@@ -1,0 +1,61 @@
+{
+    "collectionName": "Florian's Continent Collection",
+    "collectionYear": "2022",
+    "places": [
+        {
+            "name": "Porteous 'Studio",
+            "city": "Edinburgh",
+            "country": "Scotland",
+            "continent": "Europe",
+            "description": "An award winning apartment in Edinburgh.",
+            "type": "Apartment",
+            "accommodation": true,
+            "thumbnail": "https://a0.muscache.com/im/pictures/560f31fd-9ad4-4c00-8fd9-ef3a1d8ca573.jpg?im_w=1200",
+            "url": "https://www.airbnb.de/rooms/21585733?_set_bev_on_new_domain=1647853976_NDBlMDFhOGRjYWU5&source_impression_id=p3_1650795750_G8F%2F1EyvvdhP8nFY"
+        },
+        {
+            "name": "Casa Tiny",
+            "city": "Puerto Escondido",
+            "country": "Mexico",
+            "continent": "North America",
+            "description": "A tiny house in Puerto Escondido, Mexico.",
+            "type": "House",
+            "accommodation": true,
+            "thumbnail": "https://a0.muscache.com/im/pictures/84163416/f4685209_original.jpg?im_w=1440",
+            "url": "https://www.airbnb.de/rooms/6671904?_set_bev_on_new_domain=1647853976_NDBlMDFhOGRjYWU5&source_impression_id=p3_1650795998_O%2F%2Fg5zo%2F%2FZYOLukA"
+        },
+        {
+            "name": "Ghat House",
+            "city": "Cachagua",
+            "country": "Chile",
+            "continent": "South America",
+            "description": "A unconventional house in Cachagua, Chile.",
+            "type": "House",
+            "accommodation": false,
+            "thumbnail": "https://mnaa.cl/wp-content/uploads/2019/12/GHAT-01-1024x1364.jpg",
+            "url": "https://mnaa.cl/ghat/"
+        },
+        {
+            "name": "stairway house",
+            "city": "Tokyo",
+            "country": "Japan",
+            "continent": "Asia",
+            "description": "A house with a giant staircase in Tokyo.",
+            "type": "House",
+            "accommodation": false,
+            "thumbnail": "https://images2.dwell.com/photos/6592949745851789312/6653639108596224000/original.jpg?auto=format&q=35&w=1920",
+            "url": "https://www.nendo.jp/en/works/stairway-house/?"
+        },
+        {
+            "name": "KANGAROOBIE",
+            "city": "Orange",
+            "country": "Australia",
+            "continent": "Oceania",
+            "description": "A modern house near Orange, Australia.",
+            "type": "House",
+            "accommodation": false,
+            "thumbnail": "https://www.modscape.com.au/wp-content/uploads/2021/10/Kangaroobie-New-South-Wales-10.webp",
+            "url": "https://www.modscape.com.au/homes/kangaroobie/"
+        }
+    ]
+  }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Nice Places</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="main">
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+    </div>
+
+      <script>
+        async function populate() {
+
+        const requestURL = 'https://designwithtech.com/hfg/sem02/database/places';
+        const request = new Request(requestURL);
+
+        const response = await fetch(request);
+        const nicePlaces = await response.json();
+
+        placesHeader(nicePlaces);
+        populatePlaces(nicePlaces);
+
+        }
+
+        function placesHeader(collection) {
+        const header = document.querySelector('header');
+
+        const h1 = document.createElement('h1');
+        const p = document.createElement('p');
+
+        h1.textContent = `${collection.collectionName}`;
+        p.textContent = `${collection.collectionYear}`;
+
+        header.appendChild(h1);
+        header.appendChild(p);
+      }
+
+      function populatePlaces(obj) {
+      const section = document.querySelector('section');
+      const places = obj['places'];
+
+      for (const place of places) {
+        const myArticle = document.createElement('article');
+        const myH2 = document.createElement('h2');
+        const image = document.createElement('img');
+        const pLocation = document.createElement('p');
+        const pType = document.createElement('p');
+        const space = document.createElement('br');
+        const pDesc = document.createElement('p');
+        const pBooking = document.createElement('p');
+        const button = document.createElement('a');
+        const myList = document.createElement('ul');
+
+        image.src = `${place.thumbnail}`;
+        myH2.textContent = place.name;
+        pLocation.textContent = `${place.city}, ${place.country}, ${place.continent}`;
+        pType.textContent = `${place.type}`;
+        pDesc.textContent = `${place.description}`;
+        pBooking.textContent = `Available for booking?`+ bookingAvailability(place);
+        button.textContent = `Visit`;
+        button.setAttribute("href", `${place.url}`);
+        button.setAttribute("target", `_blank`);
+        button.setAttribute("class", `button`);
+
+        myArticle.appendChild(image);
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(pType);
+        myArticle.appendChild(space);
+        myArticle.appendChild(pLocation);
+        myArticle.appendChild(pDesc);
+        myArticle.appendChild(pBooking);
+        myArticle.appendChild(button);
+        section.appendChild(myArticle);
+      }
+    }
+
+      function bookingAvailability(obj) {
+        if (obj.accommodation == true) {
+          return ` Yes`;
+        } else {
+          return ` No`;
+        }
+      }
+
+        populate();
+
+      </script>
+  </body>
+</html>

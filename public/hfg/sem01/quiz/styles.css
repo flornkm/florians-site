@@ -1,0 +1,707 @@
+@font-face {
+    font-family: 'Pixelschrift'; /* Schriftart Name */
+    src: url('fonts/VT323-Regular.ttf'); /* Schriftart */
+}
+
+/* Klasse gilt für den Body */
+ .bodyclass {
+    font-family:'Inter', 'Helvetica', 'Arial', sans-serif; 
+    background-color: #E7E7E7;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 97VH;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+/* Anpassungen Schriftart */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Pixelschrift', 'Helvetica', sans-serif;
+  } 
+
+
+/* Abschnitt für alle Geräte ab einer Breite von 1100px - PCs */
+@media (min-width: 1100px) {
+    .text-with-image {
+        display: flex;
+        width: 100%;vertical-align: middle;
+        height: 450px;
+    }
+    .reverse {
+        flex-direction: row-reverse;
+    }
+    .text-with-image .textholder {
+        width: 50%;
+        padding: 30px 30px 30px 0px;
+    }
+    
+    .reverse .textholder {
+        padding: 30px 0px 30px 30px;
+    }
+    .imageholder {
+        width: 50%;
+        height: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+    }
+    .imageholder img {
+        position: absolute;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        max-height: 100%;
+    }
+}
+/* Abschnitt für alle Geräte ab einer Breite von 480px - also Tablets und PCs */
+@media (min-width: 480px) {
+    .choose-container {
+        width: 70% !important;
+    }
+    .questionfield {
+        font-size:20px;
+        background-color: white; 
+        border-radius: 5px;
+        width: 50%; height: auto;
+        padding: 20px;
+        margin: 30px auto;
+        text-align: center;
+        border: 1px solid #eeeeee;
+    }
+    .auswahldiv {
+        display: flex;
+        flex-direction: initial;
+        max-width: 50%;
+        margin: auto; 
+        margin-top:0px;
+        text-align: center;
+        justify-content: center;
+    }
+    .auswahl { 
+        background: rgb(255, 255, 255);
+        width: 200px;
+        margin: 20px; 
+        padding: 30px;
+        font-size: 18px; 
+        border-radius: 5px;;
+        transition: all ease 0.2s;
+        transform: scale(1);
+        -webkit-box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05); 
+box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05);
+    }
+    #images {
+        width: 50%;
+        padding: 20px;
+        border-radius: 5px;
+        height: 200px;
+        background-size: cover;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
+    }
+    .responsive {
+        width: 50%;
+    }
+    .description {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .inputName {
+        margin-bottom: 10px;
+    }
+    p.reloadbutton { 
+        padding: 10px;
+        background: red;
+        color: white;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .score{
+        display: flex;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .scorebutton {
+        padding: 10px;
+        margin: 10px;
+        width: 50%;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05); 
+box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05);
+    }
+    p.reloadbutton {
+        padding: 10px;
+        background: red;
+        color: white;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .score{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        justify-content: center;
+    }
+    .scorebutton {
+        padding: 10px;
+        margin: 10px;
+        width: 100px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05); 
+box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05);
+    }
+    input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid grey;
+        width: 170px;
+        margin-left: 10px;
+    }
+    .end-container {
+        width: 70% !important;
+    }
+    .auswahl:hover {
+        transform: scale(1.05);
+        background-color: white !important;
+    }
+}
+/* Abschnitt alle Geräte bis einer Breite von 1099px - also Handys und Tablets etc. */
+@media (max-width: 1099px) {
+    .text-with-image {
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+    .text-with-image .textholder {
+        width: 100%;
+        padding: 0 0 0px 0;
+    }
+    .text-with-image img {
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+/* Abschnitt alle Geräte bis einer Breite von 920px - also ebenfalls Handys und Tablets etc. */
+@media (max-width: 920px) {
+    .control {
+        flex-direction: column;
+        left: 0px;
+        width: 90%;
+    }
+    .button {
+        width: auto;
+    }
+}
+/* Abschnitt für alle Geräte bis einer Breite von 479px - also Handys */
+@media (max-width: 479px) {
+    .bodyclass {
+        height: auto;
+    }
+    h1 {
+        font-size: 23px;
+    }
+    h2 {
+        font-size: 21px !important;
+    }
+    h3 {
+        font-size: 19px;;
+    }
+    p {
+        font-size: 16px !important;
+    }
+    .questionfield {
+        font-size:16px;
+        background-color: white; 
+        border-radius: 5px;
+        width: 90%; height: auto;
+        padding: 5px;
+        margin: 30px auto;
+        text-align: center;
+        border: 1px solid #eeeeee;
+    }
+    .auswahldiv {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        /* margin: auto; */
+        text-align: center;
+        justify-content: center;
+    }
+    .auswahl { 
+        background: rgb(255, 255, 255);
+        width: auto;
+        margin: 20px; 
+        padding: 15px;
+        font-size: 16px;
+        border-radius: 5px;;
+        transition: all ease 0.2s;
+        transform: scale(1);
+    }
+    #quesText {
+        font-size: 30px;
+    }
+    #images {
+        width: auto;
+        padding: 20px;
+        border-radius: 5px;
+        height: 60px;
+        background-size: cover;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
+    }
+    .nextbutton, .endbutton {
+        width: 90% !important;
+        font-size: 16px;
+        padding: 15px !important;
+    }
+    .responsive {
+        width: 90%;
+    }
+    .responsive h1 {
+        width: 75%;
+    }
+    p.reloadbutton { 
+        padding: 10px;
+        background: red;
+        color: white;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .score{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+    .scorebutton {
+        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        text-align: center;
+        background-color: rgb(231, 231, 231);
+        border-radius: 5px;
+    }
+    input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid grey;
+        width: auto;
+        margin-left: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 16px;
+    }
+    .description {
+        width: 100%;
+    }
+    .inputName {
+        margin-bottom: 10px;
+    }
+    .copyright p {
+        font-size: 11px !important;
+    }
+    .auswahl {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .startScreen {
+        padding-top: 100px;
+    }
+    .responsive h1 {
+        width: 100%;
+    }
+    .button {
+        width: 80%;
+    }
+    #quest {
+        font-size: 23px !important;
+    }
+    #questNr {
+        font-size: 18px !important;
+    }
+    .chooseScreen, #endscreen {
+        background: white !important;
+    }
+    .chooseScreen {
+        overflow: hidden;
+    }
+    .modes #points, .modes #soundButton {
+        position: initial;
+        float: left;
+        margin-right: 10px;
+        width: 100%;
+    }
+    .modes {
+        display: flex;
+    }
+    #price {
+        width: 90% !important;
+        padding: 15px;
+    }
+}
+/* Abschnitt für sehr dünne Handys */
+@media (max-width: 260px) {
+    #process {
+        display: none !important;
+    }
+}
+/* Abschnitt für alle Geräte unabhängig von der Größe */
+.choose-container, .end-container {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    background-color: white;
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 5px;
+}
+.nextbutton, .endbutton { 
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 18px; 
+    margin: 20px;
+    background-color: white;
+    border-style: none;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05); 
+box-shadow: 0px 5px 30px 5px rgba(0,0,0,0.05);
+    transition: all ease 0.2s;
+    text-align: center;
+}
+.nextbutton:hover, .endbutton:hover {
+    background-color: white;
+}
+p#quest {
+    font-size: 30px;
+}
+#points {
+    font-size: 20px;
+    padding: 10px;
+    background:white;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    top: 0px;
+    display: block;
+    cursor:initial;
+}
+#soundButton {
+    font-size: 20px;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    top: 75px;
+    display: block;
+}
+#process {
+    font-size: 20px;
+    padding: 10px;
+    background:white;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    position: fixed;
+    top: 150px;
+    display: block;
+    cursor:initial;
+}
+#language {
+    font-size: 20px;
+    padding: 10px;
+    display: block;
+    position: fixed;
+    top: 0px;
+    background:rgb(231, 231, 231);
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+    z-index: 200;
+    border: 1px solid rgb(211, 211, 211);
+    transition: all ease 0.2s;
+}
+#questOne {
+    display: block;
+}
+#button {
+    display: none;
+}
+
+#auswahl {
+    display: none;
+}
+p {
+    cursor: pointer;
+    font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+}
+#endbutton {
+    display: none;
+}
+#endscreen {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100VH;
+    z-index: 10;
+    background-image: url('images/pixellandscape.jpg');
+    justify-content: center;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+.endtext {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    text-align: center;
+}
+#endpoints {
+    font-size: 50px;
+}
+.copyright {
+    position: fixed;
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    bottom: 5px;
+    left: 0;
+}
+.copyright p {
+    margin-left: auto;
+    margin-right: auto;
+    cursor:initial;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+}
+#highscore, #bestlist {
+    cursor:initial;
+    font-weight: 900;
+    font-size: 23px;
+    font-family: 'Pixelschrift';
+}
+#bestlist {
+    margin-bottom: 0px;
+}
+#bestlist ol li {
+    font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+}
+#highscoreList {
+    width: auto;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+.list-holder {
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+#endscreen {
+    padding-bottom: 150px;
+}
+#endtext {
+    width: auto;
+    height: auto;
+}
+.reloadbutton, .scorebutton {
+    transition: all ease 0.2s;
+    padding: 20px;
+}
+.reloadbutton:hover {
+    background: rgb(243, 49, 49);
+}
+.scorebutton:hover {
+    background: rgb(211, 211, 211);
+}
+.chooseScreen {
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+    background-image: url('images/pixellandscape.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.down {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button {
+    background-color: rgb(231, 231, 231);
+    margin: 20px; 
+    padding: 30px;
+    font-size: 20px;
+    border-radius: 5px;;
+    transition: all ease 0.2s;
+    transform: scale(1);
+    border: 1px solid rgb(211, 211, 211);
+    width: auto;
+    height: auto;
+    text-align: center;
+    flex-direction: row;
+}
+.button:hover {
+    background: rgb(211, 211, 211);
+}
+.pricebutton{
+    margin-left: auto;
+    margin-right: auto;
+}
+.pricebody {
+    margin: 0 0 0 0 !important;
+}
+#price {
+    pointer-events: none;
+    display: none;
+}
+.control {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.startScreen {
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+    padding-bottom: 30px;
+}
+.text {
+    cursor: initial;
+    line-height: 1.4em;
+}
+#close {
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    width: auto;
+    height: auto;
+}
+hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    color:#eeeeee;
+}
+.profile {
+    border-radius: 500px;
+    width: 150px;
+    border: 1px solid #eeeeee;
+}
+#quest, #questNr  {
+    font-family: 'Pixelschrift', 'Helvetica', sans-serif;
+}
+.pricebutton {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: yellow;
+    color: black;
+    width: 200px;
+    border: 1px solid rgb(233, 233, 2);
+    cursor: pointer;
+}
+#what-he-wants {
+    cursor: inherit;
+}
+#images {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;    
+   /* background-color: rgb(231, 231, 231); */
+}
+#language:hover {
+    background-color: white;
+}
+
+/* Styling von der Prozess Bar */
+progress, progress[role] {
+    width: 100%;
+    height: 10px;
+    border: 10px;
+    background-color: #E7E7E7;
+} 
+progress::-moz-progress-bar {
+    width: 100%;
+    height: 10px;
+    border: none;
+    background-color: #FF732A;
+} 
+progress::-webkit-progress-value {
+    background-color: #FF732A;
+    transition: all ease 1s;
+}
+progress::-webkit-progress-bar {
+    background-color: #E7E7E7;
+}
+progress[role]:after {
+	background-image: none; /* removes default background from polyfill */
+}
+.process-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.process-holder img {
+    width: 40px;
+    height: auto;
+}
+#what-he-wants {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.noscript {
+    width: 100%;
+    height: 100VH; /* will cover the text displayed when javascript is enabled*/
+    z-index: 1000; /* higher than other z-index */
+    position: fixed;
+    background-color: white;
+    top: 0;
+ }
+.noscript #div100 {
+    text-align: center;
+    padding: 30px;
+}

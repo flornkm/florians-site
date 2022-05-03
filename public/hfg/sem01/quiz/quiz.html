@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Florians QUIZ</title>
+    <meta charset="utf-8"/>
+    <!-- Damit das mit Responsive funktioniert existiert die nächste Zeile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="images/quiz_favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="styles.css">
+    <script src="quiz.js" type="text/javascript"></script>
+    <script src="mode.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+<!-- Hier ist der ganze HTML Code für das Quiz, habe ich natürlich angepasst. -->
+<body class = "bodyclass" onload="load();">
+    <noscript class="noscript">
+        <div id="div100">
+            Your browser isn't supporting JavaScript, please enable it and try again.
+        </div>
+    </noscript>
+    <div id="start" class="startScreen">
+        <div class="responsive">
+        <p class="reloadbutton" id="close" onclick="startScreen(); "><i class="material-icons">close</i></p>
+        <h1 id="h1-title-start">Welcome to my first "big" JavaScript Project: <br/>A Quiz Game</h1>
+        <div class="text-with-image">
+        <div class="textholder">
+        <h2 id="h2-title-how">Story</h2>
+        <p id="p-text-how" class="text">
+        Bruno is a shepherd and lost a sheep. That's because his mission is to find it. To find it, he has to answer right difficult questions in five levels.
+        If he get's five Points he is able to see his sheep. You can see his points on the top left corner, you also have the ability to save your score.
+        Saving your score with the highest number of points (5) is necessary to go to the sheep.
+        </p>
+        <p class="nextbutton" onclick="startScreen(); ">Quiz Start</p>
+        </div>
+        <div class="imageholder">
+            <img src="images/farmer_light.jpeg"/>
+        </div>
+    </div>
+    <hr/>
+    <div class="text-with-image reverse">
+        <div class="textholder">
+        <h2 id="h2-title-error">Browser Error</h2>
+        <p id="p-text-error" class="text">
+        If you are unable to close this frame with the X button on the top right corner, your browser isn't loading the temporary files correctly.
+        To fix this error just delete all your browser cookies & data and completely restart the browser, then it should work.
+        <br/>
+        </p>
+        </div>
+        <div class="imageholder">
+            <img src="images/quiz_error.jpg"/>
+        </div>
+    </div>
+    <hr/>
+    <div class="text-with-image">
+        <div class="textholder">
+        <h2 id="h2-title-goal">Goal</h2>
+        <p id="p-text-goal" class="text">
+            The goal is, as said on top, to help Bruno answering questions in one category right. If you answered all 5 questions right, 
+            Bruno is able to find his sheep as seen on the right side of the screen.
+        </p>
+        <p class="nextbutton" onclick="startScreen(); ">Quiz Start</p>
+        </div>
+        <div class="imageholder">
+            <img src="images/sheep.jpg"/>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div id="chooseQuiz" class="chooseScreen">
+        <div class="choose-container">
+            <img class="profile" src="images/farmer_light.jpeg"/>
+            <h1 class="down" id="choose-title">Which way should Bruno go?</h1>
+            <p id="what-he-wants">He wants to find his sheep. He can only do that with answering questions right. Because he is stupid, he needs your help.</p>
+            <div class="auswahldiv">
+            <p class="auswahl" id="history" onclick="chooseQuizHistory();"><i class="material-icons">history_toggle_off</i><br/>History</p>
+            <p class="auswahl" id="javascript" onclick="chooseQuizJavascript();"><i class="material-icons">code</i><br/>Javascript</p>
+        </div>
+        </div>
+    </div>
+    <div class="modes">
+    <p id="points">Points: </p>
+    <p id="soundButton" onclick="setSound();">Sound disabled</p>
+    </div>
+    <p id="language" onclick="languageChange();">&#127468;&#127463; <br/> English</p>
+    <div id="questbox">
+    <div id="questOne">
+    <div id="images"></div>
+    <div id="pointer" onclick="starteNeueRunde();" class = "questionfield" >
+    <div class="process-holder">
+        <img src="images/farmer_light.jpeg">
+        <progress class="process" id="processbar" value="0" max="100"></progress>
+        <img src="images/sheep.jpg">
+    </div>
+    <p id="questNr"></p>
+    <p id="quest"></p>
+    <p id="click">Click here to start it.</p>
+    </div> 
+    <div id="quesText"></div>
+    <div class = "auswahldiv" id="auswahl">
+        <p id="11" class="auswahl" onclick="tippeButton(this);">1</p>
+        <p id="12" class="auswahl" onclick="tippeButton(this);">2</p>
+        <p id="13" class="auswahl" onclick="tippeButton(this);">3</p>
+    </div>
+    <div class = "auswahldiv">  
+    <p class="nextbutton" id="button" onclick="starteNeueRunde();">Next question</p>
+    <p class="endbutton" id="endbutton" onclick="endRound();">Finish</p>
+    </div>
+    </div>
+</div>
+<div id="endscreen">
+    <div class="end-container">
+    <div class="endtext">
+    <h1 id="endpoints"></h1>
+    <h2 id="found"></h2>
+    <p id="highscore"></p>
+    <br/>
+    <div class="score">
+    <p class="inputNam" id="input-name">Who helped Bruno? </p>
+    <input type='text' name="name" id="saveName" placeholder="Guest" maxlength="8"/>
+</div>  
+<p class="description" id="desc">To save a highscore to the list click the "save"-button.</p>
+    <div class="score">
+    <p class="scorebutton" id="save" onclick="saveScore();">Save new Highscore</p>
+    <p class="scorebutton" id="reset" onclick="resetScore();">Reset Highscore</p>
+    </div>
+    <p class="pricebutton" id="price" onclick="getPrice();">Collect sheep</p>
+    <h3 id="bestlist">Bestlist:</h3>
+    <div class="list-holder">
+    <ol id="highscoreList"></ol>
+    </div>
+    <p class="reloadbutton" id="restart" onClick="window.location.reload();">Restart quiz</p>
+</div>
+</div>
+</div>
+<div class="copyright" id="copy"></div>
+</body>
+</html>

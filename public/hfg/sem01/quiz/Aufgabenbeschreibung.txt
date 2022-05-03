@@ -1,0 +1,51 @@
+Finales Projekt:Quiz
+Programmiersprachen 1 - WS21/22 - Erstes Semester
+
+Übersicht
+Was: Ein Quiz das über eine grafische Oberfläche gespielt werden kann
+Wie: Wir können alles Anwenden was wir gelernt haben: Variablen, if else statements, Arrays, Loops, Funktionen 
+Womit: JavaScript (Programmierung), html, CSS (User Interface), Firefox Browser ab Version 95.0
+
+Termine:
+Kickoff: 14.12.2021 S
+Abgabedatums: 21.01.2022 es zählt wie immmer das Datum in gitHub
+Präsentation/Testen der Spiele: 25.01.2022  
+
+Quiz Must have Features
+Aus einer Menge an Fragen sollen in zufällig ausgewählte Reihenfolge fünf Fragen gestellt werden.
+Es gibt immer drei Antworten zur Auswahl, aber nur eine ist korrekt.
+Wenn eine Antwort ausgewählt wurde gibt es für die korrekte Antwort einen Punkt.
+Für Falsche Antworten gibt es null Punkte. Es darf nur eine Antwort ausgewählt werden.
+Über einen "nächste Frage" Button wird die nächste Frage mit erneut drei Antworten zur Auswahl angezeigt.
+Gestartet wird das Spiel über einen Klick in den obigen Textbereiche.
+Wenn eine Antwort ausgewählt wurde, darf keine weitere Antwort auswählbar sein.
+Das Spiel wird über das erneute Laden der Seite gestartet.
+
+Quiz Bonusfeatures
+- Die Antworten stehen direkt auf den Button, anstatt im oberen Textfeld
+- Es gibt eine Highscore
+- Es gibt eine Highscore Liste
+- In jeder Runde gibt es unterschiedliche Fragen 
+- Mutliplayer Modus z.B. Player1 und Player2 können gegeneinander spielen
+- Visuelle Effekte z.B. beim knacken der Highscore
+- Das gesamte CSS ist im Stylesheet
+- Der Start des Spiels geht über einen gesonderten "Start Game" Button 
+
+Setup:
+gitHub:Das Spiel wird in einem gesonderten Ordner mit dem Namen Quiz_DeinName (z.B. Quiz_Ulrike) auf dein git Repositotry hochgeladen.
+In dem Ordner liegen min. drei Files: quiz.js, quiz.html, styles.css 
+Nutze den Firefox Browser ab Version 95.0 (Installiert bzw. Updated deinen Firefox)
+
+Benotung:
+Gut: 
+- "Must have Feature" sind vollständig implementiert
+- Der Code des Spiels ist Dokumentiert
+- Der Code liegt in einem gesonderten Ordner auf gitHub (siehe Setup)
+- Das Quiz läuft Fehlerfrei im Firefox Browser ab Version 95.0
+
+Sehr gut: 
+- "Must haves" sind vollständig implementiert
+- Der Code des Spiels ist Dokumentiert
+- Der Code liegt in einem gesonderten Ordner auf gitHub (siehe Setup)
+- Das Quiz läuft Fehlerfrei im Firefox Browser ab Version 95.0
+- Min. zwei der Bonusfeatures sind implementiert und laufen Fehlerfrei im Firefox Browser ab Version 95.0

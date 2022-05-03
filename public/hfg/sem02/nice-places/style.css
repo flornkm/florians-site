@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #0E0E0F;
+    color: #bfbfbf;
+    font-family: 'Overpass Mono', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: white;
+}
+
+
+
+header {
+    position: fixed;
+    z-index: 1;
+    padding-left: 30px;
+}
+
+@media screen and (min-width: 500px) {
+section {
+    display: flex;
+    position: relative;
+    align-self: flex-end;
+}
+.main {
+    height: 100vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+}
+img {
+    width: 500px;
+    height: 300px;
+    object-fit: fill;
+}
+} @media screen and (max-width: 499px) {
+    img {
+        width: 100%;
+        height: 300px;
+        object-fit: fill;
+    }
+
+    header {
+        background: rgb(14,14,15);
+        background: -moz-linear-gradient(180deg, rgba(14,14,15,1) 0%, rgba(14,14,15,0) 100%);
+        background: -webkit-linear-gradient(180deg, rgba(14,14,15,1) 0%, rgba(14,14,15,0) 100%);
+        background: linear-gradient(180deg, rgba(14,14,15,1) 0%, rgba(14,14,15,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0e0e0f",endColorstr="#0e0e0f",GradientType=1);
+    }
+
+    .main {
+        position: absolute;
+        top: 0;
+    }
+
+
+    article {
+        margin-top: 96px;
+    }
+}
+
+
+
+
+article {
+    padding: 30px;
+}
+
+.hightlight {
+    color: white;
+}
+
+.button {
+    border: none;
+    background-color: #bfbfbf;
+    color: #0E0E0F;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease 0.2s;
+    font-family: 'Overpass Mono', monospace;
+    text-decoration: none;
+    position: relative;
+    top: 12px;
+}
+
+.button:hover {
+    background-color: white;
+}
