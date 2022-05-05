@@ -1,3 +1,18 @@
 {
-    "cleanUrls": true
+    "cleanUrls": true,
+    "redirects": [
+      { "source": "/globe", "destination": "/globe/index.html" },
+      {
+        "source": "/:path((?!uk/).*)",
+        "has": [
+          {
+            "type": "header",
+            "key": "x-vercel-ip-country",
+            "value": "GB"
+          }
+        ],
+        "destination": "/uk/:path*",
+        "permanent": false
+      }
+    ]
   }
