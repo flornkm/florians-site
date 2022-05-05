@@ -831,7 +831,7 @@ textarea.w-select {
   top: 50%;
   left: 0;
   border: solid transparent;
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
@@ -871,7 +871,7 @@ textarea.w-select {
   top: 100%;
   left: 50%;
   border: solid transparent;
-  content: " ";
+  content: ' ';
   height: 0;
   width: 0;
   position: absolute;
@@ -919,6 +919,13 @@ textarea.w-select {
 .w-background-video > video::-webkit-media-controls-start-playback-button {
   display: none !important;
   -webkit-appearance: none;
+}
+.w-background-video--control {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  background-color: transparent;
+  padding: 0;
 }
 .w-slider {
   position: relative;
@@ -1807,4 +1814,10 @@ textarea.w-select {
 }
 .w-condition-invisible {
   display: none !important;
+}
+.wf-layout-layout {
+  display: grid !important;
+}
+.wf-layout-cell {
+  display: flex !important;
 }
