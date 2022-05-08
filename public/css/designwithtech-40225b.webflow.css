@@ -1363,8 +1363,16 @@ a {
   top: 5%;
   right: 5%;
   bottom: auto;
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
   font-size: 48px;
   cursor: pointer;
+}
+
+.html-embed:hover {
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .style {
