@@ -677,7 +677,7 @@ a {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #1e1e20;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
 }
@@ -909,7 +909,7 @@ a {
 .project-card {
   overflow: visible;
   padding: 0px;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #ededed;
   color: #ededed;
 }
@@ -918,7 +918,7 @@ a {
   width: 100%;
   height: auto;
   max-height: 550px;
-  border-radius: 5px;
+  border-radius: 15px;
   -o-object-fit: contain;
   object-fit: contain;
 }
