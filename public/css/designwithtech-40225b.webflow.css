@@ -61,6 +61,12 @@ h6 {
   font-weight: 700;
 }
 
+p {
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
 a {
   text-decoration: none;
 }
@@ -1196,7 +1202,7 @@ a {
   bottom: 0%;
   z-index: 99;
   display: none;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 .contact-popup-wrapper {
@@ -1211,9 +1217,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   height: 50vh;
-  padding-top: 24px;
-  padding-right: 12%;
-  padding-left: 12%;
+  padding: 24px 12%;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -1244,6 +1248,9 @@ a {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
+  border-style: none solid none none;
+  border-width: 1px;
+  border-color: #1e1e20 #2c2c2c #1e1e20 #1e1e20;
 }
 
 .mail-wrapper {
@@ -1325,6 +1332,8 @@ a {
 }
 
 .textarea {
+  max-height: 150px;
+  max-width: 31vw;
   border-style: solid;
   border-width: 1px;
   border-color: #7e7e7e;
@@ -1345,6 +1354,8 @@ a {
 }
 
 .div-block {
+  max-height: 100%;
+  max-width: 100%;
   padding-bottom: 24px;
 }
 
@@ -1363,6 +1374,7 @@ a {
   top: 5%;
   right: 5%;
   bottom: auto;
+  opacity: 1;
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
   font-size: 48px;
@@ -1370,9 +1382,7 @@ a {
 }
 
 .html-embed:hover {
-  -webkit-transform: scale(0.9);
-  -ms-transform: scale(0.9);
-  transform: scale(0.9);
+  opacity: 0.75;
 }
 
 .style {
@@ -1612,6 +1622,7 @@ a {
 
   .contact-popup-inner {
     width: 100%;
+    border-right-style: none;
   }
 
   .mail-wrapper {
@@ -1626,6 +1637,7 @@ a {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+    border-top: 1px solid #2c2c2c;
   }
 
   .field-label {
@@ -1646,6 +1658,7 @@ a {
   }
 
   .textarea {
+    max-width: 76vw;
     border-style: solid;
     border-width: 1px;
     border-color: #7e7e7e;
