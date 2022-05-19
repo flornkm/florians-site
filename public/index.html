@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Sun May 15 2022 20:58:50 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu May 19 2022 07:36:08 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -248,7 +248,7 @@ body, .body {
             <p>2017 - 2020</p>
             <div class="cv-info">
               <h5 class="heading5 margin-down-12">Abitur</h5>
-              <p>Freelance</p>
+              <p>Karl-Arnold-Schule<br>Biberach an der Riß</p>
             </div>
           </div>
           <div class="cv-row">
@@ -287,7 +287,7 @@ body, .body {
         </div>
       </div>
       <div class="form-wrapper">
-        <div class="w-form">
+        <div id="my-form" class="w-form">
           <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Wf Form Contact Form" action="https://formspree.io/f/xbjwjdre" method="post">
             <div class="contact-form-grid">
               <div id="w-node-a60f367e-64ee-b770-d926-6ff940d9310f-40d93100"><label for="Email-2" id="contact-email" class="field-label">Email *</label><input type="email" class="text-field w-input" maxlength="256" name="Email-2" data-name="Email 2" placeholder="" id="Email-2" required=""></div>
@@ -450,4 +450,38 @@ $('.cms-slide-right').click(function(){
 });
 $('.cms-slide-left').click(function(){
   $('.cms-slider').slick('slickPrev');
-});</body></html></script></body></html>
+});
+<!-- Place this script at the end of the body tag -->
+<script>
+    var form = document.getElementById("my-form");
+    async function handleSubmit(event) {
+      event.preventDefault();
+      var status = document.getElementById("my-form-status");
+      var data = new FormData(event.target);
+      fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          status.innerHTML = "Thanks for your submission!";
+          form.reset()
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+            } else {
+              status.innerHTML = "Oops! There was a problem submitting your form"
+            }
+          })
+        }
+      }).catch(error => {
+        status.innerHTML = "Oops! There was a problem submitting your form"
+      });
+    }
+    form.addEventListener("submit", handleSubmit)
+</script>
+</body>
+</html>
