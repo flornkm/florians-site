@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
   },
   "homepage": "https://github.com/flooorianflo/designwithtech#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "vercel": "^24.2.4"
   }
 }
