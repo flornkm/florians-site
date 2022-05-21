@@ -144,8 +144,8 @@
 
       // Generate Globe
       const Globe = new ThreeGlobe()
-        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+        .globeImageUrl('./assets/globe_texture.jpeg')
+        .bumpImageUrl('./assets/globe_topology.png')
         // Points
         .pointsData(myLocations)
         .pointColor('color')
