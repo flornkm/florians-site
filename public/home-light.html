@@ -1,10 +1,16 @@
 <!DOCTYPE html><!--  This site was created in Webflow. http://www.webflow.com  -->
 <!--  Last Published: Mon May 23 2022 07:52:25 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
+<html data-wf-page="6289f7039a52f6cd6d6ea7d8" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
-  <title>Combining Design and Technology – designwithtech</title>
+  <title>Home Light</title>
   <meta content="This a personal website, portfolio and project showcase where design gets connected with technology and vice versa. UI and UX Design and much more." name="description">
+  <meta content="Home Light" property="og:title">
+  <meta content="This a personal website, portfolio and project showcase where design gets connected with technology and vice versa. UI and UX Design and much more." property="og:description">
+  <meta content="Home Light" property="twitter:title">
+  <meta content="This a personal website, portfolio and project showcase where design gets connected with technology and vice versa. UI and UX Design and much more." property="twitter:description">
+  <meta property="og:type" content="website">
+  <meta content="summary_large_image" name="twitter:card">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -41,8 +47,26 @@ body, .body {
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
   <!--  [Attributes by Finsweet] Copy to clipboard  -->
   <script defer="" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-copyclip@1/copyclip.js"></script>
+  <!--  Light Mode  -->
+  <script>
+const prefersLightScheme = window.matchMedia("(prefers-color-scheme: light)");
+if (prefersLightScheme.matches) {
+let allClasses = [];
+let singleClasses = [
+document.querySelector('.body'),
+document.querySelector('.heading4')
+]
+for (let i = 0; i < singleClasses; i++) {
+  setClass(singleClasses[i]);
+}
+function setClass(class) {
+    allClasses.push(class);
+  }
+console.log(allClasses);
+}
+</script>
 </head>
-<body class="body">
+<body class="body light">
   <div class="navigation"><img src="images/flooo_logo_basic.svg" loading="lazy" alt="" class="logo">
     <div class="navigation-links">
       <a href="#" class="navigation-link">Home</a>
@@ -54,7 +78,7 @@ body, .body {
     <div class="main-content">
       <div class="header">
         <div class="header-text">
-          <h1 class="heading2">Designer &amp; Developer. Building the products of tomorrow</h1>
+          <h1 class="heading2 light">Designer &amp; Developer. Building the products of tomorrow</h1>
           <p>In love with design. In love with technology. This website should give you a vision of how our world should look like in the future.</p>
           <div class="empty-32"></div>
           <a href="#more" class="button w-button">Learn more</a>
@@ -68,7 +92,7 @@ body, .body {
       <div class="empty-256"></div>
       <div id="more" class="core-competencies">
         <div class="core-competencies-text">
-          <h3 class="heading3">Core Competencies</h3>
+          <h3 class="heading3 light">Core Competencies</h3>
           <p>In love with design. In love with technology. This website is should give you a vision ofhow our world should look like in the future.</p>
         </div>
         <div class="slide-wrapper">
@@ -77,8 +101,8 @@ body, .body {
               <div class="card slider-card">
                 <div class="card-body is_flex">
                   <div class="icon-holder"></div>
-                  <h4 class="heading4">Fullstack <br>Design</h4>
-                  <p class="paragraph-2">Increasing conditions in User Interfaces and User Experience is forcing us to find new ways of interacting with technology.</p>
+                  <h4 class="heading4 light">Fullstack <br>Design</h4>
+                  <p class="paragraph">Increasing conditions in User Interfaces and User Experience is forcing us to find new ways of interacting with technology.</p>
                 </div>
               </div>
             </div>
@@ -86,9 +110,9 @@ body, .body {
               <div class="card slider-card">
                 <div class="card-body is_flex">
                   <div class="icon-holder">
-                    <h4 class="heading4">Fullstack <br>Development</h4>
+                    <h4 class="heading4 light">Fullstack <br>Development</h4>
                   </div>
-                  <p class="paragraph-2">Prototyping is good, but how about having the knowledge to implement technology fast and reliable?</p>
+                  <p class="paragraph">Prototyping is good, but how about having the knowledge to implement technology fast and reliable?</p>
                 </div>
               </div>
             </div>
@@ -98,7 +122,7 @@ body, .body {
                   <div class="icon-holder">
                     <h4 class="heading4">Team <br>Communications</h4>
                   </div>
-                  <p class="paragraph-2">Designers and Developers often don’t know much from each others work. Someone has to communicate between the two teams.</p>
+                  <p class="paragraph">Designers and Developers often don’t know much from each others work. Someone has to communicate between the two teams.</p>
                 </div>
               </div>
             </div>
@@ -108,7 +132,7 @@ body, .body {
                   <div class="icon-holder">
                     <h4 class="heading4">Fullstack <br>Design</h4>
                   </div>
-                  <p class="paragraph-2">Increasing conditions in User Interfaces and User Experience is forcing us to find new ways of interacting with technology.</p>
+                  <p class="paragraph">Increasing conditions in User Interfaces and User Experience is forcing us to find new ways of interacting with technology.</p>
                 </div>
               </div>
             </div>
@@ -118,7 +142,7 @@ body, .body {
                   <div class="icon-holder">
                     <h4 class="heading4">Fullstack <br>Development</h4>
                   </div>
-                  <p class="paragraph-2">Prototyping is good, but how about having the knowledge to implement technology fast and reliable?</p>
+                  <p class="paragraph">Prototyping is good, but how about having the knowledge to implement technology fast and reliable?</p>
                 </div>
               </div>
             </div>
@@ -128,7 +152,7 @@ body, .body {
                   <div class="icon-holder">
                     <h4 class="heading4">Team <br>Communications</h4>
                   </div>
-                  <p class="paragraph-2">Designers and Developers often don’t know much from each others work. Someone has to communicate between the two teams.</p>
+                  <p class="paragraph">Designers and Developers often don’t know much from each others work. Someone has to communicate between the two teams.</p>
                 </div>
               </div>
             </div>
@@ -155,27 +179,27 @@ body, .body {
       </div>
       <div class="empty-128"></div>
       <div class="feature-grid">
-        <div id="w-node-_15506030-bec7-49e6-abdb-802b5e6bcb84-39382408" class="card-grid-wrapper center">
-          <h3 class="heading3">Good to have a workflow<br>that… just works.</h3>
+        <div id="w-node-_15506030-bec7-49e6-abdb-802b5e6bcb84-6d6ea7d8" class="card-grid-wrapper center light">
+          <h3 class="heading3 light">Good to have a workflow<br>that… just works.</h3>
           <p class="paragraph card-text">My work is done hand in hand with tools I believe in and people I trust.</p>
         </div>
-        <div id="w-node-_5be05f45-a615-ac02-716f-4edeffc5b5ca-39382408" data-w-id="5be05f45-a615-ac02-716f-4edeffc5b5ca" class="card-grid-wrapper">
+        <div id="w-node-_5be05f45-a615-ac02-716f-4edeffc5b5ca-6d6ea7d8" data-w-id="5be05f45-a615-ac02-716f-4edeffc5b5ca" class="card-grid-wrapper light">
           <div class="highlight-wrapper"><img src="images/arrow.svg" loading="lazy" width="96" alt="" class="arrow">
             <div class="arrow-background"></div>
           </div>
           <div class="card-text-wrapper">
-            <h4 class="heading4">15+ Mio Eyes</h4>
+            <h4 class="heading4 light">15+ Mio Eyes</h4>
             <p class="paragraph card-text">Combined Projectviews</p>
           </div>
         </div>
-        <div id="w-node-_3d608c64-1abc-5299-a27c-3b9a6ac5de93-39382408" class="card-grid-wrapper">
+        <div id="w-node-_3d608c64-1abc-5299-a27c-3b9a6ac5de93-6d6ea7d8" class="card-grid-wrapper">
           <div class="pixel-grid"></div>
           <div class="card-text-wrapper">
             <h4 class="heading4">Pixel Perfect</h4>
             <p class="paragraph card-text">Graphics &amp; Interfaces</p>
           </div>
         </div>
-        <div id="w-node-_6655f844-f888-c6ca-13f5-2b77fcf19472-39382408" data-w-id="6655f844-f888-c6ca-13f5-2b77fcf19472" class="card-grid-wrapper">
+        <div id="w-node-_6655f844-f888-c6ca-13f5-2b77fcf19472-6d6ea7d8" data-w-id="6655f844-f888-c6ca-13f5-2b77fcf19472" class="card-grid-wrapper">
           <div class="highlight-wrapper">
             <div class="circle-green-wrapper">
               <div style="-webkit-transform:translate3d(0, 15vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 15vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 15vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 15vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="number">100</div>
@@ -186,14 +210,14 @@ body, .body {
             <p class="paragraph card-text">Webflow is the key</p>
           </div>
         </div>
-        <div id="w-node-_1f9718aa-67ac-6038-c91d-c9cc48e55de6-39382408" data-w-id="1f9718aa-67ac-6038-c91d-c9cc48e55de6" class="card-grid-wrapper">
+        <div id="w-node-_1f9718aa-67ac-6038-c91d-c9cc48e55de6-6d6ea7d8" data-w-id="1f9718aa-67ac-6038-c91d-c9cc48e55de6" class="card-grid-wrapper">
           <div class="card-text-wrapper">
             <h4 class="heading4">World Class Tools</h4>
             <p class="paragraph card-text">For a faster workflow</p>
           </div>
           <div style="-webkit-transform:translate3d(0, -25vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -25vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -25vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -25vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="tool-grid"></div>
         </div>
-        <div id="w-node-_173484c7-2ae3-c25e-7c6d-07f9859fada8-39382408" data-w-id="173484c7-2ae3-c25e-7c6d-07f9859fada8" class="card-grid-wrapper">
+        <div id="w-node-_173484c7-2ae3-c25e-7c6d-07f9859fada8-6d6ea7d8" data-w-id="173484c7-2ae3-c25e-7c6d-07f9859fada8" class="card-grid-wrapper">
           <div class="highlight-wrapper">
             <div class="code font-size">&lt;script&gt;<br>&lt;/script&gt;</div>
           </div>
@@ -202,7 +226,7 @@ body, .body {
             <p class="paragraph card-text">To reach the next level</p>
           </div>
         </div>
-        <div id="w-node-ab154ac9-65e4-c1c8-f3af-12c00f0c6592-39382408" class="card-grid-wrapper centered">
+        <div id="w-node-ab154ac9-65e4-c1c8-f3af-12c00f0c6592-6d6ea7d8" class="card-grid-wrapper centered">
           <div class="card-text-wrapper">
             <h4 class="heading4">Want to reach out?</h4>
             <p class="paragraph card-text">Contact me in under a minute</p>
@@ -220,7 +244,7 @@ body, .body {
           <div class="empty-32"></div>
           <a data-w-id="5f5c117b-d3ea-558b-1e36-f619c0f7dd26" href="#" class="button w-button">Contact me</a>
         </div>
-        <div id="w-node-_4aa52291-d1ff-a93f-a60b-e31fbc22f5ed-39382408" class="florian_cv">
+        <div id="w-node-_4aa52291-d1ff-a93f-a60b-e31fbc22f5ed-6d6ea7d8" class="florian_cv">
           <div class="cv-row">
             <p>Jun 2015 - Feb 2020</p>
             <div class="cv-info">
@@ -243,7 +267,7 @@ body, .body {
             </div>
           </div>
         </div>
-        <div id="w-node-bcaba9b7-85ee-53e1-109a-e3acf00fea2f-39382408" class="florian_cv">
+        <div id="w-node-bcaba9b7-85ee-53e1-109a-e3acf00fea2f-6d6ea7d8" class="florian_cv">
           <div class="cv-row">
             <p>2017 - 2020</p>
             <div class="cv-info">
@@ -354,7 +378,7 @@ body, .body {
       <div class="footer-grid">
         <div id="w-node-e69c2568-ce24-40df-8c51-9ce7c3304958-c330494a" class="footer-column">
           <h4 class="heading6 margin-down-24">Navigation</h4>
-          <a href="index.html" aria-current="page" class="footer-link w--current">Home</a>
+          <a href="index.html" class="footer-link">Home</a>
         </div>
         <div id="w-node-e69c2568-ce24-40df-8c51-9ce7c330495f-c330494a" class="footer-column">
           <h4 class="heading6 margin-down-24">Other</h4>
@@ -455,9 +479,8 @@ $('.cms-slide-right').click(function(){
 $('.cms-slide-left').click(function(){
   $('.cms-slider').slick('slickPrev');
 });
-</script>
-  <!--  Place this script at the end of the body tag  -->
-  <script>
+<!-- Place this script at the end of the body tag -->
+<script>
     var form = document.getElementById("my-form");
     async function handleSubmit(event) {
       event.preventDefault();
@@ -471,7 +494,7 @@ $('.cms-slide-left').click(function(){
         }
       }).then(response => {
         if (response.ok) {
-          status.innerHTML = "Success!";
+          status.innerHTML = "Thanks for your submission!";
           form.reset()
         } else {
           response.json().then(data => {
