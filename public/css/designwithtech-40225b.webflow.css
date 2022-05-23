@@ -1582,7 +1582,7 @@ a {
   right: 0%;
   bottom: 0%;
   z-index: 99;
-  display: block;
+  display: none;
 }
 
 @media screen and (max-width: 991px) {
