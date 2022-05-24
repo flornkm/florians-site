@@ -1374,7 +1374,7 @@ a {
 .text-field {
   margin-bottom: 0px;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #7e7e7e;
   border-radius: 5px;
   background-color: transparent;
@@ -1395,7 +1395,7 @@ a {
   min-height: 50px;
   min-width: 25vw;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #7e7e7e;
   border-radius: 5px;
   background-color: transparent;
