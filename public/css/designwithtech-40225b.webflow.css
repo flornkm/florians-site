@@ -2094,7 +2094,7 @@ a {
   .button.secondary {
     border-style: solid;
     border-color: #fff;
-    border-radius: 100px;
+    border-radius: 15px;
     outline-color: #fff;
     outline-offset: -2px;
     outline-style: none;
