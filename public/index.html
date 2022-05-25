@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed May 25 2022 07:54:41 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed May 25 2022 21:09:20 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -54,7 +54,7 @@ body, .body {
     <div class="main-content">
       <div class="header">
         <div class="header-text">
-          <h1 class="heading2">Designer &amp; Developer. Building the products of tomorrow</h1>
+          <h1 id="website-heading" class="heading2">Designer &amp; Developer. Building the products of tomorrow</h1>
           <p>In love with design. In love with technology. This website should give you a vision of how our world should look like in the future.</p>
           <div class="empty-32"></div>
           <a href="#more" class="button w-button">Learn more</a>
@@ -456,7 +456,6 @@ $('.cms-slide-left').click(function(){
   $('.cms-slider').slick('slickPrev');
 });
 </script>
-  <!--  Place this script at the end of the body tag  -->
   <script>
     var form = document.getElementById("my-form");
     async function handleSubmit(event) {
@@ -487,6 +486,13 @@ $('.cms-slide-left').click(function(){
       });
     }
     form.addEventListener("submit", handleSubmit)
+let title = document.getElementById('website-heading');
+let titles = ['Building the products of tomorrow', 'Working with realworld data', 'Using Artificial Intelligence'];
+function generateTitle() {
+  return Math.floor(Math.random() * titles.length);
+}
+let heading = `Designer & Developer. ${titles[generateTitle()]}`;
+title.innerText = heading;
 </script>
 </body>
 </html>
