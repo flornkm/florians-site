@@ -144,8 +144,8 @@
 
       // Generate Globe
       const Globe = new ThreeGlobe()
-        .globeImageUrl('./assets/globe_texture.jpeg')
-        .bumpImageUrl('./assets/globe_topology.png')
+        .globeImageUrl('./globe/assets/globe_texture.jpeg')
+        .bumpImageUrl('./globe/assets/globe_topology.png')
         // Points
         .pointsData(myLocations)
         .pointColor('color')
