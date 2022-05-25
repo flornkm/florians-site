@@ -118,7 +118,7 @@ a {
   border-style: solid;
   border-width: 2px;
   border-color: #fff;
-  border-radius: 15px;
+  border-radius: 100px;
   background-color: #fff;
   outline-color: #fff;
   outline-offset: -2px;
@@ -630,7 +630,7 @@ a {
 .button-secondary.slide-right {
   margin-right: 0px;
   border-style: none;
-  border-radius: 15px;
+  border-radius: 100px;
   background-color: hsla(0, 0%, 100%, 0.15);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
@@ -1683,7 +1683,7 @@ a {
   position: relative;
   bottom: 64px;
   margin-right: 0px;
-  border-radius: 0.7em;
+  border-radius: 5em;
 }
 
 @media screen and (max-width: 991px) {
@@ -2094,7 +2094,7 @@ a {
   .button.secondary {
     border-style: solid;
     border-color: #fff;
-    border-radius: 15px;
+    border-radius: 100px;
     outline-color: #fff;
     outline-offset: -2px;
     outline-style: none;
