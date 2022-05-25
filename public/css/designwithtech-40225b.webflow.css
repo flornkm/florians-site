@@ -1594,7 +1594,7 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 83vh;
+  height: 70vh;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -1681,7 +1681,6 @@ a {
 
 .button-big.no-margin {
   position: relative;
-  bottom: 64px;
   margin-right: 0px;
   border-radius: 5em;
 }
