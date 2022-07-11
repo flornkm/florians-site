@@ -1801,7 +1801,7 @@ a {
 
   .header-text {
     width: 100%;
-    max-width: 100%;
+    max-width: 400px;
     padding-right: 0px;
   }
 
@@ -2211,7 +2211,7 @@ a {
   .button.secondary {
     border-style: solid;
     border-color: #fff;
-    border-radius: 100px;
+    border-radius: 8px;
     outline-color: #fff;
     outline-offset: -2px;
     outline-style: none;
@@ -2354,6 +2354,10 @@ a {
     outline-offset: -2px;
     outline-style: none;
     outline-width: 2px;
+  }
+
+  .empty-96.mobile-hide {
+    display: none;
   }
 }
 
