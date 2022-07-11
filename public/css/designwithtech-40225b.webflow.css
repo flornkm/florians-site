@@ -429,6 +429,10 @@ a {
   height: 128px;
 }
 
+.empty-128.above-mobile-hide {
+  display: none;
+}
+
 .core-competencies {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2231,6 +2235,14 @@ a {
 
   .lottie-animation {
     max-width: 100%;
+  }
+
+  .empty-128.above-mobile-hide {
+    display: block;
+  }
+
+  .empty-256.mobile-hide {
+    display: none;
   }
 
   .card-slider_nav {
