@@ -2368,6 +2368,10 @@ a {
     outline-width: 2px;
   }
 
+  .slider-overlay {
+    display: none;
+  }
+
   .empty-96.mobile-hide {
     display: none;
   }
