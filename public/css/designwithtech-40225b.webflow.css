@@ -1,6 +1,6 @@
 body {
   background-color: #0e0e0f;
-  font-family: Satoshi, sans-serif;
+  font-family: Plusjakartasans, sans-serif;
   color: #dadada;
   font-size: 1rem;
   line-height: 1.5em;
@@ -10,59 +10,67 @@ body {
 h1 {
   margin-top: 20px;
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
   color: #fff;
   font-size: 4.209rem;
-  line-height: 1.5em;
-  font-weight: 700;
+  line-height: 1.3em;
+  font-weight: 600;
 }
 
 h2 {
   margin-top: 20px;
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
   color: #fff;
   font-size: 3.157rem;
-  line-height: 1.5em;
-  font-weight: 700;
+  line-height: 1.4em;
+  font-weight: 600;
 }
 
 h3 {
   margin-top: 20px;
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
   color: #fff;
   font-size: 2.369rem;
-  line-height: 1.5em;
-  font-weight: 700;
+  line-height: 1.4em;
+  font-weight: 600;
 }
 
 h4 {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
   color: #fff;
   font-size: 1.777rem;
-  line-height: 1.5em;
-  font-weight: 700;
+  line-height: 1.4em;
+  font-weight: 600;
 }
 
 h5 {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
   color: #fff;
   font-size: 1.333rem;
-  line-height: 1.5em;
-  font-weight: 700;
+  line-height: 1.4em;
+  font-weight: 600;
 }
 
 h6 {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
   color: #fff;
   font-size: 1rem;
   line-height: 1.5em;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 p {
   margin-bottom: 10px;
+  font-family: Plusjakartasans, sans-serif;
+  color: #9e9e9e;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
@@ -96,6 +104,7 @@ a {
 }
 
 .paragraph {
+  font-family: Plusjakartasans, sans-serif;
   font-size: 1rem;
   line-height: 1.5em;
 }
@@ -105,7 +114,7 @@ a {
 }
 
 .paragraph.card-text {
-  color: #7e7e7e;
+  color: #acacac;
 }
 
 .paragraph.margin-top-12 {
@@ -118,7 +127,7 @@ a {
   border-style: solid;
   border-width: 2px;
   border-color: #fff;
-  border-radius: 100px;
+  border-radius: 8px;
   background-color: #fff;
   outline-color: #fff;
   outline-offset: -2px;
@@ -126,6 +135,7 @@ a {
   outline-width: 2px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
+  font-family: Plusjakartasans, sans-serif;
   color: #0e0e0f;
 }
 
@@ -207,7 +217,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  height: 128px;
+  height: 96px;
   padding-right: 12%;
   padding-left: 12%;
   -webkit-box-pack: justify;
@@ -218,6 +228,13 @@ a {
 
 .logo {
   width: 64px;
+  height: 64px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: hsla(0, 0%, 62%, 0.3);
+  border-radius: 20px;
+  -o-object-fit: contain;
+  object-fit: contain;
 }
 
 .logo.light {
@@ -276,15 +293,15 @@ a {
   display: flex;
   width: 100%;
   height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .header-text {
   width: auto;
-  max-width: 370px;
+  max-width: 400px;
   padding-right: 30px;
 }
 
@@ -308,6 +325,7 @@ a {
 
 .body {
   background-color: #0e0e0f;
+  font-family: Plusjakartasans, sans-serif;
 }
 
 .body.light {
@@ -341,6 +359,10 @@ a {
   color: #1e1e20;
 }
 
+.heading2.no-margin {
+  margin-bottom: 0px;
+}
+
 .heading3 {
   margin-bottom: 24px;
   font-size: 2.369rem;
@@ -351,17 +373,29 @@ a {
 }
 
 .heading4 {
-  margin-bottom: 24px;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  color: #fff;
   font-size: 1.777rem;
 }
 
 .heading4.mail {
+  margin-bottom: 8px;
   font-size: 1.5rem;
   font-weight: 500;
 }
 
 .heading4.light {
   color: #1e1e20;
+}
+
+.heading4.thin {
+  font-weight: 500;
+}
+
+.heading4.thin.grey {
+  margin-top: 16px;
+  color: #7e7e7e;
 }
 
 .heading5 {
@@ -380,6 +414,11 @@ a {
 .heading6.margin-down-24 {
   margin-top: 0px;
   margin-bottom: 24px;
+}
+
+.heading6.margin-down-24.footer-heading {
+  color: #9e9e9e;
+  font-weight: 500;
 }
 
 .empty-32 {
@@ -440,7 +479,7 @@ a {
   top: 0%;
   right: 0%;
   bottom: 0%;
-  z-index: 1;
+  z-index: 2;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -570,8 +609,9 @@ a {
 }
 
 .card-slider_nav-icon {
-  width: 12px;
-  height: 20px;
+  width: auto;
+  height: auto;
+  font-size: 1.5rem;
 }
 
 .button-secondary {
@@ -740,7 +780,7 @@ a {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05);
 }
 
 .card-grid-wrapper.center.light {
@@ -914,10 +954,13 @@ a {
   grid-template-rows: auto;
 }
 
-.florian_photo {
+.florian-photo {
   width: 200px;
   height: 200px;
   border-radius: 500px;
+  background-image: url('../images/florian_photo.jpeg');
+  background-position: 50% 0%;
+  background-size: cover;
   -o-object-fit: cover;
   object-fit: cover;
 }
@@ -1140,6 +1183,7 @@ a {
   opacity: 1;
   -webkit-transition: opacity 150ms ease-in-out;
   transition: opacity 150ms ease-in-out;
+  color: #dadada;
 }
 
 .footer-icon-link:hover {
@@ -1200,7 +1244,7 @@ a {
   -webkit-align-items: flex-end;
   -ms-flex-align: end;
   align-items: flex-end;
-  background-color: #0e0e0f;
+  background-color: transparent;
   opacity: 1;
   -webkit-perspective: 1200px;
   perspective: 1200px;
@@ -1258,14 +1302,14 @@ a {
   right: 0%;
   bottom: 0%;
   z-index: 99;
-  display: block;
+  display: none;
   background-color: transparent;
 }
 
 .contact-popup-wrapper {
   position: absolute;
-  left: 0%;
-  top: auto;
+  left: auto;
+  top: 0%;
   right: 0%;
   bottom: 0%;
   z-index: 100;
@@ -1273,14 +1317,21 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 50vh;
-  padding: 24px 12%;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  width: 42vw;
+  height: 100vh;
+  padding: 24px 48px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 25px;
   background-color: #1e1e20;
   color: #dadada;
 }
@@ -1290,7 +1341,7 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 50%;
+  width: 100%;
   padding-right: 30px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -1305,7 +1356,7 @@ a {
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
   flex: 0 auto;
-  border-style: none solid none none;
+  border-style: none;
   border-width: 1px;
   border-color: #1e1e20 #2c2c2c #1e1e20 #1e1e20;
 }
@@ -1338,7 +1389,7 @@ a {
 }
 
 .form-wrapper {
-  width: 40%;
+  width: 100%;
   -webkit-box-flex: 0;
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
@@ -1374,8 +1425,8 @@ a {
 .text-field {
   margin-bottom: 0px;
   border-style: solid;
-  border-width: 2px;
-  border-color: #7e7e7e;
+  border-width: 1px;
+  border-color: #44444b;
   border-radius: 5px;
   background-color: transparent;
   color: #fff;
@@ -1391,12 +1442,12 @@ a {
 
 .textarea {
   max-height: 100px;
-  max-width: 31vw;
+  max-width: 100%;
   min-height: 50px;
   min-width: 25vw;
   border-style: solid;
-  border-width: 2px;
-  border-color: #7e7e7e;
+  border-width: 1px;
+  border-color: #44444b;
   border-radius: 5px;
   background-color: transparent;
   outline-color: #fff;
@@ -1685,6 +1736,56 @@ a {
   border-radius: 5em;
 }
 
+.slider-overlay {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 1;
+  background-image: -webkit-gradient(linear, left top, right top, from(#0e0e0f), color-stop(50%, rgba(30, 30, 32, 0)), to(#0e0e0f));
+  background-image: linear-gradient(90deg, #0e0e0f, rgba(30, 30, 32, 0) 50%, #0e0e0f);
+}
+
+.date {
+  color: #9e9e9e;
+}
+
+.html-embed-2 {
+  color: #0e0e0f;
+}
+
+.brand {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 64px;
+  height: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.html-embed-3 {
+  display: none;
+}
+
+.empty-96 {
+  height: 96px;
+}
+
+@media screen and (min-width: 1920px) {
+  .header-text {
+    max-width: 400px;
+  }
+
+  .textarea {
+    max-width: 100%;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .header {
     -webkit-box-orient: vertical;
@@ -1699,7 +1800,7 @@ a {
   }
 
   .header-text {
-    width: 530px;
+    width: 100%;
     max-width: 100%;
     padding-right: 0px;
   }
@@ -1717,7 +1818,7 @@ a {
   }
 
   .card-slider_nav {
-    z-index: 1;
+    z-index: 2;
     width: auto;
     max-width: 100%;
   }
@@ -1788,12 +1889,19 @@ a {
   }
 
   .contact-popup-wrapper {
+    left: 0%;
+    top: auto;
+    right: 0%;
+    bottom: 0%;
+    width: 100vw;
     height: 80vh;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 0px;
   }
 
   .contact-popup-inner {
@@ -1803,6 +1911,7 @@ a {
 
   .mail-wrapper {
     margin-top: 0px;
+    margin-bottom: 48px;
     cursor: pointer;
   }
 
@@ -1834,7 +1943,7 @@ a {
   }
 
   .textarea {
-    max-width: 76vw;
+    max-width: 100%;
     border-style: solid;
     border-width: 1px;
     border-color: #7e7e7e;
@@ -1850,6 +1959,15 @@ a {
   .h1 {
     font-size: 3.052rem;
     line-height: 1.3em;
+  }
+
+  .contact-popup-parent {
+    display: none;
+  }
+
+  .slider-overlay {
+    background-image: -webkit-gradient(linear, right top, left top, from(#0e0e0f), to(rgba(30, 30, 32, 0)));
+    background-image: linear-gradient(270deg, #0e0e0f, rgba(30, 30, 32, 0));
   }
 }
 
@@ -2585,6 +2703,90 @@ a {
   font-family: 'Satoshi';
   src: url('../fonts/Satoshi-MediumItalic.woff2') format('woff2'), url('../fonts/Satoshi-MediumItalic.eot') format('embedded-opentype'), url('../fonts/Satoshi-MediumItalic.woff') format('woff'), url('../fonts/Satoshi-MediumItalic.ttf') format('truetype');
   font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-Italic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-LightItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-SemiBold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-SemiBoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-Regular.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-Light.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-Medium.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-ExtraBold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Bold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Bold.woff') format('woff'), url('../fonts/PlusJakartaSans-ExtraBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-ExtraLight.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-MediumItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-BoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraBoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraBoldItalic.woff') format('woff'), url('../fonts/PlusJakartaSans-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-ExtraLightItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraLightItalic.woff') format('woff');
+  font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
