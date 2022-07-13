@@ -2004,6 +2004,7 @@ a {
 
   .main-image {
     width: 120px;
+    margin-bottom: 16px;
   }
 }
 
@@ -2225,6 +2226,11 @@ a {
 }
 
 @media screen and (max-width: 479px) {
+  .main-wrapper {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
   .button {
     margin-bottom: 24px;
     border-style: solid;
@@ -2406,6 +2412,11 @@ a {
 
   .empty-96.mobile-hide {
     display: none;
+  }
+
+  .main-image {
+    width: 80px;
+    margin-bottom: 0px;
   }
 }
 
