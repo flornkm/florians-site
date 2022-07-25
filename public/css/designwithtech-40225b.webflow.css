@@ -121,6 +121,23 @@ a {
   margin-top: 12px;
 }
 
+.paragraph.dark {
+  color: #0e0e0f;
+}
+
+.paragraph.dark.no-margin {
+  margin-bottom: 0px;
+}
+
+.paragraph.no-margin {
+  margin-bottom: 0px;
+  background-color: transparent;
+}
+
+.paragraph.no-margin.light {
+  color: #fff;
+}
+
 .button {
   margin-right: 12px;
   padding: 10px 30px;
@@ -224,17 +241,31 @@ a {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .logo {
   width: 64px;
   height: 64px;
-  border-style: solid;
+  border-style: none;
   border-width: 1px;
   border-color: hsla(0, 0%, 62%, 0.3);
   border-radius: 20px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  transition: transform 200ms ease, -webkit-transform 200ms ease;
   -o-object-fit: contain;
   object-fit: contain;
+}
+
+.logo:hover {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .logo.light {
@@ -1798,7 +1829,69 @@ a {
 }
 
 .main-image {
-  width: 250px;
+  width: 350px;
+}
+
+.dropdown-explanation {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px 14px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-style: none;
+  border-width: 1px;
+  border-color: #9e9e9e;
+  border-radius: 30px;
+  background-color: transparent;
+}
+
+.dropdown-list {
+  left: auto;
+  top: 0%;
+  right: 0%;
+  bottom: auto;
+}
+
+.dropdown-list.w--open {
+  left: 100%;
+  top: 10%;
+  right: auto;
+  bottom: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-top-left-radius: 0px;
+  background-color: transparent;
+}
+
+.dropdown-toggle {
+  padding: 0px;
+}
+
+.dropdown-icon {
+  width: auto;
+  height: auto;
+  margin-right: 8px;
+  color: #9e9e9e;
+  font-size: 32px;
 }
 
 @media screen and (min-width: 1920px) {

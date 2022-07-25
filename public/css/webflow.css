@@ -137,7 +137,7 @@ html[data-w-dynpage] [data-w-cloak] {
   background-attachment: scroll;
   background-color: transparent;
   box-shadow: none;
-  opacity: 1.0;
+  opacity: 1;
   transform: none;
   transition: none;
   direction: ltr;
@@ -167,7 +167,6 @@ html[data-w-dynpage] [data-w-cloak] {
   position: fixed !important;
   display: inline-block !important;
   visibility: visible !important;
-  opacity: 1 !important;
   z-index: 2147483647 !important;
   top: auto !important;
   right: 12px !important;
@@ -178,7 +177,7 @@ html[data-w-dynpage] [data-w-cloak] {
   border-radius: 3px !important;
   padding: 6px 8px 6px 6px !important;
   font-size: 12px !important;
-  opacity: 1.0 !important;
+  opacity: 1 !important;
   line-height: 14px !important;
   text-decoration: none !important;
   transform: none !important;
@@ -331,7 +330,7 @@ label {
   padding: 8px 12px;
   margin-bottom: 10px;
   font-size: 14px;
-  line-height: 1.428571429;
+  line-height: 1.42857143;
   color: #333333;
   vertical-align: middle;
   background-color: #ffffff;
@@ -1281,7 +1280,7 @@ textarea.w-select {
   right: 0;
   bottom: 0;
   left: 0;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   background: rgba(0, 0, 0, 0.4);
   text-align: left;
   text-overflow: ellipsis;
@@ -1305,8 +1304,8 @@ textarea.w-select {
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 .w-lightbox-left {
   display: none;
@@ -1367,7 +1366,7 @@ textarea.w-select {
   /* 2 */
 }
 .w-lightbox-active {
-  opacity: .3;
+  opacity: 0.3;
 }
 .w-lightbox-thumbnail {
   position: relative;
@@ -1411,8 +1410,8 @@ textarea.w-select {
   margin-left: -20px;
   border: 5px solid rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-  -webkit-animation: spin .8s infinite linear;
-  animation: spin .8s infinite linear;
+  -webkit-animation: spin 0.8s infinite linear;
+  animation: spin 0.8s infinite linear;
 }
 .w-lightbox-spinner:after {
   content: "";
@@ -1460,10 +1459,10 @@ textarea.w-select {
   .w-lightbox-left,
   .w-lightbox-right {
     display: block;
-    opacity: .5;
+    opacity: 0.5;
   }
   .w-lightbox-close {
-    opacity: .8;
+    opacity: 0.8;
   }
   .w-lightbox-control:hover {
     opacity: 1;

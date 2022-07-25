@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Wed Jul 13 2022 20:06:27 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Mon Jul 25 2022 15:23:07 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="628c727b822cf7c76983a4ce" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -26,9 +26,22 @@
 </head>
 <body class="body">
   <div class="navigation">
-    <a href="index.html" class="brand w-inline-block"><img src="images/flooo_logo_basic.svg" loading="lazy" alt="" class="logo"></a>
+    <div data-hover="true" data-delay="0" class="w-dropdown">
+      <div class="dropdown-toggle w-dropdown-toggle">
+        <a href="index.html" class="brand w-inline-block"><img src="images/flooo_logo_basic.svg" loading="lazy" data-w-id="af99a72a-5dd7-c328-b9c2-80d76a0c7b22" alt="" class="logo"></a>
+      </div>
+      <nav class="dropdown-list w-dropdown-list">
+        <div class="dropdown-explanation">
+          <div class="dropdown-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
+              <rect width="256" height="256" fill="none"></rect>
+              <line x1="216" y1="128" x2="40" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+              <polyline points="112 56 40 128 112 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+            </svg></div>
+          <p class="paragraph no-margin">Home</p>
+        </div>
+      </nav>
+    </div>
     <div class="navigation-links">
-      <a href="index.html" class="navigation-link">Home</a>
       <a data-w-id="af99a72a-5dd7-c328-b9c2-80d76a0c7b26" href="#" class="navigation-link">Contact</a>
       <a href="#" class="navigation-link">More</a>
     </div>
@@ -182,8 +195,14 @@
   border-color:  #0e0e0f;
   color: white;
   }
+  @media only screen and (min-width: 1020px) {
   .slider-overlay {
+    background-image: linear-gradient(90deg, #fcfcfc, #fcfcfc00 50%, #fcfcfc);
+  }
+  } @media only screen and (max-width: 1019px) {
+      .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
+  }
   }
   .card.slider-card {
   border-color: #dbdbdb;

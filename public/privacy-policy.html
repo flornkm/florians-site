@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Wed Jul 13 2022 20:06:27 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Mon Jul 25 2022 15:23:07 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62781946400562cba6a5e092" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -170,8 +170,14 @@
   border-color:  #0e0e0f;
   color: white;
   }
+  @media only screen and (min-width: 1020px) {
   .slider-overlay {
+    background-image: linear-gradient(90deg, #fcfcfc, #fcfcfc00 50%, #fcfcfc);
+  }
+  } @media only screen and (max-width: 1019px) {
+      .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
+  }
   }
   .card.slider-card {
   border-color: #dbdbdb;
