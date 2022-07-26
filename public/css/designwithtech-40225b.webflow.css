@@ -2135,12 +2135,19 @@ a {
   }
 
   .navigation-links {
-    display: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
 
   .navigation-link {
     margin-right: 12px;
     margin-left: 12px;
+  }
+
+  .header-main {
+    display: none;
   }
 
   .heading4.mail {
