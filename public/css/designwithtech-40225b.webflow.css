@@ -1593,6 +1593,9 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  background-color: #0e0e0f;
 }
 
 .empty-96 {
@@ -1794,7 +1797,7 @@ a {
   color: #9e9e9e;
 }
 
-.equipment-wrapper-2 {
+.equipment-wrapper {
   position: relative;
   display: -ms-grid;
   display: grid;
@@ -1819,12 +1822,12 @@ a {
   text-decoration: none;
 }
 
-.equipment-wrapper-2:hover {
+.equipment-wrapper:hover {
   padding-top: 0px;
   background-color: #28282b;
 }
 
-.equipment-wrapper-2.gradient {
+.equipment-wrapper.gradient {
   -ms-grid-rows: 3fr 0.5fr;
   grid-template-rows: 3fr 0.5fr;
   background-image: radial-gradient(circle farthest-corner at 100% 100%, #6186ff, #33cfff);
