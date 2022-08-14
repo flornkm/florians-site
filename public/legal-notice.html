@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Aug 14 2022 20:05:55 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Aug 14 2022 20:13:14 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62781734d9a5e7346d6b0128" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -181,24 +181,40 @@
   outline-color:#0e0e0f;
   color: #0e0e0f;
   }
-  .button.secondary, .close-button, .navigation-link { 
+  .button.secondary, .close-button { 
   background-color:  transparent;
   border-color:   #dbdbdb;
   color: #0e0e0f;
   }
-  .button.secondary:hover, .close-button:hover, .navigation-link:hover {
+  .button.secondary:hover, .close-button:hover {
   background-color: #dbdbdb;
   border-color:   #dbdbdb;
     color: #0e0e0f;
   }
+  .navigation-link:hover {
+       background-color: transparent;
+    }
   @media only screen and (min-width: 1020px) {
   .slider-overlay {
     background-image: linear-gradient(90deg, #fcfcfc, #fcfcfc00 50%, #fcfcfc);
   }
+    .navigation-menu-wrapper {
+  background-color: transparent;
+  }
   } @media only screen and (max-width: 1019px) {
+    .navigation-menu-wrapper {
+  background-color: white;
+  }
       .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
+    }
+    .navigation-link {
+      background-color:  transparent;
+    border-color:   #dbdbdb;
   }
+     .navigation-link:hover {
+       background-color: #dbdbdb;
+    }
   }
   .card.slider-card {
   border-color: #dbdbdb;
@@ -212,7 +228,7 @@
 .card-slider_nav-icon {
   color: #0e0e0f;
   }
-  .card-grid-wrapper, .navigation-menu-wrapper {
+  .card-grid-wrapper {
   background-color: white;
   }
   .code.font-size {
