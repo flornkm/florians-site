@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Aug 14 2022 11:14:24 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Aug 14 2022 15:17:02 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -24,24 +24,26 @@
 </head>
 <body class="body">
   <div class="navigation">
-    <div data-hover="true" data-delay="0" class="logo-dropdown w-dropdown">
-      <div class="dropdown-toggle w-dropdown-toggle">
-        <a href="index.html" aria-current="page" class="brand w-inline-block w--current"><img src="images/flooo_logo_basic.svg" loading="lazy" data-w-id="af99a72a-5dd7-c328-b9c2-80d76a0c7b22" alt="" class="logo"></a>
-      </div>
-      <nav class="dropdown-list w-dropdown-list">
-        <div class="dropdown-explanation">
-          <div class="dropdown-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
-              <rect width="256" height="256" fill="none"></rect>
-              <line x1="216" y1="128" x2="40" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-              <polyline points="112 56 40 128 112 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
-            </svg></div>
-          <p class="paragraph no-margin">Home</p>
+    <div class="navigation-wrapper">
+      <div data-hover="true" data-delay="0" class="logo-dropdown w-dropdown">
+        <div class="dropdown-toggle w-dropdown-toggle">
+          <a href="index.html" aria-current="page" class="brand w-inline-block w--current"><img src="images/flooo_logo_basic.svg" loading="lazy" data-w-id="af99a72a-5dd7-c328-b9c2-80d76a0c7b22" alt="" class="logo"></a>
         </div>
-      </nav>
-    </div>
-    <div class="navigation-links">
-      <a data-w-id="af99a72a-5dd7-c328-b9c2-80d76a0c7b26" href="#" class="navigation-link">Contact</a>
-      <a href="#more" class="navigation-link">More</a>
+        <nav class="dropdown-list w-dropdown-list">
+          <div class="dropdown-explanation">
+            <div class="dropdown-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
+                <rect width="256" height="256" fill="none"></rect>
+                <line x1="216" y1="128" x2="40" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                <polyline points="112 56 40 128 112 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+              </svg></div>
+            <p class="paragraph no-margin">Home</p>
+          </div>
+        </nav>
+      </div>
+      <div class="navigation-links">
+        <a data-w-id="af99a72a-5dd7-c328-b9c2-80d76a0c7b26" href="#" class="navigation-link">Contact</a>
+        <a href="#more" class="navigation-link">More</a>
+      </div>
     </div>
   </div>
   <div class="main-wrapper">
@@ -260,7 +262,7 @@
       <div class="project-wrapper">
         <h2 class="heading2 center margin-down-48">Projects</h2>
         <a href="documents/userjourney_anchor_documentation.pdf" target="_blank" class="project-link w-inline-block">
-          <div class="project-card"><img src="images/interaction_map_thumbnail.jpg" loading="lazy" srcset="images/interaction_map_thumbnail-p-500.jpeg 500w, images/interaction_map_thumbnail-p-800.jpeg 800w, images/interaction_map_thumbnail-p-1080.jpeg 1080w, images/interaction_map_thumbnail.jpg 1500w" sizes="76vw" alt="" class="project-thumbnail"></div>
+          <div class="project-card"><img src="images/interaction_map_thumbnail.jpg" loading="lazy" srcset="images/interaction_map_thumbnail-p-500.jpeg 500w, images/interaction_map_thumbnail-p-800.jpeg 800w, images/interaction_map_thumbnail-p-1080.jpeg 1080w, images/interaction_map_thumbnail.jpg 1500w" sizes="(max-width: 1919px) 90vw, 1200px" alt="" class="project-thumbnail"></div>
           <h3 class="heading5">Interaction Map</h3>
           <p>2021 – Documentation Language: German</p>
         </a>
@@ -288,8 +290,8 @@
           <div class="w-form">
             <form id="my-form" name="wf-form-Contact-Form" data-name="Wf Form Contact Form" action="https://formspree.io/f/xbjwjdre" method="post">
               <div class="contact-form-grid">
-                <div id="w-node-_9cd1297b-7859-21da-a9b6-c1102fce04c3-2fce04b2"><label for="Email" id="contact-email" class="field-label">Email *</label><input type="email" class="text-field w-input" maxlength="256" name="Email" data-name="Email" placeholder="" id="Email" required=""></div>
-                <div id="w-node-_9cd1297b-7859-21da-a9b6-c1102fce04c7-2fce04b2" class="div-block"><label for="Message" id="contact-message" class="field-label-2">Message</label><textarea id="Message" name="Message" maxlength="5000" data-name="Message" placeholder="" class="text-area w-input"></textarea></div>
+                <div id="w-node-_9cd1297b-7859-21da-a9b6-c1102fce04c3-2fce04b2"><label for="Email" id="contact-email" class="form-label">Email *</label><input type="email" class="text-field w-input" maxlength="256" name="Email" data-name="Email" placeholder="" id="Email" required=""></div>
+                <div id="w-node-_9cd1297b-7859-21da-a9b6-c1102fce04c7-2fce04b2" class="div-block"><label for="Message" id="contact-message" class="form-label">Message</label><textarea id="Message" name="Message" maxlength="5000" data-name="Message" placeholder="" class="text-area w-input"></textarea></div>
               </div><input type="submit" value="Submit" data-wait="Please wait..." class="button w-button">
               <p id="my-form-status" class="paragraph margin-top-12 w-node-e5f081a3-49f6-3c46-f01e-43bdad0146b9-2fce04b2"> </p>
             </form>
@@ -482,6 +484,12 @@
   }
   .dropdown-icon {
     color: #757575;
+  }
+  .equipment-wrapper {
+  background-color: #f3f3f3;
+  }
+  .equipment-wrapper:hover {
+  background-color: #e8e8e8;
   }
 }
 </style><!--  Slick Slider JS  -->
