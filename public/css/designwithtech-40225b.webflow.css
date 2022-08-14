@@ -1734,7 +1734,7 @@ a {
 }
 
 .navigation {
-  z-index: 10;
+  z-index: 90;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1790,6 +1790,7 @@ a {
 }
 
 .navbar-menu-overlay {
+  position: relative;
   display: none;
 }
 
@@ -2188,6 +2189,7 @@ a {
   }
 
   .hamburger-menu.w--open {
+    z-index: 99;
     background-color: hsla(0, 0%, 100%, 0.15);
   }
 
