@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Tue Jul 26 2022 12:16:10 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Aug 14 2022 11:11:12 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f42db28b9ee8e55e22e" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -50,6 +50,9 @@
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   <style>
+  .text-area {
+   resize: none; 
+  }
 @media (prefers-color-scheme: light) {
   body, .body {
   	background-color:  #fcfcfc;
@@ -78,15 +81,15 @@
   outline-color:#0e0e0f;
   color: #0e0e0f;
   }
-  .button.secondary {
-  background-color: transparent;
-  border-color:  #0e0e0f;
+  .button.secondary, .close-button { 
+  background-color:  transparent;
+  border-color:   #dbdbdb;
   color: #0e0e0f;
   }
-  .button.secondary:hover {
-  background-color:#0e0e0f;
-  border-color:  #0e0e0f;
-  color: white;
+  .button.secondary:hover, .close-button:hover {
+  background-color: #dbdbdb;
+  border-color:   #dbdbdb;
+    color: #0e0e0f;
   }
   @media only screen and (min-width: 1020px) {
   .slider-overlay {
@@ -115,15 +118,18 @@
   .code.font-size {
   color: #585858;
   }
-  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .textarea, .text-field, .paragraph-2 {
-  	color: #757575;
+  label {
+    color: #757575;
+  }
+  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2 {
+  	color: #595959;
   }
   .contact-popup-wrapper, .mail-icon {
   background-color: white;
   color: #0e0e0f;
   }
- .text-field:focus, .textarea:focus, .html-embed {
-	border-color:#878787;
+ .text-field:focus, .text-area:focus, .html-embed {
+	border-color:#256ad9;
   }
   .arrow-background {
   background-color: 
@@ -144,6 +150,9 @@
 }
   .circle-green-wrapper {
   background-color: #e3ffdf;
+  }
+  .dropdown-icon {
+    color: #757575;
   }
 }
 </style>
