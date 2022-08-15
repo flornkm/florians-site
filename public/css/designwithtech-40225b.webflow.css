@@ -3113,6 +3113,10 @@ a {
     font-size: 3.157rem;
   }
 
+  .heading1.center.max-width.white.mobile-smaller {
+    font-size: 2.369rem;
+  }
+
   .heading2 {
     font-size: 2.369rem;
   }
