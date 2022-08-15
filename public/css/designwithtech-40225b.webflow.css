@@ -1713,7 +1713,7 @@ a {
   top: auto;
   right: 0%;
   bottom: 0%;
-  overflow: scroll;
+  overflow: hidden;
   max-height: 150px;
   padding: 8px 23px;
 }
