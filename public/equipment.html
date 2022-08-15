@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Mon Aug 15 2022 00:22:49 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Mon Aug 15 2022 10:14:16 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="628c727b822cf7c76983a4ce" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -25,16 +25,16 @@
   <script type="text/javascript" charset="UTF-8" src="https://cdn.cookie-script.com/s/421bf8720edfdbd1ad6e14116f00de8d.js"></script>
 </head>
 <body class="body">
-  <div data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27c0" data-animation="over-left" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
+  <div data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27c0" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
     <div class="container w-container">
       <a href="index.html" class="brand w-inline-block"><img src="images/flooo_logo_basic.svg" loading="lazy" data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27c3" alt="" class="logo"></a>
       <div class="filler"></div>
       <nav role="navigation" class="navigation-menu w-nav-menu">
         <div class="navigation-menu-wrapper">
-          <a href="index.html" class="navigation-link">Home</a>
-          <a href="tutor.html" class="navigation-link">Tutor</a>
-          <a href="equipment.html" aria-current="page" class="navigation-link w--current">Equipment</a>
-          <a data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27cb" href="#" class="button secondary navigiation-button w-button">Contact me</a>
+          <a id="w-node-_5d3d687f-858f-7f35-7d47-6d467e0e27c7-7e0e27c0" href="index.html" class="navigation-link">Home</a>
+          <a id="w-node-_5d3d687f-858f-7f35-7d47-6d467e0e27c9-7e0e27c0" href="tutor.html" class="navigation-link">Tutor</a>
+          <a id="w-node-_0a176865-4479-8a44-9e44-f614fba4c2ae-7e0e27c0" href="equipment.html" aria-current="page" class="navigation-link w--current">Equipment</a>
+          <a id="w-node-_5d3d687f-858f-7f35-7d47-6d467e0e27cb-7e0e27c0" data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27cb" href="#" class="button secondary navigiation-button w-button">Contact me</a>
         </div>
       </nav>
       <div class="hamburger-menu w-nav-button">
@@ -373,7 +373,7 @@ word-break: break-all;
   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .project-wrapper, .check-wrapper, .check-icon, .price-text  {
   color:  #0e0e0f;
   }
-  .navigation-link, .footer-link, .footer-icon-link, .footer-link-legal, .project-link, .link, .link.big-link{
+  .navigation-link, .footer-link, .footer-icon-link, .footer-link-legal, .project-link, .link, .link.big-link, .navigiation-button{
   color: #0e0e0f;
   }
   .top-bar, .bottom-bar {
@@ -413,22 +413,19 @@ word-break: break-all;
   .slider-overlay {
     background-image: linear-gradient(90deg, #fcfcfc, #fcfcfc00 50%, #fcfcfc);
   }
-    .navigation-menu-wrapper {
-  background-color: transparent;
-  }
   } @media only screen and (max-width: 1019px) {
-    .navigation-menu-wrapper {
-  background-color: white;
-  }
       .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
     }
-    .navigation-link {
-      background-color:  transparent;
+    .navigation-link, .navigiation-button {
+      background-color:  white;
     border-color:   #dbdbdb;
   }
-     .navigation-link:hover {
+     .navigation-link:hover, .navigiation-button:hover {
        background-color: #dbdbdb;
+    }
+    .button.secondary.navigiation-button {
+     background-color: #fff;
     }
   }
   .card.slider-card {
@@ -436,6 +433,10 @@ word-break: break-all;
   }
   .tutor-header {
    padding-bottom: 10%; 
+  mix-blend-mode: difference;
+  }
+  .tutor-icon {
+   display: none; 
   }
   .button-secondary.slide-right, .hamburger-menu {
   background-color: #00000026;
@@ -445,6 +446,9 @@ word-break: break-all;
   }
 .card-slider_nav-icon {
   color: #0e0e0f;
+  }
+  .navigation-menu-wrapper {
+  background-color: transparent;
   }
   .card-grid-wrapper, .tab-content {
   background-color: white;

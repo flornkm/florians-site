@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Mon Aug 15 2022 00:22:49 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Mon Aug 15 2022 10:14:16 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62781946400562cba6a5e092" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -148,7 +148,7 @@
   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .project-wrapper, .check-wrapper, .check-icon, .price-text  {
   color:  #0e0e0f;
   }
-  .navigation-link, .footer-link, .footer-icon-link, .footer-link-legal, .project-link, .link, .link.big-link{
+  .navigation-link, .footer-link, .footer-icon-link, .footer-link-legal, .project-link, .link, .link.big-link, .navigiation-button{
   color: #0e0e0f;
   }
   .top-bar, .bottom-bar {
@@ -188,22 +188,19 @@
   .slider-overlay {
     background-image: linear-gradient(90deg, #fcfcfc, #fcfcfc00 50%, #fcfcfc);
   }
-    .navigation-menu-wrapper {
-  background-color: transparent;
-  }
   } @media only screen and (max-width: 1019px) {
-    .navigation-menu-wrapper {
-  background-color: white;
-  }
       .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
     }
-    .navigation-link {
-      background-color:  transparent;
+    .navigation-link, .navigiation-button {
+      background-color:  white;
     border-color:   #dbdbdb;
   }
-     .navigation-link:hover {
+     .navigation-link:hover, .navigiation-button:hover {
        background-color: #dbdbdb;
+    }
+    .button.secondary.navigiation-button {
+     background-color: #fff;
     }
   }
   .card.slider-card {
@@ -211,6 +208,10 @@
   }
   .tutor-header {
    padding-bottom: 10%; 
+  mix-blend-mode: difference;
+  }
+  .tutor-icon {
+   display: none; 
   }
   .button-secondary.slide-right, .hamburger-menu {
   background-color: #00000026;
@@ -220,6 +221,9 @@
   }
 .card-slider_nav-icon {
   color: #0e0e0f;
+  }
+  .navigation-menu-wrapper {
+  background-color: transparent;
   }
   .card-grid-wrapper, .tab-content {
   background-color: white;
