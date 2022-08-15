@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Aug 14 2022 20:13:14 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Mon Aug 15 2022 00:22:49 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -30,6 +30,7 @@
       <nav role="navigation" class="navigation-menu w-nav-menu">
         <div class="navigation-menu-wrapper">
           <a href="index.html" aria-current="page" class="navigation-link w--current">Home</a>
+          <a href="tutor.html" class="navigation-link">Tutor</a>
           <a href="equipment.html" class="navigation-link">Equipment</a>
           <a data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27cb" href="#" class="button secondary navigiation-button w-button">Contact me</a>
         </div>
@@ -50,8 +51,10 @@
           <h2 id="website-heading" class="heading4 thin grey">Let&#x27;s build the products <br>of tomorrow</h2>
           <p>Currently studying at the university of design in Schwaebisch Gmuend, Germany.</p>
           <div class="empty-32"></div>
-          <a href="#more" class="button w-button">Learn more</a>
-          <a data-w-id="eba30a69-52e6-d11e-299a-3368fa3cb735" href="#" class="button secondary w-button">Contact me</a>
+          <div class="button-holder">
+            <a href="#more" class="button w-button">Learn more</a>
+            <a data-w-id="eba30a69-52e6-d11e-299a-3368fa3cb735" href="#" class="button secondary w-button">Contact me</a>
+          </div>
         </div>
         <div class="header-main"><img src="images/main_header.png" loading="lazy" alt="" class="main-image"></div>
       </div>
@@ -384,7 +387,7 @@
   	background-color:  #fcfcfc;
     color: #0e0e0f;
   }
-  h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .project-wrapper {
+  h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .project-wrapper, .check-wrapper, .check-icon, .price-text  {
   color:  #0e0e0f;
   }
   .navigation-link, .footer-link, .footer-icon-link, .footer-link-legal, .project-link, .link, .link.big-link{
@@ -448,6 +451,9 @@
   .card.slider-card {
   border-color: #dbdbdb;
   }
+  .tutor-header {
+   padding-bottom: 10%; 
+  }
   .button-secondary.slide-right, .hamburger-menu {
   background-color: #00000026;
   }
@@ -457,8 +463,13 @@
 .card-slider_nav-icon {
   color: #0e0e0f;
   }
-  .card-grid-wrapper {
+  .card-grid-wrapper, .tab-content {
   background-color: white;
+  }
+  .tab-holder, .price-card-holder {
+    background-color: white;
+    border-radius: 32px;
+    box-shadow: 0 1px 20px 0 rgb(0 0 0 / 5%);
   }
   .code.font-size {
   color: #585858;
@@ -466,7 +477,7 @@
   label {
     color: #757575;
   }
-  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2 {
+  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2, .tab-link, .price-detail {
   	color: #595959;
   }
   .contact-popup-wrapper, .mail-icon {
