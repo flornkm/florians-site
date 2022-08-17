@@ -3248,6 +3248,10 @@ a {
     font-size: 30px;
   }
 
+  .div-block {
+    padding-bottom: 0px;
+  }
+
   .p {
     font-size: 1rem;
   }
@@ -3258,6 +3262,10 @@ a {
 
   .h1 {
     font-size: 2.7rem;
+  }
+
+  .contact-popup-parent {
+    display: none;
   }
 
   .equipment-grid {
@@ -3358,6 +3366,11 @@ a {
   .pricing.blur {
     overflow: hidden;
     max-height: 350px;
+  }
+
+  .multiline-input {
+    max-height: 150px;
+    min-height: 100px;
   }
 
   .project-details-grid {
@@ -3499,6 +3512,10 @@ a {
     padding-left: 5%;
   }
 
+  .div-block {
+    padding-bottom: 0px;
+  }
+
   .p {
     font-size: 1rem;
     line-height: 1.4em;
@@ -3554,6 +3571,11 @@ a {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+  }
+
+  .multiline-input {
+    max-height: 100px;
+    min-height: 50px;
   }
 
   .project-header-image {
