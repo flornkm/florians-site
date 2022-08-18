@@ -2688,7 +2688,9 @@ a {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
-    background-color: transparent;
+    border-color: #fff;
+    background-color: #fff;
+    color: #0e0e0f;
   }
 
   .button.secondary.navigiation-button:hover {
@@ -2705,10 +2707,12 @@ a {
     justify-content: center;
     border-style: solid;
     border-width: 1px;
-    border-color: #44444b;
+    border-color: #fff;
     border-radius: 8px;
+    background-color: #fff;
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
+    color: #0e0e0f;
   }
 
   .navigation-link:hover {
