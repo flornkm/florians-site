@@ -164,7 +164,7 @@ a {
 
 .button {
   margin-right: 12px;
-  padding: 10px 24px;
+  padding: 0.75em 1.25em;
   border-style: solid;
   border-width: 1px;
   border-color: #fff;
@@ -174,6 +174,7 @@ a {
   transition: all 150ms ease-in-out;
   font-family: Plusjakartasans, sans-serif;
   color: #0e0e0f;
+  line-height: 1em;
 }
 
 .button:hover {
@@ -183,7 +184,6 @@ a {
 }
 
 .button.secondary {
-  padding: 10px 24px;
   border-style: solid;
   border-width: 1px;
   border-color: #44444b;
@@ -2738,7 +2738,6 @@ a {
     margin-right: 8px;
     margin-bottom: 0px;
     margin-left: 8px;
-    padding: 16px;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -2756,7 +2755,7 @@ a {
   .navigation-link {
     width: 150px;
     margin: 0px 8px;
-    padding: 16px;
+    padding: 0.75em 1.25em;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -2769,6 +2768,7 @@ a {
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
     color: #0e0e0f;
+    line-height: 1em;
   }
 
   .navigation-link:hover {
