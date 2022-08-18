@@ -1063,15 +1063,11 @@ a {
 .project-link {
   width: 100%;
   height: auto;
-  -webkit-transition: opacity 150ms ease-in-out;
-  transition: opacity 150ms ease-in-out;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
   color: #dadada;
   text-decoration: none;
   cursor: pointer;
-}
-
-.project-link:hover {
-  opacity: 0.85;
 }
 
 .footer {
@@ -2507,12 +2503,14 @@ a {
 }
 
 .category {
+  margin-right: 8px;
   margin-bottom: 8px;
-  margin-left: 8px;
-  padding: 8px;
+  padding: 0.8em 1em;
   border-radius: 20px;
   background-color: #1381ee;
   color: #fff;
+  font-size: 0.75rem;
+  line-height: 1em;
 }
 
 .no-margin {
@@ -2521,6 +2519,10 @@ a {
 
 .no-margin.margin-down-8 {
   margin-bottom: 8px;
+}
+
+.no-margin.margin-down-8.margin-right-8 {
+  margin-right: 8px;
 }
 
 .project-grid {
