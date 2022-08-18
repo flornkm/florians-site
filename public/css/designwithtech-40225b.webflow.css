@@ -2694,7 +2694,8 @@ a {
   }
 
   .button.secondary.navigiation-button:hover {
-    background-color: #44444b;
+    border-color: #dadada;
+    background-color: #dadada;
   }
 
   .navigation-link {
@@ -2716,7 +2717,8 @@ a {
   }
 
   .navigation-link:hover {
-    background-color: #44444b;
+    border-color: #dadada;
+    background-color: #dadada;
     text-decoration: none;
   }
 
