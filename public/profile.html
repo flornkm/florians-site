@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Fri Aug 19 2022 14:21:52 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Fri Aug 19 2022 14:28:52 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62ff61f839e6a1dd17df1628" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -93,6 +93,13 @@
       <div class="availability-wrapper">
         <div>Availability</div>
         <div class="empty-16"></div>
+        <div class="w-embed">
+          <style>
+.availability-inner.scroll-y {
+overflow-x: scroll;
+}
+</style>
+        </div>
         <div data-w-id="fb1ef599-3659-ccf3-4c2e-805d234facbf" class="availability-inner scroll-y">
           <div class="week-grid">
             <div id="w-node-fb1ef599-3659-ccf3-4c2e-805d234facc1-17df1628" style="-webkit-transform:translate3d(0, 10vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="day-div">
@@ -130,7 +137,7 @@
           </div>
         </div>
       </div>
-      <div class="empty-128"></div>
+      <div class="empty-128 mobile-hide"></div>
       <div class="copyright-wrapper">
         <a href="legal-notice.html" class="button tertiary w-button">Legal Notice</a>
         <a href="privacy-policy.html" class="button tertiary w-button">Privacy Policy</a>
@@ -368,7 +375,7 @@
     color: #0e0e0f;
 }
   .avatar-image {
-  	outline-color: #dadada;
+  	border-color: #dadada;
   }
   .information-item.background-webdesign, .information-item.background-askme {
     background-position: 75% 0%;

@@ -2841,11 +2841,10 @@ a {
 .avatar-image {
   width: 150px;
   margin-bottom: 24px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1e1e20;
   border-radius: 200px;
-  outline-color: #1e1e20;
-  outline-offset: 3px;
-  outline-style: solid;
-  outline-width: 1px;
 }
 
 .avatar-name-wrapper {
@@ -3674,6 +3673,10 @@ a {
     font-size: 1rem;
   }
 
+  .empty-128.mobile-hide {
+    display: none;
+  }
+
   .card-body {
     padding: 16px 20px 20px;
   }
@@ -4033,6 +4036,10 @@ a {
     text-align: center;
   }
 
+  .button.tertiary {
+    margin-bottom: 16px;
+  }
+
   .button.xxl {
     margin-right: 0px;
     padding: 16px 24px;
@@ -4261,6 +4268,13 @@ a {
     grid-template-rows: auto auto;
   }
 
+  .avatar-image {
+    outline-color: #1e1e20;
+    outline-offset: 3px;
+    outline-style: none;
+    outline-width: 1px;
+  }
+
   .social-icons-wrapper {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
@@ -4290,8 +4304,8 @@ a {
     min-width: 400px;
   }
 
-  .availability-inner.scroll-y {
-    overflow: scroll;
+  .availability-wrapper {
+    margin-bottom: 64px;
   }
 }
 
