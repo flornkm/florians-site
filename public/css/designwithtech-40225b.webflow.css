@@ -2104,7 +2104,7 @@ a {
   display: -ms-grid;
   display: grid;
   grid-auto-columns: 1fr;
-  grid-column-gap: 64px;
+  grid-column-gap: 24px;
   grid-row-gap: 64px;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -3118,6 +3118,10 @@ a {
     display: none;
   }
 
+  .empty-128.mobile-hide-two {
+    display: block;
+  }
+
   .card-body {
     padding: 16px 20px 20px;
   }
@@ -3325,11 +3329,14 @@ a {
   }
 
   .copyright-wrapper {
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 }
 
@@ -3414,6 +3421,10 @@ a {
 
   .empty-128.above-mobile-hide {
     display: block;
+  }
+
+  .empty-128.mobile-hide-two {
+    display: none;
   }
 
   .empty-256.mobile-hide {
@@ -3629,6 +3640,17 @@ a {
   .information-item.background-pixel {
     overflow: hidden;
     height: 450px;
+  }
+
+  .copyright-wrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .transition.mobile-hide {
