@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Fri Aug 19 2022 23:34:56 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Aug 20 2022 11:13:11 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -21,6 +21,11 @@
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
   <!--  [Attributes by Finsweet] Copy to clipboard  -->
   <script defer="" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-copyclip@1/copyclip.js"></script>
+  <style>
+.slider-overlay {
+pointer-events: none;
+}
+</style>
 </head>
 <body class="body">
   <div data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27c0" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
@@ -513,22 +518,24 @@
       .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
     }
+    .navigation-link:hover, .navigiation-button:hover {
+       background-color: #dbdbdb;
+    }
+    } @media only screen and (max-width: 768px) {
+      .slider-overlay {
+    background-image: none;
+    }
+  }
     .navigation-link, .navigiation-button {
       background-color:  white;
     border-color:   #dbdbdb;
   }
-     .navigation-link:hover, .navigiation-button:hover {
-       background-color: #dbdbdb;
-    }
     .button.secondary.navigiation-button {
      background-color: #fff;
     }
   }
   .card.slider-card {
   border-color: #dbdbdb;
-  }
-  .tutor-header {
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.7004595588235294) 0%, rgba(255,255,255,1) 100%), url(https://uploads-ssl.webflow.com/62777f14896c267719382407/62fb847a22514162c7025eca_tutor_header.png);
   }
   .button-secondary.slide-right, .hamburger-menu {
   background-color: #00000026;
@@ -562,7 +569,7 @@
   label {
     color: #757575;
   }
-  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2, .tab-link, .price-detail {
+  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2, .tab-link, .price-detail, .slide-paragraph {
   	color: #595959;
   }
   .contact-popup-wrapper, .mail-icon {
@@ -686,6 +693,13 @@
   .information-item.background-webdesign > .information-text.xxl, .information-item.background-askme > .information-text.xxl {
     color: #0e0e0f;
   } 
+   .button.secondary.navigiation-button:hover {
+    background-color: #dbdbdb;
+}
+  .transition {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#44444b), to(#0e0e0f));
+    background-image: linear-gradient(180deg, #44444b, #fcfcfc);
+}
 }
 </style><!--  Slick Slider JS  -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

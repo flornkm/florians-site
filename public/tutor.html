@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Fri Aug 19 2022 23:34:56 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Aug 20 2022 11:13:11 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62f95a7cd5249342da489f27" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -28,9 +28,9 @@
   <div class="tutor-header">
     <div class="tutor-header-wrapper"><img src="images/internal_drive.png" loading="lazy" alt="" class="tutor-laptop">
       <h1 class="heading1 center max-width mobile-smaller gradient">No more full disks because of failed <span class="highlight-color">design</span> attempts</h1>
-      <p class="paragraph center">One to One Meetingsfor learning faster.</p>
+      <p class="paragraph center dark-color">One to One Meetingsfor learning faster.</p>
       <div class="empty-50"></div>
-      <a href="https://www.superprof.de/student-gestaltungshochschule-mit-mehreren-jahren-erfahrung-gibt-remote-online-unterricht-bereich-webdesign-und.html" target="_blank" class="button xl w-button">Visit Superprof</a>
+      <a href="https://www.superprof.de/student-gestaltungshochschule-mit-mehreren-jahren-erfahrung-gibt-remote-online-unterricht-bereich-webdesign-und.html" target="_blank" class="button xl white w-button">Visit Superprof</a>
     </div>
     <a href="https://macosicons.com/#/" target="_blank" class="copyright-text">Disk Icon Source</a>
   </div>
@@ -203,22 +203,24 @@
       .slider-overlay {
     background-image: linear-gradient(90deg, #1e1e2000 0%, #fcfcfc);
     }
+    .navigation-link:hover, .navigiation-button:hover {
+       background-color: #dbdbdb;
+    }
+    } @media only screen and (max-width: 768px) {
+      .slider-overlay {
+    background-image: none;
+    }
+  }
     .navigation-link, .navigiation-button {
       background-color:  white;
     border-color:   #dbdbdb;
   }
-     .navigation-link:hover, .navigiation-button:hover {
-       background-color: #dbdbdb;
-    }
     .button.secondary.navigiation-button {
      background-color: #fff;
     }
   }
   .card.slider-card {
   border-color: #dbdbdb;
-  }
-  .tutor-header {
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.7004595588235294) 0%, rgba(255,255,255,1) 100%), url(https://uploads-ssl.webflow.com/62777f14896c267719382407/62fb847a22514162c7025eca_tutor_header.png);
   }
   .button-secondary.slide-right, .hamburger-menu {
   background-color: #00000026;
@@ -252,7 +254,7 @@
   label {
     color: #757575;
   }
-  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2, .tab-link, .price-detail {
+  p, .p, .p.big, .paragraph, .date, .paragraph.card-text, .text-area, .text-field, .paragraph-2, .tab-link, .price-detail, .slide-paragraph {
   	color: #595959;
   }
   .contact-popup-wrapper, .mail-icon {
@@ -376,6 +378,13 @@
   .information-item.background-webdesign > .information-text.xxl, .information-item.background-askme > .information-text.xxl {
     color: #0e0e0f;
   } 
+   .button.secondary.navigiation-button:hover {
+    background-color: #dbdbdb;
+}
+  .transition {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#44444b), to(#0e0e0f));
+    background-image: linear-gradient(180deg, #44444b, #fcfcfc);
+}
 }
 </style>
 </body>
