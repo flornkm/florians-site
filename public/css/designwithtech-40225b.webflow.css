@@ -2674,6 +2674,14 @@ a {
     background-color: #dadada;
   }
 
+  .button.tertiary:hover {
+    text-decoration: none;
+  }
+
+  .button.tertiary:active {
+    text-decoration: underline;
+  }
+
   .navigation-link {
     width: 150px;
     margin: 0px 8px;
@@ -3099,6 +3107,11 @@ a {
     color: #0e0e0f;
   }
 
+  .button.tertiary:hover {
+    background-color: transparent;
+    color: #fff;
+  }
+
   .navigation-link {
     width: 100%;
     margin-top: 8px;
@@ -3450,6 +3463,17 @@ a {
     margin-bottom: 16px;
   }
 
+  .button.tertiary:hover {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .button.tertiary.custom-padding {
+    margin-right: 0px;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+  }
+
   .button.xxl {
     margin-right: 0px;
     padding: 16px 24px;
@@ -3719,6 +3743,13 @@ a {
   }
 
   .copyright-wrapper {
+    position: absolute;
+    left: 0%;
+    top: auto;
+    right: 0%;
+    bottom: 0%;
+    padding-top: 0px;
+    padding-bottom: 0px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -webkit-flex-direction: row;
