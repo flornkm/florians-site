@@ -397,7 +397,8 @@ a {
 }
 
 .heading4.mail {
-  margin-bottom: 8px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   font-size: 1.5rem;
   font-weight: 500;
 }
