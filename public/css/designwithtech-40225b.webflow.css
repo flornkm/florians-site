@@ -386,6 +386,10 @@ a {
   margin-bottom: 0px;
 }
 
+.heading2.no-margin.margin-down-16 {
+  margin-bottom: 16px;
+}
+
 .heading3 {
   margin-bottom: 24px;
   font-size: 2.369rem;
@@ -2076,6 +2080,10 @@ a {
 
 .highlight {
   color: #dadada;
+}
+
+.highlight.underline {
+  text-decoration: underline;
 }
 
 .slash {
