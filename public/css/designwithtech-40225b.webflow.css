@@ -433,6 +433,13 @@ a {
   margin-right: 8px;
 }
 
+.heading4.no-margin.purple-gradient {
+  background-image: radial-gradient(circle farthest-corner at 0% 100%, #bd56e3, #eba6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .heading4.pixel-heading {
   color: #fff;
 }
@@ -2710,7 +2717,7 @@ a {
   display: flex;
   width: 450px;
   max-width: 100%;
-  padding: 32px 80px 32px 32px;
+  padding: 32px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2720,10 +2727,10 @@ a {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   grid-auto-columns: 1fr;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -2735,6 +2742,11 @@ a {
 
 .alert-icon {
   color: #fff;
+}
+
+.alert-image {
+  width: 100%;
+  margin-bottom: 24px;
 }
 
 @media screen and (min-width: 1920px) {
