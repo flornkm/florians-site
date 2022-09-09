@@ -3154,6 +3154,22 @@ a {
     background-color: rgba(0, 0, 0, 0.85);
   }
 
+  .equipment-wrapper.gradient.alert {
+    display: none;
+  }
+
+  .equipment-wrapper.gradient.real {
+    display: -ms-grid;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 8px;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    -ms-grid-rows: 3fr 0.5fr;
+    grid-template-rows: 3fr 0.5fr;
+  }
+
   .project-grid {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
