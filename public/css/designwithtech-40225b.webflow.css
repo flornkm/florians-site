@@ -1722,6 +1722,10 @@ a {
   width: 350px;
 }
 
+.main-image.not-visible {
+  display: none;
+}
+
 .close-button {
   position: absolute;
   left: auto;
@@ -2647,6 +2651,12 @@ a {
   margin-bottom: 64px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#44444b), to(#0e0e0f));
   background-image: linear-gradient(180deg, #44444b, #0e0e0f);
+}
+
+.main-lottie {
+  width: 350px;
+  max-width: 100%;
+  mix-blend-mode: difference;
 }
 
 @media screen and (min-width: 1920px) {
