@@ -2686,6 +2686,7 @@ a {
   background-image: url('../images/main_header.jpg');
   background-position: 0px 0px;
   background-size: cover;
+  cursor: pointer;
 }
 
 .alert-popup {
@@ -2695,7 +2696,10 @@ a {
   right: 0%;
   bottom: 0%;
   z-index: 99;
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding-right: 10%;
   padding-left: 10%;
   -webkit-box-pack: center;
