@@ -240,6 +240,18 @@ a {
   color: #fff;
 }
 
+.button.custom {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 0em;
+}
+
 .test {
   background-color: #0e0e0f;
 }
@@ -393,6 +405,10 @@ a {
 .heading3 {
   margin-bottom: 24px;
   font-size: 2.369rem;
+}
+
+.heading3.grey {
+  color: #9e9e9e;
 }
 
 .heading4 {
@@ -2696,10 +2712,7 @@ a {
   right: 0%;
   bottom: 0%;
   z-index: 99;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-right: 10%;
   padding-left: 10%;
   -webkit-box-pack: center;
@@ -2751,6 +2764,26 @@ a {
 .alert-image {
   width: 100%;
   margin-bottom: 24px;
+}
+
+.more {
+  display: none;
+}
+
+.why-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 56px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.button-icon {
+  margin-left: 8px;
 }
 
 @media screen and (min-width: 1920px) {
@@ -3639,6 +3672,13 @@ a {
     margin-right: 0px;
     padding: 16px 24px;
     font-size: 1.6rem;
+  }
+
+  .button.custom {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 
   .navigation-link {
