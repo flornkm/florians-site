@@ -269,6 +269,7 @@ a {
 }
 
 .logo {
+  display: none;
   width: 64px;
   height: 64px;
   border-style: none;
@@ -1727,14 +1728,21 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 64px;
   height: 64px;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
   border-radius: 20px;
-  background-color: #0e0e0f;
+  color: #fff;
+}
+
+.brand:hover {
+  color: #1381ee;
+}
+
+.brand.w--current {
+  background-color: transparent;
 }
 
 .empty-96 {
@@ -2790,6 +2798,12 @@ a {
   margin-left: 8px;
 }
 
+.logo-text {
+  font-size: 1.3rem;
+  font-style: italic;
+  text-decoration: none;
+}
+
 @media screen and (min-width: 1920px) {
   .header-text {
     max-width: 400px;
@@ -3812,6 +3826,10 @@ a {
     padding-left: 5%;
   }
 
+  .contact-popup-wrapper {
+    height: 95vh;
+  }
+
   .div-block {
     padding-bottom: 0px;
   }
@@ -3823,6 +3841,10 @@ a {
 
   .h1 {
     font-size: 2.6rem;
+  }
+
+  .contact-popup-parent {
+    display: none;
   }
 
   .slider-overlay {
