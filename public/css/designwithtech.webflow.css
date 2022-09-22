@@ -2800,8 +2800,6 @@ a {
 
 .logo-text {
   font-size: 1.3rem;
-  font-style: italic;
-  text-decoration: none;
 }
 
 @media screen and (min-width: 1920px) {
@@ -2832,6 +2830,7 @@ a {
     justify-content: center;
     border-style: none;
     border-color: #fff;
+    border-radius: 30px;
     background-color: transparent;
     color: #fff;
   }
@@ -2851,7 +2850,7 @@ a {
   .navigation-link {
     width: 100%;
     margin: 0px 8px;
-    padding: 1em 1.25em;
+    padding: 1.1em 1.25em;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -2859,7 +2858,7 @@ a {
     border-style: none;
     border-width: 1px;
     border-color: #fff;
-    border-radius: 8px;
+    border-radius: 30px;
     background-color: transparent;
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
@@ -3179,6 +3178,8 @@ a {
     display: grid;
     width: 100%;
     max-width: 100%;
+    padding-right: 2px;
+    padding-left: 2px;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -3201,7 +3202,7 @@ a {
     border-style: solid;
     border-width: 1px;
     border-color: #2c2c2f;
-    border-radius: 8px;
+    border-radius: 30px;
     background-color: rgba(30, 30, 32, 0.97);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
@@ -3258,6 +3259,15 @@ a {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
   }
+
+  .back-rect {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    right: auto;
+    bottom: 0%;
+    border-radius: 30px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -3310,7 +3320,7 @@ a {
   }
 
   .header-main {
-    display: none;
+    display: block;
   }
 
   .heading1 {
@@ -3527,6 +3537,8 @@ a {
   }
 
   .navigation-menu-wrapper {
+    padding-right: 2px;
+    padding-left: 2px;
     justify-items: center;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -3657,10 +3669,11 @@ a {
   .button.secondary.navigiation-button {
     margin-right: 0px;
     margin-left: 0px;
-    padding-right: 0.25em;
-    padding-left: 0.25em;
+    padding-right: 0.125em;
+    padding-left: 0.125em;
+    border-radius: 30px;
     color: #dadada;
-    font-size: 1rem;
+    font-size: 14px;
   }
 
   .button.secondary.no-margin-right {
@@ -3711,11 +3724,13 @@ a {
   .navigation-link {
     margin-right: 0px;
     margin-left: 0px;
-    padding: 1em 0.25em;
-    font-size: 1rem;
+    padding: 1em 0.125em;
+    border-radius: 30px;
+    font-size: 14px;
   }
 
   .header-main {
+    display: block;
     width: 100%;
   }
 
@@ -3827,7 +3842,7 @@ a {
   }
 
   .contact-popup-wrapper {
-    height: 95vh;
+    height: 90vh;
   }
 
   .div-block {
@@ -3844,7 +3859,7 @@ a {
   }
 
   .contact-popup-parent {
-    display: none;
+    display: block;
   }
 
   .slider-overlay {
@@ -3861,7 +3876,7 @@ a {
   }
 
   .navigation-menu {
-    width: 80%;
+    width: 90%;
   }
 
   .navigation-menu-wrapper {
@@ -3893,6 +3908,10 @@ a {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+  }
+
+  .button-holder.mobile-hide {
+    display: none;
   }
 
   .multiline-input {
