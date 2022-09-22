@@ -3643,6 +3643,8 @@ a {
   .button.secondary.navigiation-button {
     margin-right: 0px;
     margin-left: 0px;
+    padding-right: 0.25em;
+    padding-left: 0.25em;
     color: #dadada;
     font-size: 1rem;
   }
@@ -3695,8 +3697,7 @@ a {
   .navigation-link {
     margin-right: 0px;
     margin-left: 0px;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding: 1em 0.25em;
     font-size: 1rem;
   }
 
@@ -3838,7 +3839,7 @@ a {
   }
 
   .navigation-menu {
-    width: 95%;
+    width: 80%;
   }
 
   .navigation-menu-wrapper {
