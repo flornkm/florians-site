@@ -3859,7 +3859,7 @@ a {
   }
 
   .contact-popup-parent {
-    display: block;
+    display: none;
   }
 
   .slider-overlay {
@@ -3880,6 +3880,8 @@ a {
   }
 
   .navigation-menu-wrapper {
+    padding-right: 0px;
+    padding-left: 0px;
     justify-items: stretch;
     -webkit-box-align: center;
     -webkit-align-items: center;
