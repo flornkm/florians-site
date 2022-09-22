@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Sep 22 2022 14:11:23 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu Sep 22 2022 14:35:21 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62fe158c80972adb48104492" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -35,7 +35,7 @@
         <div class="navigation-menu-wrapper">
           <a id="w-node-_5d3d687f-858f-7f35-7d47-6d467e0e27c7-7e0e27c0" href="https://designwithtech.com/#top" class="navigation-link">Home</a>
           <a href="https://designwithtech.com/#resume" id="w-node-_0a176865-4479-8a44-9e44-f614fba4c2ae-7e0e27c0" class="navigation-link">Resume</a>
-          <a id="w-node-_677ca172-ddfb-adec-a5b3-ef374bb58e77-7e0e27c0" href="https://designwithtech.com/#projects" class="navigation-link">Projects</a>
+          <a id="w-node-_677ca172-ddfb-adec-a5b3-ef374bb58e77-7e0e27c0" href="https://designwithtech.com/#projects" class="navigation-link">Work</a>
           <a id="w-node-_5d3d687f-858f-7f35-7d47-6d467e0e27cb-7e0e27c0" data-w-id="5d3d687f-858f-7f35-7d47-6d467e0e27cb" href="#" class="button secondary navigiation-button w-button">Contact</a>
         </div>
       </nav>
@@ -464,7 +464,28 @@
   .avatar-image-wrapper {
     border-color: #dadada;
   }
+  @media screen and (max-width: 991px) {
+.navigation-menu-wrapper {
+  border-color: #dbdbdb;
+      background-color: #fcfcfcf2;
+  }
+    .button.secondary.navigiation-button:hover {
+      background-color: #fcfcfcf2
+    }
+    .navigation-link, .button.secondary.navigiation-button {
+     color: #7e7e7e; 
+    }
+    .navigation-link.w--current, .button.secondary.navigiation-button.w--current {
+     color: #0e0e0f;
+     background-color: #ededed;
+    }
+  }
 }
+  @media screen and (max-width: 479px) {
+    html {
+     font-size: 14px; 
+    }
+  }
 </style>
 </body>
 </html>

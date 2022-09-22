@@ -3096,7 +3096,7 @@ a {
     right: 0%;
     bottom: 5%;
     z-index: 99;
-    width: 80%;
+    width: 400px;
     margin-right: auto;
     margin-left: auto;
     -webkit-box-orient: horizontal;
@@ -3505,6 +3505,7 @@ a {
   }
 
   .navigation-menu {
+    width: 400px;
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
@@ -3836,16 +3837,20 @@ a {
     margin-bottom: 0px;
   }
 
+  .navigation-menu {
+    width: 95%;
+  }
+
   .navigation-menu-wrapper {
     justify-items: stretch;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    -ms-grid-rows: auto auto;
-    grid-template-rows: auto auto;
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: auto;
+    grid-template-rows: auto;
   }
 
   .tutor-header-wrapper {
