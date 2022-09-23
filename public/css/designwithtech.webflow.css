@@ -3077,6 +3077,10 @@ a {
     background-image: linear-gradient(270deg, #0e0e0f, rgba(30, 30, 32, 0));
   }
 
+  .empty-96 {
+    display: none;
+  }
+
   .main-image {
     width: 120px;
     margin-bottom: 16px;
@@ -3523,6 +3527,10 @@ a {
     background-image: none;
   }
 
+  .empty-96 {
+    display: block;
+  }
+
   .equipment-grid {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
@@ -3669,8 +3677,7 @@ a {
   .button.secondary.navigiation-button {
     margin-right: 0px;
     margin-left: 0px;
-    padding-right: 0.125em;
-    padding-left: 0.125em;
+    padding: 1.4em 0.125em;
     border-radius: 30px;
     color: #dadada;
     font-size: 14px;
@@ -3724,13 +3731,18 @@ a {
   .navigation-link {
     margin-right: 0px;
     margin-left: 0px;
-    padding: 1em 0.125em;
+    padding: 1.4em 0.125em;
     border-radius: 30px;
     font-size: 14px;
   }
 
+  .navigation-link.w--current {
+    padding-top: 1.4em;
+    padding-bottom: 1.4em;
+  }
+
   .header-main {
-    display: block;
+    display: none;
     width: 100%;
   }
 
@@ -3864,6 +3876,10 @@ a {
 
   .slider-overlay {
     display: none;
+  }
+
+  .empty-96 {
+    display: block;
   }
 
   .empty-96.mobile-hide {
