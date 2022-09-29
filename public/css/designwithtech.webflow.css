@@ -3760,6 +3760,10 @@ a {
     justify-content: space-between;
   }
 
+  .button.icon {
+    width: auto;
+  }
+
   .navigation-link {
     margin-right: 0px;
     margin-left: 0px;
