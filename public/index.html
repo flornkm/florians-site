@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Wed Oct 05 2022 16:47:41 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Mon Oct 10 2022 22:20:10 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -174,7 +174,7 @@ pointer-events: initial;
           </a>
         </div>
       </div>
-      <div class="work-explanation">
+      <div class="grid-explanation">
         <div class="interactive-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
             <rect width="256" height="256" fill="none"></rect>
             <path d="M168,112V100a20,20,0,0,0-40,0V36a20,20,0,0,0-40,0V157.3l-21.9-38a20,20,0,0,0-34.7,20C64,208,83.8,232,128,232a80,80,0,0,0,80-80V112a20,20,0,0,0-40,0Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
@@ -312,17 +312,17 @@ pointer-events: none;
                       </svg></div>
                   </div>
                 </div>
-                <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
+                <div data-current="Tab 2" data-easing="ease" data-duration-in="300" data-duration-out="100" class="tabs w-tabs">
                   <div class="tabs-menu w-tab-menu">
-                    <a data-w-tab="Tab 1" class="tab-link-1 w-inline-block w-tab-link w--current">
+                    <a data-w-tab="Tab 1" class="tab-link-1 w-inline-block w-tab-link">
                       <div>Startscreen</div>
                     </a>
-                    <a data-w-tab="Tab 2" class="tab-link-2 w-inline-block w-tab-link">
+                    <a data-w-tab="Tab 2" class="tab-link-2 w-inline-block w-tab-link w--current">
                       <div>Ambient Chat</div>
                     </a>
                   </div>
                   <div class="tabs-content w-tab-content">
-                    <div data-w-tab="Tab 1" class="tab-pane-1 w-tab-pane w--tab-active">
+                    <div data-w-tab="Tab 1" class="tab-pane-1 w-tab-pane">
                       <div class="drawn-arrow w-embed"><svg width="39" height="112" viewbox="0 0 39 112" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M37.5214 110.209C22.478 107.783 10.5266 95.3413 6.21829 81.1627C0.855454 63.5195 6.03316 44.8097 14.664 29.1159C19.5804 20.1763 25.6461 11.9164 31.9684 3.91614C33.5929 1.85825 30.6907 -1.0728 29.0376 1.00398C17.02 16.1314 5.50598 32.5143 1.55867 51.7433C-2.01339 69.1504 0.888872 88.1671 13.9896 101.062C20.2502 107.226 28.4917 111.196 37.2793 111.989C38.2911 112.083 38.538 110.374 37.5214 110.209Z" fill="currentColor"></path>
                           <path d="M28.054 0.451739C23.9167 1.85828 19.6941 3.12323 15.438 4.11914C11.1677 5.11505 6.79785 5.69558 2.56553 6.81893C0.93626 7.25316 1.27355 9.72643 2.95983 9.73115C11.814 9.75003 21.0431 6.25726 28.876 2.39635C29.9543 1.85828 29.2035 0.0599846 28.054 0.451739Z" fill="currentColor"></path>
@@ -330,7 +330,7 @@ pointer-events: none;
                         </svg></div>
                       <div class="dark-heading-ambient-chat drawn">Get started by clicking <br>the tabs on the top</div>
                     </div>
-                    <div data-w-tab="Tab 2" class="tab-pane-ambient-chat w-tab-pane">
+                    <div data-w-tab="Tab 2" class="tab-pane-ambient-chat w-tab-pane w--tab-active">
                       <div class="mini-app">
                         <div id="w-node-fdd3d1b7-f1cf-880d-5941-6c1147c0a31b-39382408" class="mini-side-bar">
                           <a data-w-id="a59cb34d-7556-6d52-2bf1-cb32ab9a6457" style="filter:invert(0%)" href="#" class="ambient-chat-global-chat w-inline-block"><img loading="lazy" src="images/global_chat.jpg" alt="" class="image"></a>
@@ -396,7 +396,7 @@ overflow-y: scroll;
                           </div>
                           <div class="message-form">
                             <div class="form-wrapper-chat w-form">
-                              <form id="email-form-2" name="email-form-2" data-name="Email Form 2" action="https://javascript:void(0)" method="get" class="message-input"><input type="text" class="message-field w-input" maxlength="256" name="message" data-name="message" placeholder="Message" id="message-2"><input type="submit" data-wait="Please wait..." value="Submit" class="send w-button"></form>
+                              <form id="wf-form-chatform" name="wf-form-chatform" data-name="chatform" method="get" class="message-input"><input type="text" class="message-field w-input" maxlength="256" name="message" data-name="message" placeholder="Message" id="message-2"><input type="submit" data-wait="Please wait..." value="Submit" class="send w-button"></form>
                               <div class="w-form-done">
                                 <div>Thank you! Your submission has been received!</div>
                               </div>
@@ -990,6 +990,9 @@ $('.cms-slide-left').click(function(){
 </script>
   <!--  Chat  -->
   <script>
+$("#chatform").submit(function(e){
+        e.preventDefault();
+    });
 $('.send').on("click", function() { 
 console.log($('.message-field').val()); 
 var msg = $("<p class='bubble'></p>").text($('.message-field').val());
