@@ -3712,7 +3712,7 @@ a {
 
 .mp-single-track {
   display: none;
-  width: 100%;
+  width: 20%;
   padding: 8px 16px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
@@ -3790,7 +3790,10 @@ a {
 .sp-thumbnail {
   width: 128px;
   height: 128px;
-  border-radius: 4px;
+  border-radius: 200px;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .sp-thumbnail.blurry-background {
@@ -3812,6 +3815,10 @@ a {
   object-fit: cover;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+}
+
+.sp-thumbnail.cover.pause {
+  display: none;
 }
 
 .mp-artist-name {
@@ -4271,6 +4278,19 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.controls-background {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background-color: #131318;
 }
 
 @media screen and (min-width: 1920px) {
@@ -5691,6 +5711,10 @@ a {
     align-items: stretch;
   }
 
+  .information-item.fav {
+    height: 350px;
+  }
+
   .information-text.dark {
     color: #0e0e0f;
   }
@@ -5858,6 +5882,15 @@ a {
 
   .mp-play {
     width: 32px;
+  }
+
+  .sp-thumbnail.cover {
+    width: 96px;
+    height: 96px;
+  }
+
+  .sp-artist-name {
+    font-size: 1.2rem;
   }
 
   .mp-pause {

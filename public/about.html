@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Tue Oct 11 2022 22:02:58 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed Oct 12 2022 22:01:23 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6336ba22a9242e2e391a6725" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -123,14 +123,14 @@ pointer-events: none;
           <div data-w-id="f75e54d9-3e7d-a52f-b29d-623eb5ff2b44" style="opacity:0" class="mp-example-wrapper">
             <div class="mp-track-wrapper">
               <div tmplayer-init="multitrack" class="mp-track">
-                <div class="sp-details-wrapper">
+                <div class="sp-details-wrapper"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background">
                   <div class="w-embed">
                     <style>
-.mp-controls {
+.mp-controla-wrapper {
 pointer-events: none;
 }
 </style>
-                  </div><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail">
+                  </div><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover pause">
                   <div class="sp-title-wrapper">
                     <div tmplayer-element="title" class="sp-artist-name">Title</div>
                     <div tmplayer-element="artist" class="sp-title">Artist</div>
@@ -138,7 +138,7 @@ pointer-events: none;
                 </div>
                 <div class="mp-controla-wrapper">
                   <div class="mp-controls">
-                    <a href="https://open.spotify.com/playlist/5jUAEQynp22gk1yMwqNXey" target="_blank" class="mp-link w-inline-block"><img src="images/playlist.svg" loading="lazy" alt="" class="mp-playlist"></a><img src="images/back.svg" loading="lazy" tmplayer-button="previous" alt="" class="mp-previous"><img src="images/play.svg" loading="lazy" data-w-id="f75e54d9-3e7d-a52f-b29d-623eb5ff2b51" tmplayer-button="play" alt="" class="mp-play"><img src="images/pause.svg" loading="lazy" data-w-id="f75e54d9-3e7d-a52f-b29d-623eb5ff2b52" tmplayer-button="pause" alt="" class="mp-pause"><img src="images/forward.svg" loading="lazy" data-w-id="f75e54d9-3e7d-a52f-b29d-623eb5ff2b53" tmplayer-button="next" alt="" class="mp-next"><img src="images/copyright.svg" loading="lazy" alt="" class="mp-copyright">
+                    <a href="https://open.spotify.com/playlist/5jUAEQynp22gk1yMwqNXey" target="_blank" class="mp-link w-inline-block"><img src="images/playlist.svg" loading="lazy" alt="" class="mp-playlist"></a><img src="images/back.svg" loading="lazy" tmplayer-button="previous" alt="" class="mp-previous"><img src="images/play.svg" loading="lazy" tmplayer-button="play" alt="" class="mp-play"><img src="images/pause.svg" loading="lazy" tmplayer-button="pause" alt="" class="mp-pause"><img src="images/forward.svg" loading="lazy" tmplayer-button="next" alt="" class="mp-next"><img src="images/artist.svg" loading="lazy" alt="" class="mp-copyright">
                   </div>
                   <div class="mp-media-player-bar-wrapper">
                     <div tmplayer-element="elapsed" class="mp-elapsed">0:00</div>
@@ -176,6 +176,20 @@ pointer-events: none;
                   <div tmplayer-meta="audio-url" class="mp-track-url">https://dl.dropboxusercontent.com/s/a4n8ritu5rf7x8p/01099_VHS.mp3?dl=0</div><img src="images/vhs_cover.jpeg" loading="lazy" tmplayer-meta="thumbnail" alt="" class="mp-track-thumbnail">
                   <div tmplayer-meta="artist" class="mp-track-artist">01099</div>
                   <div tmplayer-meta="title" class="mp-track-title">VHS</div>
+                </div>
+                <div class="mp-track-time-wrapper"><img src="https://uploads-ssl.webflow.com/62e1e4e31272dc9e9a0d6001/62e1e4e41272dc53b00d6026_audio-active.svg" height="40" width="20" tmplayer-interaction="monitor-state" alt="" class="mp-audio-bar">
+                  <div tmplayer-interaction="populate-duration" class="mp-track-time">0:00</div>
+                </div>
+              </div>
+              <div tmplayer-action="toggle" tmplayer-parent="multitrack" class="mp-single-track">
+                <div class="mp-title-wrapper">
+                  <div class="mp-title">It&#x27;s All on U</div>
+                  <div class="mp-artist-name">Illenium</div>
+                </div>
+                <div tmplayer-element="audio" class="true-media-player-single-track">
+                  <div tmplayer-meta="audio-url" class="mp-track-url">https://dl.dropboxusercontent.com/s/v0f9e7wi2z87lmw/illenium_itsallonu.mp3?dl=0</div><img src="images/itsallonu_cover.jpeg" loading="lazy" tmplayer-meta="thumbnail" alt="" class="mp-track-thumbnail">
+                  <div tmplayer-meta="title" class="mp-track-title">It&#x27;s All on U</div>
+                  <div tmplayer-meta="artist" class="mp-track-artist">Illenium</div>
                 </div>
                 <div class="mp-track-time-wrapper"><img src="https://uploads-ssl.webflow.com/62e1e4e31272dc9e9a0d6001/62e1e4e41272dc53b00d6026_audio-active.svg" height="40" width="20" tmplayer-interaction="monitor-state" alt="" class="mp-audio-bar">
                   <div tmplayer-interaction="populate-duration" class="mp-track-time">0:00</div>
@@ -625,6 +639,15 @@ pointer-events: none;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#44444b), to(#0e0e0f));
     background-image: linear-gradient(180deg, #44444b, #fcfcfc);
 }
+  .video-popup-wrapper, .close-button-vid.custom-margin {
+   background-color: white; 
+  }
+  .close-button-vid.custom-margin {
+   border-color: #dbdbdb; 
+  }
+  .close-button-vid.custom-margin:hover {
+    background-color: #dbdbdb;
+}
   .arrow-link {
    color: #0e0e0f;
     background-color: transparent;
@@ -676,80 +699,6 @@ box-shadow: 0px 5px 40px 0px rgba(0,0,0,0.05);
   }
 </style><!--  [Attributes by True Media Player] Audio Player Plugin  -->
   <script src="https://trueaudioplayer.b-cdn.net/true-audio-player@1.min.js" type="text/javascript"></script>
-  <!--  Card Slider Config  -->
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.card-slider').slick({
-      	arrows: false,
-        infinite: true,
-        autoplay: false,
-        autoplaySpeed: 8000,
-        speed: 300,
-        slidesToShow: 3,
-  			slidesToScroll: 1,
-        responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2          
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
-      });
-    });
-</script>
-  <!--  Card Slider Custom Nav  -->
-  <script>
-$('.slide-right').click(function(){
-  $('.card-slider').slick('slickNext');
-});
-$('.slide-left').click(function(){
-  $('.card-slider').slick('slickPrev');
-});
-</script>
-  <!--  Card Slider Config  -->
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.cms-slider').slick({
-      	arrows: false,
-        infinite: false,
-        autoplay: false,
-        autoplaySpeed: 8000,
-        speed: 300,
-        slidesToShow: 3,
-  			slidesToScroll: 1,
-        responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2          
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1
-          }
-        }
-      ]
-      });
-    });
-</script>
-  <!--  Card Slider Custom Nav  -->
-  <script>
-$('.cms-slide-right').click(function(){
-  $('.cms-slider').slick('slickNext');
-});
-$('.cms-slide-left').click(function(){
-  $('.cms-slider').slick('slickPrev');
-});
-</script>
   <script>
     var form = document.getElementById("my-form");
     async function handleSubmit(event) {
@@ -780,6 +729,47 @@ $('.cms-slide-left').click(function(){
       });
     }
     form.addEventListener("submit", handleSubmit)
+</script>
+  <!--  Rotate Cover  -->
+  <script>
+var width = $("body").width();
+function rotateForEver($elem, rotator) {
+    if (rotator === void(0)) {
+        rotator = $({deg: 0});
+    } else {
+        rotator.get(0).deg = 0;
+    }
+    return rotator.animate(
+        {deg: 360},
+        {
+            duration: 5000,
+            easing: 'linear',
+            step: function(now){
+                $elem.css({transform: 'rotate(' + now + 'deg)'});
+            },
+            complete: function(){
+                rotateForEver($elem, rotator);
+            },
+        }
+    );
+}
+var $rotator;
+$('.mp-play').click(function(){
+  if (width > 1024) {
+    $rotator = rotateForEver($('.sp-thumbnail.cover'));
+  }
+});
+$('.mp-next').click(function(){
+if (width > 1024) {
+	$rotator.stop();
+  $rotator = rotateForEver($('.sp-thumbnail.cover'));
+}
+});
+$('.mp-pause').click(function() {
+if (width > 1024) {
+        $rotator.stop();
+        }
+});
 </script>
 </body>
 </html>
