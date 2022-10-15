@@ -5228,6 +5228,14 @@ a {
 
   .project-link {
     height: 400px;
+    padding: 30px;
+    background-color: #1e1e20;
+  }
+
+  .project-link:active {
+    -webkit-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
   }
 
   .footer-brand-wrapper {
@@ -6078,6 +6086,10 @@ a {
     border-top-right-radius: 12px;
   }
 
+  .tab-link-2.w--current:hover {
+    background-color: #fff;
+  }
+
   .tab-link-1:hover {
     background-color: transparent;
   }
@@ -6087,6 +6099,10 @@ a {
     -webkit-order: 1;
     -ms-flex-order: 1;
     order: 1;
+  }
+
+  .tab-link-1.w--current:hover {
+    background-color: #fff;
   }
 
   .tab-pane-1 {

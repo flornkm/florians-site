@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Fri Oct 14 2022 08:55:47 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Oct 15 2022 16:23:52 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="633dadbd5443fd1de17293e7" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -263,11 +263,12 @@ display: none;
       .navigation-menu-wrapper > .navigation-link { 
     background: transparent;
 }
-      @media (prefers-color-scheme: light)
+      @media (prefers-color-scheme: light) {
 .button.secondary.navigiation-button {
     background-color: transparent;
   color: #0e0e0f;
 }
+      }
       @media (prefers-color-scheme: dark) {
     .navigation-link[aria-current="page"], .navigation-link.w--current {
   background-color: #2c2c2f;
@@ -278,6 +279,9 @@ display: none;
       background-color: white;
         color: #0e0e0f;
         }
+        .project-link {
+    background-color: #f3f3f3;
+	}
       }
 }
 @media (prefers-color-scheme: light) {
