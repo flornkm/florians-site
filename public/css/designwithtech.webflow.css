@@ -1716,10 +1716,7 @@ a {
 }
 
 .image-copyright-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   width: 100%;
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
