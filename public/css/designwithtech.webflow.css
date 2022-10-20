@@ -310,8 +310,7 @@ a {
 }
 
 .logo {
-  display: none;
-  width: 64px;
+  width: 40px;
   height: 64px;
   border-style: none;
   border-width: 1px;
@@ -323,12 +322,6 @@ a {
   transition: transform 200ms ease, -webkit-transform 200ms ease;
   -o-object-fit: contain;
   object-fit: contain;
-}
-
-.logo:hover {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 
 .navigation-link {
@@ -1621,7 +1614,6 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  border-radius: 20px;
   color: #fff;
 }
 
@@ -1631,6 +1623,7 @@ a {
 
 .brand.w--current {
   background-color: transparent;
+  mix-blend-mode: exclusion;
 }
 
 .empty-96 {
@@ -2720,6 +2713,7 @@ a {
 }
 
 .logo-text {
+  display: none;
   font-size: 1.3rem;
 }
 
