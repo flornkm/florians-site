@@ -2307,8 +2307,8 @@ a {
   -ms-grid-rows: auto;
   grid-template-rows: auto;
   border-style: solid;
-  border-width: 1px;
-  border-color: #21cdf8;
+  border-width: 3px 1px;
+  border-color: #1381ee;
   border-radius: 24px;
   background-color: #1381ee;
   -webkit-transform: rotate(0deg);
@@ -4502,14 +4502,15 @@ a {
   max-height: 100%;
 }
 
-.holo-effect {
+.effect {
   position: absolute;
   left: 0%;
   top: 0%;
   right: 0%;
   bottom: 0%;
   z-index: 2;
-  mix-blend-mode: lighten;
+  border-radius: 24px;
+  mix-blend-mode: soft-light;
 }
 
 .gradient-circle {
@@ -4527,7 +4528,7 @@ a {
 }
 
 .gradient-circle.red {
-  background-color: #eb8d2a;
+  background-color: #b72aeb;
 }
 
 .gradient-circle.green {
@@ -4561,7 +4562,29 @@ a {
   opacity: 0.1;
   -webkit-filter: sepia(100%);
   filter: sepia(100%);
-  mix-blend-mode: hard-light;
+  mix-blend-mode: exclusion;
+}
+
+.noise-filter {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 2;
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+
+.gradient-overlay-1 {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  display: none;
+  background-image: linear-gradient(225deg, #ff2c2c, #fdff72 25%, #28ff89 50%, #bdc8ff 75%, #f08);
+  mix-blend-mode: color-dodge;
 }
 
 @media screen and (min-width: 1920px) {

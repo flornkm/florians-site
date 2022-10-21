@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Oct 20 2022 22:06:04 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Fri Oct 21 2022 09:11:35 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62fe158c80972adb48104492" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -127,18 +127,26 @@ display: none;
         <div class="empty-32"></div>
         <a id="w-node-_0db402e9-b556-c97f-4476-a0e96c5d312f-6c5d3127" href="../work.html" class="button white cta-custom w-button">Go back</a>
       </div><img src="../images/main_header_1.png" loading="lazy" id="w-node-a13402fa-5746-fcc5-2b99-1e625b98c1ff-6c5d3127" alt="" class="cta-illustration">
-      <div id="w-node-_3daa413b-148f-0633-1cf7-e6da83e826de-6c5d3127" class="holo-effect">
+      <div id="w-node-_3daa413b-148f-0633-1cf7-e6da83e826de-6c5d3127" class="effect">
         <div class="gradient-circle yellow"></div>
         <div class="gradient-circle green"></div>
         <div class="gradient-circle red"></div>
         <div class="w-embed">
           <style>
-.holo-effect {
+.effect {
 pointer-events: none;
 }
 </style>
         </div>
         <div class="texture"></div>
+        <div class="noise-filter w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%">
+            <filter id="n">
+              <feturbulence type="fractalNoise" basefrequency=".7" numoctaves="10" stitchtiles="stitch">
+            </feturbulence></filter>
+            <rect width="100%" height="100%" fill="#000"></rect>
+            <rect width="100%" height="100%" filter="url(#n)" opacity="0.3"></rect>
+          </svg></div>
+        <div class="gradient-overlay-1"></div>
       </div>
     </div>
   </div>
