@@ -3272,7 +3272,7 @@ a {
 }
 
 .dark-heading-ambient-chat.drawn {
-  font-family: 'Gochi Hand', sans-serif;
+  font-family: Gochihand, sans-serif;
   color: #1381ee;
   font-weight: 400;
 }
@@ -7636,5 +7636,12 @@ a {
   src: url('../fonts/PlusJakartaSans-ExtraLightItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraLightItalic.woff') format('woff');
   font-weight: 200;
   font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gochihand';
+  src: url('../fonts/GochiHand-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
   font-display: swap;
 }
