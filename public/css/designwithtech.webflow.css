@@ -2748,15 +2748,34 @@ a {
   top: 0%;
   right: 0%;
   bottom: 0%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.homebility-inner._1 {
+  display: block;
+}
+
+.homebility-inner.terms {
+  display: none;
+}
+
+.homebility-inner.startpage {
+  display: none;
+  overflow: hidden;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .phone-time {
@@ -2804,6 +2823,15 @@ a {
   -ms-flex-align: center;
   align-items: center;
   color: #1e1e20;
+}
+
+.homebility-main.terms {
+  padding-top: 16px;
+  padding-bottom: 32px;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .homebility-welcome {
@@ -2902,9 +2930,7 @@ a {
 }
 
 .mobile-cursor {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  position: relative;
   z-index: 2;
   width: 24px;
   height: 24px;
@@ -4119,6 +4145,64 @@ a {
   transition: opacity 2000ms ease;
 }
 
+.cursor-wrapper {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+}
+
+.pointer-reference {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 0;
+}
+
+.homebility-terms-wrapper {
+  overflow: scroll;
+  width: 80%;
+  height: 70%;
+  font-size: 0.8rem;
+  line-height: 1.4em;
+  font-weight: 400;
+}
+
+.homebility-startpage-vector {
+  position: relative;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  max-height: 100%;
+  border-radius: 32px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.homebility-name {
+  position: absolute;
+  left: 38px;
+  top: 56px;
+  right: auto;
+  bottom: auto;
+  z-index: 1;
+  margin-bottom: 16px;
+  color: #0e0e0f;
+  font-size: 0.8em;
+  font-weight: 500;
+  text-align: center;
+}
+
+.homebility-name.left {
+  margin-bottom: 0px;
+  text-align: left;
+  cursor: none;
+}
+
 @media screen and (min-width: 1920px) {
   .header-text {
     max-width: 400px;
@@ -4700,6 +4784,10 @@ a {
     -ms-transform: scale(0.9);
     transform: scale(0.9);
   }
+
+  .homebility-name {
+    font-size: 2em;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -5201,6 +5289,14 @@ a {
     grid-template-columns: 1fr;
     -ms-grid-rows: auto;
     grid-template-rows: auto;
+  }
+
+  .homebility-name {
+    font-size: 1.5em;
+  }
+
+  .homebility-name.left {
+    margin-bottom: 0.4em;
   }
 }
 
@@ -5708,6 +5804,13 @@ a {
 
   .bubble.response {
     top: 128px;
+  }
+
+  .homebility-name {
+    left: 24px;
+    top: 32px;
+    margin-bottom: 8px;
+    font-size: 1em;
   }
 }
 
