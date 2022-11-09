@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Tue Nov 08 2022 23:32:03 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed Nov 09 2022 19:25:16 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="62777f14896c262b39382408" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -22,7 +22,7 @@
   <!--  [Attributes by Finsweet] Copy to clipboard  -->
   <script defer="" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-copyclip@1/copyclip.js"></script>
   <style>
-.slider-overlay, .work-information {
+.slider-overlay, .work-information, .no-click {
 pointer-events: none;
 }
 .arrow-link {
@@ -273,7 +273,7 @@ pointer-events: none;
               </div>
               <div class="homebility-inner startpage">
                 <div class="homebility-name">Your home</div><img src="images/homebility_start.svg" loading="eager" alt="" class="homebility-startpage-vector">
-              </div><img src="images/phone_frame.webp" loading="eager" srcset="images/phone_frame-p-500.webp 500w, images/phone_frame-p-800.webp 800w, images/phone_frame-p-1080.webp 1080w, images/phone_frame-p-1600.webp 1600w, images/phone_frame.webp 1952w" sizes="(max-width: 479px) 71vw, 306px" alt="" class="phone">
+              </div><img src="images/phone_frame.webp" loading="eager" srcset="images/phone_frame-p-500.webp 500w, images/phone_frame-p-800.webp 800w, images/phone_frame-p-1080.webp 1080w, images/phone_frame-p-1600.webp 1600w, images/phone_frame.webp 1952w" sizes="(max-width: 479px) 204px, 306px" alt="" class="phone">
               <div class="cursor-wrapper">
                 <div data-w-id="978d7ca1-044d-93f4-a783-8331e1ccd4b7" class="cursor-div">
                   <div data-w-id="8921150f-ed68-f364-8f47-1c000a1b7bd8" class="mobile-cursor"></div>
@@ -302,7 +302,7 @@ pointer-events: none;
  }
   </style>
               </div>
-              <div class="video-overlay"></div><img src="images/bookflipper_thumbnail_1.jpg" loading="lazy" srcset="images/bookflipper_thumbnail_1-p-500.jpg 500w, images/bookflipper_thumbnail_1-p-800.jpg 800w, images/bookflipper_thumbnail_1-p-1080.jpg 1080w, images/bookflipper_thumbnail_1.jpg 1500w" sizes="(max-width: 991px) 80vw, 100vw" alt="" class="video-thumbnail">
+              <div class="video-overlay"></div><img src="images/bookflipper_thumbnail_1.jpg" loading="lazy" srcset="images/bookflipper_thumbnail_1-p-500.jpg 500w, images/bookflipper_thumbnail_1-p-800.jpg 800w, images/bookflipper_thumbnail_1-p-1080.jpg 1080w, images/bookflipper_thumbnail_1.jpg 1500w" sizes="(max-width: 479px) 100vw, (max-width: 991px) 80vw, 100vw" alt="" class="video-thumbnail">
             </div>
             <div class="work-information">
               <a data-w-id="d3d8abaa-e465-0185-a6f7-a493c6b1208b" href="work/bookflipper.html" class="arrow-link video-arrow w-inline-block">
@@ -348,7 +348,31 @@ pointer-events: none;
                     <polyline points="88 64 192 64 192 168" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></polyline>
                   </svg></div>
               </a>
-            </div><img src="images/resumer_cover.webp" loading="lazy" alt="" class="resumer">
+            </div>
+            <div data-current="Tab 1" data-easing="ease" data-duration-in="300" data-duration-out="100" class="browser-window w-tabs">
+              <div class="tabs-wrapper w-tab-menu">
+                <a data-w-tab="Tab 1" class="tab-app w-inline-block w-tab-link w--current"><img loading="lazy" src="images/favicon.webp" alt="" class="tab-app-logo">
+                  <div class="tab-app-text">Resumer</div>
+                </a>
+                <a data-w-tab="Tab 2" class="tab-app w-inline-block w-tab-link"><img sizes="(max-width: 767px) 8px, 40px" srcset="images/folder_icon.webp 500w" src="images/folder_icon.webp" loading="lazy" alt="" class="tab-app-logo transparent">
+                  <div class="tab-app-text">download.pdf</div>
+                </a>
+                <a data-w-tab="Tab 3" class="tab-app fade-out-1 no-click w-inline-block w-tab-link"><img loading="lazy" src="images/favicon.png" alt="" class="tab-app-logo transparent">
+                  <div class="tab-app-text">Curations</div>
+                </a>
+                <a data-w-tab="Tab 4" class="tab-app fade-out-2 no-click w-inline-block w-tab-link"><img loading="lazy" src="images/anton_favicon.jpeg" alt="" class="tab-app-logo">
+                  <div class="tab-app-text">antonstallboerger.com</div>
+                </a>
+              </div>
+              <div class="tabs-content w-tab-content">
+                <div data-w-tab="Tab 1" class="browser-content w-tab-pane w--tab-active"><img loading="lazy" src="images/resumer_done.svg" alt="" class="resumer-landingpage"></div>
+                <div data-w-tab="Tab 2" class="browser-content pdf w-tab-pane">
+                  <div class="example-pdf-wrapper"><img loading="lazy" src="images/resumer_cv.webp" alt="" class="example-pdf"></div>
+                </div>
+                <div data-w-tab="Tab 3" class="browser-content w-tab-pane"></div>
+                <div data-w-tab="Tab 4" class="browser-content w-tab-pane"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -975,7 +999,9 @@ $('.chat-writing').css("display", "block");
 $('.chat-writing').css("opacity", 1);
 });
 $('.homebility-button').on("click", function(e) { 
+if ($('.homebility-input').val() !== "") {
   $('.homebility-name').text($('.homebility-input').val() + 's Home');
+  }
 });
 </script>
 </body>
