@@ -2929,6 +2929,18 @@ a {
   cursor: none;
 }
 
+.homebility-input:active {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.homebility-input:focus {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 .homebility-form {
   font-size: 30px;
 }
@@ -2970,7 +2982,7 @@ a {
 }
 
 .mobile-cursor {
-  position: relative;
+  position: absolute;
   z-index: 2;
   width: 24px;
   height: 24px;
@@ -4164,12 +4176,24 @@ a {
 }
 
 .cursor-wrapper {
-  position: absolute;
+  position: fixed;
   left: 0%;
   top: 0%;
   right: 0%;
   bottom: 0%;
-  z-index: 1;
+  z-index: 100;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .homebility-terms-wrapper {
@@ -4395,6 +4419,34 @@ a {
 .project-arrow {
   width: 48px;
   height: 48px;
+}
+
+.canvas {
+  position: relative;
+  overflow: hidden;
+  height: 70vh;
+  border-radius: 24px;
+  background-color: #fff;
+}
+
+.canvas-area {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.dots {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 
 @media screen and (min-width: 1920px) {

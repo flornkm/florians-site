@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sat Nov 12 2022 13:05:31 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Tue Nov 15 2022 18:51:25 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6336ba22a9242e2e391a6725" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -27,8 +27,12 @@
   <!--  [Attributes by Finsweet] Copy to clipboard  -->
   <script defer="" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-copyclip@1/copyclip.js"></script>
   <style>
-.slider-overlay {
+.slider-overlay, .dots {
 pointer-events: none;
+}
+#canvas {
+width: 100%;
+height: 100%;
 }
 </style>
 </head>
@@ -269,6 +273,11 @@ pointer-events: none;
           </div>
         </div>
       </div>
+      <div class="empty-128"></div>
+      <div class="canvas"><img src="images/canvas.svg" loading="lazy" alt="" class="dots">
+        <div class="canvas-area w-embed"><canvas id="canvas"><canvas></canvas></canvas></div>
+      </div>
+      <div id="mouseData"></div>
     </div>
   </div>
   <div class="contact-popup-parent">
@@ -839,6 +848,83 @@ $('.mp-pause').click(function() {
 if (width > 1024) {
         $rotator.stop();
         }
+});
+</script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+  <script>
+  // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAR6GQzV4NpqR10O8EdV_V8Yt8OyISjwwE",
+  authDomain: "designwithtech-canvas.firebaseapp.com",
+  databaseURL: "https://designwithtech-canvas-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "designwithtech-canvas",
+  storageBucket: "designwithtech-canvas.appspot.com",
+  messagingSenderId: "762166154095",
+  appId: "1:762166154095:web:aeaf6f4026f4af10904e9a"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// Set database variable
+var database = firebase.database();
+const canvas = document.getElementById('canvas');
+// declare all characters
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function generateString(length) {
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+let id = generateString(5);
+var userKey = firebase.database().ref('lines').push().key;
+console.log(userKey);
+var context = canvas.getContext('2d');
+var radius = 5;  //不要犯蠢，第一次竟然打成0，根本就不會有東西跑出來啊
+var start = 0; //起始點
+var end = Math.PI * 2;  //結束點
+var dragging = false;
+canvas.width = canvas.clientWidth;  //設定canvas的寬
+canvas.height = canvas.clientHeight;  //設定canvas的高
+context.lineWidth = radius * 2;  //試著改變參數，會發現裡頭有線連著
+var putPoint = function(e){
+	if(dragging){
+		context.lineTo(e.offsetX, e.offsetY);
+		context.stroke();
+		context.beginPath(); //請把這條beginPath到fill一起看
+		context.arc(e.offsetX, e.offsetY, radius, start, end);
+		context.fill();  //填滿它
+		context.beginPath();
+		context.moveTo(e.offsetX, e.offsetY);
+firebase.database().ref('lines/' + userKey).set({
+    mouseX: e.offsetX,
+    mouseY: e.offsetY
+    });
+	}
+}
+var engage = function(e){
+	dragging = true;
+	putPoint(e);
+}
+var disengage = function(){
+	dragging = false;
+	context.beginPath();
+}
+canvas.addEventListener('mousedown', engage);
+canvas.addEventListener('mousemove', putPoint);
+canvas.addEventListener('mouseup', disengage);
+window.onbeforeunload = function (e) {
+ firebase.database().ref('lines/' + userKey).remove();
+ }
+ var linesRef= firebase.database().ref();
+linesRef.on('value', (snapshot) => {
+  const data = snapshot.val();
+  var obj = data.lines;
+	var result = Object.keys(obj).map((key) => [Number(key), obj[key]]);
+	result.forEach(element => {
+  });
 });
 </script>
 </body>
