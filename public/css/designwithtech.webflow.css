@@ -437,6 +437,11 @@ a {
   margin-top: 0px;
 }
 
+.heading3.no-margin.no-margin-top.cta-heading {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
 .heading4 {
   color: #fff;
   font-size: 1.777rem;
@@ -2991,8 +2996,18 @@ a {
   border-color: hsla(0, 0%, 77.3%, 0.4);
   border-radius: 100px;
   background-color: rgba(14, 14, 15, 0.32);
+  opacity: 0;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+}
+
+.mobile-cursor.brush {
+  border-style: none;
+  border-radius: 0px;
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  color: #fff;
 }
 
 .homebility-click {
@@ -4429,6 +4444,7 @@ a {
   border-width: 1px;
   border-color: #44444b;
   border-radius: 24px;
+  cursor: none;
 }
 
 .canvas-area {
@@ -4450,6 +4466,17 @@ a {
   opacity: 0.15;
   -o-object-fit: cover;
   object-fit: cover;
+}
+
+.canvas-explainer {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.brush-icon {
+  position: relative;
+  top: -8px;
+  right: -20px;
 }
 
 @media screen and (min-width: 1920px) {
@@ -5052,6 +5079,36 @@ a {
   .resumer-landingpage {
     height: 100%;
   }
+
+  .canvas {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .canvas-area {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+  }
+
+  .canvas-info {
+    position: relative;
+    z-index: 2;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -5622,6 +5679,11 @@ a {
 
   .project-info-wrapper {
     padding: 16px;
+  }
+
+  .canvas {
+    padding-right: 24px;
+    padding-left: 24px;
   }
 }
 

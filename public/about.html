@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Tue Nov 15 2022 23:47:31 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed Nov 16 2022 08:51:47 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6374135794a60591e788e3d2" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -67,6 +67,14 @@ height: 100%;
       <div class="navbar-menu-overlay"></div>
     </div>
   </div>
+  <div class="cursor-wrapper">
+    <div class="mobile-cursor brush">
+      <div class="brush-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
+          <rect width="256" height="256" fill="none"></rect>
+          <path d="M225,23c-21.3,0-45.3,11.8-71.1,34.9-18.1,16.2-33.6,34.7-44.3,48.7A60.1,60.1,0,0,0,32,164c0,31.2-16.2,45.1-17,45.8a7.7,7.7,0,0,0-2.5,8.8A7.8,7.8,0,0,0,20,224H92a60.1,60.1,0,0,0,57.4-77.6c14-10.7,32.5-26.2,48.7-44.3C221.2,76.3,233,52.3,233,31A8,8,0,0,0,225,23ZM124.4,113.6c2.9-3.7,6.3-7.9,10.2-12.5a75.4,75.4,0,0,1,20.3,20.3c-4.6,3.9-8.8,7.3-12.5,10.2A59.4,59.4,0,0,0,124.4,113.6Zm42.6-2.9A93.1,93.1,0,0,0,145.3,89c19.6-21.2,46-44.4,70.8-49.1C211.4,64.7,188.2,91.1,167,110.7Z"></path>
+        </svg></div>
+    </div>
+  </div>
   <div style="display:none;background-color:rgba(0,0,0,0)" class="video-popup">
     <div style="opacity:0;-webkit-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="video-popup-wrapper">
       <div class="wave-embed w-embed w-iframe">
@@ -89,7 +97,7 @@ height: 100%;
       <div class="empty-96 mobile-hide"></div>
       <div class="about-grid">
         <div id="w-node-_919c8647-021e-f158-23a9-ebeda4266c0f-e788e3d2" class="about-me">
-          <h4 class="heading4">A few words…</h4>
+          <h1 class="heading3">A few words…</h1>
           <p class="paragraph">It&#x27;s not only design and technology, it&#x27;s design WITH technology what I&#x27;m amazed about. When it comes to projects that are defining our future, I&#x27;m willing to participate in them and do the best I can to bring them to life. <br><br>In 2013 with the age of 12 I started looking up Blender, Cinema4D and AfterEffects Tutorials on Youtube and quickly went along many other Adobe software. I quickly realised that I love creating things for the digital world, so I started to sell my ability as a freelance video editor and my skills as an intro and brand designer. I have worked hard and got to know many people from all over the world. When Figma and other prototyping tools came out, I met another love of mine: user interface and user experience design. While studying at the University of Applied Design in Schwäbisch Gmünd (Germany) I learned how to write code in different programming languages and I count this to a very loved skill of mine too. <br><br>My goal is to found and work on something that&#x27;s a life-changer for humanity.</p>
           <div class="empty-32"></div>
           <div class="two-btns">
@@ -274,8 +282,19 @@ pointer-events: none;
         </div>
       </div>
       <div class="empty-128"></div>
-      <div class="canvas"><img src="images/canvas.svg" loading="lazy" alt="" class="dots">
-        <div class="canvas-area w-embed"><canvas id="canvas"><canvas></canvas></canvas></div>
+      <div class="canvas-explainer">
+        <h2 class="heading4">Draw me something!</h2>
+        <p>Other people that opened this tab will see it in realtime.</p>
+      </div>
+      <div data-w-id="97d016f5-11fa-3ad1-28dd-fe01b80f78ff" class="canvas"><img src="images/canvas.svg" loading="lazy" alt="" class="dots">
+        <div class="canvas-area w-embed"><canvas id="canvas"><canvas>
+              <style>
+.cursor-wrapper {
+pointer-events: none;
+}
+</style>
+        </canvas></canvas></div>
+        <p class="canvas-info">For now, you can only draw on desktop devices! Sorry.</p>
       </div>
       <div id="mouseData"></div>
     </div>
@@ -547,6 +566,9 @@ pointer-events: none;
 }
   .canvas {
    border-color: #d8d8d8; 
+  }
+  .mobile-cursor.brush {
+   color: #0e0e0f; 
   }
   .tab-holder, .price-card-holder, .information-item, .information-item-nopad {
     background-color: white;
