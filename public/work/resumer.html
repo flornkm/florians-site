@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Nov 17 2022 23:10:11 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu Dec 01 2022 13:27:57 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6374135794a605b73888e3dd" data-wf-site="62777f14896c267719382407">
 <head>
   <meta charset="utf-8">
@@ -100,7 +100,7 @@ display: none;
             <div class="slider-item w-slide"><img src="../images/figma_screens.webp" loading="lazy" srcset="../images/figma_screens-p-500.webp 500w, ../images/figma_screens-p-800.webp 800w, ../images/figma_screens-p-1080.webp 1080w, ../images/figma_screens.webp 1182w" sizes="(max-width: 479px) 77vw, (max-width: 991px) 78vw, (max-width: 1919px) 79vw, 1184px" alt="" class="slider-image">
               <p class="caption">Some highfidelity screens in Figma</p>
             </div>
-            <div class="slider-item w-slide"><img src="../images/real_resumer.webp" loading="lazy" srcset="../images/real_resumer-p-500.webp 500w, ../images/real_resumer-p-800.webp 800w, ../images/real_resumer-p-1080.webp 1080w, ../images/real_resumer.webp 1219w" sizes="(max-width: 479px) 77vw, (max-width: 991px) 78vw, (max-width: 1919px) 79vw, 1184px" alt="" class="slider-image contain">
+            <div class="slider-item w-slide"><img src="../images/real_resumer.webp" loading="lazy" srcset="../images/real_resumer-p-500.webp 500w, ../images/real_resumer-p-800.webp 800w, ../images/real_resumer-p-1080.webp 1080w, ../images/real_resumer.webp 1219w" sizes="(max-width: 479px) 77vw, (max-width: 991px) 78vw, (max-width: 1919px) 79vw, 62vw" alt="" class="slider-image contain">
               <p class="caption">Landingpage of the real software</p>
             </div>
           </div>
@@ -399,6 +399,23 @@ display: none;
   .message-field {
     color: #4d4d4d;
 }
+  .curations-nav {
+   background-color: #f4f4f4;
+   border-color: #d5d5d5;
+    box-shadow: 0 8px 24px 0 rgb(174 174 174 / 50%);
+  }
+  .curations-nav-link.active {
+    background-color: white;
+}
+  .curations-nav-link:hover {
+    background-color: white;
+  }
+  .curations-card-info-text {
+    color: #000;
+  }
+  .curations-nav-link {
+   color: black; 
+  }
   .dots {
     opacity: 1;
 }
@@ -659,6 +676,10 @@ const projects = [
   {
   	title: 'Anchor User Journey',
     link: '/work/user-journey-anchor'
+  },
+  {
+  	title: 'Curations',
+    link: '/work/curations'
   },
 ];
 for (let i = 0; i < projects.length; i++) {
