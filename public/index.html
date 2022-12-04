@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sat Dec 03 2022 23:01:04 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Dec 04 2022 16:01:14 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6389cb7fbc615aa958365356" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -30,22 +30,22 @@
   @media (prefers-color-scheme: dark) {
   body {
     background-color: #090909;
-    color: #808080;
+    color: #b4b4b4;
     }
     .navbar {
     border-bottom: 1px solid #2e2e2e;
     background-color: #090909;; 
       border-color: #2e2e2e;
     }
-    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
+    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .heading4, .heading5, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
      color: white; 
     }
-    p {
-     color: #808080; 
+    p, .grey-text.brand-subtext, .project-icon-info {
+     color: #b4b4b4; 
     }
     .heading2.subtext {
     margin-bottom: 40px;
-    color: #7b7b7b;
+    color: #b4b4b4;
     }
     .footer {
     background-color: #090909;
@@ -66,26 +66,27 @@
     div.button.no-padding.dropdown.w-dropdown {
      background-color: none !important; 
     }
+    .collaborator-image {
+      border: 1px solid #252525;
+    }
     .dropdown-list.w--open {
     border: 1px solid #252525;
     border-radius: 8px;
     background-color: #151515;
     }
-    .dropdown-icon-link.github {
-        color: white;
-	}
-    .dropdown-icon-link.last.linkedin {
-    color: #6b89ff;
-	}
     .dropdown-icon-link:hover {
     background-color: #1e1e1e;
 	}
     .header-image {
-    display: none;
+    mix-blend-mode: normal;
     }
     .button-icon.w-embed > svg > path {
     stroke: #000;
 	}
+    .collaborator-name-wrapper, .black-rect {
+     background-color: white;
+      color: black;
+    }
     @media screen and (max-width: 767px)
       .navbar.wf-section {
         border-color: #2e2e2e;
@@ -156,7 +157,7 @@
           <h1 class="heading1">Hey, I&#x27;m Florian</h1>
           <h2 class="heading2 subtext">A designer and developer of digital products.</h2>
           <p>I am currently studying Digital Product Design and Development at the HfG Schwaebisch Gmuend. My motto is: Let’s build the products of tomorrow. Useful products. Sustainable products. And of course, products that are easy to use.</p>
-        </div><img src="images/header.jpg" loading="lazy" id="w-node-_5da66d86-ac24-d0ae-ed35-b2c025460abf-58365356" srcset="images/header-p-500.jpg 500w, images/header.jpg 907w" sizes="(max-width: 767px) 100vw, (max-width: 991px) 32vw, 24vw" alt="Florian Comic Figure" class="header-image">
+        </div><img src="images/main_header.png" loading="lazy" id="w-node-_5da66d86-ac24-d0ae-ed35-b2c025460abf-58365356" alt="" class="header-image">
       </header>
       <div class="empty-192"></div>
       <div data-w-id="47a2d12f-2353-5783-c339-bdd2d534dc33" class="explanation">
@@ -485,7 +486,7 @@ background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208,
             </svg>
           </div><!--  .clockbox  -->
         </div>
-        <div class="flex-cols">
+        <div class="flex-cols clock-text">
           <p class="footer-text">Your time is running.<br>Use it wisely.</p>
         </div>
       </div>

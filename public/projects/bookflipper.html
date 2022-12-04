@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sat Dec 03 2022 23:01:04 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Dec 04 2022 16:01:14 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="638a3616f6c144800cda956d" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -11,6 +11,7 @@
   <link href="../css/normalize.css" rel="stylesheet" type="text/css">
   <link href="../css/webflow.css" rel="stylesheet" type="text/css">
   <link href="../css/designwithtech.webflow.css" rel="stylesheet" type="text/css">
+  <style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="7c2ae40c-e890-f331-e434-ca4b374cc3b6"] {display:none;-webkit-transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;}}</style>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Figtree:regular,500,600,700,800,900"]  }});</script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
@@ -24,22 +25,22 @@
   @media (prefers-color-scheme: dark) {
   body {
     background-color: #090909;
-    color: #808080;
+    color: #b4b4b4;
     }
     .navbar {
     border-bottom: 1px solid #2e2e2e;
     background-color: #090909;; 
       border-color: #2e2e2e;
     }
-    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
+    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .heading4, .heading5, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
      color: white; 
     }
-    p {
-     color: #808080; 
+    p, .grey-text.brand-subtext, .project-icon-info {
+     color: #b4b4b4; 
     }
     .heading2.subtext {
     margin-bottom: 40px;
-    color: #7b7b7b;
+    color: #b4b4b4;
     }
     .footer {
     background-color: #090909;
@@ -60,26 +61,27 @@
     div.button.no-padding.dropdown.w-dropdown {
      background-color: none !important; 
     }
+    .collaborator-image {
+      border: 1px solid #252525;
+    }
     .dropdown-list.w--open {
     border: 1px solid #252525;
     border-radius: 8px;
     background-color: #151515;
     }
-    .dropdown-icon-link.github {
-        color: white;
-	}
-    .dropdown-icon-link.last.linkedin {
-    color: #6b89ff;
-	}
     .dropdown-icon-link:hover {
     background-color: #1e1e1e;
 	}
     .header-image {
-    display: none;
+    mix-blend-mode: normal;
     }
     .button-icon.w-embed > svg > path {
     stroke: #000;
 	}
+    .collaborator-name-wrapper, .black-rect {
+     background-color: white;
+      color: black;
+    }
     @media screen and (max-width: 767px)
       .navbar.wf-section {
         border-color: #2e2e2e;
@@ -143,16 +145,16 @@
       </div>
     </div>
   </div>
-  <main class="main">
+  <main class="main no-overflow">
     <div class="content">
       <header class="project-header">
-        <h1 class="heading2">A robot that is flipping books based on users input</h1>
-        <p class="explanation-text">Bookflipper</p>
+        <h1 class="heading2 project-title">A robot that is flipping books based on users input</h1>
+        <p class="explanation-text">It&#x27;s using Arduino, MQTT and Socket.io as main technologies.</p>
       </header>
       <div class="collaborators-wrapper">
         <h3 class="heading5">Collaborators:</h3>
         <a data-w-id="dfab2f9a-e3c2-320a-c599-93391ec3fb7b" href="https://www.antonstallboerger.com/" target="_blank" class="collaborator w-inline-block"><img src="../images/anton_photo.jpg" loading="lazy" alt="" class="collaborator-image">
-          <div style="display:none;-webkit-transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-50%, 4px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="collaborator-name-wrapper">
+          <div data-w-id="7c2ae40c-e890-f331-e434-ca4b374cc3b6" class="collaborator-name-wrapper">
             <div>Anton Stallbörger</div>
             <div class="black-rect"></div>
           </div>
@@ -160,11 +162,72 @@
       </div>
       <div class="empty-32"></div>
       <div class="main-project-info-wrapper"><img src="../images/bookflipper_main-image.jpg" loading="lazy" id="w-node-dd1ef2fe-4ef6-20d4-b4e0-17ac011ee327-0cda956d" srcset="../images/bookflipper_main-image-p-500.jpg 500w, ../images/bookflipper_main-image-p-800.jpg 800w, ../images/bookflipper_main-image-p-1080.jpg 1080w, ../images/bookflipper_main-image.jpg 1500w" sizes="80vw" alt="" class="main-image"></div>
-      <div class="two-col">
+      <div class="third-col">
         <div id="w-node-_9b47b8e5-bf2d-ab07-002f-1cd83db45466-0cda956d">
           <h2 id="w-node-_04986ed7-0f1f-0070-c72e-1619513383c4-0cda956d" class="heading4">Problem</h2>
           <div class="empty-16"></div>
           <p>Reading the same book like a friend is something interesting. Not only can you talk and discuss it afterwards, but you learn new ways of viewing on what the book tells you when talking to friends about it. You often talk about specific sites or show him or her where you are and how your process is going. But what if your friend is somewhere remote and you don&#x27;t see each other in real life?</p>
+        </div>
+      </div>
+      <div class="empty-64"></div>
+      <div class="slider-wrapper">
+        <div data-delay="4000" data-animation="slide" class="slider_component w-slider" data-autoplay="false" data-easing="ease-in" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="false">
+          <div class="card_mask w-slider-mask">
+            <div class="card w-slide">
+              <div class="box"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="slider-image">
+                <p>Image Text</p>
+              </div>
+            </div>
+            <div class="card w-slide">
+              <div class="box"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="slider-image">
+                <p>Image Text</p>
+              </div>
+            </div>
+            <div class="card w-slide">
+              <div class="box"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="slider-image">
+                <p>Image Text</p>
+              </div>
+            </div>
+            <div class="card w-slide">
+              <div class="box"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="slider-image">
+                <p>Image Text</p>
+              </div>
+            </div>
+            <div class="card w-slide">
+              <div class="box"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="slider-image">
+                <p>Image Text</p>
+              </div>
+            </div>
+            <div class="card w-slide">
+              <div class="box"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="slider-image">
+                <p>Image Text</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-arrow left w-slider-arrow-left">
+            <div class="w-embed">
+              <?xml version="1.0" encoding="UTF-8"?><svg width="32px" height="32px" stroke-width="1.47" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
+                <path d="M6 12h12.5m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="1.47" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="slide-arrow w-slider-arrow-right">
+            <div class="w-embed">
+              <?xml version="1.0" encoding="UTF-8"?><svg width="32px" height="32px" stroke-width="1.47" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
+                <path d="M6 12h12.5m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="1.47" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="slide-navigation w-slider-nav w-round"></div>
+        </div>
+      </div>
+      <div class="empty-192"></div>
+      <div class="process-wrapper">
+        <h2 class="heading3">Process</h2>
+        <div data-w-id="8a70798d-b29f-065f-0cb0-bbee2ffdb2ab" class="process">
+          <div id="w-node-_0e1bc2f5-6e0c-d4d5-177f-c85a477988cb-0cda956d" class="process-grid-downwards"></div>
+          <div id="w-node-e80090fb-ccdf-b368-80cb-ad9a931f2731-0cda956d" class="process-line"></div>
+          <div id="w-node-b5fec3d2-59a5-4e33-dfb4-c76db898a676-0cda956d" class="process-grid-downwards"></div>
         </div>
       </div>
     </div>
@@ -310,7 +373,7 @@ background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208,
             </svg>
           </div><!--  .clockbox  -->
         </div>
-        <div class="flex-cols">
+        <div class="flex-cols clock-text">
           <p class="footer-text">Your time is running.<br>Use it wisely.</p>
         </div>
       </div>
