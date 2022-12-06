@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Dec 04 2022 16:01:14 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Tue Dec 06 2022 22:25:44 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="638a3616f6c144800cda956d" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -32,7 +32,7 @@
     background-color: #090909;; 
       border-color: #2e2e2e;
     }
-    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .heading4, .heading5, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
+    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .heading4, .heading5, .explanation-text, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
      color: white; 
     }
     p, .grey-text.brand-subtext, .project-icon-info {
@@ -58,9 +58,6 @@
     background-color: #0f0f0f;
     color: #fff;
 	}
-    div.button.no-padding.dropdown.w-dropdown {
-     background-color: none !important; 
-    }
     .collaborator-image {
       border: 1px solid #252525;
     }
@@ -81,6 +78,13 @@
     .collaborator-name-wrapper, .black-rect {
      background-color: white;
       color: black;
+    }
+    .button.no-padding.dropdown.w-dropdown {
+     background-color: transparent; 
+      border-radius: 200px;
+    }
+    .project-cover-image {
+    border-color: #292929;
     }
     @media screen and (max-width: 767px)
       .navbar.wf-section {
@@ -146,7 +150,7 @@
     </div>
   </div>
   <main class="main no-overflow">
-    <div class="content">
+    <div class="content project">
       <header class="project-header">
         <h1 class="heading2 project-title">A robot that is flipping books based on users input</h1>
         <p class="explanation-text">It&#x27;s using Arduino, MQTT and Socket.io as main technologies.</p>
@@ -161,7 +165,7 @@
         </a>
       </div>
       <div class="empty-32"></div>
-      <div class="main-project-info-wrapper"><img src="../images/bookflipper_main-image.jpg" loading="lazy" id="w-node-dd1ef2fe-4ef6-20d4-b4e0-17ac011ee327-0cda956d" srcset="../images/bookflipper_main-image-p-500.jpg 500w, ../images/bookflipper_main-image-p-800.jpg 800w, ../images/bookflipper_main-image-p-1080.jpg 1080w, ../images/bookflipper_main-image.jpg 1500w" sizes="80vw" alt="" class="main-image"></div>
+      <div class="main-project-info-wrapper"><img src="../images/bookflipper_main-image.jpg" loading="lazy" id="w-node-dd1ef2fe-4ef6-20d4-b4e0-17ac011ee327-0cda956d" sizes="80vw" srcset="../images/bookflipper_main-image-p-500.jpg 500w, ../images/bookflipper_main-image-p-800.jpg 800w, ../images/bookflipper_main-image-p-1080.jpg 1080w, ../images/bookflipper_main-image.jpg 1500w" alt="" class="main-image"></div>
       <div class="third-col">
         <div id="w-node-_9b47b8e5-bf2d-ab07-002f-1cd83db45466-0cda956d">
           <h2 id="w-node-_04986ed7-0f1f-0070-c72e-1619513383c4-0cda956d" class="heading4">Problem</h2>
@@ -378,11 +382,14 @@ background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208,
         </div>
       </div>
       <div id="w-node-d61014f5-e7f0-e0cf-cdbd-891b17da0d86-5aa2000e" class="footer-link-col last">
+        <h3 class="footer-heading">Navigation</h3>
+        <a href="#" class="footer-link">Projects</a>
+      </div>
+      <div id="w-node-fdf53c97-26bf-7bb2-be4e-16bd13882ec3-5aa2000e" class="footer-link-col last">
         <h3 class="footer-heading">Info</h3>
         <a href="#" class="footer-link">Journal</a>
-        <a href="#" class="footer-link">Legal Notice</a>
+        <a href="#" class="footer-link">Colophon</a>
       </div>
-      <div id="w-node-_0f2634ac-02f1-2dea-fc59-e1fe93159746-5aa2000e"></div>
     </div>
     <div class="copyright-text">
       <div class="footer-text-mini w-embed w-script">

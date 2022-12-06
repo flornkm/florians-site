@@ -47,8 +47,12 @@ p {
   min-height: 100vh;
   margin-right: auto;
   margin-left: auto;
+  padding-top: 176px;
+  padding-bottom: 176px;
+}
+
+.content.project {
   padding-top: 128px;
-  padding-bottom: 160px;
 }
 
 .navbar {
@@ -74,8 +78,8 @@ p {
   max-width: 1048px;
   margin-right: auto;
   margin-left: auto;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   background-color: transparent;
 }
 
@@ -183,14 +187,12 @@ p {
 }
 
 .button.primary {
-  padding: 8px 16px;
+  padding: 12px 16px;
   border-style: none;
   background-color: #1281ed;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  font-family: Plusjakartasans, sans-serif;
   color: #fff;
-  font-weight: 500;
 }
 
 .button.primary:hover {
@@ -226,7 +228,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 8px 16px;
+  padding: 12px 16px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   -webkit-flex-direction: row-reverse;
@@ -256,7 +258,7 @@ p {
 
 .dropdown-list.w--open {
   left: 0px;
-  top: 48px;
+  top: 56px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -318,6 +320,7 @@ p {
 }
 
 .explanation-text {
+  color: #000;
   font-size: 1.563rem;
   line-height: 1.4em;
   font-weight: 500;
@@ -368,7 +371,9 @@ p {
   border-style: none;
   border-width: 1px;
   border-color: #d3d3d3;
-  background-color: #f4f4f4;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
 }
 
 .project-headline {
@@ -425,7 +430,9 @@ p {
 
 .project-cover-image {
   width: 100%;
-  border-radius: 16px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #f3f3f3;
 }
 
 .project-headline-wrapper {
@@ -493,21 +500,20 @@ p {
   display: -ms-flexbox;
   display: flex;
   margin-top: 48px;
+  padding: 8px 16px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   grid-column-gap: 16px;
   grid-row-gap: 8px;
-  border-style: none;
-  border-width: 1px;
-  border-color: #595959;
-  border-radius: 24px;
+  border-radius: 16px;
+  background-color: hsla(0, 0%, 81.2%, 0.1);
 }
 
 .footer-link-col {
@@ -535,19 +541,30 @@ p {
 }
 
 .footer-link {
-  border-radius: 4px;
+  padding: 8px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent transparent transparent hsla(0, 0%, 81.2%, 0);
+  border-radius: 0px;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
   color: #cfcfcf;
   font-size: 1rem;
   text-decoration: none;
 }
 
 .footer-link:hover {
-  text-decoration: underline;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: hsla(0, 0%, 81.2%, 0.1);
 }
 
 .footer-heading {
   margin-top: 0px;
   margin-bottom: 0px;
+  padding-left: 8px;
   color: #fff;
   font-size: 1.25rem;
   line-height: 1.4em;
@@ -636,7 +653,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 8px 16px;
+  padding: 12px 16px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -778,10 +795,10 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 8px 16px;
+  padding: 12px 16px;
   grid-column-gap: 8px;
   color: #000;
-  font-weight: 400;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -928,6 +945,7 @@ p {
 }
 
 .brand-text-big {
+  font-size: 1.5rem;
   line-height: 1em;
 }
 
@@ -1294,7 +1312,7 @@ p {
     right: auto;
     bottom: 16px;
     width: 90%;
-    padding: 16px;
+    padding: 8px 16px;
     border-style: solid;
     border-width: 1px;
     border-color: #dadada;
@@ -1314,6 +1332,17 @@ p {
 
   .brand {
     padding-left: 0px;
+  }
+
+  .button.primary {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .dropdown-toggle {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #fff;
   }
 
   .dropdown-list {
@@ -1377,6 +1406,11 @@ p {
     padding-top: 16px;
   }
 
+  .icon-button {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
   ._404-wrapper {
     -webkit-box-align: end;
     -webkit-align-items: flex-end;
@@ -1422,6 +1456,8 @@ p {
 @media screen and (max-width: 479px) {
   .navbar {
     width: 90%;
+    padding-right: 12px;
+    padding-left: 12px;
   }
 
   .nav-wrapper {
@@ -1495,6 +1531,10 @@ p {
   .footer-inner {
     -ms-grid-columns: 2fr;
     grid-template-columns: 2fr;
+  }
+
+  .footer-first-col {
+    background-color: hsla(0, 0%, 81.2%, 0);
   }
 
   .flex-cols.clock-text {
@@ -1692,7 +1732,7 @@ p {
   order: 9999;
 }
 
-#w-node-_0f2634ac-02f1-2dea-fc59-e1fe93159746-5aa2000e {
+#w-node-fdf53c97-26bf-7bb2-be4e-16bd13882ec3-5aa2000e {
   -ms-grid-column: span 1;
   grid-column-start: span 1;
   -ms-grid-column-span: 1;
@@ -1701,6 +1741,10 @@ p {
   grid-row-start: span 1;
   -ms-grid-row-span: 1;
   grid-row-end: span 1;
+  -webkit-box-ordinal-group: 10000;
+  -webkit-order: 9999;
+  -ms-flex-order: 9999;
+  order: 9999;
 }
 
 #w-node-dd1ef2fe-4ef6-20d4-b4e0-17ac011ee327-0cda956d {
@@ -1803,9 +1847,9 @@ p {
 }
 @font-face {
   font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-SemiBold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-SemiBold.woff') format('woff');
+  src: url('../fonts/PlusJakartaSans-SemiBoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-SemiBoldItalic.woff') format('woff');
   font-weight: 600;
-  font-style: normal;
+  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -1817,20 +1861,6 @@ p {
 }
 @font-face {
   font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-Medium.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-SemiBoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-SemiBoldItalic.woff') format('woff');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Plusjakartasans';
   src: url('../fonts/PlusJakartaSans-LightItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-LightItalic.woff') format('woff');
   font-weight: 300;
   font-style: italic;
@@ -1838,8 +1868,29 @@ p {
 }
 @font-face {
   font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-Italic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Italic.woff') format('woff');
-  font-weight: 400;
+  src: url('../fonts/PlusJakartaSans-Medium.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-SemiBold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-ExtraLightItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraLightItalic.woff') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-ExtraBoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-BoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraBoldItalic.woff') format('woff'), url('../fonts/PlusJakartaSans-BoldItalic.woff') format('woff');
+  font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
@@ -1852,9 +1903,16 @@ p {
 }
 @font-face {
   font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-BoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraBoldItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraBoldItalic.woff') format('woff'), url('../fonts/PlusJakartaSans-BoldItalic.woff') format('woff');
-  font-weight: 700;
+  src: url('../fonts/PlusJakartaSans-Italic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Italic.woff') format('woff');
+  font-weight: 400;
   font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plusjakartasans';
+  src: url('../fonts/PlusJakartaSans-Bold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraBold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Bold.woff') format('woff'), url('../fonts/PlusJakartaSans-ExtraBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 @font-face {
@@ -1862,19 +1920,5 @@ p {
   src: url('../fonts/PlusJakartaSans-ExtraLight.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraLight.woff') format('woff');
   font-weight: 200;
   font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-ExtraBold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Bold.woff2') format('woff2'), url('../fonts/PlusJakartaSans-Bold.woff') format('woff'), url('../fonts/PlusJakartaSans-ExtraBold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Plusjakartasans';
-  src: url('../fonts/PlusJakartaSans-ExtraLightItalic.woff2') format('woff2'), url('../fonts/PlusJakartaSans-ExtraLightItalic.woff') format('woff');
-  font-weight: 200;
-  font-style: italic;
   font-display: swap;
 }
