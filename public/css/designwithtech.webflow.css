@@ -47,6 +47,7 @@ p {
   min-height: 100vh;
   margin-right: auto;
   margin-left: auto;
+  padding-top: 176px;
   padding-bottom: 176px;
 }
 
@@ -290,7 +291,6 @@ p {
 .header {
   display: -ms-grid;
   display: grid;
-  min-height: 50vh;
   grid-auto-columns: 1fr;
   grid-column-gap: 8px;
   grid-row-gap: 8px;
@@ -336,6 +336,10 @@ p {
   font-size: 1.563rem;
   line-height: 1.4em;
   font-weight: 500;
+}
+
+.explanation-text.subtext {
+  color: #464646;
 }
 
 .empty-256 {
@@ -525,7 +529,6 @@ p {
   grid-column-gap: 16px;
   grid-row-gap: 8px;
   border-radius: 16px;
-  background-color: hsla(0, 0%, 81.2%, 0.1);
 }
 
 .footer-link-col {
@@ -641,8 +644,18 @@ p {
 }
 
 .about-image {
-  position: relative;
+  position: absolute;
+  left: auto;
+  top: 5%;
+  right: 5%;
+  bottom: auto;
   z-index: 1;
+  width: 200px;
+  height: 300px;
+  padding: 8px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.08);
   -o-object-fit: contain;
   object-fit: contain;
 }
@@ -1272,6 +1285,58 @@ p {
   display: none;
 }
 
+.about-canvas {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 94vh;
+  margin-top: 66px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.6)), to(hsla(0, 0%, 100%, 0.6))), url('../images/canvas.svg');
+  background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.6), hsla(0, 0%, 100%, 0.6)), url('../images/canvas.svg');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, 640px;
+  background-repeat: repeat, repeat;
+}
+
+.draggable {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.headingplus {
+  background-color: transparent;
+  color: #1281ed;
+  font-size: 3.052rem;
+}
+
+.headingplus.draggable {
+  width: auto;
+  height: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: transparent;
+}
+
+.sticker {
+  position: absolute;
+  left: 10%;
+  top: 15%;
+  right: auto;
+  bottom: auto;
+  border-radius: 1000px;
+}
+
 @media screen and (max-width: 991px) {
   .menu-button {
     padding: 12px;
@@ -1577,6 +1642,10 @@ p {
 
   .nav-wrapper {
     grid-column-gap: 8px;
+  }
+
+  .brand {
+    display: none;
   }
 
   .brand.w--current {
