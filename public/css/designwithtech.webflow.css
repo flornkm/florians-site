@@ -1654,7 +1654,7 @@ p {
   z-index: 2;
   width: 14em;
   height: 10em;
-  padding: 4px;
+  padding: 8px;
   background-color: #fff;
 }
 
@@ -1951,6 +1951,10 @@ p {
   right: 30%;
   bottom: 20%;
   color: #fff;
+}
+
+.code.about-custom-2.draggable {
+  font-size: 0.7em;
 }
 
 .syntax-1 {
