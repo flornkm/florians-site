@@ -936,6 +936,15 @@ p {
   width: auto;
 }
 
+.tooltip-name-wrapper.custom-2 {
+  top: -50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+}
+
 .black-rect {
   position: absolute;
   top: auto;
@@ -1357,7 +1366,6 @@ p {
   -ms-flex-pack: center;
   justify-content: center;
   grid-column-gap: 8px;
-  background-image: radial-gradient(circle farthest-corner at 50% 50%, #fefefe, hsla(0, 0%, 100%, 0));
   font-family: 'Schoolbell v18 latin', sans-serif;
   color: #1281ed;
 }
@@ -1940,6 +1948,10 @@ p {
   color: #fff;
 }
 
+.app-icon.twitter {
+  background-color: #26a0f1;
+}
+
 .code {
   padding: 8px 16px;
   -webkit-box-pack: center;
@@ -2033,10 +2045,6 @@ p {
   padding-top: 0.6em;
   padding-right: 1em;
   padding-left: 1.7em;
-  background-image: url('../images/paper.svg');
-  background-position: 50% 0%;
-  background-size: contain;
-  background-repeat: no-repeat;
   font-size: 1em;
 }
 
@@ -2052,12 +2060,16 @@ p {
 }
 
 .paper-text {
+  position: relative;
+  z-index: 1;
   margin-bottom: 0.2em;
   font-size: 0.7em;
   line-height: 1.4em;
 }
 
 .memoji {
+  position: relative;
+  z-index: 1;
   width: 2.5em;
   height: 2.5em;
   mix-blend-mode: luminosity;
@@ -2067,6 +2079,29 @@ p {
 
 .memoji:hover {
   mix-blend-mode: multiply;
+}
+
+.paper-vector {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+}
+
+.latest-tweet {
+  position: absolute;
+  left: 40%;
+  top: 5%;
+  right: auto;
+  bottom: auto;
+  width: 10em;
+  height: auto;
+  min-height: 5em;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.08);
 }
 
 @media screen and (max-width: 991px) {
