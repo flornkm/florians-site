@@ -1238,7 +1238,12 @@ p {
   right: auto;
   bottom: auto;
   width: 7em;
-  border-radius: 1000px;
+}
+
+.sticker.draggable {
+  z-index: 1;
+  -webkit-perspective: 256px;
+  perspective: 256px;
 }
 
 .mapimages-images {
@@ -1352,6 +1357,7 @@ p {
   -ms-flex-pack: center;
   justify-content: center;
   grid-column-gap: 8px;
+  background-image: radial-gradient(circle farthest-corner at 50% 50%, #fefefe, hsla(0, 0%, 100%, 0));
   font-family: 'Schoolbell v18 latin', sans-serif;
   color: #1281ed;
 }
@@ -1362,9 +1368,21 @@ p {
   top: auto;
   right: auto;
   bottom: 15%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  grid-row-gap: 8px;
 }
 
 .written.about-custom-1.draggable {
+  grid-row-gap: 16px;
+  background-image: none;
   font-size: 1em;
 }
 
@@ -1377,17 +1395,21 @@ p {
   color: #12af44;
 }
 
+.sticker-image {
+  border-radius: 1000px;
+}
+
 .sticker-gradient {
   position: absolute;
   left: 0%;
   top: 0%;
   right: 0%;
   bottom: 0%;
-  z-index: 3;
+  z-index: 2;
   display: none;
   background-image: -webkit-gradient(linear, left bottom, left top, from(#4157ff), color-stop(39%, #ff3033), to(#edff62));
   background-image: linear-gradient(0deg, #4157ff, #ff3033 39%, #edff62);
-  mix-blend-mode: overlay;
+  mix-blend-mode: color;
 }
 
 .easter-egg {
@@ -1629,7 +1651,7 @@ p {
   left: 4%;
   top: auto;
   right: auto;
-  bottom: 30%;
+  bottom: 20%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1919,7 +1941,7 @@ p {
 }
 
 .code {
-  padding: 4px 16px 8px;
+  padding: 8px 16px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -1929,7 +1951,7 @@ p {
   border-width: 1px;
   border-color: #727272;
   border-radius: 16px;
-  background-color: #464646;
+  background-color: #292929;
   font-family: Jetbrainsmono, sans-serif;
   color: #1281ed;
   font-size: 0.8em;
@@ -1949,12 +1971,13 @@ p {
   left: auto;
   top: auto;
   right: 30%;
-  bottom: 20%;
+  bottom: 10%;
   color: #fff;
 }
 
 .code.about-custom-2.draggable {
-  font-size: 0.7em;
+  z-index: 1;
+  font-size: 0.6em;
 }
 
 .syntax-1 {
@@ -1966,13 +1989,16 @@ p {
 }
 
 .syntax-3 {
-  color: #7cfff8;
+  color: #84e2ff;
 }
 
 .file-name {
   display: inline-block;
   width: 100%;
   margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #3a3a3a;
   font-family: Plusjakartasans, sans-serif;
   color: #b6b4b4;
   font-size: 0.8em;
@@ -1985,6 +2011,62 @@ p {
 
 .syntax-5 {
   color: #ff9838;
+}
+
+.drawn-stars.absolute-1 {
+  position: absolute;
+  left: auto;
+  top: 6%;
+  right: 38%;
+  bottom: auto;
+}
+
+.paper {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 10%;
+  bottom: 5%;
+  z-index: 1;
+  width: 12em;
+  height: 17em;
+  padding-top: 0.6em;
+  padding-right: 1em;
+  padding-left: 1.7em;
+  background-image: url('../images/paper.svg');
+  background-position: 50% 0%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: 1em;
+}
+
+.paper.draggable {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.paper-text {
+  margin-bottom: 0.2em;
+  font-size: 0.7em;
+  line-height: 1.4em;
+}
+
+.memoji {
+  width: 2.5em;
+  height: 2.5em;
+  mix-blend-mode: luminosity;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.memoji:hover {
+  mix-blend-mode: multiply;
 }
 
 @media screen and (max-width: 991px) {
