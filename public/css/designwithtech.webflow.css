@@ -55,6 +55,16 @@ p {
   padding-top: 128px;
 }
 
+.content.no-padding {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.content.scratchpad {
+  padding-top: 128px;
+  padding-bottom: 0px;
+}
+
 .navbar {
   position: fixed;
   left: 50%;
@@ -1524,6 +1534,10 @@ p {
   display: none;
 }
 
+.mp-single-track._4 {
+  display: none;
+}
+
 .mp-progress-bar-wrapper {
   position: absolute;
   left: 0%;
@@ -1681,7 +1695,7 @@ p {
 }
 
 .mp-example-wrapper.draggable {
-  z-index: 2;
+  z-index: 1;
   width: 14em;
   height: 10em;
   padding: 8px;
@@ -2062,7 +2076,7 @@ p {
 .paper-text {
   position: relative;
   z-index: 1;
-  margin-bottom: 0.2em;
+  margin-bottom: 1em;
   font-size: 0.7em;
   line-height: 1.4em;
 }
@@ -2095,6 +2109,7 @@ p {
   top: 5%;
   right: auto;
   bottom: auto;
+  z-index: 1;
   width: 10em;
   height: auto;
   min-height: 5em;
@@ -2102,6 +2117,32 @@ p {
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.08);
+}
+
+.scratchpad {
+  height: 60vh;
+  max-height: 80vh;
+}
+
+.scratchpad-form {
+  width: 100%;
+  height: 100%;
+}
+
+.scratchpad-form-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.scratchpad-input {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e6e6e6;
+  border-radius: 8px;
+  font-family: Jetbrainsmono, sans-serif;
 }
 
 @media screen and (max-width: 991px) {
