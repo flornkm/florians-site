@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Dec 11 2022 23:13:59 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed Dec 14 2022 22:58:59 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="6389cb7fbc615aa958365356" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -107,6 +107,33 @@
 }
 </style>
  -->
+  <script src="https://designwithtech.com/assets/libs/jquery.min.js"></script>
+  <style>
+.bubble-end {
+-webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+ }
+.bubble-end.first {
+-webkit-transform: scaleX(1);
+  transform: scaleX(1);
+ }
+.appear {
+	animation: 0.5s 1 ease-in-out appearAnim;
+}
+.red {
+  background-color: red;
+  animation: 0.1s infinite linear wiggle;
+}
+@keyframes appearAnim {
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes wiggle {
+  0% {transform: rotate(2deg);}
+  50% {transform: rotate(-2deg);}
+  100% {transform: rotate(2deg);}
+}
+</style>
 </head>
 <body>
   <div class="navbar wf-section">
@@ -417,6 +444,37 @@
           </a>
         </div>
       </div>
+      <div class="empty-256"></div>
+      <div class="chat">
+        <div class="chat-contact">
+          <div class="chat-contact-info">
+            <div class="chat-contact-avatar"><img src="images/memoji.png" loading="lazy" alt="" class="avatar"></div>
+            <div class="chat-name">Florian</div>
+          </div>
+        </div>
+        <div id="chat-wrapper" class="chat-wrapper">
+          <div class="bubble first">
+            <div>Hey, what is your name? 👋</div>
+            <div class="bubble-end first"></div>
+          </div>
+        </div>
+        <div id="chat-form" class="message-form w-form">
+          <form id="email-form" name="email-form" data-name="Email Form" method="get" class="message-input-wrapper"><input type="text" class="message-text w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your message" id="message">
+            <a id="submit-chat" href="#" class="submit-button w-inline-block">
+              <div class="submit-button-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewbox="0 0 256 256">
+                  <rect width="256" height="256" fill="none"></rect>
+                  <path d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm39.6,103.6a7.8,7.8,0,0,1-5.7,2.3,7.6,7.6,0,0,1-5.6-2.3L136,107.3V168a8,8,0,0,1-16,0V107.3L99.7,127.6a8,8,0,0,1-11.3-11.3l33.9-33.9a8.7,8.7,0,0,1,2.6-1.8,8.3,8.3,0,0,1,6.2,0,8.7,8.7,0,0,1,2.6,1.8l33.9,33.9A8,8,0,0,1,167.6,127.6Z"></path>
+                </svg></div>
+            </a>
+          </form>
+          <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <footer class="footer">
@@ -639,6 +697,107 @@ function runTheClock() {
     SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
 }
 var interval = setInterval(runTheClock, 1000);
+</script><!--  Contact Chat  -->
+  <script>
+let submitChat = document.getElementById('submit-chat');
+let chatInput = document.getElementById('message');
+let chatWrapper = document.getElementById('chat-wrapper');
+let chatForm = document.getElementById('chat-form');
+let messageCount = 0;
+let answers = {
+	name: '',
+	why: '',
+  email: ''
+};
+Webflow.push(function() {
+  // Disable submitting form fields during development
+  $('form').submit(function() {
+    return false;
+  });
+});
+function isEmpty(str) {
+    return !str.trim().length;
+}
+function addAnswer(answer) {
+	messageCount++;
+  for (let i = 0; i < messageCount; i++) {
+    document.querySelectorAll('.bubble')[i].classList.remove("appear");
+   }
+   let answerMessage;
+		if (messageCount !== 7) {
+    	answerMessage = '<div class="bubble first appear"> <div class="bubble-end first"></div>' + answer + '</div>';
+    } else {
+    	answerMessage = '<div class="bubble first appear red">' + answer + '</div>';
+    }
+  chatWrapper.innerHTML += answerMessage;
+  let height = document.querySelectorAll('.bubble')[messageCount].offsetHeight + 16;
+  for (let i = 0; i < messageCount; i++) {
+    document.querySelectorAll('.bubble')[i].style.transform += "translate(0, -"+ height +"px )";
+  }
+}
+function validateEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+function sendForm(e) {
+	if (!isEmpty(chatInput.value)) {
+  	messageCount++;
+    for (let i = 0; i < messageCount; i++) {
+    document.querySelectorAll('.bubble')[i].classList.remove("appear");
+    }
+  	let message = '<div class="bubble appear"> <div class="bubble-end"></div>' + chatInput.value + '</div>';
+    chatWrapper.innerHTML += message;
+    let height = document.querySelectorAll('.bubble')[messageCount].offsetHeight + 16;
+    for (let i = 0; i < messageCount; i++) {
+    document.querySelectorAll('.bubble')[i].style.transform += "translate(0, -"+ height +"px )";
+    }
+    if (messageCount === 1) {
+    	answers.name = chatInput.value;
+    	setTimeout(addAnswer, 2000, 'Nice to meet you, ' + chatInput.value + '!');
+      setTimeout(addAnswer, 3000, 'So tell me, why are you contacting me?');
+    } else if (messageCount === 4) {
+    	answers.why = chatInput.value;
+     setTimeout(addAnswer, 2000, 'Got it. Thanks for the information.');
+     setTimeout(addAnswer, 3000, 'I just need a way to contact you. Might you give me your e-mail?');
+    } else if (messageCount === 7 || messageCount === 8) {
+    	answers.email = chatInput.value;
+      setTimeout(addAnswer, 2000, 'Writing it down real quick… ✍️');
+      setTimeout(addAnswer, 4000, 'Done! I reach out to you soon. ');
+      $.ajax({
+        url: "https://formspree.io/f/xbjwjdre",
+        method: "POST",
+        dataType: "json",
+        data: {
+        	name: answers.name,
+          email: answers.email,
+          message: answers.why
+        }
+      });
+    }
+    chatInput.value = '';
+  }
+  }
+submitChat.addEventListener('click', e => {
+    if (messageCount !== 6 && messageCount !== 7) { 
+    	sendForm(e);
+    } else if (messageCount === 6 && validateEmail) { 
+    sendForm(e);
+    } else if (messageCount === 6 && !validateEmail) { 
+    console.log('Type valid mail');
+    }
+});
+chatInput.addEventListener("keypress", function(e) {
+    if (event.key === "Enter") {
+    	if (messageCount !== 6 && messageCount !== 7) { 
+    	sendForm(e);
+      } else if (messageCount === 6 && validateEmail(chatInput.value) || messageCount === 7 && validateEmail(chatInput.value))  { 
+      document.querySelector('.red').style.display = "none";
+      sendForm(e);
+      } else if (messageCount === 6 && !validateEmail(chatInput.value)) { 
+      setTimeout(addAnswer, 1000, 'I have said, VALID!');
+      }
+    }
+  });
 </script>
 </body>
 </html>
