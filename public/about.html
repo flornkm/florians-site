@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Fri Dec 16 2022 19:51:12 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Dec 17 2022 11:36:55 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fc0577e0e00" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -117,6 +117,8 @@ console.log(obj);
     background: black;
     padding: 4px 8px;
     border-radius: 100px;
+    position: relative;
+    z-index: 101;
   }
   .clouds {
   pointer-events: none;
@@ -235,7 +237,7 @@ li > .media ~ .media {
     </div>
   </div>
   <div style="display:none;opacity:0" class="popup-screen">
-    <div data-w-id="e68d49ac-e559-f39b-13fa-6c3a2781064c" style="-webkit-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="popup no-overflow">
+    <div style="-webkit-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="popup no-overflow">
       <div data-w-id="7b5d272b-e7fc-4e62-508f-6694a52aae2e" class="close-button">
         <div class="close-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
             <rect width="256" height="256" fill="none"></rect>
@@ -243,9 +245,9 @@ li > .media ~ .media {
             <line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
           </svg></div>
       </div>
-      <div id="3d" class="threejs-wrapper"></div><img src="images/clouds.png" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(2, 2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(2, 2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(2, 2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(2, 2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" sizes="100vw" srcset="images/clouds-p-500.png 500w, images/clouds-p-800.png 800w, images/clouds-p-1080.png 1080w, images/clouds.png 1920w" alt="" class="clouds">
+      <div id="3d" class="threejs-wrapper"></div>
       <div class="heading-text">
-        <div class="plane-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewbox="0 0 256 256">
+        <div class="plane-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
             <rect width="256" height="256" fill="none"></rect>
             <path d="M176,216a8,8,0,0,1-8,8H24a8,8,0,0,1,0-16H168A8,8,0,0,1,176,216ZM247.1,89.5,228.5,66.7a35.9,35.9,0,0,0-46.2-8.2L139.5,83.6,81.3,64.2a4.1,4.1,0,0,0-2.9.1L61.9,71.4a12,12,0,0,0-3.3,19.9l26.6,24L63.7,127.5,37.6,116.3a4.4,4.4,0,0,0-3.2,0l-16.7,7.2a12,12,0,0,0-3.5,19.8h0l37.7,35.3a35.8,35.8,0,0,0,42.7,4.9L246,95.5a4,4,0,0,0,1.9-2.8A4.1,4.1,0,0,0,247.1,89.5Z"></path>
           </svg></div>
@@ -632,6 +634,7 @@ var interval = setInterval(runTheClock, 1000);
 </script>
   <script src="https://designwithtech.com/assets/libs/trueaudioplayer.js" type="text/javascript"></script>
   <script src="https://designwithtech.com/assets/libs/tweetfetch.js" type="text/javascript"></script>
+  <script src="/https://designwithtech.com/assets/libs/three.min.js"></script>
   <script src="https://designwithtech.com/assets/libs/globe.gl.min.js"></script>
   <!--  Globe  -->
   <script>
@@ -794,12 +797,23 @@ let myDOMElement = document.getElementById('3d');
     .height('100%')*/
     .backgroundColor('#00000000')
   	.globeImageUrl('https://designwithtech.com/assets/images/earth-texture.jpg')
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+    .showAtmosphere(true)	
+    .atmosphereColor('#a3f0ff')	
+    .atmosphereAltitude('0.5')
     .pointsData(myLocations)
         .pointColor('color')
         .pointRadius([0.6])
         .pointsTransitionDuration([3500])
         .pointResolution([50])
        . pointAltitude(0.1)
+  const globeMaterial = myGlobe.globeMaterial();
+    globeMaterial.bumpScale = 10;
+    new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-water.png', texture => {
+      globeMaterial.specularMap = texture;
+      globeMaterial.specular = new THREE.Color('grey');
+      globeMaterial.shininess = 15;
+    });
 }
 /* Based on this http://jsfiddle.net/brettwp/J4djY/*/
 function detectDoubleTapClosure() {

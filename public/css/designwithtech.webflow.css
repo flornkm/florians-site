@@ -2543,7 +2543,7 @@ p {
   width: 80%;
   height: 60%;
   max-width: 1048px;
-  padding: 24px;
+  padding: 8px;
   border-style: solid;
   border-width: 1px;
   border-color: #e6e6e6;
@@ -2615,8 +2615,9 @@ p {
   right: 0%;
   bottom: 0%;
   z-index: 100;
+  display: none;
   height: 100%;
-  opacity: 0.6;
+  opacity: 0.3;
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
@@ -2661,30 +2662,26 @@ p {
 
 .heading-text {
   position: absolute;
-  left: 50%;
-  top: 0%;
+  left: 0%;
+  top: auto;
   right: auto;
-  bottom: auto;
+  bottom: 0%;
   z-index: 101;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 16px 32px 8px;
+  padding: 8px 32px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
   grid-column-gap: 16px;
   grid-row-gap: 16px;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
+  border-radius: 0px 32px 0px 0px;
   background-color: #fff;
-  -webkit-transform: translate(-50%, 0px);
-  -ms-transform: translate(-50%, 0px);
-  transform: translate(-50%, 0px);
   color: #1281ed;
-  font-size: 2rem;
+  font-size: 1.563rem;
   line-height: 1.4em;
   font-style: italic;
   font-weight: 600;
@@ -2871,7 +2868,7 @@ p {
   }
 
   .heading-text {
-    width: 80%;
+    width: 50%;
   }
 }
 
@@ -3371,11 +3368,19 @@ p {
   }
 
   .heading-text {
+    left: 50%;
+    bottom: 2%;
+    width: 280px;
+    max-width: 100%;
     padding-right: 16px;
     padding-left: 16px;
+    border-radius: 100px;
     background-color: hsla(0, 0%, 100%, 0.7);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
+    -webkit-transform: translate(-50%, 0px);
+    -ms-transform: translate(-50%, 0px);
+    transform: translate(-50%, 0px);
   }
 }
 
