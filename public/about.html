@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Tue Dec 27 2022 16:08:44 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed Dec 28 2022 12:32:09 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fc0577e0e00" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -255,8 +255,8 @@ li > .media ~ .media {
       </div>
     </div>
   </div>
-  <div class="about-canvas">
-    <h1 class="headingplus grey em draw-font">More about me</h1>
+  <div id="canvas" class="about-canvas">
+    <h1 class="headingplus grey em draw-font center"><span class="playground">Playground</span> to learn<br>more about me</h1>
     <div id="drag-2" data-w-id="126bf1b8-05eb-4db1-b268-a79b42a82938" class="mapimages-images draggable">
       <div class="mapimages-wrapper">
         <div data-delay="5000" data-animation="cross" class="mapimages-slider w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="true" data-autoplay-limit="0" data-nav-spacing="3" data-duration="200" data-infinite="true">
@@ -389,9 +389,9 @@ touch-action: none;
         <div class="black-rect"></div>
       </div>
     </div>
-    <div id="drag-6" class="code about-custom-2 draggable"><span class="file-name">example.html<br></span><span class="syntax-4">&lt;</span><span class="syntax-1">style</span><span class="syntax-4">&gt;</span><br>.<span class="syntax-2">i-like-css</span> {<br><span class="syntax-3">visibility</span>:<span class="syntax-3"> </span><span class="syntax-5">visible</span>;<br>}<br><span class="syntax-4">&lt;/</span><span class="syntax-1">style</span><span class="syntax-4">&gt;</span></div>
+    <div id="drag-6" class="code about-custom-2 draggable"><span class="file-name">example.html<br></span><span class="syntax-4">&lt;</span><span class="syntax-1">style</span><span class="syntax-4">&gt;</span><br>.<span class="syntax-2">flo-likes-css</span> {<br><span class="syntax-3">visibility</span>:<span class="syntax-3"> </span><span class="syntax-5">visible</span>;<br>}<br><span class="syntax-4">&lt;/</span><span class="syntax-1">style</span><span class="syntax-4">&gt;</span></div>
     <div class="paper draggable">
-      <div class="paper-text">Some important notes:<br>• Art ≠ Design<br>• Minimalism is something good<br>• Not every product using AI is a necessary one<br>‍<br><em>Cheers!</em><br></div><img src="images/memoji.png" loading="lazy" alt="" class="memoji"><img src="images/paper.svg" loading="lazy" alt="" class="paper-vector">
+      <div class="paper-text">Art ≠ Design<br><br>Go for a walk to clear your mind.<br><br>Don&#x27;t think your life is bad, there are people who are worse off than you. Be thankful for what you have, even if it&#x27;s not much.<br>‍<br><em>Cheers!</em><br></div><img src="images/memoji.png" loading="lazy" alt="" class="memoji"><img src="images/paper.svg" loading="lazy" alt="" class="paper-vector">
     </div>
     <div data-w-id="214bee25-d56b-2393-21d0-35c93d55290e" class="latest-tweet draggable">
       <div class="app-icon twitter w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewbox="0 0 256 256">
@@ -409,7 +409,7 @@ touch-action: none;
         <div class="black-rect"></div>
       </div>
       <div data-w-id="1ca9eb81-4327-756f-4be6-f89afaf401aa" class="popup-opener"></div>
-    </div>
+    </div><img src="images/florian_cursor.svg" loading="lazy" id="flo" alt="" class="florian-cursor">
   </div>
   <footer class="footer">
     <div class="footer-inner">
@@ -636,6 +636,20 @@ var interval = setInterval(runTheClock, 1000);
   <script src="https://designwithtech.com/assets/libs/tweetfetch.js" type="text/javascript"></script>
   <script src="https://designwithtech.com/assets/libs/three.min.js"></script>
   <script src="https://designwithtech.com/assets/libs/globe.gl.min.js"></script>
+  <!--  Move to random on canvas  -->
+  <script>
+let florianCursor = document.getElementById('flo');
+let canvas = document.getElementById('canvas');
+function num(maxVal) {
+	let num = Math.floor(Math.random() * maxVal/2);
+   let plusOrMinus = Math.random() < 0.5 ? -num : num;
+  console.log(plusOrMinus);
+	return plusOrMinus;
+}
+setInterval(() => {
+  florianCursor.style.transform = 'translate('+ num(canvas.offsetWidth) + 'px, ' + num(canvas.offsetHeight) + 'px)'
+}, 5000);
+</script>
   <!--  Globe  -->
   <script>
 let active = false;

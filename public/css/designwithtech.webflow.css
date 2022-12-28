@@ -582,6 +582,7 @@ p {
   transition: all 150ms ease-in-out;
   color: #cfcfcf;
   font-size: 1rem;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -1216,6 +1217,7 @@ p {
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   color: #464646;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -1289,6 +1291,11 @@ p {
 
 .headingplus.grey.em.draw-font {
   font-family: 'Schoolbell v18 latin', sans-serif;
+  color: #c5c5c5;
+}
+
+.headingplus.grey.em.draw-font.center {
+  text-align: center;
 }
 
 .sticker {
@@ -2902,6 +2909,17 @@ p {
   height: 100%;
 }
 
+.playground {
+  color: #727272;
+}
+
+.florian-cursor {
+  position: absolute;
+  z-index: 98;
+  -webkit-transition: all 2000ms ease-in-out;
+  transition: all 2000ms ease-in-out;
+}
+
 @media screen and (max-width: 991px) {
   .menu-button {
     padding: 12px;
@@ -2973,6 +2991,14 @@ p {
 
   .icon-button:active {
     background-color: #f0f0f0;
+  }
+
+  .main-project-info-wrapper {
+    height: auto;
+  }
+
+  .main-image {
+    height: auto;
   }
 
   .grey-text.brand-subtext {
