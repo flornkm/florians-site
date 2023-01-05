@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Jan 05 2023 01:22:42 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu Jan 05 2023 15:45:56 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2f03c37e0dfe" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -24,6 +24,7 @@
   <script defer="" src="/_vercel/insights/script.js"></script>
   <!--  [Attributes by Finsweet] Copy to clipboard  -->
   <script defer="" src="https://designwithtech.com/assets/dist/copyclip.js"></script>
+  <style> .slider_component { touch-action: none; } </style>
   <!-- 
 <style>
   @media (prefers-color-scheme: dark) {
@@ -209,7 +210,7 @@
                   <rect width="256" height="256" fill="none"></rect>
                   <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.2l82.6,75.7a8,8,0,0,0,10.8,0L216,74.2V192Z"></path>
                 </svg></div>
-              <div class="text-block">Contact</div>
+              <div class="text-block nav-button-text">Contact</div>
               <div class="tooltip-name-wrapper bottom">
                 <div id="mail-text">Copy E-Mail!</div>
               </div>
@@ -957,11 +958,9 @@ const SECONDHAND = document.querySelector("#second");
 const GETREALTIME = document.querySelector("#dateAndTime");
 const DATEDOTAY = document.getElementById("date")
 var date = new Date();
-console.log(date);
 let hr = date.getHours();
 let min = date.getMinutes();
 let sec = date.getSeconds();
-console.log("Hour: " + hr + " Minute: " + min + " Second: " + sec);
 let hrPosition = (hr*360/12)+(min*(360/60)/12);
 let minPosition = (min*360/60)+(sec*(360/60)/60);
 let secPosition = sec*360/60;

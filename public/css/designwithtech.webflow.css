@@ -3368,6 +3368,10 @@ p {
     display: flex;
   }
 
+  .text-block.nav-button-text {
+    display: none;
+  }
+
   .about-canvas {
     height: 100vh;
     margin-top: 0px;
@@ -3501,6 +3505,10 @@ p {
 }
 
 @media screen and (max-width: 479px) {
+  .content {
+    padding-top: 80px;
+  }
+
   .navbar {
     width: 90%;
     padding-right: 12px;
