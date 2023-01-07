@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Jan 05 2023 15:45:56 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Jan 07 2023 15:31:51 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fc0577e0e00" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -16,6 +16,9 @@
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/designwithtech.webflow.css" rel="stylesheet" type="text/css">
+  <style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="aed1c198-37ed-d8d5-81d1-7ab1e0d5c131"] {-webkit-transform:translate3d(-50px, 32px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(-50px, 32px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(-50px, 32px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(-50px, 32px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);}}</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Varela Round:400"]  }});</script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
@@ -112,6 +115,9 @@
 const obj = JSON.parse('https://platform.twitter.com/widgets.js');
   </script>
   <style>
+  .question-mark {
+  	pointer-events: none;
+  }
   .label {
   	color: white;
     background: black;
@@ -178,7 +184,8 @@ li > .media ~ .media {
               <div class="navigation-link-text">About</div>
               <div class="nav-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
                   <rect width="256" height="256" fill="none"></rect>
-                  <path d="M200,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24ZM96,48h64a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16Zm84.8,150.4a8.1,8.1,0,0,1-11.2-1.6,52,52,0,0,0-83.2,0A8,8,0,0,1,80,200a7.7,7.7,0,0,1-4.8-1.6,8,8,0,0,1-1.6-11.2A67.8,67.8,0,0,1,101,165.5a40,40,0,1,1,54,0,67.8,67.8,0,0,1,27.4,21.7A8,8,0,0,1,180.8,198.4ZM152,136a24,24,0,1,1-24-24A24.1,24.1,0,0,1,152,136Z"></path>
+                  <circle cx="128" cy="120" r="44"></circle>
+                  <path d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm65.8,162.4a81.3,81.3,0,0,0-24.5-23,59.7,59.7,0,0,1-82.6,0,81.3,81.3,0,0,0-24.5,23,88,88,0,1,1,131.6,0Z"></path>
                 </svg></div>
             </a>
             <div data-hover="false" data-delay="0" data-w-id="05217f6e-abd2-14aa-9d73-284ff53a0531" class="button no-padding dropdown w-dropdown">
@@ -236,6 +243,44 @@ li > .media ~ .media {
       </div>
     </div>
   </div>
+  <main class="main">
+    <div class="content">
+      <div class="about-me">
+        <div class="backpack-wrapper">
+          <div class="backpack-opener">
+            <div data-w-id="7f2aa941-a1ab-7693-c923-8a9f3b62d241" data-is-ix2-target="1" class="backpack" data-animation-type="lottie" data-src="documents/backpack.mp4.lottie.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-duration="0" data-ix2-initial-state="0"></div>
+            <div data-w-id="aed1c198-37ed-d8d5-81d1-7ab1e0d5c131" class="question-mark">?</div>
+          </div>
+        </div>
+        <div class="about-grid">
+          <div class="about-main">
+            <h1 class="heading4">About me</h1>
+            <div class="empty-8"></div>
+            <div class="about-text w-embed w-script">
+              <p class="about-text"><span class="first-word">Hello</span> – My name is Florian and I am currently <span id="age"></span> years old. I am a designer and developer and I love to create beautiful products. </p>
+              <script>
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+document.getElementById("age").innerHTML = getAge("2001/11/01");
+</script>
+            </div>
+            <p class="about-text">Currently I am studying at the Hochschule fuer Gestaltung, also known as just <em>HfG</em>, in Schwaebisch Gmuend, Germany.</p>
+            <div class="empty-24"></div>
+            <p>Beside my desire to work between design and code I love working with CSS and creating animations for web and mobile applications.</p>
+          </div>
+          <div id="w-node-_0dd1a90e-8eaf-1321-9c18-f1dd31589a06-577e0e00" class="about-work"></div>
+        </div>
+      </div>
+    </div>
+  </main>
   <div style="display:none;opacity:0" class="popup-screen">
     <div style="-webkit-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="popup no-overflow">
       <div data-w-id="7b5d272b-e7fc-4e62-508f-6694a52aae2e" class="close-button">
@@ -255,7 +300,7 @@ li > .media ~ .media {
       </div>
     </div>
   </div>
-  <div id="canvas" class="about-canvas">
+  <div id="canvas" style="display:none;-webkit-transform:translate3d(0, -100vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, -100vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, -100vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, -100vh, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="about-canvas">
     <h1 class="headingplus grey em draw-font center"><span class="playground">Playground</span> to learn<br>more about me</h1>
     <div id="drag-2" data-w-id="126bf1b8-05eb-4db1-b268-a79b42a82938" class="mapimages-images draggable">
       <div class="mapimages-wrapper">
@@ -302,7 +347,7 @@ touch-action: none;
     <div id="drag-5" data-w-id="48cc8ed4-d115-2dbd-49c1-34109572adba" class="mp-example-wrapper draggable">
       <div class="mp-track-wrapper">
         <div tmplayer-init="multitrack" class="mp-track">
-          <div class="sp-details-wrapper"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background"><img src="images/song_cover.jpg" loading="lazy" id="w-node-_48cc8ed4-d115-2dbd-49c1-34109572adc0-577e0e00" tmplayer-element="thumbnail" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" sizes="(max-width: 479px) 64px, (max-width: 767px) 80px, 96px" alt="" class="sp-thumbnail cover"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover pause">
+          <div class="sp-details-wrapper"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background"><img src="images/song_cover.jpg" loading="lazy" id="w-node-_48cc8ed4-d115-2dbd-49c1-34109572adc0-577e0e00" tmplayer-element="thumbnail" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" sizes="100vw" alt="" class="sp-thumbnail cover"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover pause">
             <div class="sp-title-wrapper">
               <div tmplayer-element="title" class="sp-artist-name">Title</div>
               <div tmplayer-element="artist" class="sp-title">Artist</div>
@@ -410,6 +455,7 @@ touch-action: none;
       </div>
       <div data-w-id="1ca9eb81-4327-756f-4be6-f89afaf401aa" class="popup-opener"></div>
     </div><img src="images/florian_cursor.svg" loading="lazy" id="flo" alt="" class="florian-cursor">
+    <a data-w-id="2ec7f13d-6e4d-29b5-6dd3-2b5bce53a55c" href="#" class="close-button-text w-button">Close</a>
   </div>
   <footer class="footer">
     <div class="footer-inner">
