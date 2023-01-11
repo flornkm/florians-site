@@ -3786,7 +3786,6 @@ p {
 
   .about-canvas {
     z-index: 100;
-    display: none;
     height: 100vh;
     margin-top: 0px;
     font-size: 20px;
@@ -3947,7 +3946,8 @@ p {
   }
 
   .close-button-text {
-    bottom: 128px;
+    top: 32px;
+    bottom: auto;
   }
 
   .information-wrapper {
@@ -4716,6 +4716,16 @@ p {
     -webkit-order: -9999;
     -ms-flex-order: -9999;
     order: -9999;
+    -ms-grid-column-align: start;
+    justify-self: start;
+  }
+
+  #w-node-d61014f5-e7f0-e0cf-cdbd-891b17da0d86-5aa2000e {
+    -ms-grid-column-align: start;
+    justify-self: start;
+  }
+
+  #w-node-fdf53c97-26bf-7bb2-be4e-16bd13882ec3-5aa2000e {
     -ms-grid-column-align: start;
     justify-self: start;
   }
