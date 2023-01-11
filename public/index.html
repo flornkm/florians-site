@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Jan 08 2023 16:40:07 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Wed Jan 11 2023 15:48:12 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2f03c37e0dfe" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -773,6 +773,8 @@
             <div>Oops! Something went wrong while submitting the form.</div>
           </div>
         </div>
+        <div class="confetti" data-w-id="f6b3a081-3e94-7bfe-cfd8-9933821e262e" data-animation-type="lottie" data-src="documents/confetti.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="3" data-duration="0"></div>
+        <div id="confetti-container" class="confetti-container"></div>
       </div>
     </div>
   </main>
@@ -930,7 +932,6 @@ background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208,
       <div id="w-node-fdf53c97-26bf-7bb2-be4e-16bd13882ec3-5aa2000e" class="footer-link-col last">
         <h3 class="footer-heading">Info</h3>
         <a href="https://blog.designwithtech.com/" target="_blank" class="footer-link">Journal</a>
-        <a href="scratchpad.html" class="footer-link">Scratchpad</a>
         <a href="colophon.html" class="footer-link">Colophon</a>
       </div>
     </div>
@@ -1000,7 +1001,18 @@ function runTheClock() {
 }
 var interval = setInterval(runTheClock, 1000);
 </script><!--  Contact Chat  -->
+  <script src="https://designwithtech.com/assets/libs/lottie.js"></script>
   <script>
+let confettiContainer = document.getElementById('confetti-container');
+let animation = bodymovin.loadAnimation({
+  // animationData: { /* ... */ },
+  container: confettiContainer, // required
+  path: './documents/confetti.json', // required
+  renderer: 'svg', // required
+  loop: false, // optional
+  autoplay: false, // optional
+  name: "Confetti Animation", // optional
+});
 let submitChat = document.getElementById('submit-chat');
 let chatInput = document.getElementById('message');
 let chatWrapper = document.getElementById('chat-wrapper');
@@ -1075,6 +1087,10 @@ function sendForm(e) {
           message: answers.why
         }
       });
+      setTimeout(() => {
+        confettiContainer.style.display = "block";
+        animation.play();
+     	}, 4000);
     }
     chatInput.value = '';
   }

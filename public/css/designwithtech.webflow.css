@@ -2273,6 +2273,11 @@ p {
   background-color: #f7f7f7;
 }
 
+.message-form {
+  position: relative;
+  z-index: 1;
+}
+
 .message-input-wrapper {
   position: relative;
   display: -webkit-box;
@@ -2360,6 +2365,7 @@ p {
 
 .chat-wrapper {
   position: relative;
+  z-index: 1;
   height: 40vh;
 }
 
@@ -3323,6 +3329,24 @@ p {
 
 .legal-wrapper {
   max-width: 800px;
+}
+
+.confetti {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  display: none;
+}
+
+.confetti-container {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  display: none;
 }
 
 @media screen and (max-width: 991px) {
