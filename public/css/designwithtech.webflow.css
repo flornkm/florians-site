@@ -365,9 +365,14 @@ p {
   color: #fff;
 }
 
+.heading2.subtext {
+  color: #464646;
+}
+
 .heading1 {
   margin-top: 0px;
   margin-bottom: 16px;
+  font-size: 3.052rem;
   line-height: 1.2em;
 }
 
@@ -3181,7 +3186,7 @@ p {
 }
 
 .company-title {
-  color: #464646;
+  color: #000;
   font-size: 1rem;
   line-height: 1.5em;
   font-weight: 500;
@@ -3230,7 +3235,7 @@ p {
 }
 
 .sideproject-title {
-  color: #464646;
+  color: #000;
   line-height: 1.5em;
   font-weight: 500;
 }
@@ -3281,6 +3286,7 @@ p {
   align-items: center;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
+  border-radius: 16px;
   background-color: #f4f4f4;
 }
 
@@ -3347,6 +3353,48 @@ p {
   right: 0%;
   bottom: 0%;
   display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.important {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 370px;
+  padding: 16px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  background-color: #e6effa;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  color: #1281ed;
+  font-size: 1rem;
+  line-height: 1.4em;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.important:hover {
+  background-color: #1281ed;
+  color: #fff;
+}
+
+.important.gradient-border {
+  border-radius: 8px;
+  background-color: hsla(0, 0%, 100%, 0.9);
+  color: #000;
 }
 
 @media screen and (max-width: 991px) {
