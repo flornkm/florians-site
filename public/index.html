@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sun Jan 15 2023 17:15:40 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Jan 15 2023 19:54:38 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2f03c37e0dfe" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -139,46 +139,6 @@
   50% {transform: rotate(-2deg);}
   100% {transform: rotate(2deg);}
 }
-.gradient-border {
-  --borderWidth: 1px;
-  border-radius: 8px;
-  position: relative;
-}
-.gradient-border:before {
-  content: "";
-  height: calc(100% + var(--borderWidth) * 4);
-  width: calc(100% + var(--borderWidth) * 4);
-  background: linear-gradient(60deg, #89c0f6, #71b3f4, #419af0, #1281ec, #0e67bd, #0b4d8e, #d550a3, #ca248c);
-  background-size: 300% 300%;
-  position: absolute;
-  z-index: -1;
-  border-radius: 9px;
-  animation: animationGradient 4s ease alternate infinite;
-}
-.gradient-border:after {
-  content: "";
-  height: calc(100% + var(--borderWidth) * 3);
-  width: calc(100% + var(--borderWidth) * 3);
-  background: linear-gradient(60deg, #89c0f6, #71b3f4, #419af0, #1281ec, #0e67bd, #0b4d8e, #d550a3, #ca248c);
-  background-size: 300% 300%;
-  position: absolute;
-  z-index: -2;
-  border-radius: 8px;
-  filter: blur(40px);
-  opacity: 0.25;
-  animation: animationGradient 4s ease alternate infinite;
-}
-@keyframes animationGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 100% 0%;
-  }
-}
 </style>
 </head>
 <body>
@@ -274,9 +234,14 @@
           <h1 class="heading1">Hey, I&#x27;m Florian</h1>
           <h2 class="heading2 subtext">A designer and developer<br>building digital products.</h2>
           <div class="empty-16"></div>
-          <a href="/#contact" class="important gradient-border w-inline-block">
-            <div>Currently I am looking for internship opportunities in Europe or North America.</div>
-          </a>
+          <div class="chip-wrapper">
+            <a href="/#contact" class="chip w-inline-block">
+              <div class="red-circle">
+                <div data-w-id="ae98c26a-e3bc-7a22-22c4-fe6d47923c8d" class="circle-animation"></div>
+              </div>
+              <div>Currently I am looking for internship opportunities in Europe or North America.</div>
+            </a>
+          </div>
           <p class="hidden">I am currently studying Digital Product Design and Development at the HfG Schwaebisch Gmuend. My motto is: Let’s build the products of tomorrow. Useful products. Sustainable products. And of course, products that are easy to use.</p>
         </div><img src="images/main_header.png" loading="lazy" id="w-node-_5da66d86-ac24-d0ae-ed35-b2c025460abf-c37e0dfe" alt="" class="header-image">
       </header>
