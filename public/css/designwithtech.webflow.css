@@ -3440,7 +3440,7 @@ p {
   border-width: 1px;
   border-color: #e6e6e6;
   border-radius: 1000px;
-  background-color: hsla(0, 0%, 94.1%, 0.5);
+  background-color: #f0f0f0;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   color: #000;
@@ -3449,8 +3449,7 @@ p {
 }
 
 .chip:hover {
-  border-color: #c5c5c5;
-  background-color: #f0f0f0;
+  background-color: hsla(0, 0%, 94.1%, 0.5);
 }
 
 .red-circle {
