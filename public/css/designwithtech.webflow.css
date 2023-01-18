@@ -3489,6 +3489,288 @@ p {
   background-color: #ff3d3d;
 }
 
+.card-img {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 1.75rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-radius: 1rem;
+  background-color: #8f00ff;
+}
+
+.content-type {
+  font-size: 0.875rem;
+}
+
+.display-block {
+  display: block;
+}
+
+.card_hole {
+  position: absolute;
+  left: 0%;
+  top: 1rem;
+  right: 0%;
+  bottom: auto;
+  width: 6rem;
+  height: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  border-radius: 100rem;
+  background-color: #080808;
+}
+
+.card_traits-icon-wrapper {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.heading-5 {
+  line-height: 1.2;
+}
+
+.flip-image {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  padding: 4rem 1.75rem 1.75rem;
+  background-color: #fff8ac;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-image.is-back {
+  padding-top: 9rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e0da9a;
+  background-image: url('../images/photo-back.svg');
+  background-position: 0px 0px;
+  background-size: auto;
+  box-shadow: 8px 8px 64px 0 rgba(0, 0, 0, 0.05);
+  -webkit-transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.flip-image.is-front {
+  display: block;
+  padding-top: 5rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-row-gap: 2.5rem;
+  background-image: url('../images/florian_photo.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  -webkit-transform: rotate(0deg) perspective(1200px);
+  transform: rotate(0deg) perspective(1200px);
+}
+
+.card_cta-wrapper {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-row-gap: 0.25rem;
+}
+
+.card_cta-wrapper.is-back {
+  left: 1.5rem;
+  bottom: 1.5rem;
+}
+
+.card_traits-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-row-gap: 0.125rem;
+}
+
+.card_main-text {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1.5rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-row-gap: 0.5rem;
+}
+
+.card_traits-list {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 2rem;
+  grid-row-gap: 1.5rem;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.card_stamp-wrapper {
+  position: absolute;
+  left: auto;
+  top: 2rem;
+  right: 1rem;
+  bottom: auto;
+  width: 5.5rem;
+  opacity: 0.5;
+  -webkit-transform: rotate(29deg);
+  -ms-transform: rotate(29deg);
+  transform: rotate(29deg);
+}
+
+.heading-type {
+  color: rgba(251, 249, 252, 0.5);
+  font-size: 0.875rem;
+  font-weight: 200;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card_cta {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding-bottom: 0.25rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: #080808;
+}
+
+.card_cta-icon {
+  width: 1rem;
+  height: 1rem;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.card_traits {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  grid-row-gap: 2rem;
+}
+
+.card_traits-icon {
+  height: 100%;
+}
+
+.image-wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 24rem;
+  height: 35rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card_stamp-img {
+  width: 100%;
+  opacity: 0.79;
+}
+
+.card_traits-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  grid-column-gap: 1.125rem;
+}
+
+.about-image-container {
+  -webkit-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+}
+
 @media screen and (max-width: 991px) {
   .menu-button {
     padding: 12px;
@@ -3706,6 +3988,15 @@ p {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+  }
+
+  .flip-image {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .card_traits-list {
+    grid-row-gap: 2rem;
   }
 }
 
@@ -4374,6 +4665,68 @@ p {
     height: auto;
     max-height: none;
   }
+
+  .card-img {
+    position: relative;
+  }
+
+  .card_traits-icon-wrapper {
+    display: none;
+  }
+
+  .flip-image.is-back {
+    padding: 6rem 1.5rem 1.5rem;
+    -webkit-transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  }
+
+  .flip-image.is-front {
+    padding-right: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .card_cta-wrapper {
+    left: 0.5rem;
+    top: auto;
+    right: auto;
+    bottom: 0.5rem;
+  }
+
+  .card_cta-wrapper.is-back {
+    left: 1.5rem;
+    bottom: 2rem;
+  }
+
+  .card_main-text {
+    margin-bottom: 1.5rem;
+  }
+
+  .card_traits-list {
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 1rem;
+  }
+
+  .card_stamp-wrapper {
+    width: 4rem;
+  }
+
+  .heading-type {
+    font-size: 0.75rem;
+  }
+
+  .card_traits {
+    grid-row-gap: 1rem;
+  }
+
+  .image-wrapper {
+    width: 19rem;
+    height: 29.5rem;
+  }
+
+  .card_traits-item {
+    grid-column-gap: 0.5rem;
+  }
 }
 
 #w-node-_20d0332f-45fe-a2d7-a678-d5a610b3507d-c37e0dfe {
@@ -4604,19 +4957,6 @@ p {
   -webkit-order: 9999;
   -ms-flex-order: 9999;
   order: 9999;
-}
-
-#w-node-a7df21e8-9128-28db-6106-6aa45d864620-c37e0dfe {
-  -ms-grid-column: span 1;
-  grid-column-start: span 1;
-  -ms-grid-column-span: 1;
-  grid-column-end: span 1;
-  -ms-grid-row: span 1;
-  grid-row-start: span 1;
-  -ms-grid-row-span: 1;
-  grid-row-end: span 1;
-  -ms-grid-column-align: end;
-  justify-self: end;
 }
 
 #w-node-f67b5c98-b010-70da-3166-4250f058ad04-c37e0dfe {
