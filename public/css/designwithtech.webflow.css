@@ -1402,6 +1402,7 @@ p {
   position: relative;
   width: 100%;
   height: 400px;
+  max-width: 300px;
 }
 
 .next-icon {
@@ -1409,7 +1410,7 @@ p {
 }
 
 .mapimg-slide3 {
-  background-image: url('../images/review_3.webp');
+  background-image: url('../images/photo_room.jpg');
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -1421,13 +1422,13 @@ p {
 }
 
 .mapimg-slide2 {
-  background-image: url('../images/review_2.webp');
+  background-image: url('../images/photo_bakery.jpg');
   background-position: 50% 50%;
   background-size: cover;
 }
 
 .mapimg-slide1 {
-  background-image: url('../images/review_1.webp');
+  background-image: url('../images/photo_arduino.jpg');
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -1451,7 +1452,7 @@ p {
 }
 
 .mapimg-slide4 {
-  background-image: url('../images/review_4.webp');
+  background-image: url('../images/photo_church.jpg');
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -3990,6 +3991,18 @@ p {
   display: none;
 }
 
+.mapimg-slide5 {
+  background-image: url('../images/photo_blacklist.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.mapimg-slide6 {
+  background-image: url('../images/photo_sheep.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
 @media screen and (max-width: 991px) {
   .menu-button {
     padding: 12px;
@@ -4102,6 +4115,10 @@ p {
 
   .card_mask {
     width: 50%;
+  }
+
+  .mapimages-wrapper {
+    max-width: 300px;
   }
 
   .sticker-image {
@@ -4474,6 +4491,10 @@ p {
     height: 100vh;
     margin-top: 0px;
     font-size: 20px;
+  }
+
+  .mapimages-wrapper {
+    max-width: none;
   }
 
   .mp-playlist {
