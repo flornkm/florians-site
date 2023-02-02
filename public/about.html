@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Wed Feb 01 2023 23:26:52 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu Feb 02 2023 09:01:50 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fc0577e0e00" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -355,7 +355,7 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
           </div>
         </div>
         <div id="w-node-_7d0238a7-b5b4-0836-71d8-084b8741aa8e-577e0e00" class="draggable-holder">
-          <div id="w-node-_7d0238a7-b5b4-0836-71d8-084b8741aa8f-577e0e00" class="draggable-wrapper draggable">
+          <div id="w-node-_7d0238a7-b5b4-0836-71d8-084b8741aa8f-577e0e00" class="draggable-wrapper draggable story">
             <div id="drag-2" data-w-id="06430848-c1d3-96e9-7469-0cc3f1d29124" class="mapimages-images">
               <div class="mapimages-wrapper">
                 <div data-delay="5000" data-animation="cross" class="mapimages-slider w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="true" data-autoplay-limit="0" data-nav-spacing="3" data-duration="200" data-infinite="true">
@@ -391,8 +391,95 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
           </div>
         </div>
         <div id="w-node-_87ecf9ff-0b30-4015-8f93-7803dcbebd6f-577e0e00" class="draggable-holder">
-          <div id="w-node-_3fdf5ea9-6861-b367-13f9-634d931e41a5-577e0e00" class="sticker draggable">
-            <div class="sticker-gradient"></div><img src="images/sticker.png" loading="lazy" width="200" id="drag-3" alt="" class="sticker-image">
+          <div id="drag-5" data-w-id="aade0f2f-1dea-4252-0567-04f0f39047b2" class="mp-example-wrapper draggable">
+            <div class="mp-track-wrapper">
+              <div tmplayer-init="multitrack" class="mp-track">
+                <div class="sp-details-wrapper"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background"><img src="images/song_cover.jpg" loading="lazy" id="w-node-aade0f2f-1dea-4252-0567-04f0f39047b7-577e0e00" tmplayer-element="thumbnail" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" sizes="(max-width: 767px) 64px, 96px" alt="" class="sp-thumbnail cover"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover pause">
+                  <div class="sp-title-wrapper">
+                    <div tmplayer-element="title" class="sp-artist-name">Title</div>
+                    <div tmplayer-element="artist" class="sp-title">Artist</div>
+                  </div>
+                </div>
+                <div class="mp-controla-wrapper">
+                  <div class="mp-controls"><img src="images/back.svg" loading="lazy" tmplayer-button="previous" alt="" class="mp-previous"><img src="images/play.svg" loading="lazy" tmplayer-button="play" alt="" class="mp-play"><img src="images/pause.svg" loading="lazy" tmplayer-button="pause" alt="" class="mp-pause"><img src="images/forward.svg" loading="lazy" tmplayer-button="next" alt="" class="mp-next"></div>
+                  <div class="mp-media-player-bar-wrapper">
+                    <div tmplayer-element="elapsed" class="mp-elapsed">0:00</div>
+                    <div tmplayer-element="progress-bar-wrapper" class="mp-progress-bar-wrapper">
+                      <div class="mp-progress-bar-background">
+                        <div tmplayer-element="progress-bar" class="progress-bar">
+                          <div data-w-id="aade0f2f-1dea-4252-0567-04f0f39047ca" class="true-progress-head"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div tmplayer-element="duration" class="mp-duration">0:00</div>
+                  </div>
+                </div>
+              </div>
+              <div tmplayer-action="toggle" tmplayer-parent="multitrack" class="mp-single-track _1">
+                <div class="mp-title-wrapper">
+                  <div class="mp-title">Vacation</div>
+                  <div class="mp-artist-name">Track 1</div>
+                </div>
+                <div class="mp-track-time-wrapper"><img src="https://uploads-ssl.webflow.com/62e1e4e31272dc9e9a0d6001/62e1e4e41272dc53b00d6026_audio-active.svg" height="40" width="20" tmplayer-interaction="monitor-state" alt="" class="mp-audio-bar">
+                  <div tmplayer-interaction="populate-duration" class="mp-track-time">0:00</div>
+                </div>
+                <div tmplayer-element="audio" class="true-media-player-single-track">
+                  <div tmplayer-meta="title" class="mp-track-title">Vacation</div>
+                  <div tmplayer-meta="artist" class="mp-track-artist">Track 1</div>
+                  <div tmplayer-meta="audio-url" class="mp-track-url">https://dl.dropboxusercontent.com/s/lxkyij9yfjak571/SyncHits-Toast_Hawaii.wav?dl=0</div><img src="images/song_cover.jpg" loading="lazy" tmplayer-meta="thumbnail" alt="" class="mp-track-thumbnail">
+                </div>
+              </div>
+              <div tmplayer-action="toggle" tmplayer-parent="multitrack" class="mp-single-track _2">
+                <div class="mp-title-wrapper">
+                  <div class="mp-title">Be sane</div>
+                  <div class="mp-artist-name">Track 2</div>
+                </div>
+                <div class="mp-track-time-wrapper"><img src="https://uploads-ssl.webflow.com/62e1e4e31272dc9e9a0d6001/62e1e4e41272dc53b00d6026_audio-active.svg" height="40" width="20" tmplayer-interaction="monitor-state" alt="" class="mp-audio-bar">
+                  <div tmplayer-interaction="populate-duration" class="mp-track-time">0:00</div>
+                </div>
+                <div tmplayer-element="audio" class="true-media-player-single-track">
+                  <div tmplayer-meta="title" class="mp-track-title">Be sane</div>
+                  <div tmplayer-meta="artist" class="mp-track-artist">Track 2</div>
+                  <div tmplayer-meta="audio-url" class="mp-track-url">https://dl.dropboxusercontent.com/s/vulp6kww2230if1/Fashion-Lounge.wav?dl=0</div><img src="images/song_cover.jpg" loading="lazy" tmplayer-meta="thumbnail" sizes="100vw" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" alt="" class="mp-track-thumbnail">
+                </div>
+              </div>
+              <div tmplayer-action="toggle" tmplayer-parent="multitrack" class="mp-single-track _3">
+                <div class="mp-title-wrapper">
+                  <div class="mp-title">Today I do it</div>
+                  <div class="mp-artist-name">Track 3</div>
+                </div>
+                <div class="mp-track-time-wrapper"><img src="https://uploads-ssl.webflow.com/62e1e4e31272dc9e9a0d6001/62e1e4e41272dc53b00d6026_audio-active.svg" height="40" width="20" tmplayer-interaction="monitor-state" alt="" class="mp-audio-bar">
+                  <div tmplayer-interaction="populate-duration" class="mp-track-time">0:00</div>
+                </div>
+                <div tmplayer-element="audio" class="true-media-player-single-track">
+                  <div tmplayer-meta="title" class="mp-track-title">Today I do it</div>
+                  <div tmplayer-meta="artist" class="mp-track-artist">Track 3</div>
+                  <div tmplayer-meta="audio-url" class="mp-track-url">https://dl.dropboxusercontent.com/s/nizxz96og9kd41u/Jazzy-LoFi_Chill.wav?dl=0</div><img src="images/song_cover.jpg" loading="lazy" tmplayer-meta="thumbnail" sizes="100vw" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" alt="" class="mp-track-thumbnail">
+                </div>
+              </div>
+              <div tmplayer-action="toggle" tmplayer-parent="multitrack" class="mp-single-track _4">
+                <div class="mp-title-wrapper">
+                  <div class="mp-title">Pool Lounge</div>
+                  <div class="mp-artist-name">Track 4</div>
+                </div>
+                <div class="mp-track-time-wrapper"><img src="https://uploads-ssl.webflow.com/62e1e4e31272dc9e9a0d6001/62e1e4e41272dc53b00d6026_audio-active.svg" height="40" width="20" tmplayer-interaction="monitor-state" alt="" class="mp-audio-bar">
+                  <div tmplayer-interaction="populate-duration" class="mp-track-time">0:00</div>
+                </div>
+                <div tmplayer-element="audio" class="true-media-player-single-track">
+                  <div tmplayer-meta="title" class="mp-track-title">Pool Lounge</div>
+                  <div tmplayer-meta="artist" class="mp-track-artist">Track 4</div>
+                  <div tmplayer-meta="audio-url" class="mp-track-url">https://dl.dropboxusercontent.com/s/2rf7cndyfibmvqf/Poolside-Funky_Lounge.wav?dl=0</div><img src="images/song_cover.jpg" loading="lazy" tmplayer-meta="thumbnail" sizes="100vw" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" alt="" class="mp-track-thumbnail">
+                </div>
+              </div>
+              <div class="app-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewbox="0 0 256 256">
+                  <rect width="256" height="256" fill="none"></rect>
+                  <path d="M212.9,25.7a8,8,0,0,0-6.8-1.5l-128,32A8,8,0,0,0,72,64V174.1A36,36,0,1,0,88,204V110.2l112-28v59.9A36,36,0,1,0,216,172V32A7.8,7.8,0,0,0,212.9,25.7Z"></path>
+                </svg></div>
+            </div>
+            <div class="tooltip-name-wrapper custom-1">
+              <div>Music while working</div>
+              <div class="black-rect"></div>
+            </div>
           </div>
         </div>
       </div>
