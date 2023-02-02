@@ -4049,13 +4049,9 @@ p {
   border-radius: 8px;
   -webkit-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
-  color: #7a7d86;
+  color: #edeef1;
   font-weight: 500;
   text-decoration: none;
-}
-
-.navigation-link-darkmode:hover {
-  color: #fff;
 }
 
 .navigation-link-darkmode.w--current {
