@@ -2456,6 +2456,7 @@ p {
   width: 48px;
   height: 48px;
   padding: 4px;
+  border: 1px solid #e6e6e6;
   border-radius: 1000px;
   background-color: #fff;
 }
