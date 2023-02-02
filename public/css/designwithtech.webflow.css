@@ -109,6 +109,12 @@ p {
   transform: translate(-50%, 0px);
 }
 
+.navbar.nav-darkmode {
+  display: none;
+  border-bottom-color: #2d3139;
+  background-color: #131620;
+}
+
 .navigation {
   z-index: 99;
   width: 100%;
@@ -1095,6 +1101,10 @@ p {
   line-height: 1em;
 }
 
+.brand-text-big.darkmode-brand {
+  color: #fff;
+}
+
 .grey-text {
   margin-left: 4px;
   color: grey;
@@ -1303,6 +1313,10 @@ p {
 .navigation-link.w--current {
   background-color: #f0f0f0;
   color: #000;
+}
+
+.navigation-link.darkmode-link {
+  color: #fff;
 }
 
 .nav-icon {
@@ -3780,6 +3794,21 @@ p {
   transform: rotate(3deg);
 }
 
+.headline-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .headline {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4001,6 +4030,54 @@ p {
   background-image: url('../images/photo_sheep.jpg');
   background-position: 50% 50%;
   background-size: cover;
+}
+
+.navigation-link-darkmode {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px 12px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 8px;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+  color: #7a7d86;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.navigation-link-darkmode:hover {
+  color: #fff;
+}
+
+.navigation-link-darkmode.w--current {
+  background-color: #2d3139;
+  color: #fff;
+}
+
+.navigation-link-darkmode.darkmode-link {
+  color: #fff;
+}
+
+.headline-image {
+  display: none;
+  height: 110px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.headline-image.blurry {
+  position: absolute;
+  -webkit-filter: blur(80px);
+  filter: blur(80px);
 }
 
 @media screen and (max-width: 991px) {

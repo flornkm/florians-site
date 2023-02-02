@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Feb 02 2023 16:46:20 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Thu Feb 02 2023 23:08:26 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fb2867e0dff" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -23,89 +23,174 @@
   <!--  [Attributes by Finsweet] Copy to clipboard  -->
   <script defer="" src="https://designwithtech.com/assets/dist/copyclip.js"></script>
   <style> .slider_component { touch-action: pan-x; } </style>
-  <!-- 
-<style>
-  @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #090909;
-    color: #b4b4b4;
+  <style>
+ @media (prefers-color-scheme: dark) {
+   body {
+     background-color: #080d14;
+     color: #7a7d86;
     }
-    .navbar {
-    border-bottom: 1px solid #2e2e2e;
-    background-color: #090909;; 
-      border-color: #2e2e2e;
-    }
-    h1, h2, h3, h4, h5, h6, .brand, .heading1, .heading2, .heading3, .heading4, .heading5, .explanation-text, .project-headline, .project-header-icon.w-embed, .dropdown-icon-link {
-     color: white; 
-    }
-    p, .grey-text.brand-subtext, .project-icon-info {
-     color: #b4b4b4; 
-    }
-    .heading2.subtext {
-    margin-bottom: 40px;
-    color: #b4b4b4;
-    }
-    .footer {
-    background-color: #090909;
-    border-top: solid 1px #2e2e2e;
+   p, .heading2.subtext, .grey-text, .company, .sideproject, .explanation-text.subtext {
+     color: #7a7d86;
+   }
+   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .heading2.project-title {
+    color: white; 
+   }
+   .navbar, .chip {
+    border-color: #2D3139;
+    background-color: #121620; 
+   }
+   .chip:hover {
+    background-color: #171c28;
+	}
+.navigation-link.w--current {
+    background-color: #2d313a;
+    color: #fff;
 }
-    .project-cover {
-     background-color: #191919; 
-    }
-    .icon-button, .dropdown-toggle, .button {
-    border: 1px solid #252525;
-    background-color: #151515;
+   .tab-link.rect {
+    border: 1px solid #2d313a;
+    background-color: #121620;
+	}
+   .tab-link.w--current {
     color: #fff;
 	}
-    .icon-button:hover, .dropdown-toggle:hover, .button:hover {
-    background-color: #0f0f0f;
+   .tab-link {
+    color: #7b7d86;
+   }
+   .tab-link:hover {
     color: #fff;
 	}
-    .collaborator-image {
-      border: 1px solid #252525;
-    }
-    .dropdown-list.w--open {
-    border: 1px solid #252525;
-    border-radius: 8px;
-    background-color: #151515;
-    }
-    .dropdown-icon-link:hover {
-    background-color: #1e1e1e;
+   .project-cover {
+	background-color: #121620;
+   }
+   .project-cover-image {
+    border-color: #2d313a;
+   }
+   .project-icon-info {
+    color: #7b7d86;
+   }
+   .chat {
+    background-color: #121620;
+   }
+   .chat-contact {
+    border-bottom: 1px solid #464d5b;
+    background-color: #2d313a;
+   }
+   .chat-contact-info {
+    color: white; 
+   }
+   .message-text {
+    border-color: #464d5b;
+    color: #fff;
+    background-color: #2d313a;
+   }
+   .message-text::placeholder {
+     color: #7a7d86;
+   }
+   .dropdown-toggle {
+    background-color: #2d313a;
+    color: #fff;
+    border: 1px solid #464d5b;
+   }
+   .dropdown-toggle:hover {
+    background-color: #121620;
 	}
-    .header-image {
-    mix-blend-mode: normal;
-    }
-    .button-icon.w-embed > svg > path {
-    stroke: #000;
+   .dropdown-list.w--open {
+    border: 1px solid #464d5b;
+    background-color: #2d313a;
+   }
+   .dropdown-icon-link {
+    color: #fff;
+   }
+   .dropdown-icon-link:hover {
+    border-left: 2px solid #1281ed;
+    background-color: #121620;
 	}
-    .collaborator-name-wrapper, .black-rect {
-     background-color: white;
-      color: black;
-    }
-    .button.no-padding.dropdown.w-dropdown {
-     background-color: transparent; 
-      border-radius: 200px;
-    }
-    .project-cover-image {
-    border-color: #292929;
-    }
-    .navigation-link {
-      color: #cfcfcf;
-    }
-    .navigation-link:hover {
-      background-color: hsla(0, 0%, 81.2%, 0.1);
-    }
-    .heading3.subtext, .explanation-text.subtext {
-       color: #b4b4b4;
-    }
-    @media screen and (max-width: 767px)
-      .navbar.wf-section {
-        border-color: #2e2e2e;
-        background-color: #090909b0;
-    	}
+   .button {
+    border: 1px solid #2d313a;
+    background-color: #080c14;
+    color: #fff;
+	}
+   .button:hover {
+    background-color: #2d313a;
+	}
+   .mail-contact {
+    border-color: #2d313a;
+    background-color: #121620e8;
+    color: #fff;
+	}
+   .footer {
+    background-color: #060a10;
+	}
+   .circle {
+    fill: #121620;
+   }
+   .nav-lightmode {
+    display: none; 
+   }
+   .navbar.nav-darkmode {
+    display: flex; 
+   }
+   .about-text, .first-word, .company-title, .sideproject-title, .sp-title-wrapper {
+    color: #fff;
+	}
+   .draggable-wrapper {
+    border-color: #2D3139;
+    background-color: #131620;
+	}
+   .mp-example-wrapper.draggable {
+    background-color: #121620;
+     border-color: #2e323b;
+   }
+   .mp-track-wrapper {
+     background-color: #2D3139;
+   }
+   .paper {
+     color: #fff;
+   }
+   .paper-vector {
+    opacity: 0.2;
+   }
+   .draggable-holder {
+    background-color: #040609;
+	}
+   .text-link {
+    border-bottom: 1.5px solid #fff;
+    color: #fff;
+   }
+   .tooltip-name-wrapper {
+    background-color: #fff;
+    color: #000;
+   }
+   .black-rect {
+    background-color: #fff;
+   }
+   .summary-video {
+    border-color: #2d313a;
+   }
+   circle.circle {
+    fill: #121620;
+	}
+   .footer-link:hover {
+    background-color: #2d313a;
+   }
+   .project-links-wrapper {
+     background-color: #171C28;
+   }
+   div.nav-icon {
+    background-color: transparent !important; 
+   }
+   .text-link:hover {
+    border-bottom-color: #7a7d86;
+    color: #7a7d86;
 }
+   .headline {
+    display: none; 
+   }
+   .headline-image {
+    display: block; 
+   }
+  }
 </style>
- -->
 </head>
 <body>
   <div data-w-id="c3a1746b-ddca-653b-b98e-c41a4fd2dc91" class="_404-wrapper">
