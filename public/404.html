@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Feb 02 2023 23:31:59 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Feb 04 2023 17:12:00 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fb2867e0dff" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -32,7 +32,7 @@
    p, .heading2.subtext, .grey-text, .company, .sideproject, .explanation-text.subtext {
      color: #7a7d86;
    }
-   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .heading2.project-title {
+   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .quote, .heading2.project-title {
     color: white; 
    }
    .navbar, .chip {
@@ -191,6 +191,11 @@
    }
    .project-headline-wrapper {
     color: #fff;
+   }
+   @media screen and (max-width: 767px) {
+	.headline-wrapper {
+    mix-blend-mode: plus-lighter;
+	}
    }
   }
 </style>

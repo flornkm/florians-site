@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Feb 02 2023 23:31:59 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Feb 04 2023 17:12:00 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fc0577e0e00" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -37,7 +37,7 @@
    p, .heading2.subtext, .grey-text, .company, .sideproject, .explanation-text.subtext {
      color: #7a7d86;
    }
-   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .heading2.project-title {
+   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .quote, .heading2.project-title {
     color: white; 
    }
    .navbar, .chip {
@@ -197,6 +197,11 @@
    .project-headline-wrapper {
     color: #fff;
    }
+   @media screen and (max-width: 767px) {
+	.headline-wrapper {
+    mix-blend-mode: plus-lighter;
+	}
+   }
   }
 </style>
   <script src="https://designwithtech.com/assets/libs/interact.js"></script>
@@ -206,6 +211,9 @@ const obj = JSON.parse('https://platform.twitter.com/widgets.js');
   <style>
   .grid-canvas {
     cursor: url("https://designwithtech.com/assets/images/cursor.svg"), auto;
+    }
+    .headline-wrapper {
+    pointer-events: none;
     }
   .question-mark {
   	pointer-events: none;
@@ -349,11 +357,13 @@ li > .media ~ .media {
         </div>
         <div class="about-grid">
           <div class="about-main">
-            <h1 class="heading4">About me</h1>
-            <div class="empty-8"></div>
-            <div class="about-text w-embed w-script">
-              <p class="about-text"><span class="first-word">Nice to meet you!</span> – My name is Florian and I am currently <span id="age"></span> years old. I am a designer and developer and I love to create beautiful products. </p>
-              <script>
+            <div class="about-container"><img src="images/florian_student.jpg" loading="lazy" sizes="170px" srcset="images/florian_student-p-500.jpg 500w, images/florian_student.jpg 732w" alt="" class="profile-image">
+              <div class="right">
+                <h1 class="heading4">About me</h1>
+                <div class="empty-8"></div>
+                <div class="about-text w-embed w-script">
+                  <p class="about-text"><span class="first-word">Nice to meet you!</span> – My name is Florian and I am currently <span id="age"></span> years old. I am a designer and developer and I love to create beautiful products. </p>
+                  <script>
 function getAge(dateString) {
     var today = new Date();
     var birthDate = new Date(dateString);
@@ -366,9 +376,10 @@ function getAge(dateString) {
 }
 document.getElementById("age").innerHTML = getAge("2001/01/11");
 </script>
+                </div>
+                <p class="about-text">Currently I am studying at the Hochschule fuer Gestaltung, also known as just <em>HfG</em>, in Schwaebisch Gmuend, Germany.</p>
+              </div>
             </div>
-            <p class="about-text">Currently I am studying at the Hochschule fuer Gestaltung, also known as just <em>HfG</em>, in Schwaebisch Gmuend, Germany.</p>
-            <div class="empty-24"></div>
             <p class="about-text">Beside my desire to work between design and code I love working with CSS and creating animations for web and mobile applications.</p>
           </div>
           <div id="w-node-_0dd1a90e-8eaf-1321-9c18-f1dd31589a06-577e0e00" class="about-work">
@@ -381,11 +392,19 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
               </div>
             </div>
             <div class="work-row">
+              <div class="company-information"><img src="images/company_metahype.jpg" loading="lazy" alt="" class="company-image">
+                <div class="company"><span class="company-title">Digital Strategist and Designer<br>‍</span>Metahype</div>
+              </div>
+              <div class="date">
+                <p>2020 - present</p>
+              </div>
+            </div>
+            <div class="work-row">
               <div class="company-information"><img src="images/company_hfg.jpg" loading="lazy" alt="" class="company-image">
                 <div class="company"><span class="company-title">Webdesign Tutor<br>‍‍</span>HfG Schwaebisch Gmuend</div>
               </div>
               <div class="date">
-                <p>Q2 2022</p>
+                <p>2022</p>
               </div>
             </div>
             <div class="work-row">
@@ -397,7 +416,9 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
               </div>
             </div>
             <div class="work-row">
-              <div class="company"><span class="company-title">Videoeditor</span><br>Freeelance</div>
+              <div class="company-information"><img src="images/company_videoeditor2.jpg" loading="lazy" alt="" class="company-image">
+                <div class="company"><span class="company-title">Videoeditor</span><br>Freelance (16+ million Views)</div>
+              </div>
               <div class="date">
                 <p>2015 - 2020</p>
               </div>
@@ -484,7 +505,7 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
           <div id="drag-5" data-w-id="aade0f2f-1dea-4252-0567-04f0f39047b2" class="mp-example-wrapper draggable">
             <div class="mp-track-wrapper">
               <div tmplayer-init="multitrack" class="mp-track">
-                <div class="sp-details-wrapper"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background"><img src="images/song_cover.jpg" loading="lazy" id="w-node-aade0f2f-1dea-4252-0567-04f0f39047b7-577e0e00" tmplayer-element="thumbnail" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" sizes="(max-width: 767px) 64px, 96px" alt="" class="sp-thumbnail cover"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover pause">
+                <div class="sp-details-wrapper"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail blurry-background"><img src="images/song_cover.jpg" loading="lazy" id="w-node-aade0f2f-1dea-4252-0567-04f0f39047b7-577e0e00" tmplayer-element="thumbnail" srcset="images/song_cover-p-500.jpg 500w, images/song_cover.jpg 500w" sizes="(max-width: 479px) 69vw, (max-width: 767px) 64px, 96px" alt="" class="sp-thumbnail cover"><img src="images/wavy-thumbnail_1wavy-thumbnail.png" loading="lazy" tmplayer-element="thumbnail" alt="" class="sp-thumbnail cover pause">
                   <div class="sp-title-wrapper">
                     <div tmplayer-element="title" class="sp-artist-name">Title</div>
                     <div tmplayer-element="artist" class="sp-title">Artist</div>
@@ -945,7 +966,7 @@ background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208,
                   <path d="M224,64H154.7L126.9,43.2a15.6,15.6,0,0,0-9.6-3.2H72A16,16,0,0,0,56,56V72H40A16,16,0,0,0,24,88V200a16,16,0,0,0,16,16H192.9A15.2,15.2,0,0,0,208,200.9V184h16.9A15.2,15.2,0,0,0,240,168.9V80A16,16,0,0,0,224,64Zm0,104H208V112a16,16,0,0,0-16-16H122.7L94.9,75.2A15.6,15.6,0,0,0,85.3,72H72V56h45.3l27.8,20.8a15.6,15.6,0,0,0,9.6,3.2H224Z"></path>
                 </svg></div>
             </a>
-            <a href="about.html" aria-current="page" class="navigation-link-darkmode w-inline-block w--current">
+            <a data-w-id="7a9379d9-2329-eb5a-8def-118bebc8b548" href="about.html" aria-current="page" class="navigation-link-darkmode w-inline-block w--current">
               <div class="navigation-link-text">About</div>
               <div data-w-id="7a9379d9-2329-eb5a-8def-118bebc8b54b" class="nav-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
                   <rect width="256" height="256" fill="none"></rect>

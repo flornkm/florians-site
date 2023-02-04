@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Thu Feb 02 2023 23:31:59 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sat Feb 04 2023 17:12:00 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2f03c37e0dfe" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -38,7 +38,7 @@
    p, .heading2.subtext, .grey-text, .company, .sideproject, .explanation-text.subtext {
      color: #7a7d86;
    }
-   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .heading2.project-title {
+   h1, h2, h3, h4, h5, h6, .heading1, .heading2, .heading3, .heading4, .heading5, .heading6, .explanation-text, .legal-paragraph, .project-headline, .chip, .brand-text-big, .quote, .heading2.project-title {
     color: white; 
    }
    .navbar, .chip {
@@ -198,6 +198,11 @@
    .project-headline-wrapper {
     color: #fff;
    }
+   @media screen and (max-width: 767px) {
+	.headline-wrapper {
+    mix-blend-mode: plus-lighter;
+	}
+   }
   }
 </style>
   <script src="https://designwithtech.com/assets/libs/jquery.min.js"></script>
@@ -345,7 +350,7 @@ pointer-events: initial;
                   <path d="M224,64H154.7L126.9,43.2a15.6,15.6,0,0,0-9.6-3.2H72A16,16,0,0,0,56,56V72H40A16,16,0,0,0,24,88V200a16,16,0,0,0,16,16H192.9A15.2,15.2,0,0,0,208,200.9V184h16.9A15.2,15.2,0,0,0,240,168.9V80A16,16,0,0,0,224,64Zm0,104H208V112a16,16,0,0,0-16-16H122.7L94.9,75.2A15.6,15.6,0,0,0,85.3,72H72V56h45.3l27.8,20.8a15.6,15.6,0,0,0,9.6,3.2H224Z"></path>
                 </svg></div>
             </a>
-            <a href="about.html" class="navigation-link-darkmode w-inline-block">
+            <a data-w-id="7a9379d9-2329-eb5a-8def-118bebc8b548" href="about.html" class="navigation-link-darkmode w-inline-block">
               <div class="navigation-link-text">About</div>
               <div data-w-id="7a9379d9-2329-eb5a-8def-118bebc8b54b" class="nav-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
                   <rect width="256" height="256" fill="none"></rect>

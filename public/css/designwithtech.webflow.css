@@ -3604,7 +3604,7 @@ p {
   -ms-flex-direction: column;
   flex-direction: column;
   grid-row-gap: 2.5rem;
-  background-image: url('../images/florian_photo.jpg');
+  background-image: url('../images/photo_church.jpg');
   background-position: 50% 50%;
   background-size: cover;
   -webkit-transform: rotate(0deg) perspective(1200px);
@@ -4076,6 +4076,33 @@ p {
   filter: blur(80px);
 }
 
+.profile-image {
+  height: 256px;
+  max-width: 170px;
+  border-radius: 8px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: 50% 0%;
+  object-position: 50% 0%;
+}
+
+.about-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 24px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  grid-column-gap: 24px;
+}
+
 @media screen and (max-width: 991px) {
   .menu-button {
     padding: 12px;
@@ -4330,6 +4357,19 @@ p {
     padding-right: 10%;
     padding-left: 10%;
   }
+
+  .profile-image {
+    margin-bottom: 32px;
+  }
+
+  .about-container {
+    padding-bottom: 24px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -4358,6 +4398,12 @@ p {
     -webkit-transform: translate(-50%, 0px);
     -ms-transform: translate(-50%, 0px);
     transform: translate(-50%, 0px);
+  }
+
+  .navbar.nav-lightmode {
+    background-color: #fff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .navigation {
@@ -4696,6 +4742,7 @@ p {
   }
 
   .about-me {
+    position: relative;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -4748,6 +4795,13 @@ p {
 
   .contact-alternative {
     display: block;
+  }
+
+  .headline-wrapper {
+    position: absolute;
+    top: 128px;
+    width: 100%;
+    mix-blend-mode: multiply;
   }
 
   .grid-canvas {
