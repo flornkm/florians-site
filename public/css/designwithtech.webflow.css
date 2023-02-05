@@ -1897,6 +1897,7 @@ p {
   border-color: #323236;
   border-radius: 100px;
   background-color: #131318;
+  font-size: 1.4rem;
 }
 
 .mp-next {
@@ -2216,7 +2217,6 @@ p {
   position: relative;
   z-index: 1;
   margin-bottom: 1em;
-  line-height: 1.4em;
 }
 
 .memoji {
@@ -2702,8 +2702,14 @@ p {
   align-items: center;
   border-radius: 100px;
   background-color: #000;
+  -webkit-transition: opacity 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
   color: #fff;
   cursor: pointer;
+}
+
+.close-button:hover {
+  opacity: 0.8;
 }
 
 .close-icon {
@@ -4079,7 +4085,6 @@ p {
 .profile-image {
   height: 256px;
   max-width: 170px;
-  border-radius: 8px;
   -o-object-fit: cover;
   object-fit: cover;
   -o-object-position: 50% 0%;
@@ -4101,6 +4106,94 @@ p {
   -ms-flex-align: start;
   align-items: flex-start;
   grid-column-gap: 24px;
+}
+
+.popup-open-button {
+  position: absolute;
+  left: auto;
+  top: auto;
+  right: 5%;
+  bottom: 5%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #131317;
+  -webkit-transition: opacity 150ms ease;
+  transition: opacity 150ms ease;
+}
+
+.popup-open-button:hover {
+  opacity: 0.8;
+}
+
+.popup-open-icon {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  color: #fff;
+}
+
+.background-paper {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+}
+
+.widget-link {
+  position: relative;
+  z-index: 1;
+  padding-top: 0px;
+  color: #000;
+}
+
+.link {
+  position: relative;
+}
+
+.youtube-logo {
+  position: relative;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.widget-link-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  grid-column-gap: 8px;
+}
+
+.greeting {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 991px) {
@@ -4661,6 +4754,7 @@ p {
 
   .mp-controls {
     padding: 8px 24px;
+    font-size: 1.2rem;
   }
 
   .mp-next {

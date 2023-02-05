@@ -1,5 +1,5 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sat Feb 04 2023 17:15:54 GMT+0000 (Coordinated Universal Time)  -->
+<!--  Last Published: Sun Feb 05 2023 00:19:07 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="639cc5f8406f2fc0577e0e00" data-wf-site="6389cb7fbc615a8c12365355">
 <head>
   <meta charset="utf-8">
@@ -153,7 +153,7 @@
      color: #fff;
    }
    .paper-vector {
-    opacity: 0.2;
+    display: none;
    }
    .draggable-holder {
     background-color: #040609;
@@ -195,6 +195,24 @@
     display: block; 
    }
    .project-headline-wrapper {
+    color: #fff;
+   }
+   .popup-open-button, .close-button {
+     background-color: #fff;
+     color: #141620; 
+   }
+   .popup-open-icon {
+    color: #141620; 
+   }
+   .popup {
+     background-color: #2d3139;
+     border-color: #454c5a;
+   }
+   .heading-text {
+    background-color: #2d3139;
+    color: #fff;
+	}
+   .widget-link {
     color: #fff;
    }
    @media screen and (max-width: 767px) {
@@ -357,7 +375,7 @@ li > .media ~ .media {
         </div>
         <div class="about-grid">
           <div class="about-main">
-            <div class="about-container"><img src="images/florian_student.jpg" loading="lazy" sizes="100vw" srcset="images/florian_student-p-500.jpg 500w, images/florian_student.jpg 732w" alt="" class="profile-image">
+            <div class="about-container"><img src="images/florian_student.jpg" loading="lazy" sizes="170px" srcset="images/florian_student-p-500.jpg 500w, images/florian_student.jpg 732w" alt="" class="profile-image">
               <div class="right">
                 <h1 class="heading4">About me</h1>
                 <div class="empty-8"></div>
@@ -456,10 +474,17 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
           <div id="w-node-_5904a3fd-c293-0746-a74b-68c3ae6bbb95-577e0e00" class="draggable-wrapper draggable">
             <div data-w-id="dc7d14d5-e8aa-e82c-efa5-cc60ecc27713" class="earth-item"><img src="images/earth.svg" loading="lazy" alt="">
               <div class="tooltip-name-wrapper custom-2">
-                <div>Double click</div>
+                <div>Places I visited</div>
                 <div class="black-rect"></div>
               </div>
-              <div data-w-id="dc7d14d5-e8aa-e82c-efa5-cc60ecc27719" class="popup-opener"></div>
+              <div class="popup-opener"></div>
+            </div>
+            <div data-w-id="6ffe771b-0ee6-0771-ba61-438219cb2316" class="popup-open-button">
+              <div class="popup-open-icon w-embed">
+                <?xml version="1.0" encoding="UTF-8"?><svg width="32px" height="32px" stroke-width="1.47" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
+                  <path d="M9.5 8L6 11.5 9.5 15M14 8l3.5 3.5L14 15" stroke="currentColor" stroke-width="1.47" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -497,7 +522,21 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
         <div id="w-node-_443a6502-46fb-b368-808f-b6945a65ef49-577e0e00" class="draggable-holder">
           <div id="w-node-_443a6502-46fb-b368-808f-b6945a65ef4a-577e0e00" class="draggable-wrapper draggable no-overflow">
             <div class="paper">
-              <div class="paper-text">If I have something important to say, you&#x27;ll find it here.<br></div><img src="images/memoji.png" loading="lazy" alt="" class="memoji"><img src="images/paper.svg" loading="lazy" alt="" class="paper-vector">
+              <div class="paper-text">Suggested Youtube Channels:<a href="https://www.youtube.com/@CodeAesthetic" target="_blank" class="inline-link"></a><br></div>
+              <div class="widget-link-wrapper"><img src="images/company_videoeditor2.jpg" loading="lazy" alt="" class="youtube-logo">
+                <a href="https://www.youtube.com/@veritasium" target="_blank" class="widget-link">Veritasium</a>
+              </div>
+              <div class="widget-link-wrapper"><img src="images/company_videoeditor2.jpg" loading="lazy" alt="" class="youtube-logo">
+                <a href="https://www.youtube.com/@enricotartarotti" target="_blank" class="widget-link">Enrico Tartarotti</a>
+              </div>
+              <div class="widget-link-wrapper"><img src="images/company_videoeditor2.jpg" loading="lazy" alt="" class="youtube-logo">
+                <a href="https://www.youtube.com/@Fireship" target="_blank" class="widget-link">Fireship</a>
+              </div>
+              <div class="widget-link-wrapper"><img src="images/company_videoeditor2.jpg" loading="lazy" alt="" class="youtube-logo">
+                <a href="https://www.youtube.com/@CodeAesthetic" target="_blank" class="widget-link">CodeAesthetic</a>
+              </div>
+              <div class="greeting"><em>Sincerely</em></div><img src="images/memoji.png" loading="lazy" alt="" class="memoji">
+              <div class="background-paper"><img src="images/paper.svg" loading="lazy" alt="" class="paper-vector"></div>
             </div>
           </div>
         </div>
@@ -601,8 +640,8 @@ document.getElementById("age").innerHTML = getAge("2001/01/11");
       <div data-w-id="7b5d272b-e7fc-4e62-508f-6694a52aae2e" class="close-button">
         <div class="close-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 256 256">
             <rect width="256" height="256" fill="none"></rect>
-            <line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
-            <line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+            <line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+            <line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
           </svg></div>
       </div>
       <div id="3d" class="threejs-wrapper"></div>
@@ -1247,10 +1286,6 @@ let active = false;
     $('.close-button').click(e => {
     	active = false;
     });
-    /* Regex test to determine if user is on mobile */
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  	document.querySelector('.earth-item').addEventListener('touchend', detectDoubleTapClosure());
-}
 function generateGlobe() {
 let myDOMElement = document.getElementById('3d');
 	const myGlobe = Globe();
@@ -1279,31 +1314,7 @@ let myDOMElement = document.getElementById('3d');
       globeMaterial.shininess = 15;
     });
 }
-/* Based on this http://jsfiddle.net/brettwp/J4djY/*/
-function detectDoubleTapClosure() {
-  let lastTap = 0;
-  let timeout;
-  return function detectDoubleTap(event) {
-    const curTime = new Date().getTime();
-    const tapLen = curTime - lastTap;
-    if (tapLen < 500 && tapLen > 0) {
-    	if (!active) {
-      $('.popup-opener').click();
-      active = true;
-    setTimeout(function() {
-      generateGlobe();
-    }, 200);
-		}
-      event.preventDefault();
-    } else {
-      timeout = setTimeout(() => {
-        clearTimeout(timeout);
-      }, 500);
-    }
-    lastTap = curTime;
-  };
-}
-$('.earth-item').dblclick(function() {
+$('.popup-open-button').click(function() {
 if (!active) {
 $('.popup-opener').click();
 	active = true;
