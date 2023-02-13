@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import * as Icon from "react-feather";
 import { Menu, Transition } from "@headlessui/react";
 import Message from "./message";
@@ -10,10 +10,15 @@ function classNames(...classes) {
 }
 
 export default function Contact() {
+  const chatWrapper = useRef();
+  const input = useRef();
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
-  const [msgCount, setMsgCount] = useState(0);
+  const [messages, setMessages] = useState([
+    { msg: "Hey, what is your name? 👋", type: "left" },
+  ]);
+  const [newMessage, setNewMessage] = useState("");
 
   let options = {
     width: "100px",
@@ -28,12 +33,31 @@ export default function Contact() {
       hour: "#ffffff",
     },
   };
+
+  const sendMessage = () => {
+    if (
+      (input.current.value !== "" && messages.length === 1) ||
+      messages.length === 5 ||
+      messages.length === 7
+    ) {
+      setMessages([...messages, { msg: newMessage, type: "right" }]);
+      setNewMessage("");
+
+      setTimeout(() => {
+        setMessages([
+          ...messages,
+          { msg: "Hello, my name is Florian. 😊", type: "left" },
+        ]);
+      }, 1000);
+    }
+  };
+
   return (
     <div
       id="contact"
       class="relative w-full h-[510px] bg-gray-50 rounded-xl overflow-hidden"
     >
-      <div class="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid">
+      <div class="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-gray-50 bg-opacity-90 backdrop-blur-md z-10 relative">
         <div class="flex place-items-center gap-3">
           <Image
             loader={imgLoader}
@@ -50,8 +74,13 @@ export default function Contact() {
           <Icon.Info class="text-gray-300" />
         </div>
       </div>
-      <div class="h-[360px] flex flex-col place-items-end relative mb-4">
-        <Message msg="Hey, what is your name? 👋" type="left" />
+      <div
+        class="h-[360px] flex flex-col justify-end gap-4 relative mb-4"
+        ref={chatWrapper}
+      >
+        {messages.map((message, index) => (
+          <Message key={index} msg={message.msg} type={message.type} />
+        ))}
       </div>
       <div class="w-full flex gap-3 pl-3 pr-3 h-[64px] place-items-center justify-between">
         <Menu as="div" className="relative inline-block text-left">
@@ -145,10 +174,20 @@ export default function Contact() {
         </Menu>
         <div class="w-[90%] h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm">
           <input
+            ref={input}
             class="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3"
             placeholder="Enter your message"
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+              }
+            }}
           ></input>
           <Icon.ArrowUp
+            onClick={sendMessage}
             class="right-2 text-white bg-[#1480EB] absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-[#2795FD] transition-all"
             size={28}
           />
