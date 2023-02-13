@@ -1,13 +1,13 @@
 import Head from "next/head";
 import * as React from "react";
-import { useState, Fragment, useMemo } from "react";
+import { useState, Fragment, useMemo, useEffect } from "react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
 import { Menu, Transition } from "@headlessui/react";
-import useIntersection from "@/hooks/useIntersection";
+import { useIsVisible } from '@/hooks/useIsVisible';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -22,7 +22,7 @@ export default function Home() {
   const [highlight, setHighlight] = useState("Home");
   const rect = React.useRef(null);
   const projects = React.useRef(null);
-  const projectsInViewport = useIntersection(projects, "0px");
+  const isVisible = useIsVisible(projects);
 
   const changeItem = () => {
     if (item === 0) {
@@ -34,9 +34,13 @@ export default function Home() {
     }
   };
 
-  if (projectsInViewport && highlight !== "Projects") {
-    setHighlight("Projects");
-  }
+  useEffect(() => {
+    if (isVisible) {
+      setHighlight("Projects");
+    } else {
+      setHighlight("Home");
+    }
+  }, [isVisible]);
 
   return (
     <>
@@ -103,7 +107,7 @@ export default function Home() {
               ></div>
             </div>
           </div>
-          <div ref={projects}>
+          <div ref={projects} id="projects">
             <div class="grid grid-cols-2 gap-8">
               <Link href={"#"} class="group">
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
@@ -244,7 +248,8 @@ export default function Home() {
               <br /> If you want to read more to myself, you can click the
               button below or find me on{" "}
               <Link
-                href="#"
+                href="https://read.cv/floriandwt"
+                target={"_blank"}
                 class="text-[#1281ed] inline-block border border-solid border-blue-100 rounded-md pl-1 pr-1"
               >
                 Read.cv
@@ -252,12 +257,12 @@ export default function Home() {
               .
             </p>
             <div class="h-8"></div>
-            <button
+            <Link
               class="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300"
-              href="#"
+              href="./about"
             >
               About me
-            </button>
+            </Link>
           </div>
           <Image
             loader={imgLoader}
@@ -269,7 +274,7 @@ export default function Home() {
           />
         </div>
         <div class="h-64"></div>
-        <div class="relative w-full h-[510px] bg-gray-50 rounded-xl overflow-hidden">
+        <div id="contact" class="relative w-full h-[510px] bg-gray-50 rounded-xl overflow-hidden">
           <div class="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid">
             <div class="flex place-items-center gap-3">
               <Image
