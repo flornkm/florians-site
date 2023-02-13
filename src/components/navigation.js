@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-export default function Navigation(title) {
-  
+export default function Navigation(title, highlight) {
   return (
     <div class="w-full fixed md:border-b max-md:border max-md:rounded-full max-md:w-[90%] max-md:mr-auto max-md:ml-auto max-md:bottom-8 bg-white z-50">
       <div class="flex h-16 justify-between place-items-center max-w-7xl pl-[10%] pr-[10%] m-auto">
@@ -16,13 +15,13 @@ export default function Navigation(title) {
         </Link>
         <div class="flex">
           <ul class="flex gap-4 place-items-center font-medium">
-            <li class="p-2 text-gray-600 hover:text-black transition-all">
+            <li class={title.highlight === "Home" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"}>
               <Link href="#">Home</Link>
             </li>
-            <li class="p-2 text-gray-600 hover:text-black transition-all">
+            <li class={title.highlight === "Projects" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"}>
               <Link href="#">Projects</Link>
             </li>
-            <li class="p-2 text-gray-600 hover:text-black transition-all">
+            <li class={title.highlight === "About" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"}>
               <Link href="#">About</Link>
             </li>
             <button

@@ -1,12 +1,13 @@
 import Head from "next/head";
 import * as React from "react";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useMemo } from "react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
 import { Menu, Transition } from "@headlessui/react";
+import useIntersection from "@/hooks/useIntersection";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -18,7 +19,10 @@ export default function Home() {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
   const [item, setItem] = useState(0);
+  const [highlight, setHighlight] = useState("Home");
   const rect = React.useRef(null);
+  const projects = React.useRef(null);
+  const projectsInViewport = useIntersection(projects, "0px");
 
   const changeItem = () => {
     if (item === 0) {
@@ -30,6 +34,10 @@ export default function Home() {
     }
   };
 
+  if (projectsInViewport && highlight !== "Projects") {
+    setHighlight("Projects");
+  }
+
   return (
     <>
       <Head>
@@ -38,7 +46,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation title={title} />
+      <Navigation title={title} highlight={highlight} />
       <main class="max-md:w-[90%] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
         <div class="h-[70vh] flex place-items-center justify-between">
           <div class="md:w-[50%]">
@@ -95,7 +103,7 @@ export default function Home() {
               ></div>
             </div>
           </div>
-          <div>
+          <div ref={projects}>
             <div class="grid grid-cols-2 gap-8">
               <Link href={"#"} class="group">
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
@@ -283,19 +291,19 @@ export default function Home() {
             <div class="p-2 rounded-xl bg-[#1280EC] text-white absolute bottom-4 left-8 transition-all">
               Hey, what is your name? 👋
               <div class="absolute bottom-[-2px] left-[-8px]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="19"
-                height="16"
-                viewBox="0 0 19 16"
-                fill="none"
-              >
-                <path
-                  d="M1.90735e-06 14.7395C9.10227 16.3944 16.0324 11.6364 18.3597 9.05055L18.1011 1.29294C15.6014 1.81011 10.1883 2.27557 8.53338 0C8.79197 9.30914 1.81011 13.9637 1.90735e-06 14.7395Z"
-                  fill="#1381EE"
-                />
-              </svg>
-            </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="19"
+                  height="16"
+                  viewBox="0 0 19 16"
+                  fill="none"
+                >
+                  <path
+                    d="M1.90735e-06 14.7395C9.10227 16.3944 16.0324 11.6364 18.3597 9.05055L18.1011 1.29294C15.6014 1.81011 10.1883 2.27557 8.53338 0C8.79197 9.30914 1.81011 13.9637 1.90735e-06 14.7395Z"
+                    fill="#1381EE"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
           <div class="w-full flex gap-3 pl-3 pr-3 h-[64px] place-items-center justify-between">
@@ -389,8 +397,14 @@ export default function Home() {
               </Transition>
             </Menu>
             <div class="w-[90%] h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm">
-              <input class="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3" placeholder="Enter your message"></input>
-              <Icon.ArrowUp class="right-2 text-white bg-[#1480EB] absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-[#2795FD] transition-all" size={28} />
+              <input
+                class="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3"
+                placeholder="Enter your message"
+              ></input>
+              <Icon.ArrowUp
+                class="right-2 text-white bg-[#1480EB] absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-[#2795FD] transition-all"
+                size={28}
+              />
             </div>
           </div>
         </div>
