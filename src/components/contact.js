@@ -9,9 +9,25 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+function useOutsideAlerter(ref, setArrowUp) {
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setArrowUp(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
+
 export default function Contact() {
   const chatWrapper = useRef();
   const input = useRef();
+  const menu = useRef();
+  const [arrowUp, setArrowUp] = useState(false);
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
@@ -20,35 +36,90 @@ export default function Contact() {
   ]);
   const [newMessage, setNewMessage] = useState("");
 
-  let options = {
-    width: "100px",
-    border: false,
-    borderColor: "transparent",
-    baseColor: "#000",
-    centerColor: "transparent",
-    centerBorderColor: "transparent",
-    handColors: {
-      second: "#ef4444",
-      minute: "#ffffff",
-      hour: "#ffffff",
-    },
+  useOutsideAlerter(menu, setArrowUp);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") {
+      setArrowUp(false);
+    }
   };
 
   const sendMessage = () => {
-    if (
-      (input.current.value !== "" && messages.length === 1) ||
-      messages.length === 5 ||
-      messages.length === 7
-    ) {
-      setMessages([...messages, { msg: newMessage, type: "right" }]);
-      setNewMessage("");
+    if (input.current.value !== "") {
+      if (messages.length === 1) {
+        setMessages([...messages, { msg: newMessage, type: "right" }]);
+        setNewMessage("");
 
-      setTimeout(() => {
-        setMessages([
-          ...messages,
-          { msg: "Hello, my name is Florian. 😊", type: "left" },
-        ]);
-      }, 1000);
+        setTimeout(() => {
+          setMessages((messages) => [
+            ...messages,
+            { msg: `Nice to meet you, ${messages[1].msg}.`, type: "left" },
+          ]);
+        }, 1000);
+
+        setTimeout(() => {
+          setMessages((messages) => [
+            ...messages,
+            { msg: "So tell me, why are you contacting me?", type: "left" },
+          ]);
+        }, 2000);
+      } else if (messages.length === 4) {
+        setMessages([...messages, { msg: newMessage, type: "right" }]);
+        setNewMessage("");
+
+        setTimeout(() => {
+          setMessages((messages) => [
+            ...messages,
+            { msg: "Got it. Thanks for the information.", type: "left" },
+          ]);
+        }, 1000);
+
+        setTimeout(() => {
+          setMessages((messages) => [
+            ...messages,
+            {
+              msg: "I just need a way to contact you. Might you give me your e-mail?",
+              type: "left",
+            },
+          ]);
+        }, 2000);
+      } else if (messages.length === 7 && newMessage.includes("@")) {
+        setMessages([...messages, { msg: newMessage, type: "right" }]);
+        const data = {
+          name: messages[1].msg,
+          email: newMessage,
+          message: messages[4].msg
+        };
+        setNewMessage("");
+
+        setTimeout(() => {
+          setMessages((messages) => [
+            ...messages,
+            { msg: "Writing it down real quick… ✍️", type: "left" },
+          ]);
+        }, 1000);
+
+        fetch("https://formspree.io/f/xbjwjdre", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+            setTimeout(() => {
+              setMessages((messages) => [
+                ...messages,
+                { msg: "Done! I reach out to you soon.", type: "left" },
+              ]);
+            }, 3500);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     }
   };
 
@@ -85,8 +156,9 @@ export default function Contact() {
       <div class="w-full flex gap-3 pl-3 pr-3 h-[64px] place-items-center justify-between">
         <Menu as="div" className="relative inline-block text-left">
           <div>
-            <Menu.Button className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all">
+            <Menu.Button onClick={() => {setArrowUp(!arrowUp)}} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all">
               <Icon.Smartphone />
+              <Icon.ChevronUp class={arrowUp ? "ml-1 transition-all rotate-0" : "ml-1 transition-all rotate-180"} size={20} />
             </Menu.Button>
           </div>
           <Transition
@@ -98,7 +170,7 @@ export default function Contact() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute overflow-hidden left-0 top-[-150px] z-10 w-56 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-150px] z-10 w-56 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-0">
                 <Link href="#">
                   <Menu.Item>
@@ -172,7 +244,7 @@ export default function Contact() {
             </Menu.Items>
           </Transition>
         </Menu>
-        <div class="w-[90%] h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm">
+        <div class="w-full h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm">
           <input
             ref={input}
             class="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3"
