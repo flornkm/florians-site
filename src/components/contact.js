@@ -132,7 +132,7 @@ export default function Contact() {
         <div class="flex place-items-center gap-3">
           <Image
             loader={imgLoader}
-            src="memoji.png"
+            src="./images/memoji.png"
             alt="Florian Profile Avatar"
             class="rounded-full bg-white border border-solid p-1"
             width={48}
@@ -172,7 +172,7 @@ export default function Contact() {
           >
             <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-150px] z-10 w-56 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-0">
-                <Link href="#">
+                <Link href="https://twitter.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
                     {({ active }) => (
                       <button
@@ -181,15 +181,16 @@ export default function Contact() {
                           active
                             ? "bg-gray-100 text-gray-900 border-l-[#1480EB]"
                             : "text-gray-700 border-l-transparent",
-                          "block w-full px-4 py-2 text-left text-sm font-medium border-l-2"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
                         )}
                       >
-                        Sign out
+                        <Icon.Twitter size={16} />
+                        @floriandwt
                       </button>
                     )}
                   </Menu.Item>
                 </Link>
-                <Link href="#">
+                <Link href="https://dribbble.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
                     {({ active }) => (
                       <button
@@ -198,15 +199,16 @@ export default function Contact() {
                           active
                             ? "bg-gray-100 text-gray-900 border-l-[#1480EB]"
                             : "text-gray-700 border-l-transparent",
-                          "block w-full px-4 py-2 text-left text-sm font-medium border-l-2"
+                          "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
                         )}
                       >
-                        Sign out
+                        <Icon.Dribbble size={16} />
+                        @floriandwt
                       </button>
                     )}
                   </Menu.Item>
                 </Link>
-                <Link href="#">
+                <Link href="https://github.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
                     {({ active }) => (
                       <button
@@ -215,15 +217,16 @@ export default function Contact() {
                           active
                             ? "bg-gray-100 text-gray-900 border-l-[#1480EB]"
                             : "text-gray-700 border-l-transparent",
-                          "block w-full px-4 py-2 text-left text-sm font-medium border-l-2"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
                         )}
                       >
-                        Sign out
+                        <Icon.GitHub size={16} />
+                        @floriandwt
                       </button>
                     )}
                   </Menu.Item>
                 </Link>
-                <Link href="#">
+                <Link href="https://www.linkedin.com/in/floriandwt/" target={"_blank"}>
                   <Menu.Item>
                     {({ active }) => (
                       <button
@@ -232,9 +235,10 @@ export default function Contact() {
                           active
                             ? "bg-gray-100 text-gray-900 border-l-[#1480EB]"
                             : "text-gray-700 border-l-transparent",
-                          "block w-full px-4 py-2 text-left text-sm font-medium border-l-2"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
                         )}
                       >
+                        <Icon.Linkedin size={16} />
                         Sign out
                       </button>
                     )}

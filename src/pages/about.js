@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState, Fragment, useMemo } from "react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
+import RiveComponent from "@rive-app/react-canvas";
 import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
@@ -23,8 +24,61 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main class="max-md:w-[90%] min-h-[80vh] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
-        
+      <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
+        <div class="w-full h-[35vh] pt-5">
+          <RiveComponent
+            src="./animations/florian_animation.riv"
+            class="max-w-[500px] h-auto object-contain m-auto"
+          />
+        </div>
+        <div class="gap-16 grid grid-cols-2 max-md:grid-cols-1">
+          <div>
+            <div class="flex gap-8 mb-6 max-lg:flex-col">
+              <Image
+                loader={imgLoader}
+                src="./images/florian_student.jpg"
+                class="inline-flex object-cover object-top max-h-64"
+                width={200}
+                height={100}
+              />
+              <div>
+                <h1 class="text-2xl font-medium mb-3">About me</h1>
+                <p>
+                  <span class="font-bold italic">Nice to meet you!</span> - My
+                  name is Florian and I am currently 22 years old. I am a
+                  designer and developer and I love to create beautiful
+                  products. Currently I am studying at the Hochschule fuer
+                  Gestaltung, also known as just HfG, in Schwaebisch Gmuend,
+                  Germany.
+                </p>
+              </div>
+            </div>
+            <p>
+              Beside my desire to work between design and code I love working
+              with CSS and creating animations for web and mobile applications.
+            </p>
+          </div>
+          <div>
+            <h2 class="font-medium text-lg mb-4">Work</h2>
+            <div class="flex w-full justify-between">
+              <div class="flex gap-2">
+                <Image 
+                  loader={imgLoader}  
+                  src="./images/company_hfg.jpg"
+                  class="flex object-cover object-center rounded-full border border-gray-200 p-1 w-[48px]"
+                  width={32}
+                  height={32}
+                />
+                <div>
+                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <p class="text-sm text-gray-500">Metahype</p>
+                </div>
+              </div>
+              <p class="text-gray-500">2020 - present</p>
+            </div>
+          </div>
+        </div>
+        <div class="h-64"></div>
       </main>
       <Footer />
     </>

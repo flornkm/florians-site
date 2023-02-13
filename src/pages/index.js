@@ -70,7 +70,7 @@ export default function Home() {
           </div>
           <Image
             loader={imgLoader}
-            src="main_header.png"
+            src="./images/main_header.png"
             alt="Header Image of Florian as Cartoon Character"
             class="mix-blend-exclusion max-md:hidden"
             width={250}
@@ -109,7 +109,7 @@ export default function Home() {
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
                   <Image
                     loader={imgLoader}
-                    src="ambient_chat_preview.jpg"
+                    src="./images/ambient_chat_preview.jpg"
                     alt="Heaer Image of Florian as Cartoon Character"
                     class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
                     width={250}
@@ -139,7 +139,7 @@ export default function Home() {
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
                   <Image
                     loader={imgLoader}
-                    src="ambient_chat_preview.jpg"
+                    src="./images/ambient_chat_preview.jpg"
                     alt="Heaer Image of Florian as Cartoon Character"
                     class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
                     width={250}
@@ -169,7 +169,7 @@ export default function Home() {
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
                   <Image
                     loader={imgLoader}
-                    src="ambient_chat_preview.jpg"
+                    src="./images/ambient_chat_preview.jpg"
                     alt="Heaer Image of Florian as Cartoon Character"
                     class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
                     width={250}
@@ -199,7 +199,7 @@ export default function Home() {
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
                   <Image
                     loader={imgLoader}
-                    src="ambient_chat_preview.jpg"
+                    src="./images/ambient_chat_preview.jpg"
                     alt="Heaer Image of Florian as Cartoon Character"
                     class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
                     width={250}
