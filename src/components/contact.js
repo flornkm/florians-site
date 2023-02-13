@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import * as Icon from "react-feather";
 import { Menu, Transition } from "@headlessui/react";
+import Message from "./message";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,6 +13,8 @@ export default function Contact() {
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
+  const [msgCount, setMsgCount] = useState(0);
+
   let options = {
     width: "100px",
     border: false,
@@ -48,23 +51,7 @@ export default function Contact() {
         </div>
       </div>
       <div class="h-[360px] flex flex-col place-items-end relative mb-4">
-        <div class="p-2 rounded-xl bg-[#1280EC] text-white absolute bottom-4 left-8 transition-all">
-          Hey, what is your name? 👋
-          <div class="absolute bottom-[-2px] left-[-8px]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="19"
-              height="16"
-              viewBox="0 0 19 16"
-              fill="none"
-            >
-              <path
-                d="M1.90735e-06 14.7395C9.10227 16.3944 16.0324 11.6364 18.3597 9.05055L18.1011 1.29294C15.6014 1.81011 10.1883 2.27557 8.53338 0C8.79197 9.30914 1.81011 13.9637 1.90735e-06 14.7395Z"
-                fill="#1381EE"
-              />
-            </svg>
-          </div>
-        </div>
+        <Message msg="Hey, what is your name? 👋" type="left" />
       </div>
       <div class="w-full flex gap-3 pl-3 pr-3 h-[64px] place-items-center justify-between">
         <Menu as="div" className="relative inline-block text-left">
