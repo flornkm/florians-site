@@ -58,16 +58,16 @@ export default function Home() {
               with CSS and creating animations for web and mobile applications.
             </p>
           </div>
-          <div>
-            <h2 class="font-medium text-lg mb-4">Work</h2>
+          <div class="flex flex-col gap-6">
+            <h2 class="font-medium text-lg">Work</h2>
             <div class="flex w-full justify-between">
-              <div class="flex gap-2">
+              <div class="flex gap-2 place-items-center ">
                 <Image 
                   loader={imgLoader}  
                   src="./images/company_hfg.jpg"
-                  class="flex object-cover object-center rounded-full border border-gray-200 p-1 w-[48px]"
-                  width={32}
-                  height={32}
+                  class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  width={40}
+                  height={40}
                 />
                 <div>
                   <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
@@ -75,6 +75,80 @@ export default function Home() {
                 </div>
               </div>
               <p class="text-gray-500">2020 - present</p>
+            </div>
+            <div class="flex w-full justify-between">
+              <div class="flex gap-2 place-items-center ">
+                <Image 
+                  loader={imgLoader}  
+                  src="./images/company_hfg.jpg"
+                  class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  width={40}
+                  height={40}
+                />
+                <div>
+                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <p class="text-sm text-gray-500">Metahype</p>
+                </div>
+              </div>
+              <p class="text-gray-500">2020 - present</p>
+            </div>
+            <div class="flex w-full justify-between">
+              <div class="flex gap-2 place-items-center ">
+                <Image 
+                  loader={imgLoader}  
+                  src="./images/company_hfg.jpg"
+                  class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  width={40}
+                  height={40}
+                />
+                <div>
+                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <p class="text-sm text-gray-500">Metahype</p>
+                </div>
+              </div>
+              <p class="text-gray-500">2020 - present</p>
+            </div>
+            <div class="flex w-full justify-between">
+              <div class="flex gap-2 place-items-center ">
+                <Image 
+                  loader={imgLoader}  
+                  src="./images/company_hfg.jpg"
+                  class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  width={40}
+                  height={40}
+                />
+                <div>
+                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <p class="text-sm text-gray-500">Metahype</p>
+                </div>
+              </div>
+              <p class="text-gray-500">2020 - present</p>
+            </div>
+          </div>
+          <div class="flex flex-col gap-6">
+            <h2 class="font-medium text-lg">Side projects</h2>
+            <div class="flex w-full justify-between">
+              <div class="flex gap-2 place-items-center ">
+                <Image 
+                  loader={imgLoader}  
+                  src="./images/project_curations.jpg"
+                  class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  width={40}
+                  height={40}
+                />
+                <div>
+                  <h3 class="font-medium text-md">Curations</h3>
+                  <p class="text-sm text-gray-500">Website featuring useful curations for designers and developers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <h2 class="font-medium text-lg">Connect</h2>
+            <div class="flex gap-4">
+              <Link class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black" href={"#"}>Read.cv</Link>
+              <Link class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black" href={"#"}>GitHub</Link>
+              <Link class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black" href={"#"}>LinkedIn</Link>
             </div>
           </div>
         </div>
