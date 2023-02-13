@@ -2,6 +2,7 @@ import Head from "next/head";
 import * as React from "react";
 import { useState, Fragment } from "react";
 import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
@@ -47,7 +48,7 @@ export default function Home() {
             </h2>
             <div class="h-8"></div>
             <Link
-              class="p-4 w-full max-w-[400px] flex place-items-center gap-6 bg-gray-100 border border-gray-200 border-solid rounded-2xl"
+              class="p-4 w-full max-w-[400px] flex place-items-center gap-6 bg-gray-100 border border-gray-300 transition-all hover:bg-gray-50 hover:border-gray-200 border-solid rounded-2xl"
               href={"#"}
             >
               <div class="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-red-600 opacity-75">
@@ -300,7 +301,7 @@ export default function Home() {
           <div class="w-full flex gap-3 pl-3 pr-3 h-[64px] place-items-center justify-between">
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button className="inline-flex w-full justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-0 transition-all">
+                <Menu.Button className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all">
                   <Icon.Smartphone />
                 </Menu.Button>
               </div>
@@ -395,6 +396,7 @@ export default function Home() {
         </div>
         <div class="h-64"></div>
       </main>
+      <Footer />
     </>
   );
 }
