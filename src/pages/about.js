@@ -1,8 +1,8 @@
 import Head from "next/head";
 import * as React from "react";
 import { useState, useCallback } from "react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import RiveComponent from "@rive-app/react-canvas";
 import Image from "next/image";
 import Link from "next/link";
@@ -240,6 +240,7 @@ export default function Home() {
             </DragOverlay>
           </DndContext>
         <div class="h-32"></div>
+        
       </main>
       <Footer />
     </>
