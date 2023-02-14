@@ -1,12 +1,27 @@
 import Head from "next/head";
 import * as React from "react";
-import { useState, Fragment, useMemo } from "react";
+import { useState, useCallback } from "react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import RiveComponent from "@rive-app/react-canvas";
 import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
+import {
+  DndContext,
+  closestCenter,
+  MouseSensor,
+  TouchSensor,
+  DragOverlay,
+  useSensor,
+  useSensors,
+  DragStartEvent,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import { arrayMove, SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
+import Grid from "@/layout/Grid";
+import SortableItem from "@/layout/SortableItem";
+import Item from "@/layout/Item";
 
 export default function Home() {
   const title = "Designer and Developer";
@@ -14,6 +29,33 @@ export default function Home() {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
   const highlight = "About";
+
+  const [items, setItems] = useState(
+    Array.from({ length: 4 }, (_, i) => (i + 1).toString())
+  );
+  const [activeId, setActiveId] = useState(null);
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+
+  const handleDragStart = useCallback((event) => {
+    setActiveId(event.active.id);
+  }, []);
+  const handleDragEnd = useCallback((event) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+
+    setActiveId(null);
+  }, []);
+  const handleDragCancel = useCallback(() => {
+    setActiveId(null);
+  }, []);
 
   return (
     <>
@@ -62,15 +104,17 @@ export default function Home() {
             <h2 class="font-medium text-lg">Work</h2>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
-                <Image 
-                  loader={imgLoader}  
+                <Image
+                  loader={imgLoader}
                   src="./images/company_hfg.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
                 />
                 <div>
-                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <h3 class="font-medium text-md">
+                    Digital Strategist and Designer
+                  </h3>
                   <p class="text-sm text-gray-500">Metahype</p>
                 </div>
               </div>
@@ -78,15 +122,17 @@ export default function Home() {
             </div>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
-                <Image 
-                  loader={imgLoader}  
+                <Image
+                  loader={imgLoader}
                   src="./images/company_hfg.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
                 />
                 <div>
-                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <h3 class="font-medium text-md">
+                    Digital Strategist and Designer
+                  </h3>
                   <p class="text-sm text-gray-500">Metahype</p>
                 </div>
               </div>
@@ -94,15 +140,17 @@ export default function Home() {
             </div>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
-                <Image 
-                  loader={imgLoader}  
+                <Image
+                  loader={imgLoader}
                   src="./images/company_hfg.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
                 />
                 <div>
-                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <h3 class="font-medium text-md">
+                    Digital Strategist and Designer
+                  </h3>
                   <p class="text-sm text-gray-500">Metahype</p>
                 </div>
               </div>
@@ -110,15 +158,17 @@ export default function Home() {
             </div>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
-                <Image 
-                  loader={imgLoader}  
+                <Image
+                  loader={imgLoader}
                   src="./images/company_hfg.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
                 />
                 <div>
-                  <h3 class="font-medium text-md">Digital Strategist and Designer</h3>
+                  <h3 class="font-medium text-md">
+                    Digital Strategist and Designer
+                  </h3>
                   <p class="text-sm text-gray-500">Metahype</p>
                 </div>
               </div>
@@ -129,8 +179,8 @@ export default function Home() {
             <h2 class="font-medium text-lg">Side projects</h2>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
-                <Image 
-                  loader={imgLoader}  
+                <Image
+                  loader={imgLoader}
                   src="./images/project_curations.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
@@ -138,7 +188,10 @@ export default function Home() {
                 />
                 <div>
                   <h3 class="font-medium text-md">Curations</h3>
-                  <p class="text-sm text-gray-500">Website featuring useful curations for designers and developers</p>
+                  <p class="text-sm text-gray-500">
+                    Website featuring useful curations for designers and
+                    developers
+                  </p>
                 </div>
               </div>
             </div>
@@ -146,12 +199,46 @@ export default function Home() {
           <div class="flex flex-col gap-4">
             <h2 class="font-medium text-lg">Connect</h2>
             <div class="flex gap-4">
-              <Link class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black" href={"#"}>Read.cv</Link>
-              <Link class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black" href={"#"}>GitHub</Link>
-              <Link class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black" href={"#"}>LinkedIn</Link>
+              <Link
+                class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                href={"#"}
+              >
+                Read.cv
+              </Link>
+              <Link
+                class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                href={"#"}
+              >
+                GitHub
+              </Link>
+              <Link
+                class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                href={"#"}
+              >
+                LinkedIn
+              </Link>
             </div>
           </div>
         </div>
+        <div class="h-32"></div>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragCancel={handleDragCancel}
+          >
+            <SortableContext items={items} strategy={rectSortingStrategy}>
+              <Grid columns={3}>
+                {items.map((id) => (
+                  <SortableItem key={id} id={id} />
+                ))}
+              </Grid>
+            </SortableContext>
+            <DragOverlay adjustScale style={{ transformOrigin: "0 0 " }}>
+              {activeId ? <Item id={activeId} isDragging /> : null}
+            </DragOverlay>
+          </DndContext>
         <div class="h-64"></div>
       </main>
       <Footer />
