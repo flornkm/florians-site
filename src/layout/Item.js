@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes, CSSProperties } from "react";
 import * as Icon from "react-feather";
-import CustomMap from "../components/CustomMap";
 
 const Item = forwardRef(
   ({ id, index, withOpacity, isDragging, style, ...props }, ref) => {
@@ -30,7 +29,6 @@ const Item = forwardRef(
             size={40}
             class="p-2 shadow-sm bg-gradient-to-t from-green-500 to-emerald-500 text-white rounded-lg absolute top-2 right-2"
           />
-          <CustomMap />
         </div>
       )) ||
       (id === "2" && (

@@ -17,8 +17,12 @@ import {
   useSensors,
   DragStartEvent,
   DragEndEvent,
-} from '@dnd-kit/core';
-import { arrayMove, SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
 import Grid from "@/layout/Grid";
 import SortableItem from "@/layout/SortableItem";
 import Item from "@/layout/Item";
@@ -221,6 +225,7 @@ export default function Home() {
           </div>
         </div>
         <div class="h-32"></div>
+        <div class="hidden">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -235,12 +240,15 @@ export default function Home() {
                 ))}
               </Grid>
             </SortableContext>
-            <DragOverlay adjustScale style={{ transformOrigin: "0 0 ", objectFit: "contain" }}>
+            <DragOverlay
+              adjustScale
+              style={{ transformOrigin: "0 0 ", objectFit: "contain" }}
+            >
               {activeId ? <Item id={activeId} isDragging /> : null}
             </DragOverlay>
           </DndContext>
+        </div>
         <div class="h-32"></div>
-        
       </main>
       <Footer />
     </>

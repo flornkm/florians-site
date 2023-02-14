@@ -1,13 +1,13 @@
 import Head from "next/head";
 import * as React from "react";
 import { useState, useMemo, useEffect } from "react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import Contact from "@/components/contact";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
 import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
-import { useIsVisible } from '@/hooks/useIsVisible';
+import { useIsVisible } from "@/hooks/useIsVisible";
 
 export default function Home() {
   const title = "Designer and Developer";
@@ -104,124 +104,77 @@ export default function Home() {
             </div>
           </div>
           <div ref={projects} id="projects">
-            <div class="grid grid-cols-2 gap-8">
-              <Link href={"#"} class="group">
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
+            <div
+              class={
+                !item ? "grid gap-8 grid-cols-2" : "grid gap-8 grid-cols-1"
+              }
+            >
+              <Link
+                href={"#"}
+                class={!item ? "group" : "group flex gap-8 place-items-center"}
+              >
+                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/ambient_chat_preview.jpg"
+                    src="./images/boost.jpg"
                     alt="Heaer Image of Florian as Cartoon Character"
-                    class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
+                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={250}
                     height={250}
                   />
                 </div>
-                <div class="flex place-items-center gap-2">
-                  <h3 class="text-xl font-medium pb-1">Curations</h3>
-                  <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
-                </div>
-                <p class="pb-2 text-gray-500">
-                  Website featuring useful curations for designers and
-                  developers
-                </p>
-                <div class="flex gap-4 text-xs text-gray-500">
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.Calendar width={16} />
-                    <p>Q4 2021</p>
+                <div>
+                  <div class="flex place-items-center gap-2">
+                    <h3 class="text-xl font-medium pb-1">Boost</h3>
+                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
                   </div>
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.MapPin width={16} />
-                    <p>Q4 2021</p>
+                  <p class="pb-2 text-gray-500">
+                    Mobile application and hardware device to calculate
+                    nutrition intake and provide personalized nutrition
+                  </p>
+
+                  <div class="flex gap-4 text-xs text-gray-500">
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.Calendar width={16} />
+                      <p>Q1 2023</p>
+                    </div>
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.MapPin width={16} />
+                      <p>Schwaebisch Gmuend</p>
+                    </div>
                   </div>
                 </div>
               </Link>
-              <Link href={"#"} class="group">
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
+
+              <Link href={"#"} class={!item ? "group" : "group flex gap-8 place-items-center"}>
+                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/ambient_chat_preview.jpg"
+                    src="./images/curations.jpg"
                     alt="Heaer Image of Florian as Cartoon Character"
-                    class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
+                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={250}
                     height={250}
                   />
                 </div>
-                <div class="flex place-items-center gap-2">
-                  <h3 class="text-xl font-medium pb-1">Curations</h3>
-                  <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
-                </div>
-                <p class="pb-2 text-gray-500">
-                  Website featuring useful curations for designers and
-                  developers
-                </p>
-                <div class="flex gap-4 text-xs text-gray-500">
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.Calendar width={16} />
-                    <p>Q4 2021</p>
+                <div>
+                  <div class="flex place-items-center gap-2">
+                    <h3 class="text-xl font-medium pb-1">Curations</h3>
+                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
                   </div>
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.MapPin width={16} />
-                    <p>Q4 2021</p>
-                  </div>
-                </div>
-              </Link>
-              <Link href={"#"} class="group">
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
-                  <Image
-                    loader={imgLoader}
-                    src="./images/ambient_chat_preview.jpg"
-                    alt="Heaer Image of Florian as Cartoon Character"
-                    class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
-                    width={250}
-                    height={250}
-                  />
-                </div>
-                <div class="flex place-items-center gap-2">
-                  <h3 class="text-xl font-medium pb-1">Curations</h3>
-                  <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
-                </div>
-                <p class="pb-2 text-gray-500">
-                  Website featuring useful curations for designers and
-                  developers
-                </p>
-                <div class="flex gap-4 text-xs text-gray-500">
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.Calendar width={16} />
-                    <p>Q4 2021</p>
-                  </div>
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.MapPin width={16} />
-                    <p>Q4 2021</p>
-                  </div>
-                </div>
-              </Link>
-              <Link href={"#"} class="group">
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6">
-                  <Image
-                    loader={imgLoader}
-                    src="./images/ambient_chat_preview.jpg"
-                    alt="Heaer Image of Florian as Cartoon Character"
-                    class="w-[100%] max-h-[256px] object-cover group-hover:opacity-80 transition-all"
-                    width={250}
-                    height={250}
-                  />
-                </div>
-                <div class="flex place-items-center gap-2">
-                  <h3 class="text-xl font-medium pb-1">Curations</h3>
-                  <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
-                </div>
-                <p class="pb-2 text-gray-500">
-                  Website featuring useful curations for designers and
-                  developers
-                </p>
-                <div class="flex gap-4 text-xs text-gray-500">
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.Calendar width={16} />
-                    <p>Q4 2021</p>
-                  </div>
-                  <div class="flex gap-2 place-items-center">
-                    <Icon.MapPin width={16} />
-                    <p>Q4 2021</p>
+                  <p class="pb-2 text-gray-500">
+                    Website featuring useful curations for designers and
+                    developers
+                  </p>
+                  <div class="flex gap-4 text-xs text-gray-500">
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.Calendar width={16} />
+                      <p>Q4 2022</p>
+                    </div>
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.MapPin width={16} />
+                      <p>Schwaebisch Gmuend</p>
+                    </div>
                   </div>
                 </div>
               </Link>
