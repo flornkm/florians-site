@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
+    "react-globe.gl": "^2.23.1",
     "rive-react": "^3.0.35"
   },
   "devDependencies": {
