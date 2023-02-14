@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.7",
     "@headlessui/react": "^1.7.10",
     "@next/font": "13.1.6",
     "@rive-app/canvas": "^1.0.98",
