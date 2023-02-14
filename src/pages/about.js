@@ -231,15 +231,15 @@ export default function Home() {
             <SortableContext items={items} strategy={rectSortingStrategy}>
               <Grid columns={3}>
                 {items.map((id) => (
-                  <SortableItem key={id} id={id} />
+                  <SortableItem key={id} id={id} index={items.indexOf(id)} />
                 ))}
               </Grid>
             </SortableContext>
-            <DragOverlay adjustScale style={{ transformOrigin: "0 0 " }}>
+            <DragOverlay adjustScale style={{ transformOrigin: "0 0 ", objectFit: "contain" }}>
               {activeId ? <Item id={activeId} isDragging /> : null}
             </DragOverlay>
           </DndContext>
-        <div class="h-64"></div>
+        <div class="h-32"></div>
       </main>
       <Footer />
     </>

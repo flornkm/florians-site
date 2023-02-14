@@ -2,14 +2,7 @@ import React, { FC } from 'react';
 
 const Grid = ({ children, columns }) => {
     return (
-        <div
-            style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${columns}, 1fr)`,
-                gridGap: "1rem",
-                maxWidth: '80rem',
-            }}
-        >
+        <div class={"grid grid-cols-3 grid-rows-2 gap-4 max-w-80rem min-h-[50vh]"}>
             {children}
         </div>
     );
