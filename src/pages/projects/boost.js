@@ -2,9 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
-import { useState, useCallback } from "react";
+import * as Icon from "react-feather";
+import { useState, useEffect, useCallback } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import useEmblaCarousel from "embla-carousel-react";
 
 export default function Boost() {
   const [title, setTitle] = useState("Boost");
@@ -12,6 +14,34 @@ export default function Boost() {
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+  });
+
+  useEffect(() => {
+    if (emblaApi) {
+      // Embla API is ready
+    }
+  }, [emblaApi]);
+
+
+  // const scrollNext = useCallback(
+  //   () => emblaApi && 
+  //   emblaApi.scrollNext(),
+  //   [emblaApi]
+  // );
+
+  const scrollNext = () => {
+    if (emblaApi) {
+      emblaApi.scrollNext();
+    }
+  };
+
+  const scrollBack = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
+    [emblaApi]
+  );
 
   return (
     <>
@@ -51,21 +81,130 @@ export default function Boost() {
           <Image
             loader={imgLoader}
             src="./images/banner-boost.jpg"
-            class="inline-flex object-cover object-center max-h-128 mb-10"
+            class="inline-flex object-cover object-center max-h-128 mb-32"
             width={1200}
             height={500}
           />
-          <p class="text-gray-700 md:max-w-[80%] text-lg">
-              Boost is a prototype of an innovative digital product and app
-              designed and developed with Ionic React, NodeJS Express, and
-              Prisma. The product seamlessly integrates with the app, allowing
-              users to track their daily nutrient intake and receive
-              personalized recommendations based on factors such as weather and
-              step count. As a digital product designer, I had the opportunity
-              to work on Boost's prototype and develop its design, ensuring a
-              seamless user experience.
+          <p class="text-gray-700 md:max-w-[80%] text-lg mb-32">
+            Boost is a prototype of an innovative digital product and app
+            designed and developed with Ionic React, NodeJS Express, and Prisma.
+            The product seamlessly integrates with the app, allowing users to
+            track their daily nutrient intake and receive personalized
+            recommendations based on factors such as weather and step count. As
+            a digital product designer, I had the opportunity to work on Boost's
+            prototype and develop its design, ensuring a seamless user
+            experience.
+          </p>
+          <div class="relative min-h-[500px]">
+            <div class="absolute w-[100vw] translate-x-[-50%] left-[50%] cursor-grab">
+              <div className="embla" ref={emblaRef}>
+                <div className="embla__container">
+                  <div className="embla__slide">
+                    <Image
+                      loader={imgLoader}
+                      src="./images/boost_app_in_hand.webp"
+                      class="inline-flex object-cover object-center h-full w-full"
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                  <div className="embla__slide">
+                    <Image
+                      loader={imgLoader}
+                      src="./images/boost_application.webp"
+                      class="inline-flex object-cover object-center h-full w-full"
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                  <div className="embla__slide">
+                    <Image
+                      loader={imgLoader}
+                      src="./images/boost_detail.webp"
+                      class="inline-flex object-cover object-center h-full w-full"
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                  <div className="embla__slide">
+                    <Image
+                      loader={imgLoader}
+                      src="./images/boost_full_device.webp"
+                      class="inline-flex object-cover object-center h-full w-full"
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                  <div className="embla__slide">
+                    <Image
+                      loader={imgLoader}
+                      src="./images/boost_in_use.webp"
+                      class="inline-flex object-cover object-center h-full w-full"
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-4 mt-8 w-full justify-between">
+            <div></div>
+            <div class="flex gap-4">
+              <Icon.ArrowLeft
+                size={40}
+                onClick={scrollBack}
+                class="p-2 bg-[#1480EB] text-white rounded-full cursor-pointer hover:bg-[#2795FD] transition-all"
+              />
+              <Icon.ArrowRight
+                size={40}
+                onClick={scrollNext}
+                class="p-2 bg-[#1480EB] text-white rounded-full cursor-pointer hover:bg-[#2795FD] transition-all"
+              />
+            </div>
+          </div>
+          <div class="h-32"></div>
+          <div class="relative">
+          <h2 class="text-2xl font-medium text-left mb-2 xl:sticky top-24 max-xl:mb-8">The Process</h2>
+          <div class="w-full flex justify-end">
+          <div class="flex flex-col xl:max-w-3xl">
+            <Image
+              loader={imgLoader}
+              src="./images/boost_application.webp"
+              class="inline-flex object-cover object-center max-h-96 mb-10"
+              width={1200}
+              height={200}
+            />
+            <h3 class="text-xl font-medium text-left mb-2">Research</h3>
+            <p class="text-gray-700 text-base mb-10">
+              I started by conducting research on the current state of the
+              nutrition industry. I found that there are many nutrition apps
+              available, but most of them are not very user-friendly. I also
+              found that there are many nutrition devices available, but most of
+              them are not very accurate. I wanted to create a product that
+              combined the best of both worlds.
             </p>
-            <div class="h-64"></div>
+            <div class="h-16"></div>
+            <Image
+              loader={imgLoader}
+              src="./images/boost_application.webp"
+              class="inline-flex object-cover object-center max-h-96 mb-10"
+              width={1200}
+              height={200}
+            />
+            <h3 class="text-xl font-medium text-left mb-2">Research</h3>
+            <p class="text-gray-700 text-base mb-10">
+              I started by conducting research on the current state of the
+              nutrition industry. I found that there are many nutrition apps
+              available, but most of them are not very user-friendly. I also
+              found that there are many nutrition devices available, but most of
+              them are not very accurate. I wanted to create a product that
+              combined the best of both worlds.
+            </p>
+          </div>
+          </div>
+          </div>
+          <div class="h-64"></div>
         </div>
       </main>
       <Footer />
