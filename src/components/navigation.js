@@ -5,7 +5,7 @@ export default function Navigation(title, highlight) {
     <div class="w-full fixed md:border-b max-md:border max-md:rounded-full max-md:w-[90%] max-md:mr-auto max-md:ml-auto max-md:bottom-8 bg-white z-50">
       <div class="flex h-16 justify-between place-items-center max-w-7xl pl-[10%] pr-[10%] m-auto">
         <Link
-          href={"#"}
+          href={"/"}
           class="flex justify-center max-md:place-items-center md:place-items-end gap-2 hover:opacity-60 transition-all"
         >
           <span class="text-xl text-black right-8 m-0 font-medium">
@@ -26,7 +26,7 @@ export default function Navigation(title, highlight) {
             </li>
             <Link
               class="bg-[#1280EC] text-white pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-[#2795FE] transition-all"
-              href="./#contact"
+              href="/#contact"
             >
               Contact
             </Link>

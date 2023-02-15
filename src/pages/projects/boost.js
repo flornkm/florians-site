@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import { useState, useCallback } from "react";
 import Navigation from "@/components/Navigation";
@@ -7,6 +9,9 @@ import Footer from "@/components/Footer";
 export default function Boost() {
   const [title, setTitle] = useState("Boost");
   const [highlight, setHighlight] = useState("Projects");
+  const imgLoader = ({ src, width, quality }) => {
+    return `/${src}?w=${width}&q=${quality || 75}`;
+  };
 
   return (
     <>
@@ -18,7 +23,50 @@ export default function Boost() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
-
+        <div class="flex flex-col items-left justify-left h-full pt-32">
+          <h1 class="text-4xl font-bold text-left mb-2">Boost</h1>
+          <h2 class="text-2xl font-medium text-left text-gray-500 mb-5">
+            Nutrition Application & Hardware device
+          </h2>
+          <div class="mb-10 flex gap-4 place-items-center">
+            <p class="text-xl font-medium">Collaborators:</p>
+            <Link
+              href={"#"}
+              target="_blank"
+              class="group relative transition-all"
+            >
+              <div class="hidden absolute group-hover:flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] group-hover:bottom-[125%] bg-black text-white rounded-full w-max text-sm">
+                <span class="z-10 relative">Anton Stallbörger</span>
+                <div class="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
+              </div>
+              <Image
+                loader={imgLoader}
+                src="./images/collaborator_anton_stallboerger.jpg"
+                class="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                width={48}
+                height={48}
+              />
+            </Link>
+          </div>
+          <Image
+            loader={imgLoader}
+            src="./images/banner-boost.jpg"
+            class="inline-flex object-cover object-center max-h-128 mb-10"
+            width={1200}
+            height={500}
+          />
+          <p class="text-gray-700 md:max-w-[80%] text-lg">
+              Boost is a prototype of an innovative digital product and app
+              designed and developed with Ionic React, NodeJS Express, and
+              Prisma. The product seamlessly integrates with the app, allowing
+              users to track their daily nutrient intake and receive
+              personalized recommendations based on factors such as weather and
+              step count. As a digital product designer, I had the opportunity
+              to work on Boost's prototype and develop its design, ensuring a
+              seamless user experience.
+            </p>
+            <div class="h-64"></div>
+        </div>
       </main>
       <Footer />
     </>

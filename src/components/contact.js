@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Fragment, useState, useRef, useEffect } from "react";
 import * as Icon from "react-feather";
 import { Menu, Transition } from "@headlessui/react";
-import Message from "./message";
+import Message from "./Message";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

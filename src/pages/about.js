@@ -89,8 +89,8 @@ export default function Home() {
               />
               <div>
                 <h1 class="text-2xl font-medium mb-3">About me</h1>
-                <p>
-                  <span class="font-bold italic">Nice to meet you!</span> - My
+                <p class="text-gray-600">
+                  <span class="font-bold italic text-black">Nice to meet you!</span> - My
                   name is Florian and I am currently 22 years old. I am a
                   designer and developer and I love to create beautiful
                   products. Currently I am studying at the Hochschule fuer
@@ -99,7 +99,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <p>
+            <p class="text-gray-600">
               Beside my desire to work between design and code I love working
               with CSS and creating animations for web and mobile applications.
             </p>

@@ -128,7 +128,7 @@ export default function Home() {
                     <h3 class="text-xl font-medium pb-1">Boost</h3>
                     <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
                   </div>
-                  <p class="pb-2 text-gray-500">
+                  <p class="pb-2 text-gray-600">
                     Mobile application and hardware device to calculate
                     nutrition intake and provide personalized nutrition
                   </p>
@@ -165,7 +165,7 @@ export default function Home() {
                     <h3 class="text-xl font-medium pb-1">Curations</h3>
                     <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
                   </div>
-                  <p class="pb-2 text-gray-500">
+                  <p class="pb-2 text-gray-600">
                     Website featuring useful curations for designers and
                     developers
                   </p>
@@ -188,7 +188,7 @@ export default function Home() {
         <div class="flex gap-8 justify-between max-md:flex-col ">
           <div class="md:max-w-[50%]">
             <h2 class="text-2xl font-medium mb-4">More to my person</h2>
-            <p class="text-gray-500">
+            <p class="text-gray-600">
               Being interested in technology and design would be a big
               understatement. I love creating useful products, trying out new
               things and adjusting key levers as long as necessary to give
