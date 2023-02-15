@@ -16,13 +16,13 @@ export default function Navigation(title, highlight) {
         <div class="flex">
           <ul class="flex gap-4 place-items-center font-medium">
             <li>
-              <Link class={title.highlight === "Home" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"} href="./">Home</Link>
+              <Link class={title.highlight === "Home" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"} href="/">Home</Link>
             </li>
             <li>
-              <Link class={title.highlight === "Projects" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"} href="./#projects">Projects</Link>
+              <Link class={title.highlight === "Projects" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"} href="/#projects">Projects</Link>
             </li>
             <li>
-              <Link class={title.highlight === "About" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"} href="./about">About</Link>
+              <Link class={title.highlight === "About" ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md" : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg"} href="/about">About</Link>
             </li>
             <Link
               class="bg-[#1280EC] text-white pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-[#2795FE] transition-all"

@@ -88,7 +88,7 @@ export default function Home() {
         <div>
           <div class="flex justify-between pb-[40px]">
             <h2 class="text-3xl font-medium text-black">Some of my projects</h2>
-            <div class="flex gap-6 relative place-items-center pl-2 pr-2">
+            <div class="max-md:hidden flex gap-6 relative place-items-center pl-2 pr-2">
               <Icon.Grid
                 onClick={changeItem}
                 class="cursor-pointer text-gray-600 hover:text-black transition-all relative z-10"
@@ -106,20 +106,20 @@ export default function Home() {
           <div ref={projects} id="projects">
             <div
               class={
-                !item ? "grid gap-8 grid-cols-2" : "grid gap-8 grid-cols-1"
+                !item ? "grid gap-8 md:grid-cols-2" : "grid gap-8 grid-cols-1"
               }
             >
               <Link
-                href={"#"}
-                class={!item ? "group" : "group flex gap-8 place-items-center"}
+                href={"./projects/boost"}
+                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
               >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
                     src="./images/boost.jpg"
-                    alt="Heaer Image of Florian as Cartoon Character"
+                    alt="Photo of the Boost Device"
                     class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
-                    width={250}
+                    width={350}
                     height={250}
                   />
                 </div>
@@ -146,14 +146,17 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link href={"#"} class={!item ? "group" : "group flex gap-8 place-items-center"}>
+              <Link
+                href={"#"}
+                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+              >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
                     src="./images/curations.jpg"
-                    alt="Heaer Image of Florian as Cartoon Character"
+                    alt="Image of Curations in a Mockup"
                     class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
-                    width={250}
+                    width={350}
                     height={250}
                   />
                 </div>
@@ -215,8 +218,8 @@ export default function Home() {
           </div>
           <Image
             loader={imgLoader}
-            src="photo_church.jpg"
-            alt="Heaer Image of Florian as Cartoon Character"
+            src="./images/florian_student.jpg"
+            alt="Image of Florian as a student"
             class="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all rotate-3"
             width={250}
             height={600}
