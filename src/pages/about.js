@@ -225,7 +225,7 @@ export default function Home() {
           </div>
         </div>
         <div class="h-32"></div>
-        <div class="hidden">
+        <div class="block">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
