@@ -110,7 +110,7 @@ export default function Home() {
               <div class="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
-                  src="./images/company_hfg.jpg"
+                  src="./images/company_metahype.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
@@ -135,18 +135,18 @@ export default function Home() {
                 />
                 <div>
                   <h3 class="font-medium text-md">
-                    Digital Strategist and Designer
+                    Webdesigner and Developer
                   </h3>
-                  <p class="text-sm text-gray-500">Metahype</p>
+                  <p class="text-sm text-gray-500">HfG Schwaebisch Gmuend</p>
                 </div>
               </div>
-              <p class="text-gray-500">2020 - present</p>
+              <p class="text-gray-500">2022</p>
             </div>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
-                  src="./images/company_hfg.jpg"
+                  src="./images/company_comondo.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
@@ -155,28 +155,28 @@ export default function Home() {
                   <h3 class="font-medium text-md">
                     Digital Strategist and Designer
                   </h3>
-                  <p class="text-sm text-gray-500">Metahype</p>
+                  <p class="text-sm text-gray-500">Comondo</p>
                 </div>
               </div>
-              <p class="text-gray-500">2020 - present</p>
+              <p class="text-gray-500">2020 - 2021</p>
             </div>
             <div class="flex w-full justify-between">
               <div class="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
-                  src="./images/company_hfg.jpg"
+                  src="./images/company_videoeditor.jpg"
                   class="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
                   width={40}
                   height={40}
                 />
                 <div>
                   <h3 class="font-medium text-md">
-                    Digital Strategist and Designer
+                    Videoeditor and Motion Designer
                   </h3>
-                  <p class="text-sm text-gray-500">Metahype</p>
+                  <p class="text-sm text-gray-500">Freelance</p>
                 </div>
               </div>
-              <p class="text-gray-500">2020 - present</p>
+              <p class="text-gray-500">2015 - 2020</p>
             </div>
           </div>
           <div class="flex flex-col gap-6">
