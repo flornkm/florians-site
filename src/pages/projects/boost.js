@@ -15,8 +15,8 @@ export default function Boost() {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "start",
+    loop: true,
+    align: "center",
   });
 
   useEffect(() => {
@@ -26,17 +26,11 @@ export default function Boost() {
   }, [emblaApi]);
 
 
-  // const scrollNext = useCallback(
-  //   () => emblaApi && 
-  //   emblaApi.scrollNext(),
-  //   [emblaApi]
-  // );
-
-  const scrollNext = () => {
-    if (emblaApi) {
-      emblaApi.scrollNext();
-    }
-  };
+  const scrollNext = useCallback(
+    () => emblaApi && 
+    emblaApi.scrollNext(),
+    [emblaApi]
+  );
 
   const scrollBack = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -61,7 +55,7 @@ export default function Boost() {
           <div class="mb-10 flex gap-4 place-items-center">
             <p class="text-xl font-medium">Collaborators:</p>
             <Link
-              href={"#"}
+              href={"https://www.antonstallboerger.com/"}
               target="_blank"
               class="group relative transition-all"
             >
@@ -95,7 +89,7 @@ export default function Boost() {
             prototype and develop its design, ensuring a seamless user
             experience.
           </p>
-          <div class="relative min-h-[500px]">
+          <div class="relative md:min-h-[500px] max-md:min-h-[350px]">
             <div class="absolute w-[100vw] translate-x-[-50%] left-[50%] cursor-grab">
               <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
