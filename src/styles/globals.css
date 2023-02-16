@@ -8,10 +8,21 @@
 
 .embla__container {
     display: flex;
-    gap: 16px;
+    box-sizing: border-box;
 }
 
-.embla__slide {
-    flex: 0 0 600px;
-    min-width: 0;
+@media screen and (min-width: 768px) {
+    .embla__slide {
+        flex: 0 0 600px;
+        min-width: 0;
+        border-right: 16px solid white;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .embla__slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        border-right: 0;
+    }
 }
