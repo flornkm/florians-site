@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -18,11 +20,10 @@ module.exports = {
           '0%, 100%': { transform: 'translateX(-16px)' },
           '50%': { transform: 'translateX(16px)' },
         }
-      }
+      },
     },
     fontFamily: {
-      sans: ['Plus Jakarta Sans', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
+      sans: ['var(--pjs-font)', ...fontFamily.sans]
     },
   },
   plugins: [],
