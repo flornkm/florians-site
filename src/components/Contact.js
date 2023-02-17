@@ -239,7 +239,7 @@ export default function Contact() {
                         )}
                       >
                         <Icon.Linkedin size={16} />
-                        Sign out
+                        /floriandwt
                       </button>
                     )}
                   </Menu.Item>

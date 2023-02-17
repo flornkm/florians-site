@@ -216,6 +216,41 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
+
+              <Link
+                href={"/projects/homebility"}
+                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+              >
+                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
+                  <Image
+                    loader={imgLoader}
+                    src="./images/homebility/homebility.jpg"
+                    alt="Image of Curations in a Mockup"
+                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    width={350}
+                    height={250}
+                  />
+                </div>
+                <div>
+                  <div class="flex place-items-center gap-2">
+                    <h3 class="text-xl font-medium pb-1">Homebility</h3>
+                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                  </div>
+                  <p class="pb-2 text-gray-600">
+                    Accessible smarthome application with an easy to use interface
+                  </p>
+                  <div class="flex gap-4 text-xs text-gray-500">
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.Calendar width={16} />
+                      <p>Q2 2022</p>
+                    </div>
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.MapPin width={16} />
+                      <p>Schwaebisch Gmuend</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

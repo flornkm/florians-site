@@ -24,19 +24,25 @@ export default function Footer() {
         <div class="flex flex-col gap-2 font-medium items-start">
           <h4 class="text-xl text-white mb-2">Navigation</h4>
           <Link
-            href={"#"}
+            href={"/"}
             class="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2"
           >
             Home
           </Link>
           <Link
-            href={"#"}
+            href={"/#projects"}
             class="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2"
           >
             Projects
           </Link>
           <Link
             href={"#"}
+            class="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2"
+          >
+            Concepts
+          </Link>
+          <Link
+            href={"/about"}
             class="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2"
           >
             About

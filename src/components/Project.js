@@ -115,6 +115,25 @@ export default function Project({
                 />
               </Link>
             )}
+            {collaborators.includes("Alice") && (
+              <Link
+                href={"#"}
+                class="group relative transition-all"
+              >
+                <div class="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200">
+                  <span class="z-10 relative">Alice Sopp</span>
+                  <div class="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
+                </div>
+                <Image
+                  loader={imgLoader}
+                  src="./images/collaborator_alice_sopp.jpg"
+                  alt="Alice Sopp"
+                  class="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                  width={48}
+                  height={48}
+                />
+              </Link>
+            )}
           </div>}
           <Image
             loader={imgLoader}
