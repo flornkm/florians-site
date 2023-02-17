@@ -70,7 +70,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
+      <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div class="w-full h-[35vh] pt-5">
           <RiveComponent
             src="./animations/florian_animation.riv"
@@ -90,8 +90,10 @@ export default function Home() {
               <div>
                 <h1 class="text-2xl font-medium mb-3">About me</h1>
                 <p class="text-gray-600">
-                  <span class="font-bold italic text-black">Nice to meet you!</span> - My
-                  name is Florian and I am currently 22 years old. I am a
+                  <span class="font-bold italic text-black">
+                    Nice to meet you!
+                  </span>{" "}
+                  - My name is Florian and I am currently 22 years old. I am a
                   designer and developer and I love to create beautiful
                   products. Currently I am studying at the Hochschule fuer
                   Gestaltung, also known as just HfG, in Schwaebisch Gmuend,
@@ -134,9 +136,7 @@ export default function Home() {
                   height={40}
                 />
                 <div>
-                  <h3 class="font-medium text-md">
-                    Webdesigner and Developer
-                  </h3>
+                  <h3 class="font-medium text-md">Webdesigner and Developer</h3>
                   <p class="text-sm text-gray-500">HfG Schwaebisch Gmuend</p>
                 </div>
               </div>
@@ -204,22 +204,37 @@ export default function Home() {
             <h2 class="font-medium text-lg">Connect</h2>
             <div class="flex gap-4">
               <Link
-                class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                class="font-medium transition-all text-black hover:opacity-75 border-b-black group"
                 href={"#"}
+                target="_blank"
               >
                 Read.cv
+                <Icon.ArrowUpRight
+                  size={20}
+                  class="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                />
               </Link>
               <Link
-                class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                class="font-medium transition-all text-black hover:opacity-75 border-b-black group"
                 href={"#"}
+                target="_blank"
               >
                 GitHub
+                <Icon.ArrowUpRight
+                  size={20}
+                  class="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                />
               </Link>
               <Link
-                class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                class="font-medium transition-all text-black hover:opacity-75 border-b-black group"
                 href={"#"}
+                target="_blank"
               >
                 LinkedIn
+                <Icon.ArrowUpRight
+                  size={20}
+                  class="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                />
               </Link>
             </div>
           </div>

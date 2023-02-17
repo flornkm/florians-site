@@ -47,7 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main class="max-md:w-[90%] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
+      <main class="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div class="h-[70vh] flex place-items-center justify-between">
           <div class="md:w-[50%]">
             <h1 class="text-5xl font-bold mb-6">Hey, I'm Florian</h1>

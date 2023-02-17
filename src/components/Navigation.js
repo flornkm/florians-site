@@ -4,7 +4,7 @@ import * as Icon from "react-feather";
 export default function Navigation(title, highlight) {
   return (
     <div class="w-full fixed md:border-b max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 bg-white z-50 overflow-hidden">
-      <div class="flex h-16 justify-between place-items-center max-w-7xl md:pl-[10%] md:pr-[10%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
+      <div class="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
           class="flex justify-center max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden"
@@ -20,7 +20,7 @@ export default function Navigation(title, highlight) {
               <Link
                 class={
                   title.highlight === "Home"
-                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2"
+                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/"
@@ -33,7 +33,7 @@ export default function Navigation(title, highlight) {
               <Link
                 class={
                   title.highlight === "Projects"
-                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2"
+                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/#projects"
@@ -46,20 +46,20 @@ export default function Navigation(title, highlight) {
               <Link
                 class={
                   title.highlight === "Concepts"
-                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2"
+                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="#"
               >
                 <span class="md:block max-md:hidden">Concepts</span>
-                <Icon.User class="max-md:block md:hidden" size={24} />
+                <Icon.Zap class="max-md:block md:hidden" size={24} />
               </Link>
             </li>
             <li>
               <Link
                 class={
                   title.highlight === "About"
-                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2"
+                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/about"
