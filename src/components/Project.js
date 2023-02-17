@@ -72,50 +72,54 @@ export default function Project({
           <h2 class="text-2xl font-medium text-left text-gray-500 mb-5">
             {shortDescription}
           </h2>
-          <div class="mb-10 flex gap-4 place-items-center">
+          {!collaborators && <div class="h-4"></div>}
+          {collaborators && <div class="mb-10 flex gap-4 place-items-center">
             <p class="text-xl font-medium">Collaborators:</p>
-            {collaborators && collaborators.includes("Anton") && (
+            {collaborators.includes("Anton") && (
               <Link
                 href={"https://www.antonstallboerger.com/"}
                 target="_blank"
                 class="group relative transition-all"
               >
-                <div class="hidden absolute group-hover:flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] group-hover:bottom-[125%] bg-black text-white rounded-full w-max text-sm">
+                <div class="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200">
                   <span class="z-10 relative">Anton Stallbörger</span>
                   <div class="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
                 </div>
                 <Image
                   loader={imgLoader}
                   src="./images/collaborator_anton_stallboerger.jpg"
+                  alt="Anton Stallbörger"
                   class="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
                   width={48}
                   height={48}
                 />
               </Link>
             )}
-            {collaborators && collaborators.includes("Nils") && (
+            {collaborators.includes("Nils") && (
               <Link
                 href={"https://www.nilseller.com/"}
                 target="_blank"
                 class="group relative transition-all"
               >
-                <div class="hidden absolute group-hover:flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] group-hover:bottom-[125%] bg-black text-white rounded-full w-max text-sm">
+                <div class="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200">
                   <span class="z-10 relative">Nils Eller</span>
                   <div class="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
                 </div>
                 <Image
                   loader={imgLoader}
                   src="./images/collaborator_nils_eller.jpg"
+                  alt="Nils Eller"
                   class="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
                   width={48}
                   height={48}
                 />
               </Link>
             )}
-          </div>
+          </div>}
           <Image
             loader={imgLoader}
             src={bannerSource}
+            alt={"Project Banner Image for " + projectTitle}
             class="inline-flex object-cover object-center max-h-128 mb-16"
             width={1200}
             height={500}
@@ -170,6 +174,7 @@ export default function Project({
                 <Image
                   loader={imgLoader}
                   src={processImage1}
+                  alt={processHeading1}
                   class="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
@@ -182,6 +187,7 @@ export default function Project({
                 <Image
                   loader={imgLoader}
                   src={processImage2}
+                  alt={processHeading2}
                   class="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
@@ -194,6 +200,7 @@ export default function Project({
                 <Image
                   loader={imgLoader}
                   src={processImage3}
+                  alt={processHeading3}
                   class="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
@@ -202,18 +209,19 @@ export default function Project({
                   {processHeading3}
                 </h3>
                 <p class="text-gray-700 text-base mb-10">{processText3}</p>
-                <div class="h-16"></div>
-                <Image
+                {processImage4 && <div class="h-16"></div>}
+                {processImage4 && <Image
                   loader={imgLoader}
                   src={processImage4}
+                  alt={processHeading4}
                   class="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
-                />
-                <h3 class="text-xl font-medium text-left mb-2">
+                />}
+                {processImage4 && <h3 class="text-xl font-medium text-left mb-2">
                   {processHeading4}
-                </h3>
-                <p class="text-gray-700 text-base mb-10">{processText4}</p>
+                </h3>}
+                {processImage4 && <p class="text-gray-700 text-base mb-10">{processText4}</p>}
               </div>
             </div>
           </div>
@@ -228,6 +236,7 @@ export default function Project({
                     <Image
                       loader={imgLoader}
                       src={videoThumbnail}
+                      alt="Video Thumbnail"
                       class="w-full h-full rounded-2xl aspect-video object-cover"
                       width={1920}
                       height={1080}
@@ -269,7 +278,10 @@ export default function Project({
                       target="_blank"
                     >
                       {link.text}
-                      <Icon.ArrowUpRight size={20} class="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all" />
+                      <Icon.ArrowUpRight
+                        size={20}
+                        class="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                      />
                     </Link>
                   ))}
                 </div>

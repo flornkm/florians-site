@@ -15,7 +15,7 @@ export default function Navigation(title, highlight) {
           <span class="text-gray-500 m-0 max-md:hidden">{title.title}</span>
         </Link>
         <div class="flex max-sm:w-full">
-          <ul class="flex gap-4 place-items-center font-medium max-md:justify-between max-md:w-full">
+          <ul class="flex gap-2 place-items-center font-medium max-md:justify-between max-md:w-full">
             <li>
               <Link
                 class={
