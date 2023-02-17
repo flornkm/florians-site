@@ -45,6 +45,19 @@ export default function Navigation(title, highlight) {
             <li>
               <Link
                 class={
+                  title.highlight === "Concepts"
+                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2"
+                    : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
+                }
+                href="#"
+              >
+                <span class="md:block max-md:hidden">Concepts</span>
+                <Icon.User class="max-md:block md:hidden" size={24} />
+              </Link>
+            </li>
+            <li>
+              <Link
+                class={
                   title.highlight === "About"
                     ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
@@ -60,7 +73,7 @@ export default function Navigation(title, highlight) {
               href="/#contact"
             >
               <span class="md:block max-sm:hidden">Contact</span>
-                <Icon.MessageCircle class="max-md:block sm:hidden" size={24} />
+              <Icon.MessageCircle class="max-md:block sm:hidden" size={24} />
             </Link>
           </ul>
         </div>
