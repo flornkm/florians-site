@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as Icon from "react-feather";
 import { useIsVisible } from "@/hooks/useIsVisible";
+import copy from "copy-to-clipboard";
 
 export default function Home() {
   const title = "Designer and Developer";
@@ -18,7 +19,11 @@ export default function Home() {
   const [highlight, setHighlight] = useState("Home");
   const rect = React.useRef(null);
   const projects = React.useRef(null);
+  const contact = React.useRef(null);
+  const [mailText, setMailText] = useState(["Florian", "Click to copy"]);
+  const [mailActive, setMailActive] = useState(false);
   const isVisible = useIsVisible(projects);
+  const contactVisible = useIsVisible(contact);
 
   const changeItem = () => {
     if (item === 0) {
@@ -36,7 +41,20 @@ export default function Home() {
     } else {
       setHighlight("Home");
     }
-  }, [isVisible]);
+    if (contactVisible) {
+      setMailActive(true);
+    } else {
+      setMailActive(false);
+    }
+  }, [isVisible, contactVisible]);
+
+  const copyMail = () => {
+    copy("florian@designwithtech.com");
+    setMailText(["Copied", "Copied"]);
+    setTimeout(() => {
+      setMailText(["Florian", "Click to copy"]);
+    }, 2000);
+  };
 
   return (
     <>
@@ -50,7 +68,9 @@ export default function Home() {
       <main class="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div class="h-[70vh] flex place-items-center justify-between">
           <div class="md:w-[50%]">
-            <h1 class="text-5xl font-bold mb-6 leading-tight">Hey, I'm Florian</h1>
+            <h1 class="text-5xl font-bold mb-6 leading-tight">
+              Hey, I'm Florian
+            </h1>
             <h2 class="text-3xl font-medium text-gray-700">
               A designer and developer building digital products.
             </h2>
@@ -111,7 +131,11 @@ export default function Home() {
             >
               <Link
                 href={"./projects/boost"}
-                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+                class={
+                  !item
+                    ? "group"
+                    : "group grid grid-cols-2 gap-8 place-items-center"
+                }
               >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
@@ -148,7 +172,11 @@ export default function Home() {
 
               <Link
                 href={"/projects/curations"}
-                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+                class={
+                  !item
+                    ? "group"
+                    : "group grid grid-cols-2 gap-8 place-items-center"
+                }
               >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
@@ -184,7 +212,11 @@ export default function Home() {
 
               <Link
                 href={"/projects/ambient-chat"}
-                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+                class={
+                  !item
+                    ? "group"
+                    : "group grid grid-cols-2 gap-8 place-items-center"
+                }
               >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
@@ -219,7 +251,11 @@ export default function Home() {
 
               <Link
                 href={"/projects/homebility"}
-                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+                class={
+                  !item
+                    ? "group"
+                    : "group grid grid-cols-2 gap-8 place-items-center"
+                }
               >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
@@ -237,7 +273,8 @@ export default function Home() {
                     <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
                   <p class="pb-2 text-gray-600">
-                    Accessible smarthome application with an easy to use interface
+                    Accessible smarthome application with an easy to use
+                    interface
                   </p>
                   <div class="flex gap-4 text-xs text-gray-500">
                     <div class="flex gap-2 place-items-center">
@@ -296,7 +333,30 @@ export default function Home() {
           />
         </div>
         <div class="h-64"></div>
-        <Contact />
+        <div
+          class={
+            (mailActive
+              ? "fixed right-0 bottom-8 z-40 pointer-events-none pr-[10%] opacity-100"
+              : "opacity-0 pr-[10%] bottom-0") + " transition-all duration-300"
+          }
+        >
+          <div class="max-w-6xl flex justify-end w-full">
+            <div
+              onClick={copyMail}
+              class="pr-4 pl-4 pt-3 pb-3 group pointer-events-auto bg-white bg-opacity-75 rounded-lg backdrop-blur-xl ring-1 ring-gray-300 cursor-pointer flex gap-8 justify-between place-items-center"
+            >
+              <div class="flex flex-col">
+                <p class="font-bold group-hover:hidden">{mailText[0]}</p>
+                <p class="font-bold hidden group-hover:block">{mailText[1]}</p>
+                <p>florian@designwithtech.com</p>
+              </div>
+              <Icon.Mail width={24} />
+            </div>
+          </div>
+        </div>
+        <div ref={contact} id="contact">
+          <Contact />
+        </div>
         <div class="h-64"></div>
       </main>
       <Footer />
