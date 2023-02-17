@@ -50,13 +50,13 @@ export default function Home() {
       <main class="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div class="h-[70vh] flex place-items-center justify-between">
           <div class="md:w-[50%]">
-            <h1 class="text-5xl font-bold mb-6">Hey, I'm Florian</h1>
+            <h1 class="text-5xl font-bold mb-6 leading-tight">Hey, I'm Florian</h1>
             <h2 class="text-3xl font-medium text-gray-700">
               A designer and developer building digital products.
             </h2>
             <div class="h-8"></div>
             <Link
-              class="p-4 w-full max-w-[400px] flex place-items-center gap-6 bg-gray-100 border border-gray-300 transition-all hover:bg-gray-50 hover:border-gray-200 border-solid rounded-2xl"
+              class="p-4 w-full max-w-[400px] flex place-items-center gap-6 bg-gray-100 border border-gray-300 transition-all hover:bg-gray-50 hover:border-gray-200 border-solid rounded-xl"
               href={"./#contact"}
             >
               <div class="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-red-600 opacity-75">
@@ -86,7 +86,7 @@ export default function Home() {
         </div>
         <div class="h-64"></div>
         <div>
-          <div class="flex justify-between pb-[40px]">
+          <div class="flex justify-between pb-4">
             <h2 class="text-3xl font-medium text-black">Some of my projects</h2>
             <div class="max-md:hidden flex gap-6 relative place-items-center pl-2 pr-2">
               <Icon.Grid
@@ -106,7 +106,7 @@ export default function Home() {
           <div ref={projects} id="projects">
             <div
               class={
-                !item ? "grid gap-8 md:grid-cols-2" : "grid gap-8 grid-cols-1"
+                !item ? "grid gap-8 md:grid-cols-2" : "grid gap-2 grid-cols-1"
               }
             >
               <Link
@@ -124,9 +124,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <div class="flex place-items-center gap-2">
+                  <div class="flex place-items-center gap-1">
                     <h3 class="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
+                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
                   <p class="pb-2 text-gray-600">
                     Mobile application and hardware device to calculate
@@ -163,7 +163,7 @@ export default function Home() {
                 <div>
                   <div class="flex place-items-center gap-2">
                     <h3 class="text-xl font-medium pb-1">Curations</h3>
-                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all relative" />
+                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
                   <p class="pb-2 text-gray-600">
                     Website featuring useful curations for designers and
@@ -173,6 +173,41 @@ export default function Home() {
                     <div class="flex gap-2 place-items-center">
                       <Icon.Calendar width={16} />
                       <p>Q4 2022</p>
+                    </div>
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.MapPin width={16} />
+                      <p>Schwaebisch Gmuend</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              <Link
+                href={"/projects/ambient-chat"}
+                class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
+              >
+                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
+                  <Image
+                    loader={imgLoader}
+                    src="./images/ambient_chat/ambient_chat.jpg"
+                    alt="Image of Curations in a Mockup"
+                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    width={350}
+                    height={250}
+                  />
+                </div>
+                <div>
+                  <div class="flex place-items-center gap-2">
+                    <h3 class="text-xl font-medium pb-1">Ambient Chat</h3>
+                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                  </div>
+                  <p class="pb-2 text-gray-600">
+                    Realtime chat application with artificial intelligence
+                  </p>
+                  <div class="flex gap-4 text-xs text-gray-500">
+                    <div class="flex gap-2 place-items-center">
+                      <Icon.Calendar width={16} />
+                      <p>Q2 2022</p>
                     </div>
                     <div class="flex gap-2 place-items-center">
                       <Icon.MapPin width={16} />
@@ -202,7 +237,7 @@ export default function Home() {
               <Link
                 href="https://read.cv/floriandwt"
                 target={"_blank"}
-                class="text-[#1281ed] inline-block border border-solid border-blue-100 rounded-md pl-1 pr-1"
+                class="text-[#1281ed] opacity-100 inline-block font-medium rounded-md transition-opacity hover:opacity-80"
               >
                 Read.cv
               </Link>

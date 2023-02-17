@@ -1,7 +1,7 @@
 export default function Message({ msg, type }) {
   return (
     <>
-      {type === "left" && <div class={"p-2 rounded-xl bg-[#1280EC] text-white relative bottom-[16px] left-8 transition-all max-w-[300px] self-start"}>
+      {type === "left" && <div class={"p-2 rounded-xl bg-[#1280EC] text-white relative bottom-[16px] left-8 transition-all max-w-[300px] max-sm:max-w-[70%] self-start"}>
         {msg}
         <div class="absolute bottom-[-2px] left-[-8px]">
           <svg

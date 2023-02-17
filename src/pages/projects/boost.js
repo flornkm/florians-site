@@ -4,7 +4,7 @@ export default function Boost() {
   return (
     <Project
       projectTitle="Boost"
-      shortDescription="Nutrition Application & Hardware device"
+      shortDescription="Nutrition application & hardware device"
       bannerSource="./images/boost/banner-boost.jpg"
       collaborators={["Anton"]}
       projectMainDescription="Boost is a prototype of an innovative digital product and app
@@ -22,7 +22,7 @@ export default function Boost() {
         "./images/boost/boost_full_device.webp",
         "./images/boost/boost_in_use.webp",
       ]}
-      processImage1="./images/boost/boost/boost_research.webp"
+      processImage1="./images/boost/boost_research.webp"
       processHeading1="Research"
       processText1="First of all, we had to make a survey to find out what people
       thought about the current state of the nutrition industry. We

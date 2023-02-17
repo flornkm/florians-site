@@ -126,7 +126,7 @@ export default function Contact() {
   return (
     <div
       id="contact"
-      class="relative w-full h-[510px] bg-gray-50 rounded-xl overflow-hidden"
+      class="relative w-full min-h-[510px] bg-gray-50 rounded-xl overflow-hidden "
     >
       <div class="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-gray-50 bg-opacity-90 backdrop-blur-md z-10 relative">
         <div class="flex place-items-center gap-3">
@@ -153,7 +153,7 @@ export default function Contact() {
           <Message key={index} msg={message.msg} type={message.type} />
         ))}
       </div>
-      <div class="w-full flex gap-3 pl-3 pr-3 h-[64px] place-items-center justify-between">
+      <div class="w-full flex gap-2 pl-3 pr-3 min-h-[64px] place-items-center justify-between max-sm:pb-3 max-sm:flex-wrap">
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button onClick={() => {setArrowUp(!arrowUp)}} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all">
