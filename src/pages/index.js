@@ -147,7 +147,7 @@ export default function Home() {
               </Link>
 
               <Link
-                href={"#"}
+                href={"/projects/curations"}
                 class={!item ? "group" : "group grid grid-cols-2 gap-8 place-items-center"}
               >
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
