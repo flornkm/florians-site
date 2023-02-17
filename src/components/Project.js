@@ -68,7 +68,7 @@ export default function Project({
       <Navigation title={projectTitle} highlight={highlight} />
       <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div class="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
-          <h1 class="text-4xl font-bold text-left mb-2">{projectTitle}</h1>
+          <h1 class="text-4xl font-bold text-left mb-3">{projectTitle}</h1>
           <h2 class="text-2xl font-medium text-left text-gray-500 mb-5">
             {shortDescription}
           </h2>

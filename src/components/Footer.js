@@ -36,7 +36,7 @@ export default function Footer() {
             Projects
           </Link>
           <Link
-            href={"#"}
+            href={"/concepts"}
             class="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2"
           >
             Concepts

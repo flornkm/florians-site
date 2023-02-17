@@ -49,7 +49,7 @@ export default function Navigation(title, highlight) {
                     ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
-                href="#"
+                href="/concepts"
               >
                 <span class="md:block max-md:hidden">Concepts</span>
                 <Icon.Zap class="max-md:block md:hidden" size={24} />
