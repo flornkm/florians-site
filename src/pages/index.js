@@ -116,7 +116,7 @@ export default function Home() {
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/boost.jpg"
+                    src="./images/boost/boost.jpg"
                     alt="Photo of the Boost Device"
                     class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
@@ -153,7 +153,7 @@ export default function Home() {
                 <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/curations.jpg"
+                    src="./images/curations/curations.jpg"
                     alt="Image of Curations in a Mockup"
                     class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}

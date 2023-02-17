@@ -5,15 +5,15 @@ export default function Boost() {
     <Project
       projectTitle="Curations"
       shortDescription="A curated collection of the best products on the web"
-      bannerSource="./images/banner-curations.jpg"
+      bannerSource="./images/curations/banner-curations.jpg"
       collaborators={["Anton", "Nils"]}
       projectMainDescription="During our time at university, my team and I recognized the significance of tools in our daily lives and conceived the idea of curating a collection of such tools. We began with a modest Notion database-page containing a limited number of tools, but we aspired to share our collection with a wider audience in an easily accessible way. To achieve this goal, we leveraged the Notion API and developed a website that displays our curated collection and allows users to submit their own discoveries. Our team of curators carefully selects each tool before it is deployed to the public, ensuring the highest quality recommendations. As a result, our platform has enabled thousands of individuals to discover new and innovative tools, gain inspiration, and much more."
       slideImages={[
-        "./images/boost_app_in_hand.webp",
-        "./images/boost_application.webp",
-        "./images/boost_detail.webp",
-        "./images/boost_full_device.webp",
-        "./images/boost_in_use.webp",
+        "./images/curations/cuations_details.webp",
+        "./images/curations/curations_cards.webp",
+        "./images/curations/curations_in_use.webp",
+        "./images/curations/curations_wireframe.webp",
+        "./images/curations/curations_update.webp",
       ]}
       processImage1="./images/boost_research.webp"
       processHeading1="Generating ideas"
