@@ -17,7 +17,7 @@ export default function Footer() {
   };
   return (
     <div class="w-full min-h-[300px] bg-zinc-800 pt-24 pb-24">
-      <div class="flex justify-between place-items-top max-w-7xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-24">
+      <div class="flex justify-between place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-24">
         <div class="w-[50%]">
           <AnalogClock {...options} />
         </div>
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
       </div>
       <div class="h-16"></div>
-      <div class="flex justify-between place-items-top max-w-7xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-8">
+      <div class="flex justify-between place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-8">
         <p class="text-zinc-500 text-xs">
           {new Date().getFullYear()} Design With Tech. All Rights Reserved.
         </p>

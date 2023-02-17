@@ -66,7 +66,7 @@ export default function Project({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={projectTitle} highlight={highlight} />
-      <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-7xl pl-[10%] pr-[10%] m-auto bg-white">
+      <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div class="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 class="text-4xl font-bold text-left mb-2">{projectTitle}</h1>
           <h2 class="text-2xl font-medium text-left text-gray-500 mb-5">
@@ -259,16 +259,17 @@ export default function Project({
           {projectLinks && (
             <div>
               <div class="h-32"></div>
-              <div class="flex w-full justify-between p-8 bg-gray-100 rounded-lg place-items-center max-sm:flex-col max-sm:gap-8">
-                <h2 class="text-2xl font-medium">Project links</h2>
+              <div class="flex w-full justify-between p-8 bg-gray-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8">
+                <h2 class="text-2xl font-medium text-left">Project links</h2>
                 <div class="flex gap-4 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
-                      class="font-medium transition-all text-black hover:opacity-75 border-b-2 border-b-black"
+                      class="font-medium text-lg transition-all text-black hover:opacity-75 border-b-black group"
                       href={link.url}
                       target="_blank"
                     >
                       {link.text}
+                      <Icon.ArrowUpRight size={20} class="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all" />
                     </Link>
                   ))}
                 </div>
