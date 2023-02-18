@@ -23,7 +23,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['var(--pjs-font)', ...fontFamily.sans]
+      sans: ['var(--pjs-font)', ...fontFamily.sans],
+      display: ['var(--kalam-font)', ...fontFamily.sans],
     },
   },
   plugins: [],

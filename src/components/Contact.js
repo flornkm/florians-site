@@ -126,39 +126,39 @@ export default function Contact() {
   return (
     <div
       id="contact"
-      class="relative w-full min-h-[510px] bg-gray-50 rounded-xl overflow-hidden "
+      className="relative w-full min-h-[510px] bg-gray-50 rounded-xl overflow-hidden "
     >
-      <div class="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-gray-50 bg-opacity-90 backdrop-blur-md z-10 relative">
-        <div class="flex place-items-center gap-3">
+      <div className="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-gray-50 bg-opacity-90 backdrop-blur-md z-10 relative">
+        <div className="flex place-items-center gap-3">
           <Image
             loader={imgLoader}
             src="./images/memoji.png"
             alt="Florian Profile Avatar"
-            class="rounded-full bg-white border border-solid p-1"
+            className="rounded-full bg-white border border-solid p-1"
             width={48}
             height={48}
           />
-          <p class="text-xl font-medium">Florian</p>
+          <p className="text-xl font-medium">Florian</p>
         </div>
-        <div class="flex gap-4">
-          <Icon.Video class="text-gray-300" />
-          <Icon.Info class="text-gray-300" />
+        <div className="flex gap-4">
+          <Icon.Video className="text-gray-300" />
+          <Icon.Info className="text-gray-300" />
         </div>
       </div>
       <div
-        class="h-[360px] flex flex-col justify-end gap-4 relative mb-4"
+        className="h-[360px] flex flex-col justify-end gap-4 relative mb-4"
         ref={chatWrapper}
       >
         {messages.map((message, index) => (
           <Message key={index} msg={message.msg} type={message.type} />
         ))}
       </div>
-      <div class="w-full flex gap-2 pl-3 pr-3 min-h-[64px] place-items-center justify-between max-sm:pb-3 max-sm:flex-wrap">
+      <div className="w-full flex gap-2 pl-3 pr-3 min-h-[64px] place-items-center justify-between max-sm:pb-3 max-sm:flex-wrap">
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button onClick={() => {setArrowUp(!arrowUp)}} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all">
               <Icon.Smartphone />
-              <Icon.ChevronUp class={arrowUp ? "ml-1 transition-all rotate-0" : "ml-1 transition-all rotate-180"} size={20} />
+              <Icon.ChevronUp className={arrowUp ? "ml-1 transition-all rotate-0" : "ml-1 transition-all rotate-180"} size={20} />
             </Menu.Button>
           </div>
           <Transition
@@ -248,10 +248,10 @@ export default function Contact() {
             </Menu.Items>
           </Transition>
         </Menu>
-        <div class="w-full h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm">
+        <div className="w-full h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm">
           <input
             ref={input}
-            class="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3"
+            className="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3"
             placeholder="Enter your message"
             type="text"
             value={newMessage}
@@ -264,7 +264,7 @@ export default function Contact() {
           ></input>
           <Icon.ArrowUp
             onClick={sendMessage}
-            class="right-2 text-white bg-[#1480EB] absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-[#2795FD] transition-all"
+            className="right-2 text-white bg-[#1480EB] absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-[#2795FD] transition-all"
             size={28}
           />
         </div>

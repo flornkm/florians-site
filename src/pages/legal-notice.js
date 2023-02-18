@@ -12,10 +12,10 @@ export default function LegalNotice() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main class="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div class="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
-          <h1 class="text-2xl font-bold mb-2"> Legal Notice</h1>
-          <p class="text-lg">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
+        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
+          <h1 className="text-2xl font-bold mb-2"> Legal Notice</h1>
+          <p className="text-lg">
             For the internet presence of: designwithtech.com Responsible for
             this websites is: Florian Kiem
             <br /> Adress and phone number is blurred out because of privacy
@@ -24,7 +24,7 @@ export default function LegalNotice() {
             specific information.
           </p>
         </div>
-        <div class="h-64"></div>
+        <div className="h-64"></div>
       </main>
       <Footer />
     </>

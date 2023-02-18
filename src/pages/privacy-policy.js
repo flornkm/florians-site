@@ -12,10 +12,10 @@ export default function PrivacyPolicy() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main class="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div class="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
-          <h1 class="text-2xl font-bold mb-2">Privacy Policy</h1>
-          <p class="max-w-2xl">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
+        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
+          <h1 className="text-2xl font-bold mb-2">Privacy Policy</h1>
+          <p className="max-w-2xl">
           This Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your information when You use the
           Service and tells You about Your privacy rights and how the law
@@ -412,7 +412,7 @@ export default function PrivacyPolicy() {
           By email: florian@designwithtech.com
           </p>
         </div>
-        <div class="h-64"></div>
+        <div className="h-64"></div>
       </main>
       <Footer />
     </>
