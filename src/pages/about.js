@@ -304,8 +304,12 @@ export default function Home() {
                   height={40}
                 />
                 <div>
-                  <h3 className="font-medium text-md">Webdesigner and Developer</h3>
-                  <p className="text-sm text-gray-500">HfG Schwaebisch Gmuend</p>
+                  <h3 className="font-medium text-md">
+                    Webdesigner and Developer
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    HfG Schwaebisch Gmuend
+                  </p>
                 </div>
               </div>
               <p className="text-gray-500">2022</p>
@@ -430,10 +434,7 @@ export default function Home() {
                 ))}
               </Grid>
             </SortableContext>
-            <DragOverlay
-              adjustScale
-              style={{ transformOrigin: "0 0 ", objectFit: "contain" }}
-            >
+            <DragOverlay adjustScale={true}>
               {activeId ? <Item id={activeId} isDragging /> : null}
             </DragOverlay>
           </DndContext>
