@@ -20,8 +20,13 @@ const Item = forwardRef(
       boxShadow: isDragging ? "rgb(0 0 0 / 0.1) 0 2px 4px -2px" : "none",
       transform: isDragging ? "scale(1.05)" : "scale(1)",
       backgroundSize: "cover",
+      top: "0",
+      objectFit: "cover",
+      transformOrigin: "0 0",
+      height:
+         index === 1 || index === 2 ? "500px" : null,
       gridRow:
-        index === 1 || index === 2 ? "span 2 / span 2" : "span 1 / span 1",
+         index === 1 || index === 2 ? "span 2 / span 2" : null,
       ...style,
     };
 
@@ -105,7 +110,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 ring-gray-200 ring-1 relative bg-gray-50 border w-full h-full items-center justify-center flex flex-col rounded-xl max-md:min-h-[300px] overflow-hidden"
+            "max-md:row-span-1 max-h-[500px] ring-gray-200 ring-1 relative bg-gray-50 border items-center w-full justify-center flex flex-col rounded-xl max-md:min-h-[300px] overflow-hidden"
           }
           {...props}
         >
@@ -115,8 +120,8 @@ const Item = forwardRef(
               src="/images/maps.svg"
               alt="Maps Vector"
               className="h-full w-full object-cover pointer-events-none"
-              width={800}
-              height={600}
+              width={500}
+              height={400}
             />
           </div>
           <Icon.Globe
