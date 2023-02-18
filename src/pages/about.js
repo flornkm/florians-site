@@ -239,10 +239,10 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div className="w-full h-[35vh] pt-5 max-md:h-[200px]">
+        <div className="w-full md:pt-20 pb-4 max-md:h-[200px]">
           <RiveComponent
             src="./animations/florian_animation.riv"
-            className="max-w-[500px] h-auto max-h-[300px] object-contain m-auto "
+            className="max-w-[500px] max-md:h-64 md:h-[200px] object-contain m-auto"
           />
         </div>
         <div className="gap-16 grid grid-cols-2 max-md:grid-cols-1">
