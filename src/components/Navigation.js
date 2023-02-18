@@ -55,7 +55,7 @@ export default function Navigation(title, highlight) {
                 <Icon.Zap class="max-md:block md:hidden" size={24} />
               </Link>
             </li>
-            <li>
+            <li class="md:mr-6">
               <Link
                 class={
                   title.highlight === "About"
