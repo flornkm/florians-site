@@ -3,77 +3,77 @@ import * as Icon from "react-feather";
 
 export default function Navigation(title, highlight) {
   return (
-    <div class="w-full fixed md:border-b max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 bg-white z-50 overflow-hidden">
-      <div class="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
+    <div className="w-full fixed md:border-b max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 bg-white z-50 overflow-hidden">
+      <div className="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
-          class="flex justify-center max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden"
+          className="flex justify-center max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden"
         >
-          <span class="text-xl text-black right-8 m-0 font-medium">
+          <span className="text-xl text-black right-8 m-0 font-medium">
             Florian
           </span>
-          <span class="text-gray-500 m-0 max-md:hidden">{title.title}</span>
+          <span className="text-gray-500 m-0 max-md:hidden">{title.title}</span>
         </Link>
-        <div class="flex max-sm:w-full">
-          <ul class="flex gap-2 place-items-center font-medium max-md:justify-between max-md:w-full">
+        <div className="flex max-sm:w-full">
+          <ul className="flex gap-2 place-items-center font-medium max-md:justify-between max-md:w-full">
             <li>
               <Link
-                class={
+                className={
                   title.highlight === "Home"
                     ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/"
               >
-                <span class="md:block max-md:hidden">Home</span>
-                <Icon.Home class="max-md:block md:hidden" size={24} />
+                <span className="md:block max-md:hidden">Home</span>
+                <Icon.Home className="max-md:block md:hidden" size={24} />
               </Link>
             </li>
             <li>
               <Link
-                class={
+                className={
                   title.highlight === "Projects"
                     ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/#projects"
               >
-                <span class="md:block max-md:hidden">Projects</span>
-                <Icon.Folder class="max-md:block md:hidden" size={24} />
+                <span className="md:block max-md:hidden">Projects</span>
+                <Icon.Folder className="max-md:block md:hidden" size={24} />
               </Link>
             </li>
             <li>
               <Link
-                class={
+                className={
                   title.highlight === "Concepts"
                     ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/concepts"
               >
-                <span class="md:block max-md:hidden">Concepts</span>
-                <Icon.Zap class="max-md:block md:hidden" size={24} />
+                <span className="md:block max-md:hidden">Concepts</span>
+                <Icon.Zap className="max-md:block md:hidden" size={24} />
               </Link>
             </li>
-            <li class="md:mr-6">
+            <li className="md:mr-6">
               <Link
-                class={
+                className={
                   title.highlight === "About"
                     ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2"
                 }
                 href="/about"
               >
-                <span class="md:block max-md:hidden">About</span>
-                <Icon.User class="max-md:block md:hidden" size={24} />
+                <span className="md:block max-md:hidden">About</span>
+                <Icon.User className="max-md:block md:hidden" size={24} />
               </Link>
             </li>
             <Link
-              class="bg-[#1280EC] text-white sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-[#2795FE] transition-all flex"
+              className="bg-[#1280EC] text-white sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-[#2795FE] transition-all flex"
               href="/#contact"
             >
-              <span class="md:block max-sm:hidden">Contact</span>
-              <Icon.MessageCircle class="max-md:block sm:hidden" size={24} />
+              <span className="md:block max-sm:hidden">Contact</span>
+              <Icon.MessageCircle className="max-md:block sm:hidden" size={24} />
             </Link>
           </ul>
         </div>

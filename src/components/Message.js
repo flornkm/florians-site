@@ -1,9 +1,9 @@
 export default function Message({ msg, type }) {
   return (
     <>
-      {type === "left" && <div class={"p-2 rounded-xl bg-[#1280EC] text-white relative bottom-[16px] left-8 transition-all max-w-[300px] max-sm:max-w-[70%] self-start"}>
+      {type === "left" && <div className={"p-2 rounded-xl bg-[#1280EC] text-white relative bottom-[16px] left-8 transition-all max-w-[300px] max-sm:max-w-[70%] self-start"}>
         {msg}
-        <div class="absolute bottom-[-2px] left-[-8px]">
+        <div className="absolute bottom-[-2px] left-[-8px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="19"
@@ -18,9 +18,9 @@ export default function Message({ msg, type }) {
           </svg>
         </div>
       </div>}
-      {type === "right" && <div class="p-2 rounded-xl bg-[#1280EC] text-white relative bottom-4 right-8 transition-all max-w-[300px] self-end">
+      {type === "right" && <div className="p-2 rounded-xl bg-[#1280EC] text-white relative bottom-4 right-8 transition-all max-w-[300px] self-end">
         {msg}
-        <div class="absolute bottom-[-2px] right-[-8px] scale-x-[-1]">
+        <div className="absolute bottom-[-2px] right-[-8px] scale-x-[-1]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="19"

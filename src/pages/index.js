@@ -65,24 +65,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main class="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div class="h-[70vh] flex place-items-center justify-between">
-          <div class="md:w-[50%]">
-            <h1 class="text-5xl font-bold mb-6 leading-tight">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
+        <div className="h-[70vh] flex place-items-center justify-between">
+          <div className="md:w-[50%]">
+            <h1 className="text-5xl font-bold mb-6 leading-tight">
               Hey, I'm Florian
             </h1>
-            <h2 class="text-3xl font-medium text-gray-700">
+            <h2 className="text-3xl font-medium text-gray-700">
               A designer and developer building digital products.
             </h2>
-            <div class="h-8"></div>
+            <div className="h-8"></div>
             <Link
-              class="p-4 w-full max-w-[400px] flex place-items-center ring-1 ring-gray-200 gap-6 bg-gray-50 transition-all hover:bg-gray-100 hover:border-gray-200 border-solid rounded-xl"
+              className="p-4 w-full max-w-[400px] flex place-items-center ring-1 ring-gray-200 gap-6 bg-gray-50 transition-all hover:bg-gray-100 hover:border-gray-200 border-solid rounded-xl"
               href={"./#contact"}
             >
-              <div class="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-red-600 opacity-75">
-                <div class="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-red-500 opacity-75"></div>
+              <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-red-600 opacity-75">
+                <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-red-500 opacity-75"></div>
               </div>
-              <p class="font-medium text-sm">
+              <p className="font-medium text-sm">
                 Currently I am looking for internship opportunities in Europe or
                 North America.
               </p>
@@ -92,77 +92,77 @@ export default function Home() {
             loader={imgLoader}
             src="./images/main_header.png"
             alt="Header Image of Florian as Cartoon Character"
-            class="mix-blend-exclusion max-md:hidden"
+            className="mix-blend-exclusion max-md:hidden"
             width={250}
             height={250}
           />
         </div>
         <div>
-          <h2 class="text-2xl font-medium text-black">
+          <h2 className="text-2xl font-medium text-black">
             As a designer and developer I see my role in leading projects that
             help companies to achieve their ambitious goals in creating
             something functionally and technologically useful for humanity
           </h2>
         </div>
-        <div class="h-64"></div>
+        <div className="h-64"></div>
         <div>
-          <div class="flex justify-between pb-4">
-            <h2 class="text-3xl font-medium text-black">Some of my projects</h2>
-            <div class="max-md:hidden flex gap-6 relative place-items-center pl-2 pr-2">
+          <div className="flex justify-between pb-4">
+            <h2 className="text-3xl font-medium text-black">Some of my projects</h2>
+            <div className="max-md:hidden flex gap-6 relative place-items-center pl-2 pr-2">
               <Icon.Grid
                 onClick={changeItem}
-                class="cursor-pointer text-gray-600 hover:text-black transition-all relative z-10"
+                className="cursor-pointer text-gray-600 hover:text-black transition-all relative z-10"
               />
               <Icon.List
                 onClick={changeItem}
-                class="cursor-pointer text-gray-600 hover:text-black transition-all relative z-10"
+                className="cursor-pointer text-gray-600 hover:text-black transition-all relative z-10"
               />
               <div
                 ref={rect}
-                class="w-[40px] h-[40px] left-0 top-[50%] translate-y-[-50%] rounded-md absolute bg-gray-100 border border-gray-200 transition-all"
+                className="w-[40px] h-[40px] left-0 top-[50%] translate-y-[-50%] rounded-md absolute bg-gray-100 border border-gray-200 transition-all"
               ></div>
             </div>
           </div>
           <div ref={projects} id="projects">
             <div
-              class={
+              className={
                 !item ? "grid gap-8 md:grid-cols-2" : "grid gap-2 grid-cols-1"
               }
             >
               <Link
                 href={"./projects/boost"}
-                class={
+                className={
                   !item
                     ? "group"
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
                     src="./images/boost/boost.jpg"
                     alt="Photo of the Boost Device"
-                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
                 <div>
-                  <div class="flex place-items-center gap-1">
-                    <h3 class="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                  <div className="flex place-items-center gap-1">
+                    <h3 className="text-xl font-medium pb-1">Boost</h3>
+                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
-                  <p class="pb-2 text-gray-600">
+                  <p className="pb-2 text-gray-600">
                     Mobile application and hardware device to calculate
                     nutrition intake and provide personalized nutrition
                   </p>
 
-                  <div class="flex gap-4 text-xs text-gray-500">
-                    <div class="flex gap-2 place-items-center">
+                  <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.Calendar width={16} />
                       <p>Q1 2023</p>
                     </div>
-                    <div class="flex gap-2 place-items-center">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.MapPin width={16} />
                       <p>Schwaebisch Gmuend</p>
                     </div>
@@ -172,37 +172,37 @@ export default function Home() {
 
               <Link
                 href={"/projects/curations"}
-                class={
+                className={
                   !item
                     ? "group"
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
                     src="./images/curations/curations.jpg"
                     alt="Image of Curations in a Mockup"
-                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
                 <div>
-                  <div class="flex place-items-center gap-2">
-                    <h3 class="text-xl font-medium pb-1">Curations</h3>
-                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                  <div className="flex place-items-center gap-2">
+                    <h3 className="text-xl font-medium pb-1">Curations</h3>
+                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
-                  <p class="pb-2 text-gray-600">
+                  <p className="pb-2 text-gray-600">
                     Website featuring useful curations for designers and
                     developers
                   </p>
-                  <div class="flex gap-4 text-xs text-gray-500">
-                    <div class="flex gap-2 place-items-center">
+                  <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.Calendar width={16} />
                       <p>Q4 2022</p>
                     </div>
-                    <div class="flex gap-2 place-items-center">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.MapPin width={16} />
                       <p>Schwaebisch Gmuend</p>
                     </div>
@@ -212,36 +212,36 @@ export default function Home() {
 
               <Link
                 href={"/projects/ambient-chat"}
-                class={
+                className={
                   !item
                     ? "group"
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
                     src="./images/ambient_chat/ambient_chat.jpg"
                     alt="Image of Curations in a Mockup"
-                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
                 <div>
-                  <div class="flex place-items-center gap-2">
-                    <h3 class="text-xl font-medium pb-1">Ambient Chat</h3>
-                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                  <div className="flex place-items-center gap-2">
+                    <h3 className="text-xl font-medium pb-1">Ambient Chat</h3>
+                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
-                  <p class="pb-2 text-gray-600">
+                  <p className="pb-2 text-gray-600">
                     Realtime chat application with artificial intelligence
                   </p>
-                  <div class="flex gap-4 text-xs text-gray-500">
-                    <div class="flex gap-2 place-items-center">
+                  <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.Calendar width={16} />
                       <p>Q2 2022</p>
                     </div>
-                    <div class="flex gap-2 place-items-center">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.MapPin width={16} />
                       <p>Schwaebisch Gmuend</p>
                     </div>
@@ -251,37 +251,37 @@ export default function Home() {
 
               <Link
                 href={"/projects/homebility"}
-                class={
+                className={
                   !item
                     ? "group"
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div class="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-white shadow-md ring-1 ring-gray-100 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
                     src="./images/homebility/homebility.jpg"
                     alt="Image of Curations in a Mockup"
-                    class="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
                 <div>
-                  <div class="flex place-items-center gap-2">
-                    <h3 class="text-xl font-medium pb-1">Homebility</h3>
-                    <Icon.ArrowRight class="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                  <div className="flex place-items-center gap-2">
+                    <h3 className="text-xl font-medium pb-1">Homebility</h3>
+                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
                   </div>
-                  <p class="pb-2 text-gray-600">
+                  <p className="pb-2 text-gray-600">
                     Accessible smarthome application with an easy to use
                     interface
                   </p>
-                  <div class="flex gap-4 text-xs text-gray-500">
-                    <div class="flex gap-2 place-items-center">
+                  <div className="flex gap-4 text-xs text-gray-500">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.Calendar width={16} />
                       <p>Q2 2022</p>
                     </div>
-                    <div class="flex gap-2 place-items-center">
+                    <div className="flex gap-2 place-items-center">
                       <Icon.MapPin width={16} />
                       <p>Schwaebisch Gmuend</p>
                     </div>
@@ -291,11 +291,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div class="h-64"></div>
-        <div class="flex gap-8 justify-between max-md:flex-col ">
-          <div class="md:max-w-[50%]">
-            <h2 class="text-2xl font-medium mb-4">More to my person</h2>
-            <p class="text-gray-600">
+        <div className="h-64"></div>
+        <div className="flex gap-8 justify-between max-md:flex-col ">
+          <div className="md:max-w-[50%]">
+            <h2 className="text-2xl font-medium mb-4">More to my person</h2>
+            <p className="text-gray-600">
               Being interested in technology and design would be a big
               understatement. I love creating useful products, trying out new
               things and adjusting key levers as long as necessary to give
@@ -309,15 +309,15 @@ export default function Home() {
               <Link
                 href="https://read.cv/floriandwt"
                 target={"_blank"}
-                class="text-[#1281ed] opacity-100 inline-block font-medium rounded-md transition-opacity hover:opacity-80"
+                className="text-[#1281ed] opacity-100 inline-block font-medium rounded-md transition-opacity hover:opacity-80"
               >
                 Read.cv
               </Link>
               .
             </p>
-            <div class="h-8"></div>
+            <div className="h-8"></div>
             <Link
-              class="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300"
+              className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300"
               href="./about"
             >
               About me
@@ -327,27 +327,27 @@ export default function Home() {
             loader={imgLoader}
             src="./images/florian_student.jpg"
             alt="Image of Florian as a student"
-            class="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all rotate-3"
+            className="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all rotate-3"
             width={250}
             height={600}
           />
         </div>
-        <div class="h-64"></div>
+        <div className="h-64"></div>
         <div
-          class={
+          className={
             (mailActive
               ? "fixed right-0 bottom-8 z-40 pointer-events-none pr-[10%] opacity-100 max-md:hidden"
               : "opacity-0 pr-[10%] bottom-0") + " transition-all duration-300 max-md:hidden"
           }
         >
-          <div class="max-w-6xl flex justify-end w-full">
+          <div className="max-w-6xl flex justify-end w-full">
             <div
               onClick={copyMail}
-              class="pr-4 pl-4 pt-3 pb-3 group pointer-events-auto bg-white bg-opacity-75 rounded-lg backdrop-blur-xl ring-1 ring-gray-300 cursor-pointer flex gap-8 justify-between place-items-center"
+              className="pr-4 pl-4 pt-3 pb-3 group pointer-events-auto bg-white bg-opacity-75 rounded-lg backdrop-blur-xl ring-1 ring-gray-300 cursor-pointer flex gap-8 justify-between place-items-center"
             >
-              <div class="flex flex-col">
-                <p class="font-bold group-hover:hidden">{mailText[0]}</p>
-                <p class="font-bold hidden group-hover:block">{mailText[1]}</p>
+              <div className="flex flex-col">
+                <p className="font-bold group-hover:hidden">{mailText[0]}</p>
+                <p className="font-bold hidden group-hover:block">{mailText[1]}</p>
                 <p>florian@designwithtech.com</p>
               </div>
               <Icon.Mail width={24} />
@@ -357,7 +357,7 @@ export default function Home() {
         <div ref={contact} id="contact">
           <Contact />
         </div>
-        <div class="h-64"></div>
+        <div className="h-64"></div>
       </main>
       <Footer />
     </>
