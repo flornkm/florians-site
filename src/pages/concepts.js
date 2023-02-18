@@ -28,18 +28,42 @@ export default function Home() {
         <div class="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 class="text-4xl font-bold text-left mb-3">Concepts</h1>
           <h2 class="text-2xl font-medium text-left text-gray-500">
-            Some of my ideas that are not as finished as projects.
+            These are like projects, just not as finished.
           </h2>
         </div>
-        <div class="grid grid-cols-3 gap-3 min-h-96">
-          <div class="bg-gray-100 rounded-md w-full h-[16] p-2 cursor-pointer transition-all hover:bg-gray-200">
-            Empty
+        <div class="hidden grid-cols-3 gap-3 min-h-96 max-md:grid-cols-2 max-sm:grid-cols-1">
+          <div class="bg-transparent rounded-2xl w-full h-[16] p-8 cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-col gap-2 place-items-center text-gray-600 hover:text-black">
+            <Image
+              loader={imgLoader}
+              src="./images/concept_icons/concept-icon_nutri.svg"
+              alt="Nutri Blueprint Icon"
+              class="rounded-2xl"
+              width={64}
+              height={64}
+              />
+              <p class="text-base font-medium text-center">Nutri</p>
           </div>
-          <div class="bg-gray-100 rounded-md w-full h-[16] p-2 cursor-pointer transition-all hover:bg-gray-200">
-            Empty
+          <div class="bg-transparent rounded-2xl w-full h-[16] p-8 cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-col gap-2 place-items-center text-gray-600 hover:text-black">
+            <Image
+              loader={imgLoader}
+              src="./images/concept_icons/concept-icon_stackoverflow.svg"
+              alt="Nutri Blueprint Icon"
+              class="rounded-2xl"
+              width={64}
+              height={64}
+              />
+              <p class="text-base font-medium text-center">Stackoverflow</p>
           </div>
-          <div class="bg-gray-100 rounded-md w-full h-[16] p-2 cursor-pointer transition-all hover:bg-gray-200">
-            Empty
+          <div class="bg-transparent rounded-2xl w-full h-[16] p-8 cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-col gap-2 place-items-center text-gray-600 hover:text-black">
+            <Image
+              loader={imgLoader}
+              src="./images/concept_icons/concept-icon_solarized.svg"
+              alt="Nutri Blueprint Icon"
+              class="rounded-2xl"
+              width={64}
+              height={64}
+              />
+              <p class="text-base font-medium text-center">Solarized</p>
           </div>
         </div>
       </main>

@@ -71,19 +71,19 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main class="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div class="w-full h-[35vh] pt-5">
+        <div class="w-full h-[35vh] pt-5 max-md:h-[200px]">
           <RiveComponent
             src="./animations/florian_animation.riv"
-            class="max-w-[500px] h-auto object-contain m-auto"
+            class="max-w-[500px] h-auto max-h-[300px] object-contain m-auto "
           />
         </div>
         <div class="gap-16 grid grid-cols-2 max-md:grid-cols-1">
           <div>
-            <div class="flex gap-8 mb-6 max-lg:flex-col">
+            <div class="flex gap-8 mb-6 max-lg:flex-col max-md:gap-4">
               <Image
                 loader={imgLoader}
                 src="./images/florian_student.jpg"
-                class="inline-flex object-cover object-top max-h-64"
+                class="inline-flex object-cover object-top max-h-64 max-md:w-20 max-md:h-20 max-md:rounded-full max-md:ring-1 max-md:ring-gray-300"
                 width={200}
                 height={100}
               />
@@ -202,7 +202,7 @@ export default function Home() {
           </div>
           <div class="flex flex-col gap-4">
             <h2 class="font-medium text-lg">Connect</h2>
-            <div class="flex gap-4">
+            <div class="flex gap-4 max-sm:flex-col">
               <Link
                 class="font-medium transition-all text-black hover:opacity-75 border-b-black group"
                 href={"#"}
@@ -240,7 +240,7 @@ export default function Home() {
           </div>
         </div>
         <div class="h-32"></div>
-        <div class="hidden">
+        <div class="block">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}

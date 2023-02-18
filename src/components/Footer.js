@@ -57,7 +57,7 @@ export default function Footer() {
             Journal
           </Link>
           <Link
-            href={"#"}
+            href={"/colophon"}
             class="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2"
           >
             Colophon
@@ -70,8 +70,8 @@ export default function Footer() {
           {new Date().getFullYear()} Design With Tech. All Rights Reserved.
         </p>
         <div class="flex gap-8 font-medium">
-            <Link href={"#"} class="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2">Legal Notice</Link>
-            <Link href={"#"} class="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2">Privacy Policy</Link>
+            <Link href={"/legal-notice"} class="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2">Legal Notice</Link>
+            <Link href={"/privacy-policy"} class="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2">Privacy Policy</Link>
         </div>
       </div>
     </div>

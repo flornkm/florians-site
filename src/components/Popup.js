@@ -1,8 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
-export default function usePopup(popupOpen) {
-  let [isOpen, setIsOpen] = useState(true)
+export default function Popup(popupOpen) {
+  let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
     setIsOpen(false)

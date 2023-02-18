@@ -76,7 +76,7 @@ export default function Home() {
             </h2>
             <div class="h-8"></div>
             <Link
-              class="p-4 w-full max-w-[400px] flex place-items-center gap-6 bg-gray-100 border border-gray-300 transition-all hover:bg-gray-50 hover:border-gray-200 border-solid rounded-xl"
+              class="p-4 w-full max-w-[400px] flex place-items-center ring-1 ring-gray-200 gap-6 bg-gray-50 transition-all hover:bg-gray-100 hover:border-gray-200 border-solid rounded-xl"
               href={"./#contact"}
             >
               <div class="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-red-600 opacity-75">
@@ -336,8 +336,8 @@ export default function Home() {
         <div
           class={
             (mailActive
-              ? "fixed right-0 bottom-8 z-40 pointer-events-none pr-[10%] opacity-100"
-              : "opacity-0 pr-[10%] bottom-0") + " transition-all duration-300"
+              ? "fixed right-0 bottom-8 z-40 pointer-events-none pr-[10%] opacity-100 max-md:hidden"
+              : "opacity-0 pr-[10%] bottom-0") + " transition-all duration-300 max-md:hidden"
           }
         >
           <div class="max-w-6xl flex justify-end w-full">
