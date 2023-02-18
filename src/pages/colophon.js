@@ -67,6 +67,17 @@ export default function Colophon() {
                     className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
                   />
                 </Link>
+                <Link
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  href={"https://www.nilseller.com/"}
+                  target="_blank"
+                >
+                  Nils Eller
+                  <Icon.ArrowUpRight
+                    size={20}
+                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                  />
+                </Link>
               </div>
             </div>
             <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1"></div>
