@@ -185,7 +185,7 @@ export default function Project({
           </div>
           <div className="h-32"></div>
           <div className="relative">
-            <h2 className="text-2xl font-medium text-left mb-2 xl:sticky top-24 max-xl:mb-12 left-0">
+            <h2 className="text-2xl font-medium text-left mb-2 xl:sticky top-24 max-xl:mb-8 left-0">
               The Process
             </h2>
             <div className="w-full flex justify-end">

@@ -15,7 +15,7 @@ import Autoplay from "embla-carousel-autoplay";
 const Item = forwardRef(
   ({ id, index, withOpacity, isDragging, style, ...props }, ref) => {
     const inlineStyles = {
-      opacity: withOpacity ? "0.5" : "1",
+      opacity: isDragging ? "0.7" : "1",
       cursor: isDragging ? "grabbing" : "grab",
       boxShadow: isDragging ? "rgb(0 0 0 / 0.1) 0 2px 4px -2px" : "none",
       transform: isDragging ? "scale(1.05)" : "scale(1)",
@@ -23,8 +23,6 @@ const Item = forwardRef(
       top: "0",
       objectFit: "cover",
       transformOrigin: "0 0",
-      height:
-         index === 1 || index === 2 ? "500px" : null,
       gridRow:
          index === 1 || index === 2 ? "span 2 / span 2" : null,
       ...style,
@@ -110,7 +108,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 max-h-[500px] ring-gray-200 ring-1 relative bg-gray-50 border items-center w-full justify-center flex flex-col rounded-xl max-md:min-h-[300px] overflow-hidden"
+            "max-md:row-span-1 overflow-hidden border-gray-200 relative bg-gray-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px]"
           }
           {...props}
         >
@@ -177,11 +175,11 @@ const Item = forwardRef(
             draggable={false}
           >
             <div className="embla__container flex h-full w-full gap-0">
-              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-pink-400 bg-[url('/images/slider/photo_arduino.jpg')]"></div>
-              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-pink-400 bg-[url('/images/slider/photo_bakery.jpg')]"></div>
-              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-pink-400 bg-[url('/images/slider/photo_church.jpg')]"></div>
-              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-pink-400 bg-[url('/images/slider/photo_croatia.jpg')]"></div>
-              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-pink-400 bg-[url('/images/slider/photo_room.jpg')]"></div>
+              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-[url('/images/slider/photo_arduino.jpg')] bg-center"></div>
+              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-[url('/images/slider/photo_bakery.jpg')] bg-center"></div>
+              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-[url('/images/slider/photo_church.jpg')] bg-center"></div>
+              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-[url('/images/slider/photo_croatia.jpg')] bg-center"></div>
+              <div className="embla__slide flex-[0_0_100%] w-full min-w-0 bg-cover bg-[url('/images/slider/photo_room.jpg')] bg-center"></div>
             </div>
           </div>
           <Icon.Image
@@ -237,13 +235,13 @@ const Item = forwardRef(
               play: (
                 <Icon.Play
                   size={40}
-                  className="bg-black rounded-md p-2 text-white transition-all hover:bg-gray-900"
+                  className="bg-black rounded-full p-2 text-white transition-all hover:bg-gray-900"
                 />
               ),
               pause: (
                 <Icon.Pause
                   size={40}
-                  className="bg-black rounded-md p-2 text-white transition-all hover:bg-gray-900"
+                  className="bg-black rounded-full p-2 text-white transition-all hover:bg-gray-900"
                 />
               ),
             }}
