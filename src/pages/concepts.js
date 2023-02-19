@@ -29,6 +29,11 @@ export default function Home() {
       icon: "./images/concept_icons/concept-icon_nutri.svg",
     },
     {
+      title: "HeartbeatOS",
+      description: "Heart Simulator & Monitoring",
+      icon: "./images/concept_icons/concept-icon_heartbeat.svg",
+    },
+    {
       title: "Stackoverflow",
       description: "Redesign & Extension",
       icon: "./images/concept_icons/concept-icon_stackoverflow.svg",
@@ -108,6 +113,29 @@ export default function Home() {
           url: "https://homicides-visualization.designwithtech.com/",
         },
       ];
+    } else if (concept.title === "HeartbeatOS") {
+      currentConcept.current.collaborators = ["Anton"];
+      currentConcept.current.title = "HeartbeatOS";
+      currentConcept.current.shortDescription = "Heart Simulator & Monitoring";
+      currentConcept.current.icon =
+        "./images/concept_icons/concept-icon_heartbeat.svg";
+      currentConcept.current.mainImages = [
+        "./images/heartbeat/heartbeat_mockup.jpg",
+        "./images/heartbeat/heartbeat_interface.jpg",
+        "./images/heartbeat/heartbeat_documentation.jpg",
+      ];
+      currentConcept.current.text =
+        "A heartbeat sensor and pulse sensor communication system that utilizes cutting-edge technology to establish a seamless connection between the two devices. Our project is built on Microsoft Azure Services, offering a reliable and secure foundation for this innovative communication system.";
+      currentConcept.current.links = [
+        {
+          text: "Frontend",
+          url: "https://heartbeat-frontend.azurewebsites.net/",
+        },
+        {
+          text: "Documentation",
+          url: "https://heartbeat-documentation.vercel.app/",
+        },
+      ];
     }
     setPopupState(true);
   };
@@ -133,8 +161,7 @@ export default function Home() {
           </h2>
         </div>
         <div className="min-h-96 flex flex-col place-items-start w-full gap-4">
-          {domLoaded &&
-            concepts.map((concept, index) => (
+          {concepts.map((concept, index) => (
               <div
                 key={index}
                 onClick={() => {
