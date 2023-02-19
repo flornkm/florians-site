@@ -65,7 +65,7 @@ export default function Home() {
             Smaller creations and ideas.
           </h2>
         </div>
-        <div className="min-h-96 flex flex-col place-items-start w-full gap-4">
+        <div className="min-h-96 hidden flex-col place-items-start w-full gap-4">
           {domLoaded &&
             shuffledConcepts.map((concept, index) => (
               <div
