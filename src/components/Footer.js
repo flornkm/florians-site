@@ -54,7 +54,7 @@ export default function Footer() {
                 }}
                 className="w-full flex place-items-center justify-center rounded-lg border bg-transparent border-zinc-600 px-3 py-2.5 text-sm font-medium text-white hover:bg-zinc-700 transition-all dark:bg-transparent dark:border-gray-800 dark:text-white dark:hover:bg-gray-900"
               >
-                Toggle Darkmode
+                Toggle Mode
                 <Icon.ChevronUp
                   className={
                     arrowUp
@@ -90,10 +90,9 @@ export default function Footer() {
                           "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center"
                         )}
                         onClick={() => {
-                          if (localStorage.getItem("color-theme")) {
                             document.documentElement.classList.remove("dark");
                             localStorage.setItem("color-theme", "light");
-                          }
+                            setArrowUp(false);
                         }}
                       >
                         <Icon.Sun size={16} />
@@ -112,10 +111,9 @@ export default function Footer() {
                           "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center"
                         )}
                         onClick={() => {
-                          if (localStorage.getItem("color-theme")) {
                             document.documentElement.classList.add("dark");
                             localStorage.setItem("color-theme", "dark");
-                          }
+                            setArrowUp(false);
                         }}
                       >
                         <Icon.Moon size={16} />
@@ -135,8 +133,10 @@ export default function Footer() {
                         )}
                         onClick={() => {
                           if (localStorage.getItem("color-theme")) {
-                            localStorage.removeItem('color-theme')
+                            localStorage.removeItem('color-theme');
+                            window.location.reload();
                           }
+                          setArrowUp(false);
                         }}
                       >
                         <Icon.Circle size={16} />
