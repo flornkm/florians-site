@@ -107,7 +107,7 @@ export default function Home() {
         <div className="h-64"></div>
         <div>
           <div className="flex justify-between pb-4">
-            <h2 className="text-3xl font-medium text-black">Some of my projects</h2>
+            <h2 className="text-3xl font-semibold text-black">Some of my projects</h2>
             <div className="max-md:hidden flex gap-6 relative place-items-center pl-2 pr-2">
               <Icon.Grid
                 onClick={changeItem}
@@ -294,7 +294,7 @@ export default function Home() {
         <div className="h-64"></div>
         <div className="flex gap-8 justify-between max-md:flex-col ">
           <div className="md:max-w-[50%]">
-            <h2 className="text-2xl font-medium mb-4">More to my person</h2>
+            <h2 className="text-2xl font-semibold mb-4">More to my person</h2>
             <p className="text-gray-600">
               Being interested in technology and design would be a big
               understatement. I love creating useful products, trying out new
@@ -325,7 +325,7 @@ export default function Home() {
           </div>
           <Image
             loader={imgLoader}
-            src="./images/florian_student.jpg"
+            src="./images/photo_memoji.jpg"
             alt="Image of Florian as a student"
             className="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all duration-100 ease-in-out rotate-3 md:hover:-rotate-3"
             width={250}
@@ -346,8 +346,8 @@ export default function Home() {
               className="pr-4 pl-4 pt-3 pb-3 group pointer-events-auto bg-white bg-opacity-75 rounded-lg backdrop-blur-xl ring-1 ring-gray-300 cursor-pointer flex gap-8 justify-between place-items-center"
             >
               <div className="flex flex-col">
-                <p className="font-bold group-hover:hidden">{mailText[0]}</p>
-                <p className="font-bold hidden group-hover:block">{mailText[1]}</p>
+                <p className="font-semibold group-hover:hidden">{mailText[0]}</p>
+                <p className="font-semibold hidden group-hover:block">{mailText[1]}</p>
                 <p>florian@designwithtech.com</p>
               </div>
               <Icon.Mail width={24} />
