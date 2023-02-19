@@ -327,7 +327,7 @@ export default function Home() {
             loader={imgLoader}
             src="./images/florian_student.jpg"
             alt="Image of Florian as a student"
-            className="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all rotate-3"
+            className="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all duration-100 ease-in-out rotate-3 md:hover:-rotate-3"
             width={250}
             height={600}
           />

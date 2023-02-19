@@ -250,7 +250,7 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div className="w-full md:pt-20 pb-4 max-md:h-[200px]">
+        <div className="w-full md:pt-20 pb-4 max-md:h-[200px] relative z-0">
           <RiveComponent
             src="./animations/florian_animation.riv"
             className="max-w-[500px] max-md:h-64 md:h-[200px] object-contain m-auto"
@@ -262,7 +262,7 @@ export default function Home() {
               <Image
                 loader={imgLoader}
                 src="./images/florian_student.jpg"
-                className="inline-flex object-cover object-top max-h-64 max-md:w-20 max-md:h-20 max-md:rounded-full max-md:ring-1 max-md:ring-gray-300"
+                className="inline-flex object-cover object-top max-h-64 max-md:w-20 max-md:h-20 max-md:rounded-full max-md:ring-1 max-md:ring-gray-300 relative z-10"
                 width={200}
                 height={100}
               />
