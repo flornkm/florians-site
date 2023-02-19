@@ -250,7 +250,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
         <div className="w-full md:pt-20 pb-4 max-md:h-[200px] relative z-0">
           <RiveComponent
             src="./animations/florian_animation.riv"
@@ -269,8 +269,8 @@ export default function Home() {
               />
               <div>
                 <h1 className="text-2xl font-semibold mb-3">About me</h1>
-                <p className="text-gray-600">
-                  <span className="font-bold italic text-black">
+                <p className="text-gray-600 dark:text-gray-300">
+                  <span className="font-bold italic text-black dark:text-white">
                     Nice to meet you!
                   </span>{" "}
                   - My name is Florian and I am currently 22 years old. I am a
@@ -281,7 +281,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Beside my desire to work between design and code I love working
               with CSS and creating animations for web and mobile applications.
             </p>
@@ -293,7 +293,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/company_metahype.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -311,7 +311,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/company_hfg.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -331,7 +331,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/company_comondo.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -349,7 +349,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/company_videoeditor.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -370,7 +370,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/project_curations.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -388,7 +388,7 @@ export default function Home() {
             <h2 className="font-medium text-lg">Connect</h2>
             <div className="flex gap-4 max-sm:flex-col">
               <Link
-                className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                 href={"#"}
                 target="_blank"
               >
@@ -399,7 +399,7 @@ export default function Home() {
                 />
               </Link>
               <Link
-                className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                 href={"#"}
                 target="_blank"
               >
@@ -410,7 +410,7 @@ export default function Home() {
                 />
               </Link>
               <Link
-                className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                 href={"#"}
                 target="_blank"
               >
@@ -479,7 +479,7 @@ export default function Home() {
                 >
                   <Dialog.Panel
                     ref={globePopupContainer}
-                    className="w-full ring-4 ring-white max-w-5xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t from-sky-400 to-sky-300 text-left align-middle shadow-xl transition-all relative min-h-[600px]"
+                    className="w-full ring-4 ring-white max-w-5xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t from-sky-400 to-sky-300 text-left align-middle shadow-xl transition-all relative min-h-[600px] dark:ring-gray-800"
                   >
                     <Globe
                       ref={globeEl}
@@ -502,7 +502,7 @@ export default function Home() {
                     />
                     <button
                       type="button"
-                      className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-gray-900 focus:outline-none right-2 top-2"
+                      className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-gray-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-gray-100 dark:text-black"
                       onClick={closeModal}
                     >
                       <Icon.X size={24} />

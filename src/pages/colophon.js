@@ -14,7 +14,7 @@ export default function Colophon() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 className="text-2xl font-semibold mb-2">Colophon</h1>
           <p className="text-base mb-10">
@@ -29,7 +29,7 @@ export default function Colophon() {
               <h2 className="text-lg font-medium">Typography</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-2">
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://fonts.google.com/specimen/Plus+Jakarta+Sans"}
                   target="_blank"
                 >
@@ -41,12 +41,12 @@ export default function Colophon() {
                 </Link>
               </div>
             </div>
-            <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1"></div>  
+            <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1 dark:bg-gray-800"></div>  
             <div className="flex justify-between w-full flex-wrap gap-4">
               <h2 className="text-lg font-medium">Photography</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-2">
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"#"}
                   target="_blank"
                 >
@@ -57,7 +57,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://www.marcrufeis.de/"}
                   target="_blank"
                 >
@@ -68,7 +68,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://www.nilseller.com/"}
                   target="_blank"
                 >
@@ -80,12 +80,12 @@ export default function Colophon() {
                 </Link>
               </div>
             </div>
-            <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1"></div>
+            <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1 dark:bg-gray-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-2">
               <h2 className="text-lg font-medium">Tech Stack</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-2">
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://nextjs.org/"}
                   target="_blank"
                 >
@@ -96,7 +96,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://tailwindcss.com/"}
                   target="_blank"
                 >
@@ -107,7 +107,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://vercel.com/"}
                   target="_blank"
                 >
@@ -118,7 +118,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://formspree.io/"}
                   target="_blank"
                 >
@@ -130,12 +130,12 @@ export default function Colophon() {
                 </Link>
               </div>
             </div>
-            <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1"></div>
+            <div className="h-[1px] bg-gray-200 w-full mt-1 mb-1 dark:bg-gray-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-4">
               <h2 className="text-lg font-medium">Inspiration</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-2">
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://linusrogge.com/"}
                   target="_blank"
                 >
@@ -146,7 +146,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://www.marco.fyi/"}
                   target="_blank"
                 >
@@ -157,7 +157,7 @@ export default function Colophon() {
                   />
                 </Link>
                 <Link
-                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group"
+                  className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://samuelkraft.com/"}
                   target="_blank"
                 >

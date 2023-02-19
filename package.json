@@ -15,6 +15,7 @@
     "@next/font": "^13.1.6",
     "@rive-app/canvas": "^1.0.98",
     "@rive-app/react-canvas": "^3.0.35",
+    "@vercel/analytics": "^0.1.10",
     "analog-clock-react": "^1.3.0",
     "copy-to-clipboard": "^3.3.3",
     "embla-carousel-autoplay": "^7.0.9",

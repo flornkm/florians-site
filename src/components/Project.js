@@ -66,7 +66,7 @@ export default function Project({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={projectTitle} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 className="text-4xl font-bold text-left mb-3">{projectTitle}</h1>
           <h2 className="text-2xl font-medium text-left text-gray-500 mb-5">
@@ -81,9 +81,9 @@ export default function Project({
                 target="_blank"
                 className="group relative transition-all"
               >
-                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200">
+                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
                   <span className="z-10 relative">Anton Stallbörger</span>
-                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
+                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                 </div>
                 <Image
                   loader={imgLoader}
@@ -101,9 +101,9 @@ export default function Project({
                 target="_blank"
                 className="group relative transition-all"
               >
-                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200">
+                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
                   <span className="z-10 relative">Nils Eller</span>
-                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
+                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                 </div>
                 <Image
                   loader={imgLoader}
@@ -120,9 +120,9 @@ export default function Project({
                 href={"#"}
                 className="group relative transition-all"
               >
-                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200">
+                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
                   <span className="z-10 relative">Alice Sopp</span>
-                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45"></div>
+                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                 </div>
                 <Image
                   loader={imgLoader}
@@ -143,7 +143,7 @@ export default function Project({
             width={1200}
             height={500}
           />
-          <p className="text-gray-700 md:max-w-[80%] text-lg mb-32">
+          <p className="text-gray-700 md:max-w-[80%] text-lg mb-32 dark:text-gray-300">
             {projectMainDescription}
           </p>
           <div className="relative md:min-h-[400px] max-md:h-[400px]">
@@ -202,7 +202,7 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading1}
                 </h3>
-                <p className="text-gray-700 text-base mb-10">{processText1}</p>
+                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText1}</p>
                 <div className="h-16"></div>
                 <Image
                   loader={imgLoader}
@@ -216,7 +216,7 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading2}
                 </h3>
-                <p className="text-gray-700 text-base mb-10">{processText2}</p>
+                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText2}</p>
                 <div className="h-16"></div>
                 <Image
                   loader={imgLoader}
@@ -230,7 +230,7 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading3}
                 </h3>
-                <p className="text-gray-700 text-base mb-10">{processText3}</p>
+                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText3}</p>
                 {processImage4 && <div className="h-16"></div>}
                 {processImage4 && <Image
                   loader={imgLoader}
@@ -244,7 +244,7 @@ export default function Project({
                 {processImage4 && <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading4}
                 </h3>}
-                {processImage4 && <p className="text-gray-700 text-base mb-10">{processText4}</p>}
+                {processImage4 && <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText4}</p>}
               </div>
             </div>
           </div>
@@ -291,12 +291,12 @@ export default function Project({
           {projectLinks && (
             <div>
               <div className="h-32"></div>
-              <div className="flex w-full justify-between p-8 bg-gray-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8">
+              <div className="flex w-full justify-between p-8 bg-gray-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-gray-900">
                 <h2 className="text-2xl font-medium text-left">Project links</h2>
                 <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
-                      className="font-medium text-lg transition-all text-black hover:opacity-75 border-b-black group"
+                      className="font-medium text-lg transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                       href={link.url}
                       target="_blank"
                     >
