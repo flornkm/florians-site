@@ -15,7 +15,7 @@
     .embla__slide {
         flex: 0 0 600px;
         min-width: 0;
-        border-right: 16px solid white;
+        margin-right: 16px
     }
 }
 
