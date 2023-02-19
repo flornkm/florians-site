@@ -16,14 +16,12 @@ import {
   DragOverlay,
   useSensor,
   useSensors,
-  DragStartEvent,
-  DragEndEvent,
-} from "@dnd-kit/core";
+} from '@dnd-kit/core';
 import {
   arrayMove,
   SortableContext,
   rectSortingStrategy,
-} from "@dnd-kit/sortable";
+} from '@dnd-kit/sortable';
 import Grid from "@/layout/Grid";
 import SortableItem from "@/layout/SortableItem";
 import Item from "@/layout/Item";
@@ -83,6 +81,19 @@ export default function Home() {
 
   const handleDragCancel = useCallback(() => {
     setActiveId(null);
+  }, []);
+
+  const handleDragOver = useCallback((event) => {
+    const { active, over } = event;
+
+    if (active.id !== over?.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
   }, []);
 
   const closeModal = () => setGlobePopup(false);
@@ -419,6 +430,7 @@ export default function Home() {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onDragCancel={handleDragCancel}
+            onDragOver={handleDragOver}
           >
             <SortableContext items={items} strategy={rectSortingStrategy}>
               <Grid columns={3}>
@@ -430,6 +442,7 @@ export default function Home() {
                     onClick={() => {
                       id === "1" && setGlobePopup(true);
                     }}
+                    
                   />
                 ))}
               </Grid>
