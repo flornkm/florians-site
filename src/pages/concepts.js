@@ -13,6 +13,40 @@ export default function Home() {
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
+
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  React.useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
+  const concepts = [
+    {
+      title: "Nutri",
+      description: "Social Food App",
+      icon: "./images/concept_icons/concept-icon_nutri.svg",
+    },
+    {
+      title: "Stackoverflow",
+      description: "Redesign & Extension",
+      icon: "./images/concept_icons/concept-icon_stackoverflow.svg",
+    },
+    {
+      title: "Solarized",
+      description: "Autobahn & Energy",
+      icon: "./images/concept_icons/concept-icon_solarized.svg",
+    },
+    {
+      title: "Homicides",
+      description: "ThreeJS Visualization",
+      icon: "./images/concept_icons/concept-icon_solarized.svg",
+    },
+  ];
+
+  const shuffledConcepts = !domLoaded
+    ? concepts
+    : concepts.sort(() => 0.5 - Math.random());
+
   const highlight = "Concepts";
 
   return (
@@ -25,46 +59,35 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
-        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
+        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">
           <h1 className="text-4xl font-bold text-left mb-3">Concepts</h1>
           <h2 className="text-2xl font-medium text-left text-gray-500">
-            These are like projects, just not as finished.
+            Smaller creations and ideas.
           </h2>
         </div>
-        <div className="hidden grid-cols-3 gap-3 min-h-96 max-md:grid-cols-2 max-sm:grid-cols-1">
-          <div className="bg-transparent rounded-2xl w-full h-[16] p-8 cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-col gap-2 place-items-center text-gray-600 hover:text-black">
-            <Image
-              loader={imgLoader}
-              src="./images/concept_icons/concept-icon_nutri.svg"
-              alt="Nutri Blueprint Icon"
-              className="rounded-2xl"
-              width={64}
-              height={64}
-              />
-              <p className="text-base font-medium text-center">Nutri</p>
-          </div>
-          <div className="bg-transparent rounded-2xl w-full h-[16] p-8 cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-col gap-2 place-items-center text-gray-600 hover:text-black">
-            <Image
-              loader={imgLoader}
-              src="./images/concept_icons/concept-icon_stackoverflow.svg"
-              alt="Nutri Blueprint Icon"
-              className="rounded-2xl"
-              width={64}
-              height={64}
-              />
-              <p className="text-base font-medium text-center">Stackoverflow</p>
-          </div>
-          <div className="bg-transparent rounded-2xl w-full h-[16] p-8 cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-col gap-2 place-items-center text-gray-600 hover:text-black">
-            <Image
-              loader={imgLoader}
-              src="./images/concept_icons/concept-icon_solarized.svg"
-              alt="Nutri Blueprint Icon"
-              className="rounded-2xl"
-              width={64}
-              height={64}
-              />
-              <p className="text-base font-medium text-center">Solarized</p>
-          </div>
+        <div className="min-h-96 flex flex-col place-items-start w-full gap-4">
+          {domLoaded &&
+            shuffledConcepts.map((concept, index) => (
+              <div
+                key={index}
+                className="bg-transparent rounded-2xl flex justify-center place-items-center"
+              >
+                <div className="cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-row gap-4 justify-center px-4 py-3 rounded-lg place-items-center text-gray-600 hover:text-black relative -left-4">
+                  <Image
+                    loader={imgLoader}
+                    src={concept.icon}
+                    alt="Nutri Blueprint Icon"
+                    className="rounded-xl"
+                    width={48}
+                    height={48}
+                  />
+                  <div>
+                    <p className="text-lg font-medium">{concept.title}</p>
+                    <p className="text-base">{concept.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </main>
       <Footer />
