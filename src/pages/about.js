@@ -16,12 +16,12 @@ import {
   DragOverlay,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   rectSortingStrategy,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 import Grid from "@/layout/Grid";
 import SortableItem from "@/layout/SortableItem";
 import Item from "@/layout/Item";
@@ -35,6 +35,7 @@ export default function Home() {
   const highlight = "About";
 
   const globePopupContainer = React.useRef(null);
+  const globeEl = React.useRef(null);
 
   const [items, setItems] = useState(
     Array.from({ length: 4 }, (_, i) => (i + 1).toString())
@@ -267,7 +268,7 @@ export default function Home() {
                 height={100}
               />
               <div>
-                <h1 className="text-2xl font-medium mb-3">About me</h1>
+                <h1 className="text-2xl font-semibold mb-3">About me</h1>
                 <p className="text-gray-600">
                   <span className="font-bold italic text-black">
                     Nice to meet you!
@@ -303,7 +304,7 @@ export default function Home() {
                   <p className="text-sm text-gray-500">Metahype</p>
                 </div>
               </div>
-              <p className="text-gray-500">2020 - present</p>
+              <p className="text-gray-500 text-right">2020 - present</p>
             </div>
             <div className="flex w-full justify-between">
               <div className="flex gap-2 place-items-center ">
@@ -323,7 +324,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <p className="text-gray-500">2022</p>
+              <p className="text-gray-500 text-right">2022</p>
             </div>
             <div className="flex w-full justify-between">
               <div className="flex gap-2 place-items-center ">
@@ -341,7 +342,7 @@ export default function Home() {
                   <p className="text-sm text-gray-500">Comondo</p>
                 </div>
               </div>
-              <p className="text-gray-500">2020 - 2021</p>
+              <p className="text-gray-500 text-right">2020 - 2021</p>
             </div>
             <div className="flex w-full justify-between">
               <div className="flex gap-2 place-items-center ">
@@ -359,7 +360,7 @@ export default function Home() {
                   <p className="text-sm text-gray-500">Freelance</p>
                 </div>
               </div>
-              <p className="text-gray-500">2015 - 2020</p>
+              <p className="text-gray-500 text-right">2015 - 2020</p>
             </div>
           </div>
           <div className="flex flex-col gap-6">
@@ -442,7 +443,6 @@ export default function Home() {
                     onClick={() => {
                       id === "1" && setGlobePopup(true);
                     }}
-                    
                   />
                 ))}
               </Grid>
@@ -479,12 +479,15 @@ export default function Home() {
                 >
                   <Dialog.Panel
                     ref={globePopupContainer}
-                    className="w-full ring-4 ring-white max-w-4xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t from-sky-400 to-sky-300 text-left align-middle shadow-xl transition-all relative min-h-[500px]"
+                    className="w-full ring-4 ring-white max-w-5xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t from-sky-400 to-sky-300 text-left align-middle shadow-xl transition-all relative min-h-[600px]"
                   >
                     <Globe
+                      ref={globeEl}
                       pointsData={myLocations}
-                      height={500}
-                      width={896}
+                      height={600}
+                      width={globePopupContainer.current?.offsetWidth}
+                      showGraticules={true}
+                      showGlobe={true}
                       showAtmosphere={true}
                       atmosphereAltitude={0.5}
                       atmosphereColor="#a3f0ff"

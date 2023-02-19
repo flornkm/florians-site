@@ -194,6 +194,7 @@ export default function Project({
                   loader={imgLoader}
                   src={processImage1}
                   alt={processHeading1}
+                  quality={100}
                   className="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
@@ -207,6 +208,7 @@ export default function Project({
                   loader={imgLoader}
                   src={processImage2}
                   alt={processHeading2}
+                  quality={100}
                   className="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
@@ -220,6 +222,7 @@ export default function Project({
                   loader={imgLoader}
                   src={processImage3}
                   alt={processHeading3}
+                  quality={100}
                   className="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}
@@ -233,6 +236,7 @@ export default function Project({
                   loader={imgLoader}
                   src={processImage4}
                   alt={processHeading4}
+                  quality={100}
                   className="inline-flex object-cover object-center max-h-96 mb-8"
                   width={800}
                   height={384}

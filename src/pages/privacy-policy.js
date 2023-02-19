@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
-          <h1 className="text-2xl font-bold mb-2">Privacy Policy</h1>
+          <h1 className="text-2xl font-semibold mb-2">Privacy Policy</h1>
           <p className="max-w-2xl">
           This Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your information when You use the
