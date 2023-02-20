@@ -389,7 +389,7 @@ export default function Home() {
             <div className="flex gap-4 max-sm:flex-col">
               <Link
                 className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                href={"#"}
+                href={"https://read.cv/floriandwt"}
                 target="_blank"
               >
                 Read.cv
@@ -400,7 +400,7 @@ export default function Home() {
               </Link>
               <Link
                 className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                href={"#"}
+                href={"https://github.com/floriandwt"}
                 target="_blank"
               >
                 GitHub
@@ -411,7 +411,7 @@ export default function Home() {
               </Link>
               <Link
                 className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                href={"#"}
+                href={"https://www.linkedin.com/in/floriandwt/"}
                 target="_blank"
               >
                 LinkedIn
