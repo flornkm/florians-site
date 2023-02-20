@@ -146,7 +146,7 @@ export default function Project({
           <p className="text-gray-700 md:max-w-[80%] text-lg mb-32 dark:text-gray-300">
             {projectMainDescription}
           </p>
-          <div className="relative md:min-h-[400px] max-md:h-[400px]">
+          <div className="relative md:min-h-[500px] max-md:h-[400px]">
             <div className="absolute w-[100vw] translate-x-[-50%] left-[50%] cursor-grab">
               <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
@@ -157,9 +157,9 @@ export default function Project({
                           <Image
                             loader={imgLoader}
                             src={slideImage}
-                            className="inline-flex object-cover object-center max-h-96 mb-8"
+                            className="inline-flex object-cover object-center mb-2"
                             width={800}
-                            height={384}
+                            height={450}
                           />
                         </div>
                       </div>
