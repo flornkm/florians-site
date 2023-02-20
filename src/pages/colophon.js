@@ -16,7 +16,7 @@ export default function Colophon() {
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
-          <h1 className="text-2xl font-semibold mb-2">Colophon</h1>
+        <h1 className="text-3xl font-semibold text-left mb-3">Colophon</h1>
           <p className="text-base mb-10">
             A colophon describes the methods, tools, and materials used to make
             a creative work. On this site you'll therefore find information from

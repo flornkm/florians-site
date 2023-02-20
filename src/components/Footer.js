@@ -179,7 +179,7 @@ export default function Footer() {
         <div className="flex flex-col gap-2 font-medium items-start">
           <h4 className="text-xl text-white mb-2">Info</h4>
           <Link
-            href={"#"}
+            href={"/journal"}
             className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
           >
             Journal

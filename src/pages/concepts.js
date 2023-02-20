@@ -146,8 +146,8 @@ export default function Home() {
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">
-          <h1 className="text-4xl font-semibold text-left mb-3">Concepts</h1>
-          <h2 className="text-2xl font-medium text-left text-gray-500">
+          <h1 className="text-3xl font-semibold text-left mb-3">Concepts</h1>
+          <h2 className="text-xl font-medium text-left text-gray-500">
             Smaller creations and ideas.
           </h2>
         </div>
