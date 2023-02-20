@@ -1,7 +1,9 @@
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import * as Icon from "react-feather";
 
 export default function Journal({ title, text, mainImage }) {
   const imgLoader = ({ src, width, quality }) => {
@@ -17,22 +19,30 @@ export default function Journal({ title, text, mainImage }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white relative">
         <div className="flex flex-col items-left justify-left h-full pt-24 max-md:pt-16 mb-6">
           <Image
-            loader={imgLoader} 
+            loader={imgLoader}
             src={mainImage}
             alt="Journal Cover"
             width={1920}
             height={500}
             className="mb-10"
-            />
+          />
           <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>
           {text}
           <div className="h-6"></div>
           <small className="text-gray-500 mb-10">
             <time>2023</time> © Design With Tech.
           </small>
+        </div>
+        <div className="fixed z-10 bottom-10 left-[50%] w-full flex justify-end bg-red max-w-6xl translate-x-[-50%] pr-[5%] pointer-events-none max-md:bottom-auto max-md:top-12 max-md:pr-[10%]">
+          <Link
+            href={"/journal"}
+            className="bg-white bg-opacity-80 rounded-full backdrop-blur-xl p-2 pointer-events-auto ring-1 ring-gray-300 hover:bg-gray-50 transition-all dark:bg-gray-800 dark:ring-gray-700 dark:hover:bg-gray-900"
+          >
+            <Icon.CornerUpLeft size={32} />
+          </Link>
         </div>
       </main>
       <Footer />

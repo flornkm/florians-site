@@ -20,7 +20,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Home"
-                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-800"
+                    ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-700"
                     : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-gray-400 dark:hover:text-white"
                 }
                 href="/"
@@ -33,7 +33,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Projects"
-                  ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-800"
+                  ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-700"
                   : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-gray-400 dark:hover:text-white"
                 }
                 href="/#projects"
@@ -46,7 +46,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Concepts"
-                  ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-800"
+                  ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-700"
                   : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-gray-400 dark:hover:text-white"
                 }
                 href="/concepts"
@@ -59,7 +59,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "About"
-                  ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-800"
+                  ? "bg-gray-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-gray-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-gray-700"
                   : "bg-none p-2 text-gray-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-gray-400 dark:hover:text-white"
                 }
                 href="/about"

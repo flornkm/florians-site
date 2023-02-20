@@ -1,11 +1,9 @@
 import Head from "next/head";
 import * as React from "react";
-import { useState, useCallback, Fragment } from "react";
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import Link from "next/link";
-import * as Icon from "react-feather";
 import Popup from "@/components/Popup";
 
 export default function Home() {
@@ -16,6 +14,12 @@ export default function Home() {
 
   const highlight = "Concepts";
   const [popupState, setPopupState] = useState(false);
+
+  React.useEffect(() => {
+    if (popupState) {
+      console.log("Popup is active");
+    }
+  }, [popupState]);
 
   const concepts = [
     {

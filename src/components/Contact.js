@@ -170,7 +170,7 @@ export default function Contact() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-150px] z-10 w-56 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700">
+            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-160px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700 p-1">
               <div className="py-0">
                 <Link href="https://twitter.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
@@ -179,9 +179,9 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 border-l-[#1480EB] dark:bg-gray-600 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.Twitter size={16} />
@@ -197,9 +197,9 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 border-l-[#1480EB] dark:bg-gray-600 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.Dribbble size={16} />
@@ -215,9 +215,9 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 border-l-[#1480EB] dark:bg-gray-600 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.GitHub size={16} />
@@ -233,9 +233,9 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 border-l-[#1480EB] dark:bg-gray-600 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                            "flex w-full px-4 py-2 text-left text-sm font-medium border-l-2 gap-2 place-items-center"
+                            "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.Linkedin size={16} />

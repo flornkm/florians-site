@@ -76,7 +76,7 @@ export default function Footer() {
             >
               <Menu.Items
                 ref={menu}
-                className="absolute overflow-hidden left-0 top-[-115px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
+                className="absolute overflow-hidden left-0 top-[-124px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700 p-1"
               >
                 <div className="py-0">
                   <Menu.Item>
@@ -85,9 +85,9 @@ export default function Footer() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                          "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center"
+                          "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                         onClick={() => {
                             document.documentElement.classList.remove("dark");
@@ -106,9 +106,9 @@ export default function Footer() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                          "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center"
+                          "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                         onClick={() => {
                             document.documentElement.classList.add("dark");
@@ -127,9 +127,9 @@ export default function Footer() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white"
+                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
                             : "text-gray-700 border-l-transparent dark:text-gray-300",
-                          "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center"
+                          "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                         onClick={() => {
                           if (localStorage.getItem("color-theme")) {
