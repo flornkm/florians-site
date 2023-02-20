@@ -270,7 +270,7 @@ export default function Home() {
               <div>
                 <h1 className="text-2xl font-semibold mb-3">About me</h1>
                 <p className="text-gray-600 dark:text-gray-300">
-                  <span className="font-bold italic text-black dark:text-white">
+                  <span className="font-semibold italic text-black dark:text-white">
                     Nice to meet you!
                   </span>{" "}
                   - My name is Florian and I am currently 22 years old. I am a
