@@ -6,6 +6,7 @@ export default function JounalEntry() {
       <Journal
         mainImage={"images/journal/favourite-tools/tools_i_use.jpeg"}
         title={"Most Favourite Tools"}
+        date={"2022-10-21"}
         text={
           <>
             <article className="text-gray-700 dark:text-gray-300">

@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import * as Icon from "react-feather";
 
-export default function Journal({ title, text, mainImage }) {
+export default function Journal({ title, text, mainImage, date }) {
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
@@ -20,21 +20,24 @@ export default function Journal({ title, text, mainImage }) {
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white relative">
-        <div className="flex flex-col items-left justify-left h-full pt-24 max-md:pt-16 mb-6">
-          <Image
-            loader={imgLoader}
-            src={mainImage}
-            alt="Journal Cover"
-            width={1920}
-            height={500}
-            className="mb-10"
-          />
-          <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>
-          {text}
-          <div className="h-6"></div>
-          <small className="text-gray-500 mb-10">
-            <time>2023</time> © Design With Tech.
-          </small>
+        <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
+          <div className="max-w-xl">
+            <Image
+              loader={imgLoader}
+              src={mainImage}
+              alt="Journal Cover"
+              width={1920}
+              height={500}
+              className="mb-10"
+            />
+            <div className="flex gap-4 text-sm text-gray-500 mb-2">{date}</div>
+            <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>
+            {text}
+            <div className="h-6"></div>
+            <small className="text-gray-500 mb-10">
+              <time>2023</time> © Design With Tech.
+            </small>
+          </div>
         </div>
         <div className="fixed z-10 bottom-10 left-[50%] w-full flex justify-end bg-red max-w-6xl translate-x-[-50%] pr-[5%] pointer-events-none max-md:bottom-auto max-md:top-12 max-md:pr-[10%]">
           <Link
