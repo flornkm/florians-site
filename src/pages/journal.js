@@ -6,14 +6,14 @@ import Footer from "@/components/Footer";
 export default function Journal() {
   const entries = [
     {
-      title: "Most favourite tools in 2022",
-      description: "Here are my 8 most favourite tools in 2022.",
-      link: "/journal/most-favourite-tools-2022",
-    },
-    {
       title: "The Web in the future",
       description: "What will the internet look like in the future?",
       link: "/journal/webdesign-in-the-future",
+    },
+    {
+      title: "Most favourite tools in 2022",
+      description: "Here are my 8 most favourite tools in 2022.",
+      link: "/journal/most-favourite-tools-2022",
     },
   ];
 
@@ -34,14 +34,17 @@ export default function Journal() {
           </h2>
         </div>
         <div className="flex flex-col items-start gap-4">
-        {entries.map((entry) => (
-          <Link href={entry.link} className="cursor-pointer flex flex-col justify-start transition-all hover:bg-gray-100 px-4 py-3 rounded-lg text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 relative -left-4">
-            <h3 className="text-xl font-medium text-left mb-2">{entry.title}</h3>
-            <p className="text-left">
-              {entry.description}
-            </p>
-          </Link>
-        ))}
+          {entries.map((entry) => (
+            <Link
+              href={entry.link}
+              className="cursor-pointer flex flex-col justify-start transition-all hover:bg-gray-100 px-4 py-3 rounded-lg text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 relative -left-4"
+            >
+              <h3 className="text-xl font-medium text-left mb-2">
+                {entry.title}
+              </h3>
+              <p className="text-left">{entry.description}</p>
+            </Link>
+          ))}
         </div>
         <div className="h-64"></div>
       </main>

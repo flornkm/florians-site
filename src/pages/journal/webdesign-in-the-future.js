@@ -6,6 +6,7 @@ export default function JounalEntry() {
       <Journal
         mainImage={"images/journal/webdesign_in_the_future/websites_in_the_future.jpg"}
         title={"The Web in the future"}
+        date={"2022-11-07"}
         text={
           <>
             <article className="text-gray-700 dark:text-gray-300">
