@@ -343,7 +343,7 @@ export default function Home() {
           <div className="max-w-6xl flex justify-end w-full">
             <div
               onClick={copyMail}
-              className="pr-4 pl-4 pt-3 pb-3 group pointer-events-auto bg-white bg-opacity-80 rounded-lg backdrop-blur-xl ring-1 ring-gray-300 cursor-pointer flex gap-8 justify-between place-items-center dark:bg-gray-800 dark:ring-gray-700 dark:bg-opacity-80"
+              className="pr-4 pl-4 pt-3 pb-3 group z-10 pointer-events-auto bg-white bg-opacity-80 rounded-lg backdrop-blur-xl ring-1 ring-gray-300 cursor-pointer flex gap-8 justify-between place-items-center dark:bg-gray-800 dark:ring-gray-700 dark:bg-opacity-80"
             >
               <div className="flex flex-col">
                 <p className="font-semibold group-hover:hidden">{mailText[0]}</p>

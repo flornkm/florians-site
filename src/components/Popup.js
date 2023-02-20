@@ -16,12 +16,12 @@ export default function Popup({
   text,
   links,
 }) {
-  let [isOpen, setIsOpen] = useState(true);
+  let [isOpen, setIsOpen] = useState(false);
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
 
-  let completeButtonRef = useRef(null)
+  let completeButtonRef = useRef(null);
 
   function closeModal() {
     setIsOpen(false);
@@ -51,7 +51,12 @@ export default function Popup({
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal} initialFocus={completeButtonRef}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={closeModal}
+          initialFocus={completeButtonRef}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -195,7 +200,9 @@ export default function Popup({
                             ))}
                         </div>
                       </div>
-                      <h3 className="text-xl font-medium mb-1 dark:text-white">About</h3>
+                      <h3 className="text-xl font-medium mb-1 dark:text-white">
+                        About
+                      </h3>
                       <p className="text-gray-700 dark:text-gray-300">{text}</p>
                       {links && (
                         <div className="mt-10">
