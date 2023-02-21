@@ -73,68 +73,67 @@ export default function Project({
             {shortDescription}
           </h2>
           {!collaborators && <div className="h-4"></div>}
-          {collaborators && <div className="mb-10 flex gap-4 place-items-center">
-            <p className="text-xl font-medium">Collaborators:</p>
-            {collaborators.includes("Anton") && (
-              <Link
-                href={"https://www.antonstallboerger.com/"}
-                target="_blank"
-                className="group relative transition-all"
-              >
-                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
-                  <span className="z-10 relative">Anton Stallbörger</span>
-                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
-                </div>
-                <Image
-                  loader={imgLoader}
-                  src="./images/collaborator_anton_stallboerger.jpg"
-                  alt="Anton Stallbörger"
-                  className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
-                  width={48}
-                  height={48}
-                />
-              </Link>
-            )}
-            {collaborators.includes("Nils") && (
-              <Link
-                href={"https://www.nilseller.com/"}
-                target="_blank"
-                className="group relative transition-all"
-              >
-                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
-                  <span className="z-10 relative">Nils Eller</span>
-                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
-                </div>
-                <Image
-                  loader={imgLoader}
-                  src="./images/collaborator_nils_eller.jpg"
-                  alt="Nils Eller"
-                  className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
-                  width={48}
-                  height={48}
-                />
-              </Link>
-            )}
-            {collaborators.includes("Alice") && (
-              <Link
-                href={"#"}
-                className="group relative transition-all"
-              >
-                <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
-                  <span className="z-10 relative">Alice Sopp</span>
-                  <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
-                </div>
-                <Image
-                  loader={imgLoader}
-                  src="./images/collaborator_alice_sopp.jpg"
-                  alt="Alice Sopp"
-                  className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
-                  width={48}
-                  height={48}
-                />
-              </Link>
-            )}
-          </div>}
+          {collaborators && (
+            <div className="mb-10 flex gap-4 place-items-center">
+              <p className="text-xl font-medium">Collaborators:</p>
+              {collaborators.includes("Anton") && (
+                <Link
+                  href={"https://www.antonstallboerger.com/"}
+                  target="_blank"
+                  className="group relative transition-all"
+                >
+                  <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
+                    <span className="z-10 relative">Anton Stallbörger</span>
+                    <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
+                  </div>
+                  <Image
+                    loader={imgLoader}
+                    src="./images/collaborator_anton_stallboerger.jpg"
+                    alt="Anton Stallbörger"
+                    className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                    width={48}
+                    height={48}
+                  />
+                </Link>
+              )}
+              {collaborators.includes("Nils") && (
+                <Link
+                  href={"https://www.nilseller.com/"}
+                  target="_blank"
+                  className="group relative transition-all"
+                >
+                  <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
+                    <span className="z-10 relative">Nils Eller</span>
+                    <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
+                  </div>
+                  <Image
+                    loader={imgLoader}
+                    src="./images/collaborator_nils_eller.jpg"
+                    alt="Nils Eller"
+                    className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                    width={48}
+                    height={48}
+                  />
+                </Link>
+              )}
+              {collaborators.includes("Alice") && (
+                <Link href={"#"} className="group relative transition-all">
+                  <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
+                    <span className="z-10 relative">Alice Sopp</span>
+                    <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
+                  </div>
+                  <Image
+                    loader={imgLoader}
+                    src="./images/collaborator_alice_sopp.jpg"
+                    alt="Alice Sopp"
+                    className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                    width={48}
+                    height={48}
+                  />
+                </Link>
+              )}
+            </div>
+          )}
           <Image
             loader={imgLoader}
             src={bannerSource}
@@ -146,7 +145,7 @@ export default function Project({
           <p className="text-gray-700 md:max-w-[80%] text-lg mb-32 dark:text-gray-300">
             {projectMainDescription}
           </p>
-          <div className="relative md:min-h-[500px] max-md:h-[400px]">
+          <div className="relative min-h-[600px] max-sm:min-h-[500px]">
             <div className="absolute w-[100vw] translate-x-[-50%] left-[50%] cursor-grab">
               <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
@@ -157,30 +156,29 @@ export default function Project({
                           <Image
                             loader={imgLoader}
                             src={slideImage}
-                            className="inline-flex object-cover object-center mb-2"
-                            width={800}
-                            height={450}
+                            className="inline-flex object-cover object-center mb-2 max-md:object-contain"
+                            width={1000}
+                            height={800}
                           />
                         </div>
                       </div>
                     ))}
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="flex gap-4 mt-8 w-full justify-between">
-            <div></div>
-            <div className="flex gap-4">
-              <Icon.ArrowLeft
-                size={40}
-                onClick={scrollBack}
-                className="p-2 bg-[#1480EB] text-white rounded-full cursor-pointer hover:bg-[#2795FD] transition-all"
-              />
-              <Icon.ArrowRight
-                size={40}
-                onClick={scrollNext}
-                className="p-2 bg-[#1480EB] text-white rounded-full cursor-pointer hover:bg-[#2795FD] transition-all"
-              />
+              <div className="flex gap-4 mt-8 w-full justify-end max-w-5xl max-md:pr-[10%] md:pr-[2%] mx-auto">
+                  <div className="flex gap-4">
+                    <Icon.ArrowLeft
+                      size={40}
+                      onClick={scrollBack}
+                      className="p-2 bg-[#1480EB] text-white rounded-full cursor-pointer hover:bg-[#2795FD] transition-all"
+                    />
+                    <Icon.ArrowRight
+                      size={40}
+                      onClick={scrollNext}
+                      className="p-2 bg-[#1480EB] text-white rounded-full cursor-pointer hover:bg-[#2795FD] transition-all"
+                    />
+                  </div>
+              </div>
             </div>
           </div>
           <div className="h-32"></div>
@@ -202,7 +200,9 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading1}
                 </h3>
-                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText1}</p>
+                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                  {processText1}
+                </p>
                 <div className="h-16"></div>
                 <Image
                   loader={imgLoader}
@@ -216,7 +216,9 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading2}
                 </h3>
-                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText2}</p>
+                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                  {processText2}
+                </p>
                 <div className="h-16"></div>
                 <Image
                   loader={imgLoader}
@@ -230,21 +232,31 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading3}
                 </h3>
-                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText3}</p>
+                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                  {processText3}
+                </p>
                 {processImage4 && <div className="h-16"></div>}
-                {processImage4 && <Image
-                  loader={imgLoader}
-                  src={processImage4}
-                  alt={processHeading4}
-                  quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8"
-                  width={800}
-                  height={384}
-                />}
-                {processImage4 && <h3 className="text-xl font-medium text-left mb-2">
-                  {processHeading4}
-                </h3>}
-                {processImage4 && <p className="text-gray-700 text-base mb-10 dark:text-gray-300">{processText4}</p>}
+                {processImage4 && (
+                  <Image
+                    loader={imgLoader}
+                    src={processImage4}
+                    alt={processHeading4}
+                    quality={100}
+                    className="inline-flex object-cover object-center max-h-96 mb-8"
+                    width={800}
+                    height={384}
+                  />
+                )}
+                {processImage4 && (
+                  <h3 className="text-xl font-medium text-left mb-2">
+                    {processHeading4}
+                  </h3>
+                )}
+                {processImage4 && (
+                  <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                    {processText4}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -292,7 +304,9 @@ export default function Project({
             <div>
               <div className="h-32"></div>
               <div className="flex w-full justify-between p-8 bg-gray-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-gray-900">
-                <h2 className="text-2xl font-medium text-left">Project links</h2>
+                <h2 className="text-2xl font-medium text-left">
+                  Project links
+                </h2>
                 <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
