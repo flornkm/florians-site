@@ -1,6 +1,6 @@
 import Link from "next/link";
+import dynamic from 'next/dynamic'
 import { Fragment, useEffect, useRef, useState } from "react";
-import AnalogClock from "analog-clock-react";
 import { Menu, Transition } from "@headlessui/react";
 import * as Icon from "react-feather";
 
@@ -38,6 +38,10 @@ export default function Footer() {
       hour: "#ffffff",
     },
   };
+
+  const AnalogClock = dynamic(() => import("analog-clock-react"), {
+    ssr: false,
+  });
 
   useOutsideAlerter(menu, setArrowUp);
   return (
