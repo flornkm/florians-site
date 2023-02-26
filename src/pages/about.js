@@ -343,7 +343,7 @@ export default function Home() {
                 />
                 <div>
                   <h3 className="font-medium text-md">
-                    Webdesigner and Developer
+                    Webdesign Tutor
                   </h3>
                   <p className="text-sm text-gray-500">
                     HfG Schwaebisch Gmuend
