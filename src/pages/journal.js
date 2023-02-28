@@ -6,6 +6,11 @@ import Footer from "@/components/Footer";
 export default function Journal() {
   const entries = [
     {
+      title: "Most favourite tools: February 2023 edition",
+      description: "Here are my 3 most favourite tools in February 2023.",
+      link: "/journal/most-favourite-tools-feb23",
+    },
+    {
       title: "The Web in the future",
       description: "What will the internet look like in the future?",
       link: "/journal/webdesign-in-the-future",
