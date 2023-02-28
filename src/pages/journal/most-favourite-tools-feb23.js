@@ -42,7 +42,13 @@ export default function JounalEntry() {
                 looking forward to use it for saving my favorite findings from
                 around the internet. I just can recommend it to everyone, but
                 make sure to install the browser extension because it will make
-                your experience a lot better.
+                your experience a lot better. Thanks to <Link
+                href="https://linusrogge.com/"
+                target="_blank"
+                className="text-[#1281ed] opacity-100 inline-block font-medium rounded-md transition-opacity hover:opacity-80"
+              >
+                Linus Rogge
+              </Link> for recommending this tool.
               </p>
               <Link
                 className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
