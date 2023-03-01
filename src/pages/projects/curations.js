@@ -33,6 +33,10 @@ export default function Curations() {
           url: "https://www.curations.tech/",
         },
         {
+          text: "Product Hunt",
+          url: "https://www.producthunt.com/products/curations",
+        },
+        {
           text: "GitHub Repo",
           url: "https://github.com/floriandwt/Curations",
         },
