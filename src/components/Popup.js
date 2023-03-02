@@ -40,6 +40,7 @@ export default function Popup({
     loop: false,
     align: "start",
     dragFree: true,
+    containScroll: "keepSnaps",
   });
 
   useEffect(() => {
