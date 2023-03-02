@@ -302,12 +302,15 @@ export default function Project({
                       width={1920}
                       height={1080}
                     />
-                    <button
+                    <Image
+                      loader={imgLoader}
+                      src="./images/play_button.svg"
+                      alt="Play Button"
                       onClick={() => setVideo(true)}
-                      className="absolute z-10 bg-white bg-opacity-0 ring-1 ring-gray-300 ring-opacity-20 text-white font-medium pt-4 pb-4 pl-6 pr-6 rounded-md backdrop-blur-xl transition-all hover:ring-opacity-40 hover:bg-opacity-10"
-                    >
-                      Play Video
-                    </button>
+                      className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
+                      width={96}
+                      height={96}
+                      />
                   </div>
                 )}
                 {video && (
