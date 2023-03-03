@@ -15,11 +15,14 @@ export default function Popup({
   mainImages,
   text,
   links,
+  video,
+  videoThumbnail,
 }) {
   let [isOpen, setIsOpen] = useState(false);
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
+  const [videoState, setVideoState] = useState(false);
 
   let completeButtonRef = useRef(null);
 
@@ -181,6 +184,45 @@ export default function Popup({
 
                       <div className="embla py-6 cursor-grab" ref={emblaRef}>
                         <div className="embla__container">
+                          {video && (
+                            <div className="embla__slide max-md:pr-2">
+                              <div className="embla__slide__inner">
+                                {!videoState && (
+                                  <div className="w-full max-h-96 flex justify-center place-items-center">
+                                    <Image
+                                      loader={imgLoader}
+                                      src={videoThumbnail}
+                                      alt="Video Thumbnail"
+                                      className="w-full max-h-80 aspect-video object-cover"
+                                      width={1000}
+                                      height={500}
+                                    />
+                                    <Image
+                                      loader={imgLoader}
+                                      src="./images/play_button.svg"
+                                      alt="Play Button"
+                                      onClick={() => setVideoState(true)}
+                                      className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
+                                      width={96}
+                                      height={96}
+                                    />
+                                  </div>
+                                )}
+                                {videoState && (
+                                  <iframe
+                                    width="100%"
+                                    height="auto"
+                                    src={video}
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    className="max-h-80 aspect-video pointer-events-none"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen
+                                  ></iframe>
+                                )}
+                              </div>
+                            </div>
+                          )}
                           {mainImages &&
                             mainImages.map((mainImage, index) => (
                               <div

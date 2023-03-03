@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_971_453)">
+<mask id="mask0_971_453" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+<rect width="512" height="512" fill="url(#paint0_linear_971_453)"/>
+</mask>
+<g mask="url(#mask0_971_453)">
+<rect x="8" y="8" width="496" height="496" fill="#1480EB"/>
+<rect x="8" y="8" width="496" height="496" stroke="#1480EB" stroke-width="16"/>
+<g opacity="0.15" filter="url(#filter0_f_971_453)">
+<circle cx="256" cy="256" r="256" fill="white"/>
+</g>
+</g>
+<path d="M256 401.834C336.541 401.834 401.833 336.542 401.833 256C401.833 175.459 336.541 110.167 256 110.167C175.458 110.167 110.167 175.459 110.167 256C110.167 336.542 175.458 401.834 256 401.834Z" fill="white" fill-opacity="0.5" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M110.167 256H401.833" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M256 110.167C292.477 150.101 313.207 201.926 314.333 256C313.207 310.075 292.477 361.899 256 401.834C219.523 361.899 198.793 310.075 197.667 256C198.793 201.926 219.523 150.101 256 110.167Z" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<filter id="filter0_f_971_453" x="-200" y="-200" width="912" height="912" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_971_453"/>
+</filter>
+<linearGradient id="paint0_linear_971_453" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF6363"/>
+<stop offset="1" stop-color="#D72A2A"/>
+</linearGradient>
+<clipPath id="clip0_971_453">
+<rect width="512" height="512" fill="white"/>
+</clipPath>
+</defs>
+</svg>

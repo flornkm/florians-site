@@ -23,7 +23,7 @@ export default function AmbientChat() {
       processHeading3="Refining the user experience"
       processText3="After building the frontend and backend components, I moved on to styling the application using CSS. I found it important to ensure that the design was both aesthetically pleasing and user-friendly. I also focused on making the application responsive, so it would look great on all devices. Once the styling was complete, I dockerized the application to make it more scalable and efficient. This also made it easier to deploy and manage, which was a big plus for me. For the database, I decided to use Airtable API, which allowed for easy integration with my application. I found that Airtable provided a simple and intuitive way to manage and store data, which made it a great choice for my project."
       videoThumbnail="./images/ambient_chat/ambient_chat.jpg"
-      videoSource="https://www.youtube.com/embed/FcL5ehtL1uU?autoplay=1"
+      videoSource="https://www.youtube.com/embed/FcL5ehtL1uU?autoplay=1&mute=1&loop=1"
       projectLinks={[
         {
           text: "Chat (restricted mode)",
