@@ -23,6 +23,11 @@ export default function Home() {
 
   const concepts = [
     {
+      title: "Web Audit",
+      description: "Raycast SEO Extension",
+      icon: "./images/concept_icons/concept-icon_web-audit.svg",
+    },
+    {
       title: "Nutri",
       description: "Social Food App",
       icon: "./images/concept_icons/concept-icon_nutri.svg",
@@ -61,6 +66,7 @@ export default function Home() {
       currentConcept.current.shortDescription = "Social Food App";
       currentConcept.current.icon =
         "./images/concept_icons/concept-icon_nutri.svg";
+      currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/nutri/nutri_mockup.jpg",
         "./images/nutri/nutri_double_diamond.jpg",
@@ -80,6 +86,7 @@ export default function Home() {
       currentConcept.current.shortDescription = "Redesign & Extension";
       currentConcept.current.icon =
         "./images/concept_icons/concept-icon_stackoverflow.svg";
+      currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/stackoverflow/stackoverflow_redesign.jpg",
         "./images/stackoverflow/stackoverflow_extension.jpg",
@@ -99,6 +106,7 @@ export default function Home() {
       currentConcept.current.shortDescription = "ThreeJS Data Visualization";
       currentConcept.current.icon =
         "./images/concept_icons/concept-icon_visualization.svg";
+      currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/visualization/visualization_website.jpg",
         "./images/visualization/visualization_colors.jpg",
@@ -118,6 +126,7 @@ export default function Home() {
       currentConcept.current.shortDescription = "Heart Simulator & Monitoring";
       currentConcept.current.icon =
         "./images/concept_icons/concept-icon_heartbeat.svg";
+      currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/heartbeat/heartbeat_mockup.jpg",
         "./images/heartbeat/heartbeat_interface.jpg",
@@ -133,6 +142,33 @@ export default function Home() {
         {
           text: "Documentation",
           url: "https://heartbeat-documentation.vercel.app/",
+        },
+      ];
+    } else if (concept.title === "Web Audit") {
+      currentConcept.current.collaborators = [""];
+      currentConcept.current.title = "Web Audit";
+      currentConcept.current.shortDescription = "Raycast SEO Extension";
+      currentConcept.current.icon =
+        "./images/concept_icons/concept-icon_web-audit.svg";
+      currentConcept.current.video =
+        "https://www.youtube.com/embed/hMlDm9P88nY?autoplay=1&mute=1&controls=0&loop=1";
+      currentConcept.current.videoThumbnail =
+        "./images/web_audit/web-audit_thumbnail.jpg";
+      currentConcept.current.mainImages = [
+        "./images/web_audit/web-audit_analyze.jpg",
+        "./images/web_audit/web-audit_score.jpg",
+        "./images/web_audit/web-audit_info.jpg",
+      ];
+      currentConcept.current.text =
+        "A Raycast extension that allows users to quickly and easily perform a website audit. The extension provides a comprehensive overview of a website's SEO performance.";
+      currentConcept.current.links = [
+        {
+          text: "Raycast Store",
+          url: "https://www.raycast.com/floriandwt/web-audit",
+        },
+        {
+          text: "GitHub",
+          url: "https://github.com/floriandwt/web-audit-extension",
         },
       ];
     }
@@ -217,6 +253,8 @@ export default function Home() {
           mainImages={currentConcept.current.mainImages}
           text={currentConcept.current.text}
           links={currentConcept.current.links}
+          video={currentConcept.current.video}
+          videoThumbnail={currentConcept.current.videoThumbnail}
         />
       </main>
       <Footer />
