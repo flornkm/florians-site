@@ -73,7 +73,7 @@ export default function Boost() {
       reliability in our product design and aim to offer a highly
       realistic user experience."
       videoThumbnail="./images/boost/boost_device.webp"
-      videoSource="https://www.youtube.com/embed/DTpulxnIuxg?autoplay=1&mute=1&loop=1"
+      videoSource="https://www.youtube.com/embed/DTpulxnIuxg?autoplay=1&loop=1"
       projectLinks={[
         {
           text: "Landingpage",
