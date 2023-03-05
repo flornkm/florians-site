@@ -151,7 +151,7 @@ export default function Home() {
       currentConcept.current.icon =
         "./images/concept_icons/concept-icon_web-audit.svg";
       currentConcept.current.video =
-        "https://www.youtube.com/embed/hMlDm9P88nY?autoplay=1&mute=1&controls=0&loop=1";
+        "https://www.youtube.com/embed/hMlDm9P88nY?autoplay=1&mute=1&loop=1";
       currentConcept.current.videoThumbnail =
         "./images/web_audit/web-audit_thumbnail.jpg";
       currentConcept.current.mainImages = [

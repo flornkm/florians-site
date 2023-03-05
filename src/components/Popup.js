@@ -215,7 +215,7 @@ export default function Popup({
                                     src={video}
                                     title="YouTube video player"
                                     frameborder="0"
-                                    className="max-h-80 aspect-video pointer-events-none"
+                                    className="max-h-80 aspect-video"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowfullscreen
                                   ></iframe>
