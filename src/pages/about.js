@@ -363,7 +363,7 @@ export default function Home() {
                 />
                 <div>
                   <h3 className="font-medium text-md">
-                    Digital Strategist and Designer
+                    Webdesigner & -developer
                   </h3>
                   <p className="text-sm text-gray-500">Comondo</p>
                 </div>
