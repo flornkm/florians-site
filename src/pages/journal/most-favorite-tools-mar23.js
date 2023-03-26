@@ -19,8 +19,7 @@ export default function JounalEntry() {
               <p className="mb-6">
                 Posts is a mobile application made from the team behind ReadCV.
                 It is a platform that's built for designers and developers to
-                share their work, photos and thoughts. It has a very clean and
-                simple interface that's designed to focues on the content.
+                share their work, photos and thoughts.
               </p>
               <Link
                 className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
@@ -34,7 +33,7 @@ export default function JounalEntry() {
               </h3>
               <p className="mb-6">
                 While I don't use Revolut as my main bank or trading app, I
-                use it for managing my money when I am studying. The app lets
+                use it for managing my money while I am studying. The app lets
                 you easily view insights, round up your purchases and manage
                 your money in a very easy way.
               </p>
@@ -49,7 +48,7 @@ export default function JounalEntry() {
                 Fig <br /><span className="text-gray-500 text-lg">Terminal with superpowers</span>
               </h3>
               <p className="mb-6">
-                Fig is no application, it is more like an addition to your
+                Fig is no extra application, it is more like an addition to your
                 terminal. It extends the terminal with a lot of useful features
                 like autocomplete, which is very useful for working more
                 efficiently. You can install it via Homebrew and it has a
