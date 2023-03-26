@@ -17,7 +17,7 @@ export default function JounalEntry() {
                 Posts <br /><span className="text-gray-500 text-lg">Twitter, but for designers and developers</span>
               </h3>
               <p className="mb-6">
-                Post is a mobile application made from the team behind ReadCV.
+                Posts is a mobile application made from the team behind ReadCV.
                 It is a platform that's built for designers and developers to
                 share their work, photos and thoughts. It has a very clean and
                 simple interface that's designed to focues on the content.
