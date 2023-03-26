@@ -61,7 +61,8 @@ export default function Journal({ title, text, mainImage, date }) {
             {text}
             <div className="h-6"></div>
             <small className="text-gray-500 mb-10">
-              <time>2023</time> © Design With Tech.
+              <time>2023</time> - All used images belong to their respective
+              owners and are used for demonstration purposes only.
             </small>
           </div>
         </div>
