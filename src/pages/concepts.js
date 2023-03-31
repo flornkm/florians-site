@@ -226,7 +226,7 @@ export default function Home() {
               }}
               className="bg-transparent rounded-2xl flex justify-center place-items-center"
             >
-              <div className="cursor-pointer transition-all hover:bg-gray-100 flex flex-wrap flex-row gap-4 justify-center px-4 py-3 rounded-lg place-items-center text-gray-600 hover:text-black relative -left-4 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800">
+              <div className="cursor-pointer transition-all hover:bg-gray-100 flex flex-row gap-4 justify-start px-4 py-3 rounded-lg place-items-center text-gray-600 hover:text-black relative -left-4 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800">
                 <Image
                   loader={imgLoader}
                   src={concept.icon}
@@ -236,8 +236,8 @@ export default function Home() {
                   height={48}
                 />
                 <div>
-                  <p className="text-lg font-medium">{concept.title}</p>
-                  <p className="text-base">{concept.description}</p>
+                  <p className="text-lg font-medium text-ellipsis">{concept.title}</p>
+                  <p className="text-base text-ellipsis">{concept.description}</p>
                 </div>
               </div>
             </div>
