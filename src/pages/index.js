@@ -105,8 +105,8 @@ export default function Home() {
               className="p-4 w-full max-w-[400px] flex place-items-center ring-1 ring-gray-200 gap-6 bg-gray-50 transition-all hover:bg-gray-100 hover:border-gray-200 border-solid rounded-xl dark:bg-gray-900 dark:ring-gray-800 dark:hover:bg-gray-800 dark:hover:ring-gray-700"
               href={"./#contact"}
             >
-              <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-red-600 opacity-75 dark:bg-red-500">
-                <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-red-500 opacity-75"></div>
+              <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-emerald-600 opacity-75 dark:bg-emerald-500">
+                <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-emerald-500 opacity-75"></div>
               </div>
               <p className="font-medium text-sm">
                 Currently I am looking for internship opportunities in Europe or
