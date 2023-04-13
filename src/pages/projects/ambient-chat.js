@@ -12,6 +12,7 @@ export default function AmbientChat() {
         "./images/ambient_chat/ambient_chat_settings.webp",
         "./images/ambient_chat/ambient_chat_friendlist.webp",
         "./images/ambient_chat/ambient_chat_input.webp",
+        "./images/ambient_chat/ambient_chat_box.webp",
       ]}
       processImage1="./images/ambient_chat/ambient_chat_blueprint.jpg"
       processHeading1="Organizing my codebase"
