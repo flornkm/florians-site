@@ -210,10 +210,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">
           <h1 className="text-3xl font-semibold text-left mb-3">Concepts</h1>
-          <h2 className="text-xl font-medium text-left text-gray-500">
+          <h2 className="text-xl font-medium text-left text-zinc-400">
             Smaller creations and ideas.
           </h2>
         </div>
@@ -226,7 +226,7 @@ export default function Home() {
               }}
               className="bg-transparent rounded-2xl flex justify-center place-items-center"
             >
-              <div className="cursor-pointer transition-all hover:bg-gray-100 flex flex-row gap-4 justify-start px-4 py-3 rounded-lg place-items-center text-gray-600 hover:text-black relative -left-4 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800">
+              <div className="cursor-pointer transition-all hover:bg-zinc-100 flex flex-row gap-4 justify-start px-4 py-3 rounded-lg place-items-center text-zinc-500 hover:text-black relative -left-4 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800">
                 <Image
                   loader={imgLoader}
                   src={concept.icon}

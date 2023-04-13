@@ -45,7 +45,7 @@ export default function Footer() {
 
   useOutsideAlerter(menu, setArrowUp);
   return (
-    <div className="w-full min-h-[300px] bg-zinc-800 pt-24 pb-24 dark:bg-black dark:bg-opacity-50">
+    <div className="w-full min-h-[300px] bg-zinc-800 pt-24 pb-24 dark:bg-[#101012] dark:bg-opacity-50">
       <div className="flex justify-between place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-24">
         <div className="w-[50%]">
           <AnalogClock {...options} />
@@ -56,7 +56,7 @@ export default function Footer() {
                 onClick={() => {
                   setArrowUp(!arrowUp);
                 }}
-                className="w-full flex place-items-center justify-center rounded-lg border bg-transparent border-zinc-600 px-3 py-2.5 text-sm font-medium text-white hover:bg-zinc-700 transition-all dark:bg-transparent dark:border-gray-800 dark:text-white dark:hover:bg-gray-900"
+                className="w-full flex place-items-center justify-center rounded-lg border bg-transparent border-zinc-600 px-3 py-2.5 text-sm font-medium text-white hover:bg-zinc-700 transition-all dark:bg-transparent dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-900"
               >
                 Toggle Mode
                 <Icon.ChevronUp
@@ -80,7 +80,7 @@ export default function Footer() {
             >
               <Menu.Items
                 ref={menu}
-                className="absolute overflow-hidden left-0 top-[-124px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700 p-1"
+                className="absolute overflow-hidden left-0 top-[-124px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800 dark:ring-zinc-700 p-1"
               >
                 <div className="py-0">
                   <Menu.Item>
@@ -89,8 +89,8 @@ export default function Footer() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                           "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                         onClick={() => {
@@ -110,8 +110,8 @@ export default function Footer() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                           "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                         onClick={() => {
@@ -131,8 +131,8 @@ export default function Footer() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                           "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                         onClick={() => {
@@ -157,25 +157,25 @@ export default function Footer() {
           <h4 className="text-xl text-white mb-2">Navigation</h4>
           <Link
             href={"/"}
-            className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Home
           </Link>
           <Link
             href={"/#projects"}
-            className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Projects
           </Link>
           <Link
             href={"/concepts"}
-            className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Concepts
           </Link>
           <Link
             href={"/about"}
-            className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             About
           </Link>
@@ -184,13 +184,13 @@ export default function Footer() {
           <h4 className="text-xl text-white mb-2">Info</h4>
           <Link
             href={"/journal"}
-            className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Journal
           </Link>
           <Link
             href={"/colophon"}
-            className="text-gray-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Colophon
           </Link>
@@ -204,13 +204,13 @@ export default function Footer() {
         <div className="flex gap-8 font-medium">
           <Link
             href={"/legal-notice"}
-            className="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Legal Notice
           </Link>
           <Link
             href={"/privacy-policy"}
-            className="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-gray-800"
+            className="text-zinc-400 text-xs p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
             Privacy Policy
           </Link>

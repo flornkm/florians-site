@@ -56,23 +56,15 @@ export default function Journal({ title, text, mainImage, date }) {
               height={500}
               className="mb-10"
             />
-            <div className="flex gap-4 text-sm text-gray-500 mb-2">{date}</div>
+            <div className="flex gap-4 text-sm text-zinc-500 mb-2">{date}</div>
             <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>
             {text}
             <div className="h-6"></div>
-            <small className="text-gray-500 mb-10">
+            <small className="text-zinc-500 mb-10">
               <time>2023</time> - All used images belong to their respective
               owners and are used for demonstration purposes only.
             </small>
           </div>
-        </div>
-        <div className="fixed z-10 bottom-10 left-[50%] w-full flex justify-end bg-red max-w-6xl translate-x-[-50%] pr-[5%] pointer-events-none max-md:bottom-auto max-md:top-12 max-md:pr-[10%]">
-          <Link
-            href={"/journal"}
-            className="bg-white bg-opacity-80 rounded-full backdrop-blur-xl p-2 pointer-events-auto ring-1 ring-gray-300 hover:bg-gray-50 transition-all dark:bg-gray-800 dark:ring-gray-700 dark:hover:bg-gray-900"
-          >
-            <Icon.CornerUpLeft size={32} />
-          </Link>
         </div>
       </main>
       <Footer />

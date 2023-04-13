@@ -108,7 +108,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden border-gray-200 relative bg-gray-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-gray-800 dark:border-gray-700"
+            "max-md:row-span-1 overflow-hidden border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
           }
           {...props}
         >
@@ -133,7 +133,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden border-gray-200 relative bg-gray-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-gray-800 dark:border-gray-700"
+            "max-md:row-span-1 overflow-hidden border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
           }
           {...props}
         >
@@ -193,7 +193,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 border-gray-200 relative p-8 bg-gray-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-gray-800 dark:border-gray-700"
+            "max-md:row-span-1 border-zinc-200 relative p-8 bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
           }
           {...props}
         >
@@ -216,7 +216,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 p-2 border-gray-200 relative bg-gray-50 border w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] dark:bg-gray-800 dark:border-gray-700"
+            "max-md:row-span-1 p-2 border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
           }
           {...props}
         >
@@ -235,13 +235,13 @@ const Item = forwardRef(
               play: (
                 <Icon.Play
                   size={40}
-                  className="bg-black rounded-full p-2 text-white transition-all hover:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:text-black"
+                  className="bg-black rounded-full p-2 text-white transition-all hover:bg-zinc-900 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
                 />
               ),
               pause: (
                 <Icon.Pause
                   size={40}
-                  className="bg-black rounded-full p-2 text-white transition-all hover:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 dark:text-black"
+                  className="bg-black rounded-full p-2 text-white transition-all hover:bg-zinc-900 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
                 />
               ),
             }}
@@ -258,7 +258,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 border-gray-200 relative bg-gray-50 border w-full h-full items-center justify-center flex rounded-xl"
+            "max-md:row-span-1 border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl"
           }
           {...props}
         >

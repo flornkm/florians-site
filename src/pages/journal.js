@@ -62,18 +62,18 @@ export default function Journal() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 className="text-3xl font-semibold text-left mb-3">Journal</h1>
-          <h2 className="text-xl font-medium text-left text-gray-500">
+          <h2 className="text-xl font-medium text-left text-zinc-500">
             Thoughts and more.
           </h2>
         </div>
-        <div className="flex flex-col items-start gap-4">
+        <div className="flex flex-col items-start gap-8">
           {entries.map((entry) => (
             <Link
               href={entry.link}
-              className="cursor-pointer flex flex-col justify-start transition-all hover:bg-gray-100 px-4 py-3 rounded-lg text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 relative -left-4"
+              className="cursor-pointer flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 relative -left-4"
             >
               <h3 className="text-xl font-medium text-left mb-2">
                 {entry.title}
