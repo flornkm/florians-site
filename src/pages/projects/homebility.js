@@ -1,4 +1,5 @@
 import Project from "@/components/Project";
+import * as Icon from "react-feather";
 
 export default function Homebility() {
   return (
@@ -27,11 +28,36 @@ export default function Homebility() {
       processImage4="./images/homebility/homebility_design.jpg"
       processHeading4="Polished design and prototype"
       processText4="During the final stage of the project, we created a completely clickable prototype in Figma. This allowed us to test the app with real users and get feedback on the overall functionality and user experience. We also worked on branding the app, choosing colors and typography that reflected the values of our app and the ideas behind and would resonate with our target audience. By the end of this phase, we had a fully designed app."
+      challenge="We had to make sure that everyone could use the app, regardless of their technical knowledge or disability status."
+      result="The app prototype had as our survey results showed, a low learning curve compared to other smart home applications. Because of the use of icons and a simple interface, the app was easy to understand for everyone."
       projectLinks={[
         {
           text: "Figma Prototype",
           url: "https://www.figma.com/proto/nNVxSEvwhOYCrpbsEkcdy2/visual_prototyping_project?page-id=304%3A10971&node-id=399%3A18472&viewport=712%2C458%2C0.07&scaling=scale-down&starting-point-node-id=399%3A18472",
         },
+      ]}
+      stack={[
+        {
+          name: "User Research",
+          icon: <Icon.Users size={18} />,
+          color: "text-blue-500 dark:text-blue-400",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+        },
+        {
+          name: "Design Thinking",
+          icon: <Icon.Briefcase size={18} />,
+          color: "text-blue-500 dark:text-blue-400",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+        },
+        {
+          name: "Prototyping",
+          icon: <Icon.Figma size={18} />,
+          color: "text-blue-500 dark:text-blue-400",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+        }
       ]}
     />
   );

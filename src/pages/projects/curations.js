@@ -1,4 +1,5 @@
 import Project from "@/components/Project";
+import * as Icon from "react-feather";
 
 export default function Curations() {
   return (
@@ -7,7 +8,7 @@ export default function Curations() {
       shortDescription="A curated collection of the best products on the web"
       bannerSource="./images/curations/banner-curations.jpg"
       collaborators={["Anton", "Nils"]}
-      projectMainDescription="During our time at university, my team and I recognized the significance of tools in our daily lives and conceived the idea of curating a collection of such tools. We began with a modest Notion database-page containing a limited number of tools, but we aspired to share our collection with a wider audience in an easily accessible way. To achieve this goal, we leveraged the Notion API and developed a website that displays our curated collection and allows users to submit their own discoveries. Our team of curators carefully selects each tool before it is deployed to the public, ensuring the highest quality recommendations. As a result, our platform has enabled thousands of individuals to discover new and innovative tools, gain inspiration, and much more."
+      projectMainDescription="In university, my team recognized the value of tools in our daily lives and decided to create a collection of them. We started with a Notion database-page, but wanted to share it more widely. Using the Notion API, we developed a website where users can view our curated collection and submit their own discoveries. Our curators meticulously select each tool, guaranteeing the best recommendations. Our platform has helped countless individuals find new and innovative tools and gain inspiration.      "
       slideImages={[
         "./images/curations/cuations_details.webp",
         "./images/curations/curations_cards.webp",
@@ -26,7 +27,9 @@ export default function Curations() {
       processText3="In the spring of 2022, we launched version 1 of Curations, utilizing Webflow and their CMS. Although the Content Management System (CMS) was initially suitable for managing a small number of cards, we quickly realized its limitations when it came to manually inserting every link, image, and text. Consequently, we recognized the need to transition to more robust and scalable technologies."
       processImage4="./images/curations/curations_site.jpg"
       processHeading4="The Gateway to Innovative Tools"
-      processText4="Leveraging NextJS, we successfully established a connection to our existing Notion page, which already contained a vast collection of links. Additionally, we made the strategic decision to release the project as open-source, not only to assist others encountering similar challenges and seeking solutions but also to enable the community to contribute to its development. In November of 2022, we launched the site on ProductHunt, which proved to be a major success. Through the help of newsletters, Twitter followers, and the ProductHunt platform, we were able to reach nearly 10,000 users within the first launch. Moving forward, our plan is to expand the project beyond just a curated list of links, providing users with even greater value and utility."
+      processText4="Leveraging NextJS, Supabase and Vercel, we developed a website that displays our curated collection and allows users to submit their own discoveries. Our team of curators carefully selects each tool before it is deployed to the public, ensuring the highest quality recommendations."
+      challenge="Our browsers are full of tabs, our bookmarks are full of links, and our notes are full of ideas. We needed a platform that would allow us to organize and share our discoveries with others."
+      result="Curations had a successfull launch on ProductHunt, reaching nearly 10,000 users within the first launch. Moving forward, our plan is to expand the project beyond just a curated list of links, providing users with even greater value and utility."
       projectLinks={[
         {
           text: "Curations",
@@ -40,6 +43,50 @@ export default function Curations() {
           text: "GitHub Repo",
           url: "https://github.com/floriandwt/Curations",
         },
+      ]}
+      stack={[
+        {
+          name: "User Research",
+          icon: <Icon.Users size={18} />,
+          color: "text-blue-500 dark:text-blue-400",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+        },
+        {
+          name: "Prototyping",
+          icon: <Icon.Figma size={18} />,
+          color: "text-blue-500 dark:text-blue-400",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+        },
+        {
+          name: "NextJS",
+          icon: <Icon.Code size={18} />,
+          color: "text-purple-500 dark:text-purple-400",
+          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-50",
+          backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
+        },
+        {
+          name: "Vercel",
+          icon: <Icon.Server size={18} />,
+          color: "text-purple-500 dark:text-purple-400",
+          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-50",
+          backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
+        },
+        {
+          name: "Custom Screenshot API",
+          icon: <Icon.Camera size={18} />,
+          color: "text-emerald-500 dark:text-emerald-400",
+          ringColor: "ring-emerald-200 dark:ring-emerald-800 dark:ring-opacity-50",
+          backgroundColor: "bg-emerald-50 dark:bg-emerald-900 dark:bg-opacity-20"
+        },
+        {
+          name: "Supabase",
+          icon: <Icon.Database size={18} />,
+          color: "text-orange-500 dark:text-orange-400",
+          ringColor: "ring-orange-200 dark:ring-orange-800 dark:ring-opacity-50",
+          backgroundColor: "bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20"
+        }
       ]}
     />
   );
