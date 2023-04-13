@@ -42,35 +42,35 @@ export default function AmbientChat() {
           name: "Prototyping",
           icon: <Icon.Figma size={18} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "VueJS",
           icon: <Icon.Code size={18} />,
           color: "text-purple-500 dark:text-purple-400",
-          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-50",
+          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-30",
           backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
         },
         {
           name: "NodeJS Express",
           icon: <Icon.Server size={18} />,
           color: "text-purple-500 dark:text-purple-400",
-          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-50",
+          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-30",
           backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
         },
         {
           name: "SocketIO",
           icon: <Icon.Server size={18} />,
           color: "text-purple-500 dark:text-purple-400",
-          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-50",
+          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-30",
           backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
         },
         {
           name: "Airtable",
           icon: <Icon.Database size={18} />,
           color: "text-orange-500 dark:text-orange-400",
-          ringColor: "ring-orange-200 dark:ring-orange-800 dark:ring-opacity-50",
+          ringColor: "ring-orange-200 dark:ring-orange-800 dark:ring-opacity-30",
           backgroundColor: "bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20"
         },
       ]}

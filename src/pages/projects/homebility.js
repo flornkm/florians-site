@@ -41,21 +41,21 @@ export default function Homebility() {
           name: "User Research",
           icon: <Icon.Users size={18} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "Design Thinking",
           icon: <Icon.Briefcase size={18} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "Prototyping",
           icon: <Icon.Figma size={18} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-50",
+          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         }
       ]}
