@@ -12,7 +12,7 @@ export default function Navigation(title, highlight) {
           <span className="text-xl text-black right-8 m-0 font-medium dark:text-white">
             Florian
           </span>
-          <span className="text-zinc-500 m-0 max-md:hidden">{title.title}</span>
+          <span className="text-zinc-500 m-0 max-md:hidden dark:text-zinc-400">{title.title}</span>
         </Link>
         <div className="flex max-sm:w-full">
           <ul className="flex gap-2 place-items-center font-medium max-md:justify-between max-md:w-full">

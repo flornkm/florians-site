@@ -65,7 +65,7 @@ export default function Journal() {
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 className="text-3xl font-semibold text-left mb-3">Journal</h1>
-          <h2 className="text-xl font-medium text-left text-zinc-500">
+          <h2 className="text-xl font-medium text-left text-zinc-500 dark:text-zinc-400">
             Thoughts and more.
           </h2>
         </div>
