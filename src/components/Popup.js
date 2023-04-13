@@ -85,7 +85,7 @@ export default function Popup({
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-5xl transform rounded-2xl bg-white text-left align-middle shadow-xl transition-all dark:bg-gray-800">
+                  <Dialog.Panel className="w-full max-w-5xl transform rounded-2xl bg-white text-left align-middle shadow-xl transition-all dark:bg-zinc-800">
                     <div className="overflow-y-auto max-h-[70vh] p-6 max-md:max-h-[60vh]">
                       <div className="flex w-full place-items-center justify-between max-md:flex-col pr-20 max-md:items-start max-md:gap-8">
                         <div className="flex gap-6 place-items-center">
@@ -100,12 +100,12 @@ export default function Popup({
                           <div>
                             <Dialog.Title
                               as="h3"
-                              className="text-2xl font-semibold leading-6 text-gray-900 dark:text-white"
+                              className="text-2xl font-semibold leading-6 text-zinc-900 dark:text-white"
                             >
                               {name}
                             </Dialog.Title>
                             <div className="mt-2">
-                              <p className="text-gray-500">
+                              <p className="text-zinc-400">
                                 {shortDescription}
                               </p>
                             </div>
@@ -129,7 +129,7 @@ export default function Popup({
                                   loader={imgLoader}
                                   src="./images/collaborator_anton_stallboerger.jpg"
                                   alt="Anton Stallbörger"
-                                  className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                                  className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                                   width={48}
                                   height={48}
                                 />
@@ -151,7 +151,7 @@ export default function Popup({
                                   loader={imgLoader}
                                   src="./images/collaborator_nils_eller.jpg"
                                   alt="Nils Eller"
-                                  className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                                  className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                                   width={48}
                                   height={48}
                                 />
@@ -172,7 +172,7 @@ export default function Popup({
                                   loader={imgLoader}
                                   src="./images/collaborator_alice_sopp.jpg"
                                   alt="Alice Sopp"
-                                  className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                                  className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                                   width={48}
                                   height={48}
                                 />
@@ -246,10 +246,10 @@ export default function Popup({
                       <h3 className="text-xl font-medium mb-1 dark:text-white">
                         About
                       </h3>
-                      <p className="text-gray-700 dark:text-gray-300">{text}</p>
+                      <p className="text-zinc-700 dark:text-zinc-300">{text}</p>
                       {links && (
                         <div className="mt-10">
-                          <div className="flex w-full justify-between p-4 bg-gray-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-gray-700">
+                          <div className="flex w-full justify-between p-4 bg-zinc-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-zinc-700">
                             <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                               {links.map((link) => (
                                 <Link
@@ -271,7 +271,7 @@ export default function Popup({
                       <button
                         type="button"
                         ref={completeButtonRef}
-                        className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-gray-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-gray-100 dark:text-black"
+                        className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-zinc-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
                         onClick={() => {
                           setPopupState(false);
                           setIsOpen(false);

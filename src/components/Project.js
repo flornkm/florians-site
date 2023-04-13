@@ -92,10 +92,10 @@ export default function Project({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={projectTitle} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 className="text-4xl font-bold text-left mb-3">{projectTitle}</h1>
-          <h2 className="text-2xl font-medium text-left text-gray-500 mb-5">
+          <h2 className="text-2xl font-medium text-left text-zinc-500 mb-5 dark:text-zinc-400">
             {shortDescription}
           </h2>
           {!collaborators && <div className="h-4"></div>}
@@ -116,7 +116,7 @@ export default function Project({
                     loader={imgLoader}
                     src="./images/collaborator_anton_stallboerger.jpg"
                     alt="Anton Stallbörger"
-                    className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                    className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
                     height={48}
                   />
@@ -136,7 +136,7 @@ export default function Project({
                     loader={imgLoader}
                     src="./images/collaborator_nils_eller.jpg"
                     alt="Nils Eller"
-                    className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                    className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
                     height={48}
                   />
@@ -152,7 +152,7 @@ export default function Project({
                     loader={imgLoader}
                     src="./images/collaborator_alice_sopp.jpg"
                     alt="Alice Sopp"
-                    className="inline-flex ring-1 ring-gray-300 object-cover object-center max-h-128 rounded-full"
+                    className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
                     height={48}
                   />
@@ -168,7 +168,7 @@ export default function Project({
             width={1200}
             height={500}
           />
-          <p className="text-gray-700 md:max-w-[80%] text-lg mb-32 dark:text-gray-300">
+          <p className="text-zinc-700 md:max-w-[80%] text-lg mb-32 dark:text-zinc-300">
             {projectMainDescription}
           </p>
           <div className="relative min-h-[600px] max-sm:min-h-[500px]">
@@ -226,7 +226,7 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading1}
                 </h3>
-                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                <p className="text-zinc-700 text-base mb-10 dark:text-zinc-300">
                   {processText1}
                 </p>
                 <div className="h-16"></div>
@@ -242,7 +242,7 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading2}
                 </h3>
-                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                <p className="text-zinc-700 text-base mb-10 dark:text-zinc-300">
                   {processText2}
                 </p>
                 <div className="h-16"></div>
@@ -258,7 +258,7 @@ export default function Project({
                 <h3 className="text-xl font-medium text-left mb-2">
                   {processHeading3}
                 </h3>
-                <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                <p className="text-zinc-700 text-base mb-10 dark:text-zinc-300">
                   {processText3}
                 </p>
                 {processImage4 && <div className="h-16"></div>}
@@ -279,7 +279,7 @@ export default function Project({
                   </h3>
                 )}
                 {processImage4 && (
-                  <p className="text-gray-700 text-base mb-10 dark:text-gray-300">
+                  <p className="text-zinc-700 text-base mb-10 dark:text-zinc-300">
                     {processText4}
                   </p>
                 )}
@@ -332,7 +332,7 @@ export default function Project({
           {projectLinks && (
             <div>
               <div className="h-32"></div>
-              <div className="flex w-full justify-between p-8 bg-gray-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-gray-900">
+              <div className="flex w-full justify-between p-8 bg-zinc-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-zinc-900">
                 <h2 className="text-2xl font-medium text-left">
                   Project links
                 </h2>

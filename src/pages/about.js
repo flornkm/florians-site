@@ -276,7 +276,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={title} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="w-full md:pt-20 pb-4 max-md:h-[200px] relative z-0">
           <RiveComponent
             src="./animations/florian_animation.riv"
@@ -289,13 +289,13 @@ export default function Home() {
               <Image
                 loader={imgLoader}
                 src="./images/florian_student.jpg"
-                className="inline-flex object-cover object-top max-h-64 max-md:w-20 max-md:h-20 max-md:rounded-full max-md:ring-1 max-md:ring-gray-300 relative z-10"
+                className="inline-flex object-cover object-top max-h-64 max-md:w-20 max-md:h-20 max-md:rounded-full max-md:ring-1 max-md:ring-zinc-300 relative z-10"
                 width={200}
                 height={100}
               />
               <div>
                 <h1 className="text-2xl font-semibold mb-3">About me</h1>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-zinc-600 dark:text-zinc-300">
                   <span className="font-semibold italic text-black dark:text-white">
                     Nice to meet you!
                   </span>{" "}
@@ -307,7 +307,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-zinc-600 dark:text-zinc-300">
               Beside my desire to work between design and code I love working
               with CSS and creating animations for web and mobile applications.
             </p>
@@ -319,7 +319,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/company_metahype.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -327,17 +327,17 @@ export default function Home() {
                   <h3 className="font-medium text-md">
                     Digital Strategist and Designer
                   </h3>
-                  <p className="text-sm text-gray-500">Metahype</p>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">Metahype</p>
                 </div>
               </div>
-              <p className="text-gray-500 text-right">2020 - present</p>
+              <p className="text-zinc-500 text-right dark:text-zinc-400">2020 - present</p>
             </div>
             <div className="flex w-full justify-between">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_hfg.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -345,19 +345,19 @@ export default function Home() {
                   <h3 className="font-medium text-md">
                     Webdesign Tutor
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
                     HfG Schwaebisch Gmuend
                   </p>
                 </div>
               </div>
-              <p className="text-gray-500 text-right">2022</p>
+              <p className="text-zinc-500 text-right dark:text-zinc-400">2022</p>
             </div>
             <div className="flex w-full justify-between">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_comondo.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -365,17 +365,17 @@ export default function Home() {
                   <h3 className="font-medium text-md">
                     Webdesigner & -developer
                   </h3>
-                  <p className="text-sm text-gray-500">Comondo</p>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">Comondo</p>
                 </div>
               </div>
-              <p className="text-gray-500 text-right">2020 - 2021</p>
+              <p className="text-zinc-500 text-right dark:text-zinc-400">2020 - 2021</p>
             </div>
             <div className="flex w-full justify-between">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_videoeditor.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
@@ -383,10 +383,10 @@ export default function Home() {
                   <h3 className="font-medium text-md">
                     Videoeditor and Motion Designer
                   </h3>
-                  <p className="text-sm text-gray-500">Freelance</p>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">Freelance</p>
                 </div>
               </div>
-              <p className="text-gray-500 text-right">2015 - 2020</p>
+              <p className="text-zinc-500 text-right dark:text-zinc-400">2015 - 2020</p>
             </div>
           </div>
           <div className="flex flex-col gap-6">
@@ -396,13 +396,13 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/project_curations.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-gray-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
                   width={40}
                   height={40}
                 />
                 <div>
                   <h3 className="font-medium text-md">Curations</h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
                     Website featuring useful curations for designers and
                     developers
                   </p>
@@ -505,7 +505,7 @@ export default function Home() {
                 >
                   <Dialog.Panel
                     ref={globePopupContainer}
-                    className="w-full ring-4 ring-white max-w-5xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t from-sky-400 to-sky-300 text-left align-middle shadow-xl transition-all relative min-h-[600px] dark:ring-gray-800"
+                    className="w-full ring-4 ring-white max-w-5xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t from-sky-400 to-sky-300 text-left align-middle shadow-xl transition-all relative min-h-[600px] dark:ring-zinc-800"
                   >
                     <Globe
                       ref={globeEl}
@@ -528,7 +528,7 @@ export default function Home() {
                     />
                     <button
                       type="button"
-                      className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-gray-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-gray-100 dark:text-black"
+                      className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-zinc-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
                       onClick={closeModal}
                     >
                       <Icon.X size={24} />

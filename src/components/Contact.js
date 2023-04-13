@@ -126,9 +126,9 @@ export default function Contact() {
   return (
     <div
       id="contact"
-      className="relative w-full min-h-[510px] bg-gray-50 rounded-xl overflow-hidden dark:bg-gray-900 dark:bg-opacity-50"
+      className="relative w-full min-h-[510px] bg-zinc-50 rounded-xl overflow-hidden dark:bg-zinc-900 dark:bg-opacity-50"
     >
-      <div className="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-gray-50 bg-opacity-90 backdrop-blur-md z-10 relative dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-zinc-50 bg-opacity-90 backdrop-blur-md z-10 relative dark:bg-zinc-800 dark:border-zinc-700">
         <div className="flex place-items-center gap-3">
           <Image
             loader={imgLoader}
@@ -141,8 +141,8 @@ export default function Contact() {
           <p className="text-xl font-medium">Florian</p>
         </div>
         <div className="flex gap-4">
-          <Icon.Video className="text-gray-300 dark:text-gray-600" />
-          <Icon.Info className="text-gray-300 dark:text-gray-600" />
+          <Icon.Video className="text-zinc-300 dark:text-zinc-600" />
+          <Icon.Info className="text-zinc-300 dark:text-zinc-600" />
         </div>
       </div>
       <div
@@ -156,7 +156,7 @@ export default function Contact() {
       <div className="w-full flex gap-2 pl-3 pr-3 min-h-[64px] place-items-center justify-between max-sm:pb-3 max-sm:flex-wrap">
         <Menu as="div" className="relative inline-block text-left">
           <div>
-            <Menu.Button onClick={() => {setArrowUp(!arrowUp)}} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800">
+            <Menu.Button onClick={() => {setArrowUp(!arrowUp)}} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 transition-all dark:bg-zinc-900 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-800">
               <Icon.Smartphone />
               <Icon.ChevronUp className={arrowUp ? "ml-1 transition-all rotate-0" : "ml-1 transition-all rotate-180"} size={20} />
             </Menu.Button>
@@ -170,7 +170,7 @@ export default function Contact() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-160px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700 p-1">
+            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-160px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800 dark:ring-zinc-700 p-1">
               <div className="py-0">
                 <Link href="https://twitter.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
@@ -179,8 +179,8 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                             "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
@@ -197,8 +197,8 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                             "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
@@ -215,8 +215,8 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                             "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
@@ -233,8 +233,8 @@ export default function Contact() {
                         type="submit"
                         className={classNames(
                           active
-                            ? "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white"
-                            : "text-gray-700 border-l-transparent dark:text-gray-300",
+                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
+                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
                             "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
                         )}
                       >
@@ -248,10 +248,10 @@ export default function Contact() {
             </Menu.Items>
           </Transition>
         </Menu>
-        <div className="w-full h-[48px] bg-white rounded-full border border-solid border-gray-300 relative text-sm dark:border-gray-700">
+        <div className="w-full h-[48px] bg-white rounded-full border border-solid border-zinc-300 relative text-sm dark:border-zinc-700">
           <input
             ref={input}
-            className="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3 dark:text-white dark:bg-gray-900"
+            className="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3 dark:text-white dark:bg-zinc-900"
             placeholder="Enter your message"
             type="text"
             value={newMessage}
