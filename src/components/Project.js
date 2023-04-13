@@ -30,6 +30,9 @@ export default function Project({
   videoThumbnail,
   videoSource,
   projectLinks,
+  stack,
+  challenge,
+  result
 }) {
   const [highlight, setHighlight] = useState("Projects");
   const [video, setVideo] = useState(false);
@@ -164,10 +167,17 @@ export default function Project({
             loader={imgLoader}
             src={bannerSource}
             alt={"Project Banner Image for " + projectTitle}
-            className="inline-flex object-cover object-center max-h-128 mb-16"
+            className="inline-flex object-cover object-center max-h-128 mb-10"
             width={1200}
             height={500}
           />
+          <div className="flex gap-2 mb-10 flex-wrap">
+            {stack.map((stackItem, index) => (
+              <div key={index} className={"flex gap-2 font-medium items-center text-[14px] px-3 py-2 ring-1 rounded-full " + stackItem.color + " " + stackItem.ringColor + " " + stackItem.backgroundColor}>
+                {stackItem.icon} <p className="ml-2">{stackItem.name}</p>
+              </div>
+            ))}
+          </div>
           <p className="text-zinc-700 md:max-w-[80%] text-lg mb-32 dark:text-zinc-300">
             {projectMainDescription}
           </p>
@@ -207,10 +217,18 @@ export default function Project({
               </div>
             </div>
           </div>
+          {challenge && <div><div className="h-24"></div>
+            <div className="flex gap-4 items-start justify-between max-md:flex-col">
+              <h3 className="font-medium text-2xl">Challenge</h3>
+              <p className="text-zinc-700 mb-10 dark:text-zinc-300 xl:max-w-3xl text-lg">
+                {challenge}
+              </p>
+            </div>
+          </div>}
           <div className="h-32"></div>
           <div className="relative">
             <h2 className="text-2xl font-medium text-left mb-2 xl:sticky top-24 max-xl:mb-8 left-0">
-              The Process
+              Action
             </h2>
             <div className="w-full flex justify-end">
               <div className="flex flex-col xl:max-w-3xl">
@@ -286,6 +304,15 @@ export default function Project({
               </div>
             </div>
           </div>
+          {result && <div><div className="h-24"></div>
+          <div className="flex gap-4 items-start justify-between max-md:flex-col">
+              <h3 className="font-medium text-2xl">Result</h3>
+              <p className="text-zinc-700 mb-10 dark:text-zinc-300 xl:max-w-3xl text-lg">
+                {result}
+              </p>
+            </div>
+
+          </div>}
           {videoSource && (
             <div className="mt-32">
               <h2 className="text-2xl font-medium text-left mb-6 left-0">
@@ -310,7 +337,7 @@ export default function Project({
                       className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
                       width={96}
                       height={96}
-                      />
+                    />
                   </div>
                 )}
                 {video && (
