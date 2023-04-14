@@ -125,9 +125,7 @@ export default function Home() {
         </div>
         <div>
           <h2 className="text-2xl font-medium text-black dark:text-white">
-            As a designer and developer I see my role in leading projects that
-            help companies to achieve their ambitious goals in creating
-            something functionally and technologically useful for humanity
+          As a designer and developer, I see my role in leading projects that help companies to achieve their ambitious goals of creating something functionally and technologically useful for humanity
           </h2>
         </div>
         <div className="h-64"></div>
