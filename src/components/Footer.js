@@ -197,7 +197,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="h-16"></div>
-      <div className="flex justify-between place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-8">
+      <div className="flex justify-between items-center place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-8">
         <p className="text-zinc-500 text-xs">
           {new Date().getFullYear()} Design With Tech. All Rights Reserved.
         </p>
