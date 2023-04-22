@@ -104,7 +104,7 @@ export default function Colophon() {
                     className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
                   />
                 </Link>
-                <Link
+                <Link 
                   className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
                   href={"https://www.nilseller.com/"}
                   target="_blank"

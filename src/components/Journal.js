@@ -45,7 +45,7 @@ export default function Journal({ title, text, mainImage, date }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#080D14] dark:text-white relative">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-transparent dark:text-white relative">
         <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
           <div className="max-w-xl">
             <Image
