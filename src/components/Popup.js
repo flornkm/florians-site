@@ -86,7 +86,7 @@ export default function Popup({
                   leaveTo="opacity-0 scale-95"
                 >
                   <Dialog.Panel className="w-full max-w-5xl transform rounded-2xl bg-white text-left align-middle shadow-xl transition-all dark:bg-zinc-800">
-                    <div className="overflow-y-auto max-h-[70vh] p-6 max-md:max-h-[60vh]">
+                    <div className="overflow-y-auto max-h-[70vh] p-6 max-md:max-h-[60vh] pt-8">
                       <div className="flex w-full place-items-center justify-between max-md:flex-col pr-20 max-md:items-start max-md:gap-8">
                         <div className="flex gap-6 place-items-center">
                           <Image
@@ -130,8 +130,8 @@ export default function Popup({
                                   src="./images/collaborator_anton_stallboerger.jpg"
                                   alt="Anton Stallbörger"
                                   className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
-                                  width={48}
-                                  height={48}
+                                  width={40}
+                                  height={40}
                                 />
                               </Link>
                             )}
@@ -152,8 +152,8 @@ export default function Popup({
                                   src="./images/collaborator_nils_eller.jpg"
                                   alt="Nils Eller"
                                   className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
-                                  width={48}
-                                  height={48}
+                                  width={40}
+                                  height={40}
                                 />
                               </Link>
                             )}
@@ -173,8 +173,8 @@ export default function Popup({
                                   src="./images/collaborator_alice_sopp.jpg"
                                   alt="Alice Sopp"
                                   className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
-                                  width={48}
-                                  height={48}
+                                  width={40}
+                                  height={40}
                                 />
                               </Link>
                             )}
