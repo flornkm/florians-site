@@ -92,8 +92,8 @@ export default function Popup({
                           <Image
                             loader={imgLoader}
                             src={icon}
-                            width={88}
-                            height={88}
+                            width={64}
+                            height={64}
                             alt={name}
                             className="rounded-2xl"
                           />

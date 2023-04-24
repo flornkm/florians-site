@@ -6,7 +6,7 @@ export default function LegalNotice() {
   return (
     <>
       <Head>
-        <title>Legal Notice | Design With Tech</title>
+        <title>Legal Notice</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
@@ -14,7 +14,7 @@ export default function LegalNotice() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           property="og:title"
-          content="Combining Design and Technology | Design With Tech"
+          content="Legal Notice"
         />
         <meta
           property="og:description"
