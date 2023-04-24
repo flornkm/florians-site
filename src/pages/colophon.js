@@ -8,7 +8,7 @@ export default function Colophon() {
   return (
     <>
       <Head>
-        <title>Colophon | Design With Tech</title>
+        <title>Colophon</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
@@ -16,7 +16,7 @@ export default function Colophon() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           property="og:title"
-          content="Combining Design and Technology | Design With Tech"
+          content="Colophon"
         />
         <meta
           property="og:description"

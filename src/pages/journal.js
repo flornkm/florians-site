@@ -30,7 +30,7 @@ export default function Journal() {
   return (
     <>
       <Head>
-        <title>Journal | Design With Tech</title>
+        <title>Journal - Florian</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
@@ -38,7 +38,7 @@ export default function Journal() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           property="og:title"
-          content="Combining Design and Technology | Design With Tech"
+          content="Journal - Florian"
         />
         <meta
           property="og:description"

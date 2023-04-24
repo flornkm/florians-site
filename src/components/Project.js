@@ -63,7 +63,7 @@ export default function Project({
   return (
     <>
       <Head>
-        <title>{projectTitle} | Design With Tech</title>
+        <title>{projectTitle} - Florians Portfolio</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
@@ -71,7 +71,7 @@ export default function Project({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           property="og:title"
-          content="Combining Design and Technology | Design With Tech"
+          content={projectTitle + " - Florians Portfolio"}
         />
         <meta
           property="og:description"

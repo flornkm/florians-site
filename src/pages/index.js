@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Combining Design and Technology | Design With Tech</title>
+        <title>Florians Portfolio - Digital Product Designer</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
@@ -67,7 +67,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           property="og:title"
-          content="Combining Design and Technology | Design With Tech"
+          content="Florians Portfolio - Digital Product Designer"
         />
         <meta
           property="og:description"
@@ -114,14 +114,14 @@ export default function Home() {
               </p>
             </Link>
           </div>
-          <Image
+          {/* <Image
             loader={imgLoader}
             src="./images/main_header.png"
             alt="Header Image of Florian as Cartoon Character"
             className="mix-blend-exclusion max-md:hidden dark:mix-blend-normal"
             width={250}
             height={250}
-          />
+          /> */}
         </div>
         <div>
           <h2 className="text-2xl font-medium text-black dark:text-white">

@@ -244,7 +244,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>About Florian | Design With Tech</title>
+        <title>About myself - Florian</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
@@ -252,7 +252,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           property="og:title"
-          content="Combining Design and Technology | Design With Tech"
+          content="About myself - Florian"
         />
         <meta
           property="og:description"
