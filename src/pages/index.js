@@ -92,7 +92,7 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
-        <div className="h-[70vh] flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:pt-48 gap-16">
+        <div className="md:h-[70vh] flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-40 gap-16">
           <div className="md:w-[50%]">
             <h1 className="text-5xl font-bold mb-6 leading-tight">
               Hey, I'm Florian
@@ -101,7 +101,6 @@ export default function Home() {
               A designer and developer building digital products.
             </h2>
             <div className="h-8 max-md:hidden"></div>
-            
           </div>
           {/* <Image
             loader={imgLoader}
@@ -112,7 +111,7 @@ export default function Home() {
             height={250}
           /> */}
           <Link
-              className="p-4 shadow-lg hover:shadow-zinc-100 active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
+              className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
               href={"./#contact"}
             >
               <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-emerald-600 opacity-75 dark:bg-emerald-500">
