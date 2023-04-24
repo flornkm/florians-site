@@ -92,7 +92,7 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
-        <div className="h-[70vh] flex place-items-center justify-between">
+        <div className="h-[70vh] flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:pt-48 gap-16">
           <div className="md:w-[50%]">
             <h1 className="text-5xl font-bold mb-6 leading-tight">
               Hey, I'm Florian
@@ -100,9 +100,19 @@ export default function Home() {
             <h2 className="text-3xl font-medium text-zinc-700 dark:text-zinc-400">
               A designer and developer building digital products.
             </h2>
-            <div className="h-8"></div>
-            <Link
-              className="p-4 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
+            <div className="h-8 max-md:hidden"></div>
+            
+          </div>
+          {/* <Image
+            loader={imgLoader}
+            src="./images/main_header.png"
+            alt="Header Image of Florian as Cartoon Character"
+            className="mix-blend-exclusion max-md:hidden dark:mix-blend-normal"
+            width={250}
+            height={250}
+          /> */}
+          <Link
+              className="p-4 shadow-lg hover:shadow-zinc-100 active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
               href={"./#contact"}
             >
               <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-emerald-600 opacity-75 dark:bg-emerald-500">
@@ -113,15 +123,6 @@ export default function Home() {
                 North America.
               </p>
             </Link>
-          </div>
-          {/* <Image
-            loader={imgLoader}
-            src="./images/main_header.png"
-            alt="Header Image of Florian as Cartoon Character"
-            className="mix-blend-exclusion max-md:hidden dark:mix-blend-normal"
-            width={250}
-            height={250}
-          /> */}
         </div>
         <div>
           <h2 className="text-2xl font-medium text-black dark:text-white">
