@@ -29,14 +29,14 @@ export default function Journal({ title, text, mainImage, date }) {
         />
         <meta
           property="og:image"
-          content={mainImage}
+          content="/images/designwithtech_opengraph.jpg"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@floriandwt" />
         <meta name="twitter:title" content="Florian Portfolio" />
         <meta
           name="twitter:image"
-          content={mainImage}
+          content="/images/designwithtech_twitter.jpg"
         />
         <meta
           name="twitter:description"
