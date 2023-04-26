@@ -13,7 +13,7 @@ export default function JounalEntry() {
         text={
           <>
             <article className="text-gray-700 dark:text-gray-300">
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 Posts <br /><span className="text-gray-500 text-lg">Twitter, but for designers and developers</span>
               </h3>
               <p className="mb-6">
@@ -28,7 +28,7 @@ export default function JounalEntry() {
               >
                 Posts on Testflight
               </Link>
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-10">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 Revolut <br /><span className="text-gray-500 text-lg">Intelligent, easy to use banking app</span>
               </h3>
               <p className="mb-6">
@@ -44,7 +44,7 @@ export default function JounalEntry() {
               >
                 Revolut
               </Link>
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-10">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 Fig <br /><span className="text-gray-500 text-lg">Terminal with superpowers</span>
               </h3>
               <p className="mb-6">
@@ -61,7 +61,7 @@ export default function JounalEntry() {
               >
                 Fig
               </Link>
-              <div className="h-10"></div>
+              <div className="h-24"></div>
             </article>
           </>
         }
