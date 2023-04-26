@@ -47,7 +47,7 @@ export default function Journal({ title, text, mainImage, date }) {
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-transparent dark:text-white relative">
         <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             <Image
               loader={imgLoader}
               src={mainImage}

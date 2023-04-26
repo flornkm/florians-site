@@ -13,7 +13,7 @@ export default function JounalEntry() {
         text={
           <>
             <article className="text-gray-700 dark:text-gray-300">
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 Supabase <br/><span className="text-gray-500 text-lg">From database to user authentication</span>
               </h3>
               <p className="mb-6">
@@ -31,7 +31,7 @@ export default function JounalEntry() {
               >
                 Supabase
               </Link>
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-10">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 Cosmos <br/><span className="text-gray-500 text-lg">A new way to save and look at your favorite things</span>
               </h3>
               <p className="mb-6">
@@ -57,7 +57,7 @@ export default function JounalEntry() {
               >
                 Cosmos
               </Link>
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-10">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 Rive <br/><span className="text-gray-500 text-lg">Creating animations intuitively</span>
               </h3>
               <p className="mb-6">
@@ -79,7 +79,7 @@ export default function JounalEntry() {
               >
                 Rive
               </Link>
-              <div className="h-10"></div>
+              <div className="h-24"></div>
             </article>
           </>
         }

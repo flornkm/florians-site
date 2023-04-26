@@ -10,10 +10,10 @@ export default function JounalEntry() {
         text={
           <>
             <article className="text-gray-700 dark:text-gray-300">
-              <h3 className="text-xl font-medium mb-2 text-black dark:text-white">
+              <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
                 The different stages
               </h3>
-              <p className="mb-8">
+              <p className="mb-16">
                 Web 1.0 was an era full of hyperlinks without any additional
                 visuals or functions. When Web 2.0 came, most websites we know
                 today (or not) where born. For example Facebook (now Meta),
@@ -30,7 +30,7 @@ export default function JounalEntry() {
               <h3 className="text-xl font-medium mb-2 text-black dark:text-white">
                 Web 3.0 is misleading
               </h3>
-              <p className="mb-8">
+              <p className="mb-16">
                 The term "Web 3.0" is often used in combination with crypto. But
                 I don't think that this makes sense. I don't hate crypto, but I
                 think because of the recent events (FTX) a lot of things will
@@ -43,7 +43,7 @@ export default function JounalEntry() {
               <h3 className="text-xl font-medium mb-2 text-black dark:text-white">
                 Which problems will be solved?
               </h3>
-              <p className="mb-8">
+              <p className="mb-24">
                 Today we have a lot of problems on our planet. Not only the
                 cimate change, but also the fact that we are running out of
                 resources. We need to find a way to produce more food, energy
