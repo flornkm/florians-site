@@ -146,7 +146,7 @@ export default function Project({
                 </Link>
               )}
               {collaborators.includes("Alice") && (
-                <Link href={"#"} className="group relative transition-all">
+                <Link href={"https://www.alicesopp.com/"} target="_blank" className="group relative transition-all">
                   <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
                     <span className="z-10 relative">Alice Sopp</span>
                     <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
