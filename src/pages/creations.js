@@ -229,9 +229,9 @@ export default function Home() {
               onClick={() => {
                 activatePopup(concept);
               }}
-              className={"bg-transparent rounded-2xl flex self-stretch h-full w-full " + (concept.title === "Web Audit" ? "md:col-span-2 md:row-span-2" : "")}
+              className={"bg-transparent rounded-2xl flex h-full w-full " + (concept.title === "Web Audit" ? "md:col-span-2 md:row-span-2" : "")}
             >
-              <div className="cursor-pointer transition-all group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-100 w-full flex flex-col gap-4 justify-center px-4 py-3 rounded-lg text-zinc-500 hover:text-black relative -left-4 dark:text-zinc-400 dark:hover:text-white dark:bg-zinc-900">
+              <div className="cursor-pointer transition-all h-full group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-100 w-full flex flex-col gap-4 max-md:justify-center md:justify-end px-4 py-3 rounded-lg text-zinc-500 hover:text-black relative -left-4 dark:text-zinc-400 dark:hover:text-white dark:bg-zinc-900">
                 <Image
                   loader={imgLoader}
                   src={concept.preview ? concept.preview : concept.icon}
