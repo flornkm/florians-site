@@ -145,7 +145,7 @@ export default function Home() {
               />
               <div
                 ref={rect}
-                className="w-[40px] h-[40px] left-0 top-[50%] translate-y-[-50%] rounded-md absolute bg-zinc-100 border border-zinc-200 transition-all dark:bg-zinc-800 dark:border-zinc-700"
+                className="w-[40px] h-[40px] left-0 top-[50%] translate-y-[-50%] rounded-md absolute bg-zinc-100 border border-zinc-200 transition-all dark:bg-zinc-900 dark:border-zinc-800"
               ></div>
             </div>
           </div>
@@ -163,10 +163,10 @@ export default function Home() {
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div className="bg-zinc-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/boost/boost.jpg"
+                    src="./images/boost/boost.webp"
                     alt="Photo of the Boost Device"
                     className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
@@ -204,10 +204,10 @@ export default function Home() {
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div className="bg-zinc-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/curations/curations.jpg"
+                    src="./images/curations/curations.webp"
                     alt="Image of Curations in a Mockup"
                     className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
@@ -244,10 +244,10 @@ export default function Home() {
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div className="bg-zinc-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/ambient_chat/ambient_chat.jpg"
+                    src="./images/ambient_chat/ambient_chat.webp"
                     alt="Image of Curations in a Mockup"
                     className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}
@@ -283,10 +283,10 @@ export default function Home() {
                     : "group grid grid-cols-2 gap-8 place-items-center"
                 }
               >
-                <div className="bg-zinc-100 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
                   <Image
                     loader={imgLoader}
-                    src="./images/homebility/homebility.jpg"
+                    src="./images/homebility/homebility.webp"
                     alt="Image of Curations in a Mockup"
                     className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
                     width={350}

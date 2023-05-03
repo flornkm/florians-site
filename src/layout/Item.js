@@ -108,7 +108,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
+            "max-md:row-span-1 overflow-hidden border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-900 dark:border-zinc-800"
           }
           {...props}
         >
@@ -133,7 +133,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
+            "max-md:row-span-1 overflow-hidden border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-900 dark:border-zinc-800"
           }
           {...props}
         >
@@ -193,7 +193,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 border-zinc-200 relative p-8 bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
+            "max-md:row-span-1 border-zinc-200 relative p-8 bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] dark:bg-zinc-900 dark:border-zinc-800"
           }
           {...props}
         >
@@ -216,7 +216,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 p-2 border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] dark:bg-zinc-800 dark:border-zinc-700"
+            "max-md:row-span-1 p-2 border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] dark:bg-zinc-900 dark:border-zinc-800"
           }
           {...props}
         >

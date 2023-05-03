@@ -167,7 +167,7 @@ export default function Project({
             loader={imgLoader}
             src={bannerSource}
             alt={"Project Banner Image for " + projectTitle}
-            className="inline-flex object-cover object-center max-h-128 mb-10"
+            className="inline-flex object-cover object-center max-h-128 mb-10 bg-zinc-100 dark:bg-zinc-900 rounded-lg"
             width={1200}
             height={500}
           />
@@ -237,7 +237,7 @@ export default function Project({
                   src={processImage1}
                   alt={processHeading1}
                   quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8"
+                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
                   width={800}
                   height={384}
                 />
@@ -253,7 +253,7 @@ export default function Project({
                   src={processImage2}
                   alt={processHeading2}
                   quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8"
+                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
                   width={800}
                   height={384}
                 />
@@ -269,7 +269,7 @@ export default function Project({
                   src={processImage3}
                   alt={processHeading3}
                   quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8"
+                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
                   width={800}
                   height={384}
                 />
@@ -286,7 +286,7 @@ export default function Project({
                     src={processImage4}
                     alt={processHeading4}
                     quality={100}
-                    className="inline-flex object-cover object-center max-h-96 mb-8"
+                    className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
                     width={800}
                     height={384}
                   />
