@@ -168,10 +168,10 @@ export default function Footer() {
             Projects
           </Link>
           <Link
-            href={"/concepts"}
+            href={"/creations"}
             className="text-zinc-200 p-2 transition-all rounded-lg hover:bg-zinc-700 -ml-2 dark:hover:bg-zinc-800"
           >
-            Concepts
+            Creations
           </Link>
           <Link
             href={"/about"}
