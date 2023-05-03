@@ -12,7 +12,7 @@ export default function Home() {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
 
-  const highlight = "Concepts";
+  const highlight = "Creations";
   const [popupState, setPopupState] = useState(false);
 
   React.useEffect(() => {
@@ -26,26 +26,31 @@ export default function Home() {
       title: "Web Audit",
       description: "Raycast SEO Extension",
       icon: "./images/concept_icons/concept-icon_web-audit.svg",
+      preview: "./images/web_audit/web-audit_preview.png",
     },
     {
       title: "Nutri",
       description: "Social Food App",
       icon: "./images/concept_icons/concept-icon_nutri.svg",
+      preview: "./images/nutri/nutri_preview.png",
     },
     {
       title: "HeartbeatOS",
       description: "Heart Simulator & Monitoring",
       icon: "./images/concept_icons/concept-icon_heartbeat.svg",
+      preview: "./images/heartbeat/heartbeat_preview.png",
     },
     {
       title: "Stackoverflow",
       description: "Redesign & Extension",
       icon: "./images/concept_icons/concept-icon_stackoverflow.svg",
+      preview: "./images/stackoverflow/stackoverflow_preview.png",
     },
     {
       title: "Visualization",
       description: "ThreeJS Data Visualization",
       icon: "./images/concept_icons/concept-icon_visualization.svg",
+      preview: "./images/visualization/visualization_preview.png",
     },
   ];
 
@@ -212,32 +217,32 @@ export default function Home() {
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">
-          <h1 className="text-3xl font-semibold text-left mb-3">Concepts</h1>
+          <h1 className="text-3xl font-semibold text-left mb-3">Creations</h1>
           <h2 className="text-xl font-medium text-left text-zinc-400">
-            Smaller creations and ideas.
+            A selection of ideas, concepts and more.
           </h2>
         </div>
-        <div className="min-h-96 flex flex-col place-items-start w-full gap-4">
+        <div className="min-h-96 grid grid-cols-3 w-full gap-4 max-md:grid-cols-1 max-lg:grid-cols-2 pb-32">
           {concepts.map((concept, index) => (
             <div
               key={index}
               onClick={() => {
                 activatePopup(concept);
               }}
-              className="bg-transparent rounded-2xl flex justify-center place-items-center"
+              className={"bg-transparent rounded-2xl flex self-stretch h-full w-full " + (concept.title === "Web Audit" ? "md:col-span-2 md:row-span-2" : "")}
             >
-              <div className="cursor-pointer transition-all hover:bg-zinc-100 flex flex-row gap-4 justify-start px-4 py-3 rounded-lg place-items-center text-zinc-500 hover:text-black relative -left-4 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800">
+              <div className="cursor-pointer transition-all group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-100 w-full flex flex-col gap-4 justify-center px-4 py-3 rounded-lg text-zinc-500 hover:text-black relative -left-4 dark:text-zinc-400 dark:hover:text-white dark:bg-zinc-900">
                 <Image
                   loader={imgLoader}
-                  src={concept.icon}
+                  src={concept.preview ? concept.preview : concept.icon}
                   alt="Nutri Blueprint Icon"
-                  className="rounded-xl"
-                  width={48}
-                  height={48}
+                  className="rounded-xl w-full group-hover:opacity-80 transition-all"
+                  width={500}
+                  height={300}
                 />
                 <div>
-                  <p className="text-lg font-medium text-ellipsis">{concept.title}</p>
-                  <p className="text-base text-ellipsis">{concept.description}</p>
+                  <p className="text-base font-medium text-ellipsis">{concept.title}</p>
+                  <p className="text-sm text-ellipsis">{concept.description}</p>
                 </div>
               </div>
             </div>

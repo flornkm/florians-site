@@ -45,13 +45,13 @@ export default function Navigation(title, highlight) {
             <li>
               <Link
                 className={
-                  title.highlight === "Concepts"
+                  title.highlight === "Creations"
                   ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
                   : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
-                href="/concepts"
+                href="/creations"
               >
-                <span className="md:block max-md:hidden">Concepts</span>
+                <span className="md:block max-md:hidden">Creations</span>
                 <Icon.Zap className="max-md:block md:hidden" size={24} />
               </Link>
             </li>

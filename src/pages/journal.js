@@ -78,7 +78,7 @@ export default function Journal() {
           {entries.map((entry) => (
             <Link
               href={entry.link}
-              className="cursor-pointer flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 relative -left-4"
+              className="cursor-pointer flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900 relative -left-4"
             >
               <h3 className="text-xl font-medium text-left mb-2">
                 {entry.title}

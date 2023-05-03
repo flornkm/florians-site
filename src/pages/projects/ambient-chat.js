@@ -6,7 +6,7 @@ export default function AmbientChat() {
     <Project
       projectTitle="Ambient Chat"
       shortDescription="Chat application with GPT-3 integration"
-      bannerSource="./images/ambient_chat/banner-ambient_chat.jpg"
+      bannerSource="./images/ambient_chat/banner-ambient_chat.webp"
       projectMainDescription="Ambient Chat is a chat application that began as a simple idea for a sleek chat room interface. Using VueJS and NodeJS Express with SocketIO, I developed a complete chat platform that allows users to send, receive, and store messages from other users. In addition, I incorporated OpenAI's GPT-3 technology to enable users to chat with AI bots that feel authentic and natural.      "
       slideImages={[
         "./images/ambient_chat/ambient_chat_interface.webp",
@@ -15,13 +15,13 @@ export default function AmbientChat() {
         "./images/ambient_chat/ambient_chat_input.webp",
         "./images/ambient_chat/ambient_chat_box.webp",
       ]}
-      processImage1="./images/ambient_chat/ambient_chat_blueprint.jpg"
+      processImage1="./images/ambient_chat/ambient_chat_blueprint.webp"
       processHeading1="Organizing my codebase"
       processText1="Before diving into development, I spent time blueprinting my application in FigJam to plan out the structure of my classes and components. I found this to be a crucial step in creating a clean and organized codebase. By breaking down the application's functionality and visualizing the various components that would be necessary to achieve it, I was able to streamline the development process and ensure that everything would connect seamlessly."
-      processImage2="./images/ambient_chat/ambient_chat_components.jpg"
+      processImage2="./images/ambient_chat/ambient_chat_components.webp"
       processHeading2="Building the core components"
       processText2="Once I had sketched out my ideas and determined the architecture of my application, I began building classes and components using VueJS, my chosen frontend framework. My first task was to create a core component that I knew would be essential later in the development process. Meanwhile, on the backend, I initialized a NodeJS server and installed the Express framework, which allowed me to start testing the sending and receiving of data. By taking a strategic approach to development, I was able to quickly establish the foundation of my application and start building out its core functionality."
-      processImage3="./images/ambient_chat/ambient_chat_user_experience.jpg"
+      processImage3="./images/ambient_chat/ambient_chat_user_experience.webp"
       processHeading3="Refining the user experience"
       processText3="After building the frontend and backend components, I moved on to styling the application using CSS. I found it important to ensure that the design was both aesthetically pleasing and user-friendly. I also focused on making the application responsive, so it would look great on all devices. Once the styling was complete, I dockerized the application to make it more scalable and efficient. This also made it easier to deploy and manage, which was a big plus for me. For the database, I decided to use Airtable API, which allowed for easy integration with my application. I found that Airtable provided a simple and intuitive way to manage and store data, which made it a great choice for my project."
       challenge="How can I create a chat application that is both aesthetically pleasing and user-friendly?
