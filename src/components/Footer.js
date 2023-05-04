@@ -50,6 +50,7 @@ export default function Footer() {
         <div className="w-[50%]">
           <AnalogClock {...options} />
           <div className="h-12"></div>
+          <div className="w-full">
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button
@@ -74,13 +75,13 @@ export default function Footer() {
               enter="transition ease-out duration-100"
               enterFrom="transform opacity-0 scale-95"
               enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
+              leave="transition ease-in duration-100"
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
               <Menu.Items
                 ref={menu}
-                className="absolute overflow-hidden left-0 top-[-124px] z-10 w-40 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-zinc-800 dark:ring-zinc-700 p-1"
+                className="absolute overflow-hidden left-0 top-[-128px] z-10 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none focus:outline-none dark:bg-zinc-800 dark:ring-zinc-700 p-1"
               >
                 <div className="py-0">
                   <Menu.Item>
@@ -152,6 +153,7 @@ export default function Footer() {
               </Menu.Items>
             </Transition>
           </Menu>
+          </div>
         </div>
         <div className="flex flex-col gap-2 font-medium items-start">
           <h4 className="text-xl text-white mb-2">Navigation</h4>
