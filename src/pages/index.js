@@ -379,7 +379,7 @@ export default function Home() {
                 <p className="font-semibold hidden group-hover:block">
                   {mailText[1]}
                 </p>
-                <p>florian@designwithtech.com</p>
+                <p>florian.kiem@hfg.design</p>
               </div>
               <Icon.Mail width={24} />
             </div>

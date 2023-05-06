@@ -183,7 +183,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Concepts - Florian</title>
+        <title>Creations - Florian</title>
         <meta
           name="description"
           content="Designer and Developer building digital products."
