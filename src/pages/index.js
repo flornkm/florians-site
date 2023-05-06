@@ -49,7 +49,7 @@ export default function Home() {
   }, [isVisible, contactVisible]);
 
   const copyMail = () => {
-    copy("florian@designwithtech.com");
+    copy("florian.kiem@hfg.design");
     setMailText(["Copied", "Copied"]);
     setTimeout(() => {
       setMailText(["Florian", "Click to copy"]);
