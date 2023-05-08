@@ -8,7 +8,7 @@ import React, {
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import * as Icon from "react-feather";
-import { Play, Pause, ClockClockwise, Wine } from "phosphor-react";
+import { Play, Pause, ClockClockwise, PersonSimpleRun } from "phosphor-react";
 // import AudioPlayer from "react-h5-audio-player";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -268,7 +268,7 @@ const Item = forwardRef(
             className="p-2 shadow-sm bg-gradient-to-t from-red-500 to-rose-500 text-white rounded-lg absolute top-2 right-2"
           />}
         </div>
-      ))|| (id === "5" && (
+      )) || (id === "5" && (
         <div
           ref={ref}
           style={inlineStyles}
@@ -281,7 +281,7 @@ const Item = forwardRef(
           {!withOpacity && <div className="h-full w-full flex flex-col gap-2 justify-start p-2">
             <p className="text-sm italic text-zinc-400">Todays Workout:</p>
             <div className="h-full flex-col gap-4 w-full flex items-center justify-center">
-              {nextWorkout() === "Rest" ? <ClockClockwise size={40} weight="fill" /> : <PersonSimpleRun size={40} weight="fill" /> }
+              {nextWorkout() === "Rest" ? <ClockClockwise size={40} weight="fill" /> : <PersonSimpleRun size={40} weight="fill" />}
               <p className="text-lg font-medium">{nextWorkout()}</p>
             </div>
           </div>}
@@ -302,7 +302,7 @@ const Item = forwardRef(
         >
           {id}
         </div>
-      )) 
+      ))
     );
   }
 );
