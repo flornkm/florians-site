@@ -126,7 +126,7 @@ export default function Contact() {
   return (
     <div
       id="contact"
-      className="relative w-full min-h-[510px] bg-zinc-50 rounded-xl overflow-hidden dark:bg-zinc-900 dark:bg-opacity-50"
+      className="relative w-full min-h-[510px] bg-zinc-100 rounded-xl overflow-hidden dark:bg-zinc-900 dark:bg-opacity-50"
     >
       <div className="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-zinc-50 bg-opacity-90 backdrop-blur-md z-10 relative dark:bg-zinc-800 dark:border-zinc-700">
         <div className="flex place-items-center gap-3">
@@ -190,24 +190,6 @@ export default function Contact() {
                     )}
                   </Menu.Item>
                 </Link>
-                {/* <Link href="https://dribbble.com/floriandwt" target={"_blank"}>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <button
-                        type="submit"
-                        className={classNames(
-                          active
-                            ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-white"
-                            : "text-zinc-700 border-l-transparent dark:text-zinc-300",
-                            "flex w-full px-4 py-2 text-left text-sm font-medium gap-2 place-items-center rounded-lg"
-                        )}
-                      >
-                        <Icon.Dribbble size={16} />
-                        @floriandwt
-                      </button>
-                    )}
-                  </Menu.Item>
-                </Link> */}
                 <Link href="https://github.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
                     {({ active }) => (

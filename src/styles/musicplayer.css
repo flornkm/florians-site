@@ -6,10 +6,12 @@
     font-family: inherit;
     width: 100%;
     padding: 1rem 1rem;
-    border: 1px solid #E4E7EB;
-    background-color: #fff;
+    border: 1px solid #f87171;
+    background-color: #ef4444;
     border-radius: 1rem;
   }
+
+
   .rhap_container:focus:not(:focus-visible) {
     outline: 0;
   }
@@ -78,7 +80,7 @@
   }
   
   .rhap_time {
-    color: black;
+    color: white;
     font-size: 1rem;
     user-select: none;
     -webkit-user-select: none;
@@ -99,7 +101,7 @@
     height: 100%;
     position: absolute;
     z-index: 2;
-    background-color: black;
+    background-color: #991b1b;
     border-radius: 2px;
   }
   

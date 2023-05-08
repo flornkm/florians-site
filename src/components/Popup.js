@@ -246,22 +246,23 @@ export default function Popup({
                       <h3 className="text-xl font-medium mb-1 dark:text-white">
                         About
                       </h3>
-                      <p className="text-zinc-700 dark:text-zinc-300">{text}</p>
+                      <p className="text-zinc-700 dark:text-zinc-400">{text}</p>
                       {links && (
                         <div className="mt-10">
-                          <div className="flex w-full justify-between p-4 bg-zinc-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-zinc-700">
+                          <div className="flex w-full justify-between rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8">
                             <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                               {links.map((link) => (
                                 <Link
-                                  className="font-medium text-lg transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                                  href={link.url}
+                                className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:hover:bg-opacity-50 rounded-md"
+                                href={link.url}
                                   target="_blank"
                                 >
                                   {link.text}
                                   <Icon.ArrowUpRight
-                                    size={20}
-                                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
-                                  />
+                    size={16}
+                    strokeWidth={2.5}
+                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                  />
                                 </Link>
                               ))}
                             </div>
@@ -271,7 +272,7 @@ export default function Popup({
                       <button
                         type="button"
                         ref={completeButtonRef}
-                        className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white absolute text-sm font-medium hover:bg-zinc-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
+                        className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white hover:opacity-80 absolute text-sm font-medium hover:bg-zinc-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
                         onClick={() => {
                           setPopupState(false);
                           setIsOpen(false);

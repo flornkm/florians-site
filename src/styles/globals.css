@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+input, textarea {
+    transition: all ease 0.3s;
+}
+
+input:focus-visible, textarea:focus-visible {
+    outline: 1px solid #1180EB;
+    box-shadow: 0 0 0 4px #1180EB66;
+}
+
+button, a {
+    transition: all ease 0.3s;
+}
+
+button:focus-visible, a:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #1180EB66;
+}
+
 .embla {
     overflow: hidden;
 }

@@ -3,6 +3,7 @@ import "@/styles/musicplayer.css";
 import { useEffect } from "react";
 import { Plus_Jakarta_Sans } from "@next/font/google";
 import { Kalam } from "@next/font/google";
+import { JetBrains_Mono } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
 // If loading a variable font, you don't need to specify the font weight
@@ -13,6 +14,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 const kalamFont = Kalam({
+  weight: ["400"],
+  style: ["normal"],
+  subsets: ["latin"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
   weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
@@ -39,6 +46,7 @@ export default function App({ Component, pageProps }) {
           :root {
             --pjs-font: ${plusJakartaSans.style.fontFamily};
             --kalam-font: ${kalamFont.style.fontFamily};
+            --jetbrains-mono-font: ${jetBrainsMono.style.fontFamily};
           }
         `}
       </style>

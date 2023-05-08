@@ -359,22 +359,23 @@ export default function Project({
           {projectLinks && (
             <div>
               <div className="h-32"></div>
-              <div className="flex w-full justify-between p-8 bg-zinc-100 rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8 dark:bg-zinc-900">
+              <div className="flex w-full justify-between rounded-lg place-items-center max-sm:place-items-start max-sm:flex-col max-sm:gap-8">
                 <h2 className="text-2xl font-medium text-left">
                   Project links
                 </h2>
                 <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
-                      className="font-medium text-lg transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                      href={link.url}
+                    className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                    href={link.url}
                       target="_blank"
                     >
                       {link.text}
                       <Icon.ArrowUpRight
-                        size={20}
-                        className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
-                      />
+                    size={16}
+                    strokeWidth={2.5}
+                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                  />
                     </Link>
                   ))}
                 </div>

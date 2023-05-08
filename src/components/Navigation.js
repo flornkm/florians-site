@@ -7,7 +7,7 @@ export default function Navigation(title, highlight) {
       <div className="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
-          className="flex justify-center max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden"
+          className="flex justify-center max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden rounded-md"
         >
           <span className="text-xl text-black right-8 m-0 font-medium dark:text-white">
             Florian
@@ -32,13 +32,13 @@ export default function Navigation(title, highlight) {
             <li>
               <Link
                 className={
-                  title.highlight === "Projects"
+                  title.highlight === "Work"
                   ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
                   : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
-                href="/#projects"
+                href="/#work"
               >
-                <span className="md:block max-md:hidden">Projects</span>
+                <span className="md:block max-md:hidden">Work</span>
                 <Icon.Folder className="max-md:block md:hidden" size={24} />
               </Link>
             </li>
