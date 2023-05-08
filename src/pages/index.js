@@ -174,9 +174,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <div className="flex place-items-center gap-1">
+                  <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Mobile application and hardware device to calculate
@@ -215,9 +215,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <div className="flex place-items-center gap-2">
+                  <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Curations</h3>
-                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Website featuring useful curations for designers and
@@ -255,9 +255,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <div className="flex place-items-center gap-2">
+                  <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Ambient Chat</h3>
-                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Realtime chat application with artificial intelligence
@@ -294,9 +294,9 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <div className="flex place-items-center gap-2">
+                  <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Homebility</h3>
-                    <Icon.ArrowRight className="opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Accessible smarthome application with an easy to use
