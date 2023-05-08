@@ -73,10 +73,10 @@ export default function Journal() {
               href={entry.link}
               className="cursor-pointer flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900 relative -left-4"
             >
-              <h3 className="text-xl font-medium text-left mb-2">
+              <h3 className="text-lg font-medium text-ellipsis transition-all text-black dark:text-white">
                 {entry.title}
               </h3>
-              <p className="text-left">{entry.description}</p>
+              <p className="text-ellipsis transition-all text-zinc-500 dark:text-zinc-400">{entry.description}</p>
             </Link>
           ))}
         </div>

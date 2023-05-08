@@ -143,13 +143,13 @@ export default function Footer() {
         <div className="flex gap-8 font-medium">
           <Link
             href={"/legal-notice"}
-            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-200 -ml-2 dark:hover:bg-zinc-800 text-xs"
+            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-200 -ml-2 dark:hover:text-white text-xs"
           >
             Legal Notice
           </Link>
           <Link
             href={"/privacy-policy"}
-            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-200 -ml-2 dark:hover:bg-zinc-800 text-xs"
+            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-200 -ml-2 dark:hover:text-white text-xs"
           >
             Privacy Policy
           </Link>
