@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 import * as React from "react";
 import * as Icon from "react-feather";
 import { useState, useEffect, useCallback } from "react";
@@ -62,38 +63,30 @@ export default function Project({
 
   return (
     <>
-      <Head>
-        <title>{projectTitle} - Florians Portfolio</title>
-        <meta
-          name="description"
-          content="Designer and Developer building digital products."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          property="og:title"
-          content={projectTitle + " - Florians Portfolio"}
-        />
-        <meta
-          property="og:description"
-          content="Designer and Developer building digital products."
-        />
-        <meta
-          property="og:image"
-          content="/images/designwithtech_opengraph.jpg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@floriandwt" />
-        <meta name="twitter:title" content="Florian Portfolio" />
-        <meta
-          name="twitter:image"
-          content="/images/designwithtech_twitter.jpg"
-        />
-        <meta
-          name="twitter:description"
-          content="Designer and Developer building digital products."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title={projectTitle + " - Florian"}
+        description={shortDescription}
+        openGraph={{
+          url: 'floriandwt.com',
+          title: projectTitle + " - Florian",
+          description: '',
+          images: [
+            {
+              url: '/images/designwithtech_opengraph.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Florian - Digtital Product Designer',
+              type: 'image/jpeg',
+            }
+          ],
+          siteName: 'Florian - Digtital Product Designer',
+        }}
+        twitter={{
+          handle: '@floriandwt',
+          site: '@floriandwt',
+          cardType: 'summary_large_image',
+        }}
+      />
       <Navigation title={projectTitle} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
