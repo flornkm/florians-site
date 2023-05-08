@@ -231,18 +231,18 @@ export default function Home() {
               }}
               className={"bg-transparent rounded-2xl flex h-full w-full " + (concept.title === "Web Audit" ? "md:col-span-2 md:row-span-2" : "")}
             >
-              <div className="cursor-pointer transition-all h-full group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-100 w-full flex flex-col gap-4 max-md:justify-center md:justify-end px-4 py-3 rounded-lg text-zinc-500 hover:text-black relative dark:text-zinc-400 dark:hover:text-white dark:bg-zinc-900">
+              <div className="cursor-pointer transition-all h-full group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-900 dark:bg-[#131314] w-full flex flex-col gap-4 max-md:justify-center md:justify-end px-4 py-3 rounded-lg group">
                 <Image
                   loader={imgLoader}
                   src={concept.preview ? concept.preview : concept.icon}
                   alt="Nutri Blueprint Icon"
-                  className="rounded-xl w-full group-hover:opacity-80 transition-all"
+                  className="rounded-xl w-full transition-all"
                   width={500}
                   height={300}
                 />
                 <div>
-                  <p className="text-base font-medium text-ellipsis">{concept.title}</p>
-                  <p className="text-sm text-ellipsis">{concept.description}</p>
+                  <p className="text-base font-medium text-ellipsis transition-all text-black dark:text-white">{concept.title}</p>
+                  <p className="text-sm text-ellipsis transition-all text-zinc-500 dark:text-zinc-400">{concept.description}</p>
                 </div>
               </div>
             </div>

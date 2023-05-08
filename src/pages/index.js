@@ -1,6 +1,7 @@
 import Head from "next/head";
 import * as React from "react";
 import { useState, useMemo, useEffect } from "react";
+import { NextSeo } from "next-seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
@@ -11,13 +12,11 @@ import { useIsVisible } from "@/hooks/useIsVisible";
 import copy from "copy-to-clipboard";
 
 export default function Home() {
-  const title = "Designer and Developer";
+  const title = "Digital Product Designer";
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
-  const [item, setItem] = useState(0);
   const [highlight, setHighlight] = useState("Home");
-  const rect = React.useRef(null);
   const projects = React.useRef(null);
   const contact = React.useRef(null);
   const [mailText, setMailText] = useState(["Florian", "Click to copy"]);
@@ -25,19 +24,9 @@ export default function Home() {
   const isVisible = useIsVisible(projects);
   const contactVisible = useIsVisible(contact);
 
-  const changeItem = () => {
-    if (item === 0) {
-      setItem(1);
-      rect.current.style.transform = "translateX(48px) translateY(-50%)";
-    } else {
-      setItem(0);
-      rect.current.style.transform = "translateX(0%) translateY(-50%)";
-    }
-  };
-
   useEffect(() => {
     if (isVisible) {
-      setHighlight("Projects");
+      setHighlight("Work");
     } else {
       setHighlight("Home");
     }
@@ -58,38 +47,30 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Florians Portfolio - Digital Product Designer</title>
-        <meta
-          name="description"
-          content="Designer and Developer building digital products."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          property="og:title"
-          content="Florians Portfolio - Digital Product Designer"
-        />
-        <meta
-          property="og:description"
-          content="Designer and Developer building digital products."
-        />
-        <meta
-          property="og:image"
-          content="/images/designwithtech_opengraph.jpg"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@floriandwt" />
-        <meta name="twitter:title" content="Florian Portfolio" />
-        <meta
-          name="twitter:image"
-          content="/images/designwithtech_twitter.jpg"
-        />
-        <meta
-          name="twitter:description"
-          content="Designer and Developer building digital products."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title="Florian - Digtital Product Designer"
+        description="Product Designer and Developer building digital experiences."
+        openGraph={{
+          url: 'https://www.url.ie/a',
+          title: 'Florian - Digtital Product Designer',
+          description: 'Product Designer and Developer building digital experiences.',
+          images: [
+            {
+              url: '/images/designwithtech_opengraph.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Florian - Digtital Product Designer',
+              type: 'image/jpeg',
+            }
+          ],
+          siteName: 'Florian - Digtital Product Designer',
+        }}
+        twitter={{
+          handle: '@floriandwt',
+          site: '@floriandwt',
+          cardType: 'summary_large_image',
+        }}
+      />
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="md:h-[70vh] flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-40 gap-16">
@@ -102,222 +83,173 @@ export default function Home() {
             </h2>
             <div className="h-8 max-md:hidden"></div>
           </div>
-          {/* <Image
-            loader={imgLoader}
-            src="./images/main_header.png"
-            alt="Header Image of Florian as Cartoon Character"
-            className="mix-blend-exclusion max-md:hidden dark:mix-blend-normal"
-            width={250}
-            height={250}
-          /> */}
           <Link
-              className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
-              href={"./#contact"}
-            >
-              <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-emerald-600 opacity-75 dark:bg-emerald-500">
-                <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-emerald-500 opacity-75"></div>
-              </div>
-              <p className="font-medium text-sm">
-                Currently I am looking for internship opportunities in Europe or
-                North America.
-              </p>
-            </Link>
+            className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
+            href={"./#contact"}
+          >
+            <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-green-600 opacity-75 dark:bg-green-500">
+              <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-green-500 opacity-75"></div>
+            </div>
+            <p className="font-medium text-sm">
+              Currently I am looking for internship opportunities in Europe or
+              North America.
+            </p>
+          </Link>
         </div>
         <div>
           <h2 className="text-2xl font-medium text-black dark:text-white">
-          As a designer and developer, I see my role in leading projects that help companies to achieve their ambitious goals of creating something functionally and technologically useful for humanity
+            As a designer and developer, I see my role in leading projects that help companies to achieve their ambitious goals of creating something functionally and technologically useful for humanity
           </h2>
         </div>
         <div className="h-64"></div>
         <div>
-          <div className="flex justify-between pb-4">
+          <div className="flex justify-between pb-8 max-md:pb-16">
             <h2 className="text-3xl font-semibold text-black dark:text-white">
-              Some of my projects
+              Some of my selected work
             </h2>
-            <div className="max-md:hidden flex gap-6 relative place-items-center pl-2 pr-2">
-              <Icon.Grid
-                onClick={changeItem}
-                className="cursor-pointer text-zinc-600 hover:text-black transition-all relative z-10 dark:text-white dark:hover:text-zinc-300"
-              />
-              <Icon.List
-                onClick={changeItem}
-                className="cursor-pointer text-zinc-600 hover:text-black transition-all relative z-10 dark:text-white dark:hover:text-zinc-300"
-              />
-              <div
-                ref={rect}
-                className="w-[40px] h-[40px] left-0 top-[50%] translate-y-[-50%] rounded-md absolute bg-zinc-100 border border-zinc-200 transition-all dark:bg-zinc-900 dark:border-zinc-800"
-              ></div>
-            </div>
           </div>
-          <div ref={projects} id="projects">
+          <div ref={projects} id="work">
             <div
               className={
-                !item ? "grid gap-8 md:grid-cols-2" : "grid gap-2 grid-cols-1"
+                "flex flex-col gap-8"
               }
             >
-              <Link
-                href={"./projects/boost"}
-                className={
-                  !item
-                    ? "group"
-                    : "group grid grid-cols-2 gap-8 place-items-center"
-                }
-              >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
-                  <Image
-                    loader={imgLoader}
-                    src="./images/boost/boost.webp"
-                    alt="Photo of the Boost Device"
-                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
-                    width={350}
-                    height={250}
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center">
-                    <h3 className="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
-                  </div>
-                  <p className="pb-2 text-zinc-600 dark:text-zinc-400">
-                    Mobile application and hardware device to calculate
-                    nutrition intake and provide personalized nutrition
-                  </p>
-
-                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400">
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.Calendar width={16} />
-                      <p>Q1 2023</p>
-                    </div>
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.MapPin width={16} />
-                      <p>Schwaebisch Gmuend</p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
 
               <Link
-                href={"/projects/curations"}
-                className={
-                  !item
-                    ? "group"
-                    : "group grid grid-cols-2 gap-8 place-items-center"
-                }
+                href={"./projects/curations"}
+                className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+
                   <Image
                     loader={imgLoader}
                     src="./images/curations/curations.webp"
                     alt="Image of Curations in a Mockup"
-                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
-                <div>
+                <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Curations</h3>
                     <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                  </div>
+                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+                    <div className="flex gap-2 place-items-center">
+                      <Icon.Calendar width={14} />
+                      <p className="font-mono">Q4 2022 – <span className="text-green-500 font-sans font-medium">Now</span></p>
+                    </div>
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Website featuring useful curations for designers and
                     developers
                   </p>
-                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400">
+                </div>
+              </Link>
+
+              <Link
+                href={"./projects/boost"}
+                className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
+              >
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+
+                  <Image
+                    loader={imgLoader}
+                    src="./images/boost/boost.webp"
+                    alt="Photo of the Boost Device"
+                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
+                    width={350}
+                    height={250}
+                  />
+                </div>
+                <div className="max-w-sm col-span-2">
+                  <div className="flex items-center">
+                    <h3 className="text-xl font-medium pb-1">Boost</h3>
+                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                  </div>
+                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
-                      <Icon.Calendar width={16} />
-                      <p>Q4 2022</p>
-                    </div>
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.MapPin width={16} />
-                      <p>Schwaebisch Gmuend</p>
+                      <Icon.Calendar width={14} />
+                      <p className="font-mono">Q1 2023</p>
                     </div>
                   </div>
+                  <p className="pb-2 text-zinc-600 dark:text-zinc-400">
+                    Mobile application and hardware device to calculate
+                    nutrition intake and provide personalized nutrition
+                  </p>
                 </div>
               </Link>
 
               <Link
                 href={"/projects/ambient-chat"}
-                className={
-                  !item
-                    ? "group"
-                    : "group grid grid-cols-2 gap-8 place-items-center"
-                }
+                className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+
                   <Image
                     loader={imgLoader}
                     src="./images/ambient_chat/ambient_chat.webp"
-                    alt="Image of Curations in a Mockup"
-                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    alt="Image of the Ambient Chat Platform"
+                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
-                <div>
+                <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Ambient Chat</h3>
                     <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
+                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+                    <div className="flex gap-2 place-items-center">
+                      <Icon.Calendar width={14} />
+                      <p className="font-mono">Q2 2022</p>
+                    </div>
+                  </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Realtime chat application with artificial intelligence
                   </p>
-                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400">
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.Calendar width={16} />
-                      <p>Q2 2022</p>
-                    </div>
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.MapPin width={16} />
-                      <p>Schwaebisch Gmuend</p>
-                    </div>
-                  </div>
                 </div>
               </Link>
 
               <Link
                 href={"/projects/homebility"}
-                className={
-                  !item
-                    ? "group"
-                    : "group grid grid-cols-2 gap-8 place-items-center"
-                }
+                className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6">
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+
                   <Image
                     loader={imgLoader}
                     src="./images/homebility/homebility.webp"
-                    alt="Image of Curations in a Mockup"
-                    className="w-full max-h-[272px] object-cover group-hover:opacity-80 transition-all"
+                    alt="Image of the Homebility Mobile App"
+                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
                     width={350}
                     height={250}
                   />
                 </div>
-                <div>
+                <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Homebility</h3>
                     <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                  </div>
+                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+                    <div className="flex gap-2 place-items-center">
+                      <Icon.Calendar width={14} />
+                      <p className="font-mono">Q2 2022</p>
+                    </div>
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
                     Accessible smarthome application with an easy to use
                     interface
                   </p>
-                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400">
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.Calendar width={16} />
-                      <p>Q2 2022</p>
-                    </div>
-                    <div className="flex gap-2 place-items-center">
-                      <Icon.MapPin width={16} />
-                      <p>Schwaebisch Gmuend</p>
-                    </div>
-                  </div>
                 </div>
               </Link>
+
             </div>
           </div>
         </div>
-        <div className="h-64"></div>
+        {/* <div className="h-64"></div>
         <div className="flex gap-8 justify-between max-md:flex-col ">
           <div className="md:max-w-[50%]">
             <h2 className="text-2xl font-semibold mb-4">More to my person</h2>
@@ -357,7 +289,7 @@ export default function Home() {
             width={250}
             height={600}
           />
-        </div>
+        </div> */}
         <div className="h-64"></div>
         <div
           className={

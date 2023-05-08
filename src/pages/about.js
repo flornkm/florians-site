@@ -38,7 +38,7 @@ export default function Home() {
   const globeEl = React.useRef(null);
 
   const [items, setItems] = useState(
-    Array.from({ length: 4 }, (_, i) => (i + 1).toString())
+    Array.from({ length: 5 }, (_, i) => (i + 1).toString())
   );
   const [activeId, setActiveId] = useState(null);
   const [globePopup, setGlobePopup] = useState(false);
@@ -277,49 +277,89 @@ export default function Home() {
       </Head>
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
-        <div className="w-full md:pt-20 pb-4 max-md:h-[200px] relative z-0">
+        <div className="h-40 max-md:h-24" />
+        {/* <div className="w-full md:pt-20 pb-4 max-md:h-[200px] relative z-0">
           <RiveComponent
             src="./animations/florian_animation.riv"
             className="max-w-[500px] max-md:h-64 md:h-[200px] object-contain m-auto"
           />
-        </div>
-        <div className="gap-16 grid grid-cols-2 max-md:grid-cols-1">
-          <div>
-            <div className="flex gap-8 mb-6 max-lg:flex-col max-md:gap-4">
-              <Image
-                loader={imgLoader}
-                src="./images/florian_student.jpg"
-                className="inline-flex object-cover object-top max-h-64 max-md:w-20 max-md:h-20 max-md:rounded-full max-md:ring-1 max-md:ring-zinc-300 relative z-10"
-                width={200}
-                height={100}
-              />
-              <div>
-                <h1 className="text-2xl font-semibold mb-3">About me</h1>
-                <p className="text-zinc-600 dark:text-zinc-300">
-                  <span className="font-semibold italic text-black dark:text-white">
-                    Nice to meet you!
-                  </span>{" "}
-                  - My name is Florian and I am currently 22 years old. I am a
-                  designer and developer and I love to create beautiful
-                  products. Currently I am studying at the Hochschule fuer
-                  Gestaltung, also known as just HfG, in Schwaebisch Gmuend,
-                  Germany.
-                </p>
+        </div> */}
+        <div className="gap-24 grid grid-cols-2 max-md:flex max-md:flex-col max-md:gap-0">
+          <div className="flex gap-8 max-lg:flex-col max-md:gap-4 max-w-lg row-span-1 max-md:order-2 max-md:mb-24 md:pt-4">
+            <div className="justify-center flex flex-col">
+              <h1 className="text-xl font-semibold mb-3">About me</h1>
+              <p className="text-zinc-600 dark:text-zinc-300 mb-2">
+                My name is Flo and I am currently 22 years old. I am a
+                designer and developer and I love to create beautiful
+                products. Currently I am studying at the Hochschule fuer
+                Gestaltung, also known as just HfG, in Schwaebisch Gmuend,
+                Germany.
+              </p>
+              <p className="text-zinc-600 dark:text-zinc-300">
+                Beside my desire to work between design and code I love working
+                with CSS and creating animations for web and mobile applications.
+              </p>
+
+            </div>
+          </div>
+          <div className="row-span-2 max-md:order-first">
+            <Image
+              loader={imgLoader}
+              src="./images/florian_student.jpg"
+              className="inline-flex object-cover mb-12 object-top max-h-96 rounded-lg max-md:w-40 max-md:h-40 first-chil max-md:rounded-full max-md:ring-1 max-md:ring-zinc-300 relative z-10 row-span-2 h-full"
+              width={300}
+              height={200}
+            />
+            <div className="flex flex-col gap-4 max-md:hidden">
+              <h2 className="font-medium text-lg">Let's connect</h2>
+              <div className="flex gap-4 max-sm:flex-col">
+                <Link
+                  className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                  href={"https://read.cv/floriandwt"}
+                  target="_blank"
+                >
+                  Read.cv
+                  <Icon.ArrowUpRight
+                    size={16}
+                    strokeWidth={2.5}
+                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                  />
+                </Link>
+                <Link
+                  className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                  href={"https://github.com/floriandwt"}
+                  target="_blank"
+                >
+                  GitHub
+                  <Icon.ArrowUpRight
+                    size={16}
+                    strokeWidth={2.5}
+                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                  />
+                </Link>
+                <Link
+                  className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                  href={"https://www.linkedin.com/in/floriandwt/"}
+                  target="_blank"
+                >
+                  LinkedIn
+                  <Icon.ArrowUpRight
+                    size={16}
+                    strokeWidth={2.5}
+                    className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                  />
+                </Link>
               </div>
             </div>
-            <p className="text-zinc-600 dark:text-zinc-300">
-              Beside my desire to work between design and code I love working
-              with CSS and creating animations for web and mobile applications.
-            </p>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3 order-3 max-md:mb-24">
             <h2 className="font-medium text-lg">Work</h2>
-            <div className="flex w-full justify-between">
+            <Link href="https://meta-hype.com/" target="_blank" className="flex items-center w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_metahype.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
                   width={40}
                   height={40}
                 />
@@ -330,14 +370,14 @@ export default function Home() {
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">Metahype</p>
                 </div>
               </div>
-              <p className="text-zinc-500 text-right dark:text-zinc-400">2020 - present</p>
-            </div>
-            <div className="flex w-full justify-between">
+              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2020 - <span className="text-green-500 font-sans font-medium">Now</span></p>
+            </Link>
+            <Link href="https://www.hfg-gmuend.de/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_hfg.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
                   width={40}
                   height={40}
                 />
@@ -350,14 +390,14 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <p className="text-zinc-500 text-right dark:text-zinc-400">2022</p>
-            </div>
-            <div className="flex w-full justify-between">
+              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2022</p>
+            </Link>
+            <div className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_comondo.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
                   width={40}
                   height={40}
                 />
@@ -368,14 +408,14 @@ export default function Home() {
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">Comondo</p>
                 </div>
               </div>
-              <p className="text-zinc-500 text-right dark:text-zinc-400">2020 - 2021</p>
+              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2020 - 2021</p>
             </div>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/company_videoeditor.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
                   width={40}
                   height={40}
                 />
@@ -386,17 +426,17 @@ export default function Home() {
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">Freelance</p>
                 </div>
               </div>
-              <p className="text-zinc-500 text-right dark:text-zinc-400">2015 - 2020</p>
+              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2015 - 2020</p>
             </div>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 order-4">
             <h2 className="font-medium text-lg">Side projects</h2>
-            <div className="flex w-full justify-between">
+            <Link href="https://curations.tech/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
                   src="./images/project_curations.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-200 p-1 dark:bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
                   width={40}
                   height={40}
                 />
@@ -408,46 +448,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
-          <div className="flex flex-col gap-4">
-            <h2 className="font-medium text-lg">Connect</h2>
-            <div className="flex gap-4 max-sm:flex-col">
-              <Link
-                className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                href={"https://read.cv/floriandwt"}
-                target="_blank"
-              >
-                Read.cv
-                <Icon.ArrowUpRight
-                  size={20}
-                  className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
-                />
-              </Link>
-              <Link
-                className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                href={"https://github.com/floriandwt"}
-                target="_blank"
-              >
-                GitHub
-                <Icon.ArrowUpRight
-                  size={20}
-                  className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
-                />
-              </Link>
-              <Link
-                className="font-medium transition-all text-black hover:opacity-75 border-b-black group dark:text-white"
-                href={"https://www.linkedin.com/in/floriandwt/"}
-                target="_blank"
-              >
-                LinkedIn
-                <Icon.ArrowUpRight
-                  size={20}
-                  className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
-                />
-              </Link>
-            </div>
-          </div>
+
         </div>
         <div className="h-32"></div>
         <div className="block">
