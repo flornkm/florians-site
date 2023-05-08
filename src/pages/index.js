@@ -125,7 +125,7 @@ export default function Home() {
                     loader={imgLoader}
                     src="./images/curations/curations.webp"
                     alt="Image of Curations in a Mockup"
-                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-contain transition-all"
                     width={350}
                     height={250}
                   />
@@ -158,7 +158,7 @@ export default function Home() {
                     loader={imgLoader}
                     src="./images/boost/boost.webp"
                     alt="Photo of the Boost Device"
-                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-contain transition-all"
                     width={350}
                     height={250}
                   />
@@ -191,7 +191,7 @@ export default function Home() {
                     loader={imgLoader}
                     src="./images/ambient_chat/ambient_chat.webp"
                     alt="Image of the Ambient Chat Platform"
-                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-contain transition-all"
                     width={350}
                     height={250}
                   />
@@ -223,7 +223,7 @@ export default function Home() {
                     loader={imgLoader}
                     src="./images/homebility/homebility.webp"
                     alt="Image of the Homebility Mobile App"
-                    className="w-full max-h-[272px] object-contain group-hover:opacity-80 transition-all"
+                    className="w-full max-h-[272px] object-contain transition-all"
                     width={350}
                     height={250}
                   />
