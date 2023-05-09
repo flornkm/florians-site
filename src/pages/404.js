@@ -10,7 +10,7 @@ export default function Custom404() {
                     className="bg-[#1280EC] text-white font-medium sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-[#2795FE] transition-all flex"
                     href="/"
                 >
-                    <span className="md:block max-sm:hidden">Back to Home</span>
+                    Back to Home
                 </Link>
             </div>
             <Footer />

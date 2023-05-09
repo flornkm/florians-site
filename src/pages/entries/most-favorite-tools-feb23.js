@@ -25,7 +25,7 @@ export default function JounalEntry() {
                 even if you are just starting out or used to Firebase.
               </p>
               <Link
-                className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
+                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
                 href="https://supabase.com/"
                 target="_blank"
               >
@@ -51,7 +51,7 @@ export default function JounalEntry() {
               </Link> for recommending this tool.
               </p>
               <Link
-                className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
+                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
                 href="https://cosmos.so/"
                 target="_blank"
               >
@@ -73,7 +73,7 @@ export default function JounalEntry() {
                 or other interactions.
               </p>
               <Link
-                className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
+                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
                 href="https://rive.app/"
                 target="_blank"
               >

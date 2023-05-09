@@ -9,27 +9,27 @@ export default function Journal() {
     {
       title: "Most favorite tools: April 2023 edition",
       description: "Here are my 3 most favourite tools in April 2023.",
-      link: "/journal/most-favorite-tools-apr23",
+      link: "/entries/most-favorite-tools-apr23",
     },
     {
       title: "Most favorite tools: March 2023 edition",
       description: "Here are my 3 most favourite tools in March 2023.",
-      link: "/journal/most-favorite-tools-mar23",
+      link: "/entries/most-favorite-tools-mar23",
     },
     {
       title: "Most favorite tools: February 2023 edition",
       description: "Here are my 3 most favourite tools in February 2023.",
-      link: "/journal/most-favorite-tools-feb23",
+      link: "/entries/most-favorite-tools-feb23",
     },
     {
       title: "The Web in the future",
       description: "What will the internet look like in the future?",
-      link: "/journal/webdesign-in-the-future",
+      link: "/entries/webdesign-in-the-future",
     },
     {
       title: "Most favorite tools in 2022",
       description: "Here are my 8 most favourite tools in 2022.",
-      link: "/journal/most-favorite-tools-2022",
+      link: "/entries/most-favorite-tools-2022",
     },
   ];
 
