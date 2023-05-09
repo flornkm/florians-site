@@ -6,7 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import * as Icon from "react-feather";
 
-export default function Journal({ title, text, mainImage, date }) {
+export default function Entry({ title, text, mainImage, date }) {
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };

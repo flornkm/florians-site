@@ -39,23 +39,23 @@ export default function Homebility() {
       stack={[
         {
           name: "User Research",
-          icon: <Icon.Users size={18} />,
+          icon: <Icon.Users size={14} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
+          ringColor: "ring-blue-100 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "Design Thinking",
-          icon: <Icon.Briefcase size={18} />,
+          icon: <Icon.Briefcase size={14} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
+          ringColor: "ring-blue-100 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "Prototyping",
-          icon: <Icon.Figma size={18} />,
+          icon: <Icon.Figma size={14} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
+          ringColor: "ring-blue-100 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         }
       ]}
