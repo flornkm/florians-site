@@ -140,20 +140,6 @@ export default function Colophon() {
                   />
                   Nils Eller
                 </Link>
-                <Link
-                  className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
-                  href={"https://www.antonstallboerger.com/"}
-                  target="_blank"
-                >
-                  <Image
-                    src="/images/people/anton_profile.jpg"
-                    alt="Photography"
-                    width={48}
-                    height={48}
-                    className="rounded-full h-6 w-6"
-                  />
-                  Anton Stallbörger
-                </Link>
               </div>
             </div>
             <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
@@ -253,6 +239,40 @@ export default function Colophon() {
                     className="rounded-full h-6 w-6"
                   />
                   Samuel Kraft
+                </Link>
+              </div>
+            </div>
+            <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
+            <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
+              <h2 className="text-lg font-medium text-zinc-400">With the help of</h2>
+              <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
+              <Link
+                  className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                  href={"https://www.antonstallboerger.com/"}
+                  target="_blank"
+                >
+                  <Image
+                    src="/images/people/anton_profile.jpg"
+                    alt="Photography"
+                    width={48}
+                    height={48}
+                    className="rounded-full h-6 w-6"
+                  />
+                  Anton Stallbörger
+                </Link>
+                <Link
+                  className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                  href={"https://www.nilseller.com/"}
+                  target="_blank"
+                >
+                  <Image
+                    src="/images/people/nils_profile.jpg"
+                    alt="Photography"
+                    width={48}
+                    height={48}
+                    className="rounded-full h-6 w-6"
+                  />
+                  Nils Eller
                 </Link>
               </div>
             </div>
