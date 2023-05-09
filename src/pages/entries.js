@@ -36,11 +36,11 @@ export default function Journal() {
   return (
     <>
       <NextSeo
-        title="Journal - Florian"
+        title="Entries - Florian"
         description="A little journal about my life as a designer and developer and more."
         openGraph={{
           url: 'floriandwt.com',
-          title: 'Journal - Florian',
+          title: 'Entries - Florian',
           description: 'A little journal about my life as a designer and developer and more.',
           images: [
             {
@@ -62,7 +62,7 @@ export default function Journal() {
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
-          <h1 className="text-3xl font-semibold text-left mb-3">Journal</h1>
+          <h1 className="text-3xl font-semibold text-left mb-3">Entries</h1>
           <h2 className="text-xl font-medium text-left text-zinc-500 dark:text-zinc-400">
             Thoughts and more.
           </h2>

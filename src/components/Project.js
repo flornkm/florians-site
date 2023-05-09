@@ -164,9 +164,9 @@ export default function Project({
             width={1200}
             height={500}
           />
-          <div className="flex gap-3 mb-10 flex-wrap">
+          <div className="flex gap-2 mb-10 flex-wrap">
             {stack.map((stackItem, index) => (
-              <div key={index} className={"flex gap-0.5 font-medium items-center text-[14px] px-3 py-2 ring-1 rounded-full " + stackItem.color + " " + stackItem.ringColor + " " + stackItem.backgroundColor}>
+              <div key={index} className={"flex text-xs font-medium items-center text-[14px] px-2 py-1.5 ring-1 rounded-full " + stackItem.color + " " + stackItem.ringColor + " " + stackItem.backgroundColor}>
                 {stackItem.icon} <p className="ml-2">{stackItem.name}</p>
               </div>
             ))}

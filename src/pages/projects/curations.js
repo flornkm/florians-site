@@ -47,44 +47,44 @@ export default function Curations() {
       stack={[
         {
           name: "User Research",
-          icon: <Icon.Users size={18} />,
+          icon: <Icon.Users size={14} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
+          ringColor: "ring-blue-100 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "Prototyping",
-          icon: <Icon.Figma size={18} />,
+          icon: <Icon.Figma size={14} />,
           color: "text-blue-500 dark:text-blue-400",
-          ringColor: "ring-blue-200 dark:ring-blue-800 dark:ring-opacity-30",
+          ringColor: "ring-blue-100 dark:ring-blue-800 dark:ring-opacity-30",
           backgroundColor: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
         },
         {
           name: "NextJS",
-          icon: <Icon.Code size={18} />,
+          icon: <Icon.Code size={14} />,
           color: "text-purple-500 dark:text-purple-400",
-          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-30",
+          ringColor: "ring-purple-100 dark:ring-purple-800 dark:ring-opacity-30",
           backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
         },
         {
           name: "Vercel",
-          icon: <Icon.Server size={18} />,
+          icon: <Icon.Server size={14} />,
           color: "text-purple-500 dark:text-purple-400",
-          ringColor: "ring-purple-200 dark:ring-purple-800 dark:ring-opacity-30",
+          ringColor: "ring-purple-100 dark:ring-purple-800 dark:ring-opacity-30",
           backgroundColor: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
         },
         {
           name: "Custom Screenshot API",
-          icon: <Icon.Camera size={18} />,
-          color: "text-emerald-500 dark:text-emerald-400",
-          ringColor: "ring-emerald-200 dark:ring-emerald-800 dark:ring-opacity-30",
-          backgroundColor: "bg-emerald-50 dark:bg-emerald-900 dark:bg-opacity-20"
+          icon: <Icon.Camera size={14} />,
+          color: "text-green-500 dark:text-green-400",
+          ringColor: "ring-green-100 dark:ring-green-800 dark:ring-opacity-30",
+          backgroundColor: "bg-green-50 dark:bg-green-900 dark:bg-opacity-20"
         },
         {
           name: "Supabase",
-          icon: <Icon.Database size={18} />,
+          icon: <Icon.Database size={14} />,
           color: "text-orange-500 dark:text-orange-400",
-          ringColor: "ring-orange-200 dark:ring-orange-800 dark:ring-opacity-30",
+          ringColor: "ring-orange-100 dark:ring-orange-800 dark:ring-opacity-30",
           backgroundColor: "bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20"
         }
       ]}

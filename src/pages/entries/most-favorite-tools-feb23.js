@@ -1,4 +1,4 @@
-import Journal from "@/components/Journal";
+import Journal from "@/components/Entry";
 import Link from "next/link";
 
 export default function JounalEntry() {
@@ -6,7 +6,7 @@ export default function JounalEntry() {
     <>
       <Journal
         mainImage={
-          "images/journal/favorite-tools-feb23/most_favorite_tools_feb23.webp"
+          "images/entries/favorite-tools-feb23/most_favorite_tools_feb23.webp"
         }
         title={"Flos most favorite tools: February 2023 edition"}
         date={"2023-02-28"}

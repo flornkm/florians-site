@@ -33,8 +33,8 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Work"
-                  ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
-                  : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/#work"
               >
@@ -46,8 +46,8 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Creations"
-                  ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
-                  : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/creations"
               >
@@ -59,8 +59,8 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "About"
-                  ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
-                  : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/about"
               >
@@ -69,7 +69,7 @@ export default function Navigation(title, highlight) {
               </Link>
             </li>
             <Link
-              className="bg-[#1280EC] text-white sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-[#2795FE] transition-all flex"
+              className="bg-[#1280EC] text-white sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-[#2795FE] transition-all flex font-medium"
               href="/#contact"
             >
               <span className="md:block max-sm:hidden">Contact</span>
