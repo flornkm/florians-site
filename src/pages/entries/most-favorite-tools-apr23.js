@@ -20,7 +20,7 @@ export default function JounalEntry() {
               If you're looking to boost your productivity, Raycast is an excellent tool that I've already written about. Recently, they released a new feature called Raycast AI, which enables you to utilize ChatGPT directly within Raycast. This is an incredibly efficient way to use AI without the need to open a new application or tab.
               </p>
               <Link
-                className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
+                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
                 href="https://www.raycast.com/ai"
                 target="_blank"
               >
@@ -33,7 +33,7 @@ export default function JounalEntry() {
               I've been an Arc user on my Mac for quite some time, and I'm thrilled to see that they've launched a mobile version. It's a sleek browser with an attractive design, and it also includes some impressive features, particularly for tab management.
               </p>
               <Link
-                className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
+                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
                 href="https://apps.apple.com/us/app/arc-mobile-companion/id1669785846"
                 target="_blank"
               >
@@ -46,7 +46,7 @@ export default function JounalEntry() {
               You're probably already familiar with Vercel, but I wanted to give it a quick shoutout since I've been using it extensively myself. Throughout April, I relied heavily on Vercel for deploying my projects.
               </p>
               <Link
-                className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-gray-100 transition-all font-medium border border-solid border-gray-300 dark:bg-transparent dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
+                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
                 href="https://vercel.com/"
                 target="_blank"
               >
