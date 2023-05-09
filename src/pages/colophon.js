@@ -278,7 +278,7 @@ export default function Colophon() {
             </div>
           </div>
         </div>
-        <div className="md:h-64"></div>
+        <div className="md:h-64 max-md:h-32"></div>
       </main>
       <Footer />
     </>
