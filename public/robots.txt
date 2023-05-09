@@ -1,0 +1,10 @@
+//robots.txt
+
+# Block all crawlers from legal-notice and privacy-policy
+User-agent: *
+Disallow: /legal-notice
+Disallow: /privacy-policy
+
+# Allow all crawlers
+User-agent: *
+Allow: /
