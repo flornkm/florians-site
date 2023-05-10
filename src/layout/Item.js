@@ -22,7 +22,7 @@ const Item = forwardRef(
   ({ id, index, withOpacity, isDragging, style, ...props }, ref) => {
     const inlineStyles = {
       opacity: isDragging && 1,
-      backgroundColor: isDragging && "#fafafa",
+      // if darkmode is not enabled, set the background color to white
       cursor: isDragging ? "grabbing" : "grab",
       boxShadow: isDragging ? "rgb(0 0 0 / 0.1) 0 2px 4px -2px" : "none",
       transform: isDragging ? "scale(1.05) rotate(-1deg)" : "none",
@@ -121,7 +121,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
+            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
@@ -150,7 +150,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
+            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
@@ -214,7 +214,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 relative p-8 w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
+            "max-md:row-span-1 relative p-8 w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
@@ -222,21 +222,21 @@ const Item = forwardRef(
           <div className="w-full h-full pr-12" style={{ opacity: withOpacity ? 0 : 1 }}>
             <p className="font-display text-lg mb-3">Youtube channels I recommend:</p>
             <div className="flex flex-col gap-2 flex-nowrap items-start">
-              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-900 rounded-md" href="https://www.youtube.com/@CodeAesthetic" target="_blank">- CodeAesthetic
+              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-800 rounded-md" href="https://www.youtube.com/@CodeAesthetic" target="_blank">- CodeAesthetic
                 <Icon.ArrowUpRight
                   size={16}
                   strokeWidth={2.5}
                   className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
                 />
               </Link>
-              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-900 rounded-md" href="https://www.youtube.com/@AZisk" target="_blank">- Alex Ziskind
+              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-800 rounded-md" href="https://www.youtube.com/@AZisk" target="_blank">- Alex Ziskind
                 <Icon.ArrowUpRight
                   size={16}
                   strokeWidth={2.5}
                   className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
                 />
               </Link>
-              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-900 rounded-md" href="https://www.youtube.com/@Fireship" target="_blank">- Fireship
+              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-800 rounded-md" href="https://www.youtube.com/@Fireship" target="_blank">- Fireship
                 <Icon.ArrowUpRight
                   size={16}
                   strokeWidth={2.5}
@@ -256,7 +256,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
+            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
@@ -295,7 +295,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
+            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
