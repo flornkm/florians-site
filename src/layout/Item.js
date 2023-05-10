@@ -21,7 +21,8 @@ const AudioPlayer = dynamic(() => import("react-h5-audio-player"), {
 const Item = forwardRef(
   ({ id, index, withOpacity, isDragging, style, ...props }, ref) => {
     const inlineStyles = {
-      opacity: isDragging ? "1" : "1",
+      opacity: isDragging && 1,
+      backgroundColor: isDragging && "#fafafa",
       cursor: isDragging ? "grabbing" : "grab",
       boxShadow: isDragging ? "rgb(0 0 0 / 0.1) 0 2px 4px -2px" : "none",
       transform: isDragging ? "scale(1.05) rotate(-1deg)" : "none",
@@ -50,7 +51,7 @@ const Item = forwardRef(
 
     const nextWorkout = () => {
       const today = new Date().getDay();
-      const nextWorkout = today === 2 ? "Full Body Workout" : today === 4 ? "Full Body Workout" : today === 6 ? "Full Body Workout" : "Rest";
+      const nextWorkout = today === 2 ? "Full Body Workout" : today === 4 ? "Full Body Workout" : today === 6 ? "Full Body Workout" : "Rest Day";
       return nextWorkout;
     };
 
@@ -120,16 +121,19 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
+            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
         >
-          <div className="opacity-100 hover:opacity-80 transition-all h-full w-full object-cover')]" style={{ opacity: withOpacity ? "0" : "1" }}>
+          <div className="opacity-100 hover:opacity-80 transition-all flex items-center justify-center h-full w-full object-cover')]" style={{ opacity: withOpacity ? "0" : "1" }}>
+            <div className="absolute h-8 w-8 rounded-full z-10 border-4 border-white bg-blue-500 shadow-lg" />
+            <div className="absolute h-8 w-8 rounded-full bg-blue-500 shadow-lg animate-ping" />
+            <div className="absolute inset-0 bg-transparent z-10 shadow-zinc-50" />
             <Image
               loader={imgLoader}
-              src="/images/maps.svg"
-              alt="Maps Vector"
+              src="/images/maps.jpg"
+              alt="Maps Background"
               className="h-full w-full object-cover pointer-events-none"
               width={500}
               height={400}
@@ -137,7 +141,7 @@ const Item = forwardRef(
           </div>
           {!withOpacity && <Icon.Globe
             size={40}
-            className="p-2 shadow-sm bg-gradient-to-t from-green-500 to-emerald-500 text-white rounded-lg absolute top-2 right-2"
+            className="p-2 shadow-sm bg-gradient-to-t from-green-500 to-emerald-500 text-white rounded-lg absolute top-2 right-2 z-30"
           />}
         </div>
       )) ||
@@ -146,7 +150,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
+            "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
@@ -210,17 +214,35 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 relative p-8 w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] overflow-hidden "
+            "max-md:row-span-1 relative p-8 w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
         >
           <div className="w-full h-full pr-12" style={{ opacity: withOpacity ? 0 : 1 }}>
             <p className="font-display text-lg mb-3">Youtube channels I recommend:</p>
-            <div className="flex flex-col gap-2">
-              <Link className="font-display opacity-100 transition-all hover:opacity-80" href="https://www.youtube.com/@CodeAesthetic" target="_blank">- <span className="underline">CodeAesthetic</span></Link>
-              <Link className="font-display opacity-100 transition-all hover:opacity-80" href="https://www.youtube.com/@AZisk" target="_blank">- <span className="underline">Alex Ziskind </span></Link>
-              <Link className="font-display opacity-100 transition-all hover:opacity-80" href="https://www.youtube.com/@Fireship" target="_blank">- <span className="underline">Fireship</span></Link>
+            <div className="flex flex-col gap-2 flex-nowrap items-start">
+              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-900 rounded-md" href="https://www.youtube.com/@CodeAesthetic" target="_blank">- CodeAesthetic
+                <Icon.ArrowUpRight
+                  size={16}
+                  strokeWidth={2.5}
+                  className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                />
+              </Link>
+              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-900 rounded-md" href="https://www.youtube.com/@AZisk" target="_blank">- Alex Ziskind
+                <Icon.ArrowUpRight
+                  size={16}
+                  strokeWidth={2.5}
+                  className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                />
+              </Link>
+              <Link className="font-display transition-all text-black border-b-black group dark:text-white hover:bg-zinc-200 hover:bg-opacity-75 dark:hover:bg-zinc-900 rounded-md" href="https://www.youtube.com/@Fireship" target="_blank">- Fireship
+                <Icon.ArrowUpRight
+                  size={16}
+                  strokeWidth={2.5}
+                  className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
+                />
+              </Link>
             </div>
           </div>
           {!withOpacity && <Icon.Paperclip
@@ -234,7 +256,7 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] "
+            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
@@ -273,16 +295,15 @@ const Item = forwardRef(
           ref={ref}
           style={inlineStyles}
           className={
-            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] "
+            "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] transition-all hover:bg-[#f2f2f2] "
             + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
           }
           {...props}
         >
           {!withOpacity && <div className="h-full w-full flex flex-col gap-2 justify-start p-2">
-            <p className="text-sm italic text-zinc-400">Todays Workout:</p>
-            <div className="h-full flex-col gap-4 w-full flex items-center justify-center">
-              {nextWorkout() === "Rest" ? <ClockClockwise size={40} weight="fill" /> : <PersonSimpleRun size={40} weight="fill" />}
-              <p className="text-lg font-medium">{nextWorkout()}</p>
+            <div className="h-full flex-col w-full flex items-center justify-center">
+              {nextWorkout() === "Rest Day" ? <Image className="w-32" src="/images/memoji/memoji_rest.png" alt="Florian Rest" width={96} height={96} /> : <Image className="w-32" src="/images/memoji/memoji_workout.png" alt="Florian Workout" width={96} height={96} />}
+              <p className="text-base text-center font-medium"><br /> {nextWorkout()}</p>
             </div>
           </div>}
           {!withOpacity && <Icon.Activity

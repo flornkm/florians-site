@@ -277,8 +277,8 @@ export default function Home() {
             className="max-w-[500px] max-md:h-64 md:h-[200px] object-contain m-auto"
           />
         </div> */}
-        <div className="gap-24 grid grid-cols-2 max-md:flex max-md:flex-col max-md:gap-0">
-          <div className="flex gap-8 max-lg:flex-col max-md:gap-4 max-w-lg row-span-1 max-md:order-2 max-md:mb-24 md:pt-4">
+        <div className="gap-0 grid grid-cols-2 max-md:flex max-md:flex-col max-md:gap-0 mb-8">
+          <div className="flex gap-8 max-lg:flex-col max-md:gap-4 max-w-lg row-span-1 max-md:order-2 max-md:mb-24 md:pt-4 md:pb-16">
             <div className="justify-center flex flex-col">
               <h1 className="text-xl font-semibold mb-3">About me</h1>
               <p className="text-zinc-600 dark:text-zinc-300 mb-2">
@@ -295,7 +295,7 @@ export default function Home() {
 
             </div>
           </div>
-          <div className="row-span-2 max-md:order-first">
+          <div className="row-span-2 order-first">
             <Image
               loader={imgLoader}
               src="./images/florian_student.jpg"
@@ -345,7 +345,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3 order-3 max-md:mb-24">
+          <div className="flex flex-col gap-3 order-3 mb-16">
             <h2 className="font-medium text-lg">Work</h2>
             <Link href="https://meta-hype.com/" target="_blank" className="flex items-center w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
@@ -422,7 +422,7 @@ export default function Home() {
               <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2015 - 2020</p>
             </div>
           </div>
-          <div className="flex flex-col gap-6 order-4">
+          <div className="flex flex-col gap-6 order-4 col-start-2">
             <h2 className="font-medium text-lg">Side projects</h2>
             <Link href="https://curations.tech/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
@@ -475,7 +475,7 @@ export default function Home() {
           </DndContext>
         </div>
         <Transition appear show={globePopup} as={Fragment}>
-          <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Dialog as="div" className="relative z-40" onClose={closeModal}>
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
