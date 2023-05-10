@@ -132,9 +132,9 @@ export default function Contact() {
         <div className="flex place-items-center gap-3">
           <Image
             loader={imgLoader}
-            src="./images/memoji.png"
+            src="./images/memoji.jpg"
             alt="Florian Profile Avatar"
-            className="rounded-full bg-white border border-solid p-1"
+            className="rounded-full bg-white border border-solid"
             width={48}
             height={48}
           />
