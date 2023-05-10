@@ -29,7 +29,7 @@ export default function Curations() {
       processHeading4="The Gateway to Innovative Tools"
       processText4="Leveraging NextJS, Supabase and Vercel, we developed a website that displays our curated collection and allows users to submit their own discoveries. Our team of curators carefully selects each tool before it is deployed to the public, ensuring the highest quality recommendations."
       challenge="Our browsers are full of tabs, our bookmarks are full of links, and our notes are full of ideas. We needed a platform that would allow us to organize and share our discoveries with others."
-      result="Curations had a successfull launch on ProductHunt, reaching nearly 10,000 users within the first launch. Moving forward, our plan is to expand the project beyond just a curated list of links, providing users with even greater value and utility."
+      result="Curations had a successfull launch on ProductHunt, reaching nearly 10,000 users within the first month. Moving forward, our plan is to expand the project beyond just a curated list of links, providing users with even greater value and utility."
       projectLinks={[
         {
           text: "Curations",
