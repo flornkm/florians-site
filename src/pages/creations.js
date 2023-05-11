@@ -24,33 +24,39 @@ export default function Home() {
 
   const concepts = [
     {
+      title: "Granny AI",
+      description: "AI Hackathon Project",
+      icon: "./images/icons/granny_ai_icon.jpg",
+      preview: "./images/granny_ai/granny_ai_preview.png",
+    },
+    {
       title: "Web Audit",
       description: "Raycast SEO Extension",
-      icon: "./images/concept_icons/concept-icon_web-audit.svg",
+      icon: "./images/icons/web_audit_icon.jpg",
       preview: "./images/web_audit/web-audit_preview.png",
     },
     {
       title: "Nutri",
       description: "Social Food App",
-      icon: "./images/concept_icons/concept-icon_nutri.svg",
+      icon: "./images/icons/nutri_icon.jpg",
       preview: "./images/nutri/nutri_preview.png",
     },
     {
       title: "HeartbeatOS",
       description: "Heart Simulator & Monitoring",
-      icon: "./images/concept_icons/concept-icon_heartbeat.svg",
+      icon: "./images/icons/heartbeatos_icon.jpg",
       preview: "./images/heartbeat/heartbeat_preview.png",
     },
     {
       title: "Stackoverflow",
       description: "Redesign & Extension",
-      icon: "./images/concept_icons/concept-icon_stackoverflow.svg",
+      icon: "./images/icons/stackoverflow_icon.jpg",
       preview: "./images/stackoverflow/stackoverflow_preview.png",
     },
     {
       title: "Visualization",
       description: "ThreeJS Data Visualization",
-      icon: "./images/concept_icons/concept-icon_visualization.svg",
+      icon: "./images/icons/visualization_icon.jpg",
       preview: "./images/visualization/visualization_preview.png",
     },
   ];
@@ -71,7 +77,7 @@ export default function Home() {
       currentConcept.current.title = "Nutri";
       currentConcept.current.shortDescription = "Social Food App";
       currentConcept.current.icon =
-        "./images/concept_icons/concept-icon_nutri.svg";
+      "./images/icons/nutri_icon.jpg";
       currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/nutri/nutri_mockup.jpg",
@@ -91,7 +97,7 @@ export default function Home() {
       currentConcept.current.title = "Stackoverflow";
       currentConcept.current.shortDescription = "Redesign & Extension";
       currentConcept.current.icon =
-        "./images/concept_icons/concept-icon_stackoverflow.svg";
+        "./images/icons/stackoverflow_icon.jpg";
       currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/stackoverflow/stackoverflow_redesign.jpg",
@@ -111,7 +117,7 @@ export default function Home() {
       currentConcept.current.title = "Visualization";
       currentConcept.current.shortDescription = "ThreeJS Data Visualization";
       currentConcept.current.icon =
-        "./images/concept_icons/concept-icon_visualization.svg";
+        "./images/icons/visualization_icon.jpg";
       currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/visualization/visualization_website.jpg",
@@ -131,7 +137,7 @@ export default function Home() {
       currentConcept.current.title = "HeartbeatOS";
       currentConcept.current.shortDescription = "Heart Simulator & Monitoring";
       currentConcept.current.icon =
-        "./images/concept_icons/concept-icon_heartbeat.svg";
+        "./images/icons/heartbeatos_icon.jpg";
       currentConcept.current.video = null;
       currentConcept.current.mainImages = [
         "./images/heartbeat/heartbeat_mockup.jpg",
@@ -155,7 +161,7 @@ export default function Home() {
       currentConcept.current.title = "Web Audit";
       currentConcept.current.shortDescription = "Raycast SEO Extension";
       currentConcept.current.icon =
-        "./images/concept_icons/concept-icon_web-audit.svg";
+      "./images/icons/web_audit_icon.jpg";
       currentConcept.current.video =
         "https://www.youtube.com/embed/hMlDm9P88nY?autoplay=1&mute=1&loop=1";
       currentConcept.current.videoThumbnail =
@@ -177,7 +183,28 @@ export default function Home() {
           url: "https://github.com/floriandwt/web-audit-extension",
         },
       ];
+    } else if (concept.title === "Granny AI") {
+      currentConcept.current.collaborators = ["Anton"];
+      currentConcept.current.title = "Granny AI";
+      currentConcept.current.shortDescription = "AI Chatbot for Shopping made in 48h";
+      currentConcept.current.icon =
+        "./images/icons/granny_ai_icon.jpg";
+      currentConcept.current.video = null;
+      currentConcept.current.mainImages = [
+        "./images/granny_ai/granny_ai_figma.jpg",
+        "./images/granny_ai/granny_ai_interface.jpg",
+        "./images/granny_ai/granny_ai_popup.jpg",
+      ];
+      currentConcept.current.text =
+        "Grandmas have always the best advice. Granny AI is a really quick developed AI bot that helps you with your decisions. In this case, Granny gives you suggestions on what clothes to buy. Granny AI was written in React / NextJS and uses the GPT-3 API from OpenAI and Elevenlabs, the Frontend was built with Tailwind CSS. The project was developed in 48 hours during a hackathon. The project is an MVP and is not ready for production.";
+      currentConcept.current.links = [
+        {
+          text: "View and Test (on own risk)",
+          url: "https://granny-ai.vercel.app/",
+        },
+      ];
     }
+
     setPopupState(true);
   };
 
@@ -222,7 +249,7 @@ export default function Home() {
               onClick={() => {
                 activatePopup(concept);
               }}
-              className={"bg-transparent rounded-2xl flex h-full w-full " + (concept.title === "Web Audit" ? "md:col-span-2 md:row-span-2" : "")}
+              className={"bg-transparent rounded-2xl flex h-full w-full " + (concept.title === "Granny AI" ? "md:col-span-2 md:row-span-2" : "")}
             >
               <div className="cursor-pointer transition-all h-full group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-900 dark:bg-[#131314] w-full flex flex-col gap-4 max-md:justify-center md:justify-end px-4 py-3 rounded-lg group">
                 <Image
