@@ -196,7 +196,7 @@ export default function Home() {
         "./images/granny_ai/granny_ai_popup.jpg",
       ];
       currentConcept.current.text =
-        "Grandmas have always the best advice. Granny AI is a really quick developed AI bot that helps you with your decisions. In this case, Granny gives you suggestions on what clothes to buy. Granny AI was written in React / NextJS and uses the GPT-3 API from OpenAI and Elevenlabs, the Frontend was built with Tailwind CSS. The project was developed in 48 hours during a hackathon. The project is an MVP and is not ready for production.";
+        "Grandmas often have the best advice. Granny AI is a really quick developed AI bot that helps you with your decisions. In this case, Granny gives you suggestions on what clothes to buy. Granny AI was written in React / NextJS and uses the GPT-3 API from OpenAI and Elevenlabs, the Frontend was built with Tailwind CSS. The project was developed in 48 hours during a hackathon. The project is an MVP and is not ready for production.";
       currentConcept.current.links = [
         {
           text: "View and Test (on own risk)",
