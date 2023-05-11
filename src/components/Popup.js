@@ -182,7 +182,7 @@ export default function Popup({
                         )}
                       </div>
 
-                      <div className="embla py-6 cursor-grab" ref={emblaRef}>
+                      <div className="embla py-6 cursor-grab active:cursor-grabbing" ref={emblaRef}>
                         <div className="embla__container">
                           {video && (
                             <div className="embla__slide max-md:pr-2">

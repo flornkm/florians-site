@@ -175,7 +175,7 @@ export default function Project({
             {projectMainDescription}
           </p>
           <div className="relative min-h-[600px] max-sm:min-h-[500px]">
-            <div className="absolute w-[99vw] translate-x-[-50%] left-[50%] cursor-grab">
+            <div className="absolute w-[99vw] translate-x-[-50%] left-[50%] cursor-grab active:cursor-grabbing">
               <div className="embla" ref={emblaRef}>
                 <div className="embla__container">
                   {slideImages &&
