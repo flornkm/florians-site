@@ -189,10 +189,12 @@ export default function Home() {
       currentConcept.current.shortDescription = "AI Chatbot for Shopping made in 48h";
       currentConcept.current.icon =
         "./images/icons/granny_ai_icon.jpg";
-      currentConcept.current.video = null;
+        currentConcept.current.video =
+        "https://www.youtube.com/embed/HgsiSR1c7sk?autoplay=1&mute=1&loop=1";
+      currentConcept.current.videoThumbnail =
+      "./images/granny_ai/granny_ai_interface.jpg";
       currentConcept.current.mainImages = [
         "./images/granny_ai/granny_ai_figma.jpg",
-        "./images/granny_ai/granny_ai_interface.jpg",
         "./images/granny_ai/granny_ai_popup.jpg",
       ];
       currentConcept.current.text =
