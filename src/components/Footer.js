@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
           <div className="h-8 max-md:h-20"></div>
           <div className="w-full flex justify-start">
-            <div className="flex items-center gap-2 max-md:gap-4 border-t border-dashed dark:border-zinc-800 border-zinc-700 pt-6 max-md:w-full max-md:justify-center max-md:pt-16 max-md:mx-8">
+            <div className="flex items-center gap-2 max-md:gap-4 pt-2 max-md:w-full max-md:justify-center max-md:pt-16 max-md:mx-8">
               <button
                 onClick={() => {
                   document.documentElement.classList.remove("dark");
