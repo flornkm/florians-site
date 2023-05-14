@@ -29,6 +29,7 @@ export default function LegalNotice() {
           site: '@floriandwt',
           cardType: 'summary_large_image',
         }}
+        nofollow={true}
       />
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
