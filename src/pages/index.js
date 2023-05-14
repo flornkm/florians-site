@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <>
       <NextSeo
-        title="Florian - Digtital Product Designer"
+        title="Florian - Digital Product Designer"
         description="Product Designer and Developer building digital experiences."
         openGraph={{
           url: 'floriandwt.com',
