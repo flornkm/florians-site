@@ -1,10 +1,16 @@
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import RiveComponent from "@rive-app/react-canvas";
+import { NextSeo } from "next-seo";
 
 export default function Custom404() {
     return (
         <>
+        <NextSeo
+        title="404 - Florian"
+        description="This is the 404 page of Florian's website."
+        nofollow={true}
+      />
             <div className="flex flex-col items-center gap-2 justify-center h-screen">
             <div className="w-full md:pt-20 pb-4 max-md:h-[400px] relative z-0">
                 <RiveComponent
