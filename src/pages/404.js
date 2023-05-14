@@ -16,7 +16,7 @@ export default function Custom404() {
                 <RiveComponent
                     artboard="404"
                     src="./animations/404.riv"
-                    className="w-full h-[400px] object-contain m-auto"
+                    className="w-full h-[400px] object-contain m-auto rounded-lg"
                 />
             </div>
                 <Link
