@@ -101,10 +101,10 @@ export default function Footer() {
             Home
           </Link>
           <Link
-            href={"/#projects"}
+            href={"/#work"}
             className="text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-200 hover:bg-zinc-700 -ml-1.5 dark:hover:bg-zinc-800"
           >
-            Projects
+            Work
           </Link>
           <Link
             href={"/creations"}
