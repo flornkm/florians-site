@@ -428,8 +428,25 @@ export default function Home() {
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
-                  src="./images/project_curations.jpg"
+                  src="./images/project_bridge.jpg"
                   className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
+                  width={40}
+                  height={40}
+                />
+                <div>
+                  <h3 className="font-medium text-md">Bridge</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    Product that helps creating job pages in a matter of minutes
+                  </p>
+                </div>
+              </div>
+            </Link>
+            <Link href="https://curations.tech/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
+              <div className="flex gap-2 place-items-center ">
+                <Image
+                  loader={imgLoader}
+                  src="./images/project_curations.jpg"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1.5 bg-white"
                   width={40}
                   height={40}
                 />
