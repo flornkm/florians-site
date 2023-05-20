@@ -359,16 +359,28 @@ export default function Project({
                 <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
-                    className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                    className="font-medium flex items-center transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
                     href={link.url}
                       target="_blank"
                     >
+                      {link.url && <Image 
+                        href={link.url}
+                        className="rounded-full mr-2"
+                        src={
+                          // just take https://unavatar.io/ + the root domain of the url
+                          "https://unavatar.io/" +
+                          link.url.replace(/(^\w+:|^)\/\//, "").split("/")[0]
+                          + "?fallback=https://source.boringavatars.com/marble/120/1337_user?colors=264653r,2a9d8f,e9c46a,f4a261,e76f51"
+                        }
+                        width={20}
+                        height={20}
+                        />}  
                       {link.text}
-                      <Icon.ArrowUpRight
+                      {/* <Icon.ArrowUpRight
                     size={16}
                     strokeWidth={2.5}
                     className="inline ml-0.5 relative group-hover:-right-1 group-hover:-top-1.5 right-0 -top-0.5 transition-all"
-                  />
+                  /> */}
                     </Link>
                   ))}
                 </div>

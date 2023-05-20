@@ -114,6 +114,37 @@ export default function Home() {
                 "flex flex-col gap-8"
               }
             >
+              <Link
+                href={"./projects/bridge"}
+                className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
+              >
+                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+
+                  <Image
+                    loader={imgLoader}
+                    src="./images/bridge/bridge.webp"
+                    alt="Image of the Bridge Landingpage in a Mockup"
+                    className="w-full max-h-[272px] object-contain transition-all"
+                    width={350}
+                    height={250}
+                  />
+                </div>
+                <div className="max-w-sm col-span-2">
+                  <div className="flex items-center">
+                    <h3 className="text-xl font-medium pb-1">Bridge</h3>
+                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                  </div>
+                  <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+                    <div className="flex gap-2 place-items-center">
+                      <Icon.Calendar width={14} />
+                      <p className="font-mono">Q1 2023 – <span className="text-green-500 font-sans font-medium">Now</span></p>
+                    </div>
+                  </div>
+                  <p className="pb-2 text-zinc-600 dark:text-zinc-400">
+                    Product that helps creating job pages in a matter of minutes
+                  </p>
+                </div>
+              </Link>
 
               <Link
                 href={"./projects/curations"}
