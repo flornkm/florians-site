@@ -51,7 +51,7 @@ const Item = forwardRef(
 
     const nextWorkout = () => {
       const today = new Date().getDay();
-      const nextWorkout = today === 2 ? "Full Body Workout" : today === 4 ? "Full Body Workout" : today === 6 ? "Full Body Workout" : "Rest Day";
+      const nextWorkout = today === 2 ? "Workout" : today === 4 ? "Workout" : today === 6 ? "Workout" : "Rest Day";
       return nextWorkout;
     };
 
@@ -301,6 +301,7 @@ const Item = forwardRef(
           {...props}
         >
           {!withOpacity && <div className="h-full w-full flex flex-col gap-2 justify-start p-2">
+            <p className="text-xs text-gray-700 absolute top-4 left-4">Todays activity</p>
             <div className="h-full flex-col w-full flex items-center justify-center">
               {nextWorkout() === "Rest Day" ? <Image className="w-32" src="/images/memoji/memoji_rest.png" alt="Florian Rest" width={96} height={96} /> : <Image className="w-32" src="/images/memoji/memoji_workout.png" alt="Florian Workout" width={96} height={96} />}
               <p className="text-base text-center font-medium"><br /> {nextWorkout()}</p>
