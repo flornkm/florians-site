@@ -424,7 +424,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-6 order-4 col-start-2">
             <h2 className="font-medium text-lg">Side projects</h2>
-            <Link href="https://curations.tech/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
+            <Link href="https://bridge.supply/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
                 <Image
                   loader={imgLoader}
