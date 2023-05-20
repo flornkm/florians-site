@@ -73,7 +73,7 @@ export default function Home() {
       />
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
-        <div className="md:h-[70vh] flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-40 gap-16">
+        <div className="md:min-h-[70vh] md:py-24 h-auto flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-32 gap-16">
           <div className="md:w-[50%]">
             <h1 className="text-5xl font-bold mb-6 leading-tight">
               Hey, I'm Florian
