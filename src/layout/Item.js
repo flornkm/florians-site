@@ -301,7 +301,7 @@ const Item = forwardRef(
           {...props}
         >
           {!withOpacity && <div className="h-full w-full flex flex-col gap-2 justify-start p-2">
-            <p className="text-xs text-gray-700 absolute top-4 left-4">Todays activity</p>
+            <p className="text-xs text-zinc-700 absolute top-4 left-4 dark:text-zinc-300">Todays activity</p>
             <div className="h-full flex-col w-full flex items-center justify-center">
               {nextWorkout() === "Rest Day" ? <Image className="w-32" src="/images/memoji/memoji_rest.png" alt="Florian Rest" width={96} height={96} /> : <Image className="w-32" src="/images/memoji/memoji_workout.png" alt="Florian Workout" width={96} height={96} />}
               <p className="text-base text-center font-medium"><br /> {nextWorkout()}</p>
