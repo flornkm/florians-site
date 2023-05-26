@@ -24,6 +24,13 @@ export default function Footer() {
 
   useEffect(() => {
     setColorTheme(localStorage.getItem("color-theme"));
+
+    // log the color theme of the system
+    console.log(
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+    );
   }, []);
 
   const AnalogClock = dynamic(() => import("analog-clock-react"), {
@@ -37,13 +44,20 @@ export default function Footer() {
     baseColor: "transparent",
     centerColor: "transparent",
     centerBorderColor: "transparent",
-    handColors: {
+    _handColors: {
       second: "#ef4444",
-      minute: colorTheme === "dark" ? "#ffffff" : "#000000",
-      hour: colorTheme === "dark" ? "#ffffff" : "#000000",
+      minute: colorTheme ? (colorTheme === "dark" ? "#ffffff" : "#000000") : (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "#ffffff" : "#000000"),
+      hour: colorTheme ? (colorTheme === "dark" ? "#ffffff" : "#000000") : (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches ? "#ffffff" : "#000000")
+    },
+    get handColors() {
+      return this._handColors;
+    },
+    set handColors(value) {
+      this._handColors = value;
     },
   };
- 
+
+
 
   useOutsideAlerter(menu, setArrowUp);
   return (
