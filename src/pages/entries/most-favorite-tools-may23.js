@@ -6,60 +6,51 @@ export default function JounalEntry() {
     <>
       <Journal
         mainImage={
-          "images/entries/favorite-tools-mar23/most_favourite_tools_mar23.webp"
+          "images/entries/favorite-tools-may23/most_favourite_tools_may23.webp"
         }
-        title={"Flos most favorite tools: March 2023 edition"}
-        date={"2023-03-26"}
+        title={"Flos most favorite tools: May 2023 edition"}
+        date={"2023-05-26"}
         text={
           <>
             <article className="text-gray-700 dark:text-gray-300">
               <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
-                Posts <br /><span className="text-gray-500 text-lg">Twitter, but for designers and developers</span>
+                Unavatar <br /><span className="text-gray-500 text-lg">The ultimate Avatar API</span>
               </h3>
               <p className="mb-6">
-                Posts is a mobile application made from the team behind ReadCV.
-                It is a platform that's built for designers and developers to
-                share their work, photos and thoughts.
+                Unavatar is a service that allows you to retrieve avatars for your users from many different sources. It's a great way to add a personal touch to your app or website. The best part is, that you can access the images via a simple URL and that it is completely free to use.
               </p>
               <Link
                 className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
-                href="https://testflight.apple.com/join/Pv0Sn7OT"
+                href="https://unavatar.io/#/"
                 target="_blank"
               >
-                Posts on Testflight
+                Unavatar
               </Link>
               <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
-                Revolut <br /><span className="text-gray-500 text-lg">Intelligent, easy to use banking app</span>
+                Screen Studio <br /><span className="text-gray-500 text-lg">Simple recording software for stunning product demos</span>
               </h3>
               <p className="mb-6">
-                While I don't use Revolut as my main bank or trading app, I
-                use it for managing my money while I am studying. The app lets
-                you easily view insights, round up your purchases and manage
-                your money in a very easy way.
+                Screen Studio is a screen recorder, that has features like zooming, highlighting, and much more built-in. The videos are looking high quality and I use it mainly for product demos. The software itself costs some money, but it's worth it in my opinion.
               </p>
               <Link
                 className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
-                href="https://www.revolut.com/"
+                href="https://www.screen.studio/"
                 target="_blank"
               >
-                Revolut
+                Screen Studio
               </Link>
               <h3 className="text-xl font-medium mb-2 text-black dark:text-white mt-16">
-                Fig <br /><span className="text-gray-500 text-lg">Terminal with superpowers</span>
+                Tailwind CSS <br /><span className="text-gray-500 text-lg">Not really a tool, but I want to mention it anyways</span>
               </h3>
               <p className="mb-6">
-                Fig is no extra application, it is more like an addition to your
-                terminal. It extends the terminal with a lot of useful features
-                like autocomplete, which is very useful for working more
-                efficiently. You can install it via Homebrew and it has a
-                free plan.
+                As you probably know, Tailwind CSS is a utility-first CSS framework. Nowadays I use it very often because it just saves me a lot of time. I also really like the Tailwind colors and their awesome community and documentation.
               </p>
               <Link
                 className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
-                href="https://fig.io/"
+                href="https://tailwindcss.com/"
                 target="_blank"
               >
-                Fig
+                Tailwind CSS
               </Link>
               <div className="h-24"></div>
             </article>
