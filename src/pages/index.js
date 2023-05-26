@@ -132,7 +132,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Bridge</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -164,7 +164,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Curations</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -230,7 +230,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Ambient Chat</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -262,7 +262,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Homebility</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
