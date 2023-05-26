@@ -20,19 +20,6 @@ function useOutsideAlerter(ref, setArrowUp) {
 export default function Footer() {
   const menu = useRef();
   const [arrowUp, setArrowUp] = useState(false);
-  let options = {
-    width: "112px",
-    border: false,
-    borderColor: "transparent",
-    baseColor: "#000",
-    centerColor: "transparent",
-    centerBorderColor: "transparent",
-    handColors: {
-      second: "#ef4444",
-      minute: "#ffffff",
-      hour: "#ffffff",
-    },
-  };
   const [colorTheme, setColorTheme] = useState(null);
 
   useEffect(() => {
@@ -42,6 +29,21 @@ export default function Footer() {
   const AnalogClock = dynamic(() => import("analog-clock-react"), {
     ssr: false,
   });
+
+  let options = {
+    width: "112px",
+    border: false,
+    borderColor: "transparent",
+    baseColor: "transparent",
+    centerColor: "transparent",
+    centerBorderColor: "transparent",
+    handColors: {
+      second: "#ef4444",
+      minute: colorTheme === "dark" ? "#ffffff" : "#000000",
+      hour: colorTheme === "dark" ? "#ffffff" : "#000000",
+    },
+  };
+ 
 
   useOutsideAlerter(menu, setArrowUp);
   return (
