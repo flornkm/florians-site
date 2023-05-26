@@ -40,14 +40,14 @@ export default function Entry({ title, text, mainImage, date }) {
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-transparent dark:text-white relative">
         <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl mb-12">
             <Image
               loader={imgLoader}
               src={mainImage}
               alt="Journal Cover"
               width={1920}
               height={500}
-              className="mb-10"
+              className="mb-10 bg-zinc-50 dark:bg-zinc-900"
             />
             <div className="flex gap-4 text-sm text-zinc-500 mb-2">{date}</div>
             <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>
