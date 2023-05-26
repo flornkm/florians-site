@@ -75,7 +75,7 @@ export default function Home() {
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="md:min-h-[70vh] md:py-24 h-auto flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-32 gap-16">
           <div className="md:w-[50%]">
-            <h1 className="text-5xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl font-semibold mb-6 leading-tight">
               Hey, I'm Florian
             </h1>
             <h2 className="text-3xl font-medium text-zinc-700 dark:text-zinc-400">
@@ -103,7 +103,7 @@ export default function Home() {
         </div>
         <div className="h-64"></div>
         <div>
-          <div className="flex justify-between pb-8 max-md:pb-16">
+          <div className="flex justify-between pb-4">
             <h2 className="text-3xl font-semibold text-black dark:text-white">
               Some of my selected work
             </h2>
@@ -132,7 +132,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Bridge</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -164,7 +164,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Curations</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -230,7 +230,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Ambient Chat</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -262,7 +262,7 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Homebility</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight size={22} className="opacity-0 bottom-[1px] group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">

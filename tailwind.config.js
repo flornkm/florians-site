@@ -24,7 +24,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['var(--pjs-font)', ...fontFamily.sans],
+      sans: ['var(--instrument-font)', ...fontFamily.sans],
       display: ['var(--kalam-font)', ...fontFamily.sans],
       mono: ['var(--jetbrains-mono-font)', ...fontFamily.mono],
     },

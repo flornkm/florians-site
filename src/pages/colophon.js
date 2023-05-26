@@ -47,14 +47,14 @@ export default function Colophon() {
           {/* <h2 className="text-xl font-medium mb-8">General</h2> */}
           <div className="flex flex-col gap-8">
             <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
-              <h2 className="text-lg font-medium text-zinc-400">Typography</h2>
+              <h2 className="text-lg text-zinc-400">Typography</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
                 <Link
                   className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
-                  href={"https://fonts.google.com/specimen/Plus+Jakarta+Sans"}
+                  href={"https://github.com/Instrument/instrument-sans?ref=uncut.wtf"}
                   target="_blank"
                 >
-                  Plus Jakarta Sans
+                  Instrument Sans
                 </Link>
                 <Link
                   className="font-medium font-display transition-all text-black border-b-black group pt-1 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
@@ -74,7 +74,7 @@ export default function Colophon() {
             </div>
             <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
-              <h2 className="text-lg font-medium text-zinc-400">Iconography</h2>
+              <h2 className="text-lg text-zinc-400">Iconography</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
                 <Link
                   className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
@@ -96,7 +96,7 @@ export default function Colophon() {
             </div>
             <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
-              <h2 className="text-lg font-medium text-zinc-400">Photography</h2>
+              <h2 className="text-lg text-zinc-400">Photography</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
                 <Link
                   className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
@@ -144,7 +144,7 @@ export default function Colophon() {
             </div>
             <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
-              <h2 className="text-lg font-medium text-zinc-400">Technology</h2>
+              <h2 className="text-lg text-zinc-400">Technology</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
                 <Link
                   className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
@@ -182,7 +182,7 @@ export default function Colophon() {
             </div>
             <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
-              <h2 className="text-lg font-medium text-zinc-400">Inspiration</h2>
+              <h2 className="text-lg text-zinc-400">Inspiration</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
               <Link
                   className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
@@ -244,7 +244,7 @@ export default function Colophon() {
             </div>
             <div className="h-[1px] border-t border-dashed border-zinc-100 w-full mt-1 mb-1 dark:bg-zinc-800 dark:border-zinc-800"></div>
             <div className="flex justify-between w-full flex-wrap gap-4 max-md:flex-col max-md:items-start max-md:gap-8">
-              <h2 className="text-lg font-medium text-zinc-400">With the help of</h2>
+              <h2 className="text-lg text-zinc-400">With the help of</h2>
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
               <Link
                   className="font-medium flex items-center gap-2 transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
