@@ -62,7 +62,7 @@ export default function Footer() {
   useOutsideAlerter(menu, setArrowUp);
   return (
     <div className="w-full min-h-[300px] bg-white pt-16 pb-24 dark:bg-[#101012] dark:bg-opacity-50">
-      <div className="max-w-6xl pl-[5%] pr-[5%] m-auto mb-16">
+      <div className="max-w-6xl pl-[5%] pr-[5%] m-auto mb-16 max-md:px-[10%]">
         <div className="w-full h-[1px] bg-zinc-100 dark:bg-zinc-800" />
       </div>
       <div className="flex justify-between place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-24">
@@ -111,64 +111,64 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-8 font-medium">
+        <div className="flex flex-col gap-2 items-start max-md:ml-8">
           <h4 className="text-black mb-2 font-semibold dark:text-white">Navigation</h4>
           <Link
             href={"/"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
           >
             Home
           </Link>
           <Link
             href={"/#work"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
           >
             Work
           </Link>
           <Link
             href={"/creations"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
           >
             Creations
           </Link>
           <Link
             href={"/about"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
           >
             About
           </Link>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-8 font-medium">
+        <div className="flex flex-col gap-2 items-start max-md:ml-8">
           <h4 className="text-black mb-2 font-semibold dark:text-white">Info</h4>
           <Link
             href={"/entries"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
           >
             Entries
           </Link>
           <Link
             href={"/colophon"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
           >
             Colophon
           </Link>
         </div>
       </div>
       <div className="h-32"></div>
-      <div className="flex justify-between items-center place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-8">
-        <p className="text-zinc-500 text-xs">
+      <div className="flex justify-between items-center place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-8 max-md:px-[10%]">
+        <p className="text-zinc-400 dark:text-zinc-600 text-xs">
           {new Date().getFullYear()} Design With Tech. All Rights Reserved.
         </p>
-        <div className="flex gap-8 font-medium">
+        <div className="flex gap-8">
           <Link
             href={"/legal-notice"}
-            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-600 -ml-2 dark:hover:text-white text-xs"
+            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-600 -ml-2 dark:text-zinc-600 dark:hover:text-zinc-500 text-xs"
           >
             Legal Notice
           </Link>
           <Link
             href={"/privacy-policy"}
-            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-600 -ml-2 dark:hover:text-white text-xs"
+            className="text-zinc-400 px-1.5 py-1 transition-all rounded-md hover:text-zinc-600 -ml-2 dark:text-zinc-600 dark:hover:text-zinc-500 text-xs"
           >
             Privacy Policy
           </Link>

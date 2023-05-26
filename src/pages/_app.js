@@ -1,16 +1,61 @@
 import "@/styles/globals.css";
 import "@/styles/musicplayer.css";
 import { useEffect } from "react";
-import { Plus_Jakarta_Sans } from "@next/font/google";
+import localFont from "@next/font/local";
 import { Kalam } from "@next/font/google";
 import { JetBrains_Mono } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
 // If loading a variable font, you don't need to specify the font weight
-const plusJakartaSans = Plus_Jakarta_Sans({
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
+
+const InstrumentSans = localFont({
+  src: [
+    {
+      path: '../../public/fonts/InstrumentSans-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-SemiBold.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-Italic[wdth,wght].woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-BoldItalic.woff2',
+      weight: '700',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-SemiBoldItalic.woff2',
+      weight: '600',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-MediumItalic.woff2',
+      weight: '500',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/InstrumentSans-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    }
+  ],
 });
 
 const kalamFont = Kalam({
@@ -44,7 +89,7 @@ export default function App({ Component, pageProps }) {
       <style jsx global>
         {`
           :root {
-            --pjs-font: ${plusJakartaSans.style.fontFamily};
+            --instrument-font: ${InstrumentSans.style.fontFamily};
             --kalam-font: ${kalamFont.style.fontFamily};
             --jetbrains-mono-font: ${jetBrainsMono.style.fontFamily};
           }
