@@ -61,8 +61,11 @@ export default function Footer() {
 
   useOutsideAlerter(menu, setArrowUp);
   return (
-    <div className="w-full min-h-[300px] bg-white border-t border-zinc-100 dark:border-zinc-800 pt-24 pb-24 dark:bg-[#101012] dark:bg-opacity-50">
-      <div className="flex justify-between place-items-top max-w-6xl pl-[10%] pr-[10%] m-auto max-md:flex-col max-md:gap-24">
+    <div className="w-full min-h-[300px] bg-white pt-16 pb-24 dark:bg-[#101012] dark:bg-opacity-50">
+      <div className="max-w-6xl pl-[5%] pr-[5%] m-auto mb-16">
+        <div className="w-full h-[1px] bg-zinc-100 dark:bg-zinc-800" />
+      </div>
+      <div className="flex justify-between place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-24">
         <div className="w-[50%] max-md:w-full">
           <div className="max-md:w-full max-md:flex max-md:justify-center md:justify-between">
             <AnalogClock {...options} />
