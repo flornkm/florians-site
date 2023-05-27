@@ -19,7 +19,7 @@ export default function Colophon() {
           description: 'Colophon of Florian\'s website.',
           images: [
             {
-              url: '/images/designwithtech_opengraph.jpg',
+              url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
               alt: 'Florian - Digtital Product Designer',

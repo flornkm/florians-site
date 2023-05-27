@@ -22,7 +22,7 @@ export default function Entry({ title, text, mainImage, date }) {
           description: '',
           images: [
             {
-              url: '/images/designwithtech_opengraph.jpg',
+              url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
               alt: 'Florian - Digtital Product Designer',

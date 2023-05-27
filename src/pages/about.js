@@ -253,7 +253,7 @@ export default function Home() {
           description: 'Here you can find out more about me and my work.',
           images: [
             {
-              url: '/images/designwithtech_opengraph.jpg',
+              url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
               alt: 'Florian - Digtital Product Designer',
