@@ -49,7 +49,7 @@ export default function Journal() {
           description: 'A little journal about my life as a designer and developer and more.',
           images: [
             {
-              url: '/images/designwithtech_opengraph.jpg',
+              url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
               alt: 'Florian - Digtital Product Designer',

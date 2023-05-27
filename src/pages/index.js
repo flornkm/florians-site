@@ -56,7 +56,7 @@ export default function Home() {
           description: 'Product Designer and Developer building digital experiences.',
           images: [
             {
-              url: '/images/designwithtech_opengraph.jpg',
+              url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
               alt: 'Florian - Digital Product Designer',
