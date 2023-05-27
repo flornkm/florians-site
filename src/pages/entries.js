@@ -66,13 +66,15 @@ export default function Journal() {
       />
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
-        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
+        <div className="flex gap-4 justify-between max-md:flex-col pt-8">
+        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 pb-16 md:pr-12">
           <h1 className="text-3xl font-semibold text-left mb-3">Entries</h1>
           <h2 className="text-xl font-medium text-left text-zinc-500 dark:text-zinc-400">
-            Thoughts and more.
+            Here you can find my thoughts, ideas and more I want to share with
+            the world wide web.
           </h2>
         </div>
-        <div className="flex flex-col items-start gap-8">
+        <div className="flex flex-col items-start gap-8 md:pt-32 md:pl-12 pb-24 md:min-w-[450px]">
           {entries.map((entry) => (
             <Link
               href={entry.link}
@@ -85,7 +87,7 @@ export default function Journal() {
             </Link>
           ))}
         </div>
-        <div className="h-64"></div>
+        </div>
       </main>
       <Footer />
     </>

@@ -36,7 +36,7 @@ export default function Colophon() {
       />
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
-        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
+        <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 className="text-3xl font-semibold text-left mb-3">Colophon</h1>
           <p className="text-base mb-24">
             A colophon describes the methods, tools, and materials used to make
@@ -278,7 +278,7 @@ export default function Colophon() {
             </div>
           </div>
         </div>
-        <div className="md:h-64 max-md:h-32"></div>
+        <div className="md:h-32 max-md:h-24"></div>
       </main>
       <Footer />
     </>

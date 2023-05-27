@@ -61,7 +61,7 @@ export default function Footer() {
 
   useOutsideAlerter(menu, setArrowUp);
   return (
-    <div className="w-full min-h-[300px] bg-white pt-16 pb-24 dark:bg-[#101012] dark:bg-opacity-50">
+    <div className="w-full min-h-[300px] bg-white pb-24 pt-16 dark:bg-[#101012] dark:bg-opacity-50">
       <div className="max-w-6xl pl-[5%] pr-[5%] m-auto mb-16 max-md:px-[10%]">
         <div className="w-full h-[1px] bg-zinc-100 dark:bg-zinc-800" />
       </div>
@@ -157,7 +157,7 @@ export default function Footer() {
       <div className="h-32"></div>
       <div className="flex justify-between items-center place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-8 max-md:px-[10%]">
         <p className="text-zinc-400 dark:text-zinc-600 text-xs">
-          {new Date().getFullYear()} Design With Tech. All Rights Reserved.
+          {new Date().getFullYear()} Florian. All Rights Reserved.
         </p>
         <div className="flex gap-8">
           <Link
