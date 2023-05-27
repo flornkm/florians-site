@@ -1,6 +1,6 @@
 import Head from "next/head";
 import * as React from "react";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";

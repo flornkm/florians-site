@@ -1,9 +1,24 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 
 export default function Navigation(title, highlight) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.addEventListener("scroll", () => {
+        if (window.scrollY > 40) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      });
+    }
+  }, []);
+
   return (
-    <div className={"w-full fixed max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] md:border-b max-md:bottom-8 border-zinc-100 bg-white z-50 overflow-hidden dark:bg-zinc-900 dark:border-zinc-800 "}>
+    <div className={"w-full fixed max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 border-zinc-200 bg-white z-50 overflow-hidden md:border-b dark:bg-zinc-900 dark:border-zinc-800 transition-all duration-150 " + (scrolled ? "border-opacity-100" : "border-opacity-0")}>
       <div className="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
