@@ -51,10 +51,10 @@ export default function Colophon() {
               <div className="flex gap-4 flex-wrap max-md:gap-4 items-center max-md:flex-col max-md:items-start">
                 <Link
                   className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
-                  href={"https://github.com/Instrument/instrument-sans?ref=uncut.wtf"}
+                  href={"https://github.com/orioncactus/pretendard/blob/main/packages/pretendard/docs/en/README.md"}
                   target="_blank"
                 >
-                  Instrument Sans
+                  Pretendard
                 </Link>
                 <Link
                   className="font-medium font-display transition-all text-black border-b-black group pt-1 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
