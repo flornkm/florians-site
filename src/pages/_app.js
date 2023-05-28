@@ -2,23 +2,20 @@ import "@/styles/globals.css";
 import "@/styles/musicplayer.css";
 import { useEffect } from "react";
 import localFont from "@next/font/local";
+import { Plus_Jakarta_Sans } from "@next/font/google";
 import { Kalam } from "@next/font/google";
 import { JetBrains_Mono } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
-// If loading a variable font, you don't need to specify the font weight
-
-
-// Variable
-const UncutSans = localFont({
+const Pretendard = localFont({
   src: [
     {
-      path: '../../public/fonts/Uncut/UncutSans-Variable.woff2',
+      path: '../../public/fonts/Pretendard/PretendardVariable.woff2',
       weight: '400 500 600 700',
       style: 'normal',
     }
   ],
-});
+})
 
 const InstrumentSans = localFont({
   src: [
@@ -70,6 +67,12 @@ const InstrumentSans = localFont({
   ],
 });
 
+const jakartaFont = Plus_Jakarta_Sans({
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal"],
+  subsets: ["latin"],
+})
+
 const kalamFont = Kalam({
   weight: ["400"],
   style: ["normal"],
@@ -101,7 +104,7 @@ export default function App({ Component, pageProps }) {
       <style jsx global>
         {`
           :root {
-            --instrument-font: ${InstrumentSans.style.fontFamily};
+            --pretendard-font: ${Pretendard.style.fontFamily};
             --kalam-font: ${kalamFont.style.fontFamily};
             --jetbrains-mono-font: ${jetBrainsMono.style.fontFamily};
           }

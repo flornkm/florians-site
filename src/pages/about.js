@@ -297,9 +297,9 @@ export default function Home() {
             <div className="justify-center flex flex-col">
               <h1 className="text-xl font-semibold mb-3">About me</h1>
               <p className="text-zinc-600 dark:text-zinc-300 mb-2">
-                My name is Flo and I am currently &nbsp;
+                My name is Flo and I am currently&nbsp;
                 { new Date().getFullYear() - 2001 }
-                &nbsp; years old. I am a
+                &nbsp;years old. I am a
                 designer and developer and I love to create beautiful
                 products. Currently I am studying at the Hochschule fuer
                 Gestaltung, also known as just HfG, in Schwaebisch Gmuend,
