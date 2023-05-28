@@ -8,50 +8,62 @@ import { Analytics } from "@vercel/analytics/react";
 
 // If loading a variable font, you don't need to specify the font weight
 
+
+// Variable
+const UncutSans = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Uncut/UncutSans-Variable.woff2',
+      weight: '400 500 600 700',
+      style: 'normal',
+    }
+  ],
+});
+
 const InstrumentSans = localFont({
   src: [
     {
-      path: '../../public/fonts/InstrumentSans-Bold.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-Bold.woff2',
       weight: '700',
       style: 'normal',
     },
     {
-      path: '../../public/fonts/InstrumentSans-SemiBold.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-SemiBold.woff2',
       weight: '600',
       style: 'normal',
     },
     {
-      path: '../../public/fonts/InstrumentSans-Medium.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-Medium.woff2',
       weight: '500',
       style: 'normal',
     },
     {
-      path: '../../public/fonts/InstrumentSans-Regular.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../../public/fonts/InstrumentSans-Italic[wdth,wght].woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-Italic[wdth,wght].woff2',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '../../public/fonts/InstrumentSans-BoldItalic.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-BoldItalic.woff2',
       weight: '700',
       style: 'italic',
     },
     {
-      path: '../../public/fonts/InstrumentSans-SemiBoldItalic.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-SemiBoldItalic.woff2',
       weight: '600',
       style: 'italic',
     },
     {
-      path: '../../public/fonts/InstrumentSans-MediumItalic.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-MediumItalic.woff2',
       weight: '500',
       style: 'italic',
     },
     {
-      path: '../../public/fonts/InstrumentSans-Italic.woff2',
+      path: '../../public/fonts/Instrument/InstrumentSans-Italic.woff2',
       weight: '400',
       style: 'italic',
     }
