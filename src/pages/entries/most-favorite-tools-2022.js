@@ -4,7 +4,7 @@ export default function JounalEntry() {
   return (
     <>
       <Journal
-        mainImage={"images/entries/favorite-tools/tools_i_use.jpeg"}
+        mainImage={"images/entries/favorite-tools/tools_i_use.webp"}
         title={"Flos most favorite tools of 2022"}
         date={"2022-10-21"}
         text={
