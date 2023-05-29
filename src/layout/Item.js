@@ -122,7 +122,7 @@ const Item = forwardRef(
           style={inlineStyles}
           className={
             "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
-            + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
+            + (withOpacity ? "bg-zinc-100 dark:bg-[#09090b]" : "bg-zinc-50 border border-zinc-200 dark:bg-[#09090b] dark:border-zinc-800")
           }
           {...props}
         >
@@ -151,11 +151,11 @@ const Item = forwardRef(
           style={inlineStyles}
           className={
             "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
-            + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
+            + (withOpacity ? "bg-zinc-100 dark:bg-[#09090b]" : "bg-zinc-50 border border-zinc-200 dark:bg-[#09090b] dark:border-zinc-800")
           }
           {...props}
         >
-          {withOpacity && <div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-zinc-100 dark:bg-black" />}
+          {withOpacity && <div className="absolute top-0 bottom-0 left-0 right-0 z-50 bg-zinc-100 dark:bg-[#09090b]" />}
           {!withOpacity && <div className="w-full h-full">
             <div className="grid grid-cols-5 gap-1 h-2 w-full absolute top-2 z-10 left-2 pr-16">
               <div className="h-2 w-full bg-white bg-opacity-50 rounded-full backdrop-blur-xl overflow-hidden">
@@ -215,7 +215,7 @@ const Item = forwardRef(
           style={inlineStyles}
           className={
             "max-md:row-span-1 relative p-8 w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] "
-            + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
+            + (withOpacity ? "bg-zinc-100 dark:bg-[#09090b]" : "bg-zinc-50 border border-zinc-200 dark:bg-[#09090b] dark:border-zinc-800")
           }
           {...props}
         >
@@ -257,7 +257,7 @@ const Item = forwardRef(
           style={inlineStyles}
           className={
             "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] "
-            + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
+            + (withOpacity ? "bg-zinc-100 dark:bg-[#09090b]" : "bg-zinc-50 border border-zinc-200 dark:bg-[#09090b] dark:border-zinc-800")
           }
           {...props}
         >
@@ -296,7 +296,7 @@ const Item = forwardRef(
           style={inlineStyles}
           className={
             "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] "
-            + (withOpacity ? "bg-zinc-100 dark:bg-black" : "bg-zinc-50 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800")
+            + (withOpacity ? "bg-zinc-100 dark:bg-[#09090b]" : "bg-zinc-50 border border-zinc-200 dark:bg-[#09090b] dark:border-zinc-800")
           }
           {...props}
         >

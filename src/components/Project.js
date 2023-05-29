@@ -88,7 +88,7 @@ export default function Project({
         }}
       />
       <Navigation title={projectTitle} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 className="text-4xl font-semibold text-left mb-3">{projectTitle}</h1>
           <h2 className="text-2xl font-medium text-left text-zinc-500 mb-5 dark:text-zinc-400">
@@ -160,7 +160,7 @@ export default function Project({
             loader={imgLoader}
             src={bannerSource}
             alt={"Project Banner Image for " + projectTitle}
-            className="inline-flex object-cover object-center max-h-128 mb-10 bg-zinc-100 dark:bg-zinc-900 rounded-lg"
+            className="inline-flex object-cover object-center max-h-128 mb-10 bg-zinc-100 dark:bg-[#09090b] rounded-lg"
             width={1200}
             height={500}
           />
@@ -230,7 +230,7 @@ export default function Project({
                   src={processImage1}
                   alt={processHeading1}
                   quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
+                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-[#09090b]"
                   width={800}
                   height={384}
                 />
@@ -246,7 +246,7 @@ export default function Project({
                   src={processImage2}
                   alt={processHeading2}
                   quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
+                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-[#09090b]"
                   width={800}
                   height={384}
                 />
@@ -262,7 +262,7 @@ export default function Project({
                   src={processImage3}
                   alt={processHeading3}
                   quality={100}
-                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
+                  className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-[#09090b]"
                   width={800}
                   height={384}
                 />
@@ -279,7 +279,7 @@ export default function Project({
                     src={processImage4}
                     alt={processHeading4}
                     quality={100}
-                    className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-zinc-900"
+                    className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-[#09090b]"
                     width={800}
                     height={384}
                   />

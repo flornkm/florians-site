@@ -72,7 +72,7 @@ export default function Home() {
         }}
       />
       <Navigation title={title} highlight={highlight} />
-      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="md:min-h-[70vh] md:py-24 h-auto flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-32 gap-16">
           <div className="md:w-[50%]">
             <h1 className="text-5xl font-semibold mb-6 leading-tight">
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="h-8 max-md:hidden"></div>
           </div>
           <Link
-            className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:ring-zinc-700"
+            className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-[#09090b] dark:ring-zinc-800 dark:hover:bg-zinc-900 dark:hover:ring-[#212126]"
             href={"./#contact"}
           >
             <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-green-600 opacity-75 dark:bg-green-500">
@@ -118,7 +118,7 @@ export default function Home() {
                 href={"./projects/bridge"}
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+                <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
 
                   <Image
                     loader={imgLoader}
@@ -150,7 +150,7 @@ export default function Home() {
                 href={"./projects/curations"}
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+                <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
 
                   <Image
                     loader={imgLoader}
@@ -183,7 +183,7 @@ export default function Home() {
                 href={"./projects/boost"}
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+                <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
 
                   <Image
                     loader={imgLoader}
@@ -216,7 +216,7 @@ export default function Home() {
                 href={"/projects/ambient-chat"}
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+                <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
 
                   <Image
                     loader={imgLoader}
@@ -248,7 +248,7 @@ export default function Home() {
                 href={"/projects/homebility"}
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
-                <div className="bg-zinc-100 dark:bg-zinc-900 rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
+                <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
 
                   <Image
                     loader={imgLoader}
@@ -333,7 +333,7 @@ export default function Home() {
           <div className="max-w-6xl flex justify-end w-full">
             <div
               onClick={copyMail}
-              className="pr-4 pl-4 pt-3 pb-3 group z-10 pointer-events-auto bg-white hover:bg-zinc-100 hover:scale-[0.99] shadow-lg dark:hover:bg-zinc-800 transition-all rounded-lg backdrop-blur-xl ring-1 ring-zinc-200 cursor-pointer flex gap-8 justify-between place-items-center dark:bg-zinc-900 dark:ring-zinc-700"
+              className="pr-4 pl-4 pt-3 pb-3 group z-10 pointer-events-auto bg-white hover:bg-zinc-100 hover:scale-[0.99] shadow-lg dark:hover:bg-zinc-900 transition-all rounded-lg backdrop-blur-xl ring-1 ring-zinc-200 cursor-pointer flex gap-8 justify-between place-items-center dark:bg-[#09090b] dark:ring-zinc-800 dark:hover:ring-[#212126]"
             >
               <div className="flex flex-col">
                 <p className="font-semibold group-hover:hidden">

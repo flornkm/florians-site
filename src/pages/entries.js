@@ -5,9 +5,11 @@ import { useState, useRef, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import { Transition } from '@headlessui/react'
 
 export default function Journal() {
   const [hoveredImg, setHoveredImg] = useState(null);
+  const [imgShow, setImgShow] = useState(false);
   const outerSticky = useRef(null);
   const reference = useRef(null);
 
@@ -84,7 +86,7 @@ export default function Journal() {
         }}
       />
       <Navigation title={"Designer and Developer"} highlight={"Legal"} />
-      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
+      <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex gap-4 justify-between max-md:flex-col pt-8 h-full min-h-screen relative">
           <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 pb-16 md:pr-12">
             <h1 className="text-3xl font-semibold text-left mb-3">Entries</h1>
@@ -93,15 +95,32 @@ export default function Journal() {
               the world wide web.
             </h2>
             <div className="relative mt-12 max-md:hidden" ref={outerSticky}>
-              {hoveredImg && <Image priority src={hoveredImg} width={800} height={500} className="w-full sticky top-56" />}
+              <Transition
+                show={imgShow}
+                enter="transition-opacity duration-75"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity duration-150"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+                as="div"
+                className="w-full sticky top-56"
+              >
+                <Image priority src={hoveredImg} width={800} height={500} />
+              </Transition>
             </div>
           </div>
           <div className="flex flex-col items-start gap-8 md:pt-32 md:pl-12 pb-24 md:min-w-[450px]" ref={reference}>
             {entries.map((entry) => (
               <Link
                 href={entry.link}
-                onMouseOver={() => setHoveredImg(entry.image)}
-                onMouseLeave={() => setHoveredImg(null)}
+                onMouseOver={() => {
+                  setImgShow(true)
+                  setHoveredImg(entry.image)
+                }}
+                onMouseLeave={() => {
+                  setImgShow(false)
+                }}
                 className="cursor-pointer flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900 relative -left-4"
               >
                 <h3 className="text-lg font-medium text-ellipsis transition-all text-black dark:text-white">

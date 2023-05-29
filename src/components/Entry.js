@@ -47,7 +47,7 @@ export default function Entry({ title, text, mainImage, date }) {
               alt="Journal Cover"
               width={1920}
               height={500}
-              className="mb-10 bg-zinc-50 dark:bg-zinc-900"
+              className="mb-10 bg-zinc-50 dark:bg-[#09090b]"
             />
             <div className="flex gap-4 text-sm text-zinc-500 mb-2">{date}</div>
             <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>

@@ -18,7 +18,7 @@ export default function Navigation(title, highlight) {
   }, []);
 
   return (
-    <div className={"w-full fixed max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 border-zinc-200 bg-white z-50 overflow-hidden md:border-b dark:bg-zinc-900 dark:border-zinc-800 transition-all duration-100 " + (scrolled ? "border-opacity-100 dark:md:bg-opacity-100" : "max-md:border-opacity-100 md:border-opacity-0 dark:md:border-opacity-0 dark:md:bg-opacity-0")}>
+    <div className={"w-full fixed max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 border-zinc-200 bg-white z-50 overflow-hidden md:border-b dark:bg-[#09090b] dark:border-zinc-800 transition-all duration-100 " + (scrolled ? "border-opacity-100 dark:md:bg-opacity-100" : "max-md:border-opacity-100 md:border-opacity-0 dark:md:border-opacity-0 dark:md:bg-opacity-0")}>
       <div className="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
@@ -35,7 +35,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Home"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/"
@@ -48,7 +48,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Work"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/#work"
@@ -61,7 +61,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Creations"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/creations"
@@ -74,7 +74,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "About"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-700"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/about"

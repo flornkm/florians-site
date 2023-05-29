@@ -237,7 +237,7 @@ export default function Home() {
         }}
       />
       <Navigation title={title} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">
           <h1 className="text-3xl font-semibold text-left mb-3">Creations</h1>
           <h2 className="text-xl text-left text-zinc-500">
@@ -253,7 +253,7 @@ export default function Home() {
               }}
               className={"bg-transparent rounded-2xl flex h-full w-full " + (concept.title === "Granny AI" ? "md:col-span-2 md:row-span-2" : "")}
             >
-              <div className="cursor-pointer transition-all h-full group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-900 dark:bg-[#131314] w-full flex flex-col gap-4 max-md:justify-center md:justify-end px-4 py-3 rounded-lg group">
+              <div className="cursor-pointer transition-all h-full group dark:hover:bg-opacity-80 hover:bg-opacity-80 bg-zinc-50 hover:bg-zinc-100 dark:hover:bg-zinc-900 dark:bg-[#09090b] w-full flex flex-col gap-4 max-md:justify-center md:justify-end px-4 py-3 rounded-lg group">
                 <Image
                   loader={imgLoader}
                   src={concept.preview ? concept.preview : concept.icon}

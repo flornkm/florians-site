@@ -20,7 +20,7 @@ export default function JounalEntry() {
                 Unavatar is a service that allows you to retrieve avatars for your users from many different sources. It's a great way to add a personal touch to your app or website. The best part is, that you can access the images via a simple URL and that it is completely free to use.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://unavatar.io/#/"
                 target="_blank"
               >
@@ -33,7 +33,7 @@ export default function JounalEntry() {
                 Screen Studio is a screen recorder, that has features like zooming, highlighting, and much more built-in. The videos are looking high quality and I use it mainly for product demos. The software itself costs some money, but it's worth it in my opinion.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://www.screen.studio/"
                 target="_blank"
               >
@@ -46,7 +46,7 @@ export default function JounalEntry() {
                 As you probably know, Tailwind CSS is a utility-first CSS framework. Nowadays I use it very often because it just saves me a lot of time. I also really like the Tailwind colors and their awesome community and documentation.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://tailwindcss.com/"
                 target="_blank"
               >

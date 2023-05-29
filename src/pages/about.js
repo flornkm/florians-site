@@ -284,7 +284,7 @@ export default function Home() {
         }}
       />
       <Navigation title={title} highlight={highlight} />
-      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
+      <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="h-40 max-md:h-24" />
         {/* <div className="w-full md:pt-20 pb-4 max-md:h-[200px] relative z-0">
           <RiveComponent
