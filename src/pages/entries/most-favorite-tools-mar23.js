@@ -22,7 +22,7 @@ export default function JounalEntry() {
                 share their work, photos and thoughts.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://testflight.apple.com/join/Pv0Sn7OT"
                 target="_blank"
               >
@@ -38,7 +38,7 @@ export default function JounalEntry() {
                 your money in a very easy way.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://www.revolut.com/"
                 target="_blank"
               >
@@ -55,7 +55,7 @@ export default function JounalEntry() {
                 free plan.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://fig.io/"
                 target="_blank"
               >

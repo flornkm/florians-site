@@ -25,7 +25,7 @@ export default function JounalEntry() {
                 even if you are just starting out or used to Firebase.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://supabase.com/"
                 target="_blank"
               >
@@ -51,7 +51,7 @@ export default function JounalEntry() {
               </Link> for recommending this tool.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://cosmos.so/"
                 target="_blank"
               >
@@ -73,7 +73,7 @@ export default function JounalEntry() {
                 or other interactions.
               </p>
               <Link
-                className="dflt-button dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 dark:border-zinc-700 dark:hover:border-zinc-600"
+                className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
                 href="https://rive.app/"
                 target="_blank"
               >

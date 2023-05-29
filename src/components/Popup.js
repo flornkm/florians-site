@@ -85,7 +85,7 @@ export default function Popup({
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-5xl transform rounded-2xl bg-white text-left align-middle shadow-xl transition-all dark:bg-zinc-800">
+                  <Dialog.Panel className="w-full max-w-5xl transform rounded-2xl bg-white text-left align-middle shadow-xl transition-all dark:bg-zinc-900">
                     <div className="overflow-y-auto max-h-[70vh] p-6 max-md:max-h-[60vh] pt-8">
                       <div className="flex w-full place-items-center justify-between max-md:flex-col pr-20 max-md:items-start max-md:gap-8">
                         <div className="flex gap-6 place-items-center">

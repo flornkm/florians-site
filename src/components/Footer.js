@@ -61,7 +61,7 @@ export default function Footer() {
 
   useOutsideAlerter(menu, setArrowUp);
   return (
-    <div className="w-full min-h-[300px] bg-white pb-24 pt-16 dark:bg-[#101012] dark:bg-opacity-50">
+    <div className="w-full min-h-[300px] bg-white pb-24 pt-16 dark:bg-black dark:bg-opacity-50">
       <div className="max-w-6xl pl-[5%] pr-[5%] m-auto mb-16 max-md:px-[10%]">
         <div className="w-full h-[1px] bg-zinc-100 dark:bg-zinc-800" />
       </div>
@@ -115,25 +115,25 @@ export default function Footer() {
           <h4 className="text-black mb-2 font-semibold dark:text-white">Navigation</h4>
           <Link
             href={"/"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Home
           </Link>
           <Link
             href={"/#work"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Work
           </Link>
           <Link
             href={"/creations"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Creations
           </Link>
           <Link
             href={"/about"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             About
           </Link>
@@ -142,13 +142,13 @@ export default function Footer() {
           <h4 className="text-black mb-2 font-semibold dark:text-white">Info</h4>
           <Link
             href={"/entries"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Entries
           </Link>
           <Link
             href={"/colophon"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-zinc-600 dark:hover:text-zinc-200 text-zinc-500 hover:bg-zinc-100 -ml-1.5 dark:hover:bg-zinc-800"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Colophon
           </Link>
