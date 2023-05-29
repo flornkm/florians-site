@@ -10,12 +10,96 @@ import { Analytics } from "@vercel/analytics/react";
 const Pretendard = localFont({
   src: [
     {
-      path: '../../public/fonts/Pretendard/PretendardVariable.woff2',
-      weight: '400 500 600 700',
+      path: '../../public/fonts/Pretendard/Pretendard-Bold.woff2',
+      weight: '700',
       style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Pretendard/Pretendard-SemiBold.woff2',
+      weight: '600',
+      style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Pretendard/Pretendard-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Pretendard/Pretendard-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+      display: 'swap',
     }
   ],
 })
+
+const Aspekta = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Aspekta/Aspekta-650.woff2',
+      weight: '700',
+      style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Aspekta/Aspekta-550.woff2',
+      weight: '600',
+      style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Aspekta/Aspekta-450.woff2',
+      weight: '500',
+      style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Aspekta/Aspekta-400.woff2',
+      weight: '400',
+      style: 'normal',
+      display: 'swap',
+    },
+    {
+      path: '../../public/fonts/Aspekta/Aspekta-300.woff2',
+      weight: '300',
+      style: 'normal',
+      display: 'swap',
+    }
+  ],
+});
+
+const Jakarta = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Jakarta/plus-jakarta-sans-v7-latin-700.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Jakarta/plus-jakarta-sans-v7-latin-600.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Jakarta/plus-jakarta-sans-v7-latin-500.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Jakarta/plus-jakarta-sans-v7-latin-regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Jakarta/plus-jakarta-sans-v7-latin-300.woff2',
+      weight: '300',
+      style: 'normal',
+    }
+  ],
+});
 
 const InstrumentSans = localFont({
   src: [
@@ -66,12 +150,6 @@ const InstrumentSans = localFont({
     }
   ],
 });
-
-const jakartaFont = Plus_Jakarta_Sans({
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal"],
-  subsets: ["latin"],
-})
 
 const kalamFont = Kalam({
   weight: ["400"],

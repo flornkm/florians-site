@@ -240,7 +240,7 @@ export default function Home() {
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-[#101012] dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">
           <h1 className="text-3xl font-semibold text-left mb-3">Creations</h1>
-          <h2 className="text-xl text-left text-zinc-400">
+          <h2 className="text-xl text-left text-zinc-500">
             A selection of ideas, concepts and more.
           </h2>
         </div>

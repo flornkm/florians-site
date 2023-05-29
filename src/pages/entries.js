@@ -88,12 +88,12 @@ export default function Journal() {
         <div className="flex gap-4 justify-between max-md:flex-col pt-8 h-full min-h-screen relative">
           <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 pb-16 md:pr-12">
             <h1 className="text-3xl font-semibold text-left mb-3">Entries</h1>
-            <h2 className="text-xl font-medium text-left text-zinc-500 dark:text-zinc-400">
+            <h2 className="text-xl text-left text-zinc-500 dark:text-zinc-400">
               Here you can find my thoughts, ideas and more I want to share with
               the world wide web.
             </h2>
             <div className="relative mt-12 max-md:hidden" ref={outerSticky}>
-              {hoveredImg && <Image src={hoveredImg} width={800} height={500} className="w-full sticky top-56" />}
+              {hoveredImg && <Image priority src={hoveredImg} width={800} height={500} className="w-full sticky top-56" />}
             </div>
           </div>
           <div className="flex flex-col items-start gap-8 md:pt-32 md:pl-12 pb-24 md:min-w-[450px]" ref={reference}>
