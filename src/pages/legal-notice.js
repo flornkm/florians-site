@@ -36,7 +36,7 @@ export default function LegalNotice() {
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 className="text-2xl font-semibold mb-2"> Legal Notice</h1>
           <p className="text-lg">
-            For the internet presence of: designwithtech.com Responsible for
+            For the internet presence of: floriandwt.com Responsible for
             this websites is: Florian Kiem
             <br /> Adress and phone number is blurred out because of privacy
             issues.
