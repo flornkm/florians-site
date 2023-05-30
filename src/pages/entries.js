@@ -85,7 +85,7 @@ export default function Journal() {
           cardType: 'summary_large_image',
         }}
       />
-      <Navigation title={"Designer and Developer"} highlight={"Legal"} />
+      <Navigation title={"Digital Product Designer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex gap-4 justify-between max-md:flex-col pt-8 h-full min-h-screen relative">
           <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 pb-16 md:pr-12">

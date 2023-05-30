@@ -8,7 +8,7 @@ import Image from "next/image";
 import Popup from "@/components/Popup";
 
 export default function Home() {
-  const title = "Designer and Developer";
+  const title = "Digital Product Designer";
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };

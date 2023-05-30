@@ -37,7 +37,7 @@ export default function Entry({ title, text, mainImage, date }) {
           cardType: 'summary_large_image',
         }}
       />
-      <Navigation title={"Designer and Developer"} highlight={"Legal"} />
+      <Navigation title={"Entry"} highlight={"Entry"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-transparent dark:text-white relative">
         <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
           <div className="max-w-2xl mb-12">
