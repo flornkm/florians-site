@@ -35,7 +35,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Home"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900 max-md:dark:bg-white max-md:dark:text-black max-md:dark:hover:text-black max-md:dark:hover:bg-white"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/"
@@ -48,7 +48,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Work"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900 max-md:dark:bg-white max-md:dark:text-black max-md:dark:hover:text-black max-md:dark:hover:bg-white"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/#work"
@@ -61,7 +61,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "Creations"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900 max-md:dark:bg-white max-md:dark:text-black max-md:dark:hover:text-black max-md:dark:hover:bg-white"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/creations"
@@ -74,7 +74,7 @@ export default function Navigation(title, highlight) {
               <Link
                 className={
                   title.highlight === "About"
-                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900"
+                    ? "bg-zinc-100 p-2 text-black hover:text-black transition-all rounded-md flex max-md:p-2 max-md:bg-zinc-600 max-md:text-white max-md:hover:text-white dark:text-white dark:hover:text-white dark:bg-zinc-900 max-md:dark:bg-white max-md:dark:text-black max-md:dark:hover:text-black max-md:dark:hover:bg-white"
                     : "bg-none p-2 text-zinc-600 hover:text-black transition-all rounded-lg flex max-md:p-2 dark:text-zinc-400 dark:hover:text-white"
                 }
                 href="/about"

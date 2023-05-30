@@ -29,7 +29,7 @@ import Item from "@/layout/Item";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Home() {
-  const title = "Designer and Developer";
+  const title = "Digital Product Designer";
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
