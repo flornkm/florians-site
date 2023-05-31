@@ -363,7 +363,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col gap-3 order-3 mb-16">
-            <h2 className="font-medium text-lg">Work</h2>
+            <h2 className="font-medium text-lg">Experience</h2>
             <Link href="https://meta-hype.com/" target="_blank" className="flex items-center w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
                 <Image
