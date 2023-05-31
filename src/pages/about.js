@@ -375,7 +375,7 @@ export default function Home() {
                 />
                 <div>
                   <h3 className="font-medium text-md">
-                    Digital Strategist and Designer
+                    Design Engineer
                   </h3>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">Metahype</p>
                 </div>
@@ -413,7 +413,7 @@ export default function Home() {
                 />
                 <div>
                   <h3 className="font-medium text-md">
-                    Webdesigner & -developer
+                    Lead (Web-) Designer
                   </h3>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">Comondo</p>
                 </div>

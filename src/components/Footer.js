@@ -61,11 +61,11 @@ export default function Footer() {
 
   useOutsideAlerter(menu, setArrowUp);
   return (
-    <div className="w-full min-h-[300px] bg-white pb-24 pt-16 dark:bg-black dark:bg-opacity-50">
+    <div className="w-full min-h-[300px] bg-white pb-24 pt-16 max-md:pb-40 dark:bg-black dark:bg-opacity-50">
       <div className="max-w-6xl pl-[5%] pr-[5%] m-auto mb-16 max-md:px-[10%]">
         <div className="w-full h-[1px] bg-zinc-100 dark:bg-zinc-800" />
       </div>
-      <div className="flex justify-between place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-24">
+      <div className="flex justify-between place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-sm:flex-col max-md:gap-12">
         <div className="w-[50%] max-md:w-full">
           <div className="max-md:w-full max-md:flex max-md:justify-center md:justify-between">
             <AnalogClock {...options} />
@@ -111,7 +111,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-8">
+        <div className="flex flex-col gap-2 items-start max-md:ml-16 max-sm:ml-[15%]">
           <h4 className="text-black mb-2 font-semibold dark:text-white">Navigation</h4>
           <Link
             href={"/"}
@@ -138,7 +138,7 @@ export default function Footer() {
             About
           </Link>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-8">
+        <div className="flex flex-col gap-2 items-start max-md:ml-16 max-sm:ml-[15%]">
           <h4 className="text-black mb-2 font-semibold dark:text-white">Info</h4>
           <Link
             href={"/entries"}
@@ -154,8 +154,8 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="h-32"></div>
-      <div className="flex justify-between items-center place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-8 max-md:px-[10%]">
+      <div className="h-32 max-md:h-16"></div>
+      <div className="flex justify-between items-center place-items-top max-w-6xl pl-[5%] pr-[5%] m-auto max-md:flex-col max-md:gap-4 max-md:px-[10%]">
         <p className="text-zinc-400 dark:text-zinc-600 text-xs">
           {new Date().getFullYear()} Florian. All Rights Reserved.
         </p>
