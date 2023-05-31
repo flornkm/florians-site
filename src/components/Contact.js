@@ -170,7 +170,7 @@ export default function Contact() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items ref={menu} className="absolute font-medium overflow-hidden left-0 top-[-128px] z-10 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none focus:outline-none dark:bg-zinc-900 dark:ring-zinc-800 p-1">
+            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-128px] z-10 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none focus:outline-none dark:bg-zinc-900 dark:ring-zinc-800 p-1">
               <div className="py-0">
                 <Link href="https://twitter.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
