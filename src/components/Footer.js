@@ -111,7 +111,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-16 max-sm:ml-[15%]">
+        <div className="flex flex-col gap-2 items-start max-md:ml-8">
           <h4 className="text-black mb-2 font-semibold dark:text-white">Navigation</h4>
           <Link
             href={"/"}
@@ -138,7 +138,7 @@ export default function Footer() {
             About
           </Link>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-16 max-sm:ml-[15%]">
+        <div className="flex flex-col gap-2 items-start max-md:ml-8">
           <h4 className="text-black mb-2 font-semibold dark:text-white">Info</h4>
           <Link
             href={"/entries"}
