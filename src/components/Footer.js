@@ -112,45 +112,51 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-col gap-2 items-start max-md:ml-8">
-          <h4 className="text-black mb-2 font-semibold dark:text-white">Navigation</h4>
+          <h4 className="text-black mb-2 font-medium dark:text-white">Navigation</h4>
           <Link
             href={"/"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Home
           </Link>
           <Link
             href={"/#work"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Work
           </Link>
           <Link
             href={"/creations"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Creations
           </Link>
           <Link
             href={"/about"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             About
           </Link>
         </div>
         <div className="flex flex-col gap-2 items-start max-md:ml-8">
-          <h4 className="text-black mb-2 font-semibold dark:text-white">Info</h4>
+          <h4 className="text-black mb-2 font-medium dark:text-white">Resources</h4>
           <Link
             href={"/entries"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Entries
           </Link>
           <Link
             href={"/colophon"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all font-medium rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Colophon
+          </Link>
+          <Link
+            href={"/influence"}
+            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+          >
+            Influence
           </Link>
         </div>
       </div>

@@ -15,7 +15,7 @@ export default function Colophon() {
         description="Colophon of Florian's website."
         openGraph={{
           url: 'floriandwt.com',
-          title: 'About - Florian',
+          title: 'Colophon - Florian',
           description: 'Colophon of Florian\'s website.',
           images: [
             {

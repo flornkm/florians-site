@@ -280,47 +280,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* <div className="h-64"></div>
-        <div className="flex gap-8 justify-between max-md:flex-col ">
-          <div className="md:max-w-[50%]">
-            <h2 className="text-2xl font-semibold mb-4">More to my person</h2>
-            <p className="text-zinc-600 dark:text-zinc-400">
-              Being interested in technology and design would be a big
-              understatement. I love creating useful products, trying out new
-              things and adjusting key levers as long as necessary to give
-              people the best experience possible. <br />
-              <br /> The reason for doing this, is because I see myself not only
-              as a designer or engineer of a product, much more can I imagine
-              myself as the end-user that wants to have an accessible product
-              that's usable. <br />
-              <br /> If you want to read more to myself, you can click the
-              button below or find me on{" "}
-              <Link
-                href="https://read.cv/floriandwt"
-                target={"_blank"}
-                className="text-[#1281ed] opacity-100 inline-block font-medium rounded-md transition-opacity hover:opacity-80"
-              >
-                Read.cv
-              </Link>
-              .
-            </p>
-            <div className="h-8"></div>
-            <Link
-              className="bg-white text-black pr-4 pl-4 pt-2 pb-2 rounded-md hover:bg-zinc-100 transition-all font-medium border border-solid border-zinc-300 dark:bg-transparent dark:border-zinc-600 dark:text-white dark:hover:bg-zinc-700"
-              href="./about"
-            >
-              About me
-            </Link>
-          </div>
-          <Image
-            loader={imgLoader}
-            src="./images/photo_memoji.jpg"
-            alt="Image of Florian as a student"
-            className="w-full h-full max-md:order-first max-md:mb-8 max-w-[350px] max-h-[500px] object-cover group-hover:opacity-80 transition-all duration-100 ease-in-out rotate-3 md:hover:-rotate-3"
-            width={250}
-            height={600}
-          />
-        </div> */}
         <div className="h-64"></div>
         <div
           className={
