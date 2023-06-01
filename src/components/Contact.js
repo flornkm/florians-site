@@ -156,7 +156,7 @@ export default function Contact() {
       <div className="w-full flex gap-2 pl-3 pr-3 min-h-[64px] place-items-center justify-between max-sm:pb-3 max-sm:flex-wrap">
         <Menu as="div" className="relative inline-block text-left">
           <div>
-            <Menu.Button onClick={() => {setArrowUp(!arrowUp)}} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:text-white dark:hover:border-zinc-700">
+            <Menu.Button onClick={() => { setArrowUp(!arrowUp) }} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:text-white dark:hover:border-zinc-700">
               <Icon.Smartphone />
               <Icon.ChevronUp className={arrowUp ? "ml-1 transition-all rotate-0" : "ml-1 transition-all rotate-180"} size={20} />
             </Menu.Button>
@@ -181,7 +181,7 @@ export default function Contact() {
                           active
                             ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white"
                             : "text-zinc-700 border-l-transparent dark:text-zinc-300",
-                            "flex w-full px-4 py-2 text-left text-sm gap-2 place-items-center rounded-lg"
+                          "flex w-full px-4 py-2 text-left text-sm gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.Twitter size={16} />
@@ -199,7 +199,7 @@ export default function Contact() {
                           active
                             ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white"
                             : "text-zinc-700 border-l-transparent dark:text-zinc-300",
-                            "flex w-full px-4 py-2 text-left text-sm gap-2 place-items-center rounded-lg"
+                          "flex w-full px-4 py-2 text-left text-sm gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.GitHub size={16} />
@@ -217,7 +217,7 @@ export default function Contact() {
                           active
                             ? "bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white"
                             : "text-zinc-700 border-l-transparent dark:text-zinc-300",
-                            "flex w-full px-4 py-2 text-left text-sm gap-2 place-items-center rounded-lg"
+                          "flex w-full px-4 py-2 text-left text-sm gap-2 place-items-center rounded-lg"
                         )}
                       >
                         <Icon.Linkedin size={16} />
@@ -230,10 +230,10 @@ export default function Contact() {
             </Menu.Items>
           </Transition>
         </Menu>
-        <div className="w-full h-[48px] bg-white rounded-full border border-solid border-zinc-300 relative dark:border-zinc-800 dark:hover:border-zinc-700 transition-all">
+        <div className="w-full h-[48px] bg-white dark:bg-zinc-900 rounded-full ring-1 ring-zinc-300 relative dark:ring-zinc-800 dark:hover:ring-zinc-700 transition-all">
           <input
             ref={input}
-            className="absolute top-0 right-0 left-0 bottom-0 rounded-full p-3 dark:text-white dark:bg-zinc-900"
+            className="absolute top-0 right-0 left-0 bottom-0 w-full rounded-full p-3 dark:text-white dark:bg-zinc-900"
             placeholder="Enter your message"
             type="text"
             value={newMessage}
