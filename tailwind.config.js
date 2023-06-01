@@ -22,11 +22,11 @@ module.exports = {
           '50%': { transform: 'translateX(16px)' },
         }
       },
-    },
-    fontFamily: {
-      sans: ['var(--pretendard-font)'],
-      display: ['var(--kalam-font)'],
-      mono: ['var(--jetbrains-mono-font)'],
+      fontFamily: {
+        sans: ['var(--pretendard-font)', ...fontFamily.sans],
+        display: ['var(--kalam-font)', ...fontFamily.sans],
+        mono: ['var(--jetbrains-mono-font)', ...fontFamily.mono],
+      },
     },
   },
   plugins: [],

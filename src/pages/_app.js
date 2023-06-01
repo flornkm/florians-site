@@ -38,18 +38,21 @@ const Pretendard = localFont({
       display: 'swap',
     }
   ],
+  variable: '--pretendard-font',
 });
 
 const kalamFont = Kalam({
   weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
+  variable: "--kalam-font",
 });
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
+  variable: "--jetbrains-mono-font",
 });
 
 export default function App({ Component, pageProps }) {
@@ -68,17 +71,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <style jsx global>
-        {`
-          :root {
-            --pretendard-font: ${Pretendard.style.fontFamily};
-            --kalam-font: ${kalamFont.style.fontFamily};
-            --jetbrains-mono-font: ${jetBrainsMono.style.fontFamily};
-          }
-        `}
-      </style>
-      <Component {...pageProps} />
-      <Analytics />
+      <div className={`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono`}>
+        <Component {...pageProps} />
+        <Analytics />
+      </div>
     </>
   );
 }

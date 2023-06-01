@@ -30,7 +30,7 @@ export default function Navigation(title, highlight) {
           <span className="text-zinc-500 m-0 max-md:hidden dark:text-zinc-400">{title.title}</span>
         </Link>
         <div className="flex max-sm:w-full">
-          <ul className="flex gap-2 place-items-center font-medium max-md:justify-between max-md:w-full">
+          <ul className="flex gap-2 place-items-center max-md:justify-between max-md:w-full">
             <li>
               <Link
                 className={
