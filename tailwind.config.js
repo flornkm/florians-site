@@ -24,9 +24,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['var(--pretendard-font)', ...fontFamily.sans],
-      display: ['var(--kalam-font)', ...fontFamily.sans],
-      mono: ['var(--jetbrains-mono-font)', ...fontFamily.mono],
+      sans: ['var(--pretendard-font)'],
+      display: ['var(--kalam-font)'],
+      mono: ['var(--jetbrains-mono-font)'],
     },
   },
   plugins: [],
