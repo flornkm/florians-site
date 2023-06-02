@@ -356,7 +356,7 @@ export default function Project({
                 <h2 className="text-2xl font-medium text-left">
                   Project links
                 </h2>
-                <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
+                <div className="flex gap-8 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
                     className="font-medium flex items-center transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
