@@ -115,25 +115,25 @@ export default function Footer() {
           <h4 className="text-black mb-2 font-medium dark:text-white">Navigation</h4>
           <Link
             href={"/"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Home
           </Link>
           <Link
             href={"/#work"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Work
           </Link>
           <Link
             href={"/creations"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Creations
           </Link>
           <Link
             href={"/about"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             About
           </Link>
@@ -142,13 +142,13 @@ export default function Footer() {
           <h4 className="text-black mb-2 font-medium dark:text-white">Resources</h4>
           <Link
             href={"/entries"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Entries
           </Link>
           <Link
             href={"/colophon"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             Colophon
           </Link>
