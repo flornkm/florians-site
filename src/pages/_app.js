@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import "@/styles/musicplayer.css";
 import { useEffect } from "react";
 import localFont from "@next/font/local";
-import { Plus_Jakarta_Sans } from "@next/font/google";
+import Script from "next/script";
 import { Kalam } from "@next/font/google";
 import { JetBrains_Mono } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
@@ -71,6 +71,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <Script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="96068fce-b0ce-4c79-9f28-2ade8ebbe2d5" async />
       <div className={`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono`}>
         <Component {...pageProps} />
         <Analytics />
