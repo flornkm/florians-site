@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "@/styles/musicplayer.css";
-import { useEffect } from "react";
+import { Transition } from "@headlessui/react";
+import { useEffect, useState } from "react";
 import localFont from "@next/font/local";
 import Script from "next/script";
 import { Kalam } from "@next/font/google";
@@ -56,6 +57,8 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export default function App({ Component, pageProps }) {
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (
@@ -67,15 +70,27 @@ export default function App({ Component, pageProps }) {
     } else {
       document.documentElement.classList.remove("dark");
     }
+
+    setLoaded(true);
   }, []);
 
   return (
     <>
       <Script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="96068fce-b0ce-4c79-9f28-2ade8ebbe2d5" async />
-      <div className={`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono`}>
-        <Component {...pageProps} />
-        <Analytics />
-      </div>
+      <Transition
+        show={loaded}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div className={loaded && (`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono`)}>
+          <Component {...pageProps} />
+          <Analytics />
+        </div>
+      </Transition>
     </>
   );
 }
