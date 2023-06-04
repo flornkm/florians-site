@@ -30,6 +30,7 @@
     "react-feather": "^2.0.10",
     "react-globe.gl": "^2.23.3",
     "react-h5-audio-player": "^3.8.6",
+    "react-sketch-canvas": "^6.2.0",
     "rive-react": "^3.0.35"
   },
   "devDependencies": {

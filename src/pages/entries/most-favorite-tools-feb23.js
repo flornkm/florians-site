@@ -45,7 +45,7 @@ export default function JounalEntry() {
                 your experience a lot better. Thanks to <Link
                 href="https://linusrogge.com/"
                 target="_blank"
-                className="text-[#1281ed] opacity-100 inline-block font-medium rounded-md transition-opacity hover:opacity-80"
+                className="inner-link"
               >
                 Linus Rogge
               </Link> for recommending this tool.

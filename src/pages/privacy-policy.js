@@ -1,17 +1,17 @@
-import Head from "next/head";
+import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import { NextSeo } from "next-seo";
 import Footer from "@/components/Footer";
 
-export default function PrivacyPolicy() {
+export default function LegalNotice() {
   return (
     <>
       <NextSeo
-        title="Privacy Policy - Florian"
+        title="Legal Notice - Florian"
         description=""
         openGraph={{
           url: 'floriandwt.com',
-          title: 'Privacy Policy - Florian',
+          title: 'Legal Notice - Florian',
           description: '',
           images: [
             {
@@ -34,7 +34,7 @@ export default function PrivacyPolicy() {
       <Navigation title={"Digital Product Designer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full min-h-screen max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
-          <h1 className="text-2xl font-semibold mb-2">Privacy Policy</h1>
+          <h1 className="text-lg font-semibold mb-12">Privacy Policy</h1>
           <p className="max-w-2xl">
             This Privacy Policy describes Our policies and procedures on the
             collection, use and disclosure of Your information when You use the
@@ -55,7 +55,7 @@ export default function PrivacyPolicy() {
             meaning regardless of whether they appear in singular or in plural.
             <br />
             <br />
-            Definitions For the purposes of this Privacy Policy:
+            <span className="text-lg font-semibold mb-12">Definitions For the purposes of this Privacy Policy</span>
             <br />
             <br />
             Account means a unique account created for You to access our Service
@@ -438,7 +438,7 @@ export default function PrivacyPolicy() {
             can contact us:
             <br />
             <br />
-            By email: florian@designwithtech.com
+            By email: <Link href="mailto:florian@designwithtech.com" className="inner-link">florian@designwithtech.com</Link>
           </p>
         </div>
         <div className="h-64"></div>

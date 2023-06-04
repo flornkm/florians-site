@@ -2,20 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-input, textarea {
+input,
+textarea {
     transition: all ease 0.3s;
 }
 
-input:focus-visible, textarea:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
     outline: 1px solid #1180EB;
     box-shadow: 0 0 0 4px #1180EB66;
 }
 
-button, a {
+button,
+a {
     transition: all ease 0.3s;
 }
 
-button:focus-visible, a:focus-visible {
+button:focus-visible,
+a:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px #1180EB66;
 }
@@ -67,4 +71,26 @@ button:focus-visible, a:focus-visible {
 
 a {
     letter-spacing: .01em;
+}
+
+.inner-link {
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    transition: all ease 0.2s;
+    padding: 2px 4px;
+    color: #000;
+}
+
+.inner-link:hover {
+    background-color: #f4f4f5;
+    border-radius: 4px;
+}
+
+.dark .inner-link {
+    color: #fff;
+}
+
+.dark .inner-link:hover {
+    background-color: #18181b;
 }

@@ -537,30 +537,6 @@ export default function Home() {
                     ref={globePopupContainer}
                     className="w-full ring-4 ring-white max-w-5xl h-full transform overflow-hidden rounded-2xl bg-gradient-to-t dark:from-[#062130] dark:to-sky-900 from-sky-500 to-sky-400 text-left align-middle shadow-xl transition-all relative min-h-[600px] dark:ring-zinc-800"
                   >
-                    <div className="absolute flex flex-col top-8 left-8 gap-1 text-white dark:text-sky-200 max-lg:hidden">
-                      <p className="font-medium text-lg mb-2">Some of the places I visited:</p>
-                      {myLocations.map((location) => (
-                        <div className="flex gap-2">
-                          {location.name.replace(/<\/?[^>]+(>|$)/g, "") + ", " +
-                            location.country}
-                            <div className="flex gap-0.5">
-                          {location.year.map((year) => (
-                            // if its not the last, put a comma after
-                            // <span className="font-mono text-xs flex gap-1 font-normal">{year}</span>
-                            year === location.year[location.year.length - 1] ? (
-                              <span className="font-mono text-xs flex font-normal">
-                                {year}
-                              </span>
-                            ) : (
-                              <span className="font-mono text-xs flex font-normal">
-                                {year + ","}
-                              </span>
-                            )
-                          ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
                     <Globe
                       ref={globeEl}
                       pointsData={myLocations}
