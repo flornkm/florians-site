@@ -77,20 +77,10 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="96068fce-b0ce-4c79-9f28-2ade8ebbe2d5" async />
-      <Transition
-        show={loaded}
-        enter="transition-opacity duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-300"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className={loaded && (`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono`)}>
+        <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
           <Component {...pageProps} />
           <Analytics />
-        </div>
-      </Transition>
+      </div>
     </>
   );
 }
