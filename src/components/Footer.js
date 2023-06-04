@@ -24,13 +24,6 @@ export default function Footer() {
 
   useEffect(() => {
     setColorTheme(localStorage.getItem("color-theme"));
-
-    // log the color theme of the system
-    console.log(
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
-    );
   }, []);
 
   const AnalogClock = dynamic(() => import("analog-clock-react"), {
@@ -111,7 +104,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-8">
+        <div className="flex flex-col gap-3 items-start max-md:ml-8">
           <h4 className="text-black mb-2 font-medium dark:text-white">Navigation</h4>
           <Link
             href={"/"}
@@ -138,7 +131,7 @@ export default function Footer() {
             About
           </Link>
         </div>
-        <div className="flex flex-col gap-2 items-start max-md:ml-8">
+        <div className="flex flex-col gap-3 items-start max-md:ml-8">
           <h4 className="text-black mb-2 font-medium dark:text-white">Resources</h4>
           <Link
             href={"/entries"}
