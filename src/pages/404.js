@@ -48,8 +48,8 @@ export default function Custom404() {
                     strokeWidth={2}
                 />
                 <div className="border border-zinc-100 dark:border-zinc-900 flex items-center justify-center flex-col p-8 rounded-3xl relative z-50 pointer-events-none bg-white dark:bg-zinc-900 bg-opacity-50 dark:bg-opacity-50 backdrop-blur-xl">
-                    <div className="pb-4 max-md:h-[400px] relative z-0 flex items-center justify-center">
-                        <h1 className="text-[80px] pointer-events-none font-medium text-black dark:text-white pointer-events-none">404</h1>
+                    <div className="pb-4 relative z-0 flex items-center justify-center">
+                        <h1 className="text-[80px] font-medium text-black dark:text-white pointer-events-none">404</h1>
                     </div>
                     <Link
                         className="dflt-button pointer-events-auto dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white flex items-center"
