@@ -76,10 +76,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="96068fce-b0ce-4c79-9f28-2ade8ebbe2d5" async />
-        <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
-          <Component {...pageProps} />
-          <Analytics />
+      <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
+        <Component {...pageProps} />
+        <Analytics />
       </div>
     </>
   );
