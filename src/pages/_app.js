@@ -71,7 +71,15 @@ export default function App({ Component, pageProps }) {
       document.documentElement.classList.remove("dark");
     }
 
-    setLoaded(true);
+    // check if the font has already been loaded
+    if (document.fonts.check("1em Pretendard")) {
+      setLoaded(true);
+    } else {
+      // if not, wait for the font to load
+      document.fonts.ready.then(() => {
+        setLoaded(true);
+      });
+    }
   }, []);
 
   return (
