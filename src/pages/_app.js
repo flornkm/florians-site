@@ -42,6 +42,20 @@ const Pretendard = localFont({
   variable: '--pretendard-font',
 });
 
+const Boris = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Boris/Boris.woff',
+      weight: '400',
+      style: 'normal',
+      subsets: ['latin'],
+      display: 'swap',
+    }
+  ],
+  variable: '--boris-font',
+});
+
+
 const kalamFont = Kalam({
   weight: ["400"],
   style: ["normal"],
@@ -84,7 +98,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${kalamFont.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
+      <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${Boris.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
         <Component {...pageProps} />
         <Analytics />
       </div>

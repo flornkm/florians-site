@@ -58,10 +58,10 @@ export default function Colophon() {
                 </Link>
                 <Link
                   className="font-medium font-display transition-all text-black border-b-black group pt-1 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
-                  href={"https://fonts.google.com/specimen/Kalam"}
+                  href={"https://www.behance.net/gallery/129274943/Boris-Free-Playful-Display-Font?ref=uncut.wtf"}
                   target="_blank"
                 >
-                  Kalam
+                  Boris
                 </Link>
                 <Link
                   className="font-medium font-mono transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
