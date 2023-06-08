@@ -51,24 +51,25 @@ export default function Home() {
         title="Florian - Digital Product Designer"
         description="Product Designer and Developer building digital experiences."
         openGraph={{
-          url: 'floriandwt.com',
-          title: 'Florian - Digital Product Designer',
-          description: 'Product Designer and Developer building digital experiences.',
+          url: "floriandwt.com",
+          title: "Florian - Digital Product Designer",
+          description:
+            "Product Designer and Developer building digital experiences.",
           images: [
             {
-              url: '/images/florian_opengraph.jpg',
+              url: "/images/florian_opengraph.jpg",
               width: 800,
               height: 600,
-              alt: 'Florian - Digital Product Designer',
-              type: 'image/jpeg',
-            }
+              alt: "Florian - Digital Product Designer",
+              type: "image/jpeg",
+            },
           ],
-          siteName: 'Florian - Digital Product Designer',
+          siteName: "Florian - Digital Product Designer",
         }}
         twitter={{
-          handle: '@floriandwt',
-          site: '@floriandwt',
-          cardType: 'summary_large_image',
+          handle: "@floriandwt",
+          site: "@floriandwt",
+          cardType: "summary_large_image",
         }}
       />
       <Navigation title={title} highlight={highlight} />
@@ -87,8 +88,8 @@ export default function Home() {
             className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-[#09090b] dark:ring-zinc-800 dark:hover:bg-zinc-900 dark:hover:ring-[#212126]"
             href={"./#contact"}
           >
-            <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-green-600 opacity-75 dark:bg-green-500">
-              <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-green-500 opacity-75"></div>
+            <div className="h-[8px] w-[8px] flex-none flex justify-center place-items-center rounded-full bg-yellow-500 opacity-75 dark:bg-yellow-400">
+              <div className="animate-ping h-[16px] w-[16px] absolute flex-none rounded-full bg-yellow-500 opacity-75"></div>
             </div>
             <p className="font-medium text-sm">
               Currently I am looking for internship opportunities in Europe or
@@ -98,10 +99,30 @@ export default function Home() {
         </div>
         <div>
           <h2 className="text-2xl font-medium text-black dark:text-white">
-            As a designer and developer, I see my role in leading projects that help companies to achieve their ambitious goals of creating something functionally and technologically useful for humanity
+            As a designer and developer, I see my role in leading projects that
+            help companies to achieve their ambitious goals of creating
+            something functionally and technologically useful for humanity
           </h2>
         </div>
-        <div className="h-64"></div>
+        <div className="py-56">
+          <div className="relative w-full h-20 flex items-center">
+            <div className="h-0.5 w-full bg-zinc-400 dark:bg-zinc-300" />
+            <div className="w-[calc(60%-4px)] absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] bg-white dark:bg-black z-20 h-[40px] rounded-[6px]" />
+            <div className="w-[60%] absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] bg-gradient-to-tr from-primary dark:from-blue-400 dark:to-fuchsia-400 to-fuchsia-500 z-10 h-11 rounded-[8px]" />
+            <div className="w-[calc(60%+12px)] absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] bg-white dark:bg-black h-16 rounded-xl" />
+            <div className="w-[calc(60%-16px)] absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] z-20 flex justify-between">
+              <div className="w-[calc(55%-4px)] bg-primary dark:bg-blue-400 h-0.5" />
+              <div className="w-[calc(45%-4px)] bg-fuchsia-500 dark:bg-fuchsia-400 h-0.5" />
+            </div>
+          </div>
+          <div className="flex justify-between w-full relative -top-8 max-md:top-0 max-sm:text-sm gap-4 font-display text-lg">
+            <p className="text-zinc-400 dark:text-zinc-300">Design</p>
+            <p className="w-[55%] relative top-6 text-primary dark:text-blue-400 max-md:top-0 max-md:w-[50%]">
+              My Scope
+            </p>
+            <p className="text-zinc-400 dark:text-zinc-300">Development</p>
+          </div>
+        </div>
         <div>
           <div className="flex justify-between pb-4">
             <h2 className="text-3xl font-semibold text-black dark:text-white">
@@ -109,17 +130,12 @@ export default function Home() {
             </h2>
           </div>
           <div ref={projects} id="work">
-            <div
-              className={
-                "flex flex-col gap-8"
-              }
-            >
+            <div className={"flex flex-col gap-8"}>
               <Link
                 href={"./projects/bridge"}
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
                 <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
-
                   <Image
                     loader={imgLoader}
                     src="./images/bridge/bridge.webp"
@@ -132,12 +148,20 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Bridge</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight
+                      size={22}
+                      className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative"
+                    />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
                       <Icon.Calendar width={14} />
-                      <p className="font-mono">Q1 2023 – <span className="text-green-500 font-sans font-medium">Now</span></p>
+                      <p className="font-mono">
+                        Q1 2023 –{" "}
+                        <span className="text-green-500 font-sans font-medium">
+                          Now
+                        </span>
+                      </p>
                     </div>
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
@@ -151,7 +175,6 @@ export default function Home() {
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
                 <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
-
                   <Image
                     loader={imgLoader}
                     src="./images/curations/curations.webp"
@@ -164,12 +187,20 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Curations</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight
+                      size={22}
+                      className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative"
+                    />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
                       <Icon.Calendar width={14} />
-                      <p className="font-mono">Q4 2022 – <span className="text-green-500 font-sans font-medium">Now</span></p>
+                      <p className="font-mono">
+                        Q4 2022 –{" "}
+                        <span className="text-green-500 font-sans font-medium">
+                          Now
+                        </span>
+                      </p>
                     </div>
                   </div>
                   <p className="pb-2 text-zinc-600 dark:text-zinc-400">
@@ -184,7 +215,6 @@ export default function Home() {
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
                 <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
-
                   <Image
                     loader={imgLoader}
                     src="./images/boost/boost.webp"
@@ -197,7 +227,10 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Boost</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight
+                      size={22}
+                      className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative"
+                    />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -217,7 +250,6 @@ export default function Home() {
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
                 <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
-
                   <Image
                     loader={imgLoader}
                     src="./images/ambient_chat/ambient_chat.webp"
@@ -230,7 +262,10 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Ambient Chat</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight
+                      size={22}
+                      className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative"
+                    />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -249,7 +284,6 @@ export default function Home() {
                 className="grid grid-cols-5 gap-16 group justify-between items-center max-md:flex max-md:flex-col max-md:gap-4 rounded-md"
               >
                 <div className="bg-zinc-100 dark:bg-[#09090b] rounded-md p-2 mb-6 mt-6 md:w-full col-span-3">
-
                   <Image
                     loader={imgLoader}
                     src="./images/homebility/homebility.webp"
@@ -262,7 +296,10 @@ export default function Home() {
                 <div className="max-w-sm col-span-2">
                   <div className="flex items-center">
                     <h3 className="text-xl font-medium pb-1">Homebility</h3>
-                    <Icon.ChevronRight size={22} className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative" />
+                    <Icon.ChevronRight
+                      size={22}
+                      className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative"
+                    />
                   </div>
                   <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
                     <div className="flex gap-2 place-items-center">
@@ -276,7 +313,6 @@ export default function Home() {
                   </p>
                 </div>
               </Link>
-
             </div>
           </div>
         </div>
