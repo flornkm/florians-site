@@ -84,7 +84,7 @@ export default function Navigation(title, highlight) {
               </Link>
             </li>
             <Link
-              className="bg-[#1280EC] text-white sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-[#2795FE] transition-all flex font-medium"
+              className="bg-primary text-white sm:pr-4 sm:pl-4 sm:pt-2 sm:pb-2 max-sm:p-2 rounded-md hover:bg-primary-light transition-all flex font-medium"
               href="/#contact"
             >
               <span className="md:block max-sm:hidden">Contact</span>

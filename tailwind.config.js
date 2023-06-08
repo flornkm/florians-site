@@ -13,6 +13,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'primary': '#1480EB',
+        'primary-light': '#2795FD',
+      },
       animation: {
         moveArrow: 'moveArrow 1s ease-in-out infinite',
       },
@@ -24,7 +28,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--pretendard-font)', ...fontFamily.sans],
-        display: ['var(--boris-font)', ...fontFamily.sans],
+        display: ['var(--gaegu-font)', ...fontFamily.sans],
         mono: ['var(--jetbrains-mono-font)', ...fontFamily.mono],
       },
     },

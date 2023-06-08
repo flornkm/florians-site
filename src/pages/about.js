@@ -316,7 +316,7 @@ export default function Home() {
             <Image
               loader={imgLoader}
               src="./images/florian_student.jpg"
-              className="inline-flex object-cover mb-12 object-top max-h-96 rounded-lg max-md:w-40 max-md:h-40 first-chil max-md:rounded-full max-md:ring-1 max-md:ring-zinc-300 relative z-10 row-span-2 h-full"
+              className="inline-flex object-cover mb-12 object-top max-h-96 rounded-lg max-md:w-40 max-md:h-40 first-chil max-md:rounded-full max-md:ring-1 max-md:ring-zinc-300 dark:ring-0 relative z-10 row-span-2 h-full"
               width={300}
               height={200}
             />
@@ -477,9 +477,8 @@ export default function Home() {
               </div>
             </Link>
           </div>
-
         </div>
-        <div className="h-32"></div>
+        <div className="h-32" />
         <div className="block">
           <DndContext
             sensors={sensors}

@@ -145,12 +145,6 @@ export default function Footer() {
           >
             Colophon
           </Link>
-          <Link
-            href={"/influence"}
-            className="dark:text-zinc-400 px-1.5 py-1 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
-          >
-            Influence
-          </Link>
         </div>
       </div>
       <div className="h-32 max-md:h-16"></div>

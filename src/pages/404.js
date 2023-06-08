@@ -47,6 +47,9 @@ export default function Custom404() {
                     ref={canvasRef}
                     strokeWidth={2}
                 />
+                <div className="text-xl pointer-events-none font-display absolute bottom-8 left-16 right-16 dark:text-white">
+                    Don't want to go home? Then draw and kill some time!
+                </div>
                 <div className="border border-zinc-100 dark:border-zinc-900 flex items-center justify-center flex-col p-8 rounded-3xl relative z-50 pointer-events-none bg-white dark:bg-zinc-900 bg-opacity-50 dark:bg-opacity-50 backdrop-blur-xl">
                     <div className="pb-4 relative z-0 flex items-center justify-center">
                         <h1 className="text-[80px] font-medium text-black dark:text-white pointer-events-none">404</h1>

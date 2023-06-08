@@ -246,7 +246,7 @@ export default function Contact() {
           ></input>
           <Icon.ArrowUp
             onClick={sendMessage}
-            className="right-2 text-white bg-[#1480EB] absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-[#2795FD] transition-all"
+            className="right-2 text-white bg-primary absolute rounded-full p-1 cursor-pointer top-[50%] translate-y-[-50%] hover:bg-primary-light transition-all"
             size={28}
           />
         </div>

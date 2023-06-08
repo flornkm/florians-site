@@ -4,7 +4,7 @@ import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import localFont from "@next/font/local";
 import Script from "next/script";
-import { Kalam } from "@next/font/google";
+import { Gaegu } from "@next/font/google";
 import { JetBrains_Mono } from "@next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -42,25 +42,11 @@ const Pretendard = localFont({
   variable: '--pretendard-font',
 });
 
-const Boris = localFont({
-  src: [
-    {
-      path: '../../public/fonts/Boris/Boris.woff',
-      weight: '400',
-      style: 'normal',
-      subsets: ['latin'],
-      display: 'swap',
-    }
-  ],
-  variable: '--boris-font',
-});
-
-
-const kalamFont = Kalam({
-  weight: ["400"],
-  style: ["normal"],
+const gaeguFont = Gaegu({
+  weight: ["700"],
+  display: "swap",
   subsets: ["latin"],
-  variable: "--kalam-font",
+  variable: "--gaegu-font",
 });
 
 const jetBrainsMono = JetBrains_Mono({
@@ -98,7 +84,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${Boris.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
+      <div className={"transition-all duration-300 " + (loaded ? (`${Pretendard.variable} font-sans ${gaeguFont.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`) : "opacity-0")}>
         <Component {...pageProps} />
         <Analytics />
       </div>

@@ -57,11 +57,11 @@ export default function Colophon() {
                   Pretendard
                 </Link>
                 <Link
-                  className="font-medium font-display transition-all text-black border-b-black group pt-1 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
-                  href={"https://www.behance.net/gallery/129274943/Boris-Free-Playful-Display-Font?ref=uncut.wtf"}
+                  className="font-medium font-display transition-all text-black text-lg relative -top-0.5 border-b-black group pt-1 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                  href={"https://fonts.google.com/specimen/Gaegu"}
                   target="_blank"
                 >
-                  Boris
+                  Gaegu
                 </Link>
                 <Link
                   className="font-medium font-mono transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"

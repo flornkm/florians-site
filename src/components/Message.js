@@ -1,7 +1,7 @@
 export default function Message({ msg, type }) {
   return (
     <>
-      {type === "left" && <div className={"p-2 rounded-xl bg-[#1280EC] text-white relative bottom-[16px] left-8 transition-all max-w-[300px] max-sm:max-w-[70%] self-start"}>
+      {type === "left" && <div className={"p-2 rounded-xl bg-primary text-white relative bottom-[16px] left-8 transition-all max-w-[300px] max-sm:max-w-[70%] self-start"}>
         {msg}
         <div className="absolute bottom-[-2px] left-[-8px]">
           <svg
@@ -18,7 +18,7 @@ export default function Message({ msg, type }) {
           </svg>
         </div>
       </div>}
-      {type === "right" && <div className="p-2 rounded-xl bg-[#1280EC] text-white relative bottom-4 right-8 transition-all max-w-[300px] self-end">
+      {type === "right" && <div className="p-2 rounded-xl bg-primary text-white relative bottom-4 right-8 transition-all max-w-[300px] self-end">
         {msg}
         <div className="absolute bottom-[-2px] right-[-8px] scale-x-[-1]">
           <svg
