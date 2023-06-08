@@ -7,22 +7,22 @@ export default function LegalNotice() {
   return (
     <>
       <NextSeo
-        title="Legal Notice - Florian"
+        title="Privacy Poliy - Florian"
         description=""
         openGraph={{
           url: 'floriandwt.com',
-          title: 'Legal Notice - Florian',
+          title: 'Privacy Poliy - Florian',
           description: '',
           images: [
             {
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digtital Product Designer',
+              alt: 'Florian - Digital Product Designer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digtital Product Designer',
+          siteName: 'Florian - Digital Product Designer',
         }}
         twitter={{
           handle: '@floriandwt',
@@ -35,8 +35,8 @@ export default function LegalNotice() {
       <main className="max-md:w-[90%] w-full min-h-screen max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 className="text-lg font-semibold mb-12">Privacy Policy</h1>
-          <p className="max-w-2xl">
-            This Privacy Policy describes Our policies and procedures on the
+          <p className="mb-32">
+          This Privacy Policy describes Our policies and procedures on the
             collection, use and disclosure of Your information when You use the
             Service and tells You about Your privacy rights and how the law
             protects You.
@@ -53,12 +53,10 @@ export default function LegalNotice() {
             initial letter is capitalized have meanings defined under the
             following conditions. The following definitions shall have the same
             meaning regardless of whether they appear in singular or in plural.
-            <br />
-            <br />
-            <span className="text-lg font-semibold mb-12">Definitions For the purposes of this Privacy Policy</span>
-            <br />
-            <br />
-            Account means a unique account created for You to access our Service
+          </p>
+          <h2 className="font-semibold mb-2">Definitions For the purposes of this Privacy Policy</h2>
+          <p className="mb-32">
+          Account means a unique account created for You to access our Service
             or parts of our Service.
             <br />
             <br />
@@ -125,12 +123,10 @@ export default function LegalNotice() {
             <br />
             <br />
             First name and last name
-            <br />
-            <br />
-            Usage Data
-            <br />
-            <br />
-            Usage Data Usage Data is collected automatically when using the
+          </p>
+          <h2 className="font-semibold mb-2">Definitions For the purposes of this Privacy Policy</h2>
+          <p className="mb-32">
+          Usage Data is collected automatically when using the
             Service.
             <br />
             <br />
@@ -199,12 +195,10 @@ export default function LegalNotice() {
             of user accounts. Without these Cookies, the services that You have
             asked for cannot be provided, and We only use these Cookies to
             provide You with those services.
-            <br />
-            <br />
-            Cookies Policy / Notice Acceptance Cookies
-            <br />
-            <br />
-            Type: Persistent Cookies
+          </p>
+          <h2 className="font-semibold mb-2">Cookies Policy / Notice Acceptance Cookies</h2>
+          <p className="mb-24">
+          Type: Persistent Cookies
             <br />
             <br />
             Administered by: Us
@@ -439,9 +433,8 @@ export default function LegalNotice() {
             <br />
             <br />
             By email: <Link href="mailto:florian@designwithtech.com" className="inner-link">florian@designwithtech.com</Link>
-          </p>
+            </p>
         </div>
-        <div className="h-64"></div>
       </main>
       <Footer />
     </>
