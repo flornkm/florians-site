@@ -18,11 +18,11 @@ export default function LegalNotice() {
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digtital Product Designer',
+              alt: 'Florian - Digital Product Designer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digtital Product Designer',
+          siteName: 'Florian - Digital Product Designer',
         }}
         twitter={{
           handle: '@floriandwt',
@@ -52,11 +52,10 @@ export default function LegalNotice() {
             The entire content of this portfolio website, including but not limited to text, graphics, images, logos, videos, and design elements, is intellectual property unless otherwise stated. It is protected by applicable copyright laws and international treaties. Unauthorized use or reproduction of the content on this website is only allowed for private use and otherwise strictly prohibited and may violate copyright laws.
           </p>
           <h2 className="font-semibold mb-2">No Warranty or Liability</h2>
-          <p className="mb-32">
+          <p className="mb-24">
             The internal content provided on this portfolio website is for general informational purposes only. While Florian endeavors to provide accurate and up-to-date information, it makes no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the content.
             In no event shall Florian be liable for any loss or damage, including without limitation indirect or consequential loss or damage, or any loss or damage whatsoever arising from the use or reliance on the internal content of this website.          </p>
         </div>
-        <div className="h-64"></div>
       </main>
       <Footer />
     </>

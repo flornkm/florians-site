@@ -78,7 +78,6 @@ a {
     position: relative;
     z-index: 1;
     transition: all ease 0.2s;
-    padding: 2px 4px;
     color: #000;
 }
 

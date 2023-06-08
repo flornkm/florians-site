@@ -22,11 +22,11 @@ export default function Colophon() {
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digtital Product Designer',
+              alt: 'Florian - Digital Product Designer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digtital Product Designer',
+          siteName: 'Florian - Digital Product Designer',
         }}
         twitter={{
           handle: '@floriandwt',
