@@ -75,7 +75,7 @@ export default function Home() {
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="md:min-h-[70vh] md:py-24 h-auto flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-32 gap-16">
-          <div className="md:w-[50%]">
+          <div className="md:w-[400px]">
             <h1 className="text-5xl font-semibold mb-6 leading-tight">
               Hey, I'm Florian
             </h1>
@@ -84,7 +84,7 @@ export default function Home() {
             </h2>
             <div className="h-8 max-md:hidden"></div>
           </div>
-          <Link
+          {/* <Link
             className="p-4 shadow-lg active:shadow-none active:scale-95 w-full max-w-[400px] flex place-items-center ring-1 ring-zinc-200 gap-6 bg-zinc-50 transition-all hover:bg-zinc-100 hover:border-zinc-200 border-solid rounded-xl dark:bg-[#09090b] dark:ring-zinc-800 dark:hover:bg-zinc-900 dark:hover:ring-[#212126]"
             href={"./#contact"}
           >
@@ -95,7 +95,7 @@ export default function Home() {
               Currently I am looking for internship opportunities in Europe or
               North America.
             </p>
-          </Link>
+          </Link> */}
         </div>
         <div>
           <h2 className="text-2xl font-medium text-black dark:text-white">
@@ -104,7 +104,7 @@ export default function Home() {
             something functionally and technologically useful for humanity
           </h2>
         </div>
-        <div className="py-56">
+        <div className="pb-56 pt-24">
           <div className="relative w-full h-20 flex items-center">
             <div className="h-0.5 w-full bg-zinc-400 dark:bg-zinc-300" />
             <div className="w-[calc(60%-4px)] absolute left-[50%] translate-y-[-50%] top-[50%] translate-x-[-50%] bg-white dark:bg-black z-20 h-[40px] rounded-[6px]" />
@@ -115,7 +115,7 @@ export default function Home() {
               <div className="w-[calc(45%-4px)] bg-fuchsia-500 dark:bg-fuchsia-400 h-0.5" />
             </div>
           </div>
-          <div className="flex justify-between w-full relative -top-8 max-md:top-0 max-sm:text-sm gap-4 font-display text-lg">
+          <div className="flex justify-between w-full relative -top-8 max-md:top-0 max-sm:text-base gap-4 font-display text-lg">
             <p className="text-zinc-400 dark:text-zinc-300">Design</p>
             <p className="w-[55%] relative top-6 text-primary dark:text-blue-400 max-md:top-0 max-md:w-[50%]">
               My Scope
