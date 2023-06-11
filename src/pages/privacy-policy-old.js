@@ -18,11 +18,11 @@ export default function LegalNotice() {
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digtital Product Designer',
+              alt: 'Florian - Design Engineer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digtital Product Designer',
+          siteName: 'Florian - Design Engineer',
         }}
         twitter={{
           handle: '@floriandwt',
@@ -31,7 +31,7 @@ export default function LegalNotice() {
         }}
         nofollow={true}
       />
-      <Navigation title={"Digital Product Designer"} highlight={"Legal"} />
+      <Navigation title={"Design Engineer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full min-h-screen max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-24">
           <h1 className="text-lg font-semibold mb-12">Privacy Policy</h1>
