@@ -8,7 +8,7 @@ import Image from "next/image";
 import Popup from "@/components/Popup";
 
 export default function Home() {
-  const title = "Digital Product Designer";
+  const title = "Design Engineer";
   const imgLoader = ({ src, width, quality }) => {
     return `/${src}?w=${width}&q=${quality || 75}`;
   };
@@ -224,11 +224,11 @@ export default function Home() {
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digital Product Designer',
+              alt: 'Florian - Design Engineer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digital Product Designer',
+          siteName: 'Florian - Design Engineer',
         }}
         twitter={{
           handle: '@floriandwt',

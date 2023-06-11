@@ -22,11 +22,11 @@ export default function Colophon() {
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digital Product Designer',
+              alt: 'Florian - Design Engineer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digital Product Designer',
+          siteName: 'Florian - Design Engineer',
         }}
         twitter={{
           handle: '@floriandwt',
@@ -34,7 +34,7 @@ export default function Colophon() {
           cardType: 'summary_large_image',
         }}
       />
-      <Navigation title={"Designer and Developer"} highlight={"Legal"} />
+      <Navigation title={"Design Engineer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 className="text-3xl font-semibold text-left mb-3">Colophon</h1>

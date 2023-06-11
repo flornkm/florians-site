@@ -75,11 +75,11 @@ export default function Project({
               url: '/images/florian_opengraph.jpg',
               width: 800,
               height: 600,
-              alt: 'Florian - Digital Product Designer',
+              alt: 'Florian - Design Engineer',
               type: 'image/jpeg',
             }
           ],
-          siteName: 'Florian - Digital Product Designer',
+          siteName: 'Florian - Design Engineer',
         }}
         twitter={{
           handle: '@floriandwt',

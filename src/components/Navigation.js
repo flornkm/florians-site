@@ -19,15 +19,15 @@ export default function Navigation(title, highlight) {
 
   return (
     <div className={"w-full fixed max-md:border max-md:rounded-full max-md:w-[80%] max-md:left-[50%] max-md:translate-x-[-50%] max-md:bottom-8 border-zinc-200 bg-white z-50 overflow-hidden md:border-b dark:bg-[#09090b] dark:border-zinc-800 transition-all duration-100 " + (scrolled ? "border-opacity-100 dark:md:bg-opacity-100" : "max-md:border-opacity-100 md:border-opacity-0 dark:md:border-opacity-0 dark:md:bg-opacity-0")}>
-      <div className="flex h-16 justify-between place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
+      <div className="flex h-16 justify-between md:gap-8 place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
-          className="flex justify-center max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden rounded-md"
+          className="flex justify-left max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden rounded-md w-full truncate"
         >
           <span className="text-xl text-black right-8 m-0 font-medium dark:text-white">
             Florian
           </span>
-          <span className="text-zinc-500 m-0 max-md:hidden dark:text-zinc-400">{title.title}</span>
+          <span className="text-zinc-500 m-0 max-md:hidden dark:text-zinc-400 truncate">{title.title}</span>
         </Link>
         <div className="flex max-sm:w-full">
           <ul className="flex gap-2 place-items-center max-md:justify-between max-md:w-full">
