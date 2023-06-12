@@ -22,7 +22,7 @@ export default function Navigation(title, highlight) {
       <div className="flex h-16 justify-between md:gap-8 place-items-center max-w-6xl md:pl-[5%] md:pr-[5%] max-md:pl-4 max-md:pr-4 m-auto max-md:w-full">
         <Link
           href={"/"}
-          className="flex justify-left max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden rounded-md w-full truncate"
+          className="flex justify-left max-md:place-items-center md:place-items-end md:gap-2 hover:opacity-60 transition-all max-sm:hidden rounded-md w-auto truncate"
         >
           <span className="text-xl text-black right-8 m-0 font-medium dark:text-white">
             Florian
