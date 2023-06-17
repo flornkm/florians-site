@@ -364,6 +364,24 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-3 order-3 mb-16">
             <h2 className="font-medium text-lg">Experience</h2>
+            <Link href="https://inlang.com/" target="_blank" className="flex items-center w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
+              <div className="flex gap-2 place-items-center ">
+                <Image
+                  loader={imgLoader}
+                  src="./images/company_inlang.jpg"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 dark:border-zinc-900 p-1 bg-white dark:bg-black"
+                  width={40}
+                  height={40}
+                />
+                <div>
+                  <h3 className="font-medium text-md">
+                    DevRel Engineer
+                  </h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">inlang</p>
+                </div>
+              </div>
+              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2023 - <span className="text-green-500 font-sans font-medium">Now</span></p>
+            </Link>
             <Link href="https://meta-hype.com/" target="_blank" className="flex items-center w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
                 <Image
@@ -380,7 +398,7 @@ export default function Home() {
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">Metahype</p>
                 </div>
               </div>
-              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2020 - <span className="text-green-500 font-sans font-medium">Now</span></p>
+              <p className="text-zinc-500 text-right text-xs font-mono dark:text-zinc-400">2020 - 2023</p>
             </Link>
             <Link href="https://www.hfg-gmuend.de/" target="_blank" className="flex w-full gap-2 justify-between px-3 py-2 -ml-3 rounded-md transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900">
               <div className="flex gap-2 place-items-center ">
@@ -425,7 +443,7 @@ export default function Home() {
                 <Image
                   loader={imgLoader}
                   src="./images/company_videoeditor.jpg"
-                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 p-1 bg-white"
+                  className="block flex-shrink-0 relative object-contain object-center rounded-full border border-zinc-100 dark:border-[#19C073] p-1 bg-white dark:bg-[#19C073]"
                   width={40}
                   height={40}
                 />
