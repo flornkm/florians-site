@@ -94,7 +94,7 @@ export default function Home() {
                 xmlns="http://www.w3.org/2000/svg"
                 className="md:group-hover:hidden"
               >
-                <rect width="286" height="286" fill="white" />
+                <rect width="286" height="286" fill="transparent" />
                 <mask
                   id="mask0_1283_1051"
                   maskUnits="userSpaceOnUse"
@@ -136,7 +136,7 @@ export default function Home() {
                 xmlns="http://www.w3.org/2000/svg"
                 className="hidden md:group-hover:block"
               >
-                <rect width="286" height="286" fill="white" />
+                <rect width="286" height="286" fill="transparent" />
                 <mask
                   id="mask0_1283_1177"
                   maskUnits="userSpaceOnUse"
