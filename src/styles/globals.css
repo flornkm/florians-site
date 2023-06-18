@@ -84,7 +84,7 @@ a {
 }
 
 .inner-link:hover {
-    background-color: #f4f4f5;
+    background-color: #0000000a;
     border-radius: 4px;
 }
 
@@ -93,5 +93,5 @@ a {
 }
 
 .dark .inner-link:hover {
-    background-color: #18181b;
+    background-color: #ffffff1a;
 }

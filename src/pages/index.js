@@ -85,7 +85,7 @@ export default function Home() {
             <div className="h-8 max-md:hidden"></div>
           </div>
           <div className="md:w-[400px] flex md:pl-5">
-            <div className="bg-white group dark:bg-black dark:border-zinc-800 rounded-xl border border-zinc-200 p-2.5 px-5 relative text-lg flex gap-2 items-center">
+            <div className="bg-zinc-50 group shadow-sm hover:bg-sky-50 dark:hover:bg-[#082f49] md:hover:shadow-sky-100 dark:md:hover:shadow-sky-800 dark:bg-[#09090B] dark:border-zinc-800 rounded-xl border md:hover:border-sky-400 border-zinc-200 p-2.5 px-5 relative text-lg flex gap-2 items-center">
               <svg
                 width="20"
                 height="20"
@@ -186,7 +186,7 @@ export default function Home() {
                 Aktuell arbeite ich
                 <Link
                   href="https://inlang.com/"
-                  className="inner-link flex items-center ml-1 gap-1"
+                  className="inner-link flex items-center ml-1 gap-1 relative group-hover:-left-[1px]"
                   target="_blank"
                 >
                   {/* <Image
@@ -198,7 +198,7 @@ export default function Home() {
                   @inlang
                 </Link>
               </p>
-              <div className="bg-white dark:bg-black dark:max-md:border-b-transparent dark:border-zinc-800 absolute z-10 top-4 -left-2 h-4 w-4 border-l border-b border-zinc-200 rotate-45 max-md:-top-2 max-md:left-6 max-md:border-b-transparent max-md:border-t" />
+              <div className="bg-zinc-50 group-hover:bg-sky-50 dark:group-hover:bg-[#082f49] dark:bg-[#09090B] dark:max-md:border-b-transparent dark:border-zinc-800 absolute z-10 md:top-[50%] md:translate-y-[-50%] -left-[8.5px] h-4 w-4 border-l border-b border-zinc-200 md:group-hover:border-sky-400 rotate-45 max-md:-top-2 max-md:left-6 max-md:border-b-transparent max-md:border-t" />
             </div>
           </div>
           {/* <Link
