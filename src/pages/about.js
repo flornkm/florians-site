@@ -375,7 +375,7 @@ export default function Home() {
                 />
                 <div>
                   <h3 className="font-medium text-md">
-                    DevRel Engineer
+                    Design Engineer
                   </h3>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400">inlang</p>
                 </div>
