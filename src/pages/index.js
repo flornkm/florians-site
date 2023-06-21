@@ -232,7 +232,7 @@ export default function Home() {
               <div className="w-[calc(45%-4px)] bg-fuchsia-500 dark:bg-fuchsia-400 h-0.5" />
             </div>
           </div>
-          <div className="flex justify-between w-full relative -top-8 max-md:top-0 max-sm:text-base text-md gap-4">
+          <div className="flex justify-between w-full relative -top-8 max-md:top-0 max-sm:text-base text-sm gap-4">
             <p className="text-zinc-400 dark:text-zinc-300">Design</p>
             <p className="w-[55%] relative top-6 text-primary dark:text-blue-400 max-md:top-0 max-md:w-[50%]">
               My Scope
