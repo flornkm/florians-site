@@ -22,6 +22,12 @@ export default function Journal() {
 
   const entries = [
     {
+      title: "Most favorite tools: June 2023 edition",
+      description: "Here are my 3 most favourite tools in June 2023.",
+      link: "/entries/most-favorite-tools-jun23",
+      image: "/images/entries/favorite-tools-jun23/most_favourite_tools_jun23.webp",
+    },
+    {
       title: "Most favorite tools: May 2023 edition",
       description: "Here are my 3 most favourite tools in May 2023.",
       link: "/entries/most-favorite-tools-may23",
