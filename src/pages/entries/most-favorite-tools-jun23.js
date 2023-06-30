@@ -43,13 +43,13 @@ export default function JounalEntry() {
                 Missive <br /><span className="text-gray-500 text-lg">A great, simple mail client for teams</span>
               </h3>
               <p className="mb-6">
-               Just like the GitHub issues which I've known from the people of <Link
+               I've also learned about Missive from working at <Link
                 href="https://inlang.com/"
                 target="_blank"
                 className="inner-link"
               >
                 inlang
-              </Link> I've also learned about Missive from them. Missive is a great mail client for teams. It is very easy to use and has a lot of great features. I especially like the fact that you can assign mails to other people and that you can easily see who is working on what.         
+              </Link> . Missive is a great mail client for teams. It is very easy to use and has a lot of great features. I especially like the fact that you can assign mails to other people and that you can easily see who is working on what.         
               </p>
               <Link
                 className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
