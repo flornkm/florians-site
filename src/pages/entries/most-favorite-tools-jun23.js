@@ -53,10 +53,10 @@ export default function JounalEntry() {
               </p>
               <Link
                 className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
-                href="https://tailwindcss.com/"
+                href="https://missiveapp.com/"
                 target="_blank"
               >
-                Tailwind CSS
+                Missive
               </Link>
               <div className="h-24"></div>
             </article>
