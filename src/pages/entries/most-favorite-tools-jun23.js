@@ -49,7 +49,7 @@ export default function JounalEntry() {
                 className="inner-link"
               >
                 inlang
-              </Link> . Missive is a great mail client for teams. It is very easy to use and has a lot of great features. I especially like the fact that you can assign mails to other people and that you can easily see who is working on what.         
+              </Link>. Missive is a great mail client for teams. It is very easy to use and has a lot of great features. I especially like the fact that you can assign mails to other people and that you can easily see who is working on what.         
               </p>
               <Link
                 className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
