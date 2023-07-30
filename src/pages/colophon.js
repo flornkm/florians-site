@@ -252,7 +252,7 @@ export default function Colophon() {
                   target="_blank"
                 >
                   <Image
-                    src="/images/people/anton_profile.jpg"
+                    src="/images/people/anton_stallboerger.jpg"
                     alt="Photography"
                     width={48}
                     height={48}

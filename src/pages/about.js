@@ -316,7 +316,7 @@ export default function Home() {
             <Image
               loader={imgLoader}
               src="./images/florian_student.webp"
-              className="inline-flex object-cover mb-12 object-top max-h-96 aspect-square rounded-full max-md:w-40 max-md:h-40 first-chil max-md:rounded-full border border-zinc-200 dark:ring-0 relative z-10 row-span-2"
+              className="inline-flex object-cover mb-12 object-top max-h-96 aspect-square rounded-full max-md:w-40 max-md:h-40 first-chil max-md:rounded-full border border-zinc-200 dark:border-zinc-700 dark:ring-0 relative z-10 row-span-2"
               width={300}
               height={200}
             />

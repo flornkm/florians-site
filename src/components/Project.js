@@ -110,7 +110,7 @@ export default function Project({
                   </div>
                   <Image
                     loader={imgLoader}
-                    src="./images/collaborator_anton_stallboerger.jpg"
+                    src="./images/people/anton_stallboerger.jpg"
                     alt="Anton Stallbörger"
                     className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
@@ -130,7 +130,7 @@ export default function Project({
                   </div>
                   <Image
                     loader={imgLoader}
-                    src="./images/collaborator_nils_eller.jpg"
+                    src="./images/people/nils_eller.jpg"
                     alt="Nils Eller"
                     className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
@@ -146,7 +146,7 @@ export default function Project({
                   </div>
                   <Image
                     loader={imgLoader}
-                    src="./images/collaborator_alice_sopp.jpg"
+                    src="./images/people/alice_sopp.jpg"
                     alt="Alice Sopp"
                     className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
