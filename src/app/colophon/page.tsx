@@ -3,7 +3,6 @@
 import Head from "next/head"
 import Link from "next/link"
 import Image from "next/image"
-import { NextSeo } from "next-seo"
 import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
 import * as Icon from "react-feather"
@@ -12,30 +11,6 @@ import { PhosphorLogo } from "phosphor-react"
 export default function Colophon() {
   return (
     <>
-      <NextSeo
-        title="Colophon - Florian"
-        description="Colophon of Florian's website."
-        openGraph={{
-          url: "floriandwt.com",
-          title: "Colophon - Florian",
-          description: "Colophon of Florian's website.",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-      />
       <Navigation title={"Design Engineer"} highlight={"Legal"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
@@ -286,7 +261,6 @@ export default function Colophon() {
                 >
                   <svg
                     className="text-red-500 scale-50 -mt-1"
-                    title="Formspree logo"
                     style={{ overflow: "visible" }}
                     width="30"
                     height="24"

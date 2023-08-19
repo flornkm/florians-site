@@ -2,7 +2,13 @@
 
 import React from "react"
 
-const Grid = ({ children, columns }) => {
+const Grid = ({
+  children,
+  columns,
+}: {
+  children: React.ReactNode
+  columns: number
+}) => {
   return (
     <div
       className={

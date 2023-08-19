@@ -9,6 +9,7 @@ import { Play, Pause } from "phosphor-react"
 // import AudioPlayer from "react-h5-audio-player";
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import { imgLoader } from "@/utils/imgLoader"
 
 // dynamic import audio player
 const AudioPlayer = dynamic(() => import("react-h5-audio-player"), {
@@ -16,7 +17,7 @@ const AudioPlayer = dynamic(() => import("react-h5-audio-player"), {
 })
 
 const Item = forwardRef(
-  ({ id, index, withOpacity, isDragging, style, ...props }, ref) => {
+  ({ id, index, withOpacity, isDragging, style, ...props }: any, ref) => {
     const inlineStyles = {
       opacity: isDragging && 1,
       // if darkmode is not enabled, set the background color to white
@@ -43,10 +44,6 @@ const Item = forwardRef(
 
     Item.displayName = "Item"
 
-    const imgLoader = ({ src, width, quality }) => {
-      return `${src}?w=${width}&q=${quality || 75}`
-    }
-
     const nextWorkout = () => {
       const today = new Date().getDay()
       const nextWorkout =
@@ -61,7 +58,7 @@ const Item = forwardRef(
     }
 
     useEffect(() => {
-      let intervalId
+      let intervalId: string | number | NodeJS.Timeout | undefined
       let index = 0
       const animationDuration = 3000 // set the duration of the animation in milliseconds
       const transition = `width ${animationDuration}ms`
@@ -78,7 +75,9 @@ const Item = forwardRef(
         .filter((ref) => ref !== null)
 
       // animate the story block elements
-      const animateStoryBlock = (storyBlockRef) => {
+      const animateStoryBlock = (
+        storyBlockRef: { style: { width: string; transition: string } } | null
+      ) => {
         if (storyBlockRef) {
           storyBlockRef.style.width = "100%"
           storyBlockRef.style.transition = transition
@@ -123,7 +122,7 @@ const Item = forwardRef(
     return (
       (id === "1" && (
         <div
-          ref={ref}
+          ref={ref as any}
           style={inlineStyles}
           className={
             "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] " +
@@ -141,7 +140,6 @@ const Item = forwardRef(
             <div className="absolute h-8 w-8 rounded-full bg-blue-500 shadow-lg animate-ping" />
             <div className="absolute inset-0 bg-transparent z-10 shadow-zinc-50" />
             <Image
-              loader={imgLoader}
               src="/images/maps.jpg"
               alt="Maps Background"
               className="h-full w-full object-cover pointer-events-none"
@@ -159,7 +157,7 @@ const Item = forwardRef(
       )) ||
       (id === "2" && (
         <div
-          ref={ref}
+          ref={ref as any}
           style={inlineStyles}
           className={
             "max-md:row-span-1 overflow-hidden relative w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] " +
@@ -229,7 +227,7 @@ const Item = forwardRef(
       )) ||
       (id === "3" && (
         <div
-          ref={ref}
+          ref={ref as any}
           style={inlineStyles}
           className={
             "max-md:row-span-1 relative p-8 w-full h-full items-center justify-center flex rounded-xl max-md:min-h-[300px] " +
@@ -295,7 +293,7 @@ const Item = forwardRef(
       )) ||
       (id === "4" && (
         <div
-          ref={ref}
+          ref={ref as any}
           style={inlineStyles}
           className={
             "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] " +
@@ -307,10 +305,12 @@ const Item = forwardRef(
         >
           <AudioPlayer
             autoPlay
-            src={[
-              "https://dl.dropboxusercontent.com/s/lxkyij9yfjak571/SyncHits-Toast_Hawaii.wav?dl=0",
-              "https://dl.dropboxusercontent.com/s/vulp6kww2230if1/Fashion-Lounge.wav?dl=0",
-            ]}
+            src={
+              [
+                "https://dl.dropboxusercontent.com/s/lxkyij9yfjak571/SyncHits-Toast_Hawaii.wav?dl=0",
+                "https://dl.dropboxusercontent.com/s/vulp6kww2230if1/Fashion-Lounge.wav?dl=0",
+              ] as any
+            }
             autoPlayAfterSrcChange={false}
             customVolumeControls={[]}
             customAdditionalControls={[]}
@@ -334,7 +334,7 @@ const Item = forwardRef(
       )) ||
       (id === "5" && (
         <div
-          ref={ref}
+          ref={ref as any}
           style={inlineStyles}
           className={
             "max-md:row-span-1 p-2 relative w-full h-full items-center justify-center flex flex-col gap-4 rounded-xl max-md:min-h-[300px] " +
@@ -383,7 +383,7 @@ const Item = forwardRef(
       )) ||
       (id !== "1" && (
         <div
-          ref={ref}
+          ref={ref as any}
           style={inlineStyles}
           className={
             "max-md:row-span-1 border-zinc-200 relative bg-zinc-50 border w-full h-full items-center justify-center flex rounded-xl"

@@ -7,13 +7,13 @@ import * as Icon from "react-feather"
 import { Menu, Transition } from "@headlessui/react"
 import Message from "./Message"
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-function useOutsideAlerter(ref, setArrowUp) {
+function useOutsideAlerter(ref: any, setArrowUp: any) {
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
         setArrowUp(false)
       }
@@ -30,7 +30,15 @@ export default function Contact() {
   const input = useRef()
   const menu = useRef()
   const [arrowUp, setArrowUp] = useState(false)
-  const imgLoader = ({ src, width, quality }) => {
+  const imgLoader = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string
+    width: number
+    quality: number
+  }) => {
     return `/${src}?w=${width}&q=${quality || 75}`
   }
   const [messages, setMessages] = useState([
@@ -40,7 +48,7 @@ export default function Contact() {
 
   useOutsideAlerter(menu, setArrowUp)
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: Record<string, string>) => {
     if (e.key === "Escape") {
       setArrowUp(false)
     }
@@ -133,7 +141,7 @@ export default function Contact() {
       <div className="w-full h-16 flex justify-between place-items-center pl-4 pr-4 border-b border-b-solid bg-zinc-50 bg-opacity-90 backdrop-blur-md z-10 relative dark:bg-zinc-900 dark:border-zinc-800">
         <div className="flex place-items-center gap-3">
           <Image
-            loader={imgLoader}
+            loader={imgLoader as any}
             src="./images/memoji.jpg"
             alt="Florian Profile Avatar"
             className="rounded-full bg-white border border-solid"
@@ -149,7 +157,7 @@ export default function Contact() {
       </div>
       <div
         className="h-[360px] flex flex-col justify-end gap-4 relative mb-4"
-        ref={chatWrapper}
+        ref={chatWrapper as any}
       >
         {messages.map((message, index) => (
           <Message key={index} msg={message.msg} type={message.type} />
@@ -185,7 +193,7 @@ export default function Contact() {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items
-              ref={menu}
+              ref={menu as any}
               className="absolute overflow-hidden left-0 top-[-128px] z-10 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none focus:outline-none dark:bg-zinc-900 dark:ring-zinc-800 p-1"
             >
               <div className="py-0">
@@ -252,7 +260,7 @@ export default function Contact() {
         </Menu>
         <div className="w-full h-[48px] bg-white dark:bg-zinc-900 rounded-full ring-1 ring-zinc-300 relative dark:ring-zinc-800 dark:hover:ring-zinc-700 transition-all">
           <input
-            ref={input}
+            ref={input as any}
             className="absolute top-0 right-0 left-0 bottom-0 w-full rounded-full p-3 dark:text-white dark:bg-zinc-900"
             placeholder="Enter your message"
             type="text"
