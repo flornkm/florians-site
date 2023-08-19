@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
+
 const nextConfig = {
-  reactStrictMode: true,
   images: {
-    domains: ["unavatar.io"],
-  },
-  experimental: {
-    appDir: true,
-    fontLoaders: [
-      { loader: "@next/font/google", options: { subsets: ["latin"] } },
-    ],
-  },
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "**",
+			}
+    ]
+  }
 }
 
 module.exports = nextConfig

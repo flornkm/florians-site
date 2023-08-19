@@ -1,13 +1,14 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { NextSeo } from "next-seo";
-import * as React from "react";
-import * as Icon from "react-feather";
-import { useState, useEffect, useCallback } from "react";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import useEmblaCarousel from "embla-carousel-react";
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { NextSeo } from "next-seo"
+import * as React from "react"
+import * as Icon from "react-feather"
+import { useState, useEffect, useCallback } from "react"
+import Navigation from "@/components/Navigation"
+import Footer from "@/components/Footer"
+import useEmblaCarousel from "embla-carousel-react"
 
 export default function Project({
   projectTitle,
@@ -33,33 +34,33 @@ export default function Project({
   projectLinks,
   stack,
   challenge,
-  result
+  result,
 }) {
-  const [highlight, setHighlight] = useState("Projects");
-  const [video, setVideo] = useState(false);
+  const [highlight, setHighlight] = useState("Projects")
+  const [video, setVideo] = useState(false)
   const imgLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`;
-  };
+    return `/${src}?w=${width}&q=${quality || 75}`
+  }
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
-  });
+  })
 
   useEffect(() => {
     if (emblaApi) {
       // Embla API is ready
     }
-  }, [emblaApi]);
+  }, [emblaApi])
 
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
     [emblaApi]
-  );
+  )
 
   const scrollBack = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi]
-  );
+  )
 
   return (
     <>
@@ -67,30 +68,32 @@ export default function Project({
         title={projectTitle + " - Florian"}
         description={shortDescription}
         openGraph={{
-          url: 'floriandwt.com',
+          url: "floriandwt.com",
           title: projectTitle + " - Florian",
-          description: '',
+          description: "",
           images: [
             {
-              url: '/images/florian_opengraph.jpg',
+              url: "/images/florian_opengraph.jpg",
               width: 800,
               height: 600,
-              alt: 'Florian - Design Engineer',
-              type: 'image/jpeg',
-            }
+              alt: "Florian - Design Engineer",
+              type: "image/jpeg",
+            },
           ],
-          siteName: 'Florian - Design Engineer',
+          siteName: "Florian - Design Engineer",
         }}
         twitter={{
-          handle: '@floriandwt',
-          site: '@floriandwt',
-          cardType: 'summary_large_image',
+          handle: "@floriandwt",
+          site: "@floriandwt",
+          cardType: "summary_large_image",
         }}
       />
       <Navigation title={projectTitle} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
-          <h1 className="text-4xl font-semibold text-left mb-3">{projectTitle}</h1>
+          <h1 className="text-4xl font-semibold text-left mb-3">
+            {projectTitle}
+          </h1>
           <h2 className="text-2xl font-medium text-left text-zinc-500 mb-5 dark:text-zinc-400">
             {shortDescription}
           </h2>
@@ -139,7 +142,11 @@ export default function Project({
                 </Link>
               )}
               {collaborators.includes("Alice") && (
-                <Link href={"https://www.alicesopp.com/"} target="_blank" className="group relative transition-all">
+                <Link
+                  href={"https://www.alicesopp.com/"}
+                  target="_blank"
+                  className="group relative transition-all"
+                >
                   <div className="absolute flex justify-center pb-1 pt-1 pl-3 pr-3 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover:opacity-100 group-hover:bottom-[125%] transition-all bg-black text-white rounded-full w-max text-sm ease-in-out duration-200 dark:bg-white dark:text-black">
                     <span className="z-10 relative">Alice Sopp</span>
                     <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
@@ -166,7 +173,17 @@ export default function Project({
           />
           <div className="flex gap-2 mb-10 flex-wrap">
             {stack.map((stackItem, index) => (
-              <div key={index} className={"flex text-xs font-medium items-center text-[14px] px-2 py-1.5 ring-1 rounded-full " + stackItem.color + " " + stackItem.ringColor + " " + stackItem.backgroundColor}>
+              <div
+                key={index}
+                className={
+                  "flex text-xs font-medium items-center text-[14px] px-2 py-1.5 ring-1 rounded-full " +
+                  stackItem.color +
+                  " " +
+                  stackItem.ringColor +
+                  " " +
+                  stackItem.backgroundColor
+                }
+              >
                 {stackItem.icon} <p className="ml-2">{stackItem.name}</p>
               </div>
             ))}
@@ -183,6 +200,9 @@ export default function Project({
                       <div className="embla__slide" key={index}>
                         <div className="embla__slide__inner">
                           <Image
+                            alt={
+                              "Slide Image " + index + " for " + projectTitle
+                            }
                             loader={imgLoader}
                             src={slideImage}
                             className="inline-flex object-cover object-center mb-2 max-md:object-contain"
@@ -210,14 +230,17 @@ export default function Project({
               </div>
             </div>
           </div>
-          {challenge && <div><div className="h-24"></div>
-            <div className="flex gap-4 items-start justify-between max-md:flex-col">
-              <h3 className="font-medium text-2xl">Challenge</h3>
-              <p className="text-zinc-700 mb-10 dark:text-zinc-300 xl:max-w-3xl text-lg">
-                {challenge}
-              </p>
+          {challenge && (
+            <div>
+              <div className="h-24"></div>
+              <div className="flex gap-4 items-start justify-between max-md:flex-col">
+                <h3 className="font-medium text-2xl">Challenge</h3>
+                <p className="text-zinc-700 mb-10 dark:text-zinc-300 xl:max-w-3xl text-lg">
+                  {challenge}
+                </p>
+              </div>
             </div>
-          </div>}
+          )}
           <div className="h-32"></div>
           <div className="relative">
             <h2 className="text-2xl font-medium text-left mb-2 xl:sticky top-24 max-xl:mb-8 left-0">
@@ -297,15 +320,17 @@ export default function Project({
               </div>
             </div>
           </div>
-          {result && <div><div className="h-24"></div>
-          <div className="flex gap-4 items-start justify-between max-md:flex-col">
-              <h3 className="font-medium text-2xl">Result</h3>
-              <p className="text-zinc-700 mb-10 dark:text-zinc-300 xl:max-w-3xl text-lg">
-                {result}
-              </p>
+          {result && (
+            <div>
+              <div className="h-24"></div>
+              <div className="flex gap-4 items-start justify-between max-md:flex-col">
+                <h3 className="font-medium text-2xl">Result</h3>
+                <p className="text-zinc-700 mb-10 dark:text-zinc-300 xl:max-w-3xl text-lg">
+                  {result}
+                </p>
+              </div>
             </div>
-
-          </div>}
+          )}
           {videoSource && (
             <div className="mt-32">
               <h2 className="text-2xl font-medium text-left mb-6 left-0">
@@ -359,22 +384,28 @@ export default function Project({
                 <div className="flex gap-8 max-sm:flex-col max-sm:items-start">
                   {projectLinks.map((link) => (
                     <Link
-                    className="font-medium flex items-center transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
-                    href={link.url}
+                      key={link.text}
+                      className="font-medium flex items-center transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md"
+                      href={link.url}
                       target="_blank"
                     >
-                      {link.url && <Image 
-                        href={link.url}
-                        className="rounded-full mr-2"
-                        src={
-                          // just take https://unavatar.io/ + the root domain of the url
-                          "https://unavatar.io/" +
-                          link.url.replace(/(^\w+:|^)\/\//, "").split("/")[0]
-                          + "?fallback=https://source.boringavatars.com/marble/120/1337_user?colors=264653r,2a9d8f,e9c46a,f4a261,e76f51"
-                        }
-                        width={20}
-                        height={20}
-                        />}  
+                      {link.url && (
+                        <Image
+                          alt="Link Icon"
+                          href={link.url}
+                          className="rounded-full mr-2"
+                          src={
+                            // just take https://unavatar.io/ + the root domain of the url
+                            "https://unavatar.io/" +
+                            link.url
+                              .replace(/(^\w+:|^)\/\//, "")
+                              .split("/")[0] +
+                            "?fallback=https://source.boringavatars.com/marble/120/1337_user?colors=264653r,2a9d8f,e9c46a,f4a261,e76f51"
+                          }
+                          width={20}
+                          height={20}
+                        />
+                      )}
                       {link.text}
                       {/* <Icon.ArrowUpRight
                     size={16}
@@ -392,5 +423,5 @@ export default function Project({
       </main>
       <Footer />
     </>
-  );
+  )
 }
