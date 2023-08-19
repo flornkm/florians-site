@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { Fragment, useState, useRef, useEffect } from "react"
@@ -55,7 +53,7 @@ export default function Contact() {
   }
 
   const sendMessage = () => {
-    if (input.current.value !== "") {
+    if (newMessage !== "") {
       if (messages.length === 1) {
         setMessages([...messages, { msg: newMessage, type: "right" }])
         setNewMessage("")

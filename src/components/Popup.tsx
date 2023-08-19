@@ -35,6 +35,7 @@ const Pretendard = localFont({
 export default function Popup({
   collaborators,
   popupState,
+  setPopupState,
   icon,
   name,
   shortDescription,
@@ -46,6 +47,7 @@ export default function Popup({
 }: {
   collaborators: string[]
   popupState: boolean
+  setPopupState: (state: boolean) => void
   icon: string
   name: string
   shortDescription: string
@@ -156,7 +158,7 @@ export default function Popup({
                                 <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                               </div>
                               <Image
-                                src="./images/collaborator_anton_stallboerger.jpg"
+                                src="/images/collaborator_anton_stallboerger.jpg"
                                 alt="Anton Stallbörger"
                                 className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                                 width={40}
@@ -177,7 +179,7 @@ export default function Popup({
                                 <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                               </div>
                               <Image
-                                src="./images/collaborator_nils_eller.jpg"
+                                src="/images/collaborator_nils_eller.jpg"
                                 alt="Nils Eller"
                                 className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                                 width={40}
@@ -197,7 +199,7 @@ export default function Popup({
                                 <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                               </div>
                               <Image
-                                src="./images/collaborator_alice_sopp.jpg"
+                                src="/images/collaborator_alice_sopp.jpg"
                                 alt="Alice Sopp"
                                 className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                                 width={40}
@@ -227,7 +229,7 @@ export default function Popup({
                                     height={500}
                                   />
                                   <Image
-                                    src="./images/play_button.svg"
+                                    src="/images/play_button.svg"
                                     alt="Play Button"
                                     onClick={() => setVideoState(true)}
                                     className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"

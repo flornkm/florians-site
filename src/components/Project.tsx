@@ -72,9 +72,6 @@ export default function Project({
 }) {
   const [highlight, setHighlight] = useState("Projects")
   const [video, setVideo] = useState(false)
-  const imgLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`
-  }
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
