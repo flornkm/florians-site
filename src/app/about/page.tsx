@@ -1,7 +1,6 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { NextSeo } from "next-seo"
 import * as React from "react"
 import { useState, useCallback, Fragment } from "react"
 import Navigation from "@/components/Navigation"
@@ -29,9 +28,6 @@ import Item from "@/layout/Item"
 import { Dialog, Transition } from "@headlessui/react"
 
 export default function About() {
-  const title = "Design Engineer"
-  const highlight = "About"
-
   const globePopupContainer = React.useRef(null)
   const globeEl = React.useRef(null)
 
@@ -255,31 +251,7 @@ export default function About() {
 
   return (
     <>
-      <NextSeo
-        title="About - Florian"
-        description="Here you can find out more about me and my work."
-        openGraph={{
-          url: "floriandwt.com",
-          title: "About - Florian",
-          description: "Here you can find out more about me and my work.",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-      />
-      <Navigation title={title} highlight={highlight} />
+      <Navigation title={"Design Engineer"} highlight={"About"} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="h-40 max-md:h-24" />
         <div className="gap-0 grid grid-cols-2 max-md:flex max-md:flex-col max-md:gap-0 mb-8">

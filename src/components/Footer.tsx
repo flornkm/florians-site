@@ -4,9 +4,9 @@ import dynamic from "next/dynamic"
 import { useEffect, useRef, useState } from "react"
 import * as Icon from "react-feather"
 
-function useOutsideAlerter(ref, setArrowUp) {
+function useOutsideAlerter(ref: any, setArrowUp: any) {
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target)) {
         setArrowUp(false)
       }
@@ -21,15 +21,15 @@ function useOutsideAlerter(ref, setArrowUp) {
 export default function Footer() {
   const menu = useRef()
   const [arrowUp, setArrowUp] = useState(false)
-  const [colorTheme, setColorTheme] = useState(null)
+  const [colorTheme, setColorTheme] = useState("" as string | null)
 
   useEffect(() => {
     setColorTheme(localStorage.getItem("color-theme"))
   }, [])
 
-  const AnalogClock = dynamic(() => import("analog-clock-react"), {
-    ssr: false,
-  })
+  const AnalogClock = dynamic(() => import("analog-clock-react" as any), {
+    ssr: false as boolean,
+  }) as any
 
   let options = {
     width: "112px",

@@ -1,4 +1,4 @@
-export default function Message({ msg, type }) {
+export default function Message({ msg, type }: { msg: string; type: string }) {
   return (
     <>
       {type === "left" && (

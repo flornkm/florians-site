@@ -35,6 +35,40 @@ export default function Project({
   stack,
   challenge,
   result,
+}: {
+  projectTitle: string
+  shortDescription: string
+  collaborators?: string[]
+  bannerSource: string
+  projectMainDescription: string
+  slideImages: string[]
+  processImage1: string
+  processHeading1: string
+  processText1: string
+  processImage2: string
+  processHeading2: string
+  processText2: string
+  processImage3: string
+  processHeading3: string
+  processText3: string
+  processImage4?: string
+  processHeading4?: string
+  processText4?: string
+  videoThumbnail?: string
+  videoSource?: string
+  projectLinks?: {
+    url: string
+    text: string
+  }[]
+  stack: {
+    name: string
+    icon: any
+    color: string
+    ringColor: string
+    backgroundColor: string
+  }[]
+  challenge?: string
+  result?: string
 }) {
   const [highlight, setHighlight] = useState("Projects")
   const [video, setVideo] = useState(false)

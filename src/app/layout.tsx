@@ -113,7 +113,7 @@ export default function RootLayout({
       }
     >
       <body className="dark:bg-black selection:bg-blue-200 dark:selection:bg-[#172554]">
-        <main>{children}</main>
+        {children}
         <Analytics />
       </body>
     </html>

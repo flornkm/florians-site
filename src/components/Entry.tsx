@@ -5,8 +5,26 @@ import Image from "next/image"
 import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
 
-export default function Entry({ title, text, mainImage, date }) {
-  const imgLoader = ({ src, width, quality }) => {
+export default function Entry({
+  title,
+  text,
+  mainImage,
+  date,
+}: {
+  title: string
+  text: any
+  mainImage: string
+  date: string
+}) {
+  const imgLoader = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string
+    width: number
+    quality: number
+  }) => {
     return `/${src}?w=${width}&q=${quality || 75}`
   }
 
@@ -41,7 +59,7 @@ export default function Entry({ title, text, mainImage, date }) {
         <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
           <div className="max-w-2xl mb-12">
             <Image
-              loader={imgLoader}
+              loader={imgLoader as any}
               src={mainImage}
               alt="Journal Cover"
               width={1920}

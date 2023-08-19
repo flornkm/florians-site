@@ -7,12 +7,6 @@ import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
 import Image from "next/image"
 import Popup from "@/components/Popup"
-import type { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "About",
-  description: "Digital Product Designer and Developer.",
-}
 
 export default function Creations() {
   const title = "Design Engineer"
@@ -214,30 +208,6 @@ export default function Creations() {
 
   return (
     <>
-      <NextSeo
-        title="Creations - Florian"
-        description="Some creations from small to big I have worked on."
-        openGraph={{
-          url: "floriandwt.com",
-          title: "Creations - Florian",
-          description: "Some creations from small to big I have worked on.",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-      />
       <Navigation title={title} highlight={highlight} />
       <main className="max-md:w-[90%] min-h-[100vh] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-8">

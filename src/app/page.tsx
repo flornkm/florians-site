@@ -11,10 +11,8 @@ import Link from "next/link"
 import * as Icon from "react-feather"
 import { useIsVisible } from "@/hooks/useIsVisible"
 import copy from "copy-to-clipboard"
-import type { Metadata } from "next"
 
 export default function Home() {
-  const title = "Design Engineer"
   const [highlight, setHighlight] = useState("Home")
   const projects = React.useRef(null)
   const contact = React.useRef(null)
@@ -46,32 +44,7 @@ export default function Home() {
 
   return (
     <>
-      <NextSeo
-        title="Florian - Design Engineer"
-        description="Product Designer and Developer building digital experiences."
-        openGraph={{
-          url: "floriandwt.com",
-          title: "Florian - Design Engineer",
-          description:
-            "Product Designer and Developer building digital experiences.",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-      />
-      <Navigation title={title} highlight={highlight} />
+      <Navigation title="Design Engineer" highlight={highlight} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="md:min-h-[70vh] md:py-24 h-auto flex place-items-center justify-between max-md:flex-col max-md:justify-start max-md:place-items-start max-md:py-32 gap-16">
           <div className="md:w-[400px] relative">

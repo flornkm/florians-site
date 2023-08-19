@@ -12,29 +12,21 @@ const Pretendard = localFont({
       path: "../../public/fonts/Pretendard/Pretendard-Bold.woff2",
       weight: "700",
       style: "normal",
-      subsets: ["latin"],
-      display: "swap",
     },
     {
       path: "../../public/fonts/Pretendard/Pretendard-SemiBold.woff2",
       weight: "600",
       style: "normal",
-      subsets: ["latin"],
-      display: "swap",
     },
     {
       path: "../../public/fonts/Pretendard/Pretendard-Medium.woff2",
       weight: "500",
       style: "normal",
-      subsets: ["latin"],
-      display: "swap",
     },
     {
       path: "../../public/fonts/Pretendard/Pretendard-Regular.woff2",
       weight: "400",
       style: "normal",
-      subsets: ["latin"],
-      display: "swap",
     },
   ],
   variable: "--pretendard-font",
@@ -51,11 +43,19 @@ export default function Popup({
   links,
   video,
   videoThumbnail,
+}: {
+  collaborators: string[]
+  popupState: boolean
+  icon: string
+  name: string
+  shortDescription: string
+  mainImages: string[]
+  text: string
+  links: { text: string; url: string }[]
+  video: string
+  videoThumbnail: string
 }) {
   let [isOpen, setIsOpen] = useState(false)
-  const imgLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`
-  }
   const [videoState, setVideoState] = useState(false)
 
   let completeButtonRef = useRef(null)
@@ -123,7 +123,6 @@ export default function Popup({
                     <div className="flex w-full place-items-center justify-between max-md:flex-col pr-20 max-md:items-start max-md:gap-8">
                       <div className="flex gap-6 place-items-center">
                         <Image
-                          loader={imgLoader}
                           src={icon}
                           width={64}
                           height={64}
@@ -157,7 +156,6 @@ export default function Popup({
                                 <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                               </div>
                               <Image
-                                loader={imgLoader}
                                 src="./images/collaborator_anton_stallboerger.jpg"
                                 alt="Anton Stallbörger"
                                 className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
@@ -179,7 +177,6 @@ export default function Popup({
                                 <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                               </div>
                               <Image
-                                loader={imgLoader}
                                 src="./images/collaborator_nils_eller.jpg"
                                 alt="Nils Eller"
                                 className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
@@ -200,7 +197,6 @@ export default function Popup({
                                 <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                               </div>
                               <Image
-                                loader={imgLoader}
                                 src="./images/collaborator_alice_sopp.jpg"
                                 alt="Alice Sopp"
                                 className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
@@ -224,7 +220,6 @@ export default function Popup({
                               {!videoState && (
                                 <div className="w-full max-h-96 flex justify-center place-items-center">
                                   <Image
-                                    loader={imgLoader}
                                     src={videoThumbnail}
                                     alt="Video Thumbnail"
                                     className="w-full max-h-80 aspect-video object-cover"
@@ -232,7 +227,6 @@ export default function Popup({
                                     height={500}
                                   />
                                   <Image
-                                    loader={imgLoader}
                                     src="./images/play_button.svg"
                                     alt="Play Button"
                                     onClick={() => setVideoState(true)}
@@ -248,7 +242,6 @@ export default function Popup({
                                   height="auto"
                                   src={video}
                                   title="YouTube video player"
-                                  frameborder="0"
                                   className="max-h-80 aspect-video"
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                   allowfullscreen
@@ -266,7 +259,6 @@ export default function Popup({
                               <div className="embla__slide__inner">
                                 <Image
                                   className="rounded-none max-h-96 object-cover w-full"
-                                  loader={imgLoader}
                                   src={mainImage}
                                   width={1000}
                                   height={500}
