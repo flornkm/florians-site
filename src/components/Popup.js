@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState, useRef } from "react";
-import * as Icon from "react-feather";
-import useEmblaCarousel from "embla-carousel-react";
-import localFont from "@next/font/local";
+import Image from "next/image"
+import Link from "next/link"
+import { Dialog, Transition } from "@headlessui/react"
+import { Fragment, useEffect, useState, useRef } from "react"
+import * as Icon from "react-feather"
+import useEmblaCarousel from "embla-carousel-react"
+import localFont from "@next/font/local"
 
 const Pretendard = localFont({
   src: [
@@ -38,12 +38,11 @@ const Pretendard = localFont({
     },
   ],
   variable: "--pretendard-font",
-});
+})
 
 export default function Popup({
   collaborators,
   popupState,
-  setPopupState,
   icon,
   name,
   shortDescription,
@@ -53,39 +52,39 @@ export default function Popup({
   video,
   videoThumbnail,
 }) {
-  let [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false)
   const imgLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`;
-  };
-  const [videoState, setVideoState] = useState(false);
+    return `/${src}?w=${width}&q=${quality || 75}`
+  }
+  const [videoState, setVideoState] = useState(false)
 
-  let completeButtonRef = useRef(null);
+  let completeButtonRef = useRef(null)
 
   function closeModal() {
-    setIsOpen(false);
-    setPopupState(false);
+    setIsOpen(false)
+    setPopupState(false)
   }
 
   useEffect(() => {
     if (popupState) {
-      setIsOpen(true);
+      setIsOpen(true)
     } else {
-      setIsOpen(false);
+      setIsOpen(false)
     }
-  }, [popupState]);
+  }, [popupState])
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
     dragFree: true,
     containScroll: "keepSnaps",
-  });
+  })
 
   useEffect(() => {
     if (emblaApi) {
       // Embla API is ready
     }
-  }, [emblaApi]);
+  }, [emblaApi])
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -288,6 +287,7 @@ export default function Popup({
                           <div className="flex gap-4 max-sm:flex-col max-sm:items-start">
                             {links.map((link) => (
                               <Link
+                                key={link.text}
                                 className="font-medium transition-all text-black border-b-black group dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:hover:bg-opacity-50 rounded-md"
                                 href={link.url}
                                 target="_blank"
@@ -309,8 +309,8 @@ export default function Popup({
                       ref={completeButtonRef}
                       className="flex w-10 h-10 justify-center place-items-center rounded-full border border-transparent bg-black text-white hover:opacity-80 absolute text-sm font-medium hover:bg-zinc-900 focus:outline-none right-2 top-2 dark:bg-white dark:hover:bg-zinc-100 dark:text-black"
                       onClick={() => {
-                        setPopupState(false);
-                        setIsOpen(false);
+                        setPopupState(false)
+                        setIsOpen(false)
                       }}
                     >
                       <Icon.X size={24} />
@@ -323,5 +323,5 @@ export default function Popup({
         )}
       </Dialog>
     </Transition>
-  );
+  )
 }

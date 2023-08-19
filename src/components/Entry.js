@@ -1,15 +1,14 @@
-import Head from "next/head";
-import Link from "next/link";
-import { NextSeo } from "next-seo";
-import Image from "next/image";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import * as Icon from "react-feather";
+"use client"
+
+import { NextSeo } from "next-seo"
+import Image from "next/image"
+import Navigation from "@/components/Navigation"
+import Footer from "@/components/Footer"
 
 export default function Entry({ title, text, mainImage, date }) {
   const imgLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`;
-  };
+    return `/${src}?w=${width}&q=${quality || 75}`
+  }
 
   return (
     <>
@@ -17,24 +16,24 @@ export default function Entry({ title, text, mainImage, date }) {
         title={title + " - Florian"}
         description="Read more about this journal entry."
         openGraph={{
-          url: 'floriandwt.com',
+          url: "floriandwt.com",
           title: title + " - Florian",
-          description: '',
+          description: "",
           images: [
             {
-              url: '/images/florian_opengraph.jpg',
+              url: "/images/florian_opengraph.jpg",
               width: 800,
               height: 600,
-              alt: 'Florian - Design Engineer',
-              type: 'image/jpeg',
-            }
+              alt: "Florian - Design Engineer",
+              type: "image/jpeg",
+            },
           ],
-          siteName: 'Florian - Design Engineer',
+          siteName: "Florian - Design Engineer",
         }}
         twitter={{
-          handle: '@floriandwt',
-          site: '@floriandwt',
-          cardType: 'summary_large_image',
+          handle: "@floriandwt",
+          site: "@floriandwt",
+          cardType: "summary_large_image",
         }}
       />
       <Navigation title={title} highlight={"Entry"} />
@@ -49,7 +48,9 @@ export default function Entry({ title, text, mainImage, date }) {
               height={500}
               className="mb-10 bg-zinc-50 dark:bg-[#09090b]"
             />
-            <div className="flex gap-4 text-sm text-zinc-500 mb-2 font-mono">{date}</div>
+            <div className="flex gap-4 text-sm text-zinc-500 mb-2 font-mono">
+              {date}
+            </div>
             <h1 className="text-3xl font-semibold text-left mb-6">{title}</h1>
             {text}
             <div className="h-6"></div>
@@ -62,5 +63,5 @@ export default function Entry({ title, text, mainImage, date }) {
       </main>
       <Footer />
     </>
-  );
+  )
 }

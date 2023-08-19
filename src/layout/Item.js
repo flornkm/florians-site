@@ -1,22 +1,19 @@
-import Link from "next/link";
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  CSSProperties,
-  useEffect,
-} from "react";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import * as Icon from "react-feather";
-import { Play, Pause, ClockClockwise, PersonSimpleRun } from "phosphor-react";
+"use client"
+
+import Link from "next/link"
+import React, { forwardRef, useEffect } from "react"
+import dynamic from "next/dynamic"
+import Image from "next/image"
+import * as Icon from "react-feather"
+import { Play, Pause } from "phosphor-react"
 // import AudioPlayer from "react-h5-audio-player";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
 
 // dynamic import audio player
 const AudioPlayer = dynamic(() => import("react-h5-audio-player"), {
   ssr: false,
-});
+})
 
 const Item = forwardRef(
   ({ id, index, withOpacity, isDragging, style, ...props }, ref) => {
@@ -32,24 +29,26 @@ const Item = forwardRef(
       transformOrigin: "0 0",
       gridRow: index === 1 ? "span 2 / span 2" : null,
       ...style,
-    };
+    }
 
-    const storyBlock1 = React.useRef(null);
-    const storyBlock2 = React.useRef(null);
-    const storyBlock3 = React.useRef(null);
-    const storyBlock4 = React.useRef(null);
-    const storyBlock5 = React.useRef(null);
+    const storyBlock1 = React.useRef(null)
+    const storyBlock2 = React.useRef(null)
+    const storyBlock3 = React.useRef(null)
+    const storyBlock4 = React.useRef(null)
+    const storyBlock5 = React.useRef(null)
 
     const [emblaRef] = useEmblaCarousel({ loop: false }, [
       Autoplay({ jump: true, delay: 3000 }),
-    ]);
+    ])
+
+    Item.displayName = "Item"
 
     const imgLoader = ({ src, width, quality }) => {
-      return `${src}?w=${width}&q=${quality || 75}`;
-    };
+      return `${src}?w=${width}&q=${quality || 75}`
+    }
 
     const nextWorkout = () => {
-      const today = new Date().getDay();
+      const today = new Date().getDay()
       const nextWorkout =
         today === 2
           ? "Workout"
@@ -57,15 +56,15 @@ const Item = forwardRef(
           ? "Workout"
           : today === 6
           ? "Workout"
-          : "Rest Day";
-      return nextWorkout;
-    };
+          : "Rest Day"
+      return nextWorkout
+    }
 
     useEffect(() => {
-      let intervalId;
-      let index = 0;
-      const animationDuration = 3000; // set the duration of the animation in milliseconds
-      const transition = `width ${animationDuration}ms`;
+      let intervalId
+      let index = 0
+      const animationDuration = 3000 // set the duration of the animation in milliseconds
+      const transition = `width ${animationDuration}ms`
 
       // create an array of refs to all five story block elements
       const storyBlockRefs = [
@@ -76,50 +75,50 @@ const Item = forwardRef(
         storyBlock5,
       ]
         .map((ref) => ref.current)
-        .filter((ref) => ref !== null);
+        .filter((ref) => ref !== null)
 
       // animate the story block elements
       const animateStoryBlock = (storyBlockRef) => {
         if (storyBlockRef) {
-          storyBlockRef.style.width = "100%";
-          storyBlockRef.style.transition = transition;
+          storyBlockRef.style.width = "100%"
+          storyBlockRef.style.transition = transition
         }
-      };
+      }
 
       // reset the story block elements
       const resetStoryBlocks = () => {
         storyBlockRefs.forEach((ref) => {
           if (ref) {
-            ref.style.width = "0%";
-            ref.style.transition = "none";
+            ref.style.width = "0%"
+            ref.style.transition = "none"
           }
-        });
-        index = 0;
-        animateStoryBlock(storyBlockRefs[0]);
-      };
+        })
+        index = 0
+        animateStoryBlock(storyBlockRefs[0])
+      }
 
       if (id === "2") {
         // start the animation cycle
-        animateStoryBlock(storyBlockRefs[0]);
+        animateStoryBlock(storyBlockRefs[0])
         intervalId = setInterval(() => {
           if (index < storyBlockRefs.length - 1) {
             // continue the animation cycle
-            animateStoryBlock(storyBlockRefs[index + 1]);
-            index++;
+            animateStoryBlock(storyBlockRefs[index + 1])
+            index++
           } else {
             // end the animation cycle and reset the story block elements
-            storyBlockRefs[0].style.transition = "none"; // remove the transition for the first element
-            storyBlockRefs[0].style.width = "0%"; // set the width of the first element to 0%
-            resetStoryBlocks();
+            storyBlockRefs[0].style.transition = "none" // remove the transition for the first element
+            storyBlockRefs[0].style.width = "0%" // set the width of the first element to 0%
+            resetStoryBlocks()
           }
-        }, animationDuration);
+        }, animationDuration)
       }
 
       return () => {
-        clearInterval(intervalId);
-        resetStoryBlocks();
-      };
-    }, []);
+        clearInterval(intervalId)
+        resetStoryBlocks()
+      }
+    }, [id])
 
     return (
       (id === "1" && (
@@ -313,7 +312,6 @@ const Item = forwardRef(
               "https://dl.dropboxusercontent.com/s/vulp6kww2230if1/Fashion-Lounge.wav?dl=0",
             ]}
             autoPlayAfterSrcChange={false}
-            autoPlay={false}
             customVolumeControls={[]}
             customAdditionalControls={[]}
             showDownloadProgress={false}
@@ -395,8 +393,8 @@ const Item = forwardRef(
           {id}
         </div>
       ))
-    );
+    )
   }
-);
+)
 
-export default Item;
+export default Item

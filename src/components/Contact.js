@@ -1,78 +1,80 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Fragment, useState, useRef, useEffect } from "react";
-import * as Icon from "react-feather";
-import { Menu, Transition } from "@headlessui/react";
-import Message from "./Message";
+"use client"
+
+import Link from "next/link"
+import Image from "next/image"
+import { Fragment, useState, useRef, useEffect } from "react"
+import * as Icon from "react-feather"
+import { Menu, Transition } from "@headlessui/react"
+import Message from "./Message"
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ")
 }
 
 function useOutsideAlerter(ref, setArrowUp) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        setArrowUp(false);
+        setArrowUp(false)
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [ref, setArrowUp])
 }
 
 export default function Contact() {
-  const chatWrapper = useRef();
-  const input = useRef();
-  const menu = useRef();
-  const [arrowUp, setArrowUp] = useState(false);
+  const chatWrapper = useRef()
+  const input = useRef()
+  const menu = useRef()
+  const [arrowUp, setArrowUp] = useState(false)
   const imgLoader = ({ src, width, quality }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`;
-  };
+    return `/${src}?w=${width}&q=${quality || 75}`
+  }
   const [messages, setMessages] = useState([
     { msg: "Hey, what is your name? 👋", type: "left" },
-  ]);
-  const [newMessage, setNewMessage] = useState("");
+  ])
+  const [newMessage, setNewMessage] = useState("")
 
-  useOutsideAlerter(menu, setArrowUp);
+  useOutsideAlerter(menu, setArrowUp)
 
   const handleKeyDown = (e) => {
     if (e.key === "Escape") {
-      setArrowUp(false);
+      setArrowUp(false)
     }
-  };
+  }
 
   const sendMessage = () => {
     if (input.current.value !== "") {
       if (messages.length === 1) {
-        setMessages([...messages, { msg: newMessage, type: "right" }]);
-        setNewMessage("");
+        setMessages([...messages, { msg: newMessage, type: "right" }])
+        setNewMessage("")
 
         setTimeout(() => {
           setMessages((messages) => [
             ...messages,
             { msg: `Nice to meet you, ${messages[1].msg}.`, type: "left" },
-          ]);
-        }, 1000);
+          ])
+        }, 1000)
 
         setTimeout(() => {
           setMessages((messages) => [
             ...messages,
             { msg: "So tell me, why are you contacting me?", type: "left" },
-          ]);
-        }, 2000);
+          ])
+        }, 2000)
       } else if (messages.length === 4) {
-        setMessages([...messages, { msg: newMessage, type: "right" }]);
-        setNewMessage("");
+        setMessages([...messages, { msg: newMessage, type: "right" }])
+        setNewMessage("")
 
         setTimeout(() => {
           setMessages((messages) => [
             ...messages,
             { msg: "Got it. Thanks for the information.", type: "left" },
-          ]);
-        }, 1000);
+          ])
+        }, 1000)
 
         setTimeout(() => {
           setMessages((messages) => [
@@ -81,23 +83,23 @@ export default function Contact() {
               msg: "I just need a way to contact you. Might you give me your e-mail?",
               type: "left",
             },
-          ]);
-        }, 2000);
+          ])
+        }, 2000)
       } else if (messages.length === 7 && newMessage.includes("@")) {
-        setMessages([...messages, { msg: newMessage, type: "right" }]);
+        setMessages([...messages, { msg: newMessage, type: "right" }])
         const data = {
           name: messages[1].msg,
           email: newMessage,
-          message: messages[4].msg
-        };
-        setNewMessage("");
+          message: messages[4].msg,
+        }
+        setNewMessage("")
 
         setTimeout(() => {
           setMessages((messages) => [
             ...messages,
             { msg: "Writing it down real quick… ✍️", type: "left" },
-          ]);
-        }, 1000);
+          ])
+        }, 1000)
 
         fetch("https://formspree.io/f/xbjwjdre", {
           method: "POST",
@@ -108,20 +110,20 @@ export default function Contact() {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log("Success:", data);
+            console.log("Success:", data)
             setTimeout(() => {
               setMessages((messages) => [
                 ...messages,
                 { msg: "Done! I reach out to you soon.", type: "left" },
-              ]);
-            }, 3500);
+              ])
+            }, 3500)
           })
           .catch((error) => {
-            console.error("Error:", error);
-          });
+            console.error("Error:", error)
+          })
       }
     }
-  };
+  }
 
   return (
     <div
@@ -156,9 +158,21 @@ export default function Contact() {
       <div className="w-full flex gap-2 pl-3 pr-3 min-h-[64px] place-items-center justify-between max-sm:pb-3 max-sm:flex-wrap">
         <Menu as="div" className="relative inline-block text-left">
           <div>
-            <Menu.Button onClick={() => { setArrowUp(!arrowUp) }} className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:text-white dark:hover:border-zinc-700">
+            <Menu.Button
+              onClick={() => {
+                setArrowUp(!arrowUp)
+              }}
+              className="w-full h-[48px] flex place-items-center justify-center rounded-full border bg-white border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:text-white dark:hover:border-zinc-700"
+            >
               <Icon.Smartphone />
-              <Icon.ChevronUp className={arrowUp ? "ml-1 transition-all rotate-0" : "ml-1 transition-all rotate-180"} size={20} />
+              <Icon.ChevronUp
+                className={
+                  arrowUp
+                    ? "ml-1 transition-all rotate-0"
+                    : "ml-1 transition-all rotate-180"
+                }
+                size={20}
+              />
             </Menu.Button>
           </div>
           <Transition
@@ -170,7 +184,10 @@ export default function Contact() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items ref={menu} className="absolute overflow-hidden left-0 top-[-128px] z-10 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none focus:outline-none dark:bg-zinc-900 dark:ring-zinc-800 p-1">
+            <Menu.Items
+              ref={menu}
+              className="absolute overflow-hidden left-0 top-[-128px] z-10 origin-bottom-left rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none focus:outline-none dark:bg-zinc-900 dark:ring-zinc-800 p-1"
+            >
               <div className="py-0">
                 <Link href="https://twitter.com/floriandwt" target={"_blank"}>
                   <Menu.Item>
@@ -208,7 +225,10 @@ export default function Contact() {
                     )}
                   </Menu.Item>
                 </Link>
-                <Link href="https://www.linkedin.com/in/floriandwt/" target={"_blank"}>
+                <Link
+                  href="https://www.linkedin.com/in/floriandwt/"
+                  target={"_blank"}
+                >
                   <Menu.Item>
                     {({ active }) => (
                       <button
@@ -240,7 +260,7 @@ export default function Contact() {
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                sendMessage();
+                sendMessage()
               }
             }}
           ></input>
@@ -252,5 +272,5 @@ export default function Contact() {
         </div>
       </div>
     </div>
-  );
+  )
 }
