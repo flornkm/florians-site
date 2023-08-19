@@ -1,9 +1,12 @@
-"use client"
-
-import * as React from "react"
 import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
 import CreationGrid from "@/components/CreationGrid"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Creations",
+  description: "A collection of my creations.",
+}
 
 export default function Creations() {
   return (

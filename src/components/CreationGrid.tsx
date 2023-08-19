@@ -241,17 +241,19 @@ function CreationGrid() {
         ))}
       </div>
       <Popup
-        collaborators={currentConcept.current.collaborators}
+        collaborators={currentConcept.current.collaborators || []}
         popupState={popupState}
         setPopupState={setPopupState}
-        icon={currentConcept.current.icon}
-        name={currentConcept.current.title}
-        shortDescription={currentConcept.current.shortDescription}
-        mainImages={currentConcept.current.mainImages}
-        text={currentConcept.current.text}
-        links={currentConcept.current.links}
-        video={currentConcept.current.video}
-        videoThumbnail={currentConcept.current.videoThumbnail}
+        icon={currentConcept.current.icon || ""}
+        name={currentConcept.current.title || ""}
+        shortDescription={currentConcept.current.shortDescription || ""}
+        // @ts-ignore
+        mainImages={currentConcept.current.mainImages || []}
+        text={currentConcept.current.text || ""}
+        // @ts-ignore
+        links={currentConcept.current.links || []}
+        video={currentConcept.current.video || ""}
+        videoThumbnail={currentConcept.current.videoThumbnail || ""}
       />
     </>
   )

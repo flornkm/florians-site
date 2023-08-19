@@ -1,31 +1,38 @@
 import Project from "@/components/Project"
 import * as Icon from "react-feather"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Bridge",
+  description:
+    "The intuitive tool that effortlessly enables you to craft and showcase job pages.",
+}
 
 export default function Bridge() {
   return (
     <Project
       projectTitle="Bridge"
       shortDescription="The intuitive tool that effortlessly enables you to craft and showcase job pages"
-      bannerSource="./images/bridge/banner-bridge.webp"
+      bannerSource="/images/bridge/banner-bridge.webp"
       // collaborators={[]}
       projectMainDescription="Bridge is a browser-based software designed to provide an easy-to-use solution for creating job pages. It enables people to quickly create forms while not being forced to use an overcomplicated marketing platform that costs hundreds of dollars. Bridge also incorporates its own design token system, allowing for seamless auto-saves, real-time updates, and fast publishing of projects. This streamlined approach ensures that you can focus on crafting compelling job pages without any technical hindrances."
       slideImages={[
-        "./images/bridge/bridge_landingpage.webp",
-        "./images/bridge/bridge_colors.webp",
-        "./images/bridge/bridge_preview.webp",
-        "./images/bridge/bridge_waitlist.webp",
-        "./images/bridge/bridge_k.webp",
+        "/images/bridge/bridge_landingpage.webp",
+        "/images/bridge/bridge_colors.webp",
+        "/images/bridge/bridge_preview.webp",
+        "/images/bridge/bridge_waitlist.webp",
+        "/images/bridge/bridge_k.webp",
       ]}
-      processImage1="./images/bridge/bridge_dashboard.webp"
+      processImage1="/images/bridge/bridge_dashboard.webp"
       processHeading1="Simple dashboard"
       processText1="I designed and developed a user-friendly dashboard that brings together essential tools and features in one place. The dashboard's primary goal was to streamline workflow and minimize time spent on switching between applications."
-      processImage2="./images/bridge/bridge_popup.webp"
+      processImage2="/images/bridge/bridge_popup.webp"
       processHeading2="States and alerts"
       processText2="To enhance user understanding and provide clear feedback within the system, I focused on implementing states and alerts throughout the project. For instance, when a user publishes a job page, a popup appears to confirm the action. This ensures that users are aware of the changes they are making."
-      processImage3="./images/bridge/bridge_form.webp"
+      processImage3="/images/bridge/bridge_form.webp"
       processHeading3="Accessible and intuitive forms"
       processText3="I designed and developed the job pages consisting of a form that allows users to enter information related to the job opening. I focused on making the form as accessible and intuitive as possible, ensuring that users can easily navigate and complete it. The database is built on top of my own thought-through design token system, which allows for easy customization and scalability as well as real-time updates."
-      processImage4="./images/bridge/bridge_submissions.webp"
+      processImage4="/images/bridge/bridge_submissions.webp"
       processHeading4="Submission management"
       processText4="For the submission management system, I focused on creating a simple and intuitive interface that allows users to easily manage and organize their submissions. This feature allows users to view and manage all submissions in one place, making it easier to keep track of the hiring process, as well as export the data."
       challenge="In today's job market, it often seems that companies either use Notion Boards or overly complicated platforms to post their job openings. This creates a dilemma for both employers and job seekers. I was curious about finding a solution that strikes a balance between the simplicity of a Notion Board and the flexibility of a complete marketing platform. To better understand this challenge, I conducted interviews with professionals working in growing companies."

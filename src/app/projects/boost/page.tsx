@@ -1,12 +1,18 @@
 import Project from "@/components/Project"
 import * as Icon from "react-feather"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Boost",
+  description: "Nutrition application & hardware device.",
+}
 
 export default function Bridge() {
   return (
     <Project
       projectTitle="Boost"
       shortDescription="Nutrition application & hardware device"
-      bannerSource="./images/boost/banner-boost.jpg"
+      bannerSource="/images/boost/banner-boost.jpg"
       collaborators={["Anton"]}
       projectMainDescription="Boost is a prototype of an innovative digital product and app
       designed and developed with Ionic React, NodeJS Express, and Prisma.
@@ -17,13 +23,13 @@ export default function Bridge() {
       prototype and develop its design, ensuring a seamless user
       experience."
       slideImages={[
-        "./images/boost/boost_app_in_hand.webp",
-        "./images/boost/boost_application.webp",
-        "./images/boost/boost_detail.webp",
-        "./images/boost/boost_full_device.webp",
-        "./images/boost/boost_in_use.webp",
+        "/images/boost/boost_app_in_hand.webp",
+        "/images/boost/boost_application.webp",
+        "/images/boost/boost_detail.webp",
+        "/images/boost/boost_full_device.webp",
+        "/images/boost/boost_in_use.webp",
       ]}
-      processImage1="./images/boost/boost_research.webp"
+      processImage1="/images/boost/boost_research.webp"
       processHeading1="Research"
       processText1="First of all, we had to make a survey to find out what people
       thought about the current state of the nutrition industry. We
@@ -34,7 +40,7 @@ export default function Bridge() {
       taking supplements in the form of pills, powders, and liquids,
       but when they could choose, they would prefer to take them in
       the form of a drink or powder because it is more convenient."
-      processImage2="./images/boost//boost_vertical_prototype.webp"
+      processImage2="/images/boost//boost_vertical_prototype.webp"
       processHeading2="Vertical Prototyping"
       processText2="In the vertical prototyping phase, we had to create a hardware
       prototype that is close to the final prototype. The goal was
@@ -48,7 +54,7 @@ export default function Bridge() {
       Our tech stack for the project was made clear, we were going
       to use Ionic React for the Frontend, NodeJS Express for the
       Backend, and Prisma for the database."
-      processImage3="./images/boost/boost_app.webp"
+      processImage3="/images/boost/boost_app.webp"
       processHeading3="Frontend"
       processText3="When researching and discussing our Frontend, we came to the
       conclusion that it would be best, if we develope a application
@@ -63,7 +69,7 @@ export default function Bridge() {
       host the Backend. We have connected the application with Apple
       HealthKit and OpenWeather API to get the user's location and
       weather data for calculating the user's daily vitamin intake."
-      processImage4="./images/boost/boost_device.webp"
+      processImage4="/images/boost/boost_device.webp"
       processHeading4="Hardware device"
       processText4="In our hardware, we incorporate a total of seven stepper
       motors, along with a selection of sensors, a circular display,
@@ -81,7 +87,7 @@ export default function Bridge() {
       received a lot of positive feedback. People told us they would
       use the app and device if it was available. We also were invited
       to present our project at a Startup Accelerator."
-      videoThumbnail="./images/boost/boost_device.webp"
+      videoThumbnail="/images/boost/boost_device.webp"
       videoSource="https://www.youtube.com/embed/DTpulxnIuxg?autoplay=1&loop=1"
       projectLinks={[
         {

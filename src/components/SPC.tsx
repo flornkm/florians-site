@@ -17,16 +17,16 @@ function ProjectsContact(props: any) {
 
   useEffect(() => {
     if (projectsVisible) {
-      props.highlight = "Work"
+      props.setHighlight("Work")
     } else {
-      props.highlight = "Home"
+      props.setHighlight("Home")
     }
     if (contactVisible) {
       setMailActive(true)
     } else {
       setMailActive(false)
     }
-  }, [projectsVisible, contactVisible, props])
+  }, [projectsVisible, contactVisible])
 
   const copyMail = () => {
     copy("florian.kiem@hfg.design")

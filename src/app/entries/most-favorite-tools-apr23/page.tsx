@@ -6,7 +6,7 @@ export default function JounalEntry() {
     <>
       <Journal
         mainImage={
-          "images/entries/favorite-tools-apr23/most_favourite_tools_apr23.webp"
+          "/images/entries/favorite-tools-apr23/most_favourite_tools_apr23.webp"
         }
         title={"Flos most favorite tools: April 2023 edition"}
         date={"2023-04-26"}

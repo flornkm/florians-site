@@ -5,15 +5,7 @@ import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import Item from "./Item"
 
-const SortableItem = (props: {
-  id: string
-  title: string
-  text: string
-  date: string
-  mainImage: string
-  slug: string
-  index: number
-}) => {
+const SortableItem = (props: { key: string; id: string; index: number }) => {
   const {
     isDragging,
     attributes,

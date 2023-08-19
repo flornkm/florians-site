@@ -5,7 +5,7 @@ export default function JounalEntry() {
     <>
       <Journal
         mainImage={
-          "images/entries/webdesign_in_the_future/websites_in_the_future.webp"
+          "/images/entries/webdesign_in_the_future/websites_in_the_future.webp"
         }
         title={"The Web in the future"}
         date={"2022-11-07"}
