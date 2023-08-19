@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from "react"
 
 export function useIsVisible(ref: React.RefObject<HTMLDivElement>) {
