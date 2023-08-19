@@ -1,10 +1,13 @@
+"use client"
+
+import { useState } from "react"
 import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
 import ProjectsContact from "@/components/SPC"
 import Link from "next/link"
 
 export default function Home() {
-  let highlight = "Home"
+  const [highlight, setHighlight] = useState("Home")
 
   return (
     <>
@@ -152,7 +155,7 @@ export default function Home() {
             <p className="text-zinc-400 dark:text-zinc-300">Development</p>
           </div>
         </div>
-        <ProjectsContact highlight={highlight} />
+        <ProjectsContact setHighlight={setHighlight} />
         <div className="h-64"></div>
       </main>
       <Footer />

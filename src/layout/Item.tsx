@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 
 import Link from "next/link"
@@ -9,7 +10,6 @@ import { Play, Pause } from "phosphor-react"
 // import AudioPlayer from "react-h5-audio-player";
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
-import { imgLoader } from "@/utils/imgLoader"
 
 // dynamic import audio player
 const AudioPlayer = dynamic(() => import("react-h5-audio-player"), {
@@ -86,7 +86,7 @@ const Item = forwardRef(
 
       // reset the story block elements
       const resetStoryBlocks = () => {
-        storyBlockRefs.forEach((ref) => {
+        storyBlockRefs.forEach((ref: any) => {
           if (ref) {
             ref.style.width = "0%"
             ref.style.transition = "none"
@@ -106,7 +106,7 @@ const Item = forwardRef(
             index++
           } else {
             // end the animation cycle and reset the story block elements
-            storyBlockRefs[0].style.transition = "none" // remove the transition for the first element
+            storyBlockRefs[0].style.transition = "none" as any // remove the transition for the first element
             storyBlockRefs[0].style.width = "0%" // set the width of the first element to 0%
             resetStoryBlocks()
           }

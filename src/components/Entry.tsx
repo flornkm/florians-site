@@ -1,9 +1,33 @@
-"use client"
-
-import { NextSeo } from "next-seo"
 import Image from "next/image"
 import Navigation from "@/components/Navigation"
 import Footer from "@/components/Footer"
+import type { Metadata, ResolvingMetadata } from "next"
+
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent?: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id
+
+  // fetch data
+  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = ((await parent) as any).openGraph?.images || []
+
+  return {
+    title: product.title,
+    openGraph: {
+      images: ["/some-specific-page-image.jpg", ...previousImages],
+    },
+  }
+}
 
 export default function Entry({
   title,
@@ -16,50 +40,13 @@ export default function Entry({
   mainImage: string
   date: string
 }) {
-  const imgLoader = ({
-    src,
-    width,
-    quality,
-  }: {
-    src: string
-    width: number
-    quality: number
-  }) => {
-    return `/${src}?w=${width}&q=${quality || 75}`
-  }
-
   return (
     <>
-      <NextSeo
-        title={title + " - Florian"}
-        description="Read more about this journal entry."
-        openGraph={{
-          url: "floriandwt.com",
-          title: title + " - Florian",
-          description: "",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-      />
       <Navigation title={title} highlight={"Entry"} />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-transparent dark:text-white relative">
         <div className="flex flex-col items-center justify-center h-full pt-24 max-md:pt-16 mb-6 w-full">
           <div className="max-w-2xl mb-12">
             <Image
-              loader={imgLoader as any}
               src={mainImage}
               alt="Journal Cover"
               width={1920}

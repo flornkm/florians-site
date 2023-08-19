@@ -143,8 +143,7 @@ export default function Project({
                     <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                   </div>
                   <Image
-                    loader={imgLoader}
-                    src="./images/people/anton_stallboerger.jpg"
+                    src="/images/people/anton_stallboerger.jpg"
                     alt="Anton Stallbörger"
                     className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
@@ -163,8 +162,7 @@ export default function Project({
                     <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                   </div>
                   <Image
-                    loader={imgLoader}
-                    src="./images/people/nils_eller.jpg"
+                    src="/images/people/nils_eller.jpg"
                     alt="Nils Eller"
                     className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
@@ -183,8 +181,7 @@ export default function Project({
                     <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
                   </div>
                   <Image
-                    loader={imgLoader}
-                    src="./images/people/alice_sopp.jpg"
+                    src="/images/people/alice_sopp.jpg"
                     alt="Alice Sopp"
                     className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
                     width={48}
@@ -195,7 +192,6 @@ export default function Project({
             </div>
           )}
           <Image
-            loader={imgLoader}
             src={bannerSource}
             alt={"Project Banner Image for " + projectTitle}
             className="inline-flex object-cover object-center max-h-128 mb-10 bg-zinc-100 dark:bg-[#09090b] rounded-lg"
@@ -234,7 +230,6 @@ export default function Project({
                             alt={
                               "Slide Image " + index + " for " + projectTitle
                             }
-                            loader={imgLoader}
                             src={slideImage}
                             className="inline-flex object-cover object-center mb-2 max-md:object-contain"
                             width={1000}
@@ -280,7 +275,6 @@ export default function Project({
             <div className="w-full flex justify-end">
               <div className="flex flex-col xl:max-w-3xl">
                 <Image
-                  loader={imgLoader}
                   src={processImage1}
                   alt={processHeading1}
                   quality={100}
@@ -296,7 +290,6 @@ export default function Project({
                 </p>
                 <div className="h-16"></div>
                 <Image
-                  loader={imgLoader}
                   src={processImage2}
                   alt={processHeading2}
                   quality={100}
@@ -312,7 +305,6 @@ export default function Project({
                 </p>
                 <div className="h-16"></div>
                 <Image
-                  loader={imgLoader}
                   src={processImage3}
                   alt={processHeading3}
                   quality={100}
@@ -329,9 +321,8 @@ export default function Project({
                 {processImage4 && <div className="h-16"></div>}
                 {processImage4 && (
                   <Image
-                    loader={imgLoader}
                     src={processImage4}
-                    alt={processHeading4}
+                    alt={processHeading4 || ""}
                     quality={100}
                     className="inline-flex object-cover object-center max-h-96 mb-8 bg-zinc-100 dark:bg-[#09090b]"
                     width={800}
@@ -371,16 +362,14 @@ export default function Project({
                 {!video && (
                   <div className="w-full h-full flex justify-center place-items-center">
                     <Image
-                      loader={imgLoader}
-                      src={videoThumbnail}
+                      src={videoThumbnail as string}
                       alt="Video Thumbnail"
                       className="w-full h-full rounded-2xl aspect-video object-cover"
                       width={1920}
                       height={1080}
                     />
                     <Image
-                      loader={imgLoader}
-                      src="./images/play_button.svg"
+                      src="/images/play_button.svg"
                       alt="Play Button"
                       onClick={() => setVideo(true)}
                       className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
@@ -395,10 +384,9 @@ export default function Project({
                     height="auto"
                     src={videoSource}
                     title="YouTube video player"
-                    frameborder="0"
-                    className="min-h-96 rounded-2xl aspect-video"
+                    className="max-h-80 aspect-video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
+                    allowFullScreen={true}
                   ></iframe>
                 )}
               </div>
@@ -423,7 +411,6 @@ export default function Project({
                       {link.url && (
                         <Image
                           alt="Link Icon"
-                          href={link.url}
                           className="rounded-full mr-2"
                           src={
                             // just take https://unavatar.io/ + the root domain of the url
