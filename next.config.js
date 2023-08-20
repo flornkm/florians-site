@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const path = require("path")
+const { withContentlayer } = require("next-contentlayer")
 
 const nextConfig = {
   experimental: {
@@ -15,4 +15,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)
