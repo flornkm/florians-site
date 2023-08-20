@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react"
 import { useIsVisible } from "@/hooks/useIsVisible"
 import Contact from "./Contact"
-import Projects from "./Projects"
+import Projects from "./ProjectsOverview"
 import copy from "copy-to-clipboard"
 import * as Icon from "react-feather"
 

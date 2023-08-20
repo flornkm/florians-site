@@ -1,8 +1,11 @@
-"use client"
+import Navigation from "@/components/interface/Navigation"
+import Footer from "@/components/interface/Footer"
+import type { Metadata } from "next"
 
-import { NextSeo } from "next-seo"
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
+export const metadata: Metadata = {
+  title: "History",
+  description: "The history of this website.",
+}
 
 export default function History() {
   const versions = [
@@ -34,31 +37,7 @@ export default function History() {
 
   return (
     <>
-      <NextSeo
-        title="History - Florian"
-        description="Florians Website History."
-        openGraph={{
-          url: "floriandwt.com",
-          title: "History - Florian",
-          description: "Florians Website History.",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-      />
-      <Navigation title={"Design Engineer"} highlight={"Legal"} />
+      <Navigation title="Website History" />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16">
           <h1 className="text-3xl font-semibold text-left mb-3">History</h1>

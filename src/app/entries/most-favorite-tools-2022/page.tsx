@@ -1,4 +1,10 @@
-import Journal from "@/components/Entry"
+import Journal from "@/components/template/Entry"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Flos most favorite tools: 2022 edition",
+  description: "Here are my 3 most favourite tools in 2022.",
+}
 
 export default function JounalEntry() {
   return (

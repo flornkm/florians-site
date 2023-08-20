@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import Popup from "./Popup"
+import Popup from "../template/Popup"
 
 function CreationGrid() {
   const [popupState, setPopupState] = useState(false)

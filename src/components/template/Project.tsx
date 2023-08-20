@@ -6,8 +6,8 @@ import { NextSeo } from "next-seo"
 import * as React from "react"
 import * as Icon from "react-feather"
 import { useState, useEffect, useCallback } from "react"
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
+import Navigation from "@/components/interface/Navigation"
+import Footer from "@/components/interface/Footer"
 import useEmblaCarousel from "embla-carousel-react"
 
 export default function Project({
