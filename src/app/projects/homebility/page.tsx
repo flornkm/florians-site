@@ -1,4 +1,4 @@
-import Project from "@/components/Project"
+import Project from "@/components/template/Project"
 import * as Icon from "react-feather"
 import type { Metadata } from "next"
 
