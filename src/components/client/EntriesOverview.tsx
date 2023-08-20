@@ -1,11 +1,7 @@
 "use client"
 
-import Head from "next/head"
 import Link from "next/link"
-import { NextSeo } from "next-seo"
 import { useState, useRef, useEffect } from "react"
-import Navigation from "@/components/interface/Navigation"
-import Footer from "@/components/interface/Footer"
 import Image from "next/image"
 import { Transition } from "@headlessui/react"
 
@@ -67,10 +63,10 @@ export default function Content({
           className="flex flex-col items-start gap-8 md:pt-32 md:pl-12 pb-24 md:min-w-[450px]"
           ref={reference}
         >
-          {entries.map((entry) => (
+          {entries.map((entry, idx) => (
             <Link
               key={entries.indexOf(entry)}
-              href={entry.link}
+              href={{ pathname: `/entries/${entry.slug}` }}
               onMouseOver={() => {
                 setImgShow(true)
                 setHoveredImg(entry.image)
@@ -78,13 +74,13 @@ export default function Content({
               onMouseLeave={() => {
                 setImgShow(false)
               }}
-              className="cursor-pointer flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900 relative -left-4"
+              className="cursor-pointer w-full flex flex-col justify-start transition-all hover:bg-zinc-100 px-4 py-3 rounded-lg text-zinc-600 hover:text-black dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900 relative -left-4"
             >
-              <h3 className="text-lg font-medium text-ellipsis transition-all text-black dark:text-white">
+              <h3 className="text-lg font-medium md:line-clamp-1 text-ellipsis transition-all text-black dark:text-white mb-2">
                 {entry.title}
               </h3>
-              <p className="text-ellipsis transition-all text-zinc-500 dark:text-zinc-400">
-                {entry.description}
+              <p className="text-ellipsis transition-all text-zinc-500 dark:text-zinc-400 font-mono text-sm">
+                {entry.date}
               </p>
             </Link>
           ))}

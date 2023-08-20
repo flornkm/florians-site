@@ -26,7 +26,7 @@ function ProjectsContact(props: any) {
     } else {
       setMailActive(false)
     }
-  }, [projectsVisible, contactVisible])
+  }, [projectsVisible, contactVisible, props])
 
   const copyMail = () => {
     copy("florian.kiem@hfg.design")
