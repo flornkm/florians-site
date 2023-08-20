@@ -1,13 +1,16 @@
 /** @type {import('next').NextConfig} */
+const path = require("path")
+
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: ["unavatar.io"],
-  },
   experimental: {
-    appDir: true,
-    fontLoaders: [
-      { loader: "@next/font/google", options: { subsets: ["latin"] } },
+    serverActions: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
 }
