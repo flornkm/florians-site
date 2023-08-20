@@ -9,22 +9,22 @@ import localFont from "@next/font/local"
 const Pretendard = localFont({
   src: [
     {
-      path: "../../public/fonts/Pretendard/Pretendard-Bold.woff2",
+      path: "../../../public/fonts/Pretendard/Pretendard-Bold.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard/Pretendard-SemiBold.woff2",
+      path: "../../../public/fonts/Pretendard/Pretendard-SemiBold.woff2",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard/Pretendard-Medium.woff2",
+      path: "../../../public/fonts/Pretendard/Pretendard-Medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard/Pretendard-Regular.woff2",
+      path: "../../../public/fonts/Pretendard/Pretendard-Regular.woff2",
       weight: "400",
       style: "normal",
     },

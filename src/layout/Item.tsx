@@ -304,7 +304,7 @@ const Item = forwardRef(
           {...props}
         >
           <AudioPlayer
-            autoPlay
+            autoPlay={false}
             src={
               [
                 "https://dl.dropboxusercontent.com/s/lxkyij9yfjak571/SyncHits-Toast_Hawaii.wav?dl=0",

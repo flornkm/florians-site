@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import Footer from "@/components/Footer"
+import Footer from "@/components/interface/Footer"
 import { useEffect, useRef, useState } from "react"
 import * as Icon from "react-feather"
 import { NextSeo } from "next-seo"

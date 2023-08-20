@@ -1,5 +1,11 @@
-import Journal from "@/components/Entry"
+import Journal from "@/components/template/Entry"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Flos most favorite tools: June 2023 edition",
+  description: "Here are my 3 most favourite tools in June 2023.",
+}
 
 export default function JounalEntry() {
   return (

@@ -1,4 +1,10 @@
-import Journal from "@/components/Entry"
+import Journal from "@/components/template/Entry"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Webdesign in the future",
+  description: "What will the internet look like in the future?",
+}
 
 export default function JounalEntry() {
   return (

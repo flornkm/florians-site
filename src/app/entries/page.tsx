@@ -1,6 +1,6 @@
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
-import Content from "@/components/Content"
+import Navigation from "@/components/interface/Navigation"
+import Footer from "@/components/interface/Footer"
+import Content from "@/components/client/EntriesOverview"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -69,7 +69,7 @@ export default function Entries() {
 
   return (
     <>
-      <Navigation title={"Design Engineer"} highlight={"Legal"} />
+      <Navigation title="Entries" />
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <Content entries={entries} />
       </main>

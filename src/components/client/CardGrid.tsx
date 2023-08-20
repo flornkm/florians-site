@@ -263,7 +263,7 @@ export default function PersonalGrid() {
             </Grid>
           </SortableContext>
           <DragOverlay adjustScale={true}>
-            {activeId ? <Item /> : null}
+            {activeId ? <Item id={activeId} /> : null}
           </DragOverlay>
         </DndContext>
       </div>

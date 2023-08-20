@@ -1,39 +1,29 @@
-"use client"
-
 import Link from "next/link"
-import Navigation from "@/components/Navigation"
-import { NextSeo } from "next-seo"
-import Footer from "@/components/Footer"
+import Navigation from "@/components/interface/Navigation"
+import Footer from "@/components/interface/Footer"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+}
 
 export default function LegalNotice() {
   return (
     <>
-      <NextSeo
-        title="Privacy Poliy - Florian"
-        description=""
-        openGraph={{
-          url: "floriandwt.com",
-          title: "Privacy Poliy - Florian",
-          description: "",
-          images: [
-            {
-              url: "/images/florian_opengraph.jpg",
-              width: 800,
-              height: 600,
-              alt: "Florian - Design Engineer",
-              type: "image/jpeg",
-            },
-          ],
-          siteName: "Florian - Design Engineer",
-        }}
-        twitter={{
-          handle: "@floriandwt",
-          site: "@floriandwt",
-          cardType: "summary_large_image",
-        }}
-        nofollow={true}
-      />
-      <Navigation title={"Design Engineer"} highlight={"Legal"} />
+      <Navigation title="Privacy Policy" />
       <main className="max-md:w-[90%] w-full min-h-screen max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 mb-16">
           <h1 className="text-lg font-semibold mb-12">Privacy Policy</h1>

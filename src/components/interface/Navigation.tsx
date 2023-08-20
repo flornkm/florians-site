@@ -10,7 +10,7 @@ export default function Navigation({
   contact,
 }: {
   title: string
-  highlight: string
+  highlight?: string
   contact?: boolean
 }) {
   const [scrolled, setScrolled] = useState(false)
