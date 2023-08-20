@@ -1,6 +1,6 @@
 <div>
     <p align="center">
-        <img width="450px" src="https://github.com/floriandwt/florians-website/assets/92092993/c7e90d14-e78a-491d-9f83-277b0e769e6e"/>
+        <img width="450px" src="https://floriankiem.com/images/florian_opengraph.jpg"/>
     </p>
     <h1 align="center">
         Florians Website
