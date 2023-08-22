@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Navigation from "@/components/interface/Navigation"
 import Footer from "@/components/interface/Footer"
-import ProjectsContact from "@/components/client/SPC"
+import ProjectsContact from "@/components/client/ProjectContactSection"
 import Link from "next/link"
 
 export default function Home() {
