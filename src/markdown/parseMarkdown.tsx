@@ -2,9 +2,23 @@ import * as React from "react"
 import NextImage from "next/image"
 import NextLink from "next/link"
 import { useMDXComponent } from "next-contentlayer/hooks"
+import ProjectLayout from "@/layout/ProjectLayout"
 
 function Image(props: any) {
-  return <NextImage alt={props.alt} {...props} />
+  if (props.src.includes("youtube")) {
+    return (
+      <iframe
+        width="100%"
+        height="auto"
+        src={props.src}
+        title="YouTube video player"
+        className="aspect-video"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      ></iframe>
+    )
+  } else {
+    return <NextImage width={1280} height={720} alt={props.alt} {...props} />
+  }
 }
 
 function Button(props: any) {
@@ -22,7 +36,7 @@ function Button(props: any) {
 }
 
 const components = {
-  Image,
+  img: Image,
   h1: (props: any) => <h1 className="text-2xl font-semibold mt-2" {...props} />,
   h2: (props: any) => <h2 className="text-xl font-semibold mt-2" {...props} />,
   h3: (props: any) => <h3 className="text-xl font-semibold mt-2" {...props} />,
@@ -44,8 +58,19 @@ interface MdxProps {
   children: string
 }
 
-export function Markdown({ children }: React.PropsWithChildren<MdxProps>) {
-  const Component = useMDXComponent(children)
+export function Markdown(props: {
+  type?: string
+  children: MdxProps["children"]
+}) {
+  const Component = useMDXComponent(props.children)
 
-  return <Component components={{ ...components }} />
+  if (props.type === "project") {
+    return (
+      <ProjectLayout {...props}>
+        <Component components={{ ...components }} />
+      </ProjectLayout>
+    )
+  } else {
+    return <Component components={{ ...components }} />
+  }
 }
