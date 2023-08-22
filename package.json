@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
@@ -40,6 +41,9 @@
   },
   "devDependencies": {
     "contentlayer": "^0.3.4",
-    "next-contentlayer": "^0.3.4"
+    "next-contentlayer": "^0.3.4",
+    "eslint": "^8.47.0",
+    "prettier": "^3.0.2",
+    "turbo": "^1.10.12"
   }
 }
