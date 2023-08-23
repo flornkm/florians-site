@@ -24,7 +24,22 @@ export default function Footer() {
   const [colorTheme, setColorTheme] = useState("" as string | null)
 
   useEffect(() => {
-    setColorTheme(localStorage.getItem("color-theme"))
+    setColorTheme(localStorage.getItem("flos-color-theme"))
+
+    if (localStorage.getItem("flos-color-theme") === "dark") {
+      document.documentElement.classList.add("dark")
+    } else if (localStorage.getItem("flos-color-theme") === "light") {
+      document.documentElement.classList.remove("dark")
+    } else if (localStorage.getItem("flos-color-theme") === null) {
+      if (
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark")
+      } else {
+        document.documentElement.classList.remove("dark")
+      }
+    }
   }, [])
 
   const AnalogClock = dynamic(() => import("analog-clock-react" as any), {
@@ -82,7 +97,7 @@ export default function Footer() {
               <button
                 onClick={() => {
                   document.documentElement.classList.remove("dark")
-                  localStorage.setItem("color-theme", "light")
+                  localStorage.setItem("flos-color-theme", "light")
                   setColorTheme("light")
                   setArrowUp(false)
                 }}
@@ -98,7 +113,7 @@ export default function Footer() {
               <button
                 onClick={() => {
                   document.documentElement.classList.add("dark")
-                  localStorage.setItem("color-theme", "dark")
+                  localStorage.setItem("flos-color-theme", "dark")
                   setColorTheme("dark")
                   setArrowUp(false)
                 }}
@@ -113,8 +128,8 @@ export default function Footer() {
               </button>
               <button
                 onClick={() => {
-                  if (localStorage.getItem("color-theme")) {
-                    localStorage.removeItem("color-theme")
+                  if (localStorage.getItem("flos-color-theme")) {
+                    localStorage.removeItem("flos-color-theme")
                     window.location.reload()
                   }
                   setArrowUp(false)
