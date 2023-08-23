@@ -18,7 +18,15 @@ const Image = (props: any) => {
       ></iframe>
     )
   } else {
-    return <NextImage width={1280} height={720} alt={props.alt} {...props} />
+    return (
+      <NextImage
+        width={1280}
+        height={720}
+        className="bg-zinc-50 dark:bg-zinc-950"
+        alt={props.alt}
+        {...props}
+      />
+    )
   }
 }
 
@@ -55,7 +63,12 @@ const components: MDXComponents = {
   h6: (props: any) => (
     <h6 className="text-lg font-semibold mt-4 mb-1" {...props} />
   ),
-  p: (props: any) => <p className="my-6 leading-relaxed" {...props} />,
+  p: (props: any) => (
+    <p
+      className="my-6 leading-relaxed text-zinc-700 dark:text-zinc-300"
+      {...props}
+    />
+  ),
   strong: (props: any) => <b className="font-medium" {...props} />,
   a: Button,
   /*
@@ -87,6 +100,10 @@ const components: MDXComponents = {
     <div className="flex items-center justify-end md:grid-cols-2 gap-4 flex-wrap">
       {props.children}
     </div>
+  ),
+  Video: (props: { children: React.ReactNode }) => (
+    // TODO: Code the video component
+    <div className="aspect-video hidden">{props.children}</div>
   ),
 }
 

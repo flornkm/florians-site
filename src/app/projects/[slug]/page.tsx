@@ -21,7 +21,7 @@ const ProjectLayout = ({ params }: { params: { slug: string } }) => {
   if (project) {
     return (
       <>
-        <Navigation title={project.title} />
+        <Navigation title={project.title} highlight="Work" />
         <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-transparent dark:text-white relative">
           <Project project={project} />
         </main>
