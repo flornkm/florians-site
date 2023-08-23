@@ -1,0 +1,47 @@
+.layered p,
+.sticked div {
+    grid-column: span 2 / span 2;
+}
+
+.layered>h1,
+.layered>h2,
+.layered>h3,
+.layered>h4,
+.layered>h5,
+.layered>h6 {
+    padding-top: 20px;
+}
+
+.layered ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.layered>ul>li>div {
+    margin: 0px;
+    margin-top: 32px;
+}
+
+@media (min-width: 768px) {
+    .layered ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: flex-end;
+        gap: 16px;
+        grid-column: span 2 / span 2;
+    }
+
+
+    .sticked>h1,
+    .sticked>h2,
+    .sticked>h3,
+    .sticked>h4,
+    .sticked>h5,
+    .sticked>h6 {
+        position: sticky;
+        top: 96px;
+    }
+}
