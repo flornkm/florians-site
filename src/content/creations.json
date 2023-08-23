@@ -1,0 +1,165 @@
+{
+  "previews": [
+    {
+      "title": "Granny AI",
+      "description": "AI Hackathon Project",
+      "icon": "/images/icons/granny_ai_icon.jpg",
+      "preview": "/images/granny_ai/granny_ai_preview.png"
+    },
+    {
+      "title": "Web Audit",
+      "description": "Raycast SEO Extension",
+      "icon": "/images/icons/web_audit_icon.jpg",
+      "preview": "/images/web_audit/web-audit_preview.png"
+    },
+    {
+      "title": "Nutri",
+      "description": "Social Food App",
+      "icon": "/images/icons/nutri_icon.jpg",
+      "preview": "/images/nutri/nutri_preview.png"
+    },
+    {
+      "title": "HeartbeatOS",
+      "description": "Heart Simulator & Monitoring",
+      "icon": "/images/icons/heartbeatos_icon.jpg",
+      "preview": "/images/heartbeat/heartbeat_preview.png"
+    },
+    {
+      "title": "Stackoverflow",
+      "description": "Redesign & Extension",
+      "icon": "/images/icons/stackoverflow_icon.jpg",
+      "preview": "/images/stackoverflow/stackoverflow_preview.png"
+    },
+    {
+      "title": "Visualization",
+      "description": "ThreeJS Data Visualization",
+      "icon": "/images/icons/visualization_icon.jpg",
+      "preview": "/images/visualization/visualization_preview.png"
+    }
+  ],
+  "data": {
+    "Nutri": {
+      "collaborators": ["Anton", "Nils"],
+      "title": "Nutri",
+      "shortDescription": "Social Food App",
+      "icon": "/images/icons/nutri_icon.jpg",
+      "video": null,
+      "mainImages": [
+        "/images/nutri/nutri_mockup.jpg",
+        "/images/nutri/nutri_double_diamond.jpg",
+        "/images/nutri/nutri_phone.jpg"
+      ],
+      "text": "Nutri is an innovative social food and recipe app concept...",
+      "links": [
+        {
+          "text": "View Prototype",
+          "url": "https://www.figma.com/proto/tO5jcdD8IQBqJ6M6atsSHg/Designmethoden-Prototypen?page-id=0%3A1&node-id=1%3A7&viewport=-126%2C337%2C0.16&scaling=scale-down&starting-point-node-id=1%3A7&show-proto-sidebar=1"
+        }
+      ]
+    },
+    "Stackoverflow": {
+      "collaborators": ["Nils"],
+      "title": "Stackoverflow",
+      "shortDescription": "Redesign & Extension",
+      "icon": "/images/icons/stackoverflow_icon.jpg",
+      "video": null,
+      "mainImages": [
+        "/images/stackoverflow/stackoverflow_redesign.jpg",
+        "/images/stackoverflow/stackoverflow_extension.jpg",
+        "/images/stackoverflow/stackoverflow_mockup.jpg"
+      ],
+      "text": "At the core of our project is a redesign of the Stack Overflow website...",
+      "links": [
+        {
+          "text": "View Prototype",
+          "url": "https://www.figma.com/proto/UIh7ItWTGGOeEmcRwNq9Of/stackoverflow_redesign?page-id=218%3A884&node-id=427%3A1477&viewport=330%2C-71%2C0.02&scaling=scale-down&starting-point-node-id=427%3A1477&show-proto-sidebar=1"
+        }
+      ]
+    },
+    "Visualization": {
+      "collaborators": ["Nils"],
+      "title": "Visualization",
+      "shortDescription": "ThreeJS Data Visualization",
+      "icon": "/images/icons/visualization_icon.jpg",
+      "video": null,
+      "mainImages": [
+        "/images/visualization/visualization_website.jpg",
+        "/images/visualization/visualization_colors.jpg",
+        "/images/visualization/visualization_options.jpg"
+      ],
+      "text": "In this project, we utilized the power of ThreeJS to create a data visualization of homicides from around the world...",
+      "links": [
+        {
+          "text": "Visualization Website",
+          "url": "https://homicides-visualization.designwithtech.com/"
+        }
+      ]
+    },
+    "HeartbeatOS": {
+      "collaborators": ["Anton"],
+      "title": "HeartbeatOS",
+      "shortDescription": "Heart Simulator & Monitoring",
+      "icon": "/images/icons/heartbeatos_icon.jpg",
+      "video": null,
+      "mainImages": [
+        "/images/heartbeat/heartbeat_mockup.jpg",
+        "/images/heartbeat/heartbeat_interface.jpg",
+        "/images/heartbeat/heartbeat_documentation.jpg"
+      ],
+      "text": "A heartbeat sensor and pulse sensor communication system that utilizes cutting-edge technology...",
+      "links": [
+        {
+          "text": "Frontend",
+          "url": "https://heartbeat-frontend.azurewebsites.net/"
+        },
+        {
+          "text": "Documentation",
+          "url": "https://heartbeat-documentation.vercel.app/"
+        }
+      ]
+    },
+    "Web Audit": {
+      "collaborators": [""],
+      "title": "Web Audit",
+      "shortDescription": "Raycast SEO Extension",
+      "icon": "/images/icons/web_audit_icon.jpg",
+      "video": "https://www.youtube.com/embed/hMlDm9P88nY?autoplay=1&mute=1&loop=1",
+      "videoThumbnail": "/images/web_audit/web-audit_thumbnail.jpg",
+      "mainImages": [
+        "/images/web_audit/web-audit_analyze.jpg",
+        "/images/web_audit/web-audit_score.jpg",
+        "/images/web_audit/web-audit_info.jpg"
+      ],
+      "text": "A Raycast extension that allows users to quickly and easily perform a website audit...",
+      "links": [
+        {
+          "text": "Raycast Store",
+          "url": "https://www.raycast.com/floriandwt/web-audit"
+        },
+        {
+          "text": "GitHub",
+          "url": "https://github.com/floriandwt/web-audit-extension"
+        }
+      ]
+    },
+    "Granny AI": {
+      "collaborators": ["Anton"],
+      "title": "Granny AI",
+      "shortDescription": "AI Chatbot for Shopping made in 48h",
+      "icon": "/images/icons/granny_ai_icon.jpg",
+      "video": "https://www.youtube.com/embed/HgsiSR1c7sk?autoplay=1&mute=1&loop=1",
+      "videoThumbnail": "/images/granny_ai/granny_ai_interface.jpg",
+      "mainImages": [
+        "/images/granny_ai/granny_ai_figma.jpg",
+        "/images/granny_ai/granny_ai_popup.jpg"
+      ],
+      "text": "Grandmas often have the best advice. Granny AI is a really quick developed AI bot that helps you with your decisions...",
+      "links": [
+        {
+          "text": "View and Test (on own risk)",
+          "url": "https://granny-ai.vercel.app/"
+        }
+      ]
+    }
+  }
+}

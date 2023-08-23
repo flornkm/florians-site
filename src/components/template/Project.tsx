@@ -47,7 +47,7 @@ const Project = ({ project }: { project: Record<string, any> }) => {
               <Image
                 src="/images/people/anton_stallboerger.jpg"
                 alt="Anton Stallbörger"
-                className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
+                className="inline-flex ring-1 ring-zinc-300 dark:ring-zinc-700 object-cover object-center max-h-128 rounded-full"
                 width={48}
                 height={48}
               />
@@ -66,7 +66,7 @@ const Project = ({ project }: { project: Record<string, any> }) => {
               <Image
                 src="/images/people/nils_eller.jpg"
                 alt="Nils Eller"
-                className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
+                className="inline-flex ring-1 ring-zinc-300 dark:ring-zinc-700 object-cover object-center max-h-128 rounded-full"
                 width={48}
                 height={48}
               />
@@ -85,7 +85,7 @@ const Project = ({ project }: { project: Record<string, any> }) => {
               <Image
                 src="/images/people/alice_sopp.jpg"
                 alt="Alice Sopp"
-                className="inline-flex ring-1 ring-zinc-300 object-cover object-center max-h-128 rounded-full"
+                className="inline-flex ring-1 ring-zinc-300 dark:ring-zinc-700 object-cover object-center max-h-128 rounded-full"
                 width={48}
                 height={48}
               />

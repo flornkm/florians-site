@@ -23,7 +23,19 @@
     margin-top: 32px;
 }
 
+ul>li>div>a.dflt-button {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
 @media (min-width: 768px) {
+
     .layered ul {
         display: flex;
         flex-direction: row;
@@ -34,7 +46,6 @@
         grid-column: span 2 / span 2;
     }
 
-
     .sticked>h1,
     .sticked>h2,
     .sticked>h3,
@@ -44,4 +55,15 @@
         position: sticky;
         top: 96px;
     }
+
+}
+
+
+@media (max-width: 768px) {
+
+    ul>li>div>a.dflt-button {
+        position: relative;
+        left: -16px;
+    }
+
 }

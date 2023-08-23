@@ -80,5 +80,6 @@ const Entry = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "./src/content",
+  contentDirExcludePatterns: ["**/creations/**/*", "**/README.md"],
   documentTypes: [Project, Entry],
 })
