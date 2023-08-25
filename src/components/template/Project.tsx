@@ -135,12 +135,12 @@ const Project = ({ project }: { project: Record<string, any> }) => {
               <Icon.ArrowLeft
                 size={40}
                 onClick={scrollBack}
-                className="p-2 bg-zinc-900 text-white rounded-full cursor-pointer hover:bg-zinc-700 transition-all"
+                className="p-2 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200 rounded-full cursor-pointer hover:bg-zinc-700 transition-all"
               />
               <Icon.ArrowRight
                 size={40}
                 onClick={scrollNext}
-                className="p-2 bg-zinc-900 text-white rounded-full cursor-pointer hover:bg-zinc-700 transition-all"
+                className="p-2 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200 rounded-full cursor-pointer hover:bg-zinc-700 transition-all"
               />
             </div>
           </div>
