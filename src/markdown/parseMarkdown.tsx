@@ -1,4 +1,3 @@
-import * as React from "react"
 import NextImage from "next/image"
 import NextLink from "next/link"
 import { useMDXComponent } from "next-contentlayer/hooks"
@@ -22,12 +21,41 @@ const Image = (props: any) => {
       <NextImage
         width={1280}
         height={720}
-        className="bg-zinc-50 dark:bg-zinc-950"
+        className="bg-zinc-50 dark:bg-zinc-950 object-cover"
         alt={props.alt}
         {...props}
       />
     )
   }
+}
+
+const Video = (props: any) => {
+  return (
+    <div className="aspect-video">
+      {/* If the user clicks on the thumbnail, the video should get rendered. */}
+      {props.children[0]}
+
+      <div className="w-full h-full flex justify-center place-items-center thumbnail">
+        {props.children[1]}
+        <Image
+          src="/images/play_button.svg"
+          alt="Play Button"
+          onClick={() => {
+            // @ts-ignore
+            // thumbnail.current.style.display = "none"
+            // @ts-ignore
+            // video.current.style.display = "block"
+          }}
+          className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
+          width={96}
+          height={96}
+        />
+      </div>
+      <div className="w-full justify-center place-items-center video hidden">
+        {props.children[1]}
+      </div>
+    </div>
+  )
 }
 
 const Button = (props: any) => {
@@ -101,10 +129,7 @@ const components: MDXComponents = {
       {props.children}
     </div>
   ),
-  Video: (props: { children: React.ReactNode }) => (
-    // TODO: Code the video component
-    <div className="aspect-video hidden">{props.children}</div>
-  ),
+  Video: Video,
 }
 
 interface MdxProps {

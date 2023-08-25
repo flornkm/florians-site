@@ -10,8 +10,8 @@ const projects = allProjects.sort((a, b) => {
     return 1
   } else {
     return (
-      new Date(b.date.split(" ")[1]).getTime() -
-      new Date(a.date.split(" ")[1]).getTime()
+      parseInt(b.date.split(" ")[b.date.split(" ").length - 1]) -
+      parseInt(a.date.split(" ")[a.date.split(" ").length - 1])
     )
   }
 })

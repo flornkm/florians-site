@@ -7,7 +7,10 @@ import Projects from "./ProjectsOverview"
 import copy from "copy-to-clipboard"
 import * as Icon from "react-feather"
 
-function ProjectsContact(props: any) {
+/**
+ * This file contains different combinations of components
+ */
+export function ProjectsContact(props: any) {
   const [mailText, setMailText] = useState(["Florian", "Click to copy"])
   const [mailActive, setMailActive] = useState(false)
   const projects = useRef(null)
@@ -79,5 +82,3 @@ function ProjectsContact(props: any) {
     </>
   )
 }
-
-export default ProjectsContact

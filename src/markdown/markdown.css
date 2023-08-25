@@ -28,10 +28,34 @@ ul>li>div>a.dflt-button {
     color: #000;
     border: none;
     padding: 10px 16px;
+    padding-left: 40px;
     font-weight: 500;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all ease 0.3s;
+    position: relative;
+}
+
+ul>li>div>a.dflt-button::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    opacity: 0.1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 8px;
+    border-radius: 0.5rem;
+    transition: all ease 0.3s;
+}
+
+.thumbnail iframe {
+    display: none;
+}
+
+.video img {
+    display: none;
 }
 
 @media (min-width: 768px) {
