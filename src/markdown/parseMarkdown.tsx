@@ -1,5 +1,6 @@
 import NextImage from "next/image"
 import NextLink from "next/link"
+import NextVideo from "./components/Video"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import type { MDXComponents } from "mdx/types"
 import "./markdown.css"
@@ -13,7 +14,7 @@ const Image = (props: any) => {
         src={props.src}
         title="YouTube video player"
         className="aspect-video"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
     )
   } else {
@@ -29,43 +30,53 @@ const Image = (props: any) => {
   }
 }
 
-const Video = (props: any) => {
-  return (
-    <div className="aspect-video">
-      {/* If the user clicks on the thumbnail, the video should get rendered. */}
-      {props.children[0]}
+// const Video = (props: any) => {
+//   const [video, setVideo] = useState(false)
 
-      <div className="w-full h-full flex justify-center place-items-center thumbnail">
-        {props.children[1]}
-        <Image
-          src="/images/play_button.svg"
-          alt="Play Button"
-          onClick={() => {
-            // @ts-ignore
-            // thumbnail.current.style.display = "none"
-            // @ts-ignore
-            // video.current.style.display = "block"
-          }}
-          className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
-          width={96}
-          height={96}
-        />
-      </div>
-      <div className="w-full justify-center place-items-center video hidden">
-        {props.children[1]}
-      </div>
-    </div>
-  )
-}
+//   return (
+//     <div className="aspect-video">
+//       {/* If the user clicks on the thumbnail, the video should get rendered. */}
+//       {props.children[0]}
+//       {!video && (
+//         <div className="w-full h-full flex justify-center place-items-center thumbnail">
+//           {props.children[1].props.children[0]}
+//           <Image
+//             src="/images/play_button.svg"
+//             alt="Play Button"
+//             onClick={() => {
+//               setVideo(true)
+//             }}
+//             className="absolute z-10 cursor-pointer rounded-full opacity-80 bg-white bg-opacity-90 transition-all hover:scale-105"
+//             width={96}
+//             height={96}
+//           />
+//         </div>
+//       )}
+//       {video && (
+//         <div className="w-full justify-center place-items-center video">
+//           {props.children[1].props.children[2]}
+//         </div>
+//       )}
+//     </div>
+//   )
+// }
 
 const Button = (props: any) => {
+  const url = new URL(props.href)
+
   return (
     <div className="mb-12 mt-6">
       <NextLink
         href={props.href}
         target="_blank"
+        id="button"
         className="dflt-button dark:bg-[#09090b] dark:border-zinc-800 dark:hover:bg-zinc-900 dark:hover:border-[#212126] dark:text-white"
       >
+        <Image
+          src={`https://unavatar.io/${url.hostname}`}
+          alt="Favicon"
+          className="rounded-full w-5 h-5"
+        />
         {props.children}
       </NextLink>
     </div>
@@ -129,7 +140,7 @@ const components: MDXComponents = {
       {props.children}
     </div>
   ),
-  Video: Video,
+  Video: NextVideo,
 }
 
 interface MdxProps {

@@ -27,34 +27,22 @@ ul>li>div>a.dflt-button {
     background-color: transparent;
     color: #000;
     border: none;
-    padding: 10px 16px;
-    padding-left: 40px;
+    padding: 4px 8px;
     font-weight: 500;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all ease 0.3s;
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-ul>li>div>a.dflt-button::before {
-    content: "";
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    background-color: #000;
-    opacity: 0.1;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 8px;
-    border-radius: 0.5rem;
-    transition: all ease 0.3s;
+ul>li>div>a.dflt-button>img {
+    display: inline-block;
 }
 
-.thumbnail iframe {
-    display: none;
-}
-
-.video img {
+a.dflt-button>img {
     display: none;
 }
 
