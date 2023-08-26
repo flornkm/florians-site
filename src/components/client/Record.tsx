@@ -16,11 +16,20 @@ export default function Record({ feed }: { feed: Post[] }) {
               key={feed.indexOf(post)}
               className="p-4 gap-24 flex justify-between group mx-auto"
             >
-              <div>
-                <h3 className="font-medium underline text-zinc-700 dark:text-zinc-300">
+              <div className="flex gap-8">
+                <Image
+                  src={`https://img.youtube.com/vi/${post.url.replace(
+                    "https://www.youtube.com/watch?v=",
+                    ""
+                  )}/hqdefault.jpg`}
+                  alt="Post Image"
+                  width={1280}
+                  height={720}
+                  className="rounded-md aspect-video max-w-[200px] h-auto mb-4 object-cover"
+                />
+                <h3 className="font-bold text-lg group-hover:underline text-zinc-700 dark:text-zinc-300">
                   {post.title}
                 </h3>
-                <p className="font-semibold">{post.date}</p>
               </div>
               <div className="flex items-center gap-4">
                 <Image
