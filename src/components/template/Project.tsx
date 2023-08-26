@@ -5,7 +5,7 @@ import Link from "next/link"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback } from "react"
 import * as Icon from "react-feather"
-import Tag from "../UI/Tag"
+import Tag from "./Tag"
 import { Markdown } from "@/markdown/parseMarkdown"
 
 const Project = ({ project }: { project: Record<string, any> }) => {

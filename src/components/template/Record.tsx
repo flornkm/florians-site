@@ -34,9 +34,9 @@ export function FeedRecords({ feed }: { feed: Record<string, any>[] }) {
         return (
           <>
             <RecordLayout url={post.url}>
-              <div className="flex gap-8 group-hover:opacity-60 dark:group-hover:opacity-80 duration-150">
+              <div className="flex gap-8 group-hover:opacity-60 dark:group-hover:opacity-80 duration-150 line-clamp-1">
                 <div className="flex flex-col gap-2 max-w-sm">
-                  <h3 className="font-medium text-lg text-zinc-900 dark:text-white truncate">
+                  <h3 className="font-medium text-lg text-zinc-900 dark:text-white">
                     {post.title}
                   </h3>
                   <p className="text-zinc-500 line-clamp-2 dark:text-zinc-400">
