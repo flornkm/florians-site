@@ -1,6 +1,6 @@
 import Navigation from "@/components/interface/Navigation"
 import Footer from "@/components/interface/Footer"
-import Content from "@/components/client/EntriesOverview"
+import Content from "@/components/client/Entries"
 import { allEntries } from "contentlayer/generated"
 import type { Metadata } from "next"
 

@@ -181,10 +181,10 @@ export default function Footer() {
             Resources
           </h4>
           <Link
-            href={"/entries"}
+            href={"/feed"}
             className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
-            Entries
+            Feed
           </Link>
           <Link
             href={"/colophon"}
@@ -199,10 +199,10 @@ export default function Footer() {
             History
           </Link>
           <Link
-            href={"/feed"}
+            href={"/entries"}
             className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
-            Feed
+            Blog
           </Link>
         </div>
       </div>

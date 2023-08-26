@@ -42,7 +42,7 @@ function Projects() {
                 className="opacity-0 bottom-0.5 group-hover:opacity-100 transition-all -translate-x-0 group-hover:translate-x-1 relative"
               />
             </div>
-            <div className="flex gap-4 text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+            <div className="flex gap-4 text-xs text-zinc-800 dark:text-zinc-200 mb-4">
               <div className="flex gap-2 items-center">
                 <Icon.Calendar width={14} />
                 {project.date.includes(" - ") ? (
