@@ -44,7 +44,7 @@ export function FeedRecords({ feed }: { feed: Record<string, any>[] }) {
                   </p>
                 </div>
               </div>
-              <div className="h-full flex w-32 flex-col items-start gap-2 text-zinc-800 dark:text-zinc-200">
+              <div className="h-full flex max-w-32 w-full flex-col items-start gap-2 text-zinc-800 dark:text-zinc-200">
                 <pre className="font-mono text-xs group-hover:opacity-60 dark:group-hover:opacity-80 duration-150">
                   {post.date}
                 </pre>
