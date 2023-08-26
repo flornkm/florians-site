@@ -1,6 +1,6 @@
 import Navigation from "@/components/interface/Navigation"
 import Footer from "@/components/interface/Footer"
-import Record from "@/components/client/Record"
+import { FeedRecords } from "@/components/template/Record"
 import { allEntries } from "contentlayer/generated"
 import type { Metadata } from "next"
 import type { Post } from "./schema"
@@ -60,7 +60,7 @@ export default async function Feed() {
       url: `/blog/${entry._raw.flattenedPath.replace("entries/", "")}`,
       platform: {
         name: "Blog",
-        icon: "https://unavatar.io/floriandwt",
+        icon: "/favicon.ico",
         url: "/blog",
       },
     })
@@ -80,7 +80,7 @@ export default async function Feed() {
       <main className="max-md:w-[90%] w-full max-w-6xl pl-[5%] pr-[5%] m-auto bg-white dark:bg-black dark:text-white">
         <div className="min-h-screen py-16">
           <h1 className="text-3xl font-semibold text-left mb-4">Feed</h1>
-          <Record feed={sortedFeed} />
+          <FeedRecords feed={sortedFeed} />
         </div>
       </main>
       <Footer />
