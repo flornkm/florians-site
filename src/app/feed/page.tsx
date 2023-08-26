@@ -46,11 +46,57 @@ async function fetchYouTubeData() {
   }
 }
 
+async function fetchGitHubData() {
+  try {
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+    headers.append("Authorization", `Bearer ${process.env.GitHubKey}`)
+
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({
+        query:
+          "{\n  viewer {\n    repositories(\n      last: 10\n      privacy: PUBLIC\n      orderBy: {field: CREATED_AT, direction: ASC}\n    ) {\n      nodes {\n        createdAt\n        name\n        description\n        url\n      }\n    }\n  }\n}",
+        variables: {},
+      }),
+      redirect: "follow",
+    })
+
+    if (response.ok) {
+      const result = await response.json()
+
+      const githubFeed = result.data.viewer.repositories.nodes.map(
+        (result: any) => ({
+          date: result.createdAt,
+          title: `Worked with repo ${result.name}`,
+          description: result.description || "",
+          url: result.url,
+          platform: {
+            name: "GitHub",
+            icon: "https://unavatar.io/github.com",
+            url: "https://github.com/",
+          },
+        })
+      )
+
+      return githubFeed
+    } else {
+      console.error("Failed to fetch GitHub data")
+      return []
+    }
+  } catch (error) {
+    console.error("Error fetching GitHub data:", error)
+    return []
+  }
+}
+
 export default async function Feed() {
   const feed: Post[] = []
   const sortedFeed: Post[] = []
 
   const youtubeFeed = await fetchYouTubeData()
+  const githubFeed = await fetchGitHubData()
 
   for (const entry of allEntries) {
     feed.push({
@@ -86,7 +132,6 @@ export default async function Feed() {
 
   for (const project of allProjects) {
     feed.push({
-      // take the first half of the project when splitting - the date is in the first half and looks like this Q1 2021 so
       date: convertQuarterToDateString(project.date.split("-")[0]),
       title: `Added ${project.title}`,
       description: project.shortDescription,
@@ -100,6 +145,7 @@ export default async function Feed() {
   }
 
   feed.push(...youtubeFeed)
+  feed.push(...githubFeed)
 
   sortedFeed.push(
     ...feed.sort((a, b) => {
