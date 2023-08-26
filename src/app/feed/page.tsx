@@ -1,7 +1,7 @@
 import Navigation from "@/components/interface/Navigation"
 import Footer from "@/components/interface/Footer"
 import { FeedRecords } from "@/components/template/Record"
-import { allEntries } from "contentlayer/generated"
+import { allEntries, allProjects } from "contentlayer/generated"
 import type { Metadata } from "next"
 import type { Post } from "./schema"
 
@@ -65,6 +65,27 @@ export default async function Feed() {
       },
     })
   }
+
+  // for (const project of allProjects) {
+  //   feed.push({
+  //     // take the first half of the project when splitting - the date is in the first half and looks like this Q1 2021 so
+  //     date:
+  //       // it is separated in quarters. We need to convert this to a date object so we can sort it later.
+  //       new Date(
+  //         project.date.split(" ")[0] +
+  //           " " +
+  //           project.date.split(" ")[1].slice(0, 4)
+  //       ),
+  //     title: project.title,
+  //     description: project.shortDescription,
+  //     url: `/projects/${project.slug}`,
+  //     platform: {
+  //       name: "Work",
+  //       icon: "https://unavatar.io/floriandwt",
+  //       url: "/#work",
+  //     },
+  //   })
+  // }
 
   feed.push(...youtubeFeed)
 
