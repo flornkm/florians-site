@@ -1,1 +1,7 @@
-export type Post = { date: string; title: any; description: any; url: string; platform: { name: string; icon: string } | { name: string; icon: string } }[]
+export type Post = {
+  date: string
+  title: string
+  description: string
+  url: string
+  platform: { name: string; icon: string; url: string }
+}
