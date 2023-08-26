@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Feed() {
   const feed: Post = []
   
-  fetch(`https://www.googleapis.com/youtube/v3/search?key=${process.env.YoutubeKey}&channelId=UCoYr999CTO9-Icsr3ra3OsQ&order=date&maxResults=20\n`, {
+  fetch(`https://www.googleapis.com/youtube/v3/search?key=${process.env.YoutubeKey}&channelId=UCoYr999CTO9-Icsr3ra3OsQ&order=date&maxResults=5\n`, {
     method: 'GET',
     redirect: 'follow'
   })
@@ -21,7 +21,7 @@ export default function Feed() {
       for (const result of JSON.parse(results).items) {
         feed.push({
           date: "test",
-          title: result.id.videoID,
+          title: "test",
           description: result.id.videoID,
           url: `https://www.youtube.com/watch?v=${result.id.videoId}`,
           platform: {
