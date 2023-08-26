@@ -1,4 +1,5 @@
 "use client"
+
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import { useEffect, useRef, useState } from "react"
@@ -180,10 +181,10 @@ export default function Footer() {
             Resources
           </h4>
           <Link
-            href={"/entries"}
+            href={"/feed"}
             className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
-            Entries
+            Feed
           </Link>
           <Link
             href={"/colophon"}
@@ -196,6 +197,12 @@ export default function Footer() {
             className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
           >
             History
+          </Link>
+          <Link
+            href={"/blog"}
+            className="dark:text-zinc-400 px-1.5 py-0.5 transition-all rounded-lg hover:text-black dark:hover:text-white text-zinc-500 hover:bg-transparent -ml-1.5 dark:hover:bg-transparent"
+          >
+            Blog
           </Link>
         </div>
       </div>

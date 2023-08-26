@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Transition } from "@headlessui/react"
 
-export default function Content({
+export default function Entries({
   entries,
 }: {
   entries: Record<string, any>[]
@@ -32,7 +32,7 @@ export default function Content({
     <>
       <div className="flex gap-4 justify-between max-md:flex-col pt-8 h-full min-h-screen relative">
         <div className="flex flex-col items-left justify-left h-full pt-32 max-md:pt-16 pb-16 md:pr-12">
-          <h1 className="text-3xl font-semibold text-left mb-3">Entries</h1>
+          <h1 className="text-3xl font-semibold text-left mb-3">Blog</h1>
           <h2 className="text-xl text-left text-zinc-500 dark:text-zinc-400">
             Here you can find my thoughts, ideas and more I want to share with
             the world wide web.
@@ -66,7 +66,7 @@ export default function Content({
           {entries.map((entry, idx) => (
             <Link
               key={entries.indexOf(entry)}
-              href={{ pathname: `/entries/${entry.slug}` }}
+              href={{ pathname: `/blog/${entry.slug}` }}
               onMouseOver={() => {
                 setImgShow(true)
                 setHoveredImg(entry.image)
