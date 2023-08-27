@@ -112,7 +112,7 @@ export default function RootLayout({
         `${Pretendard.variable} font-sans ${gaeguFont.variable} font-display ${jetBrainsMono.variable} font-mono opacity-100`
       }
     >
-      <body className="dark:bg-black selection:bg-blue-100 dark:selection:bg-[#172554] selection:text-blue-500">
+      <body className="dark:bg-black selection:bg-sky-100 dark:selection:bg-sky-950 selection:text-sky-500">
         {children}
         <Analytics />
       </body>
