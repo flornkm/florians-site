@@ -57,7 +57,7 @@ async function fetchGitHubData() {
       headers: headers,
       body: JSON.stringify({
         query:
-          "{\n  viewer {\n    repositories(\n      last: 10\n      privacy: PUBLIC\n      orderBy: {field: CREATED_AT, direction: ASC}\n    ) {\n      nodes {\n        createdAt\n        name\n        description\n        url\n      }\n    }\n  }\n}",
+          "{\n  viewer {\n    pullRequests(\n      last: 10\n      orderBy: {field: CREATED_AT, direction: ASC}\n      states: MERGED\n    ) {\n      nodes {\n        mergedAt\n        baseRepository {\n          name\n          url\n        }\n        reviews(last: 3) {\n          nodes {\n            author {\n              avatarUrl\n              ... on User {\n                name\n                url\n              }\n            }\n          }\n        }\n        bodyText\n      }\n    }\n  }\n}",
         variables: {},
       }),
       redirect: "follow",
@@ -66,21 +66,36 @@ async function fetchGitHubData() {
     if (response.ok) {
       const result = await response.json()
 
-      const githubFeed = result.data.viewer.repositories.nodes.map(
+      const githubFeed = result.data.viewer.pullRequests.nodes.map(
         (result: any) => ({
-          date: result.createdAt,
-          title: `Worked with repo ${result.name}`,
-          description: result.description || "",
-          url: result.url,
+          date: result.mergedAt,
+          title: `PR in ${result.baseRepository.name}`,
+          description: result.bodyText || "",
+          url: result.baseRepository.url,
           platform: {
             name: "GitHub",
             icon: "https://unavatar.io/github.com",
             url: "https://github.com/",
           },
+          collaborators: result.reviews.nodes.map((review: any) => ({
+            name: review.author.name,
+            avatar: review.author.avatarUrl,
+            url: review.author.url,
+          })),
         })
       )
 
-      return githubFeed
+      const filteredFeed = githubFeed.filter((item: any) => {
+        const removeDuplicateCollaborators = item.collaborators.filter(
+          (collaborator: any, index: number, self: any) =>
+            index === self.findIndex((t: any) => t.name === collaborator.name)
+        )
+        item.collaborators = removeDuplicateCollaborators
+
+        return !item.url.includes("floriandwt")
+      })
+
+      return filteredFeed
     } else {
       console.error("Failed to fetch GitHub data")
       return []
@@ -131,6 +146,29 @@ export default async function Feed() {
   }
 
   for (const project of allProjects) {
+    const collaborators =
+      project.collaborators?.map((collaborator: string) => {
+        if (collaborator === "Anton") {
+          return {
+            name: "Anton Stallbörger",
+            avatar: "/images/people/anton_stallboerger.jpg",
+            url: "https://www.antonstallboerger.com/",
+          }
+        } else if (collaborator === "Nils") {
+          return {
+            name: "Nils Eller",
+            avatar: "/images/people/nils_eller.jpg",
+            url: "https://www.nilseller.com/",
+          }
+        } else if (collaborator === "Alice") {
+          return {
+            name: "Alice Sopp",
+            avatar: "/images/people/alice_sopp.jpg",
+            url: "https://www.alicesopp.com/",
+          }
+        }
+      }) || ([] as Post["collaborators"])
+
     feed.push({
       date: convertQuarterToDateString(project.date.split("-")[0]),
       title: `Added ${project.title}`,
@@ -138,9 +176,10 @@ export default async function Feed() {
       url: `/projects/${project.slug}`,
       platform: {
         name: "Work",
-        icon: "https://unavatar.io/floriandwt",
+        icon: "/favicon.ico",
         url: "/#work",
       },
+      collaborators: collaborators,
     })
   }
 
