@@ -9,6 +9,7 @@ import { PhosphorLogo } from "phosphor-react"
 function RecordLayout(props: { url?: string; children: React.ReactNode }) {
   return props.url ? (
     <Link
+      key={props.url}
       href={props.url}
       target={props.url.includes("https") ? "_blank" : "_self"}
       className="gap-24 py-8 flex w-full justify-between group mx-auto max-md:flex-col max-md:gap-12"
@@ -35,7 +36,7 @@ export function FeedRecords({ feed }: { feed: Record<string, any>[] }) {
           <>
             <RecordLayout url={post.url}>
               <div className="flex gap-8 group-hover:opacity-60 dark:group-hover:opacity-80 duration-150 line-clamp-1">
-                <div className="flex flex-col gap-2 max-w-sm">
+                <div className="flex flex-col gap-1 max-w-sm">
                   <h3 className="font-medium text-lg text-zinc-900 dark:text-white">
                     {post.title}
                   </h3>
@@ -49,7 +50,7 @@ export function FeedRecords({ feed }: { feed: Record<string, any>[] }) {
                   {post.date}
                 </pre>
                 <Link
-                  className="flex items-center text-sm gap-1 py-0.5 px-1 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md group/platform"
+                  className="flex items-center font-medium text-sm gap-1 py-0.5 px-1 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-md group/platform"
                   onClick={(e) => {
                     e.stopPropagation()
                   }}
@@ -61,19 +62,55 @@ export function FeedRecords({ feed }: { feed: Record<string, any>[] }) {
                   <Image
                     src={post.platform.icon}
                     alt="Post Image"
-                    width={48}
-                    height={48}
-                    className="rounded h-3.5 w-3.5 mr-1"
+                    width={16}
+                    height={16}
+                    className="rounded-md mr-1 bg-white object-cover"
                   />
                   <h4>{post.platform.name}</h4>
                   {post.platform.url.includes("https") && (
                     <Icon.ArrowUpRight
                       size={16}
-                      strokeWidth={2}
-                      className="inline ml-0.5 relative group-hover/platform:-right-1 group-hover/platform:-top-1.5 right-0 -top-0.5 transition-all"
+                      strokeWidth={2.5}
+                      className="inline relative group-hover/platform:-right-1 group-hover/platform:-top-1.5 right-0 -top-0.5 transition-all"
                     />
                   )}
                 </Link>
+                <div className="flex gap-2 mt-0.5">
+                  {post.collaborators &&
+                    post.collaborators.map(
+                      (collaborator: Record<string, any>) => {
+                        return (
+                          !collaborator.name.includes("Florian Kiem") && (
+                            <Link
+                              onClick={(e) => {
+                                e.stopPropagation()
+                              }}
+                              key={post.collaborators.indexOf(collaborator)}
+                              className={`group/reviewer relative transition-all`}
+                              href={collaborator.url}
+                              target="_blank"
+                            >
+                              <div
+                                className={`absolute flex justify-center py-1 px-2.5 left-[50%] translate-x-[-50%] bottom-[120%] opacity-0 group-hover/reviewer:opacity-100 group-hover/reviewer:bottom-[125%] pointer-events-none transition-all bg-black text-white rounded-full w-max text-xs ease-in-out duration-200 dark:bg-white dark:text-black`}
+                              >
+                                <span className="z-10 relative">
+                                  {collaborator.name}
+                                </span>
+                                <div className="w-3 h-3 absolute -bottom-1 bg-black rotate-45 dark:bg-white"></div>
+                              </div>
+                              <Image
+                                src={collaborator.avatar}
+                                alt={collaborator.name}
+                                className="inline-flex ring-1 ring-zinc-300 dark:ring-zinc-700 object-cover object-center max-h-128 rounded-full"
+                                width={24}
+                                height={24}
+                              />
+                            </Link>
+                          )
+                        )
+                      }
+                    )}
+                </div>
               </div>
             </RecordLayout>
             {feed.length !== feed.indexOf(post as Post) + 1 && (
