@@ -41,7 +41,10 @@ export function FeedRecords({ feed }: { feed: Record<string, any>[] }) {
                     {post.title}
                   </h3>
                   <p className="text-zinc-500 line-clamp-2 dark:text-zinc-400">
-                    {post.description.replaceAll("#", "").replaceAll("*", "")}
+                    {post.description
+                      .replaceAll("#", "")
+                      .replaceAll("*", "")
+                      .replaceAll(/<[^>]*>/g, "")}
                   </p>
                 </div>
               </div>

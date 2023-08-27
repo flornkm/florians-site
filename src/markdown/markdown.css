@@ -24,6 +24,24 @@
     margin-top: 32px;
 }
 
+p > em > div {
+    margin: 0 !important;
+    display: inline-block;
+}
+
+p > em > div > a {
+    padding: 0px !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0px !important;
+    font-weight: 500 !important;
+}
+
+p > em > div > a:hover {
+    background-color: transparent !important;
+    text-decoration: underline;
+}
+
 ul>li>div>a.dflt-button {
     background-color: transparent;
     color: #000;
