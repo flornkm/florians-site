@@ -1,16 +1,31 @@
 // https://vite-plugin-ssr.com/onRenderClient
 export default onRenderClient
 
-import { hydrate } from 'preact'
-import { PageShell } from './PageShell'
+import { hydrate, render } from "preact"
+import { PageShell } from "./PageShell"
+import type { PageContext } from "./types"
 
-async function onRenderClient(pageContext) {
+async function onRenderClient(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
-  const body = document.querySelector('body')
-  hydrate(
+  const page = (
     <PageShell pageContext={pageContext}>
       <Page {...pageProps} />
-    </PageShell>,
-    body
+    </PageShell>
   )
+  const container = document.querySelector("body")
+
+  if (pageContext.isHydration) {
+    hydrate(page, container)
+  } else {
+    render(page, container)
+  }
+  document.title = getPageTitle(pageContext)
+}
+
+function getPageTitle(pageContext) {
+  const title =
+    (pageContext.config.documentProps || {}).title ||
+    (pageContext.documentProps || {}).title ||
+    "Demo"
+  return title
 }

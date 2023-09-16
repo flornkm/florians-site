@@ -1,11 +1,11 @@
 // https://vite-plugin-ssr.com/onRenderHtml
 export default onRenderHtml
 
-import renderToString from 'preact-render-to-string'
-import { PageShell } from './PageShell'
-import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server'
-import logoUrl from './logo.svg'
-import type { PageContext } from './types'
+import renderToString from "preact-render-to-string"
+import { PageShell } from "./PageShell"
+import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server"
+import logoUrl from "./logo.svg"
+import type { PageContext } from "./types"
 
 async function onRenderHtml(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
@@ -17,8 +17,10 @@ async function onRenderHtml(pageContext: PageContext) {
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext
-  const title = (documentProps && documentProps.title) || 'Vite SSR app'
-  const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
+  const title = (documentProps && documentProps.title) || "Vite SSR app"
+  const desc =
+    (documentProps && documentProps.description) ||
+    "App using Vite + vite-plugin-ssr"
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
@@ -38,6 +40,6 @@ async function onRenderHtml(pageContext: PageContext) {
     documentHtml,
     pageContext: {
       // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
-    }
+    },
   }
 }

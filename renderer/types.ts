@@ -3,6 +3,7 @@ export type { PageContextClient }
 export type { PageContext }
 export type { PageProps }
 
+import { JSX } from 'preact/jsx-runtime'
 import type {
   PageContextBuiltInServer,
   /*
@@ -14,13 +15,17 @@ import type {
   //*/
 } from 'vite-plugin-ssr/types'
 
-type Page = (pageProps: PageProps) => unknown
+type Page = (pageProps: PageProps) => JSX.Element
 type PageProps = Record<string, unknown>
 
 export type PageContextCustom = {
-  Page: Page 
+  Page: Page
   pageProps?: PageProps
   urlPathname: string
+  documentProps?: {
+    title?: string
+    description?: string
+  }
   exports: {
     documentProps?: {
       title?: string
