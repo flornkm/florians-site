@@ -9,7 +9,7 @@ export { usePageContext }
 
 const Context = createContext(undefined)
 
-const PageContextProvider = function ({ pageContext, children } : { pageContext: any, children: any }) {
+const PageContextProvider = function ({ pageContext, children }) {
   return <Context.Provider value={pageContext}>{children}</Context.Provider>
 }
 
