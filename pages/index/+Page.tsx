@@ -8,18 +8,5 @@ export const documentProps = {
 }
 
 function Page() {
-  return (
-    <PageLayout>
-      <div>
-        <h1>Welcome</h1>
-        This page is:
-        <ul>
-          <li>Rendered to HTML.</li>
-          <li>
-            Interactive. <Counter />
-          </li>
-        </ul>
-      </div>
-    </PageLayout>
-  )
+  return <div class="min-h-screen w-full"></div>
 }

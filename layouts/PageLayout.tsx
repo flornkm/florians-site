@@ -1,16 +1,17 @@
 import { JSX } from "preact/jsx-runtime"
 import "../design-system/global.css"
+import Navigation from "./Navigation"
 
-export default function PageLayout(props: { children: JSX.Element }) {
+export default function PageLayout(props: {
+  children: JSX.Element
+  pageContext: any
+}) {
   return (
     <>
       <header>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-        </nav>
+        <Navigation />
       </header>
-      <main class="bg-red-500">{props.children}</main>
+      <main class="w-full h-full">{props.children}</main>
     </>
   )
 }
