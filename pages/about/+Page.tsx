@@ -1,7 +1,10 @@
 export default Page
 
 import PageLayout from "../../layouts/PageLayout"
-import "./code.css"
+
+export const documentProps = {
+  title: "About Florian",
+}
 
 function Page() {
   return (

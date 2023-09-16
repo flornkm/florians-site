@@ -17,10 +17,10 @@ async function onRenderHtml(pageContext: PageContext) {
 
   // See https://vite-plugin-ssr.com/head
   const { documentProps } = pageContext
-  const title = (documentProps && documentProps.title) || "Vite SSR app"
+  const title =
+    (documentProps && documentProps.title) || "Florian - Design Engineer"
   const desc =
-    (documentProps && documentProps.description) ||
-    "App using Vite + vite-plugin-ssr"
+    (documentProps && documentProps.description) || "Florians Personal Website."
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
