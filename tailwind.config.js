@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ["Pretendard Variable", "Inter", "sans-serif"],
+    },
   },
   plugins: [],
 }
