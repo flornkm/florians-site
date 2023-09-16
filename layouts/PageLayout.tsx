@@ -1,5 +1,5 @@
 import { JSX } from "preact/jsx-runtime"
-import "./index.css"
+import "../design-system/global.css"
 
 export default function PageLayout(props: { children: JSX.Element }) {
   return (
