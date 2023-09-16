@@ -7,11 +7,13 @@ export default function PageLayout(props: {
   pageContext: any
 }) {
   return (
-    <>
-      <header>
+    <div class="min-h-[200vh] relative font-sans">
+      <header class="sticky top-0">
         <Navigation />
       </header>
-      <main class="w-full h-full">{props.children}</main>
-    </>
+      <main class="w-full relative max-w-screen-xl mx-auto">
+        {props.children}
+      </main>
+    </div>
   )
 }

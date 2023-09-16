@@ -27,6 +27,7 @@ async function onRenderHtml(pageContext: PageContext) {
       <head>
         <meta charset="UTF-8" />
         <link rel="icon" href="${logoUrl}" />
+        <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
         <title>${title}</title>
