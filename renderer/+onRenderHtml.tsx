@@ -2,17 +2,17 @@
 export default onRenderHtml
 
 import renderToString from "preact-render-to-string"
-import { PageShell } from "./PageShell"
 import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server"
 import logoUrl from "./logo.svg"
 import type { PageContext } from "./types"
+import PageLayout from "../layouts/PageLayout"
 
 async function onRenderHtml(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
   const pageHtml = renderToString(
-    <PageShell pageContext={pageContext}>
+    <PageLayout pageContext={pageContext}>
       <Page {...pageProps} />
-    </PageShell>
+    </PageLayout>
   )
 
   // See https://vite-plugin-ssr.com/head

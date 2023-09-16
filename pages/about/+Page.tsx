@@ -8,13 +8,11 @@ export const documentProps = {
 
 function Page() {
   return (
-    <PageLayout>
-      <>
-        <h1>About</h1>
-        <p>
-          Demo using <code>vite-plugin-ssr</code>.
-        </p>
-      </>
-    </PageLayout>
+    <>
+      <h1>About</h1>
+      <p>
+        Demo using <code>vite-plugin-ssr</code>.
+      </p>
+    </>
   )
 }
