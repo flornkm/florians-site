@@ -10,7 +10,7 @@ export const documentProps = {
 function Page() {
   return (
     <div class="min-h-screen w-full">
-      <h1 class="text-4xl font-bold text-center py-96">Florian</h1>
+      <h1 class="text-4xl font-semibold text-center py-96">Florian</h1>
     </div>
   )
 }
