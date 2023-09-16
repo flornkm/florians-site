@@ -3,7 +3,7 @@ export type { PageContextClient }
 export type { PageContext }
 export type { PageProps }
 
-import { JSX } from 'preact/jsx-runtime'
+import { JSX } from "preact/jsx-runtime"
 import type {
   PageContextBuiltInServer,
   /*
@@ -11,9 +11,9 @@ import type {
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
   /*/
   // When using Server Routing
-  PageContextBuiltInClientWithServerRouting as PageContextBuiltInClient
+  PageContextBuiltInClientWithServerRouting as PageContextBuiltInClient,
   //*/
-} from 'vite-plugin-ssr/types'
+} from "vite-plugin-ssr/types"
 
 type Page = (pageProps: PageProps) => JSX.Element
 type PageProps = Record<string, unknown>
@@ -22,9 +22,18 @@ export type PageContextCustom = {
   Page: Page
   pageProps?: PageProps
   urlPathname: string
+  isHydration: boolean
   documentProps?: {
     title?: string
     description?: string
+  }
+  config: {
+    isProduction: boolean
+    siteUrl: string
+    documentProps?: {
+      title?: string
+      description?: string
+    }
   }
   exports: {
     documentProps?: {
