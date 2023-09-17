@@ -5,7 +5,7 @@ import renderToString from "preact-render-to-string"
 import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server"
 import logoUrl from "./logo.svg"
 import type { PageContext } from "./types"
-import PageLayout from "../layouts/PageLayout"
+import PageLayout from "../interface/layouts/PageLayout"
 
 async function onRenderHtml(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
