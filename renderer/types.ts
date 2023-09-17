@@ -7,7 +7,6 @@ import { JSX } from "preact/jsx-runtime"
 import type {
   PageContextBuiltInServer,
   /*
-  // When using Client Routing https://vite-plugin-ssr.com/clientRouting
   PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
   /*/
   // When using Server Routing
@@ -24,8 +23,9 @@ export type PageContextCustom = {
   urlPathname: string
   isHydration: boolean
   documentProps?: {
-    title?: string
-    description?: string
+    title: string
+    slug: string
+    description: string
   }
   config: {
     isProduction: boolean

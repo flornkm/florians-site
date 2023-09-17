@@ -4,7 +4,7 @@ export default onRenderClient
 import { hydrate, render } from "preact"
 import type { PageContext } from "./types"
 import "../design-system/global.css"
-import PageLayout from "../layouts/PageLayout"
+import PageLayout from "../interface/layouts/PageLayout"
 
 async function onRenderClient(pageContext: PageContext) {
   const { Page, pageProps } = pageContext

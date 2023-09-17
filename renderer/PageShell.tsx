@@ -1,7 +1,7 @@
 import logo from "./logo.svg"
 import { PageContextProvider } from "./usePageContext"
 import "./PageShell.css"
-import { Link } from "./Link"
+import { Link } from "../interface/components/Link"
 import { JSX } from "preact/jsx-runtime"
 
 export { PageShell }
