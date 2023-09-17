@@ -13,11 +13,11 @@ export default function PageLayout({
 }) {
   return (
     <PageContextProvider pageContext={pageContext}>
-      <div class="min-h-[200vh] relative font-sans">
-        <header class="sticky top-0 border-b border-b-zinc-100 bg-white z-50">
+      <div class="min-h-[200vh] relative font-sans selection:bg-blue-100 selection:text-blue-500">
+        <nav class="sticky top-0 border-b border-b-zinc-100 bg-white z-50">
           <Navigation />
-        </header>
-        <main class="w-full relative max-w-screen-lx mx-auto md:px-10">
+        </nav>
+        <main class="w-full relative max-w-screen-lx mx-auto md:px-10 px-6">
           {children}
         </main>
       </div>
