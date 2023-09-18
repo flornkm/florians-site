@@ -73,7 +73,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
     props.className,
     // @ts-ignore
     pageContext?.urlPathname === props.href
-      ? "text-black before:opacity-0 font-medium"
+      ? "text-black before:opacity-0"
       : "text-zinc-400 hover:text-black before:opacity-0",
   ]
     .filter(Boolean)
