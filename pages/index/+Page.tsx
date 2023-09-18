@@ -1,4 +1,6 @@
 import { PageContextCustom } from "../../renderer/types"
+import { useIsVisible } from "../../interface/hooks/useIsVisible"
+import { useEffect, useRef } from "preact/hooks"
 
 export const documentProps = {
   title: "Florian - Design Engineer",
@@ -8,6 +10,23 @@ export const documentProps = {
 export const slug = "index"
 
 export default function Page() {
+  const { work, workStroke, workTitle } = {
+    work: useRef<HTMLDivElement>(null),
+    workStroke: useRef<HTMLDivElement>(null),
+    workTitle: useRef<HTMLHeadingElement>(null),
+  }
+
+  const workVisible = useIsVisible(work)
+
+  useEffect(() => {
+    if (workStroke.current && workTitle.current) {
+      if (workVisible) {
+        workStroke.current.style.width = "0%"
+        workTitle.current.style.color = "black"
+      }
+    }
+  }, [workVisible, workStroke, workTitle])
+
   return (
     <div class="min-h-screen w-full">
       <header class="flex items-center justify-start md:gap-24 gap-16 h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
@@ -35,12 +54,21 @@ export default function Page() {
           functionally and technologically useful for humanity.
         </p>
       </section>
-      <section class="w-full">
+      <section class="w-full" ref={work} id="work">
         <div class="flex gap-8 justify-between items-center">
-          <h2 class="text-2xl font-semibold flex-shrink-0">Selected work</h2>
+          <h2
+            class="text-2xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700"
+            ref={workTitle}
+          >
+            Selected work
+          </h2>
           <div class="w-full relative flex items-center">
             <div class="h-[1px] bg-zinc-100 absolute w-full" />
-            <div class="h-[1px] bg-black absolute z-10 w-[20px] transition-all" />
+            <div
+              class="h-[1px] bg-black absolute z-10 transition-all duration-700"
+              style={{ width: "100%" }}
+              ref={workStroke}
+            />
           </div>
         </div>
       </section>
