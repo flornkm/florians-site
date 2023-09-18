@@ -48,8 +48,8 @@ export default function Navigation() {
       </div>
       <div class="flex items-center">
         <NavigationLink href="/">Home</NavigationLink>
-        <NavigationLink href="/#work">Work</NavigationLink>
         <NavigationLink href="/about">About</NavigationLink>
+        <NavigationLink href="/side-projects">Sides</NavigationLink>
         <NavigationLink href="/feed">Feed</NavigationLink>
         {pageContext && (
           <div
@@ -73,7 +73,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
     props.className,
     // @ts-ignore
     pageContext?.urlPathname === props.href
-      ? "text-black before:opacity-0"
+      ? "text-black before:opacity-0 font-medium"
       : "text-zinc-400 hover:text-black before:opacity-0",
   ]
     .filter(Boolean)
