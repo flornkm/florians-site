@@ -1,6 +1,7 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
 import { useRef, useEffect, useState } from "preact/hooks"
+import Tooltip from "./Tooltip"
 
 export default function Navigation() {
   const [strokePosition, setStrokePosition] = useState({
@@ -49,7 +50,9 @@ export default function Navigation() {
       <div class="flex items-center">
         <NavigationLink href="/">Home</NavigationLink>
         <NavigationLink href="/about">About</NavigationLink>
-        <NavigationLink href="/side-projects">Sides</NavigationLink>
+        <NavigationLink href="/side-projects">
+          <Tooltip position="bottom">Side Projects</Tooltip>Sides
+        </NavigationLink>
         <NavigationLink href="/feed">Feed</NavigationLink>
         {pageContext && (
           <div
@@ -81,8 +84,8 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   return (
     <a
       {...props}
-      className={`${className} relative py-4 px-4 transition-colors duration-150 before:absolute 
-      before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden`}
+      className={`${className} py-4 px-4 transition-colors duration-150 before:absolute group
+      before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden relative`}
     />
   )
 }
