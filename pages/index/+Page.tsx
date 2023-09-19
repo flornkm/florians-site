@@ -21,8 +21,10 @@ export default function Page() {
   useEffect(() => {
     if (workStroke.current && workTitle.current) {
       if (workVisible) {
-        workStroke.current.style.width = "0%"
-        workTitle.current.style.color = "black"
+        setTimeout(() => {
+          workStroke.current.style.width = "0%"
+          workTitle.current.style.color = "black"
+        }, 100)
       }
     }
   }, [workVisible, workStroke, workTitle])
