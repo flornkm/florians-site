@@ -6,7 +6,7 @@
     // Doesn't apply to server/, see ts-node config down below and server/tsconfig.json
     "moduleResolution": "Bundler",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "unplugin-icons/types/preact"],
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "skipLibCheck": true,

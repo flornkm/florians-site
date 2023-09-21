@@ -1,5 +1,6 @@
 import preact from "@preact/preset-vite"
 import ssr from "vite-plugin-ssr/plugin"
+import Icons from "unplugin-icons/vite"
 
 const config = {
   plugins: [
@@ -7,6 +8,7 @@ const config = {
     ssr({
       prerender: true,
     }),
+    Icons({ compiler: "jsx", jsx: "preact" }),
   ],
   optimizeDeps: {
     include: [
