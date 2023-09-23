@@ -1,6 +1,7 @@
 import { PageContextCustom } from "../../renderer/types"
 import { useIsVisible } from "../../interface/hooks/useIsVisible"
 import { useEffect, useRef } from "preact/hooks"
+import Button, { ButtonWrapper } from "../../interface/components/Button"
 import Brush from "~icons/eva/brush-fill"
 import File from "~icons/eva/file-text-fill"
 import Checkmark from "~icons/eva/checkmark-square-2-fill"
@@ -37,45 +38,24 @@ export default function Page() {
       <header class="flex items-center justify-start md:gap-24 gap-16 h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
         <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex">
           <div class="cursor-text max-w-2xl">
-            <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400">
-              <a
-                href="/about"
-                class="text-zinc-400 pointer-events-auto group-hover:text-black transition-all duration-200"
-              >
-                <span class="group-hover:underline underline-offset-4 ">
-                  Florian
-                </span>
-                .
-              </a>{" "}
+            <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400 mb-10">
+              <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300">
+                Florian.
+              </span>{" "}
               A designer and developer building digital products.
             </h1>
+            <ButtonWrapper>
+              <Button style="primary" link="/#work">
+                Work
+              </Button>
+              <Button style="secondary" link="/feed">
+                Feed
+              </Button>
+            </ButtonWrapper>
           </div>
         </div>
       </header>
-      <section class="w-full max-w-xl lg:max-w-4xl lg:mx-auto h-96">
-        <p class="text-zinc-500 lg:text-center cursor-text">
-          As a
-          <span class="text-emerald-500 selection:bg-emerald-100 selection:text-emerald-500">
-            <Brush class="inline-block h-6 w-6 bg-emerald-100 p-0.5 ml-1.5 rounded-lg" />{" "}
-            designer
-          </span>{" "}
-          and
-          <span class="text-sky-500 selection:bg-sky-100 selection:text-sky-500">
-            <File class="inline-block h-6 w-6 bg-sky-100 p-0.5 mx-1.5 rounded-lg" />
-            developer
-          </span>
-          , I see my role in leading projects that help companies to achieve
-          their ambitious goals of creating something functionally and
-          technologically{" "}
-          <span class="text-purple-500 selection:bg-purple-100 selection:text-purple-500 relative">
-            <Particles />
-            <Checkmark class="inline-block h-6 w-6 bg-purple-100 p-0.5 mr-1 rounded-lg" />
-            useful
-          </span>{" "}
-          for humanity.
-        </p>
-      </section>
-      <section class="w-full" ref={work} id="work">
+      <section class="w-full scroll-mt-24" ref={work} id="work">
         <div class="flex gap-8 justify-between items-center">
           <h2
             class="text-2xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700"
@@ -93,32 +73,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </div>
-  )
-}
-
-function Particles() {
-  // returns particles flying a little bit from bottom to top
-  return (
-    <div class="absolute bottom-0 left-0 w-full h-full pointer-events-none">
-      <div
-        style={{
-          left: Math.random() * 100 + "%",
-        }}
-        class="absolute w-1 h-1 bg-purple-400 rounded-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-particle-bottom-top"
-      />
-      <div
-        style={{
-          left: Math.random() * 100 + "%",
-        }}
-        class="absolute w-1 h-1 bg-purple-400 rounded-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-particle-bottom-top-slow"
-      />
-      <div
-        style={{
-          left: Math.random() * 100 + "%",
-        }}
-        class="absolute w-1 h-1 bg-purple-400 rounded-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-particle-bottom-top"
-      />
     </div>
   )
 }
