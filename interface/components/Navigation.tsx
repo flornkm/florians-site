@@ -47,7 +47,7 @@ export default function Navigation() {
           </p>
         </a>
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center" id="nav-links">
         <NavigationLink href="/">Home</NavigationLink>
         <NavigationLink href="/about">About</NavigationLink>
         <NavigationLink href="/side-projects">

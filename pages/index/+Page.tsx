@@ -58,7 +58,7 @@ export default function Page({ projects }: { projects: any[] }) {
         </div>
       </header>
       <section class="w-full scroll-mt-24" ref={work} id="work">
-        <div class="flex gap-8 justify-between items-center">
+        <div class="flex gap-8 justify-between items-center mb-16">
           <h2
             class="text-2xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700"
             ref={workTitle}
@@ -75,10 +75,14 @@ export default function Page({ projects }: { projects: any[] }) {
           </div>
         </div>
         {projects.map((project) => (
-          <a class="flex flex-col gap-4 mt-16" href={project.url}>
-            <h3 class="text-xl font-semibold">{project.name}</h3>
-            <p class="text-gray-500">{project.slug}</p>
-            <div class="flex gap-4"></div>
+          <a class="flex gap-16 flex-col md:flex-row" href={project.url}>
+            <div class="col-span-2 bg-zinc-100">
+              <img src={project.image} alt={project.title} />
+            </div>
+            <div class="md:w-72 w-full h-full flex-shrink-0 flex flex-col justify-center items-start">
+              <h3 class="text-lg font-semibold mb-4">{project.title}</h3>
+              <p class="text-zinc-500">{project.description}</p>
+            </div>
           </a>
         ))}
       </section>
