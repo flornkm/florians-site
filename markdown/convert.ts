@@ -28,6 +28,8 @@ export async function returnContent(category: "work") {
 
     tableOfContents.push({
       title: markdown.split("\n")[1].replace("# ", "").replace("title: ", ""),
+      description: markdown.split("\n")[2].replace("description: ", ""),
+      image: markdown.split("\n")[3].replace("cover: ", ""),
       slug: file.replace(".md", ""),
       url: `/${category}/${file.replace(".md", "")}`,
     })
