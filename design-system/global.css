@@ -10,7 +10,3 @@
 	src: url(../public/fonts/Pretendard/PretendardVariable.woff2) format('woff2-variations');
 	unicode-range: U+f9ca-fa0b, U+ff03-ff05, U+ff07, U+ff0a-ff0b, U+ff0d-ff19, U+ff1b, U+ff1d, U+ff20-ff5b, U+ff5d, U+ffe0-ffe3, U+ffe5-ffe6;
 }
-
-html {
-	scroll-behavior: smooth;
-}

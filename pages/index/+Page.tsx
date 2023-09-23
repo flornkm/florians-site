@@ -13,7 +13,7 @@ export const documentProps = {
 
 export const slug = "index"
 
-export default function Page() {
+export default function Page({ projects }: { projects: any[] }) {
   const { work, workStroke, workTitle } = {
     work: useRef<HTMLDivElement>(null),
     workStroke: useRef<HTMLDivElement>(null),
@@ -26,7 +26,9 @@ export default function Page() {
     if (workStroke.current && workTitle.current) {
       if (workVisible) {
         setTimeout(() => {
+          // @ts-ignore
           workStroke.current.style.width = "0%"
+          // @ts-ignore
           workTitle.current.style.color = "black"
         }, 100)
       }
@@ -72,6 +74,13 @@ export default function Page() {
             />
           </div>
         </div>
+        {projects.map((project) => (
+          <a class="flex flex-col gap-4 mt-16" href={project.url}>
+            <h3 class="text-xl font-semibold">{project.name}</h3>
+            <p class="text-gray-500">{project.slug}</p>
+            <div class="flex gap-4"></div>
+          </a>
+        ))}
       </section>
     </div>
   )
