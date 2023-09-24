@@ -1,6 +1,6 @@
 ---
-title: Bridge
-description: Bridge is a browser-based software designed to provide an easy-to-use solution for creating job pages. It enables people to quickly create forms.
+title: Bridge geg
+description: Browser based job page creator for Startups and SMEs.
 cover: /images/bridge/bridge.webp
 ---
 
