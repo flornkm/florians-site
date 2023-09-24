@@ -1,4 +1,4 @@
-// https://vite-plugin-ssr.com/onRenderClient
+// https://vike.com/onRenderClient
 export default onRenderClient
 
 import { hydrate, render } from "preact"

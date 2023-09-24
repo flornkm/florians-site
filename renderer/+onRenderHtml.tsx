@@ -1,8 +1,8 @@
-// https://vite-plugin-ssr.com/onRenderHtml
+// https://vike.com/onRenderHtml
 export default onRenderHtml
 
 import renderToString from "preact-render-to-string"
-import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server"
+import { escapeInject, dangerouslySkipEscape } from "vike/server"
 import logoUrl from "./logo.svg"
 import type { PageContext } from "./types"
 import PageLayout from "../interface/layouts/PageLayout"
@@ -15,7 +15,7 @@ async function onRenderHtml(pageContext: PageContext) {
     </PageLayout>
   )
 
-  // See https://vite-plugin-ssr.com/head
+  // See https://vike.com/head
   const { documentProps } = pageContext
   const title =
     (documentProps && documentProps.title) || "Florian - Design Engineer"
@@ -39,7 +39,7 @@ async function onRenderHtml(pageContext: PageContext) {
   return {
     documentHtml,
     pageContext: {
-      // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
+      // We can add some `pageContext` here, which is useful if we want to do page redirection https://vike.com/page-redirection
     },
   }
 }
