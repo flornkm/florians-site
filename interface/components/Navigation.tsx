@@ -54,16 +54,20 @@ export default function Navigation() {
           <Tooltip position="bottom">Side Projects</Tooltip>Sides
         </NavigationLink>
         <NavigationLink href="/feed">Feed</NavigationLink>
-        {pageContext && (
-          <div
-            ref={stroke}
-            style={{
-              left: strokePosition.x,
-              width: strokePosition.width,
-            }}
-            class="h-[1px] absolute bottom-[-1px] bg-black opacity-0"
-          />
-        )}
+        {pageContext &&
+          (pageContext?.urlPathname === "/" ||
+            pageContext?.urlPathname === "/about" ||
+            pageContext?.urlPathname === "/side-projects" ||
+            pageContext?.urlPathname === "/feed") && (
+            <div
+              ref={stroke}
+              style={{
+                left: strokePosition.x,
+                width: strokePosition.width,
+              }}
+              class="h-[1px] absolute bottom-[-1px] bg-black opacity-0"
+            />
+          )}
       </div>
     </div>
   )
