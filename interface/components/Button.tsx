@@ -1,5 +1,5 @@
 import { JSX } from "preact/jsx-runtime"
-import { navigate } from "vite-plugin-ssr/client/router"
+import { navigate } from "vike/client/router"
 
 export default function Button(props: {
   style: "primary" | "secondary"

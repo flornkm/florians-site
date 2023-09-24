@@ -4,11 +4,7 @@ export const documentProps = {
   title: "Florian's Feed",
 }
 
-export default function Page({
-  content,
-}: {
-  content: Awaited<ReturnType<any>>
-}) {
+export default function Page({ content }: { content: string }) {
   console.log(content)
 
   return (

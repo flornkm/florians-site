@@ -1,12 +1,14 @@
 import preact from "@preact/preset-vite"
-import ssr from "vite-plugin-ssr/plugin"
+import ssr from "vike/plugin"
 import Icons from "unplugin-icons/vite"
 
 const config = {
   plugins: [
     preact(),
     ssr({
-      prerender: true,
+      prerender: {
+        partial: true,
+      },
     }),
     Icons({ compiler: "jsx", jsx: "preact" }),
   ],

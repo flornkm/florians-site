@@ -7,7 +7,7 @@ export default function Page() {
     <>
       <h1>About</h1>
       <p>
-        Demo using <code>vite-plugin-ssr</code>.
+        Demo using <code>vike</code>.
       </p>
     </>
   )

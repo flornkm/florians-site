@@ -12,7 +12,7 @@ import type {
   // When using Server Routing
   PageContextBuiltInClientWithServerRouting as PageContextBuiltInClient,
   //*/
-} from "vite-plugin-ssr/types"
+} from "vike/types"
 
 type Page = (pageProps: PageProps) => JSX.Element
 type PageProps = Record<string, unknown>

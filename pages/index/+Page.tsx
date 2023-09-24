@@ -2,9 +2,6 @@ import { PageContextCustom } from "../../renderer/types"
 import { useIsVisible } from "../../interface/hooks/useIsVisible"
 import { useEffect, useRef } from "preact/hooks"
 import Button, { ButtonWrapper } from "../../interface/components/Button"
-import Brush from "~icons/eva/brush-fill"
-import File from "~icons/eva/file-text-fill"
-import Checkmark from "~icons/eva/checkmark-square-2-fill"
 
 export const documentProps = {
   title: "Florian - Design Engineer",
