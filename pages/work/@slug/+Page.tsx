@@ -4,12 +4,12 @@ export const documentProps = {
   title: "Florian's Feed",
 }
 
-export default function Page({ content }: { content: string }) {
-  console.log(content)
+export default function Page(pageProps: any) {
+  console.log(pageProps)
 
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      <div dangerouslySetInnerHTML={{ __html: pageProps.content }}></div>
     </>
   )
 }

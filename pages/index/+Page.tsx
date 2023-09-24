@@ -71,17 +71,26 @@ export default function Page({ projects }: { projects: any[] }) {
             />
           </div>
         </div>
-        {projects.map((project) => (
-          <a class="flex gap-16 flex-col md:flex-row" href={project.url}>
-            <div class="col-span-2 bg-zinc-100">
-              <img src={project.image} alt={project.title} />
-            </div>
-            <div class="md:w-72 w-full h-full flex-shrink-0 flex flex-col justify-center items-start">
-              <h3 class="text-lg font-semibold mb-4">{project.title}</h3>
-              <p class="text-zinc-500">{project.description}</p>
-            </div>
-          </a>
-        ))}
+        <div class="flex flex-col gap-16 pb-32">
+          {projects.map((project) => (
+            <a
+              class="flex gap-16 flex-col items-end md:flex-row md:hover:bg-zinc-50 group transition-colors"
+              href={project.url}
+            >
+              <div class="col-span-2 bg-zinc-50">
+                <img src={project.image} alt={project.title} />
+              </div>
+              <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 opacity-60 transition-opacity group-hover:opacity-100">
+                <h3 class="text-lg font-semibold truncate flex-shrink-0 mb-2">
+                  {project.title}
+                </h3>
+                <p class="text-zinc-500 line-clamp-2 -mb-1 md:group-hover:mb-10 transition-all">
+                  {project.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
       </section>
     </div>
   )
