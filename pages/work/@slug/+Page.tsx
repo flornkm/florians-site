@@ -1,15 +1,13 @@
 import { usePageContext } from "../../../renderer/usePageContext"
 
 export const documentProps = {
-  title: "Florian's Feed",
+  title: "Florian's Project",
 }
 
-export default function Page(pageProps: any) {
-  console.log(pageProps)
-
+export default function Page(props: Record<string, string>) {
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: pageProps.content }}></div>
+      <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
     </>
   )
 }

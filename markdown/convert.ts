@@ -2,16 +2,10 @@ import { marked } from "marked"
 import { readFile } from "fs/promises"
 import { readdir } from "fs/promises"
 
-export default async function convertMarkdownToHtml(
+export async function convertMarkdownToHtml(
   url: string
 ): Promise<string | boolean> {
   const contentRoot = "./content"
-
-  try {
-    await readFile(`${contentRoot}${url}.md`)
-  } catch (error) {
-    return false
-  }
 
   const markdown = await readFile(`${contentRoot}${url}.md`, "utf-8")
   return marked(markdown)

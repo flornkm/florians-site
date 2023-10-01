@@ -1,6 +1,6 @@
-export default onBeforeRender
+import { returnContent } from "../../../markdown/convert"
 
-import { returnContent } from "../../markdown/convert"
+export default onBeforeRender
 
 async function onBeforeRender() {
   const projects = await returnContent("work")
