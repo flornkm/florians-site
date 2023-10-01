@@ -4,4 +4,6 @@ export default {
   passToClient: ["pageProps", "documentProps"],
   // https://vike.com/clientRouting
   clientRouting: true,
+  hydrationCanBeAborted: true,
+  // https://vite-plugin-ssr.com/meta
 }

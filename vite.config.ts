@@ -6,7 +6,9 @@ const config = {
   plugins: [
     preact(),
     ssr({
-      prerender: true,
+      prerender: {
+        partial: true,
+      },
     }),
     Icons({ compiler: "jsx", jsx: "preact" }),
   ],

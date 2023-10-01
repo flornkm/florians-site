@@ -1,27 +1,26 @@
 export default onBeforeRender
 
-import type { PageContextBuiltInServer } from "vike/types"
+import { PageContextBuiltInServer } from "vike/types"
+import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert"
 import { render } from "vike/abort"
-import convertMarkdownToHtml from "../../../markdown/convert"
+
+const rendered = {}
 
 async function onBeforeRender(pageContext: PageContextBuiltInServer) {
   const { slug } = pageContext.routeParams
-  const content = await convertMarkdownToHtml(pageContext.urlPathname).then(
-    (html) => {
-      return html
-    }
-  )
+  const projects = await returnContent("work")
 
-  // if (!content) {
-  //   throw render(404, `Unknown name: ${slug}`)
-  // }
-
-  const pageProps = {
-    content: content,
+  for (const project of projects) {
+    rendered[project.slug] = await convertMarkdownToHtml(project.url)
   }
+
+  if (!rendered[slug]) throw render(404)
+
   return {
     pageContext: {
-      pageProps,
+      pageProps: {
+        content: rendered[slug],
+      },
     },
   }
 }
