@@ -7,7 +7,7 @@ export const documentProps = {
 export default function Page(props: Record<string, string>) {
   return (
     <>
-      <article class="py-10">
+      <article class="py-16">
         <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
       </article>
     </>
