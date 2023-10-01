@@ -1,0 +1,14 @@
+article {
+    & h1 {
+        font-size: 2.5rem;
+        margin: 2rem 0 1rem;
+        font-weight: 600;
+    }
+    & align-grid {
+        display: flex;
+        justify-content: space-between;
+    }
+    & align-grid > :nth-child(3) {
+        max-width: 17.5rem
+    }
+  } 
