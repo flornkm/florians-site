@@ -8,7 +8,8 @@ export async function convertMarkdownToHtml(
   const contentRoot = "./content"
 
   const markdown = await readFile(`${contentRoot}${url}.md`, "utf-8")
-  return marked(markdown)
+
+  return marked(deleteInfo(markdown))
 }
 
 export async function returnContent(category: "work") {
@@ -30,4 +31,8 @@ export async function returnContent(category: "work") {
   }
 
   return tableOfContents
+}
+
+function deleteInfo(string: string, n = 5) {
+  return string.replace(new RegExp(`(?:.*?\n){${n - 1}}(?:.*?\n)`), "")
 }
