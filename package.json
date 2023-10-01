@@ -35,5 +35,8 @@
     "postcss": "^8.4.29",
     "tailwindcss": "^3.3.3",
     "unplugin-icons": "0.17.0"
+  },
+  "engines": {
+    "node": ">18"
   }
 }
