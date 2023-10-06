@@ -1,7 +1,9 @@
 ---
-title: Bridge geg
+title: Bridge
 description: Browser based job page creator for Startups and SMEs.
-cover: /images/bridge/bridge.webp
+icon: /images/bridge/bridge-icon.svg
+cover: /images/bridge/bridge.jpg
+date: 2023-03-01
 ---
 
 <align-grid>
@@ -23,3 +25,9 @@ Browser based job page creator for Startups and SMEs.
 
 </collaborators>
 </align-grid>
+
+## Process
+
+Test
+
+egrgrere

@@ -24,15 +24,21 @@ export async function returnContent(category: "work") {
     tableOfContents.push({
       title: markdown.split("\n")[1].replace("# ", "").replace("title: ", ""),
       description: markdown.split("\n")[2].replace("description: ", ""),
-      image: markdown.split("\n")[3].replace("cover: ", ""),
+      icon: markdown.split("\n")[3].replace("icon: ", ""),
+      image: markdown.split("\n")[4].replace("cover: ", ""),
+      date: markdown.split("\n")[5].replace("date: ", ""),
       slug: file.replace(".md", ""),
       url: `/${category}/${file.replace(".md", "")}`,
     })
   }
 
+  tableOfContents.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime()
+  })
+
   return tableOfContents
 }
 
-function deleteInfo(string: string, n = 5) {
+function deleteInfo(string: string, n = 7) {
   return string.replace(new RegExp(`(?:.*?\n){${n - 1}}(?:.*?\n)`), "")
 }
