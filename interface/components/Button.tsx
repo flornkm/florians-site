@@ -13,7 +13,7 @@ export default function Button(props: {
       }}
       class={
         (props.style !== "text" &&
-          "font-semibold rounded-xl px-5 py-2.5 transition-all duration-200 border " +
+          "font-semibold rounded-lg px-5 py-2.5 transition-all duration-200 border " +
             (props.style === "primary"
               ? "text-white bg-black hover:bg-zinc-800 border-zinc-900 hover:border-zinc-700"
               : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800")) ||

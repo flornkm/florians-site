@@ -72,24 +72,39 @@ export default function Page({ projects }: { projects: any[] }) {
           </div>
         </div>
         <div class="flex flex-col gap-16 pb-32">
-          {projects.map((project) => (
-            <a
-              class="flex gap-16 flex-col items-end md:flex-row md:hover:bg-zinc-50 group transition-colors"
-              href={project.url}
-            >
-              <div class="col-span-2 bg-zinc-50">
-                <img src={project.image} alt={project.title} />
-              </div>
-              <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 opacity-60 transition-opacity group-hover:opacity-100">
-                <h3 class="text-lg font-semibold truncate flex-shrink-0 mb-2">
-                  {project.title}
-                </h3>
-                <p class="text-zinc-500 line-clamp-2 -mb-1 md:group-hover:mb-10 transition-all">
-                  {project.description}
-                </p>
-              </div>
-            </a>
-          ))}
+          {projects.map((project) => {
+            const date = new Date(project.date)
+            return (
+              <a
+                class="flex gap-16 flex-col items-end md:flex-row group border border-transparent md:hover:border-zinc-200 bg-white transition-colors"
+                href={project.url}
+              >
+                <div class="col-span-2">
+                  <img src={project.image} alt={project.title} />
+                </div>
+                <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 opacity-60 transition-opacity group-hover:opacity-100">
+                  <p class="text-zinc-400 text-sm mb-3">
+                    {date.getFullYear()}{" "}
+                    {["Q1", "Q2", "Q3", "Q4"][Math.floor(date.getMonth() / 3)]}{" "}
+                    {date.getFullYear() !== new Date().getFullYear() &&
+                      date.getFullYear() - new Date().getFullYear() + 1}
+                  </p>
+                  <div class="flex items-center gap-2 mb-2">
+                    <img
+                      src={project.icon}
+                      class="w-6 h-6 transition-transform -rotate-6 group-hover:rotate-0 duration-500"
+                    />
+                    <h3 class="text-lg font-semibold truncate flex-shrink-0">
+                      {project.title}
+                    </h3>
+                  </div>
+                  <p class="text-zinc-500 line-clamp-2 -mb-1.5 md:group-hover:mb-10 transition-all">
+                    {project.description}
+                  </p>
+                </div>
+              </a>
+            )
+          })}
         </div>
       </section>
     </div>
