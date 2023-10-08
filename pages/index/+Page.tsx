@@ -34,7 +34,7 @@ export default function Page({ projects }: { projects: any[] }) {
 
   return (
     <div class="min-h-screen w-full">
-      <header class="flex items-center justify-start md:gap-24 gap-16 h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
+      <header class="flex items-center justify-start md:gap-24 gap-16 max-lg:pb-32 min-h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
         <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex">
           <div class="cursor-text max-w-2xl">
             <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400 mb-10">
@@ -71,18 +71,18 @@ export default function Page({ projects }: { projects: any[] }) {
             />
           </div>
         </div>
-        <div class="flex flex-col gap-16 pb-32">
+        <div class="flex flex-col gap-24 pb-32">
           {projects.map((project) => {
             const date = new Date(project.date)
             return (
               <a
-                class="flex gap-16 flex-col items-end md:flex-row group border border-transparent md:hover:border-zinc-200 bg-white transition-colors"
+                class="flex md:gap-16 gap-8 flex-col items-end md:flex-row group border border-transparent md:hover:border-zinc-200 bg-white transition-colors"
                 href={project.url}
               >
                 <div class="col-span-2">
-                  <img src={project.image} alt={project.title} />
+                  <img src={project.cover} alt={project.title} />
                 </div>
-                <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 opacity-60 transition-opacity group-hover:opacity-100">
+                <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 md:opacity-60 transition-opacity group-hover:opacity-100">
                   <p class="text-zinc-400 text-sm mb-3">
                     {date.getFullYear()}{" "}
                     {["Q1", "Q2", "Q3", "Q4"][Math.floor(date.getMonth() / 3)]}{" "}
@@ -92,7 +92,7 @@ export default function Page({ projects }: { projects: any[] }) {
                   <div class="flex items-center gap-2 mb-2">
                     <img
                       src={project.icon}
-                      class="w-6 h-6 transition-transform -rotate-6 group-hover:rotate-0 duration-500"
+                      class="w-6 h-6 transition-transform md:-rotate-6 group-hover:rotate-0 duration-500"
                     />
                     <h3 class="text-lg font-semibold truncate flex-shrink-0">
                       {project.title}
