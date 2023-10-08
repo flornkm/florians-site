@@ -1,42 +1,57 @@
 article {
-    & h1, h2, h3, h4, h5, h6 {
+
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         font-weight: 600;
         margin-bottom: 0.5em;
     }
+
     & h1 {
         font-size: 2rem;
     }
+
     & h2 {
         font-size: 1.5rem;
     }
+
     & h3 {
         font-size: 1.25rem;
     }
+
     @media screen and (min-width: 1024px) {
         & info-grid {
             justify-content: space-between;
             flex-direction: row;
             gap: 2rem;
         }
-    }   
+    }
+
     @media screen and (max-width: 1023px) {
         & info-grid {
             flex-direction: column;
             gap: 1.5rem;
         }
     }
+
     & info-grid {
         display: flex;
         margin-bottom: 4rem;
     }
+
     & p {
         color: #52525b;
         margin-bottom: 4rem;
     }
-    & info-grid > :nth-child(2) {
+
+    & info-grid> :nth-child(2) {
         max-width: 17.5rem;
         width: 100%;
     }
+
     & a {
         padding: 0.1rem 0.2rem;
         border-radius: 0.2rem;
@@ -44,25 +59,40 @@ article {
         color: black;
         transition: all ease-in-out 0.1s;
     }
+
+    & a::after {
+        content: "";
+        background-image: url("/images/icons/diagonal-arrow-right-up-outline.svg");
+        display: block;
+        font-size: 1.2rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-left: 4px;
+    }
+
     & a:hover {
         color: #71717a;
     }
-    & collaborators > ul > li {
+
+    & collaborators>ul>li {
         margin-bottom: 12px;
     }
-    & collaborators > ul > li > a {
+
+    & collaborators>ul>li>a {
         margin-bottom: 0.5rem;
         list-style: none;
         display: flex;
         align-items: center;
-    } 
-    & collaborators > ul > li > a > img {
+    }
+
+    & collaborators>ul>li>a>img {
         flex-shrink: 0;
         margin-right: 0.5rem;
         width: 24px;
         height: 24px;
         border-radius: 1000px;
     }
+
     & process-grid {
         display: grid;
         grid-template-columns: 10rem 1fr;
@@ -70,22 +100,84 @@ article {
         margin: 8rem 0;
         position: relative;
     }
-    & process-grid > div > h3 {
+
+    & process-grid>div>h3 {
         position: sticky;
         top: 5rem;
     }
+
     @media screen and (max-width: 850px) {
         & process-grid {
             grid-template-columns: 1fr;
             gap: 0;
         }
-        & process-grid > h3:nth-child(3) {
+
+        & process-grid>h3:nth-child(3) {
             position: static;
         }
     }
-  } 
 
-article > div > p > img:nth-child(1) {
+    & project-links>p {
+        display: flex;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+
+    & project-links div,
+    project-links p,
+    project-links a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        width: 100%;
+        height: 8rem;
+        border-radius: 1rem;
+        color: #18181b;
+        transition: all ease 0.2s;
+    }
+
+    & project-links a {
+        border: 1px solid #e4e4e7;
+        background-color: #fafafa;
+        color: #000;
+        font-weight: 600;
+    }
+
+    & project-links a:nth-child(1) {
+        border: 1px solid #18181b;
+        background-color: #000;
+        color: #fff;
+        font-weight: 600;
+        transform: rotateZ(1deg)
+    }
+
+    & project-links a:nth-child(1)::after {
+        filter: invert(1);
+    }
+
+    & project-links a:nth-child(2) {
+        transform: rotateZ(-0.5deg)
+    }
+
+    & project-links a:nth-child(3) {
+        transform: rotateZ(2deg)
+    }
+
+    & project-links a:nth-child(1):hover {
+        background-color: #27272a;
+        border-color: #3f3f46;
+        color: #fff;
+    }
+
+    & project-links a:hover {
+        color: #18181b;
+        background-color: #fff;
+    }
+}
+
+article>div>p>img:nth-child(1) {
     max-height: 600px;
     width: 100%;
     object-fit: cover;
@@ -93,6 +185,6 @@ article > div > p > img:nth-child(1) {
     margin-bottom: 4rem;
 }
 
-article > div > p:nth-child(3) {
+article>div>p:nth-child(3) {
     font-size: 1.1rem;
 }
