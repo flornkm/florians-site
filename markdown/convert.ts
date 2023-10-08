@@ -7,9 +7,9 @@ export async function convertMarkdownToHtml(
 ): Promise<string | boolean> {
   const contentRoot = "./content"
 
-  const markdown = await readFile(`${contentRoot}${url}.md`, "utf-8")
+  let markdown = await readFile(`${contentRoot}${url}.md`, "utf-8")
 
-  return marked(deleteInfo(markdown))
+  return marked(deleteInfo(markdown + '\n <base target="_blank">'))
 }
 
 export async function returnContent(category: "work") {

@@ -76,7 +76,7 @@ export default function Page({ projects }: { projects: any[] }) {
             const date = new Date(project.date)
             return (
               <a
-                class="flex md:gap-16 gap-8 flex-col items-end md:flex-row group border border-transparent md:hover:border-zinc-200 bg-white transition-colors"
+                class="flex md:gap-16 gap-8 flex-col items-end md:flex-row group"
                 href={project.url}
               >
                 <div class="col-span-2">
@@ -92,13 +92,14 @@ export default function Page({ projects }: { projects: any[] }) {
                   <div class="flex items-center gap-2 mb-2">
                     <img
                       src={project.icon}
-                      class="w-6 h-6 transition-transform md:-rotate-6 group-hover:rotate-0 duration-500"
+                      class="w-6 h-6 transition-transform md:-rotate-6 group-hover:rotate-0"
                     />
                     <h3 class="text-lg font-semibold truncate flex-shrink-0">
                       {project.title}
                     </h3>
+                    <div class="w-0 group-hover:w-full transition-all duration-500 h-[1px] bg-zinc-100 group-hover:bg-black ml-2 md:block hidden" />
                   </div>
-                  <p class="text-zinc-500 line-clamp-2 -mb-1.5 md:group-hover:mb-10 transition-all">
+                  <p class="text-zinc-500 line-clamp-2 -mb-1.5 md:group-hover:mb-4 transition-all">
                     {project.description}
                   </p>
                 </div>

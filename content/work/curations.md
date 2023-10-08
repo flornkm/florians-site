@@ -66,3 +66,10 @@ Leveraging NextJS, Supabase and Vercel, we developed a website that displays our
 Curations had a successfull launch on ProductHunt, reaching nearly 10,000 users within the first month. Moving forward, our plan is to expand the project beyond just a curated list of links, providing users with even greater value and utility.
 
 </process-grid>
+
+<project-links>
+
+[Curations](https://www.curations.tech/)
+[Product Hunt](https://www.producthunt.com/products/curations)
+[GitHub Repo](https://github.com/floriandwt/Curations)
+</project-links>
