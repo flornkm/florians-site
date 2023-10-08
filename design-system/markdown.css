@@ -12,14 +12,28 @@ article {
     & h3 {
         font-size: 1.25rem;
     }
-    & align-grid {
+    @media screen and (min-width: 1024px) {
+        & info-grid {
+            justify-content: space-between;
+            flex-direction: row;
+            gap: 2rem;
+        }
+    }   
+    @media screen and (max-width: 1023px) {
+        & info-grid {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+    & info-grid {
         display: flex;
-        justify-content: space-between;
+        margin-bottom: 4rem;
     }
     & p {
         color: #52525b;
+        margin-bottom: 4rem;
     }
-    & align-grid > :nth-child(2) {
+    & info-grid > :nth-child(2) {
         max-width: 17.5rem;
         width: 100%;
     }
@@ -33,12 +47,59 @@ article {
     & a:hover {
         color: #71717a;
     }
-    & ul {
-        margin: 1rem 1rem;
+    & collaborators > ul > li {
+        margin-bottom: 12px;
     }
-    & li {
+    & collaborators > ul > li > a {
         margin-bottom: 0.5rem;
-        list-style-type: "–";
-        padding-inline-start: 1ch;
+        list-style: none;
+        display: flex;
+        align-items: center;
+    } 
+    & collaborators > ul > li > a > img {
+        flex-shrink: 0;
+        margin-right: 0.5rem;
+        width: 24px;
+        height: 24px;
+        border-radius: 1000px;
+    }
+    /* @media screen and (min-width: 1024px) {
+        & process-grid {
+            justify-content: space-between;
+            flex-direction: row;
+            gap: 2rem;
+        }
+    }   
+    @media screen and (max-width: 1023px) {
+        & process-grid {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    } */
+    & process-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-bottom: 4rem;
+        margin: 8rem 0;
+    }
+    & info-grid > :nth-child(1) {
+        max-width: 17.5rem;
+        width: 100%;
+    }
+    & info-grid > :nth-child(1) {
+        max-width: 17.5rem;
+        width: 80%;
     }
   } 
+
+article > div > p > img:nth-child(1) {
+    max-height: 600px;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 4rem;
+}
+
+article > div > p:nth-child(3) {
+    font-size: 1.1rem;
+}
