@@ -63,32 +63,25 @@ article {
         height: 24px;
         border-radius: 1000px;
     }
-    /* @media screen and (min-width: 1024px) {
-        & process-grid {
-            justify-content: space-between;
-            flex-direction: row;
-            gap: 2rem;
-        }
-    }   
-    @media screen and (max-width: 1023px) {
-        & process-grid {
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-    } */
     & process-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        margin-bottom: 4rem;
+        grid-template-columns: 10rem 1fr;
+        gap: 2rem;
         margin: 8rem 0;
+        position: relative;
     }
-    & info-grid > :nth-child(1) {
-        max-width: 17.5rem;
-        width: 100%;
+    & process-grid > div > h3 {
+        position: sticky;
+        top: 5rem;
     }
-    & info-grid > :nth-child(1) {
-        max-width: 17.5rem;
-        width: 80%;
+    @media screen and (max-width: 850px) {
+        & process-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+        & process-grid > h3:nth-child(3) {
+            position: static;
+        }
     }
   } 
 
