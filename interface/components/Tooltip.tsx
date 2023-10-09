@@ -7,7 +7,7 @@ export default function Tooltip(props: {
   return (
     <div
       class={
-        "opacity-0 group-hover:opacity-100 delay-300 scale-90 group-hover:scale-100 ring-2 ring-white pointer-events-none transition-all ease-out absolute text-sm px-2 py-1 rounded-full bg-black z-40 text-white " +
+        "opacity-0 font-normal group-hover:opacity-100 scale-90 group-hover:scale-100 ring-2 ring-white pointer-events-none transition-all duration-300 ease-out absolute text-sm px-2 py-1 rounded-full bg-black z-40 text-white " +
         (props.position === "top"
           ? "-top-5 group-hover:-top-6 left-[50%] translate-x-[-50%]"
           : "") +
@@ -24,7 +24,7 @@ export default function Tooltip(props: {
     >
       <div
         class={
-          "w-2.5 h-2.5 rounded-sm bg-black absolute delay-200 scale-75 group-hover:scale-100 transition-transform duration-150 z-30 transform rotate-45 " +
+          "w-2.5 h-2.5 rounded-sm bg-black absolute scale-75 group-hover:scale-100 transition-transform duration-300 z-30 transform rotate-45 " +
           (props.position === "top"
             ? "-bottom-1 left-[50%] translate-x-[-50%]"
             : "") +

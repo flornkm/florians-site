@@ -2,6 +2,8 @@ import { PageContextCustom } from "../../renderer/types"
 import { useIsVisible } from "../../interface/hooks/useIsVisible"
 import { useEffect, useRef } from "preact/hooks"
 import Button, { ButtonWrapper } from "../../interface/components/Button"
+import Tooltip from "../../interface/components/Tooltip"
+import Contact from "../../interface/components/Contact"
 
 export const documentProps = {
   title: "Florian - Design Engineer",
@@ -35,7 +37,7 @@ export default function Page({ projects }: { projects: any[] }) {
   return (
     <div class="min-h-screen w-full">
       <header class="flex items-center justify-start md:gap-24 gap-16 max-lg:pb-32 min-h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
-        <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex">
+        <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex md:mb-24">
           <div class="cursor-text max-w-2xl">
             <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400 mb-10">
               <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300">
@@ -54,7 +56,7 @@ export default function Page({ projects }: { projects: any[] }) {
           </div>
         </div>
       </header>
-      <section class="w-full scroll-mt-24" ref={work} id="work">
+      <section class="w-full scroll-mt-24 mb-24" ref={work} id="work">
         <div class="flex gap-8 justify-between items-center mb-16">
           <h2
             class="text-2xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700"
@@ -76,36 +78,50 @@ export default function Page({ projects }: { projects: any[] }) {
             const date = new Date(project.date)
             return (
               <a
-                class="flex md:gap-16 gap-8 flex-col items-end md:flex-row group"
+                class="flex md:gap-16 gap-8 flex-col items-end md:flex-row group/project"
                 href={project.url}
               >
                 <div class="col-span-2">
                   <img src={project.cover} alt={project.title} />
                 </div>
-                <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 md:opacity-60 transition-opacity group-hover:opacity-100">
-                  <p class="text-zinc-400 text-sm mb-3">
-                    {date.getFullYear()}{" "}
-                    {["Q1", "Q2", "Q3", "Q4"][Math.floor(date.getMonth() / 3)]}{" "}
-                    {date.getFullYear() !== new Date().getFullYear() &&
-                      date.getFullYear() - new Date().getFullYear() + 1}
-                  </p>
+                <div class="md:w-72 w-full h-full flex-shrink-0 pr-4 md:opacity-60 transition-opacity group-hover/project:opacity-100">
+                  <div class="text-zinc-400 group relative inline-block md:hover:text-black">
+                    <p class="text-sm mb-3 transition-colors pt-3 inline-block">
+                      {date.getFullYear()}{" "}
+                      {
+                        ["Q1", "Q2", "Q3", "Q4"][
+                          Math.floor(date.getMonth() / 3)
+                        ]
+                      }{" "}
+                      {date.getFullYear() !== new Date().getFullYear() &&
+                        date.getFullYear() - new Date().getFullYear() + 1}
+                      <Tooltip position="top">
+                        <>{`${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`}</>
+                      </Tooltip>
+                    </p>
+                  </div>
                   <div class="flex items-center gap-2 mb-2">
                     <img
                       src={project.icon}
-                      class="w-6 h-6 transition-transform md:-rotate-6 group-hover:rotate-0"
+                      class="w-6 h-6 transition-transform md:-rotate-3 group-hover/project:rotate-0"
                     />
                     <h3 class="text-lg font-semibold truncate flex-shrink-0">
                       {project.title}
                     </h3>
-                    <div class="w-0 group-hover:w-full transition-all duration-500 h-[1px] bg-zinc-100 group-hover:bg-black ml-2 md:block hidden" />
+                    <div class="w-0 group-hover/project:w-full transition-all duration-500 h-[1px] bg-zinc-100 group-hover/project:bg-black ml-2 md:block hidden" />
                   </div>
-                  <p class="text-zinc-500 line-clamp-2 -mb-1.5 md:group-hover:mb-4 transition-all">
+                  <p class="text-zinc-500 line-clamp-2 -mb-1.5 transition-all">
                     {project.description}
                   </p>
                 </div>
               </a>
             )
           })}
+        </div>
+      </section>
+      <section class="w-full mb-64">
+        <div>
+          <Contact />
         </div>
       </section>
     </div>
