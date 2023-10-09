@@ -146,7 +146,7 @@ article {
     }
 
     & project-links a:nth-child(1) {
-        border: 1px solid #18181b;
+        border: 1px solid rgb(39 39 42);
         background-color: #000;
         color: #fff;
         font-weight: 600;
@@ -167,7 +167,7 @@ article {
 
     & project-links a:nth-child(1):hover {
         background-color: #27272a;
-        border-color: #3f3f46;
+        border-color: rgb(82 82 91);
         color: #fff;
     }
 
