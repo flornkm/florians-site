@@ -49,7 +49,7 @@ export default function Contact() {
           <div class="h-[1px] w-full bg-gradient-to-l from-zinc-200 via-zinc-300 to-zinc-800" />
         </div>
       </div>
-      <div class="bg-zinc-50 h-full"></div>
+      <div class="bg-zinc-50 h-full rounded-b-3xl"></div>
     </div>
   )
 }
