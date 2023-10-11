@@ -20,8 +20,8 @@ export default function Navigation() {
     if (activeLink) {
       const { x, width } = activeLink.getBoundingClientRect()
       setStrokePosition({
-        x: x + 16,
-        width: width - 32,
+        x: x,
+        width: width,
       })
 
       // @ts-ignore
@@ -47,7 +47,7 @@ export default function Navigation() {
           </p>
         </a>
       </div>
-      <div class="flex items-center" id="nav-links">
+      <div class="flex items-center gap-8" id="nav-links">
         <NavigationLink href="/">Home</NavigationLink>
         <NavigationLink href="/about">About</NavigationLink>
         <NavigationLink href="/side-projects">
@@ -88,7 +88,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   return (
     <a
       {...props}
-      className={`${className} py-4 px-4 transition-colors duration-150 before:absolute group
+      className={`${className} py-4 transition-colors duration-150 before:absolute group
       before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden relative`}
     />
   )
