@@ -1,5 +1,4 @@
 article {
-
     & h1,
     h2,
     h3,
@@ -9,7 +8,6 @@ article {
         font-weight: 600;
         margin-bottom: 0.5em;
     }
-
     & h1 {
         font-size: 2rem;
     }
@@ -103,7 +101,7 @@ article {
 
     & process-grid>div>h3 {
         position: sticky;
-        top: 5rem;
+        top: 4.5rem;
     }
 
     @media screen and (max-width: 850px) {
