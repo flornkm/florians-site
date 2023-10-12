@@ -5,23 +5,25 @@ import Chevron from "~icons/eva/arrow-ios-forward-outline"
 export default function Button(props: {
   style: "primary" | "secondary" | "text"
   rounded?: boolean
-  link: string
-  children: string | Element
+  link?: string
+  children: Element | string
   icon?: JSX.Element
   chevron?: boolean
   class?: string
+  function?: () => void
 }) {
   return (
     <button
       onClick={() => {
-        navigate(props.link)
+        props.link && navigate(props.link)
+        props.function && props.function()
       }}
       class={
-        "flex items-center gap-2 " +
+        "flex items-center gap-1 " +
         props.class +
         " " +
         (props.style !== "text"
-          ? "font-semibold rounded-lg px-5 py-2.5 transition-all duration-200 border " +
+          ? "font-semibold rounded-xl px-5 py-2.5 transition-all duration-200 border " +
             (props.style === "primary"
               ? "text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600"
               : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200")

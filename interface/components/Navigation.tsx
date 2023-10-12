@@ -39,7 +39,7 @@ export default function Navigation() {
     <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 px-6">
       <div class="flex items-center flex-shrink-0 mr-6">
         <a href="/#" class="group">
-          <p class="text-lg font-medium group-hover:text-zinc-500 transition-colors">
+          <p class="text-lg font-semibold group-hover:text-zinc-500 transition-colors">
             Florian
             <span class="text-sm font-normal text-zinc-500 group-hover:text-zinc-400 ml-2 transition-colors">
               Design Engineer
@@ -88,7 +88,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   return (
     <a
       {...props}
-      className={`${className} py-4 transition-colors duration-150 before:absolute group
+      className={`${className} py-4 transition-colors duration-150 before:absolute group font-medium
       before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden relative`}
     />
   )
