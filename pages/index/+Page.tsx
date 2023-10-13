@@ -73,7 +73,7 @@ export default function Page({ projects }: { projects: any[] }) {
             />
           </div>
         </div>
-        <p class="mb-20 text-zinc-500">
+        <p class="mb-20 text-zinc-500 text-lg">
           Things I have worked on in my career. Includes both employment,
           freelance and study work.
         </p>
@@ -127,7 +127,7 @@ export default function Page({ projects }: { projects: any[] }) {
           })}
         </div>
       </section>
-      <section class="w-full mb-64">
+      <section class="w-full mb-32">
         <div>
           <Contact />
         </div>

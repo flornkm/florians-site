@@ -1,0 +1,152 @@
+import Info from "~icons/eva/info-outline"
+import { usePageContext } from "../../renderer/usePageContext"
+
+export default function Footer() {
+  const pageContext = usePageContext()
+  return (
+    <footer class="py-16 border-t border-t-zinc-100">
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid md:grid-cols-4 gap-8">
+        <div class="xs:col-span-2 max-w-xs">
+          <h3 class="font-semibold mb-2">Florian's Personal Site</h3>
+          <p class="text-zinc-500">
+            Lorem labore aute veniam id aliqua fugiat mollit commodo occaecat
+            magna occaecat voluptate ad.
+          </p>
+        </div>
+        <div class="md:place-self-end">
+          <h4 class="font-medium mb-3">Pages</h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class={
+                  "text-zinc-400 transition-colors font-medium " +
+                  (pageContext.urlPathname === "/"
+                    ? "text-zinc-600"
+                    : "hover:text-zinc-600")
+                }
+                href="/"
+              >
+                {pageContext.urlPathname === "/" && "/"} Home
+              </a>
+            </li>
+            <li>
+              <a
+                class={
+                  "text-zinc-400 transition-colors font-medium " +
+                  (pageContext.urlPathname === "/about"
+                    ? "text-zinc-600"
+                    : "hover:text-zinc-600")
+                }
+                href="/about"
+              >
+                {pageContext.urlPathname === "/about" && "/"} About
+              </a>
+            </li>
+            <li>
+              <a
+                class={
+                  "text-zinc-400 transition-colors font-medium " +
+                  (pageContext.urlPathname === "/side-projects"
+                    ? "text-zinc-600"
+                    : "hover:text-zinc-600")
+                }
+                href="/side-projects"
+              >
+                {pageContext.urlPathname === "/side-projects" && "/"} Side
+                Projects
+              </a>
+            </li>
+            <li>
+              <a
+                class={
+                  "text-zinc-400 transition-colors font-medium " +
+                  (pageContext.urlPathname === "/feed"
+                    ? "text-zinc-600"
+                    : "hover:text-zinc-600")
+                }
+                href="/feed"
+              >
+                {pageContext.urlPathname === "/feed" && "/"} Feed
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="md:place-self-end">
+          <h4 class="font-medium mb-3">Other</h4>
+          <ul class="space-y-2">
+            <li>
+              <a
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                href="/"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                href="/about"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                href="/side-projects"
+              >
+                Side Projects
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                href="/feed"
+              >
+                Feed
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 ">
+        <div class="border-b border-dashed border-zinc-200 my-16" />
+      </div>
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm xs:flex-row flex-col gap-6">
+        <ul class="flex space-x-8">
+          <li>
+            <a
+              class={
+                "text-zinc-400 transition-colors font-medium " +
+                (pageContext.urlPathname === "/imprint"
+                  ? "text-zinc-600"
+                  : "hover:text-zinc-600")
+              }
+              href="/imprint"
+            >
+              {pageContext.urlPathname === "/imprint" && "/"} Imprint
+            </a>
+          </li>
+          <li>
+            <a
+              class={
+                "text-zinc-400 transition-colors font-medium " +
+                (pageContext.urlPathname === "/privacy-policy"
+                  ? "text-zinc-600"
+                  : "hover:text-zinc-600")
+              }
+              href="/privacy-policy"
+            >
+              {pageContext.urlPathname === "/privacy-policy" && "/"} Privacy
+              Policy
+            </a>
+          </li>
+        </ul>
+        <p class="text-zinc-400 leading-none">
+          <Info class="inline-block mb-0.5" /> Florian{" "}
+          {new Date().getFullYear()}
+        </p>
+      </div>
+    </footer>
+  )
+}
