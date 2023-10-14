@@ -1,12 +1,12 @@
 import { JSX } from "preact/jsx-runtime"
 
 export default function Tooltip(props: {
-  children: string | JSX.Element | (string & Element)
+  children: string | JSX.Element | Element
   position: "top" | "left" | "right" | "bottom"
   class?: string
 }) {
   return (
-    <div
+    <span
       class={
         "opacity-0 font-normal group-hover:opacity-100 delay-75 scale-90 group-hover:scale-100 pointer-events-none transition-all duration-300 ease-out absolute text-sm px-2 py-1 rounded-full bg-black z-[99] text-white " +
         (props.position === "top"
@@ -24,7 +24,7 @@ export default function Tooltip(props: {
         ` ${props.class}`
       }
     >
-      <div
+      <span
         class={
           "w-2.5 h-2.5 rounded-sm bg-black absolute scale-75 group-hover:scale-100 transition-transform duration-300 z-30 transform rotate-45 " +
           (props.position === "top"
@@ -41,7 +41,7 @@ export default function Tooltip(props: {
             : "")
         }
       />
-      <p class="z-50 relative truncate">{props.children}</p>
-    </div>
+      <span class="z-50 relative truncate">{props.children}</span>
+    </span>
   )
 }

@@ -5,7 +5,7 @@ import Chevron from "~icons/eva/arrow-ios-forward-outline"
 export default function Button(props: {
   type: "primary" | "secondary" | "text"
   rounded?: boolean
-  link?: string
+  link: string
   children: Element | string
   icon?: JSX.Element
   chevron?: boolean
@@ -15,7 +15,9 @@ export default function Button(props: {
   return (
     <button
       onClick={() => {
-        props.link && navigate(props.link)
+        props.link.includes("http")
+          ? window.open(props.link)
+          : navigate(props.link)
         props.function && props.function()
       }}
       class={

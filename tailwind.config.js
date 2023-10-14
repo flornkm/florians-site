@@ -12,7 +12,7 @@ export default {
         lx: "1152px",
       },
       maxWidth: {
-        s: "260px",
+        s: "288px",
       },
       boxShadow: {
         "nav-shadow":

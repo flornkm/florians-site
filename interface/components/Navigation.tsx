@@ -50,9 +50,7 @@ export default function Navigation() {
       <div class="flex items-center gap-8" id="nav-links">
         <NavigationLink href="/">Home</NavigationLink>
         <NavigationLink href="/about">About</NavigationLink>
-        <NavigationLink href="/side-projects">
-          <Tooltip position="bottom">Side Projects</Tooltip>Sides
-        </NavigationLink>
+        <NavigationLink href="/side-projects">Sidework</NavigationLink>
         <NavigationLink href="/feed">Feed</NavigationLink>
         {pageContext &&
           (pageContext?.urlPathname === "/" ||

@@ -80,7 +80,10 @@ export default function Page({ projects }: { projects: any[] }) {
         </p>
         <div class="flex flex-col gap-32 mb-56">
           {projects.map((project) => {
-            const date = new Date(project.date)
+            const date = new Date(
+              Number(project.date.split("/")[1]),
+              Number(project.date.split("/")[0])
+            )
             return (
               <div class="w-full group/project">
                 <div class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative">
@@ -104,7 +107,7 @@ export default function Page({ projects }: { projects: any[] }) {
                             </InlineInfo>
                           </p>
                           <Tooltip position="bottom" class="translate-y-2">
-                            <>{`${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`}</>
+                            <>{project.date}</>
                           </Tooltip>
                         </div>
                       </div>

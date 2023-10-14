@@ -3,7 +3,7 @@ title: Curations
 description: A curated collection of the best products on the web
 icon: /images/curations/curations-icon.svg
 cover: /images/curations/curations.jpg
-date: 2023-06-01
+date: 04 / 2023
 ---
 
 <info-grid>
