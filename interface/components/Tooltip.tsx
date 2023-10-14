@@ -1,7 +1,7 @@
 import { JSX } from "preact/jsx-runtime"
 
 export default function Tooltip(props: {
-  children: string | JSX.Element
+  children: string | JSX.Element | (string & Element)
   position: "top" | "left" | "right" | "bottom"
   class?: string
 }) {

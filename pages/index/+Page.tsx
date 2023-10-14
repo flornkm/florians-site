@@ -4,6 +4,7 @@ import { useEffect, useRef } from "preact/hooks"
 import Button, { ButtonWrapper } from "../../interface/components/Button"
 import Tooltip from "../../interface/components/Tooltip"
 import Contact from "../../interface/components/Contact"
+import { InlineInfo } from "../../interface/components/Inline"
 
 export const documentProps = {
   title: "Florian - Design Engineer",
@@ -35,7 +36,7 @@ export default function Page({ projects }: { projects: any[] }) {
   }, [workVisible, workStroke, workTitle])
 
   return (
-    <div class="min-h-screen w-full">
+    <div class="w-full">
       <header class="flex items-center justify-start md:gap-24 gap-16 max-lg:pb-32 min-h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
         <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex md:mb-24">
           <div class="cursor-text max-w-2xl">
@@ -92,15 +93,15 @@ export default function Page({ projects }: { projects: any[] }) {
                       <div class="flex gap-3 items-center relative">
                         <h3 class="text-2xl font-semibold">{project.title}</h3>
                         <div class="group relative">
-                          <p class="px-3 py-1 bg-zinc-100 text-zinc-500 text-sm rounded-full hidden md:block cursor-help transition-colors hover:bg-zinc-200 hover:text-zinc-600">
-                            {date.getFullYear()}{" "}
-                            {
-                              ["Q1", "Q2", "Q3", "Q4"][
-                                Math.floor(date.getMonth() / 3)
-                              ]
-                            }{" "}
-                            {date.getFullYear() !== new Date().getFullYear() &&
-                              date.getFullYear() - new Date().getFullYear() + 1}
+                          <p class="text-sm">
+                            <InlineInfo>
+                              {date.getFullYear().toString()}{" "}
+                              {
+                                ["Q1", "Q2", "Q3", "Q4"][
+                                  Math.floor(date.getMonth() / 3)
+                                ]
+                              }
+                            </InlineInfo>
                           </p>
                           <Tooltip position="bottom" class="translate-y-2">
                             <>{`${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`}</>

@@ -79,7 +79,7 @@ export default function Contact() {
           </p>
           <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </div>
-        <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col">
+        <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col lg:w-full lg:max-w-s lg:justify-between">
           <Button type="text" class="flex items-end gap-1">
             <>
               <At class="w-5 h-5" />
