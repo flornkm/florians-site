@@ -79,27 +79,13 @@ export default function Contact() {
           </p>
           <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </div>
-        <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col lg:w-full lg:max-w-s lg:justify-between">
+        <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col lg:w-full lg:max-w-s">
+          <p class="text-zinc-400">Contact via</p>
           <Button type="text" class="flex items-end gap-1">
-            <>
-              <At class="w-5 h-5" />
-              <p class="mt-0.5">LinkedIn</p>
-            </>
-          </Button>
-          <Button type="text" class="flex items-end gap-1 relative group">
-            <>
-              <At class="w-5 h-5" />
-              <p class="mt-0.5">X</p>
-              <Tooltip position="top" class="-mt-3">
-                Former Twitter
-              </Tooltip>
-            </>
+            Email
           </Button>
           <Button type="text" class="flex items-end gap-1">
-            <>
-              <At class="w-5 h-5" />
-              <p class="mt-0.5">E-Mail</p>
-            </>
+            iMessage
           </Button>
         </div>
       </div>

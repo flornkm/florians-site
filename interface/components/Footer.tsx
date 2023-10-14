@@ -100,7 +100,7 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
                 href="/feed"
               >
-                E-Mail
+                Email
               </a>
             </li>
           </ul>
