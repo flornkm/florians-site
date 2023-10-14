@@ -5,15 +5,12 @@ export default function Footer() {
   const pageContext = usePageContext()
   return (
     <footer class="py-16 border-t border-t-zinc-100">
-      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid md:grid-cols-4 gap-8">
-        <div class="xs:col-span-2 max-w-xs">
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-7 gap-8">
+        <div class="lg:col-span-5 xs:col-span-2 lg:max-w-[170px] max-w-sm">
           <h3 class="font-semibold mb-2">Florian's Personal Site</h3>
-          <p class="text-zinc-500">
-            Lorem labore aute veniam id aliqua fugiat mollit commodo occaecat
-            magna occaecat voluptate ad.
-          </p>
+          <p class="text-zinc-500">Lorem labore aute veniam id aliqua.</p>
         </div>
-        <div class="md:place-self-end">
+        <div class="xl:place-self-end lg:mr-2">
           <h4 class="font-medium mb-3">Pages</h4>
           <ul class="space-y-2">
             <li>
@@ -71,15 +68,15 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div class="md:place-self-end">
-          <h4 class="font-medium mb-3">Other</h4>
+        <div class="xl:place-self-end">
+          <h4 class="font-medium mb-3">Connect</h4>
           <ul class="space-y-2">
             <li>
               <a
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
                 href="/"
               >
-                Home
+                X (Twitter)
               </a>
             </li>
             <li>
@@ -87,7 +84,7 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
                 href="/about"
               >
-                About
+                iMessage
               </a>
             </li>
             <li>
@@ -95,7 +92,7 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
                 href="/side-projects"
               >
-                Side Projects
+                LinkedIn
               </a>
             </li>
             <li>
@@ -103,14 +100,14 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
                 href="/feed"
               >
-                Feed
+                E-Mail
               </a>
             </li>
           </ul>
         </div>
       </div>
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 ">
-        <div class="border-b border-dashed border-zinc-200 my-16" />
+        <div class="border-b border-dashed border-zinc-200 my-16 st" />
       </div>
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm xs:flex-row flex-col gap-6">
         <ul class="flex space-x-8">
