@@ -47,6 +47,9 @@ export default function Contact() {
           time: new Date(),
         },
       ])
+      setTimeout(() => {
+        chatInput.current!.focus()
+      }, 50)
     }, 1000)
   }
 
@@ -77,13 +80,13 @@ export default function Contact() {
           <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </div>
         <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col">
-          <Button style="text" class="flex items-end gap-1">
+          <Button type="text" class="flex items-end gap-1">
             <>
               <At class="w-5 h-5" />
               <p class="mt-0.5">LinkedIn</p>
             </>
           </Button>
-          <Button style="text" class="flex items-end gap-1 relative group">
+          <Button type="text" class="flex items-end gap-1 relative group">
             <>
               <At class="w-5 h-5" />
               <p class="mt-0.5">X</p>
@@ -92,7 +95,7 @@ export default function Contact() {
               </Tooltip>
             </>
           </Button>
-          <Button style="text" class="flex items-end gap-1">
+          <Button type="text" class="flex items-end gap-1">
             <>
               <At class="w-5 h-5" />
               <p class="mt-0.5">E-Mail</p>
@@ -120,14 +123,14 @@ export default function Contact() {
               ref={chatInput}
               type="text"
               placeholder="Message..."
-              class="w-full placeholder:text-zinc-400 disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-8 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-2 px-6 py-3 rounded-full bg-white border border-zinc-200"
+              class="w-full placeholder:text-zinc-400 disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200"
             />
             <Button
               function={() => {
                 sendMessage()
               }}
               rounded
-              style="primary"
+              type="primary"
               class={
                 "absolute right-1 top-1/2 -translate-y-1/2 group/button leading-none overflow-hidden md:hover:pl-16 " +
                 (loading() ? "opacity-30 pointer-events-none" : "")

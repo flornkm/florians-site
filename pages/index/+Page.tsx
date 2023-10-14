@@ -46,10 +46,10 @@ export default function Page({ projects }: { projects: any[] }) {
               A designer and developer building digital products.
             </h1>
             <ButtonWrapper>
-              <Button style="primary" link="/#work">
+              <Button type="primary" link="/#work">
                 Work
               </Button>
-              <Button style="secondary" link="/feed">
+              <Button type="secondary" link="/feed">
                 Feed
               </Button>
             </ButtonWrapper>
@@ -74,7 +74,7 @@ export default function Page({ projects }: { projects: any[] }) {
           </div>
         </div>
         <p class="mb-20 text-zinc-500 text-lg">
-          Things I have worked on in my career. Includes both employment,
+          Things I have worked on in my career. Includes all employment,
           freelance and study work.
         </p>
         <div class="flex flex-col gap-32 mb-56">
@@ -108,7 +108,7 @@ export default function Page({ projects }: { projects: any[] }) {
                         </div>
                       </div>
                       <Button
-                        style="text"
+                        type="text"
                         link={project.url}
                         class="relative"
                         chevron
