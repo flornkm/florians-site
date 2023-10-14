@@ -23,6 +23,7 @@ async function onRenderHtml(pageContext: PageContext) {
     (documentProps && documentProps.description) || "Florians Personal Website."
 
   const documentHtml = escapeInject`<!DOCTYPE html>
+  <!-- Built by myself • Florian -->
     <html lang="en">
       <head>
         <meta charset="UTF-8" />

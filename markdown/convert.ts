@@ -37,9 +37,12 @@ export async function returnContent(category: "work") {
     })
   }
 
-  tableOfContents.sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime()
-  })
+  tableOfContents.sort(
+    // @ts-expect-error
+    (a, b) =>
+      new Date(b.date.split("/")[1], b.date.split("/")[0]).getTime() -
+      new Date(a.date.split("/")[1], a.date.split("/")[0]).getTime()
+  )
 
   return tableOfContents
 }
