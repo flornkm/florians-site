@@ -2,28 +2,45 @@ import Flicking from "@egjs/preact-flicking"
 import "@egjs/preact-flicking/dist/flicking.css"
 import { JSX } from "preact/jsx-runtime"
 import { AutoPlay } from "@egjs/flicking-plugins"
-import { Arrow } from "@egjs/flicking-plugins"
-import { useRef } from "preact/hooks"
+import { useRef, useState } from "preact/hooks"
+import { useWindowResize } from "../hooks/useWindowResize"
 import Button from "./Button"
-import { createRef } from "preact"
+import ArrowRight from "~icons/eva/arrow-forward-outline"
+import ArrowLeft from "~icons/eva/arrow-back-outline"
 
 export default function Slider(props: {
   autoPlay?: boolean
   buttons?: boolean
   children: JSX.Element[] | Element[]
 }) {
-  const slider = useRef<Flicking>()
+  const slider = useRef<Flicking>(null)
+  const [panelsNumber, setPanelsNumber] = useState(() =>
+    typeof window !== "undefined"
+      ? window.innerWidth > 1024
+        ? 4
+        : window.innerWidth > 640
+        ? 2
+        : 1
+      : 1
+  )
+
   const plugins = []
   if (props.autoPlay) plugins.push(new AutoPlay({ duration: 5000 }))
 
+  useWindowResize(() => {
+    setPanelsNumber(
+      window.innerWidth > 1024 ? 4 : window.innerWidth > 640 ? 2 : 1
+    )
+  })
+
   return (
-    <div class="w-full">
+    <div class="w-full relative md:block flex flex-wrap gap-y-16 gap-x-4">
       <Flicking
         ref={slider}
         hideBeforeInit
         align="next"
         circular={true}
-        panelsPerView={4}
+        panelsPerView={panelsNumber}
         moveType="snap"
         preventDefaultOnDrag
         plugins={plugins}
@@ -31,13 +48,24 @@ export default function Slider(props: {
       >
         {props.children}
       </Flicking>
-      <p
-        onClick={() => {
+      <Button
+        type="secondary"
+        function={() => {
           slider.current?.prev()
         }}
+        class="md:absolute z-10 -translate-y-1/2 top-1/2 left-0 md:-left-8 md:shadow-xl shadow-black/5"
       >
-        Test
-      </p>
+        <ArrowLeft />
+      </Button>
+      <Button
+        type="secondary"
+        function={() => {
+          slider.current?.next()
+        }}
+        class="md:absolute z-10 -translate-y-1/2 top-1/2 right-0 md:-right-8 md:shadow-xl shadow-black/5"
+      >
+        <ArrowRight />
+      </Button>
     </div>
   )
 }
