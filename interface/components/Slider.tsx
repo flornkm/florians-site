@@ -49,6 +49,7 @@ export default function Slider(props: {
         {props.children}
       </Flicking>
       <Button
+        rounded
         type="secondary"
         function={() => {
           slider.current?.prev()
@@ -58,6 +59,7 @@ export default function Slider(props: {
         <ArrowLeft />
       </Button>
       <Button
+        rounded
         type="secondary"
         function={() => {
           slider.current?.next()
@@ -73,42 +75,44 @@ export default function Slider(props: {
 export function PhotoSlider(props: { autoPlay?: boolean; buttons?: boolean }) {
   const slides = [
     {
-      src: "/images/avatars/florian_student.webp",
-      alt: "Florian Student",
-      caption: "Florian Student",
+      src: "/images/photos/painting_inlang.jpg",
+      alt: "Image spinning",
+      caption: "inlang Onsite - A painting spinning and creating a cool effect",
     },
     {
-      src: "/images/avatars/florian_student.webp",
-      alt: "Florian Student",
-      caption: "Florian Student",
+      src: "/images/photos/rainy_berlin.jpg",
+      alt: "Rain in Berlin",
+      caption: "A photo of a rainy day in Berlin",
     },
     {
-      src: "/images/avatars/florian_student.webp",
-      alt: "Florian Student",
-      caption: "Florian Student",
+      src: "/images/photos/sms_festival.jpg",
+      alt: "Festival night",
+      caption: "A cold night at a campsite together with Luis",
     },
     {
-      src: "/images/avatars/florian_student.webp",
-      alt: "Florian Student",
-      caption: "Florian Student",
+      src: "/images/photos/starting_work.jpg",
+      alt: "Florian doing a selfie",
+      caption: "Heading off to work in my Berlin apartment",
     },
     {
-      src: "/images/avatars/florian_student.webp",
-      alt: "Florian Student",
-      caption: "Florian Student",
+      src: "/images/photos/remi_restaurant.jpg",
+      alt: "Dinner with design engineers",
+      caption:
+        "Having dinner at a Berlin restaurant with Anton, Nils and Linus",
     },
     {
-      src: "/images/avatars/florian_student.webp",
-      alt: "Florian Student",
-      caption: "Florian Student",
+      src: "/images/photos/inlang_team.jpg",
+      alt: "inlang team standing outside",
+      caption:
+        "inlang Onsite - Standing outside with Felix, Nils, Niklas and Jannes",
     },
   ]
   return (
     <Slider autoPlay={props.autoPlay} buttons={props.buttons}>
       {slides.map((slide) => (
-        <figure key={slide} class="mr-8">
+        <figure key={slide} class="mr-8 group">
           <img src={slide.src} alt={slide.alt} />
-          <figcaption class="text-sm text-zinc-400 mt-3">
+          <figcaption class="text-sm text-zinc-400 mt-3 line-clamp-2 group-hover:line-clamp-none">
             {slide.caption}
           </figcaption>
         </figure>
