@@ -14,7 +14,7 @@ export default function PageLayout({
 }) {
   return (
     <PageContextProvider pageContext={pageContext}>
-      <div class="relative font-sans selection:bg-blue-100 selection:text-blue-500">
+      <div class="relative font-sans selection:bg-blue-100 selection:text-blue-500 bg-light-zinc">
         <nav class="sticky top-0 border-b border-b-zinc-100 bg-white z-50 max-lg:hidden">
           <Navigation />
         </nav>
