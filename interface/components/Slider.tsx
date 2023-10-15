@@ -34,7 +34,7 @@ export default function Slider(props: {
   })
 
   return (
-    <div class="w-full relative md:block flex flex-wrap gap-y-16 gap-x-4">
+    <div class="w-full relative md:block flex flex-wrap gap-y-12 gap-x-4">
       <Flicking
         ref={slider}
         hideBeforeInit

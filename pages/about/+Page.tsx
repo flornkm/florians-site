@@ -1,6 +1,7 @@
 import { InlineInfo } from "../../interface/components/Inline"
 import Tooltip from "../../interface/components/Tooltip"
-import Crop from "~icons/eva/crop-outline"
+import Experience from "~icons/eva/briefcase-outline"
+import Camera from "~icons/eva/camera-outline"
 import Music from "~icons/eva/speaker-outline"
 import Movie from "~icons/eva/film-outline"
 import Map from "~icons/eva/pin-outline"
@@ -155,10 +156,11 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex flex-col md:flex-row md:gap-12 mb-48">
+      <section class="w-full flex flex-col md:flex-row md:gap-12 mb-40">
         <div class="md:w-full md:max-w-[170px]">
-          <h2 class="text-lg font-semibold md:sticky top-20 md:mb-0 mb-8">
+          <h2 class="text-lg font-semibold md:sticky top-20 md:mb-0 mb-8 relative group">
             Education
+            <Experience class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h2>
         </div>
         <div class="py-0.5">
@@ -197,31 +199,34 @@ export default function Page() {
         </div>
       </section>
       <section class="w-full mb-32">
-        <h2 class="text-xl font-semibold text-center mb-24">
+        <h2 class="text-xl font-medium mb-16 text-zinc-400">
           In case you don't want to read through the boring stuff, I treat the
           <br class="hidden md:block" />
           following sections as something like a personal library.
         </h2>
-        <div class="mb-20">
-          <h3 class="text-lg font-semibold mb-5">
-            <Map class="inline-block mb-1" /> Locations
+        <div class="mb-20 flex flex-col items-start">
+          <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
+            Locations
+            <Map class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h3>
           <div class="w-full bg-zinc-100 h-96"></div>
         </div>
-        <div class="mb-20">
-          <h3 class="text-lg font-semibold mb-5">
-            <Crop class="inline-block mb-1" /> Photos
+        <div class="mb-20 flex flex-col items-start">
+          <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
+            Photos
+            <Camera class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h3>
           <PhotoSlider autoPlay buttons />
         </div>
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="mb-20">
-            <h3 class="text-lg font-semibold mb-5">
-              <Music class="inline-block mb-1" /> Music
+          <div class="mb-20 flex flex-col items-start">
+            <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
+              Music
+              <Music class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-72 overflow-hidden bg-zinc-100 mb-2 rounded-xl transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
                   <img
                     src="/images/music-covers/enjoy_silence.jpg"
                     class="w-40 h-40 rounded-full aspect-square md:group-active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent pointer-events-none"
@@ -245,7 +250,7 @@ export default function Page() {
                 </a>
               </div>
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-72 overflow-hidden bg-zinc-100 mb-2 rounded-xl transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
                   <img
                     src="/images/music-covers/serotonin_moonbeams.jpg"
                     class="w-40 h-40 rounded-full aspect-square md:group-active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent pointer-events-none"
@@ -270,13 +275,54 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div class="mb-20">
-            <h3 class="text-lg font-semibold mb-5">
-              <Movie class="inline-block mb-1" /> Movies & Series
+          <div class="mb-20 flex flex-col items-start">
+            <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
+              Movies and series
+              <Movie class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
-              <div class="h-96 bg-zinc-100 mb-2" />
-              <div class="h-96 bg-zinc-100 mb-2" />
+              <div>
+                <div class="bg-zinc-100 h-80 mb-2 bg-[url('/images/movies-series/interstellar.jpg')] bg-cover bg-top flex items-end overflow-hidden">
+                  <div class="text-white font-medium pb-4 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
+                    <p class="leading-none">Interstellar</p>
+                    <a
+                      target="_blank"
+                      href="https://www.netflix.com/"
+                      class="cursor-alias text-sm px-3 py-0.5 bg-red-600 rounded-full transition-colors hover:bg-red-500"
+                    >
+                      Netflix
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href="https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/"
+                  target="_blank"
+                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
+                >
+                  Cover image source
+                </a>
+              </div>
+              <div>
+                <div class="bg-zinc-100 h-80 mb-2 bg-[url('/images/movies-series/wecrashed.jpg')] bg-cover bg-top flex items-end overflow-hidden">
+                  <div class="text-white font-medium pb-4 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
+                    <p class="leading-none">WeCrashed </p>
+                    <a
+                      target="_blank"
+                      href="https://www.netflix.com/"
+                      class="cursor-alias text-sm px-3 py-0.5 bg-black rounded-full transition-colors hover:bg-zinc-800"
+                    >
+                      Apple TV+
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href="https://www.vogue.co.uk%2Farts-and-lifestyle%2Farticle%2Fwecrashed-apple-tv&psig=AOvVaw1TmOHYBg5jLkyGFaFlWq5Y&ust=1697491485478000&source=images&cd=vfe&opi=89978449&ved=0CBQQ3YkBahcKEwjAmefZ_viBAxUAAAAAHQAAAAAQJA"
+                  target="_blank"
+                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
+                >
+                  Cover image source
+                </a>
+              </div>
             </div>
           </div>
         </div>
