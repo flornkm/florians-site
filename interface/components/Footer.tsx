@@ -73,7 +73,7 @@ export default function Footer() {
           <ul class="space-y-2">
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                 href="/"
               >
                 X (Twitter)
@@ -81,7 +81,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                 href="/about"
               >
                 iMessage
@@ -89,7 +89,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                 href="/side-projects"
               >
                 LinkedIn
@@ -97,7 +97,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                 href="/feed"
               >
                 Email

@@ -3,6 +3,8 @@ import Tooltip from "../../interface/components/Tooltip"
 import Crop from "~icons/eva/crop-outline"
 import Music from "~icons/eva/speaker-outline"
 import Movie from "~icons/eva/film-outline"
+import Map from "~icons/eva/pin-outline"
+import { PhotoSlider } from "../../interface/components/Slider"
 
 export const documentProps = {
   title: "About Florian",
@@ -97,7 +99,7 @@ export default function Page() {
             <ul class="space-y-2">
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                   href="https://x.com/floriandwt/"
                 >
                   X (Twitter)
@@ -105,7 +107,7 @@ export default function Page() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                   href="https://x.com/floriandwt/"
                 >
                   LinkedIn
@@ -113,7 +115,7 @@ export default function Page() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                   href="https://x.com/floriandwt/"
                 >
                   Read.cv
@@ -121,7 +123,7 @@ export default function Page() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                   href="https://x.com/floriandwt/"
                 >
                   GitHub
@@ -134,7 +136,7 @@ export default function Page() {
             <ul class="space-y-2">
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                   href="https://x.com/floriandwt/"
                 >
                   Email
@@ -142,7 +144,7 @@ export default function Page() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium"
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
                   href="https://x.com/floriandwt/"
                 >
                   iMessage
@@ -167,8 +169,9 @@ export default function Page() {
                     <p>
                       Working as {item.jobTitle} {item.company && "at"}{" "}
                       <a
-                        class="text-black hover:text-zinc-600 transition-colors font-medium"
+                        class="text-black hover:text-zinc-600 transition-colors font-medium cursor-alias"
                         href={item.comapanyLink}
+                        target="_blank"
                       >
                         {item.company}
                       </a>
@@ -200,77 +203,59 @@ export default function Page() {
         </h2>
         <div class="mb-16">
           <h3 class="text-lg font-semibold mb-2">
+            <Map class="inline-block mb-1" /> Locations
+          </h3>
+          <p class="text-zinc-500 mb-6 max-w-lg">
+            Locations I visited in my life. Hoping to see more of the world in
+            the next years.
+          </p>
+          <div class="w-full bg-zinc-100 h-96"></div>
+        </div>
+        <div class="mb-16">
+          <h3 class="text-lg font-semibold mb-2">
             <Crop class="inline-block mb-1" /> Photos
           </h3>
-          <p class="text-zinc-500 mb-6">
-            Snapshots from my life. Not from myself, I'm no photographer.
+          <p class="text-zinc-500 mb-6 max-w-lg">
+            Snapshots from different moments in my life. I am not a photographer
+            by any means, so don't expect high quality images.
           </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-8">
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
-            </div>
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
-            </div>
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
-            </div>
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
+          <PhotoSlider autoPlay buttons />
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="mb-16">
+            <h3 class="text-lg font-semibold mb-2">
+              <Music class="inline-block mb-1" /> Music
+            </h3>
+            <p class="text-zinc-500 mb-6 max-w-sm">
+              Taste is always different and I hear everything. These songs are
+              just some of my favourites.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+              <div>
+                <div class="h-56 bg-zinc-100 mb-2 rounded-xl" />
+              </div>
+              <div>
+                <div class="h-56 bg-zinc-100 mb-2 rounded-xl" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="mb-16">
-          <h3 class="text-lg font-semibold mb-2">
-            <Music class="inline-block mb-1" /> Music
-          </h3>
-          <p class="text-zinc-500 mb-6">
-            Taste is always different and I hear everything. These songs are
-            just some of my favourites.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-8">
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-            </div>
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-            </div>
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-            </div>
-            <div>
-              <div class="h-56 bg-zinc-100 mb-2" />
-            </div>
-          </div>
-        </div>
-        <div class="mb-16">
-          <h3 class="text-lg font-semibold mb-2">
-            <Movie class="inline-block mb-1" /> Movies & Documentaries
-          </h3>
-          <p class="text-zinc-500 mb-6">
-            Just like music, I have a wide range of movies and documentaries I
-            love watching.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-8">
-            <div>
-              <div class="h-80 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
-            </div>
-            <div>
-              <div class="h-80 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
-            </div>
-            <div>
-              <div class="h-80 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
-            </div>
-            <div>
-              <div class="h-80 bg-zinc-100 mb-2" />
-              <p class="text-sm text-zinc-400">Caption Nr 1</p>
+          <div class="mb-16">
+            <h3 class="text-lg font-semibold mb-2">
+              <Movie class="inline-block mb-1" /> Movies & Documentaries
+            </h3>
+            <p class="text-zinc-500 mb-6 max-w-sm">
+              Just like music, I have a wide range of movies and documentaries I
+              love watching.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+              <div>
+                <div class="h-80 bg-zinc-100 mb-2" />
+                <p class="text-sm text-zinc-400">Caption Nr 1</p>
+              </div>
+              <div>
+                <div class="h-80 bg-zinc-100 mb-2" />
+                <p class="text-sm text-zinc-400">Caption Nr 1</p>
+              </div>
             </div>
           </div>
         </div>

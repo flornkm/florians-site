@@ -11,6 +11,8 @@
   "dependencies": {
     "@babel/core": "^7.17.10",
     "@babel/plugin-transform-react-jsx": "^7.17.3",
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/preact-flicking": "^4.11.0",
     "@preact/preset-vite": "^2.3.0",
     "@types/compression": "^1.7.3",
     "@types/express": "^4.17.17",

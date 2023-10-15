@@ -81,15 +81,23 @@ export default function Contact() {
         </div>
         <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col md:justify-between lg:w-full lg:max-w-s">
           <p class="text-zinc-400">Contact via</p>
-          <Button type="text" class="flex items-end gap-1">
+          <Button
+            type="text"
+            class="flex items-end gap-1"
+            link="https://google.com/"
+          >
             Email
           </Button>
-          <Button type="text" class="flex items-end gap-1">
+          <Button
+            type="text"
+            class="flex items-end gap-1"
+            link="https://google.com/"
+          >
             iMessage
           </Button>
         </div>
       </div>
-      <div class="mx-auto bg-zinc-50 flex flex-col justify-end w-full h-[612px] rounded-b-[32px] rounded-t-2xl">
+      <div class="mx-auto bg-zinc-100 flex flex-col justify-end w-full h-[612px] rounded-b-[32px] rounded-t-2xl">
         <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
