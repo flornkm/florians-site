@@ -230,7 +230,7 @@ export default function Page() {
               Taste is always different and I hear everything. These songs are
               just some of my favourites.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
                 <div class="h-56 bg-zinc-100 mb-2 rounded-xl" />
               </div>
@@ -247,7 +247,7 @@ export default function Page() {
               Just like music, I have a wide range of movies and documentaries I
               love watching.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
                 <div class="h-80 bg-zinc-100 mb-2" />
                 <p class="text-sm text-zinc-400">Caption Nr 1</p>
