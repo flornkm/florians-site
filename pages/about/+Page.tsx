@@ -216,8 +216,7 @@ export default function Page() {
             <Crop class="inline-block mb-1" /> Photos
           </h3>
           <p class="text-zinc-500 mb-6 max-w-lg">
-            Snapshots from different moments in my life. I am not a photographer
-            by any means, so don't expect high quality images.
+            Snapshots from different moments in my life.
           </p>
           <PhotoSlider autoPlay buttons />
         </div>
