@@ -25,7 +25,7 @@ export default function Slider(props: {
   )
 
   const plugins = []
-  if (props.autoPlay) plugins.push(new AutoPlay({ duration: 5000 }))
+  if (props.autoPlay) plugins.push(new AutoPlay({ duration: 10000 }))
 
   useWindowResize(() => {
     setPanelsNumber(

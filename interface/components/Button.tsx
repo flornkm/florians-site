@@ -31,7 +31,7 @@ export default function Button(props: {
               ? "text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600"
               : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200")
           : "text-zinc-800 hover:underline underline-offset-2 font-semibold " +
-            (props.link.includes("http") ? "cursor-alias" : ""))
+            (props.link?.includes("http") ? "cursor-alias" : ""))
       }
       style={{
         borderRadius: props.rounded ? 1000 : "",
