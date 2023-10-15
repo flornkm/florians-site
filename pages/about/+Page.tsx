@@ -5,6 +5,7 @@ import Music from "~icons/eva/speaker-outline"
 import Movie from "~icons/eva/film-outline"
 import Map from "~icons/eva/pin-outline"
 import { PhotoSlider } from "../../interface/components/Slider"
+import Button from "../../interface/components/Button"
 
 export const documentProps = {
   title: "About Florian",
@@ -201,60 +202,81 @@ export default function Page() {
           <br class="hidden md:block" />
           following sections as something like a personal library.
         </h2>
-        <div class="mb-16">
-          <h3 class="text-lg font-semibold mb-2">
+        <div class="mb-20">
+          <h3 class="text-lg font-semibold mb-5">
             <Map class="inline-block mb-1" /> Locations
           </h3>
-          <p class="text-zinc-500 mb-6 max-w-lg">
-            Locations I visited in my life. Hoping to see more of the world in
-            the next years.
-          </p>
           <div class="w-full bg-zinc-100 h-96"></div>
         </div>
-        <div class="mb-16">
-          <h3 class="text-lg font-semibold mb-2">
+        <div class="mb-20">
+          <h3 class="text-lg font-semibold mb-5">
             <Crop class="inline-block mb-1" /> Photos
           </h3>
-          <p class="text-zinc-500 mb-6 max-w-lg">
-            Snapshots from different moments in my life.
-          </p>
           <PhotoSlider autoPlay buttons />
         </div>
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="mb-16">
-            <h3 class="text-lg font-semibold mb-2">
+          <div class="mb-20">
+            <h3 class="text-lg font-semibold mb-5">
               <Music class="inline-block mb-1" /> Music
             </h3>
-            <p class="text-zinc-500 mb-6 max-w-sm">
-              Taste is always different and I hear everything. These songs are
-              just some of my favourites.
-            </p>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
-                <div class="h-56 bg-zinc-100 mb-2 rounded-xl" />
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-72 overflow-hidden bg-zinc-100 mb-2 rounded-xl transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                  <img
+                    src="/images/music-covers/enjoy_silence.jpg"
+                    class="w-40 h-40 rounded-full aspect-square md:group-active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent pointer-events-none"
+                  />
+                  <Button
+                    type="secondary"
+                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent"
+                    link="https://open.spotify.com/album/13OoJ5Y23cdo8CDAiQwznb"
+                  >
+                    <p class="mx-auto selection:bg-transparent selection:text-black">
+                      Spotify
+                    </p>
+                  </Button>
+                </div>
+                <a
+                  href="https://en.wikipedia.org/wiki/Enjoy_the_Silence"
+                  target="_blank"
+                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
+                >
+                  Cover image source
+                </a>
               </div>
               <div>
-                <div class="h-56 bg-zinc-100 mb-2 rounded-xl" />
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-72 overflow-hidden bg-zinc-100 mb-2 rounded-xl transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                  <img
+                    src="/images/music-covers/serotonin_moonbeams.jpg"
+                    class="w-40 h-40 rounded-full aspect-square md:group-active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent pointer-events-none"
+                  />
+                  <Button
+                    type="secondary"
+                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent"
+                    link="https://open.spotify.com/album/1UTc8WInycl4tVgJ1yODaO"
+                  >
+                    <p class="mx-auto selection:bg-transparent selection:text-black">
+                      Spotify
+                    </p>
+                  </Button>
+                </div>
+                <a
+                  href="https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/"
+                  target="_blank"
+                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
+                >
+                  Cover image source
+                </a>
               </div>
             </div>
           </div>
-          <div class="mb-16">
-            <h3 class="text-lg font-semibold mb-2">
-              <Movie class="inline-block mb-1" /> Movies & Documentaries
+          <div class="mb-20">
+            <h3 class="text-lg font-semibold mb-5">
+              <Movie class="inline-block mb-1" /> Movies & Series
             </h3>
-            <p class="text-zinc-500 mb-6 max-w-sm">
-              Just like music, I have a wide range of movies and documentaries I
-              love watching.
-            </p>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
-              <div>
-                <div class="h-80 bg-zinc-100 mb-2" />
-                <p class="text-sm text-zinc-400">Caption Nr 1</p>
-              </div>
-              <div>
-                <div class="h-80 bg-zinc-100 mb-2" />
-                <p class="text-sm text-zinc-400">Caption Nr 1</p>
-              </div>
+              <div class="h-96 bg-zinc-100 mb-2" />
+              <div class="h-96 bg-zinc-100 mb-2" />
             </div>
           </div>
         </div>
