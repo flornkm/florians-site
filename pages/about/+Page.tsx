@@ -5,6 +5,7 @@ import Camera from "~icons/eva/camera-outline"
 import Music from "~icons/eva/speaker-outline"
 import Movie from "~icons/eva/film-outline"
 import Map from "~icons/eva/pin-outline"
+import Check from "~icons/eva/checkmark-outline"
 import { PhotoSlider } from "../../interface/components/Slider"
 import Button from "../../interface/components/Button"
 
@@ -49,6 +50,38 @@ export default function Page() {
       jobTitle: "Freelancer",
     },
   ]
+
+  const bucketList = [
+    {
+      name: "Visit New York City",
+      checked: true,
+    },
+    {
+      name: "Work in a Startup",
+      checked: true,
+    },
+    {
+      name: "Live in a city with > 1 mio. inhabitants",
+      checked: true,
+    },
+    {
+      name: "Reach an online audience from over 100,000 people",
+      checked: true,
+    },
+    {
+      name: "Live in the USA",
+      checked: false,
+    },
+    {
+      name: "Go to New Zealand & Antarctica",
+      checked: false,
+    },
+    {
+      name: "Found own startup",
+      checked: false,
+    },
+  ]
+
   return (
     <div class="w-full">
       <section class="w-full lg:pt-24 pt-16 flex gap-12 lg:flex-row flex-col mb-24">
@@ -205,25 +238,47 @@ export default function Page() {
           following sections as something like a personal library.
         </h2>
         <div class="mb-20 flex flex-col items-start">
-          <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
-            Locations
-            <Map class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
-          </h3>
-          <div class="w-full bg-zinc-100 h-96"></div>
-        </div>
-        <div class="mb-20 flex flex-col items-start">
-          <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
-            Photos
-            <Camera class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
-          </h3>
+          <h3 class="text-lg font-semibold mb-4">Photos</h3>
           <PhotoSlider autoPlay buttons />
+        </div>
+        <div class="w-full flex justify-between gap-12 md:flex-row flex-col my-32">
+          <div class="md:w-full w-full h-full">
+            <h3 class="text-lg font-semibold mb-3">Go's and NoGo's</h3>
+            <p class="text-zinc-500 mb-6">
+              Nostrud sint ut culpa ullamco sunt anim cillum elit veniam amet
+              anim. Et laboris elit non irure est. Occaecat mollit elit
+              excepteur ipsum enim minim. Consectetur sit minim ad reprehenderit
+              eiusmod. Consequat id excepteur aute enim ex aliqua eiusmod duis
+              eiusmod voluptate aliqua officia. Ad sit sint nulla ad duis duis
+              sunt culpa incididunt do.
+            </p>
+          </div>
+          <div class="md:w-full max-w-s">
+            <h4 class="text-lg font-semibold mb-4">Bucket List</h4>
+            <ul class="space-y-4 list-none">
+              {bucketList.map((entry) => (
+                <li
+                  class={
+                    "flex items-start gap-3 " +
+                    (entry.checked
+                      ? "line-through selection:bg-transparent selection:text-black"
+                      : "")
+                  }
+                >
+                  <div class="bg-zinc-100 border flex-shrink-0 cursor-pointer border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative">
+                    {entry.checked && (
+                      <Check class="absolute -right-1.5 -top-1 w-7 h-7 active:animate-shake" />
+                    )}
+                  </div>
+                  {entry.name}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
         <div class="grid md:grid-cols-2 gap-8">
           <div class="mb-20 flex flex-col items-start">
-            <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
-              Music
-              <Music class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
-            </h3>
+            <h3 class="text-lg font-semibold mb-4">Music</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
                 <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
@@ -276,10 +331,7 @@ export default function Page() {
             </div>
           </div>
           <div class="mb-20 flex flex-col items-start">
-            <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
-              Movies and series
-              <Movie class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
-            </h3>
+            <h3 class="text-lg font-semibold mb-4">Movies and series</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
                 <div class="bg-zinc-100 h-80 mb-2 bg-[url('/images/movies-series/interstellar.jpg')] bg-cover bg-top flex items-end overflow-hidden">
