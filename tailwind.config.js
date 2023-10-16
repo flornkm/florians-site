@@ -21,6 +21,17 @@ export default {
         "nav-shadow":
           "0 10px 15px -3px rgb(0 0 0 / 0.02), 0 4px 6px -4px rgb(0 0 0 / 0.025)",
       },
+      keyframes: {
+        shake: {
+          "0%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-4px)" },
+          "75%": { transform: "translateX(4px)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        shake: "shake 0.1s ease-in-out",
+      },
     },
     fontFamily: {
       sans: ["Pretendard Variable", "Inter", "sans-serif"],
