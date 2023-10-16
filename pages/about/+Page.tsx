@@ -158,9 +158,9 @@ export default function Page() {
       </section>
       <section class="w-full flex flex-col md:flex-row md:gap-12 mb-40">
         <div class="md:w-full md:max-w-[170px]">
-          <h2 class="text-lg font-semibold md:sticky top-20 md:mb-0 mb-8 relative group">
+          <h2 class="text-lg font-semibold md:sticky md:top-20 md:mb-0 mb-8 relative group">
             Education
-            <Experience class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
+            <Experience class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h2>
         </div>
         <div class="py-0.5">
@@ -207,14 +207,14 @@ export default function Page() {
         <div class="mb-20 flex flex-col items-start">
           <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
             Locations
-            <Map class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
+            <Map class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h3>
           <div class="w-full bg-zinc-100 h-96"></div>
         </div>
         <div class="mb-20 flex flex-col items-start">
           <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
             Photos
-            <Camera class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
+            <Camera class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h3>
           <PhotoSlider autoPlay buttons />
         </div>
@@ -222,7 +222,7 @@ export default function Page() {
           <div class="mb-20 flex flex-col items-start">
             <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
               Music
-              <Music class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
+              <Music class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
@@ -278,7 +278,7 @@ export default function Page() {
           <div class="mb-20 flex flex-col items-start">
             <h3 class="text-lg font-semibold mb-2 flex justify-between items-center relative group">
               Movies and series
-              <Movie class="absolute top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
+              <Movie class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
             </h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
