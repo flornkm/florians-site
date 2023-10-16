@@ -10,6 +10,7 @@ export default function Button(props: {
   icon?: JSX.Element
   chevron?: boolean
   class?: string
+  small?: boolean
   function?: () => void
 }) {
   return (
@@ -23,10 +24,11 @@ export default function Button(props: {
       }}
       class={
         "flex items-center gap-1 " +
+        (props.small ? "text-sm px-3 py-2 " : " ") +
         props.class +
         " " +
         (props.type !== "text"
-          ? "font-semibold rounded-xl px-5 py-2.5 transition-all duration-200 border " +
+          ? "font-semibold rounded-xl transition-all duration-200 border px-5 py-2.5 " +
             (props.type === "primary"
               ? "text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600"
               : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200")

@@ -98,12 +98,48 @@ export default function Contact() {
         </div>
       </div>
       <div class="mx-auto bg-zinc-100 flex flex-col justify-end w-full h-[612px] rounded-b-[32px] rounded-t-2xl">
-        <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll">
+        <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll relative">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
               {message.message}
             </ChatBubble>
           ))}
+          {messages.length === 3 && (
+            <div class="absolute bottom-4 md:gap-4 gap-2 items-center flex-wrap hidden xs:flex md:pr-8 pr-4">
+              <p>Often used answers:</p>
+              <Button
+                function={() => {
+                  chatInput.current!.value = "I have some freelance work."
+                  sendMessage()
+                }}
+                small
+                type="secondary"
+              >
+                Freelance work
+              </Button>
+              <Button
+                function={() => {
+                  chatInput.current!.value = "I have a job opportunity for you."
+                  sendMessage()
+                }}
+                small
+                type="secondary"
+              >
+                Job opportunity
+              </Button>
+              <Button
+                function={() => {
+                  chatInput.current!.value =
+                    "I got a question I want to ask you."
+                  sendMessage()
+                }}
+                small
+                type="secondary"
+              >
+                Question
+              </Button>
+            </div>
+          )}
         </div>
         <div class="flex gap-4 group">
           <div class="relative w-full">

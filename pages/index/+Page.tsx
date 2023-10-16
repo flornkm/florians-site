@@ -91,7 +91,7 @@ export default function Page({ projects }: { projects: any[] }) {
                     <img class="w-8 h-8" src={project.icon} />
                   </div>
                   <div class="w-full">
-                    <div class="flex gap-8 justify-between items-center mb-1 sticky top-0 lg:top-14 z-40 py-2">
+                    <div class="flex gap-8 justify-between items-center sticky top-0 lg:top-14 z-40 py-2">
                       <div class="w-full h-full absolute left-1/2 -translate-x-1/2 bg-light-zinc/95 backdrop-blur-xl" />
                       <div class="flex gap-3 items-center relative">
                         <h3 class="text-2xl font-semibold">{project.title}</h3>
@@ -120,9 +120,7 @@ export default function Page({ projects }: { projects: any[] }) {
                         Visit project
                       </Button>
                     </div>
-                    <p class="mb-6 md:text-lg text-zinc-500">
-                      {project.description}
-                    </p>
+                    <p class="mb-6 text-zinc-500">{project.description}</p>
                     <img src={project.cover} />
                   </div>
                 </div>
