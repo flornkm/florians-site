@@ -82,89 +82,111 @@ export default function Page() {
     },
   ]
 
+  const tools = [
+    {
+      name: "Notion",
+      icon: "/images/bridge/bridge-icon.svg",
+    },
+    {
+      name: "VS Code",
+      icon: "/images/bridge/bridge-icon.svg",
+    },
+    {
+      name: "Figma",
+      icon: "/images/bridge/bridge-icon.svg",
+    },
+    {
+      name: "Expedia",
+      icon: "/images/bridge/bridge-icon.svg",
+    },
+  ]
+
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-24 pt-16 flex gap-12 lg:flex-row flex-col mb-24">
-        <div class="max-w-[170px] w-full flex-shrink-0">
-          <img
-            src="/images/avatars/florian_student.webp"
-            class="aspect-square rounded-full"
-          />
-        </div>
-        <div class="flex-grow md:max-w-md">
-          <h1 class="text-xl font-semibold mb-3">About Florian</h1>
-          <p class="text-zinc-500 mb-4">
-            Born on the 11th of January, 2001 in{" "}
-            <InlineInfo>
-              <>
-                Southern Germany
-                <Tooltip position="top" class="-translate-y-2">
-                  Ravensburg, BW
-                </Tooltip>
-              </>
-            </InlineInfo>{" "}
-            I was part of the first generation getting adults in the age of
-            computers, mobile phones and advanced technology.
-          </p>
-          <p class="text-zinc-500 mb-4">
-            Quickly I got used to working with computers and in 2013, I began
-            making money on the internet by selling my skills as a
-            <InlineInfo>
-              <>
-                digital Designer
-                <Tooltip position="top" class="-translate-y-2">
-                  I also edited videos
-                </Tooltip>
-              </>
-            </InlineInfo>
-            .
-          </p>
-          <p class="text-zinc-500 mb-4">
-            Now, {new Date().getFullYear() - 2013} years later, I have learned
-            coding in addition, opening whole new possibilites for people and
-            companies I work with. The job title I love using for this unique
-            field is:
-            <br />
-            <span class="font-medium">Design Engineer</span>.
-          </p>
-        </div>
-        <div class="max-w-s w-full flex-shrink-0 lg:ml-auto xs:grid xs:grid-cols-2">
-          <div class="self-start mb-10 xs:mb-0">
-            <h2 class="font-medium mb-3">Socials</h2>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
-                  href="https://x.com/floriandwt/"
-                >
-                  X (Twitter)
-                </a>
-              </li>
-              <li>
-                <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
-                  href="https://x.com/floriandwt/"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
-                  href="https://x.com/floriandwt/"
-                >
-                  Read.cv
-                </a>
-              </li>
-              <li>
-                <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
-                  href="https://x.com/floriandwt/"
-                >
-                  GitHub
-                </a>
-              </li>
-            </ul>
+      <section class="w-full lg:pt-16 pt-16">
+        <h1 class="text-3xl font-semibold mb-16 w-full">About Florian</h1>
+        <div class="flex gap-12 lg:flex-row flex-col mb-24">
+          <div class="max-w-[170px] w-full flex-shrink-0">
+            <img
+              src="/images/avatars/florian_student.webp"
+              class="aspect-square rounded-full"
+            />
+          </div>
+          <div class="flex-grow md:max-w-md">
+            <h1 class="text-xl font-semibold mb-3">A few words to myself</h1>
+            <p class="text-zinc-500 mb-4">
+              Born on the 11th of January, 2001 in{" "}
+              <InlineInfo>
+                <>
+                  Southern Germany
+                  <Tooltip position="top" class="-translate-y-2">
+                    Ravensburg, BW
+                  </Tooltip>
+                </>
+              </InlineInfo>{" "}
+              I was part of the first generation getting adults in the age of
+              computers, mobile phones and advanced technology.
+            </p>
+            <p class="text-zinc-500 mb-4">
+              Quickly I got used to working with computers and in 2013, I began
+              making money on the internet by selling my skills as a
+              <InlineInfo>
+                <>
+                  digital Designer
+                  <Tooltip position="top" class="-translate-y-2">
+                    I also edited videos
+                  </Tooltip>
+                </>
+              </InlineInfo>
+              .
+            </p>
+            <p class="text-zinc-500 mb-4">
+              Now, {new Date().getFullYear() - 2013} years later, I have learned
+              coding in addition, opening whole new possibilites for people and
+              companies I work with. The job title I love using for this unique
+              field is:
+              <br />
+              <span class="font-medium">Design Engineer</span>.
+            </p>
+          </div>
+          <div class="max-w-s w-full flex-shrink-0 lg:ml-auto xs:grid xs:grid-cols-2">
+            <div class="self-start mb-10 xs:mb-0">
+              <h2 class="font-medium mb-3">Socials</h2>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    href="https://x.com/floriandwt/"
+                  >
+                    X (Twitter)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    href="https://x.com/floriandwt/"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    href="https://x.com/floriandwt/"
+                  >
+                    Read.cv
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    href="https://x.com/floriandwt/"
+                  >
+                    GitHub
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="place-self-end self-start">
             <h2 class="font-medium mb-3">Contact</h2>
@@ -224,7 +246,7 @@ export default function Page() {
                   <p class="text-zinc-500">{item.slogan}</p>
                 </div>
                 {experience.indexOf(item) !== experience.length - 1 && (
-                  <div class="border-b border-b-zinc-200 my-8" />
+                  <div class="border-b border-b-zinc-100 my-8" />
                 )}
               </div>
             )
@@ -243,15 +265,26 @@ export default function Page() {
         </div>
         <div class="w-full flex justify-between gap-12 md:flex-row flex-col my-32">
           <div class="md:w-full w-full h-full">
-            <h3 class="text-lg font-semibold mb-3">Go's and NoGo's</h3>
-            <p class="text-zinc-500 mb-6">
-              Nostrud sint ut culpa ullamco sunt anim cillum elit veniam amet
-              anim. Et laboris elit non irure est. Occaecat mollit elit
-              excepteur ipsum enim minim. Consectetur sit minim ad reprehenderit
-              eiusmod. Consequat id excepteur aute enim ex aliqua eiusmod duis
-              eiusmod voluptate aliqua officia. Ad sit sint nulla ad duis duis
-              sunt culpa incididunt do.
-            </p>
+            <h3 class="text-lg font-semibold mb-4">Tools I love using</h3>
+            <div class="py-0.5">
+              {tools.map((tool) => {
+                return (
+                  <div>
+                    <div>
+                      <div class="flex gap-3 items-center">
+                        <img src={tool.icon} class="w-5 h-5" />
+                        <p class="text-blacktransition-colors font-medium">
+                          {tool.name}
+                        </p>
+                      </div>
+                    </div>
+                    {tools.indexOf(tool) !== tools.length - 1 && (
+                      <div class="border-b border-b-zinc-100 my-3" />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           </div>
           <div class="md:w-full max-w-s">
             <h4 class="text-lg font-semibold mb-4">Bucket List</h4>

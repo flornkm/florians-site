@@ -50,8 +50,8 @@ export default function Page({ projects }: { projects: any[] }) {
               <Button type="primary" link="/#work">
                 Work
               </Button>
-              <Button type="secondary" link="/feed">
-                Feed
+              <Button type="secondary" link="/about">
+                About
               </Button>
             </ButtonWrapper>
           </div>

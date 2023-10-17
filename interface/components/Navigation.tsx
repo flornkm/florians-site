@@ -50,12 +50,12 @@ export default function Navigation() {
       <div class="flex items-center gap-8" id="nav-links">
         <NavigationLink href="/">Home</NavigationLink>
         <NavigationLink href="/about">About</NavigationLink>
-        <NavigationLink href="/side-projects">Sidework</NavigationLink>
+        <NavigationLink href="/sidework">Sidework</NavigationLink>
         <NavigationLink href="/feed">Feed</NavigationLink>
         {pageContext &&
           (pageContext?.urlPathname === "/" ||
             pageContext?.urlPathname === "/about" ||
-            pageContext?.urlPathname === "/side-projects" ||
+            pageContext?.urlPathname === "/sidework" ||
             pageContext?.urlPathname === "/feed") && (
             <div
               ref={stroke}

@@ -43,13 +43,13 @@ export default function Footer() {
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname === "/side-projects"
+                  (pageContext.urlPathname === "/sidework"
                     ? "text-zinc-600"
                     : "hover:text-zinc-600")
                 }
-                href="/side-projects"
+                href="/sidework"
               >
-                {pageContext.urlPathname === "/side-projects" && "/"} Sidework
+                {pageContext.urlPathname === "/sidework" && "/"} Sidework
               </a>
             </li>
             <li>
