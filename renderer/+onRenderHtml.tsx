@@ -23,7 +23,7 @@ async function onRenderHtml(pageContext: PageContext) {
     (documentProps && documentProps.description) || "Florians Personal Website."
 
   const documentHtml = escapeInject`<!DOCTYPE html>
-  <!-- Built by myself • Florian -->
+  <!-- Designed and coded by myself • Florian -->
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -35,7 +35,13 @@ async function onRenderHtml(pageContext: PageContext) {
       <body>
         ${dangerouslySkipEscape(pageHtml)}
       </body>
-    </html>`
+    </html>
+<!-- 
+    ____  __    _____  ____  ____    __    _  _   
+    ( ___)(  )  (  _  )(  _ \(_  _)  /__\  ( \( )  
+     )__)  )(__  )(_)(  )   / _)(_  /(__)\  )  (   
+    (__)  (____)(_____)(_)\_)(____)(__)(__)(_)\_)  
+-->`
 
   return {
     documentHtml,
