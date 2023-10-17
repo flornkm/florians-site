@@ -58,7 +58,7 @@ export default function Contact() {
       if (messages.length === 1) {
         displayMessage("Okay! And what I can do for you?")
       } else if (messages.length === 3) {
-        displayMessage("Interesting. Now I just need an email from you.")
+        displayMessage("Got it. Now I just need an email from you.")
       } else if (messages.length === 5) {
         displayMessage("Thanks, I will reach out to you soon! :)")
       }
@@ -136,7 +136,18 @@ export default function Contact() {
                 small
                 type="secondary"
               >
-                Question
+                Got a question
+              </Button>
+              <Button
+                function={() => {
+                  chatInput.current!.value =
+                    "Let's drink a beer together and connect!"
+                  sendMessage()
+                }}
+                small
+                type="secondary"
+              >
+                Let's drink a beer
               </Button>
             </div>
           )}
