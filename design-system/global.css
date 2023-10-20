@@ -9,3 +9,13 @@
 	font-display: swap;
 	src: url('/fonts/Pretendard/PretendardVariable.woff2') format('woff2-variations');
 }
+
+a {
+	padding: 0 0.25rem;
+}
+
+a:focus {
+	outline-width: 2px;
+	outline-color: #3b82f6;
+	border-radius: 0.25rem;
+}

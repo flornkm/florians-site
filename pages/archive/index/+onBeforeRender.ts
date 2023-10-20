@@ -1,9 +1,9 @@
 export default onBeforeRender
 
-import { returnContent } from "../../markdown/convert"
+import { returnContent } from "../../../markdown/convert"
 
 async function onBeforeRender() {
-  const projects = await returnContent("sidework")
+  const projects = await returnContent("archive")
 
   return {
     pageContext: {

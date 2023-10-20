@@ -47,7 +47,16 @@ export default function Page({ projects }: { projects: any[] }) {
               A designer and developer building digital products.
             </h1>
             <ButtonWrapper>
-              <Button type="primary" link="/#work">
+              <Button
+                type="primary"
+                function={() => {
+                  typeof window !== undefined &&
+                    scrollTo({
+                      top: work.current!.offsetTop - 24,
+                      behavior: "smooth",
+                    })
+                }}
+              >
                 Work
               </Button>
               <Button type="secondary" link="/about">
@@ -93,17 +102,19 @@ export default function Page({ projects }: { projects: any[] }) {
                   <div class="w-full">
                     <div class="flex gap-8 justify-between items-center sticky top-0 lg:top-14 z-40 py-2">
                       <div class="w-full h-full absolute left-1/2 -translate-x-1/2 bg-light-zinc/95 backdrop-blur-xl" />
-                      <div class="flex gap-3 items-center relative">
+                      <div class="flex md:gap-3 gap-2 items-center relative">
                         <h3 class="text-2xl font-semibold">{project.title}</h3>
                         <div class="group relative">
-                          <p class="text-sm">
+                          <p class="text-sm truncate hidden md:block">
                             <InlineInfo>
-                              {date.getFullYear().toString()}{" "}
-                              {
-                                ["Q1", "Q2", "Q3", "Q4"][
-                                  Math.floor(date.getMonth() / 3)
-                                ]
-                              }
+                              <>
+                                {date.getFullYear().toString()}{" "}
+                                {
+                                  ["Q1", "Q2", "Q3", "Q4"][
+                                    Math.floor(date.getMonth() / 3)
+                                  ]
+                                }
+                              </>
                             </InlineInfo>
                           </p>
                           <Tooltip position="bottom" class="translate-y-2">

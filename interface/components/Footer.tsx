@@ -5,14 +5,14 @@ export default function Footer() {
   const pageContext = usePageContext()
   return (
     <footer class="py-16 border-t border-t-zinc-100">
-      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-6 gap-8">
-        <div class="lg:col-span-4 xs:col-span-2 lg:max-w-[170px] max-w-sm">
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
+        <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
           <h3 class="font-semibold mb-2">Florian's Personal Site</h3>
           <p class="text-zinc-500">Lorem labore aute veniam id aliqua.</p>
         </div>
-        <div class="xl:place-self-end lg:mr-9">
+        <div class="xl:place-self-end lg:mr-7">
           <h4 class="font-medium mb-3">Pages</h4>
-          <ul class="space-y-2">
+          <ul class="space-y-2 -ml-1">
             <li>
               <a
                 class={
@@ -43,13 +43,13 @@ export default function Footer() {
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname === "/sidework"
+                  (pageContext.urlPathname === "/archive"
                     ? "text-zinc-600"
                     : "hover:text-zinc-600")
                 }
-                href="/sidework"
+                href="/archive"
               >
-                {pageContext.urlPathname === "/sidework" && "/"} Sidework
+                {pageContext.urlPathname === "/sidework" && "/"} Archive
               </a>
             </li>
             <li>
@@ -106,7 +106,7 @@ export default function Footer() {
         </div>
       </div>
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 ">
-        <div class="border-b border-dashed border-zinc-200 my-16 st" />
+        <div class="border-b border-dashed border-zinc-200 my-16" />
       </div>
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm xs:flex-row flex-col gap-6">
         <ul class="flex space-x-8">

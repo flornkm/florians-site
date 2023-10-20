@@ -12,7 +12,7 @@ export async function convertMarkdownToHtml(
   return marked(deleteInfo(markdown + '\n <base target="_blank">'))
 }
 
-export async function returnContent(category: "work" | "sidework") {
+export async function returnContent(category: "work" | "archive") {
   const contentRoot = "./content/" + category
   const tableOfContents = []
 

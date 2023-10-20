@@ -8,11 +8,11 @@ export default {
   theme: {
     extend: {
       screens: {
-        xs: "340px",
+        xs: "300px",
         lx: "1152px",
       },
       maxWidth: {
-        s: "288px",
+        s: "304px",
       },
       colors: {
         "light-zinc": "rgb(252, 252, 252)",
