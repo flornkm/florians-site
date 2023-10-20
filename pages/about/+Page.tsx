@@ -152,7 +152,7 @@ export default function Page() {
           <div class="max-w-s w-full flex-shrink-0 lg:ml-auto xs:grid xs:grid-cols-2">
             <div class="self-start mb-10 xs:mb-0">
               <h2 class="font-medium mb-3">Socials</h2>
-              <ul class="space-y-2">
+              <ul class="space-y-2 -ml-1">
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
@@ -186,28 +186,28 @@ export default function Page() {
                   </a>
                 </li>
               </ul>
+            </div>{" "}
+            <div class="place-self-end self-start">
+              <h2 class="font-medium mb-3">Contact</h2>
+              <ul class="space-y-2 -ml-1">
+                <li>
+                  <a
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    href="https://x.com/floriandwt/"
+                  >
+                    Email
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    href="https://x.com/floriandwt/"
+                  >
+                    iMessage
+                  </a>
+                </li>
+              </ul>
             </div>
-          </div>
-          <div class="place-self-end self-start">
-            <h2 class="font-medium mb-3">Contact</h2>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
-                  href="https://x.com/floriandwt/"
-                >
-                  Email
-                </a>
-              </li>
-              <li>
-                <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
-                  href="https://x.com/floriandwt/"
-                >
-                  iMessage
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </section>

@@ -23,7 +23,7 @@ export default function Button(props: {
         props.function && props.function()
       }}
       class={
-        "flex items-center gap-1 " +
+        "flex items-center gap-1 outline-transparent focus:outline-2 focus:outline-blue-500 " +
         (props.small ? "text-sm px-3 py-2 " : " ") +
         props.class +
         " " +
@@ -32,7 +32,8 @@ export default function Button(props: {
             (props.type === "primary"
               ? "text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600"
               : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200")
-          : "text-zinc-800 hover:underline underline-offset-2 font-semibold " +
+          : "text-zinc-800 hover:underline underline-offset-2 font-semibold rounded-md px-1.5 " +
+            (props.chevron ? "pr-0" : "") +
             (props.link?.includes("http") ? "cursor-alias" : ""))
       }
       style={{

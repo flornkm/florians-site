@@ -1,6 +1,6 @@
 ---
-title: Forza
-description: Test
+title: Granny AI
+description: 48 hour long AI hackathon resulting in "Granny AI"
 icon: /images/bridge/bridge-icon.svg
 cover: /images/bridge/bridge.jpg
 date: 05 / 2023
