@@ -38,7 +38,7 @@ export default function Page({ projects }: { projects: any[] }) {
   return (
     <div class="w-full">
       <header class="flex items-center justify-start md:gap-24 gap-16 max-lg:pb-32 min-h-screen w-full lg:justify-between lg:flex-row flex-col-reverse">
-        <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex md:mb-24">
+        <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex mb-24">
           <div class="cursor-text max-w-2xl">
             <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400 mb-10">
               <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300">

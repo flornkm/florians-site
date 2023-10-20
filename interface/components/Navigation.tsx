@@ -20,9 +20,14 @@ export default function Navigation() {
 
     if (activeLink) {
       const { x, width } = activeLink.getBoundingClientRect()
+
+      // Adjustments for mobile screens
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 786
+      const mobileWidthFactor = 1.25
+
       setSelectorPosition({
-        x,
-        width,
+        x: isMobile ? x - width / (mobileWidthFactor * 2) : x,
+        width: isMobile ? width * mobileWidthFactor : width,
       })
 
       // @ts-ignore
@@ -37,7 +42,7 @@ export default function Navigation() {
   }, [pageContext])
 
   return (
-    <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 px-4">
+    <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
         <a href="/#" class="group">
           <p class="text-lg font-semibold group-hover:text-zinc-500 transition-colors">
@@ -49,7 +54,7 @@ export default function Navigation() {
         </a>
       </div>
       <div
-        class="flex items-center md:gap-8 gap-4 justify-between md:justify-normal w-full md:w-auto"
+        class="flex items-center md:gap-8 gap-2 justify-between md:justify-normal w-full md:w-auto lg:px-0 md:px-1.5 px-0"
         id="nav-links"
       >
         <NavigationLink href="/">Home</NavigationLink>
@@ -67,7 +72,7 @@ export default function Navigation() {
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="lg:h-[1px] h-12 lg:-translate-x-0 -translate-x-0 absolute lg:bottom-[-1px] bg-black opacity-0 rounded-full lg:rounded-none"
+              class="lg:h-[1px] h-12 lg:-translate-x-0 flex-shrink-0 absolute lg:bottom-[-1px] bg-black opacity-0 rounded-full lg:rounded-none"
             />
           )}
       </div>
