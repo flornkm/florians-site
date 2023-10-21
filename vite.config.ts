@@ -3,6 +3,7 @@ import ssr from "vike/plugin"
 import Icons from "unplugin-icons/vite"
 
 const config = {
+  envPrefix: "PUBLIC_",
   plugins: [
     preact(),
     ssr({
