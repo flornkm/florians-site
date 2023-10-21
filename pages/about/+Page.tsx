@@ -1,10 +1,6 @@
 import { InlineInfo } from "../../interface/components/Inline"
 import Tooltip from "../../interface/components/Tooltip"
 import Experience from "~icons/eva/briefcase-outline"
-import Camera from "~icons/eva/camera-outline"
-import Music from "~icons/eva/speaker-outline"
-import Movie from "~icons/eva/film-outline"
-import Map from "~icons/eva/pin-outline"
 import Check from "~icons/eva/checkmark-outline"
 import { PhotoSlider } from "../../interface/components/Slider"
 import Button from "../../interface/components/Button"
@@ -99,19 +95,29 @@ export default function Page() {
       link: "https://apps.apple.com/us/app/expedia-hotels-flights-car/id427916203",
     },
     {
-      name: "Notion",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/88/d3/1e/88d31e04-2e05-0de3-7907-3981268a1953/AppIconProd-0-1x_U007emarketing-0-10-0-85-220-0.png/460x0w.webp",
-      link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
+      name: "X (Twitter)",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0b/8d/ac/0b8dac72-712c-0c82-a21c-4c0c393ffb88/ProductionAppIcon-1x_U007emarketing-0-7-0-0-0-85-220.png/460x0w.webp",
+      link: "https://apps.apple.com/de/app/x/id333903271",
     },
     {
-      name: "Hinge",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/d6/a3/d1/d6a3d1f9-d02c-0d25-2cdd-462dc3a81abf/AppIcon-1x_U007emarketing-0-5-0-85-220.png/460x0w.webp",
-      link: "https://apps.apple.com/us/app/hinge-dating-app-match-date/id595287172",
+      name: "Ticket Swap",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/26/68/b4/2668b404-3e5f-ffb2-f2f9-f5d47801af8f/production-app-icon-1x_U007emarketing-0-8-0-85-220-0.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/ticketswap-buy-sell-tickets/id932337449",
     },
     {
-      name: "Expedia",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a5/67/c0/a567c0c2-e970-0d9e-8959-85f7570ccdc7/AppIcon-0-1x_U007epad-0-85-220.png/460x0w.webp",
-      link: "https://apps.apple.com/us/app/expedia-hotels-flights-car/id427916203",
+      name: "Flighty",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/31/c4/27/31c427d0-32d5-02d6-b0f1-3c9bcd74b21e/AppIcon-0-0-1x_U007epad-0-0-85-220.png/200x200bb.jpg",
+      link: "https://apps.apple.com/us/app/flighty-live-flight-tracker/id1358823008",
+    },
+    {
+      name: "Spotify",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0e/68/64/0e6864ec-cc61-328f-5e33-43ce88317c82/AppIcon-0-0-1x_U007emarketing-0-6-0-0-85-220.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580",
+    },
+    {
+      name: "Finanzguru",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/ae/24/36/ae2436fc-82bd-621c-9927-40ad84e0f1ce/AppIcon-0-1x_U007epad-0-0-85-220-0.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
     },
   ]
 
@@ -279,9 +285,7 @@ export default function Page() {
         </div>
         <div class="w-full grid md:grid-cols-3 grid-rows-2 md:grid-rows-1 grid-cols-1 gap-8 mb-32">
           <div class="w-full h-full col-span-1 md:col-span-2">
-            <h3 class="text-lg font-semibold mb-8">
-              Apps from my everyday life
-            </h3>
+            <h3 class="text-lg font-semibold mb-8">Apps I like using</h3>
             <div
               x-data="{}"
               x-init="$nextTick(() => {
@@ -297,14 +301,15 @@ export default function Page() {
               >
                 {tools.map((tool) => {
                   return (
-                    <li class="group relative flex-shrink-0 bg-red-100">
-                      <a href={tool.link} target="_blank" class=" bg-red-200">
-                        <img
-                          src={tool.icon}
-                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer"
-                        />
-                      </a>
-                      <Tooltip position="top" class="-translate-y-3 z-20">
+                    <li class="group relative flex-shrink-0">
+                      <img
+                        onClick={() =>
+                          typeof window !== undefined && window.open(tool.link)
+                        }
+                        src={tool.icon}
+                        class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer hover:shadow-lg hover:shadow-black/5 transition-all"
+                      />
+                      <Tooltip position="top" class="-translate-y-3.5 z-20">
                         {tool.name}
                       </Tooltip>
                     </li>
@@ -319,10 +324,13 @@ export default function Page() {
                   return (
                     <li class="group relative flex-shrink-0">
                       <img
+                        onClick={() =>
+                          typeof window !== undefined && window.open(tool.link)
+                        }
                         src={tool.icon}
-                        class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer"
+                        class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer hover:shadow-lg hover:shadow-black/5 transition-all"
                       />
-                      <Tooltip position="top" class="-translate-y-3 z-20">
+                      <Tooltip position="top" class="-translate-y-3.5 z-20">
                         {tool.name}
                       </Tooltip>
                     </li>
@@ -343,7 +351,7 @@ export default function Page() {
                       : "")
                   }
                 >
-                  <div class="bg-zinc-100 border flex-shrink-0 cursor-pointer border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative">
+                  <div class="bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-pointer border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative">
                     {entry.checked && (
                       <Check class="absolute -right-1.5 -top-1 w-7 h-7 active:animate-shake" />
                     )}
@@ -366,7 +374,7 @@ export default function Page() {
                   />
                   <Button
                     type="secondary"
-                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent"
+                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent bg-green-500"
                     link="https://open.spotify.com/album/13OoJ5Y23cdo8CDAiQwznb"
                   >
                     <p class="mx-auto selection:bg-transparent selection:text-black">
