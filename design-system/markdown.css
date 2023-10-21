@@ -56,16 +56,7 @@ article {
         font-weight: 500;
         color: black;
         transition: all ease-in-out 0.1s;
-    }
-
-    & a::after {
-        content: "";
-        background-image: url("/images/icons/diagonal-arrow-right-up-outline.svg");
-        display: block;
-        font-size: 1.2rem;
-        width: 1.2rem;
-        height: 1.2rem;
-        margin-left: 4px;
+        cursor: alias;
     }
 
     & a:hover {
@@ -148,19 +139,10 @@ article {
         background-color: #000;
         color: #fff;
         font-weight: 600;
-        transform: rotateZ(1deg)
     }
 
     & project-links a:nth-child(1)::after {
         filter: invert(1);
-    }
-
-    & project-links a:nth-child(2) {
-        transform: rotateZ(-0.5deg)
-    }
-
-    & project-links a:nth-child(3) {
-        transform: rotateZ(2deg)
     }
 
     & project-links a:nth-child(1):hover {

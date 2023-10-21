@@ -44,7 +44,7 @@ export default function Navigation() {
   return (
     <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
-        <a href="/#" class="group">
+        <a href="/#" class="group -ml-1">
           <p class="text-lg font-semibold group-hover:text-zinc-500 transition-colors">
             Florian
             <span class="text-sm font-normal text-zinc-500 group-hover:text-zinc-400 ml-2 transition-colors hidden lg:inline-block">

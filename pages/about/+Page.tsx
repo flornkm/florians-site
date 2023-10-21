@@ -85,19 +85,33 @@ export default function Page() {
   const tools = [
     {
       name: "Notion",
-      icon: "/images/bridge/bridge-icon.svg",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/88/d3/1e/88d31e04-2e05-0de3-7907-3981268a1953/AppIconProd-0-1x_U007emarketing-0-10-0-85-220-0.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
     },
     {
-      name: "VS Code",
-      icon: "/images/bridge/bridge-icon.svg",
-    },
-    {
-      name: "Figma",
-      icon: "/images/bridge/bridge-icon.svg",
+      name: "Hinge",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/d6/a3/d1/d6a3d1f9-d02c-0d25-2cdd-462dc3a81abf/AppIcon-1x_U007emarketing-0-5-0-85-220.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/hinge-dating-app-match-date/id595287172",
     },
     {
       name: "Expedia",
-      icon: "/images/bridge/bridge-icon.svg",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a5/67/c0/a567c0c2-e970-0d9e-8959-85f7570ccdc7/AppIcon-0-1x_U007epad-0-85-220.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/expedia-hotels-flights-car/id427916203",
+    },
+    {
+      name: "Notion",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/88/d3/1e/88d31e04-2e05-0de3-7907-3981268a1953/AppIconProd-0-1x_U007emarketing-0-10-0-85-220-0.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
+    },
+    {
+      name: "Hinge",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/d6/a3/d1/d6a3d1f9-d02c-0d25-2cdd-462dc3a81abf/AppIcon-1x_U007emarketing-0-5-0-85-220.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/hinge-dating-app-match-date/id595287172",
+    },
+    {
+      name: "Expedia",
+      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a5/67/c0/a567c0c2-e970-0d9e-8959-85f7570ccdc7/AppIcon-0-1x_U007epad-0-85-220.png/460x0w.webp",
+      link: "https://apps.apple.com/us/app/expedia-hotels-flights-car/id427916203",
     },
   ]
 
@@ -211,7 +225,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex flex-col md:flex-row md:gap-12 mb-40">
+      <section class="w-full flex flex-col md:flex-row md:gap-12 mb-48">
         <div class="md:w-full md:max-w-[170px]">
           <h2 class="text-lg font-semibold md:sticky md:top-20 md:mb-0 mb-8 relative group">
             Education
@@ -254,39 +268,70 @@ export default function Page() {
         </div>
       </section>
       <section class="w-full mb-32">
-        <h2 class="text-xl font-medium mb-16 text-zinc-400">
+        <h2 class="text-xl font-medium mb-32 text-zinc-400">
           In case you don't want to read through the boring stuff, I treat the
           <br class="hidden md:block" />
           following sections as something like a personal library.
         </h2>
-        <div class="mb-20 flex flex-col items-start">
+        <div class="mb-32 flex flex-col items-start">
           <h3 class="text-lg font-semibold mb-4">Photos</h3>
           <PhotoSlider autoPlay buttons />
         </div>
-        <div class="w-full flex justify-between gap-12 md:flex-row flex-col my-32">
-          <div class="md:w-full w-full h-full">
-            <h3 class="text-lg font-semibold mb-4">Tools I love using</h3>
-            <div class="py-0.5">
-              {tools.map((tool) => {
-                return (
-                  <div>
-                    <div>
-                      <div class="flex gap-3 items-center">
-                        <img src={tool.icon} class="w-5 h-5" />
-                        <p class="text-blacktransition-colors font-medium">
-                          {tool.name}
-                        </p>
-                      </div>
-                    </div>
-                    {tools.indexOf(tool) !== tools.length - 1 && (
-                      <div class="border-b border-b-zinc-100 my-3" />
-                    )}
-                  </div>
-                )
-              })}
+        <div class="w-full grid md:grid-cols-3 grid-rows-2 md:grid-rows-1 grid-cols-1 gap-8 mb-32">
+          <div class="w-full h-full col-span-1 md:col-span-2">
+            <h3 class="text-lg font-semibold mb-8">
+              Apps from my everyday life
+            </h3>
+            <div
+              x-data="{}"
+              x-init="$nextTick(() => {
+        let ul = $refs.icons;
+        ul.insertAdjacentHTML('afterend', ul.outerHTML);
+        ul.nextSibling.setAttribute('aria-hidden', 'true');
+    })"
+              class="w-full inline-flex flex-nowrap overflow-hidden py-16 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
+            >
+              <ul
+                x-ref="icons"
+                class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll"
+              >
+                {tools.map((tool) => {
+                  return (
+                    <li class="group relative flex-shrink-0 bg-red-100">
+                      <a href={tool.link} target="_blank" class=" bg-red-200">
+                        <img
+                          src={tool.icon}
+                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer"
+                        />
+                      </a>
+                      <Tooltip position="top" class="-translate-y-3 z-20">
+                        {tool.name}
+                      </Tooltip>
+                    </li>
+                  )
+                })}
+              </ul>
+              <ul
+                x-ref="icons"
+                class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll"
+              >
+                {tools.map((tool) => {
+                  return (
+                    <li class="group relative flex-shrink-0">
+                      <img
+                        src={tool.icon}
+                        class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer"
+                      />
+                      <Tooltip position="top" class="-translate-y-3 z-20">
+                        {tool.name}
+                      </Tooltip>
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
           </div>
-          <div class="md:w-full max-w-s">
+          <div class="md:w-full max-w-s md:justify-self-end">
             <h4 class="text-lg font-semibold mb-4">Bucket List</h4>
             <ul class="space-y-4 list-none">
               {bucketList.map((entry) => (

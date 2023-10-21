@@ -128,7 +128,7 @@ export default function Page({ projects }: { projects: any[] }) {
                         class="relative"
                         chevron
                       >
-                        Visit project
+                        Read more
                       </Button>
                     </div>
                     <p class="mb-6 text-zinc-500">{project.description}</p>

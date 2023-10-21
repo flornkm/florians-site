@@ -28,9 +28,14 @@ export default {
           "75%": { transform: "translateX(4px)" },
           "100%": { transform: "translateX(0)" },
         },
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
       },
       animation: {
         shake: "shake 0.1s ease-in-out",
+        "infinite-scroll": "infinite-scroll 25s linear infinite",
       },
     },
     fontFamily: {
