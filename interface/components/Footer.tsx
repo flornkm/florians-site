@@ -49,7 +49,7 @@ export default function Footer() {
                 }
                 href="/archive"
               >
-                {pageContext.urlPathname === "/sidework" && "/"} Archive
+                {pageContext.urlPathname === "/archive" && "/"} Archive
               </a>
             </li>
             <li>
@@ -139,8 +139,7 @@ export default function Footer() {
           </li>
         </ul>
         <p class="text-zinc-400 leading-none">
-          <Info class="inline-block mb-0.5" /> Florian{" "}
-          {new Date().getFullYear()}
+          Copyright Florian {new Date().getFullYear()}
         </p>
       </div>
     </footer>
