@@ -25,6 +25,7 @@
     "node-fetch": "^3.3.2",
     "preact": "^10.10.0",
     "preact-render-to-string": "^5.2.1",
+    "signature_pad": "^4.1.6",
     "typescript": "^5.2.2",
     "vike": "^0.4.142",
     "vite": "^4.0.3"
