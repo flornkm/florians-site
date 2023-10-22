@@ -21,6 +21,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "cross-fetch": "^4.0.0",
+    "firebase": "^10.5.0",
     "marked": "^9.0.3",
     "node-fetch": "^3.3.2",
     "preact": "^10.10.0",

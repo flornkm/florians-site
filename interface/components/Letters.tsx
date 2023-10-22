@@ -3,6 +3,9 @@ import SignaturePad from "signature_pad"
 import Close from "~icons/eva/close-outline"
 import NoPrerender from "./NoPrerender"
 import Button from "./Button"
+import { db, firebaseApp } from "../../database/initFirebase"
+import { collection, addDoc, getDocs } from "firebase/firestore"
+import { initializeApp } from "firebase/app"
 
 export default function Letters() {
   return (
@@ -14,6 +17,13 @@ export default function Letters() {
   )
 }
 
+const addData = async () => {
+  const querySnapshot = await getDocs(collection(db, "users"))
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`)
+  })
+}
+
 function SendLetter() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const letterInput = useRef<HTMLTextAreaElement>(null)
@@ -22,6 +32,7 @@ function SendLetter() {
   const [signature, setSignature] = useState("")
 
   useEffect(() => {
+    addData()
     const signField = new SignaturePad(canvasRef.current!)
     const ratio = window.devicePixelRatio || 1
     canvasRef.current!.width = canvasRef.current!.offsetWidth * ratio
@@ -104,7 +115,7 @@ function SendLetter() {
                   rounded
                   chevron
                   disabled={signature.length === 0}
-                  function={() => {
+                  function={async () => {
                     const link = document.createElement("a")
                     link.download = "letter.png"
                     link.href = signature
