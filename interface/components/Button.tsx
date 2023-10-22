@@ -11,10 +11,12 @@ export default function Button(props: {
   chevron?: boolean
   class?: string
   small?: boolean
+  disabled?: boolean
   function?: () => void
 }) {
   return (
     <button
+      disabled={props.disabled}
       onClick={() => {
         props.link &&
           (props.link.includes("http")
@@ -23,7 +25,7 @@ export default function Button(props: {
         props.function && props.function()
       }}
       class={
-        "flex items-center gap-1 outline-transparent focus:outline-2 focus:outline-blue-500 " +
+        "flex items-center gap-1 outline-transparent focus:outline-2 focus:outline-blue-50 disabled:cursor-not-allowed " +
         (props.small ? "text-sm px-3 py-2 " : " ") +
         props.class +
         " " +

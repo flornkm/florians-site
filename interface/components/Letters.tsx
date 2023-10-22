@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "preact/hooks"
 import SignaturePad from "signature_pad"
 import Close from "~icons/eva/close-outline"
 import NoPrerender from "./NoPrerender"
-import { useWindowResize } from "../hooks/useWindowResize"
+import Button from "./Button"
 
 export default function Letters() {
   return (
@@ -17,9 +17,9 @@ export default function Letters() {
 function SendLetter() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const letterInput = useRef<HTMLTextAreaElement>(null)
-
-  //   const letterWritten = () => {
-  //     letterInput.current!.value.length > 0 &&
+  const handleInput = useRef<HTMLInputElement>(null)
+  const [letterWritten, setLetterWritten] = useState(false)
+  const [signature, setSignature] = useState("")
 
   useEffect(() => {
     const signField = new SignaturePad(canvasRef.current!)
@@ -28,10 +28,18 @@ function SendLetter() {
     canvasRef.current!.height = canvasRef.current!.offsetHeight * ratio
     const context = canvasRef.current!.getContext("2d")!
     context.scale(ratio, ratio)
+
     return () => {
       signField.clear()
     }
   }, [])
+
+  const saveSignature = () => {
+    if (canvasRef.current) {
+      const dataURL = canvasRef.current.toDataURL("image/png")
+      setSignature(dataURL)
+    }
+  }
 
   if (typeof window !== "undefined") document.body.style.overflow = "hidden"
 
@@ -44,30 +52,68 @@ function SendLetter() {
             <textarea
               type="text"
               ref={letterInput}
+              onInput={(e) => {
+                ;(e.target as HTMLTextAreaElement).value.length > 0
+                  ? setLetterWritten(true)
+                  : setLetterWritten(false)
+              }}
               className="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200"
             ></textarea>
           </div>
           <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0" />
-          <div className="w-full md:h-full h-3/5 p-6 flex items-end">
+          <div
+            className={
+              "w-full md:h-full h-3/5 p-6 flex items-end " +
+              (!letterWritten ? "cursor-not-allowed" : "")
+            }
+          >
             <div
               className={
                 "w-full md:h-auto h-full text-zinc-400 text-sm relative " +
-                (letterInput.current?.value.length === 0
-                  ? "cursor-not-allowed"
-                  : "")
+                (!letterWritten ? "pointer-events-none" : "")
               }
             >
               <canvas
                 ref={canvasRef}
+                onClick={() => {
+                  saveSignature()
+                }}
                 className={
                   "md:h-56 h-48 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] " +
-                  (letterInput.current?.value.length === 0
-                    ? "pointer-events-none"
-                    : "")
+                  (!letterWritten ? "pointer-events-none" : "")
                 }
               />
               <div className="h-[1px] border-t w-3/5 border-zinc-300 border-dotted mb-2" />
-              Signature
+              <div class="flex justify-between items-end">
+                <div class="flex items-start flex-col justify-between w-full gap-4">
+                  <p class="flex-shrink-0">Signature</p>
+                  <div class="flex">
+                    <p class="border border-l-zinc-200 text-black bg-zinc-100 border-r-transparent flex items-center px-2 rounded-l-full">
+                      @
+                    </p>
+                    <input
+                      ref={handleInput}
+                      type="text"
+                      placeholder="Social Media Handle (Optional)"
+                      class="placeholder:text-zinc-400 text-black w-56 disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-2 py-1 rounded-r-full bg-white border border-zinc-200"
+                    />
+                  </div>
+                </div>
+                <Button
+                  type="primary"
+                  rounded
+                  chevron
+                  disabled={signature.length === 0}
+                  function={() => {
+                    const link = document.createElement("a")
+                    link.download = "letter.png"
+                    link.href = signature
+                    link.click()
+                  }}
+                >
+                  Send
+                </Button>
+              </div>
             </div>
             <img
               className="w-48 absolute top-0 right-0 pointer-events-none"
