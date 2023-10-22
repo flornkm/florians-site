@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       cursor: {
-        draw: "url(/images/letter/edit.cur), pointer",
+        draw: "url(/images/letter/edit.cur) 4 40, pointer",
       },
       screens: {
         xs: "300px",
