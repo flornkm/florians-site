@@ -2,7 +2,7 @@ import { ComponentChild, VNode } from "preact"
 import Button from "../../../interface/components/Button"
 import { InlineInfo } from "../../../interface/components/Inline"
 import Tooltip from "../../../interface/components/Tooltip"
-import Flash from "~icons/eva/flash-fill"
+import Short from "~icons/eva/clock-fill"
 
 export const documentProps = {
   title: "Florian's Archive",
@@ -18,6 +18,10 @@ export default function Page({ projects }: { projects: any }) {
           results from hackathons. Feel free to look through if you are
           interested.
         </p>
+        <div class="flex mb-4 pb-2 items-center gap-1 text-zinc-400 border-b border-b-zinc-100">
+          <Short class="w-3.5 transition-colors" />
+          <p class="text-sm">= Short case study</p>
+        </div>
         <div class="py-0.5">
           {projects.map((project: any) => {
             const date = new Date(
@@ -27,11 +31,13 @@ export default function Page({ projects }: { projects: any }) {
             return (
               <>
                 <div class="md:grid md:grid-cols-7 flex flex-col gap-4 leading-none md:items-center">
-                  <p class="font-medium leading-snug">
-                    {project.title}{" "}
-                    <span class="inline-block items-center text-zinc-300">
-                      <Flash class="w-4" />
-                    </span>
+                  <p class="font-medium leading-snug flex items-center">
+                    {project.title}
+                    {project.short && (
+                      <span class="inline-block text-zinc-300 ml-2">
+                        <Short class="w-4 transition-colors" />
+                      </span>
+                    )}
                   </p>
                   <p class="text-zinc-500 truncate md:col-span-4 leading-snug">
                     {project.description}
