@@ -231,7 +231,6 @@ article {
 }
 
 article>div>p>img:nth-child(1) {
-    max-height: 600px;
     width: 100%;
     object-fit: cover;
     object-position: center;

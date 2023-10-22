@@ -2,6 +2,7 @@ import { ComponentChild, VNode } from "preact"
 import Button from "../../../interface/components/Button"
 import { InlineInfo } from "../../../interface/components/Inline"
 import Tooltip from "../../../interface/components/Tooltip"
+import Flash from "~icons/eva/flash-fill"
 
 export const documentProps = {
   title: "Florian's Archive",
@@ -26,7 +27,12 @@ export default function Page({ projects }: { projects: any }) {
             return (
               <>
                 <div class="md:grid md:grid-cols-7 flex flex-col gap-4 leading-none md:items-center">
-                  <p class="font-medium leading-snug">{project.title}</p>
+                  <p class="font-medium leading-snug">
+                    {project.title}{" "}
+                    <span class="inline-block items-center text-zinc-300">
+                      <Flash class="w-4" />
+                    </span>
+                  </p>
                   <p class="text-zinc-500 truncate md:col-span-4 leading-snug">
                     {project.description}
                   </p>
