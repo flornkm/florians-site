@@ -81,49 +81,54 @@ export default function Page() {
   const tools = [
     {
       name: "Notion",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/88/d3/1e/88d31e04-2e05-0de3-7907-3981268a1953/AppIconProd-0-1x_U007emarketing-0-10-0-85-220-0.png/460x0w.webp",
+      icon: "/images/apps/app_notion.jpg",
       link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
     },
     {
       name: "Hinge",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/d6/a3/d1/d6a3d1f9-d02c-0d25-2cdd-462dc3a81abf/AppIcon-1x_U007emarketing-0-5-0-85-220.png/460x0w.webp",
+      icon: "/images/apps/app_hinge.jpg",
       link: "https://apps.apple.com/us/app/hinge-dating-app-match-date/id595287172",
     },
     {
       name: "Expedia",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a5/67/c0/a567c0c2-e970-0d9e-8959-85f7570ccdc7/AppIcon-0-1x_U007epad-0-85-220.png/460x0w.webp",
+      icon: "/images/apps/app_expedia.jpg",
       link: "https://apps.apple.com/us/app/expedia-hotels-flights-car/id427916203",
     },
     {
       name: "X (Twitter)",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0b/8d/ac/0b8dac72-712c-0c82-a21c-4c0c393ffb88/ProductionAppIcon-1x_U007emarketing-0-7-0-0-0-85-220.png/460x0w.webp",
+      icon: "/images/apps/app_x.jpg",
       link: "https://apps.apple.com/de/app/x/id333903271",
     },
     {
-      name: "Ticket Swap",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/26/68/b4/2668b404-3e5f-ffb2-f2f9-f5d47801af8f/production-app-icon-1x_U007emarketing-0-8-0-85-220-0.png/460x0w.webp",
-      link: "https://apps.apple.com/us/app/ticketswap-buy-sell-tickets/id932337449",
-    },
-    {
       name: "Flighty",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/31/c4/27/31c427d0-32d5-02d6-b0f1-3c9bcd74b21e/AppIcon-0-0-1x_U007epad-0-0-85-220.png/200x200bb.jpg",
+      icon: "/images/apps/app_flighty.jpg",
       link: "https://apps.apple.com/us/app/flighty-live-flight-tracker/id1358823008",
     },
     {
       name: "Spotify",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/0e/68/64/0e6864ec-cc61-328f-5e33-43ce88317c82/AppIcon-0-0-1x_U007emarketing-0-6-0-0-85-220.png/460x0w.webp",
+      icon: "/images/apps/app_spotify.jpg",
       link: "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580",
     },
     {
       name: "Finanzguru",
-      icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/ae/24/36/ae2436fc-82bd-621c-9927-40ad84e0f1ce/AppIcon-0-1x_U007epad-0-0-85-220-0.png/460x0w.webp",
+      icon: "/images/apps/app_finanzguru.jpg",
+      link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
+    },
+    {
+      name: "Messages",
+      icon: "/images/apps/app_messages.jpg",
+      link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
+    },
+    {
+      name: "Cron",
+      icon: "/images/apps/app_cron.jpg",
       link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
     },
   ]
 
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-16 pt-16">
+      <section class="w-full lg:pt-16 pt-8">
         <h1 class="text-3xl font-semibold mb-16 w-full">About Florian</h1>
         <div class="flex gap-12 lg:flex-row flex-col mb-24">
           <div class="max-w-[170px] w-full flex-shrink-0">
@@ -284,59 +289,63 @@ export default function Page() {
           <PhotoSlider autoPlay buttons />
         </div>
         <div class="w-full grid md:grid-cols-3 grid-rows-2 md:grid-rows-1 grid-cols-1 gap-8 mb-32">
-          <div class="w-full h-full col-span-1 md:col-span-2">
+          <div class="w-full h-full col-span-1 md:col-span-2 flex flex-col justify-evenly">
             <h3 class="text-lg font-semibold mb-8">Apps I like using</h3>
-            <div
-              x-data="{}"
-              x-init="$nextTick(() => {
+            <div class="flex items-center">
+              <div
+                x-data="{}"
+                x-init="$nextTick(() => {
         let ul = $refs.icons;
         ul.insertAdjacentHTML('afterend', ul.outerHTML);
         ul.nextSibling.setAttribute('aria-hidden', 'true');
     })"
-              class="w-full inline-flex flex-nowrap overflow-hidden py-16 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
-            >
-              <ul
-                x-ref="icons"
-                class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll"
+                class="w-full inline-flex pt-12 pb-20 flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]"
               >
-                {tools.map((tool) => {
-                  return (
-                    <li class="group relative flex-shrink-0">
-                      <img
-                        onClick={() =>
-                          typeof window !== undefined && window.open(tool.link)
-                        }
-                        src={tool.icon}
-                        class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer hover:shadow-lg hover:shadow-black/5 transition-all"
-                      />
-                      <Tooltip position="top" class="-translate-y-3.5 z-20">
-                        {tool.name}
-                      </Tooltip>
-                    </li>
-                  )
-                })}
-              </ul>
-              <ul
-                x-ref="icons"
-                class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll"
-              >
-                {tools.map((tool) => {
-                  return (
-                    <li class="group relative flex-shrink-0">
-                      <img
-                        onClick={() =>
-                          typeof window !== undefined && window.open(tool.link)
-                        }
-                        src={tool.icon}
-                        class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-pointer hover:shadow-lg hover:shadow-black/5 transition-all"
-                      />
-                      <Tooltip position="top" class="-translate-y-3.5 z-20">
-                        {tool.name}
-                      </Tooltip>
-                    </li>
-                  )
-                })}
-              </ul>
+                <ul
+                  x-ref="icons"
+                  class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll"
+                >
+                  {tools.map((tool) => {
+                    return (
+                      <li class="group relative flex-shrink-0">
+                        <img
+                          onClick={() =>
+                            typeof window !== undefined &&
+                            window.open(tool.link)
+                          }
+                          src={tool.icon}
+                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all"
+                        />
+                        <Tooltip position="top" class="-translate-y-3.5 z-20">
+                          {tool.name}
+                        </Tooltip>
+                      </li>
+                    )
+                  })}
+                </ul>
+                <ul
+                  x-ref="icons"
+                  class="flex items-center justify-center md:justify-start [&_li]:mx-6 [&_img]:max-w-none animate-infinite-scroll"
+                >
+                  {tools.map((tool) => {
+                    return (
+                      <li class="group relative flex-shrink-0">
+                        <img
+                          onClick={() =>
+                            typeof window !== undefined &&
+                            window.open(tool.link)
+                          }
+                          src={tool.icon}
+                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all"
+                        />
+                        <Tooltip position="top" class="-translate-y-3.5 z-20">
+                          {tool.name}
+                        </Tooltip>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
           <div class="md:w-full max-w-s md:justify-self-end">
@@ -367,14 +376,14 @@ export default function Page() {
             <h3 class="text-lg font-semibold mb-4">Music</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8">
                   <img
                     src="/images/music-covers/enjoy_silence.jpg"
-                    class="w-40 h-40 rounded-full aspect-square md:group-active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent pointer-events-none"
+                    class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
                   />
                   <Button
                     type="secondary"
-                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent bg-green-500"
+                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent"
                     link="https://open.spotify.com/album/13OoJ5Y23cdo8CDAiQwznb"
                   >
                     <p class="mx-auto selection:bg-transparent selection:text-black">
@@ -391,10 +400,10 @@ export default function Page() {
                 </a>
               </div>
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 cursor-pointer group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8">
                   <img
                     src="/images/music-covers/serotonin_moonbeams.jpg"
-                    class="w-40 h-40 rounded-full aspect-square md:group-active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent pointer-events-none"
+                    class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
                   />
                   <Button
                     type="secondary"

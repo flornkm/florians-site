@@ -10,7 +10,7 @@ export const documentProps = {
 export default function Page({ projects }: { projects: any }) {
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-16 pt-16">
+      <section class="w-full lg:pt-16 pt-8">
         <h1 class="text-3xl font-semibold mb-4">Archive</h1>
         <p class="text-zinc-500 mb-16 max-w-lg">
           In my archive, you will find smaller creations, MVPs, ideas and

@@ -14,11 +14,19 @@ Browser based job page creator for Startups and SMEs.
 
 Bridge is a browser-based software designed to provide an easy-to-use solution for creating job pages. It enables people to quickly create forms while not being forced to use an overcomplicated marketing platform that costs hundreds of dollars. Bridge also incorporates its own design token system, allowing for seamless auto-saves, real-time updates, and fast publishing of projects. This streamlined approach ensures that you can focus on crafting compelling job pages without any technical hindrances.
 
+<three-full-grid>
+
+![Bridge landingpage](/images/bridge/bridge_landingpage.webp)
+![Bridge preview](/images/bridge/bridge_preview.webp)
+![Bridge waitlist](/images/bridge/bridge_waitlist.webp)
+
+</three-full-grid>
+
 <process-grid>
 
 ### Challenge
 
-Our browsers are full of tabs, our bookmarks are full of links, and our notes are full of ideas. We needed a platform that would allow us to organize and share our discoveries with others.
+In today's job market, it often seems that companies either use Notion Boards or overly complicated platforms to post their job openings. This creates a dilemma for both employers and job seekers. I was curious about finding a solution that strikes a balance between the simplicity of a Notion Board and the flexibility of a complete marketing platform. To better understand this challenge, I conducted interviews with professionals working in growing companies.
 
 <div>
 
@@ -28,33 +36,34 @@ Our browsers are full of tabs, our bookmarks are full of links, and our notes ar
 
 <div>
 
-#### Generating ideas
+#### Simple dashboard
 
-During the initial stages of our project, my colleagues Anton, Nils, and I brainstormed a variety of ideas, ranging from a platform with intricate navigation to a minimalist one-pager featuring only a few essential links. We engaged in extensive discussions, as well as sketching and designing, to explore and refine these diverse concepts.
+I designed and developed a user-friendly dashboard that brings together essential tools and features in one place. The dashboard's primary goal was to streamline workflow and minimize time spent on switching between applications.
 
-#### The collection
+#### States and alerts
 
-At Curations, our team of experienced curators has carefully organized an extensive collection of tools across multiple categories. Our collection is divided into various categories, including design, development, productivity, and more. Within each of these categories, we have created subcategories to make it easier for users to navigate and find the specific tools they need. For instance, under the design category, we have subcategories such as tools, portfolios, and inspiration. Similarly, our development category contains subcategories such as frameworks, repositories, and coding info. Our productivity category has subcategories like analytics, surveys, and mac apps.
+To enhance user understanding and provide clear feedback within the system, I focused on implementing states and alerts throughout the project. For instance, when a user publishes a job page, a popup appears to confirm the action. This ensures that users are aware of the changes they are making.
 
-#### Testing our prototype
+#### Accessible and intuitive forms
 
-In the spring of 2022, we launched version 1 of Curations, utilizing Webflow and their CMS. Although the Content Management System (CMS) was initially suitable for managing a small number of cards, we quickly realized its limitations when it came to manually inserting every link, image, and text. Consequently, we recognized the need to transition to more robust and scalable technologies.
+I designed and developed the job pages consisting of a form that allows users to enter information related to the job opening. I focused on making the form as accessible and intuitive as possible, ensuring that users can easily navigate and complete it. The database is built on top of my own thought-through design token system, which allows for easy customization and scalability as well as real-time updates.
 
-#### The Gateway to Innovative Tools
+#### Submission management
 
-Leveraging NextJS, Supabase and Vercel, we developed a website that displays our curated collection and allows users to submit their own discoveries. Our team of curators carefully selects each tool before it is deployed to the public, ensuring the highest quality recommendations.
+For the submission management system, I focused on creating a simple and intuitive interface that allows users to easily manage and organize their submissions. This feature allows users to view and manage all submissions in one place, making it easier to keep track of the hiring process, as well as export the data.
 
 </div>
 
 ### Result
 
-Curations had a successfull launch on ProductHunt, reaching nearly 10,000 users within the first month. Moving forward, our plan is to expand the project beyond just a curated list of links, providing users with even greater value and utility.
+Bridge is a tool that allows companies to create and publish job pages in minutes. It is designed to be simple and intuitive, while also providing the flexibility to customize the page to match the company's brand. Bridge is currently in development, so feel free to reach out if you are interested in learning more about it.
 
 </process-grid>
 
 <project-links>
 
-[Curations](https://bridge.supply/)
-[Product Hunt](https://www.producthunt.com/posts/bridge-3bd70b3a-9dce-43be-9ebd-fd4ce780ab08)
+[Bridge](https://bridge.supply/)
+[Product Hunt](https://www.producthunt.com/products/bridge-12)
+[GitHub Repo](https://github.com/floriandwt/bridge)
 
 </project-links>
