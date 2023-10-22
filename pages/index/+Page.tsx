@@ -5,6 +5,7 @@ import Button, { ButtonWrapper } from "../../interface/components/Button"
 import Tooltip from "../../interface/components/Tooltip"
 import Contact from "../../interface/components/Contact"
 import { InlineInfo } from "../../interface/components/Inline"
+import Letters from "../../interface/components/Letters"
 
 export const documentProps = {
   title: "Florian - Design Engineer",
@@ -117,7 +118,7 @@ export default function Page({ projects }: { projects: any[] }) {
                               </>
                             </InlineInfo>
                           </p>
-                          <Tooltip position="bottom" class="translate-y-2">
+                          <Tooltip position="bottom" class="translate-y-3">
                             <>{project.date}</>
                           </Tooltip>
                         </div>
@@ -141,9 +142,10 @@ export default function Page({ projects }: { projects: any[] }) {
         </div>
       </section>
       <section class="w-full mb-32">
-        <div>
-          <Contact />
-        </div>
+        <Contact />
+      </section>
+      <section class="w-full mb-32">
+        <Letters />
       </section>
     </div>
   )
