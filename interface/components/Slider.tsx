@@ -54,7 +54,7 @@ export default function Slider(props: {
         function={() => {
           slider.current?.prev()
         }}
-        class="md:absolute z-10 -translate-y-1/2 top-1/2 left-0 md:-left-8 md:shadow-xl shadow-black/5"
+        class="md:absolute z-10 -translate-y-1/2 top-1/2 left-0 md:-left-8 md:shadow-xl shadow-black/5 hover:pl-4 hover:pr-6"
       >
         <ArrowLeft />
       </Button>
@@ -64,7 +64,7 @@ export default function Slider(props: {
         function={() => {
           slider.current?.next()
         }}
-        class="md:absolute z-10 -translate-y-1/2 top-1/2 right-0 md:-right-8 md:shadow-xl shadow-black/5"
+        class="md:absolute z-10 -translate-y-1/2 top-1/2 right-0 md:-right-8 md:shadow-xl shadow-black/5 hover:pl-6 hover:pr-4"
       >
         <ArrowRight />
       </Button>
