@@ -34,6 +34,7 @@ export async function returnContent(category: "work" | "archive") {
       ...projectInfo,
       slug: file.replace(".md", ""),
       url: `/${category}/${file.replace(".md", "")}`,
+      short: markdown.length < 2000,
     })
   }
 
