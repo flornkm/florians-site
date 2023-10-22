@@ -26,8 +26,8 @@ export default function Page({ projects }: { projects: any }) {
             return (
               <>
                 <div class="md:grid md:grid-cols-7 flex flex-col gap-4 leading-none md:items-center">
-                  <p class="font-medium">{project.title}</p>
-                  <p class="text-zinc-500 truncate md:col-span-4">
+                  <p class="font-medium leading-snug">{project.title}</p>
+                  <p class="text-zinc-500 truncate md:col-span-4 leading-snug">
                     {project.description}
                   </p>
                   <div class="group relative mr-auto">
