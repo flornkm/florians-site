@@ -4,12 +4,26 @@ import Close from "~icons/eva/close-outline"
 import NoPrerender from "./NoPrerender"
 import Button from "./Button"
 
-export default function Letters() {
+export type Letter = {
+  id: string
+  text: string
+  signature: string
+  handle: string
+}
+
+export default function Letters({ letters }: { letters: Letter[] }) {
   return (
     <div>
       <NoPrerender>
         <SendLetter />
       </NoPrerender>
+      {letters.map((letter) => (
+        <p>
+          {letter.text}
+          <img src={letter.signature} alt="Signature" />
+          <p>{letter.handle}</p>
+        </p>
+      ))}
     </div>
   )
 }

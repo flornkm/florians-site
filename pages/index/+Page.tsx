@@ -5,7 +5,7 @@ import Button, { ButtonWrapper } from "../../interface/components/Button"
 import Tooltip from "../../interface/components/Tooltip"
 import Contact from "../../interface/components/Contact"
 import { InlineInfo } from "../../interface/components/Inline"
-import Letters from "../../interface/components/Letters"
+import Letters, { Letter } from "../../interface/components/Letters"
 
 export const documentProps = {
   title: "Florian - Design Engineer",
@@ -14,7 +14,13 @@ export const documentProps = {
 
 export const slug = "index"
 
-export default function Page({ projects }: { projects: any[] }) {
+export default function Page({
+  projects,
+  letters,
+}: {
+  projects: any[]
+  letters: Letter[]
+}) {
   const { work, workStroke, workTitle } = {
     work: useRef<HTMLDivElement>(null),
     workStroke: useRef<HTMLDivElement>(null),
@@ -145,7 +151,7 @@ export default function Page({ projects }: { projects: any[] }) {
         <Contact />
       </section>
       <section class="w-full mb-32">
-        <Letters />
+        <Letters letters={letters} />
       </section>
     </div>
   )

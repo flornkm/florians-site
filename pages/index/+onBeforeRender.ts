@@ -2,33 +2,26 @@ export default onBeforeRender
 
 import { initializeApp } from "firebase/app"
 import { returnContent } from "../../markdown/convert"
-import { addDoc, collection, getFirestore } from "firebase/firestore"
-
-// export const firebaseApp = initializeApp({
-//   apiKey: import.meta.env.FIREBASE_API,
-//   authDomain: import.meta.env.FIREBASE_DOMAIN,
-//   projectId: import.meta.env.FIREBASE_ID,
-// })
-
-// export const db = getFirestore(firebaseApp)
+import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore"
+import { Letter } from "../../interface/components/Letters"
 
 async function onBeforeRender() {
   const projects = await returnContent("work")
 
-  // try {
-  //   const docRef = await addDoc(collection(db, "users"), {
-  //     first: "Ada",
-  //     last: "Lovelace",
-  //     born: 1815,
-  //   })
-  //   console.log("Document written with ID: ", docRef.id)
-  // } catch (e) {
-  //   console.error("Error adding document: ", e)
-  // }
+  const firebaseApp = initializeApp({
+    apiKey: import.meta.env.FIREBASE_API,
+    authDomain: import.meta.env.FIREBASE_DOMAIN,
+    projectId: import.meta.env.FIREBASE_ID,
+  })
+
+  const db = getFirestore(firebaseApp)
+
+  const letters = await getDocs(collection(db, "letters"))
 
   return {
     pageContext: {
       pageProps: {
+        letters: letters.docs.map((letter) => letter.data()),
         projects: projects,
       },
     },
