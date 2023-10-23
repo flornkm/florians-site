@@ -1,6 +1,7 @@
 import preact from "@preact/preset-vite"
 import ssr from "vike/plugin"
 import Icons from "unplugin-icons/vite"
+import telefunc from "telefunc/vite"
 
 const config = {
   plugins: [
