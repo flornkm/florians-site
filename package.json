@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npm run server",
-    "prod": "npm run build && npm run server:prod",
+    "dev": "vite",
     "build": "vite build",
-    "server": "node ./server",
-    "server:prod": "cross-env NODE_ENV=production node ./server",
-    "clean": "rm -rf dist && rm -rf .cache && rm -rf node_modules"
+    "preview": "vite preview",
+    "start": "vite build && vite preview",
+    "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
@@ -22,14 +21,12 @@
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "cross-fetch": "^4.0.0",
-    "express": "^4.18.2",
     "firebase": "^10.5.0",
     "marked": "^9.0.3",
     "node-fetch": "^3.3.2",
     "preact": "^10.10.0",
     "preact-render-to-string": "^5.2.1",
     "signature_pad": "^4.1.6",
-    "telefunc": "^0.1.62",
     "typescript": "^5.2.2",
     "vike": "^0.4.142",
     "vite": "^4.0.3"
