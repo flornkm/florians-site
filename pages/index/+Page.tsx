@@ -147,7 +147,7 @@ export default function Page({
           })}
         </div>
       </section>
-      <section class="w-full mb-32">
+      <section class="w-full mb-56">
         <Contact />
       </section>
       <section class="w-full mb-32">

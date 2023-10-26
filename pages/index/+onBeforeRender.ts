@@ -8,20 +8,30 @@ import { Letter } from "../../interface/components/Letters"
 async function onBeforeRender() {
   const projects = await returnContent("work")
 
-  const firebaseApp = initializeApp({
-    apiKey: import.meta.env.FIREBASE_API,
-    authDomain: import.meta.env.FIREBASE_DOMAIN,
-    projectId: import.meta.env.FIREBASE_ID,
-  })
+  // const firebaseApp = initializeApp({
+  //   apiKey: import.meta.env.FIREBASE_API,
+  //   authDomain: import.meta.env.FIREBASE_DOMAIN,
+  //   projectId: import.meta.env.FIREBASE_ID,
+  // })
 
-  const db = getFirestore(firebaseApp)
+  // const db = getFirestore(firebaseApp)
 
-  const letters = await getDocs(collection(db, "letters"))
+  // const letters = await getDocs(collection(db, "letters"))
+
+  const letters = [
+    {
+      text: "test",
+      signature: "#",
+      handle: "@test",
+    },
+  ]
 
   return {
     pageContext: {
       pageProps: {
-        letters: letters.docs.map((letter) => letter.data()),
+        letters: letters.docs
+          ? letters.docs.map((letter) => letter.data())
+          : letters,
         projects: projects,
       },
     },

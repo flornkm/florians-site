@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "preact/hooks"
 import SignaturePad from "signature_pad"
 import Close from "~icons/eva/close-outline"
+import Plus from "~icons/eva/plus-outline"
 import NoPrerender from "./NoPrerender"
 import Button from "./Button"
 
@@ -12,23 +13,55 @@ export type Letter = {
 }
 
 export default function Letters({ letters }: { letters: Letter[] }) {
+  const popup = useRef<HTMLDivElement>(null)
+
+  const setShowLetter = () => {
+    if (popup.current?.style.display === "none") {
+      popup.current.style.display = "flex"
+      if (typeof window !== "undefined") document.body.style.overflow = "hidden"
+    } else if (popup.current?.style.display === "flex") {
+      popup.current.style.display = "none"
+      if (typeof window !== "undefined") document.body.style.overflow = "auto"
+    }
+  }
+
   return (
-    <div>
-      <NoPrerender>
-        <SendLetter />
-      </NoPrerender>
-      {letters.map((letter) => (
-        <p>
-          {letter.text}
-          <img src={letter.signature} alt="Signature" />
-          <p>{letter.handle}</p>
-        </p>
-      ))}
-    </div>
+    <>
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold text-center mb-8">
+          Letters sent to this site
+        </h3>
+        <Button
+          type="secondary"
+          class="mx-auto pl-4"
+          small
+          function={setShowLetter}
+        >
+          <>
+            <Plus class="mr-1" />
+            Write a letter
+          </>
+        </Button>
+      </div>
+      <div>
+        <div ref={popup} style={{ display: "none" }}>
+          <NoPrerender>
+            <SendLetter setShowLetter={setShowLetter} />
+          </NoPrerender>
+        </div>
+        {letters.map((letter) => (
+          <p>
+            {letter.text}
+            <img src={letter.signature} alt="Signature" />
+            <p>{letter.handle}</p>
+          </p>
+        ))}
+      </div>
+    </>
   )
 }
 
-function SendLetter() {
+function SendLetter(props: { setShowLetter: any }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const letterInput = useRef<HTMLTextAreaElement>(null)
   const handleInput = useRef<HTMLInputElement>(null)
@@ -55,13 +88,29 @@ function SendLetter() {
     }
   }
 
-  if (typeof window !== "undefined") document.body.style.overflow = "hidden"
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      props.setShowLetter()
+      window.removeEventListener("keydown", () => {})
+    }
+  })
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center"
+      onClick={props.setShowLetter}
+    >
       <div className="w-full md:h-3/5 h-3/4 max-w-6xl px-10">
-        <div className="w-full h-full bg-white rounded-2xl relative flex justify-between md:flex-row flex-col">
-          <Close className="absolute top-4 right-4 w-9 h-9 p-1 bg-zinc-100 rounded-full cursor-pointer transition-colors hover:bg-zinc-200" />
+        <div
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+          className="w-full h-full bg-white rounded-2xl relative flex justify-between md:flex-row flex-col"
+        >
+          <Close
+            onClick={props.setShowLetter}
+            className="absolute top-4 right-4 w-9 h-9 p-1 bg-zinc-100 rounded-full cursor-pointer transition-colors hover:bg-zinc-200"
+          />
           <div className="w-full h-full p-6">
             <textarea
               type="text"
