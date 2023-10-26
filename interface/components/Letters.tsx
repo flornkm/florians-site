@@ -14,14 +14,39 @@ export type Letter = {
 
 export default function Letters({ letters }: { letters: Letter[] }) {
   const popup = useRef<HTMLDivElement>(null)
+  const [disableButton, setDisableButton] = useState(false)
 
-  const setShowLetter = () => {
-    if (popup.current?.style.display === "none") {
-      popup.current.style.display = "flex"
-      if (typeof window !== "undefined") document.body.style.overflow = "hidden"
-    } else if (popup.current?.style.display === "flex") {
-      popup.current.style.display = "none"
-      if (typeof window !== "undefined") document.body.style.overflow = "auto"
+  const setShowLetter = (animation?: boolean) => {
+    const wrapper = popup.current
+    const container = popup.current?.children[0].children[0]
+      .children[0] as HTMLElement
+    if (typeof animation !== "boolean" || !animation) {
+      if (wrapper?.style.pointerEvents === "none") {
+        container.style.opacity = "100%"
+        container.style.transform = "scale(1)"
+        wrapper.style.pointerEvents = "auto"
+        wrapper.style.opacity = "100%"
+        if (typeof window !== "undefined")
+          document.body.style.overflow = "hidden"
+      } else if (wrapper?.style.pointerEvents === "auto") {
+        container.style.opacity = "0%"
+        container.style.transform = "scale(0.95)"
+        wrapper.style.pointerEvents = "none"
+        setTimeout(() => {
+          wrapper.style.opacity = "0%"
+        }, 150)
+        if (typeof window !== "undefined") document.body.style.overflow = "auto"
+      }
+    } else if (wrapper) {
+      wrapper.style.overflow = "hidden"
+      container.style.opacity = "0%"
+      container.style.transform = "translateX(100%)"
+      wrapper.style.pointerEvents = "none"
+      setDisableButton(true)
+      setTimeout(() => {
+        wrapper.style.opacity = "0%"
+        wrapper.style.display = "none"
+      }, 150)
     }
   }
 
@@ -35,7 +60,12 @@ export default function Letters({ letters }: { letters: Letter[] }) {
           type="secondary"
           class="mx-auto pl-4"
           small
-          function={setShowLetter}
+          disabled={disableButton}
+          function={() => {
+            if (popup.current!.style.overflow !== "hidden") {
+              setShowLetter()
+            }
+          }}
         >
           <>
             <Plus class="mr-1" />
@@ -44,7 +74,7 @@ export default function Letters({ letters }: { letters: Letter[] }) {
         </Button>
       </div>
       <div>
-        <div ref={popup} style={{ display: "none" }}>
+        <div ref={popup} style={{ opacity: "0%", pointerEvents: "none" }}>
           <NoPrerender>
             <SendLetter setShowLetter={setShowLetter} />
           </NoPrerender>
@@ -97,7 +127,7 @@ function SendLetter(props: { setShowLetter: any }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center"
+      className="fixed inset-0 bg-black/25 z-50 flex justify-center items-center"
       onClick={props.setShowLetter}
     >
       <div className="w-full md:h-3/5 h-3/4 max-w-6xl px-10">
@@ -105,11 +135,15 @@ function SendLetter(props: { setShowLetter: any }) {
           onClick={(e) => {
             e.stopPropagation()
           }}
-          className="w-full h-full bg-white rounded-2xl relative flex justify-between md:flex-row flex-col"
+          style={{
+            opacity: "0%",
+            transform: "scale(0.95)",
+          }}
+          className="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all"
         >
           <Close
             onClick={props.setShowLetter}
-            className="absolute top-4 right-4 w-9 h-9 p-1 bg-zinc-100 rounded-full cursor-pointer transition-colors hover:bg-zinc-200"
+            className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl"
           />
           <div className="w-full h-full p-6">
             <textarea
@@ -146,21 +180,19 @@ function SendLetter(props: { setShowLetter: any }) {
                   (!letterWritten ? "pointer-events-none" : "")
                 }
               />
-              <div className="h-[1px] border-t w-3/5 border-zinc-300 border-dotted mb-2" />
-              <div class="flex justify-between items-end">
-                <div class="flex items-start flex-col justify-between w-full gap-4">
-                  <p class="flex-shrink-0">Signature</p>
-                  <div class="flex">
-                    <p class="border border-l-zinc-200 text-black bg-zinc-100 border-r-transparent flex items-center px-2 rounded-l-full">
-                      @
-                    </p>
-                    <input
-                      ref={handleInput}
-                      type="text"
-                      placeholder="Social Media Handle (Optional)"
-                      class="placeholder:text-zinc-400 text-black w-56 disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-2 py-1 rounded-r-full bg-white border border-zinc-200"
-                    />
-                  </div>
+              <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted" />
+              <div class="flex justify-between items-end gap-8">
+                <div class="flex items-start flex-col justify-between w-full">
+                  <p class="flex-shrink-0 mt-2.5">Signature</p>
+                  <input
+                    ref={handleInput}
+                    type="text"
+                    placeholder="@floriandwt"
+                    class="placeholder:text-zinc-400 mt-8 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300"
+                  />
+                  <p class="flex-shrink-0 mt-2">
+                    Social Media Handle (Optional)
+                  </p>
                 </div>
                 <Button
                   type="primary"
@@ -168,21 +200,27 @@ function SendLetter(props: { setShowLetter: any }) {
                   chevron
                   disabled={signature.length === 0}
                   function={async () => {
-                    const link = document.createElement("a")
-                    link.download = "letter.png"
-                    link.href = signature
-                    link.click()
+                    // const link = document.createElement("a")
+                    // link.download = "letter.png"
+                    // link.href = signature
+                    // link.click()
+                    props.setShowLetter(true)
                   }}
                 >
                   Send
                 </Button>
               </div>
             </div>
-            <img
-              className="w-48 absolute top-0 right-0 pointer-events-none"
-              src="/images/letter/signature-stamp.png"
-              alt="Signature Stamp"
-            />
+            <figure className="w-32 absolute top-8 right-8 rotate-6 group">
+              <img
+                src="/images/letter/stamp.png"
+                class="pointer-events-none"
+                alt="Signature Stamp"
+              />
+              <figcaption class="text-[10px] text-zinc-400 mt-1.5 break-all opacity-0 transition-opacity group-hover:opacity-100">
+                Did I timetravel to the roman empire?
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
