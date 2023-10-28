@@ -7,7 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "vite build && vite preview",
-    "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite"
+    "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
+    "generate": "node ./build/generateOpengraph.js"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
@@ -26,6 +27,7 @@
     "node-fetch": "^3.3.2",
     "preact": "^10.10.0",
     "preact-render-to-string": "^5.2.1",
+    "pureimage": "^0.4.13",
     "signature_pad": "^4.1.6",
     "typescript": "^5.2.2",
     "vike": "^0.4.142",
