@@ -1,4 +1,4 @@
-import "../../../design-system/markdown.css"
+import "#design-system/markdown.css"
 
 export const documentProps = {
   title: "Florian's Project",

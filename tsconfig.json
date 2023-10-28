@@ -13,8 +13,12 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./interface/components/*"],
-      "@hooks/*": ["./interface/hooks/*"]
+      "#components/*": ["./interface/components/*"],
+      "#hooks/*": ["./interface/hooks/*"],
+      "#sections/*": ["./interface/sections/*"],
+      "#layouts/*": ["./interface/layouts/*"],
+      "#markdown/*": ["./markdown/*"],
+      "#design-system/*": ["./design-system/*"]
     }
   },
   "ts-node": {

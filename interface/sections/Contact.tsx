@@ -2,8 +2,8 @@ import IconAccountBox from "~icons/eva/message-square-outline"
 import At from "~icons/eva/at-fill"
 import LinkedIn from "~icons/eva/linkedin-outline"
 import Send from "~icons/eva/arrow-circle-up-fill"
-import Button from "./Button"
-import Tooltip from "./Tooltip"
+import Button from "../components/Button"
+import Tooltip from "../components/Tooltip"
 import { useRef, useState } from "preact/hooks"
 
 type Message = {

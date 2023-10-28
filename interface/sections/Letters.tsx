@@ -4,9 +4,9 @@ import Close from "~icons/eva/close-outline"
 import Plus from "~icons/eva/plus-outline"
 import Expand from "~icons/eva/expand-outline"
 import Collapse from "~icons/eva/collapse-outline"
-import NoPrerender from "./NoPrerender"
-import Button from "./Button"
-import Tooltip from "./Tooltip"
+import NoPrerender from "../components/NoPrerender"
+import Button from "../components/Button"
+import Tooltip from "../components/Tooltip"
 
 export type Letter = {
   id: string
