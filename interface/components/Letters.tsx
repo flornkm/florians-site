@@ -92,7 +92,7 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                     zoom !== -1 && zoom !== letters.indexOf(letter) ? 0 : 1,
                 }}
                 class={
-                  "rounded-3xl md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all " +
+                  "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all " +
                   (zoom === letters.indexOf(letter)
                     ? ""
                     : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10")
@@ -113,14 +113,47 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                     className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer"
                   />
                 )}
-
-                <p>{letter.text}</p>
                 <img
-                  src={letter.signature}
-                  alt="Signature"
-                  class="h-64 object-contain"
+                  src="/images/letter/stamp.png"
+                  class="pointer-events-none w-20 absolute md:top-8 md:bottom-auto bottom-8 right-8 rotate-6"
+                  alt="Signature Stamp"
                 />
-                <p>{letter.handle}</p>
+                <div class="w-full h-80 flex gap-4 md:flex-row flex-col">
+                  <div
+                    class={
+                      "w-full h-full overflow-x-scroll " +
+                      (zoom === letters.indexOf(letter)
+                        ? "text-black"
+                        : "text-zinc-400 group-hover/singleletter:text-black")
+                    }
+                  >
+                    <p>{letter.text}</p>
+                  </div>
+                  <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0" />
+                  <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
+                    <img
+                      src={letter.signature}
+                      alt="Signature"
+                      class="md:w-64 w-64 md:h-auto object-contain"
+                    />
+                  </div>
+                </div>
+                <div
+                  class={
+                    "absolute -top-8 transition-opacity pointer-events-none hidden md:flex " +
+                    (zoom === letters.indexOf(letter)
+                      ? "opacity-100"
+                      : "opacity-0 group-hover/singleletter:opacity-100")
+                  }
+                >
+                  <div class="flex items-center gap-3">
+                    <img
+                      src={`https://unavatar.io/${letter.handle}`}
+                      className="w-6 h-6 rounded-full"
+                    />{" "}
+                    <p>{letter.handle}</p>
+                  </div>
+                </div>
               </div>
             )
           })}

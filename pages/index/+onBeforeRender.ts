@@ -20,19 +20,19 @@ async function onBeforeRender() {
 
   const letters = [
     {
-      text: "test",
+      text: `Consectetur consectetur Lorem minim aute quis amet elit cillum adipisicing elit tempor ut incididunt. Adipisicing velit ullamco ipsum mollit aliquip sint ad commodo anim. Excepteur et mollit ut irure reprehenderit magna do commodo ad. Occaecat deserunt laborum eiusmod voluptate aute duis. Adipisicing commodo adipisicing dolore est ut Lorem consectetur officia.`,
       signature: "/images/letter/signature.png",
       handle: "@floriandwt",
     },
     {
-      text: "test",
+      text: `Consectetur consectetur Lorem minim aute quis amet elit cillum adipisicing elit tempor ut incididunt. Adipisicing velit ullamco ipsum mollit aliquip sint ad commodo anim. Excepteur et mollit ut irure reprehenderit magna do commodo ad. Occaecat deserunt laborum eiusmod voluptate aute duis. Adipisicing commodo adipisicing dolore est ut Lorem consectetur officia.`,
       signature: "/images/letter/signature.png",
-      handle: "@floriandwt",
+      handle: "@nils_e13",
     },
     {
-      text: "test",
+      text: `Consectetur consectetur Lorem minim aute quis amet elit cillum adipisicing elit tempor ut incididunt. Adipisicing velit ullamco ipsum mollit aliquip sint ad commodo anim. Excepteur et mollit ut irure reprehenderit magna do commodo ad. Occaecat deserunt laborum eiusmod voluptate aute duis. Adipisicing commodo adipisicing dolore est ut Lorem consectetur officia.`,
       signature: "/images/letter/signature.png",
-      handle: "@floriandwt",
+      handle: "@stallboerger",
     },
   ]
 
