@@ -1,5 +1,10 @@
-export default Page
+import Work from "#sections/Work"
+import { useEffect, useRef } from "preact/hooks"
 
-function Page({ projects }: { projects: any[] }) {
-  return <>Test</>
+export default function Page({ projects }: { projects: any[] }) {
+  return (
+    <section class="pt-16">
+      <Work projects={projects} />
+    </section>
+  )
 }

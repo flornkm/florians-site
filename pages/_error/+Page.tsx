@@ -1,4 +1,4 @@
-import Button, { ButtonWrapper } from "../../interface/components/Button"
+import Button, { ButtonWrapper } from "#components/Button"
 
 export default function Page({ is404 }: { is404: boolean }) {
   if (is404) {

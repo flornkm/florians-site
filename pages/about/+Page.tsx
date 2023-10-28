@@ -1,9 +1,9 @@
-import { InlineInfo } from "../../interface/components/Inline"
-import Tooltip from "../../interface/components/Tooltip"
+import { InlineInfo } from "#components/Inline"
+import Tooltip from "#components/Tooltip"
 import Experience from "~icons/eva/briefcase-outline"
 import Check from "~icons/eva/checkmark-outline"
-import { PhotoSlider } from "../../interface/components/Slider"
-import Button from "../../interface/components/Button"
+import { PhotoSlider } from "#components/Slider"
+import Button from "#components/Button"
 
 export const documentProps = {
   title: "About Florian",

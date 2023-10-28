@@ -1,7 +1,6 @@
-import { ComponentChild, VNode } from "preact"
-import Button from "../../../interface/components/Button"
-import { InlineInfo } from "../../../interface/components/Inline"
-import Tooltip from "../../../interface/components/Tooltip"
+import Button from "#components/Button"
+import { InlineInfo } from "#components/Inline"
+import Tooltip from "#components/Tooltip"
 import Short from "~icons/eva/flash-fill"
 
 export const documentProps = {

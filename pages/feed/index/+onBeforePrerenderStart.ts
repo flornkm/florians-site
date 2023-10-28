@@ -1,6 +1,6 @@
 export default onBeforePrerenderStart
 
-import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert"
+import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
 
 const rendered = {}
 
@@ -16,6 +16,7 @@ async function onBeforePrerenderStart() {
       pageContext: {
         pageProps: {
           posts: posts,
+          content: rendered,
         },
       },
     },

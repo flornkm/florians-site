@@ -1,7 +1,7 @@
 export default onBeforeRender
 
 import { PageContextBuiltInServer } from "vike/types"
-import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert"
+import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
 import { render } from "vike/abort"
 
 const rendered = {}

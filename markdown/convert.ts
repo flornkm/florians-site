@@ -9,7 +9,12 @@ export async function convertMarkdownToHtml(
 
   let markdown = await readFile(`${contentRoot}${url}.md`, "utf-8")
 
-  return marked(deleteInfo(markdown + '\n <base target="_blank">'))
+  return marked(
+    deleteInfo(
+      markdown + '\n <base target="_blank">',
+      markdown.match(/---(.*?)---/s)![1].split("\n").length
+    )
+  )
 }
 
 export async function returnContent(category: "work" | "archive" | "feed") {
@@ -48,6 +53,6 @@ export async function returnContent(category: "work" | "archive" | "feed") {
   return tableOfContents
 }
 
-function deleteInfo(string: string, n = 7) {
+function deleteInfo(string: string, n) {
   return string.replace(new RegExp(`(?:.*?\n){${n - 1}}(?:.*?\n)`), "")
 }
