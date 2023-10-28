@@ -2,8 +2,11 @@ import { useRef, useState, useEffect } from "preact/hooks"
 import SignaturePad from "signature_pad"
 import Close from "~icons/eva/close-outline"
 import Plus from "~icons/eva/plus-outline"
+import Expand from "~icons/eva/expand-outline"
+import Collapse from "~icons/eva/collapse-outline"
 import NoPrerender from "./NoPrerender"
 import Button from "./Button"
+import Tooltip from "./Tooltip"
 
 export type Letter = {
   id: string
@@ -15,6 +18,9 @@ export type Letter = {
 export default function Letters({ letters }: { letters: Letter[] }) {
   const popup = useRef<HTMLDivElement>(null)
   const [disableButton, setDisableButton] = useState(false)
+
+  // -1 zoom means nothing is zoomed
+  const [zoom, setZoom] = useState<number>(-1)
 
   const setShowLetter = (animation?: boolean) => {
     const wrapper = popup.current
@@ -47,47 +53,114 @@ export default function Letters({ letters }: { letters: Letter[] }) {
         wrapper.style.opacity = "0%"
         wrapper.style.display = "none"
       }, 150)
+      if (typeof window !== "undefined") document.body.style.overflow = "auto"
     }
   }
 
   return (
-    <>
-      <div class="mb-16">
-        <h3 class="text-2xl font-semibold text-center mb-8">
-          Letters sent to this site
-        </h3>
-        <Button
-          type="secondary"
-          class="mx-auto pl-4"
-          small
-          disabled={disableButton}
-          function={() => {
-            if (popup.current!.style.overflow !== "hidden") {
-              setShowLetter()
-            }
-          }}
-        >
-          <>
-            <Plus class="mr-1" />
-            Write a letter
-          </>
-        </Button>
-      </div>
+    <div class="overflow-hidden" onClick={() => setZoom(-1)}>
+      <h3 class="text-2xl font-semibold text-center mb-8">
+        Letters sent to this site
+      </h3>
       <div>
         <div ref={popup} style={{ opacity: "0%", pointerEvents: "none" }}>
           <NoPrerender>
             <SendLetter setShowLetter={setShowLetter} />
           </NoPrerender>
         </div>
-        {letters.map((letter) => (
-          <p>
-            {letter.text}
-            <img src={letter.signature} alt="Signature" />
-            <p>{letter.handle}</p>
-          </p>
-        ))}
+        <div class="w-full h-[512px] relative flex items-end justify-center group/letter">
+          {letters.map((letter) => {
+            return (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+                style={{
+                  top:
+                    zoom === letters.indexOf(letter)
+                      ? 0
+                      : letters.indexOf(letter) * 64,
+                  scale:
+                    zoom === letters.indexOf(letter)
+                      ? "1"
+                      : `0.9${4 * letters.indexOf(letter)}`,
+                  zIndex:
+                    zoom === letters.indexOf(letter)
+                      ? 20
+                      : letters.indexOf(letter),
+                  opacity:
+                    zoom !== -1 && zoom !== letters.indexOf(letter) ? 0 : 1,
+                }}
+                class={
+                  "rounded-3xl md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all " +
+                  (zoom === letters.indexOf(letter)
+                    ? ""
+                    : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10")
+                }
+              >
+                {letters.indexOf(letter) !== zoom ? (
+                  <Expand
+                    onClick={() => {
+                      setZoom(letters.indexOf(letter))
+                    }}
+                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer"
+                  />
+                ) : (
+                  <Collapse
+                    onClick={() => {
+                      setZoom(-1)
+                    }}
+                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer"
+                  />
+                )}
+
+                <p>{letter.text}</p>
+                <img
+                  src={letter.signature}
+                  alt="Signature"
+                  class="h-64 object-contain"
+                />
+                <p>{letter.handle}</p>
+              </div>
+            )
+          })}
+          <div class="absolute w-full bottom-0 z-10 md:pb-32 pt-24 pb-16">
+            <div
+              class={
+                "relative group transition-opacity " +
+                (zoom !== -1 ? "opacity-0" : "")
+              }
+            >
+              {disableButton && (
+                <Tooltip position="top" class="-translate-y-3.5">
+                  Letter already sent
+                </Tooltip>
+              )}
+              <Button
+                type="secondary"
+                class={
+                  "mx-auto pl-4 relative z-20 " +
+                  (disableButton ? "opacity-30" : "")
+                }
+                small
+                disabled={disableButton}
+                function={() => {
+                  if (popup.current!.style.overflow !== "hidden") {
+                    setShowLetter()
+                  }
+                }}
+              >
+                <>
+                  <Plus class="mr-1" />
+                  Write a letter
+                </>
+              </Button>
+            </div>
+            <div class="absolute bg-light-zinc inset-0 blur-lg" />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -184,12 +257,15 @@ function SendLetter(props: { setShowLetter: any }) {
               <div class="flex justify-between items-end gap-8">
                 <div class="flex items-start flex-col justify-between w-full">
                   <p class="flex-shrink-0 mt-2.5">Signature</p>
-                  <input
-                    ref={handleInput}
-                    type="text"
-                    placeholder="@floriandwt"
-                    class="placeholder:text-zinc-400 mt-8 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300"
-                  />
+                  <div class="flex items-center gap-0.5 mt-8 w-full">
+                    <p class="text-black pb-0.5 flex-shrink-0">@</p>
+                    <input
+                      ref={handleInput}
+                      type="text"
+                      placeholder="floriandwt"
+                      class="placeholder:text-zinc-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300"
+                    />
+                  </div>
                   <p class="flex-shrink-0 mt-2">
                     Social Media Handle (Optional)
                   </p>
