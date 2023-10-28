@@ -21,8 +21,18 @@ async function onBeforeRender() {
   const letters = [
     {
       text: "test",
-      signature: "#",
-      handle: "@test",
+      signature: "/images/letter/signature.png",
+      handle: "@floriandwt",
+    },
+    {
+      text: "test",
+      signature: "/images/letter/signature.png",
+      handle: "@floriandwt",
+    },
+    {
+      text: "test",
+      signature: "/images/letter/signature.png",
+      handle: "@floriandwt",
     },
   ]
 

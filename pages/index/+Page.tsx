@@ -150,7 +150,7 @@ export default function Page({
       <section class="w-full mb-56">
         <Contact />
       </section>
-      <section class="w-full mb-32">
+      <section class="w-full">
         <Letters letters={letters} />
       </section>
     </div>
