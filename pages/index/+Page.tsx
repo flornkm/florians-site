@@ -1,11 +1,11 @@
 import { PageContextCustom } from "../../renderer/types"
-import { useIsVisible } from "../../interface/hooks/useIsVisible"
+import { useIsVisible } from "@hooks/useIsVisible"
 import { useEffect, useRef } from "preact/hooks"
-import Button, { ButtonWrapper } from "../../interface/components/Button"
-import Tooltip from "../../interface/components/Tooltip"
-import Contact from "../../interface/components/Contact"
-import { InlineInfo } from "../../interface/components/Inline"
-import Letters, { Letter } from "../../interface/components/Letters"
+import Button, { ButtonWrapper } from "@components/Button"
+import Tooltip from "@components/Tooltip"
+import Contact from "@components/Contact"
+import { InlineInfo } from "@components/Inline"
+import Letters, { Letter } from "@components/Letters"
 
 export const documentProps = {
   title: "Florian - Design Engineer",

@@ -1,8 +1,27 @@
 import preact from "@preact/preset-vite"
 import ssr from "vike/plugin"
 import Icons from "unplugin-icons/vite"
+import path from "path"
+import { defineConfig } from "vite"
+import { fileURLToPath } from "url"
 
-const config = {
+export default defineConfig(() => ({
+  resolve: {
+    alias: [
+      {
+        find: "@components",
+        replacement: fileURLToPath(
+          new URL("./interface/components", import.meta.url)
+        ),
+      },
+      {
+        find: "@hooks",
+        replacement: fileURLToPath(
+          new URL("./interface/hooks", import.meta.url)
+        ),
+      },
+    ],
+  },
   plugins: [
     preact(),
     ssr({
@@ -21,6 +40,4 @@ const config = {
       "preact/hooks",
     ],
   },
-}
-
-export default config
+}))

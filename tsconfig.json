@@ -10,7 +10,12 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./interface/components/*"],
+      "@hooks/*": ["./interface/hooks/*"]
+    }
   },
   "ts-node": {
     "transpileOnly": true,
