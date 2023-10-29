@@ -10,6 +10,7 @@ async function onRenderClient(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
   const page = (
     <PageLayout pageContext={pageContext}>
+      {/* @ts-ignore */}
       <Page {...pageProps} />
     </PageLayout>
   )
@@ -25,8 +26,8 @@ async function onRenderClient(pageContext: PageContext) {
 
 function getPageTitle(pageContext: PageContext) {
   const title =
-    (pageContext.config?.documentProps || {}).title ||
     (pageContext.documentProps || {}).title ||
+    (pageContext.config || {}).title ||
     "Florian - Design Engineer"
   return title
 }

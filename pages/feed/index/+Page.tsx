@@ -1,6 +1,13 @@
 import "#design-system/feed.css"
+import { Post, PostContent } from "../types"
 
-export default function Page({ posts, content }) {
+export default function Page({
+  posts,
+  content,
+}: {
+  posts: Post[]
+  content: PostContent
+}) {
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">

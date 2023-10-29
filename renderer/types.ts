@@ -31,11 +31,10 @@ export type PageContextCustom = {
   config: {
     isProduction: boolean
     siteUrl: string
-    documentProps?: {
-      title?: string
-      description?: string
-      image?: string
-    }
+    title?: string
+    description?: string
+    image?: string
+    noindex?: boolean
   }
   exports: {
     documentProps?: {

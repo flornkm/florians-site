@@ -30,9 +30,7 @@ async function onBeforeRender() {
   return {
     pageContext: {
       pageProps: {
-        letters: letters.docs
-          ? letters.docs.map((letter) => letter.data())
-          : letters,
+        letters: letters,
         projects: projects,
       },
       documentProps: {
