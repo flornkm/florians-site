@@ -6,13 +6,6 @@ import Contact from "#sections/Contact"
 import Letters, { Letter } from "#sections/Letters"
 import Work from "#sections/Work"
 
-export const documentProps = {
-  title: "Florian - Design Engineer",
-  description: "Florians Personal Website.",
-} as PageContextCustom["documentProps"]
-
-export const slug = "index"
-
 export default function Page({
   projects,
   letters,

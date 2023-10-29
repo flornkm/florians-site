@@ -1,3 +1,4 @@
+import { PageContextCustom } from "renderer/types"
 import { returnContent } from "../../../markdown/convert"
 
 export default onBeforeRender
@@ -10,6 +11,11 @@ async function onBeforeRender() {
       pageProps: {
         projects: projects,
       },
+      documentProps: {
+        title: "Work | Florian - Design Engineer",
+        description:
+          "Actual work from my studies, services for cooporations and more. All combined as readable case studies with imagery.",
+      } satisfies PageContextCustom["exports"]["documentProps"],
     },
   }
 }

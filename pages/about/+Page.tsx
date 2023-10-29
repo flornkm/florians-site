@@ -5,10 +5,6 @@ import Check from "~icons/eva/checkmark-outline"
 import { PhotoSlider } from "#components/Slider"
 import Button from "#components/Button"
 
-export const documentProps = {
-  title: "About Florian",
-}
-
 export default function Page() {
   const experience = [
     {

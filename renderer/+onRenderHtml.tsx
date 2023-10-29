@@ -21,6 +21,7 @@ async function onRenderHtml(pageContext: PageContext) {
     (documentProps && documentProps.title) || "Florian - Design Engineer"
   const desc =
     (documentProps && documentProps.description) || "Florians Personal Website."
+  const image = (documentProps && documentProps.image) || "/images/og-image.jpg"
 
   const documentHtml = escapeInject`<!DOCTYPE html>
   <!-- Designed and coded by myself • Florian -->
@@ -30,6 +31,7 @@ async function onRenderHtml(pageContext: PageContext) {
         <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
+        <meta property="og:image" content="${image}" />
         <title>${title}</title>
       </head>
       <body>

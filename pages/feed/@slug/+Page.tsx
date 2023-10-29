@@ -1,13 +1,9 @@
 import "#design-system/feed.css"
 
-export const documentProps = {
-  title: "Florian's Project",
-}
-
 export default function Page(props: Record<string, string>) {
   return (
     <>
-      <article class="lg:py-16 pb-16">
+      <article class="lg:py-16 pb-16 max-w-lg mx-auto">
         <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
       </article>
     </>
