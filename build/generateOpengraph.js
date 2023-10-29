@@ -29,7 +29,7 @@ fs.readdir("./content", (err, folders) => {
         const frame = PImage.make(1200, 600)
         const ctx = frame.getContext("2d")
 
-        ctx.fillStyle = "white"
+        ctx.fillStyle = "#fcfcfc"
         ctx.fillRect(0, 0, 1200, 600)
 
         ctx.fillStyle = "black"

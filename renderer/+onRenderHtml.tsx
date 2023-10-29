@@ -29,7 +29,7 @@ async function onRenderHtml(pageContext: PageContext) {
   const image =
     (documentProps && documentProps.image) ||
     (config && config.image) ||
-    "/images/og-image.jpg"
+    "/images/opengraph/og-image.jpg"
   const index = (config && config.noindex) || undefined
 
   const documentHtml = escapeInject`<!DOCTYPE html>
@@ -40,7 +40,15 @@ async function onRenderHtml(pageContext: PageContext) {
         <link rel="icon" href="${logoUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
-        <meta property="og:image" content="${image}" />
+        <meta property="og:image" content="https://floriankiem.com${image}" />
+        <meta property="og:description" content="${desc}" />
+        <meta property="og:title" content="${title}" />
+        <meta name="twitter:card" content="summary" />
+        <meta property="twitter:image" content="https://floriankiem.com${image}" />
+        <meta property="twitter:description" content="${desc}" />
+        <meta property="twitter:title" content="${title}" />
+        <meta name="twitter:site" content="@floriandwt" />
+        <meta name="twitter:creator" content="@floriandwt" />
         ${index ? escapeInject`<meta name="robots" content="noindex">` : ""}
         <title>${title}</title>
       </head>

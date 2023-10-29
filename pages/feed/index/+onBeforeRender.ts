@@ -1,7 +1,6 @@
 export default onBeforeRender
 
 import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
-import { PageContextCustom } from "renderer/types"
 import { PostContent, RenderedPosts } from "../types"
 
 const rendered = {} as RenderedPosts
@@ -25,7 +24,8 @@ async function onBeforeRender() {
         title: "Feed | Florian - Design Engineer",
         description:
           "This is my personal feed. A place for collecting my memories, writings and showcasing stuff.",
-      } satisfies PageContextCustom["exports"]["documentProps"],
+        image: "/images/opengraph/og-image-feed.jpg",
+      },
     },
   }
 }
