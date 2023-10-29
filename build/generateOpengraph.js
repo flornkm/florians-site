@@ -34,22 +34,22 @@ fs.readdir("./content", (err, folders) => {
 
         ctx.fillStyle = "black"
         ctx.font = "56pt Pretendard"
-        ctx.fillText(info.title, 80, 128)
+        ctx.fillText(info.title, 152, 128)
 
         if (folder === "feed") {
-          if (info.description.length > 70) {
+          if (info.description.length > 64) {
             ctx.fillStyle = "#a1a1aa"
             ctx.font = "32pt Pretendard"
-            ctx.fillText(info.description.slice(0, 70), 80, 198)
-            ctx.fillText(info.description.slice(70, 150) + "...", 80, 248)
+            ctx.fillText(info.description.slice(0, 70), 152, 198)
+            ctx.fillText(info.description.slice(70, 150) + "...", 152, 248)
           } else {
             ctx.fillStyle = "#a1a1aa"
             ctx.font = "32pt Pretendard"
             ctx.fillText(
-              info.description.length > 70
+              info.description.length > 64
                 ? info.description.slice(0, 70) + "..."
                 : info.description,
-              80,
+              152,
               198
             )
           }
@@ -57,10 +57,10 @@ fs.readdir("./content", (err, folders) => {
           ctx.fillStyle = "#a1a1aa"
           ctx.font = "32pt Pretendard"
           ctx.fillText(
-            info.description.length > 70
+            info.description.length > 64
               ? info.description.slice(0, 70) + "..."
               : info.description,
-            80,
+            152,
             198
           )
         }
@@ -75,7 +75,7 @@ fs.readdir("./content", (err, folders) => {
               // img width and height should be accordingly calculated
               // to contain the same aspect ratio, but the widht should
               // be exactly 1040
-              ctx.drawImage(img, 80, 280, 1040, 650)
+              ctx.drawImage(img, 152, 280, 896, 560)
             })
             .catch((e) => console.log("Error: ", e))
         }
