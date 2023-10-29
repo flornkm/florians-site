@@ -6,8 +6,8 @@ export default function Footer() {
     <footer class="py-16 border-t border-t-zinc-100">
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
         <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
-          <h3 class="font-semibold mb-2">Florian's Personal Site</h3>
-          <p class="text-zinc-500">Lorem labore aute veniam id aliqua.</p>
+          <h3 class="font-semibold mb-2">Florian's personal site</h3>
+          <p class="text-zinc-500">Love to building digital products.</p>
         </div>
         <div class="xl:place-self-end lg:mr-7">
           <h4 class="font-medium mb-3">Pages</h4>

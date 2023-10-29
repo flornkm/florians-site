@@ -3,7 +3,7 @@ export default onRenderHtml
 
 import renderToString from "preact-render-to-string"
 import { escapeInject, dangerouslySkipEscape } from "vike/server"
-import logoUrl from "./logo.svg"
+import faviconUrl from "./favicon.svg"
 import type { PageContext } from "./types"
 import PageLayout from "../interface/layouts/PageLayout"
 
@@ -37,7 +37,7 @@ async function onRenderHtml(pageContext: PageContext) {
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="${logoUrl}" />
+        <link rel="icon" href="${faviconUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
         <meta property="og:image" content="https://floriankiem.com${image}" />
