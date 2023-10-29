@@ -31,8 +31,11 @@ export default function Page({ projects }: { projects: any }) {
                   </p>
                   {project.short ? (
                     <div class="group relative md:place-self-start place-self-end">
-                      <Short class="w-4 pt-0.5 transition-colors text-zinc-300 hover:text-amber-500 cursor-help" />
-                      <Tooltip position="top" class="-translate-y-3">
+                      <Short class="w-4 pt-0.5 transition-colors text-zinc-300 lg:hover:text-amber-500 cursor-help" />
+                      <Tooltip
+                        position="top"
+                        class="-translate-y-3 hidden lg:block"
+                      >
                         Short case study
                       </Tooltip>
                     </div>
