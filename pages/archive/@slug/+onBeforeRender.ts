@@ -24,6 +24,16 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
       pageProps: {
         content: rendered[slug],
       },
+      documentProps: {
+        title: `${
+          // @ts-ignore
+          projects.find((project) => project.slug === slug)!.title
+        } | Florian - Design Engineer`,
+        description:
+          // @ts-ignore
+          projects.find((project) => project.slug === slug)!.description,
+        image: `/generated/${slug}.jpg`,
+      },
     },
   }
 }

@@ -3,7 +3,6 @@ export default onBeforeRender
 import { PageContextBuiltInServer } from "vike/types"
 import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
 import { render } from "vike/abort"
-import { PageContextCustom } from "renderer/types"
 import { ProjectContent, RenderedProjects } from "../types"
 
 const rendered = {} as RenderedProjects
@@ -34,7 +33,7 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
           // @ts-ignore
           projects.find((project) => project.slug === slug)!.description,
         image: `/generated/${slug}.jpg`,
-      } satisfies PageContextCustom["exports"]["documentProps"],
+      },
     },
   }
 }
