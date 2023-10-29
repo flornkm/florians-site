@@ -1,6 +1,7 @@
 export default onBeforePrerenderStart
 
 import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
+import { PageContextBuiltInServer } from "vike/types"
 import { PostContent, RenderedPosts } from "../types"
 
 const rendered = {} as RenderedPosts
@@ -21,6 +22,12 @@ async function onBeforePrerenderStart() {
           posts: posts,
           content: rendered,
         },
+        documentProps: {
+          title: "Feed | Florian - Design Engineer",
+          description:
+            "This is my personal feed. A place for collecting my memories, writings and showcasing stuff.",
+          image: "/images/opengraph/og-image-feed.jpg",
+        },
       },
     },
     ...posts.map((post) => {
@@ -30,6 +37,13 @@ async function onBeforePrerenderStart() {
         pageContext: {
           pageProps: {
             content: rendered[post.slug],
+          },
+          documentProps: {
+            // @ts-ignore
+            title: `${post.title} | Florian - Design Engineer`,
+            // @ts-ignore
+            description: post.description,
+            image: `/generated/${post.slug}.jpg`,
           },
         },
       }

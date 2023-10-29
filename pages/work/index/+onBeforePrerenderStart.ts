@@ -20,6 +20,11 @@ async function onBeforePrerenderStart() {
         pageProps: {
           projects: projects,
         },
+        documentProps: {
+          title: "Work | Florian - Design Engineer",
+          description:
+            "Actual work from my studies, services for cooporations and more. All combined as readable case studies with imagery.",
+        },
       },
     },
     ...projects.map((project) => {
@@ -29,6 +34,13 @@ async function onBeforePrerenderStart() {
         pageContext: {
           pageProps: {
             content: rendered[project.slug],
+          },
+          documentProps: {
+            // @ts-ignore
+            title: `${project.title} | Florian - Design Engineer`,
+            // @ts-ignore
+            description: project.description,
+            image: `/generated/${project.slug}.jpg`,
           },
         },
       }

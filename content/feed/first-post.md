@@ -4,7 +4,7 @@ description: The first post on my the new website.
 date: 28 / 10 / 2023
 ---
 
-# The first post post
+# The first post
 
 This is the first post on my new website. I'm writing this while still building the website, so I don't even know when exactly
 it will be released. However, I thank you for reading this! :) It truly makes my day beceause this will the first post every created

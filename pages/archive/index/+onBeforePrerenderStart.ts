@@ -20,6 +20,12 @@ async function onBeforePrerenderStart() {
         pageProps: {
           projects: projects,
         },
+        documentProps: {
+          title: "Archive | Florian - Design Engineer",
+          description:
+            "In my archive, you will find smaller creations, MVPs, ideas and results from hackathons. Feel free to look through if you are interested.",
+          image: "/images/opengraph/og-image-archive.jpg",
+        },
       },
     },
     ...projects.map((project) => {
@@ -29,6 +35,13 @@ async function onBeforePrerenderStart() {
         pageContext: {
           pageProps: {
             content: rendered[project.slug],
+          },
+          documentProps: {
+            // @ts-ignore
+            title: `${project.title} | Florian - Design Engineer`,
+            // @ts-ignore
+            description: project.description,
+            image: `/generated/${project.slug}.jpg`,
           },
         },
       }
