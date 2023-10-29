@@ -66,7 +66,7 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div class="xl:place-self-end">
+        <div class="xs:place-self-end">
           <h4 class="font-medium mb-3">Connect</h4>
           <ul class="space-y-2">
             <li>
@@ -107,7 +107,7 @@ export default function Footer() {
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 ">
         <div class="border-b border-dashed border-zinc-200 my-16" />
       </div>
-      <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm xs:flex-row flex-col gap-6">
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm md:flex-row flex-col gap-6">
         <ul class="flex space-x-8">
           <li>
             <a
@@ -137,7 +137,7 @@ export default function Footer() {
             </a>
           </li>
         </ul>
-        <p class="text-zinc-400 leading-none">
+        <p class="text-zinc-400 leading-none ml-1">
           Copyright Florian {new Date().getFullYear()}
         </p>
       </div>
