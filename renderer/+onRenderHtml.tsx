@@ -40,11 +40,11 @@ async function onRenderHtml(pageContext: PageContext) {
         <link rel="icon" href="${faviconUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
-        <meta property="og:image" content="https://floriankiem.com${image}" />
+        <meta property="og:image" content="https://florians-site-preview.vercel.app${image}" />
         <meta property="og:description" content="${desc}" />
         <meta property="og:title" content="${title}" />
         <meta name="twitter:card" content="summary" />
-        <meta property="twitter:image" content="https://floriankiem.com${image}" />
+        <meta property="twitter:image" content="https://florians-site-preview.vercel.app${image}" />
         <meta property="twitter:description" content="${desc}" />
         <meta property="twitter:title" content="${title}" />
         <meta name="twitter:site" content="@floriandwt" />
