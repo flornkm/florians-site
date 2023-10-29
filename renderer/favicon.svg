@@ -1,14 +1,7 @@
 <svg width="175" height="175" viewBox="0 0 175 175" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="175" height="175" rx="24" fill="white"/>
-<g clip-path="url(#clip0_1715_475)">
-<rect width="108" height="150.857" transform="translate(34 11.6189)" fill="white"/>
-<rect x="34" y="11.6189" width="18.8571" height="150.857" fill="black"/>
-<rect x="81.1431" y="37.5474" width="61.2857" height="37.7142" fill="black"/>
-<rect x="81.1431" y="98.833" width="61.2857" height="63.6428" fill="black"/>
-</g>
-<defs>
-<clipPath id="clip0_1715_475">
-<rect width="108" height="150.857" fill="white" transform="translate(34 11.6189)"/>
-</clipPath>
-</defs>
+<path d="M88 150.5V88" stroke="black" stroke-width="16" stroke-linecap="round"/>
+<path d="M88.5001 88.3109L148.311 28.5" stroke="black" stroke-width="12" stroke-linecap="round"/>
+<circle cx="88" cy="88" r="12" fill="#FF0000" stroke="white" stroke-width="8"/>
+<path d="M73.2111 78.7648L142.5 119.5" stroke="#FF0000" stroke-width="8" stroke-linecap="round"/>
 </svg>
