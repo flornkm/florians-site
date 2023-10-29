@@ -1,6 +1,7 @@
 export default onBeforeRender
 
 import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
+import { PageContextCustom } from "renderer/types"
 
 const rendered = {}
 
@@ -17,6 +18,11 @@ async function onBeforeRender() {
         posts: posts,
         content: rendered,
       },
+      documentProps: {
+        title: "Feed | Florian - Design Engineer",
+        description:
+          "This is my personal feed. A place for collecting my memories, writings and showcasing stuff.",
+      } satisfies PageContextCustom["exports"]["documentProps"],
     },
   }
 }

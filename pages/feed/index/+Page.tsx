@@ -1,9 +1,5 @@
 import "#design-system/feed.css"
 
-export const documentProps = {
-  title: "Florian's Feed",
-}
-
 export default function Page({ posts, content }) {
   return (
     <div class="w-full">

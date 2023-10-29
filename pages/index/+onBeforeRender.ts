@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app"
 import { returnContent } from "../../markdown/convert"
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore"
 import { Letter } from "#sections/Letters"
+import { PageContextCustom } from "renderer/types"
 
 async function onBeforeRender() {
   const projects = await returnContent("work")
@@ -34,6 +35,10 @@ async function onBeforeRender() {
           : letters,
         projects: projects,
       },
+      documentProps: {
+        title: "Florian - Design Engineer",
+        description: "A designer and developer building digital products.",
+      } satisfies PageContextCustom["exports"]["documentProps"],
     },
   }
 }

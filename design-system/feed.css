@@ -8,23 +8,19 @@ article {
     h6 {
         font-weight: 600;
         margin-bottom: 0.5em;
-        font-size: 1.1rem;
-    }
-    /* & h1 {
-        font-size: 1.9rem;
     }
 
-    & h2 {
-        font-size: 1.5rem;
-    }
-
-    & h3 {
+    & h1 {
         font-size: 1.25rem;
-    } */
+    }
 
     & p {
         color: #52525b;
         margin-bottom: 4rem;
+    }
+
+    & strong {
+        font-weight: 600;
     }
 
     & a {

@@ -26,6 +26,7 @@ export type PageContextCustom = {
     title: string
     slug: string
     description: string
+    image: string
   }
   config: {
     isProduction: boolean
@@ -33,12 +34,14 @@ export type PageContextCustom = {
     documentProps?: {
       title?: string
       description?: string
+      image?: string
     }
   }
   exports: {
     documentProps?: {
       title?: string
       description?: string
+      image?: string
     }
   }
 }
