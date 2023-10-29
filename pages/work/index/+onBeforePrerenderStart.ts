@@ -1,13 +1,16 @@
 export default onBeforePrerenderStart
 
 import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert"
+import { ProjectContent, RenderedProjects } from "../types"
 
-const rendered = {}
+const rendered = {} as RenderedProjects
 
 async function onBeforePrerenderStart() {
   const projects = await returnContent("work")
   for (const project of projects) {
-    rendered[project.slug] = await convertMarkdownToHtml(project.url)
+    rendered[project.slug] = (await convertMarkdownToHtml(
+      project.url
+    )) as unknown as ProjectContent
   }
 
   return [

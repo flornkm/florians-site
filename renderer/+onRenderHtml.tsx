@@ -11,17 +11,26 @@ async function onRenderHtml(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
   const pageHtml = renderToString(
     <PageLayout pageContext={pageContext}>
+      {/* @ts-ignore */}
       <Page {...pageProps} />
     </PageLayout>
   )
 
   // See https://vike.com/head
-  const { documentProps } = pageContext
+  const { documentProps, config } = pageContext
   const title =
-    (documentProps && documentProps.title) || "Florian - Design Engineer"
+    (documentProps && documentProps.title) ||
+    (config && config.title) ||
+    "Florian - Design Engineer"
   const desc =
-    (documentProps && documentProps.description) || "Florians Personal Website."
-  const image = (documentProps && documentProps.image) || "/images/og-image.jpg"
+    (documentProps && documentProps.description) ||
+    (config && config.description) ||
+    "Florians Personal Website."
+  const image =
+    (documentProps && documentProps.image) ||
+    (config && config.image) ||
+    "/images/og-image.jpg"
+  const index = (config && config.noindex) || undefined
 
   const documentHtml = escapeInject`<!DOCTYPE html>
   <!-- Designed and coded by myself • Florian -->
@@ -32,6 +41,7 @@ async function onRenderHtml(pageContext: PageContext) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
         <meta property="og:image" content="${image}" />
+        ${index ? escapeInject`<meta name="robots" content="noindex">` : ""}
         <title>${title}</title>
       </head>
       <body>

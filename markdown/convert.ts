@@ -32,6 +32,7 @@ export async function returnContent(category: "work" | "archive" | "feed") {
       if (property === "") continue
       const key = property.split(": ")[0]
       const value = property.split(": ")[1]
+      // @ts-ignore
       projectInfo[key] = value
     }
 
@@ -44,15 +45,16 @@ export async function returnContent(category: "work" | "archive" | "feed") {
   }
 
   tableOfContents.sort(
-    // @ts-expect-error
     (a, b) =>
+      // @ts-expect-error
       new Date(b.date.split("/")[1], b.date.split("/")[0]).getTime() -
+      // @ts-expect-error
       new Date(a.date.split("/")[1], a.date.split("/")[0]).getTime()
   )
 
   return tableOfContents
 }
 
-function deleteInfo(string: string, n) {
+function deleteInfo(string: string, n: number) {
   return string.replace(new RegExp(`(?:.*?\n){${n - 1}}(?:.*?\n)`), "")
 }

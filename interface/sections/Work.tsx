@@ -1,8 +1,13 @@
 import Button from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
+import { Ref } from "preact"
 
-export default function Work(props: { projects; workStroke?; workTitle? }) {
+export default function Work(props: {
+  projects: Record<string, string>[]
+  workStroke?: Ref<HTMLDivElement>
+  workTitle?: Ref<HTMLHeadingElement>
+}) {
   return (
     <>
       {props.workStroke && props.workTitle && (

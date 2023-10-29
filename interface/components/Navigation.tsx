@@ -1,7 +1,6 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
 import { useRef, useEffect, useState } from "preact/hooks"
-import { useWindowResize } from "#hooks/useWindowResize"
 
 export default function Navigation() {
   const [selectorPosition, setSelectorPosition] = useState({
@@ -10,7 +9,7 @@ export default function Navigation() {
   })
   const selector = useRef(null)
 
-  const pageContext = usePageContext()
+  const pageContext = usePageContext() as any
 
   useEffect(() => {
     const activeLink = document.querySelector(

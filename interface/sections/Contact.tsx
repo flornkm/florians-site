@@ -1,9 +1,5 @@
-import IconAccountBox from "~icons/eva/message-square-outline"
-import At from "~icons/eva/at-fill"
-import LinkedIn from "~icons/eva/linkedin-outline"
 import Send from "~icons/eva/arrow-circle-up-fill"
 import Button from "../components/Button"
-import Tooltip from "../components/Tooltip"
 import { useRef, useState } from "preact/hooks"
 
 type Message = {
@@ -177,10 +173,12 @@ export default function Contact() {
                 (loading() ? "opacity-30 pointer-events-none" : "")
               }
             >
-              <p class="absolute hidden md:block transition-all opacity-0 md:group-hover/button:block group-hover/button:opacity-100 -left-[100%] group-hover/button:left-4 duration-200">
-                Send
-              </p>
-              <Send class="w-5 h-5" />
+              <>
+                <p class="absolute hidden md:block transition-all opacity-0 md:group-hover/button:block group-hover/button:opacity-100 -left-[100%] group-hover/button:left-4 duration-200">
+                  Send
+                </p>
+                <Send class="w-5 h-5" />
+              </>
             </Button>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import "../../../design-system/markdown.css"
 
-export const documentProps = {
+export const config = {
   title: "Florian's Project",
 }
 

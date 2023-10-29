@@ -1,8 +1,7 @@
-import Info from "~icons/eva/info-outline"
 import { usePageContext } from "../../renderer/usePageContext"
 
 export default function Footer() {
-  const pageContext = usePageContext()
+  const pageContext = usePageContext() as any
   return (
     <footer class="py-16 border-t border-t-zinc-100">
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
