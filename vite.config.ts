@@ -45,9 +45,7 @@ export default defineConfig(() => ({
   plugins: [
     preact(),
     ssr({
-      prerender: {
-        partial: true,
-      },
+      prerender: true,
     }),
     Icons({ compiler: "jsx", jsx: "preact" }),
   ],
