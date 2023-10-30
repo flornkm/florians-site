@@ -20,7 +20,7 @@ export default function PageLayout({
           <nav class="sticky lg:top-0 lg:bottom-auto lg:border-t-transparent lg:border-l-transparent lg:border-r-transparent lg:border-b border border-zinc-200 lg:border-b-zinc-100 bg-white z-50 top-auto bottom-8 mb-8 w-full lg:max-w-none max-w-[90%] mx-auto rounded-full lg:rounded-none shadow-xl shadow-black/5 lg:shadow-none">
             <Navigation />
           </nav>
-          <main class="w-full relative max-w-screen-lx mx-auto md:px-10 px-6 min-h-screen pt-16">
+          <main class="w-full relative max-w-screen-lx mx-auto md:px-10 px-6 min-h-screen pt-16 lg:pt-0">
             {children}
           </main>
         </div>
