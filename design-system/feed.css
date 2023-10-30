@@ -19,6 +19,12 @@ article {
         margin-bottom: 4rem;
     }
 
+    @media (prefers-color-scheme: dark) {
+        & p {
+            color: #a1a1aa;
+        }
+    }
+
     & strong {
         font-weight: 600;
         font-size: 1rem;
