@@ -1,4 +1,4 @@
-import "../../../design-system/markdown.css"
+import "#design-system/markdown.css"
 
 export const config = {
   title: "Florian's Project",
