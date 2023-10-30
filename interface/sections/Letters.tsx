@@ -92,10 +92,10 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                     zoom !== -1 && zoom !== letters.indexOf(letter) ? 0 : 1,
                 }}
                 class={
-                  "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all " +
+                  "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all dark:border-zinc-800 dark:bg-zinc-950 " +
                   (zoom === letters.indexOf(letter)
-                    ? ""
-                    : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10")
+                    ? "bg-white dark:bg-zinc-900"
+                    : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10 dark:hover:bg-zinc-900 dark:hover:shadow-none")
                 }
               >
                 {letters.indexOf(letter) !== zoom ? (
@@ -103,14 +103,14 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                     onClick={() => {
                       setZoom(letters.indexOf(letter))
                     }}
-                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer"
+                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
                   />
                 ) : (
                   <Collapse
                     onClick={() => {
                       setZoom(-1)
                     }}
-                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer"
+                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
                   />
                 )}
                 <img
@@ -123,18 +123,18 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                     class={
                       "w-full h-full overflow-x-scroll " +
                       (zoom === letters.indexOf(letter)
-                        ? "text-black"
-                        : "text-zinc-400 group-hover/singleletter:text-black")
+                        ? "text-black dark:text-white"
+                        : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
                     }
                   >
                     <p>{letter.text}</p>
                   </div>
-                  <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0" />
+                  <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
                   <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
                     <img
                       src={letter.signature}
                       alt="Signature"
-                      class="md:w-64 w-64 md:h-auto object-contain"
+                      class="md:w-64 w-64 md:h-auto object-contain dark:invert"
                     />
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                 </>
               </Button>
             </div>
-            <div class="absolute bg-light-zinc inset-0 blur-lg" />
+            <div class="absolute bg-light-zinc inset-0 blur-lg dark:bg-black" />
           </div>
         </div>
       </div>
@@ -245,11 +245,11 @@ function SendLetter(props: { setShowLetter: any }) {
             opacity: "0%",
             transform: "scale(0.95)",
           }}
-          className="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all"
+          className="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-zinc-900"
         >
           <Close
             onClick={props.setShowLetter}
-            className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl"
+            className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
           />
           <div className="w-full h-full p-6">
             <textarea
@@ -260,10 +260,10 @@ function SendLetter(props: { setShowLetter: any }) {
                   ? setLetterWritten(true)
                   : setLetterWritten(false)
               }}
-              className="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200"
+              className="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
             ></textarea>
           </div>
-          <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0" />
+          <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
           <div
             className={
               "w-full md:h-full h-3/5 p-6 flex items-end " +
@@ -282,21 +282,23 @@ function SendLetter(props: { setShowLetter: any }) {
                   saveSignature()
                 }}
                 className={
-                  "md:h-56 h-48 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] " +
+                  "md:h-56 h-48 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800 dark:invert " +
                   (!letterWritten ? "pointer-events-none" : "")
                 }
               />
-              <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted" />
+              <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
               <div class="flex justify-between items-end gap-8">
                 <div class="flex items-start flex-col justify-between w-full">
                   <p class="flex-shrink-0 mt-2.5">Signature</p>
                   <div class="flex items-center gap-0.5 mt-8 w-full">
-                    <p class="text-black pb-0.5 flex-shrink-0">@</p>
+                    <p class="text-black pb-0.5 flex-shrink-0 dark:text-white">
+                      @
+                    </p>
                     <input
                       ref={handleInput}
                       type="text"
                       placeholder="floriandwt"
-                      class="placeholder:text-zinc-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300"
+                      class="placeholder:text-zinc-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300 dark:text-white dark:bg-zinc-900 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
                     />
                   </div>
                   <p class="flex-shrink-0 mt-2">

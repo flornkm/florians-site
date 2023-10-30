@@ -12,11 +12,11 @@ export default function Page({
     <div class="w-full">
       <section class="w-full lg:pt-16">
         <h1 class="text-3xl font-semibold mb-4">Feed</h1>
-        <p class="text-zinc-500 mb-16 max-w-lg">
+        <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
           This is my personal feed. A place for collecting my memories, writings
           and showcasing stuff.
         </p>
-        <div class="w-full h-[1px] bg-zinc-100 my-16" />
+        <div class="w-full h-[1px] bg-zinc-100 my-16 dark:bg-zinc-900" />
         <div class="py-0.5 pb-16 max-w-lg mx-auto">
           {posts.map((post: any) => {
             const date = new Date(

@@ -12,7 +12,7 @@ export default function Page({ projects }: { projects: any }) {
     <div class="w-full">
       <section class="w-full lg:pt-16">
         <h1 class="text-3xl font-semibold mb-4">Archive</h1>
-        <p class="text-zinc-500 mb-16 max-w-lg">
+        <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
           In my archive, you will find smaller creations, MVPs, ideas and
           results from hackathons. Feel free to look through if you are
           interested.
@@ -31,7 +31,7 @@ export default function Page({ projects }: { projects: any }) {
                   </p>
                   {project.short ? (
                     <div class="group relative md:place-self-start place-self-end">
-                      <Short class="w-4 pt-0.5 transition-colors text-zinc-300 lg:hover:text-amber-500 cursor-help" />
+                      <Short class="w-4 pt-0.5 transition-colors text-zinc-300 lg:hover:text-amber-500 cursor-help dark:text-zinc-700" />
                       <Tooltip
                         position="top"
                         class="-translate-y-3 hidden lg:block"
@@ -42,7 +42,7 @@ export default function Page({ projects }: { projects: any }) {
                   ) : (
                     <p></p>
                   )}
-                  <p class="text-zinc-500 truncate md:col-span-4 leading-snug col-span-2">
+                  <p class="text-zinc-500 truncate md:col-span-4 leading-snug col-span-2 dark:text-zinc-400">
                     {project.description}
                   </p>
                   <div class="group relative mr-auto md:col-span-1 col-span-2 mb-4 md:mb-0">
@@ -72,7 +72,7 @@ export default function Page({ projects }: { projects: any }) {
                   </Button>
                 </div>
                 {projects.indexOf(project) !== projects.length - 1 && (
-                  <div class="border-b border-b-zinc-100 my-4" />
+                  <div class="border-b border-b-zinc-100 my-4 dark:border-b-zinc-900" />
                 )}
               </>
             )

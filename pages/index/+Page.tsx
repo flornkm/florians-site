@@ -5,6 +5,7 @@ import Button, { ButtonWrapper } from "#components/Button"
 import Contact from "#sections/Contact"
 import Letters, { Letter } from "#sections/Letters"
 import Work from "#sections/Work"
+import { changeTitleColor } from "../../interface/helper/lightOrDarkChanges"
 
 export default function Page({
   projects,
@@ -28,7 +29,18 @@ export default function Page({
           // @ts-ignore
           workStroke.current.style.width = "0%"
           // @ts-ignore
-          workTitle.current.style.color = "black"
+          if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
+            // @ts-ignore
+            workTitle.current.style.color = "white"
+          } else {
+            // @ts-ignore
+            workTitle.current.style.color = "black"
+          }
+
+          if (workTitle.current) changeTitleColor(workTitle.current)
         }, 100)
       }
     }
@@ -40,7 +52,7 @@ export default function Page({
         <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex mb-40">
           <div class="cursor-text max-w-2xl">
             <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400 mb-10">
-              <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300">
+              <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300 dark:text-zinc-500 dark:selection:bg-blue-950 dark:selection:text-blue-500">
                 Florian.
               </span>{" "}
               A designer and developer building digital products.

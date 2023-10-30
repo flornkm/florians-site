@@ -46,7 +46,7 @@ export default function Navigation() {
         <a href="/#" class="group -ml-1">
           <p class="text-lg font-semibold group-hover:text-zinc-500 transition-colors">
             Florian
-            <span class="text-sm font-normal text-zinc-500 group-hover:text-zinc-400 ml-2 transition-colors hidden lg:inline-block">
+            <span class="text-sm font-normal text-zinc-500 group-hover:text-zinc-400 ml-2 transition-colors hidden lg:inline-block dark:group-hover:text-zinc-600">
               Design Engineer
             </span>
           </p>
@@ -71,7 +71,7 @@ export default function Navigation() {
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="lg:h-[1px] h-12 lg:-translate-x-0 flex-shrink-0 absolute lg:bottom-[-1px] bg-black opacity-0 rounded-full lg:rounded-none"
+              class="lg:h-[1px] h-12 lg:-translate-x-0 flex-shrink-0 absolute lg:bottom-[-1px] bg-black opacity-0 rounded-full lg:rounded-none dark:bg-white"
             />
           )}
       </div>
@@ -86,8 +86,8 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
     props.className,
     // @ts-ignore
     pageContext?.urlPathname === props.href
-      ? "lg:text-black text-white relative z-10 before:opacity-0"
-      : "text-zinc-400 hover:text-black before:opacity-0",
+      ? "lg:text-black text-white relative z-10 before:opacity-0 dark:lg:text-white dark:text-black"
+      : "text-zinc-400 hover:text-black before:opacity-0 dark:hover:text-white",
   ]
     .filter(Boolean)
     .join(" ")
