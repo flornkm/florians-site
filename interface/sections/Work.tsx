@@ -14,21 +14,21 @@ export default function Work(props: {
         <>
           <div class="flex gap-8 justify-between items-center mb-4">
             <h2
-              class="text-3xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700"
+              class="text-3xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700 dark:text-zinc-700"
               ref={props.workTitle}
             >
               Selected work
             </h2>
             <div class="w-full relative flex items-center">
-              <div class="h-[1px] bg-zinc-100 absolute w-full" />
+              <div class="h-[1px] bg-zinc-100 absolute w-full dark:bg-zinc-900" />
               <div
-                class="h-[1px] bg-black absolute z-10 transition-all duration-700"
+                class="h-[1px] bg-black absolute z-10 transition-all duration-700 dark:bg-white"
                 style={{ width: "100%" }}
                 ref={props.workStroke}
               />
             </div>
           </div>
-          <p class="mb-20 text-zinc-500 text-lg">
+          <p class="mb-20 text-zinc-500 text-lg dark:text-zinc-400">
             Things I have worked on in my career. Includes all employment,
             freelance and study work.
           </p>
@@ -48,7 +48,7 @@ export default function Work(props: {
                 </div>
                 <div class="w-full">
                   <div class="flex gap-8 justify-between items-center sticky top-0 lg:top-14 z-40 py-2">
-                    <div class="w-full h-full absolute left-1/2 -translate-x-1/2 bg-light-zinc/95 backdrop-blur-xl" />
+                    <div class="w-full h-full absolute left-1/2 -translate-x-1/2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90" />
                     <div class="flex md:gap-3 gap-2 items-center relative">
                       <h3 class="text-2xl font-semibold">{project.title}</h3>
                       <div class="group relative">
@@ -78,7 +78,9 @@ export default function Work(props: {
                       Read more
                     </Button>
                   </div>
-                  <p class="mb-6 text-zinc-500">{project.description}</p>
+                  <p class="mb-6 text-zinc-500 dark:text-zinc-400">
+                    {project.description}
+                  </p>
                   <img src={project.cover} />
                 </div>
               </div>

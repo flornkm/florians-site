@@ -135,7 +135,7 @@ export default function Page() {
           </div>
           <div class="flex-grow md:max-w-md">
             <h1 class="text-xl font-semibold mb-3">A few words to myself</h1>
-            <p class="text-zinc-500 mb-4">
+            <p class="text-zinc-500 mb-4 dark:text-zinc-400">
               Born on the 11th of January, 2001 in{" "}
               <InlineInfo>
                 <>
@@ -148,7 +148,7 @@ export default function Page() {
               I was part of the first generation getting adults in the age of
               computers, mobile phones and advanced technology.
             </p>
-            <p class="text-zinc-500 mb-4">
+            <p class="text-zinc-500 mb-4 dark:text-zinc-400">
               Quickly I got used to working with computers and in 2013, I began
               making money on the internet by selling my skills as a
               <InlineInfo>
@@ -161,7 +161,7 @@ export default function Page() {
               </InlineInfo>
               .
             </p>
-            <p class="text-zinc-500 mb-4">
+            <p class="text-zinc-500 mb-4 dark:text-zinc-400">
               Now, {new Date().getFullYear() - 2013} years later, I have learned
               coding in addition, opening whole new possibilites for people and
               companies I work with. The job title I love using for this unique
@@ -176,7 +176,7 @@ export default function Page() {
               <ul class="space-y-2 -ml-1">
                 <li>
                   <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
                     X (Twitter)
@@ -184,7 +184,7 @@ export default function Page() {
                 </li>
                 <li>
                   <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
                     LinkedIn
@@ -192,7 +192,7 @@ export default function Page() {
                 </li>
                 <li>
                   <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
                     Read.cv
@@ -200,7 +200,7 @@ export default function Page() {
                 </li>
                 <li>
                   <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
                     GitHub
@@ -213,7 +213,7 @@ export default function Page() {
               <ul class="space-y-2 -ml-1">
                 <li>
                   <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
                     Email
@@ -221,7 +221,7 @@ export default function Page() {
                 </li>
                 <li>
                   <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
                     iMessage
@@ -248,7 +248,7 @@ export default function Page() {
                     <p>
                       Working as {item.jobTitle} {item.company && "at"}{" "}
                       <a
-                        class="text-black hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                        class="text-black hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-white dark:hover:text-zinc-200"
                         href={item.comapanyLink}
                         target="_blank"
                       >
@@ -264,10 +264,10 @@ export default function Page() {
                       <span class="text-green-600">{item.to}</span>
                     )}
                   </p>
-                  <p class="text-zinc-500">{item.slogan}</p>
+                  <p class="text-zinc-500 dark:text-zinc-400">{item.slogan}</p>
                 </div>
                 {experience.indexOf(item) !== experience.length - 1 && (
-                  <div class="border-b border-b-zinc-100 my-8" />
+                  <div class="border-b border-b-zinc-100 my-8 dark:border-b-zinc-900" />
                 )}
               </div>
             )
@@ -275,7 +275,7 @@ export default function Page() {
         </div>
       </section>
       <section class="w-full mb-32">
-        <h2 class="text-xl font-medium mb-32 text-zinc-400">
+        <h2 class="text-xl font-medium mb-32 text-zinc-400 dark:text-zinc-500">
           In case you don't want to read through the boring stuff, I treat the
           <br class="hidden md:block" />
           following sections as something like a personal library.
@@ -310,7 +310,7 @@ export default function Page() {
                             window.open(tool.link)
                           }
                           src={tool.icon}
-                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all"
+                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-zinc-800"
                         />
                         <Tooltip position="top" class="-translate-y-3.5 z-20">
                           {tool.name}
@@ -332,7 +332,7 @@ export default function Page() {
                             window.open(tool.link)
                           }
                           src={tool.icon}
-                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all"
+                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-zinc-800"
                         />
                         <Tooltip position="top" class="-translate-y-3.5 z-20">
                           {tool.name}
@@ -350,13 +350,13 @@ export default function Page() {
               {bucketList.map((entry) => (
                 <li
                   class={
-                    "flex items-start gap-3 " +
+                    "flex items-start gap-3 dark:text-zinc-400 " +
                     (entry.checked
                       ? "line-through selection:bg-transparent selection:text-black"
                       : "")
                   }
                 >
-                  <div class="bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-pointer border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative">
+                  <div class="bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-pointer border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800">
                     {entry.checked && (
                       <Check class="absolute -right-1.5 -top-1 w-7 h-7 active:animate-shake" />
                     )}
@@ -372,7 +372,7 @@ export default function Page() {
             <h3 class="text-lg font-semibold mb-4">Music</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <img
                     src="/images/music-covers/enjoy_silence.jpg"
                     class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
@@ -396,7 +396,7 @@ export default function Page() {
                 </a>
               </div>
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8">
+                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <img
                     src="/images/music-covers/serotonin_moonbeams.jpg"
                     class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"

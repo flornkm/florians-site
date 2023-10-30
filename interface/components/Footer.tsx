@@ -3,11 +3,13 @@ import { usePageContext } from "../../renderer/usePageContext"
 export default function Footer() {
   const pageContext = usePageContext() as any
   return (
-    <footer class="py-16 border-t border-t-zinc-100">
+    <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
         <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
           <h3 class="font-semibold mb-2">Florian's personal site</h3>
-          <p class="text-zinc-500">Love to building digital products.</p>
+          <p class="text-zinc-500 dark:text-zinc-400">
+            Love to building digital products.
+          </p>
         </div>
         <div class="xl:place-self-end lg:mr-7">
           <h4 class="font-medium mb-3">Pages</h4>
@@ -17,8 +19,8 @@ export default function Footer() {
                 class={
                   "text-zinc-400 transition-colors font-medium " +
                   (pageContext.urlPathname === "/"
-                    ? "text-zinc-600"
-                    : "hover:text-zinc-600")
+                    ? "text-zinc-600 dark:text-zinc-400"
+                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
                 href="/"
               >
@@ -30,8 +32,8 @@ export default function Footer() {
                 class={
                   "text-zinc-400 transition-colors font-medium " +
                   (pageContext.urlPathname === "/about"
-                    ? "text-zinc-600"
-                    : "hover:text-zinc-600")
+                    ? "text-zinc-600 dark:text-zinc-400"
+                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
                 href="/about"
               >
@@ -43,8 +45,8 @@ export default function Footer() {
                 class={
                   "text-zinc-400 transition-colors font-medium " +
                   (pageContext.urlPathname === "/archive"
-                    ? "text-zinc-600"
-                    : "hover:text-zinc-600")
+                    ? "text-zinc-600 dark:text-zinc-400"
+                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
                 href="/archive"
               >
@@ -56,8 +58,8 @@ export default function Footer() {
                 class={
                   "text-zinc-400 transition-colors font-medium " +
                   (pageContext.urlPathname === "/feed"
-                    ? "text-zinc-600"
-                    : "hover:text-zinc-600")
+                    ? "text-zinc-600 dark:text-zinc-400"
+                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
                 href="/feed"
               >
@@ -71,7 +73,7 @@ export default function Footer() {
           <ul class="space-y-2">
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/"
               >
                 X (Twitter)
@@ -79,7 +81,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/about"
               >
                 iMessage
@@ -87,7 +89,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/side-projects"
               >
                 LinkedIn
@@ -95,7 +97,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias"
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/feed"
               >
                 Email
@@ -105,7 +107,7 @@ export default function Footer() {
         </div>
       </div>
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 ">
-        <div class="border-b border-dashed border-zinc-200 my-16" />
+        <div class="border-b border-dashed border-zinc-200 my-16 dark:border-zinc-900" />
       </div>
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm md:flex-row flex-col gap-6">
         <ul class="flex space-x-8">
@@ -114,8 +116,8 @@ export default function Footer() {
               class={
                 "text-zinc-400 transition-colors font-medium " +
                 (pageContext.urlPathname === "/imprint"
-                  ? "text-zinc-600"
-                  : "hover:text-zinc-600")
+                  ? "text-zinc-600 dark:text-zinc-400"
+                  : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
               }
               href="/imprint"
             >
@@ -127,8 +129,8 @@ export default function Footer() {
               class={
                 "text-zinc-400 transition-colors font-medium " +
                 (pageContext.urlPathname === "/privacy-policy"
-                  ? "text-zinc-600"
-                  : "hover:text-zinc-600")
+                  ? "text-zinc-600 dark:text-zinc-400"
+                  : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
               }
               href="/privacy-policy"
             >
@@ -137,7 +139,7 @@ export default function Footer() {
             </a>
           </li>
         </ul>
-        <p class="text-zinc-400 leading-none ml-1">
+        <p class="text-zinc-400 leading-none ml-1 dark:text-zinc-600">
           Copyright Florian {new Date().getFullYear()}
         </p>
       </div>
