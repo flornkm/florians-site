@@ -7,6 +7,8 @@ import Collapse from "~icons/eva/collapse-outline"
 import NoPrerender from "../components/NoPrerender"
 import Button from "../components/Button"
 import Tooltip from "../components/Tooltip"
+import { push, ref, set } from "firebase/database"
+import { database } from "#database/firebaseApp"
 
 export type Letter = {
   id: string
@@ -15,9 +17,14 @@ export type Letter = {
   handle: string
 }
 
-export default function Letters({ letters }: { letters: Letter[] }) {
+export default function Letters({
+  letters,
+}: {
+  letters: Record<string, Letter>
+}) {
   const popup = useRef<HTMLDivElement>(null)
   const [disableButton, setDisableButton] = useState(false)
+  let letterArray = letters ? Object.values(letters) : []
 
   // -1 zoom means nothing is zoomed
   const [zoom, setZoom] = useState<number>(-1)
@@ -65,11 +72,11 @@ export default function Letters({ letters }: { letters: Letter[] }) {
       <div>
         <div ref={popup} style={{ opacity: "0%", pointerEvents: "none" }}>
           <NoPrerender>
-            <SendLetter setShowLetter={setShowLetter} />
+            <SendLetter setShowLetter={setShowLetter} letters={letters} />
           </NoPrerender>
         </div>
         <div class="w-full h-[512px] relative flex items-end justify-center group/letter">
-          {letters.map((letter) => {
+          {letterArray.map((letter) => {
             return (
               <div
                 onClick={(e) => {
@@ -77,31 +84,31 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                 }}
                 style={{
                   top:
-                    zoom === letters.indexOf(letter)
+                    zoom === letterArray.indexOf(letter)
                       ? 0
-                      : letters.indexOf(letter) * 64,
+                      : letterArray.indexOf(letter) * 64,
                   scale:
-                    zoom === letters.indexOf(letter)
+                    zoom === letterArray.indexOf(letter)
                       ? "1"
-                      : `0.9${4 * letters.indexOf(letter)}`,
+                      : `0.9${4 * letterArray.indexOf(letter)}`,
                   zIndex:
-                    zoom === letters.indexOf(letter)
+                    zoom === letterArray.indexOf(letter)
                       ? 20
-                      : letters.indexOf(letter),
+                      : letterArray.indexOf(letter),
                   opacity:
-                    zoom !== -1 && zoom !== letters.indexOf(letter) ? 0 : 1,
+                    zoom !== -1 && zoom !== letterArray.indexOf(letter) ? 0 : 1,
                 }}
                 class={
                   "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all dark:border-zinc-800 dark:bg-zinc-950 " +
-                  (zoom === letters.indexOf(letter)
+                  (zoom === letterArray.indexOf(letter)
                     ? "bg-white dark:bg-zinc-900"
                     : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10 dark:hover:bg-zinc-900 dark:hover:shadow-none")
                 }
               >
-                {letters.indexOf(letter) !== zoom ? (
+                {letterArray.indexOf(letter) !== zoom ? (
                   <Expand
                     onClick={() => {
-                      setZoom(letters.indexOf(letter))
+                      setZoom(letterArray.indexOf(letter))
                     }}
                     className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
                   />
@@ -122,7 +129,7 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                   <div
                     class={
                       "w-full h-full overflow-x-scroll " +
-                      (zoom === letters.indexOf(letter)
+                      (zoom === letterArray.indexOf(letter)
                         ? "text-black dark:text-white"
                         : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
                     }
@@ -138,22 +145,24 @@ export default function Letters({ letters }: { letters: Letter[] }) {
                     />
                   </div>
                 </div>
-                <div
-                  class={
-                    "absolute -top-8 transition-opacity pointer-events-none hidden md:flex " +
-                    (zoom === letters.indexOf(letter)
-                      ? "opacity-100"
-                      : "opacity-0 group-hover/singleletter:opacity-100")
-                  }
-                >
-                  <div class="flex items-center gap-3">
-                    <img
-                      src={`https://unavatar.io/${letter.handle}`}
-                      className="w-6 h-6 rounded-full"
-                    />{" "}
-                    <p>{letter.handle}</p>
+                {letter.handle && (
+                  <div
+                    class={
+                      "absolute -top-8 transition-opacity pointer-events-none hidden md:flex " +
+                      (zoom === letterArray.indexOf(letter)
+                        ? "opacity-100"
+                        : "opacity-0 group-hover/singleletter:opacity-100")
+                    }
+                  >
+                    <div class="flex items-center gap-3">
+                      <img
+                        src={`https://unavatar.io/${letter.handle}`}
+                        className="w-6 h-6 rounded-full"
+                      />{" "}
+                      <p>{letter.handle}</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )
           })}
@@ -197,7 +206,10 @@ export default function Letters({ letters }: { letters: Letter[] }) {
   )
 }
 
-function SendLetter(props: { setShowLetter: any }) {
+function SendLetter(props: {
+  setShowLetter: any
+  letters: Record<string, Letter>
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const letterInput = useRef<HTMLTextAreaElement>(null)
   const handleInput = useRef<HTMLInputElement>(null)
@@ -311,10 +323,12 @@ function SendLetter(props: { setShowLetter: any }) {
                   chevron
                   disabled={signature.length === 0}
                   function={async () => {
-                    // const link = document.createElement("a")
-                    // link.download = "letter.png"
-                    // link.href = signature
-                    // link.click()
+                    const newLetter = await push(ref(database, "letters"))
+                    await set(newLetter, {
+                      text: letterInput.current!.value,
+                      signature: signature,
+                      handle: handleInput.current!.value || null,
+                    })
                     props.setShowLetter(true)
                   }}
                 >

@@ -12,7 +12,7 @@ export default function Page({
   letters,
 }: {
   projects: any[]
-  letters: Letter[]
+  letters: Record<string, Letter>
 }) {
   const { work, workStroke, workTitle } = {
     work: useRef<HTMLDivElement>(null),

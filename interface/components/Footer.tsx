@@ -1,4 +1,5 @@
 import { usePageContext } from "../../renderer/usePageContext"
+import Heart from "~icons/eva/heart-fill"
 
 export default function Footer() {
   const pageContext = usePageContext() as any
@@ -8,7 +9,8 @@ export default function Footer() {
         <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
           <h3 class="font-semibold mb-2">Florian's personal site</h3>
           <p class="text-zinc-500 dark:text-zinc-400">
-            Love to building digital products.
+            <Heart class="inline-block text-sm mb-1 transition-colors hover:text-red-500" />{" "}
+            building digital products.
           </p>
         </div>
         <div class="xl:place-self-end lg:mr-7">
