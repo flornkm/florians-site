@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "--- For development ------------------------": "",
     "dev": "vite",
-    "build": "npm run generate && vite build",
-    "preview": "vite preview",
     "start": "vite build && vite preview",
+    "--- For production -------------------------": "",
+    "vercel-build": "npm run generate && vite build",
+    "--- Single commands ------------------------": "",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
-    "generate": "node ./build/generateOpengraph.js"
+    "generate": "node ./build/generateOpengraph.js",
+    "--- Not in use, but necessary to include ---": "",
+    "build": "npm run generate && vite build"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
@@ -21,6 +25,7 @@
     "@types/node": "^20.6.2",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
+    "@vercel/node": "^3.0.7",
     "cross-fetch": "^4.0.0",
     "firebase": "^10.5.0",
     "marked": "^9.0.3",
@@ -33,7 +38,6 @@
     "vike": "^0.4.142",
     "vite": "^4.0.3"
   },
-  "type": "module",
   "devDependencies": {
     "@iconify-json/eva": "^1.1.7",
     "@svgr/core": "^8.1.0",
@@ -43,6 +47,7 @@
     "tailwindcss": "^3.3.3",
     "unplugin-icons": "0.17.0"
   },
+  "type": "module",
   "engines": {
     "node": ">=18"
   }
