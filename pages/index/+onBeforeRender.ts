@@ -4,7 +4,14 @@ import { returnContent } from "../../markdown/convert"
 import { Letter } from "#sections/Letters"
 import { PageContextCustom } from "renderer/types"
 import { database } from "#database/firebaseApp"
-import { get, limitToLast, query, ref, set } from "firebase/database"
+import {
+  get,
+  limitToFirst,
+  limitToLast,
+  query,
+  ref,
+  set,
+} from "firebase/database"
 
 async function onBeforeRender() {
   const projects = await returnContent("work")
