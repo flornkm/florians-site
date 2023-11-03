@@ -2,8 +2,8 @@ import { initializeApp } from "firebase/app"
 import { getDatabase } from "firebase/database"
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  apiKey: process.env.FIREBASE_API_KEY,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
   projectID: "florians-website",
 }
 

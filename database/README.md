@@ -1,1 +1,1 @@
-# Currently, the database is publically available. That doesn't matter, because it just handles the "letters" and no personal data.
+# Currently, the database is publically available. That doesn't matter, because it doesn't contain any sensitive information.
