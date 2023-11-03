@@ -1,4 +1,7 @@
-export default function LoadingSpinner(props: { class?: string }) {
+export default function LoadingSpinner(props: {
+  message?: string
+  class?: string
+}) {
   return (
     <div
       class={
@@ -6,9 +9,14 @@ export default function LoadingSpinner(props: { class?: string }) {
         props.class
       }
     >
-      <div class="h-full w-full aspect-square rounded-full border-4 border-black animate-spin dark:border-white">
+      <div class="h-full w-full aspect-square rounded-full border-4 border-black animate-spin dark:border-white mb-10">
         <div class="w-2/3 h-2/3 absolute z-50 bg-light-zinc -top-2 -left-2 dark:bg-black" />
       </div>
+      {props.message && (
+        <p class="text-center text-sm absolute truncate left-1/2 -translate-x-1/2">
+          {props.message}
+        </p>
+      )}
     </div>
   )
 }

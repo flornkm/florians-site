@@ -5,6 +5,7 @@
   "scripts": {
     "--- For development ------------------------": "",
     "dev": "vite",
+    "dev:vercel": "vercel dev",
     "start": "vite build && vite preview",
     "--- For production -------------------------": "",
     "vercel-build": "npm run generate && vite build",

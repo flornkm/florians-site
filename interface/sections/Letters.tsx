@@ -182,7 +182,10 @@ export default function Letters() {
               )
             })
           ) : (
-            <LoadingSpinner class="-translate-y-32" />
+            <LoadingSpinner
+              message="💌 Fetching letters from endpoint"
+              class="-translate-y-32"
+            />
           )}
           <div class="absolute w-full bottom-0 z-10 md:pb-32 pt-24 pb-16">
             <div
@@ -314,12 +317,12 @@ function SendLetter(props: {
                   saveSignature()
                 }}
                 className={
-                  "md:h-56 h-48 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800 dark:invert " +
+                  "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800/5 dark:invert " +
                   (!letterWritten ? "pointer-events-none" : "")
                 }
               />
               <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
-              <div class="flex justify-between items-end gap-8">
+              <div class="flex md:justify-between md:items-end gap-8 flex-col md:flex-row items-start">
                 <div class="flex items-start flex-col justify-between w-full">
                   <p class="flex-shrink-0 mt-2.5">Signature</p>
                   <div class="flex items-center gap-0.5 mt-8 w-full">
@@ -363,7 +366,7 @@ function SendLetter(props: {
                 </Button>
               </div>
             </div>
-            <figure className="w-32 absolute top-8 right-8 rotate-6 group">
+            <figure className="md:w-24 w-14 absolute top-16 md:top-8 right-8 rotate-6 group">
               <img
                 src="/images/letter/stamp.png"
                 class="pointer-events-none"
