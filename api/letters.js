@@ -1,5 +1,15 @@
 import { get, limitToLast, query, ref, push, set } from "firebase/database"
-import { database } from "#database/firebaseApp.js"
+import { initializeApp } from "firebase/app"
+import { getDatabase } from "firebase/database"
+
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  projectID: "florians-website",
+}
+
+const app = initializeApp(firebaseConfig)
+const database = getDatabase(app)
 
 /**
  * @param {import('@vercel/node').VercelRequest} req
