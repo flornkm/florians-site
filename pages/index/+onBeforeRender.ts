@@ -11,6 +11,7 @@ import {
   query,
   ref,
   set,
+  onValue,
 } from "firebase/database"
 
 async function onBeforeRender() {
@@ -27,6 +28,10 @@ async function onBeforeRender() {
   } catch (error) {
     console.error("Error updating score:", error)
   }
+
+  onValue(query(ref(database, "letters"), limitToLast(3)), (snapshot) => {
+    letters = snapshot.val()
+  })
 
   return {
     pageContext: {
