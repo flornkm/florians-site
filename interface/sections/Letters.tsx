@@ -200,10 +200,12 @@ export default function Letters() {
                 type="secondary"
                 class={
                   "mx-auto pl-4 relative z-20 " +
-                  (disableButton ? "opacity-30" : "")
+                  (disableButton || letterArray.length === 0
+                    ? "opacity-30"
+                    : "")
                 }
                 small
-                disabled={disableButton}
+                disabled={disableButton || letterArray.length === 0}
                 function={() => {
                   if (popup.current!.style.overflow !== "hidden") {
                     setShowLetter()
