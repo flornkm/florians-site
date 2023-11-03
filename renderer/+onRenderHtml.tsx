@@ -43,7 +43,7 @@ async function onRenderHtml(pageContext: PageContext) {
         <meta property="og:image" content="https://florians-site-preview.vercel.app${image}" />
         <meta property="og:description" content="${desc}" />
         <meta property="og:title" content="${title}" />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content="https://florians-site-preview.vercel.app${image}" />
         <meta property="twitter:description" content="${desc}" />
         <meta property="twitter:title" content="${title}" />
