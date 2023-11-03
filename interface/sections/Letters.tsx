@@ -7,8 +7,7 @@ import Collapse from "~icons/eva/collapse-outline"
 import NoPrerender from "../components/NoPrerender"
 import Button from "../components/Button"
 import Tooltip from "../components/Tooltip"
-import { push, ref, set } from "firebase/database"
-import { database } from "#database/firebaseApp"
+import LoadingSpinner from "#components/LoadingSpinner"
 
 export type Letter = {
   id: string
@@ -17,13 +16,26 @@ export type Letter = {
   handle: string
 }
 
-export default function Letters({
-  letters,
-}: {
-  letters: Record<string, Letter>
-}) {
+async function fetchLetters() {
+  try {
+    const latestLetters = await fetch("/api/letters")
+    return await latestLetters.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export default function Letters() {
   const popup = useRef<HTMLDivElement>(null)
   const [disableButton, setDisableButton] = useState(false)
+  const [letters, setLetters] = useState<Record<string, Letter>>({})
+
+  useEffect(() => {
+    fetchLetters().then((data) => {
+      setLetters(data)
+    })
+  }, [])
+
   let letterArray = letters ? Object.values(letters) : []
 
   // -1 zoom means nothing is zoomed
@@ -76,96 +88,102 @@ export default function Letters({
           </NoPrerender>
         </div>
         <div class="w-full h-[512px] relative flex items-end justify-center group/letter">
-          {letterArray.map((letter) => {
-            return (
-              <div
-                onClick={(e) => {
-                  e.stopPropagation()
-                }}
-                style={{
-                  top:
-                    zoom === letterArray.indexOf(letter)
-                      ? 0
-                      : letterArray.indexOf(letter) * 64,
-                  scale:
-                    zoom === letterArray.indexOf(letter)
-                      ? "1"
-                      : `0.9${4 * letterArray.indexOf(letter)}`,
-                  zIndex:
-                    zoom === letterArray.indexOf(letter)
-                      ? 20
-                      : letterArray.indexOf(letter),
-                  opacity:
-                    zoom !== -1 && zoom !== letterArray.indexOf(letter) ? 0 : 1,
-                }}
-                class={
-                  "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all dark:border-zinc-800 dark:bg-zinc-950 " +
-                  (zoom === letterArray.indexOf(letter)
-                    ? "bg-white dark:bg-zinc-900"
-                    : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10 dark:hover:bg-zinc-900 dark:hover:shadow-none")
-                }
-              >
-                {letterArray.indexOf(letter) !== zoom ? (
-                  <Expand
-                    onClick={() => {
-                      setZoom(letterArray.indexOf(letter))
-                    }}
-                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
-                  />
-                ) : (
-                  <Collapse
-                    onClick={() => {
-                      setZoom(-1)
-                    }}
-                    className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
-                  />
-                )}
-                <img
-                  src="/images/letter/stamp.png"
-                  class="pointer-events-none w-20 absolute md:top-8 md:bottom-auto bottom-8 right-8 rotate-6"
-                  alt="Signature Stamp"
-                />
-                <div class="w-full h-80 flex gap-4 md:flex-row flex-col">
-                  <div
-                    class={
-                      "w-full h-full overflow-x-scroll " +
-                      (zoom === letterArray.indexOf(letter)
-                        ? "text-black dark:text-white"
-                        : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
-                    }
-                  >
-                    <p>{letter.text}</p>
-                  </div>
-                  <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
-                  <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
-                    <img
-                      src={letter.signature}
-                      alt="Signature"
-                      class="md:w-64 w-64 md:h-auto object-contain dark:invert"
+          {letterArray.length > 0 ? (
+            letterArray.map((letter) => {
+              return (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                  style={{
+                    top:
+                      zoom === letterArray.indexOf(letter)
+                        ? 0
+                        : letterArray.indexOf(letter) * 64,
+                    scale:
+                      zoom === letterArray.indexOf(letter)
+                        ? "1"
+                        : `0.9${4 * letterArray.indexOf(letter)}`,
+                    zIndex:
+                      zoom === letterArray.indexOf(letter)
+                        ? 20
+                        : letterArray.indexOf(letter),
+                    opacity:
+                      zoom !== -1 && zoom !== letterArray.indexOf(letter)
+                        ? 0
+                        : 1,
+                  }}
+                  class={
+                    "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all dark:border-zinc-800 dark:bg-zinc-950 " +
+                    (zoom === letterArray.indexOf(letter)
+                      ? "bg-white dark:bg-zinc-900"
+                      : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10 dark:hover:bg-zinc-900 dark:hover:shadow-none")
+                  }
+                >
+                  {letterArray.indexOf(letter) !== zoom ? (
+                    <Expand
+                      onClick={() => {
+                        setZoom(letterArray.indexOf(letter))
+                      }}
+                      className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
                     />
-                  </div>
-                </div>
-                {letter.handle && (
-                  <div
-                    class={
-                      "absolute -top-8 transition-opacity pointer-events-none hidden md:flex " +
-                      (zoom === letterArray.indexOf(letter)
-                        ? "opacity-100"
-                        : "opacity-0 group-hover/singleletter:opacity-100")
-                    }
-                  >
-                    <div class="flex items-center gap-3">
+                  ) : (
+                    <Collapse
+                      onClick={() => {
+                        setZoom(-1)
+                      }}
+                      className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
+                    />
+                  )}
+                  <img
+                    src="/images/letter/stamp.png"
+                    class="pointer-events-none w-20 absolute md:top-8 md:bottom-auto bottom-8 right-8 rotate-6"
+                    alt="Signature Stamp"
+                  />
+                  <div class="w-full h-80 flex gap-4 md:flex-row flex-col">
+                    <div
+                      class={
+                        "w-full h-full overflow-x-scroll " +
+                        (zoom === letterArray.indexOf(letter)
+                          ? "text-black dark:text-white"
+                          : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
+                      }
+                    >
+                      <p>{letter.text}</p>
+                    </div>
+                    <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
+                    <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
                       <img
-                        src={`https://unavatar.io/${letter.handle}`}
-                        className="w-6 h-6 rounded-full"
-                      />{" "}
-                      <p>{letter.handle}</p>
+                        src={letter.signature}
+                        alt="Signature"
+                        class="md:w-64 w-64 md:h-auto object-contain dark:invert"
+                      />
                     </div>
                   </div>
-                )}
-              </div>
-            )
-          })}
+                  {letter.handle && (
+                    <div
+                      class={
+                        "absolute -top-8 transition-opacity pointer-events-none hidden md:flex " +
+                        (zoom === letterArray.indexOf(letter)
+                          ? "opacity-100"
+                          : "opacity-0 group-hover/singleletter:opacity-100")
+                      }
+                    >
+                      <div class="flex items-center gap-3">
+                        <img
+                          src={`https://unavatar.io/${letter.handle}`}
+                          className="w-6 h-6 rounded-full"
+                        />{" "}
+                        <p>{letter.handle}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })
+          ) : (
+            <LoadingSpinner class="-translate-y-32" />
+          )}
           <div class="absolute w-full bottom-0 z-10 md:pb-32 pt-24 pb-16">
             <div
               class={

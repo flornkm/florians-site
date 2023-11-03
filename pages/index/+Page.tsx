@@ -1,19 +1,12 @@
-import { PageContextCustom } from "../../renderer/types"
 import { useIsVisible } from "#hooks/useIsVisible"
 import { useEffect, useRef } from "preact/hooks"
 import Button, { ButtonWrapper } from "#components/Button"
 import Contact from "#sections/Contact"
-import Letters, { Letter } from "#sections/Letters"
+import Letters from "#sections/Letters"
 import Work from "#sections/Work"
 import { changeTitleColor } from "../../interface/helper/lightOrDarkChanges"
 
-export default function Page({
-  projects,
-  letters,
-}: {
-  projects: any[]
-  letters: Record<string, Letter>
-}) {
+export default function Page({ projects }: { projects: any[] }) {
   const { work, workStroke, workTitle } = {
     work: useRef<HTMLDivElement>(null),
     workStroke: useRef<HTMLDivElement>(null),
@@ -88,7 +81,7 @@ export default function Page({
         <Contact />
       </section>
       <section class="w-full">
-        <Letters letters={letters} />
+        <Letters />
       </section>
     </div>
   )
