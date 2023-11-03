@@ -57,10 +57,6 @@ export default function Page() {
       checked: true,
     },
     {
-      name: "Reach an online audience from over 100,000 people",
-      checked: true,
-    },
-    {
       name: "Live in the USA",
       checked: false,
     },
@@ -79,11 +75,6 @@ export default function Page() {
       name: "Notion",
       icon: "/images/apps/app_notion.jpg",
       link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
-    },
-    {
-      name: "Hinge",
-      icon: "/images/apps/app_hinge.jpg",
-      link: "https://apps.apple.com/us/app/hinge-dating-app-match-date/id595287172",
     },
     {
       name: "Expedia",
@@ -372,14 +363,14 @@ export default function Page() {
             <h3 class="text-lg font-semibold mb-4">Music</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <img
                     src="/images/music-covers/enjoy_silence.jpg"
                     class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
                   />
                   <Button
                     type="secondary"
-                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent"
+                    class="w-full md:group-hover:opacity-100 md:opacity-0 selection:bg-transparent opacity-100"
                     link="https://open.spotify.com/album/13OoJ5Y23cdo8CDAiQwznb"
                   >
                     <p class="mx-auto selection:bg-transparent selection:text-black">
@@ -396,14 +387,14 @@ export default function Page() {
                 </a>
               </div>
               <div>
-                <div class="h-64 pt-20 hover:pt-0 md:px-8 px-4 hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <img
                     src="/images/music-covers/serotonin_moonbeams.jpg"
                     class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
                   />
                   <Button
                     type="secondary"
-                    class="w-full group-hover:opacity-100 opacity-0 selection:bg-transparent"
+                    class="w-full md:group-hover:opacity-100 md:opacity-0 selection:bg-transparent opacity-100"
                     link="https://open.spotify.com/album/1UTc8WInycl4tVgJ1yODaO"
                   >
                     <p class="mx-auto selection:bg-transparent selection:text-black">
