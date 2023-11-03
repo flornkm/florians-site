@@ -323,13 +323,20 @@ function SendLetter(props: {
                   chevron
                   disabled={signature.length === 0}
                   function={async () => {
-                    const newLetter = await push(ref(database, "letters"))
-                    await set(newLetter, {
-                      text: letterInput.current!.value,
-                      signature: signature,
-                      handle: handleInput.current!.value || null,
+                    const sendLetter = await fetch("/api/letters", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        text: letterInput.current!.value,
+                        signature: signature,
+                        handle: handleInput.current!.value,
+                      }),
                     })
-                    props.setShowLetter(true)
+
+                    if (sendLetter.status === 200) props.setShowLetter(true)
+                    else console.error("Could not send letter")
                   }}
                 >
                   Send
