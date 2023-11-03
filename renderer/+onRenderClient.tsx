@@ -5,9 +5,12 @@ import { hydrate, render } from "preact"
 import type { PageContext } from "./types"
 import "../design-system/global.css"
 import PageLayout from "../interface/layouts/PageLayout"
+import { inject } from "@vercel/analytics"
 
 async function onRenderClient(pageContext: PageContext) {
   const { Page, pageProps } = pageContext
+  inject()
+
   const page = (
     <PageLayout pageContext={pageContext}>
       {/* @ts-ignore */}
