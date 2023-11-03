@@ -18,8 +18,7 @@
       "#sections/*": ["./interface/sections/*"],
       "#layouts/*": ["./interface/layouts/*"],
       "#markdown/*": ["./markdown/*"],
-      "#design-system/*": ["./design-system/*"],
-      "#database/*": ["./database/*"]
+      "#design-system/*": ["./design-system/*"]
     }
   },
   "ts-node": {
