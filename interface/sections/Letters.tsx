@@ -276,7 +276,7 @@ function SendLetter(props: {
       className="fixed inset-0 bg-black/25 z-[52] flex justify-center items-center"
       onClick={props.setShowLetter}
     >
-      <div className="w-full md:h-3/5 h-3/4 max-w-6xl md:px-10 px-6">
+      <div className="w-full md:h-3/5 h-auto max-w-6xl md:px-10 px-6">
         <div
           onClick={(e) => {
             e.stopPropagation()
@@ -291,7 +291,7 @@ function SendLetter(props: {
             onClick={props.setShowLetter}
             className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
           />
-          <div className="w-full h-full p-6">
+          <div className="w-full md:h-full h-64 p-6">
             <textarea
               type="text"
               ref={letterInput}
