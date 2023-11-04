@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "preact/hooks"
+import { useRef, useState, useEffect, StateUpdater } from "preact/hooks"
 import SignaturePad from "signature_pad"
 import Close from "~icons/eva/close-outline"
 import Plus from "~icons/eva/plus-outline"
@@ -77,14 +77,19 @@ export default function Letters() {
   }
 
   return (
-    <div class="overflow-hidden" onClick={() => setZoom(-1)}>
-      <h3 class="text-2xl font-semibold text-center mb-8">
+    <div class="overflow-hidden pt-56" onClick={() => setZoom(-1)}>
+      <h3
+        class={
+          "text-2xl font-semibold text-center transition-transform mb-8 " +
+          (zoom !== -1 ? "md:translate-y-0 -translate-y-12" : "")
+        }
+      >
         Letters sent to this site
       </h3>
       <div>
         <div ref={popup} style={{ opacity: "0%", pointerEvents: "none" }}>
           <NoPrerender>
-            <SendLetter setShowLetter={setShowLetter} letters={letters} />
+            <SendLetter setShowLetter={setShowLetter} setLetters={setLetters} />
           </NoPrerender>
         </div>
         <div class="w-full h-[512px] relative flex items-end justify-center group/letter">
@@ -137,7 +142,7 @@ export default function Letters() {
                   )}
                   <img
                     src="/images/letter/stamp.png"
-                    class="pointer-events-none w-20 absolute md:top-8 md:bottom-auto bottom-8 right-8 rotate-6"
+                    class="pointer-events-none w-20 absolute top-8 md:block hidden right-8 rotate-6"
                     alt="Signature Stamp"
                   />
                   <div class="w-full h-80 flex gap-4 md:flex-row flex-col">
@@ -149,7 +154,7 @@ export default function Letters() {
                           : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
                       }
                     >
-                      <p>{letter.text}</p>
+                      <p class="pr-8">{letter.text}</p>
                     </div>
                     <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
                     <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
@@ -163,10 +168,10 @@ export default function Letters() {
                   {letter.handle && (
                     <div
                       class={
-                        "absolute -top-8 transition-opacity pointer-events-none hidden md:flex " +
+                        "absolute -top-8 transition-opacity pointer-events-none flex " +
                         (zoom === letterArray.indexOf(letter)
                           ? "opacity-100"
-                          : "opacity-0 group-hover/singleletter:opacity-100")
+                          : "opacity-0 md:group-hover/singleletter:opacity-100")
                       }
                     >
                       <div class="flex items-center gap-3">
@@ -231,7 +236,7 @@ export default function Letters() {
 
 function SendLetter(props: {
   setShowLetter: any
-  letters: Record<string, Letter>
+  setLetters: StateUpdater<Record<string, Letter>>
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const letterInput = useRef<HTMLTextAreaElement>(null)
@@ -268,10 +273,10 @@ function SendLetter(props: {
 
   return (
     <div
-      className="fixed inset-0 bg-black/25 z-50 flex justify-center items-center"
+      className="fixed inset-0 bg-black/25 z-[52] flex justify-center items-center"
       onClick={props.setShowLetter}
     >
-      <div className="w-full md:h-3/5 h-3/4 max-w-6xl px-10">
+      <div className="w-full md:h-3/5 h-3/4 max-w-6xl md:px-10 px-6">
         <div
           onClick={(e) => {
             e.stopPropagation()
@@ -358,15 +363,19 @@ function SendLetter(props: {
                       }),
                     })
 
-                    if (sendLetter.status === 200) props.setShowLetter(true)
-                    else console.error("Could not send letter")
+                    if (sendLetter.status === 200) {
+                      props.setShowLetter(true)
+                      fetchLetters().then((data) => {
+                        props.setLetters(data)
+                      })
+                    } else console.error("Could not send letter")
                   }}
                 >
                   Send
                 </Button>
               </div>
             </div>
-            <figure className="md:w-24 w-14 absolute top-16 md:top-8 right-8 rotate-6 group">
+            <figure className="md:w-24 w-14 absolute top-16 md:top-8 right-8 rotate-6 group hidden md:block">
               <img
                 src="/images/letter/stamp.png"
                 class="pointer-events-none"

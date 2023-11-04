@@ -46,14 +46,11 @@ export default function Navigation() {
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
         <a href="/#" class="group/all -ml-1">
           <p class="text-lg font-semibold group-hover/all:text-zinc-500 transition-colors relative dark:group-hover/all:text-zinc-400 ">
-            <span class="group/name">
-              <span class="group-hover/name:opacity-0">Florian</span>
-              <span class="group-hover/name:opacity-100 opacity-0 absolute left-0 group">
-                flrnkm
-                <Tooltip position="bottom" class="translate-y-2">
-                  My handle
-                </Tooltip>
-              </span>
+            <span class="group relative">
+              Florian
+              <Tooltip position="bottom" class="translate-y-3">
+                @flrnkm
+              </Tooltip>
             </span>
             <span class="text-sm font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden lg:inline-block dark:group-hover/all:text-zinc-600">
               Design Engineer
