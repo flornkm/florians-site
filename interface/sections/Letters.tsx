@@ -16,7 +16,7 @@ export type Letter = {
   handle: string
 }
 
-async function fetchLetters() {
+const fetchLetters = async () => {
   try {
     const latestLetters = await fetch("/api/letters")
     return await latestLetters.json()

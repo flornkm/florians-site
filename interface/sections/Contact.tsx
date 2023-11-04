@@ -8,6 +8,23 @@ type Message = {
   time: Date
 }
 
+const sendData = async (messages: string[]) => {
+  const data = {
+    name: messages[0],
+    message: messages[1],
+    email: messages[2],
+  }
+
+  const response = await fetch(import.meta.env.VITE_FORMSPREE_URL, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      Accept: "application/json",
+    },
+  })
+  return response
+}
+
 export default function Contact() {
   const chatInput = useRef<HTMLInputElement>(null)
   const [messages, setMessages] = useState([
@@ -154,7 +171,19 @@ export default function Contact() {
               disabled={loading()}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  sendMessage()
+                  if (messages.length === 5) {
+                    sendData([
+                      messages[1].message,
+                      messages[3].message,
+                      chatInput.current!.value,
+                    ]).then((response) => {
+                      if (response.status === 200) sendMessage()
+                      else
+                        displayMessage(
+                          "Something went wrong. :( I couldn't save your message."
+                        )
+                    })
+                  } else sendMessage()
                 }
               }}
               ref={chatInput}
@@ -164,7 +193,19 @@ export default function Contact() {
             />
             <Button
               function={() => {
-                sendMessage()
+                if (messages.length === 5) {
+                  sendData([
+                    messages[1].message,
+                    messages[3].message,
+                    chatInput.current!.value,
+                  ]).then((response) => {
+                    if (response.status === 200) sendMessage()
+                    else
+                      displayMessage(
+                        "Something went wrong. :( I couldn't save your message."
+                      )
+                  })
+                } else sendMessage()
               }}
               rounded
               type="primary"
