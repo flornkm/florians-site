@@ -321,6 +321,9 @@ function SendLetter(props: {
                 onClick={() => {
                   saveSignature()
                 }}
+                onTouchEnd={() => {
+                  saveSignature()
+                }}
                 className={
                   "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800/5 dark:invert " +
                   (!letterWritten ? "pointer-events-none" : "")
