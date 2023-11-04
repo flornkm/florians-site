@@ -17,6 +17,10 @@ export default function Page({ projects }: { projects: any }) {
           results from hackathons. Feel free to look through if you are
           interested.
         </p>
+        <div class="md:hidden text-sm flex items-center gap-1 text-zinc-400 dark:text-zinc-500 mb-6">
+          <Short class="w-4 pt-0.5 transition-colors text-zinc-300 dark:text-zinc-700" />
+          <p>= Short case study</p>
+        </div>
         <div class="py-0.5 pb-16">
           {projects.map((project: any) => {
             const date = new Date(
@@ -34,7 +38,7 @@ export default function Page({ projects }: { projects: any }) {
                       <Short class="w-4 pt-0.5 transition-colors text-zinc-300 lg:hover:text-amber-500 cursor-help dark:text-zinc-700" />
                       <Tooltip
                         position="top"
-                        class="-translate-y-3 hidden lg:block"
+                        class="-translate-y-3 hidden md:block"
                       >
                         Short case study
                       </Tooltip>
