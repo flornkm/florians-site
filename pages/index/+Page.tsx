@@ -77,7 +77,7 @@ export default function Page({ projects }: { projects: any[] }) {
           workTitle={workTitle}
         />
       </section>
-      <section class="w-full mb-56">
+      <section class="w-full">
         <Contact />
       </section>
       <section class="w-full">
