@@ -22,7 +22,7 @@ export default function Navigation() {
       const { x, width } = activeLink.getBoundingClientRect()
 
       // Adjustments for mobile screens
-      const isMobile = typeof window !== "undefined" && window.innerWidth < 786
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 1024
       const mobileWidthFactor = 1.25
 
       setSelectorPosition({
@@ -52,7 +52,7 @@ export default function Navigation() {
                 @flrnkm
               </Tooltip>
             </span>
-            <span class="text-sm font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden lg:inline-block dark:group-hover/all:text-zinc-600">
+            <span class="text-sm font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden md:inline-block dark:group-hover/all:text-zinc-600">
               Design Engineer
             </span>
           </p>
@@ -77,7 +77,7 @@ export default function Navigation() {
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="lg:h-[1px] h-12 lg:-translate-x-0 flex-shrink-0 absolute lg:bottom-[-1px] bg-black opacity-0 rounded-full lg:rounded-none dark:bg-white"
+              class="md:h-[1px] h-12 lg:-translate-x-0 md:-translate-x-8 translate-x-0 flex-shrink-0 absolute md:bottom-[-1px] bg-black opacity-0 rounded-full md:rounded-none dark:bg-white"
             />
           )}
       </div>
@@ -92,7 +92,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
     props.className,
     // @ts-ignore
     pageContext?.urlPathname === props.href
-      ? "lg:text-black text-white relative z-10 before:opacity-0 dark:lg:text-white dark:text-black"
+      ? "md:text-black text-white relative z-10 before:opacity-0 dark:md:text-white dark:text-black"
       : "text-zinc-400 hover:text-black before:opacity-0 dark:hover:text-white",
   ]
     .filter(Boolean)
