@@ -51,6 +51,8 @@ Around 100 people have used the application on the experimental version. I also 
 
 </process-grid>
 
+[![Ambient Chat Demo](/images/ambient-chat/cover-ambient-chat.jpg)](FcL5ehtL1uU)
+
 <project-links>
 
 [Chat (restricted mode)](https://ambient-chat.onrender.com/)
