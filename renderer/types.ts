@@ -22,6 +22,8 @@ export type PageContextCustom = {
   pageProps?: PageProps
   urlPathname: string
   isHydration: boolean
+  languageTag: string
+  urlOriginal: string
   documentProps?: {
     title: string
     slug: string

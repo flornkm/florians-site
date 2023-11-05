@@ -13,7 +13,7 @@
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
     "generate": "node ./build/generateOpengraph.js",
     "--- Not in use, but necessary to include ---": "",
-    "build": "npm run generate && vite build"
+    "build": "paraglide-js compile --project ./project.inlang.json --namespace florians-site && npm run generate && vite build"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
@@ -38,7 +38,8 @@
     "signature_pad": "^4.1.6",
     "typescript": "^5.2.2",
     "vike": "^0.4.142",
-    "vite": "^4.0.3"
+    "vite": "^4.0.3",
+    "@inlang/paraglide-js": "1.0.0-prerelease.5"
   },
   "devDependencies": {
     "@iconify-json/eva": "^1.1.7",
