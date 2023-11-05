@@ -1,4 +1,7 @@
 article {
+
+    margin-bottom: 4rem;
+
     & h1,
     h2,
     h3,
@@ -125,6 +128,36 @@ article {
         left: 50%;
         transform: translateX(-50%);
         padding: 0 4rem;
+    }
+
+    & .video-container {
+        margin-bottom: 4rem;
+        cursor: pointer;
+        position: relative;       
+        aspect-ratio: 16/9; 
+        width: 100%;
+        height: auto;
+    }
+
+    & .video-container::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 8rem;
+        height: 8rem;
+        background-image: url("/images/icons/play-circle.svg");
+        background-size: cover;
+        z-index: 10;
+        border-radius: 50%;
+        opacity: 20%;
+        transition: all ease 0.2s;
+    }
+
+    & .video-container:hover::after {
+        transform: translateX(-50%) translateY(-50%) scale(1.1);
+        opacity: 30%;
     }
 
     @media screen and (max-width: 850px) {
