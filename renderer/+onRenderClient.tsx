@@ -11,7 +11,7 @@ import {
   onSetLanguageTag,
   setLanguageTag,
   sourceLanguageTag,
-} from "@inlang/paraglide-js"
+} from "@inlang/paraglide-js/florians-site"
 import type { LanguageTag } from "@inlang/sdk"
 
 async function onRenderClient(pageContext: PageContext) {
@@ -48,8 +48,6 @@ function ParaglideJsProvider(props: {
   pageContext: any
   children: JSX.Element
 }) {
-  console.log(availableLanguageTags)
-
   setLanguageTag(() => {
     return props.pageContext
       .languageTag as (typeof availableLanguageTags)[number]

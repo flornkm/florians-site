@@ -12,6 +12,8 @@ export default function Navigation() {
 
   const pageContext = usePageContext() as any
 
+  console.log(pageContext.languageTag)
+
   useEffect(() => {
     const activeLink = document.querySelector(
       // @ts-ignore

@@ -3,11 +3,11 @@ import type { PageContext } from "./types.js"
 import {
   sourceLanguageTag,
   availableLanguageTags,
-} from "@inlang/paraglide-js/website"
+} from "@inlang/paraglide-js/florians-site"
 
 export function onBeforeRoute(pageContext: PageContext) {
   const { url: urlWithoutLanguageTag, languageTag } = i18nRouting(
-    pageContext.urlOriginal!
+    pageContext.urlOriginal
   )
 
   return {
