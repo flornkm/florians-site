@@ -4,9 +4,9 @@ import {
   sourceLanguageTag,
   availableLanguageTags,
   languageTag,
-} from "@inlang/paraglide-js/website"
+} from "@inlang/paraglide-js/florians-site"
 
-function onPrerenderStart(prerenderContext: any) {
+async function onPrerenderStart(prerenderContext: any) {
   const pageContexts = []
   for (const pageContext of prerenderContext.pageContexts) {
     // Duplicate pageContext for each locale
@@ -19,7 +19,6 @@ function onPrerenderStart(prerenderContext: any) {
       pageContexts.push({
         ...pageContext,
         urlOriginal,
-        // Set pageContext.locale
         languageTag: languageTag(),
       })
     }

@@ -17,7 +17,8 @@ async function onRenderHtml(pageContext: PageContext) {
   )
 
   // See https://vike.com/head
-  const { documentProps, config } = pageContext
+  const { documentProps, config, languageTag } = pageContext
+
   const title =
     (documentProps && documentProps.title) ||
     (config && config.title) ||
