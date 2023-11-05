@@ -3,7 +3,7 @@ import { Config } from "vike/types"
 // https://vike.com/config
 export default {
   // https://vike.com/passToClient
-  passToClient: ["pageProps", "documentProps"],
+  passToClient: ["pageProps", "documentProps", "languageTag"],
   // https://vike.com/clientRouting
   clientRouting: true,
   hydrationCanBeAborted: true,
