@@ -5,6 +5,7 @@ import Contact from "#sections/Contact"
 import Letters from "#sections/Letters"
 import Work from "#sections/Work"
 import { changeTitleColor } from "../../interface/helper/lightOrDarkChanges"
+import * as m from "@inlang/paraglide-js/florians-site/messages"
 
 export default function Page({ projects }: { projects: any[] }) {
   const { work, workStroke, workTitle } = {
@@ -48,7 +49,7 @@ export default function Page({ projects }: { projects: any[] }) {
               <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300 dark:text-zinc-500 dark:selection:bg-blue-950 dark:selection:text-blue-500">
                 Florian.
               </span>{" "}
-              A designer and developer building digital products.
+              {m.mainheadingdescription()}
             </h1>
             <ButtonWrapper>
               <Button

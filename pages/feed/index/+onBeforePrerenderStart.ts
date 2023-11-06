@@ -1,7 +1,6 @@
 export default onBeforePrerenderStart
 
 import { convertMarkdownToHtml, returnContent } from "#markdown/convert"
-import { PageContextBuiltInServer } from "vike/types"
 import { PostContent, RenderedPosts } from "../types"
 
 const rendered = {} as RenderedPosts
