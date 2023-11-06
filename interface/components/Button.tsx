@@ -1,3 +1,4 @@
+import { getLocale } from "#hooks/getLocale"
 import { JSX } from "preact/jsx-runtime"
 import { navigate } from "vike/client/router"
 import Chevron from "~icons/eva/arrow-ios-forward-outline"
@@ -20,8 +21,8 @@ export default function Button(props: {
       onClick={() => {
         props.link &&
           (props.link.includes("http")
-            ? window.open(props.link)
-            : navigate(props.link))
+            ? window.open(getLocale() + props.link)
+            : navigate(getLocale() + props.link))
         props.function && props.function()
       }}
       class={

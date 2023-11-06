@@ -1,9 +1,5 @@
 import "#design-system/markdown.css"
 
-export const config = {
-  title: "Florian's Project",
-}
-
 export default function Page(props: Record<string, string>) {
   return (
     <>

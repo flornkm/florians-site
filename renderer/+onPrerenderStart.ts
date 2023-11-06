@@ -14,16 +14,18 @@ async function onPrerenderStart(prerenderContext: any) {
       // Localize URL
       let { urlOriginal } = pageContext
       if (locale !== sourceLanguageTag) {
-        urlOriginal = `/${sourceLanguageTag}${pageContext.urlOriginal}`
+        urlOriginal = `/${locale}${pageContext.urlOriginal}`
       }
+
+      console.log(urlOriginal)
       pageContexts.push({
         ...pageContext,
         urlOriginal,
+        // Set pageContext.locale
         languageTag: languageTag(),
       })
     }
   }
-
   return {
     prerenderContext: {
       pageContexts,

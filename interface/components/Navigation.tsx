@@ -2,6 +2,7 @@ import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
 import { useRef, useEffect, useState } from "preact/hooks"
 import Tooltip from "./Tooltip"
+import { getLocale } from "#hooks/getLocale"
 
 export default function Navigation() {
   const [selectorPosition, setSelectorPosition] = useState({
@@ -15,7 +16,7 @@ export default function Navigation() {
   useEffect(() => {
     const activeLink = document.querySelector(
       // @ts-ignore
-      `a[href="${pageContext.urlPathname}"]`
+      `a[href="${pageContext.urlOriginal}"]`
     )
 
     if (activeLink) {
@@ -62,15 +63,17 @@ export default function Navigation() {
         class="flex items-center md:gap-8 gap-2 justify-between md:justify-normal w-full md:w-auto lg:px-0 md:px-1.5 px-0"
         id="nav-links"
       >
-        <NavigationLink href="/">Home</NavigationLink>
-        <NavigationLink href="/about">About</NavigationLink>{" "}
-        <NavigationLink href="/feed">Feed</NavigationLink>
-        <NavigationLink href="/archive">Archive</NavigationLink>
+        <NavigationLink href={getLocale() === "" ? "/" : getLocale()}>
+          Home
+        </NavigationLink>
+        <NavigationLink href={getLocale() + "/about"}>About</NavigationLink>
+        <NavigationLink href={getLocale() + "/feed"}>Feed</NavigationLink>
+        <NavigationLink href={getLocale() + "/archive"}>Archive</NavigationLink>
         {pageContext &&
-          (pageContext?.urlPathname === "/" ||
-            pageContext?.urlPathname === "/about" ||
-            pageContext?.urlPathname === "/archive" ||
-            pageContext?.urlPathname === "/feed") && (
+          (pageContext.urlPathname === "/" ||
+            pageContext.urlPathname === "/about" ||
+            pageContext.urlPathname === "/archive" ||
+            pageContext.urlPathname === "/feed") && (
             <div
               ref={selector}
               style={{
@@ -91,7 +94,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   const className = [
     props.className,
     // @ts-ignore
-    pageContext?.urlPathname === props.href
+    pageContext?.urlPathname === props.href.replace(getLocale(), "")
       ? "md:text-black text-white relative z-10 before:opacity-0 dark:md:text-white dark:text-black"
       : "text-zinc-400 hover:text-black before:opacity-0 dark:hover:text-white",
   ]

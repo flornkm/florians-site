@@ -1,4 +1,31 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"data": []
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "data": [
+    {
+      "id": "mainheadingdescription",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "A designer and developer building digital products."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "设计和开发数字产品的设计师。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

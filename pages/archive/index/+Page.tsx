@@ -3,10 +3,6 @@ import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
 import Short from "~icons/eva/flash-fill"
 
-export const documentProps = {
-  title: "Florian's Archive",
-}
-
 export default function Page({ projects }: { projects: any }) {
   return (
     <div class="w-full">
