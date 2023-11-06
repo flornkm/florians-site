@@ -8,7 +8,7 @@
     "dev:vercel": "vercel dev",
     "start": "npm run build && vite preview",
     "--- For production -------------------------": "",
-    "vercel-build": "npm run generate && vite build",
+    "vercel-build": "paraglide-js compile --project ./project.inlang.json --namespace florians-site && npm run generate && vite build",
     "--- Single commands ------------------------": "",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
     "generate": "node ./build/generateOpengraph.js",
