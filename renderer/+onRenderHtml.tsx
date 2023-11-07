@@ -6,8 +6,16 @@ import { escapeInject, dangerouslySkipEscape } from "vike/server"
 import faviconUrl from "./favicon.svg"
 import type { PageContext } from "./types"
 import PageLayout from "../interface/layouts/PageLayout"
+import {
+  availableLanguageTags,
+  setLanguageTag,
+} from "@inlang/paraglide-js/florians-site"
 
 async function onRenderHtml(pageContext: PageContext) {
+  setLanguageTag(() => {
+    return pageContext.languageTag as (typeof availableLanguageTags)[number]
+  })
+
   const { Page, pageProps } = pageContext
   const pageHtml = renderToString(
     <PageLayout pageContext={pageContext}>
@@ -17,7 +25,7 @@ async function onRenderHtml(pageContext: PageContext) {
   )
 
   // See https://vike.com/head
-  const { documentProps, config, languageTag } = pageContext
+  const { documentProps, config } = pageContext
 
   const title =
     (documentProps && documentProps.title) ||

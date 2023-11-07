@@ -1,7 +1,7 @@
 // https://vike.com/onRenderClient
 export default onRenderClient
 
-import { JSX, hydrate, render } from "preact"
+import { hydrate, render } from "preact"
 import type { PageContext } from "./types"
 import "../design-system/global.css"
 import PageLayout from "../interface/layouts/PageLayout"
