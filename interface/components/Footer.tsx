@@ -1,3 +1,4 @@
+import { getLocale } from "#hooks/getLocale"
 import { usePageContext } from "../../renderer/usePageContext"
 import Heart from "~icons/eva/heart-fill"
 
@@ -20,52 +21,61 @@ export default function Footer() {
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname === "/"
+                  (pageContext.urlPathname.replace(getLocale(), "/") === "/"
                     ? "text-zinc-600 dark:text-zinc-400"
                     : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
-                href="/"
+                href={(getLocale() + "/").endsWith("/") ? getLocale() : "/"}
               >
-                {pageContext.urlPathname === "/" && "/"} Home
+                {pageContext.urlPathname.replace(getLocale(), "/") === "/" &&
+                  "/"}{" "}
+                Home
               </a>
             </li>
             <li>
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname === "/about"
+                  (pageContext.urlPathname.replace(getLocale(), "") === "/about"
                     ? "text-zinc-600 dark:text-zinc-400"
                     : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
-                href="/about"
+                href={getLocale() + "/about"}
               >
-                {pageContext.urlPathname === "/about" && "/"} About
+                {pageContext.urlPathname.replace(getLocale(), "") ===
+                  "/about" && "/"}{" "}
+                About
               </a>
             </li>
             <li>
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname === "/archive"
+                  (pageContext.urlPathname.replace(getLocale(), "") ===
+                  "/archive"
                     ? "text-zinc-600 dark:text-zinc-400"
                     : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
-                href="/archive"
+                href={getLocale() + "/archive"}
               >
-                {pageContext.urlPathname === "/archive" && "/"} Archive
+                {pageContext.urlPathname.replace(getLocale(), "") ===
+                  "/archive" && "/"}{" "}
+                Archive
               </a>
             </li>
             <li>
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname === "/feed"
+                  (pageContext.urlPathname.replace(getLocale(), "") === "/feed"
                     ? "text-zinc-600 dark:text-zinc-400"
                     : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
-                href="/feed"
+                href={getLocale() + "/feed"}
               >
-                {pageContext.urlPathname === "/feed" && "/"} Feed
+                {pageContext.urlPathname.replace(getLocale(), "") === "/feed" &&
+                  "/"}{" "}
+                Feed
               </a>
             </li>
           </ul>
@@ -117,27 +127,31 @@ export default function Footer() {
             <a
               class={
                 "text-zinc-400 transition-colors font-medium " +
-                (pageContext.urlPathname === "/imprint"
+                (pageContext.urlPathname.replace(getLocale(), "") === "/imprint"
                   ? "text-zinc-600 dark:text-zinc-400"
                   : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
               }
-              href="/imprint"
+              href={getLocale() + "/imprint"}
             >
-              {pageContext.urlPathname === "/imprint" && "/"} Imprint
+              {pageContext.urlPathname.replace(getLocale(), "") ===
+                "/imprint" && "/"}{" "}
+              Imprint
             </a>
           </li>
           <li>
             <a
               class={
                 "text-zinc-400 transition-colors font-medium " +
-                (pageContext.urlPathname === "/privacy-policy"
+                (pageContext.urlPathname.replace(getLocale(), "") ===
+                "/privacy-policy"
                   ? "text-zinc-600 dark:text-zinc-400"
                   : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
               }
-              href="/privacy-policy"
+              href={getLocale() + "/privacy-policy"}
             >
-              {pageContext.urlPathname === "/privacy-policy" && "/"} Privacy
-              Policy
+              {pageContext.urlPathname.replace(getLocale(), "") ===
+                "/privacy-policy" && "/"}{" "}
+              Privacy Policy
             </a>
           </li>
         </ul>

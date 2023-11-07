@@ -3,6 +3,10 @@ import { usePageContext } from "../../renderer/usePageContext"
 import { useRef, useEffect, useState } from "preact/hooks"
 import Tooltip from "./Tooltip"
 import { getLocale } from "#hooks/getLocale"
+import {
+  languageTag,
+  sourceLanguageTag,
+} from "@inlang/paraglide-js/florians-site"
 
 export default function Navigation() {
   const [selectorPosition, setSelectorPosition] = useState({
@@ -16,7 +20,15 @@ export default function Navigation() {
   useEffect(() => {
     const activeLink = document.querySelector(
       // @ts-ignore
-      `a[href="${pageContext.urlOriginal}"]`
+      `a[href="${
+        languageTag() === sourceLanguageTag
+          ? getLocale() + pageContext.urlPathname.replace(getLocale(), "")
+          : (
+              getLocale() + pageContext.urlPathname.replace(getLocale(), "")
+            ).endsWith("/")
+          ? getLocale()
+          : getLocale() + pageContext.urlPathname.replace(getLocale(), "")
+      }"]`
     )
 
     if (activeLink) {
@@ -45,7 +57,7 @@ export default function Navigation() {
   return (
     <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
-        <a href="/#" class="group/all -ml-1">
+        <a href={getLocale() + "/#"} class="group/all -ml-1">
           <p class="text-lg font-semibold group-hover/all:text-zinc-500 transition-colors relative dark:group-hover/all:text-zinc-400 ">
             <span class="group relative">
               Florian
@@ -63,17 +75,27 @@ export default function Navigation() {
         class="flex items-center md:gap-8 gap-2 justify-between md:justify-normal w-full md:w-auto lg:px-0 md:px-1.5 px-0"
         id="nav-links"
       >
-        <NavigationLink href={getLocale() === "" ? "/" : getLocale()}>
+        <NavigationLink
+          href={
+            languageTag() === sourceLanguageTag
+              ? "/"
+              : (getLocale() + "/").endsWith("/")
+              ? getLocale()
+              : "/"
+          }
+        >
           Home
         </NavigationLink>
         <NavigationLink href={getLocale() + "/about"}>About</NavigationLink>
         <NavigationLink href={getLocale() + "/feed"}>Feed</NavigationLink>
         <NavigationLink href={getLocale() + "/archive"}>Archive</NavigationLink>
         {pageContext &&
-          (pageContext.urlPathname === "/" ||
-            pageContext.urlPathname === "/about" ||
-            pageContext.urlPathname === "/archive" ||
-            pageContext.urlPathname === "/feed") && (
+          (languageTag() === sourceLanguageTag
+            ? "/"
+            : pageContext?.urlPathname.replace(getLocale(), "/") === "/" ||
+              pageContext.urlPathname.replace(getLocale(), "") === "/about" ||
+              pageContext.urlPathname.replace(getLocale(), "") === "/archive" ||
+              pageContext.urlPathname.replace(getLocale(), "") === "/feed") && (
             <div
               ref={selector}
               style={{
@@ -94,7 +116,12 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   const className = [
     props.className,
     // @ts-ignore
-    pageContext?.urlPathname === props.href.replace(getLocale(), "")
+    (pageContext?.urlPathname.replace(getLocale(), "") === ""
+      ? "/"
+      : pageContext?.urlPathname.replace(getLocale(), "")) ===
+    (props.href.replace(getLocale(), "") === ""
+      ? "/"
+      : props.href.replace(getLocale(), ""))
       ? "md:text-black text-white relative z-10 before:opacity-0 dark:md:text-white dark:text-black"
       : "text-zinc-400 hover:text-black before:opacity-0 dark:hover:text-white",
   ]

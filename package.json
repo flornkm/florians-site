@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "--- For development ------------------------": "",
-    "dev": "vite",
-    "dev:vercel": "vercel dev",
+    "dev": "npm run compile && vite",
+    "dev:vercel": "npm run compile && vercel dev",
     "start": "npm run build && vite preview",
     "--- For production -------------------------": "",
-    "vercel-build": "paraglide-js compile --project ./project.inlang.json --namespace florians-site && npm run generate && vite build",
+    "vercel-build": "npm run compile && npm run generate && vite build",
     "--- Single commands ------------------------": "",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
     "generate": "node ./build/generateOpengraph.js",
+    "compile": "paraglide-js compile --project ./project.inlang.json --namespace florians-site",
     "--- Not in use, but necessary to include ---": "",
-    "build": "paraglide-js compile --project ./project.inlang.json --namespace florians-site && npm run generate && vite build"
+    "build": "npm run compile && npm run generate && vite build"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
