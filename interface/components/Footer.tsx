@@ -1,20 +1,22 @@
 import { getLocale } from "#hooks/getLocale"
 import { usePageContext } from "../../renderer/usePageContext"
 import Heart from "~icons/eva/heart-fill"
+import LanguagePicker from "./LanguagePicker"
 
 export default function Footer() {
   const pageContext = usePageContext() as any
   return (
     <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
-      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
-        <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
+      <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-4 gap-8">
+        <div class="lg:col-span-2 xs:col-span-2 lg:max-w-[170px] max-w-sm">
           <h3 class="font-semibold mb-2">Florian's personal site</h3>
-          <p class="text-zinc-500 dark:text-zinc-400">
+          <p class="text-zinc-500 dark:text-zinc-400 mb-8">
             <Heart class="inline-block text-sm mb-1 transition-colors hover:text-red-500" />{" "}
             building digital products.
           </p>
+          <LanguagePicker position="top" align="left" />
         </div>
-        <div class="xl:place-self-end lg:mr-7">
+        <div class="xl:place-self-end lg:mr-5">
           <h4 class="font-medium mb-3">Pages</h4>
           <ul class="space-y-2 -ml-1">
             <li>
@@ -88,7 +90,7 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/"
               >
-                X (Twitter)
+                x.com
               </a>
             </li>
             <li>

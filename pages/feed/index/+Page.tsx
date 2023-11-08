@@ -1,5 +1,6 @@
 import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
+import * as m from "@inlang/paraglide-js/florians-site/messages"
 
 export default function Page({
   posts,

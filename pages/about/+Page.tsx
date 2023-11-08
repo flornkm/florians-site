@@ -275,8 +275,8 @@ export default function Page() {
           <h3 class="text-lg font-semibold mb-4">Photos</h3>
           <PhotoSlider autoPlay buttons />
         </div>
-        <div class="w-full grid md:grid-cols-3 grid-rows-2 md:grid-rows-1 grid-cols-1 gap-8 mb-32">
-          <div class="w-full h-full col-span-1 md:col-span-2 flex flex-col justify-evenly">
+        <div class="w-full grid md:grid-cols-3 grid-rows-2 md:grid-rows-1 grid-cols-1 mb-32">
+          <div class="w-full h-full col-span-1 md:col-span-2 flex flex-col justify-evenly pr-6">
             <h3 class="text-lg font-semibold mb-8">Apps I like using</h3>
             <div class="flex items-center">
               <div
@@ -335,7 +335,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div class="md:w-full max-w-s md:justify-self-end">
+          <div class="md:w-full max-w-s md:justify-self-end flex-shrink-0">
             <h4 class="text-lg font-semibold mb-4">Bucket List</h4>
             <ul class="space-y-4 list-none">
               {bucketList.map((entry) => (

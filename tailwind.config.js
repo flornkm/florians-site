@@ -15,7 +15,7 @@ export default {
         lx: "1152px",
       },
       maxWidth: {
-        s: "304px",
+        s: "354px",
       },
       colors: {
         "light-zinc": "rgb(252, 252, 252)",
