@@ -62,10 +62,10 @@ export default function Page({ projects }: { projects: any[] }) {
                     })
                 }}
               >
-                Work
+                {m.mainheadingprimarybutton()}
               </Button>
               <Button type="secondary" link="/about">
-                About
+                {m.mainheadingsecondarybutton()}
               </Button>
             </ButtonWrapper>
           </div>

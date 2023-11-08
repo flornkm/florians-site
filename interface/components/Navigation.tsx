@@ -7,6 +7,8 @@ import {
   languageTag,
   sourceLanguageTag,
 } from "@inlang/paraglide-js/florians-site"
+import LanguagePicker from "./LanguagePicker"
+import * as m from "@inlang/paraglide-js/florians-site/messages"
 
 export default function Navigation() {
   const [selectorPosition, setSelectorPosition] = useState({
@@ -66,7 +68,7 @@ export default function Navigation() {
               </Tooltip>
             </span>
             <span class="text-sm font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden md:inline-block dark:group-hover/all:text-zinc-600">
-              Design Engineer
+              {m.nametitle()}
             </span>
           </p>
         </a>
@@ -84,11 +86,17 @@ export default function Navigation() {
               : "/"
           }
         >
-          Home
+          {m.navigationhome()}
         </NavigationLink>
-        <NavigationLink href={getLocale() + "/about"}>About</NavigationLink>
-        <NavigationLink href={getLocale() + "/feed"}>Feed</NavigationLink>
-        <NavigationLink href={getLocale() + "/archive"}>Archive</NavigationLink>
+        <NavigationLink href={getLocale() + "/about"}>
+          {m.navigationabout()}
+        </NavigationLink>
+        <NavigationLink href={getLocale() + "/feed"}>
+          {m.navigationfeed()}
+        </NavigationLink>
+        <NavigationLink href={getLocale() + "/archive"}>
+          {m.navigationarchive()}
+        </NavigationLink>
         {pageContext &&
           (languageTag() === sourceLanguageTag
             ? "/"
@@ -105,6 +113,9 @@ export default function Navigation() {
               class="md:h-[1px] h-12 lg:-translate-x-0 md:-translate-x-8 translate-x-0 flex-shrink-0 absolute md:bottom-[-1px] bg-black opacity-0 rounded-full md:rounded-none dark:bg-white"
             />
           )}
+        <div class="lg:block hidden">
+          <LanguagePicker position="bottom" align="right" />
+        </div>
       </div>
     </div>
   )
