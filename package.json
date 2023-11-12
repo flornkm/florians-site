@@ -12,7 +12,7 @@
     "--- Single commands ------------------------": "",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
     "generate": "node ./build/generateOpengraph.js",
-    "compile": "paraglide-js compile --project ./project.inlang.json --namespace florians-site",
+    "compile": "paraglide-js compile --project ./project.inlang.json --outdir ./lang/paraglide",
     "--- Not in use, but necessary to include ---": "",
     "build": "npm run compile && npm run generate && vite build"
   },
@@ -40,7 +40,7 @@
     "typescript": "^5.2.2",
     "vike": "^0.4.144",
     "vite": "^4.0.3",
-    "@inlang/paraglide-js": "1.0.0-prerelease.5"
+    "@inlang/paraglide-js": "1.0.0-prerelease.9"
   },
   "devDependencies": {
     "@iconify-json/eva": "^1.1.7",

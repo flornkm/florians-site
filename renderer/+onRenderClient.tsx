@@ -11,7 +11,7 @@ import {
   onSetLanguageTag,
   setLanguageTag,
   sourceLanguageTag,
-} from "@inlang/paraglide-js/florians-site"
+} from "#lang/paraglide/runtime"
 import type { LanguageTag } from "@inlang/sdk"
 
 async function onRenderClient(pageContext: PageContext) {

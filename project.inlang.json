@@ -7,10 +7,11 @@
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-identical-pattern@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-without-source@latest/dist/index.js",
-    "https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@latest/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@1/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@latest/dist/index.js"
   ],
   "plugin.inlang.messageFormat": {
-    "filePath": "./.inlang/plugin.inlang.messageFormat/messages.json"
+    "filePath": "./lang/messages.json",
+    "pathPattern": "./lang/messages/{languageTag}.json"
   }
 }

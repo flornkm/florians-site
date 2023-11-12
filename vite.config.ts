@@ -40,6 +40,10 @@ export default defineConfig(() => ({
         find: "#design-system",
         replacement: fileURLToPath(new URL("./design-system", import.meta.url)),
       },
+      {
+        find: "#lang",
+        replacement: fileURLToPath(new URL("./lang", import.meta.url)),
+      },
     ],
   },
   plugins: [

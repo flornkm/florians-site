@@ -5,7 +5,7 @@ import Contact from "#sections/Contact"
 import Letters from "#sections/Letters"
 import Work from "#sections/Work"
 import { changeTitleColor } from "../../interface/helper/lightOrDarkChanges"
-import * as m from "@inlang/paraglide-js/florians-site/messages"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({ projects }: { projects: any[] }) {
   const { work, workStroke, workTitle } = {

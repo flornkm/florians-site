@@ -4,7 +4,7 @@ import {
   sourceLanguageTag,
   availableLanguageTags,
   languageTag,
-} from "@inlang/paraglide-js/florians-site"
+} from "#lang/paraglide/runtime"
 
 async function onPrerenderStart(prerenderContext: any) {
   const pageContexts = []
