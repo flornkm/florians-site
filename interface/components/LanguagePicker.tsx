@@ -1,8 +1,5 @@
 import { useState } from "preact/hooks"
-import {
-  languageTag,
-  sourceLanguageTag,
-} from "@inlang/paraglide-js/florians-site"
+import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import Check from "~icons/eva/checkmark-outline"
 import { navigate } from "vike/client/router"
 import useOuterClick from "#hooks/useOuterClick"
@@ -41,7 +38,7 @@ export default function LanguagePicker(props: {
         onClick={() => (open ? setOpen(false) : setOpen(true))}
         class={
           "text-xl  hover:text-black before:opacity-0 dark:hover:text-white " +
-          (open ? "text-black" : "text-zinc-400")
+          (open ? "text-black dark:text-white" : "text-zinc-400")
         }
       >
         <LanguageIcon />
@@ -49,7 +46,7 @@ export default function LanguagePicker(props: {
       <div
         ref={elementsList}
         class={
-          "absolute z-10 bg-zinc-50 border border-zinc-200 rounded-md flex flex-col transition-all overflow-hidden " +
+          "absolute z-10 bg-zinc-50 border border-zinc-200 rounded-md flex flex-col transition-all overflow-hidden dark:bg-zinc-950 dark:border-zinc-800 " +
           //   (props.position === "top" ? "bottom-8 " : "top-8 ") +
           (props.align === "left" ? "left-0 " : "right-0 ") +
           (open
@@ -63,10 +60,10 @@ export default function LanguagePicker(props: {
           return (
             <a
               class={
-                "px-3 py-1.5 transition-colors hover:bg-zinc-100 flex items-center gap-1.5 justify-end " +
+                "px-3 py-1.5 transition-colors hover:bg-zinc-100 flex items-center gap-1.5 justify-end dark:hover:bg-zinc-900 " +
                 (languages.length - 1 === languages.indexOf(locale)
                   ? ""
-                  : " border-b border-b-zinc-200")
+                  : " border-b border-b-zinc-200 dark:border-b-zinc-800")
               }
               href={locale.link}
               onClick={(e) => {

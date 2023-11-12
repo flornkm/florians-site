@@ -3,12 +3,9 @@ import { usePageContext } from "../../renderer/usePageContext"
 import { useRef, useEffect, useState } from "preact/hooks"
 import Tooltip from "./Tooltip"
 import { getLocale } from "#hooks/getLocale"
-import {
-  languageTag,
-  sourceLanguageTag,
-} from "@inlang/paraglide-js/florians-site"
+import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import LanguagePicker from "./LanguagePicker"
-import * as m from "@inlang/paraglide-js/florians-site/messages"
+import * as m from "#lang/paraglide/messages"
 
 export default function Navigation() {
   const [selectorPosition, setSelectorPosition] = useState({
@@ -113,9 +110,6 @@ export default function Navigation() {
               class="md:h-[1px] h-12 lg:-translate-x-0 md:-translate-x-8 translate-x-0 flex-shrink-0 absolute md:bottom-[-1px] bg-black opacity-0 rounded-full md:rounded-none dark:bg-white"
             />
           )}
-        <div class="lg:block hidden">
-          <LanguagePicker position="bottom" align="right" />
-        </div>
       </div>
     </div>
   )

@@ -1,7 +1,4 @@
-import {
-  languageTag,
-  sourceLanguageTag,
-} from "@inlang/paraglide-js/florians-site"
+import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 
 export const getLocale = () => {
   return languageTag() === sourceLanguageTag ? "" : `/${languageTag()}`

@@ -6,10 +6,7 @@ import { escapeInject, dangerouslySkipEscape } from "vike/server"
 import faviconUrl from "./favicon.svg"
 import type { PageContext } from "./types"
 import PageLayout from "../interface/layouts/PageLayout"
-import {
-  availableLanguageTags,
-  setLanguageTag,
-} from "@inlang/paraglide-js/florians-site"
+import { availableLanguageTags, setLanguageTag } from "#lang/paraglide/runtime"
 
 async function onRenderHtml(pageContext: PageContext) {
   setLanguageTag(() => {
