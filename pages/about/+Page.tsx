@@ -220,9 +220,8 @@ export default function Page() {
       </section>
       <section class="w-full flex flex-col md:flex-row md:gap-12 mb-48">
         <div class="md:w-full md:max-w-[170px]">
-          <h2 class="text-lg font-semibold md:sticky md:top-20 md:mb-0 mb-8 relative group">
+          <h2 class="text-lg font-semibold md:sticky md:top-20 md:mb-0 mb-8">
             {m.about_education_title()}
-            <Experience class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h2>
         </div>
         <div class="py-0.5">
