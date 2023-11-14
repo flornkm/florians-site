@@ -2,6 +2,7 @@ import { getLocale } from "#hooks/getLocale"
 import { usePageContext } from "../../renderer/usePageContext"
 import Heart from "~icons/eva/heart-fill"
 import LanguagePicker from "./LanguagePicker"
+import * as m from "#lang/paraglide/messages"
 
 export default function Footer() {
   const pageContext = usePageContext() as any
@@ -9,15 +10,15 @@ export default function Footer() {
     <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
         <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
-          <h3 class="font-semibold mb-2">Florian's personal site</h3>
+          <h3 class="font-semibold mb-2">Florian's {m.footer_slogan()}</h3>
           <p class="text-zinc-500 dark:text-zinc-400 mb-8">
             <Heart class="inline-block text-sm mb-1 transition-colors hover:text-red-500" />{" "}
-            building digital products.
+            {m.footer_text()}
           </p>
           <LanguagePicker position="top" align="left" />
         </div>
         <div class="xl:place-self-end lg:mr-6">
-          <h4 class="font-medium mb-3">Pages</h4>
+          <h4 class="font-medium mb-3">{m.footer_title_pages()}</h4>
           <ul class="space-y-2 -ml-1">
             <li>
               <a
@@ -31,7 +32,7 @@ export default function Footer() {
               >
                 {pageContext.urlPathname.replace(getLocale(), "/") === "/" &&
                   "/"}{" "}
-                Home
+                {m.footer_page_home()}
               </a>
             </li>
             <li>
@@ -46,7 +47,7 @@ export default function Footer() {
               >
                 {pageContext.urlPathname.replace(getLocale(), "") ===
                   "/about" && "/"}{" "}
-                About
+                {m.footer_page_about()}
               </a>
             </li>
             <li>
@@ -62,7 +63,7 @@ export default function Footer() {
               >
                 {pageContext.urlPathname.replace(getLocale(), "") ===
                   "/archive" && "/"}{" "}
-                Archive
+                {m.footer_page_archive()}
               </a>
             </li>
             <li>
@@ -77,13 +78,13 @@ export default function Footer() {
               >
                 {pageContext.urlPathname.replace(getLocale(), "") === "/feed" &&
                   "/"}{" "}
-                Feed
+                {m.footer_page_feed()}
               </a>
             </li>
           </ul>
         </div>
         <div class="xs:place-self-end">
-          <h4 class="font-medium mb-3">Connect</h4>
+          <h4 class="font-medium mb-3">{m.footer_title_connect()}</h4>
           <ul class="space-y-2">
             <li>
               <a
@@ -98,7 +99,7 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/about"
               >
-                iMessage
+                {m.link_imessage()}
               </a>
             </li>
             <li>
@@ -114,7 +115,7 @@ export default function Footer() {
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                 href="/feed"
               >
-                Email
+                {m.link_email()}
               </a>
             </li>
           </ul>
@@ -137,7 +138,7 @@ export default function Footer() {
             >
               {pageContext.urlPathname.replace(getLocale(), "") ===
                 "/imprint" && "/"}{" "}
-              Imprint
+              {m.footer_page_imprint()}
             </a>
           </li>
           <li>
@@ -153,12 +154,12 @@ export default function Footer() {
             >
               {pageContext.urlPathname.replace(getLocale(), "") ===
                 "/privacy-policy" && "/"}{" "}
-              Privacy Policy
+              {m.footer_page_privacy()}
             </a>
           </li>
         </ul>
         <p class="text-zinc-400 leading-none ml-1 dark:text-zinc-600">
-          Copyright Florian {new Date().getFullYear()}
+          {m.footer_copyright()} {new Date().getFullYear()}
         </p>
       </div>
     </footer>

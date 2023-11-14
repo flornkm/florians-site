@@ -2,6 +2,916 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "data": [
     {
+      "id": "about_apps_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Apps I like using"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我喜欢使用的应用程序"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_boring_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "In case you don't want to read through the boring stuff, I treat the"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "如果你不想读这些无聊的东西，我会把"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_boring_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "following sections as something like a personal library."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "下面的部分就像个人图书馆一样。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_bucket_list_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Bucket List"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "遗愿清单"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_contact_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Contact"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "接触"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_education_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Education"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "教育"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_education_working",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Working as"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "作为"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_comondo_job",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Web Design Lead"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "网页设计主管"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_comondo_slogan",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Leading the company-wide effort to create high quality website designs for clients."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "领导全公司努力为客户创建高质量的网站设计。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_freelancer_job",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Freelancer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "自由职业者"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_freelancer_slogan",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Working as a freelance designer, video editor and motion graphics artist."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "作为一名自由设计师、视频编辑和动态图形艺术家。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_inlang_job",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Design Engineer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "设计工程师"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_inlang_slogan",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Building an ecosystem around globalization and being responsible for its marketplace."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "围绕全球化建立生态系统并对其市场负责。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_tritschlerkiem_job",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Design Engineer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "设计工程师"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_experience_tritschlerkiem_slogan",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Building digital products for other companies, ranging from websites to full-stack applications."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "为其他公司构建从网站到全栈应用程序的数字产品。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_heading",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "A few words to myself"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "对自己说几句话"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_born",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Born on the 11th of January, 2001 in"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "2001年1月11日出生于"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_generation",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "I was part of the first generation getting adults in the age of\n              computers, mobile phones and advanced technology."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我是电脑、手机和先进技术时代第一代成年人的一员。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_later",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "years later, I have learned\n              coding in addition, opening whole new possibilites for people and\n              companies I work with. The job title I love using for this unique\n              field is:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "几年后，我还学习了编码，为我工作的人和公司开启了全新的可能性。我喜欢在这个独特领域使用的职位名称是："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_now",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Now,"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "现在，"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_start",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Quickly I got used to working with computers and in 2013, I began\n              making money on the internet by selling my skills as a"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我很快就习惯了使用计算机，并于 2013 年开始通过在互联网上出售我的技能来赚钱。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_where",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Southern Germany"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "德国南部"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_where_tooltip",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Ravensburg, BW"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "拉芬斯堡 (BW)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_work",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "digital Designer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "数字设计师"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_explainer_text_work_tooltip",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "I also edited videos"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我还编辑过视频"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_music_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Music"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "音乐"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_photos_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Photos"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "相片"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_socials_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Socials"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "社交"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "About Florian"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "关于弗洛里安"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucketlist_city",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Live in a city with > 1 mio. inhabitants"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "居住在人口&gt; 1 mio 的城市。居民"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucketlist_found",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Found own startup"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "找到了自己的创业公司"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucketlist_nyc",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Visit New York City"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "游览纽约市"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucketlist_startup",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Work in a Startup"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "在初创公司工作"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucketlist_travel",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Go to New Zealand & Antarctica"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "前往新西兰和南极洲"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bucketlist_usa",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Live in the USA"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "住在美国"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "button_drink_beer",
       "selectors": [],
       "variants": [
@@ -255,7 +1165,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "出了点问题。:(我无法保存你的消息。"
+              "value": "出了些问题。 :( 我无法保存您的消息。"
             }
           ]
         }
@@ -281,7 +1191,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "明白了。现在我只需要你发一封电子邮件。"
+              "value": "知道了。现在我只需要你的一封电子邮件。"
             }
           ]
         }
@@ -307,7 +1217,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "谢谢，我会尽快联系您！:)"
+              "value": "谢谢，我会尽快与您联系！ :)"
             }
           ]
         }
@@ -323,7 +1233,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "\"Okay! And what I can do for you?\""
+              "value": "Okay! And what I can do for you?"
             }
           ]
         },
@@ -333,7 +1243,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "“好的！我能为您做什么？”"
+              "value": "好的！我能为您做什么？"
             }
           ]
         }
@@ -360,6 +1270,422 @@
             {
               "type": "Text",
               "value": "嘿，你叫什么名字？"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cover_image_source",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Cover image source"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "封面图片来源"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design_engineer",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Design Engineer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "设计工程师"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "email_link",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Email"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "电子邮件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_copyright",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Copyright Florian"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "版权所有弗洛里安"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_link_email",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Email"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "电子邮件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_link_imessage",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "iMessage"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "短信"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_about",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "About"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "关于"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_archive",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Archive"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "档案"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_feed",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Feed"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "喂养"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_home",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Home"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "家"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_imprint",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Imprint"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "印记"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_privacy",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Privacy Policy"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "隐私政策"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_slogan",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "personal site"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "个人网站"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_text",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "building digital products."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "构建数字产品。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_title_connect",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Connect"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "连接"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_title_pages",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Pages"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "页数"
             }
           ]
         }
@@ -411,7 +1737,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "我穿越到罗马帝国了吗？"
+              "value": "我是不是穿越到了罗马帝国？"
             }
           ]
         }
@@ -444,6 +1770,32 @@
       ]
     },
     {
+      "id": "letters_loading",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "💌 Fetching letters from endpoint"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "💌 从端点获取字母"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "letters_title",
       "selectors": [],
       "variants": [
@@ -464,6 +1816,58 @@
             {
               "type": "Text",
               "value": "发送至本网站的信件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "link_email",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Email"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "电子邮件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "link_imessage",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "iMessage"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "短信"
             }
           ]
         }
@@ -609,7 +2013,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "\"Message...\""
+              "value": "Message..."
             }
           ]
         },
@@ -619,7 +2023,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "“信息...”"
+              "value": "信息..."
             }
           ]
         }

@@ -4,6 +4,7 @@ import Experience from "~icons/eva/briefcase-outline"
 import Check from "~icons/eva/checkmark-outline"
 import { PhotoSlider } from "#components/Slider"
 import Button from "#components/Button"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page() {
   const experience = [
@@ -12,60 +13,56 @@ export default function Page() {
       comapanyLink: "https://inlang.com/",
       from: "06 / 2023",
       to: "Now",
-      slogan:
-        "Building an ecosystem around globalization and being responsible for its marketplace.",
-      jobTitle: "Design Engineer",
+      slogan: m.about_experience_inlang_slogan(),
+      jobTitle: m.about_experience_inlang_job(),
     },
     {
       company: "Metahype",
       comapanyLink: "https://meta-hype.com/",
       from: "12 / 2020",
       to: "06 / 2023",
-      slogan:
-        "Building digital products for other companies, ranging from websites to full-stack applications.",
-      jobTitle: "Design Engineer",
+      slogan: m.about_experience_tritschlerkiem_slogan(),
+      jobTitle: m.about_experience_tritschlerkiem_job(),
     },
     {
       company: "Comondo",
       comapanyLink: "https://meta-hype.com/",
       from: "02 / 2020",
       to: "03 / 2021",
-      slogan:
-        "Leading the company-wide effort to create high quality website designs for clients.",
-      jobTitle: "Web Design Lead",
+      slogan: m.about_experience_comondo_slogan(),
+      jobTitle: m.about_experience_comondo_job(),
     },
     {
       from: "08 / 2015",
       to: "02 / 2020",
-      slogan:
-        "Working as a freelance designer, video editor and motion graphics artist.",
-      jobTitle: "Freelancer",
+      slogan: m.about_experience_freelancer_slogan(),
+      jobTitle: m.about_experience_freelancer_job(),
     },
   ]
 
   const bucketList = [
     {
-      name: "Visit New York City",
+      name: m.bucketlist_nyc(),
       checked: true,
     },
     {
-      name: "Work in a Startup",
+      name: m.bucketlist_startup(),
       checked: true,
     },
     {
-      name: "Live in a city with > 1 mio. inhabitants",
+      name: m.bucketlist_city(),
       checked: true,
     },
     {
-      name: "Live in the USA",
+      name: m.bucketlist_usa(),
       checked: false,
     },
     {
-      name: "Go to New Zealand & Antarctica",
+      name: m.bucketlist_travel(),
       checked: false,
     },
     {
-      name: "Found own startup",
+      name: m.bucketlist_found(),
       checked: false,
     },
   ]
@@ -116,7 +113,7 @@ export default function Page() {
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
-        <h1 class="text-3xl font-semibold mb-16 w-full">About Florian</h1>
+        <h1 class="text-3xl font-semibold mb-16 w-full">{m.about_title()}</h1>
         <div class="flex gap-12 lg:flex-row flex-col mb-24">
           <div class="max-w-[170px] w-full flex-shrink-0">
             <img
@@ -125,52 +122,50 @@ export default function Page() {
             />
           </div>
           <div class="flex-grow md:max-w-md">
-            <h1 class="text-xl font-semibold mb-3">A few words to myself</h1>
+            <h1 class="text-xl font-semibold mb-3">
+              {m.about_explainer_heading()}
+            </h1>
             <p class="text-zinc-500 mb-4 dark:text-zinc-400">
-              Born on the 11th of January, 2001 in{" "}
+              {m.about_explainer_text_born()}{" "}
               <InlineInfo>
                 <>
-                  Southern Germany
+                  {m.about_explainer_text_where()}
                   <Tooltip position="top" class="-translate-y-2">
-                    Ravensburg, BW
+                    {m.about_explainer_text_where_tooltip()}
                   </Tooltip>
                 </>
               </InlineInfo>{" "}
-              I was part of the first generation getting adults in the age of
-              computers, mobile phones and advanced technology.
+              {m.about_explainer_text_generation()}
             </p>
             <p class="text-zinc-500 mb-4 dark:text-zinc-400">
-              Quickly I got used to working with computers and in 2013, I began
-              making money on the internet by selling my skills as a
+              {m.about_explainer_text_start()}
               <InlineInfo>
                 <>
-                  digital Designer
+                  {m.about_explainer_text_work()}
                   <Tooltip position="top" class="-translate-y-2">
-                    I also edited videos
+                    {m.about_explainer_text_work_tooltip()}
                   </Tooltip>
                 </>
               </InlineInfo>
               .
             </p>
             <p class="text-zinc-500 mb-4 dark:text-zinc-400">
-              Now, {new Date().getFullYear() - 2013} years later, I have learned
-              coding in addition, opening whole new possibilites for people and
-              companies I work with. The job title I love using for this unique
-              field is:
+              {m.about_explainer_text_now()} {new Date().getFullYear() - 2013}{" "}
+              {m.about_explainer_text_later()}
               <br />
-              <span class="font-medium">Design Engineer</span>.
+              <span class="font-medium">{m.design_engineer()}</span>.
             </p>
           </div>
           <div class="max-w-s w-full flex-shrink-0 lg:ml-auto xs:grid xs:grid-cols-2">
             <div class="self-start mb-10 xs:mb-0">
-              <h2 class="font-medium mb-3">Socials</h2>
+              <h2 class="font-medium mb-3">{m.about_socials_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
-                    X (Twitter)
+                    x.com
                   </a>
                 </li>
                 <li>
@@ -200,14 +195,14 @@ export default function Page() {
               </ul>
             </div>{" "}
             <div class="place-self-end self-start">
-              <h2 class="font-medium mb-3">Contact</h2>
+              <h2 class="font-medium mb-3">{m.about_contact_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
-                    Email
+                    {m.link_email()}
                   </a>
                 </li>
                 <li>
@@ -215,7 +210,7 @@ export default function Page() {
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
                     href="https://x.com/floriandwt/"
                   >
-                    iMessage
+                    {m.link_imessage()}
                   </a>
                 </li>
               </ul>
@@ -226,7 +221,7 @@ export default function Page() {
       <section class="w-full flex flex-col md:flex-row md:gap-12 mb-48">
         <div class="md:w-full md:max-w-[170px]">
           <h2 class="text-lg font-semibold md:sticky md:top-20 md:mb-0 mb-8 relative group">
-            Education
+            {m.about_education_title()}
             <Experience class="absolute pointer-events-none top-1/2 -translate-y-1/2 -left-10 mb-1 p-0.5 rounded-md text-black bg-zinc-200/75 aspect-square h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:flex" />
           </h2>
         </div>
@@ -237,7 +232,8 @@ export default function Page() {
                 <div>
                   <div class="flex gap-2 mb-1 items-center">
                     <p>
-                      Working as {item.jobTitle} {item.company && "at"}{" "}
+                      {m.about_education_working()} {item.jobTitle}{" "}
+                      {item.company && "at"}{" "}
                       <a
                         class="text-black hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-white dark:hover:text-zinc-200"
                         href={item.comapanyLink}
@@ -267,17 +263,17 @@ export default function Page() {
       </section>
       <section class="w-full mb-32">
         <h2 class="text-xl font-medium mb-32 text-zinc-400 dark:text-zinc-500">
-          In case you don't want to read through the boring stuff, I treat the
+          {m.about_boring_first()}
           <br class="hidden md:block" />
-          following sections as something like a personal library.
+          {m.about_boring_second()}
         </h2>
         <div class="mb-32 flex flex-col items-start">
-          <h3 class="text-lg font-semibold mb-4">Photos</h3>
+          <h3 class="text-lg font-semibold mb-4">{m.about_photos_title()}</h3>
           <PhotoSlider autoPlay buttons />
         </div>
         <div class="w-full grid md:grid-cols-3 grid-rows-2 md:grid-rows-1 grid-cols-1 mb-32">
           <div class="w-full h-full col-span-1 md:col-span-2 flex flex-col justify-evenly pr-6">
-            <h3 class="text-lg font-semibold mb-8">Apps I like using</h3>
+            <h3 class="text-lg font-semibold mb-8">{m.about_apps_title()}</h3>
             <div class="flex items-center">
               <div
                 x-data="{}"
@@ -336,7 +332,9 @@ export default function Page() {
             </div>
           </div>
           <div class="md:w-full max-w-s md:justify-self-end flex-shrink-0">
-            <h4 class="text-lg font-semibold mb-4">Bucket List</h4>
+            <h4 class="text-lg font-semibold mb-4">
+              {m.about_bucket_list_title()}
+            </h4>
             <ul class="space-y-4 list-none">
               {bucketList.map((entry) => (
                 <li
@@ -360,7 +358,7 @@ export default function Page() {
         </div>
         <div class="grid md:grid-cols-2 gap-8">
           <div class="mb-20 flex flex-col items-start">
-            <h3 class="text-lg font-semibold mb-4">Music</h3>
+            <h3 class="text-lg font-semibold mb-4">{m.about_music_title()}</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
                 <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
@@ -383,7 +381,7 @@ export default function Page() {
                   target="_blank"
                   class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
                 >
-                  Cover image source
+                  {m.cover_image_source()}
                 </a>
               </div>
               <div>
@@ -407,7 +405,7 @@ export default function Page() {
                   target="_blank"
                   class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
                 >
-                  Cover image source
+                  {m.cover_image_source()}
                 </a>
               </div>
             </div>
@@ -433,7 +431,7 @@ export default function Page() {
                   target="_blank"
                   class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
                 >
-                  Cover image source
+                  {m.cover_image_source()}
                 </a>
               </div>
               <div>
@@ -454,7 +452,7 @@ export default function Page() {
                   target="_blank"
                   class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors"
                 >
-                  Cover image source
+                  {m.cover_image_source()}
                 </a>
               </div>
             </div>
