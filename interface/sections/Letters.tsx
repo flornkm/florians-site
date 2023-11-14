@@ -8,6 +8,7 @@ import NoPrerender from "../components/NoPrerender"
 import Button from "../components/Button"
 import Tooltip from "../components/Tooltip"
 import LoadingSpinner from "#components/LoadingSpinner"
+import * as m from "#lang/paraglide/messages"
 
 export type Letter = {
   id: string
@@ -84,7 +85,7 @@ export default function Letters() {
           (zoom !== -1 ? "md:translate-y-0 -translate-y-12" : "")
         }
       >
-        Letters sent to this site
+        {m.letters_title()}
       </h3>
       <div>
         <div ref={popup} style={{ opacity: "0%", pointerEvents: "none" }}>
@@ -201,7 +202,7 @@ export default function Letters() {
             >
               {disableButton && (
                 <Tooltip position="top" class="-translate-y-3.5">
-                  Letter already sent
+                  {m.tooltip_letter_send()}
                 </Tooltip>
               )}
               <Button
@@ -222,7 +223,7 @@ export default function Letters() {
               >
                 <>
                   <Plus class="mr-1" />
-                  Write a letter
+                  {m.button_write_letter()}
                 </>
               </Button>
             </div>
@@ -332,7 +333,7 @@ function SendLetter(props: {
               <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
               <div class="flex md:justify-between md:items-end gap-8 flex-col md:flex-row items-start">
                 <div class="flex items-start flex-col justify-between w-full">
-                  <p class="flex-shrink-0 mt-2.5">Signature</p>
+                  <p class="flex-shrink-0 mt-2.5">{m.letter_signature()}</p>
                   <div class="flex items-center gap-0.5 mt-8 w-full">
                     <p class="text-black pb-0.5 flex-shrink-0 dark:text-white">
                       @
@@ -344,9 +345,7 @@ function SendLetter(props: {
                       class="placeholder:text-zinc-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300 dark:text-white dark:bg-zinc-900 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
                     />
                   </div>
-                  <p class="flex-shrink-0 mt-2">
-                    Social Media Handle (Optional)
-                  </p>
+                  <p class="flex-shrink-0 mt-2">{m.letter_handle()}</p>
                 </div>
                 <Button
                   type="primary"
@@ -374,7 +373,7 @@ function SendLetter(props: {
                     } else console.error("Could not send letter")
                   }}
                 >
-                  Send
+                  {m.button_send()}
                 </Button>
               </div>
             </div>
@@ -385,7 +384,7 @@ function SendLetter(props: {
                 alt="Signature Stamp"
               />
               <figcaption class="text-[10px] text-zinc-400 mt-1.5 break-all opacity-0 transition-opacity group-hover:opacity-100">
-                Did I timetravel to the roman empire?
+                {m.letter_roman_empire()}
               </figcaption>
             </figure>
           </div>

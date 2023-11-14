@@ -65,7 +65,7 @@ export default function Navigation() {
               </Tooltip>
             </span>
             <span class="text-sm font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden md:inline-block dark:group-hover/all:text-zinc-600">
-              {m.nametitle()}
+              {m.name_title()}
             </span>
           </p>
         </a>
@@ -83,16 +83,16 @@ export default function Navigation() {
               : "/"
           }
         >
-          {m.navigationhome()}
+          {m.navigation_home()}
         </NavigationLink>
         <NavigationLink href={getLocale() + "/about"}>
-          {m.navigationabout()}
+          {m.navigation_about()}
         </NavigationLink>
         <NavigationLink href={getLocale() + "/feed"}>
-          {m.navigationfeed()}
+          {m.navigation_feed()}
         </NavigationLink>
         <NavigationLink href={getLocale() + "/archive"}>
-          {m.navigationarchive()}
+          {m.navigation_archive()}
         </NavigationLink>
         {pageContext &&
           (languageTag() === sourceLanguageTag

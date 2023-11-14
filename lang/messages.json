@@ -2,7 +2,7 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "data": [
     {
-      "id": "feed",
+      "id": "button_drink_beer",
       "selectors": [],
       "variants": [
         {
@@ -11,14 +11,466 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Feed"
+              "value": "Let's drink a beer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我们喝杯啤酒吧"
             }
           ]
         }
       ]
     },
     {
-      "id": "mainheadingdescription",
+      "id": "button_email",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Email"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "电子邮件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_freelance_work",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Freelance work"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "自由职业"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_got_question",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Got a question"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "有一个问题"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_imessage",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "iMessage"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "短信"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_job_opportunity",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Job opportunity"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "工作机会"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_readmore",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Read more"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "阅读更多"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_send",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Send"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "发送"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_write_letter",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Write a letter"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "写一封信"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat_message_error",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Something went wrong. :( I couldn't save your message."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "出了点问题。:(我无法保存你的消息。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat_message_got_it",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Got it. Now I just need an email from you."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "明白了。现在我只需要你发一封电子邮件。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat_message_reach_out_soon",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Thanks, I will reach out to you soon! :)"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "谢谢，我会尽快联系您！:)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat_message_what_can_do",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "\"Okay! And what I can do for you?\""
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "“好的！我能为您做什么？”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat_message_what_name",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Hey, what is your name?"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "嘿，你叫什么名字？"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "letter_handle",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Social Media Handle (Optional)"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "社交媒体句柄（可选）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "letter_roman_empire",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Did I timetravel to the roman empire?"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我穿越到罗马帝国了吗？"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "letter_signature",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Signature"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "签名"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "letters_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Letters sent to this site"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "发送至本网站的信件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "main_header_description",
       "selectors": [],
       "variants": [
         {
@@ -44,7 +496,7 @@
       ]
     },
     {
-      "id": "mainheadingprimarybutton",
+      "id": "main_header_primarybutton",
       "selectors": [],
       "variants": [
         {
@@ -70,7 +522,7 @@
       ]
     },
     {
-      "id": "mainheadingsecondarybutton",
+      "id": "main_header_secondarybutton",
       "selectors": [],
       "variants": [
         {
@@ -96,7 +548,111 @@
       ]
     },
     {
-      "id": "nametitle",
+      "id": "message_contact_via",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Contact via"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "联系方式"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "message_often_used",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Often used answers:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "经常使用的答案："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "message_placeholder",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "\"Message...\""
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "“信息...”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "message_to",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "To:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "到："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "name_title",
       "selectors": [],
       "variants": [
         {
@@ -122,7 +678,7 @@
       ]
     },
     {
-      "id": "navigationabout",
+      "id": "navigation_about",
       "selectors": [],
       "variants": [
         {
@@ -148,7 +704,7 @@
       ]
     },
     {
-      "id": "navigationarchive",
+      "id": "navigation_archive",
       "selectors": [],
       "variants": [
         {
@@ -174,7 +730,7 @@
       ]
     },
     {
-      "id": "navigationfeed",
+      "id": "navigation_feed",
       "selectors": [],
       "variants": [
         {
@@ -200,7 +756,7 @@
       ]
     },
     {
-      "id": "navigationhome",
+      "id": "navigation_home",
       "selectors": [],
       "variants": [
         {
@@ -226,7 +782,7 @@
       ]
     },
     {
-      "id": "test",
+      "id": "time_at",
       "selectors": [],
       "variants": [
         {
@@ -235,7 +791,95 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Feed"
+              "value": "at"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "在"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tooltip_letter_send",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Letter already sent"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "信已寄出"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work_description",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Things I have worked on in my career. Includes all employment,\n            freelance and study work."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我在职业生涯中做过的事情。包括所有就业、自由职业和学习工作。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Selected work"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "部分作品"
             }
           ]
         }

@@ -2,6 +2,7 @@ import Button from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
 import { Ref } from "preact"
+import * as m from "#lang/paraglide/messages"
 
 export default function Work(props: {
   projects: Record<string, string>[]
@@ -17,7 +18,7 @@ export default function Work(props: {
               class="text-3xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700 dark:text-zinc-700"
               ref={props.workTitle}
             >
-              Selected work
+              {m.work_title()}
             </h2>
             <div class="w-full relative flex items-center">
               <div class="h-[1px] bg-zinc-100 absolute w-full dark:bg-zinc-900" />
@@ -29,8 +30,7 @@ export default function Work(props: {
             </div>
           </div>
           <p class="mb-20 text-zinc-500 text-lg dark:text-zinc-400">
-            Things I have worked on in my career. Includes all employment,
-            freelance and study work.
+            {m.work_description()}
           </p>
         </>
       )}
@@ -75,7 +75,7 @@ export default function Work(props: {
                       class="relative"
                       chevron
                     >
-                      Read more
+                      {m.button_readmore()}
                     </Button>
                   </div>
                   <p class="mb-6 text-zinc-500 dark:text-zinc-400">
