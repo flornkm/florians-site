@@ -6,3 +6,4 @@ dist
 .env.*
 .vercel
 .env*.local
+vite.config.ts.timestamp*

@@ -49,7 +49,7 @@ export default function Page({ projects }: { projects: any[] }) {
               <span class="group-hover:underline text-zinc-400 underline-offset-4 selection:bg-blue-50 selection:text-blue-300 dark:text-zinc-500 dark:selection:bg-blue-950 dark:selection:text-blue-500">
                 Florian.
               </span>{" "}
-              {m.mainheadingdescription()}
+              {m.main_header_description()}
             </h1>
             <ButtonWrapper>
               <Button
@@ -62,10 +62,10 @@ export default function Page({ projects }: { projects: any[] }) {
                     })
                 }}
               >
-                {m.mainheadingprimarybutton()}
+                {m.main_header_primarybutton()}
               </Button>
               <Button type="secondary" link="/about">
-                {m.mainheadingsecondarybutton()}
+                {m.main_header_secondarybutton()}
               </Button>
             </ButtonWrapper>
           </div>

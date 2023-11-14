@@ -1,6 +1,7 @@
 import Send from "~icons/eva/arrow-circle-up-fill"
 import Button from "../components/Button"
 import { useRef, useState } from "preact/hooks"
+import * as m from "#lang/paraglide/messages"
 
 type Message = {
   message: string
@@ -29,7 +30,7 @@ export default function Contact() {
   const chatInput = useRef<HTMLInputElement>(null)
   const [messages, setMessages] = useState([
     {
-      message: `Hey, what is your name?`,
+      message: m.chat_message_what_name(),
       position: "left",
       time: new Date(),
     },
@@ -69,11 +70,11 @@ export default function Contact() {
   const sendMessage = () => {
     if (chatInput.current && chatInput.current!.value !== "") {
       if (messages.length === 1) {
-        displayMessage("Okay! And what I can do for you?")
+        displayMessage(m.chat_message_what_can_do())
       } else if (messages.length === 3) {
-        displayMessage("Got it. Now I just need an email from you.")
+        displayMessage(m.chat_message_got_it())
       } else if (messages.length === 5) {
-        displayMessage("Thanks, I will reach out to you soon! :)")
+        displayMessage(m.chat_message_reach_out_soon())
       }
     }
   }
@@ -88,25 +89,30 @@ export default function Contact() {
       <div class="w-full py-4 flex md:flex-row flex-col-reverse justify-between gap-6 md:gap-8">
         <div class="flex items-center gap-3">
           <p class="font-medium text-lg">
-            <span class="text-zinc-400 dark:text-zinc-500">To: </span>Florian
+            <span class="text-zinc-400 dark:text-zinc-500">
+              {m.message_to()}{" "}
+            </span>
+            Florian
           </p>
           <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </div>
         <div class="flex xs:items-center gap-2 xs:gap-6 xs:flex-row flex-col md:justify-between lg:w-full lg:max-w-s">
-          <p class="text-zinc-400 dark:text-zinc-500">Contact via</p>
+          <p class="text-zinc-400 dark:text-zinc-500">
+            {m.message_contact_via()}
+          </p>
           <Button
             type="text"
             class="flex items-end gap-1"
             link="https://google.com/"
           >
-            Email
+            {m.button_email()}
           </Button>
           <Button
             type="text"
             class="flex items-end gap-1"
             link="https://google.com/"
           >
-            iMessage
+            {m.button_imessage()}
           </Button>
         </div>
       </div>
@@ -119,7 +125,7 @@ export default function Contact() {
           ))}
           {messages.length === 3 && (
             <div class="absolute bottom-4 md:gap-4 gap-2 items-center flex-wrap hidden xs:flex md:pr-8 pr-4">
-              <p>Often used answers:</p>
+              <p>{m.message_often_used()}</p>
               <Button
                 function={() => {
                   chatInput.current!.value = "I have some freelance work."
@@ -128,7 +134,7 @@ export default function Contact() {
                 small
                 type="secondary"
               >
-                Freelance work
+                {m.button_freelance_work()}
               </Button>
               <Button
                 function={() => {
@@ -138,7 +144,7 @@ export default function Contact() {
                 small
                 type="secondary"
               >
-                Job opportunity
+                {m.button_job_opportunity()}
               </Button>
               <Button
                 function={() => {
@@ -149,7 +155,7 @@ export default function Contact() {
                 small
                 type="secondary"
               >
-                Got a question
+                {m.button_got_question()}
               </Button>
               <Button
                 function={() => {
@@ -160,7 +166,7 @@ export default function Contact() {
                 small
                 type="secondary"
               >
-                Let's drink a beer
+                {m.button_drink_beer()}
               </Button>
             </div>
           )}
@@ -178,17 +184,14 @@ export default function Contact() {
                       chatInput.current!.value,
                     ]).then((response) => {
                       if (response.status === 200) sendMessage()
-                      else
-                        displayMessage(
-                          "Something went wrong. :( I couldn't save your message."
-                        )
+                      else displayMessage(m.chat_message_error())
                     })
                   } else sendMessage()
                 }
               }}
               ref={chatInput}
               type="text"
-              placeholder="Message..."
+              placeholder={m.message_placeholder()}
               class="w-full placeholder:text-zinc-400 disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800 dark:placeholder:text-zinc-500 dark:focus:border-zinc-700 dark:focus:outline-none"
             />
             <Button
@@ -200,10 +203,7 @@ export default function Contact() {
                     chatInput.current!.value,
                   ]).then((response) => {
                     if (response.status === 200) sendMessage()
-                    else
-                      displayMessage(
-                        "Something went wrong. :( I couldn't save your message."
-                      )
+                    else displayMessage(m.chat_message_error())
                   })
                 } else sendMessage()
               }}
@@ -216,7 +216,7 @@ export default function Contact() {
             >
               <>
                 <p class="absolute hidden md:block transition-all opacity-0 md:group-hover/button:block group-hover/button:opacity-100 -left-[100%] group-hover/button:left-4 duration-200">
-                  Send
+                  {m.button_send()}
                 </p>
                 <Send class="w-5 h-5" />
               </>
@@ -260,7 +260,7 @@ function ChatBubble(props: {
           (props.position === "left" ? "ml-2" : "mr-2")
         }
       >
-        {props.position === "left" ? "Florian" : "You"} at {time}
+        {props.position === "left" ? "Florian" : "You"} {m.time_at()} {time}
       </p>
     </div>
   )
