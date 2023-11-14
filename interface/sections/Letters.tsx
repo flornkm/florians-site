@@ -189,7 +189,7 @@ export default function Letters() {
             })
           ) : (
             <LoadingSpinner
-              message="💌 Fetching letters from endpoint"
+              message={m.letters_loading()}
               class="-translate-y-32"
             />
           )}
