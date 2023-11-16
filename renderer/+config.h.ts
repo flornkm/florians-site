@@ -21,5 +21,8 @@ export default {
     noindex: {
       env: "server-and-client",
     },
+    fullpage: {
+      env: "server-and-client",
+    },
   },
 } satisfies Config

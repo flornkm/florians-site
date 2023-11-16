@@ -37,6 +37,7 @@ export type PageContextCustom = {
     description?: string
     image?: string
     noindex?: boolean
+    fullpage?: boolean
   }
   exports: {
     documentProps?: {
