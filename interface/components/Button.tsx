@@ -53,5 +53,5 @@ export default function Button(props: {
 export function ButtonWrapper(props: {
   children: JSX.ElementChildrenAttribute | JSX.Element[]
 }) {
-  return <div class="flex gap-4">{props.children}</div>
+  return <div class="flex gap-4 flex-wrap">{props.children}</div>
 }
