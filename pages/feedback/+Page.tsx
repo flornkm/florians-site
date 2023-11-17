@@ -28,17 +28,21 @@ export default function Page() {
           <h2 class="text-xl font-semibold mb-2">
             2. Go to my new personal site
           </h2>
-          <p class="mb-10 text-zinc-500 dark:text-zinc-400">
+          <p class="mb-6 text-zinc-500 dark:text-zinc-400">
             Please make sure you're on the correct subdomain
             preview.floriankiem.com
           </p>
-          <Button type="primary" link="https://preview.floriankiem.com/">
+          <Button
+            chevron
+            type="primary"
+            link="https://preview.floriankiem.com/"
+          >
             Visit site
           </Button>
         </div>
         <div class="my-16 mb-32">
           <h2 class="text-xl font-semibold mb-2">3. Give me feedback</h2>
-          <p class="mb-10 text-zinc-500 dark:text-zinc-400">
+          <p class="mb-6 text-zinc-500 dark:text-zinc-400">
             As said in the video, giving me feedback on x.com / twitter or
             GitHub makes things much easier as I can collect every response on
             one or max. 2 platforms.
@@ -55,7 +59,9 @@ export default function Page() {
             </Button>
           </ButtonWrapper>
         </div>
-        <p class="text-center mb-8 text-gray-400">Thanks! ♥️</p>
+        <p class="text-center mb-8 text-gray-400 dark:text-gray-700">
+          Thanks! ♥️
+        </p>
         <img
           src="https://user-images.githubusercontent.com/92092993/282730965-b5a49150-459d-4eb5-a1e6-a0e9850c02b0.png"
           class="mx-auto w-24 opacity-40"
