@@ -65,13 +65,13 @@ The general challenge for inlang and the whole team was the need to build someth
 
 #### Division of labor
 
-**Obviously, we didn't wanted to work in chaos. That's why we have split up and I mainly worked on inlang.com's apps including `inlang/marketplace`, `inlang/markdown`, `inlang/install`, and `inlang/markdown`.**
+**Obviously, we didn't wanted to work in chaos. That's why we have split up and I mainly worked on inlang.com's apps including inlang/marketplace, inlang/markdown, inlang/install, and inlang/markdown.**
 
 #### Marketplace & Markdown
 
 In the beginning, inlang's marketplace was just a subpage of inlang.com. After a team-wide decision in September 2023, we chose to make inlang.com a marketplace, because our product is too unique to be definable in a landing page. Additionally, having a marketplace would make things much easier in terms of scaling. The landingpage we showed before on one page, now got externalized to own products which would have their own chance for showcasing them as products on inlang.com.
 
-Example for a inlang.com manifest (imagine it like a `package.json`):
+Example for a inlang.com manifest (imagine it like a package.json):
 
 ```json
 {
@@ -107,22 +107,22 @@ As stated above, in addition to introducing product manifests, I also had to fin
 
 #### Search
 
-When transforming the inlang.com into one marketplace of products, we had to find another solution for searching for products. The search was just consisting of conditional logic, basically written in pure JavaScript to filter out items from a `json`-array.
+When transforming the inlang.com into one marketplace of products, we had to find another solution for searching for products. The search was just consisting of conditional logic, basically written in pure JavaScript to filter out items from a json-array.
 
 I've tested and combined the most popular search engines, Algolia, typesense, and much more. In the end, I was left with two candidates: Algolia and Orama. Algolia is not open-source, but really good and really easy to maintain while Orama has a self-host option for NodeJS and is more like an indie-project, which I really liked. Because Algolia had a few more benefits and was maintained by a big team, we decided to go with Algolia to power our search.
 
 #### Install
 
-When you are using products from inlang, you have to set up a project. Usually, you have a project file that contains all the information about the products you are using, such as plugins and lint rules. Installing them manually would cost a bit of time, as you have to copy the `jsdeliver` link of the product into your project file.
+When you are using products from inlang, you have to set up a project. Usually, you have a project file that contains all the information about the products you are using, such as plugins and lint rules. Installing them manually would cost a bit of time, as you have to copy the jsdeliver link of the product into your project file.
 
-To make the lives of our users easier, I implemented `inlang.com/install` which provides an automatic setup for users and commits directly into the repository of the user.
+To make the lives of our users easier, I implemented inlang.com/install which provides an automatic setup for users and commits directly into the repository of the user.
 
 </div>
 
 ### Result
 
-Generally, inlang's repository has over `7,000 commits`, reached over 750 stars, and almost has 50 contributors (mid-November '23).
-In the time I've been working at inlang, I've made over `500 commits`, have learned an insane amount of coding skills and how to properly use typescript in such projects, and got a lot of technical insights into how you are building infrastructure in the 2020s.
+Generally, inlang's repository has over 7,000 commits, reached over 750 stars, and almost has 50 contributors (mid-November '23).
+In the time I've been working at inlang, I've made over 500 commits, have learned an insane amount of coding skills and how to properly use typescript in such projects, and got a lot of technical insights into how you are building infrastructure in the 2020s.
 
 </process-grid>
 
