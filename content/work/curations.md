@@ -1,8 +1,8 @@
 ---
 title: Curations
-description: A curated collection of the best products on the web
+description: A curated collection of the best products on the web.
 icon: /images/curations/curations-icon.svg
-cover: /images/curations/curations.jpg
+cover: /images/curations/cover-curations.jpg
 date: 04 / 2023
 ---
 
@@ -11,7 +11,7 @@ date: 04 / 2023
 
 # Curations
 
-A curated collection of the best products on the web
+A curated collection of the best products on the web.
 
 </div>
 
@@ -25,7 +25,7 @@ A curated collection of the best products on the web
 </collaborators>
 </info-grid>
 
-![Curations](/images/curations/curations.jpg)
+![Curations](/images/curations/cover-curations.jpg)
 
 In university, my team recognized the value of tools in our daily lives and decided to create a collection of them. We started with a Notion database-page, but wanted to share it more widely. Using the Notion API, we developed a website where users can view our curated collection and submit their own discoveries. Our curators meticulously select each tool, guaranteeing the best recommendations. Our platform has helped countless individuals find new and innovative tools and gain inspiration.
 
@@ -79,5 +79,5 @@ Curations had a successfull launch on ProductHunt, reaching nearly 10,000 users 
 
 [Curations](https://www.curations.tech/)
 [Product Hunt](https://www.producthunt.com/products/curations)
-[GitHub Repo](https://github.com/floriandwt/Curations)
+[GitHub Repo](https://github.com/flornkm/Curations)
 </project-links>

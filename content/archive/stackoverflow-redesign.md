@@ -1,6 +1,6 @@
 ---
 title: Stack Overflow Redesign
-description: Redesign & VS Code Extension
+description: Redesign & VS Code Extension.
 cover: /images/stackoverflow/cover-stackoverflow.jpg
 date: 05 / 2022
 ---
@@ -23,7 +23,7 @@ Redesign & VS Code Extension
 </collaborators>
 </info-grid>
 
-![Stack Overflow Redesign](/images/stackoverflow/cover-stackoverflow.jpg)
+[![Stack Overflow Redesign](/images/stackoverflow/cover-stackoverflow.jpg)](P_-sKaBoek0)
 
 At the core of our project is a redesign of the Stack Overflow website...
 

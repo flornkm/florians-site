@@ -1,6 +1,6 @@
 ---
 title: Granny AI
-description: AI Chatbot for Shopping made in 48h
+description: AI Chatbot for Shopping made in 48h.
 cover: /images/granny-ai/cover-granny-ai.jpg
 date: 05 / 2023
 ---
@@ -23,7 +23,7 @@ AI Chatbot for Shopping made in 48h
 </collaborators>
 </info-grid>
 
-![Granny AI Website](/images/granny-ai/cover-granny-ai.jpg)
+[![Granny AI Demo](/images/granny-ai/cover-granny-ai.jpg)](HgsiSR1c7sk)
 
 Grandmas often have the best advice. Granny AI is a really quick developed AI bot that helps you with your decisions...
 

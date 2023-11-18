@@ -28,7 +28,7 @@ article {
         & info-grid {
             justify-content: space-between;
             flex-direction: row;
-            gap: 2rem;
+            gap: 8rem;
         }
     }
 
@@ -45,12 +45,16 @@ article {
 
     & info-grid {
         display: flex;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
 
     & p {
         color: #52525b;
         margin-bottom: 4rem;
+    }
+
+    & process-grid > div > p {
+        margin-bottom: 2rem;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -92,8 +96,13 @@ article {
         }
     }
 
+    & collaborators>h4 {
+        margin-bottom: 1rem;
+    }
+
     & collaborators>ul>li {
         margin-bottom: 12px;
+        display: flex;
     }
 
     & collaborators>ul>li>a {
@@ -286,6 +295,14 @@ article {
         border-radius: 1rem;
     }
 
+    & code {
+        font-size: 0.9rem;
+        padding: 0.1rem 0.2rem;
+        color: black;
+        background-color: #f4f4f5;
+        border-radius: 0.25rem;
+    }
+
     @media (prefers-color-scheme: dark) {
         & project-links a {
             border: 1px solid #27272a;
@@ -310,6 +327,23 @@ article {
             border-color: #a1a1aa;
             border-radius: 1rem;
         }
+
+        & code {
+            color: white;
+            background-color: #27272a;
+        }
+    }
+
+    & pre {
+        margin-bottom: 4rem;
+        width: 100%;
+        border-radius: 1rem;
+    }
+
+    & pre > code {
+        margin-bottom: 4rem;
+        max-width: 90vw;
+        overflow: hidden;
     }
 }
 

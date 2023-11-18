@@ -1,6 +1,6 @@
 ---
 title: Heartbeat OS
-description: Heart Simulator & Monitoring
+description: Heart Simulator & Monitoring.
 cover: /images/heartbeat/cover-heartbeat.jpg
 date: 05 / 2023
 ---

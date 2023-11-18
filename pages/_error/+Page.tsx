@@ -61,7 +61,7 @@ function Page500() {
           </Button>
           <Button
             type="secondary"
-            link="https://github.com/floriandwt/florians-website/"
+            link="https://github.com/flornkm/florians-website/"
           >
             Open issue
           </Button>

@@ -163,7 +163,7 @@ export default function Page() {
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/floriandwt/"
+                    href="https://x.com/flornkm/"
                   >
                     x.com
                   </a>
@@ -171,7 +171,7 @@ export default function Page() {
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/floriandwt/"
+                    href="https://x.com/flornkm/"
                   >
                     LinkedIn
                   </a>
@@ -179,7 +179,7 @@ export default function Page() {
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/floriandwt/"
+                    href="https://x.com/flornkm/"
                   >
                     Read.cv
                   </a>
@@ -187,7 +187,7 @@ export default function Page() {
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/floriandwt/"
+                    href="https://x.com/flornkm/"
                   >
                     GitHub
                   </a>
@@ -200,7 +200,7 @@ export default function Page() {
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/floriandwt/"
+                    href="https://x.com/flornkm/"
                   >
                     {m.link_email()}
                   </a>
@@ -208,7 +208,7 @@ export default function Page() {
                 <li>
                   <a
                     class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/floriandwt/"
+                    href="https://x.com/flornkm/"
                   >
                     {m.link_imessage()}
                   </a>

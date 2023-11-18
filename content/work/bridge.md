@@ -2,7 +2,7 @@
 title: Bridge
 description: Browser based job page creator for Startups and SMEs.
 icon: /images/bridge/bridge-icon.svg
-cover: /images/bridge/bridge.jpg
+cover: /images/bridge/cover-bridge.jpg
 date: 03 / 2023
 ---
 
@@ -10,7 +10,7 @@ date: 03 / 2023
 
 Browser based job page creator for Startups and SMEs.
 
-![Bridge](/images/bridge/bridge.jpg)
+![Bridge](/images/bridge/cover-bridge.jpg)
 
 Bridge is a browser-based software designed to provide an easy-to-use solution for creating job pages. It enables people to quickly create forms while not being forced to use an overcomplicated marketing platform that costs hundreds of dollars. Bridge also incorporates its own design token system, allowing for seamless auto-saves, real-time updates, and fast publishing of projects. This streamlined approach ensures that you can focus on crafting compelling job pages without any technical hindrances.
 
@@ -64,6 +64,6 @@ Bridge is a tool that allows companies to create and publish job pages in minute
 
 [Bridge](https://bridge.supply/)
 [Product Hunt](https://www.producthunt.com/products/bridge-12)
-[GitHub Repo](https://github.com/floriandwt/bridge)
+[GitHub Repo](https://github.com/flornkm/bridge)
 
 </project-links>
