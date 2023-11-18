@@ -139,7 +139,7 @@ article {
         height: auto;
     }
 
-    & .video-container::after {
+    & .video-overlay::after {
         content: "";
         position: absolute;
         left: 50%;
@@ -180,7 +180,7 @@ article {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2rem;
         margin: 6rem 0;
-        width: 100vw;
+        width: 99vw;
         position: relative;
         left: 50%;
         transform: translateX(-50%);

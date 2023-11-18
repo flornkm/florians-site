@@ -54,7 +54,7 @@ export default function LanguagePicker(props: {
           (props.align === "left" ? "left-0 " : "right-0 ") +
           (open
             ? "opacity-100 " +
-              (props.position === "top" ? "bottom-8 " : "top-8 ")
+              (props.position === "top" ? "bottom-9 " : "top-9 ")
             : "opacity-0 pointer-events-none " +
               (props.position === "top" ? "bottom-4 " : "top-4 "))
         }

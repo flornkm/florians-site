@@ -73,6 +73,8 @@ Our prototype was shown on the University Exhibition and received a lot of posit
 
 </process-grid>
 
+[![Boost Exhibition Video](/images/boost/cover-boost.jpg)](DTpulxnIuxg)
+
 <project-links>
 
 [Landingpage](https://boost-three.vercel.app/)

@@ -55,3 +55,18 @@ export function ButtonWrapper(props: {
 }) {
   return <div class="flex gap-4 flex-wrap">{props.children}</div>
 }
+
+export function InlineLink(props: {
+  link: string | undefined
+  children: string | JSX.Element | undefined
+}) {
+  return (
+    <a
+      class="text-black px-0 transition-colors font-medium cursor-alias dark:text-white hover:underline underline-offset-2"
+      href={props.link}
+      target={props.link && props.link.includes("http") ? "_blank" : "_self"}
+    >
+      {props.children}
+    </a>
+  )
+}

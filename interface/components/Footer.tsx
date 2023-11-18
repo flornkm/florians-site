@@ -15,7 +15,7 @@ export default function Footer() {
           <LanguagePicker position="top" align="left" />
         </div>
         <div class="xl:place-self-end lg:mr-6">
-          <h4 class="font-medium mb-3">{m.footer_title_pages()}</h4>
+          <h4 class="font-semibold mb-3">{m.footer_title_pages()}</h4>
           <ul class="space-y-2 -ml-1">
             <li>
               <a
@@ -97,7 +97,7 @@ export default function Footer() {
           </ul>
         </div>
         <div class="xl:place-self-end">
-          <h4 class="font-medium mb-3">{m.footer_title_connect()}</h4>
+          <h4 class="font-semibold mb-3">{m.footer_title_connect()}</h4>
           <ul class="space-y-2">
             <li>
               <a

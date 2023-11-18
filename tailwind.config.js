@@ -43,6 +43,14 @@ export default {
     },
     fontFamily: {
       sans: ["Pretendard Variable", "Inter", "sans-serif"],
+      mono: [
+        "Fragment Mono",
+        "ui-monospace",
+        "SFMono-Regular",
+        "Liberation Mono",
+        "Courier New",
+        "monospace",
+      ],
     },
   },
   plugins: ["tai"],

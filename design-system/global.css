@@ -7,17 +7,19 @@
 	font-weight: 45 920;
 	font-style: normal;
 	font-display: swap;
-	src: url('/fonts/Pretendard/PretendardVariable.woff2') format('woff2-variations');
+	src: url('/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');
+}
+
+@font-face {
+	font-family: 'Fragment Mono';
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+	src: url('/fonts/fragment-mono/FragmentMono-Regular.woff2') format('woff2');
 }
 
 body {
 	background-color: rgb(252, 252, 252);
-}
-
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: #000;
-	}
 }
 
 a {
@@ -28,4 +30,37 @@ a:focus {
 	outline-width: 2px;
 	outline-color: #3b82f6;
 	border-radius: 0.25rem;
+}
+
+.custom-scrollbar {
+	scrollbar-width: auto;
+	scrollbar-color: #a1a1aa #ffffff;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: #a1a1aa;
+	border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #000;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		background-color: #71717a;
+	}
+
+	.custom-scrollbar {
+		scrollbar-color: #71717a #ffffff;
+	}
 }

@@ -4,7 +4,6 @@ import { useRef, useEffect, useState } from "preact/hooks"
 import Tooltip from "./Tooltip"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
-import LanguagePicker from "./LanguagePicker"
 import * as m from "#lang/paraglide/messages"
 
 export default function Navigation() {
@@ -68,23 +67,6 @@ export default function Navigation() {
       selector.current.classList.add("opacity-0")
     }
   }, [pageContext])
-
-  console.log(
-    "Condition 1: ",
-    pageContext.urlPathname.replace(getLocale(), "/") === "/"
-  )
-  console.log(
-    "Condition 2: ",
-    pageContext.urlPathname.replace(getLocale(), "") === "/about"
-  )
-  console.log(
-    "Condition 3: ",
-    pageContext.urlPathname.replace(getLocale(), "") === "/feed"
-  )
-  console.log(
-    "Condition 4: ",
-    pageContext.urlPathname.replace(getLocale(), "") === "/archive"
-  )
 
   return (
     <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
@@ -155,10 +137,11 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
     props.className,
     // @ts-ignore
     (pageContext?.urlPathname.replace(getLocale(), "") === ""
-      ? "/"
+      ? "/" // @ts-ignore
       : pageContext?.urlPathname.replace(getLocale(), "")) ===
+    // @ts-ignore
     (props.href.replace(getLocale(), "") === ""
-      ? "/"
+      ? "/" // @ts-ignore
       : props.href.replace(getLocale(), ""))
       ? "md:text-black text-white relative z-10 before:opacity-0 dark:md:text-white dark:text-black"
       : "text-zinc-400 hover:text-black before:opacity-0 dark:hover:text-white",

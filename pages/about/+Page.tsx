@@ -3,7 +3,7 @@ import Tooltip from "#components/Tooltip"
 import Experience from "~icons/eva/briefcase-outline"
 import Check from "~icons/eva/checkmark-outline"
 import { PhotoSlider } from "#components/Slider"
-import Button from "#components/Button"
+import Button, { InlineLink } from "#components/Button"
 import * as m from "#lang/paraglide/messages"
 
 export default function Page() {
@@ -130,7 +130,7 @@ export default function Page() {
               <InlineInfo>
                 <>
                   {m.about_explainer_text_where()}
-                  <Tooltip position="top" class="-translate-y-2">
+                  <Tooltip position="top" class="-translate-y-3">
                     {m.about_explainer_text_where_tooltip()}
                   </Tooltip>
                 </>
@@ -142,7 +142,7 @@ export default function Page() {
               <InlineInfo>
                 <>
                   {m.about_explainer_text_work()}
-                  <Tooltip position="top" class="-translate-y-2">
+                  <Tooltip position="top" class="-translate-y-3">
                     {m.about_explainer_text_work_tooltip()}
                   </Tooltip>
                 </>
@@ -158,7 +158,7 @@ export default function Page() {
           </div>
           <div class="max-w-s w-full flex-shrink-0 lg:ml-auto xs:grid xs:grid-cols-2">
             <div class="self-start mb-10 xs:mb-0">
-              <h2 class="font-medium mb-3">{m.about_socials_title()}</h2>
+              <h2 class="font-semibold mb-3">{m.about_socials_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
                   <a
@@ -195,7 +195,7 @@ export default function Page() {
               </ul>
             </div>{" "}
             <div class="place-self-end self-start">
-              <h2 class="font-medium mb-3">{m.about_contact_title()}</h2>
+              <h2 class="font-semibold mb-3">{m.about_contact_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
                   <a
@@ -233,13 +233,9 @@ export default function Page() {
                     <p>
                       {m.about_education_working()} {item.jobTitle}{" "}
                       {item.company && "at"}{" "}
-                      <a
-                        class="text-black hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-white dark:hover:text-zinc-200"
-                        href={item.comapanyLink}
-                        target="_blank"
-                      >
+                      <InlineLink link={item.comapanyLink}>
                         {item.company}
-                      </a>
+                      </InlineLink>
                     </p>
                   </div>
                   <p class="text-sm mb-4">

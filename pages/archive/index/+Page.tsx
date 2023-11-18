@@ -26,7 +26,7 @@ export default function Page({ projects }: { projects: any }) {
             return (
               <>
                 <div class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center">
-                  <p class="font-medium leading-snug flex items-center">
+                  <p class="font-semibold leading-snug flex items-center">
                     {project.title}
                   </p>
                   {project.short ? (

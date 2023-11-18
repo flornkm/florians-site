@@ -8,19 +8,21 @@
     "dev:vercel": "npm run compile && vercel dev",
     "start": "npm run build && vite preview",
     "--- For production -------------------------": "",
-    "vercel-build": "npm run compile && npm run generate && vite build",
+    "vercel-build": "npm run compile && npm run build:og && vite build",
     "--- Single commands ------------------------": "",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
-    "generate": "node ./build/generateOpengraph.js",
+    "build:og": "node ./build/generateOpengraph.js",
+    "build:sitemap": "node ./build/generateSitemap.js",
     "compile": "paraglide-js compile --project ./project.inlang.json --outdir ./lang/paraglide",
     "--- Not in use, but necessary to include ---": "",
-    "build": "npm run compile && npm run generate && vite build"
+    "build": "npm run compile && npm run build:og && npm run build:sitemap && vite build"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
     "@babel/plugin-transform-react-jsx": "^7.17.3",
     "@egjs/flicking-plugins": "^4.7.1",
     "@egjs/preact-flicking": "^4.11.0",
+    "@inlang/paraglide-js": "1.0.0-prerelease.9",
     "@preact/preset-vite": "^2.3.0",
     "@types/compression": "^1.7.3",
     "@types/express": "^4.17.17",
@@ -31,6 +33,7 @@
     "@vercel/node": "^3.0.7",
     "cross-fetch": "^4.0.0",
     "firebase": "^10.5.0",
+    "highlight.js": "^11.9.0",
     "marked": "^9.0.3",
     "node-fetch": "^3.3.2",
     "preact": "^10.10.0",
@@ -39,8 +42,7 @@
     "signature_pad": "^4.1.6",
     "typescript": "^5.2.2",
     "vike": "^0.4.144",
-    "vite": "^4.0.3",
-    "@inlang/paraglide-js": "1.0.0-prerelease.9"
+    "vite": "^4.0.3"
   },
   "devDependencies": {
     "@iconify-json/eva": "^1.1.7",
