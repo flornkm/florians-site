@@ -66,6 +66,6 @@ function deleteInfo(string: string, n: number) {
 function convertVideo(string: string) {
   return string.replace(
     /\[!\[(.*?)\]\((.*?)\)\]\((.*?)\)/g,
-    '<div class="video-container" onclick="loadVideo(this, \'https://www.youtube.com/embed/$3\', \'$1\', \'$2\')"><img class="video-overlay" src="$2" alt="$1" class="video-thumbnail"><script>function loadVideo(container, src, title, thumbnail) {container.innerHTML = \'<iframe width="100%" height="100%" src="\' + src + \'" title="\' + title + \'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>\'; container.querySelector(".video-overlay").style.backgroundImage = \'url(\' + thumbnail + \')\';}</script></div>'
+    '<div class="video-container" onclick="loadVideo(this, \'https://www.youtube.com/embed/$3?autoplay=1\', \'$1\', \'$2\')"><img class="video-overlay" src="$2" alt="$1" class="video-thumbnail"><script>function loadVideo(container, src, title, thumbnail) {container.innerHTML = \'<iframe width="100%" height="100%" src="\' + src + \'" title="\' + title + \'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>\'; container.querySelector(".video-overlay").style.backgroundImage = \'url(\' + thumbnail + \')\';}</script></div>'
   )
 }

@@ -117,7 +117,7 @@ export default function Contact() {
         </div>
       </div>
       <div class="mx-auto bg-zinc-100 flex flex-col justify-end w-full h-[652px] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950">
-        <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll relative">
+        <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
               {message.message}
