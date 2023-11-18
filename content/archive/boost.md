@@ -78,6 +78,6 @@ Our prototype was shown on the University Exhibition and received a lot of posit
 <project-links>
 
 [Landingpage](https://boost-three.vercel.app/)
-[Universtiy Exhibion](https://ausstellung.hfg-gmuend.de/w-2223/projekte/boost/studiengang:dp)
+[Universtiy Exhibition](https://ausstellung.hfg-gmuend.de/w-2223/projekte/boost/studiengang:dp)
 
 </project-links>

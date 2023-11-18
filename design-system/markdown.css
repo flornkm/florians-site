@@ -11,6 +11,7 @@ article {
         font-weight: 600;
         margin-bottom: 0.5em;
     }
+
     & h1 {
         font-size: 1.9rem;
     }
@@ -37,7 +38,7 @@ article {
             gap: 1.5rem;
         }
 
-        & info-grid > div > p {
+        & info-grid>div>p {
             margin-bottom: 1rem;
         }
     }
@@ -85,7 +86,7 @@ article {
             transition: all ease-in-out 0.1s;
             cursor: alias;
         }
-    
+
         & a:hover {
             color: #e4e4e7;
         }
@@ -118,7 +119,7 @@ article {
         overflow: hidden;
     }
 
-    & two-full-grid > p {
+    & two-full-grid>p {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
@@ -133,13 +134,13 @@ article {
     & .video-container {
         margin-bottom: 4rem;
         cursor: pointer;
-        position: relative;       
-        aspect-ratio: 16/9; 
+        position: relative;
+        aspect-ratio: 16/9;
         width: 100%;
         height: auto;
     }
 
-    & .video-overlay::after {
+    & .video-wrapper::after {
         content: "";
         position: absolute;
         left: 50%;
@@ -151,17 +152,18 @@ article {
         background-size: cover;
         z-index: 10;
         border-radius: 50%;
-        opacity: 20%;
+        opacity: 50%;
         transition: all ease 0.2s;
+        mix-blend-mode: exclusion;
     }
 
-    & .video-container:hover::after {
+    & .video-wrapper:hover::after {
         transform: translateX(-50%) translateY(-50%) scale(1.1);
         opacity: 30%;
     }
 
     @media screen and (max-width: 850px) {
-        & two-full-grid > p {
+        & two-full-grid>p {
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -175,7 +177,7 @@ article {
         overflow: hidden;
     }
 
-    & three-full-grid > p {
+    & three-full-grid>p {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2rem;
@@ -188,7 +190,7 @@ article {
     }
 
     @media screen and (max-width: 850px) {
-        & three-full-grid > p {
+        & three-full-grid>p {
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -244,10 +246,11 @@ article {
     }
 
     @media screen and (max-width: 850px) {
-        & project-links > p {
+        & project-links>p {
             flex-direction: column;
             gap: 1rem;
         }
+
         & project-links a {
             padding: 2rem 0;
         }
@@ -289,18 +292,18 @@ article {
             background-color: #18181b;
             color: #fff;
         }
-    
+
         & project-links a:nth-child(1) {
             border: 1px solid #e4e4e7;
             background-color: #ffffff;
             color: #000;
         }
-    
+
         & project-links a:hover {
             background-color: rgb(24 24 27 / 0.75);
             color: #e4e4e7;
         }
-    
+
         & project-links a:nth-child(1):hover {
             color: #000;
             background-color: #e4e4e7;
@@ -317,6 +320,7 @@ article>div>p>img:nth-child(1) {
     margin-bottom: 4rem;
 }
 
-article>div>p:nth-child(3), article>div>p:nth-child(4) {
+article>div>p:nth-child(3),
+article>div>p:nth-child(4) {
     font-size: 1.1rem;
 }
