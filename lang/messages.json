@@ -1640,6 +1640,32 @@
       ]
     },
     {
+      "id": "footer_tip",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "to switch light / darkmode, change\n            your system settings!"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "要切换明暗模式，请更改系统设置！"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "footer_title_connect",
       "selectors": [],
       "variants": [

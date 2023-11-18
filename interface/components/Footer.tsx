@@ -1,6 +1,6 @@
 import { getLocale } from "#hooks/getLocale"
 import { usePageContext } from "../../renderer/usePageContext"
-import Heart from "~icons/eva/heart-fill"
+import Bulb from "~icons/eva/bulb-fill"
 import LanguagePicker from "./LanguagePicker"
 import * as m from "#lang/paraglide/messages"
 
@@ -11,10 +11,7 @@ export default function Footer() {
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
         <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
           <h3 class="font-semibold mb-2">Florian's {m.footer_slogan()}</h3>
-          <p class="text-zinc-500 dark:text-zinc-400 mb-8">
-            <Heart class="inline-block text-sm mb-1 transition-colors hover:text-red-500" />{" "}
-            {m.footer_text()}
-          </p>
+          <p class="text-zinc-500 dark:text-zinc-400 mb-8">{m.footer_text()}</p>
           <LanguagePicker position="top" align="left" />
         </div>
         <div class="xl:place-self-end lg:mr-6">
@@ -54,6 +51,21 @@ export default function Footer() {
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
+                  (pageContext.urlPathname.replace(getLocale(), "") === "/feed"
+                    ? "text-zinc-600 dark:text-zinc-400"
+                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                }
+                href={getLocale() + "/feed"}
+              >
+                {pageContext.urlPathname.replace(getLocale(), "") === "/feed" &&
+                  "/"}{" "}
+                {m.footer_page_feed()}
+              </a>
+            </li>
+            <li>
+              <a
+                class={
+                  "text-zinc-400 transition-colors font-medium " +
                   (pageContext.urlPathname.replace(getLocale(), "") ===
                   "/archive"
                     ? "text-zinc-600 dark:text-zinc-400"
@@ -70,20 +82,21 @@ export default function Footer() {
               <a
                 class={
                   "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname.replace(getLocale(), "") === "/feed"
+                  (pageContext.urlPathname.replace(getLocale(), "") ===
+                  "/colophon"
                     ? "text-zinc-600 dark:text-zinc-400"
                     : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
                 }
-                href={getLocale() + "/feed"}
+                href={getLocale() + "/colophon"}
               >
-                {pageContext.urlPathname.replace(getLocale(), "") === "/feed" &&
-                  "/"}{" "}
-                {m.footer_page_feed()}
+                {pageContext.urlPathname.replace(getLocale(), "") ===
+                  "/colophon" && "/"}{" "}
+                Colophon
               </a>
             </li>
           </ul>
         </div>
-        <div class="xs:place-self-end">
+        <div class="xl:place-self-end">
           <h4 class="font-medium mb-3">{m.footer_title_connect()}</h4>
           <ul class="space-y-2">
             <li>
@@ -116,6 +129,14 @@ export default function Footer() {
                 href="/feed"
               >
                 {m.link_email()}
+              </a>
+            </li>
+            <li>
+              <a
+                class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
+                href="https://github.com/flornkm"
+              >
+                GitHub
               </a>
             </li>
           </ul>
@@ -162,6 +183,9 @@ export default function Footer() {
           {m.footer_copyright()} {new Date().getFullYear()}
         </p>
       </div>
+      <p class="text-xs mt-12 text-zinc-400 dark:text-zinc-600 text-center px-4">
+        <Bulb class="inline-block mb-1 mr-1" /> {m.footer_tip()}
+      </p>
     </footer>
   )
 }

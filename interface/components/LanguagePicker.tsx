@@ -37,13 +37,16 @@ export default function LanguagePicker(props: {
       <button
         onClick={() => (open ? setOpen(false) : setOpen(true))}
         class={
-          "text-xl  hover:text-black before:opacity-0 dark:hover:text-white " +
-          (open ? "text-black dark:text-white" : "text-zinc-400")
+          "text-xl p-1 rounded-md transition-colors hover:text-black hover:bg-zinc-100 before:opacity-0 dark:hover:text-white dark:hover:bg-zinc-900 " +
+          (open
+            ? "text-black dark:text-white bg-zinc-100 dark:bg-zinc-900"
+            : "text-zinc-400")
         }
       >
         <LanguageIcon />
       </button>
       <div
+        // @ts-ignore
         ref={elementsList}
         class={
           "absolute z-10 bg-zinc-50 border border-zinc-200 rounded-md flex flex-col transition-all overflow-hidden dark:bg-zinc-950 dark:border-zinc-800 " +
