@@ -345,6 +345,11 @@ article {
         max-width: 90vw;
         overflow: hidden;
     }
+
+    & pre > code {
+        border: 1px solid #71717a30;
+        border-radius: 0.75rem;
+    }
 }
 
 article>div>p>img:nth-child(1) {

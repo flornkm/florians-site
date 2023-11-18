@@ -369,12 +369,7 @@ export default function Tooltip(props: {
         </div>
         <Island
           link="https://github.com/flornkm/florians-site"
-          icon={
-            <div class="relative">
-              <Star class="text-yellow-500 flex-shrink-0" />
-              <Star class="text-yellow-500 flex-shrink-0 text-6xl absolute top-1/2 -translate-y-1/2 left-0 blur-3xl" />
-            </div>
-          }
+          icon={<Star class="text-yellow-500 flex-shrink-0" />}
           class="order-1 md:order-4"
         >
           <p class="line-clamp-2">
