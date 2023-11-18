@@ -1,6 +1,6 @@
 ---
 title: Visualization
-description: ThreeJS Data Visualization
+description: ThreeJS Data Visualization.
 cover: /images/visualization/cover-visualization.jpg
 date: 05 / 2022
 ---

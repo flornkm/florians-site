@@ -1,6 +1,6 @@
 ---
 title: Boost
-description: Nutrition application & hardware device
+description: Nutrition application & hardware device.
 cover: /images/boost/cover-boost.jpg
 date: 02 / 2023
 ---

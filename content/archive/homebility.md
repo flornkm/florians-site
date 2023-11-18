@@ -1,6 +1,6 @@
 ---
 title: Homebility
-description: Smart home application with a big focus on UX
+description: Smart home application with a big focus on UX.
 cover: /images/homebility/cover-homebility.jpg
 date: 05 / 2022
 ---

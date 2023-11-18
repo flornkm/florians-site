@@ -1,6 +1,6 @@
 ---
 title: Nutri
-description: Social Food App
+description: Social Food App.
 cover: /images/nutri/cover-nutri.jpg
 date: 05 / 2023
 ---

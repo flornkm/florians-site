@@ -53,8 +53,8 @@ async function onRenderHtml(pageContext: PageContext) {
         <meta property="twitter:image" content="https://florians-site-preview.vercel.app${image}" />
         <meta property="twitter:description" content="${desc}" />
         <meta property="twitter:title" content="${title}" />
-        <meta name="twitter:site" content="@floriandwt" />
-        <meta name="twitter:creator" content="@floriandwt" />
+        <meta name="twitter:site" content="@flornkm" />
+        <meta name="twitter:creator" content="@flornkm" />
         ${index ? escapeInject`<meta name="robots" content="noindex">` : ""}
         <title>${title}</title>
       </head>

@@ -341,7 +341,7 @@ function SendLetter(props: {
                     <input
                       ref={handleInput}
                       type="text"
-                      placeholder="floriandwt"
+                      placeholder="flornkm"
                       class="placeholder:text-zinc-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300 dark:text-white dark:bg-zinc-900 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
                     />
                   </div>

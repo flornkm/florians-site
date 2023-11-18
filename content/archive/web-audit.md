@@ -1,6 +1,6 @@
 ---
 title: Web Audit
-description: Raycast SEO Extension
+description: Raycast SEO Extension.
 cover: /images/granny-ai/cover-granny-ai.jpg
 date: 02 / 2023
 ---
@@ -9,7 +9,7 @@ date: 02 / 2023
 
 Raycast SEO Extension
 
-![Web Audit Raycast extension](/images/web-audit/cover-web-audit.jpg)
+[![Web Audit Raycast extension](/images/web-audit/cover-web-audit.jpg)](hMlDm9P88nY)
 
 A Raycast extension that allows users to quickly and easily perform a website audit...
 
@@ -23,7 +23,7 @@ A Raycast extension that allows users to quickly and easily perform a website au
 
 <project-links>
 
-[Raycast store](https://www.raycast.com/floriandwt/web-audit)
-[GitHub](https://github.com/floriandwt/web-audit-extension)
+[Raycast store](https://www.raycast.com/flornkm/web-audit)
+[GitHub](https://github.com/flornkm/web-audit-extension)
 
 </project-links>

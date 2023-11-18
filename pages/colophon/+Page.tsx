@@ -25,9 +25,6 @@ export default function Page() {
 
   return (
     <div class="w-full">
-      <link rel="stylesheet" href="/path/to/styles/default.min.css" />
-      <script src="/path/to/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script>
       <section class="w-full lg:pt-16 relative min-h-screen flex flex-col">
         <h1 class="text-3xl font-semibold mb-4 w-full order-2 md:order-1">
           Colophon
@@ -122,7 +119,7 @@ const fetchLetters = async () => {
             </div>
             <p class="text-black font-medium mb-2">Slider</p>
             <div class="bg-zinc-100 rounded-xl group px-2 pb-2 dark:bg-zinc-950 mb-12">
-              <div class="w-full h-64 py-8 relative overflow-hidden flex items-center justify-center px-16">
+              <div class="w-full lg:h-64 h-auto py-8 relative overflow-hidden flex items-center justify-center px-4 lg:px-16">
                 <Slider>
                   <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
                   <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
