@@ -293,6 +293,7 @@ export default function Page() {
                         <img
                           onClick={() =>
                             typeof window !== undefined &&
+                            window.innerWidth > 768 &&
                             window.open(tool.link)
                           }
                           src={tool.icon}
@@ -315,6 +316,7 @@ export default function Page() {
                         <img
                           onClick={() =>
                             typeof window !== undefined &&
+                            window.innerWidth > 768 &&
                             window.open(tool.link)
                           }
                           src={tool.icon}

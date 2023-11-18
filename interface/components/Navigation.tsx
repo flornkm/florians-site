@@ -17,41 +17,74 @@ export default function Navigation() {
   const pageContext = usePageContext() as any
 
   useEffect(() => {
-    const activeLink = document.querySelector(
+    const currentPath =
+      getLocale() + pageContext.urlPathname.replace(getLocale(), "")
+    const allowedPages = [
+      getLocale() + "/",
+      getLocale(),
+      getLocale() + "/about",
+      getLocale() + "/feed",
+      getLocale() + "/archive",
+    ]
+
+    // Include only specified pages for showing the selector
+    if (allowedPages.includes(currentPath)) {
+      const activeLink = document.querySelector(
+        // @ts-ignore
+        `a[href="${
+          languageTag() === sourceLanguageTag
+            ? currentPath
+            : currentPath.endsWith("/")
+            ? getLocale()
+            : currentPath
+        }"]`
+      )
+
+      if (activeLink) {
+        const { x, width } = activeLink.getBoundingClientRect()
+
+        // Adjustments for mobile screens
+        const isMobile =
+          typeof window !== "undefined" && window.innerWidth < 1024
+        const mobileWidthFactor = 1.25
+
+        setSelectorPosition({
+          x: isMobile ? x - width / (mobileWidthFactor * 2) : x,
+          width: isMobile ? width * mobileWidthFactor : width,
+        })
+
+        // @ts-ignore
+        selector.current.classList.remove("opacity-0")
+        setTimeout(() => {
+          if (selector.current) {
+            // @ts-ignore
+            selector.current.classList.add("transition-all")
+          }
+        }, 100)
+      }
+    } else {
+      // Hide the selector for non-allowed pages
       // @ts-ignore
-      `a[href="${
-        languageTag() === sourceLanguageTag
-          ? getLocale() + pageContext.urlPathname.replace(getLocale(), "")
-          : (
-              getLocale() + pageContext.urlPathname.replace(getLocale(), "")
-            ).endsWith("/")
-          ? getLocale()
-          : getLocale() + pageContext.urlPathname.replace(getLocale(), "")
-      }"]`
-    )
-
-    if (activeLink) {
-      const { x, width } = activeLink.getBoundingClientRect()
-
-      // Adjustments for mobile screens
-      const isMobile = typeof window !== "undefined" && window.innerWidth < 1024
-      const mobileWidthFactor = 1.25
-
-      setSelectorPosition({
-        x: isMobile ? x - width / (mobileWidthFactor * 2) : x,
-        width: isMobile ? width * mobileWidthFactor : width,
-      })
-
-      // @ts-ignore
-      selector.current.classList.remove("opacity-0")
-      setTimeout(() => {
-        if (selector.current) {
-          // @ts-ignore
-          selector.current.classList.add("transition-all")
-        }
-      }, 100)
+      selector.current.classList.add("opacity-0")
     }
   }, [pageContext])
+
+  console.log(
+    "Condition 1: ",
+    pageContext.urlPathname.replace(getLocale(), "/") === "/"
+  )
+  console.log(
+    "Condition 2: ",
+    pageContext.urlPathname.replace(getLocale(), "") === "/about"
+  )
+  console.log(
+    "Condition 3: ",
+    pageContext.urlPathname.replace(getLocale(), "") === "/feed"
+  )
+  console.log(
+    "Condition 4: ",
+    pageContext.urlPathname.replace(getLocale(), "") === "/archive"
+  )
 
   return (
     <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
