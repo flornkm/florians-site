@@ -7,6 +7,7 @@ import { useWindowResize } from "../hooks/useWindowResize"
 import Button from "./Button"
 import ArrowRight from "~icons/eva/arrow-forward-outline"
 import ArrowLeft from "~icons/eva/arrow-back-outline"
+import * as m from "#lang/paraglide/messages"
 
 export default function Slider(props: {
   autoPlay?: boolean
@@ -77,34 +78,32 @@ export function PhotoSlider(props: { autoPlay?: boolean; buttons?: boolean }) {
     {
       src: "/images/photos/painting_inlang.jpg",
       alt: "Image spinning",
-      caption: "inlang Onsite - A painting spinning and creating a cool effect",
+      caption: m.photo_description_inlang_onsite(),
     },
     {
       src: "/images/photos/rainy_berlin.jpg",
       alt: "Rain in Berlin",
-      caption: "A photo of a rainy day in Berlin",
+      caption: m.photo_description_berlin(),
     },
     {
       src: "/images/photos/sms_festival.jpg",
       alt: "Festival night",
-      caption: "A cold night at a campsite together with Luis",
+      caption: m.photo_description_festival(),
     },
     {
       src: "/images/photos/starting_work.jpg",
       alt: "Florian doing a selfie",
-      caption: "Heading off to work in my Berlin apartment",
+      caption: m.photo_description_apartment(),
     },
     {
       src: "/images/photos/remi_restaurant.jpg",
       alt: "Dinner with design engineers",
-      caption:
-        "Having dinner at a Berlin restaurant with Anton, Nils and Linus",
+      caption: m.photo_description_dinner(),
     },
     {
       src: "/images/photos/inlang_team.jpg",
       alt: "inlang team standing outside",
-      caption:
-        "inlang Onsite - Standing outside with Felix, Nils, Niklas and Jannes",
+      caption: m.photo_description_inlang_outside(),
     },
   ]
   return (

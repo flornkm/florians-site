@@ -91,7 +91,7 @@ export default function Footer() {
               >
                 {pageContext.urlPathname.replace(getLocale(), "") ===
                   "/colophon" && "/"}{" "}
-                Colophon
+                {m.footer_page_colophon()}
               </a>
             </li>
           </ul>

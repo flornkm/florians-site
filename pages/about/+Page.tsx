@@ -1,6 +1,5 @@
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import Experience from "~icons/eva/briefcase-outline"
 import Check from "~icons/eva/checkmark-outline"
 import { PhotoSlider } from "#components/Slider"
 import Button, { InlineLink } from "#components/Button"
@@ -232,7 +231,7 @@ export default function Page() {
                   <div class="flex gap-2 mb-1 items-center">
                     <p>
                       {m.about_education_working()} {item.jobTitle}{" "}
-                      {item.company && "at"}{" "}
+                      {item.company && m.about_education_at()}{" "}
                       <InlineLink link={item.comapanyLink}>
                         {item.company}
                       </InlineLink>
@@ -240,7 +239,7 @@ export default function Page() {
                   </div>
                   <p class="text-sm mb-4">
                     {item.from} -{" "}
-                    {item.to !== "Now" ? (
+                    {item.to !== m.about_education_now() ? (
                       item.to
                     ) : (
                       <span class="text-green-600">{item.to}</span>
