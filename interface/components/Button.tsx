@@ -59,10 +59,14 @@ export function ButtonWrapper(props: {
 export function InlineLink(props: {
   link: string | undefined
   children: string | JSX.Element | undefined
+  class: string
 }) {
   return (
     <a
-      class="text-black px-0 transition-colors font-medium cursor-alias dark:text-white hover:underline underline-offset-2"
+      class={
+        "text-black px-0 transition-colors font-medium cursor-alias dark:text-white hover:underline underline-offset-2 " +
+        (props.class ? props.class : "")
+      }
       href={props.link}
       target={props.link && props.link.includes("http") ? "_blank" : "_self"}
     >

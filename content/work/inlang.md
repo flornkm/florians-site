@@ -20,18 +20,16 @@ most likely only interested you when you want to know more about me as a develop
 
 </div>
 
-<collaborators>
+<div>
 
-#### Colleagues
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2023 |
+| Collaborators | [Samuel Stroschein](https://github.com/samuelstroschein), [Felix Häberle](https://github.com/felixhaeberle), [Jan Johannes](https://github.com/janfjohannes), [Niklas Buchfink](https://github.com/NiklasBuchfink), [Nils Jacobsen](https://github.com/NilsJacobsen), [Jannes Blobel](https://github.com/jannesblobel) |
+| Website | [inlang.com](https://inlang.com) |
 
-- [![Samuel Stroschein Avatar](/images/avatars/samuel_stroschein.jpg) Samuel Stroschein](https://github.com/samuelstroschein)
-- [![Felix Häberle Avatar](/images/avatars/felix_haeberle.jpg) Felix Häberle](https://felixhaeberle.com/)
-- [![Nils Jacobsen Avatar](/images/avatars/nils_jacobsen.jpg) Nils Jacobsen](https://github.com/NilsJacobsen)
-- [![Niklas Buchfink Avatar](/images/avatars/niklas_buchfink.jpg) Niklas Buchfink](https://niklasbuchfink.com/)
-- [![Jannes Blobel Avatar](/images/avatars/jannes_blobel.jpg) Jannes Blobel](https://github.com/jannesblobel)
-- [![Jan Johannes Avatar](/images/avatars/jan_johannes.jpg) Jan Johannes](https://github.com/janfjohannes)
-
-</collaborators>
+</div>
 </info-grid>
 
 ![inlang.com](/images/inlang/cover-inlang.jpg)

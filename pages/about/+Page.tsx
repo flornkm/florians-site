@@ -160,36 +160,27 @@ export default function Page() {
               <h2 class="font-semibold mb-3">{m.about_socials_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
-                  <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/flornkm/"
-                  >
+                  <InlineLink class="ml-1" link="https://x.com/flornkm/">
                     x.com
-                  </a>
+                  </InlineLink>
                 </li>
                 <li>
-                  <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/flornkm/"
+                  <InlineLink
+                    class="ml-1"
+                    link="https://www.linkedin.com/in/flornkm/"
                   >
                     LinkedIn
-                  </a>
+                  </InlineLink>
                 </li>
                 <li>
-                  <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/flornkm/"
-                  >
+                  <InlineLink class="ml-1" link="https://read.cv/flornkm">
                     Read.cv
-                  </a>
+                  </InlineLink>
                 </li>
                 <li>
-                  <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/flornkm/"
-                  >
+                  <InlineLink class="ml-1" link="https://github.com/flornkm">
                     GitHub
-                  </a>
+                  </InlineLink>
                 </li>
               </ul>
             </div>{" "}
@@ -197,20 +188,17 @@ export default function Page() {
               <h2 class="font-semibold mb-3">{m.about_contact_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
-                  <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/flornkm/"
-                  >
+                  <InlineLink class="ml-1" link="mailto:hello@floriankiem.com">
                     {m.link_email()}
-                  </a>
+                  </InlineLink>
                 </li>
                 <li>
-                  <a
-                    class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                    href="https://x.com/flornkm/"
+                  <InlineLink
+                    class="ml-1"
+                    link="imessage://hello@floriankiem.com"
                   >
                     {m.link_imessage()}
-                  </a>
+                  </InlineLink>
                 </li>
               </ul>
             </div>

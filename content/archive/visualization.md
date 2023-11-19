@@ -13,14 +13,16 @@ date: 05 / 2022
 ThreeJS Data Visualization
 
 </div>
+<div>
 
-<collaborators>
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2022 |
+| Collaborator | [Nils Eller](https://nilseller.com) |
+| Website | [Demo](https://homicides-visualization.designwithtech.com/) |
 
-#### Collaborators
-
-- [![Nils Eller Avatar](/images/avatars/nils_eller.jpg) Nils Eller](https://www.nilseller.com/)
-
-</collaborators>
+</div>
 </info-grid>
 
 ![Visualization](/images/visualization/cover-visualization.jpg)

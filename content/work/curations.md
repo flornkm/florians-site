@@ -15,14 +15,16 @@ A curated collection of the best products on the web.
 
 </div>
 
-<collaborators>
+<div>
 
-#### Collaborators
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2022 - 2023 |
+| Collaborators | [Nils Eller](https://nilseller.com), [[Anton Stallbörger](https://antonstallboerger.com)](https://antonstallboerger.com) |
+| Website | [curations.tech](https://curations.tech) |
 
-- [![Nils Eller Avatar](/images/avatars/nils_eller.jpg) Nils Eller](https://www.nilseller.com/)
-- [![Anton Stallbörger Avatar](/images/avatars/anton_stallboerger.jpg) Anton Stallbörger](https://antonstallboerger.com/)
-
-</collaborators>
+</div>
 </info-grid>
 
 ![Curations](/images/curations/cover-curations.jpg)

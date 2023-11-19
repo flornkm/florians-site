@@ -14,14 +14,16 @@ Social Food App
 
 </div>
 
-<collaborators>
+<div>
 
-#### Collaborators
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2022 - 2023 |
+| Collaborators | [Nils Eller](https://nilseller.com), [Anton Stallbörger](https://antonstallboerger.com) |
+| Website | [Prototype](https://www.figma.com/proto/tO5jcdD8IQBqJ6M6atsSHg/Designmethoden-Prototypen?page-id=0%3A1&node-id=1%3A7&viewport=-126%2C337%2C0.16&scaling=scale-down&starting-point-node-id=1%3A7&show-proto-sidebar=1) |
 
-- [![Anton Stallbörger Avatar](/images/avatars/anton_stallboerger.jpg) Anton Stallbörger](https://www.antonstallboerger.com/)
-- [![Nils Eller Avatar](/images/avatars/nils_eller.jpg) Nils Eller](https://www.nilseller.com/)
-
-</collaborators>
+</div>
 </info-grid>
 
 ![Nutri Mockup](/images/nutri/cover-nutri.jpg)
