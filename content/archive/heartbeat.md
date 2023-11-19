@@ -13,14 +13,16 @@ date: 05 / 2023
 Heart Simulator & Monitoring
 
 </div>
+<div>
 
-<collaborators>
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2022 - 2023 |
+| Collaborator | [Anton Stallbörger](https://antonstallboerger.com) |
+| Website | [Documentation](https://heartbeat-documentation.vercel.app/) |
 
-#### Collaborators
-
-- [![Anton Stallbörger Avatar](/images/avatars/anton_stallboerger.jpg) Anton Stallbörger](https://www.antonstallboerger.com/)
-
-</collaborators>
+</div>
 </info-grid>
 
 ![Heartbeat](/images/heartbeat/cover-heartbeat.jpg)

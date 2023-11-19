@@ -5,9 +5,24 @@ cover: /images/granny-ai/cover-granny-ai.jpg
 date: 02 / 2023
 ---
 
+<info-grid>
+<div>
+
 # Web Audit
 
 Raycast SEO Extension
+
+</div>
+<div>
+
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2023 |
+| Website | [Raycast Store](https://www.raycast.com/flornkm/web-audit) |
+
+</div>
+</info-grid>
 
 [![Web Audit Raycast extension](/images/web-audit/cover-web-audit.jpg)](hMlDm9P88nY)
 

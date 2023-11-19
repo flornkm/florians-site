@@ -48,18 +48,52 @@ article {
         margin-bottom: 2rem;
     }
 
+    & info-grid>div>p {
+        margin-bottom: 0.25rem;
+    }
+
+    & info-grid>div {
+        max-width: 32rem;
+        margin-bottom: 2rem;
+    }
+
+    & info-grid>div>table {
+        width: 100%;
+        border-spacing: 1em 0.5em;
+    }
+
+    & info-grid>div>table>tbody>tr>td {
+        padding: 0.35rem 0;
+        border-bottom: 1px solid #F4F4F5;
+        vertical-align: top;
+    }
+
+    & info-grid>div>table>tbody>tr>td:nth-child(2) {
+        padding-left: 3rem;
+        position: relative;
+        top: 0.5px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+    }
+
     & p {
         color: #52525b;
         margin-bottom: 4rem;
     }
 
-    & process-grid > div > p {
+    & process-grid>div>p {
         margin-bottom: 2rem;
     }
 
     @media (prefers-color-scheme: dark) {
         & p {
             color: #a1a1aa;
+        }
+
+        & info-grid>div>table>tbody>tr>td {
+            border-bottom: 1px solid #18181B;
         }
     }
 
@@ -69,16 +103,12 @@ article {
     }
 
     & a {
-        padding: 0.1rem 0.2rem;
+        padding: 0.1rem 0rem;
         border-radius: 0.2rem;
         font-weight: 500;
         color: black;
         transition: all ease-in-out 0.1s;
         cursor: alias;
-    }
-
-    & a:hover {
-        color: #71717a;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -89,10 +119,6 @@ article {
             color: white;
             transition: all ease-in-out 0.1s;
             cursor: alias;
-        }
-
-        & a:hover {
-            color: #e4e4e7;
         }
     }
 
@@ -112,8 +138,9 @@ article {
         align-items: center;
     }
 
-    & collaborators>ul>li>a:hover {
-        opacity: 0.75;
+    & info-grid a:hover {
+        text-underline-offset: 2px;
+        text-decoration: underline;
     }
 
     & collaborators>ul>li>a>img {
@@ -340,13 +367,13 @@ article {
         border-radius: 1rem;
     }
 
-    & pre > code {
+    & pre>code {
         margin-bottom: 4rem;
         max-width: 90vw;
         overflow: hidden;
     }
 
-    & pre > code {
+    & pre>code {
         border: 1px solid #71717a30;
         border-radius: 0.75rem;
     }

@@ -3,6 +3,7 @@ import { usePageContext } from "../../renderer/usePageContext"
 import Bulb from "~icons/eva/bulb-fill"
 import LanguagePicker from "./LanguagePicker"
 import * as m from "#lang/paraglide/messages"
+import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 
 export default function Footer() {
   const pageContext = usePageContext() as any
@@ -18,19 +19,35 @@ export default function Footer() {
           <h4 class="font-semibold mb-3">{m.footer_title_pages()}</h4>
           <ul class="space-y-2 -ml-1">
             <li>
-              <a
-                class={
-                  "text-zinc-400 transition-colors font-medium " +
-                  (pageContext.urlPathname.replace(getLocale(), "/") === "/"
-                    ? "text-zinc-600 dark:text-zinc-400"
-                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
-                }
-                href={(getLocale() + "/").endsWith("/") ? getLocale() : "/"}
-              >
-                {pageContext.urlPathname.replace(getLocale(), "/") === "/" &&
-                  "/"}{" "}
-                {m.footer_page_home()}
-              </a>
+              {languageTag() === sourceLanguageTag ? (
+                <a
+                  class={
+                    "text-zinc-400 transition-colors font-medium " +
+                    (pageContext.urlPathname.replace(getLocale(), "") === "/"
+                      ? "text-zinc-600 dark:text-zinc-400"
+                      : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                  }
+                  href={getLocale() + "/"}
+                >
+                  {pageContext.urlPathname.replace(getLocale(), "") === "/" &&
+                    "/"}{" "}
+                  {m.footer_page_home()}
+                </a>
+              ) : (
+                <a
+                  class={
+                    "text-zinc-400 transition-colors font-medium " +
+                    (pageContext.urlPathname.replace(getLocale(), "/") === "/"
+                      ? "text-zinc-600 dark:text-zinc-400"
+                      : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                  }
+                  href={(getLocale() + "/").endsWith("/") ? getLocale() : "/"}
+                >
+                  {pageContext.urlPathname.replace(getLocale(), "/") === "/" &&
+                    "/"}{" "}
+                  {m.footer_page_home()}
+                </a>
+              )}
             </li>
             <li>
               <a
@@ -102,7 +119,7 @@ export default function Footer() {
             <li>
               <a
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                href="/"
+                href="https://twitter.com/flornkm"
               >
                 x.com
               </a>
@@ -110,7 +127,7 @@ export default function Footer() {
             <li>
               <a
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                href="/about"
+                href="imessage://hello@floriankiem.com"
               >
                 {m.link_imessage()}
               </a>
@@ -118,7 +135,7 @@ export default function Footer() {
             <li>
               <a
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                href="/side-projects"
+                href="https://www.linkedin.com/in/flornkm/"
               >
                 LinkedIn
               </a>
@@ -126,7 +143,7 @@ export default function Footer() {
             <li>
               <a
                 class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
-                href="/feed"
+                href="mailto:hello@floriankiem.com"
               >
                 {m.link_email()}
               </a>

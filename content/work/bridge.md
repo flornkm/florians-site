@@ -6,9 +6,24 @@ cover: /images/bridge/cover-bridge.jpg
 date: 03 / 2023
 ---
 
+<info-grid>
+<div>
+
 # Bridge
 
 Browser based job page creator for Startups and SMEs.
+
+</div>
+<div>
+
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2023 |
+| Website | [bridge.supply](https://bridge.supply/) |
+
+</div>
+</info-grid>
 
 ![Bridge](/images/bridge/cover-bridge.jpg)
 

@@ -5,9 +5,24 @@ cover: /images/ambient-chat/cover-ambient-chat.jpg
 date: 05 / 2022
 ---
 
+<info-grid>
+<div>
+
 # Ambient Chat
 
 A chatbot that generates answers to your questions.
+
+</div>
+<div>
+
+Info
+| | |
+| ------------- | ------------- |
+| Year | 2023 |
+| Website | [Demo](https://ambient-chat.onrender.com/) |
+
+</div>
+</info-grid>
 
 ![Ambient Chat](/images/ambient-chat/cover-ambient-chat.jpg)
 
