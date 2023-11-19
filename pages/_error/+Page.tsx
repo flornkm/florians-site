@@ -1,5 +1,5 @@
 import Button, { ButtonWrapper } from "#components/Button"
-import * as m from "@inlang/paraglide-js/florians-site/messages"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({ is404 }: { is404: boolean }) {
   if (is404) {
