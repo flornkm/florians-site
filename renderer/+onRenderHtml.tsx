@@ -6,7 +6,11 @@ import { escapeInject, dangerouslySkipEscape } from "vike/server"
 import faviconUrl from "./favicon.svg"
 import type { PageContext } from "./types"
 import PageLayout from "../interface/layouts/PageLayout"
-import { availableLanguageTags, setLanguageTag } from "#lang/paraglide/runtime"
+import {
+  availableLanguageTags,
+  languageTag,
+  setLanguageTag,
+} from "#lang/paraglide/runtime"
 
 async function onRenderHtml(pageContext: PageContext) {
   setLanguageTag(() => {
@@ -38,9 +42,20 @@ async function onRenderHtml(pageContext: PageContext) {
     "/images/opengraph/og-image.jpg"
   const index = (config && config.noindex) || undefined
 
+  const ogLocales = () => {
+    switch (languageTag()) {
+      case "en":
+        return { current: "en_US", alternate: ["zh_CN"] }
+      case "zh":
+        return { current: "zh_CN", alternate: ["en_US"] }
+      default:
+        return { current: "en_US", alternate: ["zh_CN"] }
+    }
+  }
+
   const documentHtml = escapeInject`<!DOCTYPE html>
   <!-- Designed and coded by myself • Florian -->
-    <html lang="en">
+    <html lang=${languageTag()}>
       <head>
         <meta charset="UTF-8" />
         <link rel="icon" href="${faviconUrl}" />
@@ -55,7 +70,25 @@ async function onRenderHtml(pageContext: PageContext) {
         <meta property="twitter:title" content="${title}" />
         <meta name="twitter:site" content="@flornkm" />
         <meta name="twitter:creator" content="@flornkm" />
-        ${index ? escapeInject`<meta name="robots" content="noindex">` : ""}
+        ${
+          ogLocales()
+            ? escapeInject`<meta property="og:locale" content="${
+                ogLocales().current
+              }" />`
+            : ""
+        }
+        ${
+          ogLocales()
+            ? escapeInject`<meta property="og:local:alternate" content="${
+                ogLocales().alternate[0]
+              }" />`
+            : ""
+        }
+        ${
+          index || languageTag() === "zh"
+            ? escapeInject`<meta name="robots" content="noindex">`
+            : ""
+        }
         <title>${title}</title>
       </head>
       <body>
