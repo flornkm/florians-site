@@ -128,7 +128,7 @@ export default function Contact() {
               <p>{m.message_often_used()}</p>
               <Button
                 function={() => {
-                  chatInput.current!.value = "I have some freelance work."
+                  chatInput.current!.value = m.button_freelance_work()
                   sendMessage()
                 }}
                 small
@@ -138,7 +138,7 @@ export default function Contact() {
               </Button>
               <Button
                 function={() => {
-                  chatInput.current!.value = "I have a job opportunity for you."
+                  chatInput.current!.value = m.button_job_opportunity()
                   sendMessage()
                 }}
                 small
@@ -148,8 +148,7 @@ export default function Contact() {
               </Button>
               <Button
                 function={() => {
-                  chatInput.current!.value =
-                    "I got a question I want to ask you."
+                  chatInput.current!.value = m.button_got_question()
                   sendMessage()
                 }}
                 small
@@ -159,8 +158,7 @@ export default function Contact() {
               </Button>
               <Button
                 function={() => {
-                  chatInput.current!.value =
-                    "Let's drink a beer together and connect!"
+                  chatInput.current!.value = m.button_drink_beer()
                   sendMessage()
                 }}
                 small
@@ -260,7 +258,8 @@ function ChatBubble(props: {
           (props.position === "left" ? "ml-2" : "mr-2")
         }
       >
-        {props.position === "left" ? "Florian" : "You"} {m.time_at()} {time}
+        {props.position === "left" ? "Florian" : m.message_you()} {m.time_at()}{" "}
+        {time}
       </p>
     </div>
   )

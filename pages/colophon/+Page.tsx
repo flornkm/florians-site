@@ -5,6 +5,7 @@ import hljs from "highlight.js"
 import { useEffect } from "preact/hooks"
 import Slider from "#components/Slider"
 import Tooltip from "#components/Tooltip"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page() {
   useEffect(() => {
@@ -27,43 +28,44 @@ export default function Page() {
     <div class="w-full">
       <section class="w-full lg:pt-16 relative min-h-screen flex flex-col">
         <h1 class="text-3xl font-semibold mb-4 w-full order-2 md:order-1">
-          Colophon
+          {m.colophon_title()}
         </h1>
         <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400 order-3 md:order-2">
-          Every detail about my personal site, collected on one page.
+          {m.colophon_description()}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4 gap-6 md:items-start order-4 md:order-3 pb-32">
-          <p class="font-semibold leading-snug flex items-center">Typography</p>
+          <p class="font-semibold leading-snug flex items-center">
+            {m.title_typography()}
+          </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              For the typography on this website I've used{" "}
+              F{m.text_typography_first()}{" "}
               <InlineLink link="https://github.com/orioncactus/pretendard">
-                Pretendard Variable
+                {m.text_typography_pretendard()}
               </InlineLink>
-              , which was made with the influence of the Inter typeface and
-              Apple SF Pro.
+              {m.text_typography_second()}
             </p>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
-          <p class="font-medium leading-snug flex items-center">Iconography</p>
+          <p class="font-medium leading-snug flex items-center">
+            {m.title_iconography()}
+          </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              My icons are from{" "}
+              {m.text_iconography_first()}{" "}
               <InlineLink link="https://github.com/akveo/eva-icons">
-                Eva Icons
+                {m.text_iconography_eva_icons()}
               </InlineLink>
-              , offering both solid and outlined icons resulting in flexible
-              usage based on size and surroundings I used them in.
+              {m.text_iconography_second()}
             </p>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
-            Photography
+            {m.title_photography()}
           </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              Most of my photos where made from friends, colleagues or myself.
-              Credits to{" "}
+              {m.text_photography_first()}{" "}
               <InlineLink link="https://www.alicesopp.com/">
                 Alice Sopp
               </InlineLink>
@@ -79,25 +81,27 @@ export default function Page() {
             </p>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
-          <p class="font-semibold leading-snug flex items-center">Mockups</p>
+          <p class="font-semibold leading-snug flex items-center">
+            {m.title_mockups()}
+          </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              The mockups I've used are from the{" "}
+              {m.text_mockups_first()}{" "}
               <InlineLink link="https://artboard.studio/">
                 Artboard Studio
               </InlineLink>{" "}
-              Figma plugin.
+              {m.text_mockups_second()}
             </p>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
-            UI Elements
+            {m.title_ui_elements()}
           </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400 mb-6">
-              Here are some of the elements I've build especially for this site:
+              {m.text_ui_elements_first()}
             </p>
-            <p class="text-black font-medium mb-2">Letter stack</p>
+            <p class="text-black font-medium mb-2">{m.title_letter_stack()}</p>
             <div class="bg-zinc-100 rounded-xl group px-2 pb-2 dark:bg-zinc-950 mb-12">
               <div class="w-full h-64 relative overflow-hidden flex items-end justify-center">
                 <div class="absolute w-[70%] h-56 bg-zinc-50 border border-zinc-200/70 rounded-lg -bottom-2 shadow-xl shadow-black/5 transition-all dark:bg-zinc-900 dark:border-zinc-800 hover:mb-4 hover:bg-white dark:hover:bg-zinc-800 dark:hover:border-zinc-700" />
@@ -117,7 +121,7 @@ const fetchLetters = async () => {
 `}</code>
               </pre>
             </div>
-            <p class="text-black font-medium mb-2">Slider</p>
+            <p class="text-black font-medium mb-2">{m.title_slider()}</p>
             <div class="bg-zinc-100 rounded-xl group px-2 pb-2 dark:bg-zinc-950 mb-12">
               <div class="w-full lg:h-64 h-auto py-8 relative overflow-hidden flex items-center justify-center px-4 lg:px-16">
                 <Slider>
@@ -178,14 +182,14 @@ export default function Slider(props: {
 `}</code>
               </pre>
             </div>
-            <p class="text-black font-medium mb-2">Tooltip</p>
+            <p class="text-black font-medium mb-2">{m.title_tooltip()}</p>
             <div class="bg-zinc-100 rounded-xl px-2 pb-2 dark:bg-zinc-950">
               <div class="w-full h-64 relative overflow-hidden flex items-center justify-center">
                 <p class="group relative font-medium cursor-default">
                   <Tooltip position="top" class="-translate-y-2">
-                    Custom Tooltip
+                    {m.tooltip_example()}
                   </Tooltip>
-                  Hover over me
+                  {m.hover_text()}
                 </p>
               </div>
               <pre class="dark:selection:bg-zinc-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
@@ -243,62 +247,62 @@ export default function Tooltip(props: {
           </div>
 
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
-          <p class="font-semibold leading-snug flex items-center">Tech Stack</p>
+          <p class="font-semibold leading-snug flex items-center">
+            {m.title_tech_stack()}
+          </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400 mb-6">
-              The tech stack I've used might seem more advanced than you'd
-              probably expect. One goal I followed was to use unopinionated
-              tooling which allowed me to build my site as flexible as possible.
+              {m.text_tech_stack_first()}
             </p>
             <ul class="text-zinc-500 dark:text-zinc-400 space-y-2">
               <li>
-                Dev Environment:{" "}
+                {m.list_dev_env()}{" "}
                 <InlineLink link="https://vitejs.dev/">Vite</InlineLink>
               </li>
               <li>
-                SSR / Prerendering:{" "}
+                {m.ssr_list()}{" "}
                 <InlineLink link="https://vike.dev/">Vike</InlineLink>
               </li>
               <li>
-                JS Framework:{" "}
+                {m.list_js_framework()}{" "}
                 <InlineLink link="https://preactjs.com/">Preact</InlineLink>
               </li>
               <li>
-                Markdown parsing:{" "}
+                {m.list_markdown_parsing()}{" "}
                 <InlineLink link="https://github.com/markedjs/marked">
                   marked
                 </InlineLink>
               </li>
               <li>
-                CSS Framework:{" "}
+                {m.list_css_framework()}{" "}
                 <InlineLink link="https://tailwindcss.com/">
                   Tailwind CSS
                 </InlineLink>
               </li>
               <li>
-                Contact Form endpoint:{" "}
+                {m.list_contact()}{" "}
                 <InlineLink link="https://formspree.io/">Formspree</InlineLink>
               </li>
               <li>
-                Database (for the letter-stack):{" "}
+                {m.list_database()}{" "}
                 <InlineLink link="https://firebase.google.com/">
                   Firebase
                 </InlineLink>
               </li>
               <li>
-                Analytics:{" "}
+                {m.list_analytics()}{" "}
                 <InlineLink link="https://vercel.com/analytics">
                   Vercel Analytics
                 </InlineLink>
               </li>
               <li>
-                Translation:{" "}
+                {m.list_translation()}{" "}
                 <InlineLink link="https://inlang.com/m/gerre34r/library-inlang-paraglideJs">
                   inlang paraglide JS
                 </InlineLink>
               </li>
               <li>
-                Type Syntax:{" "}
+                {m.list_type()}{" "}
                 <InlineLink link="https://www.typescriptlang.org/">
                   Typescript
                 </InlineLink>
@@ -306,22 +310,24 @@ export default function Tooltip(props: {
             </ul>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
-          <p class="font-semibold leading-snug flex items-center">Hosting</p>
+          <p class="font-semibold leading-snug flex items-center">
+            {m.title_hosting()}
+          </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              My personal site is hosted on{" "}
-              <InlineLink link="https://vercel.com/">Vercel</InlineLink>. The
-              repository for it on{" "}
+              {m.text_hosting_first()}{" "}
+              <InlineLink link="https://vercel.com/">Vercel</InlineLink>.{" "}
+              {m.text_hosting_second()}{" "}
               <InlineLink link="https://github.com/">GitHub</InlineLink>.
             </p>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
-            Inspiration
+            {m.title_inspiration()}
           </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              I got inspired by the following sites from awesome people{" "}
+              {m.text_inspiration_first()}{" "}
               <InlineLink link="https://linusrogge.com/">
                 Linus Rogge
               </InlineLink>
@@ -337,12 +343,11 @@ export default function Tooltip(props: {
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
-            Great humans
+            {m.title_great_humans()}
           </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              This is a special section for giving credit to special people I
-              like talking to, working with and enjoying time together:{" "}
+              {m.text_great_humans_first()}{" "}
               <InlineLink link="https://nilseller.com/">Nils Eller</InlineLink>,{" "}
               <InlineLink link="https://antonstallboerger.com/">
                 Anton Stallbörger
@@ -355,12 +360,14 @@ export default function Tooltip(props: {
               <InlineLink link="https://linusrogge.com/">
                 Nico Tritschler
               </InlineLink>
-              . <br /> Obviously I also want to mention the talented team at{" "}
+              . <br /> {m.text_great_humans_second()}{" "}
               <InlineLink link="https://inlang.com/">inlang</InlineLink> here.
             </p>
           </div>
           <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
-          <p class="font-semibold leading-snug flex items-center">Feedback</p>
+          <p class="font-semibold leading-snug flex items-center">
+            {m.title_feedback()}
+          </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
               While building this site, I got feedback from: TBD
@@ -373,9 +380,9 @@ export default function Tooltip(props: {
           class="order-1 md:order-4"
         >
           <p class="line-clamp-2">
-            Star on GitHub{" "}
+            {m.title_star_github()}{" "}
             <span class="text-zinc-400 text-sm dark:text-zinc-500 md:inline-block block md:ml-2">
-              Find my open-source repository on GitHub.
+              {m.text_star_github()}
             </span>
           </p>
         </Island>

@@ -2,16 +2,15 @@ import Button from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
 import Short from "~icons/eva/flash-fill"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({ projects }: { projects: any }) {
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
-        <h1 class="text-3xl font-semibold mb-4">Archive</h1>
+        <h1 class="text-3xl font-semibold mb-4">{m.archive_title()}</h1>
         <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
-          In my archive, you will find smaller creations, MVPs, ideas and
-          results from hackathons. Feel free to look through if you are
-          interested.
+          {m.archive_description()}
         </p>
         <div class="md:hidden text-sm flex items-center gap-1 text-zinc-400 dark:text-zinc-500 mb-6">
           <Short class="w-4 pt-0.5 transition-colors text-zinc-300 dark:text-zinc-700" />
@@ -36,7 +35,7 @@ export default function Page({ projects }: { projects: any }) {
                         position="top"
                         class="-translate-y-3 hidden md:block"
                       >
-                        Short case study
+                        {m.short_case_study()}
                       </Tooltip>
                     </div>
                   ) : (
@@ -68,7 +67,7 @@ export default function Page({ projects }: { projects: any }) {
                     class="relative md:ml-auto col-span-2 md:col-span-1"
                     chevron
                   >
-                    Open
+                    {m.button_open()}
                   </Button>
                 </div>
                 {projects.indexOf(project) !== projects.length - 1 && (

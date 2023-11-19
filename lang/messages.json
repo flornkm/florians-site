@@ -132,6 +132,58 @@
       ]
     },
     {
+      "id": "about_education_at",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "at"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "在"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about_education_now",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Now"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "现在"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "about_education_title",
       "selectors": [],
       "variants": [
@@ -756,6 +808,58 @@
       ]
     },
     {
+      "id": "archive_description",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "In my archive, you will find smaller creations, MVPs, ideas and\n          results from hackathons. Feel free to look through if you are\n          interested."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "在我的档案中，您会发现较小的创作、MVP、黑客马拉松的想法和结果。如果您有兴趣，请随意查看。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "archive_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Archive"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "档案"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "bucketlist_city",
       "selectors": [],
       "variants": [
@@ -1068,6 +1172,58 @@
       ]
     },
     {
+      "id": "button_open",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Open"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "打开"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_open_issue",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Open issue"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开放问题"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "button_readmore",
       "selectors": [],
       "variants": [
@@ -1088,6 +1244,32 @@
             {
               "type": "Text",
               "value": "阅读更多"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "button_return_home",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Return home"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "回家"
             }
           ]
         }
@@ -1276,6 +1458,58 @@
       ]
     },
     {
+      "id": "colophon_description",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Every detail about my personal site, collected on one page."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "有关我个人网站的所有详细信息都收集在一页上。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "colophon_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Colophon"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "版画"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "cover_image_source",
       "selectors": [],
       "variants": [
@@ -1328,6 +1562,32 @@
       ]
     },
     {
+      "id": "dev_env",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Dev Environment:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开发环境："
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "email_link",
       "selectors": [],
       "variants": [
@@ -1348,6 +1608,58 @@
             {
               "type": "Text",
               "value": "电子邮件"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feed_description",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "This is my personal feed. A place for collecting my memories, writings\n          and showcasing stuff."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "这是我的个人动态。一个收集我的记忆、著作和展示东西的地方。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feed_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Feed"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "喂养"
             }
           ]
         }
@@ -1478,6 +1790,32 @@
             {
               "type": "Text",
               "value": "档案"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "footer_page_colophon",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Colophon"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "版画"
             }
           ]
         }
@@ -1718,6 +2056,162 @@
       ]
     },
     {
+      "id": "hover_text",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Hover over me"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "将鼠标悬停在我上方"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "icon_photography",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Photography"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "摄影"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "imprint_text_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "For the internet presence of: floriankiem.com according to German §5\n          of TMG"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "对于互联网上的存在：floriankiem.com 根据德国 TMG §5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "imprint_text_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "The entire content of this portfolio website, including but not\n          limited to text, graphics, images, logos, videos, and design elements,\n          is intellectual property unless otherwise stated. It is protected by\n          applicable copyright laws and international treaties. Unauthorized use\n          or reproduction of the content on this website is only allowed for\n          private use and otherwise strictly prohibited and may violate\n          copyright laws."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "除非另有说明，本投资组合网站的全部内容，包括但不限于文本、图形、图像、徽标、视频和设计元素，均为知识产权。它受适用的版权法和国际条约的保护。未经授权使用或复制本网站内容仅限私人使用，否则严格禁止，并可能违反版权法。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "imprint_text_third",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "The internal content provided on this portfolio website is for general\n          informational purposes only. While Florian endeavors to provide\n          accurate and up-to-date information, it makes no representations or\n          warranties of any kind, express or implied, about the completeness,\n          accuracy, reliability, suitability, or availability of the content. In\n          no event shall Florian be liable for any loss or damage, including\n          without limitation indirect or consequential loss or damage, or any\n          loss or damage whatsoever arising from the use or reliance on the\n          internal content of this website."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "本投资组合网站上提供的内部内容仅供一般参考之用。虽然 Florian 努力提供准确和最新的信息，但它不对内容的完整性、准确性、可靠性、适用性或可用性做出任何形式的明示或暗示的陈述或保证。在任何情况下，Florian 均不对任何损失或损害负责，包括但不限于间接或后果性损失或损害，或因使用或依赖本网站内部内容而产生的任何损失或损害。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "imprint_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Imprint"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "印记"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "letter_handle",
       "selectors": [],
       "variants": [
@@ -1894,6 +2388,240 @@
             {
               "type": "Text",
               "value": "短信"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_analytics",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Analytics:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "分析："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_contact",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Contact Form endpoint:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "联系表端点："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_css_framework",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "CSS Framework:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "CSS 框架："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_database",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Database (for the letter-stack):"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "数据库（用于信件堆栈）："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_dev_env",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Dev Environment:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开发环境："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_js_framework",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "JS Framework:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "JS框架："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_markdown_parsing",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Markdown parsing:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Markdown 解析："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_translation",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Translation:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "翻译："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list_type",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Type Syntax:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "类型语法："
             }
           ]
         }
@@ -2082,6 +2810,32 @@
       ]
     },
     {
+      "id": "message_you",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "You"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "你"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "name_title",
       "selectors": [],
       "variants": [
@@ -2212,6 +2966,812 @@
       ]
     },
     {
+      "id": "not_found_error_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "This page couldn't be found."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "无法找到该页面。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "not_found_error_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Please try\n          with another page."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "请尝试使用另一个页面。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo_description_apartment",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Heading off to work in my Berlin apartment"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "前往我的柏林公寓上班"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo_description_berlin",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "A photo of a rainy day in Berlin"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "柏林下雨天的照片"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo_description_dinner",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Having dinner at a Berlin restaurant with Anton, Nils and Linus"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "与安东、尼尔斯和莱纳斯在柏林餐厅共进晚餐"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo_description_festival",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "A cold night at a campsite together with Luis"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "与路易斯一起在露营地度过一个寒冷的夜晚"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo_description_inlang_onsite",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "inlang Onsite - A painting spinning and creating a cool effect"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "inlang Onsite - 一幅旋转的画作，创造出很酷的效果"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo_description_inlang_outside",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "inlang Onsite - Standing outside with Felix, Nils, Niklas and Jannes"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "inlang 现场 - 与 Felix、Nils、Niklas 和 Jannes 一起站在外面"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "privacy_policy_notification",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "The following text isn't translated because the privacy text is\n            important in english-speaking countries only."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "以下文本未翻译，因为隐私文本仅在英语国家/地区很重要。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "privacy_policy_title",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Privacy Policy"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "隐私政策"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "server_error_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "You encountered an error. Please try"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "您遇到错误。请尝试"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "server_error_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "again later or open an issue."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "稍后再次或提出问题。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "short_case_study",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Short case study"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "简短的案例研究"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ssr_list",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "SSR / Prerendering:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "SSR/预渲染："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_great_humans_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "This is a special section for giving credit to special people I\n              like talking to, working with and enjoying time together:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "这是一个特殊的部分，旨在表彰我喜欢与之交谈、共事并享受共度时光的特殊人士："
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_great_humans_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Obviously I also want to mention the talented team at"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "显然我还想提到才华横溢的团队"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_hosting_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "My personal site is hosted on"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我的个人网站托管在"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_hosting_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "The\n              repository for it on"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "它的存储库位于"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_iconography_eva_icons",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Eva Icons"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "伊娃图标"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_iconography_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "My icons are from"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我的图标来自"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_iconography_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": ", offering both solid and outlined icons resulting in flexible\n              usage based on size and surroundings I used them in."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "，提供实心和轮廓图标，从而根据我使用它们的大小和环境灵活使用。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_inspiration_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "I got inspired by the following sites from awesome people"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我从以下网站中获得了来自优秀人士的启发"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_mockups_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "The mockups I've used are from the"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我使用的模型来自"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_mockups_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Figma plugin."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Figma 插件。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_photography_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Most of my photos where made from friends, colleagues or myself.\n              Credits to"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我的大部分照片都是由朋友、同事或我自己拍摄的。致谢"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_star_github",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Find my open-source repository on GitHub."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "在 GitHub 上找到我的开源存储库。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_tech_stack_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "The tech stack I've used might seem more advanced than you'd\n              probably expect. One goal I followed was to use unopinionated\n              tooling which allowed me to build my site as flexible as possible."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我使用的技术堆栈可能看起来比您想象的更先进。我遵循的目标之一是使用不拘一格的工具，这使我能够尽可能灵活地构建我的网站。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_typography_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "or the typography on this website I've used"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "或者我在这个网站上使用过的排版"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_typography_pretendard",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Pretendard Variable"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "假装变量"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_typography_second",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": ", which was made with the influence of the Inter typeface and\n              Apple SF Pro."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "，它是受到Inter字体和Apple SF Pro的影响而制作的。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_ui_elements_first",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Here are some of the elements I've build especially for this site:"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "以下是我专门为此网站构建的一些元素："
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "time_at",
       "selectors": [],
       "variants": [
@@ -2232,6 +3792,396 @@
             {
               "type": "Text",
               "value": "在"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_feedback",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Feedback"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "反馈"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_great_humans",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Great humans"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "伟大的人类"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_hosting",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Hosting"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "托管"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_iconography",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Iconography"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "图像学"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_inspiration",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Inspiration"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "灵感"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_letter_stack",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Letter stack"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "信叠"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_mockups",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Mockups"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "模型"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_photography",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Photography"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "摄影"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_slider",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Slider"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "滑块"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_star_github",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Star on GitHub"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "在 GitHub 上加星标"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_tech_stack",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Tech Stack"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "技术堆栈"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_tooltip",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Tooltip"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "工具提示"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_typography",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Typography"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "版式"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title_ui_elements",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "UI Elements"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "用户界面元素"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tooltip_example",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Custom Tooltip"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "自定义工具提示"
             }
           ]
         }

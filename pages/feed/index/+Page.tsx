@@ -1,6 +1,6 @@
 import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
-import * as m from "@inlang/paraglide-js/florians-site/messages"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({
   posts,
@@ -12,10 +12,9 @@ export default function Page({
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
-        <h1 class="text-3xl font-semibold mb-4">Feed</h1>
+        <h1 class="text-3xl font-semibold mb-4">{m.feed_title()}</h1>
         <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
-          This is my personal feed. A place for collecting my memories, writings
-          and showcasing stuff.
+          {m.feed_description()}
         </p>
         <div class="w-full h-[1px] bg-zinc-100 my-16 dark:bg-zinc-900" />
         <div class="py-0.5 pb-16 max-w-lg mx-auto">
