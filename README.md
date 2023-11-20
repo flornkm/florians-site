@@ -1,5 +1,5 @@
 <a href="https://github.com/flornkm/florians-site">
-   <img src="./public/images/assets/readme-banner.png" alt="Florian Website Readme Banner">
+   <img src="https://github.com/flornkm/florians-site/assets/92092993/4ba3f09b-1d0e-4840-907c-48744eb3f596" alt="Florian Website Readme Banner">
   </a>
 
   <h3 align="center">Florians Site</h3>
