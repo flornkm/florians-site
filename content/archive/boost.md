@@ -16,12 +16,11 @@ Nutrition application & hardware device
 
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2022 - 2023 |
+|              |                                                    |
+| ------------ | -------------------------------------------------- |
+| Year         | 2022 - 2023                                        |
 | Collaborator | [Anton Stallbörger](https://antonstallboerger.com) |
-| Website | [Landingpage](https://boost-three.vercel.app/) |
+| Website      | [Landingpage](https://boost-three.vercel.app/)     |
 
 </div>
 </info-grid>

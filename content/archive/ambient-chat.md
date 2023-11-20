@@ -15,10 +15,9 @@ A chatbot that generates answers to your questions.
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2023 |
+|         |                                            |
+| ------- | ------------------------------------------ |
+| Year    | 2023                                       |
 | Website | [Demo](https://ambient-chat.onrender.com/) |
 
 </div>

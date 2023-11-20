@@ -15,12 +15,11 @@ ThreeJS Data Visualization
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2022 |
-| Collaborator | [Nils Eller](https://nilseller.com) |
-| Website | [Demo](https://homicides-visualization.designwithtech.com/) |
+|              |                                                             |
+| ------------ | ----------------------------------------------------------- |
+| Year         | 2022                                                        |
+| Collaborator | [Nils Eller](https://nilseller.com)                         |
+| Website      | [Demo](https://homicides-visualization.designwithtech.com/) |
 
 </div>
 </info-grid>

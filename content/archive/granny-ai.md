@@ -15,12 +15,11 @@ AI Chatbot for Shopping made in 48h
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2023 |
+|              |                                                    |
+| ------------ | -------------------------------------------------- |
+| Year         | 2023                                               |
 | Collaborator | [Anton Stallbörger](https://antonstallboerger.com) |
-| Website | [Demo](https://granny-ai.vercel.app/) |
+| Website      | [Demo](https://granny-ai.vercel.app/)              |
 
 </div>
 </info-grid>

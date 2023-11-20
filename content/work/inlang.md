@@ -2,7 +2,7 @@
 title: inlang
 description: Building an ecosystem for globalization.
 icon: /images/inlang/inlang-icon.svg
-cover: /images/inlang/cover-inlang.jpg
+cover: /images/inlang/inlang.png
 date: 10 / 2023
 ---
 
@@ -22,12 +22,11 @@ most likely only interested you when you want to know more about me as a develop
 
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2023 |
+|               |                                                                                                                                                                                                                                                                                                                        |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Year          | 2023                                                                                                                                                                                                                                                                                                                   |
 | Collaborators | [Samuel Stroschein](https://github.com/samuelstroschein), [Felix Häberle](https://github.com/felixhaeberle), [Jan Johannes](https://github.com/janfjohannes), [Niklas Buchfink](https://github.com/NiklasBuchfink), [Nils Jacobsen](https://github.com/NilsJacobsen), [Jannes Blobel](https://github.com/jannesblobel) |
-| Website | [inlang.com](https://inlang.com) |
+| Website       | [inlang.com](https://inlang.com)                                                                                                                                                                                                                                                                                       |
 
 </div>
 </info-grid>

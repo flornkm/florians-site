@@ -47,7 +47,7 @@ export default function Work(props: {
                   <img class="w-8 h-8" src={project.icon} />
                 </div>
                 <div class="w-full">
-                  <div class="flex gap-8 justify-between items-center sticky top-0 lg:top-14 z-40 py-2">
+                  <div class="flex gap-4 md:gap-8 justify-between items-center sticky top-0 lg:top-14 z-40 py-2">
                     <div class="w-full h-full absolute left-1/2 -translate-x-1/2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90" />
                     <div class="flex md:gap-3 gap-2 items-center relative">
                       <h3 class="text-2xl font-semibold">{project.title}</h3>
@@ -81,7 +81,12 @@ export default function Work(props: {
                   <p class="mb-6 text-zinc-500 dark:text-zinc-400">
                     {project.description}
                   </p>
-                  <img src={project.cover} />
+                  <div class="bg-zinc-100 dark:bg-zinc-900/70 overflow-hidden lg:h-[512px]">
+                    <img
+                      class="relative lg:top-8 md:left-0 md:h-auto h-96 md:object-fit md:object-center object-cover object-left"
+                      src={project.cover}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

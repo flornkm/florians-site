@@ -15,12 +15,11 @@ Smart home application with a big focus on UX
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2022 - 2023 |
-| Collaborator | [Alice Sopp](https://alicesopp.com) |
-| Website | [Prototype](https://www.figma.com/proto/nNVxSEvwhOYCrpbsEkcdy2/visual_prototyping_project?page-id=304%3A10971&node-id=399%3A18472&viewport=712%2C458%2C0.07&scaling=scale-down&starting-point-node-id=399%3A18472) |
+|              |                                                                                                                                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Year         | 2022 - 2023                                                                                                                                                                                                        |
+| Collaborator | [Alice Sopp](https://alicesopp.com)                                                                                                                                                                                |
+| Website      | [Prototype](https://www.figma.com/proto/nNVxSEvwhOYCrpbsEkcdy2/visual_prototyping_project?page-id=304%3A10971&node-id=399%3A18472&viewport=712%2C458%2C0.07&scaling=scale-down&starting-point-node-id=399%3A18472) |
 
 </div>
 </info-grid>

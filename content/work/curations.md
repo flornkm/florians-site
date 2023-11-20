@@ -2,7 +2,7 @@
 title: Curations
 description: A curated collection of the best products on the web.
 icon: /images/curations/curations-icon.svg
-cover: /images/curations/cover-curations.jpg
+cover: /images/curations/curations.png
 date: 04 / 2023
 ---
 
@@ -17,12 +17,11 @@ A curated collection of the best products on the web.
 
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2022 - 2023 |
+|               |                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Year          | 2022 - 2023                                                                                                              |
 | Collaborators | [Nils Eller](https://nilseller.com), [[Anton Stallbörger](https://antonstallboerger.com)](https://antonstallboerger.com) |
-| Website | [curations.tech](https://curations.tech) |
+| Website       | [curations.tech](https://curations.tech)                                                                                 |
 
 </div>
 </info-grid>
