@@ -3,11 +3,11 @@
 @import "tailwindcss/utilities";
 
 @font-face {
-	font-family: 'Pretendard Variable';
-	font-weight: 45 920;
+	font-family: 'Pretendard Variable', sans-serif;
+	font-weight: 1 1000;
 	font-style: normal;
 	font-display: swap;
-	src: url('/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');
+	src: url('/fonts/pretendard/PretendardVariable.woff2') format('woff2');
 }
 
 @font-face {
