@@ -15,10 +15,9 @@ Raycast SEO Extension
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2023 |
+|         |                                                            |
+| ------- | ---------------------------------------------------------- |
+| Year    | 2023                                                       |
 | Website | [Raycast Store](https://www.raycast.com/flornkm/web-audit) |
 
 </div>

@@ -2,7 +2,7 @@
 title: Bridge
 description: Browser based job page creator for Startups and SMEs.
 icon: /images/bridge/bridge-icon.svg
-cover: /images/bridge/cover-bridge.jpg
+cover: /images/bridge/bridge.png
 date: 03 / 2023
 ---
 
@@ -16,10 +16,9 @@ Browser based job page creator for Startups and SMEs.
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2023 |
+|         |                                         |
+| ------- | --------------------------------------- |
+| Year    | 2023                                    |
 | Website | [bridge.supply](https://bridge.supply/) |
 
 </div>

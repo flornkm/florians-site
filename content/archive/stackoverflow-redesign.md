@@ -15,12 +15,11 @@ Redesign & VS Code Extension
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2022 |
-| Collaborator | [Nils Eller](https://nilseller.com) |
-| Website | [Prototype](https://www.figma.com/proto/UIh7ItWTGGOeEmcRwNq9Of/stackoverflow_redesign?page-id=218%3A884&node-id=427%3A1477&viewport=330%2C-71%2C0.02&scaling=scale-down&starting-point-node-id=427%3A1477&show-proto-sidebar=1) |
+|              |                                                                                                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Year         | 2022                                                                                                                                                                                                                            |
+| Collaborator | [Nils Eller](https://nilseller.com)                                                                                                                                                                                             |
+| Website      | [Prototype](https://www.figma.com/proto/UIh7ItWTGGOeEmcRwNq9Of/stackoverflow_redesign?page-id=218%3A884&node-id=427%3A1477&viewport=330%2C-71%2C0.02&scaling=scale-down&starting-point-node-id=427%3A1477&show-proto-sidebar=1) |
 
 </div>
 </info-grid>

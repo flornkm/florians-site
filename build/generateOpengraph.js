@@ -78,6 +78,19 @@ fs.readdir("./content", (err, folders) => {
               ctx.drawImage(img, 152, 280, 896, 560)
             })
             .catch((e) => console.log("Error: ", e))
+        } else if (info.cover && info.cover.includes(".png")) {
+          const publicRoot = "./public"
+
+          await PImage.decodePNGFromStream(
+            fs.createReadStream(`${publicRoot}${info.cover}`)
+          )
+            .then((img) => {
+              // img width and height should be accordingly calculated
+              // to contain the same aspect ratio, but the widht should
+              // be exactly 1040
+              ctx.drawImage(img, 152, 280, 896, 560)
+            })
+            .catch((e) => console.log("Error: ", e))
         }
 
         PImage.encodeJPEGToStream(

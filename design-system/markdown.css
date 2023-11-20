@@ -30,6 +30,10 @@ article {
             flex-direction: row;
             gap: 8rem;
         }
+
+        & info-grid>div:nth-child(2) {
+            margin-top: 3.2rem;
+        }
     }
 
     @media screen and (max-width: 1023px) {
@@ -40,6 +44,11 @@ article {
 
         & info-grid>div>p {
             margin-bottom: 1rem;
+        }
+
+        & info-grid>div:nth-child(2) {
+            max-width: 32rem;
+            width: 100%;
         }
     }
 

@@ -15,12 +15,11 @@ Heart Simulator & Monitoring
 </div>
 <div>
 
-Info
-| | |
-| ------------- | ------------- |
-| Year | 2022 - 2023 |
-| Collaborator | [Anton Stallbörger](https://antonstallboerger.com) |
-| Website | [Documentation](https://heartbeat-documentation.vercel.app/) |
+|              |                                                              |
+| ------------ | ------------------------------------------------------------ |
+| Year         | 2022 - 2023                                                  |
+| Collaborator | [Anton Stallbörger](https://antonstallboerger.com)           |
+| Website      | [Documentation](https://heartbeat-documentation.vercel.app/) |
 
 </div>
 </info-grid>
