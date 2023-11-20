@@ -1,6 +1,7 @@
 <a href="https://github.com/flornkm/florians-site">
-   <img src="https://github.com/flornkm/florians-site/assets/92092993/4ba3f09b-1d0e-4840-907c-48744eb3f596" alt="Florian Website Readme Banner">
+   <img src="https://github.com/flornkm/florians-site/assets/92092993/808d1a88-95e5-4a3e-956d-1d457d201f3a" alt="Florian Website Readme Banner">
   </a>
+
 
   <h3 align="center">Florians Site</h3>
 
