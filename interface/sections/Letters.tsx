@@ -79,12 +79,7 @@ export default function Letters() {
 
   return (
     <div class="overflow-hidden pt-56" onClick={() => setZoom(-1)}>
-      <h3
-        class={
-          "text-2xl font-semibold text-center transition-transform mb-8 " +
-          (zoom !== -1 ? "md:translate-y-0 -translate-y-12" : "")
-        }
-      >
+      <h3 class="text-2xl font-semibold text-center md:mb-8 mb-16">
         {m.letters_title()}
       </h3>
       <div>
