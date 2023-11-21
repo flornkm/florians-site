@@ -42,7 +42,7 @@ export default {
       },
     },
     fontFamily: {
-      sans: ["Pretendard Variable", "Inter", "sans-serif"],
+      sans: ["Pretendard Variable", "Pretendard", "Inter", "sans-serif"],
       mono: [
         "Fragment Mono",
         "ui-monospace",
