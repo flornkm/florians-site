@@ -63,6 +63,7 @@ export default function Page() {
           Thanks! ♥️
         </p>
         <img
+          alt="Signature"
           src="https://user-images.githubusercontent.com/92092993/282730965-b5a49150-459d-4eb5-a1e6-a0e9850c02b0.png"
           class="mx-auto w-24 opacity-40"
         />

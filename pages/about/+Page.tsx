@@ -118,6 +118,7 @@ export default function Page() {
             <img
               src="/images/avatars/florian_student.webp"
               class="aspect-square rounded-full"
+              alt="Florian as a student at HfG Schwäbisch Gmünd"
             />
           </div>
           <div class="flex-grow md:max-w-md">
@@ -280,6 +281,7 @@ export default function Page() {
                             window.open(tool.link)
                           }
                           src={tool.icon}
+                          alt={tool.name}
                           class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-zinc-800"
                         />
                         <Tooltip position="top" class="-translate-y-3.5 z-20">
@@ -303,6 +305,7 @@ export default function Page() {
                             window.open(tool.link)
                           }
                           src={tool.icon}
+                          alt={tool.name}
                           class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-zinc-800"
                         />
                         <Tooltip position="top" class="-translate-y-3.5 z-20">
@@ -347,6 +350,7 @@ export default function Page() {
               <div>
                 <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <img
+                    alt="Enjoy the Silence by Depeche Mode"
                     src="/images/music-covers/enjoy_silence.jpg"
                     class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
                   />
@@ -371,6 +375,7 @@ export default function Page() {
               <div>
                 <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <img
+                    alt="Serotonin Moonbeams by The Blessed Madonna"
                     src="/images/music-covers/serotonin_moonbeams.jpg"
                     class="w-40 h-40 rounded-full aspect-square active:cursor-progress md:active:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
                   />

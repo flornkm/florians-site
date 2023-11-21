@@ -44,7 +44,13 @@ export default function Work(props: {
             <div class="w-full group/project">
               <div class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative">
                 <div class="lg:py-2 lg:sticky top-14 flex-shrink-0">
-                  <img class="w-8 h-8" src={project.icon} />
+                  <img
+                    alt={`
+                    Icon of ${project.title} project
+                  `}
+                    class="w-8 h-8"
+                    src={project.icon}
+                  />
                 </div>
                 <div class="w-full">
                   <div class="flex gap-4 md:gap-8 justify-between items-center sticky top-0 lg:top-14 z-40 py-2">
@@ -85,6 +91,7 @@ export default function Work(props: {
                     <img
                       class="relative lg:top-8 md:left-0 md:h-auto h-96 md:object-fit md:object-center object-cover object-left"
                       src={project.cover}
+                      alt={project.title}
                     />
                   </div>
                 </div>
