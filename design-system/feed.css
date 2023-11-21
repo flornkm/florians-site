@@ -23,6 +23,10 @@ article {
         & p {
             color: #a1a1aa;
         }
+
+        & a {
+            color: white;
+        }
     }
 
     & strong {
@@ -38,9 +42,4 @@ article {
         transition: all ease-in-out 0.1s;
         cursor: alias;
     }
-
-    & a:hover {
-        color: #71717a;
-    }
-
 }
