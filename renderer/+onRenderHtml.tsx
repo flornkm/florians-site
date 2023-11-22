@@ -60,6 +60,7 @@ async function onRenderHtml(pageContext: PageContext) {
         <meta charset="UTF-8" />
         <link rel="icon" href="${faviconUrl}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${title}</title>
         <meta name="description" content="${desc}" />
         <meta property="og:image" content="https://florians-site-preview.vercel.app${image}" />
         <meta property="og:description" content="${desc}" />
@@ -91,7 +92,15 @@ async function onRenderHtml(pageContext: PageContext) {
         }
         <!-- Analytics site tags -->
         <script async src="https://analytics.eu.umami.is/script.js" data-website-id="7e7bfc3e-f88c-4865-89a1-395e7b504c5c"></script>
-        <title>${title}</title>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RH4CNMQP6G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-RH4CNMQP6G');
+        </script>
       </head>
       <body>
         ${dangerouslySkipEscape(pageHtml)}
