@@ -35,6 +35,7 @@ export default function Page({
                 </p>
                 <article>
                   <div
+                    class="post"
                     dangerouslySetInnerHTML={{ __html: content[post.slug] }}
                   />
                 </article>

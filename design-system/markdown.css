@@ -386,6 +386,15 @@ article {
         border: 1px solid #71717a30;
         border-radius: 0.75rem;
     }
+
+    & div.post > p:nth-child(3), div.post > p:nth-child(4) {
+        font-size: 1rem;
+    }
+
+    & div.post > p.caption {
+        font-size: 0.8rem;
+        color:#71717a;
+    }
 }
 
 article>div>p>img:nth-child(1) {
