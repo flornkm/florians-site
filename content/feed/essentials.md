@@ -4,24 +4,27 @@ description: My personal essentials I'm using everyday.
 date: 23 / 11 / 2023
 ---
 
-# Three everyday life things
+# Three things I use every day
 
-Sharing things that I commonly use in my everyday life. I want to set this in contrast to the listings other people are doing on their website, because I just take things with _real benefits_, not just things that _look fancy_.
+Sharing things that I commonly use in my everyday life. I want to set this in contrast to the listings other people are creating on their website, because I just take things with _real benefits_ for myself, not just things that _look fancy_.
 
-When I attend meetings, good headphones are necessary. I have decided to not buy the Apple AirPods Max as they were not updated, still have a lightning adapter, and are quite pricy. As an alternative solution, I've bought the Sony WH-1000XM5 headphones. They have super good noise canceling, look great, and are easy to use with Apple devices. The quality is not as good as you're probably used to from Apple, but I'm super happy with them:
+When I attend meetings, good headphones are necessary. I have decided to not buy the Apple AirPods Max as they were not updated in years, still have a lightning adapter, and are quite pricy. As an alternative solution, I've bought the Sony WH-1000XM5 headphones. They have super good noise canceling, look great, and are easy to use with Apple devices. The quality is not as good as you're probably used to from Apple products, but I'm super happy with them:
 
-![Sony Headphones](/images/feed/essentials/headphones.png)
+<figure>
+<img alt="Sony Headphones" src="/images/feed/essentials/headphones.png" />
+<figcaption>Sony WH-1000XM5</figcaption>
+</figure>
 
-<p class="caption">Sony WH-1000XM5</p>
+I need coffee in the morning, but when I moved away from my old apartment, I wasn't able to bring my coffee machine with me. Instead of buying coffee to go every day or making coffee manually, I bought coffee concentrate from a brand called TryMoin. I drink it with OatMilk which tastes super nice, and definitely helps me to wake up:
 
-I need coffee in the morning, but when I moved to Berlin, I wasn't able to bring my coffee machine with me. Instead of buying coffee to go every day or making coffee manually, I bought coffee concentrate from TryMoin. I think it with OatMilk which tastes super nice:
+<figure>
+<img alt="TryMoin Coffee" src="/images/feed/essentials/coffee.png" />
+<figcaption>TryMoin Coffee</figcaption>
+</figure>
 
-![TryMoin Coffee](/images/feed/essentials/coffee.png)
+I like having things organized at one place. Especially when it comes to routines. For my bathroom-utils that I have therefore bought a washbag with a hook, this way I can just take the stuff I need to shower with me and hang it onto the shower / heating instead of wasting a lot of space in the bathroom:
 
-<p class="caption">TryMoin Coffee</p>
-
-Being in stress makes me sometimes forget things. Especially when I'm doing something in a routine, like going to shower. Instead of leaving my stuff in my room, in the bathroom somewhere, or simply somewhere, I decided to put everything into a bag that had a hook. I always hang it on the heating:
-
-![Vaude Washbag](/images/feed/essentials/washbag.png)
-
-<p class="caption">Vaude Washbag</p>
+<figure>
+<img alt="Vaude Washbag" src="/images/feed/essentials/washbag.png" />
+<figcaption>Vaude Washbag</figcaption>
+</figure>
