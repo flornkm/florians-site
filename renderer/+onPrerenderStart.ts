@@ -17,7 +17,6 @@ async function onPrerenderStart(prerenderContext: any) {
         urlOriginal = `/${locale}${pageContext.urlOriginal}`
       }
 
-      console.log(urlOriginal)
       pageContexts.push({
         ...pageContext,
         urlOriginal,
