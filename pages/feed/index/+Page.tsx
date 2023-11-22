@@ -25,7 +25,13 @@ export default function Page({
               Number(post.date.split("/")[0])
             )
             return (
-              <div class="mb-24">
+              <div
+                class={
+                  posts.indexOf(post) === posts.length - 1
+                    ? ""
+                    : "mb-24 md:mb-48"
+                }
+              >
                 <p class="text-sm text-zinc-400 mb-2">
                   {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
                   {date.toLocaleDateString("en-US", {

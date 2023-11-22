@@ -1,4 +1,4 @@
-article {
+div > article {
 
     & h1,
     h2,
@@ -16,7 +16,11 @@ article {
 
     & p {
         color: #52525b;
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    & img {
+        background-color: #F4F4F5;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -26,6 +30,10 @@ article {
 
         & a {
             color: white;
+        }
+
+        & img {
+            background-color: #111113;
         }
     }
 
@@ -41,5 +49,19 @@ article {
         color: black;
         transition: all ease-in-out 0.1s;
         cursor: alias;
+    }
+
+    & figure {
+        margin-bottom: 4rem;
+    }
+
+    & div.post > p:nth-child(3), div.post > p:nth-child(4) {
+        font-size: 1rem;
+    }
+
+    & div > figure > figcaption {
+        font-size: 0.8rem !important;
+        margin-top: 1rem;
+        color: #71717a;
     }
 }
