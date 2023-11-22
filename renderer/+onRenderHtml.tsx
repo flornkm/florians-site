@@ -89,6 +89,8 @@ async function onRenderHtml(pageContext: PageContext) {
             ? escapeInject`<meta name="robots" content="noindex">`
             : ""
         }
+        <!-- Analytics site tags -->
+        <script async src="https://analytics.eu.umami.is/script.js" data-website-id="7e7bfc3e-f88c-4865-89a1-395e7b504c5c"></script>
         <title>${title}</title>
       </head>
       <body>
