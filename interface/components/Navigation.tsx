@@ -5,6 +5,7 @@ import Tooltip from "./Tooltip"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import * as m from "#lang/paraglide/messages"
+import { navigate } from "vike/client/router"
 
 export default function Navigation() {
   const [selectorPosition, setSelectorPosition] = useState({
@@ -71,7 +72,12 @@ export default function Navigation() {
   return (
     <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
-        <a href={getLocale() + "/#"} class="group/all -ml-1">
+        <div
+          onClick={() => {
+            navigate(getLocale() + "/")
+          }}
+          class="group/all -ml-1 cursor-pointer"
+        >
           <p class="text-lg font-semibold group-hover/all:text-zinc-500 transition-colors relative dark:group-hover/all:text-zinc-400 ">
             <span class="group relative">
               Florian
@@ -83,7 +89,7 @@ export default function Navigation() {
               {m.name_title()}
             </span>
           </p>
-        </a>
+        </div>
       </div>
       <div
         class="flex items-center md:gap-8 gap-2 justify-between md:justify-normal w-full md:w-auto lg:px-0 md:px-1.5 px-0"
