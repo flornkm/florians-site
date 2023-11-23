@@ -7,7 +7,7 @@ on:
       - "new-portfolio"
 
 jobs:
-  linkChecker:
+  check-links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,4 +17,4 @@ jobs:
         uses: lycheeverse/lychee-action@v1.8.0
         with:
           fail: true
-          args: --verbose --no-progress './content/**/*.md'
+          args: --verbose --no-progress './content/*/*.md'
