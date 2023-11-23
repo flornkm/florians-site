@@ -1,0 +1,19 @@
+name: Links
+
+on:
+  push:
+    branches:
+      - "main"
+      - "new-portfolio"
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1.8.0
+        with:
+          fail: true
