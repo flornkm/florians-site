@@ -10,15 +10,23 @@
     <a href="https://floriankiem.com"><strong>Visit Site →</strong></a>
     <br />
     <br />
-    <a href="https://twitter.com/flornkm">x.com</a>
-    –
-    <a href="mailto:hello@floriankiem.com">E-Mail</a>
-    –
-    <a href="https://floriankiem.com/colophon">Learn more</a>
+    <a href="https://twitter.com/flornkm">📲 x.com</a>
+    •
+    <a href="mailto:hello@floriankiem.com">✉️ E-Mail</a>
+    •
+    <a href="https://floriankiem.com/colophon">🩵 Learn more</a>
   </p>
 </p>
 
+<br/> 
+
 ## About this project
+
+### General
+
+This is the third big iteration of my personal website. I made my first one in 2019 and am hosting the files on GitHub since the beginning of 2022.
+
+I'm a `design engineer`. That means, I'm both a creative and a logical thinker trying to combine both skills in one job.
 
 ### Features
 
@@ -33,12 +41,6 @@
 - [x] 📁 Custom folder-based imports
 - [x] 🟢 Good Lighthouse score
 - [x] ▲ Custom Vercel API endpoint
-
-### General
-
-This is the third big iteration of my personal website. I made my first one in 2019 and am hosting the files on GitHub since the beginning of 2022.
-
-I'm a `design engineer`. That means, I'm both a creative and a logical thinker trying to combine both skills in one job.
 
 ### Copying this project
 
