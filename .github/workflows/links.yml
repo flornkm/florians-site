@@ -17,4 +17,4 @@ jobs:
         uses: lycheeverse/lychee-action@v1.8.0
         with:
           fail: true
-          args: --verbose --no-progress './content/*/*'
+          args: --verbose --no-progress './content/*/*.md' './content/archive/stackoverflow-redesign.md' './content/archive/web-audit.md' './content/archive/boost.md' './content/archive/nutri.md' './content/archive/ambient-chat.md' './content/archive/ambient-chat.md'
