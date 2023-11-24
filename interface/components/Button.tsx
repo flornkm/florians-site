@@ -63,7 +63,7 @@ export function ButtonWrapper(props: {
 export function InlineLink(props: {
   link: string | undefined
   children: string | JSX.Element | undefined
-  class: string
+  class?: string
 }) {
   return (
     <a

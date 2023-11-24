@@ -348,7 +348,7 @@ export default function Page() {
             <h3 class="text-lg font-semibold mb-4">{m.about_music_title()}</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div>
-                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:lg:bg-zinc-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-zinc-950 dark:lg:hover:bg-zinc-900">
                   <img
                     alt="Enjoy the Silence by Depeche Mode"
                     src="/images/music-covers/enjoy_silence.jpg"
@@ -373,7 +373,7 @@ export default function Page() {
                 </a>
               </div>
               <div>
-                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:bg-zinc-200 group flex items-center justify-center flex-col gap-4 lg:gap-8 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:lg:bg-zinc-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-zinc-950 dark:lg:hover:bg-zinc-900">
                   <img
                     alt="Serotonin Moonbeams by The Blessed Madonna"
                     src="/images/music-covers/serotonin_moonbeams.jpg"
