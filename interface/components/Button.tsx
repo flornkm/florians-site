@@ -37,7 +37,11 @@ export default function Button(props: {
               : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 dark:text-white dark:bg-zinc-900 dark:hover:bg-zinc-950 dark:hover:text-zinc-200 dark:border-zinc-800")
           : "text-zinc-800 hover:underline underline-offset-2 font-semibold rounded-md px-1.5 dark:text-zinc-200 " +
             (props.chevron ? "pr-0" : "") +
-            (props.link?.includes("http") ? "cursor-alias" : ""))
+            (props.link?.includes("http") ||
+            props.link?.includes("mailto") ||
+            props.link?.includes("imessage")
+              ? "cursor-alias"
+              : ""))
       }
       style={{
         borderRadius: props.rounded ? 1000 : "",

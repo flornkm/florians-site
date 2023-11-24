@@ -103,14 +103,14 @@ export default function Contact() {
           <Button
             type="text"
             class="flex items-end gap-1"
-            link="https://google.com/"
+            link="mailto:hello@floriankiem.com"
           >
             {m.button_email()}
           </Button>
           <Button
             type="text"
             class="flex items-end gap-1"
-            link="https://google.com/"
+            link="imessage://hello@floriankiem.com"
           >
             {m.button_imessage()}
           </Button>
