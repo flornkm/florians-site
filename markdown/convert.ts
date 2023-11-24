@@ -10,11 +10,9 @@ export async function convertMarkdownToHtml(
   let markdown = await readFile(`${contentRoot}${url}.md`, "utf-8")
 
   const convertedHTML = marked(
-    convertVideo(
-      deleteInfo(
-        markdown + '\n <base target="_blank">',
-        markdown.match(/---(.*?)---/s)![1].split("\n").length
-      )
+    deleteInfo(
+      markdown + '\n <base target="_blank">',
+      markdown.match(/---(.*?)---/s)![1].split("\n").length
     )
   )
 
@@ -61,22 +59,4 @@ export async function returnContent(category: "work" | "archive" | "feed") {
 
 function deleteInfo(string: string, n: number) {
   return string.replace(new RegExp(`(?:.*?\n){${n - 1}}(?:.*?\n)`), "")
-}
-
-function convertVideo(string: string) {
-  return string.replace(
-    /\[!\[(.*?)\]\((.*?)\)\]\((.*?)\)/g,
-    `<div class="video-container">
-      <div class="video-wrapper" onclick="loadVideo(this, 'https://www.youtube.com/embed/$3?autoplay=1', '$1', '$2')">
-        <img class="video-overlay" src="$2" alt="$1" class="video-thumbnail">
-      </div>
-      <script>
-        function loadVideo(wrapper, src, title, thumbnail) {
-          if (typeof window === 'undefined') return;
-          var container = wrapper.parentElement;
-          container.innerHTML = '<iframe width="100%" height="100%" src="' + src + '" title="' + title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-        }
-      </script>
-    </div>`
-  )
 }

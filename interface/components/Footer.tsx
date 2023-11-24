@@ -1,7 +1,7 @@
 import { getLocale } from "#hooks/getLocale"
 import { usePageContext } from "../../renderer/usePageContext"
 import Bulb from "~icons/eva/bulb-fill"
-import LanguagePicker from "./LanguagePicker"
+import { LanguagePicker } from "./Picker"
 import * as m from "#lang/paraglide/messages"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 

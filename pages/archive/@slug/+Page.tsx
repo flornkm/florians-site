@@ -1,11 +1,10 @@
 import "#design-system/markdown.css"
+import Markdown from "#markdown/Markdown"
 
 export default function Page(props: Record<string, string>) {
   return (
     <>
-      <article class="lg:py-16 pb-16">
-        <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
-      </article>
+      <Markdown class="lg:py-16 pb-16" content={props.content} />
     </>
   )
 }
