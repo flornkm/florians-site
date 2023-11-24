@@ -116,7 +116,7 @@ export default function Contact() {
           </Button>
         </div>
       </div>
-      <div class="mx-auto bg-zinc-100 flex flex-col justify-end w-full h-[652px] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950">
+      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-[652px] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950 dark:border-zinc-900">
         <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
@@ -190,7 +190,7 @@ export default function Contact() {
               ref={chatInput}
               type="text"
               placeholder={m.message_placeholder()}
-              class="w-full placeholder:text-zinc-400 disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800 dark:placeholder:text-zinc-500 dark:focus:border-zinc-700 dark:focus:outline-none"
+              class="w-full placeholder:text-zinc-400 relative top-[1px] disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800 dark:placeholder:text-zinc-500 dark:focus:border-zinc-700 dark:focus:outline-none"
             />
             <Button
               function={() => {
