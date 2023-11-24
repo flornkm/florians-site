@@ -1,6 +1,10 @@
 import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
 import * as m from "#lang/paraglide/messages"
+import Share from "~icons/eva/share-outline"
+import Picker from "#components/Picker"
+import { useState } from "preact/hooks"
+import Markdown from "#markdown/Markdown"
 
 export default function Page({
   posts,
@@ -9,6 +13,7 @@ export default function Page({
   posts: Post[]
   content: PostContent
 }) {
+  const [copyLabel, setCopyLabel] = useState("Copy link")
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
@@ -39,12 +44,33 @@ export default function Page({
                   })}{" "}
                   {date.getDate()}, {date.getFullYear()}
                 </p>
-                <article>
-                  <div
-                    class="post"
-                    dangerouslySetInnerHTML={{ __html: content[post.slug] }}
-                  />
-                </article>
+                <Markdown content={content[post.slug]} />
+                <div class="flex items-center justify-end">
+                  <Picker
+                    options={[
+                      {
+                        label: copyLabel,
+                        function: () => {
+                          navigator.clipboard.writeText(
+                            "https://floriankiem.com" + post.url
+                          )
+                          setCopyLabel("Copied!")
+                          setTimeout(() => {
+                            setCopyLabel("Copy link")
+                          }, 1000)
+                        },
+                      },
+                      {
+                        label: "Share on X",
+                        link: `https://x.com/intent/tweet?text=${post.title} from Florian&url=https://floriankiem.com${post.url}`,
+                      },
+                    ]}
+                    position="top"
+                    align="right"
+                  >
+                    <Share />
+                  </Picker>
+                </div>
               </div>
             )
           })}

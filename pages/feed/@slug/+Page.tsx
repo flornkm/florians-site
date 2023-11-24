@@ -1,11 +1,41 @@
+import Picker from "#components/Picker"
 import "#design-system/feed.css"
+import Markdown from "#markdown/Markdown"
+import { useState } from "preact/hooks"
+import Share from "~icons/eva/share-outline"
 
 export default function Page(props: Record<string, string>) {
+  const [copyLabel, setCopyLabel] = useState("Copy link")
   return (
     <>
-      <article class="lg:py-16 pb-16 max-w-lg mx-auto">
-        <div dangerouslySetInnerHTML={{ __html: props.content }}></div>
-      </article>
+      <div>
+        <Markdown class="lg:mt-16 max-w-lg mx-auto" content={props.content} />
+      </div>
+      <div class="flex items-center justify-end mb-16 mx-auto max-w-lg">
+        <Picker
+          options={[
+            {
+              label: copyLabel,
+              function: () => {
+                // copy to clipboard the current page's url
+                navigator.clipboard.writeText(
+                  typeof window !== "undefined"
+                    ? window.location.href.replace(/\/$/, "")
+                    : ""
+                )
+                setCopyLabel("Copied!")
+                setTimeout(() => {
+                  setCopyLabel("Copy link")
+                }, 1000)
+              },
+            },
+          ]}
+          position="top"
+          align="right"
+        >
+          <Share />
+        </Picker>
+      </div>
     </>
   )
 }
