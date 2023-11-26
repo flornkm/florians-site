@@ -60,17 +60,15 @@ export default function Page() {
             don't hate me for that {`<3`} I still very much appreciate any
             feedback!
           </p>
-          <ButtonWrapper>
-            <Button type="primary" link="https://twitter.com/flornkm">
-              Write me on x
-            </Button>
-            <Button
+          <Button type="primary" link="https://twitter.com/flornkm">
+            Write me on x
+          </Button>
+          {/* <Button
               type="secondary"
               link="https://github.com/flornkm/florians-site/issues/new"
             >
               Open issue on GitHub
-            </Button>
-          </ButtonWrapper>
+            </Button> */}
         </div>
         <p class="text-center mb-8 text-gray-400 dark:text-gray-700">
           Thanks! ♥️
