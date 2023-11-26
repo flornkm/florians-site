@@ -24,7 +24,7 @@ export default function Page() {
             Just a few words which are important to me, around a minute long.
           </p>
           <iframe
-            src="https://embed.wave.video/aWtgaZxA6x9FJClN"
+            src="https://embed.wave.video/p1d2KsjAVaYFg1Wg"
             class="w-full aspect-[16/11]"
             frameBorder="0"
             allow="autoplay; fullscreen"
