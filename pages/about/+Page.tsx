@@ -16,16 +16,13 @@ export default function Page() {
       jobTitle: m.about_experience_inlang_job(),
     },
     {
-      company: "Metahype",
-      comapanyLink: "https://meta-hype.com/",
       from: "12 / 2020",
       to: "06 / 2023",
       slogan: m.about_experience_tritschlerkiem_slogan(),
-      jobTitle: m.about_experience_tritschlerkiem_job(),
+      jobTitle: m.about_experience_freelancer_job(),
     },
     {
       company: "Comondo",
-      comapanyLink: "https://meta-hype.com/",
       from: "02 / 2020",
       to: "03 / 2021",
       slogan: m.about_experience_comondo_slogan(),
@@ -221,9 +218,13 @@ export default function Page() {
                     <p>
                       {m.about_education_working()} {item.jobTitle}{" "}
                       {item.company && m.about_education_at()}{" "}
-                      <InlineLink link={item.comapanyLink}>
-                        {item.company}
-                      </InlineLink>
+                      {item.comapanyLink ? (
+                        <InlineLink link={item.comapanyLink}>
+                          {item.company}
+                        </InlineLink>
+                      ) : (
+                        item.company
+                      )}
                     </p>
                   </div>
                   <p class="text-sm mb-4">
