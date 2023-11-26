@@ -193,7 +193,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Education"
+              "value": "Experience"
             }
           ]
         },
@@ -203,7 +203,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "教育"
+              "value": "经验"
             }
           ]
         }
@@ -375,7 +375,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Building an ecosystem around globalization and being responsible for its marketplace."
+              "value": "Building an ecosystem around globalization with a team of 8."
             }
           ]
         },
@@ -385,7 +385,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "围绕全球化建立生态系统并对其市场负责。"
+              "value": "与 8 人团队围绕全球化建立生态系统。"
             }
           ]
         }
