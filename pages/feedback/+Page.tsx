@@ -4,17 +4,24 @@ export default function Page() {
   return (
     <div class="w-full">
       <section class="py-16 mx-auto max-w-2xl">
-        <h1 class="text-2xl font-semibold mb-3">Feedback for Florian</h1>
-        <p class="mb-16 text-zinc-500 dark:text-zinc-400">
-          Thank you for being down to give me feedback. Please follow the steps
-          to make it as efficient for you as possible:
+        <h1 class="text-lg font-semibold mb-3">Hey everyone!</h1>
+        <p class="text-zinc-500 dark:text-zinc-400 mb-4">
+          I'm currently working on my new personal site. Yes, personal site. Not
+          a "portfolio" in the classical sense. It should be more personal, more
+          me, while still being a place to showcase my work. :)
+        </p>
+        <p class="mb-4 text-zinc-500 dark:text-zinc-400">
+          Your feedback helps me to realize last changes and improvements,
+          therefore I'd love to hear your thoughts on the new site.
+        </p>
+        <p class="mb-16 font-medium text-black dark:text-white">
+          Here's a small guide on how to give me feedback without wasting too
+          much of your time.
         </p>
         <div class="my-16">
-          <h2 class="text-xl font-semibold mb-2">
-            1. Watch this video (less than 1 min long)
-          </h2>
+          <h2 class="text-lg font-semibold mb-2">1. Watch this quick video</h2>
           <p class="mb-10 text-zinc-500 dark:text-zinc-400">
-            Quick explanation.
+            Just a few words which are important to me, around a minute long.
           </p>
           <iframe
             src="https://embed.wave.video/aWtgaZxA6x9FJClN"
@@ -25,12 +32,12 @@ export default function Page() {
           ></iframe>
         </div>
         <div class="my-16">
-          <h2 class="text-xl font-semibold mb-2">
+          <h2 class="text-lg font-semibold mb-2">
             2. Go to my new personal site
           </h2>
           <p class="mb-6 text-zinc-500 dark:text-zinc-400">
             Please make sure you're on the correct subdomain
-            preview.floriankiem.com
+            <code class="font-mono text-sm"> preview.floriankiem.com</code>
           </p>
           <Button
             chevron
@@ -41,11 +48,17 @@ export default function Page() {
           </Button>
         </div>
         <div class="my-16 mb-32">
-          <h2 class="text-xl font-semibold mb-2">3. Give me feedback</h2>
-          <p class="mb-6 text-zinc-500 dark:text-zinc-400">
-            As said in the video, giving me feedback on x.com / twitter or
-            GitHub makes things much easier as I can collect every response on
-            one or max. 2 platforms.
+          <h2 class="text-lg font-semibold mb-2">3. Give me feedback</h2>
+          <p class="mb-4 text-zinc-500 dark:text-zinc-400">
+            As said in the video, giving me feedback on X or GitHub makes things
+            much easier as I can collect every response on one or max. 2
+            platforms.
+          </p>
+          <p class="mb-6 font-medium text-black dark:text-white">
+            There is a chance I will not implement some of the feedback I
+            receive because some implementations were made on purpose. Please
+            don't hate me for that {`<3`} I still very much appreciate any
+            feedback!
           </p>
           <ButtonWrapper>
             <Button type="primary" link="https://twitter.com/flornkm">
