@@ -335,6 +335,10 @@ export default function Tooltip(props: {
               <InlineLink link="https://samuelkraft.com/">
                 Samuel Kraft
               </InlineLink>
+              ,{" "}
+              <InlineLink link="https://www.eikedrescher.com/">
+                Eike Drescher
+              </InlineLink>
               , <InlineLink link="https://sdrn.co/">Siddharth Arun</InlineLink>,
               and{" "}
               <InlineLink link="https://endless.design/">Daryl Ginn</InlineLink>
