@@ -25,13 +25,11 @@ export default function Page() {
       company: "Comondo",
       from: "02 / 2020",
       to: "03 / 2021",
-      slogan: m.about_experience_comondo_slogan(),
       jobTitle: m.about_experience_comondo_job(),
     },
     {
       from: "08 / 2015",
       to: "02 / 2020",
-      slogan: m.about_experience_freelancer_slogan(),
       jobTitle: m.about_experience_freelancer_job(),
     },
   ]
@@ -216,8 +214,7 @@ export default function Page() {
                 <div>
                   <div class="flex gap-2 mb-1 items-center">
                     <p>
-                      {m.about_education_working()} {item.jobTitle}{" "}
-                      {item.company && m.about_education_at()}{" "}
+                      {item.jobTitle} {item.company && m.about_education_at()}{" "}
                       {item.comapanyLink ? (
                         <InlineLink link={item.comapanyLink}>
                           {item.company}
@@ -235,7 +232,11 @@ export default function Page() {
                       <span class="text-green-600">{item.to}</span>
                     )}
                   </p>
-                  <p class="text-zinc-500 dark:text-zinc-400">{item.slogan}</p>
+                  {item.slogan && (
+                    <p class="text-zinc-500 dark:text-zinc-400">
+                      {item.slogan}
+                    </p>
+                  )}
                 </div>
                 {experience.indexOf(item) !== experience.length - 1 && (
                   <div class="border-b border-b-zinc-100 my-8 dark:border-b-zinc-900" />

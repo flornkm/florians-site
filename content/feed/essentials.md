@@ -4,7 +4,7 @@ description: My personal essentials I'm using everyday.
 date: 23 / 11 / 2023
 ---
 
-# Three things I use every day
+# Two things I use every day
 
 Sharing things that I commonly use in my everyday life. I want to set this in contrast to the listings other people are creating on their website, because I just take things with _real benefits_ for myself, not just things that _look fancy_.
 
@@ -20,11 +20,4 @@ I need coffee in the morning, but when I moved away from my old apartment, I was
 <figure>
 <img alt="TryMoin Coffee" src="/images/feed/essentials/coffee.png" />
 <figcaption>TryMoin Coffee</figcaption>
-</figure>
-
-I like having things organized at one place. Especially when it comes to routines. For my bathroom-utils that I have therefore bought a washbag with a hook, this way I can just take the stuff I need to shower with me and hang it onto the shower / heating instead of wasting a lot of space in the bathroom:
-
-<figure>
-<img alt="Vaude Washbag" src="/images/feed/essentials/washbag.png" />
-<figcaption>Vaude Washbag</figcaption>
 </figure>
