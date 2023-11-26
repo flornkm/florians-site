@@ -21,7 +21,7 @@ export default function Page() {
         <div class="my-16">
           <h2 class="text-lg font-semibold mb-2">1. Watch this quick video</h2>
           <p class="mb-10 text-zinc-500 dark:text-zinc-400">
-            Just a few words which are important to me, around a minute long.
+            Just a few words, around a minute long.
           </p>
           <iframe
             src="https://embed.wave.video/p1d2KsjAVaYFg1Wg"
