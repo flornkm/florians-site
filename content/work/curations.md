@@ -26,7 +26,7 @@ A curated collection of the best products on the web.
 </div>
 </info-grid>
 
-![Curations](/images/curations/cover-curations.jpg)
+![Curations](/images/curations/curations.png)
 
 In university, my team recognized the value of tools in our daily lives and decided to create a collection of them. We started with a Notion database-page, but wanted to share it more widely. Using the Notion API, we developed a website where users can view our curated collection and submit their own discoveries. Our curators meticulously select each tool, guaranteeing the best recommendations. Our platform has helped countless individuals find new and innovative tools and gain inspiration.
 

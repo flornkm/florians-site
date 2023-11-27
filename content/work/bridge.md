@@ -24,7 +24,7 @@ Browser based job page creator for Startups and SMEs.
 </div>
 </info-grid>
 
-![Bridge](/images/bridge/cover-bridge.jpg)
+![Bridge](/images/bridge/bridge.png)
 
 Bridge is a browser-based software designed to provide an easy-to-use solution for creating job pages. It enables people to quickly create forms while not being forced to use an overcomplicated marketing platform that costs hundreds of dollars. Bridge also incorporates its own design token system, allowing for seamless auto-saves, real-time updates, and fast publishing of projects. This streamlined approach ensures that you can focus on crafting compelling job pages without any technical hindrances.
 

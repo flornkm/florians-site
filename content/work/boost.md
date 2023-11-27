@@ -1,7 +1,8 @@
 ---
 title: Boost
 description: Nutrition application & hardware device.
-cover: /images/boost/cover-boost.jpg
+icon: /images/boost/boost-icon.svg
+cover: /images/boost/boost.png
 date: 02 / 2023
 ---
 
@@ -25,7 +26,7 @@ Nutrition application & hardware device
 </div>
 </info-grid>
 
-![Boost](/images/boost/cover-boost.jpg)
+![Boost](/images/boost/boost.png)
 
 Boost is a prototype of an innovative digital product and app designed and developed with Ionic React, NodeJS Express, and Prisma. The product seamlessly integrates with the app, allowing users to track their daily nutrient intake and receive personalized recommendations based on factors such as weather and step count. As a digital product designer, I had the opportunity to work on Boost's prototype and develop its design, ensuring a seamless user experience.
 

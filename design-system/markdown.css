@@ -191,13 +191,13 @@ main > article {
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
-        width: 8rem;
-        height: 8rem;
+        width: 6rem;
+        height: 6rem;
         background-image: url("/images/icons/play-circle.svg");
         background-size: cover;
         z-index: 10;
         border-radius: 50%;
-        opacity: 50%;
+        opacity: 20%;
         transition: all ease 0.2s;
         mix-blend-mode: exclusion;
     }
@@ -284,7 +284,7 @@ main > article {
         justify-content: center;
         margin: 0;
         width: 100%;
-        height: 8rem;
+        height: 4rem;
         border-radius: 1rem;
         color: #18181b;
         transition: all ease 0.2s;
