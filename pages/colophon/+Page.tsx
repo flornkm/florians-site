@@ -316,7 +316,7 @@ export default function Tooltip(props: {
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
               {m.text_hosting_first()}{" "}
-              <InlineLink link="https://vercel.com/">Vercel</InlineLink>.{" "}
+              <InlineLink link="https://vercel.com/">Vercel</InlineLink>,{" "}
               {m.text_hosting_second()}{" "}
               <InlineLink link="https://github.com/">GitHub</InlineLink>.
             </p>
@@ -360,11 +360,7 @@ export default function Tooltip(props: {
               <InlineLink link="https://linusrogge.com/">
                 Linus Rogge
               </InlineLink>
-              , and{" "}
-              <InlineLink link="https://linusrogge.com/">
-                Nico Tritschler
-              </InlineLink>
-              . <br /> {m.text_great_humans_second()}{" "}
+              , and Nico Tritschler . <br /> {m.text_great_humans_second()}{" "}
               <InlineLink link="https://inlang.com/">inlang</InlineLink> here.
             </p>
           </div>

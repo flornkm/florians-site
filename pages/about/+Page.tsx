@@ -334,7 +334,7 @@ export default function Page() {
                       : "")
                   }
                 >
-                  <div class="bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-pointer border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800">
+                  <div class="bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-not-allowed border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800">
                     {entry.checked && (
                       <Check class="absolute -right-1.5 -top-1 w-7 h-7 active:animate-shake" />
                     )}

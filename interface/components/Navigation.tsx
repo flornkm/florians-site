@@ -79,13 +79,8 @@ export default function Navigation() {
           class="group/all -ml-1 cursor-pointer"
         >
           <p class="text-lg font-semibold group-hover/all:text-zinc-500 transition-colors relative dark:group-hover/all:text-zinc-400 ">
-            <span class="group relative">
-              Florian
-              <Tooltip position="bottom" class="translate-y-3">
-                @flrnkm
-              </Tooltip>
-            </span>
-            <span class="text-sm font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden md:inline-block dark:group-hover/all:text-zinc-600">
+            <span class="group relative">Florian</span>
+            <span class="text-base font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden md:inline-block dark:group-hover/all:text-zinc-600">
               {m.name_title()}
             </span>
           </p>

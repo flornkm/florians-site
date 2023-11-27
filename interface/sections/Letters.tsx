@@ -312,19 +312,31 @@ function SendLetter(props: {
                 (!letterWritten ? "pointer-events-none" : "")
               }
             >
-              <canvas
-                ref={canvasRef}
-                onClick={() => {
-                  saveSignature()
-                }}
-                onTouchEnd={() => {
-                  saveSignature()
-                }}
-                className={
-                  "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800/5 dark:invert " +
-                  (!letterWritten ? "pointer-events-none" : "")
-                }
-              />
+              <div class="relative">
+                <canvas
+                  ref={canvasRef}
+                  onClick={() => {
+                    saveSignature()
+                  }}
+                  onTouchEnd={() => {
+                    saveSignature()
+                  }}
+                  className={
+                    "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800/5 dark:invert " +
+                    (!letterWritten ? "pointer-events-none" : "")
+                  }
+                />
+                <Button
+                  type="text"
+                  class="absolute right-2 -bottom-8"
+                  function={() => {
+                    setSignature("")
+                    new SignaturePad(canvasRef.current!)
+                  }}
+                >
+                  Reset
+                </Button>
+              </div>
               <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
               <div class="flex md:justify-between md:items-end gap-8 flex-col md:flex-row items-start">
                 <div class="flex items-start flex-col justify-between w-full">

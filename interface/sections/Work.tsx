@@ -42,13 +42,16 @@ export default function Work(props: {
           )
           return (
             <div class="w-full group/project">
-              <div class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative">
+              <a
+                class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative group/link"
+                href={project.url}
+              >
                 <div class="lg:py-2 lg:sticky top-14 flex-shrink-0">
                   <img
                     alt={`
                     Icon of ${project.title} project
                   `}
-                    class="w-8 h-8"
+                    class="w-8 h-8 outline-1 -outline-offset-1 outline outline-transparent rounded-lg dark:outline-zinc-900"
                     src={project.icon}
                   />
                 </div>
@@ -78,7 +81,7 @@ export default function Work(props: {
                     <Button
                       type="text"
                       link={project.url}
-                      class="relative"
+                      class="relative group-hover/link:underline"
                       chevron
                     >
                       {m.button_readmore()}
@@ -95,7 +98,7 @@ export default function Work(props: {
                     />
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           )
         })}

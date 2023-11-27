@@ -37,15 +37,14 @@ export default function Page({
                     : "mb-24 md:mb-48"
                 }
               >
-                <p class="text-sm text-zinc-400 mb-2">
-                  {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
-                  {date.toLocaleDateString("en-US", {
-                    month: "long",
-                  })}{" "}
-                  {date.getDate()}, {date.getFullYear()}
-                </p>
-                <Markdown content={content[post.slug]} />
-                <div class="flex items-center justify-end">
+                <div class="flex items-center justify-between">
+                  <p class="text-sm text-zinc-400">
+                    {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
+                    {date.toLocaleDateString("en-US", {
+                      month: "long",
+                    })}{" "}
+                    {date.getDate()}, {date.getFullYear()}
+                  </p>
                   <Picker
                     options={[
                       {
@@ -71,6 +70,7 @@ export default function Page({
                     <Share />
                   </Picker>
                 </div>
+                <Markdown content={content[post.slug]} />
               </div>
             )
           })}
