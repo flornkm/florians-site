@@ -78,7 +78,7 @@ export default function Letters() {
   }
 
   return (
-    <div class="overflow-hidden pt-56" onClick={() => setZoom(-1)}>
+    <div class="overflow-hidden pt-40" onClick={() => setZoom(-1)}>
       <h3 class="text-2xl font-semibold text-center md:mb-8 mb-16">
         {m.letters_title()}
       </h3>
@@ -144,7 +144,7 @@ export default function Letters() {
                   <div class="w-full h-80 flex gap-4 md:flex-row flex-col">
                     <div
                       class={
-                        "w-full h-full overflow-x-scroll " +
+                        "w-full h-full " +
                         (zoom === letterArray.indexOf(letter)
                           ? "text-black dark:text-white"
                           : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")

@@ -4,37 +4,10 @@ import Tooltip from "#components/Tooltip"
 import { Ref } from "preact"
 import * as m from "#lang/paraglide/messages"
 
-export default function Work(props: {
-  projects: Record<string, string>[]
-  workStroke?: Ref<HTMLDivElement>
-  workTitle?: Ref<HTMLHeadingElement>
-}) {
+export default function Work(props: { projects: Record<string, string>[] }) {
   return (
     <>
-      {props.workStroke && props.workTitle && (
-        <>
-          <div class="flex gap-8 justify-between items-center mb-4">
-            <h2
-              class="text-3xl text-zinc-400 font-semibold flex-shrink-0 transition-colors duration-700 dark:text-zinc-700"
-              ref={props.workTitle}
-            >
-              {m.work_title()}
-            </h2>
-            <div class="w-full relative flex items-center">
-              <div class="h-[1px] bg-zinc-100 absolute w-full dark:bg-zinc-900" />
-              <div
-                class="h-[1px] bg-black absolute z-10 transition-all duration-700 dark:bg-white"
-                style={{ width: "100%" }}
-                ref={props.workStroke}
-              />
-            </div>
-          </div>
-          <p class="mb-20 text-zinc-500 text-lg dark:text-zinc-400">
-            {m.work_description()}
-          </p>
-        </>
-      )}
-      <div class="flex flex-col gap-32 mb-56">
+      <div class="flex flex-col gap-32">
         {props.projects.map((project) => {
           const date = new Date(
             Number(project.date.split("/")[1]),
@@ -46,7 +19,7 @@ export default function Work(props: {
                 class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative group/link"
                 href={project.url}
               >
-                <div class="lg:py-2 lg:sticky top-14 flex-shrink-0">
+                <div class="lg:sticky top-14 py-2 flex-shrink-0">
                   <img
                     alt={`
                     Icon of ${project.title} project
@@ -90,9 +63,9 @@ export default function Work(props: {
                   <p class="mb-6 text-zinc-500 dark:text-zinc-400">
                     {project.description}
                   </p>
-                  <div class="bg-zinc-100 dark:bg-zinc-900/70 overflow-hidden lg:h-[512px]">
+                  <div class="bg-zinc-100 dark:bg-zinc-900/70 overflow-hidden lg:h-[512px] flex items-center justify-center">
                     <img
-                      class="relative lg:top-8 md:left-0 md:h-auto h-96 md:object-fit md:object-center object-cover object-left"
+                      class="relative lg:top-8 md:left-0 md:h-auto h-96 md:object-scale-down md:object-center object-cover object-left md:px-12 pl-4"
                       src={project.cover}
                       alt={project.title}
                     />
