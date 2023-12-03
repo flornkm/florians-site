@@ -49,7 +49,7 @@ export default function Button(props: {
     >
       {props.icon}
       {props.children}
-      {props.chevron && <Chevron />}
+      {props.chevron && <Chevron class="flex-shrink-0" />}
     </button>
   )
 }
