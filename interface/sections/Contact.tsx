@@ -86,7 +86,7 @@ export default function Contact() {
 
   return (
     <>
-      <div class="w-full py-4 flex md:flex-row flex-col-reverse justify-between gap-6 md:gap-8">
+      <div class="w-full flex md:flex-row flex-col-reverse justify-between gap-6 md:gap-8 pr-12">
         <div class="flex items-center gap-3">
           <p class="font-medium text-lg">
             <span class="text-zinc-400 dark:text-zinc-500">
@@ -116,7 +116,7 @@ export default function Contact() {
           </Button>
         </div>
       </div>
-      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-[652px] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950 dark:border-zinc-900 relative">
+      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-full rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950/20 dark:border-zinc-800 relative">
         <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative mb-12">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
@@ -190,7 +190,7 @@ export default function Contact() {
               ref={chatInput}
               type="text"
               placeholder={m.message_placeholder()}
-              class="w-full placeholder:text-zinc-400 relative top-[1px] disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800 dark:placeholder:text-zinc-500 dark:focus:border-zinc-700 dark:focus:outline-none shadow-md shadow-black/5"
+              class="w-full placeholder:text-zinc-400 relative top-[1px] disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700/50 dark:placeholder:text-zinc-500 dark:focus:border-zinc-700 dark:focus:outline-none shadow-md shadow-black/5"
             />
             <Button
               function={() => {
@@ -209,7 +209,7 @@ export default function Contact() {
               type="primary"
               class={
                 "absolute right-1 top-1/2 -translate-y-1/2 group/button leading-none overflow-hidden md:hover:pl-16 mt-[1px] " +
-                (loading() ? "opacity-30 pointer-events-none" : "")
+                (loading() ? "pointer-events-none" : "")
               }
             >
               <>

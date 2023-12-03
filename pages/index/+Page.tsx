@@ -20,9 +20,6 @@ export default function Page({ projects }: { projects: any[] }) {
       <section class="w-full scroll-mt-24 mb-12" id="work">
         <Work projects={projects} />
       </section>
-      {/* <section class="w-full">
-        <Contact />
-      </section> */}
       <section class="w-full">
         <Letters />
       </section>
