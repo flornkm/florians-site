@@ -7,6 +7,12 @@ import * as m from "#lang/paraglide/messages"
 export default function Work(props: { projects: Record<string, string>[] }) {
   return (
     <>
+      <div class="flex gap-4 items-center mb-8">
+        <h2 class="font-medium text-lg text-zinc-300 dark:text-zinc-700">
+          Work
+        </h2>
+        <div class="w-full h-[1px] bg-zinc-100 dark:bg-zinc-900" />
+      </div>
       <div class="flex flex-col gap-32">
         {props.projects.map((project) => {
           const date = new Date(
@@ -19,12 +25,12 @@ export default function Work(props: { projects: Record<string, string>[] }) {
                 class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative group/link"
                 href={project.url}
               >
-                <div class="lg:sticky lg:top-14 py-2 flex-shrink-0 top-0">
+                <div class="lg:sticky lg:top-14 py-2.5 flex-shrink-0 top-0">
                   <img
                     alt={`
                     Icon of ${project.title} project
                   `}
-                    class="w-8 h-8 outline-1 -outline-offset-1 outline outline-transparent rounded-lg dark:outline-zinc-900"
+                    class="w-7 h-7 outline-1 -outline-offset-1 outline outline-transparent rounded-lg dark:outline-zinc-900"
                     src={project.icon}
                   />
                 </div>
@@ -54,7 +60,7 @@ export default function Work(props: { projects: Record<string, string>[] }) {
                     <Button
                       type="text"
                       link={project.url}
-                      class="relative group-hover/link:underline"
+                      class="relative group-hover/link:underline truncate"
                       chevron
                     >
                       {m.button_readmore()}

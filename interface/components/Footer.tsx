@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
       <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
-        <div class="lg:col-span-3 xs:col-span-2 lg:max-w-[170px] max-w-sm">
+        <div class="lg:col-span-3 xs:col-span-2 max-w-md">
           <h3 class="font-semibold mb-2">Florian's {m.footer_slogan()}</h3>
           <p class="text-zinc-500 dark:text-zinc-400 mb-8">{m.footer_text()}</p>
           <LanguagePicker position="top" align="left" />
