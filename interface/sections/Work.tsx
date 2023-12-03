@@ -19,7 +19,7 @@ export default function Work(props: { projects: Record<string, string>[] }) {
                 class="flex lg:gap-4 gap-2 flex-col md:flex-row items-start relative group/link"
                 href={project.url}
               >
-                <div class="lg:sticky top-14 py-2 flex-shrink-0">
+                <div class="lg:sticky lg:top-14 py-2 flex-shrink-0 top-0">
                   <img
                     alt={`
                     Icon of ${project.title} project
