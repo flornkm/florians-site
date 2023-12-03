@@ -2342,6 +2342,22 @@
       ]
     },
     {
+      "id": "link_contact",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Contact"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "link_email",
       "selectors": [],
       "variants": [
