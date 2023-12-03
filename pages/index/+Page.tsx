@@ -5,7 +5,7 @@ import * as m from "#lang/paraglide/messages"
 export default function Page({ projects }: { projects: any[] }) {
   return (
     <div class="w-full">
-      <header class="flex items-center justify-start md:gap-24 gap-16 max-lg:py-24 w-full lg:pt-24 lg:pb-8 mb-12 lg:justify-between lg:flex-row flex-col-reverse">
+      <header class="flex items-center justify-start md:gap-24 gap-16 max-lg:py-20 w-full lg:pt-24 lg:pb-8 mb-12 lg:justify-between lg:flex-row flex-col-reverse">
         <div class="lg:h-2/6 h-2/5 max-lg:w-full max-lg:flex">
           <div class="cursor-text max-w-2xl">
             <h1 class="text-4xl font-semibold leading-snug pointer-events-none transition-colors group hover:text-zinc-400 mb-10">
