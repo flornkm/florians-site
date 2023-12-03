@@ -1,15 +1,14 @@
 import Button from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import { Ref } from "preact"
 import * as m from "#lang/paraglide/messages"
 
 export default function Work(props: { projects: Record<string, string>[] }) {
   return (
     <>
       <div class="flex gap-4 items-center mb-8">
-        <h2 class="font-medium text-lg text-zinc-300 dark:text-zinc-700">
-          Work
+        <h2 class="font-medium text-lg text-zinc-300 dark:text-zinc-700 flex-shrink-0">
+          {m.work_title()}
         </h2>
         <div class="w-full h-[1px] bg-zinc-100 dark:bg-zinc-900" />
       </div>
