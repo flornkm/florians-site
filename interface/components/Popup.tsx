@@ -19,7 +19,7 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
       } transition-opacity`}
       onClick={onClose}
     >
-      <div className="w-full md:h-3/4 h-4/6 max-w-6xl md:px-10 px-6">
+      <div className="w-full md:h-3/5 h-4/6 max-w-6xl md:px-10 px-6">
         <div
           onClick={(e) => {
             e.stopPropagation()

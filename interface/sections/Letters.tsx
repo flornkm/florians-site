@@ -272,7 +272,7 @@ function SendLetter(props: {
       className="fixed inset-0 bg-black/25 z-[52] flex justify-center items-center"
       onClick={props.setShowLetter}
     >
-      <div className="w-full md:h-3/5 h-auto max-w-6xl md:px-10 px-6">
+      <div className="w-full md:h-3/4 h-auto max-w-6xl md:px-10 px-6">
         <div
           onClick={(e) => {
             e.stopPropagation()

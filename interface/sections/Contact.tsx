@@ -116,7 +116,7 @@ export default function Contact() {
           </Button>
         </div>
       </div>
-      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-full rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950/20 dark:border-zinc-800 relative">
+      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-full max-h-[30em] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950/20 dark:border-zinc-800 relative">
         <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative mb-12">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
@@ -124,7 +124,7 @@ export default function Contact() {
             </ChatBubble>
           ))}
           {messages.length === 3 && (
-            <div class="absolute bottom-4 md:gap-4 gap-2 items-center flex-wrap hidden xs:flex md:pr-8 pr-4">
+            <div class="absolute bottom-4 md:gap-4 gap-2 items-center flex-wrap hidden lg:flex md:pr-8 pr-4">
               <p>{m.message_often_used()}</p>
               <Button
                 function={() => {
