@@ -20,7 +20,9 @@ export default function Button(props: {
       disabled={props.disabled}
       onClick={() => {
         props.link &&
-          (props.link.includes("http")
+          (props.link.includes("mailto") || props.link.includes("imessage")
+            ? window.open(props.link)
+            : props.link.includes("http")
             ? window.open(getLocale() + props.link)
             : navigate(getLocale() + props.link))
         props.function && props.function()
