@@ -370,7 +370,47 @@ export default function Tooltip(props: {
           </p>
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
-              While building this site, I got feedback from: TBD
+              While building this site, I got feedback from:{" "}
+              <InlineLink link="https://twitter.com/stallboerger">
+                Anton Stallbörger
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/dvdqrng">
+                David Quiring
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/eikedrescher">
+                Eike Drescher
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/_julianherbst">
+                Julian Herbst
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/krzysztoffduda">
+                Krzysztof Duda
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/linusrogge">
+                Linus Rogge
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/nilseller">
+                Nils Eller
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/samuelkraft">
+                Samuel Kraft
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/samuelstroschei">
+                Samuel Stroschein
+              </InlineLink>
+              ,{" "}
+              <InlineLink link="https://twitter.com/thilokonzok">
+                Thilo Konzok
+              </InlineLink>
+              .
             </p>
           </div>
         </div>
