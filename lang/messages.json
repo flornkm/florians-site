@@ -245,7 +245,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Web Design Lead"
+              "value": "Designer (web)"
             }
           ]
         },
@@ -297,7 +297,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Freelancer"
+              "value": "Freelance Graphic- and Motiondesign"
             }
           ]
         },
@@ -349,7 +349,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Design Engineer"
+              "value": "Design Engineer (intern)"
             }
           ]
         },
@@ -392,6 +392,22 @@
       ]
     },
     {
+      "id": "about_experience_tritschlerkiem_company",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Tritschler & Kiem GbR"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "about_experience_tritschlerkiem_job",
       "selectors": [],
       "variants": [
@@ -401,7 +417,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Design Engineer"
+              "value": "Design Engineer (self-employed)"
             }
           ]
         },
