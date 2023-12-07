@@ -2,6 +2,7 @@ import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
 import * as m from "#lang/paraglide/messages"
 import Share from "~icons/eva/share-outline"
+import Writing from "~icons/eva/edit-2-fill"
 import Picker from "#components/Picker"
 import { useState } from "preact/hooks"
 import Markdown from "#markdown/Markdown"
@@ -37,6 +38,19 @@ export default function Page({
                     : "mb-24 md:mb-48"
                 }
               >
+                {post.type === "writing" ? (
+                  <div class="text-sm pl-1.5 px-2 py-0.5 inline-block mb-2 rounded-lg font-medium text-zinc-500 border border-zinc-400">
+                    <Writing class="inline-block mr-2 rounded-full" />
+                    Writing
+                  </div>
+                ) : post.type === "sports" ? (
+                  <div class="text-sm pl-1.5 px-2 py-0.5 inline-block mb-2 rounded-lg font-medium text-amber-500 border border-amber-400">
+                    <Writing class="inline-block mr-2 rounded-full" />
+                    Writing
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <div class="flex items-center justify-between">
                   <p class="text-sm text-zinc-400">
                     {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}

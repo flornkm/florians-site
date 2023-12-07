@@ -1,6 +1,7 @@
 ---
 title: Essentials
 description: My personal essentials I'm using everyday.
+type: writing
 date: 23 / 11 / 2023
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: First post on the new website
 description: The first post on my the new website.
+type: writing
 date: 28 / 10 / 2023
 ---
 

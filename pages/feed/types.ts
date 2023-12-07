@@ -5,6 +5,7 @@ export interface RenderedPosts {
 export type Post = {
   title: string
   slug: string
+  type: "writing"
   date: string
 }
 
