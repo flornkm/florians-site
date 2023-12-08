@@ -10,6 +10,7 @@ const routes = [
   { path: "/feed", dynamic: true },
   { path: "/archive", dynamic: false },
   { path: "/archive/projects", dynamic: true },
+  { path: "/archive/short-projects", dynamic: true },
   { path: "/colophon", dynamic: false },
   { path: "/imprint", dynamic: false },
   { path: "/privacy-policy", dynamic: false },

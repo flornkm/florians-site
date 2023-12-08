@@ -12,7 +12,7 @@ const rendered = {} as RenderedProjects
 
 async function onBeforeRender(pageContext: PageContextBuiltInServer) {
   const { slug } = pageContext.routeParams
-  const projects = await returnContent("archive/projects")
+  const projects = await returnContent("archive/short-projects")
 
   for (const project of projects) {
     rendered[project.slug] = (await convertMarkdownToHtml(
