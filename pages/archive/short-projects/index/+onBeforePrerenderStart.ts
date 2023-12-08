@@ -1,12 +1,15 @@
 export default onBeforePrerenderStart
 
 import { ProjectContent, RenderedProjects } from "pages/work/types"
-import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert"
+import {
+  convertMarkdownToHtml,
+  returnContent,
+} from "../../../../markdown/convert"
 
 const rendered = {} as RenderedProjects
 
 async function onBeforePrerenderStart() {
-  const projects = await returnContent("archive")
+  const projects = await returnContent("archive/short-projects")
   for (const project of projects) {
     rendered[project.slug] = (await convertMarkdownToHtml(
       project.url
@@ -15,37 +18,22 @@ async function onBeforePrerenderStart() {
 
   return [
     {
-      url: "/archive",
+      url: "/archive/short-projects",
       pageContext: {
         pageProps: {
           currentFolder: "all",
           projects: projects,
         },
         documentProps: {
-          title: "Archive | Florian - Design Engineer",
+          title: "Short Projects Archive | Florian - Design Engineer",
           description:
-            "In my archive, you will find smaller creations, MVPs, ideas and results from hackathons. Feel free to look through if you are interested.",
-          image: "/images/opengraph/og-image-archive.jpg",
-        },
-      },
-    },
-    {
-      url: "/archive/projects",
-      pageContext: {
-        pageProps: {
-          currentFolder: "projects",
-          projects: projects,
-        },
-        documentProps: {
-          title: "Archive | Florian - Design Engineer",
-          description:
-            "In my archive, you will find smaller creations, MVPs, ideas and results from hackathons. Feel free to look through if you are interested.",
+            "In my short projects archive, you will find some shortened case studies.",
           image: "/images/opengraph/og-image-archive.jpg",
         },
       },
     },
     ...projects.map((project) => {
-      const url = `/archive/${project.slug}`
+      const url = `/archive/short-projects/${project.slug}`
       return {
         url,
         pageContext: {

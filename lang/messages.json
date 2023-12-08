@@ -1110,6 +1110,22 @@
       ]
     },
     {
+      "id": "button_go_up",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Go up"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "button_got_question",
       "selectors": [],
       "variants": [

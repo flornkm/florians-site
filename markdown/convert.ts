@@ -19,7 +19,9 @@ export async function convertMarkdownToHtml(
   return convertedHTML
 }
 
-export async function returnContent(category: "work" | "archive" | "feed") {
+export async function returnContent(
+  category: "work" | "archive/projects" | "archive/short-projects" | "feed"
+) {
   const contentRoot = "./content/" + category
   const tableOfContents = []
 
