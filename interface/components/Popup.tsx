@@ -10,6 +10,13 @@ interface PopupProps {
 }
 
 export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      onClose()
+      window.removeEventListener("keydown", () => {})
+    }
+  })
+
   return (
     <div
       className={`fixed inset-0 bg-black/25 z-[52] flex justify-center items-center ${

@@ -158,27 +158,40 @@ export default function Page() {
               <h2 class="font-semibold mb-3">{m.about_socials_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
-                  <InlineLink class="ml-1" link="https://x.com/flornkm/">
+                  <Button
+                    type="text"
+                    class="-ml-0.5"
+                    link="https://x.com/flornkm/"
+                  >
                     x.com
-                  </InlineLink>
+                  </Button>
                 </li>
                 <li>
-                  <InlineLink
-                    class="ml-1"
+                  <Button
+                    type="text"
+                    class="-ml-0.5"
                     link="https://www.linkedin.com/in/flornkm/"
                   >
                     LinkedIn
-                  </InlineLink>
+                  </Button>
                 </li>
                 <li>
-                  <InlineLink class="ml-1" link="https://read.cv/flornkm">
+                  <Button
+                    type="text"
+                    class="-ml-0.5"
+                    link="https://read.cv/flornkm"
+                  >
                     Read.cv
-                  </InlineLink>
+                  </Button>
                 </li>
                 <li>
-                  <InlineLink class="ml-1" link="https://github.com/flornkm">
+                  <Button
+                    type="text"
+                    class="-ml-0.5"
+                    link="https://github.com/flornkm"
+                  >
                     GitHub
-                  </InlineLink>
+                  </Button>
                 </li>
               </ul>
             </div>{" "}
@@ -186,17 +199,22 @@ export default function Page() {
               <h2 class="font-semibold mb-3">{m.about_contact_title()}</h2>
               <ul class="space-y-2 -ml-1">
                 <li>
-                  <InlineLink class="ml-1" link="mailto:hello@floriankiem.com">
+                  <Button
+                    type="text"
+                    class="-ml-0.5"
+                    link="mailto:hello@floriankiem.com"
+                  >
                     {m.link_email()}
-                  </InlineLink>
+                  </Button>
                 </li>
                 <li>
-                  <InlineLink
-                    class="ml-1"
+                  <Button
+                    type="text"
+                    class="-ml-0.5"
                     link="imessage://hello@floriankiem.com"
                   >
                     {m.link_imessage()}
-                  </InlineLink>
+                  </Button>
                 </li>
               </ul>
             </div>
@@ -422,7 +440,7 @@ export default function Page() {
                 <a
                   href="https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/"
                   target="_blank"
-                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
+                  class="mt-2 text-xs font-medium text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
                 >
                   {m.cover_image_source()}
                 </a>
@@ -443,7 +461,7 @@ export default function Page() {
                 <a
                   href="https://www.vogue.co.uk%2Farts-and-lifestyle%2Farticle%2Fwecrashed-apple-tv&psig=AOvVaw1TmOHYBg5jLkyGFaFlWq5Y&ust=1697491485478000&source=images&cd=vfe&opi=89978449&ved=0CBQQ3YkBahcKEwjAmefZ_viBAxUAAAAAHQAAAAAQJA"
                   target="_blank"
-                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
+                  class="mt-2 text-xs font-medium text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
                 >
                   {m.cover_image_source()}
                 </a>

@@ -84,7 +84,7 @@ export default function Page({
                     <Share />
                   </Picker>
                 </div>
-                <Markdown content={content[post.slug]} />
+                <Markdown class="post" content={content[post.slug]} />
               </div>
             )
           })}

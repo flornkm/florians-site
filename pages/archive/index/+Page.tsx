@@ -7,6 +7,12 @@ export default function Page() {
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
+        <h1 class="text-3xl font-semibold mb-8">{m.archive_title()}</h1>
+        <div class="flex items-center mb-4">
+          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600">
+            Root
+          </p>
+        </div>
         <div class="py-0.5 pb-8">
           <a
             href="/archive/projects"
@@ -44,12 +50,9 @@ export default function Page() {
           </a>
         </div>
         <README>
-          <>
-            <h1 class="text-3xl font-semibold mb-4">{m.archive_title()}</h1>
-            <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
-              {m.archive_description()}
-            </p>
-          </>
+          <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
+            {m.archive_description()}
+          </p>
         </README>
       </section>
     </div>

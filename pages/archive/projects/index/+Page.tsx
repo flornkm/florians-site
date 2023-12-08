@@ -1,4 +1,4 @@
-import Button from "#components/Button"
+import Button, { InlineLink } from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
 import File from "~icons/eva/file-outline"
@@ -10,24 +10,17 @@ export default function Page({ projects }: { projects: any }) {
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
+        <h1 class="text-3xl font-semibold mb-8">{m.archive_title()}</h1>
+        <div class="flex items-center mb-4">
+          <InlineLink link="/archive" class="px-1.5">
+            Root
+          </InlineLink>
+          <p> / </p>
+          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600">
+            Projects
+          </p>
+        </div>
         <div class="py-0.5 pb-8">
-          <a
-            href="/archive"
-            class="flex justify-between gap-4 border-b border-b-zinc-100 dark:border-b-zinc-900 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
-          >
-            <p class="font-semibold leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-8 flex-shrink-0 text-zinc-400" />
-              <span class="md:truncate">Archive / Projects</span>
-            </p>
-            <Button
-              type="text"
-              link="/archive"
-              class="relative md:ml-auto col-span-2 md:col-span-1 group-hover/link:underline"
-              chevron
-            >
-              {m.button_go_up()}
-            </Button>
-          </a>
           {projects.map((project: any) => {
             const date = new Date(
               Number(project.date.split("/")[1]),
@@ -39,7 +32,7 @@ export default function Page({ projects }: { projects: any }) {
                   href={`${project.url}`}
                   class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
                 >
-                  <p class="font-semibold leading-snug col-span-2 flex items-center md:pl-5">
+                  <p class="font-semibold leading-snug col-span-2 flex items-center">
                     <File class="w-8 flex-shrink-0 text-zinc-400" />
                     <span class="md:truncate">{project.title}</span>
                   </p>
@@ -80,13 +73,10 @@ export default function Page({ projects }: { projects: any }) {
           })}
         </div>
         <README>
-          <>
-            <h1 class="text-3xl font-semibold mb-4">Projects</h1>
-            <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
-              Projects are long-term projects that I've worked on. They're
-              usually larger in scope and take a longer time to complete.
-            </p>
-          </>
+          <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
+            Projects are long-term projects that I've worked on. They're usually
+            larger in scope and take a longer time to complete.
+          </p>
         </README>
       </section>
     </div>

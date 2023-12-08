@@ -1,4 +1,4 @@
-div > article {
+div > article.post {
 
     & h1,
     h2,
@@ -49,13 +49,19 @@ div > article {
         color: black;
         transition: all ease-in-out 0.1s;
         cursor: alias;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    & a:hover {
+        text-decoration: none;
     }
 
     & figure {
         margin-bottom: 4rem;
     }
 
-    & div.post > p:nth-child(3), div.post > p:nth-child(4) {
+    & div > p {
         font-size: 1rem;
     }
 
