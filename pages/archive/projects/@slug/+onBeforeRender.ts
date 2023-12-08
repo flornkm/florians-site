@@ -1,7 +1,10 @@
 export default onBeforeRender
 
 import { PageContextBuiltInServer } from "vike/types"
-import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert"
+import {
+  convertMarkdownToHtml,
+  returnContent,
+} from "../../../../markdown/convert"
 import { render } from "vike/abort"
 import { ProjectContent, RenderedProjects } from "pages/work/types"
 
@@ -9,7 +12,7 @@ const rendered = {} as RenderedProjects
 
 async function onBeforeRender(pageContext: PageContextBuiltInServer) {
   const { slug } = pageContext.routeParams
-  const projects = await returnContent("archive")
+  const projects = await returnContent("archive/projects")
 
   for (const project of projects) {
     rendered[project.slug] = (await convertMarkdownToHtml(
