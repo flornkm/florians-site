@@ -6,15 +6,18 @@ import * as m from "#lang/paraglide/messages"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import { Popup, usePopup } from "./Popup"
 import Contact from "#sections/Contact"
+import NoPrerender from "./NoPrerender"
 
 export default function Footer() {
   const { isOpen, openPopup, closePopup, popup } = usePopup()
   const pageContext = usePageContext() as any
   return (
     <>
-      <Popup isOpen={isOpen} onClose={closePopup} popup={popup}>
-        <Contact />
-      </Popup>
+      <NoPrerender>
+        <Popup isOpen={isOpen} onClose={closePopup} popup={popup}>
+          <Contact />
+        </Popup>
+      </NoPrerender>
       <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
         <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
           <div class="lg:col-span-3 xs:col-span-2 max-w-md">
