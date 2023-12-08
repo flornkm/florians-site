@@ -38,27 +38,30 @@ export default function Page({
                     : "mb-24 md:mb-48"
                 }
               >
-                {post.type === "writing" ? (
-                  <div class="text-sm pl-1.5 px-2 py-0.5 inline-block mb-2 rounded-lg font-medium text-zinc-500 border border-zinc-400">
-                    <Writing class="inline-block mr-2 rounded-full" />
-                    Writing
-                  </div>
-                ) : post.type === "sports" ? (
-                  <div class="text-sm pl-1.5 px-2 py-0.5 inline-block mb-2 rounded-lg font-medium text-amber-500 border border-amber-400">
-                    <Writing class="inline-block mr-2 rounded-full" />
-                    Writing
-                  </div>
-                ) : (
-                  <></>
-                )}
                 <div class="flex items-center justify-between">
-                  <p class="text-sm text-zinc-400">
-                    {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
-                    {date.toLocaleDateString("en-US", {
-                      month: "long",
-                    })}{" "}
-                    {date.getDate()}, {date.getFullYear()}
-                  </p>
+                  <div class="flex items-center gap-1 mb-2">
+                    {post.type === "writing" ? (
+                      <div class="text-sm flex items-center gap-1.5 text-zinc-400 dark:text-zinc-500">
+                        <Writing class="inline-block rounded-md p-0.5 bg-zinc-400 text-white dark:bg-zinc-600" />
+                        Writing
+                      </div>
+                    ) : post.type === "sports" ? (
+                      <div class="text-sm pl-1.5 px-2 py-0.5 inline-block rounded-lg font-medium text-amber-500 border border-amber-400">
+                        <Writing class="inline-block mr-2 rounded-full" />
+                        Writing
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    <p class="text-zinc-400 dark:text-zinc-500">•</p>
+                    <p class="text-sm text-zinc-400 dark:text-zinc-500">
+                      {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
+                      {date.toLocaleDateString("en-US", {
+                        month: "long",
+                      })}{" "}
+                      {date.getDate()}, {date.getFullYear()}
+                    </p>
+                  </div>
                   <Picker
                     options={[
                       {
