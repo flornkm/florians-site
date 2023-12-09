@@ -25,6 +25,8 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
   return {
     pageContext: {
       pageProps: {
+        // @ts-ignore
+        title: projects.find((project) => project.slug === slug)!.title,
         content: rendered[slug],
       },
       documentProps: {

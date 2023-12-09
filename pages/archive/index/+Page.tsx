@@ -6,13 +6,13 @@ import README from "#components/README"
 export default function Page() {
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-16">
-        <h1 class="text-3xl font-semibold mb-8">{m.archive_title()}</h1>
-        <div class="flex items-center mb-4">
-          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600">
-            Root
+      <section class="w-full pb-24">
+        <div class="flex items-center py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
+          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600 -ml-1.5">
+            Archive
           </p>
         </div>
+        <h1 class="text-3xl font-semibold mt-12 mb-6">{m.archive_title()}</h1>
         <div class="py-0.5 pb-8">
           <a
             href="/archive/projects"

@@ -6,7 +6,7 @@ export default function README(props: { children: JSX.Element }) {
   return (
     <div class="bg-zinc-50 border border-zinc-200 w-full rounded-xl relative dark:border-zinc-800 dark:bg-zinc-950">
       <div class="absolute -inset-[1px] border border-zinc-200 rounded-xl z-30 pointer-events-none ring-4 ring-light-zinc dark:ring-black dark:border-zinc-800" />
-      <div class="flex justify-between items-center w-full py-2 pl-4 pr-2 border-b border-zinc-200 bg-zinc-100 sticky top-0 lg:top-14 dark:bg-zinc-900 dark:border-zinc-800">
+      <div class="flex justify-between items-center w-full py-2 pl-4 pr-2 border-b border-zinc-200 bg-zinc-100 sticky dark:bg-zinc-900 dark:border-zinc-800 top-10 lg:top-24">
         <p class="text-zinc-500 text-sm text-center dark:text-zinc-400 font-mono">
           README.md
         </p>
