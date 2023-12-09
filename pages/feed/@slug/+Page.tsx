@@ -9,7 +9,10 @@ export default function Page(props: Record<string, string>) {
   return (
     <>
       <div>
-        <Markdown class="lg:mt-16 max-w-lg mx-auto" content={props.content} />
+        <Markdown
+          class="lg:mt-16 max-w-lg mx-auto post"
+          content={props.content}
+        />
       </div>
       <div class="flex items-center justify-end mb-16 mx-auto max-w-lg">
         <Picker
