@@ -2,7 +2,8 @@ import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
 import * as m from "#lang/paraglide/messages"
 import Share from "~icons/eva/share-outline"
-import Writing from "~icons/eva/edit-2-fill"
+import Writing from "~icons/eva/edit-fill"
+import Sports from "~icons/eva/award-fill"
 import Picker from "#components/Picker"
 import { useState } from "preact/hooks"
 import Markdown from "#markdown/Markdown"
@@ -15,6 +16,19 @@ export default function Page({
   content: PostContent
 }) {
   const [copyLabel, setCopyLabel] = useState("Copy link")
+  posts.sort((a, b) => {
+    const aDate = new Date(
+      Number(a.date.split("/")[2]),
+      Number(a.date.split("/")[1]) - 1,
+      Number(a.date.split("/")[0])
+    )
+    const bDate = new Date(
+      Number(b.date.split("/")[2]),
+      Number(b.date.split("/")[1]) - 1,
+      Number(b.date.split("/")[0])
+    )
+    return bDate.getTime() - aDate.getTime()
+  })
   return (
     <div class="w-full">
       <section class="w-full lg:pt-16">
@@ -39,22 +53,22 @@ export default function Page({
                 }
               >
                 <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-1 mb-2">
+                  <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
                     {post.type === "writing" ? (
-                      <div class="text-sm flex items-center gap-1.5 text-zinc-400 dark:text-zinc-500">
-                        <Writing class="inline-block rounded-md p-0.5 bg-zinc-400 text-white dark:bg-zinc-600" />
+                      <div class="text-sm flex items-center gap-1.5">
+                        <Writing class="inline-block" />
                         Writing
                       </div>
                     ) : post.type === "sports" ? (
-                      <div class="text-sm pl-1.5 px-2 py-0.5 inline-block rounded-lg font-medium text-amber-500 border border-amber-400">
-                        <Writing class="inline-block mr-2 rounded-full" />
-                        Writing
+                      <div class="text-sm flex items-center gap-1.5">
+                        <Sports class="inline-block" />
+                        Sports Entry
                       </div>
                     ) : (
                       <></>
                     )}
-                    <p class="text-zinc-400 dark:text-zinc-500">•</p>
-                    <p class="text-sm text-zinc-400 dark:text-zinc-500">
+                    <p>•</p>
+                    <p>
                       {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
                       {date.toLocaleDateString("en-US", {
                         month: "long",
@@ -87,6 +101,71 @@ export default function Page({
                     <Share />
                   </Picker>
                 </div>
+                {post.type === "sports" && (
+                  <div class="w-full bg-zinc-100 px-4 py-8 dark:bg-zinc-900 my-4">
+                    <div class="relative w-full grid xs:grid-cols-3 place-items-end gap-4 text-zinc-500 dark:text-zinc-400">
+                      <div class="mx-auto">
+                        <div
+                          style={{
+                            height: "100px",
+                          }}
+                          class="w-8 h-full relative rounded-lg bg-zinc-200 mb-4 dark:bg-zinc-800"
+                        >
+                          <div
+                            style={{
+                              height: post.move / 3 + "px",
+                            }}
+                            class="w-full rounded-md absolute bottom-0 left-0 right-0 bg-rose-500"
+                          />
+                          <p class="absolute rotate-90 bottom-1 z-10 text-sm -right-6 font-medium text-rose-500">
+                            {post.move}
+                          </p>
+                        </div>
+                        <p class="text-xs text-center mt-2 font-mono">Move</p>
+                      </div>
+                      <div class="mx-auto">
+                        <div
+                          style={{
+                            height: "100px",
+                          }}
+                          class="w-8 h-full relative rounded-lg bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                        >
+                          <div
+                            style={{
+                              height: post.exercise * 0.6 + "px",
+                            }}
+                            class="w-full rounded-md absolute bottom-0 left-0 right-0 bg-green-500"
+                          />
+                          <p class="absolute rotate-90 bottom-1 z-10 text-sm -right-6 font-medium text-green-500">
+                            {post.exercise}
+                          </p>
+                        </div>
+                        <p class="text-xs text-center mt-2 font-mono">
+                          Exercise
+                        </p>
+                      </div>
+                      <div class="mx-auto">
+                        <div
+                          style={{
+                            height: "100px",
+                          }}
+                          class="w-8 h-full relative rounded-lg bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                        >
+                          <div
+                            style={{
+                              height: post.stand / 2 + "px",
+                            }}
+                            class="w-full rounded-md absolute bottom-0 left-0 right-0 bg-sky-500"
+                          />
+                          <p class="absolute rotate-90 bottom-1 z-10 text-sm -right-6 font-medium text-sky-500">
+                            {post.stand}
+                          </p>
+                        </div>
+                        <p class="text-xs text-center mt-2 font-mono">Stand</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <Markdown class="post" content={content[post.slug]} />
               </div>
             )
