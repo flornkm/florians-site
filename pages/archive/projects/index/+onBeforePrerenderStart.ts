@@ -38,6 +38,8 @@ async function onBeforePrerenderStart() {
         url,
         pageContext: {
           pageProps: {
+            // @ts-ignore
+            title: projects.find((x) => x.slug === project.slug)!.title,
             content: rendered[project.slug],
           },
           documentProps: {
