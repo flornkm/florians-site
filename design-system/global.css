@@ -81,6 +81,14 @@
 	src: url(/fonts/fragment-mono/FragmentMono-Regular.woff2) format('woff2');
 }
 
+@font-face {
+	font-family: 'Arial Rounded';
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+	src: url(/fonts/arial-rounded/arial-rounded-mt-bold.woff) format('woff');
+}
+
 body {
 	background-color: rgb(252, 252, 252);
 }

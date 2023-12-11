@@ -40,6 +40,9 @@ export default {
         shake: "shake 0.1s ease-in-out",
         "infinite-scroll": "infinite-scroll 25s linear infinite",
       },
+      fontFamily: {
+        rounded: ["Arial Rounded", "sans-serif"],
+      },
     },
     fontFamily: {
       sans: ["Pretendard Variable", "Pretendard", "Inter", "sans-serif"],

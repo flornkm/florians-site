@@ -32,7 +32,7 @@ export default function Page({ projects }: { projects: any }) {
                   href={`${project.url}`}
                   class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
                 >
-                  <p class="font-semibold leading-snug col-span-2 flex items-center">
+                  <p class="font-medium leading-snug col-span-2 flex items-center">
                     <File class="w-8 flex-shrink-0 text-zinc-400" />
                     <span class="md:truncate">{project.title}</span>
                   </p>
