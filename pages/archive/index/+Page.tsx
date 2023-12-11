@@ -18,7 +18,7 @@ export default function Page() {
             href="/archive/projects"
             class="flex justify-between border-b border-b-zinc-100 dark:border-b-zinc-900 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
-            <p class="font-semibold leading-snug md:col-span-2 flex items-center">
+            <p class="font-medium leading-snug md:col-span-2 flex items-center">
               <Folder class="w-8 flex-shrink-0 text-zinc-400" />
               Projects
             </p>
@@ -35,7 +35,7 @@ export default function Page() {
             href="/archive/short-projects"
             class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
-            <p class="font-semibold leading-snug md:col-span-2 flex items-center">
+            <p class="font-medium leading-snug md:col-span-2 flex items-center">
               <Folder class="w-8 flex-shrink-0 text-zinc-400" />
               Short Projects
             </p>

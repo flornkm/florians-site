@@ -107,17 +107,17 @@ export default function Page({
                       <div class="mx-auto">
                         <div
                           style={{
-                            height: "100px",
+                            height: "128px",
                           }}
-                          class="w-8 h-full relative rounded-lg bg-zinc-200 mb-4 dark:bg-zinc-800"
+                          class="w-10 h-full relative rounded-xl bg-zinc-200 mb-4 dark:bg-zinc-800"
                         >
                           <div
                             style={{
                               height: post.move / 3 + "px",
                             }}
-                            class="w-full rounded-md absolute bottom-0 left-0 right-0 bg-rose-500"
+                            class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-rose-500"
                           />
-                          <p class="absolute rotate-90 bottom-1 z-10 text-sm -right-6 font-medium text-rose-500">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded">
                             {post.move}
                           </p>
                         </div>
@@ -126,17 +126,17 @@ export default function Page({
                       <div class="mx-auto">
                         <div
                           style={{
-                            height: "100px",
+                            height: "128px",
                           }}
-                          class="w-8 h-full relative rounded-lg bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                          class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
                         >
                           <div
                             style={{
                               height: post.exercise * 0.6 + "px",
                             }}
-                            class="w-full rounded-md absolute bottom-0 left-0 right-0 bg-green-500"
+                            class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-green-500"
                           />
-                          <p class="absolute rotate-90 bottom-1 z-10 text-sm -right-6 font-medium text-green-500">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded">
                             {post.exercise}
                           </p>
                         </div>
@@ -147,17 +147,17 @@ export default function Page({
                       <div class="mx-auto">
                         <div
                           style={{
-                            height: "100px",
+                            height: "128px",
                           }}
-                          class="w-8 h-full relative rounded-lg bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                          class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
                         >
                           <div
                             style={{
                               height: post.stand / 2 + "px",
                             }}
-                            class="w-full rounded-md absolute bottom-0 left-0 right-0 bg-sky-500"
+                            class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-sky-500"
                           />
-                          <p class="absolute rotate-90 bottom-1 z-10 text-sm -right-6 font-medium text-sky-500">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded">
                             {post.stand}
                           </p>
                         </div>

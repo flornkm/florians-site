@@ -399,6 +399,10 @@ export default function Tooltip(props: {
                 Nils Eller
               </InlineLink>
               ,{" "}
+              <InlineLink link="https://twitter.com/prizigner">
+                Priyank Shah
+              </InlineLink>
+              ,{" "}
               <InlineLink link="https://twitter.com/samuelkraft">
                 Samuel Kraft
               </InlineLink>
