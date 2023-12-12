@@ -117,7 +117,7 @@ export default function Page({
                             }}
                             class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-rose-500"
                           />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
                             {post.move}
                           </p>
                         </div>
@@ -136,7 +136,7 @@ export default function Page({
                             }}
                             class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-green-500"
                           />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
                             {post.exercise}
                           </p>
                         </div>
@@ -157,7 +157,7 @@ export default function Page({
                             }}
                             class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-sky-500"
                           />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
                             {post.stand}
                           </p>
                         </div>
