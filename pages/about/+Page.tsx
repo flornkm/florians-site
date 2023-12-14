@@ -369,7 +369,7 @@ export default function Page() {
           <div class="mb-20 flex flex-col items-start">
             <h3 class="text-lg font-semibold mb-4">{m.about_music_title()}</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
-              <div>
+              <div class="relative">
                 <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:lg:bg-zinc-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-zinc-950 dark:lg:hover:bg-zinc-900">
                   <img
                     alt="Enjoy the Silence by Depeche Mode"
@@ -394,7 +394,7 @@ export default function Page() {
                   {m.cover_image_source()}
                 </a>
               </div>
-              <div>
+              <div class="relative">
                 <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:lg:bg-zinc-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-zinc-950 dark:lg:hover:bg-zinc-900">
                   <img
                     alt="Serotonin Moonbeams by The Blessed Madonna"
@@ -424,8 +424,8 @@ export default function Page() {
           <div class="mb-20 flex flex-col items-start">
             <h3 class="text-lg font-semibold mb-4">Movies and series</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
-              <div>
-                <div class="bg-zinc-100 h-80 mb-2 bg-[url('/images/movies-series/interstellar.jpg')] bg-cover bg-top flex items-end overflow-hidden">
+              <div class="relative">
+                <div class="bg-zinc-100 md:h-64 h-80 mb-2 bg-[url('/images/movies-series/interstellar.jpg')] bg-cover bg-top flex items-end overflow-hidden">
                   <div class="text-white font-medium pb-4 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
                     <p class="leading-none">Interstellar</p>
                     <a
@@ -444,9 +444,10 @@ export default function Page() {
                 >
                   {m.cover_image_source()}
                 </a>
+                <div class="h-20 hidden md:block" />
               </div>
-              <div>
-                <div class="bg-zinc-100 h-80 mb-2 bg-[url('/images/movies-series/wecrashed.jpg')] bg-cover bg-top flex items-end overflow-hidden">
+              <div class="relative">
+                <div class="bg-zinc-100 md:h-64 h-80 mb-2 bg-[url('/images/movies-series/wecrashed.jpg')] bg-cover bg-top flex items-end overflow-hidden">
                   <div class="text-white font-medium pb-4 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
                     <p class="leading-none">WeCrashed </p>
                     <a
@@ -465,6 +466,7 @@ export default function Page() {
                 >
                   {m.cover_image_source()}
                 </a>
+                <div class="h-20 hidden md:block" />
               </div>
             </div>
           </div>
