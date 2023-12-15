@@ -33,11 +33,28 @@ export default function Page() {
           </a>
           <a
             href="/archive/short-projects"
-            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+            class="flex justify-between border-b border-b-zinc-100 dark:border-b-zinc-900 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
               <Folder class="w-8 flex-shrink-0 text-zinc-400" />
               Short Projects
+            </p>
+            <Button
+              type="text"
+              link="/archive/projects"
+              class="relative md:ml-auto col-span-2 md:col-span-1 group-hover/link:underline"
+              chevron
+            >
+              {m.button_open()}
+            </Button>
+          </a>
+          <a
+            href="/archive/copyables"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+          >
+            <p class="font-medium leading-snug md:col-span-2 flex items-center">
+              <Folder class="w-8 flex-shrink-0 text-zinc-400" />
+              Copyables
             </p>
             <Button
               type="text"
