@@ -2,6 +2,15 @@ import Button, { InlineLink } from "#components/Button"
 import File from "~icons/eva/file-outline"
 import Vectorfiles from "./assets/vectorfiles.json"
 import { useState } from "preact/hooks"
+import README from "#components/README"
+
+Vectorfiles.sort((a, b) => {
+  if (a.name < b.name) {
+    return 1
+  } else {
+    return -1
+  }
+})
 
 export default function Page() {
   return (
@@ -20,12 +29,18 @@ export default function Page() {
         <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-4 h-full min-h-screen">
           <div class="py-0.5 gap-4 flex items-start flex-col h-full">
             <Item>
-              <div class="p-8">
-                <p class="font-semibold font-rounded text-zinc-500 dark:text-zinc-400">
-                  Yes, you can copy these and paste them directly into Figma or
-                  your code editor. ;)
-                </p>
-              </div>
+              <README>
+                <>
+                  <p class="text-zinc-500 max-w-lg dark:text-zinc-400 mb-4">
+                    A place for little copyable things that I've found in the
+                    Internet or made myself.
+                  </p>
+                  <p class="font-semibold font-rounded text-zinc-500 dark:text-zinc-400">
+                    Yes, you can copy these and paste them directly into Figma
+                    or your code editor. ;)
+                  </p>
+                </>
+              </README>
             </Item>
             {Vectorfiles.filter((_, i) => i % 3 === 0).map((file) => {
               const [copied, setCopied] = useState(false)
@@ -172,7 +187,7 @@ export default function Page() {
 
 function Item(props: { children: any }) {
   return (
-    <div class="w-full bg-zinc-100 dark:bg-zinc-900 relative overflow-hidden">
+    <div class="w-full bg-zinc-100 dark:bg-zinc-900 relative">
       {" "}
       {props.children}
     </div>
