@@ -2,7 +2,6 @@ import Button, { InlineLink } from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
 import File from "~icons/eva/file-outline"
-import Folder from "~icons/eva/folder-outline"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 
