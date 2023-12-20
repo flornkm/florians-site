@@ -1,14 +1,14 @@
-import Button from "#components/Button"
 import Folder from "~icons/eva/folder-outline"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"
+import Button from "#components/Button"
 
 export default function Page() {
   return (
     <div class="w-full">
-      <section class="w-full pb-24">
-        <div class="flex items-center mt-6 mb-6 py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
+      <section class="w-full">
+        <div class="flex items-center lg:mt-6 mb-6 lg:py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
           <h1
             class={
               "transition-all tabular-nums " +
@@ -26,7 +26,7 @@ export default function Page() {
             class="flex justify-between border-b border-b-zinc-100 dark:border-b-zinc-900 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-8 flex-shrink-0 text-zinc-400" />
+              <Folder class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
               Projects
             </p>
             <Button
@@ -43,7 +43,7 @@ export default function Page() {
             class="flex justify-between border-b border-b-zinc-100 dark:border-b-zinc-900 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-8 flex-shrink-0 text-zinc-400" />
+              <Folder class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
               Short Projects
             </p>
             <Button
@@ -60,7 +60,7 @@ export default function Page() {
             class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-8 flex-shrink-0 text-zinc-400" />
+              <Folder class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
               Copyables
             </p>
             <Button

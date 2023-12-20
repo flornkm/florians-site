@@ -1,7 +1,7 @@
 import Button, { InlineLink } from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import File from "~icons/eva/file-outline"
+import File from "~icons/eva/folder-outline"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"
@@ -12,8 +12,10 @@ export default function Page({ projects }: { projects: any }) {
       <section class="w-full pb-24">
         <div
           class={
-            "flex items-center mt-6 mb-6 py-2  bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
-            (userScrolledDown(40) ? "font-medium" : "text-3xl font-semibold")
+            "flex items-center lg:mt-6 mb-6 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            (userScrolledDown(40)
+              ? "font-medium py-2"
+              : "text-3xl font-semibold lg:py-2")
           }
         >
           <InlineLink link="/archive" class="px-1.5 -ml-1.5" hideWeight>
@@ -21,7 +23,7 @@ export default function Page({ projects }: { projects: any }) {
           </InlineLink>
 
           <p> / </p>
-          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600">
+          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
             Short Projects
           </p>
         </div>
@@ -38,7 +40,7 @@ export default function Page({ projects }: { projects: any }) {
                   class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
                 >
                   <p class="font-medium leading-snug col-span-2 flex items-center">
-                    <File class="w-8 flex-shrink-0 text-zinc-400" />
+                    <File class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
                     <span class="md:truncate">{project.title}</span>
                   </p>
                   <p class="text-zinc-500 truncate md:col-span-4 leading-snug col-span-2 dark:text-zinc-400">
