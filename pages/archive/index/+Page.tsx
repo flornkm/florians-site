@@ -8,17 +8,15 @@ export default function Page() {
   return (
     <div class="w-full">
       <section class="w-full">
-        <div class="flex items-center lg:mt-6 mb-6 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
-          <h1
-            class={
-              "transition-all tabular-nums " +
-              (userScrolledDown(40)
-                ? "font-medium py-2"
-                : "text-3xl font-semibold lg:py-2")
-            }
-          >
-            Archive
-          </h1>
+        <div
+          class={
+            "flex items-center lg:mt-6 mb-6 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            (userScrolledDown(40)
+              ? "font-medium py-2"
+              : "text-3xl font-semibold lg:py-2")
+          }
+        >
+          <h1 class="px-1.5 -ml-1.5">Archive</h1>
         </div>
         <div class="py-0.5 pb-8">
           <a
