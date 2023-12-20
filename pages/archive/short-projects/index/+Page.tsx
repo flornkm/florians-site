@@ -4,21 +4,27 @@ import Tooltip from "#components/Tooltip"
 import File from "~icons/eva/file-outline"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
+import { userScrolledDown } from "#hooks/userScrolledDown"
 
 export default function Page({ projects }: { projects: any }) {
   return (
     <div class="w-full">
       <section class="w-full pb-24">
-        <div class="flex items-center py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
-          <InlineLink link="/archive" class="px-1.5 -ml-1.5">
+        <div
+          class={
+            "flex items-center mt-6 mb-6 py-2  bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            (userScrolledDown(40) ? "font-medium" : "text-3xl font-semibold")
+          }
+        >
+          <InlineLink link="/archive" class="px-1.5 -ml-1.5" hideWeight>
             Archive
           </InlineLink>
+
           <p> / </p>
           <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600">
             Short Projects
           </p>
         </div>
-        <h1 class="text-3xl font-semibold mt-12 mb-6">Short Projects</h1>
         <div class="py-0.5 pb-8">
           {projects.map((project: any) => {
             const date = new Date(

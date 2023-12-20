@@ -2,24 +2,17 @@ import Button from "#components/Button"
 import Folder from "~icons/eva/folder-outline"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
-import { userScrolledDown } from "#hooks/userScrolledDown"
 
 export default function Page() {
   return (
     <div class="w-full">
       <section class="w-full pb-24">
-        <div class="flex items-center mt-6 mb-6 py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
-          <h1
-            class={
-              "transition-all tabular-nums " +
-              (userScrolledDown(40)
-                ? "font-medium text-zinc-400 dark:text-zinc-600"
-                : "text-3xl font-semibold")
-            }
-          >
+        <div class="flex items-center py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
+          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600 -ml-1.5">
             Archive
-          </h1>
+          </p>
         </div>
+        <h1 class="text-3xl font-semibold mt-12 mb-6">{m.archive_title()}</h1>
         <div class="py-0.5 pb-8">
           <a
             href="/archive/projects"

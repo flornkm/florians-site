@@ -66,13 +66,16 @@ export function InlineLink(props: {
   link: string | undefined
   children: string | JSX.Element | undefined
   class?: string
+  hideWeight?: boolean
 }) {
+  console.log(props.class?.includes("font"))
   return (
     <a
       class={
-        "text-black px-0 transition-colors font-medium dark:text-white underline hover:no-underline underline-offset-2 " +
+        "text-black px-0 transition-colors dark:text-white underline hover:no-underline underline-offset-2 " +
         (props.link?.includes("http") ? "cursor-alias " : "") +
-        (props.class ? props.class : "")
+        (props.class ? props.class : "") +
+        (props.hideWeight ? "" : " font-medium")
       }
       href={props.link}
       target={props.link && props.link.includes("http") ? "_blank" : "_self"}

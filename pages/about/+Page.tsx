@@ -108,7 +108,7 @@ export default function Page() {
 
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-16">
+      <section class="w-full lg:pt-8">
         <h1 class="text-3xl font-semibold mb-16 w-full">{m.about_title()}</h1>
         <div class="flex gap-12 lg:flex-row flex-col mb-24">
           <div class="max-w-[170px] w-full flex-shrink-0">

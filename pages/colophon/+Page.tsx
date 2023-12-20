@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-16 relative min-h-screen flex flex-col">
+      <section class="w-full lg:pt-8 relative min-h-screen flex flex-col">
         <h1 class="text-3xl font-semibold mb-4 w-full order-2 md:order-1">
           {m.colophon_title()}
         </h1>
