@@ -29,7 +29,7 @@ export default function Page() {
             Archive
           </InlineLink>
           <p> / </p>
-          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
+          <p class="px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
             Copyables
           </p>
         </div>

@@ -22,7 +22,7 @@ export default function Page({ projects }: { projects: any }) {
             Archive
           </InlineLink>
           <p> / </p>
-          <p class="font-medium px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
+          <p class="px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
             Projects
           </p>
         </div>
