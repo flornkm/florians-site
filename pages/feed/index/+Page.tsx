@@ -31,7 +31,7 @@ export default function Page({
   })
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-16">
+      <section class="w-full lg:pt-8">
         <h1 class="text-3xl font-semibold mb-4">{m.feed_title()}</h1>
         <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
           {m.feed_description()}
