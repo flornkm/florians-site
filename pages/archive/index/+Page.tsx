@@ -8,13 +8,13 @@ export default function Page() {
   return (
     <div class="w-full">
       <section class="w-full">
-        <div class="flex items-center lg:mt-6 mb-6 lg:py-2 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
+        <div class="flex items-center lg:mt-6 mb-6 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50">
           <h1
             class={
               "transition-all tabular-nums " +
               (userScrolledDown(40)
-                ? "font-medium text-zinc-400 dark:text-zinc-600"
-                : "text-3xl font-semibold")
+                ? "font-medium py-2"
+                : "text-3xl font-semibold lg:py-2")
             }
           >
             Archive
