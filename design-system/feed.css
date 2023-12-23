@@ -53,6 +53,17 @@ div > article.post {
         text-underline-offset: 2px;
     }
 
+    @media (prefers-color-scheme: dark) {
+        & a {
+            padding: 0.1rem 0rem;
+            border-radius: 0.2rem;
+            font-weight: 500;
+            color: white;
+            transition: all ease-in-out 0.1s;
+            cursor: alias;
+        }
+    }
+
     & a:hover {
         text-decoration: none;
     }
