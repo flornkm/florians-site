@@ -1,6 +1,6 @@
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import Check from "~icons/eva/checkmark-outline"
+import { Check } from "#design-system/Icons"
 import { PhotoSlider } from "#components/Slider"
 import Button, { InlineLink } from "#components/Button"
 import * as m from "#lang/paraglide/messages"
@@ -354,9 +354,12 @@ export default function Page() {
                       : "")
                   }
                 >
-                  <div class="bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-not-allowed border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800">
+                  <div class="bg-zinc-100 hover:bg-zinc-200 p-2 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-not-allowed border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800">
                     {entry.checked && (
-                      <Check class="absolute -right-1.5 -top-1 w-7 h-7 active:animate-shake" />
+                      <Check
+                        class="absolute -right-0.5 -top-0.5 w-5 h-5 active:animate-shake"
+                        size={16}
+                      />
                     )}
                   </div>
                   {entry.name}

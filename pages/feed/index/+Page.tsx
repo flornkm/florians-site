@@ -1,9 +1,8 @@
 import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
 import * as m from "#lang/paraglide/messages"
-import Share from "~icons/eva/share-outline"
-import Writing from "~icons/eva/edit-fill"
-import Sports from "~icons/eva/award-fill"
+import { Share } from "#design-system/Icons"
+import { Edit as Writing, Sports } from "#design-system/Icons"
 import Picker from "#components/Picker"
 import { useState } from "preact/hooks"
 import Markdown from "#markdown/Markdown"
@@ -56,12 +55,12 @@ export default function Page({
                   <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
                     {post.type === "writing" ? (
                       <div class="text-sm flex items-center gap-1.5">
-                        <Writing class="inline-block" />
+                        <Writing class="inline-block" stroke={1.5} />
                         Writing
                       </div>
                     ) : post.type === "sports" ? (
                       <div class="text-sm flex items-center gap-1.5">
-                        <Sports class="inline-block" />
+                        <Sports class="inline-block" stroke={1.5} />
                         Sports Entry
                       </div>
                     ) : (
@@ -98,7 +97,7 @@ export default function Page({
                     position="top"
                     align="right"
                   >
-                    <Share />
+                    <Share size={24} />
                   </Picker>
                 </div>
                 {post.type === "sports" && (

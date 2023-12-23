@@ -1,7 +1,7 @@
 import { getLocale } from "#hooks/getLocale"
 import { JSX } from "preact/jsx-runtime"
 import { navigate } from "vike/client/router"
-import Chevron from "~icons/eva/arrow-ios-forward-outline"
+import { Chevron } from "#design-system/Icons"
 
 export default function Button(props: {
   type: "primary" | "secondary" | "text"
@@ -51,7 +51,13 @@ export default function Button(props: {
     >
       {props.icon}
       {props.children}
-      {props.chevron && <Chevron class="flex-shrink-0" />}
+      {props.chevron && (
+        <Chevron
+          class="flex-shrink-0"
+          size={16}
+          stroke={props.type === "text" ? 1.5 : 2}
+        />
+      )}
     </button>
   )
 }

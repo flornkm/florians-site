@@ -1,4 +1,4 @@
-import Send from "~icons/eva/arrow-circle-up-fill"
+import { Send } from "#design-system/Icons"
 import Button from "../components/Button"
 import { useRef, useState } from "preact/hooks"
 import * as m from "#lang/paraglide/messages"

@@ -1,9 +1,6 @@
 import { useRef, useState, useEffect, StateUpdater } from "preact/hooks"
 import SignaturePad from "signature_pad"
-import Close from "~icons/eva/close-outline"
-import Plus from "~icons/eva/plus-outline"
-import Expand from "~icons/eva/expand-outline"
-import Collapse from "~icons/eva/collapse-outline"
+import { Close, Plus, Expand, Collapse } from "#design-system/Icons"
 import NoPrerender from "../components/NoPrerender"
 import Button from "../components/Button"
 import Tooltip from "../components/Tooltip"
@@ -126,14 +123,14 @@ export default function Letters() {
                       onClick={() => {
                         setZoom(letterArray.indexOf(letter))
                       }}
-                      className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
+                      class="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
                     />
                   ) : (
                     <Collapse
                       onClick={() => {
                         setZoom(-1)
                       }}
-                      className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
+                      class="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
                     />
                   )}
                   <img
@@ -152,7 +149,7 @@ export default function Letters() {
                     >
                       <p class="pr-8">{letter.text}</p>
                     </div>
-                    <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
+                    <div class="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
                     <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
                       <img
                         src={letter.signature}
@@ -173,7 +170,7 @@ export default function Letters() {
                       <div class="flex items-center gap-3">
                         <img
                           src={`https://unavatar.io/${letter.handle}`}
-                          className="w-6 h-6 rounded-full"
+                          class="w-6 h-6 rounded-full"
                         />{" "}
                         <p>{letter.handle}</p>
                       </div>
@@ -269,10 +266,10 @@ function SendLetter(props: {
 
   return (
     <div
-      className="fixed inset-0 bg-black/25 z-[52] flex justify-center items-center"
+      class="fixed inset-0 bg-black/25 z-[52] flex justify-center items-center"
       onClick={props.setShowLetter}
     >
-      <div className="w-full md:h-3/5 h-auto max-w-6xl md:px-10 px-6">
+      <div class="w-full md:h-3/5 h-auto max-w-6xl md:px-10 px-6">
         <div
           onClick={(e) => {
             e.stopPropagation()
@@ -281,13 +278,13 @@ function SendLetter(props: {
             opacity: "0%",
             transform: "scale(0.95)",
           }}
-          className="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-zinc-900"
+          class="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-zinc-900"
         >
           <Close
             onClick={props.setShowLetter}
-            className="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
+            class="absolute z-10 top-4 border right-4 w-9 h-9 p-1.5 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
           />
-          <div className="w-full md:h-full h-64 p-6">
+          <div class="w-full md:h-full h-64 p-6">
             <textarea
               type="text"
               ref={letterInput}
@@ -296,18 +293,18 @@ function SendLetter(props: {
                   ? setLetterWritten(true)
                   : setLetterWritten(false)
               }}
-              className="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
+              class="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
             ></textarea>
           </div>
-          <div className="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
+          <div class="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
           <div
-            className={
+            class={
               "w-full md:h-full h-3/5 p-6 flex items-end " +
               (!letterWritten ? "cursor-not-allowed" : "")
             }
           >
             <div
-              className={
+              class={
                 "w-full md:h-auto h-full text-zinc-400 text-sm relative " +
                 (!letterWritten ? "pointer-events-none" : "")
               }
@@ -321,7 +318,7 @@ function SendLetter(props: {
                   onTouchEnd={() => {
                     saveSignature()
                   }}
-                  className={
+                  class={
                     "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800/5 dark:invert " +
                     (!letterWritten ? "pointer-events-none" : "")
                   }
@@ -337,7 +334,7 @@ function SendLetter(props: {
                   Reset
                 </Button>
               </div>
-              <div className="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
+              <div class="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
               <div class="flex md:justify-between md:items-end gap-8 flex-col md:flex-row items-start">
                 <div class="flex items-start flex-col justify-between w-full">
                   <p class="flex-shrink-0 mt-2.5">{m.letter_signature()}</p>
@@ -384,7 +381,7 @@ function SendLetter(props: {
                 </Button>
               </div>
             </div>
-            <figure className="md:w-24 w-14 absolute top-16 md:top-8 right-8 rotate-6 group hidden md:block">
+            <figure class="md:w-24 w-14 absolute top-16 md:top-8 right-8 rotate-6 group hidden md:block">
               <img
                 src="/images/letter/stamp.png"
                 class="pointer-events-none"

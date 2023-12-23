@@ -22,7 +22,7 @@ export default function Markdown(props: { class?: string; content: string }) {
   )
 
   return (
-    <article className={props.class}>
+    <article class={props.class}>
       <div dangerouslySetInnerHTML={{ __html: replacedContent }}></div>
     </article>
   )

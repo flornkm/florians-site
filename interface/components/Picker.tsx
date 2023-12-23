@@ -2,7 +2,7 @@ import { useState } from "preact/hooks"
 import useOuterClick from "#hooks/useOuterClick"
 import { JSX } from "preact/jsx-runtime"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
-import Check from "~icons/eva/checkmark-outline"
+import { Check } from "#design-system/Icons"
 import { navigate } from "vike/client/router"
 
 type functionOption = {

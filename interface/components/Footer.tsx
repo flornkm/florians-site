@@ -1,6 +1,6 @@
 import { getLocale } from "#hooks/getLocale"
 import { usePageContext } from "../../renderer/usePageContext"
-import Bulb from "~icons/eva/bulb-fill"
+import { Bulb } from "#design-system/Icons"
 import { LanguagePicker } from "./Picker"
 import * as m from "#lang/paraglide/messages"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
@@ -227,7 +227,7 @@ export default function Footer() {
           </p>
         </div>
         <p class="text-xs mt-12 text-zinc-400 dark:text-zinc-600 lg:text-center px-6 md:px-10">
-          <Bulb class="inline-block mb-1 mr-1" /> {m.footer_tip()}
+          <Bulb class="inline-block mb-0.5 mr-1" size={12} /> {m.footer_tip()}
         </p>
       </footer>
     </>
