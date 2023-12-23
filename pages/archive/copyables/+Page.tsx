@@ -1,5 +1,5 @@
 import Button, { InlineLink } from "#components/Button"
-import File from "~icons/central-icon-system/textfile"
+import { SVG as File } from "#design-system/Icons"
 import Vectorfiles from "./assets/vectorfiles.json"
 import { useState } from "preact/hooks"
 import README from "#components/README"

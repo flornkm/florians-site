@@ -2,7 +2,7 @@ import Picker from "#components/Picker"
 import "#design-system/feed.css"
 import Markdown from "#markdown/Markdown"
 import { useState } from "preact/hooks"
-import Share from "~icons/eva/share-outline"
+import { Share } from "#design-system/Icons"
 
 export default function Page(props: Record<string, string>) {
   const [copyLabel, setCopyLabel] = useState("Copy link")

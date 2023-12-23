@@ -1,5 +1,5 @@
 import { JSX } from "preact/jsx-runtime"
-import Chevron from "~icons/eva/arrow-ios-forward-outline"
+import { Chevron } from "#design-system/Icons"
 
 export default function Island(props: {
   icon?: JSX.Element

@@ -1,4 +1,4 @@
-import Folder from "~icons/central-icon-system/folder"
+import { Folder } from "#design-system/Icons"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"

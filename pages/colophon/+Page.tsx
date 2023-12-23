@@ -1,5 +1,5 @@
 import { InlineLink } from "#components/Button"
-import Star from "~icons/eva/star-fill"
+import { Star } from "#design-system/Icons"
 import Island from "#components/Island"
 import hljs from "highlight.js"
 import { useEffect } from "preact/hooks"

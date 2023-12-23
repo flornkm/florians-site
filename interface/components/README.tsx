@@ -1,4 +1,4 @@
-import Edit from "~icons/eva/edit-outline"
+import { Edit } from "#design-system/Icons"
 import * as m from "#lang/paraglide/messages"
 import { JSX } from "preact/jsx-runtime"
 

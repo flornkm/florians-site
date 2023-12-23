@@ -1,7 +1,6 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
 import { useRef, useEffect, useState } from "preact/hooks"
-import Tooltip from "./Tooltip"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import * as m from "#lang/paraglide/messages"
@@ -135,7 +134,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   const pageContext = usePageContext()
 
   const className = [
-    props.className,
+    props.class,
     // @ts-ignore
     (pageContext?.urlPathname.replace(getLocale(), "") === ""
       ? "/" // @ts-ignore
@@ -152,7 +151,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   return (
     <a
       {...props}
-      className={`${className} py-4 transition-colors duration-150 before:absolute group font-medium md:w-auto w-full text-center
+      class={`${className} py-4 transition-colors duration-150 before:absolute group font-medium md:w-auto w-full text-center
       before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden relative z-10 text-sm xs:text-base`}
     />
   )

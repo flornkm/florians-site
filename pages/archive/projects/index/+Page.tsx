@@ -1,7 +1,7 @@
 import Button, { InlineLink } from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import File from "~icons/central-icon-system/textfile"
+import { TextFile as File } from "#design-system/Icons"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"

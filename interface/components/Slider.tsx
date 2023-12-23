@@ -5,8 +5,7 @@ import { AutoPlay } from "@egjs/flicking-plugins"
 import { useRef, useState } from "preact/hooks"
 import { useWindowResize } from "../hooks/useWindowResize"
 import Button from "./Button"
-import ArrowRight from "~icons/eva/arrow-forward-outline"
-import ArrowLeft from "~icons/eva/arrow-back-outline"
+import { ArrowRight, ArrowLeft } from "#design-system/Icons"
 import * as m from "#lang/paraglide/messages"
 
 export default function Slider(props: {
