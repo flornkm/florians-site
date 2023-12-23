@@ -13,7 +13,7 @@
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
     "build:og": "node ./build/generateOpengraph.js",
     "build:sitemap": "node ./build/generateSitemap.js",
-    "compile": "paraglide-js compile --project ./lang/project.inlang --outdir ./lang/paraglide",
+    "compile": "paraglide-js compile --project ./project.inlang --outdir ./lang/paraglide",
     "--- Not in use, but nenpcessary to include ---": "",
     "build": "npm run compile && npm run build:og && npm run build:sitemap && vite build"
   },
