@@ -1,6 +1,6 @@
 import fs from "node:fs/promises"
 
-const siteURL = "https://preview.floriankiem.com"
+const siteURL = "https://floriankiem.com"
 
 // Add all routes that should be included in the sitemap here, dynamic routes should be marked with dynamic: true
 const routes = [
