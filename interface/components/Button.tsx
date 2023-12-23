@@ -74,7 +74,6 @@ export function InlineLink(props: {
   class?: string
   hideWeight?: boolean
 }) {
-  console.log(props.class?.includes("font"))
   return (
     <a
       class={

@@ -89,6 +89,11 @@
 	src: url(/fonts/arial-rounded/arial-rounded-mt-bold.woff) format('woff');
 }
 
+/* html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+} */
+
 body {
 	background-color: rgb(252, 252, 252);
 }

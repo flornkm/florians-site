@@ -1,6 +1,6 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
-import { useRef, useEffect, useState } from "preact/hooks"
+import { useRef, useEffect, useState, useLayoutEffect } from "preact/hooks"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import * as m from "#lang/paraglide/messages"
@@ -15,7 +15,7 @@ export default function Navigation() {
 
   const pageContext = usePageContext() as any
 
-  useEffect(() => {
+  function handleSelector() {
     const currentPath =
       getLocale() + pageContext.urlPathname.replace(getLocale(), "")
     const allowedPages = [
@@ -66,6 +66,10 @@ export default function Navigation() {
       // @ts-ignore
       selector.current.classList.add("opacity-0")
     }
+  }
+
+  useLayoutEffect(() => {
+    handleSelector()
   }, [pageContext])
 
   return (
