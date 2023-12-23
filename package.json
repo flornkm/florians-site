@@ -11,12 +11,11 @@
     "vercel-build": "npm run compile && npm run build:og && vite build",
     "--- Single commands ------------------------": "",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .vite",
-    "build:icons": "node ./build/generateIcons.js",
     "build:og": "node ./build/generateOpengraph.js",
     "build:sitemap": "node ./build/generateSitemap.js",
     "compile": "paraglide-js compile --project ./lang/project.inlang --outdir ./lang/paraglide",
     "--- Not in use, but nenpcessary to include ---": "",
-    "build": "npm run compile && npm run build:og && npm run build:sitemap && npm run build:icons && vite build"
+    "build": "npm run compile && npm run build:og && npm run build:sitemap && vite build"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
