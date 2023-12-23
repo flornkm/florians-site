@@ -69,6 +69,13 @@ export default function Navigation() {
   }
 
   useLayoutEffect(() => {
+    // On first render, wait for the selector to be rendered
+    if (selectorPosition.x === 0 && selectorPosition.width === 0) {
+      setTimeout(() => {
+        handleSelector()
+      }, 100)
+    }
+
     requestAnimationFrame(() => {
       handleSelector()
     })
