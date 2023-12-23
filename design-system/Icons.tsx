@@ -58,6 +58,26 @@ export function TextFile(props: {
   )
 }
 
+export function File(props: {
+  size?: number
+  class?: string
+  stroke?: 2 | 1.5
+  onClick?: () => void
+}) {
+  return (
+    <Icon size={props.size} class={props.class} onClick={props.onClick}>
+      <path
+        d="M13 3H5V21H19V9M13 3L19 9M13 3V9H19"
+        stroke="currentColor"
+        stroke-width={props.stroke || 2}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        vector-effect="non-scaling-stroke"
+      />
+    </Icon>
+  )
+}
+
 export function Edit(props: {
   size?: number
   class?: string

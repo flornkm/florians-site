@@ -1,7 +1,7 @@
 import Button, { InlineLink } from "#components/Button"
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import { TextFile as File } from "#design-system/Icons"
+import { File } from "#design-system/Icons"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"
@@ -39,7 +39,7 @@ export default function Page({ projects }: { projects: any }) {
                   class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
                 >
                   <p class="font-medium leading-snug col-span-2 flex items-center">
-                    <File class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">{project.title}</span>
                   </p>
                   <p class="text-zinc-500 truncate md:col-span-4 leading-snug col-span-2 dark:text-zinc-400">
