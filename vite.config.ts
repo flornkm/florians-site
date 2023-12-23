@@ -1,7 +1,7 @@
 import preact from "@preact/preset-vite"
 import ssr from "vike/plugin"
 import Icons from "unplugin-icons/vite"
-import path from "path"
+import { FileSystemIconLoader } from "unplugin-icons/loaders"
 import { defineConfig } from "vite"
 import { fileURLToPath } from "url"
 
@@ -51,7 +51,15 @@ export default defineConfig(() => ({
     ssr({
       prerender: true,
     }),
-    Icons({ compiler: "jsx", jsx: "preact" }),
+    Icons({
+      compiler: "jsx",
+      jsx: "preact",
+      customCollections: {
+        "central-icon-system": FileSystemIconLoader(
+          "./design-system/assets/icons"
+        ),
+      },
+    }),
   ],
   optimizeDeps: {
     include: [

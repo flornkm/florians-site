@@ -1,5 +1,5 @@
 import Button, { InlineLink } from "#components/Button"
-import File from "~icons/eva/folder-outline"
+import File from "~icons/central-icon-system/textfile"
 import Vectorfiles from "./assets/vectorfiles.json"
 import { useState } from "preact/hooks"
 import README from "#components/README"

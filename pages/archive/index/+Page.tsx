@@ -1,4 +1,4 @@
-import Folder from "~icons/eva/folder-outline"
+import Folder from "~icons/central-icon-system/folder"
 import * as m from "#lang/paraglide/messages"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"
