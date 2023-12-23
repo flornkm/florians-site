@@ -69,7 +69,9 @@ export default function Navigation() {
   }
 
   useLayoutEffect(() => {
-    handleSelector()
+    requestAnimationFrame(() => {
+      handleSelector()
+    })
   }, [pageContext])
 
   return (
