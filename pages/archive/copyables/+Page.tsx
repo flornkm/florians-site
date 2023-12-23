@@ -54,7 +54,7 @@ export default function Page() {
               return (
                 <Item>
                   <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-2 mb-4 relative z-10">
-                    <File class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
                     </span>
@@ -100,7 +100,7 @@ export default function Page() {
               return (
                 <Item>
                   <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-2 mb-4 relative z-10">
-                    <File class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
                     </span>
@@ -146,7 +146,7 @@ export default function Page() {
               return (
                 <Item>
                   <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-2 mb-4 relative z-10">
-                    <File class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
                     </span>

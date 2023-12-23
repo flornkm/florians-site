@@ -24,7 +24,7 @@ export default function Page() {
             class="flex justify-between border-b border-b-zinc-100 dark:border-b-zinc-900 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
               Projects
             </p>
             <Button
@@ -41,7 +41,7 @@ export default function Page() {
             class="flex justify-between border-b border-b-zinc-100 dark:border-b-zinc-900 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
               Short Projects
             </p>
             <Button
@@ -58,7 +58,7 @@ export default function Page() {
             class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="w-5 flex-shrink-0 text-zinc-400 mr-2" />
+              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
               Copyables
             </p>
             <Button
