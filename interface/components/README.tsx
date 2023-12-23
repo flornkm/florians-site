@@ -10,7 +10,7 @@ export default function README(props: { children: JSX.Element }) {
         <p class="text-zinc-500 text-sm text-center dark:text-zinc-400 font-mono">
           README.md
         </p>
-        <Edit class="w-6 h-6 text-zinc-500 dark:text-zinc-400 p-0.5 hover:bg-zinc-200 transition-colors rounded-md cursor-not-allowed dark:hover:bg-zinc-800" />
+        <Edit class="w-6 h-6 text-zinc-500 dark:text-zinc-400 p-1 hover:bg-zinc-200 transition-colors rounded-md cursor-not-allowed dark:hover:bg-zinc-800" />
       </div>
       <div class="w-full px-4 py-8">{props.children}</div>
     </div>
