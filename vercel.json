@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/letters",
+      "destination": "/api/letters.js"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "/api/ssr"
+    }
+  ]
+}
