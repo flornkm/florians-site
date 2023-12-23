@@ -1,0 +1,84 @@
+div > article.post {
+
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 600;
+        margin-bottom: 0.5em;
+    }
+
+    & h1 {
+        font-size: 1.25rem;
+    }
+
+    & p {
+        color: #52525b;
+        margin-bottom: 2rem;
+    }
+
+    & img {
+        background-color: #F4F4F5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        & p {
+            color: #a1a1aa;
+        }
+
+        & a {
+            color: white;
+        }
+
+        & img {
+            background-color: #111113;
+        }
+    }
+
+    & strong {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    & a {
+        padding: 0.1rem 0.2rem;
+        border-radius: 0.2rem;
+        font-weight: 500;
+        color: black;
+        transition: all ease-in-out 0.1s;
+        cursor: alias;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        & a {
+            padding: 0.1rem 0rem;
+            border-radius: 0.2rem;
+            font-weight: 500;
+            color: white;
+            transition: all ease-in-out 0.1s;
+            cursor: alias;
+        }
+    }
+
+    & a:hover {
+        text-decoration: none;
+    }
+
+    & figure {
+        margin-bottom: 4rem;
+    }
+
+    & div > p {
+        font-size: 1rem;
+    }
+
+    & div > figure > figcaption {
+        font-size: 0.8rem !important;
+        margin-top: 1rem;
+        color: #71717a;
+    }
+}
