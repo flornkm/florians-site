@@ -97,12 +97,12 @@ export default function Page() {
     {
       name: "Messages",
       icon: "/images/apps/app_messages.jpg",
-      link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
+      link: "https://apps.apple.com/us/app/messages/id1146560473",
     },
     {
       name: "Cron",
       icon: "/images/apps/app_cron.jpg",
-      link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
+      link: "https://apps.apple.com/us/app/cron-calendar/id1607562761",
     },
   ]
 
