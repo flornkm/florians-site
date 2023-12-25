@@ -79,6 +79,13 @@ export default function Navigation() {
     requestAnimationFrame(() => {
       handleSelector()
     })
+
+    // On resize, reposition the selector
+    window.addEventListener("resize", handleSelector)
+
+    return () => {
+      window.removeEventListener("resize", handleSelector)
+    }
   }, [pageContext])
 
   return (
