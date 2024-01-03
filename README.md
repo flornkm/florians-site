@@ -102,7 +102,7 @@ You are free to contribute to the project whether by opening Issues or by forkin
 
 Click on the translation badge to contribute translations.
 
-[![inlang status badge](https://inlang.com/badge?url=github.com/flornkm/florians-site&project=/lang/project.inlang)](https://fink.inlang.com/github.com/flornkm/florians-site&project=/lang/project.inlang?ref=badge)
+[![inlang status badge](https://inlang.com/badge?url=github.com/flornkm/florians-site&project=/lang/project.inlang)](https://fink.inlang.com/github.com/flornkm/florians-site?ref=badge)
 
 ## Contact me
 
