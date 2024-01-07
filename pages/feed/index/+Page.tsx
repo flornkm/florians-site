@@ -94,7 +94,7 @@ export default function Page({
                         link: `https://x.com/intent/tweet?text=${post.title} from Florian&url=https://floriankiem.com${post.url}`,
                       },
                     ]}
-                    position="top"
+                    position="bottom"
                     align="right"
                   >
                     <Share size={24} />

@@ -22,6 +22,7 @@ async function onBeforeRender(pageContext: PageContextBuiltInServer) {
   return {
     pageContext: {
       pageProps: {
+        post: posts.find((post) => post.slug === slug),
         content: rendered[slug],
       },
       documentProps: {

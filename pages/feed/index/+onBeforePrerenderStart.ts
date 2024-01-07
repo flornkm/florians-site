@@ -35,6 +35,7 @@ async function onBeforePrerenderStart() {
         url,
         pageContext: {
           pageProps: {
+            post: post,
             content: rendered[post.slug],
           },
           documentProps: {
