@@ -10,6 +10,10 @@ div > article.post {
         margin-bottom: 0.5em;
     }
 
+    & h1:nth-child(1) {
+        color: black;
+    }
+
     & h1 {
         font-size: 1.25rem;
     }
@@ -24,6 +28,10 @@ div > article.post {
     }
 
     @media (prefers-color-scheme: dark) {
+        & h1:nth-child(1) {
+            color: white;
+        }
+
         & p {
             color: #a1a1aa;
         }

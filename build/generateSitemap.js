@@ -9,6 +9,7 @@ const routes = [
   { path: "/about", dynamic: false },
   { path: "/feed", dynamic: true },
   { path: "/archive", dynamic: false },
+  { path: "/archive/copyables", dynamic: false },
   { path: "/archive/projects", dynamic: true },
   { path: "/archive/short-projects", dynamic: true },
   { path: "/colophon", dynamic: false },

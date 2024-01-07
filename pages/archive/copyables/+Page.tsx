@@ -5,13 +5,14 @@ import { useState } from "preact/hooks"
 import README from "#components/README"
 import { userScrolledDown } from "#hooks/userScrolledDown"
 
-Vectorfiles.sort((a, b) => {
-  if (a.name < b.name) {
-    return 1
-  } else {
-    return -1
-  }
-})
+/* How to add a new vector file:
+1. Copy the SVG file
+2. Go to https://onlinetexttools.com/replace-text and replace " with '
+3. Go to https://lingojam.com/TexttoOneLine and convert the SVG to one line
+4. Add the file to the vectorfiles.json file inside of the assets folder
+*/
+
+Vectorfiles.reverse()
 
 export default function Page() {
   return (
@@ -38,14 +39,14 @@ export default function Page() {
             <Item>
               <README>
                 <>
-                  <p class="text-zinc-500 max-w-lg dark:text-zinc-400 mb-4">
+                  <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
                     A place for little copyable things that I've found in the
                     Internet or made myself.
                   </p>
-                  <p class="font-semibold font-rounded text-zinc-500 dark:text-zinc-400">
+                  {/* <p class="font-semibold font-rounded text-zinc-500 dark:text-zinc-400">
                     Yes, you can copy these and paste them directly into Figma
                     or your code editor. ;)
-                  </p>
+                  </p> */}
                 </>
               </README>
             </Item>
@@ -53,7 +54,7 @@ export default function Page() {
               const [copied, setCopied] = useState(false)
               return (
                 <Item>
-                  <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-2 mb-4 relative z-10">
+                  <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-4 mb-4 relative z-10">
                     <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
@@ -99,7 +100,7 @@ export default function Page() {
               const [copied, setCopied] = useState(false)
               return (
                 <Item>
-                  <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-2 mb-4 relative z-10">
+                  <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-4 mb-4 relative z-10">
                     <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
@@ -145,7 +146,7 @@ export default function Page() {
               const [copied, setCopied] = useState(false)
               return (
                 <Item>
-                  <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-2 mb-4 relative z-10">
+                  <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-4 mb-4 relative z-10">
                     <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
