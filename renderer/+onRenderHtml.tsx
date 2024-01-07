@@ -58,7 +58,7 @@ async function onRenderHtml(pageContext: PageContext) {
     <html lang=${languageTag()}>
       <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="${faviconUrl}" />
+        <link rel="icon" href="/images/icons/florian_favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${title}</title>
         <meta name="description" content="${desc}" />
