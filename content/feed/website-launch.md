@@ -1,6 +1,6 @@
 ---
-title: First post on the new website
-description: The first post on my the new website.
+title: Website launch
+description: My new personal site is finally live!
 type: writing
 date: 23 / 12 / 2023
 ---
