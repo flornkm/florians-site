@@ -53,8 +53,8 @@ export default function Page() {
           <div>
             <p class="text-zinc-500 dark:text-zinc-400">
               {m.text_iconography_first()}{" "}
-              <InlineLink link="https://github.com/akveo/eva-icons">
-                {m.text_iconography_eva_icons()}
+              <InlineLink link="https://iconists.co/central">
+                Central Icon System by Iconists
               </InlineLink>
               {m.text_iconography_second()}
             </p>
