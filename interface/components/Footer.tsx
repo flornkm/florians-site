@@ -125,7 +125,17 @@ export default function Footer() {
                   {m.footer_page_colophon()}
                 </a>
               </li>
-              <div class="h-6 hidden md:block" />
+
+              <li>
+                <a
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-pointer dark:text-zinc-600 dark:hover:text-zinc-400"
+                  onClick={() => {
+                    openPopup()
+                  }}
+                >
+                  {m.link_contact()}
+                </a>
+              </li>
             </ul>
           </div>
           <div class="xl:place-self-end">
@@ -171,14 +181,14 @@ export default function Footer() {
                   GitHub
                 </a>
               </li>
+
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-pointer dark:text-zinc-600 dark:hover:text-zinc-400"
-                  onClick={() => {
-                    openPopup()
-                  }}
+                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium dark:text-zinc-600 dark:hover:text-zinc-400 cursor-alias"
+                  href="https://cal.com/flornkm"
+                  target="_blank"
                 >
-                  {m.link_contact()}
+                  Calcom
                 </a>
               </li>
             </ul>
