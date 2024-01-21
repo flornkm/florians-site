@@ -116,8 +116,8 @@ export default function Contact() {
           </Button>
         </div>
       </div>
-      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-full max-h-[30em] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950/20 dark:border-zinc-800 relative">
-        <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative mb-12">
+      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-full md:max-h-[90%] max-h-[85%] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950/20 dark:border-zinc-800 relative">
+        <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
               {message.message}
@@ -169,7 +169,7 @@ export default function Contact() {
             </div>
           )}
         </div>
-        <div class="flex gap-4 group absolute -left-1 -right-1">
+        <div class="flex gap-4 group sticky bottom-0.5 -left-1 -right-1">
           <div class="relative w-full">
             <input
               disabled={loading()}
