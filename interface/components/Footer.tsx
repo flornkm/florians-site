@@ -15,7 +15,9 @@ export default function Footer() {
     <>
       <NoPrerender>
         <Popup isOpen={isOpen} onClose={closePopup} popup={popup}>
-          <Contact />
+          <div class="flex flex-col gap-4 h-full max-h-[99%]">
+            <Contact />
+          </div>
         </Popup>
       </NoPrerender>
       <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
