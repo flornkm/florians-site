@@ -51,7 +51,7 @@ export default function Page({
                     : "mb-24 md:mb-48"
                 }
               >
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between mb-4">
                   <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
                     {post.type === "writing" ? (
                       <div class="text-sm flex items-center gap-1.5">

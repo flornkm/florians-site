@@ -56,22 +56,41 @@ const generateImage = async (path, folder, file) => {
   ctx.font = "56pt Pretendard"
   ctx.fillText(info.title, 152, 128)
 
-  if (folder === "feed") {
-    if (info.description.length > 64) {
-      ctx.fillStyle = "#a1a1aa"
-      ctx.font = "32pt Pretendard"
-      ctx.fillText(info.description.slice(0, 70), 152, 198)
-      ctx.fillText(info.description.slice(70, 150) + "...", 152, 248)
-    } else {
-      ctx.fillStyle = "#a1a1aa"
-      ctx.font = "32pt Pretendard"
-      ctx.fillText(
-        info.description.length > 64
-          ? info.description.slice(0, 70) + "..."
-          : info.description,
-        152,
-        198
+  if (folder === "./content/feed") {
+    if (info.cover && info.cover.includes(".jpg")) {
+      const publicRoot = "./public"
+
+      await PImage.decodeJPEGFromStream(
+        fs.createReadStream(`${publicRoot}${info.cover}`)
       )
+        .then((img) => {
+          const imgWidth = img.width
+          const imgHeight = img.height
+          const aspectRatio = imgWidth / imgHeight
+
+          const imgWidthCalculated = 896
+          const imgHeightCalculated = imgWidthCalculated / aspectRatio
+
+          ctx.drawImage(img, 152, 280, imgWidthCalculated, imgHeightCalculated)
+        })
+        .catch((e) => console.log("Error: ", e))
+    } else if (!info.cover) {
+      if (info.description.length > 64) {
+        ctx.fillStyle = "#a1a1aa"
+        ctx.font = "32pt Pretendard"
+        ctx.fillText(info.description.slice(0, 70), 152, 198)
+        ctx.fillText(info.description.slice(70, 150) + "...", 152, 248)
+      } else {
+        ctx.fillStyle = "#a1a1aa"
+        ctx.font = "32pt Pretendard"
+        ctx.fillText(
+          info.description.length > 64
+            ? info.description.slice(0, 70) + "..."
+            : info.description,
+          152,
+          198
+        )
+      }
     }
   } else {
     ctx.fillStyle = "#a1a1aa"
@@ -85,7 +104,11 @@ const generateImage = async (path, folder, file) => {
     )
   }
 
-  if (info.cover && info.cover.includes(".jpg")) {
+  if (
+    info.cover &&
+    info.cover.includes(".jpg") &&
+    folder !== "./content/feed"
+  ) {
     const publicRoot = "./public"
 
     await PImage.decodeJPEGFromStream(
