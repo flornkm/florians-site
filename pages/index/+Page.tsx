@@ -1,6 +1,7 @@
 import Letters from "#sections/Letters"
 import Work from "#sections/Work"
 import * as m from "#lang/paraglide/messages"
+import Waitlist from "#components/Waitlist"
 
 export default function Page({ projects }: { projects: any[] }) {
   return (
@@ -22,6 +23,22 @@ export default function Page({ projects }: { projects: any[] }) {
       </section>
       <section class="w-full">
         <Letters />
+      </section>
+      <section class="w-full relative h-full mb-24 lg:mb-0">
+        <div class="w-screen overflow-hidden relative left-1/2 -translate-x-1/2 inset-0 py-16 bg-zinc-100 dark:bg-zinc-900 h-full border-y border-y-zinc-200 dark:border-y-zinc-800">
+          <div class="w-full relative max-w-screen-lx mx-auto md:px-10 px-6 z-10">
+            <h2 class="text-xl font-semibold leading-snug mb-4">
+              Join my personal waitlist
+            </h2>
+            <p class="mb-6 text-zinc-500 dark:text-zinc-400">
+              I'm currently working on own a new project and and want to inform
+              you first when it's ready. I therefore created this personal
+              waitlist. I will never spam you and will only update you when I
+              have something really useful to share.
+            </p>
+            <Waitlist />
+          </div>
+        </div>
       </section>
     </div>
   )
