@@ -55,7 +55,6 @@ export default function Page() {
             </Button>
           </a>
           <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
-
           <a
             href="/archive/copyables"
             class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
@@ -66,7 +65,43 @@ export default function Page() {
             </p>
             <Button
               type="text"
-              link="/archive/projects"
+              link="/archive/copyables"
+              class="relative md:ml-auto col-span-2 md:col-span-1 group-hover/link:underline"
+              chevron
+            >
+              {m.button_open()}
+            </Button>
+          </a>
+          <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+          <a
+            href="/archive/photos"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+          >
+            <p class="font-medium leading-snug md:col-span-2 flex items-center">
+              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              Photos
+            </p>
+            <Button
+              type="text"
+              link="/archive/photos"
+              class="relative md:ml-auto col-span-2 md:col-span-1 group-hover/link:underline"
+              chevron
+            >
+              {m.button_open()}
+            </Button>
+          </a>
+          <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+          <a
+            href="/archive/posts"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+          >
+            <p class="font-medium leading-snug md:col-span-2 flex items-center">
+              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              Posts
+            </p>
+            <Button
+              type="text"
+              link="/archive/posts"
               class="relative md:ml-auto col-span-2 md:col-span-1 group-hover/link:underline"
               chevron
             >
