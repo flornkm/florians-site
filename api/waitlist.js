@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email, origin: "florians-site" }),
       })
       res.statusCode = 200
       res.end()
