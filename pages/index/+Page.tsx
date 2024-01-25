@@ -31,7 +31,7 @@ export default function Page({ projects }: { projects: any[] }) {
               Join my personal waitlist
             </h2>
             <p class="mb-6 text-zinc-500 dark:text-zinc-400">
-              I'm currently working on own a new project and and want to inform
+              I'm currently working on a new project and and want to inform
               you first when it's ready. I therefore created this personal
               waitlist. I will never spam you and will only update you when I
               have something really useful to share.
