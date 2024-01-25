@@ -25,8 +25,8 @@ export default function Page({ projects }: { projects: any[] }) {
         <Letters />
       </section>
       <section class="w-full relative h-full mb-24 lg:mb-0">
-        <div class="w-screen overflow-hidden relative left-1/2 -translate-x-1/2 inset-0 py-16 bg-zinc-100 dark:bg-zinc-900 h-full border-y border-y-zinc-200 dark:border-y-zinc-800">
-          <div class="w-full relative max-w-screen-lx mx-auto md:px-10 px-6 z-10">
+        <div class="2xl:w-[99vw] md:w-[98vw] w-[97vw] overflow-hidden relative left-1/2 -translate-x-1/2 inset-0 py-16 bg-zinc-100 dark:bg-zinc-950 h-full border-y border-y-zinc-200 dark:border-zinc-900 cta-gradient">
+          <div class="w-full relative max-w-screen-lx mx-auto md:px-10 px-12 z-10">
             <h2 class="text-xl font-semibold leading-snug mb-4">
               Join my personal waitlist
             </h2>

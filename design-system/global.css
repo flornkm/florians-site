@@ -127,9 +127,17 @@ a:focus {
 	border-radius: 10px;
 }
 
+.cta-gradient {
+	background: linear-gradient(90deg, rgba(252,252,252,1) 0%, rgba(244,244,245,1) 10%, rgba(244,244,245,1) 90%, rgba(252,252,252,1) 100%);
+}
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: #000;
+	}
+
+	.cta-gradient {
+		background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,9,11,1) 50%, rgba(0,0,0,1) 100%);
 	}
 
 	.custom-scrollbar::-webkit-scrollbar-thumb {
