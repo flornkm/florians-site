@@ -4262,6 +4262,38 @@
       ]
     },
     {
+      "id": "waitlist_description",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "I'm currently working on a new project and and want to inform\n              you first when it's ready. I therefore created this personal\n              waitlist. I will never spam you and will only update you when I\n              have something really useful to share."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "waitlist_heading",
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Join my personal waitlist"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "work_description",
       "selectors": [],
       "variants": [

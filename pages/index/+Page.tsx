@@ -28,13 +28,10 @@ export default function Page({ projects }: { projects: any[] }) {
         <div class="2xl:w-[99vw] md:w-[98vw] w-[97vw] overflow-hidden relative left-1/2 -translate-x-1/2 inset-0 py-16 bg-zinc-100 dark:bg-zinc-950 h-full border-y dark:lg:border-b-0 border-y-zinc-200 dark:border-zinc-900 cta-gradient">
           <div class="w-full relative max-w-screen-lx mx-auto md:px-10 px-12 z-10">
             <h2 class="text-xl font-semibold leading-snug mb-4">
-              Join my personal waitlist
+              {m.waitlist_heading()}
             </h2>
             <p class="mb-6 text-zinc-500 dark:text-zinc-400">
-              I'm currently working on a new project and and want to inform
-              you first when it's ready. I therefore created this personal
-              waitlist. I will never spam you and will only update you when I
-              have something really useful to share.
+              {m.waitlist_description()}
             </p>
             <Waitlist />
           </div>
