@@ -404,6 +404,16 @@
               "value": "Tritschler & Kiem GbR"
             }
           ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Tritschler & Kiem GbR"
+            }
+          ]
         }
       ]
     },
@@ -1120,6 +1130,16 @@
             {
               "type": "Text",
               "value": "Go up"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "上"
             }
           ]
         }
@@ -2384,6 +2404,16 @@
             {
               "type": "Text",
               "value": "Contact"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "接触"
             }
           ]
         }
@@ -4274,6 +4304,16 @@
               "value": "I'm currently working on a new project and and want to inform\n              you first when it's ready. I therefore created this personal\n              waitlist. I will never spam you and will only update you when I\n              have something really useful to share."
             }
           ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "我目前正在开发一个新项目，并希望在项目准备就绪时先通知您。因此，我创建了这个个人候补名单。我绝不会向您发送垃圾邮件，只有当我有真正有用的东西要分享时才会更新您。"
+            }
+          ]
         }
       ]
     },
@@ -4288,6 +4328,16 @@
             {
               "type": "Text",
               "value": "Join my personal waitlist"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "加入我的个人候补名单"
             }
           ]
         }
