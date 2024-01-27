@@ -27,7 +27,7 @@ function Page404() {
           This page couldn't be found <br class="hidden xs:block" /> Please try
           again later
         </p>
-        <Button type="secondary" link="/">
+        <Button type="secondary" link="https://floriankiem.com/">
           Homepage
         </Button>
       </div>
