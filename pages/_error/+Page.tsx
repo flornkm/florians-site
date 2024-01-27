@@ -27,13 +27,8 @@ function Page404() {
           This page couldn't be found <br class="hidden xs:block" /> Please try
           again later
         </p>
-        <Button
-          type="secondary"
-          function={() => {
-            window.history.back()
-          }}
-        >
-          Go back
+        <Button type="secondary" link="/">
+          Homepage
         </Button>
       </div>
     </div>
