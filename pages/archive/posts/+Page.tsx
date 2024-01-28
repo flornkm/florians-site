@@ -47,6 +47,18 @@ const posts = [
     src: '<div style="padding: 62.50% 0 0 0; position: relative"><div style="height:100%;left:0;position:absolute;top:0;width:100%"><iframe height="100%" width="100%;" src="https://embed.wave.video/nqAGm3gE4caLM6xP" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe></div></div>',
     type: "video",
   },
+  {
+    src: "/images/archive/posts/missingfont-web.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/missingfont-mobile.webp",
+    type: "image",
+  },
+  {
+    src: '<div style="padding: 56.25% 0 0 0; position: relative"><div style="height:100%;left:0;position:absolute;top:0;width:100%"><iframe height="100%" width="100%;" src="https://embed.wave.video/BxJWyuZLr0yAivNJ" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe></div></div>',
+    type: "video",
+  },
 ] as Post[]
 
 posts.reverse()
@@ -78,6 +90,7 @@ export default function Page() {
                   <Item>
                     {post.type === "image" ? (
                       <img
+                        data-src={post.src}
                         src={post.src}
                         alt={post.src.split("/").pop()?.split(".")[0]}
                         class="mx-auto"
@@ -97,6 +110,7 @@ export default function Page() {
                   <Item>
                     {post.type === "image" ? (
                       <img
+                        data-src={post.src}
                         src={post.src}
                         alt={post.src.split("/").pop()?.split(".")[0]}
                         class="mx-auto"
@@ -116,6 +130,7 @@ export default function Page() {
                   <Item>
                     {post.type === "image" ? (
                       <img
+                        data-src={post.src}
                         src={post.src}
                         alt={post.src.split("/").pop()?.split(".")[0]}
                         class="mx-auto"

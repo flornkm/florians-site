@@ -62,6 +62,7 @@ export default function Page() {
                 return (
                   <Item>
                     <img
+                      data-src={photo.src}
                       src={photo.src}
                       alt={photo.src.split("/").pop()?.split(".")[0]}
                       class="mx-auto"
@@ -77,6 +78,7 @@ export default function Page() {
                 return (
                   <Item>
                     <img
+                      data-src={photo.src}
                       src={photo.src}
                       alt={photo.src.split("/").pop()?.split(".")[0]}
                       class="mx-auto"
@@ -92,6 +94,7 @@ export default function Page() {
                 return (
                   <Item>
                     <img
+                      data-src={photo.src}
                       src={photo.src}
                       alt={photo.src.split("/").pop()?.split(".")[0]}
                       class="mx-auto"

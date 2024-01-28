@@ -84,7 +84,7 @@ main > article {
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 6;
     }
 
     & p {
@@ -118,6 +118,16 @@ main > article {
         color: black;
         transition: all ease-in-out 0.1s;
         cursor: alias;
+    }
+
+    & process-grid p>a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    & process-grid a:hover {
+        text-decoration: none;
+        text-underline-offset: 2px;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -163,6 +173,7 @@ main > article {
     & three-full-grid {
         overflow: hidden;
     }
+
 
     & two-full-grid>p {
         display: grid;
