@@ -8,11 +8,8 @@ import * as m from "#lang/paraglide/messages"
 export default function Page() {
   const experience = [
     {
-      company: m.about_experience_tritschlerkiem_company(),
-      comapanyLink: "https://tritschlerkiem.com/",
       from: "02 / 2024",
       to: "Now",
-      slogan: m.about_experience_tritschlerkiem_slogan(),
       jobTitle: m.about_experience_tritschlerkiem_job(),
     },
     {
@@ -28,6 +25,7 @@ export default function Page() {
       comapanyLink: "https://tritschlerkiem.com/",
       from: "12 / 2020",
       to: "06 / 2023",
+      slogan: m.about_experience_tritschlerkiem_slogan(),
       jobTitle: m.about_experience_tritschlerkiem_job(),
     },
     {
