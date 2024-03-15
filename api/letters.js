@@ -34,6 +34,13 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "POST") {
     const { text, signature, handle } = req.body
+
+    if (text.length > 100) {
+      res.statusCode = 400
+      res.end()
+      return
+    }
+
     try {
       const newLetter = await push(ref(database, "letters"))
       await set(newLetter, {
