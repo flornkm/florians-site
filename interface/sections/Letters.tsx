@@ -293,6 +293,7 @@ function SendLetter(props: {
                   ? setLetterWritten(true)
                   : setLetterWritten(false)
               }}
+              maxLength={100}
               class="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
             ></textarea>
           </div>
