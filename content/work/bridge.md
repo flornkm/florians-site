@@ -76,7 +76,6 @@ Bridge is a tool that allows companies to create and publish job pages in minute
 
 <project-links>
 
-[Bridge](https://bridge.supply/)
 [Product Hunt](https://www.producthunt.com/products/bridge-12)
 [GitHub Repo](https://github.com/flornkm/bridge)
 
