@@ -30,7 +30,7 @@ export default function Page() {
         <h1 class="text-3xl font-semibold mb-4 w-full order-2 md:order-1">
           {m.colophon_title()}
         </h1>
-        <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400 order-3 md:order-2">
+        <p class="text-neutral-500 mb-16 max-w-lg dark:text-neutral-400 order-3 md:order-2">
           {m.colophon_description()}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4 gap-6 md:items-start order-4 md:order-3 pb-32">
@@ -38,7 +38,7 @@ export default function Page() {
             {m.title_typography()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               F{m.text_typography_first()}{" "}
               <InlineLink link="https://github.com/orioncactus/pretendard">
                 {m.text_typography_pretendard()}
@@ -46,12 +46,12 @@ export default function Page() {
               {m.text_typography_second()}
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-medium leading-snug flex items-center">
             {m.title_iconography()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               {m.text_iconography_first()}{" "}
               <InlineLink link="https://iconists.co/central">
                 Central Icon System by Iconists
@@ -59,12 +59,12 @@ export default function Page() {
               {m.text_iconography_second()}
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_photography()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               {m.text_photography_first()}{" "}
               <InlineLink link="https://www.alicesopp.com/">
                 Alice Sopp
@@ -80,12 +80,12 @@ export default function Page() {
               .
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_mockups()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               {m.text_mockups_first()}{" "}
               <InlineLink link="https://artboard.studio/">
                 Artboard Studio
@@ -93,22 +93,22 @@ export default function Page() {
               {m.text_mockups_second()}
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_ui_elements()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400 mb-6">
+            <p class="text-neutral-500 dark:text-neutral-400 mb-6">
               {m.text_ui_elements_first()}
             </p>
             <p class="text-black font-medium mb-2">{m.title_letter_stack()}</p>
-            <div class="bg-zinc-100 rounded-xl group px-2 pb-2 dark:bg-zinc-950 mb-12">
+            <div class="bg-neutral-100 rounded-xl group px-2 pb-2 dark:bg-neutral-950 mb-12">
               <div class="w-full h-64 relative overflow-hidden flex items-end justify-center">
-                <div class="absolute w-[70%] h-56 bg-zinc-50 border border-zinc-200/70 rounded-lg -bottom-2 shadow-xl shadow-black/5 transition-all dark:bg-zinc-900 dark:border-zinc-800 hover:mb-4 hover:bg-white dark:hover:bg-zinc-800 dark:hover:border-zinc-700" />
-                <div class="absolute w-[80%] h-56 bg-zinc-50 border border-zinc-200/70 rounded-lg -bottom-8 shadow-xl shadow-black/5 transition-all dark:bg-zinc-900 dark:border-zinc-800 hover:mb-4 hover:bg-white dark:hover:bg-zinc-800 dark:hover:border-zinc-700" />
-                <div class="absolute w-[90%] h-56 bg-zinc-50 border border-zinc-200/70 rounded-lg -bottom-14 shadow-xl shadow-black/5 transition-all dark:bg-zinc-900 dark:border-zinc-800 hover:mb-4 hover:bg-white dark:hover:bg-zinc-800 dark:hover:border-zinc-700" />
+                <div class="absolute w-[70%] h-56 bg-neutral-50 border border-neutral-200/70 rounded-lg -bottom-2 shadow-xl shadow-black/5 transition-all dark:bg-neutral-900 dark:border-neutral-800 hover:mb-4 hover:bg-white dark:hover:bg-neutral-800 dark:hover:border-neutral-700" />
+                <div class="absolute w-[80%] h-56 bg-neutral-50 border border-neutral-200/70 rounded-lg -bottom-8 shadow-xl shadow-black/5 transition-all dark:bg-neutral-900 dark:border-neutral-800 hover:mb-4 hover:bg-white dark:hover:bg-neutral-800 dark:hover:border-neutral-700" />
+                <div class="absolute w-[90%] h-56 bg-neutral-50 border border-neutral-200/70 rounded-lg -bottom-14 shadow-xl shadow-black/5 transition-all dark:bg-neutral-900 dark:border-neutral-800 hover:mb-4 hover:bg-white dark:hover:bg-neutral-800 dark:hover:border-neutral-700" />
               </div>
-              <pre class="dark:selection:bg-zinc-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
+              <pre class="dark:selection:bg-neutral-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
                 <code class="language-typescript overflow-x-scroll px-2 pb-2 custom-scrollbar rounded-[7px]">{`// Fetch the letters from endpoint
 const fetchLetters = async () => {
   try {
@@ -122,17 +122,17 @@ const fetchLetters = async () => {
               </pre>
             </div>
             <p class="text-black font-medium mb-2">{m.title_slider()}</p>
-            <div class="bg-zinc-100 rounded-xl group px-2 pb-2 dark:bg-zinc-950 mb-12">
+            <div class="bg-neutral-100 rounded-xl group px-2 pb-2 dark:bg-neutral-950 mb-12">
               <div class="w-full lg:h-64 h-auto py-8 relative overflow-hidden flex items-center justify-center px-4 lg:px-16">
                 <Slider>
-                  <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
-                  <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
-                  <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
-                  <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
-                  <div class="bg-zinc-200 w-32 rounded-md aspect-square mr-8 dark:bg-zinc-700" />
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
                 </Slider>
               </div>
-              <pre class="dark:selection:bg-zinc-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
+              <pre class="dark:selection:bg-neutral-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
                 <code class="language-typescript overflow-x-scroll px-2 pb-2 custom-scrollbar rounded-[7px]">{`// The component
 import Flicking from "@egjs/preact-flicking"
 import "@egjs/preact-flicking/dist/flicking.css"
@@ -183,7 +183,7 @@ export default function Slider(props: {
               </pre>
             </div>
             <p class="text-black font-medium mb-2">{m.title_tooltip()}</p>
-            <div class="bg-zinc-100 rounded-xl px-2 pb-2 dark:bg-zinc-950">
+            <div class="bg-neutral-100 rounded-xl px-2 pb-2 dark:bg-neutral-950">
               <div class="w-full h-64 relative overflow-hidden flex items-center justify-center">
                 <p class="group relative font-medium cursor-default">
                   <Tooltip position="top" class="-translate-y-2">
@@ -192,7 +192,7 @@ export default function Slider(props: {
                   {m.hover_text()}
                 </p>
               </div>
-              <pre class="dark:selection:bg-zinc-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
+              <pre class="dark:selection:bg-neutral-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
                 <code class="language-typescript overflow-x-scroll px-2 pb-2 custom-scrollbar rounded-[7px]">{`// Fetch the letters from endpoint
 import { JSX } from "preact/jsx-runtime"
 
@@ -246,15 +246,15 @@ export default function Tooltip(props: {
             </div>
           </div>
 
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_tech_stack()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400 mb-6">
+            <p class="text-neutral-500 dark:text-neutral-400 mb-6">
               {m.text_tech_stack_first()}
             </p>
-            <ul class="text-zinc-500 dark:text-zinc-400 space-y-2">
+            <ul class="text-neutral-500 dark:text-neutral-400 space-y-2">
               <li>
                 {m.list_dev_env()}{" "}
                 <InlineLink link="https://vitejs.dev/">Vite</InlineLink>
@@ -309,24 +309,24 @@ export default function Tooltip(props: {
               </li>
             </ul>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_hosting()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               {m.text_hosting_first()}{" "}
               <InlineLink link="https://vercel.com/">Vercel</InlineLink>,{" "}
               {m.text_hosting_second()}{" "}
               <InlineLink link="https://github.com/">GitHub</InlineLink>.
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_inspiration()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               {m.text_inspiration_first()}{" "}
               <InlineLink link="https://linusrogge.com/">
                 Linus Rogge
@@ -345,12 +345,12 @@ export default function Tooltip(props: {
               .
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_great_humans()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               {m.text_great_humans_first()}{" "}
               <InlineLink link="https://nilseller.com/">Nils Eller</InlineLink>,{" "}
               <InlineLink link="https://antonstallboerger.com/">
@@ -364,12 +364,12 @@ export default function Tooltip(props: {
               <InlineLink link="https://inlang.com/">inlang</InlineLink> here.
             </p>
           </div>
-          <div class="border-b border-b-zinc-100 my-2 dark:border-b-zinc-900 md:col-span-2" />
+          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
           <p class="font-semibold leading-snug flex items-center">
             {m.title_feedback()}
           </p>
           <div>
-            <p class="text-zinc-500 dark:text-zinc-400">
+            <p class="text-neutral-500 dark:text-neutral-400">
               While building this site, I got feedback from:{" "}
               <InlineLink link="https://twitter.com/stallboerger">
                 Anton Stallbörger
@@ -425,7 +425,7 @@ export default function Tooltip(props: {
         >
           <p class="line-clamp-2">
             {m.title_star_github()}{" "}
-            <span class="text-zinc-400 text-sm dark:text-zinc-500 md:inline-block block md:ml-2">
+            <span class="text-neutral-400 text-sm dark:text-neutral-500 md:inline-block block md:ml-2">
               {m.text_star_github()}
             </span>
           </p>

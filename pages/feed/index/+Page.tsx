@@ -32,10 +32,10 @@ export default function Page({
     <div class="w-full">
       <section class="w-full lg:pt-8">
         <h1 class="text-3xl font-semibold mb-4">{m.feed_title()}</h1>
-        <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
+        <p class="text-neutral-500 mb-16 max-w-lg dark:text-neutral-400">
           {m.feed_description()}
         </p>
-        <div class="w-full h-[1px] bg-zinc-100 my-16 dark:bg-zinc-900" />
+        <div class="w-full h-[1px] bg-neutral-100 my-16 dark:bg-neutral-900" />
         <div class="py-0.5 pb-16 max-w-lg mx-auto">
           {posts.map((post: any) => {
             const date = new Date(
@@ -52,7 +52,7 @@ export default function Page({
                 }
               >
                 <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
+                  <div class="flex items-center gap-1 mb-2 text-neutral-400 dark:text-neutral-500 text-sm flex-wrap">
                     {post.type === "writing" ? (
                       <div class="text-sm flex items-center gap-1.5">
                         <Writing class="inline-block" stroke={1.5} />
@@ -101,14 +101,14 @@ export default function Page({
                   </Picker>
                 </div>
                 {post.type === "sports" && (
-                  <div class="w-full bg-zinc-100 px-4 py-8 dark:bg-zinc-900 my-4">
-                    <div class="relative w-full grid xs:grid-cols-3 place-items-end gap-4 text-zinc-500 dark:text-zinc-400">
+                  <div class="w-full bg-neutral-100 px-4 py-8 dark:bg-neutral-900 my-4">
+                    <div class="relative w-full grid xs:grid-cols-3 place-items-end gap-4 text-neutral-500 dark:text-neutral-400">
                       <div class="mx-auto">
                         <div
                           style={{
                             height: "128px",
                           }}
-                          class="w-10 h-full relative rounded-xl bg-zinc-200 mb-4 dark:bg-zinc-800"
+                          class="w-10 h-full relative rounded-xl bg-neutral-200 mb-4 dark:bg-neutral-800"
                         >
                           <div
                             style={{
@@ -116,7 +116,7 @@ export default function Page({
                             }}
                             class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-rose-500"
                           />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-neutral-900">
                             {post.move}
                           </p>
                         </div>
@@ -127,7 +127,7 @@ export default function Page({
                           style={{
                             height: "128px",
                           }}
-                          class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                          class="w-10 h-full relative rounded-xl bg-neutral-200 mx-auto mb-4 dark:bg-neutral-800"
                         >
                           <div
                             style={{
@@ -135,7 +135,7 @@ export default function Page({
                             }}
                             class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-green-500"
                           />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-neutral-900">
                             {post.exercise}
                           </p>
                         </div>
@@ -148,7 +148,7 @@ export default function Page({
                           style={{
                             height: "128px",
                           }}
-                          class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                          class="w-10 h-full relative rounded-xl bg-neutral-200 mx-auto mb-4 dark:bg-neutral-800"
                         >
                           <div
                             style={{
@@ -156,7 +156,7 @@ export default function Page({
                             }}
                             class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-sky-500"
                           />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
+                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-neutral-900">
                             {post.stand}
                           </p>
                         </div>

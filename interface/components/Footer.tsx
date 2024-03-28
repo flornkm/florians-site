@@ -20,11 +20,11 @@ export default function Footer() {
           </div>
         </Popup>
       </NoPrerender>
-      <footer class="py-16 border-t border-t-zinc-100 dark:border-t-zinc-900">
+      <footer class="py-16 border-t border-t-neutral-100 dark:border-t-neutral-900">
         <div class="max-w-screen-lx mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
           <div class="lg:col-span-3 xs:col-span-2 max-w-md">
             <h3 class="font-semibold mb-2">Florian's {m.footer_slogan()}</h3>
-            <p class="text-zinc-500 dark:text-zinc-400 mb-8">
+            <p class="text-neutral-500 dark:text-neutral-400 mb-8">
               {m.footer_text()}
             </p>
             <LanguagePicker position="top" align="left" />
@@ -36,10 +36,10 @@ export default function Footer() {
                 {languageTag() === sourceLanguageTag ? (
                   <a
                     class={
-                      "text-zinc-400 transition-colors font-medium " +
+                      "text-neutral-400 transition-colors font-medium " +
                       (pageContext.urlPathname.replace(getLocale(), "") === "/"
-                        ? "text-zinc-600 dark:text-zinc-400"
-                        : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                        ? "text-neutral-600 dark:text-neutral-400"
+                        : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                     }
                     href={getLocale() + "/"}
                   >
@@ -50,10 +50,10 @@ export default function Footer() {
                 ) : (
                   <a
                     class={
-                      "text-zinc-400 transition-colors font-medium " +
+                      "text-neutral-400 transition-colors font-medium " +
                       (pageContext.urlPathname.replace(getLocale(), "/") === "/"
-                        ? "text-zinc-600 dark:text-zinc-400"
-                        : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                        ? "text-neutral-600 dark:text-neutral-400"
+                        : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                     }
                     href={(getLocale() + "/").endsWith("/") ? getLocale() : "/"}
                   >
@@ -66,11 +66,11 @@ export default function Footer() {
               <li>
                 <a
                   class={
-                    "text-zinc-400 transition-colors font-medium " +
+                    "text-neutral-400 transition-colors font-medium " +
                     (pageContext.urlPathname.replace(getLocale(), "") ===
                     "/about"
-                      ? "text-zinc-600 dark:text-zinc-400"
-                      : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                      ? "text-neutral-600 dark:text-neutral-400"
+                      : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                   }
                   href={getLocale() + "/about"}
                 >
@@ -82,11 +82,11 @@ export default function Footer() {
               <li>
                 <a
                   class={
-                    "text-zinc-400 transition-colors font-medium " +
+                    "text-neutral-400 transition-colors font-medium " +
                     (pageContext.urlPathname.replace(getLocale(), "") ===
                     "/feed"
-                      ? "text-zinc-600 dark:text-zinc-400"
-                      : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                      ? "text-neutral-600 dark:text-neutral-400"
+                      : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                   }
                   href={getLocale() + "/feed"}
                 >
@@ -98,11 +98,11 @@ export default function Footer() {
               <li>
                 <a
                   class={
-                    "text-zinc-400 transition-colors font-medium " +
+                    "text-neutral-400 transition-colors font-medium " +
                     (pageContext.urlPathname.replace(getLocale(), "") ===
                     "/archive"
-                      ? "text-zinc-600 dark:text-zinc-400"
-                      : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                      ? "text-neutral-600 dark:text-neutral-400"
+                      : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                   }
                   href={getLocale() + "/archive"}
                 >
@@ -114,11 +114,11 @@ export default function Footer() {
               <li>
                 <a
                   class={
-                    "text-zinc-400 transition-colors font-medium " +
+                    "text-neutral-400 transition-colors font-medium " +
                     (pageContext.urlPathname.replace(getLocale(), "") ===
                     "/colophon"
-                      ? "text-zinc-600 dark:text-zinc-400"
-                      : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                      ? "text-neutral-600 dark:text-neutral-400"
+                      : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                   }
                   href={getLocale() + "/colophon"}
                 >
@@ -130,7 +130,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-pointer dark:text-zinc-600 dark:hover:text-zinc-400"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-pointer dark:text-neutral-600 dark:hover:text-neutral-400"
                   onClick={() => {
                     openPopup()
                   }}
@@ -145,7 +145,7 @@ export default function Footer() {
             <ul class="space-y-2">
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                   href="https://twitter.com/flornkm"
                 >
                   x.com
@@ -153,7 +153,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                   href="imessage://hello@floriankiem.com"
                 >
                   {m.link_imessage()}
@@ -161,7 +161,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                   href="https://www.linkedin.com/in/flornkm/"
                 >
                   LinkedIn
@@ -169,7 +169,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                   href="mailto:hello@floriankiem.com"
                 >
                   {m.link_email()}
@@ -177,7 +177,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium cursor-alias dark:text-zinc-600 dark:hover:text-zinc-400"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                   href="https://github.com/flornkm"
                 >
                   GitHub
@@ -186,7 +186,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  class="text-zinc-400 hover:text-zinc-600 transition-colors font-medium dark:text-zinc-600 dark:hover:text-zinc-400 cursor-alias"
+                  class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium dark:text-neutral-600 dark:hover:text-neutral-400 cursor-alias"
                   href="https://cal.com/flornkm"
                   target="_blank"
                 >
@@ -197,18 +197,18 @@ export default function Footer() {
           </div>
         </div>
         <div class="max-w-screen-lx mx-auto md:px-10 px-6 ">
-          <div class="border-b border-dashed border-zinc-200 my-16 dark:border-zinc-900" />
+          <div class="border-b border-dashed border-neutral-200 my-16 dark:border-neutral-900" />
         </div>
         <div class="max-w-screen-lx mx-auto md:px-10 px-6 flex justify-between text-sm md:flex-row flex-col gap-6">
           <ul class="flex space-x-8">
             <li>
               <a
                 class={
-                  "text-zinc-400 transition-colors font-medium " +
+                  "text-neutral-400 transition-colors font-medium " +
                   (pageContext.urlPathname.replace(getLocale(), "") ===
                   "/imprint"
-                    ? "text-zinc-600 dark:text-zinc-400"
-                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                    ? "text-neutral-600 dark:text-neutral-400"
+                    : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                 }
                 href={getLocale() + "/imprint"}
               >
@@ -220,11 +220,11 @@ export default function Footer() {
             <li>
               <a
                 class={
-                  "text-zinc-400 transition-colors font-medium " +
+                  "text-neutral-400 transition-colors font-medium " +
                   (pageContext.urlPathname.replace(getLocale(), "") ===
                   "/privacy-policy"
-                    ? "text-zinc-600 dark:text-zinc-400"
-                    : "hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400")
+                    ? "text-neutral-600 dark:text-neutral-400"
+                    : "hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400")
                 }
                 href={getLocale() + "/privacy-policy"}
               >
@@ -234,11 +234,11 @@ export default function Footer() {
               </a>
             </li>
           </ul>
-          <p class="text-zinc-400 leading-none ml-1 dark:text-zinc-600">
+          <p class="text-neutral-400 leading-none ml-1 dark:text-neutral-600">
             {m.footer_copyright()} {new Date().getFullYear()}
           </p>
         </div>
-        <p class="text-xs mt-12 text-zinc-400 dark:text-zinc-600 lg:text-center px-6 md:px-10">
+        <p class="text-xs mt-12 text-neutral-400 dark:text-neutral-600 lg:text-center px-6 md:px-10">
           <Bulb class="inline-block mb-0.5 mr-1" size={12} /> {m.footer_tip()}
         </p>
       </footer>

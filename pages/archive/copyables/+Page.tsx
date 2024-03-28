@@ -20,7 +20,7 @@ export default function Page() {
       <section class="w-full pb-24">
         <div
           class={
-            "flex items-center lg:mt-6 mb-6  bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            "flex items-center lg:mt-6 mb-6  bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
             (userScrolledDown(40)
               ? "font-medium py-2"
               : "text-3xl font-semibold lg:py-2")
@@ -30,7 +30,7 @@ export default function Page() {
             Archive
           </InlineLink>
           <p> / </p>
-          <p class="px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
+          <p class="px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
             Copyables
           </p>
         </div>
@@ -39,11 +39,11 @@ export default function Page() {
             <Item>
               <README>
                 <>
-                  <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
+                  <p class="text-neutral-500 max-w-lg dark:text-neutral-400">
                     A place for little copyable things that I've found in the
                     Internet or made myself.
                   </p>
-                  {/* <p class="font-semibold font-rounded text-zinc-500 dark:text-zinc-400">
+                  {/* <p class="font-semibold font-rounded text-neutral-500 dark:text-neutral-400">
                     Yes, you can copy these and paste them directly into Figma
                     or your code editor. ;)
                   </p> */}
@@ -55,7 +55,10 @@ export default function Page() {
               return (
                 <Item>
                   <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-4 mb-4 relative z-10">
-                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+                    <File
+                      class="flex-shrink-0 text-neutral-400 mr-2"
+                      size={20}
+                    />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
                     </span>
@@ -84,7 +87,7 @@ export default function Page() {
                         <Button
                           type="text"
                           link={file.source}
-                          class="text-zinc-500 text-sm mx-auto"
+                          class="text-neutral-500 text-sm mx-auto"
                         >
                           Source
                         </Button>
@@ -101,7 +104,10 @@ export default function Page() {
               return (
                 <Item>
                   <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-4 mb-4 relative z-10">
-                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+                    <File
+                      class="flex-shrink-0 text-neutral-400 mr-2"
+                      size={20}
+                    />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
                     </span>
@@ -130,7 +136,7 @@ export default function Page() {
                         <Button
                           type="text"
                           link={file.source}
-                          class="text-zinc-500 text-sm mx-auto"
+                          class="text-neutral-500 text-sm mx-auto"
                         >
                           Source
                         </Button>
@@ -147,7 +153,10 @@ export default function Page() {
               return (
                 <Item>
                   <p class="font-medium leading-snug col-span-2 flex items-center mt-4 ml-4 mb-4 relative z-10">
-                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+                    <File
+                      class="flex-shrink-0 text-neutral-400 mr-2"
+                      size={20}
+                    />
                     <span class="md:truncate">
                       {file.name.toLowerCase().replaceAll(" ", "_")}.svg
                     </span>
@@ -176,7 +185,7 @@ export default function Page() {
                         <Button
                           type="text"
                           link={file.source}
-                          class="text-zinc-500 text-sm mx-auto"
+                          class="text-neutral-500 text-sm mx-auto"
                         >
                           Source
                         </Button>
@@ -195,7 +204,7 @@ export default function Page() {
 
 function Item(props: { children: any }) {
   return (
-    <div class="w-full bg-zinc-100 dark:bg-zinc-900 relative">
+    <div class="w-full bg-neutral-100 dark:bg-neutral-900 relative">
       {" "}
       {props.children}
     </div>

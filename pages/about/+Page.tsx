@@ -127,7 +127,7 @@ export default function Page() {
             <h1 class="text-xl font-semibold mb-3">
               {m.about_explainer_heading()}
             </h1>
-            <p class="text-zinc-500 mb-4 dark:text-zinc-400">
+            <p class="text-neutral-500 mb-4 dark:text-neutral-400">
               {m.about_explainer_text_born()}{" "}
               <InlineInfo>
                 <>
@@ -139,7 +139,7 @@ export default function Page() {
               </InlineInfo>{" "}
               {m.about_explainer_text_generation()}
             </p>
-            <p class="text-zinc-500 mb-4 dark:text-zinc-400">
+            <p class="text-neutral-500 mb-4 dark:text-neutral-400">
               {m.about_explainer_text_start()}
               <InlineInfo>
                 <>
@@ -151,7 +151,7 @@ export default function Page() {
               </InlineInfo>
               .
             </p>
-            <p class="text-zinc-500 mb-4 dark:text-zinc-400">
+            <p class="text-neutral-500 mb-4 dark:text-neutral-400">
               {m.about_explainer_text_now()} {new Date().getFullYear() - 2013}{" "}
               {m.about_explainer_text_later()}
               <br />
@@ -258,13 +258,13 @@ export default function Page() {
                     )}
                   </p>
                   {item.slogan && (
-                    <p class="text-zinc-500 dark:text-zinc-400">
+                    <p class="text-neutral-500 dark:text-neutral-400">
                       {item.slogan}
                     </p>
                   )}
                 </div>
                 {experience.indexOf(item) !== experience.length - 1 && (
-                  <div class="border-b border-b-zinc-100 my-8 dark:border-b-zinc-900" />
+                  <div class="border-b border-b-neutral-100 my-8 dark:border-b-neutral-900" />
                 )}
               </div>
             )
@@ -272,7 +272,7 @@ export default function Page() {
         </div>
       </section>
       <section class="w-full mb-32">
-        <h2 class="text-xl font-medium mb-32 text-zinc-400 dark:text-zinc-500">
+        <h2 class="text-xl font-medium mb-32 text-neutral-400 dark:text-neutral-500">
           {m.about_boring_first()}
           <br class="hidden md:block" />
           {m.about_boring_second()}
@@ -309,7 +309,7 @@ export default function Page() {
                           }
                           src={tool.icon}
                           alt={tool.name}
-                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-zinc-800"
+                          class="w-16 h-16 rounded-2xl border border-neutral-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-neutral-800"
                         />
                         <Tooltip position="top" class="-translate-y-3.5 z-20">
                           {tool.name}
@@ -333,7 +333,7 @@ export default function Page() {
                           }
                           src={tool.icon}
                           alt={tool.name}
-                          class="w-16 h-16 rounded-2xl border border-zinc-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-zinc-800"
+                          class="w-16 h-16 rounded-2xl border border-neutral-200 cursor-alias hover:shadow-lg hover:shadow-black/5 transition-all dark:border-neutral-800"
                         />
                         <Tooltip position="top" class="-translate-y-3.5 z-20">
                           {tool.name}
@@ -353,13 +353,13 @@ export default function Page() {
               {bucketList.map((entry) => (
                 <li
                   class={
-                    "flex items-start gap-3 dark:text-zinc-400 " +
+                    "flex items-start gap-3 dark:text-neutral-400 " +
                     (entry.checked
                       ? "line-through selection:bg-transparent selection:text-black"
                       : "")
                   }
                 >
-                  <div class="bg-zinc-100 hover:bg-zinc-200 p-2 hover:border-zinc-300 transition-colors border flex-shrink-0 cursor-not-allowed border-zinc-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-zinc-900 dark:border-zinc-800 dark:hover:border-zinc-700 dark:hover:bg-zinc-800">
+                  <div class="bg-neutral-100 hover:bg-neutral-200 p-2 hover:border-neutral-300 transition-colors border flex-shrink-0 cursor-not-allowed border-neutral-200 bg-gradient-to-tr rounded-md flex items-center justify-center w-6 h-6 relative dark:bg-neutral-900 dark:border-neutral-800 dark:hover:border-neutral-700 dark:hover:bg-neutral-800">
                     {entry.checked && (
                       <Check
                         class="absolute -right-0.5 -top-0.5 w-5 h-5 active:animate-shake"
@@ -378,7 +378,7 @@ export default function Page() {
             <h3 class="text-lg font-semibold mb-4">{m.about_music_title()}</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div class="relative">
-                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:lg:bg-zinc-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-zinc-950 dark:lg:hover:bg-zinc-900">
+                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-neutral-100 mb-2 transition-all hover:lg:bg-neutral-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-neutral-950 dark:lg:hover:bg-neutral-900">
                   <img
                     alt="Enjoy the Silence by Depeche Mode"
                     src="/images/music-covers/enjoy_silence.jpg"
@@ -397,13 +397,13 @@ export default function Page() {
                 <a
                   href="https://en.wikipedia.org/wiki/Enjoy_the_Silence"
                   target="_blank"
-                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
+                  class="mt-2 text-xs text-neutral-300 hover:text-neutral-400 cursor-alias transition-colors dark:text-neutral-700 dark:hover:text-neutral-600"
                 >
                   {m.cover_image_source()}
                 </a>
               </div>
               <div class="relative">
-                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-zinc-100 mb-2 transition-all hover:lg:bg-zinc-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-zinc-950 dark:lg:hover:bg-zinc-900">
+                <div class="md:h-64 h-80 md:pt-20 hover:pt-0 md:px-8 px-4 md:hover:h-64 lg:hover:h-80 overflow-hidden bg-neutral-100 mb-2 transition-all hover:lg:bg-neutral-200 group flex items-center justify-center gap-16 flex-col lg:gap-8 dark:bg-neutral-950 dark:lg:hover:bg-neutral-900">
                   <img
                     alt="Serotonin Moonbeams by The Blessed Madonna"
                     src="/images/music-covers/serotonin_moonbeams.jpg"
@@ -422,7 +422,7 @@ export default function Page() {
                 <a
                   href="https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/"
                   target="_blank"
-                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
+                  class="mt-2 text-xs text-neutral-300 hover:text-neutral-400 cursor-alias transition-colors dark:text-neutral-700 dark:hover:text-neutral-600"
                 >
                   {m.cover_image_source()}
                 </a>
@@ -433,7 +433,7 @@ export default function Page() {
             <h3 class="text-lg font-semibold mb-4">Movies and series</h3>
             <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-2 w-full gap-8">
               <div class="relative">
-                <div class="bg-zinc-100 md:h-64 h-80 mb-2 bg-[url('/images/movies-series/interstellar.jpg')] bg-cover bg-top flex items-end overflow-hidden">
+                <div class="bg-neutral-100 md:h-64 h-80 mb-2 bg-[url('/images/movies-series/interstellar.jpg')] bg-cover bg-top flex items-end overflow-hidden">
                   <div class="text-white font-medium pb-4 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
                     <p class="leading-none">Interstellar</p>
                     <a
@@ -448,20 +448,20 @@ export default function Page() {
                 <a
                   href="https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/"
                   target="_blank"
-                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
+                  class="mt-2 text-xs text-neutral-300 hover:text-neutral-400 cursor-alias transition-colors dark:text-neutral-700 dark:hover:text-neutral-600"
                 >
                   {m.cover_image_source()}
                 </a>
                 <div class="h-20 hidden md:block" />
               </div>
               <div class="relative">
-                <div class="bg-zinc-100 md:h-64 h-80 mb-2 bg-[url('/images/movies-series/wecrashed.jpg')] bg-cover bg-top flex items-end overflow-hidden">
+                <div class="bg-neutral-100 md:h-64 h-80 mb-2 bg-[url('/images/movies-series/wecrashed.jpg')] bg-cover bg-top flex items-end overflow-hidden">
                   <div class="text-white font-medium pb-4 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
                     <p class="leading-none">WeCrashed </p>
                     <a
                       target="_blank"
                       href="https://www.netflix.com/"
-                      class="cursor-alias text-sm px-3 py-0.5 bg-black rounded-full transition-colors hover:bg-zinc-800"
+                      class="cursor-alias text-sm px-3 py-0.5 bg-black rounded-full transition-colors hover:bg-neutral-800"
                     >
                       Apple TV+
                     </a>
@@ -470,7 +470,7 @@ export default function Page() {
                 <a
                   href="https://www.vogue.co.uk%2Farts-and-lifestyle%2Farticle%2Fwecrashed-apple-tv&psig=AOvVaw1TmOHYBg5jLkyGFaFlWq5Y&ust=1697491485478000&source=images&cd=vfe&opi=89978449&ved=0CBQQ3YkBahcKEwjAmefZ_viBAxUAAAAAHQAAAAAQJA"
                   target="_blank"
-                  class="mt-2 text-xs text-zinc-300 hover:text-zinc-400 cursor-alias transition-colors dark:text-zinc-700 dark:hover:text-zinc-600"
+                  class="mt-2 text-xs text-neutral-300 hover:text-neutral-400 cursor-alias transition-colors dark:text-neutral-700 dark:hover:text-neutral-600"
                 >
                   {m.cover_image_source()}
                 </a>

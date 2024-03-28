@@ -16,9 +16,10 @@ export default {
       },
       maxWidth: {
         s: "300px",
+        nav: "450px",
       },
       colors: {
-        "light-zinc": "rgb(252, 252, 252)",
+        "light-neutral": "rgb(252, 252, 252)",
       },
       boxShadow: {
         "nav-shadow":

@@ -12,7 +12,7 @@ export default function Page({ projects }: { projects: any }) {
       <section class="w-full pb-24">
         <div
           class={
-            "flex items-center lg:mt-6 mb-6 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            "flex items-center lg:mt-6 mb-6 bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
             (userScrolledDown(40)
               ? "font-medium py-2"
               : "text-3xl font-semibold lg:py-2")
@@ -23,7 +23,7 @@ export default function Page({ projects }: { projects: any }) {
           </InlineLink>
 
           <p> / </p>
-          <p class="px-1.5 text-zinc-400 dark:text-zinc-600 truncate">
+          <p class="px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
             Short Projects
           </p>
         </div>
@@ -37,13 +37,16 @@ export default function Page({ projects }: { projects: any }) {
               <>
                 <a
                   href={`${project.url}`}
-                  class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+                  class="grid md:grid-cols-8 grid-cols-2 gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-neutral-100 rounded-md dark:hover:bg-neutral-900"
                 >
                   <p class="font-medium leading-snug col-span-2 flex items-center">
-                    <File class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+                    <File
+                      class="flex-shrink-0 text-neutral-400 mr-2"
+                      size={20}
+                    />
                     <span class="md:truncate">{project.title}</span>
                   </p>
-                  <p class="text-zinc-500 truncate md:col-span-4 leading-snug col-span-2 dark:text-zinc-400">
+                  <p class="text-neutral-500 truncate md:col-span-4 leading-snug col-span-2 dark:text-neutral-400">
                     {project.description}
                   </p>
                   <div class="group relative mr-auto md:col-span-1 col-span-2 mb-4 md:mb-0">
@@ -73,14 +76,14 @@ export default function Page({ projects }: { projects: any }) {
                   </Button>
                 </a>
                 {projects.indexOf(project) !== projects.length - 1 && (
-                  <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+                  <div class="border-b border-b-neutral-100 dark:border-b-neutral-900" />
                 )}
               </>
             )
           })}
         </div>
         <README>
-          <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
+          <p class="text-neutral-500 max-w-lg dark:text-neutral-400">
             Short projects have a shorter case study and are usually smaller in
             scope.
           </p>
