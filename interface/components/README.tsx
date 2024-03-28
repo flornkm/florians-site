@@ -4,13 +4,13 @@ import { JSX } from "preact/jsx-runtime"
 
 export default function README(props: { children: JSX.Element }) {
   return (
-    <div class="bg-zinc-50 border border-zinc-200 w-full rounded-xl relative dark:border-zinc-800 dark:bg-zinc-950">
-      <div class="absolute -inset-[1px] border border-zinc-200 rounded-xl z-30 pointer-events-none ring-4 ring-light-zinc dark:ring-black dark:border-zinc-800" />
-      <div class="flex justify-between items-center w-full py-2 pl-4 pr-2 border-b border-zinc-200 bg-zinc-100 sticky dark:bg-zinc-900 dark:border-zinc-800 top-10 lg:top-24">
-        <p class="text-zinc-500 text-sm text-center dark:text-zinc-400 font-mono">
+    <div class="bg-neutral-50 border border-neutral-200 w-full rounded-xl relative dark:border-neutral-800 dark:bg-neutral-950">
+      <div class="absolute -inset-[1px] border border-neutral-200 rounded-xl z-30 pointer-events-none ring-4 ring-light-neutral dark:ring-black dark:border-neutral-800" />
+      <div class="flex justify-between items-center w-full py-2 pl-4 pr-2 border-b border-neutral-200 bg-neutral-100 sticky dark:bg-neutral-900 dark:border-neutral-800 top-10 lg:top-24">
+        <p class="text-neutral-500 text-sm text-center dark:text-neutral-400 font-mono">
           README.md
         </p>
-        <Edit class="w-6 h-6 text-zinc-500 dark:text-zinc-400 p-1 hover:bg-zinc-200 transition-colors rounded-md cursor-not-allowed dark:hover:bg-zinc-800" />
+        <Edit class="w-6 h-6 text-neutral-500 dark:text-neutral-400 p-1 hover:bg-neutral-200 transition-colors rounded-md cursor-not-allowed dark:hover:bg-neutral-800" />
       </div>
       <div class="w-full px-4 py-8">{props.children}</div>
     </div>

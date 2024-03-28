@@ -18,7 +18,7 @@ export default function Page(
   return (
     <div class="lg:mt-16 max-w-lg mx-auto">
       <div class="flex justify-between items-center gap-4 flex-wrap mb-2">
-        <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
+        <div class="flex items-center gap-1 mb-2 text-neutral-400 dark:text-neutral-500 text-sm flex-wrap">
           {props.post.type === "writing" ? (
             <div class="text-sm flex items-center gap-1.5">
               <Writing class="inline-block" stroke={1.5} />
@@ -67,16 +67,16 @@ export default function Page(
         </Picker>{" "}
       </div>
       {/* <h1 class="text-4xl font-bold mb-8">{props.title}</h1> */}
-      <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
+      <div class="flex items-center gap-1 mb-2 text-neutral-400 dark:text-neutral-500 text-sm flex-wrap">
         {props.post.type === "sports" && (
-          <div class="w-full bg-zinc-100 px-4 py-8 dark:bg-zinc-900 my-4">
-            <div class="relative w-full grid xs:grid-cols-3 place-items-end gap-4 text-zinc-500 dark:text-zinc-400">
+          <div class="w-full bg-neutral-100 px-4 py-8 dark:bg-neutral-900 my-4">
+            <div class="relative w-full grid xs:grid-cols-3 place-items-end gap-4 text-neutral-500 dark:text-neutral-400">
               <div class="mx-auto">
                 <div
                   style={{
                     height: "128px",
                   }}
-                  class="w-10 h-full relative rounded-xl bg-zinc-200 mb-4 dark:bg-zinc-800"
+                  class="w-10 h-full relative rounded-xl bg-neutral-200 mb-4 dark:bg-neutral-800"
                 >
                   <div
                     style={{
@@ -84,7 +84,7 @@ export default function Page(
                     }}
                     class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-rose-500"
                   />
-                  <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
+                  <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-neutral-900">
                     {props.post.move}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export default function Page(
                   style={{
                     height: "128px",
                   }}
-                  class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                  class="w-10 h-full relative rounded-xl bg-neutral-200 mx-auto mb-4 dark:bg-neutral-800"
                 >
                   <div
                     style={{
@@ -103,7 +103,7 @@ export default function Page(
                     }}
                     class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-green-500"
                   />
-                  <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
+                  <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-neutral-900">
                     {props.post.exercise}
                   </p>
                 </div>
@@ -114,7 +114,7 @@ export default function Page(
                   style={{
                     height: "128px",
                   }}
-                  class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
+                  class="w-10 h-full relative rounded-xl bg-neutral-200 mx-auto mb-4 dark:bg-neutral-800"
                 >
                   <div
                     style={{
@@ -122,7 +122,7 @@ export default function Page(
                     }}
                     class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-sky-500"
                   />
-                  <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
+                  <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-neutral-900">
                     {props.post.stand}
                   </p>
                 </div>

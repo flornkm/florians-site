@@ -6,7 +6,7 @@ export default function Page() {
     <div class="w-full">
       <section class="w-full lg:pt-8 relative min-h-screen flex flex-col max-w-3xl mb-32">
         <h1 class="text-3xl font-semibold mb-4">{m.privacy_policy_title()}</h1>
-        <div class="text-zinc-500 mb-16 dark:text-zinc-400">
+        <div class="text-neutral-500 mb-16 dark:text-neutral-400">
           <p class="mb-4">{m.privacy_policy_notification()}</p>
           <p class="mb-16">
             This Privacy Policy describes Our policies and procedures on the

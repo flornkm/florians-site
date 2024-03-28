@@ -10,7 +10,7 @@ export default function Page() {
       <section class="w-full">
         <div
           class={
-            "flex items-center lg:mt-6 mb-6 bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            "flex items-center lg:mt-6 mb-6 bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
             (userScrolledDown(40)
               ? "font-medium py-2"
               : "text-3xl font-semibold lg:py-2")
@@ -21,10 +21,10 @@ export default function Page() {
         <div class="py-0.5 pb-8">
           <a
             href="/archive/projects"
-            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-neutral-100 rounded-md dark:hover:bg-neutral-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              <Folder class="flex-shrink-0 text-neutral-400 mr-2" size={20} />
               Projects
             </p>
             <Button
@@ -36,13 +36,13 @@ export default function Page() {
               {m.button_open()}
             </Button>
           </a>
-          <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+          <div class="border-b border-b-neutral-100 dark:border-b-neutral-900" />
           <a
             href="/archive/short-projects"
-            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-neutral-100 rounded-md dark:hover:bg-neutral-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              <Folder class="flex-shrink-0 text-neutral-400 mr-2" size={20} />
               Short Projects
             </p>
             <Button
@@ -54,13 +54,13 @@ export default function Page() {
               {m.button_open()}
             </Button>
           </a>
-          <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+          <div class="border-b border-b-neutral-100 dark:border-b-neutral-900" />
           <a
             href="/archive/copyables"
-            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-neutral-100 rounded-md dark:hover:bg-neutral-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              <Folder class="flex-shrink-0 text-neutral-400 mr-2" size={20} />
               Copyables
             </p>
             <Button
@@ -72,13 +72,13 @@ export default function Page() {
               {m.button_open()}
             </Button>
           </a>
-          <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+          <div class="border-b border-b-neutral-100 dark:border-b-neutral-900" />
           <a
             href="/archive/photos"
-            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-neutral-100 rounded-md dark:hover:bg-neutral-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              <Folder class="flex-shrink-0 text-neutral-400 mr-2" size={20} />
               Photos
             </p>
             <Button
@@ -90,13 +90,13 @@ export default function Page() {
               {m.button_open()}
             </Button>
           </a>
-          <div class="border-b border-b-zinc-100 dark:border-b-zinc-900" />
+          <div class="border-b border-b-neutral-100 dark:border-b-neutral-900" />
           <a
             href="/archive/posts"
-            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-zinc-100 rounded-md dark:hover:bg-zinc-900"
+            class="flex justify-between gap-4 leading-none md:items-center group/link py-4 transition-colors hover:bg-neutral-100 rounded-md dark:hover:bg-neutral-900"
           >
             <p class="font-medium leading-snug md:col-span-2 flex items-center">
-              <Folder class="flex-shrink-0 text-zinc-400 mr-2" size={20} />
+              <Folder class="flex-shrink-0 text-neutral-400 mr-2" size={20} />
               Posts
             </p>
             <Button
@@ -110,7 +110,7 @@ export default function Page() {
           </a>
         </div>
         <README>
-          <p class="text-zinc-500 max-w-lg dark:text-zinc-400">
+          <p class="text-neutral-500 max-w-lg dark:text-neutral-400">
             {m.archive_description()}
           </p>
         </README>

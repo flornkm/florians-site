@@ -108,6 +108,16 @@ a:focus {
 	border-radius: 0.25rem;
 }
 
+/* Letter Spacing -2% on h1, h2, h3 and -1% on h4, h5, h6 */
+
+h1, h2, h3 {
+	letter-spacing: -2%;
+}
+
+h4, h5, h6 {
+	letter-spacing: -1%;
+}
+
 .custom-scrollbar {
 	scrollbar-width: auto;
 	scrollbar-color: #a1a1aa #ffffff;

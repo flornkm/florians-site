@@ -69,12 +69,12 @@ export default function Waitlist() {
             type="text"
             placeholder="john.doe@domain.com"
             class={
-              "w-full placeholder:text-zinc-400 relative top-[1px] disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 outline-offset-1 px-6 py-3 rounded-full bg-white border dark:bg-zinc-800 dark:placeholder:text-zinc-500 dark:focus:outline-none " +
+              "w-full placeholder:text-neutral-400 relative top-[1px] disabled:cursor-not-allowed outline-0 outline-neutral-500/0 transition-all focus:outline-4 focus:outline-neutral-500/10 outline-offset-1 px-6 py-3 rounded-full bg-white border dark:bg-neutral-800 dark:placeholder:text-neutral-500 dark:focus:outline-none " +
               (info && info.type === "error"
                 ? "border-red-200 focus:border-red-300 text-red-500 dark:border-red-700/50 dark:focus:border-red-700"
                 : info && info.type === "success"
                 ? "border-green-200 focus:border-green-300 text-green-500 dark:border-green-700/50 dark:focus:border-green-700"
-                : "border-zinc-200 focus:border-zinc-300 dark:border-zinc-700/50 dark:focus:border-zinc-700") +
+                : "border-neutral-200 focus:border-neutral-300 dark:border-neutral-700/50 dark:focus:border-neutral-700") +
               (loading ? " opacity-50 pointer-events-none" : "")
             }
           />

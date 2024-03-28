@@ -110,7 +110,7 @@ export function PhotoSlider(props: { autoPlay?: boolean; buttons?: boolean }) {
       {slides.map((slide) => (
         <figure key={slide} class="mr-8 group">
           <img src={slide.src} alt={slide.alt} />
-          <figcaption class="text-sm text-zinc-400 mt-3 line-clamp-2 group-hover:line-clamp-none">
+          <figcaption class="text-sm text-neutral-400 mt-3 line-clamp-2 group-hover:line-clamp-none">
             {slide.caption}
           </figcaption>
         </figure>

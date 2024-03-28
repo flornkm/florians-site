@@ -42,7 +42,7 @@ export default function Page() {
       <section class="w-full pb-24">
         <div
           class={
-            "flex items-center lg:mt-6 mb-6  bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
+            "flex items-center lg:mt-6 mb-6  bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
             (userScrolledDown(40)
               ? "font-medium py-2"
               : "text-3xl font-semibold lg:py-2")
@@ -52,7 +52,9 @@ export default function Page() {
             Archive
           </InlineLink>
           <p> / </p>
-          <p class="px-1.5 text-zinc-400 dark:text-zinc-600 truncate">Photos</p>
+          <p class="px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
+            Photos
+          </p>
         </div>
         <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-4 h-full min-h-screen">
           <div class="py-0.5 gap-4 flex items-start flex-col h-full">
@@ -111,7 +113,7 @@ export default function Page() {
 
 function Item(props: { children: any }) {
   return (
-    <div class="w-full bg-zinc-100 dark:bg-zinc-900 relative">
+    <div class="w-full bg-neutral-100 dark:bg-neutral-900 relative">
       {" "}
       {props.children}
     </div>

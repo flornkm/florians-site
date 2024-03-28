@@ -89,7 +89,7 @@ export default function Contact() {
       <div class="w-full flex md:flex-row flex-col-reverse justify-between gap-6 md:gap-8 pr-12">
         <div class="flex items-center gap-3">
           <p class="font-medium text-lg">
-            <span class="text-zinc-400 dark:text-zinc-500">
+            <span class="text-neutral-400 dark:text-neutral-500">
               {m.message_to()}{" "}
             </span>
             Florian
@@ -97,7 +97,7 @@ export default function Contact() {
           <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
         </div>
         <div class="flex xs:items-center gap-2 xs:gap-4 xs:flex-row flex-col md:justify-end lg:w-full lg:max-w-s">
-          <p class="text-zinc-400 dark:text-zinc-500">
+          <p class="text-neutral-400 dark:text-neutral-500">
             {m.message_contact_via()}
           </p>
           <Button
@@ -116,7 +116,7 @@ export default function Contact() {
           </Button>
         </div>
       </div>
-      <div class="mx-auto bg-zinc-100 border border-zinc-200 flex flex-col justify-end w-full h-full md:max-h-[90%] max-h-[85%] rounded-b-[32px] rounded-t-2xl dark:bg-zinc-950/20 dark:border-zinc-800 relative">
+      <div class="mx-auto bg-neutral-100 border border-neutral-200 flex flex-col justify-end w-full h-full md:max-h-[90%] max-h-[85%] rounded-b-[32px] rounded-t-2xl dark:bg-neutral-950/20 dark:border-neutral-800 relative">
         <div class="h-full w-full xs:p-8 p-4 flex flex-col gap-3 overflow-y-scroll custom-scrollbar relative">
           {messages.map((message) => (
             <ChatBubble position={message.position} date={message.time}>
@@ -190,7 +190,7 @@ export default function Contact() {
               ref={chatInput}
               type="text"
               placeholder={m.message_placeholder()}
-              class="w-full placeholder:text-zinc-400 relative top-[1px] disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700/50 dark:placeholder:text-zinc-500 dark:focus:border-zinc-700 dark:focus:outline-none shadow-md shadow-black/5"
+              class="w-full placeholder:text-neutral-400 relative top-[1px] disabled:cursor-not-allowed outline-0 outline-neutral-500/0 transition-all focus:outline-4 focus:outline-neutral-500/10 focus:border-neutral-300 outline-offset-1 px-6 py-3 rounded-full bg-white border border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700/50 dark:placeholder:text-neutral-500 dark:focus:border-neutral-700 dark:focus:outline-none shadow-md shadow-black/5"
             />
             <Button
               function={() => {
@@ -246,15 +246,15 @@ function ChatBubble(props: {
         class={
           "px-4 py-2 text-white rounded-2xl relative " +
           (props.position === "left"
-            ? "rounded-tl-md bg-zinc-400 selection:bg-zinc-500 selection:text-white dark:bg-zinc-800"
-            : "rounded-tr-md bg-zinc-600 selection:bg-zinc-700 selection:text-white dark:bg-zinc-600")
+            ? "rounded-tl-md bg-neutral-400 selection:bg-neutral-500 selection:text-white dark:bg-neutral-800"
+            : "rounded-tr-md bg-neutral-600 selection:bg-neutral-700 selection:text-white dark:bg-neutral-600")
         }
       >
         {props.children}
       </div>
       <p
         class={
-          "text-zinc-400 text-xs mt-1.5 " +
+          "text-neutral-400 text-xs mt-1.5 " +
           (props.position === "left" ? "ml-2" : "mr-2")
         }
       >

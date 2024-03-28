@@ -13,13 +13,13 @@ function Page404() {
     <div class="w-full h-[90vh] flex justify-center items-center">
       <div class="flex flex-col justify-center items-center gap-4 max-w-xs">
         <h1 class="text-6xl font-bold text-center leading-none hover:cursor-none">
-          <span class="transition-all hover:animate-pulse hover:bg-zinc-100 px-1 rounded-md relative dark:hover:bg-zinc-900">
+          <span class="transition-all hover:animate-pulse hover:bg-neutral-100 px-1 rounded-md relative dark:hover:bg-neutral-900">
             4
           </span>
-          <span class="transition-all hover:animate-pulse hover:bg-zinc-100 px-1 rounded-md relative dark:hover:bg-zinc-900">
+          <span class="transition-all hover:animate-pulse hover:bg-neutral-100 px-1 rounded-md relative dark:hover:bg-neutral-900">
             0
           </span>
-          <span class="transition-all hover:animate-pulse hover:bg-zinc-100 px-1 rounded-md relative dark:hover:bg-zinc-900">
+          <span class="transition-all hover:animate-pulse hover:bg-neutral-100 px-1 rounded-md relative dark:hover:bg-neutral-900">
             4
           </span>
         </h1>
