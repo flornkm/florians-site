@@ -118,7 +118,7 @@ export function LanguagePicker(props: {
         // @ts-ignore
         ref={elementsList}
         class={
-          "absolute z-10 bg-neutral-50 border border-neutral-200 rounded-md flex flex-col transition-all overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 " +
+          "absolute p-1 z-10 bg-neutral-50 shadow-lg shadow-black/5 border border-neutral-200 rounded-lg flex flex-col gap-1 transition-all duration-100 overflow-hidden dark:bg-neutral-950 dark:border-neutral-800 " +
           //   (props.position === "top" ? "bottom-8 " : "top-8 ") +
           (props.align === "left" ? "left-0 " : "right-0 ") +
           (open
@@ -132,10 +132,7 @@ export function LanguagePicker(props: {
           return (
             <a
               class={
-                "px-3 py-1.5 transition-colors hover:bg-neutral-100 flex items-center gap-1.5 justify-end dark:hover:bg-neutral-900 " +
-                (languages.length - 1 === languages.indexOf(locale)
-                  ? ""
-                  : " border-b border-b-neutral-200 dark:border-b-neutral-800")
+                "px-3 py-1.5 rounded-md transition-colors hover:bg-neutral-100 flex items-center gap-1.5 justify-end dark:hover:bg-neutral-900"
               }
               href={locale.link}
               onClick={(e) => {

@@ -74,11 +74,11 @@
 }
 
 @font-face {
-	font-family: 'Fragment Mono';
-	font-weight: 400;
+	font-family: 'Commit Mono';
+	font-weight: 400 600;
 	font-style: normal;
 	font-display: swap;
-	src: url(/fonts/fragment-mono/FragmentMono-Regular.woff2) format('woff2');
+	src: url(/fonts/commit-mono/commit-mono-var.woff2) format('woff2');
 }
 
 @font-face {

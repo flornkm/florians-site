@@ -13,7 +13,7 @@ export default function Work(props: { projects: Record<string, string>[] }) {
             Number(project.date.split("/")[0])
           )
           return (
-            <div class="w-full group/project">
+            <div class="w-full group/project mb-8 md:mb-0">
               <a
                 class="flex md:gap-0 gap-2 flex-col lg:flex lg:flex-row items-start relative group/link"
                 href={project.url}
