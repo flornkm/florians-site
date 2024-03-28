@@ -48,7 +48,7 @@ export default {
     fontFamily: {
       sans: ["Pretendard Variable", "Pretendard", "Inter", "sans-serif"],
       mono: [
-        "Fragment Mono",
+        "Commit Mono",
         "ui-monospace",
         "SFMono-Regular",
         "Liberation Mono",

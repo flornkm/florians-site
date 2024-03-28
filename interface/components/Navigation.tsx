@@ -45,7 +45,7 @@ export default function Navigation() {
 
         // Adjustments for mobile screens
         const isMobile =
-          typeof window !== "undefined" && window.innerWidth < 1024
+          typeof window !== "undefined" && window.innerWidth < 768
         const mobileWidthFactor = 1.2
 
         setSelectorPosition({
@@ -90,7 +90,7 @@ export default function Navigation() {
   }, [pageContext])
 
   return (
-    <div class="w-full flex md:grid md:grid-cols-5 items-center justify-between max-w-screen-3xl mx-auto md:px-10 min-[650px]:px-5 min-[400px]:px-3.5 xs:px-3">
+    <div class="w-full flex lg:grid lg:grid-cols-5 items-center justify-between max-w-screen-3xl mx-auto md:px-10 min-[650px]:px-5 min-[400px]:px-3.5 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
         <div
           onClick={() => {
@@ -148,7 +148,7 @@ export default function Navigation() {
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="md:h-9 h-12 lg:-translate-x-0 min-[850px]:-translate-x-7 md:-translate-x-5 -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white"
+              class="md:h-9 h-12 md:-translate-x-10 lg:-translate-x-0 lg:px-0 xs:-translate-x-[1px] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white"
             />
           )}
       </div>
@@ -177,7 +177,7 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
   return (
     <a
       {...props}
-      class={`${className} py-4 lg:px-4 transition-colors max-lg:truncate duration-150 before:absolute group font-medium md:w-auto w-full text-center
+      class={`${className} py-4 md:px-4 transition-colors max-lg:truncate duration-150 before:absolute group font-medium md:w-auto w-full text-center
       before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden relative z-10 text-sm xs:text-base`}
     />
   )

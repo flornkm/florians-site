@@ -1,7 +1,7 @@
 import Letters from "#sections/Letters"
 import Work from "#sections/Work"
 import * as m from "#lang/paraglide/messages"
-import Waitlist from "#components/Waitlist"
+import Waitlist, { DesignEngineerEyeCatcher } from "#components/Waitlist"
 
 export default function Page({ projects }: { projects: any[] }) {
   return (
@@ -21,20 +21,26 @@ export default function Page({ projects }: { projects: any[] }) {
       <section class="w-full scroll-mt-24 mb-12" id="work">
         <Work projects={projects} />
       </section>
-      <section class="w-full">
+      <section class="w-full bg-neutral-100 mb-12">
         <Letters />
       </section>
-      <section class="w-full relative h-full mb-24 lg:mb-0">
-        <div class="2xl:w-[99vw] md:w-[98vw] w-[97vw] overflow-hidden relative left-1/2 -translate-x-1/2 inset-0 py-16 bg-neutral-100 dark:bg-neutral-950 h-full border-y dark:lg:border-b-0 border-y-neutral-200 dark:border-neutral-900 cta-gradient">
-          <div class="w-full relative max-w-screen-lx mx-auto md:px-10 px-12 z-10">
-            <h2 class="text-xl font-semibold leading-snug mb-4">
-              {m.waitlist_heading()}
-            </h2>
-            <p class="mb-6 text-neutral-500 dark:text-neutral-400">
-              {m.waitlist_description()}
-            </p>
+      <section class="w-full flex items-center md:flex-row flex-col overflow-hidden">
+        <div class="lg:max-w-[calc((100%-450px)/2)] w-full relative hidden lg:block">
+          <DesignEngineerEyeCatcher />
+        </div>
+        <div class="w-full relative h-full mb-24 lg:mb-0 py-16">
+          <div class="w-full relative max-w-screen-lx mx-auto z-10">
+            <div class="max-w-4xl">
+              <h2 class="text-xl font-semibold leading-snug mb-4">
+                {m.waitlist_heading()}
+              </h2>
+              <p class="mb-6 text-neutral-500 dark:text-neutral-400">
+                {m.waitlist_description()}
+              </p>
+            </div>
             <Waitlist />
           </div>
+          <div class="absolute bg-light-neutral blur-xl inset-0 scale-110" />
         </div>
       </section>
     </div>
