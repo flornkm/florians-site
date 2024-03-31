@@ -16,7 +16,7 @@ export default {
       },
       maxWidth: {
         s: "300px",
-        nav: "450px",
+        nav: "432px",
       },
       colors: {
         "light-neutral": "rgb(252, 252, 252)",

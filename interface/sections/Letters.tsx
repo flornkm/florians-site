@@ -92,7 +92,7 @@ export default function Letters() {
           style={{
             perspective: "1000px",
           }}
-          class="w-full h-[616px] relative flex items-end justify-center group/letter"
+          class="w-full h-[616px] mt-20 relative flex items-end justify-center group/letter"
         >
           {letterArray.length > 0 ? (
             letterArray.map((letter) => {
@@ -139,7 +139,7 @@ export default function Letters() {
                     "rounded-3xl group/singleletter cursor-pointer w-full mx-auto p-6 bg-neutral-50 absolute shadow-2xl border-t border-t-neutral-200 shadow-black/5 transition-all dark:border-neutral-800 dark:bg-neutral-950 " +
                     (zoom === letterArray.indexOf(letter)
                       ? "bg-white dark:bg-neutral-900"
-                      : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-900 dark:hover:shadow-none")
+                      : "hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-900 dark:hover:shadow-none")
                   }
                 >
                   <img
@@ -169,6 +169,10 @@ export default function Letters() {
                   </div>
                   {letter.handle && (
                     <div
+                      style={{
+                        opacity:
+                          zoom === letterArray.indexOf(letter) ? "100%" : "0%",
+                      }}
                       class={
                         "absolute -top-8 transition-opacity pointer-events-none flex " +
                         (zoom === letterArray.indexOf(letter)

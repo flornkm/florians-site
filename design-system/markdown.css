@@ -1,4 +1,4 @@
-main > article {
+main>article {
 
     margin-bottom: 4rem;
 
@@ -26,20 +26,33 @@ main > article {
 
     @media screen and (min-width: 1024px) {
         & info-grid {
-            justify-content: space-between;
             flex-direction: row;
-            gap: 8rem;
+        }
+
+        & info-grid>div:nth-child(1) {
+            width: 100%;
+            max-width: calc((100% - 432px) / 2);
+            padding-right: 6rem;
         }
 
         & info-grid>div:nth-child(2) {
-            margin-top: 3.2rem;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        & div>p>img:nth-child(1) {
+            width: 100%;
+            max-width: none;
+            background-color: #F5F5F5;
+            padding: 8rem 16rem;
+            margin: 0 auto;
         }
     }
 
     @media screen and (max-width: 1023px) {
         & info-grid {
-            flex-direction: column;
-            gap: 1.5rem;
+            flex-direction: column-reverse;
+            gap: 0;
         }
 
         & info-grid>div>p {
@@ -47,7 +60,6 @@ main > article {
         }
 
         & info-grid>div:nth-child(2) {
-            max-width: 32rem;
             width: 100%;
         }
     }
@@ -59,10 +71,11 @@ main > article {
 
     & info-grid>div>p {
         margin-bottom: 0.25rem;
+        font-size: 1.1rem;
+
     }
 
     & info-grid>div {
-        max-width: 32rem;
         margin-bottom: 2rem;
     }
 
@@ -107,7 +120,6 @@ main > article {
     }
 
     & info-grid> :nth-child(2) {
-        max-width: 18.8rem;
         width: 100%;
     }
 
@@ -236,7 +248,7 @@ main > article {
     & three-full-grid>p {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 2rem;
+        gap: 1rem;
         margin: 6rem 0;
         width: 99vw;
         position: relative;
@@ -258,8 +270,7 @@ main > article {
 
     & process-grid {
         display: grid;
-        grid-template-columns: 10rem 1fr;
-        gap: 2rem;
+        grid-template-columns: calc((100% - 432px) / 2) 1fr;
         margin: 8rem 0;
         position: relative;
     }
@@ -400,7 +411,6 @@ main > article {
 }
 
 article>div>p>img:nth-child(1) {
-    width: 100%;
     object-fit: cover;
     object-position: center;
     margin-bottom: 4rem;
@@ -408,5 +418,6 @@ article>div>p>img:nth-child(1) {
 
 article>div>p:nth-child(3),
 article>div>p:nth-child(4) {
-    font-size: 1.1rem;
+    max-width: 432px;
+    margin: 0 auto;
 }

@@ -9,6 +9,16 @@ date: 10 / 2023
 <info-grid>
 <div>
 
+|               |                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Year          | 2023                                                                                                                                                                                                                                                                                                                                                                     |
+| Collaborators | [Samuel Stroschein](https://github.com/samuelstroschein), [Felix Häberle](https://github.com/felixhaeberle), [Jan Johannes](https://github.com/janfjohannes), [Niklas Buchfink](https://github.com/NiklasBuchfink), [Nils Jacobsen](https://github.com/NilsJacobsen), [Jannes Blobel](https://github.com/jannesblobel), [Loris Sigrist](https://github.com/LorisSigrist) |
+| Website       | [inlang.com](https://inlang.com)                                                                                                                                                                                                                                                                                                                                         |
+
+</div>
+
+<div>
+
 # inlang
 
 Building an ecosystem for globalization with a team consisting of designers and engineers.
@@ -16,16 +26,6 @@ I worked at inlang as a design engineer from mid-june 2023 to mid-january 2024.
 
 My main tasks were related to technical implementation and product building.
 This case study is more focused on the technical side of things as these were the tasks I've spent most of my time on.
-
-</div>
-
-<div>
-
-|               |                                                                                                                                                                                                                                                                                                                                                                          |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Year          | 2023                                                                                                                                                                                                                                                                                                                                                                     |
-| Collaborators | [Samuel Stroschein](https://github.com/samuelstroschein), [Felix Häberle](https://github.com/felixhaeberle), [Jan Johannes](https://github.com/janfjohannes), [Niklas Buchfink](https://github.com/NiklasBuchfink), [Nils Jacobsen](https://github.com/NilsJacobsen), [Jannes Blobel](https://github.com/jannesblobel), [Loris Sigrist](https://github.com/LorisSigrist) |
-| Website       | [inlang.com](https://inlang.com)                                                                                                                                                                                                                                                                                                                                         |
 
 </div>
 </info-grid>
