@@ -9,19 +9,19 @@ date: 04 / 2023
 <info-grid>
 <div>
 
-# Curations
-
-A curated collection of the best products on the web.
-
-</div>
-
-<div>
-
 |               |                                                                                                                          |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | Year          | 2022 - 2023                                                                                                              |
 | Collaborators | [Nils Eller](https://nilseller.com), [[Anton Stallbörger](https://antonstallboerger.com)](https://antonstallboerger.com) |
 | Website       | [curations.tech](https://curations.tech)                                                                                 |
+
+</div>
+
+<div>
+
+# Curations
+
+A curated collection of the best products on the web.
 
 </div>
 </info-grid>

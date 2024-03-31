@@ -25,7 +25,7 @@ export default function PageLayout({
               <Navigation />
             </nav>
           )}
-          <main class="w-full relative max-w-screen-3xl mx-auto md:px-10 px-6 min-h-screen pt-4 lg:pt-0">
+          <main class="w-full relative mx-auto md:px-10 px-6 min-h-screen pt-4 lg:pt-0">
             {children}
           </main>
         </div>

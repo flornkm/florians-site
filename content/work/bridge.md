@@ -9,17 +9,17 @@ date: 03 / 2023
 <info-grid>
 <div>
 
-# Bridge
-
-Browser based job page creator for Startups and SMEs.
-
-</div>
-<div>
-
 |         |                                         |
 | ------- | --------------------------------------- |
 | Year    | 2023                                    |
 | Website | [bridge.supply](https://bridge.supply/) |
+
+</div>
+<div>
+
+# Bridge
+
+Browser based job page creator for Startups and SMEs.
 
 </div>
 </info-grid>

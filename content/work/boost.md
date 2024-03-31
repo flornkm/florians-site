@@ -9,19 +9,19 @@ date: 02 / 2023
 <info-grid>
 <div>
 
-# Boost
-
-Nutrition application & hardware device
-
-</div>
-
-<div>
-
 |              |                                                    |
 | ------------ | -------------------------------------------------- |
 | Year         | 2022 - 2023                                        |
 | Collaborator | [Anton Stallbörger](https://antonstallboerger.com) |
 | Website      | [Landingpage](https://boost-three.vercel.app/)     |
+
+</div>
+
+<div>
+
+# Boost
+
+Nutrition application & hardware device
 
 </div>
 </info-grid>
