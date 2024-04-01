@@ -4,6 +4,7 @@ import { Check } from "#design-system/Icons"
 import { PhotoSlider } from "#components/Slider"
 import Button, { InlineLink } from "#components/Button"
 import * as m from "#lang/paraglide/messages"
+import { useEffect, useState } from "preact/hooks"
 
 export default function Page() {
   const experience = [
@@ -113,20 +114,21 @@ export default function Page() {
 
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-8">
-        <h1 class="text-3xl font-semibold mb-16 w-full">{m.about_title()}</h1>
-        <div class="flex gap-12 lg:flex-row flex-col mb-24">
-          <div class="max-w-[170px] w-full flex-shrink-0">
+      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 md:mb-8">
+        <div class="lg:w-1/3 mb-4 md:mb-0">
+          <h1 class="text-2xl line-clamp-2 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
+            {m.about_title()}
+          </h1>
+        </div>
+        <div class="lg:max-w-nav w-full lg:mx-auto">
+          <div class="w-full h-40 rounded-2xl bg-neutral-100 relative bg-[url('/images/photos/netherlands.jpg')] bg-cover bg-center mb-16">
             <img
               src="/images/avatars/florian_student.webp"
-              class="aspect-square rounded-full"
-              alt="Florian as a student at HfG Schwäbisch Gmünd"
+              class="aspect-square rounded-full w-24 absolute -bottom-12 left-0 border-4 border-light-neutral"
+              alt="Florian as a student"
             />
           </div>
-          <div class="flex-grow md:max-w-md">
-            <h1 class="text-xl font-semibold mb-3">
-              {m.about_explainer_heading()}
-            </h1>
+          <div class="flex-grow mx-auto max-w-md">
             <p class="text-neutral-500 mb-4 dark:text-neutral-400">
               {m.about_explainer_text_born()}{" "}
               <InlineInfo>
@@ -158,6 +160,99 @@ export default function Page() {
               <span class="font-medium">{m.design_engineer()}</span>.
             </p>
           </div>
+        </div>
+        <div class="w-1/3 hidden lg:block" />
+      </section>
+      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 md:mb-64 lg:max-w-none max-w-md mx-auto">
+        <div class="lg:w-1/3">
+          <h2 class="text-xl font-semibold md:sticky md:top-20 md:mb-0">
+            {m.about_education_title()}
+          </h2>
+        </div>
+        <div class="lg:max-w-nav w-full lg:mx-auto">
+          <p class="text-neutral-500 mb-4">
+            Working as a {experience[0].jobTitle}
+            {experience[0].company && `at ${experience[0].company}`}
+            {experience[0].from && ` since ${experience[0].from}`}
+            {experience[0].to && ` until ${experience[0].to}`}.
+          </p>
+          <p class="text-neutral-500 mb-4">
+            In the past, I worked at{" "}
+            {experience
+              .filter((item) => item.company)
+              .map((item) => {
+                const [loading, setLoading] = useState<Boolean>(true)
+                const [fetchable, setFetchable] = useState<Boolean>(false)
+
+                useEffect(() => {
+                  fetch(
+                    `https://api.microlink.io/?url=${item.comapanyLink}&embed=logo.url`
+                  )
+                    .then((res) =>
+                      res.ok ? setFetchable(true) : setFetchable(false)
+                    )
+                    .finally(() => {
+                      console.log("done")
+                      setLoading(false)
+                    })
+                }, [fetchable])
+
+                return item.comapanyLink ? (
+                  <InlineLink
+                    link={item.comapanyLink}
+                    class="inline-block items-center gap-1 text-black mr-1.5"
+                  >
+                    {item.comapanyLink && fetchable ? (
+                      <img
+                        class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 -translate-y-0.5"
+                        src={`https://api.microlink.io/?url=${item.comapanyLink}&embed=logo.url`}
+                      />
+                    ) : (
+                      loading && (
+                        <div class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 translate-y-1 bg-neutral-200 animate-pulse" />
+                      )
+                    )}
+                    {item.company}
+                    {experience.filter((item) => item.company).indexOf(item) !==
+                    experience.filter((item) => item.company).length - 1
+                      ? ", "
+                      : ""}
+                  </InlineLink>
+                ) : (
+                  <span class="inline-block items-center gap-1 text-black mr-1.5 font-medium">
+                    {item.comapanyLink && fetchable ? (
+                      <img
+                        class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 -translate-y-0.5"
+                        src={`https://api.microlink.io/?url=${item.comapanyLink}&embed=logo.url`}
+                      />
+                    ) : (
+                      loading && (
+                        <div class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 translate-y-1 bg-neutral-200 animate-pulse" />
+                      )
+                    )}
+                    {item.company}
+                    {experience.filter((item) => item.company).indexOf(item) !==
+                    experience.filter((item) => item.company).length - 1
+                      ? ", "
+                      : ""}
+                  </span>
+                )
+              })}
+            .
+          </p>
+        </div>
+        <div class="w-1/3 hidden lg:block" />
+      </section>
+      <section class="w-full flex gap-4 flex-col lg:items-end lg:flex-row py-4 md:mb-8">
+        <div class="flex gap-12 lg:flex-row flex-col mb-24">
+          <div class="max-w-[170px] w-full flex-shrink-0">
+            <img
+              src="/images/avatars/florian_student.webp"
+              class="aspect-square rounded-full"
+              alt="Florian as a student at HfG Schwäbisch Gmünd"
+            />
+          </div>
+
           <div class="max-w-s w-full flex-shrink-0 lg:ml-auto xs:grid xs:grid-cols-2">
             <div class="self-start mb-10 xs:mb-0">
               <h2 class="font-semibold mb-3">{m.about_socials_title()}</h2>
