@@ -13,15 +13,15 @@ main>article {
     }
 
     & h1 {
-        font-size: 1.9rem;
-    }
-
-    & h2 {
         font-size: 1.5rem;
     }
 
-    & h3 {
+    & h2 {
         font-size: 1.25rem;
+    }
+
+    & h3 {
+        font-size: 1.125rem;
     }
 
     @media screen and (min-width: 1024px) {
@@ -71,8 +71,6 @@ main>article {
 
     & info-grid>div>p {
         margin-bottom: 0.25rem;
-        font-size: 1.1rem;
-
     }
 
     & info-grid>div {
@@ -420,4 +418,5 @@ article>div>p:nth-child(3),
 article>div>p:nth-child(4) {
     max-width: 432px;
     margin: 0 auto;
+    margin-bottom: 2rem;
 }
