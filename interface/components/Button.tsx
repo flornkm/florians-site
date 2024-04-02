@@ -36,7 +36,7 @@ export default function Button(props: {
           ? "font-semibold rounded-md transition-all duration-200 px-5 py-2.5 " +
             (props.type === "primary"
               ? "text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-600 dark:text-black dark:bg-white dark:hover:bg-neutral-200 dark:border-neutral-200 dark:hover:border-neutral-400"
-              : "text-black bg-neutral-100 hover:bg-neutral-200 hover:text-neutral-800 dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-950 dark:hover:text-neutral-200 dark:border-neutral-800")
+              : "text-black bg-neutral-200/75 hover:bg-neutral-200 hover:text-neutral-800 dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-950 dark:hover:text-neutral-200 dark:border-neutral-800")
           : "text-neutral-800 hover:underline underline-offset-2 font-medium rounded-md px-1.5 dark:text-neutral-200 " +
             (props.chevron ? "pr-0" : "") +
             (props.link?.includes("http") ||
