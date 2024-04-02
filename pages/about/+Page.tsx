@@ -5,8 +5,17 @@ import { PhotoSlider } from "#components/Slider"
 import Button, { InlineLink } from "#components/Button"
 import * as m from "#lang/paraglide/messages"
 import { useEffect, useState } from "preact/hooks"
+import { Popup, usePopup } from "#components/Popup"
+import NoPrerender from "#components/NoPrerender"
 
 export default function Page() {
+  const {
+    isOpen: aboutPopupOpen,
+    openPopup: openAboutPopup,
+    closePopup: closeAboutPopup,
+    popup: aboutPopup,
+  } = usePopup()
+
   const experience = [
     {
       from: "02 / 2024",
@@ -176,7 +185,7 @@ export default function Page() {
             {experience[0].from && ` since ${experience[0].from}`}
             {experience[0].to && ` until ${experience[0].to}`}.
           </p>
-          <p class="text-neutral-500 mb-4">
+          <p class="text-neutral-500 mb-8">
             In the past, I worked at{" "}
             {experience
               .filter((item) => item.company)
@@ -188,9 +197,7 @@ export default function Page() {
                   fetch(
                     `https://api.microlink.io/?url=${item.comapanyLink}&embed=logo.url`
                   )
-                    .then((res) =>
-                      res.ok ? setFetchable(true) : setFetchable(false)
-                    )
+                    .then((res) => res.ok && setFetchable(true))
                     .finally(() => {
                       console.log("done")
                       setLoading(false)
@@ -234,12 +241,62 @@ export default function Page() {
                     {experience.filter((item) => item.company).indexOf(item) !==
                     experience.filter((item) => item.company).length - 1
                       ? ", "
-                      : ""}
+                      : "."}
                   </span>
                 )
               })}
-            .
           </p>
+          <Button
+            type="secondary"
+            function={() => {
+              openAboutPopup()
+            }}
+          >
+            Open Experience
+          </Button>
+          <NoPrerender>
+            <Popup
+              popup={aboutPopup}
+              onClose={closeAboutPopup}
+              isOpen={aboutPopupOpen}
+            >
+              <div>
+                <h3 class="text-lg font-semibold mb-8">Experience Sheet</h3>
+                <table class="w-full">
+                  {experience.map((item) => {
+                    return (
+                      <tr class="grid md:grid-cols-3 gap-2 md:gap-8 mb-8 md:mb-4">
+                        <td>
+                          {item.jobTitle}{" "}
+                          {item.company && m.about_education_at()}{" "}
+                          {item.comapanyLink ? (
+                            <InlineLink link={item.comapanyLink}>
+                              {item.company}
+                            </InlineLink>
+                          ) : (
+                            item.company
+                          )}
+                        </td>
+                        <td class="font-mono text-sm mt-0.5">
+                          {item.from} -{" "}
+                          {item.to !== m.about_education_now() ? (
+                            item.to
+                          ) : (
+                            <span class="text-green-600">{item.to}</span>
+                          )}
+                        </td>
+                        {item.slogan && (
+                          <td class="text-neutral-500 text-sm">
+                            {item.slogan}
+                          </td>
+                        )}
+                      </tr>
+                    )
+                  })}
+                </table>
+              </div>
+            </Popup>
+          </NoPrerender>
         </div>
         <div class="w-1/3 hidden lg:block" />
       </section>
