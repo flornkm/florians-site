@@ -262,38 +262,55 @@ export default function Page() {
             >
               <div>
                 <h3 class="text-lg font-semibold mb-8">Experience Sheet</h3>
-                <table class="w-full">
-                  {experience.map((item) => {
-                    return (
-                      <tr class="grid md:grid-cols-3 gap-2 md:gap-8 mb-8 md:mb-4">
-                        <td>
-                          {item.jobTitle}{" "}
-                          {item.company && m.about_education_at()}{" "}
-                          {item.comapanyLink ? (
-                            <InlineLink link={item.comapanyLink}>
-                              {item.company}
-                            </InlineLink>
-                          ) : (
-                            item.company
-                          )}
-                        </td>
-                        <td class="font-mono text-sm mt-0.5">
-                          {item.from} -{" "}
-                          {item.to !== m.about_education_now() ? (
-                            item.to
-                          ) : (
-                            <span class="text-green-600">{item.to}</span>
-                          )}
-                        </td>
-                        {item.slogan && (
-                          <td class="text-neutral-500 text-sm">
-                            {item.slogan}
-                          </td>
-                        )}
+                <div class="custom-scrollbar w-full overflow-x-scroll">
+                  <table class="w-full border-spacing-1 table-auto rounded-xl min-w-[512px] border overflow-hidden border-neutral-200 border-separate">
+                    <thead class="bg-neutral-50 h-10 text-neutral-900">
+                      <tr>
+                        <th class="text-left font-medium px-4 rounded-lg">
+                          Job
+                        </th>
+                        <th class="text-left font-medium px-4 rounded-lg">
+                          Time
+                        </th>
+                        <th class="text-left font-medium px-4 rounded-lg">
+                          Description
+                        </th>
                       </tr>
-                    )
-                  })}
-                </table>
+                    </thead>
+                    {experience.map((item) => {
+                      return (
+                        <tr class="bg-neutral-50 hover:bg-neutral-100 transition-all duration-75">
+                          <td class="h-14 px-4 rounded-lg">
+                            <a
+                              target="_blank"
+                              href={item.comapanyLink ?? undefined}
+                              class="hover:bg-neutral-100 p-0"
+                            >
+                              {item.jobTitle}{" "}
+                              {item.company && m.about_education_at()}{" "}
+                              {item.company}
+                            </a>
+                          </td>
+                          <td class="font-mono text-sm mt-0.5 h-14 px-4 rounded-lg">
+                            <p class="line-clamp-2">
+                              {item.from} -{" "}
+                              {item.to !== m.about_education_now() ? (
+                                item.to
+                              ) : (
+                                <span class="text-green-600">{item.to}</span>
+                              )}
+                            </p>
+                          </td>
+                          {item.slogan && (
+                            <td class="text-neutral-500 h-14 px-4 rounded-lg max-w-md">
+                              <p class="line-clamp-2">{item.slogan}</p>
+                            </td>
+                          )}
+                        </tr>
+                      )
+                    })}
+                  </table>
+                </div>
               </div>
             </Popup>
           </NoPrerender>

@@ -59,6 +59,9 @@ dependencies:
   node-fetch:
     specifier: ^3.3.2
     version: 3.3.2
+  openai-streams:
+    specifier: ^6.2.0
+    version: 6.2.0
   preact:
     specifier: ^10.10.0
     version: 10.10.0
@@ -2275,6 +2278,14 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
+  /axios@0.26.1:
+    resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
+    dependencies:
+      follow-redirects: 1.15.6
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios@1.6.8:
     resolution: {integrity: sha512-v/ZHtJDU39mDpyBoFVkETcd/uNdxrWRrg3bKpOKzXFA6Bvqopts6ALSMU3y6ijYxbw2B+wPrIv46egTzJXCLGQ==}
     dependencies:
@@ -3025,6 +3036,11 @@ packages:
   /etag@1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /eventsource-parser@1.1.2:
+    resolution: {integrity: sha512-v0eOBUbiaFojBu2s2NPBfYUoRR9GjcDNvCXVaqEf5vVfpIAh9f8RCo4vXTP8c63QRKCFwoLpMpTdPwwhEKVgzA==}
+    engines: {node: '>=14.18'}
     dev: false
 
   /exit-hook@2.2.1:
@@ -3801,6 +3817,26 @@ packages:
       wrappy: 1.0.2
     dev: false
 
+  /openai-streams@6.2.0:
+    resolution: {integrity: sha512-iP4CfmkXhPoRQhnO2663mOXP0rgGC++7PuuH6lqbfyMIK+G6Qo4TtfIHsMePdHtm6OOA5yQJ/Pi6MwC9tnJepg==}
+    engines: {node: '>=14'}
+    dependencies:
+      eventsource-parser: 1.1.2
+      openai: 3.3.0
+      yield-stream: 3.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /openai@3.3.0:
+    resolution: {integrity: sha512-uqxI/Au+aPRnsaQRe8CojU0eCR7I0mBiKjD3sNMzY6DaC1ZVrc85u98mtJW6voDug8fgGN+DIZmTDxTthxb7dQ==}
+    dependencies:
+      axios: 0.26.1
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /opentype.js@0.4.11:
     resolution: {integrity: sha512-GthxucX/6aftfLdeU5Ho7o7zmQcC8uVtqdcelVq12X++ndxwBZG8Xb5rFEKT7nEcWDD2P1x+TNuJ70jtj1Mbpw==}
     hasBin: true
@@ -4186,6 +4222,11 @@ packages:
   /shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  /shim-streams@0.0.2:
+    resolution: {integrity: sha512-9Otb+FCl13XxRp1nVddtsCbwvB7AEMTjzc3/fixowyzvSVoCzu/VEstblB2SdIDbd61u5D/zpS5u9fGzDdOoZg==}
+    engines: {node: '>=14'}
+    dev: false
 
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
@@ -4695,6 +4736,14 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+    dev: false
+
+  /yield-stream@3.1.0:
+    resolution: {integrity: sha512-QCw2k88BWQV4uFJ9gLocEzYDk5IPCeSB9RnlF43RfyrQyj2TpQqq1q2/uhOZwM4YNLcWx1FuAq+28vaKSciEnQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      shim-streams: 0.0.2
+      web-streams-polyfill: 3.3.3
     dev: false
 
   /yn@3.1.1:
