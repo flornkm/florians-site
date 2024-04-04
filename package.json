@@ -37,6 +37,7 @@
     "highlight.js": "^11.9.0",
     "marked": "^9.0.3",
     "node-fetch": "^3.3.2",
+    "openai-streams": "^6.2.0",
     "preact": "^10.10.0",
     "preact-render-to-string": "^5.2.1",
     "pureimage": "^0.4.13",
