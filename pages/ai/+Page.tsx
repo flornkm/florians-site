@@ -13,7 +13,6 @@ export default function Page() {
   >([])
   const [generatedText, setGeneratedText] = useState<string[]>([])
   const [error, setError] = useState<string>("")
-  const [hideIntro, setHideIntro] = useState<boolean>(false)
   const chatWrapper = useRef<HTMLDivElement>(null)
 
   const sendToAI = useCallback(async () => {
@@ -84,40 +83,16 @@ export default function Page() {
     }
 
     setGeneratedText([])
-
     setLoading(false)
   }, [messages, setMessages, setGeneratedText])
 
-  const Introduction = () => {
-    useEffect(() => {
-      document.body.style.overflow = "hidden"
-      return () => {
-        document.body.style.overflow = "auto"
-      }
-    }, [hideIntro])
-
-    return (
-      <div class="w-screen h-screen flex items-center justify-center fixed inset-0 bg-white z-50">
-        <div class="flex flex-col items-center max-w-md">
-          <div class="aspect-square w-24 rounded-full bg-neutral-200 mb-8"></div>
-          <h1 class="text-2xl font-bold mb-2 text-center">
-            Talk to my AI clone
-          </h1>
-          <p class="text-center mb-8 text-neutral-500">
-            This AI is a clone of me, especially useful for employees who want
-            to ask me questions when I'm not around.
-          </p>
-          <Button function={() => setHideIntro(true)} type="primary">
-            Get Started
-          </Button>
-        </div>
-      </div>
-    )
-  }
+  useEffect(() => {
+    if (chatInput.current) chatInput.current.focus()
+  }, [messages])
 
   return (
     <div class="w-full">
-      {hideIntro ? null : <Introduction />}
+      <Introduction focusChat={() => chatInput.current?.focus()} />
       <section class="w-full min-h-screen flex-col">
         <form
           class="w-full lg:max-w-xl mx-auto sticky lg:top-[90vh] top-[82vh] md:mb-16 shadow-lg rounded-full mb-4 lg:mb-8"
@@ -135,7 +110,7 @@ export default function Page() {
             type="text"
             placeholder="Ask me anything!"
             class={
-              "w-full placeholder:text-neutral-400 relative top-[1px] disabled:cursor-not-allowed outline-0 outline-neutral-500/0 transition-all focus:outline-4 focus:outline-neutral-500/10 outline-offset-1 px-6 py-3 rounded-full bg-white border dark:bg-neutral-800 dark:placeholder:text-neutral-500 dark:focus:outline-none " +
+              "w-full placeholder:text-neutral-400 relative pr-20 truncate top-[1px] disabled:cursor-not-allowed outline-0 outline-neutral-500/0 transition-all focus:outline-4 focus:outline-neutral-500/10 outline-offset-1 px-6 py-3 rounded-full bg-white border dark:bg-neutral-800 dark:placeholder:text-neutral-500 dark:focus:outline-none " +
               +(loading ? " opacity-50 pointer-events-none" : "")
             }
           />
@@ -177,13 +152,98 @@ export default function Page() {
             <ChatBubble
               key={messages.length}
               role="system"
-              content={generatedText.map((text) => text).join("")}
+              content={
+                generatedText.map((text) => text).join("") === ""
+                  ? "..."
+                  : generatedText.map((text) => text).join("")
+              }
               timestamp={new Date().toISOString()}
             />
           )}
           {error && <p>{error}</p>}
         </div>
       </section>
+    </div>
+  )
+}
+
+const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
+  const [hideIntro, setHideIntro] = useState<boolean>(false)
+  const [ready, setReady] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!hideIntro) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+  }, [hideIntro])
+
+  return (
+    <div
+      class={
+        "w-screen h-screen flex items-center justify-center fixed inset-0 transition-all " +
+        (hideIntro ? "pointer-events-none z-[52]" : "bg-white z-50")
+      }
+    >
+      <div class="flex flex-col items-center max-w-md">
+        <div
+          class={
+            "bg-white relative z-[52] px-3 py-2 flex transition-all gap-2 duration-500 pointer-events-auto border " +
+            (hideIntro
+              ? "-translate-y-[39vh] shadow-lg rounded-xl border-neutral-200 w-56"
+              : "translate-x-0 mb-8 rounded-none border-white w-32")
+          }
+        >
+          <div
+            class={
+              "aspect-square rounded-full transition-all duration-500 bg-[url('/images/avatars/memoji-placeholder.jpg')] bg-cover " +
+              (hideIntro ? "w-12" : "w-24")
+            }
+          ></div>
+          {hideIntro && (
+            <div
+              class={
+                "mb-2 transition-all absolute top-1/2 p-1.5 -translate-y-1/2 truncate duration-500 z-10 " +
+                (hideIntro ? "opacity-100 left-[72px]" : "opacity-0 blur-xl")
+              }
+            >
+              <h2 class="font-medium">Florian's AI Clone</h2>
+              <p class="text-neutral-500 text-sm">Online 24/7</p>
+            </div>
+          )}
+        </div>
+        {!ready ? (
+          <div
+            class={
+              "flex items-center flex-col w-full transition-all h-32 " +
+              (hideIntro ? "opacity-0 blur-lg" : "opacity-100 blur-none")
+            }
+          >
+            <h1 class="text-2xl font-bold mb-2 text-center">
+              Talk to my AI clone
+            </h1>
+            <p class="text-center mb-8 text-neutral-500">
+              This AI is a clone of me, especially useful for employees who want
+              to ask me questions when I'm not around.
+            </p>
+            <Button
+              function={() => {
+                setHideIntro(true)
+                focusChat?.()
+                setTimeout(() => {
+                  setReady(true)
+                }, 500)
+              }}
+              type="primary"
+            >
+              Get Started
+            </Button>
+          </div>
+        ) : (
+          <div class="h-32" />
+        )}
+      </div>
     </div>
   )
 }

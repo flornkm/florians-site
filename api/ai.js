@@ -1,4 +1,5 @@
 import OpenAI from "openai"
+import data from "../content/data/ai-personalization.json"
 
 export const config = {
   runtime: "edge",
@@ -16,7 +17,13 @@ export default async function handler(req) {
     try {
       const stream = await openai.chat.completions.create({
         model: "gpt-4",
-        messages,
+        messages: [
+          {
+            role: "system",
+            content: `You act as a human clone following the personalization text: ${data.input}`,
+          },
+          ...messages,
+        ],
         stream: true,
       })
 
