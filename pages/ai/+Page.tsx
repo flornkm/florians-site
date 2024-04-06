@@ -8,9 +8,9 @@ const decoder = new TextDecoder()
 export default function Page() {
   const chatInput = useRef<HTMLInputElement>(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
-    []
-  )
+  const [messages, setMessages] = useState<
+    { role: string; content: string; timestamp: string }[]
+  >([])
   const [generatedText, setGeneratedText] = useState<string[]>([])
   const [error, setError] = useState<string>("")
   const [hideIntro, setHideIntro] = useState<boolean>(false)
@@ -23,7 +23,10 @@ export default function Page() {
     setLoading(true)
 
     chatInput.current!.value = ""
-    setMessages([...messages, { role: "user", content: input }])
+    setMessages([
+      ...messages,
+      { role: "user", content: input, timestamp: new Date().toISOString() },
+    ])
 
     try {
       const response = await fetch("/api/ai", {
@@ -34,7 +37,10 @@ export default function Page() {
         },
         body: JSON.stringify({
           messages: [
-            ...messages,
+            ...messages.map((message) => ({
+              role: message.role,
+              content: message.content,
+            })),
             {
               role: "user",
               content: input,
@@ -69,6 +75,7 @@ export default function Page() {
         {
           role: "system",
           content: text,
+          timestamp: new Date().toISOString(),
         },
       ])
     } catch (error) {
@@ -163,6 +170,7 @@ export default function Page() {
               key={index}
               role={message.role}
               content={message.content}
+              timestamp={message.timestamp}
             />
           ))}
           {loading && (
@@ -170,6 +178,7 @@ export default function Page() {
               key={messages.length}
               role="system"
               content={generatedText.map((text) => text).join("")}
+              timestamp={new Date().toISOString()}
             />
           )}
           {error && <p>{error}</p>}
@@ -179,7 +188,15 @@ export default function Page() {
   )
 }
 
-const ChatBubble = ({ role, content }: { role: string; content: string }) => {
+const ChatBubble = ({
+  role,
+  content,
+  timestamp,
+}: {
+  role: string
+  content: string
+  timestamp: string
+}) => {
   return (
     <div
       class={
@@ -189,13 +206,28 @@ const ChatBubble = ({ role, content }: { role: string; content: string }) => {
     >
       <div
         class={
-          "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-4xl " +
-          (role === "user"
-            ? "bg-neutral-900 text-white rounded-tr-md"
-            : "bg-neutral-100 rounded-tl-md")
+          "flex lg:items-center md:gap-4 gap-2 flex-col " +
+          (role === "user" ? "lg:flex-row" : "lg:flex-row-reverse")
         }
       >
-        <p>{content}</p>
+        <div
+          class={
+            "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-4xl " +
+            (role === "user"
+              ? "bg-neutral-900 text-white rounded-tr-md"
+              : "bg-neutral-100 rounded-tl-md")
+          }
+        >
+          <p>{content}</p>
+        </div>
+        <p
+          class={
+            "text-neutral-500 text-xs " +
+            (role === "user" ? "lg:text-right" : "lg:text-left")
+          }
+        >
+          {new Date(timestamp).toLocaleTimeString()}
+        </p>
       </div>
     </div>
   )
