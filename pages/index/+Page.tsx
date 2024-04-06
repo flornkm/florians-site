@@ -2,16 +2,20 @@ import Letters from "#sections/Letters"
 import Work from "#sections/Work"
 import * as m from "#lang/paraglide/messages"
 import Waitlist from "#components/Waitlist"
+import { AiSwitch } from "#components/Navigation"
 
 export default function Page({ projects }: { projects: any[] }) {
   return (
     <div class="w-full">
       <header class="w-full flex gap-4 flex-col lg:items-end lg:flex-row py-4 md:mb-8">
-        <div class="lg:w-1/3 mb-4 md:mb-0">
-          <h1 class="text-2xl line-clamp-2 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
+        <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
+          <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
             Designer and Developer <br />
             <span class="text-black">Florian</span>
           </h1>
+          <div class="mt-2 lg:hidden xs:mb-0 mb-4">
+            <AiSwitch />
+          </div>
         </div>
         <div class="max-w-nav w-full lg:mx-auto">
           <h2 class="md:text-2xl text-xl font-semibold">{m.work_title()}</h2>
