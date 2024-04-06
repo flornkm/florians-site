@@ -5,7 +5,6 @@ import { LanguagePicker } from "./Picker"
 import * as m from "#lang/paraglide/messages"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import { Popup, usePopup } from "./Popup"
-import Contact from "#sections/Contact"
 import NoPrerender from "./NoPrerender"
 
 export default function Footer() {
@@ -13,13 +12,6 @@ export default function Footer() {
   const pageContext = usePageContext() as any
   return (
     <>
-      <NoPrerender>
-        <Popup isOpen={isOpen} onClose={closePopup} popup={popup}>
-          <div class="flex flex-col gap-4 h-full max-h-[99%]">
-            <Contact />
-          </div>
-        </Popup>
-      </NoPrerender>
       <footer class="py-16 bg-neutral-100 dark:border-t-neutral-900">
         <div class="w-full mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
           <div class="max-w-md">
@@ -133,9 +125,12 @@ export default function Footer() {
                   </a>
                 </li>
 
+                {
+                  // TODO Change
+                }
                 <li>
                   <a
-                    class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-pointer dark:text-neutral-600 dark:hover:text-neutral-400"
+                    class="text-neutral-400 invisible hover:text-neutral-600 transition-colors font-medium cursor-pointer dark:text-neutral-600 dark:hover:text-neutral-400"
                     onClick={() => {
                       openPopup()
                     }}
