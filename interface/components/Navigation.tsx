@@ -1,6 +1,12 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
-import { useRef, useEffect, useState, useLayoutEffect } from "preact/hooks"
+import {
+  useRef,
+  useEffect,
+  useState,
+  useLayoutEffect,
+  useMemo,
+} from "preact/hooks"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import * as m from "#lang/paraglide/messages"
@@ -89,6 +95,10 @@ export default function Navigation() {
     }
   }, [pageContext])
 
+  const aiMode = useMemo(() => {
+    return pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
+  }, [pageContext])
+
   return (
     <div class="w-full flex lg:grid lg:grid-cols-5 items-center justify-between max-w-screen-3xl mx-auto md:px-10 min-[650px]:px-5 min-[400px]:px-3.5 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
@@ -99,15 +109,20 @@ export default function Navigation() {
           class="group/all -ml-1 cursor-pointer"
         >
           <p class="text-lg font-medium group-hover/all:text-neutral-500 transition-colors relative dark:group-hover/all:text-neutral-400 ">
-            <span class="group relative">Florian</span>
+            <span class="group relative">
+              {aiMode ? "Florian AI" : "Florian"}
+            </span>
             <span class="text-base font-normal text-neutral-500 group-hover/all:text-neutral-400 ml-2 transition-colors hidden xl:inline-block dark:group-hover/all:text-neutral-600">
-              {m.name_title()}
+              {aiMode ? "Beta" : m.name_title()}
             </span>
           </p>
         </div>
       </div>
       <div
-        class="flex items-center col-span-3 lg:gap-4 md:gap-3 gap-1.5 justify-between md:max-w-[calc(432px+(6px*5))] mx-auto truncate md:justify-between w-full lg:px-0 md:px-1.5 px-0"
+        class={
+          "flex items-center transition-opacity col-span-3 lg:gap-4 md:gap-3 gap-1.5 justify-between md:max-w-[calc(432px+(6px*5))] mx-auto truncate md:justify-between w-full lg:px-0 md:px-1.5 px-0 " +
+          (aiMode ? "opacity-0" : "opacity-100")
+        }
         id="nav-links"
       >
         <NavigationLink
@@ -151,6 +166,28 @@ export default function Navigation() {
               class="md:h-9 h-12 md:-translate-x-10 lg:-translate-x-0 lg:px-0 xs:-translate-x-[1px] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white"
             />
           )}
+      </div>
+      <div class="w-full h-full flex items-center justify-end">
+        <button
+          class="font-medium flex items-center gap-2 group"
+          onClick={() => {
+            pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
+              ? navigate(getLocale() + "/")
+              : navigate(getLocale() + "/ai")
+          }}
+        >
+          <>
+            AI Mode
+            <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100">
+              <div
+                class={
+                  "h-4 aspect-square rounded-full transition-all duration-100 " +
+                  (aiMode ? "bg-black ml-3.5" : "bg-white ml-0.5")
+                }
+              />
+            </div>
+          </>
+        </button>
       </div>
     </div>
   )

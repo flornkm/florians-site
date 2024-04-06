@@ -11,17 +11,12 @@ export default async function handler(req) {
   if (req.method === "POST") {
     const buf = await req.arrayBuffer()
     const rawBody = new TextDecoder().decode(buf)
-    const { message } = JSON.parse(rawBody)
+    const { messages } = JSON.parse(rawBody)
 
     try {
       const stream = await openai.chat.completions.create({
         model: "gpt-4",
-        messages: [
-          {
-            role: "user",
-            content: message,
-          },
-        ],
+        messages,
         stream: true,
       })
 
