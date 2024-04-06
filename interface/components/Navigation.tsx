@@ -1,12 +1,6 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
-import {
-  useRef,
-  useEffect,
-  useState,
-  useLayoutEffect,
-  useMemo,
-} from "preact/hooks"
+import { useRef, useState, useLayoutEffect, useMemo } from "preact/hooks"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import * as m from "#lang/paraglide/messages"
@@ -121,7 +115,7 @@ export default function Navigation() {
       <div
         class={
           "flex items-center transition-opacity col-span-3 lg:gap-4 md:gap-3 gap-1.5 justify-between md:max-w-[calc(432px+(6px*5))] mx-auto truncate md:justify-between w-full lg:px-0 md:px-1.5 px-0 " +
-          (aiMode ? "opacity-0" : "opacity-100")
+          (aiMode ? "lg:opacity-0" : "opacity-100")
         }
         id="nav-links"
       >
@@ -167,7 +161,7 @@ export default function Navigation() {
             />
           )}
       </div>
-      <div class="w-full h-full flex items-center justify-end">
+      <div class="w-full h-full hidden items-center justify-end lg:flex">
         <button
           class="font-medium flex items-center gap-2 group"
           onClick={() => {
@@ -182,7 +176,7 @@ export default function Navigation() {
               <div
                 class={
                   "h-4 aspect-square rounded-full transition-all duration-100 " +
-                  (aiMode ? "bg-black ml-3.5" : "bg-white ml-0.5")
+                  (aiMode ? "bg-neutral-900 ml-3.5" : "bg-white ml-0.5")
                 }
               />
             </div>
@@ -190,6 +184,37 @@ export default function Navigation() {
         </button>
       </div>
     </div>
+  )
+}
+
+export const AiSwitch = function () {
+  const pageContext = usePageContext() as any
+
+  const aiMode = useMemo(() => {
+    return pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
+  }, [pageContext])
+
+  return (
+    <button
+      class="font-medium flex items-center gap-2 group truncate"
+      onClick={() => {
+        pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
+          ? navigate(getLocale() + "/")
+          : navigate(getLocale() + "/ai")
+      }}
+    >
+      <>
+        <span class="truncate">AI Mode</span>
+        <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100">
+          <div
+            class={
+              "h-4 aspect-square rounded-full transition-all duration-100 " +
+              (aiMode ? "bg-neutral-900 ml-3.5" : "bg-white ml-0.5")
+            }
+          />
+        </div>
+      </>
+    </button>
   )
 }
 

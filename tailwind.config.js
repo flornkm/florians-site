@@ -36,10 +36,15 @@ export default {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },
         },
+        "fade-up-gentle": {
+          "0%": { opacity: 0, transform: "translateY(10px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
       },
       animation: {
         shake: "shake 0.1s ease-in-out",
         "infinite-scroll": "infinite-scroll 25s linear infinite",
+        "fade-up-gentle": "fade-up-gentle 0.5s ease-out",
       },
       fontFamily: {
         rounded: ["Arial Rounded", "sans-serif"],
