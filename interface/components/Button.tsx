@@ -2,6 +2,7 @@ import { getLocale } from "#hooks/getLocale"
 import { JSX } from "preact/jsx-runtime"
 import { navigate } from "vike/client/router"
 import { Chevron } from "#design-system/Icons"
+import { useEffect, useState } from "preact/hooks"
 
 export default function Button(props: {
   type: "primary" | "secondary" | "text"
@@ -73,7 +74,19 @@ export function InlineLink(props: {
   children: any
   class?: string
   hideWeight?: boolean
+  inlineImageUrl?: string
 }) {
+  const [fetchable, setFetchable] = useState<Boolean>(false)
+
+  useEffect(() => {
+    if (!props.inlineImageUrl) return
+    fetch(props.inlineImageUrl)
+      .then((res) => res.ok && setFetchable(true))
+      .finally(() => {
+        console.log("Fetched inline image.")
+      })
+  }, [fetchable, props.inlineImageUrl])
+
   return (
     <a
       class={
@@ -85,6 +98,12 @@ export function InlineLink(props: {
       href={props.link}
       target={props.link && props.link.includes("http") ? "_blank" : "_self"}
     >
+      {props.inlineImageUrl && fetchable && (
+        <img
+          class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 -translate-y-0.5"
+          src={props.inlineImageUrl}
+        />
+      )}
       {props.children}
     </a>
   )

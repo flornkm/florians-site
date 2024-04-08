@@ -56,7 +56,11 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
                 if (diffY > 0 && !close)
                   popup.current.style.height = `calc(100% - ${diffY}px)`
                 else if (close)
-                  setTimeout(() => (popup.current!.style.height = "100%"), 150)
+                  e.preventDefault(),
+                    setTimeout(
+                      () => (popup.current!.style.height = "100%"),
+                      150
+                    )
               }
             }
             window.addEventListener("touchmove", onMove)
@@ -68,7 +72,7 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
           ref={popup}
           class="w-full h-full bg-white rounded-t-3xl md:rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
-          <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-4 h-1.5 w-20 bg-neutral-200 rounded-full" />
+          <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-20 bg-neutral-200 rounded-full" />
           <Close
             onClick={onClose}
             class="absolute hidden md:block z-10 top-4 border right-4 w-9 h-9 p-1.5 text-black bg-neutral-50 hover:bg-white hover:text-neutral-800 border-neutral-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-neutral-200 dark:border-neutral-200 dark:hover:border-neutral-400"

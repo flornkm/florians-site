@@ -1,8 +1,3 @@
-import Button from "#components/Button"
-import { InlineInfo } from "#components/Inline"
-import Tooltip from "#components/Tooltip"
-import * as m from "#lang/paraglide/messages"
-
 export default function Work(props: { projects: Record<string, string>[] }) {
   return (
     <>
