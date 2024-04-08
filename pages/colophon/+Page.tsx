@@ -26,14 +26,18 @@ export default function Page() {
 
   return (
     <div class="w-full">
+      <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row py-4 md:mb-8">
+        <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
+          <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
+            {m.colophon_title()}
+          </h1>
+        </div>
+      </section>
       <section class="w-full lg:pt-8 relative min-h-screen flex flex-col">
-        <h1 class="text-3xl font-semibold mb-4 w-full order-2 md:order-1">
-          {m.colophon_title()}
-        </h1>
-        <p class="text-neutral-500 mb-16 max-w-lg dark:text-neutral-400 order-3 md:order-2">
-          {m.colophon_description()}
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4 gap-6 md:items-start order-4 md:order-3 pb-32">
+        {/*
+        First grid col should be calc((100%-432px)/2) wide and the second grid col should be full width
+        */}
+        <div class="grid grid-cols-1 md:grid-cols-[repeat(1,_calc((100%-432px)/2)_calc(432px+(100%-432px)/2))] md:gap-8 gap-6 md:items-start order-4 md:order-3 pb-32">
           <p class="font-semibold leading-snug flex items-center">
             {m.title_typography()}
           </p>

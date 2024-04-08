@@ -7,7 +7,7 @@ export default function Page(props: Record<string, string>) {
     <>
       <div class="flex items-center mb-4 py-2 bg-transparent sticky top-0 lg:top-14 z-50">
         <div class="w-[99vw] bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90 absolute top-0 bottom-0 left-1/2 -translate-x-1/2" />
-        <div class="flex relative z-20">
+        <div class="flex relative z-20 font-mono">
           <InlineLink link="/archive" class="px-1.5 -ml-1.5">
             Archive
           </InlineLink>

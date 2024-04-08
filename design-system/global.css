@@ -141,6 +141,10 @@ h4, h5, h6 {
 	background: linear-gradient(90deg, rgba(252,252,252,1) 0%, rgba(244,244,245,1) 10%, rgba(244,244,245,1) 90%, rgba(252,252,252,1) 100%);
 }
 
+.font-mono {
+	font-size: 15px;
+}
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: #000;
