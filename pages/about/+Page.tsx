@@ -139,20 +139,27 @@ const tools = [
 export default function Page() {
   return (
     <div class="w-full">
-      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 md:mb-8 mb-12">
-        <div class="lg:w-1/3 mb-4 md:mb-0">
+      <section class="w-full flex flex-col lg:flex-row py-4 md:mb-4 mb-12">
+        <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8">
           <h1 class="text-2xl line-clamp-2 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
             {m.about_title()}
           </h1>
         </div>
-        <div class="lg:max-w-nav w-full lg:mx-auto">
-          <div class="w-full h-40 rounded-2xl bg-neutral-100 relative bg-[url('/images/photos/netherlands.jpg')] bg-cover bg-center mb-16">
+        <div class="w-full lg:mx-auto">
+          <div class="w-full h-40 rounded-2xl bg-neutral-100 max-w-nav relative bg-[url('/images/photos/netherlands.jpg')] bg-cover bg-center mb-8">
             <img
               src="/images/avatars/florian_student.webp"
               class="aspect-square rounded-full w-24 absolute -bottom-12 left-0 border-4 border-light-neutral"
               alt="Florian as a student"
             />
           </div>
+        </div>
+      </section>
+      <section class="w-full flex flex-col lg:flex-row py-4 md:mb-8 mb-12">
+        <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8">
+          <div />
+        </div>
+        <div class="lg:max-w-nav w-full lg:mx-auto">
           <div class="flex-grow mx-auto max-w-md">
             <p class="text-neutral-500 mb-4 dark:text-neutral-400">
               {m.about_explainer_text_born()}{" "}
@@ -186,27 +193,76 @@ export default function Page() {
             </p>
           </div>
         </div>
-        <div class="w-1/3 hidden lg:block" />
-      </section>
-      <section class="w-full flex flex-col lg:flex-row py-4 md:mb-16 mb-14 lg:max-w-none max-w-md mx-auto">
-        <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full">
-          <h3 class="text-lg font-semibold mb-4 md:mb-0">
-            Experience & Education
-          </h3>
-        </div>
-        <Experience />
-        <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full mt-16 lg:mt-0">
+        <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full lg:pl-8">
+          <Experience />
           <Education />
         </div>
       </section>
       <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto mb-16 lg:mb-0">
-        <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full flex-shrink-0 lg:mt-24">
-          <h3 class="text-lg font-semibold mb-4 md:mb-0">
+        <div class="flex flex-col lg:py-24 items-start lg:max-w-[calc(((100%-432px)/2)+432px)] lg:pr-2 relative">
+          <h3 class="text-lg font-semibold mb-4 md:mb-4">
             {m.about_photos_title()}
           </h3>
-        </div>
-        <div class="flex flex-col lg:py-24 items-start lg:max-w-[calc(((100%-432px)/2)+432px)] lg:pr-2 lg:-ml-4 relative">
           <PhotoSlider autoPlay buttons />
+        </div>
+        <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full flex-shrink-0 lg:mt-24 lg:pl-8">
+          <h3 class="text-lg font-semibold mb-4 md:mb-4">Bucketlist</h3>
+          <div class="grid 2xl:grid-cols-2 gap-4">
+            <ul class="w-full">
+              {bucketList
+                .filter((item) => item.checked)
+                .map((item) => {
+                  return (
+                    <li class="flex gap-4 font-mono mb-4 text-neutral-500 dark:text-neutral-400">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="flex-shrink-0 text-neutral-400 dark:text-neutral-500 mt-1"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M4 8.66602L5.84162 13.666H7.75373L12.0721 2H10.0526L6.87287 11.2598H6.74396L5.8533 8.66602H4Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <p>{item.name}</p>
+                    </li>
+                  )
+                })}
+            </ul>
+            <ul class="w-full">
+              {bucketList
+                .filter((item) => !item.checked)
+                .map((item) => {
+                  return (
+                    <li class="flex gap-2 font-mono mb-4 text-black">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="flex-shrink-0 text-black mt-1"
+                      >
+                        <rect
+                          x="0.75"
+                          y="0.75"
+                          width="14.5"
+                          height="14.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+                      <p>{item.name}</p>
+                    </li>
+                  )
+                })}
+            </ul>
+          </div>
         </div>
       </section>
       <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto h-80">
@@ -295,69 +351,9 @@ export default function Page() {
         </div>
       </section>
       <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto mb-16">
-        <div class="lg:max-w-[calc((100%-432px)/2)] w-full">
-          <h3 class="text-lg font-semibold mb-4 md:mb-0">Bucketlist</h3>
-        </div>
-        <div class="flex flex-col max-w-nav mr-auto">
-          <div class="grid lg:grid-cols-2 gap-4">
-            <ul class="w-full">
-              {bucketList
-                .filter((item) => item.checked)
-                .map((item) => {
-                  return (
-                    <li class="flex gap-4 font-mono mb-4 text-neutral-500 dark:text-neutral-400">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="flex-shrink-0 text-neutral-400 dark:text-neutral-500 mt-1"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M4 8.66602L5.84162 13.666H7.75373L12.0721 2H10.0526L6.87287 11.2598H6.74396L5.8533 8.66602H4Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      <p>{item.name}</p>
-                    </li>
-                  )
-                })}
-            </ul>
-          </div>
-        </div>
-        <div class="lg:max-w-[calc((100%-432px)/2)] w-full ml-auto">
-          <ul class="w-full">
-            {bucketList
-              .filter((item) => !item.checked)
-              .map((item) => {
-                return (
-                  <li class="flex gap-2 font-mono mb-4 text-black">
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="flex-shrink-0 text-black mt-1"
-                    >
-                      <rect
-                        x="0.75"
-                        y="0.75"
-                        width="14.5"
-                        height="14.5"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                      />
-                    </svg>
-                    <p>{item.name}</p>
-                  </li>
-                )
-              })}
-          </ul>
-        </div>
+        <div class="lg:max-w-[calc((100%-432px)/2)] w-full"></div>
+        <div class="flex flex-col max-w-nav mr-auto"></div>
+        <div class="lg:max-w-[calc((100%-432px)/2)] w-full ml-auto"></div>
       </section>
       <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto mb-24">
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full lg:mb-0 mb-8">
@@ -403,40 +399,44 @@ export default function Page() {
         <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full">
           <h3 class="text-lg font-semibold mb-8 lg:mb-0">Songs & Movies</h3>
         </div>
-        <div class="xl:flex flex-col md:flex-row gap-16 w-full md:grid md:grid-cols-2">
-          <Music
-            music={[
-              {
-                name: "Enjoy the Silence",
-                cover: "/images/music-covers/enjoy_silence.jpg",
-                link: "https://open.spotify.com/album/13OoJ5Y23cdo8CDAiQwznb",
-                source: "https://en.wikipedia.org/wiki/Enjoy_the_Silence",
-              },
-              {
-                name: "Serotonin Moonbeams by The Blessed Madonna",
-                cover: "/images/music-covers/serotonin_moonbeams.jpg",
-                link: "https://open.spotify.com/album/1UTc8WInycl4tVgJ1yODaO",
-                source:
-                  "https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/",
-              },
-            ]}
-          />
-          <Movies
-            movies={[
-              {
-                title: "Interstellar",
-                cover: "/images/movies-series/interstellar.jpg",
-                url: "https://www.netflix.com/de-en/title/70305903",
-                provider: "Netflix",
-              },
-              {
-                title: "WeCrashed",
-                cover: "/images/movies-series/wecrashed.jpg",
-                url: "https://tv.apple.com/show/wecrashed/umc.cmc.6qw605uv2rwbzutk2p2fsgvq9?l=en-GB",
-                provider: "Apple TV+",
-              },
-            ]}
-          />
+        <div class="xl:flex flex-col lg:flex-row gap-16 w-full">
+          <div class="lg:max-w-nav w-full flex-shrink-0 grid md:grid-cols-2 gap-16">
+            <Music
+              music={[
+                {
+                  name: "Enjoy the Silence",
+                  cover: "/images/music-covers/enjoy_silence.jpg",
+                  link: "https://open.spotify.com/album/13OoJ5Y23cdo8CDAiQwznb",
+                  source: "https://en.wikipedia.org/wiki/Enjoy_the_Silence",
+                },
+                {
+                  name: "Serotonin Moonbeams by The Blessed Madonna",
+                  cover: "/images/music-covers/serotonin_moonbeams.jpg",
+                  link: "https://open.spotify.com/album/1UTc8WInycl4tVgJ1yODaO",
+                  source:
+                    "https://www.stereogum.com/2205763/the-blessed-madonna-serotonin-moonbeams-feat-uffie/music/",
+                },
+              ]}
+            />
+          </div>
+          <div class="w-full xl:max-w-none max-w-nav grid md:grid-cols-2 gap-8">
+            <Movies
+              movies={[
+                {
+                  title: "Interstellar",
+                  cover: "/images/movies-series/interstellar.jpg",
+                  url: "https://www.netflix.com/de-en/title/70305903",
+                  provider: "Netflix",
+                },
+                {
+                  title: "WeCrashed",
+                  cover: "/images/movies-series/wecrashed.jpg",
+                  url: "https://tv.apple.com/show/wecrashed/umc.cmc.6qw605uv2rwbzutk2p2fsgvq9?l=en-GB",
+                  provider: "Apple TV+",
+                },
+              ]}
+            />
+          </div>
         </div>
       </section>
     </div>
@@ -526,7 +526,7 @@ const Experience = () => {
   } = usePopup()
 
   return (
-    <div class="lg:max-w-nav w-full lg:mx-auto">
+    <div class="max-w-nav w-full mb-16 lg:pl-4">
       <p class="text-neutral-500 mb-4">
         Working as a {experience[0].jobTitle}
         {experience[0].company && `at ${experience[0].company}`}
@@ -567,13 +567,14 @@ const Experience = () => {
       </p>
       <Button
         type="secondary"
+        small
         function={() => {
           openExperiencePopup()
         }}
       >
         <>
           Open Experience
-          <Expand class="w-4 h-4 ml-1" />
+          <Expand class="w-3 h-3 ml-1" />
         </>
       </Button>
       <NoPrerender>
@@ -645,7 +646,7 @@ const Education = () => {
   } = usePopup()
 
   return (
-    <div class="lg:max-w-nav w-full lg:mx-auto">
+    <div class="lg:max-w-nav w-full lg:pl-4">
       <p class="text-neutral-500 mb-4">
         Studying at{" "}
         <InlineLink
@@ -688,13 +689,14 @@ const Education = () => {
       </p>
       <Button
         type="secondary"
+        small
         function={() => {
           openEducationPopup()
         }}
       >
         <>
           Open Education
-          <Expand class="w-4 h-4 ml-1" />
+          <Expand class="w-3 h-3 ml-1" />
         </>
       </Button>
       <NoPrerender>

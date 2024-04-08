@@ -55,7 +55,7 @@ function Page500() {
             0
           </span>
         </h1>
-        <p class="text-center mb-4 bg-gradient-to-b from-red-500 via-black via-60% to-black bg-clip-text text-transparent">
+        <p class="text-center mb-4">
           You encountered an error.
           <br class="hidden xs:block" />
           Please try again later or open an issue.{" "}

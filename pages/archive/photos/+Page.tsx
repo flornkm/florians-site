@@ -1,5 +1,6 @@
-import { InlineLink } from "#components/Button"
-import { userScrolledDown } from "#hooks/userScrolledDown"
+import { FolderIllustration } from "#design-system/Vectors"
+import FileSystem from "#sections/FileSystem"
+import { useState } from "preact/hooks"
 
 const photos = [
   {
@@ -37,84 +38,59 @@ const photos = [
 photos.reverse()
 
 export default function Page() {
+  const [photoPopup, setPhotoPopup] = useState<string | null>(null)
+
+  function PhotoPopup({ src }: { src: string }) {
+    return (
+      <div
+        className="fixed top-0 left-0 p-4 w-full h-full bg-black/25 z-[52] cursor-zoom-out"
+        onClick={() => setPhotoPopup(null)}
+      >
+        <div className="w-full h-full rounded-lg relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <img src={src} alt="photo" className="object-contain h-full w-full" />
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div class="w-full">
-      <section class="w-full pb-24">
-        <div
-          class={
-            "flex items-center lg:mt-6 mb-6  bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
-            (userScrolledDown(40)
-              ? "font-medium py-2"
-              : "text-3xl font-semibold lg:py-2")
-          }
-        >
-          <InlineLink link="/archive" class="px-1.5 -ml-1.5" hideWeight>
-            Archive
-          </InlineLink>
-          <p> / </p>
-          <p class="px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
-            Photos
-          </p>
+    <div className="w-full">
+      <FileSystem>
+        <div className="w-full gap-4 items-start grid xl:grid-cols-5 md:grid-cols-3 xs:grid-cols-2">
+          <a
+            href="/archive"
+            className="p-4 transition-colors hover:bg-neutral-200 rounded-lg flex items-center justify-center"
+          >
+            <div className="flex flex-col items-center gap-2 w-28">
+              <FolderIllustration />
+              <p className="font-medium text-center">..</p>
+            </div>
+          </a>
+          {photos.map((photo) => {
+            return (
+              <Item>
+                <img
+                  onClick={() => {
+                    setPhotoPopup(photo.src)
+                  }}
+                  data-src={photo.src}
+                  src={photo.src}
+                  alt={photo.src.split("/").pop()?.split(".")[0]}
+                  className="object-cover cursor-zoom-in h-32 w-full transition-opacity hover:opacity-75 border border-neutral-200"
+                />
+              </Item>
+            )
+          })}
         </div>
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-4 h-full min-h-screen">
-          <div class="py-0.5 gap-4 flex items-start flex-col h-full">
-            {photos
-              .filter((_, i) => i % 3 === 0)
-              .map((photo) => {
-                return (
-                  <Item>
-                    <img
-                      data-src={photo.src}
-                      src={photo.src}
-                      alt={photo.src.split("/").pop()?.split(".")[0]}
-                      class="mx-auto"
-                    />
-                  </Item>
-                )
-              })}
-          </div>
-          <div class="py-0.5 gap-4 flex items-start flex-col">
-            {photos
-              .filter((_, i) => i % 3 === 1)
-              .map((photo) => {
-                return (
-                  <Item>
-                    <img
-                      data-src={photo.src}
-                      src={photo.src}
-                      alt={photo.src.split("/").pop()?.split(".")[0]}
-                      class="mx-auto"
-                    />
-                  </Item>
-                )
-              })}
-          </div>
-          <div class="py-0.5 gap-4 flex items-start flex-col">
-            {photos
-              .filter((_, i) => i % 3 === 2)
-              .map((photo) => {
-                return (
-                  <Item>
-                    <img
-                      data-src={photo.src}
-                      src={photo.src}
-                      alt={photo.src.split("/").pop()?.split(".")[0]}
-                      class="mx-auto"
-                    />
-                  </Item>
-                )
-              })}
-          </div>
-        </div>
-      </section>
+      </FileSystem>
+      {photoPopup && <PhotoPopup src={photoPopup} />}
     </div>
   )
 }
 
 function Item(props: { children: any }) {
   return (
-    <div class="w-full bg-neutral-100 dark:bg-neutral-900 relative">
-      {" "}
+    <div className="w-full bg-neutral-100 dark:bg-neutral-900 relative">
       {props.children}
     </div>
   )

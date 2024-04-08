@@ -121,7 +121,7 @@ export default function Page() {
             rounded
             type="primary"
             class={
-              "absolute right-1 top-1/2 -translate-y-1/2 group/button leading-none overflow-hidden md:hover:pl-28 mt-[1px] " +
+              "absolute right-1 top-1/2 -translate-y-1/2 group/button leading-none overflow-hidden md:hover:pl-16 mt-[1px] " +
               (loading ? "pointer-events-none" : "")
             }
           >

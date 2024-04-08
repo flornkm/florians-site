@@ -90,7 +90,7 @@ export function InlineLink(props: {
   return (
     <a
       class={
-        "text-black px-0 transition-colors dark:text-white underline hover:no-underline underline-offset-2 " +
+        "text-black px-0 transition-colors dark:text-white hover:bg-neutral-200/75 rounded-md dark:hover:bg-neutral-800/75 " +
         (props.link?.includes("http") ? "cursor-alias " : "") +
         (props.class ? props.class : "") +
         (props.hideWeight ? "" : " font-medium")
