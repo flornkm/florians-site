@@ -115,7 +115,7 @@ export default function Navigation() {
       <div
         class={
           "flex items-center transition-opacity col-span-3 lg:gap-4 md:gap-3 gap-1.5 justify-between md:max-w-[calc(432px+(6px*5))] mx-auto truncate md:justify-between w-full lg:px-0 md:px-1.5 px-0 " +
-          (aiMode ? "lg:opacity-0" : "opacity-100")
+          (aiMode ? "lg:opacity-0 lg:pointer-events-none" : "opacity-100")
         }
         id="nav-links"
       >

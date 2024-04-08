@@ -1,5 +1,5 @@
 import Button from "#components/Button"
-import { useCallback, useEffect, useRef, useState } from "preact/hooks"
+import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
 import { Send } from "#design-system/Icons"
 import LoadingSpinner from "#components/LoadingSpinner"
 
@@ -140,6 +140,9 @@ export default function Page() {
           </Button>
         </form>
         <div class="w-full mb-8 md:-mt-24 md:pb-72 pb-24" ref={chatWrapper}>
+          {messages.length === 0 && (
+            <div class="bg-[url('/images/assets/empty-chat.jpg')] opacity-40 bg-no-repeat top-56 w-[400px] mx-auto bg-contain absolute inset-0" />
+          )}
           {messages.map((message, index) => (
             <ChatBubble
               key={index}
@@ -171,6 +174,14 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
   const [hideIntro, setHideIntro] = useState<boolean>(false)
   const [ready, setReady] = useState<boolean>(false)
 
+  const tooNarrow = useMemo(() => {
+    if (typeof window !== "undefined" && window.innerHeight < 850) {
+      return true
+    }
+
+    return false
+  }, [])
+
   useEffect(() => {
     if (!hideIntro) {
       document.body.style.overflow = "hidden"
@@ -191,8 +202,9 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           class={
             "bg-white relative z-[52] px-3 py-2 flex transition-all gap-2 duration-500 pointer-events-auto border " +
             (hideIntro
-              ? "-translate-y-[39vh] shadow-lg rounded-xl border-neutral-200 w-56"
-              : "translate-x-0 mb-8 rounded-none border-white w-32")
+              ? "lg:-translate-y-[38vh] -translate-y-[39vh] shadow-lg rounded-xl border-neutral-200 w-56 "
+              : "translate-x-0 mb-8 rounded-none border-white w-32 ") +
+            (tooNarrow ? "hidden" : "")
           }
         >
           <div
@@ -201,17 +213,17 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
               (hideIntro ? "w-12" : "w-24")
             }
           ></div>
-          {hideIntro && (
-            <div
-              class={
-                "mb-2 transition-all absolute top-1/2 p-1.5 -translate-y-1/2 truncate duration-500 z-10 " +
-                (hideIntro ? "opacity-100 left-[72px]" : "opacity-0 blur-xl")
-              }
-            >
-              <h2 class="font-medium">Florian's AI Clone</h2>
-              <p class="text-neutral-500 text-sm">Online 24/7</p>
-            </div>
-          )}
+          <div
+            class={
+              "mb-2 transition-all absolute top-1/2 p-1.5 -translate-y-1/2 truncate duration-500 z-10 " +
+              (hideIntro
+                ? "opacity-100 left-[72px]"
+                : "opacity-0 blur-xl pointer-events-none")
+            }
+          >
+            <h2 class="font-medium">Florian's AI Clone</h2>
+            <p class="text-neutral-500 text-sm">Online 24/7</p>
+          </div>
         </div>
         {!ready ? (
           <div
@@ -272,7 +284,7 @@ const ChatBubble = ({
       >
         <div
           class={
-            "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-4xl " +
+            "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-2xl " +
             (role === "user"
               ? "bg-neutral-900 text-white rounded-tr-md"
               : "bg-neutral-100 rounded-tl-md")
