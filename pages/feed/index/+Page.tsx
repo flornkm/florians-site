@@ -62,7 +62,7 @@ export default function Page({
                     class="post line-clamp-5"
                     content={content[post.slug]}
                   />
-                  <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5" />
+                  <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
                 </div>
                 <div class="flex items-center justify-between max-w-nav mx-auto gap-2 mt-8 w-full">
                   <Button type="text" link={post.url}>

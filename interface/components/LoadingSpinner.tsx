@@ -9,8 +9,8 @@ export default function LoadingSpinner(props: {
       class={
         "absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-12 h-12 z-40 " +
         (props.invert
-          ? "bg-neutral-900 dark:bg-neutral-100"
-          : "bg-neutral-100 dark:bg-neutral-900") +
+          ? "bg-[#101010] dark:bg-neutral-100"
+          : "bg-neutral-100 dark:bg-[#101010]") +
         " " +
         (props.class ? props.class : "")
       }
@@ -19,8 +19,8 @@ export default function LoadingSpinner(props: {
         class={
           "h-full w-full aspect-square rounded-full " +
           (props.invert
-            ? "border-white dark:border-neutral-900"
-            : "border-neutral-900 dark:border-white") +
+            ? "border-white dark:border-neutral-[#101010]"
+            : "border-neutral-[#101010] dark:border-white") +
           " animate-spin mb-10 " +
           (props.thin ? "border-2" : "border-4")
         }
@@ -29,8 +29,8 @@ export default function LoadingSpinner(props: {
           class={
             "w-2/3 h-2/3 absolute z-50 " +
             (props.invert
-              ? "bg-neutral-900 dark:bg-neutral-100"
-              : "bg-neutral-100 dark:bg-neutral-900") +
+              ? "bg-[#101010] dark:bg-neutral-100"
+              : "bg-neutral-100 dark:bg-[#101010]") +
             " -top-2 -left-2"
           }
         />

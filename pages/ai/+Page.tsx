@@ -110,7 +110,7 @@ export default function Page() {
             type="text"
             placeholder="Ask me anything!"
             class={
-              "w-full placeholder:text-neutral-400 relative pr-20 truncate top-[1px] disabled:cursor-not-allowed outline-0 outline-neutral-500/0 transition-all focus:outline-4 focus:outline-neutral-500/10 outline-offset-1 px-6 py-3 rounded-full bg-white border dark:bg-neutral-800 dark:placeholder:text-neutral-500 dark:focus:outline-none " +
+              "w-full placeholder:text-neutral-400 relative pr-20 truncate top-[1px] disabled:cursor-not-allowed outline-0 transition-all outline-offset-1 px-6 py-3 rounded-full bg-white border border-neutral-200 focus:border-neutral-300 dark:border-neutral-700 dark:focus:border-neutral-600 dark:bg-neutral-800 dark:placeholder:text-neutral-500 " +
               +(loading ? " opacity-50 pointer-events-none" : "")
             }
           />
@@ -141,7 +141,7 @@ export default function Page() {
         </form>
         <div class="w-full mb-8 md:-mt-24 md:pb-72 pb-24" ref={chatWrapper}>
           {messages.length === 0 && (
-            <div class="bg-[url('/images/assets/empty-chat.jpg')] opacity-40 bg-no-repeat top-56 w-[400px] mx-auto bg-contain absolute inset-0" />
+            <div class="bg-[url('/images/assets/empty-chat.jpg')] dark:bg-none opacity-40 bg-no-repeat top-56 w-[400px] mx-auto bg-contain absolute inset-0" />
           )}
           {messages.map((message, index) => (
             <ChatBubble
@@ -182,19 +182,21 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
     return false
   }, [])
 
-  useEffect(() => {
-    if (!hideIntro) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
-  }, [hideIntro])
+  // useEffect(() => {
+  //   if (!hideIntro) {
+  //     document.body.style.overflow = "hidden"
+  //   } else {
+  //     document.body.style.overflow = "auto"
+  //   }
+  // }, [hideIntro])
 
   return (
     <div
       class={
         "w-screen h-screen flex items-center justify-center fixed inset-0 transition-all " +
-        (hideIntro ? "pointer-events-none z-[52]" : "bg-white z-50")
+        (hideIntro
+          ? "pointer-events-none z-[52]"
+          : "bg-white z-50 dark:bg-black")
       }
     >
       <div class="flex flex-col items-center max-w-md">
@@ -202,8 +204,8 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           class={
             "bg-white relative z-[52] px-3 py-2 flex transition-all gap-2 duration-500 pointer-events-auto border " +
             (hideIntro
-              ? "lg:-translate-y-[38vh] -translate-y-[39vh] shadow-lg rounded-xl border-neutral-200 w-56 "
-              : "translate-x-0 mb-8 rounded-none border-white w-32 ") +
+              ? "lg:-translate-y-[38vh] -translate-y-[39vh] shadow-lg rounded-xl border-neutral-200 dark:border-neutral-800 w-56 dark:bg-[#0A0A0A] "
+              : "translate-x-0 mb-8 rounded-none border-white dark:border-black w-32 dark:bg-black ") +
             (tooNarrow ? "hidden" : "")
           }
         >
@@ -286,8 +288,8 @@ const ChatBubble = ({
           class={
             "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-2xl " +
             (role === "user"
-              ? "bg-neutral-900 text-white rounded-tr-md"
-              : "bg-neutral-100 rounded-tl-md")
+              ? "bg-neutral-900 text-white rounded-tr-md dark:bg-neutral-100 dark:text-black"
+              : "bg-neutral-100 rounded-tl-md dark:bg-neutral-900")
           }
         >
           <p>{content}</p>

@@ -141,7 +141,7 @@ export default function Page() {
     <div class="w-full">
       <section class="w-full flex flex-col lg:flex-row py-4 md:mb-4 mb-12">
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8">
-          <h1 class="text-2xl line-clamp-2 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
+          <h1 class="text-2xl line-clamp-2 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group">
             {m.about_title()}
           </h1>
         </div>
@@ -149,7 +149,7 @@ export default function Page() {
           <div class="w-full h-40 rounded-2xl bg-neutral-100 max-w-nav relative bg-[url('/images/photos/netherlands.jpg')] bg-cover bg-center mb-8">
             <img
               src="/images/avatars/florian_student.webp"
-              class="aspect-square rounded-full w-24 absolute -bottom-12 left-0 border-4 border-light-neutral"
+              class="aspect-square rounded-full w-24 absolute -bottom-12 left-0 border-4 border-light-neutral dark:border-black"
               alt="Florian as a student"
             />
           </div>
@@ -239,7 +239,7 @@ export default function Page() {
                 .filter((item) => !item.checked)
                 .map((item) => {
                   return (
-                    <li class="flex gap-2 font-mono mb-4 text-black">
+                    <li class="flex gap-2 font-mono mb-4 text-black dark:text-white">
                       <svg
                         width="16"
                         height="16"
@@ -481,7 +481,10 @@ const Movies = ({ movies }: { movies: Record<string, string>[] }) => {
       {movies.map((movie) => (
         <div class="w-full">
           <div
-            class={`bg-neutral-100 md:h-[236px] h-80 mb-3 bg-[url('${movie.cover}')] bg-cover bg-top flex items-end overflow-hidden`}
+            style={{
+              backgroundImage: `url(${movie.cover})`,
+            }}
+            class={`bg-neutral-100 md:h-[236px] h-80 mb-3 bg-cover bg-top flex items-end overflow-hidden`}
           >
             <div class="text-white truncate font-medium pb-3 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
               <p class="leading-none mb-1 truncate">{movie.title}</p>
@@ -527,13 +530,13 @@ const Experience = () => {
 
   return (
     <div class="max-w-nav w-full mb-16 lg:pl-4">
-      <p class="text-neutral-500 mb-4">
+      <p class="text-neutral-500 mb-4 dark:text-neutral-400">
         Working as a {experience[0].jobTitle}
         {experience[0].company && `at ${experience[0].company}`}
         {experience[0].from && ` since ${experience[0].from}`}
         {experience[0].to && ` until ${experience[0].to}`}.
       </p>
-      <p class="text-neutral-500 mb-8">
+      <p class="text-neutral-500 mb-8 dark:text-neutral-400">
         In the past, I worked at{" "}
         {experience
           .filter((item) => item.company)
@@ -647,7 +650,7 @@ const Education = () => {
 
   return (
     <div class="lg:max-w-nav w-full lg:pl-4">
-      <p class="text-neutral-500 mb-4">
+      <p class="text-neutral-500 mb-4 dark:text-neutral-400">
         Studying at{" "}
         <InlineLink
           link={education[0].url}
@@ -662,7 +665,7 @@ const Education = () => {
         </InlineLink>
         since {education[0].from} in {education[0].focus}.
       </p>
-      <p class="text-neutral-500 mb-8">
+      <p class="text-neutral-500 mb-8 dark:text-neutral-400">
         Previously, I attended{" "}
         {education.map(
           (item) =>

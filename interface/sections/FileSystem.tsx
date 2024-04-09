@@ -57,7 +57,7 @@ export default function FileSystem(props: { children: JSX.Element }) {
           ))}
         </ul>
       </div>
-      <div class="w-full lg:w-full bg-neutral-100 md:p-8 p-4 min-h-screen">
+      <div class="w-full lg:w-full bg-neutral-100 md:p-8 p-4 min-h-screen dark:bg-[#101010]">
         {props.children}
       </div>
     </section>

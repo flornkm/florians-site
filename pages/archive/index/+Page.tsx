@@ -7,14 +7,16 @@ export default function Page() {
   return (
     <div class="w-full">
       <FileSystem>
-        <div class="w-full gap-4 items-start grid xl:grid-cols-5 md:grid-cols-3 xs:grid-cols-2 xs:grid-cols-2">
+        <div class="w-full gap-4 items-start grid xl:grid-cols-5 md:grid-cols-3 xs:grid-cols-2">
           {tabs.map((tab) => (
             <a
               href={tab.path}
-              class="p-4 transition-colors hover:bg-neutral-200 rounded-lg flex items-center justify-center"
+              className="p-4 transition-colors rounded-lg flex items-center justify-center group"
             >
               <div class="flex flex-col items-center gap-2 w-28">
-                <FolderIllustration />
+                <div class="text-neutral-400 group-hover:text-neutral-500 relative transition-colors dark:text-neutral-500 dark:group-hover:text-neutral-400">
+                  <FolderIllustration />
+                </div>
                 <p class="font-medium text-center">{tab.name}</p>
               </div>
             </a>
