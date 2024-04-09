@@ -165,28 +165,7 @@ export default function Navigation() {
           )}
       </div>
       <div class="w-full h-full hidden items-center justify-end lg:flex">
-        <button
-          class="font-medium flex items-center gap-2 group"
-          onClick={() => {
-            pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
-              ? navigate(getLocale() + "/")
-              : navigate(getLocale() + "/ai")
-          }}
-        >
-          <>
-            AI Mode
-            <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100 dark:bg-neutral-700 dark:group-hover:bg-neutral-600">
-              <div
-                class={
-                  "h-4 aspect-square rounded-full transition-all duration-100 " +
-                  (aiMode
-                    ? "bg-neutral-900 ml-3.5 dark:bg-neutral-100"
-                    : "bg-white ml-0.5 dark:bg-neutral-900")
-                }
-              />
-            </div>
-          </>
-        </button>
+        <AiSwitch />
       </div>
     </div>
   )
@@ -201,7 +180,7 @@ export const AiSwitch = function () {
 
   return (
     <button
-      class="font-medium flex items-center gap-2 group truncate"
+      class="font-medium flex items-center gap-2 group"
       onClick={() => {
         pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
           ? navigate(getLocale() + "/")
@@ -209,12 +188,14 @@ export const AiSwitch = function () {
       }}
     >
       <>
-        <span class="truncate">AI Mode</span>
-        <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100">
+        AI Mode
+        <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100 dark:bg-neutral-700 dark:group-hover:bg-neutral-600">
           <div
             class={
               "h-4 aspect-square rounded-full transition-all duration-100 " +
-              (aiMode ? "bg-neutral-900 ml-3.5" : "bg-white ml-0.5")
+              (aiMode
+                ? "bg-neutral-900 ml-3.5 dark:bg-neutral-100"
+                : "bg-white ml-0.5 dark:bg-neutral-900")
             }
           />
         </div>
