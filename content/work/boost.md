@@ -7,6 +7,19 @@ date: 02 / 2023
 ---
 
 <info-grid>
+
+<div>
+
+# Boost
+
+</div>
+
+<div>
+
+Nutrition application & hardware device
+
+</div>
+
 <div>
 
 |              |                                                    |
@@ -17,13 +30,6 @@ date: 02 / 2023
 
 </div>
 
-<div>
-
-# Boost
-
-Nutrition application & hardware device
-
-</div>
 </info-grid>
 
 ![Boost](/images/boost/boost.png)

@@ -13,6 +13,7 @@ export default function Page() {
   >([])
   const [generatedText, setGeneratedText] = useState<string[]>([])
   const [error, setError] = useState<string>("")
+  const [audioPlaying, setAudioPlaying] = useState<boolean>(false)
   const chatWrapper = useRef<HTMLDivElement>(null)
 
   const sendToAI = useCallback(async () => {
@@ -29,12 +30,9 @@ export default function Page() {
 
     try {
       const secret = localStorage.getItem("florians-ai-secret")
-      if (!secret) {
-        setError("Secret key not found.")
-        return
-      }
+      if (!secret) return setError("Secret key not found.")
 
-      const response = await fetch("/api/ai", {
+      const response = await fetch("/api/ai/text", {
         method: "POST",
         headers: {
           Accept: "text/plain",
@@ -92,6 +90,71 @@ export default function Page() {
     setGeneratedText([])
     setLoading(false)
   }, [messages, setMessages, setGeneratedText])
+
+  const sendToReadAI = useCallback(async (message: string) => {
+    try {
+      const secret = localStorage.getItem("florians-ai-secret")
+      if (!secret) return setError("Secret key not found.")
+
+      const response = await fetch("/api/ai/voice", {
+        method: "POST",
+        headers: {
+          Accept: "audio/mpeg",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ key: secret, message }),
+      })
+
+      const mediaSource = new MediaSource()
+      const audio = new Audio()
+      audio.src = URL.createObjectURL(mediaSource)
+
+      audio.play().then(() => {
+        setAudioPlaying(true)
+
+        setTimeout(() => {
+          setAudioPlaying(false)
+        }, message.length * 50)
+      })
+
+      let sourceBuffer: SourceBuffer | null = null
+
+      mediaSource.addEventListener("sourceopen", () => {
+        sourceBuffer = mediaSource.addSourceBuffer("audio/mpeg")
+        receiveAudioData()
+      })
+
+      const reader = response.body!.getReader()
+
+      const receiveAudioData = async () => {
+        try {
+          while (true) {
+            const { value, done } = await reader.read()
+            if (value && sourceBuffer) {
+              if (!sourceBuffer.updating) {
+                sourceBuffer.appendBuffer(value)
+              } else {
+                await new Promise((resolve) => {
+                  sourceBuffer!.addEventListener("updateend", resolve, {
+                    once: true,
+                  })
+                })
+                sourceBuffer.appendBuffer(value)
+              }
+            }
+            if (done) {
+              break
+            }
+          }
+        } catch (error) {
+          console.error("Error reading audio data:", error)
+        }
+      }
+    } catch (error) {
+      setError("Error fetching data from server.")
+      console.error("Error fetching data from server.", error)
+    }
+  }, [])
 
   useEffect(() => {
     if (chatInput.current) chatInput.current.focus()
@@ -156,6 +219,12 @@ export default function Page() {
               role={message.role}
               content={message.content}
               timestamp={message.timestamp}
+              playAudio={
+                messages.indexOf(message) === messages.length - 1
+                  ? () => sendToReadAI(message.content)
+                  : undefined
+              }
+              audioPlaying={audioPlaying}
             />
           ))}
           {loading && (
@@ -289,11 +358,21 @@ const ChatBubble = ({
   role,
   content,
   timestamp,
+  playAudio,
+  audioPlaying,
 }: {
   role: string
   content: string
   timestamp: string
+  playAudio?: () => void
+  audioPlaying?: boolean
 }) => {
+  const [loading, setLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (audioPlaying) setLoading(false)
+  }, [audioPlaying])
+
   return (
     <div
       class={
@@ -307,15 +386,87 @@ const ChatBubble = ({
           (role === "user" ? "lg:flex-row" : "lg:flex-row-reverse")
         }
       >
-        <div
-          class={
-            "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-2xl " +
-            (role === "user"
-              ? "bg-neutral-900 text-white rounded-tr-md dark:bg-neutral-100 dark:text-black"
-              : "bg-neutral-100 rounded-tl-md dark:bg-neutral-900")
-          }
-        >
-          <p>{content}</p>
+        <div>
+          <div
+            class={
+              "flex items-center space-x-2 px-4 py-2 rounded-xl max-w-2xl " +
+              (role === "user"
+                ? "bg-neutral-900 text-white rounded-tr-md dark:bg-neutral-100 dark:text-black"
+                : "bg-neutral-100 rounded-tl-md dark:bg-neutral-900")
+            }
+          >
+            <p>{content}</p>
+          </div>
+          {role === "system" && playAudio && (
+            <div
+              class={
+                "flex item gap-2 mt-2 " +
+                (loading ? "opacity-50 cursor-not-allowed" : "")
+              }
+            >
+              <Button
+                type="secondary"
+                disabled={loading}
+                function={() => {
+                  playAudio?.()
+                  setLoading(true)
+                }}
+                small
+              >
+                Speak out
+              </Button>
+              <div class="flex items-center gap-1">
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-fast" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-slow" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-fast" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-medium" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-slow" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-fast" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-medium" : "")
+                  }
+                />
+                <div
+                  class={
+                    "h-4 w-1 rounded-full bg-neutral-200 dark:bg-neutral-800 " +
+                    (audioPlaying ? "animate-shrink-in-height-fast" : "")
+                  }
+                />
+              </div>
+            </div>
+          )}
         </div>
         <p
           class={

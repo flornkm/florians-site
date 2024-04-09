@@ -36,7 +36,7 @@ export default function Button(props: {
         props.class +
         " " +
         (props.type !== "text"
-          ? "font-semibold rounded-md transition-all duration-200 px-5 py-2 " +
+          ? "font-semibold rounded-md transition-all duration-200 px-4 py-2 " +
             (props.type === "primary"
               ? "text-white bg-neutral-900 hover:bg-neutral-800 dark:text-black dark:bg-white dark:hover:bg-neutral-200 "
               : "border text-black border-neutral-200 hover:bg-neutral-100 hover:text-neutral-800 dark:text-white dark:bg-transparent dark:hover:bg-neutral-900 dark:hover:text-neutral-200 dark:border-neutral-800")

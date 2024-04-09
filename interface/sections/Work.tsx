@@ -13,7 +13,7 @@ export default function Work(props: { projects: Record<string, string>[] }) {
                 class="flex md:gap-0 gap-2 flex-col lg:flex lg:flex-row items-start relative group/link"
                 href={project.url}
               >
-                <div class="w-full lg:max-w-[calc((100%-432px)/2)] sticky top-20 md:pr-8">
+                <div class="w-full lg:max-w-[calc((100%-432px)/2)] lg:sticky top-20 md:pr-8">
                   <h3 class="text-lg font-semibold group-hover:text-neutral-400 transition-colors md:group-hover/link:underline underline-offset-2">
                     {project.title}
                   </h3>

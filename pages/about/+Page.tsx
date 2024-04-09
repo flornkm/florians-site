@@ -216,7 +216,7 @@ export default function Page() {
           ea
         </p>
       </div>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto">
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16">
         <h3 class="text-lg font-semibold max-w-nav w-full relative z-10">
           {m.about_apps_title()}
         </h3>
@@ -299,8 +299,8 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto mb-16 lg:mb-0">
-        <div class="flex flex-col items-start lg:max-w-[calc(((100%-432px)/2)+432px)] lg:pr-2 relative lg:mb-0 mb-12">
+      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto mb-16">
+        <div class="flex flex-col items-start lg:max-w-[calc(((100%-432px)/2)+432px)] lg:pr-2 relative lg:mb-0 mb-24">
           <h3 class="text-lg font-semibold mb-4 md:mb-4">
             {m.about_photos_title()}
           </h3>
@@ -347,7 +347,7 @@ export default function Page() {
                         viewBox="0 0 16 16"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        class="flex-shrink-0 text-black mt-1"
+                        class="flex-shrink-0 text-black mt-1 dark:text-white"
                       >
                         <rect
                           x="0.75"
@@ -371,7 +371,7 @@ export default function Page() {
         <div class="flex flex-col max-w-nav mr-auto"></div>
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full ml-auto"></div>
       </section>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 bg-neutral-100 md:py-12 p-8 dark:bg-[#101010]">
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-32 bg-neutral-100 md:py-12 p-8 dark:bg-[#101010]">
         <h3 class="text-lg font-semibold max-w-nav w-full relative z-10 mb-12">
           Favorite meals
         </h3>
@@ -411,7 +411,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto lg:mb-16">
+      <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto lg:mb-32">
         <div class="w-full lg:max-w-[calc((100%-432px)/2)] max-w-nav lg:pr-8 mb-12 lg:mb-0">
           <h3 class="text-lg font-semibold mb-8">Movies</h3>
           <div class="grid md:grid-cols-2 gap-8">
@@ -455,13 +455,7 @@ export default function Page() {
             />
           </div>
         </div>
-
-        <div class="md:mb-0 w-full lg:max-w-[calc((100%-432px)/2)] lg:h-80 flex-col flex items-end justify-end">
-          <p class="text-neutral-400 dark:text-neutral-500 text-sm">
-            Thanks for visiting my website.
-          </p>
-          <Signature />
-        </div>
+        <div class="md:mb-0 w-full lg:max-w-[calc((100%-432px)/2)] lg:h-80 flex-col flex items-end justify-end" />
       </section>
     </div>
   )

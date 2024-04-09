@@ -10,6 +10,9 @@ date: 05 / 2023
 
 # Granny AI
 
+</div>
+<div>
+
 AI Chatbot for Shopping made in 48h
 
 </div>
