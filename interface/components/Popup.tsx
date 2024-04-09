@@ -1,6 +1,7 @@
 import { Ref, useRef, useState } from "preact/hooks"
 import { JSX } from "preact/jsx-runtime"
 import { Close } from "#design-system/Icons"
+import Button from "./Button"
 
 interface PopupProps {
   isOpen: boolean
@@ -73,10 +74,13 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
           class="w-full h-full bg-white rounded-t-3xl md:rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
           <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-20 bg-neutral-200 rounded-full" />
-          <Close
-            onClick={onClose}
-            class="absolute hidden md:block z-10 top-4 right-4 w-9 h-9 p-1.5 text-black bg-neutral-50 hover:bg-white hover:text-neutral-800 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-neutral-200"
-          />
+          <Button
+            type="secondary"
+            function={onClose}
+            class="absolute top-4 right-5 w-8 flex items-center justify-center"
+          >
+            <Close class="w-6 h-6 flex-shrink-0" />
+          </Button>
           <div class="w-full h-full p-5 flex flex-col justify-between gap-4 overflow-y-scroll custom-scrollbar">
             {children}
           </div>

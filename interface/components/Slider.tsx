@@ -34,7 +34,7 @@ export default function Slider(props: {
   })
 
   return (
-    <div class="w-full relative md:block flex flex-wrap gap-y-12 gap-x-4">
+    <div class="w-full relative md:block flex flex-wrap md:gap-y-12 gap-x-4">
       <Flicking
         ref={slider}
         hideBeforeInit
@@ -48,7 +48,7 @@ export default function Slider(props: {
       >
         {props.children}
       </Flicking>
-      <div class="lg:absolute lg:top-1/2 pointer-events-none lg:-translate-y-1/2 lg:mt-0 md:mt-8 z-10 gap-4 lg:w-full flex lg:justify-between items-center">
+      <div class="lg:absolute lg:top-1/2 pointer-events-none lg:-translate-y-1/2 lg:mt-0 mt-6 z-10 gap-4 lg:w-full flex lg:justify-between items-center">
         <Button
           rounded
           type="primary"

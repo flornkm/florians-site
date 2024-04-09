@@ -29,34 +29,36 @@ export default function Page(
         </div>
         <div class="lg:max-w-nav w-full lg:mx-auto">
           <div class="relative">
-            <Markdown class="post line-clamp-5 mb-4" content={props.content} />
+            <Markdown class="post mb-4" content={props.content} />
           </div>
         </div>
         <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full lg:order-last order-first lg:ml-0 ml-auto lg:pl-4 relative lg:bottom-0 -bottom-6">
-          <Picker
-            options={[
-              {
-                label: copyLabel,
-                function: () => {
-                  navigator.clipboard.writeText(
-                    "https://floriankiem.com" + props.post.url
-                  )
-                  setCopyLabel("Copied!")
-                  setTimeout(() => {
-                    setCopyLabel("Copy link")
-                  }, 1000)
+          <div class="flex">
+            <Picker
+              options={[
+                {
+                  label: copyLabel,
+                  function: () => {
+                    navigator.clipboard.writeText(
+                      "https://floriankiem.com" + props.post.url
+                    )
+                    setCopyLabel("Copied!")
+                    setTimeout(() => {
+                      setCopyLabel("Copy link")
+                    }, 1000)
+                  },
                 },
-              },
-              {
-                label: "Share on X",
-                link: `https://x.com/intent/tweet?text=${props.post.title} from Florian&url=https://floriankiem.com${props.post.url}`,
-              },
-            ]}
-            position="bottom"
-            align="left"
-          >
-            <Share size={24} />
-          </Picker>
+                {
+                  label: "Share on X",
+                  link: `https://x.com/intent/tweet?text=${props.post.title} from Florian&url=https://floriankiem.com${props.post.url}`,
+                },
+              ]}
+              position="bottom"
+              align="right"
+            >
+              <Share size={24} />
+            </Picker>
+          </div>
         </div>
       </div>
     </>

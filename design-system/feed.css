@@ -19,7 +19,7 @@ div > article.post {
     }
 
     & p {
-        color: #52525b;
+        color: #737373;
         margin-bottom: 2rem;
     }
 
@@ -33,7 +33,7 @@ div > article.post {
         }
 
         & p {
-            color: #a1a1aa;
+            color: #a3a3a3;
         }
 
         & a {

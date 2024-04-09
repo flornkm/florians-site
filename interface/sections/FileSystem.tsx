@@ -38,20 +38,28 @@ export default function FileSystem(props: { children: JSX.Element }) {
           <li>
             <a
               href="/archive"
-              class={urlPathname === "/archive" ? "font-bold" : "font-normal"}
+              class={
+                "underline-offset-2 hover:underline " +
+                (urlPathname === "/archive"
+                  ? "font-bold"
+                  : "font-normal text-neutral-400 dark:text-neutral-500")
+              }
             >
-              {urlPathname === "/archive" && "_"}
               root
             </a>
           </li>
           {tabs.map((tab) => (
-            <li class="pl-4">
+            <li class="pl-2">
               <a
                 href={tab.path}
-                class={urlPathname === tab.path ? "font-bold" : "font-normal"}
+                class={
+                  "underline-offset-2 hover:underline " +
+                  (urlPathname === tab.path
+                    ? "font-bold"
+                    : "font-normal text-neutral-400 dark:text-neutral-500")
+                }
               >
-                {urlPathname === tab.path && "_"}
-                {tab.name}
+                ﹂{tab.name}
               </a>
             </li>
           ))}
