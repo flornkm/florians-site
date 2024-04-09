@@ -9,9 +9,9 @@ export default function Page({ projects }: { projects: any[] }) {
     <div class="w-full">
       <header class="w-full flex gap-4 flex-col lg:items-end lg:flex-row py-4 md:mb-8">
         <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
-          <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
+          <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug">
             Designer and Developer <br />
-            <span class="text-black">Florian</span>
+            <span class="text-black dark:text-white">Florian</span>
           </h1>
           <div class="mt-2 lg:hidden xs:mb-0 mb-4">
             <AiSwitch />
@@ -25,7 +25,7 @@ export default function Page({ projects }: { projects: any[] }) {
       <section class="w-full scroll-mt-24 mb-12" id="work">
         <Work projects={projects} />
       </section>
-      <section class="w-full bg-neutral-100 mb-12">
+      <section class="w-full bg-neutral-100 mb-12 dark:bg-[#101010]">
         <Letters />
       </section>
       <section class="w-full flex items-center md:flex-row flex-col overflow-hidden">
@@ -41,7 +41,6 @@ export default function Page({ projects }: { projects: any[] }) {
             </div>
             <Waitlist />
           </div>
-          <div class="absolute bg-light-neutral blur-xl inset-0 scale-110" />
         </div>
       </section>
     </div>

@@ -157,7 +157,7 @@ export default function Navigation() {
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="md:h-9 h-12 md:-translate-x-10 lg:-translate-x-0 lg:px-0 xs:-translate-x-[1px] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white"
+              class="md:h-9 h-12 md:-translate-x-10 lg:-translate-x-0 lg:px-0 xs:-translate-x-[1px] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white dark:md:bg-neutral-900"
             />
           )}
       </div>
@@ -172,11 +172,13 @@ export default function Navigation() {
         >
           <>
             AI Mode
-            <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100">
+            <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100 dark:bg-neutral-700 dark:group-hover:bg-neutral-600">
               <div
                 class={
                   "h-4 aspect-square rounded-full transition-all duration-100 " +
-                  (aiMode ? "bg-neutral-900 ml-3.5" : "bg-white ml-0.5")
+                  (aiMode
+                    ? "bg-neutral-900 ml-3.5 dark:bg-neutral-100"
+                    : "bg-white ml-0.5 dark:bg-neutral-900")
                 }
               />
             </div>

@@ -136,10 +136,10 @@ export default function Letters() {
                         : "0",
                   }}
                   class={
-                    "rounded-3xl group/singleletter cursor-pointer w-full mx-auto p-6 bg-neutral-50 absolute shadow-2xl border-t border-t-neutral-200 shadow-black/5 transition-all dark:border-neutral-800 dark:bg-neutral-950 " +
+                    "rounded-3xl group/singleletter cursor-pointer w-full mx-auto p-6 bg-neutral-50 absolute shadow-2xl border-t border-t-neutral-200 shadow-black/5 transition-all dark:border-neutral-800 dark:hover:border-neutral-700 " +
                     (zoom === letterArray.indexOf(letter)
-                      ? "bg-white dark:bg-neutral-900"
-                      : "hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-900 dark:hover:shadow-none")
+                      ? "bg-white dark:bg-neutral-800"
+                      : "hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-800 dark:hover:shadow-none dark:bg-neutral-900")
                   }
                 >
                   <img
@@ -158,7 +158,14 @@ export default function Letters() {
                     >
                       <p class="pr-8">{letter.text}</p>
                     </div>
-                    <div class="md:w-[1px] h-[1px] w-full md:h-full bg-neutral-200 flex-shrink-0 dark:bg-neutral-800" />
+                    <div
+                      class={
+                        "md:w-[1px] h-[1px] w-full md:h-full bg-neutral-200 flex-shrink-0 " +
+                        (zoom === letterArray.indexOf(letter)
+                          ? "dark:bg-neutral-700"
+                          : "dark:bg-neutral-800 dark:group-hover/singleletter:bg-neutral-700")
+                      }
+                    />
                     <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
                       <img
                         src={letter.signature}
@@ -232,7 +239,7 @@ export default function Letters() {
                 </>
               </Button>
             </div>
-            <div class="absolute bg-neutral-100 inset-0 blur-lg dark:bg-black" />
+            <div class="absolute bg-neutral-100 inset-0 blur-lg dark:bg-[#101010]" />
           </div>
         </div>
       </div>

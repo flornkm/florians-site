@@ -36,8 +36,8 @@ export default function Button(props: {
         (props.type !== "text"
           ? "font-semibold rounded-md transition-all duration-200 px-5 py-2.5 " +
             (props.type === "primary"
-              ? "text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-600 dark:text-black dark:bg-white dark:hover:bg-neutral-200 dark:border-neutral-200 dark:hover:border-neutral-400"
-              : "text-black bg-neutral-200/75 hover:bg-neutral-200 hover:text-neutral-800 dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-950 dark:hover:text-neutral-200 dark:border-neutral-800")
+              ? "text-white bg-neutral-900 hover:bg-neutral-800 dark:text-black dark:bg-white dark:hover:bg-neutral-200 "
+              : "text-black bg-neutral-200/75 hover:bg-neutral-200 hover:text-neutral-800 dark:text-white dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:border-neutral-800")
           : "text-neutral-800 hover:underline underline-offset-2 font-medium rounded-md px-1.5 dark:text-neutral-200 " +
             (props.chevron ? "pr-0" : "") +
             (props.link?.includes("http") ||
@@ -90,7 +90,7 @@ export function InlineLink(props: {
   return (
     <a
       class={
-        "text-black px-0 transition-colors dark:text-white hover:bg-neutral-200/75 rounded-md dark:hover:bg-neutral-800/75 " +
+        "text-black px-0 transition-colors dark:text-white hover:underline underline-offset-2 " +
         (props.link?.includes("http") ? "cursor-alias " : "") +
         (props.class ? props.class : "") +
         (props.hideWeight ? "" : " font-medium")

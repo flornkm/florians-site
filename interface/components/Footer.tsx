@@ -12,7 +12,7 @@ export default function Footer() {
   const pageContext = usePageContext() as any
   return (
     <>
-      <footer class="py-16 bg-neutral-100 dark:border-t-neutral-900">
+      <footer class="py-16 bg-neutral-100 dark:bg-[#101010]">
         <div class="w-full mx-auto md:px-10 px-6 grid lg:grid-cols-5 gap-8">
           <div class="max-w-md">
             <h3 class="font-semibold mb-2">Florian's {m.footer_slogan()}</h3>

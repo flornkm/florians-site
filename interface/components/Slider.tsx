@@ -51,11 +51,11 @@ export default function Slider(props: {
       <div class="lg:absolute lg:top-1/2 pointer-events-none lg:-translate-y-1/2 lg:mt-0 md:mt-8 z-10 gap-4 lg:w-full flex lg:justify-between items-center">
         <Button
           rounded
-          type="secondary"
+          type="primary"
           function={() => {
             slider.current?.prev()
           }}
-          class="shadow-black/5 pointer-events-auto aspect-square -ml-2 bg-white hover:bg-neutral-50 border border-neutral-200 hover:pl-4 justify-center lg:w-2 w-4 hover:pr-6 lg:shadow-xl"
+          class="shadow-black/5 pointer-events-auto aspect-square -ml-2 bg-white hover:bg-neutral-50 hover:pl-4 justify-center lg:w-2 w-4 hover:pr-6 lg:shadow-xl"
         >
           <div class="flex-shrink-0">
             <ArrowLeft />
@@ -63,11 +63,11 @@ export default function Slider(props: {
         </Button>
         <Button
           rounded
-          type="secondary"
+          type="primary"
           function={() => {
             slider.current?.next()
           }}
-          class="shadow-black/5 pointer-events-auto aspect-square -mr-2 bg-white hover:bg-neutral-50 border border-neutral-200 hover:pr-4 lg:w-2 w-4 justify-center hover:pl-6 lg:shadow-xl"
+          class="shadow-black/5 pointer-events-auto aspect-square -mr-2 bg-white hover:bg-neutral-50 hover:pr-4 lg:w-2 w-4 justify-center hover:pl-6 lg:shadow-xl"
         >
           <div class="flex-shrink-0">
             <ArrowRight />

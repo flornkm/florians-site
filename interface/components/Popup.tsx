@@ -75,7 +75,7 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
           <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-20 bg-neutral-200 rounded-full" />
           <Close
             onClick={onClose}
-            class="absolute hidden md:block z-10 top-4 border right-4 w-9 h-9 p-1.5 text-black bg-neutral-50 hover:bg-white hover:text-neutral-800 border-neutral-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-neutral-200 dark:border-neutral-200 dark:hover:border-neutral-400"
+            class="absolute hidden md:block z-10 top-4 right-4 w-9 h-9 p-1.5 text-black bg-neutral-50 hover:bg-white hover:text-neutral-800 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-neutral-200"
           />
           <div class="w-full h-full p-5 flex flex-col justify-between gap-4 overflow-y-scroll custom-scrollbar">
             {children}

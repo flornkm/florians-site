@@ -37,7 +37,7 @@ export default function Page() {
         {/*
         First grid col should be calc((100%-432px)/2) wide and the second grid col should be full width
         */}
-        <div class="grid grid-cols-1 md:grid-cols-[repeat(1,_calc((100%-432px)/2)_calc(432px+(100%-432px)/2))] md:gap-8 gap-6 md:items-start order-4 md:order-3 pb-32">
+        <div class="grid grid-cols-1 md:grid-cols-[repeat(1,_calc((100%-432px)/2)_calc(432px+(100%-432px)/2))] gap-y-8 md:items-start order-4 md:order-3 pb-32">
           <p class="font-semibold leading-snug flex items-center">
             {m.title_typography()}
           </p>
