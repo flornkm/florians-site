@@ -1,4 +1,4 @@
-import { InlineLink } from "#components/Button"
+import Button, { InlineLink } from "#components/Button"
 import { Star } from "#design-system/Icons"
 import Island from "#components/Island"
 import hljs from "highlight.js"
@@ -37,7 +37,7 @@ export default function Page() {
         {/*
         First grid col should be calc((100%-432px)/2) wide and the second grid col should be full width
         */}
-        <div class="grid grid-cols-1 md:grid-cols-[repeat(1,_calc((100%-432px)/2)_calc(432px+(100%-432px)/2))] gap-y-8 md:items-start order-4 md:order-3 pb-32">
+        <div class="grid grid-cols-1 md:grid-cols-[repeat(1,_calc((100%-432px)/2)_calc(432px+(100%-432px)/2))] gap-y-16 md:items-start order-4 md:order-3 pb-32">
           <p class="font-semibold leading-snug flex items-center">
             {m.title_typography()}
           </p>
@@ -50,8 +50,8 @@ export default function Page() {
               {m.text_typography_second()}
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
-          <p class="font-medium leading-snug flex items-center">
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
+          <p class="font-semibold leading-snug flex items-center">
             {m.title_iconography()}
           </p>
           <div>
@@ -63,7 +63,7 @@ export default function Page() {
               {m.text_iconography_second()}
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_photography()}
           </p>
@@ -84,7 +84,7 @@ export default function Page() {
               .
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_mockups()}
           </p>
@@ -97,7 +97,7 @@ export default function Page() {
               {m.text_mockups_second()}
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_ui_elements()}
           </p>
@@ -105,27 +105,31 @@ export default function Page() {
             <p class="text-neutral-500 dark:text-neutral-400 mb-6">
               {m.text_ui_elements_first()}
             </p>
-            <p class="text-black font-medium mb-2">{m.title_letter_stack()}</p>
+            <p class="text-black font-medium mb-2 dark:text-white">Buttons</p>
             <div class="bg-neutral-100 rounded-xl group px-2 pb-2 dark:bg-neutral-950 mb-12">
-              <div class="w-full h-64 relative overflow-hidden flex items-end justify-center">
-                <div class="absolute w-[70%] h-56 bg-neutral-50 border border-neutral-200/70 rounded-lg -bottom-2 shadow-xl shadow-black/5 transition-all dark:bg-neutral-900 dark:border-neutral-800 hover:mb-4 hover:bg-white dark:hover:bg-neutral-800 dark:hover:border-neutral-700" />
-                <div class="absolute w-[80%] h-56 bg-neutral-50 border border-neutral-200/70 rounded-lg -bottom-8 shadow-xl shadow-black/5 transition-all dark:bg-neutral-900 dark:border-neutral-800 hover:mb-4 hover:bg-white dark:hover:bg-neutral-800 dark:hover:border-neutral-700" />
-                <div class="absolute w-[90%] h-56 bg-neutral-50 border border-neutral-200/70 rounded-lg -bottom-14 shadow-xl shadow-black/5 transition-all dark:bg-neutral-900 dark:border-neutral-800 hover:mb-4 hover:bg-white dark:hover:bg-neutral-800 dark:hover:border-neutral-700" />
+              <div class="w-full lg:h-64 h-auto py-8 relative overflow-hidden flex items-center justify-center px-4 lg:px-16">
+                <Button type="primary" class="mr-4">
+                  Primary
+                </Button>
+                <Button type="secondary" class="mr-4">
+                  Secondary
+                </Button>
+                <Button type="text">Text</Button>
               </div>
               <pre class="dark:selection:bg-neutral-800 text-sm h-full rounded-lg font-mono flex flex-col justify-between border border-black/5 dark:border-white/5">
-                <code class="language-typescript overflow-x-scroll px-2 pb-2 custom-scrollbar rounded-[7px]">{`// Fetch the letters from endpoint
-const fetchLetters = async () => {
-  try {
-    const latestLetters = await fetch("/api/letters")
-    return await latestLetters.json()
-  } catch (error) {
-    console.error(error)
-  }
-}
+                <code class="language-typescript overflow-x-scroll px-2 pb-2 custom-scrollbar rounded-[7px]">{`
+<Button type="primary" class="mr-4">Primary</Button>
+
+<Button type="secondary" class="mr-4">Secondary</Button>
+
+<Button type="text">Text</Button>
+
 `}</code>
               </pre>
             </div>
-            <p class="text-black font-medium mb-2">{m.title_slider()}</p>
+            <p class="text-black font-medium mb-2 dark:text-white">
+              {m.title_slider()}
+            </p>
             <div class="bg-neutral-100 rounded-xl group px-2 pb-2 dark:bg-neutral-950 mb-12">
               <div class="w-full lg:h-64 h-auto py-8 relative overflow-hidden flex items-center justify-center px-4 lg:px-16">
                 <Slider>
@@ -186,7 +190,9 @@ export default function Slider(props: {
 `}</code>
               </pre>
             </div>
-            <p class="text-black font-medium mb-2">{m.title_tooltip()}</p>
+            <p class="text-black font-medium mb-2 dark:text-white">
+              {m.title_tooltip()}
+            </p>
             <div class="bg-neutral-100 rounded-xl px-2 pb-2 dark:bg-neutral-950">
               <div class="w-full h-64 relative overflow-hidden flex items-center justify-center">
                 <p class="group relative font-medium cursor-default">
@@ -250,7 +256,7 @@ export default function Tooltip(props: {
             </div>
           </div>
 
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_tech_stack()}
           </p>
@@ -313,7 +319,7 @@ export default function Tooltip(props: {
               </li>
             </ul>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_hosting()}
           </p>
@@ -325,7 +331,7 @@ export default function Tooltip(props: {
               <InlineLink link="https://github.com/">GitHub</InlineLink>.
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_inspiration()}
           </p>
@@ -349,7 +355,7 @@ export default function Tooltip(props: {
               .
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_great_humans()}
           </p>
@@ -368,7 +374,7 @@ export default function Tooltip(props: {
               <InlineLink link="https://inlang.com/">inlang</InlineLink> here.
             </p>
           </div>
-          <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" />
+          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center">
             {m.title_feedback()}
           </p>

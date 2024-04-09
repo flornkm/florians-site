@@ -131,12 +131,12 @@ main>article {
     }
 
     & process-grid p>a {
-        text-decoration: underline;
+        text-decoration: none;
         text-underline-offset: 2px;
     }
 
     & process-grid a:hover {
-        text-decoration: none;
+        text-decoration: underline;
         text-underline-offset: 2px;
     }
 
@@ -305,7 +305,7 @@ main>article {
         margin: 0;
         width: 100%;
         height: 4rem;
-        border-radius: 1rem;
+        border-radius: 0.5rem;
         color: #18181b;
         transition: all ease 0.2s;
     }
@@ -329,8 +329,8 @@ main>article {
     }
 
     & project-links a:nth-child(1) {
-        border: 1px solid rgb(39 39 42);
-        background-color: #000;
+        border: none;
+        background-color: #171717;
         color: #fff;
         font-weight: 600;
     }
@@ -346,9 +346,9 @@ main>article {
     }
 
     & project-links a:hover {
-        color: #18181b;
-        background-color: #fff;
-        border-radius: 1rem;
+        color: #262626;
+        background-color: #f5f5f5;
+        border-radius: 0.5rem;
     }
 
     & code {
@@ -362,26 +362,24 @@ main>article {
     @media (prefers-color-scheme: dark) {
         & project-links a {
             border: 1px solid #27272a;
-            background-color: #18181b;
+            background-color: #000;
             color: #fff;
         }
 
         & project-links a:nth-child(1) {
-            border: 1px solid #e4e4e7;
             background-color: #ffffff;
             color: #000;
         }
 
         & project-links a:hover {
-            background-color: rgb(24 24 27 / 0.75);
+            background-color: #171717;
             color: #e4e4e7;
         }
 
         & project-links a:nth-child(1):hover {
             color: #000;
             background-color: #e4e4e7;
-            border-color: #a1a1aa;
-            border-radius: 1rem;
+            border-radius: 0.5rem;
         }
 
         & code {
