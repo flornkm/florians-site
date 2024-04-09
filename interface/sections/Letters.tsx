@@ -149,18 +149,21 @@ export default function Letters() {
                       : "hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-800 dark:hover:shadow-none dark:bg-neutral-900")
                   }
                 >
-                  {zoom === letterArray.indexOf(letter) && (
-                    <Alert
-                      onClick={(e) => {
-                        e!.stopPropagation()
-                        if (typeof window !== "undefined")
-                          window.open(
-                            "https://twitter.com/messages/compose?recipient_id=1053753388289155073&text=There%20is%20a%20weird%20letter%20on%20your%20website!"
-                          )
-                      }}
-                      class="absolute -top-12 aspect-square right-4 w-9 h-9 p-1.5 rounded-md flex items-center justify-center z-50 bg-amber-400 hover:bg-amber-300 transition-colors"
-                    />
-                  )}
+                  <Alert
+                    onClick={(e) => {
+                      e!.stopPropagation()
+                      if (typeof window !== "undefined")
+                        window.open(
+                          "https://twitter.com/messages/compose?recipient_id=1053753388289155073&text=There%20is%20a%20weird%20letter%20on%20your%20website!"
+                        )
+                    }}
+                    class={
+                      "absolute -top-12 aspect-square right-4 w-9 h-9 p-1.5 rounded-md flex items-center justify-center z-50 bg-amber-400 hover:bg-amber-300 dark:hover:bg-amber-500 transition-all " +
+                      (zoom === letterArray.indexOf(letter)
+                        ? "opacity-100"
+                        : "opacity-0")
+                    }
+                  />
                   <img
                     src="/images/letter/stamp.png"
                     class="pointer-events-none w-20 absolute top-8 md:block hidden right-8 rotate-6"
@@ -314,9 +317,9 @@ function SendLetter(props: {
           class="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
           <Button
-            type="primary"
+            type="secondary"
             function={props.setShowLetter}
-            class="absolute top-4 right-5 w-8 flex items-center justify-center z-50"
+            class="absolute top-4 right-5 w-10 h-10 flex items-center justify-center z-50 backdrop-blur-lg"
           >
             <Close class="w-6 h-6 flex-shrink-0" />
           </Button>

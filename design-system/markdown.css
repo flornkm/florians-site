@@ -16,6 +16,13 @@ main>article {
         font-size: 1.5rem;
     }
 
+    & h1:nth-child(1)::before {
+        content: "Project";
+        font-size: 1.5rem;
+        display: block;
+        color: rgb(163, 163, 163);
+    }
+
     & h2 {
         font-size: 1.25rem;
     }
@@ -37,7 +44,13 @@ main>article {
 
         & info-grid>div:nth-child(2) {
             width: 100%;
-            max-width: 450px;
+            max-width: 432px;
+        }
+
+        & info-grid>div:nth-child(3) {
+            width: 100%;
+            max-width: calc((100% - 432px) / 2);
+            padding-left: 6rem;
         }
 
         & div>p>img:nth-child(1) {
@@ -51,7 +64,7 @@ main>article {
 
     @media screen and (max-width: 1023px) {
         & info-grid {
-            flex-direction: column-reverse;
+            flex-direction: column;
             gap: 0;
         }
 
@@ -59,8 +72,16 @@ main>article {
             margin-bottom: 1rem;
         }
 
+        & info-grid>div:nth-child(1) {
+            margin-bottom: 0;
+        }
+
         & info-grid>div:nth-child(2) {
             width: 100%;
+        }
+
+        & info-grid>div:nth-child(3) {
+            padding-top: 2rem;
         }
     }
 
@@ -108,6 +129,10 @@ main>article {
     }
 
     @media (prefers-color-scheme: dark) {
+        & h1:nth-child(1)::before {
+        color: rgb(115, 115, 115);
+    }
+
         & p {
             color: #a3a3a3;
         }

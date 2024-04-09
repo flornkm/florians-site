@@ -10,6 +10,9 @@ date: 05 / 2022
 
 # Stack Overflow Redesign
 
+</div>
+<div>
+
 Redesign & VS Code Extension
 
 </div>

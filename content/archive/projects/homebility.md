@@ -10,6 +10,9 @@ date: 05 / 2022
 
 # Homebility
 
+</div>
+<div>
+
 Smart home application with a big focus on UX
 
 </div>

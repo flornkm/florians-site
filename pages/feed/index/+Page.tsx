@@ -62,7 +62,7 @@ export default function Page({
                   />
                   <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
                 </div>
-                <Button type="secondary" link={post.url} class="mt-4 mx-auto">
+                <Button type="text" link={post.url} class="mt-4 mx-auto">
                   Read more
                 </Button>
               </div>

@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-import data from "../content/data/ai-personalization.json"
+import data from "../../content/data/ai-personalization.json"
 
 export const config = {
   runtime: "edge",

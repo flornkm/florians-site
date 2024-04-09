@@ -22,7 +22,7 @@ export default function Page(props: Record<string, string>) {
 
   return (
     <>
-      <Markdown class="lg:py-16 pb-16" content={props.content} />
+      <Markdown class="lg:py-4 pb-16" content={props.content} />
     </>
   )
 }

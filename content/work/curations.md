@@ -7,6 +7,19 @@ date: 04 / 2023
 ---
 
 <info-grid>
+
+<div>
+
+# Curations
+
+</div>
+
+<div>
+
+A curated collection of the best products on the web.
+
+</div>
+
 <div>
 
 |               |                                                                                                                          |
@@ -17,13 +30,6 @@ date: 04 / 2023
 
 </div>
 
-<div>
-
-# Curations
-
-A curated collection of the best products on the web.
-
-</div>
 </info-grid>
 
 ![Curations](/images/curations/curations.png)

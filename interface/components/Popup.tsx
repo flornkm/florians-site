@@ -77,7 +77,7 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
           <Button
             type="secondary"
             function={onClose}
-            class="absolute top-4 right-5 w-8 flex items-center justify-center"
+            class="absolute top-4 right-5 w-10 h-10 flex items-center justify-center"
           >
             <Close class="w-6 h-6 flex-shrink-0" />
           </Button>
