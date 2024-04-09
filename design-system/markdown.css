@@ -99,7 +99,7 @@ main>article {
     }
 
     & p {
-        color: #52525b;
+        color: #737373;
         margin-bottom: 4rem;
     }
 
@@ -109,11 +109,15 @@ main>article {
 
     @media (prefers-color-scheme: dark) {
         & p {
-            color: #a1a1aa;
+            color: #a3a3a3;
         }
 
         & info-grid>div>table>tbody>tr>td {
             border-bottom: 1px solid #18181B;
+        }
+
+        & div>p>img:nth-child(1) {
+            background-color: #101010;
         }
     }
 

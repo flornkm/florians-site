@@ -294,10 +294,13 @@ function SendLetter(props: {
           }}
           class="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
-          <Close
-            onClick={props.setShowLetter}
-            class="absolute z-10 top-4 border right-4 w-9 h-9 p-1.5 text-black bg-neutral-50 hover:bg-white hover:text-neutral-800 border-neutral-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-neutral-200 dark:border-neutral-200 dark:hover:border-neutral-400"
-          />
+          <Button
+            type="primary"
+            function={props.setShowLetter}
+            class="absolute top-4 right-5 w-8 flex items-center justify-center z-50"
+          >
+            <Close class="w-6 h-6 flex-shrink-0" />
+          </Button>
           <div class="w-full md:h-full h-64 p-6">
             <textarea
               type="text"

@@ -1,8 +1,6 @@
 import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
-import * as m from "#lang/paraglide/messages"
 import { Share } from "#design-system/Icons"
-import { Edit as Writing, Sports } from "#design-system/Icons"
 import Picker from "#components/Picker"
 import { useState } from "preact/hooks"
 import Markdown from "#markdown/Markdown"
@@ -47,7 +45,7 @@ export default function Page({
           )
           return (
             <div class="mb-24 flex flex-col lg:flex-row w-full">
-              <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full items-center gap-1 text-neutral-400 dark:text-neutral-500 text-sm mb-2 md:0 pr-8">
+              <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full items-center gap-1 text-neutral-400 dark:text-neutral-500 text-sm mb-2 md:0 lg:pr-8">
                 <p>
                   {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
                   {date.toLocaleDateString("en-US", {
@@ -64,37 +62,37 @@ export default function Page({
                   />
                   <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
                 </div>
-                <div class="flex items-center justify-between max-w-nav mx-auto gap-2 mt-8 w-full">
-                  <Button type="text" link={post.url}>
-                    Read more
-                  </Button>
-                </div>
+                <Button type="secondary" link={post.url} class="mt-4 mx-auto">
+                  Read more
+                </Button>
               </div>
               <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full lg:order-last order-first lg:ml-0 ml-auto lg:pl-4 relative lg:bottom-0 -bottom-6">
-                <Picker
-                  options={[
-                    {
-                      label: copyLabel,
-                      function: () => {
-                        navigator.clipboard.writeText(
-                          "https://floriankiem.com" + post.url
-                        )
-                        setCopyLabel("Copied!")
-                        setTimeout(() => {
-                          setCopyLabel("Copy link")
-                        }, 1000)
+                <div class="flex">
+                  <Picker
+                    options={[
+                      {
+                        label: copyLabel,
+                        function: () => {
+                          navigator.clipboard.writeText(
+                            "https://floriankiem.com" + post.url
+                          )
+                          setCopyLabel("Copied!")
+                          setTimeout(() => {
+                            setCopyLabel("Copy link")
+                          }, 1000)
+                        },
                       },
-                    },
-                    {
-                      label: "Share on X",
-                      link: `https://x.com/intent/tweet?text=${post.title} from Florian&url=https://floriankiem.com${post.url}`,
-                    },
-                  ]}
-                  position="bottom"
-                  align="left"
-                >
-                  <Share size={24} />
-                </Picker>
+                      {
+                        label: "Share on X",
+                        link: `https://x.com/intent/tweet?text=${post.title} from Florian&url=https://floriankiem.com${post.url}`,
+                      },
+                    ]}
+                    position="bottom"
+                    align="right"
+                  >
+                    <Share size={24} />
+                  </Picker>
+                </div>
               </div>
             </div>
           )
