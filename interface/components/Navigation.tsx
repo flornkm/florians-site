@@ -107,7 +107,7 @@ export default function Navigation() {
               {aiMode ? "Florian AI" : "Florian"}
             </span>
             <span class="text-base font-normal text-neutral-500 group-hover/all:text-neutral-400 ml-2 transition-colors hidden xl:inline-block dark:group-hover/all:text-neutral-600">
-              {aiMode ? "Beta" : m.name_title()}
+              {aiMode ? "Experimental" : m.name_title()}
             </span>
           </p>
         </div>

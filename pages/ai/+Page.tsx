@@ -28,6 +28,12 @@ export default function Page() {
     ])
 
     try {
+      const secret = localStorage.getItem("florians-ai-secret")
+      if (!secret) {
+        setError("Secret key not found.")
+        return
+      }
+
       const response = await fetch("/api/ai", {
         method: "POST",
         headers: {
@@ -35,6 +41,7 @@ export default function Page() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          key: secret,
           messages: [
             ...messages.map((message) => ({
               role: message.role,
@@ -110,7 +117,7 @@ export default function Page() {
             type="text"
             placeholder="Ask me anything!"
             class={
-              "w-full placeholder:text-neutral-400 relative pr-20 truncate top-[1px] disabled:cursor-not-allowed outline-0 transition-all outline-offset-1 px-6 py-3 rounded-full bg-white border border-neutral-200 focus:border-neutral-300 dark:border-neutral-700 dark:focus:border-neutral-600 dark:bg-neutral-800 dark:placeholder:text-neutral-500 " +
+              "w-full placeholder:text-neutral-400 relative pr-20 truncate top-[1px] disabled:cursor-not-allowed outline-0 transition-all outline-offset-1 px-6 py-3 rounded-full bg-white border border-neutral-200 focus:border-neutral-300 dark:border-neutral-800 dark:focus:border-neutral-700 dark:bg-neutral-900 dark:placeholder:text-neutral-500 " +
               +(loading ? " opacity-50 pointer-events-none" : "")
             }
           />
@@ -121,7 +128,7 @@ export default function Page() {
             rounded
             type="primary"
             class={
-              "absolute right-1 top-1/2 -translate-y-1/2 group/button leading-none overflow-hidden md:hover:pl-16 mt-[1px] " +
+              "absolute right-2 top-1/2 -translate-y-1/2 group/button leading-none overflow-hidden md:hover:pl-16 mt-[1px] " +
               (loading ? "pointer-events-none" : "")
             }
           >
@@ -141,7 +148,7 @@ export default function Page() {
         </form>
         <div class="w-full mb-8 md:-mt-24 md:pb-72 pb-24" ref={chatWrapper}>
           {messages.length === 0 && (
-            <div class="bg-[url('/images/assets/empty-chat.jpg')] dark:bg-none opacity-40 bg-no-repeat top-56 w-[400px] mx-auto bg-contain absolute inset-0" />
+            <div class="bg-[url('/images/assets/empty-chat.png')] dark:bg-[url('/images/assets/empty-chat-light.png')] opacity-40 dark:opacity-100 bg-no-repeat top-56 max-w-[400px] mx-auto bg-contain absolute inset-0" />
           )}
           {messages.map((message, index) => (
             <ChatBubble
@@ -173,6 +180,7 @@ export default function Page() {
 const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
   const [hideIntro, setHideIntro] = useState<boolean>(false)
   const [ready, setReady] = useState<boolean>(false)
+  const [secret, setSecret] = useState<string>("")
 
   const tooNarrow = useMemo(() => {
     if (typeof window !== "undefined" && window.innerHeight < 850) {
@@ -181,14 +189,6 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
 
     return false
   }, [])
-
-  // useEffect(() => {
-  //   if (!hideIntro) {
-  //     document.body.style.overflow = "hidden"
-  //   } else {
-  //     document.body.style.overflow = "auto"
-  //   }
-  // }, [hideIntro])
 
   return (
     <div
@@ -199,10 +199,10 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           : "bg-white z-50 dark:bg-black")
       }
     >
-      <div class="flex flex-col items-center max-w-md">
+      <div class="flex flex-col items-center max-w-md p-4">
         <div
           class={
-            "bg-white relative z-[52] px-3 py-2 flex transition-all gap-2 duration-500 pointer-events-auto border " +
+            "bg-white relative z-[55] px-3 py-2 flex transition-all gap-2 duration-500 pointer-events-auto border " +
             (hideIntro
               ? "lg:-translate-y-[38vh] -translate-y-[39vh] shadow-lg rounded-xl border-neutral-200 dark:border-neutral-800 w-56 dark:bg-[#0A0A0A] "
               : "translate-x-0 mb-8 rounded-none border-white dark:border-black w-32 dark:bg-black ") +
@@ -211,7 +211,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
         >
           <div
             class={
-              "aspect-square rounded-full transition-all duration-500 bg-[url('/images/avatars/memoji-placeholder.jpg')] bg-cover " +
+              "aspect-square rounded-full transition-all duration-500 bg-[url('/images/avatars/florian_student.webp')] bg-cover " +
               (hideIntro ? "w-12" : "w-24")
             }
           ></div>
@@ -241,18 +241,41 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
               This AI is a clone of me, especially useful for employees who want
               to ask me questions when I'm not around.
             </p>
-            <Button
-              function={() => {
-                setHideIntro(true)
-                focusChat?.()
-                setTimeout(() => {
-                  setReady(true)
-                }, 500)
-              }}
-              type="primary"
-            >
-              Get Started
-            </Button>
+            <div class="max-w-xs relative w-full">
+              <input
+                value={secret}
+                onInput={(e) => setSecret(e.currentTarget.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    localStorage.setItem("florians-ai-secret", secret)
+                    setHideIntro(true)
+                    focusChat?.()
+                    setTimeout(() => {
+                      setReady(true)
+                    }, 500)
+                  }
+                }}
+                type="password"
+                class="w-full px-4 py-[9px] border border-neutral-200 rounded-full pr-32 truncate outline-none focus:border-neutral-300 transition-all outline-0 focus:outline-2 focus:outline-neutral-100 outline-offset-0 dark:bg-neutral-900 dark:border-neutral-800 dark:focus:border-neutral-700 dark:focus:outline-0"
+                placeholder="Secret key required"
+              />
+              <Button
+                disabled={secret === ""}
+                function={() => {
+                  localStorage.setItem("florians-ai-secret", secret)
+                  setHideIntro(true)
+                  focusChat?.()
+                  setTimeout(() => {
+                    setReady(true)
+                  }, 500)
+                }}
+                small
+                type="primary"
+                class="absolute right-1 z-20 top-1/2 -translate-y-1/2 truncate !rounded-full disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Get Started
+              </Button>
+            </div>
           </div>
         ) : (
           <div class="h-32" />

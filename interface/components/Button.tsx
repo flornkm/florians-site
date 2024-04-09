@@ -3,6 +3,7 @@ import { JSX } from "preact/jsx-runtime"
 import { navigate } from "vike/client/router"
 import { Chevron } from "#design-system/Icons"
 import { useEffect, useState } from "preact/hooks"
+import { RefObject } from "preact"
 
 export default function Button(props: {
   type: "primary" | "secondary" | "text"
@@ -13,8 +14,9 @@ export default function Button(props: {
   chevron?: boolean
   class?: string
   small?: boolean
+  ref?: RefObject<HTMLButtonElement>
   disabled?: boolean
-  function?: () => void
+  function?: (e?: MouseEvent) => void
 }) {
   return (
     <button
@@ -55,7 +57,7 @@ export default function Button(props: {
       {props.chevron && (
         <Chevron
           class="flex-shrink-0"
-          size={16}
+          size={14}
           stroke={props.type === "text" ? 1.5 : 2}
         />
       )}
