@@ -10,7 +10,7 @@ export default function Island(props: {
   return (
     <a
       class={
-        "sticky px-6 overflow-hidden py-3 group rounded-full font-medium z-20 top-8 lg:bottom-8 w-full bg-white border border-neutral-200 shadow-xl shadow-neutral-500/5 mb-12 flex justify-between items-center dark:bg-neutral-950 dark:border-neutral-900 " +
+        "sticky px-6 overflow-hidden py-3 max-w-xl mx-auto group rounded-full font-medium z-20 top-8 lg:bottom-8 w-full bg-white border border-neutral-200 shadow-xl shadow-neutral-500/5 mb-12 flex justify-between items-center dark:bg-neutral-950 dark:border-neutral-900 " +
         props.class
       }
       href={props.link}

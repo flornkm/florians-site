@@ -139,7 +139,10 @@ export default function Navigation() {
         <NavigationLink href={getLocale() + "/archive"}>
           {m.navigation_archive()}
         </NavigationLink>
-        <NavigationLink href={getLocale() + "/colophon"}>
+        <NavigationLink
+          href={getLocale() + "/colophon"}
+          class="hidden md:block"
+        >
           Site Info
         </NavigationLink>
         {pageContext &&
@@ -157,7 +160,7 @@ export default function Navigation() {
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="md:h-9 h-12 md:-translate-x-10 lg:-translate-x-0 lg:px-0 xs:-translate-x-[1px] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white dark:md:bg-neutral-900"
+              class="md:h-9 h-12 md:translate-x-0 lg:-translate-x-0 lg:px-0 xs:translate-x-[5%] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white dark:md:bg-neutral-900"
             />
           )}
       </div>
