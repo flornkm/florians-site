@@ -12,7 +12,10 @@ export default async function handler(req) {
   if (req.method === "POST") {
     const buf = await req.arrayBuffer()
     const rawBody = new TextDecoder().decode(buf)
-    const { messages } = JSON.parse(rawBody)
+    const { messages, key } = JSON.parse(rawBody)
+
+    if (key !== process.env.ADVANCED_KEY)
+      return new Response("Unauthorized", { status: 401 })
 
     try {
       const stream = await openai.chat.completions.create({

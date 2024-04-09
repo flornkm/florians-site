@@ -1,8 +1,15 @@
 import { useRef, useState, useEffect, StateUpdater } from "preact/hooks"
 import SignaturePad from "signature_pad"
-import { Close, Plus } from "#design-system/Icons"
+import {
+  Alert,
+  ArrowLeft,
+  Close,
+  Collapse,
+  Expand,
+  Plus,
+} from "#design-system/Icons"
 import NoPrerender from "../components/NoPrerender"
-import Button from "../components/Button"
+import Button, { ButtonWrapper } from "../components/Button"
 import Tooltip from "../components/Tooltip"
 import LoadingSpinner from "#components/LoadingSpinner"
 import * as m from "#lang/paraglide/messages"
@@ -142,6 +149,18 @@ export default function Letters() {
                       : "hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-800 dark:hover:shadow-none dark:bg-neutral-900")
                   }
                 >
+                  {zoom === letterArray.indexOf(letter) && (
+                    <Alert
+                      onClick={(e) => {
+                        e!.stopPropagation()
+                        if (typeof window !== "undefined")
+                          window.open(
+                            "https://twitter.com/messages/compose?recipient_id=1053753388289155073&text=There%20is%20a%20weird%20letter%20on%20your%20website!"
+                          )
+                      }}
+                      class="absolute -top-12 aspect-square right-4 w-9 h-9 p-1.5 rounded-md flex items-center justify-center z-50 bg-amber-400 hover:bg-amber-300 transition-colors"
+                    />
+                  )}
                   <img
                     src="/images/letter/stamp.png"
                     class="pointer-events-none w-20 absolute top-8 md:block hidden right-8 rotate-6"

@@ -98,6 +98,24 @@ export function Edit(props: {
   )
 }
 
+export function Alert(props: {
+  size?: number
+  class?: string
+  stroke?: 2 | 1.5
+  onClick?: (e?: MouseEvent) => void
+}) {
+  return (
+    <Icon size={props.size} class={props.class} onClick={props.onClick}>
+      <path
+        d="M11.9961 10.0156V12.0121M11.999 15H12.009M11.1344 3.49213L2.88563 17.4956C2.49362 18.1611 2.97412 19 3.74728 19H20.2449C21.0181 19 21.4986 18.1611 21.1066 17.4956L12.8577 3.49213C12.4712 2.83596 11.521 2.83596 11.1344 3.49213ZM12.249 15C12.249 15.1381 12.1371 15.25 11.999 15.25C11.861 15.25 11.749 15.1381 11.749 15C11.749 14.8619 11.861 14.75 11.999 14.75C12.1371 14.75 12.249 14.8619 12.249 15Z"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </Icon>
+  )
+}
+
 export function Expand(props: {
   size?: number
   class?: string
