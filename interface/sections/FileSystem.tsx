@@ -34,7 +34,7 @@ export default function FileSystem(props: { children: JSX.Element }) {
         <h1 class="text-2xl line-clamp-2 mb-6 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
           Archive
         </h1>
-        <ul class="font-mono space-y-2 sticky top-24 mb-8 lg:mb-0">
+        <ul class="font-mono space-y-2 sticky top-24 mb-8 lg:mb-0 hidden lg:block">
           <li>
             <a
               href="/archive"
