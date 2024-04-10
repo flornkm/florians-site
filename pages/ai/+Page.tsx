@@ -264,8 +264,8 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
       class={
         "w-screen h-screen flex items-center justify-center fixed inset-0 transition-all " +
         (hideIntro
-          ? "pointer-events-none z-[52]"
-          : "bg-white z-50 dark:bg-black")
+          ? "pointer-events-none z-[51]"
+          : "bg-white dark:bg-black lg:z-50 z-[52]")
       }
     >
       <div class="flex flex-col items-center max-w-md p-4">
