@@ -318,6 +318,7 @@ function SendLetter(props: {
         >
           <Button
             type="secondary"
+            rounded
             function={props.setShowLetter}
             class="absolute top-4 right-5 w-10 h-10 flex items-center justify-center z-50 backdrop-blur-lg"
           >

@@ -180,7 +180,7 @@ export const AiSwitch = function () {
 
   return (
     <button
-      class="font-medium flex items-center gap-2 group"
+      class="font-medium flex items-center gap-2 group truncate"
       onClick={() => {
         pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
           ? navigate(getLocale() + "/")
