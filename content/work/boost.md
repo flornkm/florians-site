@@ -10,13 +10,14 @@ date: 02 / 2023
 
 <div>
 
+# Work
 # Boost
 
 </div>
 
 <div>
 
-Nutrition application & hardware device
+Nutrition application & hardware device developed in 2022 - 2023 for an university project at HfG Schwäbisch Gmünd.
 
 </div>
 

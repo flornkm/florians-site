@@ -10,13 +10,14 @@ date: 03 / 2023
 
 <div>
 
+# Work
 # Bridge
 
 </div>
 
 <div>
 
-Browser based job page creator for Startups and SMEs.
+Browser based job page creator for Startups and SMEs. The project was never fully released, but the code is open source and can be found on GitHub.
 
 </div>
 
