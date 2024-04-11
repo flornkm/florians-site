@@ -418,7 +418,7 @@ const ChatBubble = ({
                 }}
                 small
               >
-                Speak out
+                Voiceclone me
               </Button>
               <div class="flex items-center gap-1">
                 <div
