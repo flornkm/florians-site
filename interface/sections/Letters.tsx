@@ -160,8 +160,8 @@ export default function Letters() {
                     class={
                       "absolute -top-12 aspect-square right-4 w-9 h-9 p-1.5 rounded-md flex items-center justify-center z-50 bg-amber-400 hover:bg-amber-300 dark:hover:bg-amber-500 transition-all " +
                       (zoom === letterArray.indexOf(letter)
-                        ? "opacity-100"
-                        : "opacity-0")
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none")
                     }
                   />
                   <img
