@@ -17,19 +17,24 @@ Vectorfiles.reverse()
 export default function Page() {
   return (
     <div class="w-full">
-      <FileSystem>
+      <FileSystem items={{ amount: Vectorfiles.length, label: "items" }}>
         <div class="w-full gap-4 items-start grid xl:grid-cols-5 md:grid-cols-3 xs:grid-cols-2">
-          <a
-            href="/archive"
-            className="p-4 transition-colors rounded-lg flex items-center justify-center group"
+          <button
+            onClick={(e) => {
+              if (e.detail === 1) e.preventDefault()
+              else window.location.href = "/archive"
+            }}
+            className="p-4 relative rounded-lg flex items-center justify-center group cursor-default active:scale-95 transition-transform duration-75"
           >
             <div className="flex flex-col items-center gap-2 w-28">
-              <div class="text-neutral-400 group-hover:text-neutral-500 relative transition-colors dark:text-neutral-500 dark:group-hover:text-neutral-400">
+              <div class="text-neutral-400 relative dark:text-neutral-500">
                 <FolderIllustration />
               </div>
-              <p className="font-medium text-center">..</p>
+              <p className="font-medium text-center text-neutral-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-75">
+                ..
+              </p>
             </div>
-          </a>
+          </button>
           {Vectorfiles.map((file) => {
             return (
               <Item fileData={file.data}>

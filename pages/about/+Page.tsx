@@ -222,7 +222,7 @@ export default function Page() {
         </h3>
         <div class="lg:w-5/12 w-full">
           <div class="flex items-center relative">
-            <div class="gradient-blur pointer-events-none w-4/12 ml-auto z-10 -right-16 absolute inset-0 -mr-10 hidden lg:block">
+            <div class="gradient-blur pointer-events-none w-1/2 ml-auto z-10 -right-16 absolute inset-0 -mr-10 hidden lg:block">
               <div />
               <div />
               <div />
@@ -230,7 +230,7 @@ export default function Page() {
               <div />
               <div />
             </div>
-            <div class="gradient-blur pointer-events-none z-10 w-4/12 -left-16 absolute inset-0 rotate-180 -ml-10 hidden lg:block">
+            <div class="gradient-blur pointer-events-none z-10 w-1/2 -left-16 absolute inset-0 rotate-180 -ml-10 hidden lg:block">
               <div />
               <div />
               <div />

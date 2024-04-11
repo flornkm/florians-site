@@ -259,6 +259,11 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
     return false
   }, [])
 
+  useEffect(() => {
+    if (hideIntro) document.body.style.overflow = "auto"
+    else document.body.style.overflow = "hidden"
+  }, [hideIntro])
+
   return (
     <div
       class={
