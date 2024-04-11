@@ -402,7 +402,7 @@ const ChatBubble = ({
           >
             <p>{content}</p>
           </div>
-          {role === "system" && playAudio && (
+          {role === "system" && playAudio && content !== "Unauthorized" && (
             <div
               class={
                 "flex item gap-2 mt-2 " +
