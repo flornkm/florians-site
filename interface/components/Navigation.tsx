@@ -182,9 +182,10 @@ export const AiSwitch = function () {
     <button
       class="font-medium flex items-center gap-2 group truncate"
       onClick={() => {
-        pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
-          ? navigate(getLocale() + "/")
-          : navigate(getLocale() + "/ai")
+        if (pageContext?.urlPathname.replace(getLocale(), "") === "/ai") {
+          navigate(getLocale() + "/")
+          document.body.style.overflow = "auto"
+        } else navigate(getLocale() + "/ai")
       }}
     >
       <>
