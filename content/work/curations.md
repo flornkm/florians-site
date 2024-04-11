@@ -10,13 +10,14 @@ date: 04 / 2023
 
 <div>
 
+# Work
 # Curations
 
 </div>
 
 <div>
 
-A curated collection of the best products on the web.
+A curated collection of the best products on the web. Developed and maintained from early 2022 to early 2023, featuring a collection of tools across multiple categories.
 
 </div>
 

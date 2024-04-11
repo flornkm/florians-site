@@ -16,11 +16,13 @@ main>article {
         font-size: 1.5rem;
     }
 
-    & h1:nth-child(1)::before {
-        content: "Project";
-        font-size: 1.5rem;
-        display: block;
+    & h1:nth-child(1) {
         color: rgb(163, 163, 163);
+        margin-bottom: 0;
+    }
+
+    & h1:nth-child(1), h1:nth-child(2) {
+        line-height: 1.375;
     }
 
     & h2 {
