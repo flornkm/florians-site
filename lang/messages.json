@@ -866,6 +866,60 @@
       "alias": {}
     },
     {
+      "id": "ai_description",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "This AI is a clone of me, especially useful for employees who want\n              to ask me questions when I'm not around."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "这个人工智能是我的克隆，对于那些想要<inlang-LineFeed>当我不在的时候问我问题。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai_heading",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Talk to my AI clone"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "与我的 AI 克隆人交谈"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "archive_description",
       "selectors": [],
       "variants": [
@@ -918,6 +972,60 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "ask_me",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Ask me anything!"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "问我任何事情！"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "available",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Available on"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "可在"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "bucketlist_city",
@@ -1026,6 +1134,33 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "bucketlist_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Bucketlist"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "愿望清单"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "bucketlist_travel",
@@ -1433,6 +1568,33 @@
       "alias": {}
     },
     {
+      "id": "categories",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "categories"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "类别"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "chat_message_error",
       "selectors": [],
       "variants": [
@@ -1649,6 +1811,33 @@
       "alias": {}
     },
     {
+      "id": "description",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Description"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "描述"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "design_engineer",
       "selectors": [],
       "variants": [
@@ -1674,6 +1863,33 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "designer_developer",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Designer and Developer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "设计师和开发人员"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "dev_env",
@@ -1728,6 +1944,87 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "error_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "You encountered an error."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "您遇到了一个错误。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience_sheet",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Experience Sheet"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "经验表"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Experience"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "经验"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "feed_description",
@@ -2189,6 +2486,33 @@
       "alias": {}
     },
     {
+      "id": "go_back",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Go back"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "回去"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "hover_text",
       "selectors": [],
       "variants": [
@@ -2349,6 +2673,60 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "job",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Job"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "工作"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "latest_posts",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Latest Posts"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "最新帖子"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "letter_handle",
@@ -2810,6 +3188,33 @@
       "alias": {}
     },
     {
+      "id": "listen_now",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Listen now"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "现在听"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "main_header_description",
       "selectors": [],
       "variants": [
@@ -2889,6 +3294,33 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "meals_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Meals"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "餐食"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "message_contact_via",
@@ -3024,6 +3456,60 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "movies_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Movies"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "电影"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "music_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Music"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "音乐"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "name_title",
@@ -3215,6 +3701,87 @@
       "alias": {}
     },
     {
+      "id": "open_experience",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Open Experience"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开放体验"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "open_issue",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Open issue"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开放问题"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "past_worked",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "In the past, I worked at"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "过去，我曾在"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "photo_description_apartment",
       "selectors": [],
       "variants": [
@@ -3377,6 +3944,33 @@
       "alias": {}
     },
     {
+      "id": "photos_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Photos"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "相片"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "privacy_policy_notification",
       "selectors": [],
       "variants": [
@@ -3429,6 +4023,60 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "read_more",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Read more"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "阅读更多"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "send",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Send"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "发送"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "server_error_first",
@@ -3510,6 +4158,60 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "site_info",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Site Info"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "网站信息"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Source"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "来源"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ssr_list",
@@ -3998,6 +4700,33 @@
       "alias": {}
     },
     {
+      "id": "time",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Time"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "时间"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "time_at",
       "selectors": [],
       "variants": [
@@ -4457,6 +5186,60 @@
       "alias": {}
     },
     {
+      "id": "try_later",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Please try again later or open an issue."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "请稍后重试或打开问题。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "voiceclone",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Voiceclone me"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "语音克隆我"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "waitlist_description",
       "selectors": [],
       "variants": [
@@ -4511,6 +5294,33 @@
       "alias": {}
     },
     {
+      "id": "watch_now",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Watch now"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "立即观看"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "work_description",
       "selectors": [],
       "variants": [
@@ -4563,6 +5373,33 @@
         }
       ],
       "alias": {}
+    },
+    {
+      "id": "working_as_a",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Working as a"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "作为"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

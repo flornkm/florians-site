@@ -178,7 +178,9 @@ export default function Page() {
             </p>
           </div>
           <div class="max-w-nav mx-auto">
-            <h3 class="text-lg font-semibold mt-12 mb-2">Experience</h3>
+            <h3 class="text-lg font-semibold mt-12 mb-2">
+              {m.experience_title()}
+            </h3>
             <Experience />
           </div>
         </div>
@@ -186,7 +188,9 @@ export default function Page() {
       </section>
       <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 lg:p-8 relative z-10">
         <div class="w-full max-w-nav">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4">Bucketlist</h3>
+          <h3 class="text-lg font-semibold mb-4 md:mb-4">
+            {m.bucketlist_title()}
+          </h3>
           <div class="grid 2xl:grid-cols-2 gap-8">
             <ul class="w-full">
               {bucketList
@@ -318,7 +322,7 @@ export default function Page() {
       </section>
       <section class="mb-40">
         <div class="w-full max-w-nav mx-auto mb-24">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4">Movies</h3>
+          <h3 class="text-lg font-semibold mb-4 md:mb-4">{m.movies_title()}</h3>
           <Movies
             movies={[
               {
@@ -337,7 +341,7 @@ export default function Page() {
           />
         </div>
         <div class="w-full max-w-nav mx-auto mb-32">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4">Music</h3>
+          <h3 class="text-lg font-semibold mb-4 md:mb-4">{m.music_title()}</h3>
           <Music
             music={[
               {
@@ -357,7 +361,7 @@ export default function Page() {
           />
         </div>
         <div class="w-full max-w-nav mx-auto mb-24">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4">Meals</h3>
+          <h3 class="text-lg font-semibold mb-4 md:mb-4">{m.meals_title()}</h3>
           <Meals
             meals={[
               {
@@ -380,7 +384,7 @@ export default function Page() {
         </div>
       </section>
       <section class="mb-16">
-        <h3 class="text-lg font-semibold mb-4">Photos</h3>
+        <h3 class="text-lg font-semibold mb-4">{m.photos_title()}</h3>
         <div class="w-full">
           <PhotoSlider />
         </div>
@@ -406,11 +410,11 @@ const Music = ({ music }: { music: Record<string, string>[] }) => {
               <div class="w-full">
                 <h4 class="font-semibold mb-2 truncate">{song.name}</h4>
                 <Button type="text" link={song.url} class="!px-0">
-                  Listen now
+                  {m.listen_now()}
                 </Button>
               </div>
               <Button type="text" link={song.source} small class="!px-0">
-                Source
+                {m.source()}
               </Button>
             </div>
           </div>
@@ -458,12 +462,12 @@ const Movies = ({ movies }: { movies: Record<string, string>[] }) => {
             <div>
               <h4 class="font-semibold mb-2">{movie.title}</h4>
               <Button type="text" link={movie.url} class="!px-0">
-                Watch now
+                {m.watch_now()}
               </Button>
             </div>
             <div>
               <p class="text-neutral-400 dark:text-neutral-500 text-sm">
-                Available on {movie.provider}.
+                {m.available()} {movie.provider}.
               </p>
             </div>
           </div>
@@ -484,14 +488,14 @@ const Experience = () => {
   return (
     <div class="max-w-nav w-full mb-4">
       <p class="text-neutral-500 mb-4 dark:text-neutral-400">
-        Working as a {experience[0].jobTitle}
+        {m.working_as_a()} {experience[0].jobTitle}
         {experience[0].company &&
           `${experience[0].jobTitle && `at`} ${experience[0].company}`}
         {experience[0].from && ` since ${experience[0].from}`}
         {experience[0].to && ` until ${experience[0].to}`}.
       </p>
       <p class="text-neutral-500 mb-8 dark:text-neutral-400">
-        In the past, I worked at{" "}
+        {m.past_worked()}{" "}
         {experience
           .filter((item) => item.company)
           .map((item) => {
@@ -529,7 +533,7 @@ const Experience = () => {
         }}
       >
         <>
-          Open Experience
+          {m.open_experience()}
           <Expand class="w-4 h-4 ml-1" />
         </>
       </Button>
@@ -540,16 +544,16 @@ const Experience = () => {
           isOpen={experiencePopupOpen}
         >
           <div>
-            <h3 class="text-lg font-semibold mb-8">Experience Sheet</h3>
+            <h3 class="text-lg font-semibold mb-8">{m.experience_sheet()}</h3>
             <div class="custom-scrollbar w-full overflow-x-scroll">
               <div class="overflow-hidden border border-neutral-200 rounded-xl dark:border-neutral-700">
                 <table class="w-full border-spacing-1 table-auto rounded-xl border-collapse">
                   <thead class="h-10 text-neutral-900 bg-neutral-100 dark:text-white dark:bg-neutral-800">
                     <tr>
-                      <th class="text-left font-medium px-4">Job</th>
-                      <th class="text-left font-medium px-4">Time</th>
+                      <th class="text-left font-medium px-4">{m.job()}</th>
+                      <th class="text-left font-medium px-4">{m.time()}</th>
                       <th class="text-left font-medium px-4 max-lg:hidden">
-                        Description
+                        {m.description()}
                       </th>
                     </tr>
                   </thead>

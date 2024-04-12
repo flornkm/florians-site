@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
 import { Send } from "#design-system/Icons"
 import LoadingSpinner from "#components/LoadingSpinner"
 import { AiSwitch } from "#components/Navigation"
+import * as m from "#lang/paraglide/messages"
 
 const decoder = new TextDecoder()
 
@@ -183,7 +184,7 @@ export default function Page() {
               }
             }}
             type="text"
-            placeholder="Ask me anything!"
+            placeholder={m.ask_me()}
             class={
               "w-full placeholder:text-neutral-400 relative pr-20 truncate top-[1px] disabled:cursor-not-allowed outline-0 transition-all outline-offset-1 px-6 py-3 rounded-full bg-white border border-neutral-200 focus:border-neutral-300 dark:border-neutral-800 dark:focus:border-neutral-700 dark:bg-neutral-900 dark:placeholder:text-neutral-500 " +
               +(loading ? " opacity-50 pointer-events-none" : "")
@@ -202,7 +203,7 @@ export default function Page() {
           >
             <>
               <p class="absolute hidden md:block transition-all opacity-0 md:group-hover/button:block group-hover/button:opacity-100 -left-[100%] group-hover/button:left-4 duration-200">
-                Send
+                {m.send()}
               </p>
               {loading ? (
                 <div class="p-2.5">
@@ -349,11 +350,10 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
             }
           >
             <h1 class="text-2xl font-bold mb-2 text-center">
-              Talk to my AI clone
+              {m.ai_heading()}
             </h1>
             <p class="text-center mb-8 text-neutral-500">
-              This AI is a clone of me, especially useful for employees who want
-              to ask me questions when I'm not around.
+              {m.ai_description()}
             </p>
             <div class="max-w-xs relative w-full">
               <input
@@ -451,7 +451,7 @@ const ChatBubble = ({
                 }}
                 small
               >
-                Voiceclone me
+                {m.voiceclone()}
               </Button>
               <div class="flex items-center gap-1">
                 <div

@@ -145,7 +145,7 @@ export default function Navigation() {
           href={getLocale() + "/colophon"}
           class="hidden md:block"
         >
-          Site Info
+          {m.site_info()}
         </NavigationLink>
         {pageContext &&
           (languageTag() === sourceLanguageTag
