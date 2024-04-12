@@ -74,11 +74,11 @@
 }
 
 @font-face {
-	font-family: 'Fragment Mono';
-	font-weight: 400;
+	font-family: 'Commit Mono';
+	font-weight: 400 600;
 	font-style: normal;
 	font-display: swap;
-	src: url(/fonts/fragment-mono/FragmentMono-Regular.woff2) format('woff2');
+	src: url(/fonts/commit-mono/commit-mono-var.woff2) format('woff2');
 }
 
 @font-face {
@@ -89,10 +89,10 @@
 	src: url(/fonts/arial-rounded/arial-rounded-mt-bold.woff) format('woff');
 }
 
-/* html {
+html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-} */
+}
 
 body {
 	background-color: rgb(252, 252, 252);
@@ -106,6 +106,16 @@ a:focus {
 	outline-width: 2px;
 	outline-color: #3b82f6;
 	border-radius: 0.25rem;
+}
+
+/* Letter Spacing -2% on h1, h2, h3 and -1% on h4, h5, h6 */
+
+h1, h2, h3 {
+	letter-spacing: -2%;
+}
+
+h4, h5, h6 {
+	letter-spacing: -1%;
 }
 
 .custom-scrollbar {
@@ -129,6 +139,10 @@ a:focus {
 
 .cta-gradient {
 	background: linear-gradient(90deg, rgba(252,252,252,1) 0%, rgba(244,244,245,1) 10%, rgba(244,244,245,1) 90%, rgba(252,252,252,1) 100%);
+}
+
+.font-mono {
+	font-size: 15px;
 }
 
 @media (prefers-color-scheme: dark) {

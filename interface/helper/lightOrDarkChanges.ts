@@ -1,5 +1,3 @@
-import { Ref } from "preact"
-
 export function changeTitleColor(element: HTMLHeadingElement) {
   window
     .matchMedia("(prefers-color-scheme: light)")

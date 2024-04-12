@@ -1,6 +1,6 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
-import { useRef, useEffect, useState, useLayoutEffect } from "preact/hooks"
+import { useRef, useState, useLayoutEffect, useMemo } from "preact/hooks"
 import { getLocale } from "#hooks/getLocale"
 import { languageTag, sourceLanguageTag } from "#lang/paraglide/runtime"
 import * as m from "#lang/paraglide/messages"
@@ -24,6 +24,7 @@ export default function Navigation() {
       getLocale() + "/about",
       getLocale() + "/feed",
       getLocale() + "/archive",
+      getLocale() + "/colophon",
     ]
 
     // Include only specified pages for showing the selector
@@ -44,8 +45,8 @@ export default function Navigation() {
 
         // Adjustments for mobile screens
         const isMobile =
-          typeof window !== "undefined" && window.innerWidth < 1024
-        const mobileWidthFactor = 1.25
+          typeof window !== "undefined" && window.innerWidth < 768
+        const mobileWidthFactor = 1.2
 
         setSelectorPosition({
           x: isMobile ? x - width / (mobileWidthFactor * 2) : x,
@@ -88,25 +89,36 @@ export default function Navigation() {
     }
   }, [pageContext])
 
+  const aiMode = useMemo(() => {
+    return pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
+  }, [pageContext])
+
   return (
-    <div class="w-full flex items-center justify-between max-w-screen-lx mx-auto md:px-10 min-[350px]:px-4 xs:px-3">
+    <div class="w-full flex lg:grid lg:grid-cols-5 items-center justify-between max-w-screen-3xl mx-auto md:px-10 min-[650px]:px-5 min-[400px]:px-3.5 xs:px-3">
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
         <div
           onClick={() => {
+            if (typeof window !== "undefined")
+              document.body.style.overflow = "auto"
             navigate(getLocale() + "/")
           }}
           class="group/all -ml-1 cursor-pointer"
         >
-          <p class="text-lg font-medium group-hover/all:text-zinc-500 transition-colors relative dark:group-hover/all:text-zinc-400 ">
-            <span class="group relative">Florian</span>
-            <span class="text-base font-normal text-zinc-500 group-hover/all:text-zinc-400 ml-2 transition-colors hidden md:inline-block dark:group-hover/all:text-zinc-600">
-              {m.name_title()}
+          <p class="text-lg font-medium group-hover/all:text-neutral-500 transition-colors relative dark:group-hover/all:text-neutral-400 ">
+            <span class="group relative">
+              {aiMode ? "Florian AI" : "Florian"}
+            </span>
+            <span class="text-base font-normal text-neutral-500 group-hover/all:text-neutral-400 ml-2 transition-colors hidden xl:inline-block dark:group-hover/all:text-neutral-600">
+              {aiMode ? "Experimental" : m.name_title()}
             </span>
           </p>
         </div>
       </div>
       <div
-        class="flex items-center md:gap-8 gap-2 justify-between md:justify-normal w-full md:w-auto lg:px-0 md:px-1.5 px-0"
+        class={
+          "flex items-center transition-opacity col-span-3 lg:gap-4 md:gap-3 gap-1.5 justify-between md:max-w-[calc(432px+(6px*5))] mx-auto truncate md:justify-between w-full lg:px-0 md:px-1.5 px-0 " +
+          (aiMode ? "lg:opacity-0 lg:pointer-events-none" : "opacity-100")
+        }
         id="nav-links"
       >
         <NavigationLink
@@ -129,24 +141,69 @@ export default function Navigation() {
         <NavigationLink href={getLocale() + "/archive"}>
           {m.navigation_archive()}
         </NavigationLink>
+        <NavigationLink
+          href={getLocale() + "/colophon"}
+          class="hidden md:block"
+        >
+          {m.site_info()}
+        </NavigationLink>
         {pageContext &&
           (languageTag() === sourceLanguageTag
             ? "/"
             : pageContext?.urlPathname.replace(getLocale(), "/") === "/" ||
               pageContext.urlPathname.replace(getLocale(), "") === "/about" ||
               pageContext.urlPathname.replace(getLocale(), "") === "/archive" ||
-              pageContext.urlPathname.replace(getLocale(), "") === "/feed") && (
+              pageContext.urlPathname.replace(getLocale(), "") === "/feed" ||
+              pageContext.urlPathname.replace(getLocale(), "") ===
+                "/colophon") && (
             <div
               ref={selector}
               style={{
                 left: selectorPosition.x,
                 width: selectorPosition.width,
               }}
-              class="md:h-[1px] h-12 lg:-translate-x-0 md:-translate-x-8 translate-x-0 flex-shrink-0 absolute md:bottom-[-1px] bg-black opacity-0 rounded-full md:rounded-none dark:bg-white"
+              class="md:h-9 h-12 md:translate-x-0 lg:-translate-x-0 lg:px-0 xs:translate-x-[5%] -translate-x-0.5 flex-shrink-0 absolute md:bg-neutral-100 bg-black opacity-0 rounded-full md:rounded-md dark:bg-white dark:md:bg-neutral-900"
             />
           )}
       </div>
+      <div class="w-full h-full hidden items-center justify-end lg:flex">
+        <AiSwitch />
+      </div>
     </div>
+  )
+}
+
+export const AiSwitch = function () {
+  const pageContext = usePageContext() as any
+
+  const aiMode = useMemo(() => {
+    return pageContext?.urlPathname.replace(getLocale(), "") === "/ai"
+  }, [pageContext])
+
+  return (
+    <button
+      class="font-medium flex items-center gap-2 group truncate"
+      onClick={() => {
+        if (pageContext?.urlPathname.replace(getLocale(), "") === "/ai") {
+          navigate(getLocale() + "/")
+          document.body.style.overflow = "auto"
+        } else navigate(getLocale() + "/ai")
+      }}
+    >
+      <>
+        AI Mode
+        <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100 dark:bg-neutral-700 dark:group-hover:bg-neutral-600">
+          <div
+            class={
+              "h-4 aspect-square rounded-full transition-all duration-100 " +
+              (aiMode
+                ? "bg-neutral-900 ml-3.5 dark:bg-neutral-100"
+                : "bg-white ml-0.5 dark:bg-neutral-900")
+            }
+          />
+        </div>
+      </>
+    </button>
   )
 }
 
@@ -164,14 +221,14 @@ const NavigationLink = function (props: JSX.IntrinsicElements["a"]) {
       ? "/" // @ts-ignore
       : props.href.replace(getLocale(), ""))
       ? "md:text-black text-white relative z-10 before:opacity-0 dark:md:text-white dark:text-black"
-      : "text-zinc-400 hover:text-black before:opacity-0 dark:hover:text-white",
+      : "text-neutral-400 hover:text-black before:opacity-0 dark:hover:text-white",
   ]
     .filter(Boolean)
     .join(" ")
   return (
     <a
       {...props}
-      class={`${className} py-4 transition-colors duration-150 before:absolute group font-medium md:w-auto w-full text-center
+      class={`${className} py-4 md:px-4 transition-colors max-lg:truncate duration-150 before:absolute group font-medium md:w-auto w-full text-center
       before:inset-x-0 before:-bottom-[3px] before:h-[1px] before:bg-black max-md:before:hidden relative z-10 text-sm xs:text-base`}
     />
   )

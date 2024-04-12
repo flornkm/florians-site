@@ -1,5 +1,8 @@
 import { InlineLink } from "#components/Button"
+import { FolderIllustration } from "#design-system/Vectors"
 import { userScrolledDown } from "#hooks/userScrolledDown"
+import FileSystem from "#sections/FileSystem"
+import { useState } from "preact/hooks"
 
 type Post = {
   src: string
@@ -64,94 +67,99 @@ const posts = [
 posts.reverse()
 
 export default function Page() {
+  const [postPopup, setPostPopup] = useState<{
+    type: "photo" | "video"
+    src: string
+  } | null>(null)
+
+  function PostPopup({ src, type }: { src: string; type: "photo" | "video" }) {
+    return (
+      <div
+        className="fixed top-0 left-0 p-4 w-full h-full bg-black/25 z-[52] cursor-zoom-out"
+        onClick={() => setPostPopup(null)}
+      >
+        <div className="w-full max-w-4xl h-full rounded-lg relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          {type === "video" ? (
+            <div
+              dangerouslySetInnerHTML={{ __html: src }}
+              className="w-full h-auto absolute top-1/2 -translate-y-1/2 pointer-events-none"
+            />
+          ) : (
+            <img
+              src={src}
+              alt="photo"
+              className="object-contain h-full w-full"
+            />
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div class="w-full">
-      <section class="w-full pb-24">
-        <div
-          class={
-            "flex items-center lg:mt-6 mb-6  bg-light-zinc/95 backdrop-blur-xl dark:bg-black/90 sticky top-0 lg:top-14 z-50 transition-all " +
-            (userScrolledDown(40)
-              ? "font-medium py-2"
-              : "text-3xl font-semibold lg:py-2")
-          }
-        >
-          <InlineLink link="/archive" class="px-1.5 -ml-1.5" hideWeight>
-            Archive
-          </InlineLink>
-          <p> / </p>
-          <p class="px-1.5 text-zinc-400 dark:text-zinc-600 truncate">Posts</p>
+    <div className="w-full">
+      <FileSystem items={{ amount: posts.length, label: "projects" }}>
+        <div className="w-full gap-4 items-start grid xl:grid-cols-5 md:grid-cols-3 xs:grid-cols-2">
+          <button
+            onClick={(e) => {
+              if (
+                e.detail === 1 &&
+                typeof window !== "undefined" &&
+                window.innerWidth > 768
+              )
+                e.preventDefault()
+              else window.location.href = "/archive"
+            }}
+            className="p-4 relative rounded-lg flex items-center justify-center group cursor-default active:scale-95 transition-transform duration-75"
+          >
+            <div className="flex flex-col items-center gap-2 w-28">
+              <div class="text-neutral-400 relative dark:text-neutral-500">
+                <FolderIllustration />
+              </div>
+              <p className="font-medium text-center text-neutral-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-75">
+                ..
+              </p>
+            </div>
+          </button>
+          {posts.map((post) => {
+            return (
+              <Item>
+                {post.type === "image" ? (
+                  <img
+                    onClick={() => {
+                      setPostPopup({ type: "photo", src: post.src })
+                    }}
+                    data-src={post.src}
+                    src={post.src}
+                    alt={post.src.split("/").pop()?.split(".")[0]}
+                    class="object-cover w-full cursor-zoom-in h-32 transition-opacity hover:opacity-75"
+                  />
+                ) : (
+                  <div
+                    onClick={() =>
+                      setPostPopup({ type: "video", src: post.src })
+                    }
+                    class="transition-opacity hover:opacity-75 cursor-zoom-in h-32 relative overflow-hidden"
+                  >
+                    <div
+                      class="pointer-events-none absolute inset-0 w-56 left-1/2 -translate-x-1/2 border border-neutral-200"
+                      dangerouslySetInnerHTML={{ __html: post.src }}
+                    />
+                  </div>
+                )}
+              </Item>
+            )
+          })}
         </div>
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-4 h-full min-h-screen">
-          <div class="py-0.5 gap-4 flex items-start flex-col h-full">
-            {posts
-              .filter((_, i) => i % 3 === 0)
-              .map((post) => {
-                return (
-                  <Item>
-                    {post.type === "image" ? (
-                      <img
-                        data-src={post.src}
-                        src={post.src}
-                        alt={post.src.split("/").pop()?.split(".")[0]}
-                        class="mx-auto"
-                      />
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: post.src }} />
-                    )}
-                  </Item>
-                )
-              })}
-          </div>
-          <div class="py-0.5 gap-4 flex items-start flex-col">
-            {posts
-              .filter((_, i) => i % 3 === 1)
-              .map((post) => {
-                return (
-                  <Item>
-                    {post.type === "image" ? (
-                      <img
-                        data-src={post.src}
-                        src={post.src}
-                        alt={post.src.split("/").pop()?.split(".")[0]}
-                        class="mx-auto"
-                      />
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: post.src }} />
-                    )}
-                  </Item>
-                )
-              })}
-          </div>
-          <div class="py-0.5 gap-4 flex items-start flex-col">
-            {posts
-              .filter((_, i) => i % 3 === 2)
-              .map((post) => {
-                return (
-                  <Item>
-                    {post.type === "image" ? (
-                      <img
-                        data-src={post.src}
-                        src={post.src}
-                        alt={post.src.split("/").pop()?.split(".")[0]}
-                        class="mx-auto"
-                      />
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: post.src }} />
-                    )}
-                  </Item>
-                )
-              })}
-          </div>
-        </div>
-      </section>
+      </FileSystem>
+      {postPopup && <PostPopup src={postPopup.src} type={postPopup.type} />}
     </div>
   )
 }
 
 function Item(props: { children: any }) {
   return (
-    <div class="w-full bg-zinc-100 dark:bg-zinc-900 relative">
-      {" "}
+    <div class="w-full bg-neutral-100 dark:bg-neutral-900 relative border border-neutral-200 dark:border-neutral-800">
       {props.children}
     </div>
   )

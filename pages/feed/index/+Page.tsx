@@ -1,11 +1,11 @@
 import "#design-system/feed.css"
 import { Post, PostContent } from "../types"
-import * as m from "#lang/paraglide/messages"
 import { Share } from "#design-system/Icons"
-import { Edit as Writing, Sports } from "#design-system/Icons"
 import Picker from "#components/Picker"
 import { useState } from "preact/hooks"
 import Markdown from "#markdown/Markdown"
+import Button from "#components/Button"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({
   posts,
@@ -30,51 +30,46 @@ export default function Page({
   })
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-8">
-        <h1 class="text-3xl font-semibold mb-4">{m.feed_title()}</h1>
-        <p class="text-zinc-500 mb-16 max-w-lg dark:text-zinc-400">
-          {m.feed_description()}
-        </p>
-        <div class="w-full h-[1px] bg-zinc-100 my-16 dark:bg-zinc-900" />
-        <div class="py-0.5 pb-16 max-w-lg mx-auto">
-          {posts.map((post: any) => {
-            const date = new Date(
-              Number(post.date.split("/")[2]),
-              Number(post.date.split("/")[1]) - 1,
-              Number(post.date.split("/")[0])
-            )
-            return (
-              <div
-                class={
-                  posts.indexOf(post) === posts.length - 1
-                    ? ""
-                    : "mb-24 md:mb-48"
-                }
-              >
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center gap-1 mb-2 text-zinc-400 dark:text-zinc-500 text-sm flex-wrap">
-                    {post.type === "writing" ? (
-                      <div class="text-sm flex items-center gap-1.5">
-                        <Writing class="inline-block" stroke={1.5} />
-                        Writing
-                      </div>
-                    ) : post.type === "sports" ? (
-                      <div class="text-sm flex items-center gap-1.5">
-                        <Sports class="inline-block" stroke={1.5} />
-                        Sports Entry
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    <p>•</p>
-                    <p>
-                      {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
-                      {date.toLocaleDateString("en-US", {
-                        month: "long",
-                      })}{" "}
-                      {date.getDate()}, {date.getFullYear()}
-                    </p>
-                  </div>
+      <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row pb-4 md:mb-4">
+        <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
+          <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
+            {m.latest_posts()}
+          </h1>
+        </div>
+      </section>
+      <section>
+        {posts.map((post: any) => {
+          const date = new Date(
+            Number(post.date.split("/")[2]),
+            Number(post.date.split("/")[1]) - 1,
+            Number(post.date.split("/")[0])
+          )
+          return (
+            <div class="mb-24 flex flex-col lg:flex-row w-full">
+              <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full items-center gap-1 text-neutral-400 dark:text-neutral-500 text-sm mb-2 md:0 lg:pr-8">
+                <p>
+                  {date.toLocaleDateString("en-US", { weekday: "long" })} –{" "}
+                  {date.toLocaleDateString("en-US", {
+                    month: "long",
+                  })}{" "}
+                  {date.getDate()}, {date.getFullYear()}
+                </p>
+              </div>
+              <div class="lg:max-w-nav w-full lg:mx-auto">
+                <div class="relative">
+                  <Markdown
+                    noSelect
+                    class="post line-clamp-5"
+                    content={content[post.slug]}
+                  />
+                  <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
+                </div>
+                <Button type="text" link={post.url} class="mt-4 mx-auto">
+                  {m.read_more()}
+                </Button>
+              </div>
+              <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full lg:order-last order-first lg:ml-0 ml-auto lg:pl-4 relative lg:bottom-0 -bottom-6">
+                <div class="flex">
                   <Picker
                     options={[
                       {
@@ -100,76 +95,10 @@ export default function Page({
                     <Share size={24} />
                   </Picker>
                 </div>
-                {post.type === "sports" && (
-                  <div class="w-full bg-zinc-100 px-4 py-8 dark:bg-zinc-900 my-4">
-                    <div class="relative w-full grid xs:grid-cols-3 place-items-end gap-4 text-zinc-500 dark:text-zinc-400">
-                      <div class="mx-auto">
-                        <div
-                          style={{
-                            height: "128px",
-                          }}
-                          class="w-10 h-full relative rounded-xl bg-zinc-200 mb-4 dark:bg-zinc-800"
-                        >
-                          <div
-                            style={{
-                              height: post.move / 3 + "px",
-                            }}
-                            class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-rose-500"
-                          />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
-                            {post.move}
-                          </p>
-                        </div>
-                        <p class="text-xs text-center mt-2 font-mono">Move</p>
-                      </div>
-                      <div class="mx-auto">
-                        <div
-                          style={{
-                            height: "128px",
-                          }}
-                          class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
-                        >
-                          <div
-                            style={{
-                              height: post.exercise * 0.6 + "px",
-                            }}
-                            class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-green-500"
-                          />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
-                            {post.exercise}
-                          </p>
-                        </div>
-                        <p class="text-xs text-center mt-2 font-mono">
-                          Exercise
-                        </p>
-                      </div>
-                      <div class="mx-auto">
-                        <div
-                          style={{
-                            height: "128px",
-                          }}
-                          class="w-10 h-full relative rounded-xl bg-zinc-200 mx-auto mb-4 dark:bg-zinc-800"
-                        >
-                          <div
-                            style={{
-                              height: post.stand / 2 + "px",
-                            }}
-                            class="w-full rounded-xl absolute bottom-0 left-0 right-0 bg-sky-500"
-                          />
-                          <p class="absolute bottom-1 z-10 font-medium text-white text-sm left-1/2 -translate-x-1/2 font-rounded dark:text-zinc-900">
-                            {post.stand}
-                          </p>
-                        </div>
-                        <p class="text-xs text-center mt-2 font-mono">Stand</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <Markdown class="post" content={content[post.slug]} />
               </div>
-            )
-          })}
-        </div>
+            </div>
+          )
+        })}
       </section>
     </div>
   )

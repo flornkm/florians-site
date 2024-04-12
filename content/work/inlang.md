@@ -7,9 +7,15 @@ date: 10 / 2023
 ---
 
 <info-grid>
+
 <div>
 
+# Work
 # inlang
+
+</div>
+
+<div>
 
 Building an ecosystem for globalization with a team consisting of designers and engineers.
 I worked at inlang as a design engineer from mid-june 2023 to mid-january 2024.
@@ -28,6 +34,7 @@ This case study is more focused on the technical side of things as these were th
 | Website       | [inlang.com](https://inlang.com)                                                                                                                                                                                                                                                                                                                                         |
 
 </div>
+
 </info-grid>
 
 ![inlang.com](/images/inlang/cover-inlang.jpg)

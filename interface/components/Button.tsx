@@ -2,6 +2,8 @@ import { getLocale } from "#hooks/getLocale"
 import { JSX } from "preact/jsx-runtime"
 import { navigate } from "vike/client/router"
 import { Chevron } from "#design-system/Icons"
+import { useEffect, useState } from "preact/hooks"
+import { RefObject } from "preact"
 
 export default function Button(props: {
   type: "primary" | "secondary" | "text"
@@ -12,8 +14,9 @@ export default function Button(props: {
   chevron?: boolean
   class?: string
   small?: boolean
+  ref?: RefObject<HTMLButtonElement>
   disabled?: boolean
-  function?: () => void
+  function?: (e?: MouseEvent) => void
 }) {
   return (
     <button
@@ -29,15 +32,15 @@ export default function Button(props: {
       }}
       class={
         "flex items-center gap-1 outline-transparent focus:outline-2 focus:outline-blue-50 disabled:cursor-not-allowed " +
-        (props.small ? "text-sm px-3 py-2 " : " ") +
+        (props.small ? "text-sm px-3 py-1.5 " : " ") +
         props.class +
         " " +
         (props.type !== "text"
-          ? "font-semibold rounded-xl transition-all duration-200 border px-5 py-2.5 " +
+          ? "font-medium rounded-md transition-all duration-200 px-4 py-2 " +
             (props.type === "primary"
-              ? "text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
-              : "text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 dark:text-white dark:bg-zinc-900 dark:hover:bg-zinc-950 dark:hover:text-zinc-200 dark:border-zinc-800")
-          : "text-zinc-800 hover:underline underline-offset-2 font-medium rounded-md px-1.5 dark:text-zinc-200 " +
+              ? "text-white bg-neutral-900 hover:bg-neutral-800 dark:text-black dark:bg-white dark:hover:bg-neutral-200 "
+              : "border text-black border-neutral-200 hover:bg-neutral-100 hover:text-neutral-800 dark:text-white dark:bg-transparent dark:hover:bg-neutral-900 dark:hover:text-neutral-200 dark:border-neutral-800")
+          : "text-neutral-800 hover:underline underline-offset-2 font-medium rounded-md px-1.5 dark:text-neutral-200 " +
             (props.chevron ? "pr-0" : "") +
             (props.link?.includes("http") ||
             props.link?.includes("mailto") ||
@@ -54,7 +57,7 @@ export default function Button(props: {
       {props.chevron && (
         <Chevron
           class="flex-shrink-0"
-          size={16}
+          size={14}
           stroke={props.type === "text" ? 1.5 : 2}
         />
       )}
@@ -70,14 +73,15 @@ export function ButtonWrapper(props: {
 
 export function InlineLink(props: {
   link: string | undefined
-  children: string | JSX.Element | undefined
+  children: any
   class?: string
   hideWeight?: boolean
+  inlineImageUrl?: string
 }) {
   return (
     <a
       class={
-        "text-black px-0 transition-colors dark:text-white underline hover:no-underline underline-offset-2 " +
+        "text-black px-0 transition-colors dark:text-white hover:underline underline-offset-2 " +
         (props.link?.includes("http") ? "cursor-alias " : "") +
         (props.class ? props.class : "") +
         (props.hideWeight ? "" : " font-medium")
@@ -85,6 +89,12 @@ export function InlineLink(props: {
       href={props.link}
       target={props.link && props.link.includes("http") ? "_blank" : "_self"}
     >
+      {props.inlineImageUrl && (
+        <img
+          class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 -translate-y-0.5"
+          src={props.inlineImageUrl}
+        />
+      )}
       {props.children}
     </a>
   )

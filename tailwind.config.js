@@ -16,9 +16,10 @@ export default {
       },
       maxWidth: {
         s: "300px",
+        nav: "432px",
       },
       colors: {
-        "light-zinc": "rgb(252, 252, 252)",
+        "light-neutral": "rgb(252, 252, 252)",
       },
       boxShadow: {
         "nav-shadow":
@@ -35,10 +36,23 @@ export default {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },
         },
+        "fade-up-gentle": {
+          "0%": { opacity: 0, transform: "translateY(10px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        "shrink-in-height": {
+          "0%": { height: "100%" },
+          "50%": { height: "20%" },
+          "100%": { height: "100%" },
+        },
       },
       animation: {
         shake: "shake 0.1s ease-in-out",
         "infinite-scroll": "infinite-scroll 25s linear infinite",
+        "fade-up-gentle": "fade-up-gentle 0.5s ease-out",
+        "shrink-in-height-fast": "shrink-in-height 0.5s ease-in-out infinite",
+        "shrink-in-height-slow": "shrink-in-height 2s ease-in-out infinite",
+        "shrink-in-height-medium": "shrink-in-height 1s ease-in-out infinite",
       },
       fontFamily: {
         rounded: ["Arial Rounded", "sans-serif"],
@@ -47,7 +61,7 @@ export default {
     fontFamily: {
       sans: ["Pretendard Variable", "Pretendard", "Inter", "sans-serif"],
       mono: [
-        "Fragment Mono",
+        "Commit Mono",
         "ui-monospace",
         "SFMono-Regular",
         "Liberation Mono",

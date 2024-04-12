@@ -35,6 +35,8 @@ processDirectory("./content").then(() => {
 })
 
 const generateImage = async (path, folder, file) => {
+  if (path.includes("./content/data")) return
+
   const markdown = await readFile(path, "utf-8")
   const properties = markdown.match(/---(.*?)---/s)[1].split("\n")
 
