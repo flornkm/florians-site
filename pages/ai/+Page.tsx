@@ -2,6 +2,7 @@ import Button from "#components/Button"
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
 import { Send } from "#design-system/Icons"
 import LoadingSpinner from "#components/LoadingSpinner"
+import { AiSwitch } from "#components/Navigation"
 
 const decoder = new TextDecoder()
 
@@ -273,6 +274,9 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           : "bg-white dark:bg-black lg:z-50 z-[52]")
       }
     >
+      <div class="absolute top-10 right-6 lg:hidden">
+        <AiSwitch />
+      </div>
       <div class="flex flex-col items-center max-w-md p-4">
         <div
           class={

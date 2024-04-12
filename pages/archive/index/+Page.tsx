@@ -12,7 +12,12 @@ export default function Page() {
           {tabs.map((tab) => (
             <button
               onClick={(e) => {
-                if (e.detail === 1) e.preventDefault()
+                if (
+                  e.detail === 1 &&
+                  typeof window !== "undefined" &&
+                  window.innerWidth > 768
+                )
+                  e.preventDefault()
                 else window.location.href = tab.path
               }}
               className="p-4 relative rounded-lg flex items-center justify-center group cursor-default active:scale-95 transition-transform duration-75"

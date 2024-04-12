@@ -55,7 +55,7 @@ export default function Slider(props: {
           function={() => {
             slider.current?.prev()
           }}
-          class="shadow-black/5 pointer-events-auto aspect-square -ml-2 px-6 justify-center lg:w-2 hover:pl-5 hover:pr-7 lg:shadow-xl"
+          class="shadow-black/5 pointer-events-auto aspect-square -ml-2 px-2 h-10 lg:px-5 justify-center lg:w-2 lg:hover:pl-4 hover:pr-6 lg:shadow-xl"
         >
           <div class="flex-shrink-0">
             <ArrowLeft size={20} />
@@ -67,7 +67,7 @@ export default function Slider(props: {
           function={() => {
             slider.current?.next()
           }}
-          class="shadow-black/5 pointer-events-auto aspect-square -mr-2 px-6 lg:w-2 justify-center hover:pr-5 hover:pl-7 lg:shadow-xl"
+          class="shadow-black/5 pointer-events-auto aspect-square -mr-2 h-10 lg:px-5 lg:w-2 justify-center lg:hover:pr-4 hover:pl-6 lg:shadow-xl"
         >
           <div class="flex-shrink-0">
             <ArrowRight size={20} />
