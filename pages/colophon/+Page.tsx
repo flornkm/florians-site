@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <div class="w-full">
-      <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row py-4 md:mb-4">
+      <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row pb-4 md:mb-4">
         <div class="lg:w-1/3 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
           <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
             {m.colophon_title()}

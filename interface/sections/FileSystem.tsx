@@ -58,7 +58,7 @@ export default function FileSystem(props: {
   const { urlPathname } = pageContext
 
   return (
-    <section class="w-full flex flex-col lg:flex-row lg:py-4 md:mb-4 mb-12">
+    <section class="w-full flex flex-col lg:flex-row lg:pb-4 md:mb-4 mb-12">
       {tabs.find((tab) => tab.path === urlPathname) ? (
         <div class="flex items-center mb-4 py-2 sticky top-0 lg:top-14 z-50 lg:hidden bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90">
           <div class="flex relative">
