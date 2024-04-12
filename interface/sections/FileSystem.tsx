@@ -59,17 +59,21 @@ export default function FileSystem(props: {
 
   return (
     <section class="w-full flex flex-col lg:flex-row lg:py-4 md:mb-4 mb-12">
-      <div class="flex items-center mb-4 py-2 sticky top-0 lg:top-14 z-50 lg:hidden bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90">
-        <div class="flex relative">
-          <InlineLink link="/archive" class="px-1.5 -ml-1.5">
-            Archive
-          </InlineLink>
-          {tabs.find((tab) => tab.path === urlPathname) && <p> / </p>}
-          <p class="font-medium px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
-            {tabs.find((tab) => tab.path === urlPathname)?.name}
-          </p>
+      {tabs.find((tab) => tab.path === urlPathname) ? (
+        <div class="flex items-center mb-4 py-2 sticky top-0 lg:top-14 z-50 lg:hidden bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90">
+          <div class="flex relative">
+            <InlineLink link="/archive" class="px-1.5 -ml-1.5">
+              Archive
+            </InlineLink>
+            {tabs.find((tab) => tab.path === urlPathname) && <p> / </p>}
+            <p class="font-medium px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
+              {tabs.find((tab) => tab.path === urlPathname)?.name}
+            </p>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div class="h-4" />
+      )}
       <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8 h-full">
         <h1 class="text-2xl line-clamp-2 mb-6 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
           Archive
