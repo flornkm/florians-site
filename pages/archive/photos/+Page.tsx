@@ -2,7 +2,7 @@ import { FolderIllustration } from "#design-system/Vectors"
 import FileSystem from "#sections/FileSystem"
 import { useState } from "preact/hooks"
 
-export const photos = [
+const photos = [
   {
     src: "/images/archive/photos/IMG_6790.webp",
   },

@@ -1,10 +1,9 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
 import Vectorfiles from "../../pages/archive/copyables/assets/vectorfiles.json"
-import { photos } from "../../pages/archive/photos/+Page.jsx"
-import { posts } from "../../pages/archive/posts/+Page.jsx"
 import { InlineLink } from "#components/Button"
 
+// TODO: Auto fill the amount of items in each tab
 export const tabs = [
   {
     name: "Projects",
@@ -34,7 +33,7 @@ export const tabs = [
     name: "Photos",
     path: "/archive/photos",
     items: {
-      amount: photos.length,
+      amount: 10,
       label: "photos",
     },
   },
@@ -42,7 +41,7 @@ export const tabs = [
     name: "Posts",
     path: "/archive/posts",
     items: {
-      amount: posts.length,
+      amount: 13,
       label: "posts",
     },
   },
@@ -60,14 +59,16 @@ export default function FileSystem(props: {
 
   return (
     <section class="w-full flex flex-col lg:flex-row lg:py-4 md:mb-4 mb-12">
-      <div class="flex relative lg:hidden mb-6 pt-2">
-        <InlineLink link="/archive" class="px-1.5 -ml-1.5">
-          Archive
-        </InlineLink>
-        {tabs.find((tab) => tab.path === urlPathname) && <p> / </p>}
-        <p class="font-medium px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
-          {tabs.find((tab) => tab.path === urlPathname)?.name}
-        </p>
+      <div class="flex items-center mb-4 py-2 sticky top-0 lg:top-14 z-50 lg:hidden bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90">
+        <div class="flex relative">
+          <InlineLink link="/archive" class="px-1.5 -ml-1.5">
+            Archive
+          </InlineLink>
+          {tabs.find((tab) => tab.path === urlPathname) && <p> / </p>}
+          <p class="font-medium px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
+            {tabs.find((tab) => tab.path === urlPathname)?.name}
+          </p>
+        </div>
       </div>
       <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8 h-full">
         <h1 class="text-2xl line-clamp-2 mb-6 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
