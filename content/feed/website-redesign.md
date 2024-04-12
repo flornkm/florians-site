@@ -30,4 +30,4 @@ Drawer Component instead of default popup modals. This is, at least in my opinio
 
 ## What's next?
 
-Finetuning, working, and building, as you might know, missingfont.com. So I guess, see you in a bit!
+Finetuning, working, and building. So I guess, see you in a bit!
