@@ -1,6 +1,6 @@
 import { InlineInfo } from "#components/Inline"
 import Tooltip from "#components/Tooltip"
-import { Expand } from "#design-system/Icons"
+import { Check, Expand } from "#design-system/Icons"
 import { PhotoSlider } from "#components/Slider"
 import Button, { InlineLink } from "#components/Button"
 import * as m from "#lang/paraglide/messages"
@@ -202,6 +202,7 @@ export default function Page() {
         </div>
         <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full lg:pl-8" />
       </section>
+      <div class="relative lg:block hidden"></div>
       <div class="w-full overflow-hidden flex items-center justify-between lg:justify-center mb-12">
         <p class="text-[22vw] rotate-1 text-center flex tracking-tighter letter-rotate leading-none inset-0 bg-gradient-to-t from-neutral-100 to-neutral-200 text-transparent bg-clip-text dark:from-neutral-900 dark:to-neutral-800">
           Fu
@@ -216,7 +217,7 @@ export default function Page() {
           ea
         </p>
       </div>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16">
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-8">
         <h3 class="text-lg font-semibold max-w-nav w-full relative z-10">
           {m.about_apps_title()}
         </h3>
@@ -299,37 +300,57 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto mb-16">
-        <div class="flex flex-col items-start lg:max-w-[calc(((100%-432px)/2)+432px)] lg:pr-2 relative lg:mb-0 mb-24">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4">
-            {m.about_photos_title()}
-          </h3>
-          <PhotoSlider autoPlay buttons />
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 p-8 relative z-10">
+        <h3 class="text-lg font-semibold max-w-nav w-full relative z-10 mb-12">
+          Favorite meals
+        </h3>
+        <div class="w-full grid 2xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-16 lg:justify-center lg:flex-row max-w-4xl">
+          <div class="flex flex-col items-center">
+            <img
+              src="/images/about/meals/healthy-chicken.webp"
+              alt="Food"
+              class="h-48 mb-8 mx-auto object-contain"
+            />
+            <h4 class="font-semibold mb-1">Healthy Chicken</h4>
+            <p class="text-neutral-500 dark:text-neutral-400 font-mono">
+              576 cal
+            </p>
+          </div>
+          <div class="flex flex-col items-center">
+            <img
+              src="/images/about/meals/avocado-bread.webp"
+              alt="Food"
+              class="h-48 mb-8 mx-auto object-contain"
+            />
+            <h4 class="font-semibold mb-1">Avocado Bread</h4>
+            <p class="text-neutral-500 dark:text-neutral-400 font-mono">
+              432 cal
+            </p>
+          </div>
+          <div class="flex flex-col items-center">
+            <img
+              src="/images/about/meals/tasty-ramen.webp"
+              alt="Food"
+              class="h-48 mb-8 mx-auto object-contain"
+            />
+            <h4 class="font-semibold mb-1">Tasty Ramen</h4>
+            <p class="text-neutral-500 dark:text-neutral-400 font-mono">
+              632 cal
+            </p>
+          </div>
         </div>
-        <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full flex-shrink-0 lg:pl-8">
+      </section>
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 p-8 relative z-10">
+        <div class="w-full max-w-nav">
           <h3 class="text-lg font-semibold mb-4 md:mb-4">Bucketlist</h3>
-          <div class="grid 2xl:grid-cols-2 gap-4">
+          <div class="grid 2xl:grid-cols-2 gap-8">
             <ul class="w-full">
               {bucketList
                 .filter((item) => item.checked)
                 .map((item) => {
                   return (
-                    <li class="flex gap-2 font-mono mb-4 text-neutral-500 dark:text-neutral-400">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="flex-shrink-0 text-neutral-400 dark:text-neutral-500 mt-1"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M4 8.66602L5.84162 13.666H7.75373L12.0721 2H10.0526L6.87287 11.2598H6.74396L5.8533 8.66602H4Z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                    <li class="flex gap-2 mb-4 text-neutral-500 dark:text-neutral-400 items-center">
+                      <Check class="w-3.5 h-3.5 flex-shrink-0 text-neutral-500 dark:text-neutral-400" />
                       <p>{item.name}</p>
                     </li>
                   )
@@ -340,7 +361,7 @@ export default function Page() {
                 .filter((item) => !item.checked)
                 .map((item) => {
                   return (
-                    <li class="flex gap-2 font-mono mb-4 text-black dark:text-white">
+                    <li class="flex gap-2 mb-4 text-black dark:text-white">
                       <svg
                         width="16"
                         height="16"
@@ -366,54 +387,22 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto mb-16">
+      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto mb-16 justify-center relative z-10">
+        <div class="flex flex-col items-start lg:max-w-[calc(((100%-432px)/2)+432px)] relative lg:mb-0 mb-16">
+          <h3 class="text-lg font-semibold mb-4 md:mb-4 lg:max-w-nav mx-auto w-full">
+            {m.about_photos_title()}
+          </h3>
+          <PhotoSlider autoPlay buttons />
+        </div>
+      </section>
+      <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto mb-16 relative z-10">
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full"></div>
         <div class="flex flex-col max-w-nav mr-auto"></div>
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full ml-auto"></div>
       </section>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-32 bg-neutral-100 md:py-12 p-8 dark:bg-[#101010]">
-        <h3 class="text-lg font-semibold max-w-nav w-full relative z-10 mb-12">
-          Favorite meals
-        </h3>
-        <div class="w-full grid 2xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-16 lg:justify-center lg:flex-row max-w-4xl">
-          <div>
-            <img
-              src="/images/about/meals/healthy-chicken.webp"
-              alt="Food"
-              class="h-48 mb-8 mx-auto object-contain"
-            />
-            <h4 class="font-semibold mb-1">Healthy Chicken</h4>
-            <p class="text-neutral-500 dark:text-neutral-400 font-mono">
-              576 cal
-            </p>
-          </div>
-          <div>
-            <img
-              src="/images/about/meals/avocado-bread.webp"
-              alt="Food"
-              class="h-48 mb-8 mx-auto object-contain"
-            />
-            <h4 class="font-semibold mb-1">Avocado Bread</h4>
-            <p class="text-neutral-500 dark:text-neutral-400 font-mono">
-              432 cal
-            </p>
-          </div>
-          <div>
-            <img
-              src="/images/about/meals/tasty-ramen.webp"
-              alt="Food"
-              class="h-48 mb-8 mx-auto object-contain"
-            />
-            <h4 class="font-semibold mb-1">Tasty Ramen</h4>
-            <p class="text-neutral-500 dark:text-neutral-400 font-mono">
-              632 cal
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="w-full flex flex-col lg:flex-row lg:max-w-none max-w-md mx-auto lg:mb-32">
-        <div class="w-full lg:max-w-[calc((100%-432px)/2)] max-w-nav lg:pr-8 mb-12 lg:mb-0">
-          <h3 class="text-lg font-semibold mb-8">Movies</h3>
+      <section class="w-full flex flex-col gap-24 mx-auto mb-24">
+        <div class="lg:max-w-nav w-full flex-shrink-0 mb-12 lg:mb-0 mx-auto relative z-10">
+          <h3 class="text-lg font-semibold mb-4">Movies</h3>
           <div class="grid md:grid-cols-2 gap-8">
             <Movies
               movies={[
@@ -433,8 +422,8 @@ export default function Page() {
             />
           </div>
         </div>
-        <div class="lg:max-w-nav w-full flex-shrink-0 mb-12 lg:mb-0">
-          <h3 class="text-lg font-semibold mb-8">Songs</h3>
+        <div class="lg:max-w-nav w-full flex-shrink-0 lg:mb-0 mx-auto">
+          <h3 class="text-lg font-semibold mb-4">Songs</h3>
           <div class="grid md:grid-cols-2 gap-8">
             <Music
               music={[
@@ -455,7 +444,6 @@ export default function Page() {
             />
           </div>
         </div>
-        <div class="md:mb-0 w-full lg:max-w-[calc((100%-432px)/2)] lg:h-80 flex-col flex items-end justify-end" />
       </section>
     </div>
   )
@@ -467,13 +455,13 @@ const Music = ({ music }: { music: Record<string, string>[] }) => {
       {music.map((song) => {
         return (
           <div class="mb-8 flex flex-col items-start w-full">
-            <div class="flex items-center flex-col gap-4 w-full mb-2">
+            <div class="flex items-center flex-col gap-4 w-full mb-[27px]">
               <img
                 alt={song.name}
                 src={song.cover}
                 class="w-40 aspect-square mb-4 rounded-full active:cursor-progress md:hover:rotate-[360deg] transition-transform duration-1000 selection:bg-transparent"
               />
-              <Button type="secondary" class="w-full" link={song.link}>
+              <Button type="text" class="w-full" link={song.link}>
                 <p class="mx-auto selection:bg-transparent selection:text-black">
                   Spotify
                 </p>

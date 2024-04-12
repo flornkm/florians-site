@@ -98,6 +98,8 @@ export default function Navigation() {
       <div class="items-center flex-shrink-0 mr-6 hidden md:flex">
         <div
           onClick={() => {
+            if (typeof window !== "undefined")
+              document.body.style.overflow = "auto"
             navigate(getLocale() + "/")
           }}
           class="group/all -ml-1 cursor-pointer"

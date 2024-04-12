@@ -83,7 +83,7 @@ export default function Letters() {
 
   return (
     <div
-      class="overflow-hidden pt-16 max-w-4xl mx-auto px-8"
+      class="overflow-hidden pt-16 max-w-4xl mx-auto md:px-8 px-5"
       onClick={() => setZoom(-1)}
     >
       <h3 class="text-2xl font-semibold text-center md:mb-8">

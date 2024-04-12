@@ -54,17 +54,18 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
 
               if (popup.current) {
                 const diffY = e.touches[0].clientY - startY
-                if (diffY > 0 && !close)
+                if (!close)
                   popup.current.style.height = `calc(100% - ${diffY}px)`
-                else if (close)
-                  e.preventDefault(),
-                    setTimeout(
-                      () => (popup.current!.style.height = "100%"),
-                      150
-                    )
               }
             }
             window.addEventListener("touchmove", onMove)
+          }}
+          onTouchEnd={() => {
+            if (popup.current) {
+              popup.current.style.transition =
+                "all cubic-bezier(0.4, 0, 0.2, 1) 0.15s"
+              popup.current.style.height = "100%"
+            }
           }}
           style={{
             transform: isMobile ? "translateY(32px)" : "scale(0.95)",
@@ -73,7 +74,7 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
           ref={popup}
           class="w-full h-full bg-white rounded-t-3xl md:rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
-          <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-20 bg-neutral-200 rounded-full" />
+          <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-2 h-1.5 w-20 bg-neutral-200 rounded-full dark:bg-neutral-800" />
           <Button
             type="secondary"
             function={onClose}
