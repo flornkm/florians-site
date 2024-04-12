@@ -1,5 +1,4 @@
 import README from "#components/README"
-import Tooltip from "#components/Tooltip"
 import { FolderIllustration } from "#design-system/Vectors"
 import * as m from "#lang/paraglide/messages"
 import FileSystem, { tabs } from "#sections/FileSystem"

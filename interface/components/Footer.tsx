@@ -197,7 +197,7 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <p class="text-neutral-400 dark:text-neutral-600 font-mono text-sm">
+            <p class="text-neutral-400 dark:text-neutral-600 text-sm">
               {m.footer_tip()}
             </p>
           </div>

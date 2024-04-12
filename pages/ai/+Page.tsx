@@ -171,7 +171,11 @@ export default function Page() {
         >
           <input
             ref={chatInput}
-            disabled={loading}
+            disabled={
+              loading ||
+              (messages.length > 0 &&
+                messages[messages.length - 1].content === "Unauthorized")
+            }
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault()

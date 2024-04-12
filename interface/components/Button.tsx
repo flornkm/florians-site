@@ -36,7 +36,7 @@ export default function Button(props: {
         props.class +
         " " +
         (props.type !== "text"
-          ? "font-semibold rounded-md transition-all duration-200 px-4 py-2 " +
+          ? "font-medium rounded-md transition-all duration-200 px-4 py-2 " +
             (props.type === "primary"
               ? "text-white bg-neutral-900 hover:bg-neutral-800 dark:text-black dark:bg-white dark:hover:bg-neutral-200 "
               : "border text-black border-neutral-200 hover:bg-neutral-100 hover:text-neutral-800 dark:text-white dark:bg-transparent dark:hover:bg-neutral-900 dark:hover:text-neutral-200 dark:border-neutral-800")
@@ -78,17 +78,6 @@ export function InlineLink(props: {
   hideWeight?: boolean
   inlineImageUrl?: string
 }) {
-  const [fetchable, setFetchable] = useState<Boolean>(false)
-
-  useEffect(() => {
-    if (!props.inlineImageUrl) return
-    fetch(props.inlineImageUrl)
-      .then((res) => res.ok && setFetchable(true))
-      .finally(() => {
-        console.log("Fetched inline image.")
-      })
-  }, [fetchable, props.inlineImageUrl])
-
   return (
     <a
       class={
@@ -100,7 +89,7 @@ export function InlineLink(props: {
       href={props.link}
       target={props.link && props.link.includes("http") ? "_blank" : "_self"}
     >
-      {props.inlineImageUrl && fetchable && (
+      {props.inlineImageUrl && (
         <img
           class="w-6 aspect-square ml-1 rounded-sm inline-block mx-1 -translate-y-0.5"
           src={props.inlineImageUrl}

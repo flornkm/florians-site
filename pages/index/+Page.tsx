@@ -29,9 +29,9 @@ export default function Page({ projects }: { projects: any[] }) {
         <Letters />
       </section>
       <section class="w-full flex items-center md:flex-row flex-col overflow-hidden">
-        <div class="w-full relative h-full mb-24 lg:mb-0 py-16">
+        <div class="w-full relative h-full py-16">
           <div class="w-full relative max-w-screen-md mx-auto z-10">
-            <div class="max-w-4xl">
+            <div class="max-w-2xl">
               <h2 class="text-xl font-semibold leading-snug mb-4">
                 {m.waitlist_heading()}
               </h2>
