@@ -347,7 +347,8 @@ export default function Tooltip(props: {
               , <InlineLink link="https://sdrn.co/">Siddharth Arun</InlineLink>,
               and{" "}
               <InlineLink link="https://endless.design/">Daryl Ginn</InlineLink>
-              .
+              . {m.text_inspiration_second()}{" "}
+              <InlineLink link="https://www.delphi.ai/home">Delphi</InlineLink>
             </p>
           </div>
 

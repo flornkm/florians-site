@@ -4457,6 +4457,33 @@
       "alias": {}
     },
     {
+      "id": "text_inspiration_second",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Regarding the AI clone, I got inspired by"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "关于人工智能克隆，我受到了以下启发："
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "text_mockups_first",
       "selectors": [],
       "variants": [
