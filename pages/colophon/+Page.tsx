@@ -26,17 +26,14 @@ export default function Page() {
 
   return (
     <div class="w-full">
-      <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row py-4 md:mb-8">
-        <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
+      <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row py-4 md:mb-4">
+        <div class="lg:w-1/3 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
           <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
             {m.colophon_title()}
           </h1>
         </div>
       </section>
-      <section class="w-full lg:pt-8 relative min-h-screen flex flex-col">
-        {/*
-        First grid col should be calc((100%-432px)/2) wide and the second grid col should be full width
-        */}
+      <section class="w-full relative min-h-screen flex flex-col">
         <div class="grid grid-cols-1 md:grid-cols-[repeat(1,_calc((100%-432px)/2)_calc(432px+(100%-432px)/2))] lg:gap-y-16 gap-y-4 md:items-start order-4 md:order-3 pb-32">
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_typography()}
@@ -50,7 +47,6 @@ export default function Page() {
               {m.text_typography_second()}
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_iconography()}
           </p>
@@ -63,7 +59,6 @@ export default function Page() {
               {m.text_iconography_second()}
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_photography()}
           </p>
@@ -84,7 +79,7 @@ export default function Page() {
               .
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
+
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_mockups()}
           </p>
@@ -97,7 +92,6 @@ export default function Page() {
               {m.text_mockups_second()}
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_ui_elements()}
           </p>
@@ -133,6 +127,8 @@ export default function Page() {
             <div class="bg-neutral-100 rounded-xl group px-2 pb-2 dark:bg-neutral-950 mb-12">
               <div class="w-full lg:h-64 h-auto py-8 relative overflow-hidden flex items-center justify-center px-4 lg:px-16">
                 <Slider>
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
+                  <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
                   <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
                   <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
                   <div class="bg-neutral-200 w-32 rounded-md aspect-square mr-8 dark:bg-neutral-700" />
@@ -256,7 +252,6 @@ export default function Tooltip(props: {
             </div>
           </div>
 
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_tech_stack()}
           </p>
@@ -319,7 +314,7 @@ export default function Tooltip(props: {
               </li>
             </ul>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
+
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_hosting()}
           </p>
@@ -331,7 +326,7 @@ export default function Tooltip(props: {
               <InlineLink link="https://github.com/">GitHub</InlineLink>.
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
+
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_inspiration()}
           </p>
@@ -355,7 +350,7 @@ export default function Tooltip(props: {
               .
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
+
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_great_humans()}
           </p>
@@ -374,7 +369,7 @@ export default function Tooltip(props: {
               <InlineLink link="https://inlang.com/">inlang</InlineLink> here.
             </p>
           </div>
-          {/* <div class="border-b border-b-neutral-100 my-2 dark:border-b-neutral-900 md:col-span-2" /> */}
+
           <p class="font-semibold leading-snug flex items-center mb-0 mt-8 lg:mt-0">
             {m.title_feedback()}
           </p>

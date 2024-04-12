@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <div class="w-full">
       <section class="w-full lg:pt-4 relative min-h-screen flex flex-col max-w-nav mx-auto">
-        <h1 class="text-3xl font-semibold mb-4">{m.privacy_policy_title()}</h1>
+        <h1 class="text-2xl font-semibold mb-4">{m.privacy_policy_title()}</h1>
         <div class="text-neutral-500 mb-16 dark:text-neutral-400">
           <p class="mb-4">{m.privacy_policy_notification()}</p>
           <p class="mb-16">

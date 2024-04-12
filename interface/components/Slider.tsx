@@ -16,9 +16,13 @@ export default function Slider(props: {
   const slider = useRef<Flicking>(null)
   const [panelsNumber, setPanelsNumber] = useState(() =>
     typeof window !== "undefined"
-      ? window.innerWidth > 1250
-        ? 3
+      ? window.innerWidth > 1400
+        ? 5
+        : window.innerWidth > 1250
+        ? 4
         : window.innerWidth > 1023
+        ? 3
+        : window.innerWidth > 768
         ? 2
         : 1
       : 1
@@ -29,7 +33,15 @@ export default function Slider(props: {
 
   useWindowResize(() => {
     setPanelsNumber(
-      window.innerWidth > 1250 ? 3 : window.innerWidth > 1023 ? 2 : 1
+      window.innerWidth > 1400
+        ? 5
+        : window.innerWidth > 1250
+        ? 4
+        : window.innerWidth > 1023
+        ? 3
+        : window.innerWidth > 768
+        ? 2
+        : 1
     )
   })
 

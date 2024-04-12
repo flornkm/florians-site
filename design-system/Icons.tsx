@@ -29,7 +29,7 @@ export function Folder(props: {
       <path
         d="M3 4V19H21V7H12L10 4H3Z"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -49,7 +49,7 @@ export function TextFile(props: {
       <path
         d="M13 3H5V21H19V9M13 3L19 9M13 3V9H19M9 13H12M9 17H15.5"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -69,7 +69,7 @@ export function File(props: {
       <path
         d="M13 3H5V21H19V9M13 3L19 9M13 3V9H19"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -89,7 +89,7 @@ export function Edit(props: {
       <path
         d="M13.5 6L16.5 3L21 7.5L18 10.5M13.5 6L3 16.5V21H7.5L18 10.5M13.5 6L18 10.5"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -109,7 +109,7 @@ export function Alert(props: {
       <path
         d="M11.9961 10.0156V12.0121M11.999 15H12.009M11.1344 3.49213L2.88563 17.4956C2.49362 18.1611 2.97412 19 3.74728 19H20.2449C21.0181 19 21.4986 18.1611 21.1066 17.4956L12.8577 3.49213C12.4712 2.83596 11.521 2.83596 11.1344 3.49213ZM12.249 15C12.249 15.1381 12.1371 15.25 11.999 15.25C11.861 15.25 11.749 15.1381 11.749 15C11.749 14.8619 11.861 14.75 11.999 14.75C12.1371 14.75 12.249 14.8619 12.249 15Z"
         stroke="black"
-        stroke-width="2"
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
       />
     </Icon>
@@ -127,7 +127,7 @@ export function Expand(props: {
       <path
         d="M14 4H20V10M14 10L19.25 4.75M10 14L4.75 19.25M4 14V20H10"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -164,7 +164,7 @@ export function Chevron(props: {
       <path
         d="M9 4L17 12L9 20"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -211,7 +211,7 @@ export function Check(props: {
       <path
         d="M3 15L9.29412 20L21 4"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -231,7 +231,7 @@ export function Close(props: {
       <path
         d="M5 5L19 19M19 5L5 19"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -252,7 +252,7 @@ export function ArrowRight(props: {
       <path
         d="M14 6L20 12L14 18M19 12H4"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -273,7 +273,7 @@ export function ArrowLeft(props: {
       <path
         d="M10 6L4 12L10 18M5 12H20"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -314,7 +314,7 @@ export function Plus(props: {
       <path
         d="M12 4V12M12 12V20M12 12H4M12 12H20"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         vector-effect="non-scaling-stroke"
       />
@@ -354,7 +354,7 @@ export function Star(props: {
       <path
         d="M12 2L14.8769 8.00573L21.5 8.87539L16.655 13.4568L17.8713 20L12 16.8257L6.12868 20L7.345 13.4568L2.5 8.87539L9.12305 8.00573L12 2Z"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -375,7 +375,7 @@ export function Share(props: {
       <path
         d="M3 8V19H19M8 14V13C8 10.2386 10.2386 8 13 8H20M20 8L16.5 4.5M20 8L16.5 11.5"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -396,7 +396,7 @@ export function Sports(props: {
       <path
         d="M12 12C13.35 9.51506 13.35 5.48495 12 3M12 12C9.17306 12.0739 5.68337 14.088 4.20642 16.5M12 12C13.477 14.412 16.9671 16.4261 19.794 16.5M7.50371 13.4343C9.20613 16.2139 12.4045 18.6922 15.8159 20.1426M3.04441 11.153C6.03241 8.96273 9.75937 7.47157 13.0079 7.38725M15.4934 15.1784C17.049 12.3145 17.5994 8.30998 17.157 4.62945M18.364 5.63604C21.8787 9.15077 21.8787 14.8493 18.364 18.364C14.8492 21.8787 9.15074 21.8787 5.63604 18.364C2.12132 14.8492 2.12132 9.15074 5.63604 5.63604C9.15077 2.12132 14.8493 2.12132 18.364 5.63604Z"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         stroke-linejoin="round"
         vector-effect="non-scaling-stroke"
@@ -417,7 +417,7 @@ export function Translate(props: {
       <path
         d="M19.7783 4.22183L4.22197 19.7782M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM18.3644 18.364C17.1928 19.5355 13.3939 17.636 9.87913 14.1213C6.36441 10.6066 4.46492 6.8076 5.63649 5.63603C6.80807 4.46446 10.6071 6.36395 14.1218 9.87867C17.6365 13.3934 19.536 17.1924 18.3644 18.364Z"
         stroke="currentColor"
-        stroke-width={props.stroke || 2}
+        stroke-width={props.stroke || 1.5}
         stroke-linecap="round"
         vector-effect="non-scaling-stroke"
       />
