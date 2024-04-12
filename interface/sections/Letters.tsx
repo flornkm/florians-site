@@ -1,8 +1,15 @@
 import { useRef, useState, useEffect, StateUpdater } from "preact/hooks"
 import SignaturePad from "signature_pad"
-import { Close, Plus, Expand, Collapse } from "#design-system/Icons"
+import {
+  Alert,
+  ArrowLeft,
+  Close,
+  Collapse,
+  Expand,
+  Plus,
+} from "#design-system/Icons"
 import NoPrerender from "../components/NoPrerender"
-import Button from "../components/Button"
+import Button, { ButtonWrapper } from "../components/Button"
 import Tooltip from "../components/Tooltip"
 import LoadingSpinner from "#components/LoadingSpinner"
 import * as m from "#lang/paraglide/messages"
@@ -75,8 +82,11 @@ export default function Letters() {
   }
 
   return (
-    <div class="overflow-hidden pt-40" onClick={() => setZoom(-1)}>
-      <h3 class="text-2xl font-semibold text-center md:mb-8 mb-16">
+    <div
+      class="overflow-hidden pt-16 max-w-4xl mx-auto md:px-8 px-5"
+      onClick={() => setZoom(-1)}
+    >
+      <h3 class="text-2xl font-semibold text-center md:mb-8">
         {m.letters_title()}
       </h3>
       <div>
@@ -85,13 +95,20 @@ export default function Letters() {
             <SendLetter setShowLetter={setShowLetter} setLetters={setLetters} />
           </NoPrerender>
         </div>
-        <div class="w-full h-[512px] relative flex items-end justify-center group/letter">
+        <div
+          style={{
+            perspective: "1000px",
+          }}
+          class="w-full h-[616px] mt-20 relative flex items-end justify-center group/letter"
+        >
           {letterArray.length > 0 ? (
             letterArray.map((letter) => {
               return (
                 <div
                   onClick={(e) => {
                     e.stopPropagation()
+                    if (zoom === -1) setZoom(letterArray.indexOf(letter))
+                    else setZoom(-1)
                   }}
                   style={{
                     top:
@@ -110,46 +127,67 @@ export default function Letters() {
                       zoom !== -1 && zoom !== letterArray.indexOf(letter)
                         ? 0
                         : 1,
+                    transform:
+                      zoom !== -1
+                        ? "rotateX(0)"
+                        : `rotateX(-${
+                            letterArray.indexOf(letter) * 12
+                          }deg) translateZ(0)`,
+                    borderTopWidth:
+                      zoom === -1
+                        ? letterArray.indexOf(letter) === 0
+                          ? "0"
+                          : letterArray.indexOf(letter) === 1
+                          ? "2px"
+                          : "3px"
+                        : "0",
                   }}
                   class={
-                    "rounded-3xl group/singleletter md:w-2/3 w-full mx-auto p-6 border border-zinc-200 bg-zinc-50 absolute shadow-2xl shadow-black/5 transition-all dark:border-zinc-800 dark:bg-zinc-950 " +
+                    "rounded-3xl group/singleletter cursor-pointer w-full mx-auto p-6 bg-neutral-50 absolute shadow-2xl border-t border-t-neutral-200 shadow-black/5 transition-all dark:border-neutral-800 dark:hover:border-neutral-700 " +
                     (zoom === letterArray.indexOf(letter)
-                      ? "bg-white dark:bg-zinc-900"
-                      : "md:hover:-translate-y-8 hover:bg-white hover:shadow-black/10 dark:hover:bg-zinc-900 dark:hover:shadow-none")
+                      ? "bg-white dark:bg-neutral-800"
+                      : "hover:bg-white hover:shadow-black/10 dark:hover:bg-neutral-800 dark:hover:shadow-none dark:bg-neutral-900")
                   }
                 >
-                  {letterArray.indexOf(letter) !== zoom ? (
-                    <Expand
-                      onClick={() => {
-                        setZoom(letterArray.indexOf(letter))
-                      }}
-                      class="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
-                    />
-                  ) : (
-                    <Collapse
-                      onClick={() => {
-                        setZoom(-1)
-                      }}
-                      class="absolute z-10 top-4 border right-4 w-9 h-9 p-1 text-white bg-black hover:bg-zinc-800 border-zinc-800 hover:border-zinc-600 transition-colors rounded-full cursor-pointer dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
-                    />
-                  )}
+                  <Alert
+                    onClick={(e) => {
+                      e!.stopPropagation()
+                      if (typeof window !== "undefined")
+                        window.open(
+                          "https://twitter.com/messages/compose?recipient_id=1053753388289155073&text=There%20is%20a%20weird%20letter%20on%20your%20website!"
+                        )
+                    }}
+                    class={
+                      "absolute -top-12 aspect-square right-4 w-9 h-9 p-1.5 rounded-md flex items-center justify-center z-50 bg-amber-400 hover:bg-amber-300 dark:hover:bg-amber-500 transition-all " +
+                      (zoom === letterArray.indexOf(letter)
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none")
+                    }
+                  />
                   <img
                     src="/images/letter/stamp.png"
                     class="pointer-events-none w-20 absolute top-8 md:block hidden right-8 rotate-6"
                     alt="Signature Stamp"
                   />
-                  <div class="w-full h-80 flex gap-4 md:flex-row flex-col">
+                  <div class="w-full md:h-96 h-80 flex gap-4 md:flex-row flex-col">
                     <div
                       class={
                         "w-full h-full " +
                         (zoom === letterArray.indexOf(letter)
                           ? "text-black dark:text-white"
-                          : "text-zinc-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
+                          : "text-neutral-400 group-hover/singleletter:text-black dark:group-hover/singleletter:text-white")
                       }
                     >
                       <p class="pr-8">{letter.text}</p>
                     </div>
-                    <div class="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
+                    <div
+                      class={
+                        "md:w-[1px] h-[1px] w-full md:h-full bg-neutral-200 flex-shrink-0 " +
+                        (zoom === letterArray.indexOf(letter)
+                          ? "dark:bg-neutral-700"
+                          : "dark:bg-neutral-800 dark:group-hover/singleletter:bg-neutral-700")
+                      }
+                    />
                     <div class="w-full h-1/3 md:h-full flex flex-col justify-end">
                       <img
                         src={letter.signature}
@@ -160,6 +198,10 @@ export default function Letters() {
                   </div>
                   {letter.handle && (
                     <div
+                      style={{
+                        opacity:
+                          zoom === letterArray.indexOf(letter) ? "100%" : "0%",
+                      }}
                       class={
                         "absolute -top-8 transition-opacity pointer-events-none flex " +
                         (zoom === letterArray.indexOf(letter)
@@ -185,7 +227,7 @@ export default function Letters() {
               class="-translate-y-32"
             />
           )}
-          <div class="absolute w-full bottom-0 z-10 md:pb-32 pt-24 pb-16">
+          <div class="absolute w-full bottom-0 z-10 md:pb-24 pt-24 pb-16">
             <div
               class={
                 "relative group transition-opacity " +
@@ -198,7 +240,7 @@ export default function Letters() {
                 </Tooltip>
               )}
               <Button
-                type="secondary"
+                type="primary"
                 class={
                   "mx-auto pl-4 relative z-20 " +
                   (disableButton || letterArray.length === 0
@@ -219,7 +261,7 @@ export default function Letters() {
                 </>
               </Button>
             </div>
-            <div class="absolute bg-light-zinc inset-0 blur-lg dark:bg-black" />
+            <div class="absolute bg-neutral-100 inset-0 blur-lg dark:bg-[#101010]" />
           </div>
         </div>
       </div>
@@ -257,16 +299,10 @@ function SendLetter(props: {
     }
   }
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      props.setShowLetter()
-      window.removeEventListener("keydown", () => {})
-    }
-  })
-
   return (
     <div
       class="fixed inset-0 bg-black/25 z-[52] flex justify-center items-center"
+      id="letter-popup"
       onClick={props.setShowLetter}
     >
       <div class="w-full md:h-3/5 h-auto max-w-6xl md:px-10 px-6">
@@ -278,12 +314,16 @@ function SendLetter(props: {
             opacity: "0%",
             transform: "scale(0.95)",
           }}
-          class="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-zinc-900"
+          class="w-full h-full bg-white rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
-          <Close
-            onClick={props.setShowLetter}
-            class="absolute z-10 top-4 border right-4 w-9 h-9 p-1.5 text-black bg-zinc-50 hover:bg-white hover:text-zinc-800 border-zinc-200 transition-colors rounded-full cursor-pointer shadow-xl dark:text-black dark:bg-white dark:hover:bg-zinc-200 dark:border-zinc-200 dark:hover:border-zinc-400"
-          />
+          <Button
+            type="secondary"
+            rounded
+            function={props.setShowLetter}
+            class="absolute top-4 right-5 w-10 h-10 flex items-center justify-center z-50 backdrop-blur-lg"
+          >
+            <Close class="w-6 h-6 flex-shrink-0" />
+          </Button>
           <div class="w-full md:h-full h-64 p-6">
             <textarea
               type="text"
@@ -294,10 +334,10 @@ function SendLetter(props: {
                   : setLetterWritten(false)
               }}
               maxLength={100}
-              class="w-full h-full bg-zinc-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-zinc-500/10 focus:border-zinc-300 outline-offset-1 border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
+              class="w-full h-full bg-neutral-100 px-4 py-3 resize-none rounded-xl transition-all outline-transparent focus:outline-4 focus:outline-neutral-500/10 focus:border-neutral-200 outline-offset-1 border border-neutral-100 dark:bg-neutral-800 dark:border-neutral-700 dark:placeholder:text-neutral-500 dark:focus:border-neutral-600 dark:focus:outline-none"
             ></textarea>
           </div>
-          <div class="md:w-[1px] h-[1px] w-full md:h-full bg-zinc-200 flex-shrink-0 dark:bg-zinc-800" />
+          <div class="md:w-[1px] h-[1px] w-full md:h-full bg-neutral-200 flex-shrink-0 dark:bg-neutral-800" />
           <div
             class={
               "w-full md:h-full h-3/5 p-6 flex items-end " +
@@ -306,7 +346,7 @@ function SendLetter(props: {
           >
             <div
               class={
-                "w-full md:h-auto h-full text-zinc-400 text-sm relative " +
+                "w-full md:h-auto h-full text-neutral-400 text-sm relative " +
                 (!letterWritten ? "pointer-events-none" : "")
               }
             >
@@ -320,7 +360,7 @@ function SendLetter(props: {
                     saveSignature()
                   }}
                   class={
-                    "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-zinc-100 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-zinc-800/5 dark:invert " +
+                    "md:h-56 h-32 w-full cursor-draw transition-colors border border-transparent hover:border-neutral-200 rounded-t-xl rounded-br-xl relative -bottom-[1px] dark:hover:border-neutral-800/5 dark:invert " +
                     (!letterWritten ? "pointer-events-none" : "")
                   }
                 />
@@ -335,7 +375,7 @@ function SendLetter(props: {
                   Reset
                 </Button>
               </div>
-              <div class="h-[1px] border-t w-[calc(100%-16px)] border-zinc-300 border-dotted dark:border-zinc-800" />
+              <div class="h-[1px] border-t w-[calc(100%-16px)] border-neutral-300 border-dotted dark:border-neutral-800" />
               <div class="flex md:justify-between md:items-end gap-8 flex-col md:flex-row items-start">
                 <div class="flex items-start flex-col justify-between w-full">
                   <p class="flex-shrink-0 mt-2.5">{m.letter_signature()}</p>
@@ -347,7 +387,7 @@ function SendLetter(props: {
                       ref={handleInput}
                       type="text"
                       placeholder="flornkm"
-                      class="placeholder:text-zinc-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-zinc-500/0 transition-all focus:outline-none focus:border-b-zinc-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-zinc-300 dark:text-white dark:bg-zinc-900 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-600 dark:focus:outline-none"
+                      class="placeholder:text-neutral-400 text-black w-full disabled:opacity-30 disabled:cursor-not-allowed outline-0 outline-neutral-500/0 transition-all focus:outline-none focus:border-b-neutral-400 outline-offset-1 py-1 bg-white border-b border-dotted border-b-neutral-300 dark:text-white dark:bg-neutral-900 dark:border-neutral-700 dark:placeholder:text-neutral-500 dark:focus:border-neutral-600 dark:focus:outline-none"
                     />
                   </div>
                   <p class="flex-shrink-0 mt-2">{m.letter_handle()}</p>
@@ -388,7 +428,7 @@ function SendLetter(props: {
                 class="pointer-events-none"
                 alt="Signature Stamp"
               />
-              <figcaption class="text-[10px] text-zinc-400 mt-1.5 break-all opacity-0 transition-opacity group-hover:opacity-100">
+              <figcaption class="text-[10px] text-neutral-400 mt-1.5 break-all opacity-0 transition-opacity group-hover:opacity-100">
                 {m.letter_roman_empire()}
               </figcaption>
             </figure>

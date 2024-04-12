@@ -10,6 +10,9 @@ date: 05 / 2022
 
 # Ambient Chat
 
+</div>
+<div>
+
 A chatbot that generates answers to your questions.
 
 </div>

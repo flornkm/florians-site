@@ -10,6 +10,9 @@ date: 05 / 2023
 
 # Heartbeat OS
 
+</div>
+<div>
+
 Heart Simulator & Monitoring
 
 </div>

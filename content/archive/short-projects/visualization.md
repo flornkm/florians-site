@@ -10,6 +10,9 @@ date: 05 / 2022
 
 # Visualization
 
+</div>
+<div>
+
 ThreeJS Data Visualization
 
 </div>

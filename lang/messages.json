@@ -25,7 +25,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_boring_first",
@@ -51,7 +52,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_boring_second",
@@ -77,7 +79,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_bucket_list_title",
@@ -103,7 +106,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_contact_title",
@@ -129,7 +133,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_education_at",
@@ -155,7 +160,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_education_now",
@@ -181,7 +187,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_education_title",
@@ -193,7 +200,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "Experience"
+              "value": "Education"
             }
           ]
         },
@@ -207,7 +214,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_education_working",
@@ -233,7 +241,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_comondo_job",
@@ -259,7 +268,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_comondo_slogan",
@@ -285,7 +295,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_freelancer_job",
@@ -311,7 +322,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_freelancer_slogan",
@@ -337,7 +349,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_inlang_job",
@@ -363,7 +376,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_inlang_slogan",
@@ -389,7 +403,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_tritschlerkiem_company",
@@ -415,7 +430,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_tritschlerkiem_job",
@@ -441,7 +457,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_experience_tritschlerkiem_slogan",
@@ -467,7 +484,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_heading",
@@ -493,7 +511,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_born",
@@ -519,7 +538,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_generation",
@@ -545,7 +565,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_later",
@@ -571,7 +592,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_now",
@@ -597,7 +619,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_start",
@@ -623,7 +646,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_where",
@@ -649,7 +673,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_where_tooltip",
@@ -675,7 +700,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_work",
@@ -701,7 +727,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_explainer_text_work_tooltip",
@@ -727,7 +754,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_music_title",
@@ -753,7 +781,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_photos_title",
@@ -779,7 +808,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_socials_title",
@@ -805,7 +835,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "about_title",
@@ -831,6 +862,61 @@
             }
           ]
         }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "ai_description",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "This AI is a clone of me, especially useful for employees who want\n              to ask me questions when I'm not around."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "这个人工智能是我的克隆，对于那些想要<inlang-LineFeed>当我不在的时候问我问题。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai_heading",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Talk to my AI clone"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "与我的 AI 克隆人交谈"
+            }
+          ]
+        }
       ]
     },
     {
@@ -843,7 +929,7 @@
           "pattern": [
             {
               "type": "Text",
-              "value": "In my archive, you will find smaller creations, MVPs, ideas and\n          results from hackathons. Feel free to look through if you are\n          interested."
+              "value": "In my archive, you will find smaller creations, MVPs, ideas and          results from hackathons. Feel free to look through if you are          interested. You have to double click on the folders to open them, just like in the file system."
             }
           ]
         },
@@ -857,7 +943,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "archive_title",
@@ -880,6 +967,61 @@
             {
               "type": "Text",
               "value": "档案"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "ask_me",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Ask me anything!"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "问我任何事情！"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "available",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Available on"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "可在"
             }
           ]
         }
@@ -909,7 +1051,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "bucketlist_found",
@@ -935,7 +1078,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "bucketlist_nyc",
@@ -961,7 +1105,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "bucketlist_startup",
@@ -984,6 +1129,34 @@
             {
               "type": "Text",
               "value": "在初创公司工作"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "bucketlist_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Bucketlist"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "愿望清单"
             }
           ]
         }
@@ -1013,7 +1186,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "bucketlist_usa",
@@ -1039,7 +1213,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_drink_beer",
@@ -1065,7 +1240,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_email",
@@ -1091,7 +1267,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_freelance_work",
@@ -1117,7 +1294,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_go_up",
@@ -1143,7 +1321,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_got_question",
@@ -1169,7 +1348,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_imessage",
@@ -1195,7 +1375,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_job_opportunity",
@@ -1221,7 +1402,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_open",
@@ -1247,7 +1429,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_open_issue",
@@ -1273,7 +1456,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_readmore",
@@ -1299,7 +1483,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_return_home",
@@ -1325,7 +1510,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_send",
@@ -1351,7 +1537,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "button_write_letter",
@@ -1374,6 +1561,34 @@
             {
               "type": "Text",
               "value": "写一封信"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "categories",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "categories"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "类别"
             }
           ]
         }
@@ -1403,7 +1618,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "chat_message_got_it",
@@ -1429,7 +1645,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "chat_message_reach_out_soon",
@@ -1455,7 +1672,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "chat_message_what_can_do",
@@ -1481,7 +1699,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "chat_message_what_name",
@@ -1507,7 +1726,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "colophon_description",
@@ -1533,7 +1753,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "colophon_title",
@@ -1559,7 +1780,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "cover_image_source",
@@ -1582,6 +1804,34 @@
             {
               "type": "Text",
               "value": "封面图片来源"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "description",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Description"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "描述"
             }
           ]
         }
@@ -1611,6 +1861,34 @@
             }
           ]
         }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "designer_developer",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Designer and Developer"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "设计师和开发人员"
+            }
+          ]
+        }
       ]
     },
     {
@@ -1637,7 +1915,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "email_link",
@@ -1660,6 +1939,88 @@
             {
               "type": "Text",
               "value": "电子邮件"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "error_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "You encountered an error."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "您遇到了一个错误。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience_sheet",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Experience Sheet"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "经验表"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "experience_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Experience"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "经验"
             }
           ]
         }
@@ -1689,7 +2050,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "feed_title",
@@ -1715,7 +2077,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_copyright",
@@ -1741,7 +2104,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_link_email",
@@ -1767,7 +2131,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_link_imessage",
@@ -1793,7 +2158,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_about",
@@ -1819,7 +2185,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_archive",
@@ -1845,7 +2212,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_colophon",
@@ -1871,7 +2239,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_feed",
@@ -1897,7 +2266,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_home",
@@ -1923,7 +2293,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_imprint",
@@ -1949,7 +2320,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_page_privacy",
@@ -1975,7 +2347,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_slogan",
@@ -2001,7 +2374,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_text",
@@ -2027,7 +2401,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_tip",
@@ -2053,7 +2428,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_title_connect",
@@ -2079,7 +2455,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "footer_title_pages",
@@ -2102,6 +2479,34 @@
             {
               "type": "Text",
               "value": "页数"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "go_back",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Go back"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "回去"
             }
           ]
         }
@@ -2131,7 +2536,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "icon_photography",
@@ -2157,7 +2563,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "imprint_text_first",
@@ -2183,7 +2590,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "imprint_text_second",
@@ -2209,7 +2617,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "imprint_text_third",
@@ -2235,7 +2644,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "imprint_title",
@@ -2258,6 +2668,61 @@
             {
               "type": "Text",
               "value": "印记"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "job",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Job"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "工作"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "latest_posts",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Latest Posts"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "最新帖子"
             }
           ]
         }
@@ -2287,7 +2752,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "letter_roman_empire",
@@ -2313,7 +2779,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "letter_signature",
@@ -2339,7 +2806,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "letters_loading",
@@ -2365,7 +2833,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "letters_title",
@@ -2391,7 +2860,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "link_contact",
@@ -2417,7 +2887,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "link_email",
@@ -2443,7 +2914,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "link_imessage",
@@ -2469,7 +2941,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_analytics",
@@ -2495,7 +2968,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_contact",
@@ -2521,7 +2995,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_css_framework",
@@ -2547,7 +3022,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_database",
@@ -2573,7 +3049,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_dev_env",
@@ -2599,7 +3076,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_js_framework",
@@ -2625,7 +3103,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_markdown_parsing",
@@ -2651,7 +3130,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_translation",
@@ -2677,7 +3157,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "list_type",
@@ -2700,6 +3181,34 @@
             {
               "type": "Text",
               "value": "类型语法："
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "listen_now",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Listen now"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "现在听"
             }
           ]
         }
@@ -2729,7 +3238,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "main_header_primarybutton",
@@ -2755,7 +3265,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "main_header_secondarybutton",
@@ -2778,6 +3289,34 @@
             {
               "type": "Text",
               "value": "关于"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "meals_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Meals"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "餐食"
             }
           ]
         }
@@ -2807,7 +3346,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "message_often_used",
@@ -2833,7 +3373,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "message_placeholder",
@@ -2859,7 +3400,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "message_to",
@@ -2885,7 +3427,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "message_you",
@@ -2908,6 +3451,61 @@
             {
               "type": "Text",
               "value": "你"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "movies_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Movies"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "电影"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "music_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Music"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "音乐"
             }
           ]
         }
@@ -2937,7 +3535,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "navigation_about",
@@ -2963,7 +3562,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "navigation_archive",
@@ -2989,7 +3589,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "navigation_feed",
@@ -3015,7 +3616,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "navigation_home",
@@ -3041,7 +3643,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "not_found_error_first",
@@ -3067,7 +3670,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "not_found_error_second",
@@ -3090,6 +3694,88 @@
             {
               "type": "Text",
               "value": "请尝试使用另一个页面。"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "open_experience",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Open Experience"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开放体验"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "open_issue",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Open issue"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "开放问题"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "past_worked",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "In the past, I worked at"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "过去，我曾在"
             }
           ]
         }
@@ -3119,7 +3805,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "photo_description_berlin",
@@ -3145,7 +3832,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "photo_description_dinner",
@@ -3171,7 +3859,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "photo_description_festival",
@@ -3197,7 +3886,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "photo_description_inlang_onsite",
@@ -3223,7 +3913,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "photo_description_inlang_outside",
@@ -3246,6 +3937,34 @@
             {
               "type": "Text",
               "value": "inlang 现场 - 与 Felix、Nils、Niklas 和 Jannes 一起站在外面"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "photos_title",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Photos"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "相片"
             }
           ]
         }
@@ -3275,7 +3994,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "privacy_policy_title",
@@ -3298,6 +4018,61 @@
             {
               "type": "Text",
               "value": "隐私政策"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "read_more",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Read more"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "阅读更多"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "send",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Send"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "发送"
             }
           ]
         }
@@ -3327,7 +4102,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "server_error_second",
@@ -3353,7 +4129,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "short_case_study",
@@ -3376,6 +4153,61 @@
             {
               "type": "Text",
               "value": "简短的案例研究"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "site_info",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Site Info"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "网站信息"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Source"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "来源"
             }
           ]
         }
@@ -3405,7 +4237,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_great_humans_first",
@@ -3431,7 +4264,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_great_humans_second",
@@ -3457,7 +4291,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_hosting_first",
@@ -3483,7 +4318,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_hosting_second",
@@ -3509,7 +4345,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_iconography_eva_icons",
@@ -3535,7 +4372,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_iconography_first",
@@ -3561,7 +4399,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_iconography_second",
@@ -3587,7 +4426,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_inspiration_first",
@@ -3613,7 +4453,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_mockups_first",
@@ -3639,7 +4480,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_mockups_second",
@@ -3665,7 +4507,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_photography_first",
@@ -3691,7 +4534,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_star_github",
@@ -3717,7 +4561,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_tech_stack_first",
@@ -3743,7 +4588,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_typography_first",
@@ -3769,7 +4615,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_typography_pretendard",
@@ -3795,7 +4642,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_typography_second",
@@ -3821,7 +4669,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "text_ui_elements_first",
@@ -3844,6 +4693,34 @@
             {
               "type": "Text",
               "value": "以下是我专门为此网站构建的一些元素："
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "time",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Time"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "时间"
             }
           ]
         }
@@ -3873,7 +4750,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_feedback",
@@ -3899,7 +4777,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_great_humans",
@@ -3925,7 +4804,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_hosting",
@@ -3951,7 +4831,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_iconography",
@@ -3977,7 +4858,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_inspiration",
@@ -4003,7 +4885,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_letter_stack",
@@ -4029,7 +4912,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_mockups",
@@ -4055,7 +4939,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_photography",
@@ -4081,7 +4966,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_slider",
@@ -4107,7 +4993,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_star_github",
@@ -4133,7 +5020,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_tech_stack",
@@ -4159,7 +5047,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_tooltip",
@@ -4185,7 +5074,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_typography",
@@ -4211,7 +5101,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "title_ui_elements",
@@ -4237,7 +5128,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "tooltip_example",
@@ -4263,7 +5155,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "tooltip_letter_send",
@@ -4286,6 +5179,61 @@
             {
               "type": "Text",
               "value": "信已寄出"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "try_later",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Please try again later or open an issue."
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "请稍后重试或打开问题。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "voiceclone",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Voiceclone me"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "语音克隆我"
             }
           ]
         }
@@ -4315,7 +5263,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "waitlist_heading",
@@ -4338,6 +5287,34 @@
             {
               "type": "Text",
               "value": "加入我的个人候补名单"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "watch_now",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Watch now"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "立即观看"
             }
           ]
         }
@@ -4367,7 +5344,8 @@
             }
           ]
         }
-      ]
+      ],
+      "alias": {}
     },
     {
       "id": "work_title",
@@ -4390,6 +5368,34 @@
             {
               "type": "Text",
               "value": "部分作品"
+            }
+          ]
+        }
+      ],
+      "alias": {}
+    },
+    {
+      "id": "working_as_a",
+      "alias": {},
+      "selectors": [],
+      "variants": [
+        {
+          "languageTag": "en",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "Working as a"
+            }
+          ]
+        },
+        {
+          "languageTag": "zh",
+          "match": [],
+          "pattern": [
+            {
+              "type": "Text",
+              "value": "作为"
             }
           ]
         }

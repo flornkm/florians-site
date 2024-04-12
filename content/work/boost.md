@@ -7,11 +7,17 @@ date: 02 / 2023
 ---
 
 <info-grid>
+
 <div>
 
+# Work
 # Boost
 
-Nutrition application & hardware device
+</div>
+
+<div>
+
+Nutrition application & hardware device developed in 2022 - 2023 for an university project at HfG Schwäbisch Gmünd.
 
 </div>
 
@@ -24,6 +30,7 @@ Nutrition application & hardware device
 | Website      | [Landingpage](https://boost-three.vercel.app/)     |
 
 </div>
+
 </info-grid>
 
 ![Boost](/images/boost/boost.png)

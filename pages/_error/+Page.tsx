@@ -1,4 +1,5 @@
 import Button, { ButtonWrapper } from "#components/Button"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({ is404 }: { is404: boolean }) {
   if (is404) {
@@ -13,13 +14,13 @@ function Page404() {
     <div class="w-full h-[90vh] flex justify-center items-center">
       <div class="flex flex-col justify-center items-center gap-4 max-w-xs">
         <h1 class="text-6xl font-bold text-center leading-none hover:cursor-none">
-          <span class="transition-all hover:animate-pulse hover:bg-zinc-100 px-1 rounded-md relative dark:hover:bg-zinc-900">
+          <span class="transition-all hover:animate-pulse hover:bg-neutral-100 px-1 rounded-md relative dark:hover:bg-neutral-900">
             4
           </span>
-          <span class="transition-all hover:animate-pulse hover:bg-zinc-100 px-1 rounded-md relative dark:hover:bg-zinc-900">
+          <span class="transition-all hover:animate-pulse hover:bg-neutral-100 px-1 rounded-md relative dark:hover:bg-neutral-900">
             0
           </span>
-          <span class="transition-all hover:animate-pulse hover:bg-zinc-100 px-1 rounded-md relative dark:hover:bg-zinc-900">
+          <span class="transition-all hover:animate-pulse hover:bg-neutral-100 px-1 rounded-md relative dark:hover:bg-neutral-900">
             4
           </span>
         </h1>
@@ -55,10 +56,10 @@ function Page500() {
             0
           </span>
         </h1>
-        <p class="text-center mb-4 bg-gradient-to-b from-red-500 via-black via-60% to-black bg-clip-text text-transparent">
-          You encountered an error.
+        <p class="text-center mb-4">
+          {m.error_title()}
           <br class="hidden xs:block" />
-          Please try again later or open an issue.{" "}
+          {m.try_later()}{" "}
         </p>
         <ButtonWrapper>
           <Button
@@ -67,13 +68,13 @@ function Page500() {
               window.history.back()
             }}
           >
-            Go back
+            {m.go_back()}
           </Button>
           <Button
             type="secondary"
             link="https://github.com/flornkm/florians-website/"
           >
-            Open issue
+            {m.open_issue()}
           </Button>
         </ButtonWrapper>
       </div>

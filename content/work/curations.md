@@ -7,11 +7,17 @@ date: 04 / 2023
 ---
 
 <info-grid>
+
 <div>
 
+# Work
 # Curations
 
-A curated collection of the best products on the web.
+</div>
+
+<div>
+
+A curated collection of the best products on the web. Developed and maintained from early 2022 to early 2023, featuring a collection of tools across multiple categories.
 
 </div>
 
@@ -24,6 +30,7 @@ A curated collection of the best products on the web.
 | Website       | [curations.tech](https://curations.tech)                                                                                 |
 
 </div>
+
 </info-grid>
 
 ![Curations](/images/curations/curations.png)

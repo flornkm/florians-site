@@ -16,9 +16,13 @@ export default function Slider(props: {
   const slider = useRef<Flicking>(null)
   const [panelsNumber, setPanelsNumber] = useState(() =>
     typeof window !== "undefined"
-      ? window.innerWidth > 1024
+      ? window.innerWidth > 1400
+        ? 5
+        : window.innerWidth > 1250
         ? 4
-        : window.innerWidth > 640
+        : window.innerWidth > 1023
+        ? 3
+        : window.innerWidth > 768
         ? 2
         : 1
       : 1
@@ -29,12 +33,20 @@ export default function Slider(props: {
 
   useWindowResize(() => {
     setPanelsNumber(
-      window.innerWidth > 1024 ? 4 : window.innerWidth > 640 ? 2 : 1
+      window.innerWidth > 1400
+        ? 5
+        : window.innerWidth > 1250
+        ? 4
+        : window.innerWidth > 1023
+        ? 3
+        : window.innerWidth > 768
+        ? 2
+        : 1
     )
   })
 
   return (
-    <div class="w-full relative md:block flex flex-wrap gap-y-12 gap-x-4">
+    <div class="w-full relative md:block flex flex-wrap md:gap-y-12 gap-x-4">
       <Flicking
         ref={slider}
         hideBeforeInit
@@ -48,26 +60,32 @@ export default function Slider(props: {
       >
         {props.children}
       </Flicking>
-      <Button
-        rounded
-        type="secondary"
-        function={() => {
-          slider.current?.prev()
-        }}
-        class="md:absolute z-10 -translate-y-1/2 top-1/2 left-0 md:-left-8 md:shadow-xl shadow-black/5 hover:pl-4 hover:pr-6"
-      >
-        <ArrowLeft />
-      </Button>
-      <Button
-        rounded
-        type="secondary"
-        function={() => {
-          slider.current?.next()
-        }}
-        class="md:absolute z-10 -translate-y-1/2 top-1/2 right-0 md:-right-8 md:shadow-xl shadow-black/5 hover:pl-6 hover:pr-4"
-      >
-        <ArrowRight />
-      </Button>
+      <div class="lg:absolute lg:top-1/2 pointer-events-none lg:-translate-y-1/2 lg:mt-0 mt-6 z-10 gap-4 lg:w-full flex lg:justify-between items-center">
+        <Button
+          rounded
+          type="primary"
+          function={() => {
+            slider.current?.prev()
+          }}
+          class="shadow-black/5 pointer-events-auto aspect-square -ml-2 px-2 h-10 w-10 lg:px-5 justify-center lg:w-2 lg:hover:pl-4 lg:hover:pr-6 lg:shadow-xl"
+        >
+          <div class="flex-shrink-0">
+            <ArrowLeft size={20} />
+          </div>
+        </Button>
+        <Button
+          rounded
+          type="primary"
+          function={() => {
+            slider.current?.next()
+          }}
+          class="shadow-black/5 pointer-events-auto aspect-square -mr-2 h-10 w-10 lg:px-5 lg:w-2 justify-center lg:hover:pr-4 lg:hover:pl-6 lg:shadow-xl"
+        >
+          <div class="flex-shrink-0">
+            <ArrowRight size={20} />
+          </div>
+        </Button>
+      </div>
     </div>
   )
 }
@@ -110,7 +128,7 @@ export function PhotoSlider(props: { autoPlay?: boolean; buttons?: boolean }) {
       {slides.map((slide) => (
         <figure key={slide} class="mr-8 group">
           <img src={slide.src} alt={slide.alt} />
-          <figcaption class="text-sm text-zinc-400 mt-3 line-clamp-2 group-hover:line-clamp-none">
+          <figcaption class="text-sm text-neutral-400 mt-3 line-clamp-2">
             {slide.caption}
           </figcaption>
         </figure>
