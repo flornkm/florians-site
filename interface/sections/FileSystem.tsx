@@ -2,6 +2,7 @@ import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
 import Vectorfiles from "../../pages/archive/copyables/assets/vectorfiles.json"
 import { InlineLink } from "#components/Button"
+import * as m from "#lang/paraglide/messages"
 
 // TODO: Auto fill the amount of items in each tab
 export const tabs = [
@@ -63,7 +64,7 @@ export default function FileSystem(props: {
         <div class="flex items-center mb-4 py-2 sticky top-0 lg:top-14 z-50 lg:hidden bg-light-neutral/95 backdrop-blur-xl dark:bg-black/90">
           <div class="flex relative">
             <InlineLink link="/archive" class="px-1.5 -ml-1.5">
-              Archive
+              {m.archive_title()}
             </InlineLink>
             {tabs.find((tab) => tab.path === urlPathname) && <p> / </p>}
             <p class="font-medium px-1.5 text-neutral-400 dark:text-neutral-600 truncate">
@@ -76,7 +77,7 @@ export default function FileSystem(props: {
       )}
       <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8 h-full">
         <h1 class="text-2xl line-clamp-2 mb-6 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
-          Archive
+          {m.archive_title()}
         </h1>
         <ul class="sticky top-24 mb-8 lg:mb-0 hidden lg:block w-full lg:pr-8">
           <li class="w-full flex items-center justify-between">
@@ -89,7 +90,7 @@ export default function FileSystem(props: {
                   : "text-neutral-400 dark:text-neutral-500")
               }
             >
-              <span class="group-hover:underline ">Archive</span>
+              <span class="group-hover:underline ">{m.archive_title()}</span>
               <span
                 class={
                   "no-underline " +
@@ -98,7 +99,7 @@ export default function FileSystem(props: {
                     : "text-neutral-300 dark:text-neutral-600")
                 }
               >
-                {tabs.length} categories
+                {tabs.length} {m.categories()}
               </span>
             </a>
           </li>

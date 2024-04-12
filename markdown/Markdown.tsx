@@ -1,4 +1,8 @@
-export default function Markdown(props: { class?: string; content: string }) {
+export default function Markdown(props: {
+  class?: string
+  content: string
+  noSelect?: boolean
+}) {
   // Regular expression pattern to capture video ID and image source
   const pattern =
     /<a\s+href="([A-Za-z0-9_-]{11})"\s*><img\s+src="([^"]+)"[^>]+><\/a>/g
@@ -22,7 +26,10 @@ export default function Markdown(props: { class?: string; content: string }) {
   )
 
   return (
-    <article class={props.class}>
+    <article
+      class={props.class}
+      style={{ userSelect: props.noSelect ? "none" : "auto" }}
+    >
       <div dangerouslySetInnerHTML={{ __html: replacedContent }}></div>
     </article>
   )

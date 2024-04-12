@@ -1,4 +1,5 @@
 import Button, { ButtonWrapper } from "#components/Button"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({ is404 }: { is404: boolean }) {
   if (is404) {
@@ -56,9 +57,9 @@ function Page500() {
           </span>
         </h1>
         <p class="text-center mb-4">
-          You encountered an error.
+          {m.error_title()}
           <br class="hidden xs:block" />
-          Please try again later or open an issue.{" "}
+          {m.try_later()}{" "}
         </p>
         <ButtonWrapper>
           <Button
@@ -67,13 +68,13 @@ function Page500() {
               window.history.back()
             }}
           >
-            Go back
+            {m.go_back()}
           </Button>
           <Button
             type="secondary"
             link="https://github.com/flornkm/florians-website/"
           >
-            Open issue
+            {m.open_issue()}
           </Button>
         </ButtonWrapper>
       </div>

@@ -5,6 +5,7 @@ import Picker from "#components/Picker"
 import { useState } from "preact/hooks"
 import Markdown from "#markdown/Markdown"
 import Button from "#components/Button"
+import * as m from "#lang/paraglide/messages"
 
 export default function Page({
   posts,
@@ -32,7 +33,7 @@ export default function Page({
       <section class="w-full flex gap-4 flex-col lg:items-start lg:flex-row pb-4 md:mb-4">
         <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
           <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group hover:text-neutral-400">
-            Latest Posts
+            {m.latest_posts()}
           </h1>
         </div>
       </section>
@@ -57,13 +58,14 @@ export default function Page({
               <div class="lg:max-w-nav w-full lg:mx-auto">
                 <div class="relative">
                   <Markdown
+                    noSelect
                     class="post line-clamp-5"
                     content={content[post.slug]}
                   />
                   <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
                 </div>
                 <Button type="text" link={post.url} class="mt-4 mx-auto">
-                  Read more
+                  {m.read_more()}
                 </Button>
               </div>
               <div class="lg:max-w-[calc((100%-432px)/2)] lg:w-full lg:order-last order-first lg:ml-0 ml-auto lg:pl-4 relative lg:bottom-0 -bottom-6">
