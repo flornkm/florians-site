@@ -9,7 +9,7 @@ type Post = {
   type: "image" | "video"
 }
 
-const posts = [
+export const posts = [
   {
     src: "/images/archive/posts/domainlist.webp",
     type: "image",
