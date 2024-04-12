@@ -56,13 +56,12 @@ export default function Page({
                 </p>
               </div>
               <div class="lg:max-w-nav w-full lg:mx-auto">
-                <div class="relative">
+                <div class="relative max-h-[450px] overflow-hidden">
                   <Markdown
-                    noSelect
                     class="post line-clamp-5"
                     content={content[post.slug]}
                   />
-                  <div class="absolute bottom-0 w-full z-10 pointer-events-none bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
+                  <div class="absolute bottom-0 w-full z-10 bg-gradient-to-b from-transparent to-light-neutral h-1/5 dark:to-black" />
                 </div>
                 <Button type="text" link={post.url} class="mt-4 mx-auto">
                   {m.read_more()}
