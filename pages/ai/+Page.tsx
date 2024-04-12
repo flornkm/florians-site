@@ -306,7 +306,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
     >
       <div
         class={
-          "absolute top-10 right-6 lg:hidden " +
+          "absolute top-6 right-6 lg:hidden " +
           (hideIntro ? "opacity-0 pointer-events-none" : "opacity-100")
         }
       >
@@ -322,12 +322,13 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
             (tooNarrow ? "hidden" : "")
           }
         >
-          <div
+          <img
+            src="/images/avatars/florian_student.webp"
             class={
-              "aspect-square rounded-full transition-all duration-500 bg-[url('/images/avatars/florian_student.webp')] bg-cover " +
+              "aspect-square rounded-full transition-all duration-500 object-cover " +
               (hideIntro ? "w-12" : "w-24")
             }
-          ></div>
+          />
           <div
             class={
               "mb-2 transition-all absolute top-1/2 p-1.5 -translate-y-1/2 truncate duration-500 z-10 " +
