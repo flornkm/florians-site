@@ -233,7 +233,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto">
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-8">
         <h3 class="text-lg font-semibold max-w-nav w-full relative z-10">
           {m.about_apps_title()}
         </h3>
