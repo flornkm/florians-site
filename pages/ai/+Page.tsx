@@ -258,6 +258,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
   const [hideIntro, setHideIntro] = useState<boolean>(false)
   const [ready, setReady] = useState<boolean>(false)
   const [secret, setSecret] = useState<string>("")
+  const [error, setError] = useState<string>("")
 
   const tooNarrow = useMemo(() => {
     if (typeof window !== "undefined" && window.innerHeight < 850) {
@@ -271,6 +272,28 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
     if (hideIntro) document.body.style.overflow = "auto"
     else document.body.style.overflow = "hidden"
   }, [hideIntro])
+
+  const accessHandler = useCallback(async () => {
+    await fetch("/api/access", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ key: secret }),
+    }).then((response) => {
+      if (response.ok) {
+        localStorage.setItem("florians-ai-secret", secret)
+        setHideIntro(true)
+        focusChat?.()
+        setTimeout(() => {
+          setReady(true)
+        }, 500)
+      } else {
+        setSecret("")
+        setError("Invalid secret key. Please contact @flornkm to get access.")
+      }
+    })
+  }, [secret])
 
   return (
     <div
@@ -337,12 +360,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
                 onInput={(e) => setSecret(e.currentTarget.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    localStorage.setItem("florians-ai-secret", secret)
-                    setHideIntro(true)
-                    focusChat?.()
-                    setTimeout(() => {
-                      setReady(true)
-                    }, 500)
+                    accessHandler()
                   }
                 }}
                 type="password"
@@ -351,14 +369,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
               />
               <Button
                 disabled={secret === ""}
-                function={() => {
-                  localStorage.setItem("florians-ai-secret", secret)
-                  setHideIntro(true)
-                  focusChat?.()
-                  setTimeout(() => {
-                    setReady(true)
-                  }, 500)
-                }}
+                function={accessHandler}
                 small
                 type="primary"
                 class="absolute right-1 z-20 top-1/2 -translate-y-1/2 truncate !rounded-full disabled:cursor-not-allowed disabled:opacity-50"
@@ -366,6 +377,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
                 Get Started
               </Button>
             </div>
+            {error && <p class="text-sm mt-4 text-red-500">{error}</p>}
           </div>
         ) : (
           <div class="h-32" />

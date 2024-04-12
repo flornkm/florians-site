@@ -7,7 +7,7 @@ import { AiSwitch } from "#components/Navigation"
 export default function Page({ projects }: { projects: any[] }) {
   return (
     <div class="w-full">
-      <header class="w-full flex gap-4 flex-col lg:items-end lg:flex-row py-4 md:mb-8">
+      <header class="w-full flex gap-4 flex-col lg:items-end lg:flex-row pb-4 md:mb-8">
         <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
           <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug">
             Designer and Developer <br />

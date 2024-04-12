@@ -3,7 +3,7 @@ import * as m from "#lang/paraglide/messages"
 export default function Page() {
   return (
     <div class="w-full">
-      <section class="w-full lg:pt-4 relative min-h-screen flex flex-col max-w-nav mx-auto">
+      <section class="w-full relative min-h-screen flex flex-col max-w-nav mx-auto">
         <h1 class="text-2xl font-semibold mb-4">{m.imprint_title()}</h1>
         <p class="text-neutral-500 mb-8 dark:text-neutral-400">
           {m.imprint_text_first()}

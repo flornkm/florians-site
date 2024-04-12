@@ -121,7 +121,7 @@ const tools = [
 export default function Page() {
   return (
     <div class="w-full">
-      <section class="w-full flex flex-col lg:flex-row py-4 md:mb-4 mb-8 lg:mb-12">
+      <section class="w-full flex flex-col lg:flex-row pb-4 md:mb-4 mb-8 lg:mb-12">
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full mb-4 md:mb-8">
           <h1 class="text-2xl line-clamp-2 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug transition-colors group">
             {m.about_title()}
