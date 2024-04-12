@@ -1,7 +1,5 @@
-import Button from "#components/Button"
 import Vectorfiles from "./assets/vectorfiles.json"
 import { useState } from "preact/hooks"
-import README from "#components/README"
 import { FolderIllustration } from "#design-system/Vectors"
 import FileSystem from "#sections/FileSystem"
 

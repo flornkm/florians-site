@@ -193,31 +193,22 @@ export default function Page() {
             </p>
           </div>
           <div class="max-w-nav mx-auto">
-            <h3 class="text-lg font-semibold mt-12 mb-4">
-              {m.about_education_title()} & Experience
-            </h3>
+            <h3 class="text-lg font-semibold mt-12 mb-2">Experience</h3>
             <Experience />
+            <h3 class="text-lg font-semibold mt-12 mb-2">
+              {m.about_education_title()}
+            </h3>
             <Education />
           </div>
         </div>
         <div class="md:mb-0 lg:max-w-[calc((100%-432px)/2)] w-full lg:pl-8" />
       </section>
-      <div class="relative lg:block hidden"></div>
-      <div class="w-full overflow-hidden flex items-center justify-between lg:justify-center mb-12">
-        <p class="text-[22vw] rotate-1 text-center flex tracking-tighter letter-rotate leading-none inset-0 bg-gradient-to-t from-neutral-100 to-neutral-200 text-transparent bg-clip-text dark:from-neutral-900 dark:to-neutral-800">
-          Fu
-        </p>
-        <p class="text-[22vw] -rotate-3 text-center flex tracking-tighter letter-rotate leading-none inset-0 bg-gradient-to-t from-neutral-100 to-neutral-200 text-transparent bg-clip-text dark:from-neutral-900 dark:to-neutral-800">
-          n
-        </p>
-        <p class="text-[22vw] ml-4 -rotate-6 text-center flex tracking-tighter letter-rotate leading-none inset-0 bg-gradient-to-t from-neutral-100 to-neutral-200 text-transparent bg-clip-text dark:from-neutral-900 dark:to-neutral-800">
-          Ar
-        </p>
-        <p class="text-[22vw] rotate-3 text-center flex tracking-tighter letter-rotate leading-none inset-0 bg-gradient-to-t from-neutral-100 to-neutral-200 text-transparent bg-clip-text dark:from-neutral-900 dark:to-neutral-800">
-          ea
-        </p>
+      <div class="w-full border-t border-neutral-200 lg:pt-8 pt-6 pb-8 lg:pb-0">
+        <h2 class="text-xl font-semibold lg:absolute lg:max-w-none max-w-nav mx-auto text-neutral-400 dark:text-neutral-500">
+          More about me
+        </h2>
       </div>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-8">
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto">
         <h3 class="text-lg font-semibold max-w-nav w-full relative z-10">
           {m.about_apps_title()}
         </h3>
@@ -299,8 +290,55 @@ export default function Page() {
             </div>
           </div>
         </div>
+        <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 lg:p-8 relative z-10">
+          <div class="w-full max-w-nav">
+            <h3 class="text-lg font-semibold mb-4 md:mb-4">Bucketlist</h3>
+            <div class="grid 2xl:grid-cols-2 gap-8">
+              <ul class="w-full">
+                {bucketList
+                  .filter((item) => item.checked)
+                  .map((item) => {
+                    return (
+                      <li class="flex gap-2 mb-4 text-neutral-500 dark:text-neutral-400 items-center">
+                        <Check class="w-3.5 h-3.5 flex-shrink-0 text-neutral-500 dark:text-neutral-400" />
+                        <p>{item.name}</p>
+                      </li>
+                    )
+                  })}
+              </ul>
+              <ul class="w-full">
+                {bucketList
+                  .filter((item) => !item.checked)
+                  .map((item) => {
+                    return (
+                      <li class="flex gap-2 mb-4 text-black dark:text-white">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="flex-shrink-0 text-black mt-1 dark:text-white"
+                        >
+                          <rect
+                            x="0.75"
+                            y="0.75"
+                            width="14.5"
+                            height="14.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                          />
+                        </svg>
+                        <p>{item.name}</p>
+                      </li>
+                    )
+                  })}
+              </ul>
+            </div>
+          </div>
+        </section>
       </section>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 p-8 relative z-10">
+      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 lg:p-8 relative z-10">
         <h3 class="text-lg font-semibold max-w-nav w-full relative z-10 mb-12">
           Favorite meals
         </h3>
@@ -340,56 +378,9 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section class="w-full flex flex-col items-center lg:max-w-none max-w-md mx-auto mb-16 md:py-12 p-8 relative z-10">
-        <div class="w-full max-w-nav">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4">Bucketlist</h3>
-          <div class="grid 2xl:grid-cols-2 gap-8">
-            <ul class="w-full">
-              {bucketList
-                .filter((item) => item.checked)
-                .map((item) => {
-                  return (
-                    <li class="flex gap-2 mb-4 text-neutral-500 dark:text-neutral-400 items-center">
-                      <Check class="w-3.5 h-3.5 flex-shrink-0 text-neutral-500 dark:text-neutral-400" />
-                      <p>{item.name}</p>
-                    </li>
-                  )
-                })}
-            </ul>
-            <ul class="w-full">
-              {bucketList
-                .filter((item) => !item.checked)
-                .map((item) => {
-                  return (
-                    <li class="flex gap-2 mb-4 text-black dark:text-white">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="flex-shrink-0 text-black mt-1 dark:text-white"
-                      >
-                        <rect
-                          x="0.75"
-                          y="0.75"
-                          width="14.5"
-                          height="14.5"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                        />
-                      </svg>
-                      <p>{item.name}</p>
-                    </li>
-                  )
-                })}
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto mb-16 justify-center relative z-10">
-        <div class="flex flex-col items-start lg:max-w-[calc(((100%-432px)/2)+432px)] relative lg:mb-0 mb-16">
-          <h3 class="text-lg font-semibold mb-4 md:mb-4 lg:max-w-nav mx-auto w-full">
+      <section class="w-full flex gap-4 flex-col lg:flex-row py-4 lg:max-w-none max-w-md mx-auto lg:mb-16 mb-8 justify-center relative z-10">
+        <div class="flex flex-col items-start lg:max-w-[calc(((100%-432px)/2)+432px)] relative lg:mb-0">
+          <h3 class="text-lg font-semibold mb-4 md:mb-6 lg:max-w-nav mx-auto w-full">
             {m.about_photos_title()}
           </h3>
           <PhotoSlider autoPlay buttons />
@@ -401,7 +392,7 @@ export default function Page() {
         <div class="lg:max-w-[calc((100%-432px)/2)] w-full ml-auto"></div>
       </section>
       <section class="w-full flex flex-col gap-24 mx-auto mb-24">
-        <div class="lg:max-w-nav w-full flex-shrink-0 mb-12 lg:mb-0 mx-auto relative z-10">
+        <div class="lg:max-w-nav w-full flex-shrink-0 mb-4 lg:mb-0 mx-auto relative z-10">
           <h3 class="text-lg font-semibold mb-4">Movies</h3>
           <div class="grid md:grid-cols-2 gap-8">
             <Movies
@@ -490,7 +481,7 @@ const Movies = ({ movies }: { movies: Record<string, string>[] }) => {
             style={{
               backgroundImage: `url(${movie.cover})`,
             }}
-            class="bg-neutral-100 md:h-[233px] h-80 mb-3 bg-cover bg-top flex items-end overflow-hidden"
+            class="bg-neutral-100 md:h-[256px] h-80 mb-3 bg-cover bg-top flex items-end overflow-hidden"
           >
             <div class="text-white truncate font-medium pb-3 px-4 relative w-full bg-gradient-to-t from-black/75 to-transparent pt-32 flex xs:justify-between items-start xs:gap-0 gap-2 xs:items-end flex-col xs:flex-row">
               <p class="leading-none mb-1 truncate">{movie.title}</p>

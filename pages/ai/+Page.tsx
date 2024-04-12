@@ -166,7 +166,7 @@ export default function Page() {
       <Introduction focusChat={() => chatInput.current?.focus()} />
       <section class="w-full min-h-screen flex-col">
         <form
-          class="w-full lg:max-w-xl mx-auto sticky lg:top-[90vh] top-[82vh] md:mb-16 shadow-lg rounded-full mb-4 lg:mb-8"
+          class="w-full lg:max-w-xl mx-auto sticky z-40 lg:top-[90vh] top-[80vh] md:mb-16 shadow-lg rounded-full mb-4 lg:mb-8"
           onSubmit={(e) => e.preventDefault()}
         >
           <input
@@ -210,7 +210,10 @@ export default function Page() {
             </>
           </Button>
         </form>
-        <div class="w-full mb-8 md:-mt-24 md:pb-72 pb-24" ref={chatWrapper}>
+        <div
+          class="w-full mb-8 md:-mt-24 md:pb-72 lg:pb-24 pb-72"
+          ref={chatWrapper}
+        >
           {messages.length === 0 && (
             <div class="bg-[url('/images/assets/empty-chat.png')] dark:bg-[url('/images/assets/empty-chat-light.png')] opacity-40 dark:opacity-100 bg-no-repeat top-56 max-w-[400px] mx-auto bg-contain absolute inset-0" />
           )}
@@ -274,7 +277,12 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           : "bg-white dark:bg-black lg:z-50 z-[52]")
       }
     >
-      <div class="absolute top-10 right-6 lg:hidden">
+      <div
+        class={
+          "absolute top-10 right-6 lg:hidden " +
+          (hideIntro ? "opacity-0 pointer-events-none" : "opacity-100")
+        }
+      >
         <AiSwitch />
       </div>
       <div class="flex flex-col items-center max-w-md p-4">

@@ -74,7 +74,7 @@ export function Popup({ popup, isOpen, onClose, children }: PopupProps) {
           ref={popup}
           class="w-full h-full bg-white rounded-t-3xl md:rounded-3xl relative flex justify-between md:flex-row flex-col transition-all dark:bg-neutral-900"
         >
-          <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-2 h-1.5 w-20 bg-neutral-200 rounded-full dark:bg-neutral-800" />
+          <div class="md:hidden absolute left-1/2 -translate-x-1/2 top-2 h-1.5 w-16 bg-neutral-200 rounded-full dark:bg-neutral-800" />
           <Button
             type="secondary"
             function={onClose}
