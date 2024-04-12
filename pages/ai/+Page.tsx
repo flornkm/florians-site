@@ -325,7 +325,7 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           <img
             src="/images/avatars/florian_student.webp"
             class={
-              "aspect-square rounded-full transition-all duration-500 object-cover " +
+              "aspect-square rounded-full transition-all duration-500 object-cover bg-neutral-200 dark:bg-neutral-800 " +
               (hideIntro ? "w-12" : "w-24")
             }
           />
@@ -378,7 +378,11 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
                 Get Started
               </Button>
             </div>
-            {error && <p class="text-sm mt-4 text-red-500">{error}</p>}
+            {error && (
+              <p class="text-sm mt-4 text-red-500 text-center max-w-xs">
+                {error}
+              </p>
+            )}
           </div>
         ) : (
           <div class="h-32" />

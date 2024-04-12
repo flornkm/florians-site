@@ -131,7 +131,7 @@ main>article {
     }
 
     @media (prefers-color-scheme: dark) {
-        & h1:nth-child(1)::before {
+        & h1:nth-child(1) {
         color: rgb(115, 115, 115);
     }
 
