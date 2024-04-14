@@ -261,6 +261,10 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
   const [secret, setSecret] = useState<string>("")
   const [error, setError] = useState<string>("")
 
+  const image = useMemo(() => {
+    return "/images/avatars/florian_student.webp"
+  }, [])
+
   const tooNarrow = useMemo(() => {
     if (typeof window !== "undefined" && window.innerHeight < 850) {
       return true
@@ -324,6 +328,9 @@ const Introduction = ({ focusChat }: { focusChat?: () => void }) => {
           }
         >
           <img
+            onLoad={(e) => {
+              console.log("test")
+            }}
             src="/images/avatars/florian_student.webp"
             class={
               "aspect-square rounded-full transition-all duration-500 object-cover bg-neutral-200 dark:bg-neutral-800 " +
