@@ -108,7 +108,7 @@ export default function FileSystem(props: {
               <a
                 href={tab.path}
                 class={
-                  "underline-offset-2 font-medium group pl-2 w-full flex items-center justify-between py-1 " +
+                  "underline-offset-2 font-medium group pl-4 w-full flex items-center justify-between py-1 " +
                   (urlPathname === tab.path
                     ? ""
                     : "text-neutral-400 dark:text-neutral-500")
