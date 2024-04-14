@@ -128,13 +128,15 @@ export default function Page() {
           </h1>
         </div>
         <div class="w-full lg:mx-auto">
-          <div class="w-full h-40 lg:h-48 rounded-2xl bg-neutral-100 max-w-xl relative bg-[url('/images/photos/netherlands.jpg')] bg-cover bg-center mx-auto lg:ml-0">
-            <div class="w-full max-w-nav mx-auto left-1/2 -translate-x-1/2 absolute -bottom-12">
-              <img
-                src="/images/avatars/florian_student.webp"
-                class="aspect-square rounded-full w-24 border-4 border-light-neutral dark:border-black"
-                alt="Florian as a student"
-              />
+          <div class="w-full h-40 lg:h-48 relative">
+            <div class="rounded-2xl absolute left-1/2 w-full max-w-xl inset-0 -translate-x-1/2 bg-neutral-100 max-w-xl bg-[url('/images/photos/netherlands.jpg')] bg-cover bg-center mx-auto lg:ml-0">
+              <div class="w-full max-w-nav mx-auto left-1/2 -translate-x-1/2 absolute -bottom-12">
+                <img
+                  src="/images/avatars/florian_student.webp"
+                  class="aspect-square rounded-full w-24 border-4 border-light-neutral dark:border-black"
+                  alt="Florian as a student"
+                />
+              </div>
             </div>
           </div>
         </div>
