@@ -62,6 +62,42 @@ const posts = [
     src: '<div style="padding: 56.25% 0 0 0; position: relative"><div style="height:100%;left:0;position:absolute;top:0;width:100%"><iframe height="100%" width="100%;" src="https://embed.wave.video/BxJWyuZLr0yAivNJ" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe></div></div>',
     type: "video",
   },
+  {
+    src: "/images/archive/posts/design-engineer.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/figjam-3d.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/figma-figjam.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/google-maps-reviews-redesign.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/letter-section-redesign.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/life-changelog.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/review-form.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/review-logo.webp",
+    type: "image",
+  },
+  {
+    src: "/images/archive/posts/rmt-components.webp",
+    type: "image",
+  },
 ] as Post[]
 
 posts.reverse()

@@ -33,6 +33,54 @@ const photos = [
   {
     src: "/images/archive/photos/IMG_8120.webp",
   },
+  {
+    src: "/images/archive/photos/IMG_9942.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_9936.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_9910.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_9828.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_9125.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_9019.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_8924.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_8899.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_8880.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_8815.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_8736.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_0021.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_0053.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_0168.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_0213.webp",
+  },
+  {
+    src: "/images/archive/photos/IMG_0221.webp",
+  },
 ]
 
 photos.reverse()
