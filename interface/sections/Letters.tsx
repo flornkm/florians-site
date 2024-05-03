@@ -248,8 +248,7 @@ export default function Letters() {
                     : "")
                 }
                 small
-                // disabled={disableButton || letterArray.length === 0}
-                disabled
+                disabled={disableButton || letterArray.length === 0}
                 function={() => {
                   if (popup.current!.style.overflow !== "hidden") {
                     setShowLetter()
