@@ -278,6 +278,7 @@ function SendLetter(props: {
   const handleInput = useRef<HTMLInputElement>(null)
   const [letterWritten, setLetterWritten] = useState(false)
   const [signature, setSignature] = useState("")
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const signField = new SignaturePad(canvasRef.current!)
@@ -396,8 +397,9 @@ function SendLetter(props: {
                   type="primary"
                   rounded
                   chevron
-                  disabled={signature.length === 0}
+                  disabled={signature.length === 0 || loading}
                   function={async () => {
+                    setLoading(true)
                     const sendLetter = await fetch("/api/letters", {
                       method: "POST",
                       headers: {
@@ -414,6 +416,7 @@ function SendLetter(props: {
                       props.setShowLetter(true)
                       fetchLetters().then((data) => {
                         props.setLetters(data)
+                        setLoading(false)
                       })
                     } else console.error("Could not send letter")
                   }}
