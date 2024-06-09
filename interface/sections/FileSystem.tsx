@@ -1,16 +1,13 @@
 import { JSX } from "preact/jsx-runtime"
 import { usePageContext } from "../../renderer/usePageContext"
-import Vectorfiles from "../../pages/archive/copyables/assets/vectorfiles.json"
 import { InlineLink } from "#components/Button"
 import * as m from "#lang/paraglide/messages"
 
-// TODO: Auto fill the amount of items in each tab
 export const tabs = [
   {
     name: "Projects",
     path: "/archive/projects",
     items: {
-      amount: 2,
       label: "projects",
     },
   },
@@ -18,23 +15,13 @@ export const tabs = [
     name: "Short Projects",
     path: "/archive/short-projects",
     items: {
-      amount: 6,
       label: "projects",
-    },
-  },
-  {
-    name: "Copyables",
-    path: "/archive/copyables",
-    items: {
-      amount: Vectorfiles.length,
-      label: "copyables",
     },
   },
   {
     name: "Photos",
     path: "/archive/photos",
     items: {
-      amount: 10,
       label: "photos",
     },
   },
@@ -42,8 +29,14 @@ export const tabs = [
     name: "Posts",
     path: "/archive/posts",
     items: {
-      amount: 13,
       label: "posts",
+    },
+  },
+  {
+    name: "Experiments",
+    path: "/archive/experiments",
+    items: {
+      label: "experiments",
     },
   },
 ]
@@ -93,13 +86,13 @@ export default function FileSystem(props: {
               <span class="group-hover:underline ">{m.archive_title()}</span>
               <span
                 class={
-                  "no-underline " +
+                  "no-underline font-mono font-medium " +
                   (urlPathname === "/archive"
                     ? "text-black dark:text-white"
                     : "text-neutral-300 dark:text-neutral-600")
                 }
               >
-                {tabs.length} {m.categories()}
+                /
               </span>
             </a>
           </li>
@@ -117,13 +110,13 @@ export default function FileSystem(props: {
                 <span class="group-hover:underline ">{tab.name}</span>
                 <span
                   class={
-                    "no-underline " +
+                    "no-underline font-mono font-medium " +
                     (urlPathname === tab.path
                       ? "text-black dark:text-white"
                       : "text-neutral-300 dark:text-neutral-600")
                   }
                 >
-                  {`${tab.items.amount} ${tab.items.label}`}
+                  {`/${tab.items.label}`}
                 </span>
               </a>
             </li>

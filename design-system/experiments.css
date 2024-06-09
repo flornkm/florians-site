@@ -1,0 +1,28 @@
+@keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    25%, 75% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .custom-caret {
+    position: absolute;
+    width: 2px;
+    height: 1.25em;
+    background: #3b82f6;
+    border-radius: 1000px;
+    animation: blink 1s step-end infinite;
+    pointer-events: none;
+  }
+
+  .mirror-div {
+    visibility: hidden;
+    position: absolute;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
