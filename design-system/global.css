@@ -145,6 +145,20 @@ h4, h5, h6 {
 	font-size: 15px;
 }
 
+.animate-svg path {
+	transition: stroke-dashoffset 0.3s ease-in-out;
+  }
+  
+  .checked path {
+	stroke-dasharray: 20;
+	stroke-dashoffset: 0;
+  }
+  
+  .unchecked path {
+	stroke-dasharray: 20;
+	stroke-dashoffset: 20; 
+  }
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: #000;
