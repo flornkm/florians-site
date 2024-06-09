@@ -120,7 +120,7 @@ export default function Page() {
         </div>
       </div>
       <div class="w-full h-[calc(100vh-256px)] flex items-center justify-center">
-        <div class="w-full max-w-lg h-full max-md:max-h-96 bg-white shadow-2xl shadow-black/[2%] rounded-xl border border-neutral-200 p-4">
+        <div class="w-full max-w-lg h-full max-md:max-h-96 bg-white dark:bg-neutral-900 dark:border-neutral-800 shadow-2xl shadow-black/[2%] rounded-xl border border-neutral-200 p-4">
           <h1 class="text-xl ml-3.5 font-semibold text-neutral-900 dark:text-white mb-4">
             Noteblock
           </h1>
@@ -128,7 +128,7 @@ export default function Page() {
             <textarea
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
-              class="w-full resize-none focus:border-blue-400 h-full focus:outline-none caret-transparent border border-neutral-200 rounded-lg px-4 py-2"
+              class="w-full resize-none focus:border-blue-400 h-full focus:outline-none caret-transparent border border-neutral-200 bg-transparent dark:border-neutral-800 dark:focus:border-blue-400/40 rounded-lg px-4 py-2"
               ref={inputRef}
               rows={4}
               style={{ overflow: "hidden", cursor: "none" }}
