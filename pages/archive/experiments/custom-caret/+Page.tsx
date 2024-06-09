@@ -4,6 +4,7 @@ import "#design-system/experiments.css"
 
 export default function Page() {
   const [focused, setFocused] = useState(false)
+  const [customCaret, setCustomCaret] = useState(true)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const caretRef = useRef<HTMLDivElement>(null)
   const mirrorRef = useRef<HTMLDivElement>(null)
@@ -101,6 +102,10 @@ export default function Page() {
     }
   }, [focused])
 
+  const toggleCustomCaret = () => {
+    setCustomCaret((prevState) => !prevState)
+  }
+
   return (
     <>
       <div class="flex items-center mb-4 py-2 bg-transparent sticky top-0 lg:top-14 z-50">
@@ -121,17 +126,40 @@ export default function Page() {
       </div>
       <div class="w-full h-[calc(100vh-256px)] flex items-center justify-center">
         <div class="w-full max-w-lg h-full max-md:max-h-96 bg-white dark:bg-neutral-900 dark:border-neutral-800 shadow-2xl shadow-black/[2%] rounded-xl border border-neutral-200 p-4">
-          <h1 class="text-xl ml-3.5 font-semibold text-neutral-900 dark:text-white mb-4">
-            Noteblock
-          </h1>
+          <div class="flex w-full justify-between items-center mb-4 gap-4 truncate">
+            <h1 class="text-xl ml-3.5 font-semibold text-neutral-900 dark:text-white truncate">
+              Noteblock
+            </h1>
+            <button
+              class="font-medium flex items-center gap-2 group truncate mr-3.5 flex-shrink-0"
+              onClick={toggleCustomCaret}
+            >
+              <>
+                Custom Caret
+                <div class="bg-neutral-200 rounded-full h-5 w-8 relative flex items-center group-hover:bg-neutral-300 transition-colors duration-100 dark:bg-neutral-700 dark:group-hover:bg-neutral-600">
+                  <div
+                    class={
+                      "h-4 aspect-square rounded-full transition-all duration-100 " +
+                      (customCaret
+                        ? "bg-neutral-900 ml-3.5 dark:bg-neutral-100"
+                        : "bg-white ml-0.5 dark:bg-neutral-900")
+                    }
+                  />
+                </div>
+              </>
+            </button>
+          </div>
           <div style={{ position: "relative" }} class="h-[calc(100%-44px)]">
             <textarea
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
-              class="w-full resize-none focus:border-blue-400 h-full focus:outline-none caret-transparent border border-neutral-200 bg-transparent dark:border-neutral-800 dark:focus:border-blue-400/40 rounded-lg px-4 py-2"
+              class={
+                "w-full resize-none focus:border-blue-400 h-full focus:outline-none border border-neutral-200 bg-transparent dark:border-neutral-800 dark:focus:border-blue-400/40 rounded-lg px-4 py-2 " +
+                (customCaret ? "caret-transparent" : "")
+              }
               ref={inputRef}
               rows={4}
-              style={{ overflow: "hidden", cursor: "none" }}
+              style={{ overflow: "hidden", cursor: customCaret ? "none" : "" }}
             />
             <div
               ref={caretRef}
@@ -139,7 +167,12 @@ export default function Page() {
                 "custom-caret " +
                 (focused ? " transition-all duration-100 ease-in-out" : "")
               }
-              style={{ position: "absolute", top: "12px", left: "12px" }}
+              style={{
+                position: "absolute",
+                top: "12px",
+                left: "12px",
+                visibility: customCaret ? "visible" : "hidden",
+              }}
             />
             <div
               ref={mirrorRef}
