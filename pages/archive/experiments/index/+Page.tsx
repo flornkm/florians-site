@@ -10,6 +10,10 @@ const experiments = [
     title: "Custom Caret",
     path: "/archive/experiments/custom-caret",
   },
+  {
+    title: "Splitview",
+    path: "/archive/experiments/splitview",
+  },
 ]
 
 export default function Page() {
