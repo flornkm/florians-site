@@ -26,3 +26,34 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
+  .ai-gradient {
+    background: #1d1d1f;
+    background-clip: text;
+    -webkit-text-fill-color: rgba(0,0,0,0);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    background-image: linear-gradient(108deg,#0894FF,#C959DD 34%,#FF2E54 68%,#FF9004);
+  }
+
+  .path {
+    stroke-dasharray: 2500;
+    stroke-dashoffset: 2500;
+    animation: dash 4s ease-in-out infinite;
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  filter: drop-shadow( 0px 0px 128px #C45BDE50);
+
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dashoffset: 5000;
+    }
+    50% {
+      stroke-dashoffset: 2500;
+      filter: blur(0);
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }

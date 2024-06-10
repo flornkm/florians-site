@@ -14,6 +14,10 @@ const experiments = [
     title: "Splitview",
     path: "/archive/experiments/splitview",
   },
+  {
+    title: "Apple Intelligence",
+    path: "/archive/experiments/apple-intelligence",
+  },
 ]
 
 export default function Page() {
