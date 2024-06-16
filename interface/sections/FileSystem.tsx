@@ -15,7 +15,7 @@ export const tabs = [
     name: "Short Projects",
     path: "/archive/short-projects",
     items: {
-      label: "projects",
+      label: "short-projects",
     },
   },
   {
