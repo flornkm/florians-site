@@ -147,6 +147,7 @@ export default function Footer() {
                   <a
                     class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                     href="https://twitter.com/flornkm"
+                    target="_blank"
                   >
                     x.com
                   </a>
@@ -155,6 +156,7 @@ export default function Footer() {
                   <a
                     class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                     href="imessage://hello@floriankiem.com"
+                    target="_blank"
                   >
                     {m.link_imessage()}
                   </a>
@@ -163,6 +165,7 @@ export default function Footer() {
                   <a
                     class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                     href="https://www.linkedin.com/in/flornkm/"
+                    target="_blank"
                   >
                     LinkedIn
                   </a>
@@ -179,6 +182,7 @@ export default function Footer() {
                   <a
                     class="text-neutral-400 hover:text-neutral-600 transition-colors font-medium cursor-alias dark:text-neutral-600 dark:hover:text-neutral-400"
                     href="https://github.com/flornkm"
+                    target="_blank"
                   >
                     GitHub
                   </a>
