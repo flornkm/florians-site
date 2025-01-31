@@ -14,11 +14,10 @@ const experiments = [
     title: "Splitview",
     path: "/archive/experiments/splitview",
   },
-  // !TODO Adjust for Safari later on
-  // {
-  //   title: "Apple Intelligence",
-  //   path: "/archive/experiments/apple-intelligence",
-  // },
+  {
+    title: "SVG Animation",
+    path: "/archive/experiments/svg-animation",
+  },
 ]
 
 export default function Page() {
