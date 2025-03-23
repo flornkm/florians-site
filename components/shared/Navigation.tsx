@@ -118,7 +118,7 @@ export default function Navigation() {
             href="/contact"
             key="contact"
             className={cn(
-              "text-sm font-medium relative z-10 px-3 py-1 transition-colors duration-300 ease-in-out bg-neutral-600 text-white hover:bg-neutral-900 rounded-full",
+              "text-sm font-medium relative z-10 px-3 py-1 transition-colors duration-300 ease-in-out bg-black text-white hover:bg-neutral-800 rounded-full",
               urlPathname === "/contact" && "bg-neutral-900",
             )}
             ref={(el) => {
