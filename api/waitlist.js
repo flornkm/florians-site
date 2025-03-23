@@ -7,12 +7,12 @@ export default async function handler(req, res) {
     /**
      * @type {string}
      */
-    let email = JSON.parse(req.body).email
+    let email = JSON.parse(req.body).email;
 
     if (!email || !email.includes("@")) {
-      res.statusCode = 400
-      res.end()
-      return
+      res.statusCode = 400;
+      res.end();
+      return;
     }
 
     try {
@@ -22,13 +22,13 @@ export default async function handler(req, res) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: email, origin: "florians-site" }),
-      })
-      res.statusCode = 200
-      res.end()
+      });
+      res.statusCode = 200;
+      res.end();
     } catch (error) {
-      console.error("Error adding email.", error)
-      res.statusCode = 500
-      res.end()
+      console.error("Error adding email.", error);
+      res.statusCode = 500;
+      res.end();
     }
   }
 }

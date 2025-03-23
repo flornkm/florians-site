@@ -1,62 +1,14 @@
-import preact from "@preact/preset-vite"
-import ssr from "vike/plugin"
-import { defineConfig } from "vite"
-import { fileURLToPath } from "url"
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import vercel from "vite-plugin-vercel";
 
-export default defineConfig(() => ({
-  resolve: {
-    alias: [
-      {
-        find: "#components",
-        replacement: fileURLToPath(
-          new URL("./interface/components", import.meta.url)
-        ),
-      },
-      {
-        find: "#hooks",
-        replacement: fileURLToPath(
-          new URL("./interface/hooks", import.meta.url)
-        ),
-      },
-      {
-        find: "#sections",
-        replacement: fileURLToPath(
-          new URL("./interface/sections", import.meta.url)
-        ),
-      },
-      {
-        find: "#layouts",
-        replacement: fileURLToPath(
-          new URL("./interface/layouts", import.meta.url)
-        ),
-      },
-      {
-        find: "#markdown",
-        replacement: fileURLToPath(new URL("./markdown", import.meta.url)),
-      },
-      {
-        find: "#design-system",
-        replacement: fileURLToPath(new URL("./design-system", import.meta.url)),
-      },
-      {
-        find: "#lang",
-        replacement: fileURLToPath(new URL("./lang", import.meta.url)),
-      },
-    ],
+export default defineConfig({
+  plugins: [react({}), tailwindcss(), vercel()],
+  build: {
+    target: "es2022",
   },
-  plugins: [
-    preact(),
-    ssr({
-      prerender: true,
-    }),
-  ],
-  optimizeDeps: {
-    include: [
-      "preact",
-      "preact/devtools",
-      "preact/debug",
-      "preact/jsx-dev-runtime",
-      "preact/hooks",
-    ],
+  server: {
+    port: 3000,
   },
-}))
+});
