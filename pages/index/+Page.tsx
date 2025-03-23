@@ -41,7 +41,7 @@ export default function Page() {
                 </p>
               </div>
               <div className="w-full max-w-[calc(100%-136px)] justify-self-end">
-                <div className="w-full h-96 bg-neutral-100 rounded-lg">
+                <div className="w-full h-96 bg-neutral-100 rounded-md">
                   <img src={project.cover} alt={project.title} className="w-full h-full object-cover rounded-lg" />
                 </div>
               </div>

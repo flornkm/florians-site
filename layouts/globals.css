@@ -137,3 +137,10 @@ body {
 :focus {
 	@apply transition-all duration-150 outline-blue-400 outline-offset-4;
 }
+
+.progressive-blur {
+	-webkit-backdrop-filter: blur(40px);
+	backdrop-filter: blur(40px);
+	-webkit-mask-image: linear-gradient(to bottom, transparent, black);
+	mask-image: linear-gradient(to bottom, transparent, black);
+}
