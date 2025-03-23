@@ -1,34 +1,29 @@
 {
   "compilerOptions": {
     "strict": true,
-    "module": "ES2020",
-    "target": "ES2020",
-    "allowJs": true,
-    // Doesn't apply to server/, see ts-node config down below and server/tsconfig.json
-    "moduleResolution": "Bundler",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client", "unplugin-icons/types/preact"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "#components/*": ["./interface/components/*"],
-      "#hooks/*": ["./interface/hooks/*"],
-      "#sections/*": ["./interface/sections/*"],
-      "#layouts/*": ["./interface/layouts/*"],
-      "#markdown/*": ["./markdown/*"],
-      "#design-system/*": ["./design-system/*"],
-      "#lang/*": ["./lang/*"]
-    }
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "module": "ESNext",
+    "noEmit": true,
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "types": [
+      "vite/client",
+      "vike-react",
+      "vite-plugin-vercel/types"
+    ],
+    "jsx": "preserve",
+    "jsxImportSource": "react"
   },
-  "ts-node": {
-    "transpileOnly": true,
-    "esm": true,
-    "compilerOptions": {
-      "module": "Node16",
-      "moduleResolution": "Node16"
-    }
-  }
+  "exclude": [
+    "dist"
+  ]
 }

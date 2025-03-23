@@ -1,48 +1,60 @@
-import Letters from "#sections/Letters"
-import Work from "#sections/Work"
-import * as m from "#lang/paraglide/messages"
-import Waitlist from "#components/Waitlist"
-import { AiSwitch } from "#components/Navigation"
+import { usePageContext } from "vike-react/usePageContext";
+import Section from "../../components/shared/Section";
+import { Link } from "../../components/ui/Link";
+import TriangleFilled from "../../icons/triangle-filled";
 
-export default function Page({ projects }: { projects: any[] }) {
+export default function Page() {
+  const pageContext = usePageContext();
+
+  const projects = pageContext.data as {
+    title: string;
+    description: string;
+    slug: string;
+    date: string;
+    cover: string;
+  }[];
+
   return (
-    <div class="w-full">
-      <header class="w-full flex gap-4 flex-col lg:items-end lg:flex-row pb-4 md:mb-8">
-        <div class="lg:w-1/3 mb-4 md:mb-0 w-full flex flex-col-reverse xs:flex-row justify-between gap-4">
-          <h1 class="text-2xl line-clamp-3 text-neutral-400 selection:bg-blue-50 selection:text-blue-300 dark:text-neutral-500 dark:selection:bg-blue-950 dark:selection:text-blue-500 font-semibold leading-snug">
-            {m.designer_developer()} <br />
-            <span class="text-black dark:text-white">Florian</span>
+    <div className="w-full min-h-screen px-4">
+      <div className="w-full max-w-5xl mx-auto">
+        <Section className="items-end mb-12">
+          <h1 className="font-semibold leading-tight text-lg">
+            Designer by day, <br /> <span className="text-neutral-400">Engineer by night</span>
           </h1>
-          <div class="mt-2 lg:hidden xs:mb-0 mb-4">
-            <AiSwitch />
+          <div className="w-col flex items-center justify-center">
+            <h2 className="font-semibold text-lg">Latest Work</h2>
           </div>
-        </div>
-        <div class="max-w-nav w-full lg:mx-auto">
-          <h2 class="md:text-2xl text-xl font-semibold">{m.work_title()}</h2>
-        </div>
-        <div class="w-1/3 hidden lg:block" />
-      </header>
-      <section class="w-full scroll-mt-24 mb-12" id="work">
-        <Work projects={projects} />
-      </section>
-      <section class="w-full bg-neutral-100 mb-12 dark:bg-[#101010]">
-        <Letters />
-      </section>
-      <section class="w-full flex items-center md:flex-row flex-col overflow-hidden">
-        <div class="w-full relative h-full py-16">
-          <div class="w-full relative max-w-screen-md mx-auto z-10">
-            <div class="max-w-2xl">
-              <h2 class="text-xl font-semibold leading-snug mb-4">
-                {m.waitlist_heading()}
-              </h2>
-              <p class="mb-6 text-neutral-500 dark:text-neutral-400">
-                {m.waitlist_description()}
-              </p>
-            </div>
-            <Waitlist />
+        </Section>
+        <section className="w-full flex flex-col mb-32 group/section">
+          {projects.map((project) => (
+            <Link
+              href={`/work/${project.slug}`}
+              key={project.slug}
+              className="w-full grid grid-cols-[336px_1fr] items-start group/item hover:opacity-100 group-hover/section:opacity-30 transition-opacity duration-300 ease-out py-4"
+            >
+              <div className="flex flex-col gap-0.5 w-full items-start sticky top-16">
+                <h3 className="font-semibold">{project.title}</h3>
+                <p className="text-neutral-400 font-medium text-sm mb-2">{project.description}</p>
+                <p className="items-center pointer-events-none hidden lg:flex gap-1 group-hover/item:opacity-100 group-hover/item:ml-0 group-hover/item:blur-none opacity-0 -ml-2 blur-[1px] transition-all duration-300 ease-out focus:hidden group-focus/item:hidden">
+                  <TriangleFilled className="w-4 h-4 inline-block" />
+                  <span className="text-sm font-medium inline-block">Click to open</span>
+                </p>
+              </div>
+              <div className="w-full max-w-[calc(100%-136px)] justify-self-end">
+                <div className="w-full h-96 bg-neutral-100 rounded-lg">
+                  <img src={project.cover} alt={project.title} className="w-full h-full object-cover rounded-lg" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </section>
+        <section className="w-full flex flex-col gap-8 justify-center items-center">
+          <div>
+            <h2 className="font-semibold text-lg text-center mb-1">Digital Guestbook</h2>
+            <p className="text-neutral-400 font-medium text-sm mb-2 text-center">Send me a postcard.</p>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-  )
+  );
 }
