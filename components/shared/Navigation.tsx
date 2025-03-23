@@ -2,7 +2,7 @@ import { useRive } from "@rive-app/react-canvas";
 import { useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { cn } from "../../lib/utils";
-import { Link } from "../ui/Link";
+import { Link } from "../ui/link";
 
 type Tab = {
   name: string;
@@ -17,6 +17,10 @@ const tabs = [
   {
     name: "About",
     href: "/about",
+  },
+  {
+    name: "Timeline",
+    href: "/timeline",
   },
 ] as Tab[];
 

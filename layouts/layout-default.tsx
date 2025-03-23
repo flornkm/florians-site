@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import React from "react";
-import Navigation from "../components/shared/Navigation";
+import Navigation from "../components/shared/navigation";
 
 export default function LayoutDefault({ children }: { children: React.ReactNode }) {
   return (

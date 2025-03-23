@@ -1,8 +1,8 @@
 import { useData } from "vike-react/useData";
-import ScrollWheel from "../../../components/shared/ScrollWheel";
-import Section from "../../../components/shared/Section";
-import { Link } from "../../../components/ui/Link";
-import Tooltip from "../../../components/ui/Tooltip";
+import ScrollWheel from "../../../components/shared/scroll-wheel";
+import Section from "../../../components/shared/section";
+import { Link } from "../../../components/ui/link";
+import Tooltip from "../../../components/ui/tooltip";
 import ChevronLeft from "../../../icons/chevron-left";
 import type { Data } from "./+data.js";
 

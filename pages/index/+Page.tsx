@@ -1,6 +1,6 @@
 import { usePageContext } from "vike-react/usePageContext";
-import Section from "../../components/shared/Section";
-import { Link } from "../../components/ui/Link";
+import Section from "../../components/shared/section";
+import { Link } from "../../components/ui/link";
 import TriangleFilled from "../../icons/triangle-filled";
 
 export default function Page() {
