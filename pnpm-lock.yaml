@@ -11,12 +11,18 @@ importers:
       '@rive-app/react-canvas':
         specifier: ^4.18.3
         version: 4.18.3(react@19.0.0)
+      '@types/react-signature-canvas':
+        specifier: ^1.0.7
+        version: 1.0.7
       '@vite-plugin-vercel/vike':
         specifier: ^9.0.4
         version: 9.0.4(vike@0.4.224(react-streaming@0.3.48(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)))(vite-plugin-vercel@9.0.5)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2))
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2))
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -32,6 +38,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      react-signature-canvas:
+        specifier: 1.1.0-alpha.2
+        version: 1.1.0-alpha.2(@types/react@19.0.10)(prop-types@15.8.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       remark-rehype:
         specifier: ^11.1.1
         version: 11.1.1
@@ -93,6 +102,9 @@ importers:
       tailwindcss:
         specifier: ^4.0.12
         version: 4.0.12
+      tw-animate-css:
+        specifier: ^1.2.9
+        version: 1.2.9
       typescript:
         specifier: ^5.7.3
         version: 5.8.2
@@ -175,6 +187,10 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+
+  '@babel/runtime@7.27.1':
+    resolution: {integrity: sha512-1x3D2xEk2fRo3PAhwQwu5UubzgiVWSXTBfWpVd2Mx2AzRqJuDJCsgaDVZ7HB5iGzDW1Hl1sWN2mFyKjmR9uAog==}
+    engines: {node: '>=6.9.0'}
 
   '@babel/template@7.26.9':
     resolution: {integrity: sha512-qyRplbeIpNZhmzOysF/wFMuP9sctmh2cFzRAZOn1YapxBsE1i9bJIY586R/WBLfLcmcBlM8ROBiQURnnNy+zfA==}
@@ -850,8 +866,14 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
+  '@types/react-signature-canvas@1.0.7':
+    resolution: {integrity: sha512-0ulzaUvcIQ0HdNB5fHj+KE7ztWhlhYRsi65TdPIRj/t+FD5Rr8NJKBv4/xLViz7HsUh/tgqsoyKeARrm9+gPIg==}
+
   '@types/react@19.0.10':
     resolution: {integrity: sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==}
+
+  '@types/signature_pad@2.3.6':
+    resolution: {integrity: sha512-v3j92gCQJoxomHhd+yaG4Vsf8tRS/XbzWKqDv85UsqjMGy4zhokuwKe4b6vhbgncKkh+thF+gpz6+fypTtnFqQ==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1071,6 +1093,9 @@ packages:
   chownr@3.0.0:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
+
+  class-variance-authority@0.7.1:
+    resolution: {integrity: sha512-Ka+9Trutv7G8M6WT6SeiRWz792K5qEqIGEGzXKhAE6xOWAY6pPH8U+9IY3oCMv6kqTmLsv7Xh/2w2RigkePMsg==}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -2044,6 +2069,20 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
+  react-signature-canvas@1.1.0-alpha.2:
+    resolution: {integrity: sha512-tKUNk3Gmh04Ug4K8p5g8Is08BFUKvbXxi0PyetQ/f8OgCBzcx4vqNf9+OArY/TdNdfHtswXQNRwZD6tyELjkjQ==}
+    peerDependencies:
+      '@types/prop-types': ^15.7.3
+      '@types/react': 0.14 - 19
+      prop-types: ^15.5.8
+      react: 0.14 - 19
+      react-dom: 0.14 - 19
+    peerDependenciesMeta:
+      '@types/prop-types':
+        optional: true
+      '@types/react':
+        optional: true
+
   react-streaming@0.3.48:
     resolution: {integrity: sha512-AWU5iNZtDNuNf6rdiiJybbPqP5kQl54jwcFqBNApl337EfQxpWm5g/uaDSiY2U+C0WvQ6QmFYOdK4IxJ5WUVVA==}
     peerDependencies:
@@ -2157,6 +2196,9 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
+  signature_pad@2.3.2:
+    resolution: {integrity: sha512-peYXLxOsIY6MES2TrRLDiNg2T++8gGbpP2yaC+6Ohtxr+a2dzoaqWosWDY9sWqTAAk6E/TyQO+LJw9zQwyu5kA==}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -2244,6 +2286,9 @@ packages:
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
+  trim-canvas@0.1.2:
+    resolution: {integrity: sha512-nd4Ga3iLFV94mdhW9JFMLpQbHUyCQuhFOD71PEAt1NjtMD5wbZctzhX8c3agHNybMR5zXD1XTGoIEWk995E6pQ==}
+
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
 
@@ -2258,6 +2303,9 @@ packages:
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
+  tw-animate-css@1.2.9:
+    resolution: {integrity: sha512-9O4k1at9pMQff9EAcCEuy1UNO43JmaPQvq+0lwza9Y0BQ6LB38NiMj+qHqjoQf40355MX+gs6wtlR6H9WsSXFg==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -2555,6 +2603,8 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.9
       '@babel/helper-plugin-utils': 7.26.5
+
+  '@babel/runtime@7.27.1': {}
 
   '@babel/template@7.26.9':
     dependencies:
@@ -3053,9 +3103,16 @@ snapshots:
     dependencies:
       '@types/react': 19.0.10
 
+  '@types/react-signature-canvas@1.0.7':
+    dependencies:
+      '@types/react': 19.0.10
+      '@types/signature_pad': 2.3.6
+
   '@types/react@19.0.10':
     dependencies:
       csstype: 3.1.3
+
+  '@types/signature_pad@2.3.6': {}
 
   '@types/unist@3.0.3': {}
 
@@ -3340,6 +3397,10 @@ snapshots:
       supports-color: 7.2.0
 
   chownr@3.0.0: {}
+
+  class-variance-authority@0.7.1:
+    dependencies:
+      clsx: 2.1.1
 
   clsx@2.1.1: {}
 
@@ -4358,6 +4419,18 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
+  react-signature-canvas@1.1.0-alpha.2(@types/react@19.0.10)(prop-types@15.8.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      '@babel/runtime': 7.27.1
+      '@types/signature_pad': 2.3.6
+      prop-types: 15.8.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      signature_pad: 2.3.2
+      trim-canvas: 0.1.2
+    optionalDependencies:
+      '@types/react': 19.0.10
+
   react-streaming@0.3.48(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@brillout/import': 0.2.6
@@ -4525,6 +4598,8 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
+  signature_pad@2.3.2: {}
+
   source-map-js@1.2.1: {}
 
   source-map-support@0.5.21:
@@ -4637,6 +4712,8 @@ snapshots:
 
   tr46@0.0.3: {}
 
+  trim-canvas@0.1.2: {}
+
   trim-lines@3.0.1: {}
 
   trough@2.2.0: {}
@@ -4646,6 +4723,8 @@ snapshots:
       typescript: 5.8.2
 
   tslib@2.8.1: {}
+
+  tw-animate-css@1.2.9: {}
 
   type-check@0.4.0:
     dependencies:
