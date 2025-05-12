@@ -13,7 +13,10 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "types": ["vite/client", "vike-react", "vite-plugin-vercel/types"],
     "jsx": "preserve",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "exclude": ["dist"]
 }

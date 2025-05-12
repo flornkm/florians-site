@@ -35,6 +35,14 @@ We developed mobile apps with SwiftUI to provide a seamless experience. Users ca
 **Technical challenges**  
 One major hurdle was receiving accurate user information in our backend. Apple's ecosystem made this difficult compared to platforms like Stripe. We leveraged App Store Connect API with Server Notifications v2, requiring extensive testing to ensure reliability.
 
+<video
+          src="/videos/sona.webm"
+          autoPlay
+          muted
+          loop
+          playsInline
+        ></video>
+
 ## Result
 
 Sona launched successfully on ProductHunt, reaching nearly 10,000 users in its first month. We're now expanding beyond summaries to provide even greater value to our users.

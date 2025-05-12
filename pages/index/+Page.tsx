@@ -1,7 +1,7 @@
 import { usePageContext } from "vike-react/usePageContext";
+import TriangleFilled from "../../components/icons/triangle-filled";
+import { Link } from "../../components/shared/link";
 import Section from "../../components/shared/section";
-import { Link } from "../../components/ui/link";
-import TriangleFilled from "../../icons/triangle-filled";
 
 export default function Page() {
   const pageContext = usePageContext();
@@ -30,7 +30,7 @@ export default function Page() {
             <Link
               href={`/work/${project.slug}`}
               key={project.slug}
-              className="w-full grid grid-cols-[336px_1fr] items-start group/item hover:opacity-100 group-hover/section:opacity-30 transition-opacity duration-300 ease-out py-4"
+              className="w-full grid grid-cols-[290px_1fr] items-start group/item hover:opacity-100 group-hover/section:opacity-30 transition-opacity duration-300 ease-out py-4"
             >
               <div className="flex flex-col gap-0.5 w-full items-start sticky top-16">
                 <h3 className="font-semibold">{project.title}</h3>

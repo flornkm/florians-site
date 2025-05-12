@@ -1,8 +1,8 @@
+import { cn } from "@/lib/utils";
 import { useRive } from "@rive-app/react-canvas";
 import { useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
-import { cn } from "../../lib/utils";
-import { Link } from "../ui/link";
+import { Link } from "./link";
 
 type Tab = {
   name: string;
@@ -64,15 +64,15 @@ export default function Navigation() {
   }, [urlPathname, activeLink]);
 
   return (
-    <nav className="sticky top-0 z-50 w-screen bg-white px-4">
+    <nav className="sticky top-[90vh] md:top-0 z-50 md:w-screen bg-white px-4">
       <div
         className={cn(
-          "pointer-events-none absolute left-1/2 w-full transition-all duration-500 ease-in-out h-px -translate-x-1/2 bottom-0 bg-neutral-200",
+          "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-500 ease-in-out h-px -translate-x-1/2 bottom-0 bg-neutral-200",
           scrolled ? "max-w-[100vw]" : "max-w-5xl",
         )}
       />
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between py-2.5 gap-4 relative">
-        <div className="flex w-auto md:w-full max-w-[calc(341px)] items-center justify-between">
+        <div className="w-auto md:w-full max-w-[calc(341px)] items-center justify-between hidden md:flex">
           <div className="flex items-center gap-4">
             <Link
               onMouseEnter={() => {
@@ -122,7 +122,7 @@ export default function Navigation() {
             href="/contact"
             key="contact"
             className={cn(
-              "text-sm font-medium relative z-10 px-3 py-1 transition-colors duration-300 ease-in-out bg-black text-white hover:bg-neutral-800 rounded-full",
+              "text-sm hidden md:block font-medium relative z-10 px-3 py-1 transition-colors duration-300 ease-in-out bg-black text-white hover:bg-neutral-800 rounded-full",
               urlPathname === "/contact" && "bg-neutral-900",
             )}
             ref={(el) => {
