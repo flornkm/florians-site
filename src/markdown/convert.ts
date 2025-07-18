@@ -3,7 +3,7 @@ import { marked } from "marked";
 import { gfmHeadingId } from "marked-gfm-heading-id";
 
 export async function convertMarkdownToHtml(url: string): Promise<string | boolean> {
-  const contentRoot = "./content";
+  const contentRoot = "./src/content";
 
   const markdown = await readFile(`${contentRoot}${url}.md`, "utf-8");
 
@@ -21,7 +21,7 @@ export async function convertMarkdownToHtml(url: string): Promise<string | boole
 }
 
 export async function returnContent(category: "work" | "timeline") {
-  const contentRoot = "./content/" + category;
+  const contentRoot = "./src/content/" + category;
   const tableOfContents = [];
 
   const files = await readdir(contentRoot);

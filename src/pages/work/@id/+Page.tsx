@@ -1,3 +1,4 @@
+import { proseVariants } from "@/lib/prose-variants";
 import { useData } from "vike-react/useData";
 import ArrowTopRight from "../../../components/icons/arrow-top-right";
 import ChevronLeft from "../../../components/icons/chevron-left";
@@ -9,8 +10,6 @@ import type { Data } from "./+data.js";
 
 export default function Page() {
   const project = useData<Data>();
-
-  console.log(project);
 
   return (
     <div className="w-full px-4">
@@ -60,10 +59,7 @@ export default function Page() {
           </div>
         </div>
         <div className="w-full max-w-[calc(100%-76px)] justify-self-end">
-          <article
-            className="prose mb-12 [&_video]:rounded-xl prose-img:max-w-xl prose-p:text-neutral-500 prose-h1:text-lg prose-h1:font-semibold prose-h2:text-base prose-h2:font-semibold prose-h3:text-sm prose-h3:font-semibold prose-p:text-sm prose-p:font-normal"
-            dangerouslySetInnerHTML={{ __html: project.html }}
-          />
+          <article className={proseVariants.default} dangerouslySetInnerHTML={{ __html: project.html }} />
           <div className="w-full flex flex-col items-start">
             <h2 className="font-semibold mb-2">Related links</h2>
             <div className="flex gap-0.5 bg-neutral-100 p-0.5 rounded-[10px] overflow-hidden">

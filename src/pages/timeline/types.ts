@@ -5,6 +5,7 @@ export type TimelineItem = {
   description: string;
   slug: string;
   date: string;
+  content?: string;
   type: TimelineItemType;
   source?: string;
 } & (
