@@ -14,11 +14,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./"),
-      "@components": path.resolve(__dirname, "./components"),
-      "@pages": path.resolve(__dirname, "./pages"),
-      "@hooks": path.resolve(__dirname, "./hooks"),
-      "@icons": path.resolve(__dirname, "./icons"),
+      "@": path.resolve(__dirname, "./src"),
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@icons": path.resolve(__dirname, "./src/icons"),
     },
   },
 });

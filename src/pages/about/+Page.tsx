@@ -1,38 +1,29 @@
-import Animation from "@/components/shared/animation";
-
 export default function Page() {
   const life = [
     {
       title: "Brick by brick",
       description:
         "As my favorite toy as a child, LEGO bricks helped me to develop a passion for building creative things.",
-      animation: {
-        src: "/animations/florian.riv",
-        artboard: "lego-stack",
-        animations: ["play"],
-        autoplay: true,
+      video: {
+        src: "/videos/rotating-lego-block.webm",
+        size: 80,
       },
     },
     {
-      title: "Youtube",
+      title: "Motion Design",
       description:
-        "When I grew up, I began to work with different Youtube channels worldwide via. the platform Fiverr.",
-      animation: {
-        src: "/animations/florian.riv",
-        artboard: "youtube",
-        animations: ["play"],
-        autoplay: true,
+        "When I grew up, I began to work with different Youtube channels editing videos for them and learning a lot about getting details right.",
+      video: {
+        src: "/videos/rotating-laptop.webm",
+        size: 96,
       },
     },
     {
       title: "Bauhaus",
-      description:
-        "I always selected educational courses after the Bauhaus movement as this way of thinking is consistent with my design philosophy.",
-      animation: {
-        src: "/animations/florian.riv",
-        artboard: "bauhaus",
-        animations: ["play"],
-        autoplay: true,
+      description: "I was always fascinated by the Bauhaus movement and its focus on simplicity and functionality.",
+      video: {
+        src: "/videos/rotating-vitra-chair.webm",
+        size: 128,
       },
     },
   ];
@@ -45,14 +36,14 @@ export default function Page() {
   ];
 
   return (
-    <div className="w-full px-4">
-      <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full">
+      <div className="w-full max-w-5xl mx-auto px-4">
         <section className="flex flex-col items-start gap-4 mb-8">
           <div className="pb-8 w-full relative mb-4">
             <div className="-mb-8 ml-1.5 border border-neutral-200 rounded-full w-28 aspect-square overflow-hidden">
               <img
                 src="/images/avatars/florian_kiem.webp"
-                className="w-full rounded-full transition-all duration-300 ease-out hover:dither"
+                className="w-full rounded-full transition-all duration-300 ease-out"
               />
             </div>
             <div className="absolute pointer-events-none -bottom-11 h-full w-32">
@@ -83,25 +74,39 @@ export default function Page() {
           </div>
         </section>
         <section className="w-full mb-16">
-          <h2 className="font-semibold text-left mb-6">Life TLDR;</h2>
+          <h2 className="font-semibold text-left mb-4">Learn more about me</h2>
           <div className="w-full grid md:grid-cols-3 md:gap-8 lg:gap-12">
             {life.map((step) => (
-              <div className="flex flex-col gap-2 mb-12 max-w-sm">
-                <Animation riveParams={step.animation} className="w-32 h-32 bg-neutral-50 rounded-md mb-2" />
+              <div className="flex flex-col gap-2 max-w-sm">
+                <div className="rounded-md aspect-square w-32 flex items-center justify-center mb-2 bg-neutral-100">
+                  {step.video && (
+                    <video
+                      src={step.video.src}
+                      className="object-contain"
+                      style={{
+                        width: step.video.size,
+                        height: step.video.size,
+                      }}
+                      muted
+                      loop
+                      autoPlay
+                    />
+                  )}
+                </div>
                 <h3 className="font-semibold text-sm text-left">{step.title}</h3>
-                <p className="text-sm text-balance"> {step.description}</p>
+                <p className="text-sm"> {step.description}</p>
               </div>
             ))}
           </div>
         </section>
-        <section className="w-full">
+        {/* <section className="w-full min-h-screen flex flex-col justify-center scroll-snap-section">
           <h2 className="font-semibold text-left mb-6">Companies worked with</h2>
           <div className="w-full flex flex-wrap gap-4">
             {companies.map((company) => (
               <img src={company.logo} alt={company.name} />
             ))}
           </div>
-        </section>
+        </section> */}
       </div>
     </div>
   );
