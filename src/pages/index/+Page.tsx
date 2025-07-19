@@ -34,7 +34,7 @@ export default function Page() {
             >
               <div className="flex flex-col gap-0.5 w-full items-start sticky top-16">
                 <h3 className="font-semibold">{project.title}</h3>
-                <p className="text-neutral-400 font-medium text-sm mb-2">{project.description}</p>
+                <p className="text-neutral-500 text-sm mb-2">{project.description}</p>
                 <p className="items-center pointer-events-none hidden lg:flex gap-1 group-hover/item:opacity-100 group-hover/item:ml-0 group-hover/item:blur-none opacity-0 -ml-2 blur-[1px] transition-all duration-300 ease-out focus:hidden group-focus/item:hidden">
                   <TriangleFilled className="w-4 h-4 inline-block" />
                   <span className="text-sm font-medium inline-block">Click to open</span>

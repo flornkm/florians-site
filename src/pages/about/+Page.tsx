@@ -1,3 +1,6 @@
+import ArrowTopRight from "@/components/icons/arrow-top-right";
+import { Link } from "@/components/shared/link";
+
 export default function Page() {
   const life = [
     {
@@ -5,14 +8,14 @@ export default function Page() {
       description:
         "As my favorite toy as a child, LEGO bricks helped me to develop a passion for building creative things.",
       video: {
-        src: "/videos/rotating-lego-block.webm",
+        src: "/videos/rotating-block.webm",
         size: 80,
       },
     },
     {
-      title: "Motion Design",
+      title: "Internet",
       description:
-        "When I grew up, I began to work with different Youtube channels editing videos for them and learning a lot about getting details right.",
+        'I\'m a "typical" internet kid. Growing up, I worked with different Youtube channels, editing videos for them, and learning a lot.',
       video: {
         src: "/videos/rotating-laptop.webm",
         size: 96,
@@ -30,8 +33,47 @@ export default function Page() {
 
   const companies = [
     {
-      name: "Google",
-      logo: "/images/companies/google.svg",
+      name: "Superpower",
+      logo: "/images/companies/superpower-logo.svg",
+      url: "https://superpower.com",
+    },
+    {
+      name: "Opral",
+      logo: "/images/companies/opral-logo.svg",
+      url: "https://opral.com",
+    },
+    {
+      name: "3D AI Studio",
+      logo: "/images/companies/3d-ai-studio-logo.svg",
+      url: "https://3daistudio.com",
+    },
+    {
+      name: "Morphic",
+      logo: "/images/companies/morphic-logo.svg",
+      url: "https://morphic.com",
+    },
+    {
+      name: "Novis",
+      logo: "/images/companies/novis-logo.svg",
+      url: "https://novis.ai",
+    },
+    {
+      name: "Remove.tech",
+      logo: "/images/companies/remove-tech-logo.svg",
+      url: "https://remove.tech",
+    },
+  ];
+
+  const institutions = [
+    {
+      name: "TU Delft",
+      logo: "/images/institutions/tudelft-logo.svg",
+      url: "https://tudelft.nl",
+    },
+    {
+      name: "University of Design Schwaebisch Gmuend",
+      logo: "/images/institutions/hfg-logo.svg",
+      url: "https://hfg-gmuend.de",
     },
   ];
 
@@ -61,11 +103,11 @@ export default function Page() {
             </div>
           </div>
           <div className="flex flex-col gap-2 max-w-xl shrink-0 items-start">
-            <p className="text-sm">
+            <p className="text-sm text-neutral-500">
               Many designers are writing about similar desires. So I just write my current thinking about the state of
               design and engineering down, and what benefits and joy it brings to me.
             </p>
-            <p className="text-sm mb-4">
+            <p className="text-sm mb-4 text-neutral-500">
               As a design engineer, my biggest strength is to translate design into code. Working in the intersection of
               those two worlds truly feels special. It doesn't only make companies more efficient by making iteration
               cycles smaller, but also helps the handoff between both teams to heal long-term, eventually resulting in
@@ -74,10 +116,10 @@ export default function Page() {
           </div>
         </section>
         <section className="w-full mb-16">
-          <h2 className="font-semibold text-left mb-4">Learn more about me</h2>
+          <h2 className="font-semibold text-left mb-4">Info</h2>
           <div className="w-full grid md:grid-cols-3 md:gap-8 lg:gap-12">
-            {life.map((step) => (
-              <div className="flex flex-col gap-2 max-w-sm">
+            {life.map((step, index) => (
+              <div key={index} className="flex flex-col gap-2 max-w-sm">
                 <div className="rounded-md aspect-square w-32 flex items-center justify-center mb-2 bg-neutral-100">
                   {step.video && (
                     <video
@@ -90,24 +132,79 @@ export default function Page() {
                       muted
                       loop
                       autoPlay
+                      playsInline
+                      preload="metadata"
                     />
                   )}
                 </div>
                 <h3 className="font-semibold text-sm text-left">{step.title}</h3>
-                <p className="text-sm"> {step.description}</p>
+                <p className="text-sm text-neutral-500"> {step.description}</p>
               </div>
             ))}
           </div>
         </section>
-        {/* <section className="w-full min-h-screen flex flex-col justify-center scroll-snap-section">
-          <h2 className="font-semibold text-left mb-6">Companies worked with</h2>
-          <div className="w-full flex flex-wrap gap-4">
+        <section className="w-full flex flex-col justify-center">
+          <h2 className="font-semibold text-left mb-2">Past</h2>
+          <p className="text-sm text-neutral-500 max-w-xl mb-4">
+            I'm very thankful for the opportunities I had in the past to work together with some of the most talented
+            teams, learning from them and working on truly great products:
+          </p>
+          <div className="w-auto flex mb-8 gap-8 scrollbar-none px-8 md:px-0 py-4 items-center md:mask-r-from-50% max-md:mask-x-from-95% scrollbar overflow-x-auto">
             {companies.map((company) => (
-              <img src={company.logo} alt={company.name} />
+              <LogoHover
+                entity={{
+                  url: company.url,
+                  name: company.name,
+                  logo: company.logo,
+                }}
+              />
             ))}
           </div>
-        </section> */}
+          <p className="text-sm text-neutral-500 max-w-xl mb-4">
+            A lot of the things I learned comes from practice which I was able to apply to my own projects at these
+            institutions:
+          </p>
+          <div className="w-auto flex gap-8 scrollbar-none px-8 md:px-0 py-4 items-center md:mask-r-from-50% max-md:mask-x-from-95% scrollbar overflow-x-auto">
+            {institutions.map((institution) => (
+              <LogoHover
+                entity={{
+                  url: institution.url,
+                  name: institution.name,
+                  logo: institution.logo,
+                }}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
+
+const LogoHover = ({
+  entity,
+}: {
+  entity: {
+    url: string;
+    name: string;
+    logo: string;
+  };
+}) => {
+  return (
+    <div className="group w-24 shrink-0 relative">
+      <Link
+        className="absolute line-clamp-1 z-10 cursor-pointer inset-0 text-center text-neutral-500 opacity-0 group-hover:opacity-100 blur-[2px] transition-all group-hover:blur-none"
+        href={entity.url}
+        target="_blank"
+      >
+        {entity.name}
+        <ArrowTopRight className="w-4 h-4 inline ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 ease-out" />
+      </Link>
+      <img
+        src={entity.logo}
+        alt={entity.name}
+        className="h-6 opacity-50 mx-auto group-hover:blur-[2px] group-hover:opacity-10 transition-all"
+      />
+    </div>
+  );
+};
