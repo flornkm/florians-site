@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+@plugin 'tailwind-scrollbar';
 
 @font-face {
   font-family: "Pretendard Variable";
@@ -145,6 +146,7 @@
   --font-mono: "Commit Mono", "ui-monospace", "SFMono-Regular", "Liberation Mono", "Courier New", "monospace";
   --font-rounded: "Open Runde", "sans-serif";
   --spacing-col: 248px;
+  --text-ms: 15px;
 }
 
 html {
@@ -155,16 +157,6 @@ html {
 body {
   width: 100dvw;
   overflow-x: hidden;
-}
-
-@utility dither {
-  filter: url(#dither);
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-}
-
-@utility dither-none {
-  filter: none;
 }
 
 /* Global focus style */
