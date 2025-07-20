@@ -62,8 +62,8 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full px-4">
-      <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full">
+      <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div className="bg-gradient-to-b from-white via-white dark:from-black dark:via-black to-transparent pt-12 pb-8 -mt-8 z-10">
           <H1 className="text-center mb-3">A blog, photos, experiments, and more updates</H1>
         </div>
