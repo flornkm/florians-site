@@ -157,6 +157,7 @@ html {
 body {
   width: 100dvw;
   overflow-x: hidden;
+  @apply bg-white dark:bg-black dark:text-white;
 }
 
 /* Global focus style */

@@ -8,7 +8,7 @@ export default function Section({
   ...props
 }: { as?: React.ElementType } & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <Component className={cn("w-full grid grid-cols-[336px_1fr] gap-4", className)} {...props}>
+    <Component className={cn("w-full md:grid grid-cols-[336px_1fr] gap-4", className)} {...props}>
       {children}
     </Component>
   );

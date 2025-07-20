@@ -1,11 +1,11 @@
+import Button from "@/components/ui/button";
+import Input from "@/components/ui/input";
+import Label from "@/components/ui/label";
+import Textarea from "@/components/ui/textarea";
+import { useForm } from "@/hooks/use-form";
+import { cn } from "@/lib/utils";
 import { useActionState, useCallback, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import Button from "../../components/shared/button";
-import Input from "../../components/shared/input";
-import Label from "../../components/shared/label";
-import Textarea from "../../components/shared/textarea";
-import { useForm } from "../../hooks/use-form";
-import { cn } from "../../lib/utils";
 
 type EntryState = null | {
   success: boolean;
@@ -75,12 +75,12 @@ export default function Page() {
           <div className="w-full max-w-lg pr-8">
             <div className="mb-6">
               <h1 className="text-lg font-semibold">Send a letter</h1>
-              <p className="text-sm text-neutral-500 w-full max-w-lg">It's like a digital guestbook.</p>
+              <p className="text-ms text-neutral-500 w-full max-w-lg">It's like a digital guestbook.</p>
             </div>
             <form action={formAction} className="w-full flex flex-col gap-4">
               {state && (
                 <div
-                  className={`p-3 rounded-lg text-sm ${state.success ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                  className={`p-3 rounded-lg text-ms ${state.success ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
                 >
                   {state.message}
                 </div>
@@ -159,7 +159,7 @@ export default function Page() {
                     !formValues.message && "opacity-0",
                   )}
                 >
-                  <p className="text-sm">
+                  <p className="text-ms">
                     <span className="font-semibold">Dear Website,</span> <br />
                     <br />
                     {formValues.message}
@@ -172,7 +172,7 @@ export default function Page() {
                     !formValues.name && "opacity-0",
                   )}
                 >
-                  <p className="text-sm font-medium text-neutral-500">
+                  <p className="text-ms font-medium text-neutral-500">
                     Sincerely,
                     <span className="inline-flex ml-2 items-center gap-1 translate-y-[3px]">
                       <img

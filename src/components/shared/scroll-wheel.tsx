@@ -1,4 +1,6 @@
+import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { H4 } from "../design-system/heading";
 
 export default function ScrollWheel({ html }: { html: string }) {
   const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([]);
@@ -68,15 +70,19 @@ export default function ScrollWheel({ html }: { html: string }) {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="space-y-2 text-sm">
-      <h4 className="font-medium text-neutral-800 mb-3">On this page</h4>
+    <nav className="space-y-2 text-ms">
+      <H4 className="font-medium text-neutral-800 mb-3">On this page</H4>
       <ul className="space-y-2">
         {headings.map((heading) => (
           <li
             key={heading.id}
-            className={`cursor-pointer transition-all duration-200 hover:text-neutral-800
-              ${activeHeading === heading.id ? "text-neutral-800 font-medium" : "text-neutral-500"}
-              ${heading.level > 1 ? `ml-${(heading.level - 1) * 2}` : ""}`}
+            className={cn(
+              "cursor-pointer transition-all duration-200 hover:text-neutral-800 dark:hover:text-neutral-500",
+              activeHeading === heading.id
+                ? "text-neutral-800 font-medium dark:text-neutral-200"
+                : "text-neutral-500 dark:text-neutral-400",
+              heading.level > 1 ? `ml-${(heading.level - 1) * 2}` : "",
+            )}
             onClick={() => scrollToHeading(heading.id)}
           >
             {heading.text}

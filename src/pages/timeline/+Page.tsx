@@ -1,7 +1,8 @@
-import ArrowTopRight from "@/components/icons/arrow-top-right";
-import Button from "@/components/shared/button";
+import { H1, H2 } from "@/components/design-system/heading";
+import Button from "@/components/ui/button";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
+import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { useEffect, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { TimelineItem } from "./types";
@@ -51,7 +52,6 @@ export default function Page() {
       item.style.width = "100vw";
       item.style.top = `${-itemDistanceToTopScreen}px`;
       item.style.zIndex = "999";
-      item.style.backgroundColor = "white";
       item.style.border = "none";
       item.style.paddingTop = "48px";
     }
@@ -64,10 +64,10 @@ export default function Page() {
   return (
     <div className="w-full px-4">
       <div className="w-full max-w-5xl mx-auto">
-        <div className="bg-gradient-to-b from-white via-white to-transparent pt-12 pb-8 -mt-8 z-10">
-          <h1 className="text-lg font-semibold text-center">A blog, photos, experiments, and more updates</h1>
+        <div className="bg-gradient-to-b from-white via-white dark:from-black dark:via-black to-transparent pt-12 pb-8 -mt-8 z-10">
+          <H1 className="text-center mb-3">A blog, photos, experiments, and more updates</H1>
         </div>
-        <div className="sticky z-10 top-40 flex flex-col items-center gap-4 h-0">
+        <div className="sticky z-10 top-16 md:top-40 flex flex-col items-center gap-4 h-0">
           {items.map((item, index) => {
             const gotShown = index < activeIndex;
 
@@ -75,7 +75,7 @@ export default function Page() {
               <div
                 style={{
                   zIndex: items.length - Math.abs(activeIndex - index),
-                  top: `-${Math.abs(activeIndex - index) * 72}px`,
+                  top: `-${Math.abs(activeIndex - index) * 64}px`,
                   pointerEvents: activeIndex === index ? "auto" : "none",
                   visibility: gotShown ? "hidden" : "visible",
                   transform: `scale(${gotShown ? 1.05 : Math.max(0.2, 1 - Math.abs(activeIndex - index) * 0.1)})`,
@@ -83,7 +83,7 @@ export default function Page() {
                 }}
                 id={`timeline-item-${item.slug}`}
                 key={item.slug}
-                className="w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-16rem)] bg-white shadow-xl shadow-black/[.03] rounded-2xl p-8 border border-neutral-200"
+                className="w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-neutral-950 dark:border-neutral-800 shadow-xl shadow-black/[.03] rounded-2xl p-8 border border-neutral-200"
               >
                 <Button
                   onClick={() => handleOpen(index)}
@@ -93,9 +93,9 @@ export default function Page() {
                   )}
                   variant="secondary"
                 >
-                  <ArrowTopRight className="w-4 h-4 shrink-0" />
+                  <IconArrowUpRight className="w-4 h-4 shrink-0" />
                 </Button>
-                <h2 className="text-sm font-semibold capitalize mb-4 font-mono">{item.type}</h2>
+                <H2 className="capitalize mb-4 font-mono">{item.type}</H2>
                 <div className="w-full h-full overflow-hidden flex items-start justify-center">
                   <div
                     className={`${proseVariants.default} max-w-lg`}
@@ -112,9 +112,7 @@ export default function Page() {
           })}
         </div>
         {Array.from({ length: items.length }).map((_, index) => (
-          <div key={index} data-scroll-section data-index={index} className="h-[calc(100vh)] w-full">
-            <div className="text-white text-2xl">Item {index + 1}</div>
-          </div>
+          <div key={index} data-scroll-section data-index={index} className="h-[calc(100vh)] w-full" />
         ))}
       </div>
     </div>

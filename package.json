@@ -3,13 +3,15 @@
     "dev": "vike dev",
     "build": "vike build",
     "start": "vike preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "install-icons": "dotenv -- pnpm add central-icons@npm:@central-icons-react/round-outlined-radius-1-stroke-2"
   },
   "dependencies": {
     "@rive-app/react-canvas": "^4.18.3",
     "@types/react-signature-canvas": "^1.0.7",
-    "@vite-plugin-vercel/vike": "^9.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vite-plugin-vercel/vike": "^9.0.6",
+    "@vitejs/plugin-react": "^4.7.0",
+    "central-icons": "npm:@central-icons-react/round-outlined-radius-1-stroke-2@^0.0.36",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "marked": "^15.0.7",
@@ -19,9 +21,9 @@
     "react-signature-canvas": "1.1.0-alpha.2",
     "remark-rehype": "^11.1.1",
     "tailwind-merge": "^3.0.2",
-    "vike": "^0.4.223",
+    "vike": "^0.4.236",
     "vike-react": "^0.5.13",
-    "vite-plugin-vercel": "^9.0.5"
+    "vite-plugin-vercel": "^9.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -30,6 +32,7 @@
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
@@ -43,7 +46,7 @@
     "tw-animate-css": "^1.2.9",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.1",
-    "vite": "^6.1.1"
+    "vite": "^6.3.5"
   },
   "type": "module"
 }
