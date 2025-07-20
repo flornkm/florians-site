@@ -43,7 +43,7 @@ export default function Page() {
             <div className="group rounded-lg my-px font-mono">
               <div className="[mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] p-4">
                 <div className={cn("flex items-center justify-between", activeIndex === index && "mt-2")}>
-                  <h2 className="font-semibold text-sm transition-all duration-500">{item.question}</h2>
+                  <h2 className="font-semibold text-ms transition-all duration-500">{item.question}</h2>
                   <div className="relative w-3 h-3">
                     <div
                       className={cn(
