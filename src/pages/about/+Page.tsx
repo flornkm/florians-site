@@ -1,4 +1,4 @@
-import { Body2 } from "@/components/design-system/body";
+import { Body2, Body4 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import { IconAspectRatio11 } from "central-icons/IconAspectRatio11";
 import { IconSquareCheck } from "central-icons/IconSquareCheck";
@@ -12,12 +12,14 @@ import { bucketlist } from "./const/bucketlist";
 import { companies } from "./const/companies";
 import { institutions } from "./const/institutions";
 import { life } from "./const/life";
+import { tools } from "./const/tools";
 import { LogoHover } from "./logo-hover";
+import { PhoneOutlines } from "./phone-outlines";
 
 export default function Page() {
   return (
     <div className="w-full">
-      <div className="w-full max-w-5xl mx-auto px-4 space-y-16">
+      <div className="w-full max-w-5xl mx-auto px-4 md:px-0 space-y-16">
         <section className="flex flex-col items-start gap-4 mb-8">
           <div className="pb-8 w-full relative mb-4">
             <div className="-mb-8 ml-1.5 border border-neutral-200 dark:border-neutral-900 rounded-full w-28 aspect-square overflow-hidden">
@@ -166,6 +168,26 @@ export default function Page() {
                   </li>
                 ))}
             </ul>
+          </div>
+        </section>
+        <section className="flex">
+          <div className="rounded-[62px] relative mx-auto">
+            <PhoneOutlines className="text-neutral-300 dark:text-neutral-800" />
+            <div className="absolute inset-0 px-10 py-20">
+              <H2 className="text-left mb-6">Apps I use</H2>
+              <div className="grid grid-cols-4 gap-6">
+                {tools.map((tool) => (
+                  <div>
+                    <img
+                      src={tool.icon}
+                      alt={tool.name}
+                      className="object-cover rounded-xl border border-neutral-200 dark:border-neutral-900 mb-2"
+                    />
+                    <Body4 className="text-center truncate">{tool.name}</Body4>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </div>

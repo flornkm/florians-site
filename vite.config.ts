@@ -1,8 +1,8 @@
 import tailwindcss from "@tailwindcss/vite";
+import vercel from "@vite-plugin-vercel/vike";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
-import vercel from "vite-plugin-vercel";
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), vercel()],
@@ -11,6 +11,9 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+  },
+  ssr: {
+    noExternal: ["vike", "vike-react"],
   },
   resolve: {
     alias: {

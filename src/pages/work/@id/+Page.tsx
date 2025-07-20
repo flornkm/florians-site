@@ -16,8 +16,8 @@ export default function Page() {
   const project = useData<Data>();
 
   return (
-    <div className="w-full px-4">
-      <Section as="div" className="w-full max-w-5xl mx-auto">
+    <div className="w-full">
+      <Section as="div" className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div className="flex-1 shrink-0">
           <div className="flex items-center gap-3 mb-2">
             <Link href="/" className="w-auto flex items-center gap-1 text-ms font-medium group/link">
@@ -32,12 +32,15 @@ export default function Page() {
           </div>
           <Body2 className="mb-4">{project.description}</Body2>
           <div className="flex mb-8 select-none">
-            {project.collaborators.map((collaborator, index) => (
+            {project.collaborators?.map((collaborator, index) => (
               <Tooltip
                 content={collaborator}
                 key={collaborator}
                 className="w-6 h-6 rounded-full border border-black/10 relative outline-2 -outline-offset-1 outline-white dark:outline-black"
-                style={{ marginLeft: index > 0 ? "-6px" : "0", zIndex: project.collaborators.length - index + 1 }}
+                style={{
+                  marginLeft: index > 0 ? "-6px" : "0",
+                  zIndex: (project.collaborators?.length || 0) - index + 1,
+                }}
               >
                 <img
                   src={`/images/avatars/${collaborator.replaceAll(" ", "_").toLowerCase()}.jpg`}
@@ -58,28 +61,30 @@ export default function Page() {
               />
             </Tooltip>
           </div>
-          <div className="md:sticky top-20 hidden">
+          <div className="md:sticky top-20 hidden md:block">
             <ScrollWheel html={project.html} />
           </div>
         </div>
         <div className="w-full md:max-w-[calc(100%-76px)] justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
-          <div className="flex flex-col items-start bg-black dark:bg-white rounded-[10px] mx-auto sticky md:w-auto w-full top-[calc(100dvh-9rem)] md:top-[calc(100dvh-6rem)] -mb-16 shadow-xl">
-            <H2 className="mb-1.5 text-white px-2 pt-1 dark:text-black">Related links</H2>
-            <div className="flex gap-0.5 p-0.5 overflow-hidden">
-              {project.links.map((link) => (
-                <Link
-                  href={link}
-                  className={cn(
-                    buttonVariants({ variant: "secondary" }),
-                    "flex items-center gap-2 bg-white group hover:bg-neutral-50 dark:bg-black dark:hover:bg-neutral-900 dark:text-white",
-                  )}
-                >
-                  {link.replaceAll("https://", "").replaceAll("http://", "").replaceAll("www.", "").split("/")[0]}
-                  <IconArrowUpRight className="w-4 h-4 inline ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 ease-out" />
-                </Link>
-              ))}
+          {project.links && project.links.length > 0 && (
+            <div className="flex flex-col items-start dark:bg-neutral-900 bg-white border border-neutral-200/75 dark:border-neutral-800 rounded-[10px] mx-auto sticky md:w-auto w-full top-[calc(100dvh-9rem)] md:top-[calc(100dvh-6rem)] -mb-16 shadow-xl">
+              <H2 className="mb-1 dark:text-white px-2 pt-1 text-black">Related links</H2>
+              <div className="flex gap-0.5 p-0.5 overflow-hidden">
+                {project.links?.map((link: string) => (
+                  <Link
+                    href={link}
+                    className={cn(
+                      buttonVariants({ variant: "secondary" }),
+                      "flex items-center gap-2 dark:bg-white group dark:hover:bg-neutral-50 bg-black hover:bg-neutral-900 text-white dark:text-black",
+                    )}
+                  >
+                    {link.replaceAll("https://", "").replaceAll("http://", "").replaceAll("www.", "").split("/")[0]}
+                    <IconArrowUpRight className="w-4 h-4 inline ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 ease-out" />
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <article className={proseVariants.default} dangerouslySetInnerHTML={{ __html: project.html }} />
         </div>
       </Section>

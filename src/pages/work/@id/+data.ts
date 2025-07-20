@@ -9,14 +9,8 @@ export const data = async (pageContext: PageContextServer) => {
   const config = useConfig();
 
   const projects = await returnContent("work");
-  const project = projects.find((project) => project.slug === pageContext.routeParams.id);
 
-  if (!project) {
-    throw new Error(`Project with ID ${pageContext.routeParams.id} not found`);
-  }
-
-  // Update the type to include all properties from the markdown frontmatter
-  type ProjectType = typeof project & {
+  const project = projects.find((project) => project.slug === pageContext.routeParams.id) as typeof project & {
     title: string;
     description: string;
     cover: string;
@@ -25,39 +19,45 @@ export const data = async (pageContext: PageContextServer) => {
     date: string;
   };
 
-  const typedProject = project as ProjectType;
-
-  // Only split if the properties are strings
-  if (typeof typedProject.collaborators === "string") {
-    typedProject.collaborators = typedProject.collaborators
-      .split(",")
-      .map((item) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
+  if (!project) {
+    throw new Error(`Project with ID ${pageContext.routeParams.id} not found`);
   }
 
-  if (typeof typedProject.links === "string") {
-    typedProject.links = typedProject.links
+  // Only split if the properties are strings, otherwise set defaults
+  if (typeof project.collaborators === "string") {
+    project.collaborators = project.collaborators
       .split(",")
       .map((item) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
+  } else if (!project.collaborators) {
+    project.collaborators = [];
+  }
+
+  if (typeof project.links === "string") {
+    project.links = project.links
+      .split(",")
+      .map((item) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
+  } else if (!project.links) {
+    project.links = [];
   }
 
   config({
-    title: typedProject.title,
-    description: typedProject.description,
+    title: project.title,
+    description: project.description,
   });
 
   // Convert the markdown to html
-  const html = await convertMarkdownToHtml(`/work/${typedProject.slug}`);
+  const html = await convertMarkdownToHtml(`/work/${project.slug}`);
 
   if (!html) {
-    throw new Error(`Failed to convert markdown to html for project ${typedProject.slug}`);
+    throw new Error(`Failed to convert markdown to html for project ${project.slug}`);
   }
 
   return {
-    title: typedProject.title,
-    description: typedProject.description,
-    collaborators: typedProject.collaborators,
-    links: typedProject.links,
-    date: typedProject.date,
+    title: project.title,
+    description: project.description,
+    collaborators: project.collaborators,
+    links: project.links,
+    date: project.date,
     html: html as string,
   };
 };
