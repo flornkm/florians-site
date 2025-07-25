@@ -9,6 +9,7 @@
   "dependencies": {
     "@rive-app/react-canvas": "^4.18.3",
     "@types/react-signature-canvas": "^1.0.7",
+    "@vercel/node": "^5.3.6",
     "@vite-plugin-vercel/vike": "^9.0.6",
     "@vitejs/plugin-react": "^4.7.0",
     "central-icons": "npm:@central-icons-react/round-outlined-radius-1-stroke-2@^0.0.36",
