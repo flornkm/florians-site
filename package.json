@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "VERCEL=1 vike dev",
-    "build": "VERCEL=1 vike build",
+    "dev": "vike dev",
+    "build": "vike build",
     "preview": "vercel dev",
     "start": "vike preview",
     "lint": "eslint .",
