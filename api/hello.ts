@@ -1,7 +1,9 @@
-export const config = { runtime: 'edge' };
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default async function handler(request: Request) {
-  return new Response(JSON.stringify({ message: 'Hello from API!' }), {
-    headers: { 'Content-Type': 'application/json' }
-  });
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200).json({ message: 'Hello from API!' });
 }
