@@ -1,4 +1,4 @@
-export const life = [
+export const LIFE = [
   {
     title: "Brick by brick",
     description:
@@ -18,8 +18,9 @@ export const life = [
     },
   },
   {
-    title: "Bauhaus",
-    description: "I was always fascinated by the Bauhaus movement and its focus on simplicity and functionality.",
+    title: "Design school",
+    description:
+      "I was always fascinated by historical design movements, and how they indirectly inspire todays software design.",
     video: {
       src: "/videos/rotating-vitra-chair.webm",
       size: 128,
