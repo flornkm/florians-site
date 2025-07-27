@@ -1,4 +1,4 @@
-export const tools = [
+export const TOOLS = [
   {
     name: "Notion",
     icon: "/images/apps/app_notion.jpg",

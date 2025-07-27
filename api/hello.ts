@@ -1,5 +1,7 @@
-export function GET(request: Request) {
-  const response = await fetch('https://api.vercel.app/products');
-  const products = await response.json();
-  return Response.json(products);
+export const config = { runtime: 'edge' };
+
+export default async function handler(request: Request) {
+  return new Response(JSON.stringify({ message: 'Hello from API!' }), {
+    headers: { 'Content-Type': 'application/json' }
+  });
 }

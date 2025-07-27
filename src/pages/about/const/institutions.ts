@@ -1,4 +1,4 @@
-export const institutions = [
+export const INSTITUTIONS = [
   {
     name: "TU Delft",
     logo: "/images/institutions/tudelft-logo.svg",

@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "dev": "vike dev",
-    "build": "vike build",
+    "dev": "VERCEL=1 vike dev",
+    "build": "VERCEL=1 vike build",
+    "preview": "vercel dev",
     "start": "vike preview",
     "lint": "eslint .",
     "install-icons": "dotenv -- pnpm add central-icons@npm:@central-icons-react/round-outlined-radius-1-stroke-2"

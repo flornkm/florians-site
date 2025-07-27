@@ -1,4 +1,4 @@
-export const companies = [
+export const COMPANIES = [
   {
     name: "Superpower",
     logo: "/images/companies/superpower-logo.svg",

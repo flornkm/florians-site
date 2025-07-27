@@ -8,15 +8,62 @@ import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 import IconArrowUpRight from "central-icons/IconArrowUpRight";
-import { bucketlist } from "./const/bucketlist";
-import { companies } from "./const/companies";
-import { institutions } from "./const/institutions";
-import { life } from "./const/life";
-import { tools } from "./const/tools";
+import { useEffect } from "react";
+import { BUCKETLIST } from "./const/bucketlist";
+import { COMPANIES } from "./const/companies";
+import { INSTITUTIONS } from "./const/institutions";
+import { LIFE } from "./const/life";
+import { TOOLS } from "./const/tools";
 import { LogoHover } from "./logo-hover";
 import { PhoneOutlines } from "./phone-outlines";
 
 export default function Page() {
+  const testRequest = async () => {
+    try {
+      console.log("Making request to /api/hello...");
+
+      const response = await fetch("/api/hello", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+      console.log("Response content-type:", response.headers.get("content-type"));
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response body:", errorText);
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+      }
+
+      const responseText = await response.text();
+      console.log("Raw response text:", responseText);
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+        console.log("Parsed JSON data:", data);
+      } catch (parseError) {
+        console.error("Failed to parse JSON:", parseError);
+        console.log("This suggests the endpoint is serving a file instead of executing the function");
+        throw new Error("Invalid JSON response - likely serving static file");
+      }
+
+      console.log("Test request successful:", data);
+      return data;
+    } catch (error) {
+      console.error("Test request failed:", error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    testRequest();
+  }, []);
+
   return (
     <div className="w-full">
       <div className="w-full max-w-5xl mx-auto px-4 md:px-0 space-y-16">
@@ -78,7 +125,7 @@ export default function Page() {
         <section className="w-full mb-16">
           <H2 className="text-left mb-4">Info</H2>
           <div className="w-full grid md:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
-            {life.map((step, index) => (
+            {LIFE.map((step, index) => (
               <div key={index} className="flex flex-col gap-2 max-w-sm">
                 <div className="rounded-md aspect-square w-32 flex items-center justify-center mb-2 border border-neutral-100 dark:border-neutral-900">
                   {step.video && (
@@ -97,7 +144,7 @@ export default function Page() {
                     />
                   )}
                 </div>
-                <H3 className="text-left mb-2">{step.title}</H3>
+                <H3 className="text-left">{step.title}</H3>
                 <Body2> {step.description}</Body2>
               </div>
             ))}
@@ -110,7 +157,7 @@ export default function Page() {
             teams, learning from them and working on truly great products:
           </Body2>
           <HorizontalScroll>
-            {companies.map((company) => (
+            {COMPANIES.map((company) => (
               <LogoHover
                 entity={{
                   url: company.url,
@@ -125,7 +172,7 @@ export default function Page() {
             institutions:
           </Body2>
           <HorizontalScroll>
-            {institutions.map((institution) => (
+            {INSTITUTIONS.map((institution) => (
               <LogoHover
                 entity={{
                   url: institution.url,
@@ -136,14 +183,13 @@ export default function Page() {
             ))}
           </HorizontalScroll>
         </section>
-        <section>
-          <H2 className="text-left mb-2">Bucketlist</H2>
-          <Body2 className="max-w-xl mb-4">Things I did or aim to do in the future.</Body2>
-          <div className="flex items-start gap-16">
-            <ul className="space-y-3">
-              {bucketlist
-                .filter((item) => item.completed)
-                .map((item) => (
+        <section className="grid grid-cols-2">
+          <div>
+            <H2 className="text-left mb-2">Bucketlist</H2>
+            <Body2 className="max-w-xl mb-4">Things I did or aim to do in the future.</Body2>
+            <div className="flex items-start gap-16">
+              <ul className="space-y-3">
+                {BUCKETLIST.filter((item) => item.completed).map((item) => (
                   <li className="flex items-start gap-1.5 text-neutral-400">
                     {item.completed ? (
                       <IconSquareCheck className="shrink-0" />
@@ -153,11 +199,9 @@ export default function Page() {
                     <Body2 className="font-medium">{item.title}</Body2>
                   </li>
                 ))}
-            </ul>
-            <ul className="space-y-3">
-              {bucketlist
-                .filter((item) => !item.completed)
-                .map((item) => (
+              </ul>
+              <ul className="space-y-3">
+                {BUCKETLIST.filter((item) => !item.completed).map((item) => (
                   <li className="flex items-start gap-1.5">
                     {item.completed ? (
                       <IconSquareCheck className="shrink-0" />
@@ -167,28 +211,35 @@ export default function Page() {
                     <Body2 className="font-medium dark:text-white">{item.title}</Body2>
                   </li>
                 ))}
-            </ul>
+              </ul>
+            </div>
           </div>
-        </section>
-        <section className="flex">
-          <div className="rounded-[62px] relative mx-auto">
-            <PhoneOutlines className="text-neutral-300 dark:text-neutral-800" />
-            <div className="absolute inset-0 px-10 py-20">
-              <H2 className="text-left mb-6">Apps I use</H2>
-              <div className="grid grid-cols-4 gap-6">
-                {tools.map((tool) => (
-                  <div>
-                    <img
-                      src={tool.icon}
-                      alt={tool.name}
-                      className="object-cover rounded-xl border border-neutral-200 dark:border-neutral-900 mb-2"
-                    />
-                    <Body4 className="text-center truncate">{tool.name}</Body4>
-                  </div>
-                ))}
+          <div className="flex w-full bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 flex-col">
+            <H2 className="text-left mb-6">Apps in use</H2>
+            <div className="rounded-[62px] aspect-[178/365] h-full w-full relative mx-auto bg-white dark:bg-black max-w-xs">
+              <PhoneOutlines className="text-neutral-300 aspect-[178/365] dark:text-neutral-800 h-full absolute top-0 left-1/2 -translate-x-1/2" />
+              <div className="absolute inset-0 px-10 py-20">
+                <div className="grid grid-cols-4 gap-6">
+                  {TOOLS.map((tool) => (
+                    <Link href={tool.link} target="_blank" className="cursor-default">
+                      <div className="rounded-xl relative group">
+                        <img
+                          src={tool.icon}
+                          alt={tool.name}
+                          className="object-cover rounded-[10px] cursor-pointer border border-neutral-200 dark:border-neutral-900 mb-1.5"
+                        />
+                        <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-black opacity-0 rounded-xl inset-0 absolute" />
+                      </div>
+                      <Body4 className="text-center cursor-text truncate text-[10px]">{tool.name}</Body4>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
+        </section>
+        <section className="flex w-full bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 flex-col">
+          <H2 className="text-left mb-6 md:-mb-6">Countries visited</H2>
         </section>
       </div>
     </div>

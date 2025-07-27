@@ -1,4 +1,4 @@
-export const bucketlist = [
+export const BUCKETLIST = [
   {
     title: "Visit the US",
     completed: true,

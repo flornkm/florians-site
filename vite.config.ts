@@ -1,13 +1,16 @@
-import tailwindcss from "@tailwindcss/vite";
-import vercel from "@vite-plugin-vercel/vike";
-import react from "@vitejs/plugin-react";
-import path from "path";
-import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite"
+import vike from 'vike/plugin'
+import react from "@vitejs/plugin-react"
+import path from "path"
+import { defineConfig } from "vite"
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), vercel()],
+  root: 'src',
+  plugins: [react(), tailwindcss(), vike()],
+  publicDir: "../public",
   build: {
     target: "es2022",
+    outDir: path.resolve(__dirname, "dist"),
   },
   server: {
     port: 3000,
@@ -17,11 +20,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@components": path.resolve(__dirname, "./src/components"),
-      "@pages": path.resolve(__dirname, "./src/pages"),
-      "@hooks": path.resolve(__dirname, "./src/hooks"),
-      "@icons": path.resolve(__dirname, "./src/icons"),
+      "@": path.resolve(__dirname, "./src")
     },
   },
 });
