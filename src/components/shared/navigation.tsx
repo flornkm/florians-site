@@ -21,8 +21,8 @@ const tabs = [
     href: "/about",
   },
   {
-    name: "Timeline",
-    href: "/timeline",
+    name: "Collection",
+    href: "/collection",
   },
 ] as Tab[];
 
@@ -66,10 +66,10 @@ export default function Navigation() {
   }, [urlPathname, activeLink]);
 
   return (
-    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-50 px-1.5 md:w-screen md:shadow-none bg-white dark:bg-black md:px-4 border md:border-none border-neutral-100 shadow-xl shadow-black/5 md:max-w-none mx-auto rounded-full dark:md:border-none dark:border dark:border-neutral-900 w-fit max-w-[calc(100%-2rem)]">
+    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-50 px-1.5 md:w-screen md:shadow-none bg-white dark:bg-black md:px-4 border md:border-none border-neutral-100 shadow-xl shadow-black/5 md:max-w-none mx-auto dark:md:border-none dark:border dark:border-neutral-900 w-fit max-w-[calc(100%-2rem)]">
       <div
         className={cn(
-          "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-500 ease-in-out h-px -translate-x-1/2 bottom-0 bg-neutral-200 dark:bg-neutral-900",
+          "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-500 ease-in-out h-px -translate-x-1/2 bottom-0 bg-neutral-100 dark:bg-neutral-900",
           scrolled ? "max-w-[100vw]" : "max-w-5xl",
         )}
       />

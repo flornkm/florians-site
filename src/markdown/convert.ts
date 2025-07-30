@@ -20,7 +20,7 @@ export async function convertMarkdownToHtml(url: string): Promise<string | boole
   return convertedHTML;
 }
 
-export async function returnContent(category: "work" | "timeline") {
+export async function returnContent(category: "work" | "collection") {
   const contentRoot = "./src/content/" + category;
   const tableOfContents = [];
 

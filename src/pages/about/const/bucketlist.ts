@@ -27,4 +27,8 @@ export const BUCKETLIST = [
     title: "Build an own hardware product",
     completed: false,
   },
+  {
+    title: "Buy an olive tree",
+    completed: false,
+  },
 ];

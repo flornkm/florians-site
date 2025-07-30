@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Customizes globe.gl tooltips */
+.float-tooltip-kap {
+    @apply !bg-black dark:!bg-white !px-2 !py-1 !rounded-lg !font-medium;
+}
+.float-tooltip-kap > * {
+    @apply truncate text-white dark:text-black;
+}

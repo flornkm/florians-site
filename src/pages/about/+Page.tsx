@@ -2,72 +2,30 @@ import { Body2, Body4 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import { IconAspectRatio11 } from "central-icons/IconAspectRatio11";
 import { IconSquareCheck } from "central-icons/IconSquareCheck";
+import { useRef } from "react";
+import type { GlobeMethods } from "react-globe.gl";
 
 import { buttonVariants } from "@/components/ui/button";
+import { Globe } from "@/components/ui/globe";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 import { Link } from "@/components/ui/link";
+import { LogoHover } from "@/components/ui/logo-hover";
 import { cn } from "@/lib/utils";
 import IconArrowUpRight from "central-icons/IconArrowUpRight";
-import { useEffect } from "react";
 import { BUCKETLIST } from "./const/bucketlist";
 import { COMPANIES } from "./const/companies";
 import { INSTITUTIONS } from "./const/institutions";
 import { LIFE } from "./const/life";
 import { TOOLS } from "./const/tools";
-import { LogoHover } from "./logo-hover";
-import { PhoneOutlines } from "./phone-outlines";
+import { VISITED_COUNTRIES, type CountryData } from "./const/visited-countries";
 
 export default function Page() {
-  const testRequest = async () => {
-    try {
-      console.log("Making request to /api/hello...");
-
-      const response = await fetch("/api/hello", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("Response status:", response.status);
-      console.log("Response headers:", response.headers);
-      console.log("Response content-type:", response.headers.get("content-type"));
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Error response body:", errorText);
-        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
-      }
-
-      const responseText = await response.text();
-      console.log("Raw response text:", responseText);
-
-      let data;
-      try {
-        data = JSON.parse(responseText);
-        console.log("Parsed JSON data:", data);
-      } catch (parseError) {
-        console.error("Failed to parse JSON:", parseError);
-        console.log("This suggests the endpoint is serving a file instead of executing the function");
-        throw new Error("Invalid JSON response - likely serving static file");
-      }
-
-      console.log("Test request successful:", data);
-      return data;
-    } catch (error) {
-      console.error("Test request failed:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    testRequest();
-  }, []);
+  const globeRef = useRef<GlobeMethods>(null);
 
   return (
     <div className="w-full">
       <div className="w-full max-w-5xl mx-auto px-4 md:px-0 space-y-16">
-        <section className="flex flex-col items-start gap-4 mb-8">
+        <section className="flex flex-col items-start gap-4 mb-12">
           <div className="pb-8 w-full relative mb-4">
             <div className="-mb-8 ml-1.5 border border-neutral-200 dark:border-neutral-900 rounded-full w-28 aspect-square overflow-hidden">
               <img
@@ -123,11 +81,10 @@ export default function Page() {
           </div>
         </section>
         <section className="w-full mb-16">
-          <H2 className="text-left mb-4">Info</H2>
           <div className="w-full grid md:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
             {LIFE.map((step, index) => (
               <div key={index} className="flex flex-col gap-2 max-w-sm">
-                <div className="rounded-md aspect-square w-32 flex items-center justify-center mb-2 border border-neutral-100 dark:border-neutral-900">
+                <div className="h-20 w-20 aspect-square flex items-center justify-center rounded-lg">
                   {step.video && (
                     <video
                       src={step.video.src}
@@ -183,11 +140,49 @@ export default function Page() {
             ))}
           </HorizontalScroll>
         </section>
-        <section className="grid grid-cols-2">
+        <section className="grid md:grid-cols-2">
+          <div className="mb-8 md:mb-0">
+            <H2 className="text-left">Countries visited</H2>
+            <div className="mask-radial-[45%_60%] overflow-hidden mask-radial-from-50% min-h-56 w-full flex items-center justify-center">
+              <Globe
+                ref={globeRef}
+                width={212}
+                height={212}
+                globeImageUrl="/images/earth-texture.jpg"
+                showAtmosphere={false}
+                globeCurvatureResolution={20}
+                animateIn={true}
+                htmlElementsData={VISITED_COUNTRIES}
+                htmlElement={() => {
+                  const el = document.createElement("div");
+                  el.innerHTML = `<svg viewBox="-4 0 36 36" style="width: 16px; height: 16px;">
+                    <path fill="#ef4444" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"></path>
+                    <circle fill="white" cx="14" cy="14" r="7"></circle>
+                  </svg>`;
+
+                  el.style.transition = "opacity 0.5s ease-in-out, filter 0.5s ease-in-out";
+
+                  return el;
+                }}
+                htmlLat={(d) => (d as CountryData).latitude}
+                htmlLng={(d) => (d as CountryData).longitude}
+                htmlAltitude={0.02}
+                htmlElementVisibilityModifier={(el, isVisible) => {
+                  el.style.opacity = isVisible ? "1" : "0";
+                  el.style.filter = isVisible ? "blur(0px)" : "blur(1px)";
+                }}
+                autoRotate={true}
+                autoRotateSpeed={1.0}
+                enableZoom={false}
+                enablePan={false}
+                enableRotate={true}
+              />
+            </div>
+          </div>
           <div>
             <H2 className="text-left mb-2">Bucketlist</H2>
             <Body2 className="max-w-xl mb-4">Things I did or aim to do in the future.</Body2>
-            <div className="flex items-start gap-16">
+            <div className="flex md:flex-row flex-col-reverse items-start gap-8 md:gap-16">
               <ul className="space-y-3">
                 {BUCKETLIST.filter((item) => item.completed).map((item) => (
                   <li className="flex items-start gap-1.5 text-neutral-400">
@@ -214,32 +209,29 @@ export default function Page() {
               </ul>
             </div>
           </div>
-          <div className="flex w-full bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 flex-col">
-            <H2 className="text-left mb-6">Apps in use</H2>
-            <div className="rounded-[62px] aspect-[178/365] h-full w-full relative mx-auto bg-white dark:bg-black max-w-xs">
-              <PhoneOutlines className="text-neutral-300 aspect-[178/365] dark:text-neutral-800 h-full absolute top-0 left-1/2 -translate-x-1/2" />
-              <div className="absolute inset-0 px-10 py-20">
-                <div className="grid grid-cols-4 gap-6">
-                  {TOOLS.map((tool) => (
-                    <Link href={tool.link} target="_blank" className="cursor-default">
-                      <div className="rounded-xl relative group">
-                        <img
-                          src={tool.icon}
-                          alt={tool.name}
-                          className="object-cover rounded-[10px] cursor-pointer border border-neutral-200 dark:border-neutral-900 mb-1.5"
-                        />
-                        <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-black opacity-0 rounded-xl inset-0 absolute" />
-                      </div>
-                      <Body4 className="text-center cursor-text truncate text-[10px]">{tool.name}</Body4>
-                    </Link>
-                  ))}
-                </div>
+        </section>
+        <section className="w-full p-4 bg-neutral-50 dark:bg-neutral-950 rounded-lg overflow-hidden">
+          <H2 className="text-left mb-6">Apps in use</H2>
+          <div className="rounded-[62px] aspect-[178/400] w-full relative mx-auto max-w-[350px] h-80">
+            <div className="absolute bg-[url('/images/empty-iphone-mockup-light.png')] dark:bg-[url('/images/empty-iphone-mockup-dark.png')] aspect-[178/400] w-full inset-0 bg-contain left-1/2 select-none -translate-x-1/2 top-0" />
+            <div className="absolute inset-0 px-6 md:px-4 py-16 max-w-[200px] mx-auto">
+              <div className="grid grid-cols-4 gap-2">
+                {TOOLS.map((tool) => (
+                  <Link href={tool.link} target="_blank" className="cursor-default">
+                    <div className="rounded-xl relative group">
+                      <img
+                        src={tool.icon}
+                        alt={tool.name}
+                        className="object-cover rounded-[10px] cursor-pointer border border-neutral-200 dark:border-neutral-900 mb-0.5"
+                      />
+                      <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-black opacity-0 rounded-xl inset-0 absolute" />
+                    </div>
+                    <Body4 className="text-center cursor-text truncate text-[9px]">{tool.name}</Body4>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
-        </section>
-        <section className="flex w-full bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 flex-col">
-          <H2 className="text-left mb-6 md:-mb-6">Countries visited</H2>
         </section>
       </div>
     </div>

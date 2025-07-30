@@ -11,7 +11,7 @@ export default function LayoutDefault({ children }: { children: React.ReactNode 
   return (
     <>
       {!pageContext.is404 && <Navigation />}
-      <main className={cn("w-full min-h-screen", !pageContext.is404 && "py-8")}>{children}</main>
+      <main className={cn("w-full min-h-screen dark:bg-black", !pageContext.is404 && "py-8")}>{children}</main>
     </>
   );
 }

@@ -1,13 +1,33 @@
 export const TOOLS = [
   {
-    name: "Notion",
-    icon: "/images/apps/app_notion.jpg",
-    link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
+    name: "Family",
+    icon: "/images/apps/app_family.jpg",
+    link: "https://apps.apple.com/us/app/family-crypto-wallet/id1606779267",
   },
   {
-    name: "Expedia",
-    icon: "/images/apps/app_expedia.jpg",
-    link: "https://apps.apple.com/us/app/expedia-hotels-flights-car/id427916203",
+    name: "Messages",
+    icon: "/images/apps/app_messages.jpg",
+    link: "https://apps.apple.com/us/app/messages/id1146560473",
+  },
+  {
+    name: "Spotify",
+    icon: "/images/apps/app_spotify.jpg",
+    link: "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580",
+  },
+  {
+    name: "Superpower",
+    icon: "/images/apps/app_superpower.jpg",
+    link: "https://superpower.com",
+  },
+  {
+    name: "GitHub",
+    icon: "/images/apps/app_github.jpg",
+    link: "https://apps.apple.com/us/app/github/id1477376905",
+  },
+  {
+    name: "Uber",
+    icon: "/images/apps/app_uber.jpg",
+    link: "https://apps.apple.com/us/app/uber-request-a-ride/id368677368",
   },
   {
     name: "X (Twitter)",
@@ -20,19 +40,14 @@ export const TOOLS = [
     link: "https://apps.apple.com/us/app/flighty-live-flight-tracker/id1358823008",
   },
   {
-    name: "Spotify",
-    icon: "/images/apps/app_spotify.jpg",
-    link: "https://apps.apple.com/us/app/spotify-music-and-podcasts/id324684580",
+    name: "ChatGPT",
+    icon: "/images/apps/app_chatgpt.jpg",
+    link: "https://apps.apple.com/us/app/chatgpt/id6448311069",
   },
   {
-    name: "Finanzguru",
-    icon: "/images/apps/app_finanzguru.jpg",
-    link: "https://apps.apple.com/us/app/finanzguru-konten-vertr%C3%A4ge/id1214803607",
-  },
-  {
-    name: "Messages",
-    icon: "/images/apps/app_messages.jpg",
-    link: "https://apps.apple.com/us/app/messages/id1146560473",
+    name: "Notion",
+    icon: "/images/apps/app_notion.jpg",
+    link: "https://apps.apple.com/us/app/notion-notes-docs-tasks/id1232780281",
   },
   {
     name: "Cron",

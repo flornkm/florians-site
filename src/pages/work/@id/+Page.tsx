@@ -32,7 +32,7 @@ export default function Page() {
           </div>
           <Body2 className="mb-4">{project.description}</Body2>
           <div className="flex mb-8 select-none">
-            {project.collaborators?.map((collaborator, index) => (
+            {project.collaborators?.map((collaborator: string, index: number) => (
               <Tooltip
                 content={collaborator}
                 key={collaborator}
@@ -65,17 +65,19 @@ export default function Page() {
             <ScrollWheel html={project.html} />
           </div>
         </div>
-        <div className="w-full md:max-w-[calc(100%-76px)] justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
+        <div className="w-full md:max-w-[calc(100%-96px)] justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
           {project.links && project.links.length > 0 && (
-            <div className="flex flex-col items-start dark:bg-neutral-900 bg-white border border-neutral-200/75 dark:border-neutral-800 rounded-[10px] mx-auto sticky md:w-auto w-full top-[calc(100dvh-9rem)] md:top-[calc(100dvh-6rem)] -mb-16 shadow-xl">
-              <H2 className="mb-1 dark:text-white px-2 pt-1 text-black">Related links</H2>
-              <div className="flex gap-0.5 p-0.5 overflow-hidden">
+            <div className="flex md:flex-col max-w-xs overflow-x-auto pr-0.5 scrollbar-none items-center md:items-start dark:bg-neutral-900 bg-white border border-neutral-200/50 dark:border-neutral-800 rounded-[10px] mx-auto sticky md:w-auto w-full top-[calc(100dvh-6.5rem)] md:top-[calc(100dvh-5.5rem)] -mb-16 shadow-xl">
+              <H2 className="mb-1 dark:text-white md:block h-8 flex items-center bg-gradient-to-r from-white via-white via-95% dark:from-neutral-900 dark:via-neutral-900 to-transparent pr-4 md:h-auto sticky left-0 px-2 pt-1 text-black text-sm truncate shrink-0">
+                Related links
+              </H2>
+              <div className="flex gap-1 p-0.5">
                 {project.links?.map((link: string) => (
                   <Link
                     href={link}
                     className={cn(
                       buttonVariants({ variant: "secondary" }),
-                      "flex items-center gap-2 dark:bg-white group dark:hover:bg-neutral-50 bg-black hover:bg-neutral-900 text-white dark:text-black",
+                      "flex items-center px-2 py-0.5 gap-2 dark:bg-neutral-700",
                     )}
                   >
                     {link.replaceAll("https://", "").replaceAll("http://", "").replaceAll("www.", "").split("/")[0]}
