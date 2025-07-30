@@ -9,10 +9,6 @@ const links = [
     href: "/",
   },
   {
-    label: "About",
-    href: "/about",
-  },
-  {
     label: "Contact",
     href: "/contact",
   },
@@ -31,7 +27,7 @@ export default function Page() {
             autoplay: true,
             animations: ["play"],
           }}
-          className="absolute animate-in fade-in zoom-in inset-0 -z-10 pointer-events-none [@media(max-height:500px)]:hidden h-80 max-lg:hidden max-w-lg left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+          className="absolute dark:hidden animate-in fade-in zoom-in inset-0 -z-10 pointer-events-none [@media(max-height:500px)]:hidden h-80 max-lg:hidden max-w-lg left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
         />
         <h1 className="text-lg font-semibold mb-1">Someone cut out this page.</h1>
         <p className="text-ms text-neutral-500 mb-5">But no worries, here are some pages glued together:</p>

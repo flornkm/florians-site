@@ -16,7 +16,7 @@ export default defineConfig({
     port: 3000,
   },
   ssr: {
-    noExternal: ["vike", "vike-react"],
+    noExternal: ["vike", "vike-react", "react-globe.gl", "globe.gl", "three-globe"],
   },
   resolve: {
     alias: {
