@@ -73,8 +73,8 @@ export default function Page() {
                 alt="Lovers Magazine Preview"
                 className="w-6 rounded-sm shadow transition-all group-hover:scale-110 group-hover:-rotate-2"
               />
-              <div className="flex items-center gap-2">
-                <Body2 className="font-medium dark:text-white">Interview with Lovers Magazine</Body2>
+              <div className="flex items-center gap-2 truncate">
+                <Body2 className="font-medium dark:text-white truncate">Interview with Lovers Magazine</Body2>
                 <IconArrowUpRight className="w-4 h-4 inline ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 ease-out" />
               </div>
             </Link>

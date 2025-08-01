@@ -1,5 +1,6 @@
 import { Body2 } from "@/components/design-system/body";
-import { H1, H2 } from "@/components/design-system/heading";
+import { H1 } from "@/components/design-system/heading";
+import { MarkdownRenderer } from "@/components/shared/markdown-renderer";
 import ScrollWheel from "@/components/shared/scroll-wheel";
 import Section from "@/components/shared/section";
 import { buttonVariants } from "@/components/ui/button.jsx";
@@ -65,19 +66,16 @@ export default function Page() {
             <ScrollWheel html={project.html} />
           </div>
         </div>
-        <div className="w-full md:max-w-[calc(100%-96px)] justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
+        <div className="w-full md:max-w-[calc(100%-96px)] pt-8 justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
           {project.links && project.links.length > 0 && (
-            <div className="flex md:flex-col max-w-xs overflow-x-auto pr-0.5 scrollbar-none items-center md:items-start dark:bg-neutral-900 bg-white border border-neutral-200/50 dark:border-neutral-800 rounded-[10px] mx-auto sticky md:w-auto w-full top-[calc(100dvh-6.5rem)] md:top-[calc(100dvh-5.5rem)] -mb-16 shadow-xl">
-              <H2 className="mb-1 dark:text-white md:block h-8 flex items-center bg-gradient-to-r from-white via-white via-95% dark:from-neutral-900 dark:via-neutral-900 to-transparent pr-4 md:h-auto sticky left-0 px-2 pt-1 text-black text-sm truncate shrink-0">
-                Related links
-              </H2>
-              <div className="flex gap-1 p-0.5">
+            <div className="flex md:flex-col max-w-xs bg-black dark:bg-white z-20 rounded-[10px] mx-auto sticky w-auto top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 shadow-xl">
+              <div className="flex gap-0.5 p-0.5">
                 {project.links?.map((link: string) => (
                   <Link
                     href={link}
                     className={cn(
-                      buttonVariants({ variant: "secondary" }),
-                      "flex items-center px-2 py-0.5 gap-2 dark:bg-neutral-700",
+                      buttonVariants({ variant: "tertiary" }),
+                      "flex items-center px-2 py-0.5 gap-2 text-white group dark:text-black dark:hover:bg-black dark:hover:text-white",
                     )}
                   >
                     {link.replaceAll("https://", "").replaceAll("http://", "").replaceAll("www.", "").split("/")[0]}
@@ -87,7 +85,7 @@ export default function Page() {
               </div>
             </div>
           )}
-          <article className={proseVariants.default} dangerouslySetInnerHTML={{ __html: project.html }} />
+          <MarkdownRenderer html={project.html} className={proseVariants.default} />
         </div>
       </Section>
     </div>

@@ -1,6 +1,70 @@
 import { readdir, readFile } from "fs/promises";
-import { marked } from "marked";
+import { marked, Token } from "marked";
 import { gfmHeadingId } from "marked-gfm-heading-id";
+
+const modelExtension = {
+  name: "model",
+  level: "inline" as const,
+  start(src: string) {
+    return src.indexOf("[@model:");
+  },
+  tokenizer(src: string) {
+    const rule = /^\[@model:([^\]]+)\]/;
+    const match = rule.exec(src);
+    if (match) {
+      return {
+        type: "model",
+        raw: match[0],
+        src: match[1].trim(),
+      };
+    }
+  },
+  renderer(token: Token & { src: string }) {
+    return `<div class="model-viewer" data-src="${token.src}"></div>`;
+  },
+};
+
+const videoExtension = {
+  name: "video",
+  level: "inline" as const,
+  start(src: string) {
+    return src.indexOf("[@video:");
+  },
+  tokenizer(src: string) {
+    const rule = /^\[@video:([^\]]+)\]/;
+    const match = rule.exec(src);
+    if (match) {
+      const params = match[1].trim();
+      const [src, ...options] = params.split("|");
+
+      const parsedOptions: Record<string, string | boolean> = {};
+      options.forEach((option) => {
+        const trimmed = option.trim();
+        // Handle class="" syntax
+        const classMatch = trimmed.match(/^class="([^"]*)"$/);
+        if (classMatch) {
+          parsedOptions.className = classMatch[1];
+        } else if (trimmed.includes(":")) {
+          const [key, value] = trimmed.split(":");
+          parsedOptions[key] = value;
+        } else {
+          parsedOptions[trimmed] = true;
+        }
+      });
+
+      return {
+        type: "video",
+        raw: match[0],
+        src: src.trim(),
+        options: parsedOptions,
+      };
+    }
+  },
+  renderer(token: Token & { src: string; options: Record<string, string | boolean> }) {
+    const optionsJson = JSON.stringify(token.options).replace(/"/g, "&quot;");
+    return `<div class="video-player" data-src="${token.src}" data-options="${optionsJson}"></div>`;
+  },
+};
 
 export async function convertMarkdownToHtml(url: string): Promise<string | boolean> {
   const contentRoot = "./src/content";
@@ -11,6 +75,9 @@ export async function convertMarkdownToHtml(url: string): Promise<string | boole
     gfmHeadingId({
       prefix: "flornkm-work-",
     }),
+    {
+      extensions: [modelExtension, videoExtension],
+    },
   );
 
   const convertedHTML = marked(

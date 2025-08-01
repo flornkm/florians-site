@@ -1,20 +1,24 @@
-import { Body4 } from "@/components/design-system/body";
+import { Body4 } from "@/components/design-system/body.jsx";
 import { H1 } from "@/components/design-system/heading";
+import { MarkdownRenderer } from "@/components/shared/markdown-renderer";
 import Button from "@/components/ui/button";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
+import { useWindowSize } from "@uidotdev/usehooks";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { useEffect, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { navigate } from "vike/client/router";
-import { TimelineItem } from "./types";
+import { CollectionItem } from "./types";
 
 export default function Page() {
+  const { width } = useWindowSize();
   const pageContext = usePageContext();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const items = pageContext.data as TimelineItem[];
+  const items = pageContext.data as CollectionItem[];
+  const isMobile = width! < 768;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -53,7 +57,8 @@ export default function Page() {
     setIsTransitioning(true);
 
     const item = document.getElementById(`collection-item-${items[index].slug}`);
-    const itemDistanceToTopScreen = (item?.getBoundingClientRect().top || 0) - 28;
+    const boundingRectTop = item?.getBoundingClientRect().top || 0;
+    const itemDistanceToTopScreen = isMobile ? boundingRectTop + 30 : boundingRectTop - 28;
 
     if (item) {
       item.style.height = "100vh";
@@ -61,7 +66,7 @@ export default function Page() {
       item.style.top = `${-itemDistanceToTopScreen}px`;
       item.style.zIndex = "999";
       item.style.border = "none";
-      item.style.paddingTop = "48px";
+      item.style.paddingTop = isMobile ? "0" : "48px";
       item.style.boxShadow = "none";
       item.style.padding = "48px 0";
     }
@@ -88,7 +93,7 @@ export default function Page() {
               <div
                 style={{
                   zIndex: items.length - Math.abs(activeIndex - index),
-                  top: `-${Math.abs(activeIndex - index) * 64}px`,
+                  top: `-${Math.abs(activeIndex - index) * (isMobile ? 32 : 64)}px`,
                   pointerEvents: activeIndex === index ? "auto" : "none",
                   visibility: gotShown ? "hidden" : "visible",
                   transform: `scale(${gotShown ? 1.05 : Math.max(0.2, 1 - Math.abs(activeIndex - index) * 0.1)})`,
@@ -96,13 +101,14 @@ export default function Page() {
                 }}
                 id={`collection-item-${item.slug}`}
                 key={item.slug}
-                className="w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-neutral-950 dark:border-neutral-800 shadow-xl shadow-black/[.03] rounded-2xl p-8 border border-neutral-200"
+                className={cn("w-full absolute transition-colors duration-300 mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-black dark:border-neutral-800 shadow-xl shadow-black/[.03] rounded-2xl p-8 border border-neutral-100",
+                  isTransitioning ? "dark:bg-black" : "dark:bg-neutral-950")}
               >
                 <Button
                   onClick={() => handleOpen(index)}
                   className={cn(
-                    "absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center",
-                    isTransitioning && "opacity-0",
+                    "absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
+                    isTransitioning && "top-12 rotate-180",
                   )}
                   variant="secondary"
                 >
@@ -110,15 +116,16 @@ export default function Page() {
                 </Button>
                 <Body4 className="capitalize text-black dark:text-white mb-4 font-mono">{item.type}</Body4>
                 <div className="w-full h-full flex items-start justify-center">
-                  <article
-                    className={`${proseVariants.default} max-w-lg w-full`}
-                    dangerouslySetInnerHTML={{ __html: item.content || "" }}
+                  <div
+                    className="w-full max-w-lg -mt-7"
                     style={{
                       maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
                       WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
                       height: "100%",
                     }}
-                  />
+                  >
+                    <MarkdownRenderer html={item.content || ""} className={proseVariants({ variant: "default" })} />
+                  </div>
                 </div>
               </div>
             );

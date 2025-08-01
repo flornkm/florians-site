@@ -28,7 +28,7 @@ export const BUCKETLIST = [
     completed: false,
   },
   {
-    title: "Buy an olive tree",
+    title: "Plant an olive tree",
     completed: false,
   },
 ];

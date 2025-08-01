@@ -1,11 +1,11 @@
-import tailwindcss from "@tailwindcss/vite"
-import vike from 'vike/plugin'
-import react from "@vitejs/plugin-react"
-import path from "path"
-import { defineConfig } from "vite"
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+import vike from "vike/plugin";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: 'src',
+  root: "src",
   plugins: [react(), tailwindcss(), vike()],
   publicDir: "../public",
   build: {
@@ -20,7 +20,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src")
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 });

@@ -12,14 +12,8 @@ I have posted a video of different spinning objects. Based on this, I got a lot 
 The short answer is:
 Not a 3D tool.
 
-<video
-          src="/collection/spinning-objects/spinning-objects.webm"
-          autoPlay
-          muted
-          loop
-          playsInline
-          class="border border-neutral-100 dark:border-neutral-700 p-0.5 w-full object-cover aspect-video"
-        ></video>
+[@video:/collection/spinning-objects/spinning-objects.webm|autoplay|muted|loop|playsInline|class="w-full object-cover aspect-video"]
+
 
 ## How to do it
 
@@ -38,14 +32,8 @@ Here's what works best:
 <br />
 
 
-<video
-          src="/collection/spinning-objects/raw-rotating-block.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          class="w-24"
-        ></video>
+[@video:/collection/spinning-objects/raw-rotating-block.mp4|autoplay|muted|loop|playsInline|class="max-w-24 aspect-square object-contain"]
+
 
 ### Turn your image into a video
 
@@ -60,14 +48,7 @@ Here are some considerations:
 
 <br />
 
-<video
-          src="/videos/rotating-block.webm"
-          autoPlay
-          muted
-          loop
-          playsInline
-          class="w-24"
-        ></video>
+[@video:/videos/rotating-block.webm|autoplay|muted|loop|playsInline|class="max-w-24 aspect-square object-contain"]
 
 ### Remove the background
 
@@ -82,4 +63,4 @@ If you're a programmer, you obviously can also do many of these things with **ff
 
 ## Next
 
-If you create a spinning object, I'd be super happy to see it! Feel free to share it on [X](https://x.com/flornkm) with me, I'm excited to see what you come up with.
+If you create a spinning object, I'd be super happy to see it! Feel free to share it [@flornkm](https://x.com/flornkm) with me, I'm excited to see what you come up with.
