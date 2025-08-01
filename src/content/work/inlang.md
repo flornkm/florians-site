@@ -4,7 +4,7 @@ description: The ecosystem for globalization needs.
 cover: /images/inlang/inlang.webp
 date: 10 / 2023
 collaborators: Samuel Stroschein, Nils Jacobsen, Niklas Buchfink, Jannes Blobel, Jan Johannes, Felix Haeberle
-links: inlang.com
+links: https://inlang.com, https://www.youtube.com/watch?v=mB2-Ze-SjXE
 ---
 
 # Reimagining i18n for developers
@@ -23,18 +23,22 @@ Building something that didn't exist yet was our primary challenge. How do you d
 
 ## Action
 
-**Division of labor**  
+**Division of labor**
 We organized our work efficiently, with my focus on inlang.com's applications including the Marketplace, Markdown Parser, and tools for managing plugins and lint rules.
 
-**Marketplace & Markdown**  
+![inlang design](/images/inlang/inlang-design.webp)
+
+**Marketplace & Markdown**
 We transformed inlang.com from a simple landing page into a comprehensive marketplace. This strategic pivot allowed individual products to showcase themselves and build their own communities. I implemented a manifest system (similar to package.json) that defined products and their metadata.
 
 To enhance product pages, I refactored the markdown parsing system, moving away from markdoc to more flexible technologies like remark/rehype. I introduced custom lit web components that work across all frameworks and in pure HTML/JavaScript, giving users the simplicity of markdown with advanced component capabilities.
 
-**Search implementation**  
+**Search implementation**
 As we evolved into a marketplace, we needed a robust search solution. After evaluating popular search engines including Algolia, typesense, and others, we selected Algolia for its reliability, ease of maintenance, and startup program benefits.
 
-**Installation experience**  
+[@video:/videos/inlang-installer.mp4|autoplay|muted|loop|playsInline|height:16rem|className:object-cover w-full object-top]
+
+**Installation experience**
 To simplify the user experience, I built manage.inlang.com where users can open their inlang projects and install products with just a few clicks, eliminating manual copying of links and streamlining language tag management.
 
 ## Result

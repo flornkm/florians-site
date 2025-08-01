@@ -1,12 +1,12 @@
-export type TimelineItemType = "post" | "photo";
+export type CollectionItemType = "post" | "photo" | "insight" | "experim  ";
 
-export type TimelineItem = {
+export type CollectionItem = {
   title: string;
   description: string;
   slug: string;
   date: string;
   content?: string;
-  type: TimelineItemType;
+  type: CollectionItemType;
   source?: string;
 } & (
   | {
@@ -15,6 +15,14 @@ export type TimelineItem = {
     }
   | {
       type: "post";
+      source?: never;
+    }
+  | {
+      type: "insight";
+      source?: never;
+    }
+  | {
+      type: "experiment";
       source?: never;
     }
 );

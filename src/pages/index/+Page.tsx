@@ -1,6 +1,7 @@
 import { Body2 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/icons/triangle-filled";
+import { Letters } from "@/components/letters/letters";
 import Section from "@/components/shared/section";
 import { Link } from "@/components/ui/link";
 import { usePageContext } from "vike-react/usePageContext";
@@ -43,7 +44,7 @@ export default function Page() {
                 </p>
               </div>
               <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-                <div className="w-full h-96 bg-neutral-100 dark:bg-neutral-950 rounded-md">
+                <div className="w-full h-96 bg-neutral-50 dark:bg-neutral-950 rounded-md">
                   <img src={project.cover} alt={project.title} className="w-full h-full object-cover rounded-lg" />
                 </div>
               </div>
@@ -54,6 +55,7 @@ export default function Page() {
           <div>
             <H2 className="text-center mb-2.5">Digital Guestbook</H2>
             <Body2 className="text-neutral-400 font-medium mb-2.5 text-center">Send me a postcard.</Body2>
+            <Letters />
           </div>
         </section>
       </div>

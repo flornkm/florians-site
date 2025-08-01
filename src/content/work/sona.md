@@ -4,7 +4,7 @@ description: Lightweight and affordable transcriptions.
 cover: /images/sona/sona.webp
 date: 11 / 2024
 collaborators: Nils Eller
-links: https://sona.com, https://apps.apple.com/app/sona
+links: https://sona.wtf, https://apps.apple.com/app/sona
 ---
 
 # Making transcriptions accessible.
@@ -23,25 +23,21 @@ Taking notes in meetings is essential for gathering context and information. How
 
 ## Action
 
-**Building for ourselves first**  
+![Sona Details](/images/sona/sona-details.webp)
+
+**Building for ourselves first**
 We initially created Sona for ourselves and close friends, focusing on capturing the most important details. Early feedback showed us this tool could help many others.
 
-**Backend infrastructure**  
+**Backend infrastructure**
 We built a custom Express backend running on our own GPUs to process audio data. Our pipeline includes automated actions like auto-filling speaker names and summarizing transcripts for high-quality insights.
 
-**iOS + watchOS apps**  
+**iOS + watchOS apps**
 We developed mobile apps with SwiftUI to provide a seamless experience. Users can record audio, view transcripts, and access insights all in one place.
 
-**Technical challenges**  
+**Technical challenges**
 One major hurdle was receiving accurate user information in our backend. Apple's ecosystem made this difficult compared to platforms like Stripe. We leveraged App Store Connect API with Server Notifications v2, requiring extensive testing to ensure reliability.
 
-<video
-          src="/videos/sona.webm"
-          autoPlay
-          muted
-          loop
-          playsInline
-        ></video>
+[@video:/videos/sona.webm|autoplay|muted|loop|playsInline]
 
 ## Result
 
