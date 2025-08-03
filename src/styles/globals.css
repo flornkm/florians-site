@@ -146,7 +146,8 @@
   --font-mono: "Commit Mono", "ui-monospace", "SFMono-Regular", "Liberation Mono", "Courier New", "monospace";
   --font-rounded: "Open Runde", "sans-serif";
   --spacing-col: 248px;
-  --text-ms: 15px;
+  --text-ms: 0.9375rem;
+  --aspect-a4: 1.4142857143/1;
 }
 
 html {

@@ -5,7 +5,7 @@ import React from "react";
 export const bodyVariants = cva("text-neutral-500 dark:text-neutral-400", {
   variants: {
     variant: {
-      body1: "text-base",
+      body1: "text-ms",
       body2: "text-ms",
       body3: "text-sm",
       body4: "text-xs",

@@ -4,45 +4,28 @@ import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import Label from "@/components/ui/label";
 import Textarea from "@/components/ui/textarea";
-import { useDarkmode } from "@/hooks/use-darkmode";
-import { memo, useCallback, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import React, { memo, useCallback, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-
-export interface FormValues extends Record<string, string> {
-  name: string;
-  email: string;
-  message: string;
-}
-
-export interface EntryState {
-  success: boolean;
-  message: string;
-}
-
-export interface LetterFormProps {
-  formValues: FormValues;
-  onFormChange: (field: keyof FormValues, value: string) => void;
-  onSubmit: (formData: FormData) => void;
-  state: EntryState | null;
-  isPending: boolean;
-  onSignatureChange: (signature: string | null) => void;
-}
+import { FormValues, useLetterEditor } from "./letter-editor-context";
 
 const FormField = memo(function FormField({
   id,
   label,
   type = "text",
-  defaultValue,
+  value,
   onChange,
   component: Component = Input,
+  disabled,
   ...props
 }: {
   id: string;
   label: string;
   type?: string;
-  defaultValue: string;
+  value: string;
   onChange: (value: string) => void;
   component?: typeof Input | typeof Textarea;
+  disabled?: boolean;
   [key: string]: unknown;
 }) {
   const handleChange = useCallback(
@@ -55,50 +38,60 @@ const FormField = memo(function FormField({
   return (
     <div className="w-full flex flex-col gap-1">
       <Label htmlFor={id}>{label}</Label>
-      <Component id={id} name={id} type={type} defaultValue={defaultValue} onChange={handleChange} {...props} />
+      <Component id={id} name={id} type={type} value={value} onChange={handleChange} disabled={disabled} {...props} />
     </div>
   );
 });
 
-const SignatureField = memo(function SignatureField({
-  onSignatureChange,
-}: {
-  onSignatureChange: (signature: string | null) => void;
-}) {
+const SignatureField = memo(function SignatureField({ disabled }: { disabled?: boolean }) {
+  const { signature, setSignature, resetSignature } = useLetterEditor();
   const sigRef = useRef<SignatureCanvas>(null);
-  const [signature, setSignature] = useState<string | null>(null);
-  const { darkmode } = useDarkmode();
+
+  React.useEffect(() => {
+    if (resetSignature && sigRef.current) {
+      sigRef.current.clear();
+    }
+  }, [resetSignature]);
 
   const handleSignatureEnd = useCallback(() => {
     if (sigRef.current) {
       const signatureData = sigRef.current.toDataURL();
       setSignature(signatureData);
-      onSignatureChange(signatureData);
     }
-  }, [onSignatureChange]);
+  }, [setSignature]);
 
   const clearSignature = useCallback(() => {
     if (sigRef.current) {
       sigRef.current.clear();
       setSignature(null);
-      onSignatureChange(null);
     }
-  }, [onSignatureChange]);
+  }, [setSignature]);
 
   return (
     <div className="w-full flex flex-col gap-1">
       <Label htmlFor="signature">Signature</Label>
-      <div className="border border-neutral-200 dark:border-neutral-800 rounded-[9px] mb-2">
-        <SignatureCanvas
-          penColor={darkmode ? "white" : "black"}
-          canvasProps={{
-            className:
-              "w-full h-40 outline-0 transition-all dark:active:bg-neutral-950 duration-150 outline-offset-1 outline-neutral-100 active:outline-2 rounded-lg dark:outline-neutral-800 dark:outline-neutral-900",
-            id: "signature",
-          }}
-          ref={sigRef}
-          onEnd={handleSignatureEnd}
-        />
+      <div
+        className={cn(
+          "border border-neutral-200 dark:border-neutral-800 dark:active:border-neutral-700 rounded-[9px] mb-2",
+          disabled ? "opacity-50 cursor-not-allowed" : "",
+        )}
+      >
+        <div
+          className={cn(
+            "w-full outline-0 transition-all dark:active:bg-neutral-950 border-none duration-150 outline-offset-1 outline-neutral-100 active:outline-2 rounded-lg dark:outline-neutral-800",
+            disabled && "pointer-events-none",
+          )}
+        >
+          <SignatureCanvas
+            penColor="black"
+            canvasProps={{
+              className: "dark:invert h-40 w-full",
+              id: "signature",
+            }}
+            ref={sigRef}
+            onEnd={handleSignatureEnd}
+          />
+        </div>
       </div>
       <Button type="button" variant="tertiary" className="mb-6" onClick={clearSignature} disabled={!signature}>
         Clear signature
@@ -108,64 +101,14 @@ const SignatureField = memo(function SignatureField({
   );
 });
 
-const FormStatus = memo(function FormStatus({ state }: { state: EntryState | null }) {
-  if (!state) return null;
+export default function LetterForm() {
+  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty } = useLetterEditor();
 
-  return (
-    <div
-      className={`p-3 rounded-lg text-ms ${state.success ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
-    >
-      {state.message}
-    </div>
-  );
-});
-
-export default function LetterForm({
-  formValues,
-  onFormChange,
-  onSubmit,
-  state,
-  isPending,
-  onSignatureChange,
-}: LetterFormProps) {
-  const [signature, setSignature] = useState<string | null>(null);
-  const formDataRef = useRef<FormValues>({ name: "", email: "", message: "" });
-
-  const handleSignatureChange = useCallback(
-    (signatureData: string | null) => {
-      setSignature(signatureData);
-      onSignatureChange(signatureData);
+  const handleFieldChange = useCallback(
+    (field: keyof FormValues) => (value: string) => {
+      setFormValue(field, value);
     },
-    [onSignatureChange],
-  );
-
-  const isFormEmpty = useCallback(() => {
-    return !Object.values(formDataRef.current).every((value) => value) || !signature;
-  }, [signature]);
-
-  // Create stable callbacks that only update refs and parent
-  const handleNameChange = useCallback(
-    (value: string) => {
-      formDataRef.current.name = value;
-      onFormChange("name", value);
-    },
-    [onFormChange],
-  );
-
-  const handleEmailChange = useCallback(
-    (value: string) => {
-      formDataRef.current.email = value;
-      onFormChange("email", value);
-    },
-    [onFormChange],
-  );
-
-  const handleMessageChange = useCallback(
-    (value: string) => {
-      formDataRef.current.message = value;
-      onFormChange("message", value);
-    },
-    [onFormChange],
+    [setFormValue],
   );
 
   return (
@@ -174,16 +117,23 @@ export default function LetterForm({
         <H1 className="text-lg font-semibold">Send a letter</H1>
         <Body1 className="max-w-lg">It's like a digital guestbook.</Body1>
       </div>
-      <form action={onSubmit} className="w-full flex flex-col gap-4">
-        <FormStatus state={state} />
+      <form action={submitLetter} className="w-full flex flex-col gap-4">
         <FormField
-          id="name"
+          id="handle"
           label="Handle (e.g. @handle)"
           maxLength={12}
-          defaultValue={formValues.name}
-          onChange={handleNameChange}
+          value={formValues.handle}
+          onChange={handleFieldChange("handle")}
+          disabled={isSubmitting}
         />
-        <FormField id="email" label="Email" type="email" defaultValue={formValues.email} onChange={handleEmailChange} />
+        <FormField
+          id="email"
+          label="Email"
+          type="email"
+          value={formValues.email}
+          onChange={handleFieldChange("email")}
+          disabled={isSubmitting}
+        />
         <FormField
           id="message"
           label="Message"
@@ -191,16 +141,19 @@ export default function LetterForm({
           className="resize-none"
           rows={6}
           maxLength={102}
-          defaultValue={formValues.message}
-          onChange={handleMessageChange}
+          value={formValues.message}
+          onChange={handleFieldChange("message")}
+          disabled={isSubmitting}
         />
-        <SignatureField onSignatureChange={handleSignatureChange} />
+        <SignatureField disabled={isSubmitting} />
         <div className="flex flex-col gap-1.5">
-          <Button type="submit" disabled={isFormEmpty() || isPending}>
-            {isPending ? "Sending..." : "Send"}
+          <Button type="submit" disabled={isEmpty || isSubmitting}>
+            {isSubmitting ? "Sending..." : "Send"}
           </Button>
         </div>
       </form>
     </div>
   );
 }
+
+export type { FormValues };

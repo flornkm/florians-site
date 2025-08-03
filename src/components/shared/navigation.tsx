@@ -115,7 +115,7 @@ export default function Navigation() {
                 if (eyesClosedInput) eyesClosedInput.value = false;
               }}
               href="/"
-              className="flex items-center gap-2 rounded-full py-1 touch-manipulation"
+              className="flex items-center gap-2 text-ms rounded-full py-1 touch-manipulation"
             >
               <RiveComponent className="w-6 h-6" />
               <Body1 className="font-medium text-black dark:text-white min-[450px]:block hidden">Florian</Body1>
@@ -147,7 +147,7 @@ export default function Navigation() {
                   if (el) tabsRef.current.set(tab.href, el);
                 }}
               >
-                {tab.name}
+                <Body1>{tab.name}</Body1>
               </Link>
             ))}
           </div>
@@ -164,7 +164,7 @@ export default function Navigation() {
               if (el) tabsRef.current.set("/contact", el);
             }}
           >
-            Contact
+            <Body1>Contact</Body1>
           </Link>
         </div>
       </div>
