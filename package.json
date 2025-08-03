@@ -27,6 +27,7 @@
     "openai": "^5.11.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-draggable": "^4.5.0",
     "react-globe.gl": "^2.34.0",
     "react-leaflet": "^5.0.0",
     "react-signature-canvas": "1.1.0-alpha.2",

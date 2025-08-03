@@ -1,10 +1,14 @@
 import { Body2 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/icons/triangle-filled";
-import { Letters } from "@/components/letters/letters";
+import { LetterStack } from "@/components/letters/letter-stack";
 import Section from "@/components/shared/section";
+import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+
+import { IconPencil } from "central-icons/IconPencil";
 import { usePageContext } from "vike-react/usePageContext";
+import { navigate } from "vike/client/router";
 
 export default function Page() {
   const pageContext = usePageContext();
@@ -28,7 +32,7 @@ export default function Page() {
             <H2 className="mb-2.5">Latest Work</H2>
           </div>
         </Section>
-        <section className="w-full flex flex-col mb-32 group/section">
+        <section className="w-full flex flex-col mb-12 group/section">
           {projects.map((project) => (
             <Link
               href={`/work/${project.slug}`}
@@ -51,11 +55,24 @@ export default function Page() {
             </Link>
           ))}
         </section>
-        <section className="w-full flex flex-col gap-8 justify-center items-center">
-          <div>
-            <H2 className="text-center mb-2.5">Digital Guestbook</H2>
-            <Body2 className="text-neutral-400 font-medium mb-2.5 text-center">Send me a postcard.</Body2>
-            <Letters />
+        <section className="w-screen pt-24 pb-32 relative left-1/2 -translate-x-1/2 overflow-hidden flex flex-col gap-8 justify-center items-center mb-24 mask-y-from-95% mask-y-to-100%">
+          <div className="flex flex-col justify-center">
+            <div className="mb-2">
+              <H2 className="text-center mb-0.5">Digital Guestbook</H2>
+              <Body2 className="text-neutral-400 font-medium mb-2.5 text-center">Send me a postcard.</Body2>
+            </div>
+            <LetterStack />
+            <Button
+              variant="secondary"
+              className="mt-4 mx-auto"
+              onClick={() => {
+                navigate("/entry");
+              }}
+            >
+              <Body2 className="text-black dark:text-white">
+                <IconPencil className="inline-block w-3.5 -mt-1 mr-1" /> Send Postcard
+              </Body2>
+            </Button>
           </div>
         </section>
       </div>
