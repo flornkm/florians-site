@@ -62,7 +62,7 @@ const stampVariants = cva(
       {
         variant: "preview",
         isEmpty: true,
-        className: "opacity-0 mr-2 scale-105 shadow-2xl dark:shadow-white rotate-2",
+        className: "opacity-0 scale-105 shadow-2xl dark:shadow-white rotate-2",
       },
       {
         variant: "preview",
@@ -107,7 +107,7 @@ export const Letter = forwardRef<
         <div
           className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
         >
-          <p className="text-ms max-w-xs break-all">
+          <p className="text-ms max-w-xs">
             <span className="font-semibold">Dear Website,</span> <br />
             {message}
           </p>

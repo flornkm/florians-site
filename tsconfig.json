@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "jsxImportSource": "react",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@public": ["./public"],
     }
   },
   "exclude": ["dist"]

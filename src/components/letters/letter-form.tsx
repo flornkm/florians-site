@@ -78,7 +78,7 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
       >
         <div
           className={cn(
-            "w-full outline-0 transition-all dark:active:bg-neutral-950 border-none duration-150 outline-offset-1 outline-neutral-100 active:outline-2 rounded-lg dark:outline-neutral-800",
+            "w-full outline-0 -outline-offset-0 active:-outline-offset-1 active:bg-neutral-50 transition-all dark:active:bg-neutral-950 border-none duration-150 outline-neutral-200 active:outline-2 rounded-lg dark:outline-neutral-700",
             disabled && "pointer-events-none",
           )}
         >

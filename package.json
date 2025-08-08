@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev": "vike dev",
     "preview": "vercel dev",
     "build": "vike build",
     "start": "vike preview",

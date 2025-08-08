@@ -93,16 +93,18 @@ export default function Page() {
               <div
                 style={{
                   zIndex: items.length - Math.abs(activeIndex - index),
-                  top: `-${Math.abs(activeIndex - index) * (isMobile ? 32 : 64)}px`,
+                  top: `-${Math.abs(activeIndex - index) * (isMobile ? 5 : 6)}vh`,
                   pointerEvents: activeIndex === index ? "auto" : "none",
                   visibility: gotShown ? "hidden" : "visible",
                   transform: `scale(${gotShown ? 1.05 : Math.max(0.2, 1 - Math.abs(activeIndex - index) * 0.1)})`,
-                  opacity: activeIndex === index ? 1 : gotShown ? 0 : 1 - index * 0.1,
+                  opacity: gotShown ? 0 : 1,
                 }}
                 id={`collection-item-${item.slug}`}
                 key={item.slug}
-                className={cn("w-full absolute transition-colors duration-300 mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-black dark:border-neutral-800 shadow-xl shadow-black/[.03] rounded-2xl p-8 border border-neutral-100",
-                  isTransitioning ? "dark:bg-black" : "dark:bg-neutral-950")}
+                className={cn(
+                  "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-black dark:border-neutral-800 shadow-xl shadow-black/[.05] rounded-2xl p-8 border border-neutral-200",
+                  isTransitioning ? "dark:bg-black" : "dark:bg-neutral-950",
+                )}
               >
                 <Button
                   onClick={() => handleOpen(index)}
@@ -114,7 +116,7 @@ export default function Page() {
                 >
                   <IconArrowUpRight className="w-4 h-4 shrink-0" />
                 </Button>
-                <Body4 className="capitalize text-black dark:text-white mb-4 font-mono">{item.type}</Body4>
+                <Body4 className="capitalize text-black dark:text-white mb-10 md:mb-4 font-mono">{item.type}</Body4>
                 <div className="w-full h-full flex items-start justify-center">
                   <div
                     className="w-full max-w-lg -mt-7"

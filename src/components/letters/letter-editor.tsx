@@ -19,7 +19,7 @@ export function LetterEditor({ children, onSuccess, onError }: LetterEditorProps
 
 LetterEditor.Form = function LetterEditorForm() {
   return (
-    <div className="flex-1 flex flex-col items-end w-full pl-8">
+    <div className="flex-1 flex flex-col items-end w-full pl-8 md:pl-0">
       <LetterForm />
     </div>
   );

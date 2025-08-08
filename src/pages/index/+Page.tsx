@@ -55,18 +55,20 @@ export default function Page() {
             </Link>
           ))}
         </section>
-        <section className="w-screen pt-24 pb-32 relative left-1/2 -translate-x-1/2 overflow-hidden flex flex-col gap-8 justify-center items-center mb-24 mask-y-from-95% mask-y-to-100%">
-          <div className="flex flex-col justify-center">
+        <section className="w-screen py-24 relative left-1/2 -translate-x-1/2 overflow-hidden flex flex-col gap-8 justify-center items-center mask-y-from-95% mask-y-to-100%">
+          <div className="flex flex-col items-center justify-center w-full md:px-0 px-4 md:w-auto">
             <div className="mb-2">
               <H2 className="text-center mb-0.5">Digital Guestbook</H2>
-              <Body2 className="text-neutral-400 font-medium mb-2.5 text-center">Send me a postcard.</Body2>
+              <Body2 className="text-neutral-400 font-medium mb-2.5 text-center">
+                Last three letters sent to this site.
+              </Body2>
             </div>
             <LetterStack />
             <Button
               variant="secondary"
               className="mt-4 mx-auto"
               onClick={() => {
-                navigate("/entry");
+                navigate("/send-postcard");
               }}
             >
               <Body2 className="text-black dark:text-white">
