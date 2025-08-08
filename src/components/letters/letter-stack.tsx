@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { Body1 } from "../design-system/body";
 import { Letter } from "./letter";
 
 interface LetterData {
@@ -15,7 +16,7 @@ interface ApiResponse {
   letters: Record<string, LetterData>;
 }
 
-const THRESHOLD = 256;
+const THRESHOLD = 150;
 
 function DraggableLetter({
   children,
@@ -91,7 +92,7 @@ function DraggableLetter({
         transform: `translate(${position.x}px, ${position.y}px) ${style?.transform || ""}`,
         transition: isDragging ? "none" : "all 0.3s ease-out",
       }}
-      className="rounded-xl touch-manipulation overflow-hidden max-w-[450px] w-full"
+      className="rounded-xl touch-manipulation overflow-hidden md:max-w-[450px] aspect-a4 w-full"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleEnd}
@@ -131,13 +132,21 @@ export function LetterStack() {
   };
 
   const letters = data?.data?.letters;
+
   if (!letters || isLoading)
     return (
-      <div className="aspect-a4 my-8 w-[450px] h-80 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-lg"></div>
+      <div className="aspect-a4 my-8 max-w-[450px] w-full md:h-80 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-lg"></div>
+    );
+
+  if (letterOrder.length === 0)
+    return (
+      <div className="aspect-a4 my-8 max-w-[450px] w-full md:h-80 flex justify-center items-center border border-dashed rounded-lg border-neutral-200 dark:border-neutral-800">
+        <Body1 className="text-neutral-500 dark:text-neutral-400">No letters available.</Body1>
+      </div>
     );
 
   return (
-    <div className="relative h-72 md:h-96 w-[512px] flex flex-col justify-center items-center">
+    <div className="relative h-72 md:h-96 md:w-[512px] w-full flex flex-col justify-center items-center">
       <>
         {letterOrder.map((id, index) => {
           const letter = letters[id];

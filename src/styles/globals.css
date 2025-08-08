@@ -158,16 +158,16 @@ html {
 body {
   width: 100dvw;
   overflow-x: hidden;
-  @apply bg-white dark:bg-black dark:text-white;
+  @apply bg-white dark:bg-black dark:text-white text-ms;
 }
 
 /* Global focus style */
-*:not([class*="outline-"]) {
+*:not([class*="outline-"]):not(input):not(textarea) {
   @apply outline-0 outline-transparent;
 }
 
-:focus-visible {
-  @apply outline-2 outline-offset-0 outline-neutral-100 transition-all duration-150;
+:focus-visible:not(input):not(textarea) {
+  @apply outline-2 outline-offset-2 outline-blue-300 transition-all duration-150;
 }
 
 .progressive-blur {
@@ -175,4 +175,9 @@ body {
   backdrop-filter: blur(40px);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black);
   mask-image: linear-gradient(to bottom, transparent, black);
+}
+
+/* Tooltip portal styles */
+#tooltip-portal {
+  font-family: var(--font-sans);
 }

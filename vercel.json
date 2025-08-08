@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "devCommand": "pnpm build && serve dist/client",
   "buildCommand": "pnpm build",
   "rewrites": [
     {
