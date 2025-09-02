@@ -37,7 +37,7 @@ export default function Page() {
               <Tooltip
                 content={collaborator}
                 key={collaborator}
-                className="w-6 h-6 rounded-full border border-black/10 relative outline-2 -outline-offset-1 outline-white dark:outline-black"
+                className="w-6 h-6 rounded-full group border border-black/10 relative outline-2 -outline-offset-1 outline-white dark:outline-black hover:!z-[9999]"
                 style={{
                   marginLeft: index > 0 ? "-6px" : "0",
                   zIndex: (project.collaborators?.length || 0) - index + 1,
@@ -45,14 +45,14 @@ export default function Page() {
               >
                 <img
                   src={`/images/avatars/${collaborator.replaceAll(" ", "_").toLowerCase()}.jpg`}
-                  className="w-full h-full object-cover rounded-full"
+                  className="w-full h-full relative group-hover:!z-[100] object-cover rounded-full"
                   alt={collaborator}
                 />
               </Tooltip>
             ))}
             <Tooltip
               content="Florian Kiem"
-              className="w-6 h-6 rounded-full border border-black/10 outline-2 -outline-offset-1 outline-white dark:outline-black"
+              className="w-6 h-6 hover:z-10 relative rounded-full border border-black/10 outline-2 -outline-offset-1 outline-white dark:outline-black"
               style={{ marginLeft: "-6px" }}
             >
               <img
@@ -85,7 +85,7 @@ export default function Page() {
               </div>
             </div>
           )}
-          <MarkdownRenderer html={project.html} className={proseVariants.default} />
+          <MarkdownRenderer html={project.html} className={proseVariants({ variant: "default" })} />
         </div>
       </Section>
     </div>
