@@ -92,14 +92,14 @@ export default function Navigation() {
   }, [activeLink]);
 
   return (
-    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-50 px-1 xs:px-3 md:w-screen md:shadow-none bg-white dark:bg-black md:px-4 border md:border-none border-neutral-100 shadow-xl shadow-black/5 md:max-w-none mx-auto dark:md:border-none dark:border dark:border-neutral-900 w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
+    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-50 px-2 xs:px-3 md:w-screen md:shadow-none bg-white dark:bg-black md:px-4 border md:border-none border-neutral-100 shadow-xl shadow-black/5 md:max-w-none mx-auto dark:md:border-none dark:border dark:border-neutral-900 w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
       <div
         className={cn(
           "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-500 ease-in-out h-px -translate-x-1/2 bottom-0 bg-neutral-100 dark:bg-neutral-900",
           scrolled ? "max-w-[100vw]" : "max-w-5xl",
         )}
       />
-      <div className="mx-auto flex md:w-full max-w-5xl items-center justify-between md:py-2.5 py-1 gap-2 md:gap-4 relative">
+      <div className="mx-auto flex md:w-full max-w-5xl items-center justify-between md:py-2.5 py-2 gap-2 md:gap-4 relative">
         <div className="w-auto md:w-full max-w-[calc(341px)] items-center justify-between hidden min-[450px]:mr-2 min-[450px]:flex">
           <div className="flex items-center gap-4">
             <Link
