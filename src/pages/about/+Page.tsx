@@ -1,10 +1,11 @@
-import { Body2, Body4 } from "@/components/design-system/body";
+import { Body2, Body3, Body4 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import { IconAspectRatio11 } from "central-icons/IconAspectRatio11";
 import { IconSquareCheck } from "central-icons/IconSquareCheck";
 import { useRef } from "react";
 import type { GlobeMethods } from "react-globe.gl";
 
+import countriesData from "@/assets/data/countries.json";
 import { buttonVariants } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
@@ -17,10 +18,41 @@ import { COMPANIES } from "./const/companies";
 import { INSTITUTIONS } from "./const/institutions";
 import { LIFE } from "./const/life";
 import { TOOLS } from "./const/tools";
-import { VISITED_COUNTRIES, type CountryData } from "./const/visited-countries";
+import { VISITED_COUNTRIES, VISITED_COUNTRY_NAMES } from "./const/visited-countries";
+
+interface CountryProperties {
+  name?: string;
+  NAME?: string;
+  ADMIN?: string;
+  admin?: string;
+}
+
+interface GeoJSONFeature {
+  type: "Feature";
+  properties: CountryProperties;
+  geometry: {
+    type: string;
+    coordinates: number[][][] | number[][][][];
+  };
+}
 
 export default function Page() {
   const globeRef = useRef<GlobeMethods>(null);
+  // Static import - no loading state needed, data available immediately
+  const countries = countriesData.features as GeoJSONFeature[];
+
+  // Helper functions for polygon styling
+  const getCountryName = (feat: object): string => {
+    const feature = feat as GeoJSONFeature;
+    return (
+      feature.properties.name || feature.properties.NAME || feature.properties.ADMIN || feature.properties.admin || ""
+    );
+  };
+
+  const isCountryVisited = (feat: object): boolean => {
+    const countryName = getCountryName(feat);
+    return VISITED_COUNTRY_NAMES.has(countryName);
+  };
 
   return (
     <div className="w-full">
@@ -142,7 +174,11 @@ export default function Page() {
         </section>
         <section className="grid md:grid-cols-2">
           <div className="mb-8 md:mb-0">
-            <H2 className="text-left">Countries visited</H2>
+            <H2 className="text-left mb-2">Countries visited</H2>
+            <div className="flex items-center gap-2">
+              <div className="bg-rose-500 rounded-sm size-3" />
+              <Body3 className="font-medium text-black">{VISITED_COUNTRIES.length} visited</Body3>
+            </div>
             <div className="mask-radial-[45%_60%] overflow-hidden mask-radial-from-50% min-h-56 w-full flex items-center justify-center">
               <Globe
                 ref={globeRef}
@@ -150,27 +186,20 @@ export default function Page() {
                 height={212}
                 globeImageUrl="/images/earth-texture.jpg"
                 showAtmosphere={false}
-                globeCurvatureResolution={20}
+                globeCurvatureResolution={8}
                 animateIn={true}
-                htmlElementsData={VISITED_COUNTRIES}
-                htmlElement={() => {
-                  const el = document.createElement("div");
-                  el.innerHTML = `<svg viewBox="-4 0 36 36" style="width: 16px; height: 16px;">
-                    <path fill="#ef4444" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z"></path>
-                    <circle fill="white" cx="14" cy="14" r="7"></circle>
-                  </svg>`;
-
-                  el.style.transition = "opacity 0.5s ease-in-out, filter 0.5s ease-in-out";
-
-                  return el;
+                // Explicitly disable HTML elements
+                htmlElementsData={[]}
+                // Enable polygon layer
+                polygonsData={countries}
+                polygonCapColor={(feat: object) => {
+                  const visited = isCountryVisited(feat);
+                  return visited ? "#f43f5e" : "transparent";
                 }}
-                htmlLat={(d) => (d as CountryData).latitude}
-                htmlLng={(d) => (d as CountryData).longitude}
-                htmlAltitude={0.02}
-                htmlElementVisibilityModifier={(el, isVisible) => {
-                  el.style.opacity = isVisible ? "1" : "0";
-                  el.style.filter = isVisible ? "blur(0px)" : "blur(1px)";
-                }}
+                polygonSideColor={(feat: object) => (isCountryVisited(feat) ? "#e879f9" : "transparent")}
+                polygonStrokeColor={(feat: object) => (isCountryVisited(feat) ? "#9f1239" : "transparent")}
+                polygonAltitude={(feat: object) => (isCountryVisited(feat) ? 0.01 : 0)}
+                polygonsTransitionDuration={300}
                 autoRotate={true}
                 autoRotateSpeed={1.0}
                 enableZoom={false}
