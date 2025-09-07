@@ -1,26 +1,25 @@
 "use client";
 
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
-import { BufferGeometry, Group, MeshToonMaterial } from "three";
+import { useEffect, useRef } from "react";
+import { AnimationAction, BufferGeometry, Group, Mesh, MeshToonMaterial, Object3D } from "three";
 
 export function CharacterModel() {
   const group = useRef<Group>(null);
   const { scene, animations } = useGLTF("/models/character.glb");
   const { actions, mixer } = useAnimations(animations, group);
-  const materialsRef = useRef<MeshToonMaterial[]>([]);
-  const [showParticles, setShowParticles] = useState(false);
-  const [characterVisible, setCharacterVisible] = useState(true);
 
   useEffect(() => {
     if (!actions || !group.current) return;
 
-    // Position character at back left initially, on the ground
     group.current.position.set(-3, -0.1, -5);
-    group.current.rotation.y = Math.PI / 4; // Face diagonally forward initially (45 degrees)
+    group.current.rotation.y = Math.PI / 4;
 
-    // Helper function to smoothly crossfade between animations
-    const crossFadeToAction = (fromAction: any, toAction: any, duration: number = 0.3) => {
+    const crossFadeToAction = (
+      fromAction: AnimationAction | null | undefined,
+      toAction: AnimationAction | null | undefined,
+      duration: number = 0.3,
+    ) => {
       if (fromAction && toAction && fromAction !== toAction) {
         toAction.reset().fadeIn(duration).play();
         fromAction.fadeOut(duration);
@@ -29,58 +28,84 @@ export function CharacterModel() {
       }
     };
 
-    // Character starts invisible, particle effect will make it appear
-
     const runSequence = async () => {
-      const walkAction = actions["Walk"];
-      const idleAction = actions["Idle"];
-      const waveAction = actions["Wave"];
+      const getAction = (name: string): AnimationAction | null =>
+        (actions[name] as AnimationAction | undefined) ?? null;
+      const walkAction: AnimationAction | null = getAction("Walk");
+      const idleAction: AnimationAction | null = getAction("Idle");
+      const waveAction: AnimationAction | null = getAction("Wave");
 
-      let currentAction = null;
+      let currentAction: AnimationAction | null = null;
+      const baseTimeScale = 0.8;
+      const walkTimeScale = 3;
 
-      // Start walking animation immediately
       if (walkAction) {
         currentAction = walkAction;
+        if (typeof walkAction.setEffectiveTimeScale === "function") {
+          walkAction.setEffectiveTimeScale(walkTimeScale);
+        }
         walkAction.reset().play();
       }
 
-      // Skip particle effect wait for now
-
-      // Walking animation with movement - stop walking when movement stops
       const walkAndMove = () => {
         return new Promise<void>((resolve) => {
           const startTime = Date.now();
           const startPosX = -3;
           const startPosZ = -5;
-          const endPosX = 0; // End in center
-          const endPosZ = 1; // Stop in front position
-          const startRotation = Math.PI / 4; // 45 degrees
-          const endRotation = 0; // Face forward
-          
-          const distance = Math.sqrt((endPosX - startPosX)**2 + (endPosZ - startPosZ)**2);
-          const walkSpeed = 0.8; // units per second - slower to match animation
-          const walkDuration = (distance / walkSpeed) * 1000;
+          const endPosX = 0;
+          const endPosZ = 1;
+          const controlPosX = 0.0;
+          const controlPosZ = -1.0;
+
+          const approxCurveLength = (segments = 24) => {
+            let length = 0;
+            let prevX = startPosX;
+            let prevZ = startPosZ;
+            for (let i = 1; i <= segments; i++) {
+              const t = i / segments;
+              const omt = 1 - t;
+              const x = omt * omt * startPosX + 2 * omt * t * controlPosX + t * t * endPosX;
+              const z = omt * omt * startPosZ + 2 * omt * t * controlPosZ + t * t * endPosZ;
+              const dx = x - prevX;
+              const dz = z - prevZ;
+              length += Math.sqrt(dx * dx + dz * dz);
+              prevX = x;
+              prevZ = z;
+            }
+            return length;
+          };
+
+          const curveLength = approxCurveLength();
+          const baseWalkSpeed = 0.7;
+          const walkSpeed = baseWalkSpeed * (walkTimeScale / baseTimeScale);
+          const walkDuration = (curveLength / walkSpeed) * 1000;
 
           const animate = () => {
             const elapsed = Date.now() - startTime;
             const walkProgress = Math.min(elapsed / walkDuration, 1);
 
-            // Smooth easing function
-            const eased = 1 - Math.pow(1 - walkProgress, 3); // ease out cubic
+            const easeInOutCubic = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+            const easeAmount = 0.25;
+            const t = walkProgress * (1 - easeAmount) + easeInOutCubic(walkProgress) * easeAmount;
 
-            // Update position with diagonal movement
-            const currentPosX = startPosX + (endPosX - startPosX) * eased;
-            const currentPosZ = startPosZ + (endPosZ - startPosZ) * eased;
-            const currentRotation = startRotation + (endRotation - startRotation) * eased;
-            
+            const omt = 1 - t;
+            const currentPosX = omt * omt * startPosX + 2 * omt * t * controlPosX + t * t * endPosX;
+            const currentPosZ = omt * omt * startPosZ + 2 * omt * t * controlPosZ + t * t * endPosZ;
+
+            const dxdt = 2 * (1 - t) * (controlPosX - startPosX) + 2 * t * (endPosX - controlPosX);
+            const dzdt = 2 * (1 - t) * (controlPosZ - startPosZ) + 2 * t * (endPosZ - controlPosZ);
+            const yaw = Math.atan2(dxdt, dzdt);
+            const alignWindowStart = 0.85;
+            const alignT = Math.max(0, Math.min(1, (walkProgress - alignWindowStart) / (1 - alignWindowStart)));
+            const currentRotation = yaw * (1 - alignT) + 0 * alignT;
+
             if (group.current) {
               group.current.position.x = currentPosX;
               group.current.position.z = currentPosZ;
               group.current.rotation.y = currentRotation;
             }
 
-            // Stop walking animation much earlier to match movement
-            if (walkProgress >= 0.8 && currentAction === walkAction) {
+            if (walkProgress >= 0.9 && currentAction === walkAction) {
               crossFadeToAction(currentAction, idleAction, 0.2);
               currentAction = idleAction;
             }
@@ -97,24 +122,18 @@ export function CharacterModel() {
 
       await walkAndMove();
 
-      // Character is already facing forward, no rotation needed
-
-      // Wait a moment in idle
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      // Wave for several seconds
       if (waveAction) {
         crossFadeToAction(currentAction, waveAction, 0.4);
         currentAction = waveAction;
 
         waveAction.clampWhenFinished = true;
-        waveAction.setLoop(2200, 1); // Play once
+        waveAction.setLoop(2200, 1);
 
-        // Wave for 2 seconds - faster
         await new Promise((resolve) => setTimeout(resolve, 1400));
       }
 
-      // Final transition back to idle and stay there
       crossFadeToAction(currentAction, idleAction, 0.4);
     };
 
@@ -127,31 +146,21 @@ export function CharacterModel() {
 
   useEffect(() => {
     if (scene) {
-      // Traverse the scene and enable shadows, improve materials
-      scene.traverse((child: any) => {
-        if (child.isMesh) {
+      scene.traverse((child: Object3D) => {
+        if (child instanceof Mesh) {
           child.castShadow = true;
           child.receiveShadow = true;
-
-          // Create dissolve shader for particle materialization effect
           if (child.material && child.geometry) {
-            // Smooth the geometry for better cartoon look
             const geometry = child.geometry as BufferGeometry;
             geometry.computeVertexNormals();
-
-            // Store original material properties
             const originalColor = child.material.color ? child.material.color.clone() : null;
             const originalMap = child.material.map || null;
-
-            // Use MeshToonMaterial that works with animations
             const toonMaterial = new MeshToonMaterial({
               color: originalColor || 0xffffff,
               map: originalMap,
               transparent: true,
-              opacity: characterVisible ? 1 : 0,
+              opacity: 1,
             });
-
-            // Enhance color saturation for more cartoon-like appearance
             if (originalColor) {
               toonMaterial.color.setRGB(
                 Math.min(originalColor.r * 1.2, 1),
@@ -159,25 +168,12 @@ export function CharacterModel() {
                 Math.min(originalColor.b * 1.2, 1),
               );
             }
-
             child.material = toonMaterial;
-            materialsRef.current.push(toonMaterial);
           }
         }
       });
     }
-  }, [scene, characterVisible]);
+  }, [scene]);
 
-  // Update material opacity when character visibility changes
-  useEffect(() => {
-    materialsRef.current.forEach((material) => {
-      material.opacity = characterVisible ? 1 : 0;
-    });
-  }, [characterVisible]);
-
-  return (
-    <>
-      <primitive object={scene} ref={group} scale={[0.5, 0.5, 0.5]} />
-    </>
-  );
+  return <primitive object={scene} ref={group} scale={[0.5, 0.5, 0.5]} />;
 }
