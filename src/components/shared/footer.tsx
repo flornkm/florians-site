@@ -1,3 +1,4 @@
+import { IconApple } from "central-icons/IconApple";
 import { IconEmail2 } from "central-icons/IconEmail2";
 import { IconGithub } from "central-icons/IconGithub";
 import { IconLinkedin } from "central-icons/IconLinkedin";
@@ -42,6 +43,7 @@ const SOCIAL_LINKS: SocialLink[] = [
   { name: "GitHub", href: "https://github.com/flornkm", icon: IconGithub },
   { name: "LinkedIn", href: "https://linkedin.com/in/flornkm", icon: IconLinkedin },
   { name: "Email", href: "mailto:hello@floriankiem.com", icon: IconEmail2 },
+  { name: "iMessage", href: "imessage://hello@floriankiem.com", icon: IconApple },
 ];
 
 const LEGAL_LINKS: Tab[] = [
