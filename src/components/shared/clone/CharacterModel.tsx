@@ -1,19 +1,40 @@
 "use client";
 
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useEffect, useRef } from "react";
-import { AnimationAction, BufferGeometry, Group, Mesh, MeshToonMaterial, Object3D } from "three";
+import { RefObject, useEffect, useMemo, useRef } from "react";
+import { AnimationAction, Color, Group, LoopOnce, Material, Mesh, Object3D, SkinnedMesh } from "three";
+import { clone as skeletonClone } from "three/examples/jsm/utils/SkeletonUtils.js";
 
-export function CharacterModel() {
+type CharacterProps = {
+  role?: "walker" | "idle";
+  position?: [number, number, number];
+  rotationY?: number;
+  scale?: number;
+  followRef?: RefObject<Group | null>;
+  start?: boolean;
+};
+
+export function CharacterModel({
+  role = "walker",
+  position = [-3, -0.1, -5],
+  rotationY = Math.PI / 4,
+  scale = 0.5,
+  followRef,
+  start = true,
+}: CharacterProps) {
   const group = useRef<Group>(null);
   const { scene, animations } = useGLTF("/models/character.glb");
+  const instance = useMemo(() => skeletonClone(scene) as Object3D, [scene]);
   const { actions, mixer } = useAnimations(animations, group);
 
-  useEffect(() => {
-    if (!actions || !group.current) return;
+  const startedRef = useRef(false);
 
-    group.current.position.set(-3, -0.1, -5);
-    group.current.rotation.y = Math.PI / 4;
+  useEffect(() => {
+    if (!actions || !group.current || startedRef.current) return;
+
+    group.current.position.set(position[0], position[1], position[2]);
+    group.current.rotation.y = rotationY;
+    if (followRef) followRef.current = group.current;
 
     const crossFadeToAction = (
       fromAction: AnimationAction | null | undefined,
@@ -39,19 +60,30 @@ export function CharacterModel() {
       const baseTimeScale = 0.8;
       const walkTimeScale = 3;
 
-      if (walkAction) {
-        currentAction = walkAction;
-        if (typeof walkAction.setEffectiveTimeScale === "function") {
-          walkAction.setEffectiveTimeScale(walkTimeScale);
-        }
-        walkAction.reset().play();
+      if (role === "walker" && !start) {
+        if (idleAction) idleAction.reset().play();
+        return;
       }
+
+      if (role === "walker" && walkAction) {
+        if (idleAction) idleAction.play();
+        currentAction = walkAction;
+        if (typeof walkAction.setEffectiveTimeScale === "function") walkAction.setEffectiveTimeScale(walkTimeScale);
+        walkAction.reset();
+        crossFadeToAction(idleAction, walkAction, 0.4);
+        startedRef.current = true;
+      } else if (idleAction) {
+        currentAction = idleAction;
+        idleAction.reset().play();
+      }
+
+      if (role !== "walker") return;
 
       const walkAndMove = () => {
         return new Promise<void>((resolve) => {
           const startTime = Date.now();
-          const startPosX = -3;
-          const startPosZ = -5;
+          const startPosX = position[0];
+          const startPosZ = position[2];
           const endPosX = 0;
           const endPosZ = 1;
           const controlPosX = 0.0;
@@ -94,10 +126,13 @@ export function CharacterModel() {
 
             const dxdt = 2 * (1 - t) * (controlPosX - startPosX) + 2 * t * (endPosX - controlPosX);
             const dzdt = 2 * (1 - t) * (controlPosZ - startPosZ) + 2 * t * (endPosZ - controlPosZ);
-            const yaw = Math.atan2(dxdt, dzdt);
+            const pathYaw = Math.atan2(dxdt, dzdt);
+            const blendWindow = 0.12;
+            const yawBlend = Math.min(t / blendWindow, 1);
+            const yawEarly = rotationY * (1 - yawBlend) + pathYaw * yawBlend;
             const alignWindowStart = 0.85;
             const alignT = Math.max(0, Math.min(1, (walkProgress - alignWindowStart) / (1 - alignWindowStart)));
-            const currentRotation = yaw * (1 - alignT) + 0 * alignT;
+            const currentRotation = yawEarly * (1 - alignT);
 
             if (group.current) {
               group.current.position.x = currentPosX;
@@ -110,11 +145,8 @@ export function CharacterModel() {
               currentAction = idleAction;
             }
 
-            if (walkProgress < 1) {
-              requestAnimationFrame(animate);
-            } else {
-              resolve();
-            }
+            if (walkProgress < 1) requestAnimationFrame(animate);
+            else resolve();
           };
           animate();
         });
@@ -122,16 +154,29 @@ export function CharacterModel() {
 
       await walkAndMove();
 
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      const playOnce = (action: AnimationAction, fadeIn: number = 0.4) => {
+        return new Promise<void>((resolve) => {
+          const onFinished = (e: { action: AnimationAction }) => {
+            if (e.action === action) {
+              mixer?.removeEventListener("finished", onFinished);
+              resolve();
+            }
+          };
+          mixer?.addEventListener("finished", onFinished);
+          action.reset();
+          action.setLoop(LoopOnce, 1);
+          action.clampWhenFinished = true;
+          action.fadeIn(fadeIn).play();
+        });
+      };
 
       if (waveAction) {
-        crossFadeToAction(currentAction, waveAction, 0.4);
+        const previous = currentAction;
         currentAction = waveAction;
-
-        waveAction.clampWhenFinished = true;
-        waveAction.setLoop(2200, 1);
-
-        await new Promise((resolve) => setTimeout(resolve, 1400));
+        if (previous && previous !== waveAction) previous.fadeOut(0.4);
+        await playOnce(waveAction, 0.4);
       }
 
       crossFadeToAction(currentAction, idleAction, 0.4);
@@ -142,38 +187,48 @@ export function CharacterModel() {
     return () => {
       if (mixer) mixer.stopAllAction();
     };
-  }, [actions, mixer, scene]);
+  }, [actions, mixer, role, start]);
 
   useEffect(() => {
-    if (scene) {
-      scene.traverse((child: Object3D) => {
-        if (child instanceof Mesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-          if (child.material && child.geometry) {
-            const geometry = child.geometry as BufferGeometry;
-            geometry.computeVertexNormals();
-            const originalColor = child.material.color ? child.material.color.clone() : null;
-            const originalMap = child.material.map || null;
-            const toonMaterial = new MeshToonMaterial({
-              color: originalColor || 0xffffff,
-              map: originalMap,
-              transparent: true,
-              opacity: 1,
-            });
-            if (originalColor) {
-              toonMaterial.color.setRGB(
-                Math.min(originalColor.r * 1.2, 1),
-                Math.min(originalColor.g * 1.2, 1),
-                Math.min(originalColor.b * 1.2, 1),
-              );
-            }
-            child.material = toonMaterial;
+    if (!instance) return;
+    instance.traverse((child: Object3D) => {
+      if (child instanceof Mesh || child instanceof SkinnedMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        const geo = (child as Mesh).geometry as { computeVertexNormals?: () => void };
+        if (geo && typeof geo.computeVertexNormals === "function") geo.computeVertexNormals();
+        type ColorishMaterial = Material & {
+          color?: Color;
+          emissive?: Color;
+          emissiveIntensity?: number;
+          skinning?: boolean;
+          needsUpdate?: boolean;
+          flatShading?: boolean;
+        };
+        const applyTo = (m: Material) => {
+          const mat = m as ColorishMaterial;
+          if (child instanceof SkinnedMesh && typeof mat.skinning !== "undefined") mat.skinning = true;
+          if (typeof mat.flatShading === "boolean") mat.flatShading = false;
+          if (role !== "walker") {
+            if (mat.color) mat.color.set(0xffffff);
+            if (mat.emissive) mat.emissive.set(0x000000);
+            if (typeof mat.emissiveIntensity === "number") mat.emissiveIntensity = 0;
+            mat.needsUpdate = true;
           }
+        };
+        const mat = (child as Mesh).material as Material | Material[] | undefined;
+        if (Array.isArray(mat)) {
+          const clones = mat.map((m) => m.clone());
+          (child as Mesh).material = clones as Material[];
+          clones.forEach(applyTo);
+        } else if (mat) {
+          const cloneMat = mat.clone();
+          (child as Mesh).material = cloneMat as Material;
+          applyTo(cloneMat);
         }
-      });
-    }
-  }, [scene]);
+      }
+    });
+  }, [instance, role]);
 
-  return <primitive object={scene} ref={group} scale={[0.5, 0.5, 0.5]} />;
+  return <primitive object={instance} ref={group} scale={[scale, scale, scale]} />;
 }
