@@ -1,17 +1,33 @@
-"use client";
-
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { RefObject, useEffect, useMemo, useRef } from "react";
-import { AnimationAction, Color, Group, LoopOnce, Material, Mesh, Object3D, SkinnedMesh } from "three";
+import {
+  AnimationAction,
+  BufferGeometry,
+  Color,
+  Group,
+  LoopOnce,
+  Material,
+  Mesh,
+  MeshToonMaterial,
+  Object3D,
+  SkinnedMesh,
+} from "three";
+import { EdgeSplitModifier } from "three/examples/jsm/modifiers/EdgeSplitModifier.js";
+import { TessellateModifier } from "three/examples/jsm/modifiers/TessellateModifier.js";
+import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { clone as skeletonClone } from "three/examples/jsm/utils/SkeletonUtils.js";
 
 type CharacterProps = {
-  role?: "walker" | "idle";
+  role?: "walker" | "idle" | "black";
   position?: [number, number, number];
   rotationY?: number;
   scale?: number;
   followRef?: RefObject<Group | null>;
   start?: boolean;
+  // Geometry smoothing controls (non-skinned only)
+  mergeVerticesEpsilon?: number | null; // set to null to disable
+  edgeSplitAngle?: number | null; // radians; set to null to disable
+  tessellate?: { maxEdgeLength?: number; iterations?: number } | null; // add triangles on long edges
 };
 
 export function CharacterModel({
@@ -21,6 +37,9 @@ export function CharacterModel({
   scale = 0.5,
   followRef,
   start = true,
+  mergeVerticesEpsilon = 1e-4,
+  edgeSplitAngle = Math.PI / 3,
+  tessellate = { maxEdgeLength: 0.08, iterations: 3 },
 }: CharacterProps) {
   const group = useRef<Group>(null);
   const { scene, animations } = useGLTF("/models/character.glb");
@@ -60,7 +79,7 @@ export function CharacterModel({
       const baseTimeScale = 0.8;
       const walkTimeScale = 3;
 
-      if (role === "walker" && !start) {
+      if ((role === "walker" || role === "black") && !start) {
         if (idleAction) idleAction.reset().play();
         return;
       }
@@ -191,44 +210,79 @@ export function CharacterModel({
 
   useEffect(() => {
     if (!instance) return;
+    // Prepare modifiers once
+    const edgeSplit = edgeSplitAngle != null ? new EdgeSplitModifier() : null;
+    const tess = tessellate
+      ? new TessellateModifier(tessellate.maxEdgeLength ?? 0.08, tessellate.iterations ?? 3)
+      : null;
+
     instance.traverse((child: Object3D) => {
       if (child instanceof Mesh || child instanceof SkinnedMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
-        const geo = (child as Mesh).geometry as { computeVertexNormals?: () => void };
-        if (geo && typeof geo.computeVertexNormals === "function") geo.computeVertexNormals();
-        type ColorishMaterial = Material & {
-          color?: Color;
-          emissive?: Color;
-          emissiveIntensity?: number;
-          skinning?: boolean;
-          needsUpdate?: boolean;
-          flatShading?: boolean;
-        };
-        const applyTo = (m: Material) => {
-          const mat = m as ColorishMaterial;
-          if (child instanceof SkinnedMesh && typeof mat.skinning !== "undefined") mat.skinning = true;
-          if (typeof mat.flatShading === "boolean") mat.flatShading = false;
-          if (role !== "walker") {
-            if (mat.color) mat.color.set(0xffffff);
-            if (mat.emissive) mat.emissive.set(0x000000);
-            if (typeof mat.emissiveIntensity === "number") mat.emissiveIntensity = 0;
-            mat.needsUpdate = true;
+
+        // Geometry smoothing pipeline for non-skinned parts
+        const mesh = child as Mesh;
+        const geometry = mesh.geometry as BufferGeometry;
+        const isSkinned = geometry.getAttribute("skinIndex") != null;
+
+        if (!isSkinned && geometry) {
+          let working = geometry.clone();
+
+          const tessellated = tess?.modify(working);
+          if (tessellated) {
+            working.dispose();
+            working = tessellated;
           }
-        };
-        const mat = (child as Mesh).material as Material | Material[] | undefined;
-        if (Array.isArray(mat)) {
-          const clones = mat.map((m) => m.clone());
-          (child as Mesh).material = clones as Material[];
-          clones.forEach(applyTo);
-        } else if (mat) {
-          const cloneMat = mat.clone();
-          (child as Mesh).material = cloneMat as Material;
-          applyTo(cloneMat);
+
+          if (mergeVerticesEpsilon) {
+            const merged = BufferGeometryUtils.mergeVertices(working, mergeVerticesEpsilon);
+            if (merged) {
+              working.dispose();
+              working = merged;
+            }
+          }
+
+          if (edgeSplitAngle) {
+            const split = edgeSplit?.modify(working, edgeSplitAngle, true);
+            if (split) {
+              working.dispose();
+              working = split;
+            }
+          }
+
+          working.computeVertexNormals();
+
+          mesh.geometry.dispose();
+          mesh.geometry = working;
+        } else {
+          try {
+            geometry.computeVertexNormals();
+          } catch (_) {
+            console.error(_);
+          }
         }
+
+        const originalMat = (child as Mesh).material as Material | Material[] | undefined;
+        let originalColor = new Color(0xffffff);
+
+        if (originalMat && !Array.isArray(originalMat)) {
+          const mat = originalMat as Material & { color?: Color };
+          if (mat.color) originalColor = mat.color.clone();
+        } else if (Array.isArray(originalMat) && originalMat.length > 0) {
+          const mat = originalMat[0] as Material & { color?: Color };
+          if (mat.color) originalColor = mat.color.clone();
+        }
+
+        const toonMaterial = new MeshToonMaterial({
+          color: role === "walker" ? originalColor : new Color(0xffffff),
+          gradientMap: null,
+        });
+
+        (child as Mesh).material = toonMaterial;
       }
     });
-  }, [instance, role]);
+  }, [instance, role, mergeVerticesEpsilon, edgeSplitAngle]);
 
   return <primitive object={instance} ref={group} scale={[scale, scale, scale]} />;
 }
