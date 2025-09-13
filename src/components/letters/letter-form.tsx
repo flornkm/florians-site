@@ -5,8 +5,9 @@ import Input from "@/components/ui/input";
 import Label from "@/components/ui/label";
 import Textarea from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import React, { memo, useCallback, useRef } from "react";
+import React, { memo, useCallback, useEffect, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
+import { navigate } from "vike/client/router";
 import { FormValues, useLetterEditor } from "./letter-editor-provider";
 
 const FormField = memo(function FormField({
@@ -102,7 +103,7 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
 });
 
 export default function LetterForm() {
-  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty } = useLetterEditor();
+  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty, success } = useLetterEditor();
 
   const handleFieldChange = useCallback(
     (field: keyof FormValues) => (value: string) => {
@@ -110,6 +111,12 @@ export default function LetterForm() {
     },
     [setFormValue],
   );
+
+  useEffect(() => {
+    if (success) {
+      navigate("/#letters");
+    }
+  }, [success]);
 
   return (
     <div className="w-full md:max-w-lg pr-8">

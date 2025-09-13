@@ -3,12 +3,13 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { db } from "./utils/_firebase.js";
 import { openai } from "./utils/_openai.js";
 
-const ref = db.ref("letters");
+const lettersRef = db.ref("letters");
+const leadsRef = db.ref("leads");
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
     try {
-      const snapshot = await ref.limitToLast(3).once("value");
+      const snapshot = await lettersRef.limitToLast(3).once("value");
       const letters = snapshot.val() || {};
 
       res.statusCode = 200;
@@ -30,6 +31,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return;
     }
 
+    const leadData = {
+      email,
+      handle,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      await leadsRef.push(leadData);
+    } catch (error) {
+      console.error("Error saving lead:", error);
+      res.statusCode = 500;
+      res.json({ error: "Failed to save lead" });
+      return;
+    }
+
     const moderation = await openai.moderations.create({ input: message });
 
     if (moderation.results[0].flagged) {
@@ -44,11 +60,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         message,
         signature,
         handle,
-        timestamp: Date.now(),
         createdAt: new Date().toISOString(),
       };
 
-      await ref.push(letterData);
+      await lettersRef.push(letterData);
 
       res.statusCode = 200;
       res.json({ success: true, message: "Letter saved successfully" });
