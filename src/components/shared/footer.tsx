@@ -78,11 +78,7 @@ export default function Footer() {
             <div className="flex items-center mb-4">
               {SOCIAL_LINKS.map((tab) => (
                 <Tooltip key={tab.name} content={tab.name}>
-                  <Link
-                    href={tab.href}
-                    target="_blank"
-                    className={cn(footerLinkVariants({ size: "medium" }), "px-1")}
-                  >
+                  <Link href={tab.href} target="_blank" className={cn(footerLinkVariants({ size: "medium" }), "px-1")}>
                     <tab.icon className="w-4.5 h-4.5" />
                   </Link>
                 </Tooltip>
