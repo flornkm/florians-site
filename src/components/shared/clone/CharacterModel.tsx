@@ -1,3 +1,4 @@
+import { useChatActionEvents, useChatStatusEvents } from "@/components/chat/chat-status";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { RefObject, useEffect, useMemo, useRef } from "react";
 import {
@@ -47,6 +48,10 @@ export function CharacterModel({
   const { actions, mixer } = useAnimations(animations, group);
 
   const startedRef = useRef(false);
+  const sequenceDoneRef = useRef(false);
+  const actionInProgressRef = useRef(false);
+  const chatEvents = useChatStatusEvents();
+  const actionEvents = useChatActionEvents();
 
   useEffect(() => {
     if (!actions || !group.current || startedRef.current) return;
@@ -199,6 +204,7 @@ export function CharacterModel({
       }
 
       crossFadeToAction(currentAction, idleAction, 0.4);
+      sequenceDoneRef.current = true;
     };
 
     runSequence();
@@ -209,8 +215,76 @@ export function CharacterModel({
   }, [actions, mixer, role, start]);
 
   useEffect(() => {
+    if (!actions) return;
+    if (role !== "walker") return;
+    const think = (actions["Think"] as AnimationAction | undefined) ?? null;
+    const talk = (actions["Talk"] as AnimationAction | undefined) ?? null;
+    const idle = (actions["Idle"] as AnimationAction | undefined) ?? null;
+
+    const fadeOthersAndPlay = (to?: AnimationAction | null, fade = 0.25) => {
+      if (!to) return;
+      Object.values(actions).forEach((a) => {
+        const act = a as AnimationAction | undefined;
+        if (act && act !== to) act.fadeOut(fade);
+      });
+      to.reset().fadeIn(fade).play();
+    };
+
+    const handler = (status: string) => {
+      if (!sequenceDoneRef.current) return;
+      if (actionInProgressRef.current) return;
+      if (status === "submitted") fadeOthersAndPlay(think);
+      else if (status === "streaming") fadeOthersAndPlay(talk);
+      else if (status === "ready") fadeOthersAndPlay(idle);
+    };
+
+    handler(chatEvents.get());
+    const unsubscribe = chatEvents.subscribe(handler);
+    return unsubscribe;
+  }, [actions, role, chatEvents]);
+
+  useEffect(() => {
+    if (!actions || !mixer) return;
+    if (role !== "walker") return;
+
+    const getAction = (name: string): AnimationAction | null => (actions[name] as AnimationAction | undefined) ?? null;
+    const idle = getAction("Idle");
+
+    const playOnce = (action: AnimationAction, fadeIn = 0.3) => {
+      const onFinished = (e: { action: AnimationAction }) => {
+        if (e.action === action) {
+          mixer.removeEventListener("finished", onFinished);
+          actionInProgressRef.current = false;
+          if (idle) idle.reset().fadeIn(0.2).play();
+        }
+      };
+      mixer.addEventListener("finished", onFinished);
+      Object.values(actions).forEach((a) => {
+        const act = a as AnimationAction | undefined;
+        if (act && act !== action) act.fadeOut(0.2);
+      });
+      actionInProgressRef.current = true;
+      action.reset();
+      action.setLoop(LoopOnce, 1);
+      action.clampWhenFinished = true;
+      action.fadeIn(fadeIn).play();
+    };
+
+    const handler = (actionName: string) => {
+      if (!sequenceDoneRef.current) return;
+      if (actionName === "None") return;
+
+      const action = getAction(actionName);
+      if (action) playOnce(action);
+    };
+
+    handler(actionEvents.get());
+    const unsubscribe = actionEvents.subscribe(handler);
+    return unsubscribe;
+  }, [actions, mixer, role, actionEvents]);
+
+  useEffect(() => {
     if (!instance) return;
-    // Prepare modifiers once
     const edgeSplit = edgeSplitAngle != null ? new EdgeSplitModifier() : null;
     const tess = tessellate
       ? new TessellateModifier(tessellate.maxEdgeLength ?? 0.08, tessellate.iterations ?? 3)
@@ -221,7 +295,6 @@ export function CharacterModel({
         child.castShadow = true;
         child.receiveShadow = true;
 
-        // Geometry smoothing pipeline for non-skinned parts
         const mesh = child as Mesh;
         const geometry = mesh.geometry as BufferGeometry;
         const isSkinned = geometry.getAttribute("skinIndex") != null;
