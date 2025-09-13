@@ -1,7 +1,7 @@
 import { openai } from "@ai-sdk/openai";
 import { convertToModelMessages, generateObject, streamText } from "ai";
 
-const AVAILABLE_ACTIONS = ["None", "Wave", "Jump"] as const;
+const AVAILABLE_ACTIONS = ["None", "Wave", "Jump", "Sit"] as const;
 
 export async function POST(req: Request): Promise<Response> {
   try {
@@ -9,19 +9,27 @@ export async function POST(req: Request): Promise<Response> {
     const uiMessages = Array.isArray(messages) ? messages : [];
     const modelMessages = convertToModelMessages(uiMessages);
 
-    const { object: actionEnum } = await generateObject({
-      model: openai("gpt-4.1-nano"),
-      output: "enum",
-      enum: [...AVAILABLE_ACTIONS],
-      system: [
-        "You are Florian's clone. Decide if the user is asking to trigger a predefined action.",
-        "Only choose an action if it's clearly requested. Otherwise choose 'None'.",
-        `Available actions: ${AVAILABLE_ACTIONS.filter((a) => a !== "None").join(", ")}`,
-      ].join(" \n"),
-      messages: modelMessages,
-    });
-
-    const selectedAction = actionEnum ?? "None";
+    let selectedAction: (typeof AVAILABLE_ACTIONS)[number] = "None";
+    try {
+      const { object } = await generateObject({
+        model: openai("gpt-4.1-nano"),
+        temperature: 0,
+        output: "enum",
+        enum: [...AVAILABLE_ACTIONS],
+        system: [
+          "You are Florian's clone. Decide if the user is asking to trigger a predefined action.",
+          "Only choose an action if it's clearly requested. Otherwise choose 'None'.",
+          `Available actions: ${AVAILABLE_ACTIONS.filter((a) => a !== "None").join(", ")}`,
+          "Return only a single enum value with no extra text.",
+        ].join(" \n"),
+        messages: modelMessages,
+      });
+      if (typeof object === "string" && (AVAILABLE_ACTIONS as readonly string[]).includes(object)) {
+        selectedAction = object as (typeof AVAILABLE_ACTIONS)[number];
+      }
+    } catch (e) {
+      console.warn("Action enum selection failed; defaulting to 'None'", e);
+    }
 
     const response = streamText({
       model: openai("gpt-4.1-nano"),

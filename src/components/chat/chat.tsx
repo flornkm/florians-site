@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport } from "ai";
+import { IconArrowUp } from "central-icons/IconArrowUp";
 import { useEffect, useRef, useState } from "react";
 import { Streamdown } from "streamdown";
 import { Body1 } from "../design-system/body";
@@ -15,6 +16,7 @@ export const Chat = () => {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const actionEvents = useChatActionEvents();
+  const chatEvents = useChatStatusEvents();
   const { messages, sendMessage, status } = useChat({
     transport: new TextStreamChatTransport({
       api: "/api/chat",
@@ -23,6 +25,7 @@ export const Chat = () => {
         try {
           const action = res.headers.get("X-Clone-Action") || "None";
           actionEvents.emit(action);
+          chatEvents.emit("streaming");
         } catch (error) {
           console.log(error);
         }
@@ -30,7 +33,6 @@ export const Chat = () => {
       },
     }),
   });
-  const chatEvents = useChatStatusEvents();
 
   useEffect(() => {
     const el = scrollContainerRef.current;
@@ -46,7 +48,7 @@ export const Chat = () => {
     <div className="w-full h-full min-h-0 overflow-hidden flex flex-col pb-16">
       <div
         ref={scrollContainerRef}
-        className="flex-1 min-h-0 overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-neutral-200 scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2"
+        className="flex-1 lg:px-0 px-8 min-h-0 overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-neutral-200 scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2"
       >
         {messages.map((message) => (
           <Body1 key={message.id} className={cn("leading-relaxed flex", message.role === "user" && "text-neutral-500")}>
@@ -59,7 +61,7 @@ export const Chat = () => {
       </div>
       <div
         className={cn(
-          "flex overflow-x-auto scrollbar-none px-10 mask-x-from-[calc(100%-4rem)] mask-x-to-100% gap-2 transition-all",
+          "flex overflow-x-auto shrink-0 scrollbar-none px-10 mask-x-from-[calc(100%-4rem)] mask-x-to-100% gap-2 transition-all",
           messages.length > 0 ? "opacity-0 h-0" : "opacity-100 h-10 mb-2 py-1",
         )}
       >
@@ -80,7 +82,7 @@ export const Chat = () => {
         ))}
       </div>
       <form
-        className="flex shrink-0 gap-2 w-full relative mx-auto max-w-[calc(100%-5rem)]"
+        className="flex shrink-0 z-[99] gap-2 w-full relative mx-auto lg:max-w-[calc(100%-5rem)] max-w-[calc(100%-4rem)]"
         onSubmit={(e) => {
           e.preventDefault();
           const value = input.trim();
@@ -92,7 +94,7 @@ export const Chat = () => {
         }}
       >
         <Input
-          className="flex-1 text-ellipsis h-12 pl-4 pr-24 rounded-full"
+          className="flex-1 text-ellipsis bg-white h-12 pl-4 pr-24 rounded-full"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={status !== "ready"}
@@ -102,10 +104,10 @@ export const Chat = () => {
         />
         <Button
           type="submit"
-          className="rounded-full absolute top-1/2 -translate-y-1/2 right-2 bg-black text-white disabled:opacity-50"
+          className="rounded-full absolute top-1/2 -translate-y-1/2 right-2.5 size-8 p-0 flex items-center justify-center bg-black text-white disabled:opacity-50"
           disabled={status !== "ready"}
         >
-          Submit
+          <IconArrowUp className="size-4" />
         </Button>
       </form>
     </div>
