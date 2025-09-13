@@ -116,7 +116,7 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-Regular.woff2) format("woff");
+  src: url(/fonts/open-runde/OpenRunde-Regular.woff2) format("woff2");
 }
 
 @font-face {
@@ -124,7 +124,7 @@
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-Medium.woff2) format("woff");
+  src: url(/fonts/open-runde/OpenRunde-Medium.woff2) format("woff2");
 }
 
 @font-face {
@@ -132,7 +132,7 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-SemiBold.woff2) format("woff");
+  src: url(/fonts/open-runde/OpenRunde-SemiBold.woff2) format("woff2");
 }
 
 @font-face {
@@ -140,13 +140,13 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-Bold.woff2) format("woff");
+  src: url(/fonts/open-runde/OpenRunde-Bold.woff2) format("woff2");
 }
 
 @theme {
   --font-sans: "Pretendard Variable", "Pretendard", "Inter", "sans-serif";
   --font-mono: "Commit Mono", "ui-monospace", "SFMono-Regular", "Liberation Mono", "Courier New", "monospace";
-  --font-rounded: "Open Runde", "sans-serif";
+  --font-round: "Open Runde", "sans-serif";
   --spacing-col: 248px;
   --text-ms: 0.9375rem;
   --aspect-a4: 1.4142857143/1;

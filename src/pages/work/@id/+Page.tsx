@@ -1,6 +1,6 @@
 import { Body2 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
-import { MarkdownRenderer } from "@/components/shared/markdown-renderer";
+import Markdown from "@/components/shared/markdown.jsx";
 import ScrollWheel from "@/components/shared/scroll-wheel";
 import Section from "@/components/shared/section";
 import { buttonVariants } from "@/components/ui/button.jsx";
@@ -85,7 +85,7 @@ export default function Page() {
               </div>
             </div>
           )}
-          <MarkdownRenderer html={project.html} className={proseVariants({ variant: "default" })} />
+          <Markdown html={project.html} className={proseVariants({ variant: "default" })} />
         </div>
       </Section>
     </div>
