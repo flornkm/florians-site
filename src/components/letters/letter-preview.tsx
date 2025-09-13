@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import Draggable from "react-draggable";
 import { Letter } from "./letter";
-import { useLetterEditor } from "./letter-editor-context";
+import { useLetterEditor } from "./letter-editor-provider";
 
 export default function LetterPreview() {
   const { formValues, signature, isEmpty } = useLetterEditor();

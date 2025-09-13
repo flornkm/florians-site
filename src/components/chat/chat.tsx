@@ -51,7 +51,13 @@ export const Chat = () => {
         className="flex-1 lg:px-0 px-8 min-h-0 overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-neutral-200 scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2"
       >
         {messages.map((message) => (
-          <Body1 key={message.id} className={cn("leading-relaxed flex", message.role === "user" && "text-neutral-500")}>
+          <Body1
+            key={message.id}
+            className={cn(
+              "leading-relaxed flex",
+              message.role === "user" ? "text-neutral-500 dark:text-neutral-400" : "text-black dark:text-white",
+            )}
+          >
             <span className="font-medium mr-1 w-14 shrink-0">{message.role === "user" ? "You:" : "Clone:"}</span>
             {message.parts.map((part, index) =>
               part.type === "text" ? <Streamdown key={index}>{part.text}</Streamdown> : null,
@@ -94,7 +100,7 @@ export const Chat = () => {
         }}
       >
         <Input
-          className="flex-1 text-ellipsis bg-white dark:bg-black h-12 pl-4 pr-24 rounded-full"
+          className="flex-1 text-ellipsis h-12 pl-4 pr-24 rounded-full"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={status !== "ready"}
