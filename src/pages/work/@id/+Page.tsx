@@ -66,7 +66,7 @@ export default function Page() {
             <ScrollWheel html={project.html} />
           </div>
         </div>
-        <div className="w-full md:max-w-[calc(100%-96px)] pt-8 justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
+        <div className="w-full md:max-w-[calc(100%-5rem)] pt-8 justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
           {project.links && project.links.length > 0 && (
             <div className="flex md:flex-col max-w-xs bg-black dark:bg-white z-20 rounded-[10px] mx-auto sticky w-auto top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 shadow-xl">
               <div className="flex gap-0.5 p-0.5">
