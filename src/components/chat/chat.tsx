@@ -72,7 +72,7 @@ export const Chat = () => {
             }}
             variant="tertiary"
             className={cn(
-              "border shrink-0 py-1 border-neutral-200 rounded-full",
+              "border shrink-0 py-1 border-neutral-200 dark:border-neutral-800 rounded-full",
               recommendation === input && "bg-neutral-50",
             )}
             key={index}
@@ -82,7 +82,7 @@ export const Chat = () => {
         ))}
       </div>
       <form
-        className="flex shrink-0 z-[99] gap-2 w-full relative mx-auto lg:max-w-[calc(100%-5rem)] max-w-[calc(100%-4rem)]"
+        className="flex shrink-0 relative gap-2 w-full mx-auto lg:max-w-[calc(100%-5rem)] max-w-[calc(100%-4rem)]"
         onSubmit={(e) => {
           e.preventDefault();
           const value = input.trim();
@@ -94,7 +94,7 @@ export const Chat = () => {
         }}
       >
         <Input
-          className="flex-1 text-ellipsis bg-white h-12 pl-4 pr-24 rounded-full"
+          className="flex-1 text-ellipsis bg-white dark:bg-black h-12 pl-4 pr-24 rounded-full"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={status !== "ready"}

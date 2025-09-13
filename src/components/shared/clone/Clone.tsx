@@ -1,3 +1,4 @@
+import { useDarkmode } from "@/hooks/use-darkmode";
 import { ContactShadows, Environment, Lightformer, Text } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -6,6 +7,9 @@ import { CharacterModel } from "./CharacterModel";
 
 function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; onCameraDone: () => void }) {
   const walkerRef = useRef<THREE.Group | null>(null);
+  const { darkmode } = useDarkmode();
+  const labelPrimaryColor = darkmode ? "#ffffff" : "black";
+  const labelSecondaryColor = darkmode ? "#6B7280" : "#A1A1A1";
   return (
     <>
       <CameraRig onComplete={onCameraDone} />
@@ -19,7 +23,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
       <Text
         position={[-3, 2.5, -5]}
         fontSize={0.12}
-        color="black"
+        color={labelPrimaryColor}
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
@@ -29,7 +33,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
       <Text
         position={[-4.07, 2.5, -4.46]}
         fontSize={0.12}
-        color="#A1A1A1"
+        color={labelSecondaryColor}
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
@@ -39,7 +43,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
       <Text
         position={[-1.93, 2.5, -5.54]}
         fontSize={0.12}
-        color="#A1A1A1"
+        color={labelSecondaryColor}
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
@@ -49,7 +53,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
       <Text
         position={[-0.86, 2.5, -6.07]}
         fontSize={0.12}
-        color="#A1A1A1"
+        color={labelSecondaryColor}
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
@@ -59,7 +63,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
       <Text
         position={[0.21, 2.5, -6.6]}
         fontSize={0.12}
-        color="#A1A1A1"
+        color={labelSecondaryColor}
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
