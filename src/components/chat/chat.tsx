@@ -5,6 +5,7 @@ import { IconArrowUp } from "central-icons/IconArrowUp";
 import { useEffect, useRef, useState } from "react";
 import { Streamdown } from "streamdown";
 import { Body1 } from "../design-system/body";
+import { Code } from "../design-system/code";
 import Button from "../ui/button";
 import Input from "../ui/input";
 import { useChatActionEvents, useChatStatusEvents } from "./chat-status";
@@ -60,7 +61,16 @@ export const Chat = () => {
           >
             <span className="font-medium mr-1 w-14 shrink-0">{message.role === "user" ? "You:" : "Clone:"}</span>
             {message.parts.map((part, index) =>
-              part.type === "text" ? <Streamdown key={index}>{part.text}</Streamdown> : null,
+              part.type === "text" ? (
+                <Streamdown
+                  key={index}
+                  components={{
+                    code: Code,
+                  }}
+                >
+                  {part.text}
+                </Streamdown>
+              ) : null,
             )}
           </Body1>
         ))}
