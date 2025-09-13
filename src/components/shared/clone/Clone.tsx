@@ -23,7 +23,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
-        Clone 2902
+        Clone 2903
       </Text>
       <CharacterModel role="idle" position={[-4.07, -0.1, -4.46]} rotationY={Math.PI / 4} />
       <Text
@@ -33,7 +33,7 @@ function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; on
         anchorX="center"
         font="/fonts/commit-mono/commit-mono-regular.otf"
       >
-        Clone 2903
+        Clone 2902
       </Text>
       <CharacterModel role="idle" position={[-1.93, -0.1, -5.54]} rotationY={Math.PI / 4} />
       <Text
@@ -74,7 +74,7 @@ function CameraRig({ onComplete }: { onComplete?: () => void }) {
   const start = useRef<number | null>(null);
   const duration = 2800;
   const target = useMemo(() => new THREE.Vector3(-3, 0.8, -5), []);
-  const endPos = useMemo(() => new THREE.Vector3(0, 2, 8), []);
+  const endPos = useMemo(() => new THREE.Vector3(0, 2, 6), []);
   const endLook = useMemo(() => new THREE.Vector3(0, 0.8, 1), []);
   const startPos = useMemo(() => {
     const dir = endPos.clone().sub(target).normalize();

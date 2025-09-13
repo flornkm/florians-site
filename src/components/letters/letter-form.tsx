@@ -114,7 +114,7 @@ export default function LetterForm() {
   return (
     <div className="w-full md:max-w-lg pr-8">
       <div className="mb-6">
-        <H1 className="text-lg font-semibold">Send a letter</H1>
+        <H1 className="text-lg font-semibold">Send a postcard</H1>
         <Body1 className="max-w-lg">It's like a digital guestbook.</Body1>
       </div>
       <form action={submitLetter} className="w-full flex flex-col gap-4">
