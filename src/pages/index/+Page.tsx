@@ -63,7 +63,9 @@ export default function Page() {
                 Last three letters sent to this site.
               </Body2>
             </div>
-            <LetterStack />
+            <div className="min-[450px]:mt-[16vw] md:mt-0 w-full">
+              <LetterStack />
+            </div>
             <Button
               variant="secondary"
               className="mt-4 mx-auto"
