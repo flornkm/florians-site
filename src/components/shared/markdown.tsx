@@ -13,7 +13,6 @@ function parseHtmlToJsx(html: string): React.ReactNode {
   const modelRegex = /<div class="model-viewer" data-src="([^"]+)"><\/div>/g;
   const videoRegex = /<div class="video-player" data-src="([^"]+)" data-options="([^"]*)"><\/div>/g;
 
-  // Collect all matches with their positions
   const matches: Array<{
     type: "model" | "video";
     index: number;
@@ -24,7 +23,6 @@ function parseHtmlToJsx(html: string): React.ReactNode {
 
   let match;
 
-  // Find all model matches
   while ((match = modelRegex.exec(html)) !== null) {
     matches.push({
       type: "model",
@@ -34,13 +32,12 @@ function parseHtmlToJsx(html: string): React.ReactNode {
     });
   }
 
-  // Find all video matches
   while ((match = videoRegex.exec(html)) !== null) {
     let options = {};
     try {
       options = JSON.parse(match[2].replace(/&quot;/g, '"'));
     } catch {
-      // If parsing fails, use empty options
+      // parsing fails, use empty options
     }
 
     matches.push({
@@ -52,7 +49,6 @@ function parseHtmlToJsx(html: string): React.ReactNode {
     });
   }
 
-  // Sort matches by position
   matches.sort((a, b) => a.index - b.index);
 
   const parts: React.ReactNode[] = [];
@@ -60,7 +56,6 @@ function parseHtmlToJsx(html: string): React.ReactNode {
   let key = 0;
 
   matches.forEach((matchItem) => {
-    // Add HTML before the match
     if (matchItem.index > lastIndex) {
       const htmlBefore = html.slice(lastIndex, matchItem.index);
       if (htmlBefore.trim()) {
@@ -68,7 +63,6 @@ function parseHtmlToJsx(html: string): React.ReactNode {
       }
     }
 
-    // Add the component
     if (matchItem.type === "model") {
       parts.push(
         <div key={`model-${key++}`} className="my-6">
@@ -84,10 +78,8 @@ function parseHtmlToJsx(html: string): React.ReactNode {
       );
     } else if (matchItem.type === "video") {
       const options = matchItem.options || {};
-      // Support both className: and class="" syntaxes
       const customClassName = (options.className as string) || "";
 
-      // Check if custom className contains width classes (w-*, max-w-*, min-w-)
       const hasWidthClass = /\b(w-\w+|max-w-\w+|min-w-\w+)\b/.test(customClassName);
       const defaultWidth = hasWidthClass ? "" : "w-full";
       const finalClassName = `${defaultWidth} ${customClassName}`.trim();
@@ -113,7 +105,6 @@ function parseHtmlToJsx(html: string): React.ReactNode {
     lastIndex = matchItem.index + matchItem.length;
   });
 
-  // Add remaining HTML
   if (lastIndex < html.length) {
     const htmlAfter = html.slice(lastIndex);
     if (htmlAfter.trim()) {
@@ -128,10 +119,10 @@ function parseHtmlToJsx(html: string): React.ReactNode {
   return <>{parts}</>;
 }
 
-export function MarkdownRenderer({ html, className = "" }: MarkdownRendererProps) {
+export const Markdown = ({ html, className = "" }: MarkdownRendererProps) => {
   const content = parseHtmlToJsx(html);
 
   return <article className={cn(proseVariants({ variant: "default" }), className)}>{content}</article>;
-}
+};
 
-export default MarkdownRenderer;
+export default Markdown;

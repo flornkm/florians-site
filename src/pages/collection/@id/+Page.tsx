@@ -1,5 +1,5 @@
 import { Body4 } from "@/components/design-system/body.jsx";
-import { MarkdownRenderer } from "@/components/shared/markdown-renderer";
+import Markdown from "@/components/shared/markdown.jsx";
 import { buttonVariants } from "@/components/ui/button.jsx";
 import { Link } from "@/components/ui/link.jsx";
 import { cn } from "@/lib/utils.js";
@@ -24,7 +24,7 @@ export default function Page() {
           <IconArrowDownLeft className="w-4 h-4 shrink-0" />
         </Link>
         <div className="w-full h-full flex items-center justify-center pt-0">
-          <MarkdownRenderer html={item.content || ""} className="max-w-lg w-full -mt-7" />
+          <Markdown html={item.content || ""} className="max-w-lg w-full -mt-7" />
         </div>
       </div>
     </div>

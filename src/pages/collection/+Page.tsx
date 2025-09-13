@@ -1,6 +1,6 @@
 import { Body4 } from "@/components/design-system/body.jsx";
 import { H1 } from "@/components/design-system/heading";
-import { MarkdownRenderer } from "@/components/shared/markdown-renderer";
+import Markdown from "@/components/shared/markdown";
 import Button from "@/components/ui/button";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
@@ -126,7 +126,7 @@ export default function Page() {
                       height: "100%",
                     }}
                   >
-                    <MarkdownRenderer html={item.content || ""} className={proseVariants({ variant: "default" })} />
+                    <Markdown html={item.content || ""} className={proseVariants({ variant: "default" })} />
                   </div>
                 </div>
               </div>
