@@ -1,4 +1,5 @@
 import { useChatActionEvents, useChatStatusEvents } from "@/components/chat/chat-status";
+import { useDarkmode } from "@/hooks/use-darkmode";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { RefObject, useEffect, useMemo, useRef } from "react";
 import {
@@ -46,6 +47,7 @@ export function CharacterModel({
   const { scene, animations } = useGLTF("/models/character.glb");
   const instance = useMemo(() => skeletonClone(scene) as Object3D, [scene]);
   const { actions, mixer } = useAnimations(animations, group);
+  const { darkmode } = useDarkmode();
 
   const startedRef = useRef(false);
   const sequenceDoneRef = useRef(false);
@@ -358,15 +360,17 @@ export function CharacterModel({
           if (mat.color) originalColor = mat.color.clone();
         }
 
+        // Non-walker color: darker in dark mode, a bit lighter in light mode
+        const nonWalkerHex = darkmode ? 0x404040 : 0xf5f5f5; // mid-dark (neutral-700) / neutral-100 (light)
         const toonMaterial = new MeshToonMaterial({
-          color: role === "walker" ? originalColor : new Color(0xffffff),
+          color: role === "walker" ? originalColor : new Color(nonWalkerHex),
           gradientMap: null,
         });
 
         (child as Mesh).material = toonMaterial;
       }
     });
-  }, [instance, role, mergeVerticesEpsilon, edgeSplitAngle]);
+  }, [instance, role, mergeVerticesEpsilon, edgeSplitAngle, darkmode]);
 
   return <primitive object={instance} ref={group} scale={[scale, scale, scale]} />;
 }
