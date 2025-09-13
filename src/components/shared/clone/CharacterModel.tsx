@@ -52,6 +52,20 @@ export function CharacterModel({
   const actionInProgressRef = useRef(false);
   const chatEvents = useChatStatusEvents();
   const actionEvents = useChatActionEvents();
+  const chatPhaseRef = useRef<0 | 1 | 2>(0);
+
+  const crossFadeToAction = (
+    fromAction: AnimationAction | null | undefined,
+    toAction: AnimationAction | null | undefined,
+    duration: number = 0.3,
+  ) => {
+    if (fromAction && toAction && fromAction !== toAction) {
+      toAction.reset().fadeIn(duration).play();
+      fromAction.fadeOut(duration);
+    } else if (toAction) {
+      toAction.reset().play();
+    }
+  };
 
   useEffect(() => {
     if (!actions || !group.current || startedRef.current) return;
@@ -59,19 +73,6 @@ export function CharacterModel({
     group.current.position.set(position[0], position[1], position[2]);
     group.current.rotation.y = rotationY;
     if (followRef) followRef.current = group.current;
-
-    const crossFadeToAction = (
-      fromAction: AnimationAction | null | undefined,
-      toAction: AnimationAction | null | undefined,
-      duration: number = 0.3,
-    ) => {
-      if (fromAction && toAction && fromAction !== toAction) {
-        toAction.reset().fadeIn(duration).play();
-        fromAction.fadeOut(duration);
-      } else if (toAction) {
-        toAction.reset().play();
-      }
-    };
 
     const runSequence = async () => {
       const getAction = (name: string): AnimationAction | null =>
@@ -233,9 +234,18 @@ export function CharacterModel({
     const handler = (status: string) => {
       if (!sequenceDoneRef.current) return;
       if (actionInProgressRef.current) return;
-      if (status === "submitted") fadeOthersAndPlay(think);
-      else if (status === "streaming") fadeOthersAndPlay(talk);
-      else if (status === "ready") fadeOthersAndPlay(idle);
+      if (status === "ready") {
+        chatPhaseRef.current = 0;
+        fadeOthersAndPlay(idle);
+        return;
+      }
+      const nextPhase: 1 | 2 = status === "submitted" ? 1 : 2;
+      if (chatPhaseRef.current !== 0 && nextPhase < chatPhaseRef.current) {
+        return;
+      }
+      chatPhaseRef.current = nextPhase;
+      if (nextPhase === 1) fadeOthersAndPlay(think);
+      else fadeOthersAndPlay(talk);
     };
 
     handler(chatEvents.get());
@@ -255,7 +265,8 @@ export function CharacterModel({
         if (e.action === action) {
           mixer.removeEventListener("finished", onFinished);
           actionInProgressRef.current = false;
-          if (idle) idle.reset().fadeIn(0.2).play();
+          crossFadeToAction(action, idle, 0.4);
+          if (idle) idle.play();
         }
       };
       mixer.addEventListener("finished", onFinished);
