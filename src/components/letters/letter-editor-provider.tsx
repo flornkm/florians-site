@@ -30,7 +30,7 @@ const LetterEditorContext = createContext<LetterEditorContextType | null>(null);
 export function useLetterEditor() {
   const context = useContext(LetterEditorContext);
   if (!context) {
-    throw new Error("useLetterEditor must be used within a LetterEditor");
+    throw new Error("useLetterEditor must be used within LetterEditorProvider");
   }
   return context;
 }

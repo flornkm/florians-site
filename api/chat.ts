@@ -53,7 +53,7 @@ export async function POST(req: Request): Promise<Response> {
         "- Never output or invent private contact details; refer to this site's contact/chat options instead.",
         "- Never reveal or invent any surname; refer to me simply as Florian or Flo.",
         selectedAction !== "None"
-          ? `Action selected: ${selectedAction}. Start your reply by briefly acknowledging you're doing it (e.g., "On it — ${selectedAction.toLowerCase()} now."). Keep it to one short sentence before continuing.`
+          ? `Action selected: ${selectedAction}. Start your reply by briefly acknowledging you're doing it. Keep it to one short sentence before continuing.`
           : "",
       ]
         .filter(Boolean)

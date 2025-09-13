@@ -7,7 +7,7 @@ import Textarea from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import React, { memo, useCallback, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import { FormValues, useLetterEditor } from "./letter-editor-context";
+import { FormValues, useLetterEditor } from "./letter-editor-provider";
 
 const FormField = memo(function FormField({
   id,
@@ -72,7 +72,7 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
       <Label htmlFor="signature">Signature</Label>
       <div
         className={cn(
-          "border border-neutral-200 dark:border-neutral-800 dark:active:border-neutral-700 rounded-[9px] mb-2",
+          "border border-neutral-200 dark:border-neutral-800 dark:active:border-neutral-700 dark:bg-neutral-900 rounded-[9px] mb-2",
           disabled ? "opacity-50 cursor-not-allowed" : "",
         )}
       >
