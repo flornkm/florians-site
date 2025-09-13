@@ -89,7 +89,7 @@ export const Chat = () => {
             variant="tertiary"
             className={cn(
               "border shrink-0 py-1 border-neutral-200 dark:border-neutral-800 rounded-full",
-              recommendation === input && "bg-neutral-50",
+              recommendation === input && "bg-neutral-50 dark:bg-neutral-900",
             )}
             key={index}
           >

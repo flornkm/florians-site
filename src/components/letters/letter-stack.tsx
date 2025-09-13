@@ -92,7 +92,7 @@ function DraggableLetter({
         transform: `translate(${position.x}px, ${position.y}px) ${style?.transform || ""}`,
         transition: isDragging ? "none" : "all 0.3s ease-out",
       }}
-      className="rounded-xl touch-manipulation overflow-hidden md:max-w-[450px] aspect-a4 w-full"
+      className="rounded-xl touch-manipulation md:max-w-[450px] aspect-a4 w-full"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleEnd}
@@ -163,7 +163,6 @@ export function LetterStack() {
                 left: "50%",
                 transform: `translate(-50%, -50%) scale(${1 - index * 0.05})`,
                 zIndex: letterOrder.length - index,
-                boxShadow: `0px ${index * 18 + 12 * index}px ${index * 2 + 8}px rgba(0, 0, 0, 0.05)`,
               }}
               onReorder={() => handleReorder(id)}
             >
