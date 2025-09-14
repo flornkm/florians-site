@@ -19,6 +19,7 @@
     "@types/three": "^0.178.1",
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/node": "^5.3.6",
+    "@vercel/og": "^0.8.5",
     "@vite-plugin-vercel/vike": "^9.0.6",
     "@vitejs/plugin-react": "^4.7.0",
     "ai": "^5.0.43",
