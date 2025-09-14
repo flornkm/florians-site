@@ -48,7 +48,7 @@ Here are some considerations:
 
 <br />
 
-[@video:/videos/rotating-block.webm|autoplay|muted|loop|playsInline|class="max-w-24 aspect-square object-contain"]
+[@video:/videos/rotating-block.mp4|webm:/videos/rotating-block.webm|mp4:/videos/rotating-block.mp4|autoplay|muted|loop|playsInline|class="max-w-24 aspect-square object-contain"]
 
 ### Remove the background
 

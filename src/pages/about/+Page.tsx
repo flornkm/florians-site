@@ -6,6 +6,7 @@ import { useRef } from "react";
 import type { GlobeMethods } from "react-globe.gl";
 
 import countriesData from "@/assets/data/countries.json";
+import { SmartVideo } from "@/components/shared/smart-video";
 import { buttonVariants } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
@@ -116,15 +117,13 @@ export default function Page() {
           <div className="w-full grid md:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
             {LIFE.map((step, index) => (
               <div key={index} className="flex flex-col gap-2 max-w-sm">
-                <div className="h-20 w-20 aspect-square flex items-center justify-center rounded-lg">
+                <div className="size-20 aspect-square flex items-center justify-center rounded-lg">
                   {step.video && (
-                    <video
-                      src={step.video.src}
-                      className="object-contain"
-                      style={{
-                        width: step.video.size,
-                        height: step.video.size,
-                      }}
+                    <SmartVideo
+                      className="object-contain bg-transparent"
+                      style={{ width: step.video.size, height: step.video.size }}
+                      webm={step.video.webm}
+                      mp4={step.video.mp4}
                       muted
                       loop
                       autoPlay

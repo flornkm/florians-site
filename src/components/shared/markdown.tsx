@@ -2,7 +2,7 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { ModelViewer } from "../3d/model-viewer";
-import { VideoPlayer } from "../video/video-player";
+import { SmartVideo } from "../shared/smart-video";
 
 interface MarkdownRendererProps {
   html: string;
@@ -84,19 +84,27 @@ function parseHtmlToJsx(html: string): React.ReactNode {
       const defaultWidth = hasWidthClass ? "" : "w-full";
       const finalClassName = `${defaultWidth} ${customClassName}`.trim();
 
+      const webmSrc = options.webm as string;
+      const mp4Src = options.mp4 as string;
+      const hasAnyDualSource = Boolean(webmSrc || mp4Src);
+
       parts.push(
         <div key={`video-${key++}`} className="my-6">
-          <VideoPlayer
-            src={matchItem.src}
+          <SmartVideo
             className={finalClassName}
-            width={typeof options.width === "string" ? options.width : "100%"}
-            height={typeof options.height === "string" ? options.height : "auto"}
+            style={{
+              width: typeof options.width === "string" ? (options.width as string) : undefined,
+              height: typeof options.height === "string" ? (options.height as string) : undefined,
+            }}
+            webm={webmSrc}
+            mp4={mp4Src}
+            src={!hasAnyDualSource ? matchItem.src : undefined}
             autoPlay={options.autoplay === true}
-            muted={options.muted !== false} // Default to muted
+            muted={options.muted !== false}
             loop={options.loop === true}
-            playsInline={options.playsInline !== false} // Default to playsInline
-            controls={options.controls === true} // Default to no controls
-            poster={typeof options.poster === "string" ? options.poster : undefined}
+            playsInline={options.playsInline !== false}
+            controls={options.controls === true}
+            poster={typeof options.poster === "string" ? (options.poster as string) : undefined}
           />
         </div>,
       );

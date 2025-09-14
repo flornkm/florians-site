@@ -9,7 +9,11 @@ type: experiment
 
 An experimental AI chatbot made for shopping in an 48h sprint in university.
 
-[@video:/collection/granny-ai/granny-memoji.webm|autoplay|muted|loop|playsInline|class="max-w-32 aspect-square object-contain"]
+<div class="[&_img]:w-32 [&_img]:h-24">
+
+![Granny AI](/collection/granny-ai/granny-memoji.gif)
+
+</div>
 
 In our 48 hour university sprint, [Anton Stallbörger](https://stallboerger.com) and myself wanted to make use of OpenAI's GPT-3 API to create a chatbot that could help shoppers find products they were looking for.
 
