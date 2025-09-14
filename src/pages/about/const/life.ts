@@ -4,7 +4,8 @@ export const LIFE = [
     description:
       "As my favorite toy as a child, LEGO bricks helped me to develop a passion for building creative things.",
     video: {
-      src: "/videos/rotating-block.webm",
+      webm: "/videos/rotating-block.webm",
+      mp4: "/videos/rotating-block.mp4",
       size: 56,
     },
   },
@@ -13,7 +14,8 @@ export const LIFE = [
     description:
       'I\'m a "typical" internet kid. Growing up, I worked with different Youtube channels, editing videos for them, and learning a lot.',
     video: {
-      src: "/videos/rotating-laptop.webm",
+      webm: "/videos/rotating-laptop.webm",
+      mp4: "/videos/rotating-laptop.mp4",
       size: 72,
     },
   },
@@ -22,7 +24,8 @@ export const LIFE = [
     description:
       "I was always fascinated by historical design movements, and how they indirectly inspire todays software design.",
     video: {
-      src: "/videos/rotating-vitra-chair.webm",
+      webm: "/videos/rotating-vitra-chair.webm",
+      mp4: "/videos/rotating-vitra-chair.mp4",
       size: 96,
     },
   },

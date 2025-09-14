@@ -6,27 +6,11 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { IconCentralIconSystem } from "central-icons/IconCentralIconSystem";
 import { IconGithub } from "central-icons/IconGithub";
-
-type PersonLink = { name: string; href: string };
-
-const INSPIRATION: PersonLink[] = [
-  { name: "Gavin Nelson", href: "https://nelson.co/" },
-  { name: "Anton Stallboerger", href: "https://antonstallboerger.com/" },
-  { name: "Linus Rogge", href: "https://linusrogge.com/" },
-  { name: "Samuel Kraft", href: "https://samuelkraft.com/" },
-].sort((a, b) => a.name.localeCompare(b.name));
-
-const PEOPLE: PersonLink[] = [
-  { name: "Nils Eller", href: "https://www.nilseller.com/" },
-  { name: "Anton Stallboerger", href: "https://antonstallboerger.com/" },
-  { name: "Linus Rogge", href: "https://linusrogge.com/" },
-  { name: "Samuel Stroschein", href: "https://x.com/samuelstroschei" },
-  { name: "Thilo Konzok", href: "https://www.konzok.com/" },
-  { name: "Xavier (Jack)", href: "https://x.com/KMkota0" },
-].sort((a, b) => a.name.localeCompare(b.name));
+import { INSPIRATION } from "./const/inspiration";
+import { PEOPLE } from "./const/people";
 
 // function to render lists more easily
-function renderLinkedList(items: PersonLink[]) {
+function renderLinkedList(items: { name: string; href: string }[]) {
   return items.map((item, i, arr) => (
     <span key={item.name}>
       <Link href={item.href} target="_blank">
