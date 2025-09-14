@@ -7,7 +7,7 @@ const letterVariants = cva(
   {
     variants: {
       variant: {
-        preview: "max-w-xs md:max-w-[450px]",
+        preview: "max-w-xs md:max-w-[450px] flex items-center justify-center",
         display: "max-w-xs md:max-w-[450px] transition-all duration-200",
       },
       isEmpty: {
@@ -131,7 +131,7 @@ export const Letter = forwardRef<
           </div>
         )}
       </div>
-      <div className="h-full shrink-0 w-px bg-neutral-200 dark:bg-neutral-800" />
+      <div className="h-[calc(100%-2rem)] shrink-0 w-px bg-neutral-200 dark:bg-neutral-800" />
       <div className="flex-1 shrink-0 w-full flex flex-col h-full items-end justify-between">
         <img src="/images/letters/letter-stamp.webp" alt="Stamp" className={stampVariants({ variant, isEmpty })} />
         {signature && (
