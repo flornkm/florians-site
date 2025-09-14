@@ -109,6 +109,8 @@ export const Chat = () => {
             chatEvents.emit("submitted");
             sendMessage({ text: value });
             setInput("");
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }
         }}
       >
