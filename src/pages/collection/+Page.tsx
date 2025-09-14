@@ -80,7 +80,7 @@ export default function Page() {
     <div className="w-full">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div
-          className="bg-gradient-to-b from-white via-white dark:from-black dark:via-black to-transparent pt-12 pb-8 -mb-16 z-10 lg:h-72 h-48 flex items-start"
+          className="bg-gradient-to-b from-white via-white dark:from-black dark:via-black to-transparent pt-12 pb-8 -mb-16 z-10 lg:h-72 h-48 flex md:items-center items-start"
           style={{ scrollSnapAlign: "start" }}
         >
           <H1 className="text-center mb-3 w-full">A blog, photos, experiments, and more updates</H1>

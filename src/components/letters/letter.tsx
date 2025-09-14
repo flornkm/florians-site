@@ -103,7 +103,7 @@ export const Letter = forwardRef<
 
   return (
     <div ref={ref} className={letterVariants({ variant, isEmpty, isDragging, className })} {...restProps}>
-      <div className="flex-1 max-w-1/2 flex flex-col gap-4 pr-8">
+      <div className="flex-1 max-w-1/2 flex flex-col h-full gap-4 pr-8">
         <div
           className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
         >
