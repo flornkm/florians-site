@@ -46,10 +46,13 @@ export const Chat = () => {
   }, [status, chatEvents]);
 
   return (
-    <div className="w-full h-full min-h-0 overflow-hidden flex flex-col pb-16">
+    <div className="w-full lg:mt-0 mt-52 h-full relative z-10 min-h-0 overflow-hidden flex flex-col pb-16">
       <div
         ref={scrollContainerRef}
-        className="flex-1 lg:px-0 px-8 min-h-0 overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-neutral-200 scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2"
+        className={cn(
+          "flex-1 lg:px-0 px-8 min-h-0 transition-all overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-neutral-200 scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2",
+          messages.length > 0 && "backdrop-blur-2xl lg:backdrop-blur-none",
+        )}
       >
         {messages.map((message) => (
           <Body1
