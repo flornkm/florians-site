@@ -121,7 +121,6 @@ export const Chat = () => {
           disabled={status !== "ready"}
           placeholder="Contact my clone…"
           required
-          autoFocus
         />
         <Button
           type="submit"
