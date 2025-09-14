@@ -46,7 +46,7 @@ export const Chat = () => {
   }, [status, chatEvents]);
 
   return (
-    <div className="w-full lg:mt-0 mt-52 h-full relative z-10 overflow-hidden flex flex-col pb-16 min-h-96">
+    <div className="w-full lg:mt-0 landscape:mt-0 landscape:md:pb-16 landscape:pb-0 mt-52 h-full relative z-10 min-h-0 overflow-hidden flex flex-col pb-16">
       <div
         ref={scrollContainerRef}
         className={cn(
