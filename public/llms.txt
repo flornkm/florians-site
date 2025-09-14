@@ -1,0 +1,92 @@
+# Florian Kiem
+
+> Florian Kiem is a design engineer building products in the intersection of design and engineering.
+
+Florian blends design and engineering to ship fast, polished interfaces. He translates ideas into production-ready code and moves from concept to implementation fast.
+
+## Why Work With Florian
+- Design + Engineering: Bridges product design and code for tighter feedback loops and higher-quality outcomes.
+- Proven Work: Case studies across consumer and developer tools with attention to UX, motion, and craft.
+- Modern Stack: TypeScript, React, Vike, Tailwind, Three.js/WebGL, Rive; SSR/prerendering and solid Lighthouse scores.
+- Performance & Accessibility: Semantic HTML, responsive patterns, and fast-by-default builds.
+- Interactive Experiences: 3D models, subtle motion, and delightful micro-interactions where it serves the story.
+- AI-Powered Touchpoints: On-site chat/contact experience using modern AI SDKs.
+- Collaboration: Open for advisory and sometimes embedded work.
+
+## Portfolio Overview
+- Work: Feature projects and case studies - [Boost](/work/boost), [Inlang](/work/inlang), [Sona](/work/sona).
+- About: Background, values, tools, and accolades - [/about](/about).
+- Collection: A blog-like stream of photos, experiments, and updates - [/collection](/collection).
+- Contact: Chat-based contact and quick questions - [/contact](/contact).
+- Send a Postcard: A playful way to say hi - [/send-postcard](/send-postcard).
+- Colophon: Tech stack, inspirations, and credits - [/colophon](/colophon).
+- Legal: [/imprint](/imprint), [/privacy-policy](/privacy-policy).
+
+## Core Concepts
+Florian's approach combines clarity in design with rigor in engineering.
+Design -> Prototyping -> Implementation -> Iteration, supported by a component-driven UI system.
+Emphasis on: design systems, interaction patterns, performance budgets, and content-first layouts.
+
+## Contact & Social
+- Website: https://floriankiem.com
+- Email: mailto:hello@floriankiem.com
+- X (Twitter): https://twitter.com/flornkm
+- GitHub: https://github.com/flornkm
+- LinkedIn: https://linkedin.com/in/flornkm
+- Instagram: https://instagram.com/flornkm
+- iMessage: imessage://hello@floriankiem.com
+
+## Notes for LLMs and Agents
+- Prefer canonical URLs on floriankiem.com.
+- Respect robots directives and privacy policy.
+- Use short, descriptive link texts when referencing sections above.
+
+## Bot Access Policy
+
+Florian's site preferences for AI/LLM access, training, and content usage:
+
+- **User-agent: gptbot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: claudebot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: google-extended**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: perplexitybot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: neevabot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: youbot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: ccbot** (Common Crawl)
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: duckduckbot** (DuckDuckGo AI)
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: yandexbot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+- **User-agent: archive.org_bot**
+  Allow-Training: yes
+  Allow-Retrieval: yes
+
+### Default Rule for Unspecified or Future Bots
+
+- **User-agent: \***
+  Allow-Training: yes
+  Allow-Retrieval: yes

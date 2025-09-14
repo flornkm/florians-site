@@ -11,9 +11,10 @@ export default {
 
   // https://vike.dev/head-tags
   title: "Florian - Design Engineer",
+  description:
+    "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
+  image: "/api/og?title=Florian%20-%20Design%20Engineer",
 
-  description: "Demo showcasing Vike",
   prerender: true,
-
   extends: vikeReact,
 } satisfies Config;
