@@ -27,19 +27,21 @@ export default function Page() {
       <div className="mb-16">
         <H1>Colophon</H1>
       </div>
-      <div className="flex md:flex-col bg-black dark:bg-white z-20 rounded-[10px] mx-auto sticky w-fit top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 shadow-xl">
-        <div className="flex gap-0.5 p-0.5">
-          <Link
-            href="https://github.com/flornkm/florians-site"
-            target="_blank"
-            className={cn(
-              buttonVariants({ variant: "tertiary" }),
-              "flex items-center px-2 py-0.5 gap-2 text-white group dark:text-black dark:hover:bg-black dark:hover:text-white",
-            )}
-          >
-            <IconGithub className="size-4" />
-            Open Source Repo
-          </Link>
+      <div className="w-full z-20 md:max-w-[calc(100%-27rem)] justify-self-end space-y-2 sticky top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 ">
+        <div className="flex md:flex-col bg-black dark:bg-white rounded-[10px] mx-auto w-fit shadow-xl">
+          <div className="flex gap-0.5 p-0.5">
+            <Link
+              href="https://github.com/flornkm/florians-site"
+              target="_blank"
+              className={cn(
+                buttonVariants({ variant: "tertiary" }),
+                "flex items-center px-2 py-0.5 gap-2 text-white group dark:text-black dark:hover:bg-black dark:hover:text-white",
+              )}
+            >
+              <IconGithub className="size-4" />
+              Open Source Repo
+            </Link>
+          </div>
         </div>
       </div>
       <section className="w-full relative min-h-screen">
