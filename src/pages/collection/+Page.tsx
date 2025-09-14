@@ -103,14 +103,14 @@ export default function Page() {
                 key={item.slug}
                 className={cn(
                   "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-black dark:border-neutral-800 shadow-xl shadow-black/[.05] rounded-2xl p-8 border border-neutral-200",
-                  isTransitioning ? "dark:bg-black" : "dark:bg-neutral-950",
+                  isTransitioning ? "dark:bg-black mt-10 md:mt-8" : "dark:bg-neutral-950",
                 )}
               >
                 <Button
                   onClick={() => handleOpen(index)}
                   className={cn(
                     "absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-                    isTransitioning && "top-12 rotate-180",
+                    isTransitioning && "top-12 rotate-180 right-2 md:right-6",
                   )}
                   variant="secondary"
                 >
