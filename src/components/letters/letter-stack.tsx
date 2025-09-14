@@ -140,7 +140,7 @@ export function LetterStack() {
 
   if (letterOrder.length === 0)
     return (
-      <div className="aspect-a4 my-8 max-w-[450px] w-full md:h-80 flex justify-center items-center border border-dashed rounded-lg border-neutral-200 dark:border-neutral-800">
+      <div className="aspect-a4 mx-auto my-8 max-w-[450px] w-full md:h-80 flex justify-center items-center border border-dashed rounded-lg border-neutral-200 dark:border-neutral-800">
         <Body1 className="text-neutral-500 dark:text-neutral-400">No letters available.</Body1>
       </div>
     );
