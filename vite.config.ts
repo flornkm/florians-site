@@ -8,6 +8,7 @@ import { defineConfig } from "vite";
 import { returnContent } from "./src/lib/convert";
 
 const BASE_URL = "https://floriankiem.com" as const;
+const EXCLUDED = ["/imprint/", "/privacy-policy/"];
 
 const [projects, items] = await Promise.all([returnContent("work"), returnContent("collection")]);
 
@@ -22,13 +23,15 @@ export default defineConfig({
       pagesDir: path.resolve(__dirname, "./src/pages"),
       defaultChangefreq: "monthly",
       sitemapGenerator: (entries) => {
+        const excluded = EXCLUDED.map((url) => new URL(url, BASE_URL).href);
+        const filtered = entries.filter((e) => !excluded.includes(e.loc));
         const dynamicEntries = [...projects, ...items].map((e) => ({
-          loc: new URL(e.url, BASE_URL).href,
+          loc: new URL(e.url + "/", BASE_URL).href,
           priority: 0.5,
           lastmod: new Date().toISOString(),
           changefreq: "monthly",
         }));
-        return [...entries, ...dynamicEntries] as SitemapEntry[];
+        return [...filtered, ...dynamicEntries] as SitemapEntry[];
       },
     }),
   ],
