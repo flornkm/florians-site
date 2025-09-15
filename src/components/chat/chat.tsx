@@ -10,7 +10,7 @@ import Button from "../ui/button";
 import Input from "../ui/input";
 import { useChatActionEvents, useChatStatusEvents } from "./chat-status";
 
-const RECOMMENDATIONS = ["How can I contact you?", "What are you currently working on?", "How did you learn to code?"];
+const RECOMMENDATIONS = ["How can I contact you?", "Please jump up!"];
 
 export const Chat = () => {
   const [input, setInput] = useState("");
