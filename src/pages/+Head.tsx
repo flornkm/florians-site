@@ -3,7 +3,9 @@
 import darkFavicon from "@public/images/icons/favicon-dark.ico";
 import lightFavicon from "@public/images/icons/favicon.ico";
 
-export default function HeadDefault() {
+// https://vike.dev/Head (+Head setting)
+// Must export a named `Head`, not a default export
+export function Head() {
   return (
     <>
       {import.meta.env.DEV && <script crossOrigin="anonymous" src="//unpkg.com/react-scan/dist/auto.global.js" />}

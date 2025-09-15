@@ -87,9 +87,44 @@ export async function convertMarkdownToHtml(url: string): Promise<string | boole
   return convertedHTML;
 }
 
-export async function returnContent(category: "work" | "collection") {
+export type ContentEntry = {
+  slug: string;
+  url: string;
+  short: boolean;
+} & Record<string, string | boolean>;
+
+export type WorkEntry = ContentEntry & {
+  title: string;
+  description: string;
+  cover: string;
+  date: string;
+  collaborators?: string | string[];
+  links?: string | string[];
+};
+
+export type CollectionEntry = ContentEntry & {
+  title: string;
+  description: string;
+  type: string;
+  collaborators?: string | string[];
+};
+
+export function isWorkEntry(entry: ContentEntry): entry is WorkEntry {
+  return (
+    typeof entry.title === "string" &&
+    typeof entry.description === "string" &&
+    typeof entry.cover === "string" &&
+    typeof entry.date === "string"
+  );
+}
+
+export function isCollectionEntry(entry: ContentEntry): entry is CollectionEntry {
+  return typeof entry.title === "string" && typeof entry.description === "string" && typeof entry.type === "string";
+}
+
+export async function returnContent(category: "work" | "collection"): Promise<ContentEntry[]> {
   const contentRoot = "./src/content/" + category;
-  const tableOfContents = [];
+  const tableOfContents: ContentEntry[] = [];
 
   const files = await readdir(contentRoot);
 
@@ -97,12 +132,11 @@ export async function returnContent(category: "work" | "collection") {
     const markdown = await readFile(`${contentRoot}/${file}`, "utf-8");
     const properties = markdown.match(/---(.*?)---/s)![1].split("\n");
 
-    const projectInfo = {};
+    const projectInfo: Record<string, string> = {};
     for (const property of properties) {
       if (property === "") continue;
       const key = property.split(": ")[0];
       const value = property.split(": ")[1];
-      // @ts-expect-error - This is a hack to get the project info
       projectInfo[key] = value;
     }
 

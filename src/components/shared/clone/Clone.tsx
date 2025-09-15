@@ -131,7 +131,7 @@ export function Clone() {
   }, []);
 
   return (
-    <div className="lg:h-full h-[512px] w-full">
+    <div className="lg:h-full h-[512px] w-full mask-r-from-95% mask-r-to-100% lg:mask-r-none">
       <Canvas
         camera={{ position: [-1.44, 1.8, -3.44], fov: 45, near: 0.1, far: 1000 }}
         style={{ background: "transparent", opacity: sceneOpacity }}

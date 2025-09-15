@@ -18,26 +18,36 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
 
     const pretendardMedium = await readPublicFileAsArrayBuffer("fonts/pretendard/Pretendard-Medium.woff");
     const avatarDataUrl = await readPublicFileAsDataUrl("images/avatars/florian_kiem.jpg", "image/jpeg");
+    const background = await readPublicFileAsDataUrl("images/og-background.png", "image/png");
 
     const imageResponse = new ImageResponse(
       jsxs("div", {
-        tw: "bg-white flex w-full h-full flex-col text-black p-10",
+        tw: "bg-white flex w-full h-full flex-col text-black p-12",
         style: {
           fontFamily: "Pretendard, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
         },
         children: [
           jsx("img", {
-            tw: "rounded-full border border-neutral-200 object-cover",
-            alt: "Avatar",
-            src: avatarDataUrl,
-            width: 128,
-            height: 128,
+            tw: "absolute inset-0",
+            src: background,
           }),
           jsx("div", {
-            tw: "flex-1 flex flex-col justify-end items-start",
+            tw: "flex-1 flex justify-between gap-4 w-full relative z-10",
             children: [
-              jsx("p", { tw: "text-7xl", children: title }),
-              jsx("p", { tw: "text-5xl text-neutral-400", children: "Florians Personal Site" }),
+              jsx("img", {
+                tw: "rounded-full shrink-0 border border-neutral-200 object-cover",
+                alt: "Avatar",
+                src: avatarDataUrl,
+                width: 128,
+                height: 128,
+              }),
+              jsx("div", {
+                tw: "flex-1 flex flex-col w-full items-end",
+                children: [
+                  jsx("p", { tw: "text-7xl text-right", children: title }),
+                  jsx("p", { tw: "text-5xl text-neutral-400", children: "Florians Personal Site" }),
+                ],
+              }),
             ],
           }),
         ],

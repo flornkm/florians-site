@@ -1,6 +1,6 @@
+import { convertMarkdownToHtml, isWorkEntry, returnContent, type WorkEntry } from "@/lib/convert";
 import { useConfig } from "vike-react/useConfig";
 import type { PageContextServer } from "vike/types";
-import { convertMarkdownToHtml, returnContent } from "../../../markdown/convert";
 
 export type Data = Awaited<ReturnType<typeof data>>;
 
@@ -10,24 +10,23 @@ export const data = async (pageContext: PageContextServer) => {
 
   const projects = await returnContent("work");
 
-  const project = projects.find((project) => project.slug === pageContext.routeParams.id) as typeof project & {
-    title: string;
-    description: string;
-    cover: string;
-    collaborators: string | string[];
-    links: string | string[];
-    date: string;
-  };
+  const projectRaw = projects.find((p) => p.slug === pageContext.routeParams.id);
 
-  if (!project) {
+  if (!projectRaw) {
     throw new Error(`Project with ID ${pageContext.routeParams.id} not found`);
   }
+
+  if (!isWorkEntry(projectRaw)) {
+    throw new Error(`Project ${pageContext.routeParams.id} is missing required fields`);
+  }
+
+  const project: WorkEntry = projectRaw;
 
   // Only split if the properties are strings, otherwise set defaults
   if (typeof project.collaborators === "string") {
     project.collaborators = project.collaborators
       .split(",")
-      .map((item) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
+      .map((item: string) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
   } else if (!project.collaborators) {
     project.collaborators = [];
   }
@@ -35,14 +34,15 @@ export const data = async (pageContext: PageContextServer) => {
   if (typeof project.links === "string") {
     project.links = project.links
       .split(",")
-      .map((item) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
+      .map((item: string) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
   } else if (!project.links) {
     project.links = [];
   }
 
   config({
-    title: project.title,
+    title: `${project.title} • Florian - Design Engineer`,
     description: project.description,
+    image: `/api/og?title=${project.title}`,
   });
 
   // Convert the markdown to html

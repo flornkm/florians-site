@@ -1,5 +1,5 @@
+import { convertMarkdownToHtml, returnContent } from "@/lib/convert";
 import { PageContextServer } from "vike/types";
-import { convertMarkdownToHtml, returnContent } from "../../markdown/convert";
 
 export const data = async (_pageContext: PageContextServer) => {
   const items = await returnContent("collection");
