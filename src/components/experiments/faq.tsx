@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-export default function Page() {
+export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState(0);
   const faq = [
     {

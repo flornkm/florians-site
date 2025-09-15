@@ -1,6 +1,6 @@
 export { onBeforePrerenderStart };
 
-import { returnContent } from "../../../markdown/convert";
+import { returnContent } from "@/lib/convert";
 
 async function onBeforePrerenderStart() {
   const items = await returnContent("collection");

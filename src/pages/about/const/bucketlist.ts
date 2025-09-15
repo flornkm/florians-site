@@ -8,7 +8,7 @@ export const BUCKETLIST = [
     completed: true,
   },
   {
-    title: "Live in big city",
+    title: "Live in a big city",
     completed: true,
   },
   {

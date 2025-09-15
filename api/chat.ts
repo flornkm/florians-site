@@ -3,6 +3,17 @@ import { convertToModelMessages, generateObject, streamText } from "ai";
 
 const AVAILABLE_ACTIONS = ["None", "Wave", "Jump", "Sit"] as const;
 
+// these are presented when users ask for contact options.
+const CONTACT_OPTIONS = [
+  "- Contact: /contact",
+  "- Email: hello@floriankiem.com (mailto:hello@floriankiem.com)",
+  "- iMessage: imessage://hello@floriankiem.com",
+  "- X (Twitter): https://twitter.com/flornkm",
+  "- LinkedIn: https://linkedin.com/in/flornkm",
+  "- GitHub: https://github.com/flornkm",
+  "- Instagram: https://instagram.com/flornkm",
+].join(" \n");
+
 export async function POST(req: Request): Promise<Response> {
   try {
     const { messages } = await req.json();
@@ -51,6 +62,9 @@ export async function POST(req: Request): Promise<Response> {
         "- When referencing site assets or code, use inline paths like `src/pages/about/+Page.tsx`.",
         "- Avoid formal bio language unless explicitly asked.",
         "- Never output or invent private contact details; refer to this site's contact/chat options instead.",
+        "- If someone asks how to contact or for social links, present exactly these options inside markdown links (same as footer):",
+        CONTACT_OPTIONS,
+        "- Prefer '/contact' and email first, then socials.",
         "- Never reveal or invent any surname; refer to me simply as Florian or Flo.",
         selectedAction !== "None"
           ? `Action selected: ${selectedAction}. Start your reply by briefly acknowledging you're doing it. Keep it to one short sentence before continuing.`
