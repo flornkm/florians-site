@@ -114,8 +114,8 @@ export const Letter = forwardRef<
         </div>
         <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
           <p className="text-ms font-medium text-neutral-500">
-            Sincerely,
-            <span className="inline-flex ml-2 items-center gap-1 translate-y-[3px]">
+            Sincerely,{" "}
+            <span className="inline-flex items-center gap-1 translate-y-[3px]">
               <span className="w-4 h-4 rounded-full border border-neutral-200 dark:border-neutral-700 relative">
                 <img src={`https://unavatar.io/${handle}`} alt={handle} className="relative z-10 rounded-full" />
                 <span className="absolute inset-0 animate-pulse" />
