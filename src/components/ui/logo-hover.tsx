@@ -8,12 +8,13 @@ export const LogoHover = ({
     url: string;
     name: string;
     logo: string;
+    width: number;
   };
 }) => {
   return (
-    <div className="group w-28 shrink-0 relative">
+    <div className="group flex items-center h-10 max-w-28 w-full shrink-0 relative">
       <Link
-        className="absolute line-clamp-1 z-10 cursor-pointer inset-0 text-center text-neutral-500 opacity-0 group-hover:opacity-100 blur-[2px] transition-all group-hover:blur-none"
+        className="absolute top-1/2 -translate-y-1/2 line-clamp-1 z-10 cursor-pointer inset-0 text-center text-neutral-500 opacity-0 group-hover:opacity-100 blur-[2px] transition-all group-hover:blur-none"
         href={entity.url}
         target="_blank"
       >
@@ -23,7 +24,10 @@ export const LogoHover = ({
       <img
         src={entity.logo}
         alt={entity.name}
-        className="h-6 opacity-50 mx-auto group-hover:blur-[2px] group-hover:opacity-10 transition-all dark:invert"
+        style={{
+          width: entity.width,
+        }}
+        className="opacity-50 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 mx-auto group-hover:blur-[2px] group-hover:opacity-10 transition-all dark:invert"
       />
     </div>
   );
