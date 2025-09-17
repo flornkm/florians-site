@@ -151,6 +151,7 @@ export default function Page() {
                   url: company.url,
                   name: company.name,
                   logo: company.logo,
+                  width: company.width,
                 }}
               />
             ))}
@@ -166,6 +167,7 @@ export default function Page() {
                   url: institution.url,
                   name: institution.name,
                   logo: institution.logo,
+                  width: institution.width,
                 }}
               />
             ))}
