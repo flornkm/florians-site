@@ -135,7 +135,7 @@ export function LetterStack() {
 
   if (!letters || isLoading)
     return (
-      <div className="aspect-a4 my-8 max-w-[450px] w-full md:h-80 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-lg"></div>
+      <div className="aspect-a4 my-8 mx-auto max-w-[450px] w-full md:h-80 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-lg"></div>
     );
 
   if (letterOrder.length === 0)
