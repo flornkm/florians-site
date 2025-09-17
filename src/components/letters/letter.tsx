@@ -103,7 +103,7 @@ export const Letter = forwardRef<
 
   return (
     <div ref={ref} className={letterVariants({ variant, isEmpty, isDragging, className })} {...restProps}>
-      <div className="flex-1 max-w-1/2 flex flex-col h-full gap-4 pr-8">
+      <div className="flex-1 max-w-1/2 flex flex-col h-full gap-2 pr-8">
         <div
           className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
         >
@@ -112,7 +112,7 @@ export const Letter = forwardRef<
             {message}
           </p>
         </div>
-        <div className={cn("flex-1 flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
+        <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
           <p className="text-ms font-medium text-neutral-500">
             Sincerely,
             <span className="inline-flex ml-2 items-center gap-1 translate-y-[3px]">
