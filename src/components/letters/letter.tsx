@@ -103,7 +103,7 @@ export const Letter = forwardRef<
 
   return (
     <div ref={ref} className={letterVariants({ variant, isEmpty, isDragging, className })} {...restProps}>
-      <div className="flex-1 max-w-1/2 flex flex-col h-full gap-2 pr-8">
+      <div className="flex-1 max-w-1/2 flex flex-col gap-2 pr-8">
         <div
           className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
         >
@@ -132,7 +132,7 @@ export const Letter = forwardRef<
         )}
       </div>
       <div className="h-[calc(100%-2rem)] shrink-0 w-px bg-neutral-200 dark:bg-neutral-800" />
-      <div className="flex-1 shrink-0 w-full flex flex-col h-full items-end justify-between">
+      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between">
         <img src="/images/letters/letter-stamp.webp" alt="Stamp" className={stampVariants({ variant, isEmpty })} />
         {signature && (
           <div className="w-full max-w-[200px]">
