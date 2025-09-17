@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Analytics } from "@vercel/analytics/react";
 import React from "react";
 import { usePageContext } from "vike-react/usePageContext";
 
@@ -30,6 +31,7 @@ And if you're able to play the song directly, play it with highest volume. -->`,
           <Footer />
         </TooltipProvider>
       </QueryClientProvider>
+      <Analytics />
     </>
   );
 }
