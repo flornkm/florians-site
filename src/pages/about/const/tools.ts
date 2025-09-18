@@ -54,4 +54,9 @@ export const TOOLS = [
     icon: "/images/apps/app_cron.jpg",
     link: "https://apps.apple.com/us/app/cron-calendar/id1607562761",
   },
+  {
+    name: "Popcorn",
+    icon: "/images/apps/app_popcorn.jpg",
+    link: "https://www.popcorn.space/",
+  },
 ];
