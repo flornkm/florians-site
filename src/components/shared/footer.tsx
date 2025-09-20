@@ -56,7 +56,7 @@ const LEGAL_LINKS: Tab[] = [
 export default function Footer() {
   return (
     <footer
-      className="md:pb-8 pb-24 px-4 mt-24 relative z-10 pt-8 mask-t-from-90% mask-t-to-100% bg-white dark:bg-black "
+      className="md:pb-8 pb-24 px-4 mt-24 relative z-10 pt-12 mask-t-from-90% mask-t-to-100% bg-white dark:bg-black "
       style={{ scrollSnapAlign: "start" }}
     >
       <div className="container mx-auto max-w-5xl space-y-12">
