@@ -1,4 +1,4 @@
-export type CollectionItemType = "post" | "photo" | "insight" | "experim  ";
+export type CollectionItemType = "post" | "photo" | "insight" | "experiment" | "project";
 
 export type CollectionItem = {
   title: string;
@@ -8,21 +8,4 @@ export type CollectionItem = {
   content?: string;
   type: CollectionItemType;
   source?: string;
-} & (
-  | {
-      type: "photo";
-      source: string;
-    }
-  | {
-      type: "post";
-      source?: never;
-    }
-  | {
-      type: "insight";
-      source?: never;
-    }
-  | {
-      type: "experiment";
-      source?: never;
-    }
-);
+};
