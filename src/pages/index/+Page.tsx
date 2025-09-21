@@ -40,8 +40,8 @@ export default function Page() {
               className="w-full md:grid grid-cols-[290px_1fr] items-start group/item hover:opacity-100 group-hover/section:opacity-30 transition-opacity duration-300 ease-out py-4"
             >
               <div className="flex flex-col gap-0.5 w-full items-start md:sticky top-16">
-                <H3 className="mb-1">{project.title}</H3>
-                <Body2 className="mb-2 text-neutral-500">{project.description}</Body2>
+                <H3>{project.title}</H3>
+                <Body2 className="mb-5 md:mb-3 text-neutral-500">{project.description}</Body2>
                 <p className="items-center pointer-events-none hidden lg:flex gap-1 group-hover/item:opacity-100 group-hover/item:ml-0 group-hover/item:blur-none opacity-0 -ml-2 blur-[1px] transition-all duration-300 ease-out focus:hidden group-focus/item:hidden">
                   <TriangleFilled className="w-4 h-4 inline-block" />
                   <span className="text-ms font-medium inline-block">Click to open</span>
