@@ -70,7 +70,7 @@ export default function Page() {
               <svg viewBox="0 0 100 50" width="100%" height="100">
                 <path id="titleCurve" d="M0,35 C20,64 80,60 100,35" fill="transparent" />
                 <text className="fill-neutral-800 dark:fill-white text-lg font-semibold pointer-events-auto">
-                  <textPath role="h1" xlinkHref="#titleCurve" startOffset="29%" textAnchor="middle" className="text-ms">
+                  <textPath role="h1" xlinkHref="#titleCurve" startOffset="28%" textAnchor="middle" className="text-ms">
                     About Flo
                   </textPath>
                 </text>
@@ -81,15 +81,15 @@ export default function Page() {
             </div>
           </div>
           <div className="flex flex-col gap-2 max-w-xl shrink-0 items-start">
-            <Body2 className="mb-2">
+            <Body2 className="mb-2 text-balance text-neutral-500">
               Many designers are writing about similar desires. So I just write my current thinking about the state of
               design and engineering down, and what benefits and joy it brings to me.
             </Body2>
-            <Body2 className="mb-4">
+            <Body2 className="mb-4 text-balance text-neutral-500">
               As a design engineer, my biggest strength is to translate design into code. Working in the intersection of
               those two worlds truly feels special. It doesn't only make companies more efficient by making iteration
               cycles smaller, but also helps the handoff between both teams to heal long-term, eventually resulting in
-              better products and faster shipping.
+              better products.
             </Body2>
           </div>
           <div className="md:grid grid-cols-2 gap-8">
@@ -133,14 +133,14 @@ export default function Page() {
                   )}
                 </div>
                 <H3 className="text-left">{step.title}</H3>
-                <Body2> {step.description}</Body2>
+                <Body2 className="text-neutral-500">{step.description}</Body2>
               </div>
             ))}
           </div>
         </section>
         <section className="w-full flex flex-col justify-center">
           <H2 className="text-left mb-2">Past</H2>
-          <Body2 className="max-w-xl mb-4">
+          <Body2 className="max-w-xl mb-4 text-neutral-500">
             I'm very thankful for the opportunities I had in the past to work together with some of the most talented
             teams, learning from them and working on truly great products:
           </Body2>
@@ -156,9 +156,9 @@ export default function Page() {
               />
             ))}
           </HorizontalScroll>
-          <Body2 className="max-w-xl mb-4">
+          <Body2 className="max-w-xl mb-4 text-neutral-500">
             A lot of the things I learned comes from practice which I was able to apply to my own projects at these
-            institutions:
+            universities:
           </Body2>
           <HorizontalScroll>
             {INSTITUTIONS.map((institution) => (
