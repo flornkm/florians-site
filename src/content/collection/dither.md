@@ -13,7 +13,9 @@ Developers needed to implement custom WebGL shaders to achieve the desired effec
 
 For me, it always felt unsettling – like it is too much tech debt in a way.
 
+<div class="dark:invert">
 <div class="dither w-full h-40 bg-gradient-to-t from-neutral-500 to-neutral-900"></div>
+</div>
 
 So while flying to SF I had 11 hours of time to think about a solution.
 

@@ -6,7 +6,7 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { navigate } from "vike/client/router";
 import { CollectionItem } from "./types";
@@ -16,6 +16,9 @@ export default function Page() {
   const pageContext = usePageContext();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const sectionsRef = useRef<HTMLElement[] | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const baseTopRef = useRef<number>(0);
 
   const items = pageContext.data as CollectionItem[];
   const isMobile = width! < 768;
@@ -23,31 +26,48 @@ export default function Page() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Enable scroll snapping on the html element
     document.documentElement.style.scrollSnapType = "y mandatory";
     document.documentElement.style.scrollBehavior = "smooth";
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute("data-index") || "0");
-            setActiveIndex(index);
-          }
-        });
-      },
-      {
-        threshold: 0.5,
-        rootMargin: "-10% 0px -10% 0px",
-      },
-    );
+    sectionsRef.current = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-section]"));
 
-    const sections = document.querySelectorAll("[data-scroll-section]");
-    sections.forEach((section) => observer.observe(section));
+    const computeBaseTop = () => {
+      const first = sectionsRef.current?.[0] || null;
+      baseTopRef.current = first ? first.getBoundingClientRect().top + window.scrollY : 0;
+    };
+
+    const updateActiveIndex = () => {
+      rafIdRef.current = null;
+      const sections = sectionsRef.current || [];
+      if (!sections.length) return;
+      const base = baseTopRef.current || 0;
+      const raw = (window.scrollY - base) / window.innerHeight;
+      const idx = Math.round(raw);
+      const clamped = Math.max(0, Math.min(sections.length - 1, idx));
+      setActiveIndex((prev) => (prev === clamped ? prev : clamped));
+    };
+
+    const onScroll = () => {
+      if (rafIdRef.current != null) return;
+      rafIdRef.current = window.requestAnimationFrame(updateActiveIndex);
+    };
+    const onResize = () => {
+      if (rafIdRef.current != null) cancelAnimationFrame(rafIdRef.current);
+      computeBaseTop();
+      rafIdRef.current = window.requestAnimationFrame(updateActiveIndex);
+    };
+
+    onResize();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
 
     return () => {
-      observer.disconnect();
-      // Clean up scroll snap styles
+      if (rafIdRef.current != null) cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+      sectionsRef.current = null;
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+
       document.documentElement.style.scrollSnapType = "";
       document.documentElement.style.scrollBehavior = "";
     };
