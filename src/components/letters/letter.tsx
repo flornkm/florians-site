@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 
 const letterVariants = cva(
-  "aspect-a4 shrink-0 w-full shadow-2xl shadow-black/5 active:cursor-grabbing mx-auto p-4 bg-white dark:bg-neutral-900 dark:border-neutral-800 rounded-xl border border-neutral-200 flex",
+  "aspect-a4 shrink-0 w-full shadow-2xl shadow-black/5 h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-white dark:bg-neutral-900 dark:border-neutral-800 rounded-xl border border-neutral-200 flex",
   {
     variants: {
       variant: {
@@ -103,13 +103,13 @@ export const Letter = forwardRef<
 
   return (
     <div ref={ref} className={letterVariants({ variant, isEmpty, isDragging, className })} {...restProps}>
-      <div className="flex-1 max-w-1/2 flex flex-col gap-2 pr-8">
+      <div className="flex-1 max-w-1/2 flex flex-col h-full gap-2 pr-8">
         <div
           className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
         >
           <p className="text-ms max-w-xs">
             <span className="font-semibold">Dear Website,</span> <br />
-            {message}
+            <span className="break-words">{message}</span>
           </p>
         </div>
         <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
@@ -131,7 +131,7 @@ export const Letter = forwardRef<
           </div>
         )}
       </div>
-      <div className="h-[calc(100%-2rem)] shrink-0 w-px bg-neutral-200 dark:bg-neutral-800" />
+      <div className="h-full shrink-0 w-px bg-neutral-200 dark:bg-neutral-800" />
       <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between">
         <img src="/images/letters/letter-stamp.webp" alt="Stamp" className={stampVariants({ variant, isEmpty })} />
         {signature && (
