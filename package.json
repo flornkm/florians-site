@@ -5,7 +5,7 @@
     "build": "vike build",
     "start": "vike preview",
     "lint": "eslint .",
-    "install-icons": "dotenv -- pnpm add central-icons@npm:@central-icons-react/round-outlined-radius-1-stroke-2"
+    "install-icons": "dotenv -- bun add central-icons@npm:@central-icons-react/round-outlined-radius-1-stroke-2"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.30",
