@@ -54,20 +54,41 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // adjust selector when clicking a link
   useEffect(() => {
-    if (!activeLink) return;
+    if (!activeLink || typeof document === "undefined") return;
 
-    const activeLinkElement = tabsRef.current.get(activeLink.href);
-    const selector = selectorRef.current;
+    let cancelled = false;
 
-    if (activeLinkElement && selector) {
-      const { width, left } = activeLinkElement.getBoundingClientRect();
-      const parentLeft = activeLinkElement.parentElement?.getBoundingClientRect().left || 0;
+    const positionSelector = () => {
+      const activeLinkElement = tabsRef.current.get(activeLink.href);
+      const selector = selectorRef.current;
 
-      selector.style.width = `${width}px`;
-      selector.style.left = `${left - parentLeft}px`;
-    }
+      if (activeLinkElement && selector) {
+        const { width, left } = activeLinkElement.getBoundingClientRect();
+        const parentLeft = activeLinkElement.parentElement?.getBoundingClientRect().left || 0;
+
+        selector.style.width = `${width}px`;
+        selector.style.left = `${left - parentLeft}px`;
+      }
+    };
+
+    const waitForFontsAndPosition = async () => {
+      try {
+        if (document.fonts?.ready) {
+          await document.fonts.ready;
+        }
+      } catch {
+        // no-op: fallback to immediate positioning
+      }
+      if (!cancelled) positionSelector();
+    };
+
+    positionSelector();
+    void waitForFontsAndPosition();
+
+    return () => {
+      cancelled = true;
+    };
   }, [urlPathname, activeLink]);
 
   // adjust selector when resizing window

@@ -20,17 +20,19 @@ export default function Page() {
     <div className="w-full">
       <Section as="div" className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div className="flex-1 shrink-0">
-          <div className="flex items-center gap-3 mb-2">
-            <Link href="/" className="w-auto flex items-center gap-1 text-ms font-medium group/link">
-              <IconChevronLeft className="w-4 h-4" />
-              <span className="group-hover/link:visible blur-[1px] group-hover/link:blur-none invisible truncate -ml-2 opacity-0 group-hover/link:opacity-100 group-hover/link:ml-0 max-w-0 group-hover/link:max-w-20 transition-all duration-500 ease-out focus:hidden group-focus/link:hidden">
-                Go back
-              </span>
-            </Link>
-            <H1>
-              {project.title} <span className="text-neutral-400 text-ms">{project.date.split("/")[1]}</span>
-            </H1>
-          </div>
+          <Link href="/" className="w-auto flex items-start text-ms font-medium gap-2 mb-2 group/link">
+            <IconChevronLeft className="w-4 h-4 mt-1.5" />
+            <div className="flex-1 h-7">
+              <div className="group-hover/link:translate-y-[-25.5px] transition-all duration-200 ease-out pointer-events-none">
+                <H1 className="group-hover/link:blur-[1px] group-hover/link:opacity-0 transition-all duration-200 ease-out">
+                  {project.title} <span className="text-neutral-400 text-ms">{project.date.split("/")[1]}</span>
+                </H1>
+                <span className="blur-[1px] group-hover/link:blur-none truncate opacity-0 group-hover/link:opacity-100 group-active/link:opacity-100 transition-all duration-200 ease-out focus:hidden group-focus/link:hidden">
+                  Go back
+                </span>
+              </div>
+            </div>
+          </Link>
           <Body2 className="mb-4">{project.description}</Body2>
           <div className="flex mb-8 select-none">
             {project.collaborators?.map((collaborator: string, index: number) => (

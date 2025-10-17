@@ -1,7 +1,7 @@
 import { Body2, Body3, Body4 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import { IconAspectRatio11 } from "central-icons/IconAspectRatio11";
-import { IconSquareCheck } from "central-icons/IconSquareCheck";
+import { IconCheckmark2Small } from "central-icons/IconCheckmark2Small";
 import { useRef } from "react";
 import type { GlobeMethods } from "react-globe.gl";
 
@@ -217,9 +217,9 @@ export default function Page() {
                 {BUCKETLIST.filter((item) => item.completed).map((item) => (
                   <li className="flex items-start gap-1.5 text-neutral-400">
                     {item.completed ? (
-                      <IconSquareCheck className="shrink-0" />
+                      <IconCheckmark2Small className="shrink-0" />
                     ) : (
-                      <IconAspectRatio11 className="shrink-0" />
+                      <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
                     )}
                     <Body2 className="font-medium">{item.title}</Body2>
                   </li>
@@ -229,9 +229,9 @@ export default function Page() {
                 {BUCKETLIST.filter((item) => !item.completed).map((item) => (
                   <li className="flex items-start gap-1.5">
                     {item.completed ? (
-                      <IconSquareCheck className="shrink-0" />
+                      <IconCheckmark2Small className="shrink-0" />
                     ) : (
-                      <IconAspectRatio11 className="shrink-0" />
+                      <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
                     )}
                     <Body2 className="font-medium dark:text-white">{item.title}</Body2>
                   </li>
