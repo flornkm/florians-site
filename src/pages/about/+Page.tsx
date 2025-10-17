@@ -217,7 +217,7 @@ export default function Page() {
                 {BUCKETLIST.filter((item) => item.completed).map((item) => (
                   <li className="flex items-start gap-1.5 text-neutral-400">
                     {item.completed ? (
-                      <IconCheckmark2Small className="shrink-0" />
+                      <IconCheckmark2Small className="shrink-0 size-5 mt-px" />
                     ) : (
                       <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
                     )}
@@ -229,7 +229,7 @@ export default function Page() {
                 {BUCKETLIST.filter((item) => !item.completed).map((item) => (
                   <li className="flex items-start gap-1.5">
                     {item.completed ? (
-                      <IconCheckmark2Small className="shrink-0" />
+                      <IconCheckmark2Small className="shrink-0 size-5 mt-px" />
                     ) : (
                       <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
                     )}
