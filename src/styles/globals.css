@@ -152,6 +152,18 @@
   --spacing-col: 248px;
   --text-ms: 0.9375rem;
   --aspect-a4: 1.4142857143/1;
+  --animate-fade-in: fade-in 0.5s ease-out;
+
+  @keyframes fade-in {
+      0% {
+        filter: blur(1px);
+        opacity: 0;
+      }
+      100% {
+          filter: none;
+          opacity: 1;
+      }
+    }
 }
 
 html {

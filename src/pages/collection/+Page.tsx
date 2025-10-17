@@ -5,7 +5,7 @@ import Button from "@/components/ui/button";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
+import { IconExpand45 } from "central-icons/IconExpand45";
 import { useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { navigate } from "vike/client/router";
@@ -130,11 +130,16 @@ export default function Page() {
                   onClick={() => handleOpen(index)}
                   className={cn(
                     "absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-                    isTransitioning && "top-12 rotate-180 right-2 md:right-6",
+                    isTransitioning && "top-12 right-2 md:right-6",
                   )}
                   variant="secondary"
                 >
-                  <IconArrowUpRight className="w-4 h-4 shrink-0" />
+                  <IconExpand45
+                    className={cn(
+                      "w-4 h-4 shrink-0 transition-all duration-500",
+                      isTransitioning && "opacity-0 blur-[1px]",
+                    )}
+                  />
                 </Button>
                 <Body4 className="capitalize text-black dark:text-white mb-10 md:mb-4 font-mono">{item.type}</Body4>
                 <div className="w-full h-full flex items-start justify-center">

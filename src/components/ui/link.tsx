@@ -1,5 +1,13 @@
 import React from "react";
 
-export function Link(props: React.ComponentProps<"a">) {
-  return <a href={props.href} {...props} />;
-}
+type AnchorProps = React.ComponentPropsWithRef<"a">;
+
+export const Link = React.forwardRef<HTMLAnchorElement, AnchorProps>(function Link(
+  props,
+  ref,
+) {
+  const { href, ...rest } = props;
+  return <a ref={ref} href={href} {...rest} />;
+});
+
+Link.displayName = "Link";

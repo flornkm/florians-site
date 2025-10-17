@@ -1,3 +1,5 @@
+import { usePreventScroll } from "@/hooks/use-prevent-scroll";
+import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
@@ -46,6 +48,9 @@ function DraggableLetter({
     });
   };
 
+  // Prevent page scroll while dragging (mobile + iOS Safari)
+  usePreventScroll(isDragging);
+
   const handleMove = (clientX: number, clientY: number) => {
     if (!isDragging) return;
 
@@ -90,9 +95,11 @@ function DraggableLetter({
       style={{
         ...style,
         transform: `translate(${position.x}px, ${position.y}px) ${style?.transform || ""}`,
-        transition: isDragging ? "none" : "all 0.3s ease-out",
       }}
-      className="rounded-xl touch-manipulation md:max-w-[450px] aspect-a4 w-full"
+      className={cn(
+        "rounded-xl touch-manipulation md:max-w-[450px] aspect-a4 w-full",
+        isDragging ? "transition-none touch-none" : "transition-all ease-out",
+      )}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleEnd}

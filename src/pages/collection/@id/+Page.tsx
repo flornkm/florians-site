@@ -3,7 +3,7 @@ import Markdown from "@/components/shared/markdown.jsx";
 import { buttonVariants } from "@/components/ui/button.jsx";
 import { Link } from "@/components/ui/link.jsx";
 import { cn } from "@/lib/utils.js";
-import { IconArrowDownLeft } from "central-icons/IconArrowDownLeft";
+import { IconMinimize45 } from "central-icons/IconMinimize45";
 import { useData } from "vike-react/useData";
 import type { Data } from "./+data.js";
 
@@ -21,7 +21,7 @@ export default function Page() {
             "absolute top-0 right-6 w-8 h-8 rounded-full flex items-center justify-center",
           )}
         >
-          <IconArrowDownLeft className="w-4 h-4 shrink-0" />
+          <IconMinimize45 className="w-4 h-4 shrink-0 animate-fade-in" />
         </Link>
         <div className="w-full h-full flex items-center justify-center pt-0">
           <Markdown html={item.content || ""} className="max-w-lg w-full -mt-7" />
