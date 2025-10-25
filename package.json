@@ -44,7 +44,7 @@
     "signature_pad": "^4.1.6",
     "typescript": "^5.2.2",
     "vike": "^0.4.144",
-    "vite": "^4.0.3"
+    "vite": "^7.1.12"
   },
   "devDependencies": {
     "@inlang/cli": "^2.14.0",
