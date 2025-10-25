@@ -59,4 +59,7 @@ export default defineConfig(() => ({
       "preact/hooks",
     ],
   },
+  server: {
+    allowedHosts: true
+  },
 }))
