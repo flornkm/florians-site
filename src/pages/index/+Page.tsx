@@ -26,7 +26,7 @@ export default function Page() {
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <Section className="items-end md:mb-12">
           <H1 className="leading-tight md:mb-3 mb-10">
-            Designer by day, <br /> <span className="text-neutral-400 dark:text-neutral-500">Engineer by night</span>
+            Engineer by day, <br /> <span className="text-neutral-400 dark:text-neutral-500">Engineer by night</span>
           </H1>
           <div className="w-col md:flex items-center justify-center">
             <H2 className="mb-2.5">Latest Work</H2>
@@ -86,3 +86,4 @@ export default function Page() {
     </div>
   );
 }
+
