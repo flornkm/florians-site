@@ -34,7 +34,7 @@ const footerLinkVariants = cva(
 
 const MORE_LINKS: Tab[] = [
   { name: "Colophon", href: "/colophon" },
-  { name: "Postcard", href: "/send-postcard" },
+  { name: "Experiments", href: "/experiments" },
   { name: "Contact", href: "/contact" },
 ];
 
