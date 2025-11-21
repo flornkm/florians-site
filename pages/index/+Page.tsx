@@ -15,7 +15,7 @@ export default function Page({ projects }: { projects: any[] }) {
         Skip to content
       </a>
 
-      <main id="content" class="w-full" role="main">
+      <main id="content" class="w-full min-h-screen bg-red-600" role="main">
         <header class="w-full pb-4 md:mb-8">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
             {/* Name + Role */}
@@ -46,7 +46,7 @@ export default function Page({ projects }: { projects: any[] }) {
           <Work projects={projects} />
         </section>
 
-        <section class="w-full bg-neutral-100 dark:bg-[#101010] mb-12">
+        <section class="w-full mb-12">
           {/* Provide an accessible name for the letters section without adding visual noise */}
           <h2 class="sr-only">Letters</h2>
           <Letters />
