@@ -100,7 +100,7 @@ export default function Page() {
     <div className="w-full">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div
-          className="bg-gradient-to-b from-white via-white dark:from-black dark:via-black to-transparent pt-12 pb-8 -mb-16 z-10 lg:h-72 h-48 flex md:items-center items-start"
+          className="bg-gradient-to-b from-bg-primary via-bg-primary to-transparent pt-12 pb-8 -mb-16 z-10 lg:h-72 h-48 flex md:items-center items-start"
           style={{ scrollSnapAlign: "start" }}
         >
           <H1 className="text-center mb-3 w-full">A blog, photos, experiments, and more updates</H1>
@@ -122,8 +122,8 @@ export default function Page() {
                 id={`collection-item-${item.slug}`}
                 key={item.slug}
                 className={cn(
-                  "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-white dark:bg-black dark:border-neutral-800 shadow-xl shadow-black/[.05] rounded-2xl p-8 border border-neutral-200",
-                  isTransitioning ? "dark:bg-black mt-10 md:mt-8" : "dark:bg-neutral-950",
+                  "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-bg-primary shadow-xl shadow-shadow-lg rounded-2xl p-8 border border-border-primary",
+                  isTransitioning ? "bg-bg-primary mt-10 md:mt-8" : "bg-surface-secondary",
                 )}
               >
                 <Button
@@ -141,7 +141,7 @@ export default function Page() {
                     )}
                   />
                 </Button>
-                <Body4 className="capitalize text-black dark:text-white mb-10 md:mb-4 font-mono">{item.type}</Body4>
+                <Body4 className="capitalize text-text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
                 <div className="w-full h-full flex items-start justify-center">
                   <div
                     className="w-full max-w-lg -mt-7"

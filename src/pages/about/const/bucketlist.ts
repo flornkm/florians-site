@@ -16,19 +16,15 @@ export const BUCKETLIST = [
     completed: true,
   },
   {
-    title: "Move to the US",
-    completed: false,
+    title: "Move away from Europe",
+    completed: true,
   },
   {
     title: "Visit Asia",
     completed: false,
   },
   {
-    title: "Build an own hardware product",
-    completed: false,
-  },
-  {
-    title: "Plant an olive tree",
+    title: "Get 100k+ weekly downloads on npm",
     completed: false,
   },
 ];

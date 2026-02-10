@@ -1,4 +1,4 @@
-import { Body2, Body3, Body4 } from "@/components/design-system/body";
+import { Body2, Body3 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import { IconAspectRatio11 } from "central-icons/IconAspectRatio11";
 import { IconCheckmark2Small } from "central-icons/IconCheckmark2Small";
@@ -6,14 +6,12 @@ import { useRef } from "react";
 import type { GlobeMethods } from "react-globe.gl";
 
 import countriesData from "@/assets/data/countries.json";
+import Section from "@/components/shared/section";
 import { SmartVideo } from "@/components/shared/smart-video";
-import { buttonVariants } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 import { Link } from "@/components/ui/link";
 import { LogoHover } from "@/components/ui/logo-hover";
-import { cn } from "@/lib/utils";
-import IconArrowUpRight from "central-icons/IconArrowUpRight";
 import { BUCKETLIST } from "./const/bucketlist";
 import { COMPANIES } from "./const/companies";
 import { INSTITUTIONS } from "./const/institutions";
@@ -58,61 +56,51 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="w-full max-w-5xl mx-auto px-4 md:px-0 space-y-16">
-        <section className="flex flex-col items-start gap-4 mb-12">
-          <div className="pb-8 w-full relative mb-4">
-            <div className="-mb-8 ml-1.5 border border-neutral-200 dark:border-neutral-900 rounded-full w-28 aspect-square overflow-hidden">
-              <img
-                src="/images/avatars/florian_kiem.webp"
-                className="w-full rounded-full transition-all duration-300 ease-out"
-              />
-            </div>
-            <div className="absolute pointer-events-none -bottom-11 h-full w-32">
-              <svg viewBox="0 0 100 50" width="100%" height="100">
-                <path id="titleCurve" d="M0,35 C20,64 80,60 100,35" fill="transparent" />
-                <text className="fill-neutral-800 dark:fill-white text-lg font-semibold pointer-events-auto">
-                  <textPath role="h1" xlinkHref="#titleCurve" startOffset="28%" textAnchor="middle" className="text-ms">
-                    About Flo
-                  </textPath>
-                </text>
-              </svg>
-              <H1 className="text-[19px] w-64 absolute bottom-[16px] left-[76px] pointer-events-auto">
-                rian: <span className="text-neutral-400">An Introduction</span>
-              </H1>
+        <Section className="grid-cols-[412px_1fr] gap-4 mb-12">
+          {/* Left Column: Avatar + Headline + Interview Link */}
+          <div className="flex flex-col items-start w-full">
+            <div className="pb-8 w-full relative mb-8">
+              <div className="-mb-8 ml-1.5 border border-border-primary rounded-full w-28 aspect-square overflow-hidden">
+                <img
+                  src="/images/avatars/florian_kiem.webp"
+                  className="w-full rounded-full transition-all duration-300 ease-out"
+                />
+              </div>
+              <div className="absolute pointer-events-none -bottom-11 h-full w-32 overflow-visible">
+                <svg viewBox="0 0 100 50" width="100%" height="100" overflow="visible" style={{ overflow: "visible" }}>
+                  <path id="titleCurve" d="M0,35 C20,64 80,60 100,35" fill="transparent" />
+                  <text className="fill-text-primary text-lg font-semibold pointer-events-auto">
+                    <textPath
+                      role="h1"
+                      xlinkHref="#titleCurve"
+                      startOffset="28%"
+                      textAnchor="middle"
+                      className="text-ms"
+                    >
+                      About Flo
+                    </textPath>
+                  </text>
+                </svg>
+                <H1 className="text-[19px] w-64 absolute bottom-[16px] left-[75px] pointer-events-auto">
+                  rian: <span className="text-text-quaternary">An Introduction</span>
+                </H1>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2 max-w-xl shrink-0 items-start">
-            <Body2 className="mb-2 text-balance text-neutral-500">
+          {/* Right Column: About Text */}
+          <div className="flex flex-col gap-2 shrink-0 items-start">
+            <Body2 className="mb-2 text-balance text-text-tertiary">
               Many designers are writing about similar desires. So I just write my current thinking about the state of
               design and engineering down, and what benefits and joy it brings to me.
             </Body2>
-            <Body2 className="mb-4 text-balance text-neutral-500">
+            <Body2 className="text-balance text-text-tertiary">
               As a design engineer, my biggest strength is to translate design into code. Working in the intersection of
               those two worlds truly feels special. It doesn't only make companies more efficient by making iteration
               cycles smaller, but also helps the handoff between both teams to heal long-term, eventually resulting in
               better products.
             </Body2>
           </div>
-          <div className="md:grid grid-cols-2 gap-8">
-            <Link
-              href="https://spaces.is/loversmagazine/interviews/florian-kiem"
-              target="_blank"
-              className={cn(
-                buttonVariants({ variant: "secondary" }),
-                "flex items-center gap-4 group rounded-lg p-2 pr-4",
-              )}
-            >
-              <img
-                src="/images/references/lovers-magazine-preview.webp"
-                alt="Lovers Magazine Preview"
-                className="w-6 rounded-sm shadow transition-all group-hover:scale-110 group-hover:-rotate-2"
-              />
-              <div className="flex items-center gap-2 truncate">
-                <Body2 className="font-medium dark:text-white truncate">Interview with Lovers Magazine</Body2>
-                <IconArrowUpRight className="w-4 h-4 inline ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 ease-out" />
-              </div>
-            </Link>
-          </div>
-        </section>
+        </Section>
         <section className="w-full mb-16">
           <div className="w-full grid md:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
             {LIFE.map((step, index) => (
@@ -133,14 +121,14 @@ export default function Page() {
                   )}
                 </div>
                 <H3 className="text-left">{step.title}</H3>
-                <Body2 className="text-neutral-500">{step.description}</Body2>
+                <Body2 className="text-text-tertiary">{step.description}</Body2>
               </div>
             ))}
           </div>
         </section>
         <section className="w-full flex flex-col justify-center">
           <H2 className="text-left mb-2">Past</H2>
-          <Body2 className="max-w-xl mb-4 text-neutral-500">
+          <Body2 className="max-w-xl mb-4 text-text-tertiary">
             I'm very thankful for the opportunities I had in the past to work together with some of the most talented
             teams, learning from them and working on truly great products:
           </Body2>
@@ -156,7 +144,7 @@ export default function Page() {
               />
             ))}
           </HorizontalScroll>
-          <Body2 className="max-w-xl mb-4 text-neutral-500">
+          <Body2 className="max-w-xl mb-4 text-text-tertiary">
             A lot of the things I learned comes from practice which I was able to apply to my own projects at these
             universities:
           </Body2>
@@ -173,25 +161,73 @@ export default function Page() {
             ))}
           </HorizontalScroll>
         </section>
-        <section className="grid md:grid-cols-2">
-          <div className="mb-8 md:mb-0">
-            <H2 className="text-left mb-2">Countries visited</H2>
-            <div className="flex items-center gap-2">
-              <div className="bg-rose-500 rounded-sm size-3" />
-              <Body3 className="font-medium text-black">{VISITED_COUNTRIES.length} visited</Body3>
+        <section className="grid md:grid-cols-2 gap-4">
+          {/* Apps in Use - Bento Card */}
+          <div className="p-4 pb-0 bg-surface-secondary rounded-lg overflow-hidden">
+            <H2 className="text-left mb-4">Apps in use</H2>
+            <div className="rounded-[62px] aspect-[178/400] w-full relative mx-auto max-w-[320px] h-80">
+              <div className="absolute bg-[url('/images/empty-iphone-mockup-light.png')] dark:bg-[url('/images/empty-iphone-mockup-dark.png')] aspect-[178/400] w-full inset-0 bg-contain left-1/2 select-none -translate-x-1/2 top-0" />
+              <div className="absolute inset-0 px-4 py-16 max-w-[188px] mx-auto">
+                <div className="grid grid-cols-4 gap-1.5">
+                  {TOOLS.map((tool) => (
+                    <Link key={tool.name} href={tool.link} target="_blank" className="cursor-default">
+                      <div className="rounded-xl relative group">
+                        <img
+                          src={tool.icon}
+                          alt={tool.name}
+                          className="object-cover rounded-[8px] cursor-pointer border border-border-primary"
+                        />
+                        <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-bg-inverted opacity-0 rounded-xl inset-0 absolute" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="mask-radial-[45%_60%] overflow-hidden mask-radial-from-50% min-h-56 w-full flex items-center justify-center">
+          </div>
+          {/* Bucketlist - Bento Card */}
+          <div className="p-4 bg-surface-secondary rounded-lg">
+            <H2 className="text-left mb-2">Bucketlist</H2>
+            <div className="flex flex-col gap-6">
+              <ul className="space-y-2">
+                {BUCKETLIST.filter((item) => !item.completed).map((item) => (
+                  <li key={item.title} className="flex items-start gap-1.5">
+                    <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
+                    <Body2 className="font-medium text-text-primary">{item.title}</Body2>
+                  </li>
+                ))}
+              </ul>
+              <ul className="space-y-2">
+                {BUCKETLIST.filter((item) => item.completed).map((item) => (
+                  <li key={item.title} className="flex items-start gap-1.5 text-text-quaternary">
+                    <IconCheckmark2Small className="shrink-0 size-5 mt-px" />
+                    <Body2 className="font-medium">{item.title}</Body2>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+        {/* Countries Visited - Full Width with Larger Globe */}
+        <section className="w-full p-6 bg-surface-secondary rounded-lg -mt-12">
+          <div className="flex flex-col items-center">
+            <div className="w-full flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+              <H2 className="text-left mb-2 md:mb-0">Countries visited</H2>
+              <div className="flex items-center gap-2">
+                <div className="bg-rose-500 rounded-sm size-3" />
+                <Body3 className="font-medium text-text-primary">{VISITED_COUNTRIES.length} visited</Body3>
+              </div>
+            </div>
+            <div className="mask-radial-[50%_55%] overflow-hidden mask-radial-from-50% w-full flex items-center justify-center">
               <Globe
                 ref={globeRef}
-                width={212}
-                height={212}
+                width={340}
+                height={340}
                 globeImageUrl="/images/earth-texture.jpg"
                 showAtmosphere={false}
                 globeCurvatureResolution={8}
                 animateIn={true}
-                // Explicitly disable HTML elements
                 htmlElementsData={[]}
-                // Enable polygon layer
                 polygonsData={countries}
                 polygonCapColor={(feat: object) => {
                   const visited = isCountryVisited(feat);
@@ -207,59 +243,6 @@ export default function Page() {
                 enablePan={false}
                 enableRotate={true}
               />
-            </div>
-          </div>
-          <div>
-            <H2 className="text-left mb-2">Bucketlist</H2>
-            <Body2 className="max-w-xl mb-4">Things I did or aim to do in the future.</Body2>
-            <div className="flex md:flex-row flex-col-reverse items-start gap-8 md:gap-16">
-              <ul className="space-y-3">
-                {BUCKETLIST.filter((item) => item.completed).map((item) => (
-                  <li className="flex items-start gap-1.5 text-neutral-400">
-                    {item.completed ? (
-                      <IconCheckmark2Small className="shrink-0 size-5 mt-px" />
-                    ) : (
-                      <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
-                    )}
-                    <Body2 className="font-medium">{item.title}</Body2>
-                  </li>
-                ))}
-              </ul>
-              <ul className="space-y-3">
-                {BUCKETLIST.filter((item) => !item.completed).map((item) => (
-                  <li className="flex items-start gap-1.5">
-                    {item.completed ? (
-                      <IconCheckmark2Small className="shrink-0 size-5 mt-px" />
-                    ) : (
-                      <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
-                    )}
-                    <Body2 className="font-medium dark:text-white">{item.title}</Body2>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-        <section className="w-full p-4 bg-neutral-50 dark:bg-neutral-950 rounded-lg overflow-hidden">
-          <H2 className="text-left mb-6">Apps in use</H2>
-          <div className="rounded-[62px] aspect-[178/400] w-full relative mx-auto max-w-[350px] h-80">
-            <div className="absolute bg-[url('/images/empty-iphone-mockup-light.png')] dark:bg-[url('/images/empty-iphone-mockup-dark.png')] aspect-[178/400] w-full inset-0 bg-contain left-1/2 select-none -translate-x-1/2 top-0" />
-            <div className="absolute inset-0 px-6 md:px-4 py-16 max-w-[200px] mx-auto">
-              <div className="grid grid-cols-4 gap-2">
-                {TOOLS.map((tool) => (
-                  <Link href={tool.link} target="_blank" className="cursor-default">
-                    <div className="rounded-xl relative group">
-                      <img
-                        src={tool.icon}
-                        alt={tool.name}
-                        className="object-cover rounded-[10px] cursor-pointer border border-neutral-200 dark:border-neutral-900 mb-0.5"
-                      />
-                      <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-black opacity-0 rounded-xl inset-0 absolute" />
-                    </div>
-                    <Body4 className="text-center cursor-text truncate text-[9px]">{tool.name}</Body4>
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
         </section>

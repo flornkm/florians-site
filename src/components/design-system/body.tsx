@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import React from "react";
 
-export const bodyVariants = cva("text-neutral-500 dark:text-neutral-400", {
+export const bodyVariants = cva("text-text-tertiary", {
   variants: {
     variant: {
       body1: "text-ms",

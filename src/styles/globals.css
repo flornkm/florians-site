@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "dither-plugin";
+@import "./colors.css";
+@import "./text.css";
 
 @plugin "@tailwindcss/typography";
 @plugin 'tailwind-scrollbar';
@@ -146,24 +148,21 @@
 }
 
 @theme {
-  --font-sans: "Pretendard Variable", "Pretendard", "Inter", "sans-serif";
-  --font-mono: "Commit Mono", "ui-monospace", "SFMono-Regular", "Liberation Mono", "Courier New", "monospace";
-  --font-round: "Open Runde", "sans-serif";
   --spacing-col: 248px;
   --text-ms: 0.9375rem;
   --aspect-a4: 1.4142857143/1;
   --animate-fade-in: fade-in 0.5s ease-out;
 
   @keyframes fade-in {
-      0% {
-        filter: blur(1px);
-        opacity: 0;
-      }
-      100% {
-          filter: none;
-          opacity: 1;
-      }
+    0% {
+      filter: blur(1px);
+      opacity: 0;
     }
+    100% {
+      filter: none;
+      opacity: 1;
+    }
+  }
 }
 
 html {
@@ -174,10 +173,12 @@ html {
 body {
   width: 100dvw;
   overflow-x: hidden;
-  @apply bg-white dark:bg-black dark:text-white text-ms;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--text-ms);
+  font-weight: 450;
 }
 
-/* Global focus style */
 *:not([class*="outline-"]):not(input):not(textarea) {
   @apply outline-0 outline-transparent;
 }
@@ -193,7 +194,6 @@ body {
   mask-image: linear-gradient(to bottom, transparent, black);
 }
 
-/* Tooltip portal styles */
 #tooltip-portal {
   font-family: var(--font-sans);
 }

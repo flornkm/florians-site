@@ -32,10 +32,10 @@ interface ModelViewerProps {
 
 function ErrorFallback({ error }: { error: string }) {
   return (
-    <div className="flex items-center justify-center w-full h-96 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+    <div className="flex items-center justify-center w-full h-96 bg-destructive/10 rounded-lg border border-destructive/20">
       <div className="text-center p-4">
-        <p className="text-sm text-red-600 dark:text-red-400">Failed to load 3D model</p>
-        <p className="text-xs text-red-500 dark:text-red-500 mt-1">{error}</p>
+        <p className="text-sm text-destructive">Failed to load 3D model</p>
+        <p className="text-xs text-destructive/80 mt-1">{error}</p>
       </div>
     </div>
   );
@@ -75,7 +75,6 @@ function Scene({
   } | null>(null);
 
   useEffect(() => {
-    // Dynamically import all Three.js dependencies on client side only
     Promise.all([
       import("@react-three/fiber"),
       import("@react-three/drei"),
@@ -111,7 +110,7 @@ function Scene({
   }
 
   return (
-    <Canvas className="bg-neutral-50 dark:bg-neutral-950">
+    <Canvas className="bg-surface-secondary">
       <PerspectiveCamera makeDefault position={cameraPosition} />
       <ambientLight intensity={0.8} />
       <directionalLight position={[10, 10, 5]} intensity={2.0} castShadow />
@@ -153,10 +152,10 @@ export function ModelViewer({
 
   return (
     <div
-      className={`relative cursor-grab active:cursor-grabbing dark:border-neutral-700 rounded-lg overflow-hidden ${className}`}
+      className={`relative cursor-grab active:cursor-grabbing border-border-secondary rounded-lg overflow-hidden ${className}`}
       style={{ width, height }}
     >
-      <div className="absolute inset-0 -z-10 bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+      <div className="absolute inset-0 -z-10 bg-border-primary animate-pulse" />
       <Suspense>
         <Scene
           src={src}
