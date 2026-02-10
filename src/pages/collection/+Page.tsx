@@ -1,4 +1,4 @@
-import { Body4 } from "@/components/design-system/body.jsx";
+import { Body4 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
 import Markdown from "@/components/shared/markdown";
 import Button from "@/components/ui/button";

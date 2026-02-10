@@ -3,7 +3,7 @@ import { ContactShadows, Environment, Lightformer, Text } from "@react-three/dre
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { CharacterModel } from "./CharacterModel";
+import { CharacterModel } from "./character-model";
 
 function SceneCharacters({ cameraDone, onCameraDone }: { cameraDone: boolean; onCameraDone: () => void }) {
   const walkerRef = useRef<THREE.Group | null>(null);

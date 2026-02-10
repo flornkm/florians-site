@@ -132,7 +132,7 @@ export const Letter = forwardRef<
         )}
       </div>
       <div className="h-full shrink-0 w-px bg-neutral-200 dark:bg-neutral-800" />
-      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between">
+      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between h-full">
         <img src="/images/letters/letter-stamp.webp" alt="Stamp" className={stampVariants({ variant, isEmpty })} />
         {signature && (
           <div className="w-full max-w-[200px]">

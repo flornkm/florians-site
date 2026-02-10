@@ -5,6 +5,7 @@ import { LetterStack } from "@/components/letters/letter-stack";
 import Section from "@/components/shared/section";
 import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import { cn } from "@/lib/utils";
 
 import { IconPencil } from "central-icons/IconPencil";
 import { usePageContext } from "vike-react/usePageContext";
@@ -42,7 +43,14 @@ export default function Page() {
               <div className="flex flex-col gap-0.5 w-full items-start md:sticky top-16">
                 <H3>{project.title}</H3>
                 <Body2 className="mb-5 md:mb-3 text-neutral-500">{project.description}</Body2>
-                <p className="items-center pointer-events-none hidden lg:flex gap-1 group-hover/item:opacity-100 group-hover/item:ml-0 group-hover/item:blur-none opacity-0 -ml-2 blur-[1px] transition-all duration-300 ease-out focus:hidden group-focus/item:hidden">
+                <p
+                  className={cn(
+                    "items-center pointer-events-none hidden lg:flex gap-1 opacity-0 -ml-2 blur-[1px] transition-all duration-300 ease-out focus:hidden",
+                    "group-hover/item:opacity-100 group-hover/item:ml-0 group-hover/item:blur-none",
+                    "group-focus-within/item:opacity-100 group-focus-within/item:ml-0 group-focus-within/item:blur-none",
+                    "group-active/item:opacity-100",
+                  )}
+                >
                   <TriangleFilled className="w-4 h-4 inline-block" />
                   <span className="text-ms font-medium inline-block">Click to open</span>
                 </p>

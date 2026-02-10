@@ -1,7 +1,7 @@
-import { Body4 } from "@/components/design-system/body.jsx";
-import Markdown from "@/components/shared/markdown.jsx";
-import { buttonVariants } from "@/components/ui/button.jsx";
-import { Link } from "@/components/ui/link.jsx";
+import { Body4 } from "@/components/design-system/body";
+import Markdown from "@/components/shared/markdown";
+import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils.js";
 import { IconMinimize45 } from "central-icons/IconMinimize45";
 import { useData } from "vike-react/useData";

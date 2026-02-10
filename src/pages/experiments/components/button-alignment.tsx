@@ -20,12 +20,12 @@ export const ButtonAlignment = () => {
           <div className="flex justify-start flex-col items-start relative">
             <div
               className={cn(
-                "flex justify-end bg-red-100 rounded transition-all duration-200 ease-out",
+                "flex justify-end bg-red-100 dark:bg-red-950 rounded transition-all duration-200 ease-out",
                 align ? "gap-1.5" : "gap-3",
               )}
             >
-              <div className="h-4 w-px bg-rose-400" />
-              <div className="h-4 w-px bg-rose-400" />
+              <div className="h-4 w-px bg-rose-400 dark:bg-rose-500" />
+              <div className="h-4 w-px bg-rose-400 dark:bg-rose-500" />
             </div>
             <Body4
               className={cn(
@@ -37,11 +37,11 @@ export const ButtonAlignment = () => {
             </Body4>
           </div>
           <div className="flex justify-start flex-col items-end relative">
-            <div className="flex justify-end bg-red-100 gap-3 rounded">
-              <div className="h-4 w-px bg-rose-400" />
-              <div className="h-4 w-px bg-rose-400" />
+            <div className="flex justify-end bg-red-100 dark:bg-red-950 gap-3 rounded">
+              <div className="h-4 w-px bg-rose-400 dark:bg-rose-500" />
+              <div className="h-4 w-px bg-rose-400 dark:bg-rose-500" />
             </div>
-            <Body4 className="text-black mt-1 translate-x-2 w-6">pr-3</Body4>
+            <Body4 className="text-black mt-1 translate-x-2">pr-3</Body4>
           </div>
         </div>
       </div>
