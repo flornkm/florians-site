@@ -52,8 +52,11 @@ export function SmartVideo({
   return (
     <video {...videoProps} muted={muted} loop={loop} autoPlay={autoPlay} playsInline={playsInline} preload={preload}>
       {isSafari ? (
+        // Safari: prefer MP4, but fall back to WebM if MP4 is not available
         mp4 ? (
           <source src={mp4} type='video/mp4; codecs="hvc1"' />
+        ) : webm ? (
+          <source src={webm} type="video/webm" />
         ) : null
       ) : (
         <>
