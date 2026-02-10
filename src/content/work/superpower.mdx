@@ -11,16 +11,45 @@ links: https://app.superpower.com/register?invite=93bb2595-984c-4ea9-a71b-9c7e74
 
 Superpower is a health intelligence platform, offering a various range of tests to prevent illnesses, and help its users building great habits to become the best version of themselves.
 
-[Nils Eller](https://x.com/nilseller) and myself worked with Superpower throughout 2025 to improve the overall UX throughout their platform.
+[Nils Eller](https://x.com/nilseller) and myself worked with Superpower throughout 2025 to improve the overall UX throughout their platform. Superpower turns complex biomarker data into clear, actionable health insights.
 
-Superpower turns complex biomarker data into clear, actionable health insights. An AI-powered doctor interprets your results, connects patterns across tests over time, and recommends personalized solutions. From supplements to custom protocols.
-
-## Custom SVG Chart Library
-
-One of the biggest challenges for us was to rethink how we display data. Previously used charting libraries to represent sparkline charts weren't suitable anymore, given the lack of customizability.
+## Charts
 
 To move fast we decided to build our own SVG charts from scratch. This allowed us to have full control and flexibility. We were also able to almost `1:1` re-use business logic from the web application to the react native mobile application.
 
 <BiomarkerShowcase />
 
 The charts are fully interactive – hover over any data point to see the exact value, date, and which lab processed the sample. The vertical range stack on the right provides quick visual context for where the current value falls within the reference ranges.
+
+<SVGShowcase />
+
+## Data Page
+
+<div className="not-prose my-8">
+  <img src="/images/superpower/superpower-data-page.webp" alt="Superpower data page" className="w-full h-auto rounded-xl" />
+</div>
+
+## Protocols
+
+The platform guides users through actionable health protocols, making it easy to understand what steps to take next based on their unique biomarker results.
+
+<Video webm="/images/superpower/floating-menu-react-native.webm" className="rounded-xl" />
+
+<div className="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <img src="/images/superpower/superpower-protocol.webp" alt="Superpower protocol" className="w-full h-auto rounded-xl" />
+  <img src="/images/superpower/superpower-protocol-2.webp" alt="Superpower protocol detail" className="w-full h-auto rounded-xl" />
+</div>
+
+<Video webm="/images/superpower/personalized-micro-interaction.webm" className="rounded-xl" />
+
+## Mobile app
+
+<Video webm="/images/superpower/animated-icons-bottomtabs.webm" className="rounded-xl" />
+
+## AI Doctor
+
+An AI-powered doctor interprets your results, connects patterns across tests over time, and recommends personalized solutions — from supplements to custom protocols.
+
+<div className="not-prose my-8">
+  <img src="/images/superpower/superpower-ai-doctor.webp" alt="Superpower AI doctor" className="w-full h-auto rounded-xl" />
+</div>

@@ -118,7 +118,7 @@ export default function Navigation() {
     <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-[99] px-2 xs:px-3 md:w-screen bg-primary md:px-4 border md:border-none border-tertiary md:max-w-none mx-auto w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
       <div
         className={cn(
-          "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-300 ease-out h-px -translate-x-1/2 bottom-0 bg-border-primary",
+          "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-300 ease-out h-px -translate-x-1/2 bottom-0 bg-(--border-primary)",
           scrolled ? "max-w-[100vw]" : "max-w-5xl opacity-0",
         )}
       />

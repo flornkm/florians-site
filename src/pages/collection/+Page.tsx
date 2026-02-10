@@ -111,10 +111,10 @@ export default function Page() {
     <div className="w-full">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div
-          className="bg-gradient-to-b from-bg-primary via-bg-primary to-transparent pt-12 pb-8 -mb-16 z-10 lg:h-72 h-48 flex md:items-center items-start"
+          className="relative bg-linear-to-b from-primary via-primary to-transparent pt-12 pb-8 -mb-16 z-50 lg:h-72 h-48 flex md:items-center items-start"
           style={{ scrollSnapAlign: "start" }}
         >
-          <H1 className="text-center mb-3 w-full">A blog, photos, experiments, and more updates</H1>
+          <H1 className="text-center mb-3 w-full">Updates & archive</H1>
         </div>
         <div className="sticky z-10 top-16 md:top-28 flex flex-col items-center gap-4 h-0">
           {items.map((item, index) => {
