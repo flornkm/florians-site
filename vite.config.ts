@@ -1,20 +1,30 @@
+import mdx from "@mdx-js/rollup";
 import sitemap from "@qalisa/vike-plugin-sitemap";
 import { SitemapEntry } from "@qalisa/vike-plugin-sitemap/dist/types";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import vike from "vike/plugin";
 import { defineConfig } from "vite";
-import { returnContent } from "./src/lib/convert";
+import { getContent } from "./src/lib/mdx";
 
 const BASE_URL = "https://floriankiem.com" as const;
 const EXCLUDED = ["/imprint/", "/privacy-policy/"];
 
-const [projects, items] = await Promise.all([returnContent("work"), returnContent("collection")]);
+const [projects, items] = await Promise.all([getContent("work"), getContent("collection")]);
 
 export default defineConfig({
   root: "src",
   plugins: [
+    {
+      enforce: "pre",
+      ...mdx({
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+        providerImportSource: "@mdx-js/react",
+      }),
+    },
     react(),
     tailwindcss(),
     vike(),

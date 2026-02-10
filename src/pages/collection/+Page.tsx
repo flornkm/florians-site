@@ -1,15 +1,21 @@
 import { Body4 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
-import Markdown from "@/components/shared/markdown";
+import { mdxComponents } from "@/components/shared/mdx-content";
 import Button from "@/components/ui/button";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
+import { MDXProvider } from "@mdx-js/react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { IconExpand45 } from "central-icons/IconExpand45";
-import { useEffect, useRef, useState } from "react";
+import { ComponentType, useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { navigate } from "vike/client/router";
 import { CollectionItem } from "./types";
+
+const mdxModules = import.meta.glob("/content/collection/*.mdx", { eager: true }) as Record<
+  string,
+  { default: ComponentType }
+>;
 
 export default function Page() {
   const { width } = useWindowSize();
@@ -96,6 +102,11 @@ export default function Page() {
     }, 500);
   };
 
+  const getMDXContent = (slug: string) => {
+    const modulePath = `/content/collection/${slug}.mdx`;
+    return mdxModules[modulePath]?.default;
+  };
+
   return (
     <div className="w-full">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
@@ -108,6 +119,7 @@ export default function Page() {
         <div className="sticky z-10 top-16 md:top-28 flex flex-col items-center gap-4 h-0">
           {items.map((item, index) => {
             const gotShown = index < activeIndex;
+            const MDXContent = getMDXContent(item.slug);
 
             return (
               <div
@@ -144,7 +156,15 @@ export default function Page() {
                 <Body4 className="capitalize text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
                 <div className="w-full h-full flex items-start justify-center">
                   <div className="w-full h-full max-w-lg -mt-7 mask-b-from-70%">
-                    <Markdown html={item.content || ""} className={proseVariants({ variant: "default" })} />
+                    {MDXContent ? (
+                      <article className={proseVariants({ variant: "default" })}>
+                        <MDXProvider components={mdxComponents}>
+                          <MDXContent />
+                        </MDXProvider>
+                      </article>
+                    ) : (
+                      <div>Content not found</div>
+                    )}
                   </div>
                 </div>
               </div>

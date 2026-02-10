@@ -1,9 +1,9 @@
 export { onBeforePrerenderStart };
 
-import { returnContent } from "@/lib/convert";
+import { getContent } from "@/lib/mdx";
 
 async function onBeforePrerenderStart() {
-  const projects = await returnContent("work");
+  const projects = await getContent("work");
   const projectPageURLs = projects.map((project) => `/work/${project.slug}`);
   return projectPageURLs;
 }

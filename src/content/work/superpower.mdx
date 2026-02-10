@@ -1,0 +1,26 @@
+---
+title: Superpower Dashboard
+description: Health intelligence platform
+cover: /images/superpower/superpower.webp
+date: 12 / 2025
+collaborators: Superpower Team, Nils Eller
+links: https://app.superpower.com/register?invite=93bb2595-984c-4ea9-a71b-9c7e746608b9
+---
+
+# Unlocking better healthcare for everyone
+
+Superpower is a health intelligence platform, offering a various range of tests to prevent illnesses, and help its users building great habits to become the best version of themselves.
+
+[Nils Eller](https://x.com/nilseller) and myself worked with Superpower throughout 2025 to improve the overall UX throughout their platform.
+
+Superpower turns complex biomarker data into clear, actionable health insights. An AI-powered doctor interprets your results, connects patterns across tests over time, and recommends personalized solutions. From supplements to custom protocols.
+
+## Custom SVG Chart Library
+
+One of the biggest challenges for us was to rethink how we display data. Previously used charting libraries to represent sparkline charts weren't suitable anymore, given the lack of customizability.
+
+To move fast we decided to build our own SVG charts from scratch. This allowed us to have full control and flexibility. We were also able to almost `1:1` re-use business logic from the web application to the react native mobile application.
+
+<BiomarkerShowcase />
+
+The charts are fully interactive – hover over any data point to see the exact value, date, and which lab processed the sample. The vertical range stack on the right provides quick visual context for where the current value falls within the reference ranges.
