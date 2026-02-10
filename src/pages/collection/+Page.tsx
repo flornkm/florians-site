@@ -122,8 +122,8 @@ export default function Page() {
                 id={`collection-item-${item.slug}`}
                 key={item.slug}
                 className={cn(
-                  "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-bg-primary shadow-xl shadow-shadow-lg rounded-2xl p-8 border border-border-primary",
-                  isTransitioning ? "bg-bg-primary mt-10 md:mt-8" : "bg-surface-secondary",
+                  "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-primary shadow-xl dark:shadow-none shadow-emphasis rounded-2xl p-8 border border-primary",
+                  isTransitioning ? "mt-10 md:mt-8" : "dark:bg-secondary",
                 )}
               >
                 <Button
@@ -141,16 +141,9 @@ export default function Page() {
                     )}
                   />
                 </Button>
-                <Body4 className="capitalize text-text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
+                <Body4 className="capitalize text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
                 <div className="w-full h-full flex items-start justify-center">
-                  <div
-                    className="w-full max-w-lg -mt-7"
-                    style={{
-                      maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
-                      WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
-                      height: "100%",
-                    }}
-                  >
+                  <div className="w-full h-full max-w-lg -mt-7 mask-b-from-70%">
                     <Markdown html={item.content || ""} className={proseVariants({ variant: "default" })} />
                   </div>
                 </div>

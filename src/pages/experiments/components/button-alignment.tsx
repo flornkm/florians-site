@@ -29,7 +29,7 @@ export const ButtonAlignment = () => {
             </div>
             <Body4
               className={cn(
-                "text-text-primary mt-1 transition-all duration-200 ease-out w-6",
+                "text-primary mt-1 transition-all duration-200 ease-out w-6",
                 align ? "-translate-x-2" : "-translate-x-1",
               )}
             >
@@ -41,7 +41,7 @@ export const ButtonAlignment = () => {
               <div className="h-4 w-px bg-rose-400 dark:bg-rose-500" />
               <div className="h-4 w-px bg-rose-400 dark:bg-rose-500" />
             </div>
-            <Body4 className="text-text-primary mt-1 translate-x-2">pr-3</Body4>
+            <Body4 className="text-primary mt-1 translate-x-2">pr-3</Body4>
           </div>
         </div>
       </div>

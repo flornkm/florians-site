@@ -115,7 +115,7 @@ export default function Navigation() {
   const isVisible = hasActiveTab || isHovering;
 
   return (
-    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-[99] px-2 xs:px-3 md:w-screen bg-bg-primary md:px-4 border md:border-none border-border-tertiary md:max-w-none mx-auto w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
+    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-[99] px-2 xs:px-3 md:w-screen bg-primary md:px-4 border md:border-none border-tertiary md:max-w-none mx-auto w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
       <div
         className={cn(
           "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-300 ease-out h-px -translate-x-1/2 bottom-0 bg-border-primary",
@@ -142,7 +142,7 @@ export default function Navigation() {
               className="flex items-center gap-1 text-ms rounded-full py-1 touch-manipulation"
             >
               <RiveComponent className="w-5.5 dark:invert aspect-square" />
-              <Body1 className="font-medium text-text-primary min-[500px]:block hidden">Florian</Body1>
+              <Body1 className="font-medium text-primary min-[500px]:block hidden">Florian</Body1>
             </Link>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function Navigation() {
                 onMouseEnter={() => setHoveredIndex(index)}
                 className={cn(
                   "text-ms rounded-full font-medium relative z-10 px-3 py-1 md:py-0.5 transition-colors duration-300 ease-in-out",
-                  activeIndex === index ? "text-text-primary" : "text-text-tertiary",
+                  activeIndex === index ? "text-primary" : "text-tertiary",
                 )}
               >
                 {tab.name}

@@ -27,7 +27,7 @@ export default function Page() {
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <Section className="items-end md:mb-12">
           <H1 className="leading-tight md:mb-0 mb-10">
-            Designer by day, <br /> <span className="text-text-quaternary">Engineer by night</span>
+            Designer by day, <br /> <span className="text-quaternary">Engineer by night</span>
           </H1>
           <div className="w-col md:flex items-center justify-center">
             <H2 className="mb-2.5 md:mb-5">Latest Work</H2>
@@ -42,7 +42,7 @@ export default function Page() {
             >
               <div className="flex flex-col gap-0.5 w-full items-start md:sticky top-16">
                 <H3>{project.title}</H3>
-                <Body2 className="mb-5 md:mb-3 text-text-tertiary">{project.description}</Body2>
+                <Body2 className="mb-5 md:mb-3 text-tertiary">{project.description}</Body2>
                 <p
                   className={cn(
                     "items-center pointer-events-none hidden lg:flex gap-1 opacity-0 -ml-2 blur-[1px] transition-all duration-150 ease-out focus:hidden",
@@ -70,7 +70,7 @@ export default function Page() {
           <div className="flex flex-col items-center justify-center w-full md:px-0 px-4 md:w-auto">
             <div className="mb-2">
               <H2 className="text-center mb-0.5">Digital Guestbook</H2>
-              <Body2 className="text-text-quaternary mb-2.5 text-center">Last three letters sent to this site.</Body2>
+              <Body2 className="text-quaternary mb-2.5 text-center">Last three letters sent to this site.</Body2>
             </div>
             <div className="min-[450px]:mt-[16vw] md:mt-0 w-full">
               <LetterStack />
@@ -82,7 +82,7 @@ export default function Page() {
                 navigate("/send-postcard");
               }}
             >
-              <Body2 className="text-text-primary">
+              <Body2 className="text-primary">
                 <IconPencil className="inline-block w-3.5 -mt-1 mr-1" /> Send Postcard
               </Body2>
             </Button>

@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 
 const letterVariants = cva(
-  "aspect-a4 shrink-0 w-full shadow-2xl shadow-shadow-lg h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-border-primary rounded-xl border flex",
+  "aspect-a4 shrink-0 w-full shadow-2xl shadow-emphasis h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-primary rounded-xl border flex",
   {
     variants: {
       variant: {
@@ -28,7 +28,7 @@ const letterVariants = cva(
       {
         variant: "preview",
         isEmpty: false,
-        className: "scale-100 shadow-2xl shadow-shadow-lg",
+        className: "scale-100 shadow-2xl shadow-emphasis",
       },
       {
         variant: "preview",
@@ -112,10 +112,10 @@ export const Letter = forwardRef<
           </p>
         </div>
         <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
-          <p className="text-ms font-medium text-text-tertiary">
+          <p className="text-ms font-medium text-tertiary">
             Sincerely,{" "}
             <span className="inline-flex items-center gap-1 translate-y-[3px]">
-              <span className="w-4 h-4 rounded-full border border-border-primary relative">
+              <span className="w-4 h-4 rounded-full border border-primary relative">
                 <img src={`https://unavatar.io/${handle}`} alt={handle} className="relative z-10 rounded-full" />
                 <span className="absolute inset-0 animate-pulse" />
               </span>
@@ -124,7 +124,7 @@ export const Letter = forwardRef<
           </p>
         </div>
         {variant === "display" && (email || createdAt) && (
-          <div className="text-xs text-text-quaternary space-y-1">
+          <div className="text-xs text-quaternary space-y-1">
             {email && <div>Email: {email}</div>}
             {createdAt && <div>Created: {new Date(createdAt).toLocaleString()}</div>}
           </div>

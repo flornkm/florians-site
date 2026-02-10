@@ -10,7 +10,7 @@ export const CssCalculations = () => {
 
   return (
     <div className="space-y-2 flex items-center flex-col">
-      <div className="relative flex h-56 overflow-hidden rounded border border-border-primary">
+      <div className="relative flex h-56 overflow-hidden rounded border border-primary">
         <div className="w-48 h-full" />
         <div
           className={cn(
@@ -24,7 +24,7 @@ export const CssCalculations = () => {
           }}
           variant="secondary"
           className={cn(
-            "p-1 rounded-full bg-bg-primary border shadow-shadow hover:bg-surface-secondary border-border-primary absolute top-2 transition-all duration-200 ease-out",
+            "p-1 rounded-full bg-primary border shadow-muted hover:bg-surface-secondary border-primary absolute top-2 transition-all duration-200 ease-out",
             open ? "right-[calc(50%-1.3rem)] translate-x-1/2" : "right-2",
           )}
         >

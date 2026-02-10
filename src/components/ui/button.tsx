@@ -7,8 +7,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-accent-primary text-ms text-accent-foreground hover:bg-accent-primary-hover",
-        secondary: "bg-surface-tertiary text-ms text-text-primary hover:bg-interactive-active",
-        tertiary: "text-text-tertiary text-ms hover:text-text-secondary hover:bg-interactive-hover",
+        secondary: "bg-surface-tertiary text-ms text-primary hover:bg-interactive-active",
+        tertiary: "text-tertiary text-ms hover:text-secondary hover:bg-interactive-hover",
       },
     },
     defaultVariants: {

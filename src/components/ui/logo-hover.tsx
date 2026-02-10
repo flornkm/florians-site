@@ -14,7 +14,7 @@ export const LogoHover = ({
   return (
     <div className="group flex items-center h-10 max-w-28 w-full shrink-0 relative">
       <Link
-        className="absolute top-1/2 -translate-y-1/2 line-clamp-1 z-10 cursor-pointer inset-0 text-center text-text-tertiary opacity-0 group-hover:opacity-100 blur-[2px] transition-all group-hover:blur-none"
+        className="absolute top-1/2 -translate-y-1/2 line-clamp-1 z-10 cursor-pointer inset-0 text-center text-tertiary opacity-0 group-hover:opacity-100 blur-[2px] transition-all group-hover:blur-none"
         href={entity.url}
         target="_blank"
       >

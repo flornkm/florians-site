@@ -38,7 +38,7 @@ export default function FAQ() {
           <div
             key={index}
             onClick={() => setActiveIndex(index)}
-            className="w-full flex-1/2 flex flex-col gap-2 transition-all cursor-pointer border-b overflow-hidden border-border-primary"
+            className="w-full flex-1/2 flex flex-col gap-2 transition-all cursor-pointer border-b overflow-hidden border-primary"
           >
             <div className="group rounded-lg my-px font-mono">
               <div className="[mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] p-4">
@@ -61,7 +61,7 @@ export default function FAQ() {
                 </div>
                 <p
                   className={cn(
-                    "text-xs leading-relaxed tabular-nums font-medium text-text-tertiary transition-all duration-500",
+                    "text-xs leading-relaxed tabular-nums font-medium text-tertiary transition-all duration-500",
                     activeIndex === index
                       ? "max-h-72 mt-2 mb-2 opacity-100"
                       : "max-h-0 group-hover:max-h-10 opacity-0 group-hover:opacity-100 group-hover:mt-2 overflow-hidden [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)]",
