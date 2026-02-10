@@ -1,46 +1,87 @@
 ---
 title: inlang
-description: The ecosystem for globalization needs.
+description: Localization ecosystem for software
 cover: /images/inlang/inlang.webp
 date: 10 / 2023
 collaborators: Samuel Stroschein, Nils Jacobsen, Niklas Buchfink, Jannes Blobel, Jan Johannes, Felix Haeberle
-links: https://inlang.com, https://www.youtube.com/watch?v=mB2-Ze-SjXE
+links: https://inlang.com
 ---
 
 # Reimagining i18n for developers
 
-inlang is an ecosystem of tools for internationalization needs, taking an unopinionated approach that gives developers flexibility without forcing specific implementations.
+One file format that is interoperable between multiple apps, built on git's core principles.
 
 ![inlang](/images/inlang/inlang.webp)
 
-## The Idea
+inlang enables developers to easily setup and use one file format for their translations.
+What that means in practice is, that in contrast to other translation tools which use databases to store translation strings, inlang does it fully file-based and agnostic.
 
-Anyone who has worked with i18n in development knows the pain points: implementation challenges, finding the right library, preserving type safety, updating translations, collaborating with translators, and troubleshooting issues. inlang addresses these problems with an ecosystem of tools that work together without forcing developers into a specific approach.
+This approach makes it significantly more easy for developers to integrate it into their tech stack, use one of many apps from the inlang marketplace
+or simply build their own solution using [inlang's SDK](https://github.com/opral/inlang-sdk), than it is to integrate cloud based software, especially when the mounts of files reached a significant amount.
 
-## Challenge
+## Marketplace
 
-Building something that didn't exist yet was our primary challenge. How do you define a product that isn't fully conceptualized? For me personally, joining an established team meant quickly understanding a complex codebase and how all components worked together.
-
-## Action
-
-**Division of labor**
-We organized our work efficiently, with my focus on inlang.com's applications including the Marketplace, Markdown Parser, and tools for managing plugins and lint rules.
+My personal focus at inlang was mainly taking care of the marketplace and mini-apps allowing users easier access to manage their projects.
 
 ![inlang design](/images/inlang/inlang-design.webp)
 
-**Marketplace & Markdown**
-We transformed inlang.com from a simple landing page into a comprehensive marketplace. This strategic pivot allowed individual products to showcase themselves and build their own communities. I implemented a manifest system (similar to package.json) that defined products and their metadata.
+We transformed inlang.com from a simple landing page into a comprehensive marketplace. Additionally, we introduced manifests (similar to a package.json), that defined product metadata to integrate it into one central hub.
 
-To enhance product pages, I refactored the markdown parsing system, moving away from markdoc to more flexible technologies like remark/rehype. I introduced custom lit web components that work across all frameworks and in pure HTML/JavaScript, giving users the simplicity of markdown with advanced component capabilities.
+```json
+{
+  …,
+  "properties": {
+    …,
+    "icon": {
+      "type": "string",
+      "format": "uri",
+      "description": "Icon URL."
+    },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "Image URLs for gallery display."
+    },
+    "displayName": {
+      "type": "object",
+      "description": "Localized display names.",
+      "additionalProperties": { "type": "string" }
+    },
+    "description": {
+      "type": "object",
+      "description": "Localized descriptions.",
+      "additionalProperties": { "type": "string" }
+    },
+    "readme": {
+      "type": "object",
+      "description": "Localized README URLs.",
+      "additionalProperties": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    …
+  },
+  …
+}
+```
 
-**Search implementation**
-As we evolved into a marketplace, we needed a robust search solution. After evaluating popular search engines including Algolia, typesense, and others, we selected Algolia for its reliability, ease of maintenance, and startup program benefits.
+To enhance product pages, I refactored the markdown parsing system, moving away from markdoc to remark/rehype. I introduced custom lit web components that work across all frameworks and in pure HTML/JavaScript, giving users the simplicity of markdown while enabling them to reference custom components offered by our library to show interactive descriptions.
+
+As we evolved into a marketplace, we needed a robust search solution. After looking up and testing popular search engines including Algolia, typesense, and others, we selected Algolia for its reliability.
+
+
+## Installation wizard
 
 [@video:/videos/inlang-installer.mp4|autoplay|muted|loop|playsInline|height:16rem|className:object-cover w-full object-top]
 
-**Installation experience**
-To simplify the user experience, I built manage.inlang.com where users can open their inlang projects and install products with just a few clicks, eliminating manual copying of links and streamlining language tag management.
+To simplify the user experience, I built a platform where users can open their inlang files and install products with just a few clicks, instead of relying on developers to do it.
 
-## Result
-
-By early 2023, inlang's repository had accumulated over 9,000 commits, reached more than 850 stars, and attracted nearly 50 contributors. During my time with inlang, I contributed over 850 commits while significantly improving my technical skills, particularly in TypeScript. The project provided valuable insights into modern infrastructure development practices.
+By early 2023, inlang's repository had accumulated over 9,000 commits, reached more than 850 stars, and attracted nearly 50 contributors. Given my sole design background, I was able to get a lot of hands-on Javascript and Typescript experience.

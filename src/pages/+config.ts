@@ -1,6 +1,6 @@
 import vikeReact from "vike-react/config";
 import type { Config } from "vike/types";
-import Layout from "../layouts/layout-default.jsx";
+import Layout from "../layouts/layout-default";
 
 // Default config (can be overridden by pages)
 // https://vike.dev/config

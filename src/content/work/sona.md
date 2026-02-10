@@ -1,29 +1,23 @@
 ---
 title: Sona
-description: Lightweight and affordable transcriptions.
+description: The transcriber that lives in your pocket
 cover: /images/sona/sona.webp
 date: 11 / 2024
 collaborators: Nils Eller
 links: https://sona.wtf, https://apps.apple.com/app/sona
 ---
 
-# Making transcriptions accessible.
+# Effortless meeting notes
 
 Sona captures conversations and meetings, delivering insights that matter most to you. It consists of iOS and watchOS apps backed by powerful infrastructure to process audio and extract valuable information.
 
 ![Sona](/images/sona/sona.webp)
 
-## The Idea
-
-When taking walks with friends, I often want to preserve our conversations and ideas. Sona captures these fleeting moments and makes them tangible. It's also valuable for professionals who speak with people daily, helping them remember key details from conversations.
-
-## Challenge
-
-Taking notes in meetings is essential for gathering context and information. However, remembering key details is difficult, especially when you can't write things down.
-
-## Action
+When taking walks with friends, chatting in the car, or simply having a call, we don't want to write down, we want to actively remember and talk to our conversation. Sona's idea was simple: Capturing these fleeting moments and making them accessible with the help of AI. Given that we started this project in January of 2024, there weren't a lot of AI native solutions out there and most iOS apps we were able to find used Apple's integrated iOS voice to text feature.
 
 ![Sona Details](/images/sona/sona-details.webp)
+
+## How we built it
 
 **Building for ourselves first**
 We initially created Sona for ourselves and close friends, focusing on capturing the most important details. Early feedback showed us this tool could help many others.
@@ -39,6 +33,4 @@ One major hurdle was receiving accurate user information in our backend. Apple's
 
 [@video:/videos/sona.webm|autoplay|muted|loop|playsInline]
 
-## Result
-
-Sona launched successfully on ProductHunt, reaching nearly 10,000 users in its first month. We're now expanding beyond summaries to provide even greater value to our users.
+Sona launched successfully on ProductHunt, reaching nearly 10,000 users in its first month. While we're working on new projects in the meantime, we still see a static increase in our user count.

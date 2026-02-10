@@ -1,9 +1,9 @@
 import { Body2 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
-import Markdown from "@/components/shared/markdown.jsx";
+import Markdown from "@/components/shared/markdown";
 import ScrollWheel from "@/components/shared/scroll-wheel";
 import Section from "@/components/shared/section";
-import { buttonVariants } from "@/components/ui/button.jsx";
+import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import Tooltip from "@/components/ui/tooltip";
 import { proseVariants } from "@/lib/prose-variants";
@@ -23,11 +23,16 @@ export default function Page() {
           <Link href="/" className="w-auto flex items-start text-ms font-medium gap-2 mb-2 group/link">
             <IconChevronLeft className="w-4 h-4 mt-1.5" />
             <div className="flex-1 h-7">
-              <div className="group-hover/link:translate-y-[-25.5px] transition-all duration-200 ease-out pointer-events-none">
-                <H1 className="group-hover/link:blur-[1px] group-hover/link:opacity-0 transition-all duration-200 ease-out">
+              <div className="group-hover/link:translate-y-[-25.5px] group-focus-within/link:translate-y-[-25.5px] transition-all duration-200 ease-out pointer-events-none">
+                <H1 className="group-hover/link:blur-[1px] group-hover/link:opacity-0 group-focus-within/link:blur-[1px] group-focus-within/link:opacity-0 transition-all duration-200 ease-out">
                   {project.title} <span className="text-neutral-400 text-ms">{project.date.split("/")[1]}</span>
                 </H1>
-                <span className="blur-[1px] group-hover/link:blur-none truncate opacity-0 group-hover/link:opacity-100 group-active/link:opacity-100 transition-all duration-200 ease-out focus:hidden group-focus/link:hidden">
+                <span
+                  className={cn(
+                    "blur-[1px] truncate opacity-0 transition-all duration-200 ease-out focus:hidden",
+                    "group-hover/link:blur-none group-active/link:opacity-100 group-hover/link:opacity-100 group-focus-within/link:blur-none group-focus-within/link:opacity-100",
+                  )}
+                >
                   Go back
                 </span>
               </div>
