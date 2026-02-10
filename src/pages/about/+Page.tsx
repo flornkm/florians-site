@@ -60,7 +60,7 @@ export default function Page() {
           {/* Left Column: Avatar + Headline + Interview Link */}
           <div className="flex flex-col items-start w-full">
             <div className="pb-8 w-full relative mb-8">
-              <div className="-mb-8 ml-1.5 border border-border-primary rounded-full w-28 aspect-square overflow-hidden">
+              <div className="-mb-8 ml-1.5 border border-primary rounded-full w-28 aspect-square overflow-hidden">
                 <img
                   src="/images/avatars/florian_kiem.webp"
                   className="w-full rounded-full transition-all duration-300 ease-out"
@@ -69,7 +69,7 @@ export default function Page() {
               <div className="absolute pointer-events-none -bottom-11 h-full w-32 overflow-visible">
                 <svg viewBox="0 0 100 50" width="100%" height="100" overflow="visible" style={{ overflow: "visible" }}>
                   <path id="titleCurve" d="M0,35 C20,64 80,60 100,35" fill="transparent" />
-                  <text className="fill-text-primary text-lg font-semibold pointer-events-auto">
+                  <text className="fill-primary text-lg font-semibold pointer-events-auto">
                     <textPath
                       role="h1"
                       xlinkHref="#titleCurve"
@@ -82,18 +82,18 @@ export default function Page() {
                   </text>
                 </svg>
                 <H1 className="text-[19px] w-64 absolute bottom-[16px] left-[75px] pointer-events-auto">
-                  rian: <span className="text-text-quaternary">An Introduction</span>
+                  rian: <span className="text-quaternary">An Introduction</span>
                 </H1>
               </div>
             </div>
           </div>
           {/* Right Column: About Text */}
           <div className="flex flex-col gap-2 shrink-0 items-start">
-            <Body2 className="mb-2 text-balance text-text-tertiary">
+            <Body2 className="mb-2 text-balance text-tertiary">
               Many designers are writing about similar desires. So I just write my current thinking about the state of
               design and engineering down, and what benefits and joy it brings to me.
             </Body2>
-            <Body2 className="text-balance text-text-tertiary">
+            <Body2 className="text-balance text-tertiary">
               As a design engineer, my biggest strength is to translate design into code. Working in the intersection of
               those two worlds truly feels special. It doesn't only make companies more efficient by making iteration
               cycles smaller, but also helps the handoff between both teams to heal long-term, eventually resulting in
@@ -121,14 +121,14 @@ export default function Page() {
                   )}
                 </div>
                 <H3 className="text-left">{step.title}</H3>
-                <Body2 className="text-text-tertiary">{step.description}</Body2>
+                <Body2 className="text-tertiary">{step.description}</Body2>
               </div>
             ))}
           </div>
         </section>
         <section className="w-full flex flex-col justify-center">
           <H2 className="text-left mb-2">Past</H2>
-          <Body2 className="max-w-xl mb-4 text-text-tertiary">
+          <Body2 className="max-w-xl mb-4 text-tertiary">
             I'm very thankful for the opportunities I had in the past to work together with some of the most talented
             teams, learning from them and working on truly great products:
           </Body2>
@@ -144,7 +144,7 @@ export default function Page() {
               />
             ))}
           </HorizontalScroll>
-          <Body2 className="max-w-xl mb-4 text-text-tertiary">
+          <Body2 className="max-w-xl mb-4 text-tertiary">
             A lot of the things I learned comes from practice which I was able to apply to my own projects at these
             universities:
           </Body2>
@@ -175,9 +175,9 @@ export default function Page() {
                         <img
                           src={tool.icon}
                           alt={tool.name}
-                          className="object-cover rounded-[8px] cursor-pointer border border-border-primary"
+                          className="object-cover rounded-[8px] cursor-pointer border border-primary"
                         />
-                        <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-bg-inverted opacity-0 rounded-xl inset-0 absolute" />
+                        <div className="group-hover:opacity-10 group-active:opacity-20 pointer-events-none transition-all bg-inverted opacity-0 rounded-xl inset-0 absolute" />
                       </div>
                     </Link>
                   ))}
@@ -193,13 +193,13 @@ export default function Page() {
                 {BUCKETLIST.filter((item) => !item.completed).map((item) => (
                   <li key={item.title} className="flex items-start gap-1.5">
                     <IconAspectRatio11 className="shrink-0 size-5 mt-px" />
-                    <Body2 className="font-medium text-text-primary">{item.title}</Body2>
+                    <Body2 className="font-medium text-primary">{item.title}</Body2>
                   </li>
                 ))}
               </ul>
               <ul className="space-y-2">
                 {BUCKETLIST.filter((item) => item.completed).map((item) => (
-                  <li key={item.title} className="flex items-start gap-1.5 text-text-quaternary">
+                  <li key={item.title} className="flex items-start gap-1.5 text-quaternary">
                     <IconCheckmark2Small className="shrink-0 size-5 mt-px" />
                     <Body2 className="font-medium">{item.title}</Body2>
                   </li>
@@ -215,7 +215,7 @@ export default function Page() {
               <H2 className="text-left mb-2 md:mb-0">Countries visited</H2>
               <div className="flex items-center gap-2">
                 <div className="bg-rose-500 rounded-sm size-3" />
-                <Body3 className="font-medium text-text-primary">{VISITED_COUNTRIES.length} visited</Body3>
+                <Body3 className="font-medium text-primary">{VISITED_COUNTRIES.length} visited</Body3>
               </div>
             </div>
             <div className="mask-radial-[50%_55%] overflow-hidden mask-radial-from-50% w-full flex items-center justify-center">

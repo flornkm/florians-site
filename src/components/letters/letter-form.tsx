@@ -73,13 +73,13 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
       <Label htmlFor="signature">Signature</Label>
       <div
         className={cn(
-          "border border-border-primary bg-transparent rounded-[9px] mb-2",
+          "border border-primary bg-transparent rounded-[9px] mb-2",
           disabled ? "opacity-50 cursor-not-allowed" : "",
         )}
       >
         <div
           className={cn(
-            "w-full outline-0 -outline-offset-0 active:-outline-offset-1 active:bg-surface-secondary transition-all border-none duration-150 outline-border-primary active:outline-2 rounded-lg",
+            "w-full outline-0 -outline-offset-0 active:-outline-offset-1 active:bg-surface-secondary transition-all border-none duration-150 outline-primary active:outline-2 rounded-lg",
             disabled && "pointer-events-none",
           )}
         >

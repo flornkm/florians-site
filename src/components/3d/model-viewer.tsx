@@ -152,7 +152,7 @@ export function ModelViewer({
 
   return (
     <div
-      className={`relative cursor-grab active:cursor-grabbing border-border-secondary rounded-lg overflow-hidden ${className}`}
+      className={`relative cursor-grab active:cursor-grabbing border-secondary rounded-lg overflow-hidden ${className}`}
       style={{ width, height }}
     >
       <div className="absolute inset-0 -z-10 bg-border-primary animate-pulse" />

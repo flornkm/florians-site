@@ -77,8 +77,8 @@ export default function ScrollWheel({ html }: { html: string }) {
           <li
             key={heading.id}
             className={cn(
-              "cursor-pointer transition-all duration-200 hover:text-text-primary",
-              activeHeading === heading.id ? "text-text-primary font-medium" : "text-text-tertiary",
+              "cursor-pointer transition-all duration-200 hover:text-primary",
+              activeHeading === heading.id ? "text-primary font-medium" : "text-tertiary",
               heading.level > 1 ? `ml-${(heading.level - 1) * 2}` : "",
             )}
             onClick={() => scrollToHeading(heading.id)}

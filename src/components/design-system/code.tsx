@@ -10,7 +10,7 @@ export const Code = ({
     <pre
       {...props}
       className={cn(
-        "inline-block w-full overflow-auto rounded-[10px] border bg-surface-secondary border-border-primary py-1 px-2 text-sm leading-relaxed",
+        "inline-block w-full overflow-auto rounded-[10px] border bg-surface-secondary border-primary py-1 px-2 text-sm leading-relaxed",
         typeof className === "string" ? className.replace(/(^|\s)bg-[^\s]+/g, "") : className,
       )}
     >

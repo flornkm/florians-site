@@ -34,7 +34,7 @@ export default function Page() {
               target="_blank"
               className={cn(
                 buttonVariants({ variant: "tertiary" }),
-                "flex items-center px-2 py-0.5 gap-2 text-text-inverted group hover:bg-bg-inverted hover:text-text-inverted-secondary",
+                "flex items-center px-2 py-0.5 gap-2 text-inverted group hover:bg-inverted hover:text-inverted-secondary",
               )}
             >
               <IconGithub className="size-4" />

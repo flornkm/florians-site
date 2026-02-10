@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="w-full relative max-w-5xl md:px-0 px-4 mx-auto -mt-[7px] md:-mt-2">
-        <Body4 className="capitalize text-text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
+        <Body4 className="capitalize text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
         <Link
           href="/collection"
           className={cn(

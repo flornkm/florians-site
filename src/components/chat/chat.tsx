@@ -57,7 +57,7 @@ export const Chat = () => {
         {messages.map((message) => (
           <Body1
             key={message.id}
-            className={cn("leading-relaxed flex", message.role === "user" ? "text-text-tertiary" : "text-text-primary")}
+            className={cn("leading-relaxed flex", message.role === "user" ? "text-tertiary" : "text-primary")}
           >
             <span className="font-medium mr-1 w-14 shrink-0">{message.role === "user" ? "You:" : "Clone:"}</span>
             {message.parts.map((part, index) =>
@@ -88,7 +88,7 @@ export const Chat = () => {
             }}
             variant="tertiary"
             className={cn(
-              "border shrink-0 py-1 border-border-primary rounded-full",
+              "border shrink-0 py-1 border-primary rounded-full",
               recommendation === input && "bg-surface-secondary",
             )}
             key={index}

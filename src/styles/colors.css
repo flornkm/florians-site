@@ -79,40 +79,128 @@
 }
 
 @theme inline {
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-bg-tertiary: var(--bg-tertiary);
-  --color-bg-quaternary: var(--bg-quaternary);
-  --color-bg-inverted: var(--bg-inverted);
+  /* ===========================================
+     TEXT COLORS (text-*)
+     Usage: text-primary, text-secondary, etc.
+     =========================================== */
+  --text-color-primary: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+  --text-color-tertiary: var(--text-tertiary);
+  --text-color-quaternary: var(--text-quaternary);
+  --text-color-inverted: var(--text-inverted);
+  --text-color-inverted-secondary: var(--text-inverted-secondary);
+  --text-color-accent-foreground: var(--accent-foreground);
+  --text-color-destructive: var(--destructive);
+  --text-color-warning: var(--warning);
+  --text-color-success: var(--success);
 
-  --color-surface: var(--surface);
-  --color-surface-secondary: var(--surface-secondary);
-  --color-surface-tertiary: var(--surface-tertiary);
-  --color-surface-inverted: var(--surface-inverted);
+  /* ===========================================
+     BACKGROUND COLORS (bg-*)
+     Usage: bg-primary, bg-surface-secondary, etc.
+     =========================================== */
+  --background-color-primary: var(--bg-primary);
+  --background-color-secondary: var(--bg-secondary);
+  --background-color-tertiary: var(--bg-tertiary);
+  --background-color-quaternary: var(--bg-quaternary);
+  --background-color-inverted: var(--bg-inverted);
+  --background-color-surface: var(--surface);
+  --background-color-surface-secondary: var(--surface-secondary);
+  --background-color-surface-tertiary: var(--surface-tertiary);
+  --background-color-surface-inverted: var(--surface-inverted);
+  --background-color-accent-primary: var(--accent-primary);
+  --background-color-accent-primary-hover: var(--accent-primary-hover);
+  --background-color-interactive-hover: var(--interactive-hover);
+  --background-color-interactive-active: var(--interactive-active);
+  --background-color-destructive: var(--destructive);
+  --background-color-warning: var(--warning);
+  --background-color-success: var(--success);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-tertiary: var(--text-tertiary);
-  --color-text-quaternary: var(--text-quaternary);
-  --color-text-inverted: var(--text-inverted);
-  --color-text-inverted-secondary: var(--text-inverted-secondary);
+  /* ===========================================
+     BORDER COLORS (border-*)
+     Usage: border-primary, border-secondary, etc.
+     =========================================== */
+  --border-color-primary: var(--border-primary);
+  --border-color-secondary: var(--border-secondary);
+  --border-color-tertiary: var(--border-tertiary);
+  --border-color-accent-primary: var(--accent-primary);
 
-  --color-border-primary: var(--border-primary);
-  --color-border-secondary: var(--border-secondary);
-  --color-border-tertiary: var(--border-tertiary);
+  /* ===========================================
+     OUTLINE COLORS (outline-*)
+     Usage: outline-primary, outline-secondary, etc.
+     =========================================== */
+  --outline-color-primary: var(--border-primary);
+  --outline-color-secondary: var(--border-secondary);
+  --outline-color-tertiary: var(--border-tertiary);
 
-  --color-interactive-hover: var(--interactive-hover);
-  --color-interactive-active: var(--interactive-active);
+  /* ===========================================
+     RING COLORS (ring-*)
+     Usage: ring-default, ring-primary, etc.
+     =========================================== */
+  --ring-color-default: var(--ring);
+  --ring-color-primary: var(--accent-primary);
 
-  --color-accent-primary: var(--accent-primary);
-  --color-accent-primary-hover: var(--accent-primary-hover);
-  --color-accent-foreground: var(--accent-foreground);
+  /* ===========================================
+     FILL COLORS (fill-*)
+     Usage: fill-primary, fill-secondary, etc.
+     For SVG fills that should match text colors
+     =========================================== */
+  --fill-primary: var(--text-primary);
+  --fill-secondary: var(--text-secondary);
+  --fill-tertiary: var(--text-tertiary);
+  --fill-quaternary: var(--text-quaternary);
+  --fill-inverted: var(--text-inverted);
 
-  --color-destructive: var(--destructive);
-  --color-warning: var(--warning);
-  --color-success: var(--success);
+  /* ===========================================
+     STROKE COLORS (stroke-*)
+     Usage: stroke-primary, stroke-secondary, etc.
+     For SVG strokes
+     =========================================== */
+  --stroke-primary: var(--text-primary);
+  --stroke-secondary: var(--text-secondary);
+  --stroke-tertiary: var(--text-tertiary);
 
-  --color-ring: var(--ring);
-  --color-shadow: var(--shadow);
-  --color-shadow-lg: var(--shadow-lg);
+  /* ===========================================
+     SHADOW COLORS (shadow-*)
+     Usage: shadow-muted, shadow-emphasis
+     =========================================== */
+  --box-shadow-color-muted: var(--shadow);
+  --box-shadow-color-emphasis: var(--shadow-lg);
+
+  /* ===========================================
+     DIVIDE COLORS (divide-*)
+     Usage: divide-primary, divide-secondary, etc.
+     =========================================== */
+  --divide-color-primary: var(--border-primary);
+  --divide-color-secondary: var(--border-secondary);
+  --divide-color-tertiary: var(--border-tertiary);
+
+  /* ===========================================
+     CARET COLORS (caret-*)
+     Usage: caret-primary, caret-accent, etc.
+     =========================================== */
+  --caret-color-primary: var(--text-primary);
+  --caret-color-accent: var(--accent-primary);
+
+  /* ===========================================
+     ACCENT COLORS (accent-*)
+     For form element accents
+     =========================================== */
+  --accent-color-primary: var(--accent-primary);
+
+  /* ===========================================
+     PLACEHOLDER COLORS
+     Use with placeholder: variant, e.g., placeholder:text-tertiary
+     Already covered by text colors above
+     =========================================== */
+
+  /* ===========================================
+     TEXT DECORATION COLORS (decoration-*)
+     Usage: decoration-primary, decoration-muted, etc.
+     For underline/strikethrough colors
+     =========================================== */
+  --text-decoration-color-primary: var(--text-primary);
+  --text-decoration-color-secondary: var(--text-secondary);
+  --text-decoration-color-tertiary: var(--text-tertiary);
+  --text-decoration-color-muted: var(--border-primary);
+  --text-decoration-color-emphasis: var(--text-primary);
 }

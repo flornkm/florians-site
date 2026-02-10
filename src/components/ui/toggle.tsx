@@ -34,7 +34,7 @@ export default function Toggle({ checked, onCheckedChange, className, ...props }
       >
         <div
           className={cn(
-            "size-4 rounded-full bg-bg-primary transition-all duration-200 z-10 ease-out absolute top-1/2 -translate-y-1/2",
+            "size-4 rounded-full bg-primary transition-all duration-200 z-10 ease-out absolute top-1/2 -translate-y-1/2",
             checked ? "right-0.5" : "right-3.5",
           )}
         />

@@ -131,7 +131,7 @@ const TodoItem = React.forwardRef<HTMLDivElement, TodoItemProps>(
           attributes={attributes}
           listeners={listeners}
         />
-        <Body3 className="text-text-primary font-medium">{todo.text}</Body3>
+        <Body3 className="text-primary font-medium">{todo.text}</Body3>
       </div>
     );
   },
@@ -162,7 +162,7 @@ function HandleButton({
     <button
       aria-label="Drag item"
       className={cn(
-        "p-2 hover:bg-interactive-hover rounded-md transition-all text-text-quaternary hover:text-text-primary",
+        "p-2 hover:bg-interactive-hover rounded-md transition-all text-quaternary hover:text-primary",
         cursorClass,
       )}
       {...attributes}
