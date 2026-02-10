@@ -1,6 +1,6 @@
 import { Chat } from "@/components/chat/chat";
 import { ChatStatusProvider } from "@/components/chat/chat-status";
-import { Clone } from "@/components/shared/clone/clone";
+import { Clone } from "@/components/shared/clone/Clone";
 
 export default function Page() {
   return (
