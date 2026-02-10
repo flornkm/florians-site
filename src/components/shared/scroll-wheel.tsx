@@ -1,37 +1,10 @@
+import { Heading } from "@/lib/mdx";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { H4 } from "../design-system/heading";
 
-export default function ScrollWheel({ html }: { html: string }) {
-  const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([]);
+export default function ScrollWheel({ headings }: { headings: Heading[] }) {
   const [activeHeading, setActiveHeading] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!html) return;
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = html;
-
-    const headingElements = tempDiv.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-    const extractedHeadings = Array.from(headingElements).map((heading) => {
-      const level = parseInt(heading.tagName.substring(1));
-      const text = heading.textContent || "";
-
-      let id = heading.id;
-      if (!id) {
-        id = text
-          .toLowerCase()
-          .replace(/\s+/g, "-")
-          .replace(/[^\w-]/g, "");
-        heading.id = id;
-      }
-
-      return { id, text, level };
-    });
-
-    setHeadings(extractedHeadings);
-  }, [html]);
 
   useEffect(() => {
     if (headings.length === 0 || typeof window === "undefined") return;
@@ -71,14 +44,14 @@ export default function ScrollWheel({ html }: { html: string }) {
 
   return (
     <nav className="space-y-2 text-ms">
-      <H4 className="font-medium mb-3">On this page</H4>
+      <H4 className="mb-3 font-medium">On this page</H4>
       <ul className="space-y-2">
         {headings.map((heading) => (
           <li
             key={heading.id}
             className={cn(
               "cursor-pointer transition-all duration-200 hover:text-primary",
-              activeHeading === heading.id ? "text-primary font-medium" : "text-tertiary",
+              activeHeading === heading.id ? "font-medium text-primary" : "text-tertiary",
               heading.level > 1 ? `ml-${(heading.level - 1) * 2}` : "",
             )}
             onClick={() => scrollToHeading(heading.id)}

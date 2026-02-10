@@ -1,7 +1,7 @@
-import { returnContent } from "@/lib/convert";
+import { getContent } from "@/lib/mdx";
 import { PageContextServer } from "vike/types";
 
 export const data = async (_pageContext: PageContextServer) => {
-  const projects = await returnContent("work");
+  const projects = await getContent("work");
   return projects;
 };

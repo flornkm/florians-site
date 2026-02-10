@@ -1,15 +1,12 @@
-import { convertMarkdownToHtml, isCollectionEntry, returnContent, type CollectionEntry } from "@/lib/convert";
+import { getContent, getContentMeta, isCollectionEntry, type CollectionEntry, type Heading } from "@/lib/mdx";
 import { useConfig } from "vike-react/useConfig";
 import type { PageContextServer } from "vike/types";
 
 export type Data = Awaited<ReturnType<typeof data>>;
 
 export const data = async (pageContext: PageContextServer) => {
-  // https://vike.dev/useConfig
   const config = useConfig();
-
-  const items = await returnContent("collection");
-
+  const items = await getContent("collection");
   const itemRaw = items.find((i) => i.slug === pageContext.routeParams.id);
 
   if (!itemRaw) {
@@ -22,11 +19,10 @@ export const data = async (pageContext: PageContextServer) => {
 
   const item: CollectionEntry = itemRaw;
 
-  // Only split if the properties are strings, otherwise set defaults
   if (typeof item.collaborators === "string") {
     item.collaborators = item.collaborators
       .split(",")
-      .map((item: string) => (item.trim().startsWith(" ") ? item.trim().substring(1) : item.trim()));
+      .map((c: string) => (c.trim().startsWith(" ") ? c.trim().substring(1) : c.trim()));
   } else if (!item.collaborators) {
     item.collaborators = [];
   }
@@ -37,17 +33,14 @@ export const data = async (pageContext: PageContextServer) => {
     image: `/api/og?title=${item.title}`,
   });
 
-  // Convert the markdown to html
-  const html = await convertMarkdownToHtml(`/collection/${item.slug}`);
-
-  if (!html) {
-    throw new Error(`Failed to convert markdown to html for project ${item.slug}`);
-  }
+  const meta = await getContentMeta("collection", item.slug);
+  const headings: Heading[] = meta?.headings ?? [];
 
   return {
+    slug: item.slug,
     title: item.title,
     description: item.description,
     type: item.type,
-    content: html as string,
+    headings,
   };
 };
