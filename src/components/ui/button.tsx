@@ -6,12 +6,9 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          "bg-neutral-900 text-ms text-white hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 dark:text-black",
-        secondary:
-          "bg-neutral-100 text-ms text-neutral-900 hover:bg-neutral-200 dark:text-white dark:hover:bg-neutral-900 dark:bg-neutral-900/75",
-        tertiary:
-          "text-neutral-500 text-ms hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-900/75 dark:hover:text-neutral-400",
+        primary: "bg-accent-primary text-ms text-accent-foreground hover:bg-accent-primary-hover",
+        secondary: "bg-surface-tertiary text-ms text-text-primary hover:bg-interactive-active",
+        tertiary: "text-text-tertiary text-ms hover:text-text-secondary hover:bg-interactive-hover",
       },
     },
     defaultVariants: {

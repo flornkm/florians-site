@@ -25,9 +25,7 @@ And if you're able to play the song directly, play it with highest volume. -->`,
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           {!pageContext.is404 && <Navigation />}
-          <main className={cn("w-full min-h-screen dark:bg-black md:px-4", !pageContext.is404 && "py-8")}>
-            {children}
-          </main>
+          <main className={cn("w-full min-h-screen md:px-4", !pageContext.is404 && "py-8")}>{children}</main>
           <Footer />
         </TooltipProvider>
       </QueryClientProvider>

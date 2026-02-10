@@ -20,7 +20,7 @@ interface SocialLink {
 }
 
 const footerLinkVariants = cva(
-  "font-medium flex items-center gap-2 text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300 hover:text-neutral-600 transition-all",
+  "font-medium flex items-center gap-2 text-text-tertiary hover:text-text-secondary transition-all",
   {
     variants: {
       size: {
@@ -56,7 +56,7 @@ const LEGAL_LINKS: Tab[] = [
 export default function Footer() {
   return (
     <footer
-      className="md:pb-8 pb-24 px-4 mt-24 relative z-10 pt-12 mask-t-from-90% mask-t-to-100% bg-white dark:bg-black "
+      className="md:pb-8 pb-24 px-4 mt-24 relative z-10 pt-12 mask-t-from-90% mask-t-to-100% bg-bg-primary"
       style={{ scrollSnapAlign: "start" }}
     >
       <div className="container mx-auto max-w-5xl space-y-12">

@@ -38,7 +38,7 @@ export default function FAQ() {
           <div
             key={index}
             onClick={() => setActiveIndex(index)}
-            className="w-full flex-1/2 flex flex-col gap-2 transition-all cursor-pointer border-b overflow-hidden border-neutral-200"
+            className="w-full flex-1/2 flex flex-col gap-2 transition-all cursor-pointer border-b overflow-hidden border-border-primary"
           >
             <div className="group rounded-lg my-px font-mono">
               <div className="[mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] p-4">
@@ -47,13 +47,13 @@ export default function FAQ() {
                   <div className="relative w-3 h-3">
                     <div
                       className={cn(
-                        "absolute w-0.5 h-full bg-black rounded-full transition-all duration-500 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2",
+                        "absolute w-0.5 h-full bg-text-primary rounded-full transition-all duration-500 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2",
                         activeIndex === index ? "rotate-[90deg]" : "rotate-0",
                       )}
                     />
                     <div
                       className={cn(
-                        "absolute w-0.5 h-full bg-black rotate-90 rounded-full transition-all duration-1000 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2",
+                        "absolute w-0.5 h-full bg-text-primary rotate-90 rounded-full transition-all duration-1000 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2",
                         activeIndex === index ? "rotate-[270deg]" : "rotate-90",
                       )}
                     />
@@ -61,7 +61,7 @@ export default function FAQ() {
                 </div>
                 <p
                   className={cn(
-                    "text-xs leading-relaxed tabular-nums font-medium text-neutral-500 transition-all duration-500",
+                    "text-xs leading-relaxed tabular-nums font-medium text-text-tertiary transition-all duration-500",
                     activeIndex === index
                       ? "max-h-72 mt-2 mb-2 opacity-100"
                       : "max-h-0 group-hover:max-h-10 opacity-0 group-hover:opacity-100 group-hover:mt-2 overflow-hidden [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)]",

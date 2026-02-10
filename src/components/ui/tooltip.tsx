@@ -166,7 +166,7 @@ const TooltipPortal = memo(
       <div
         ref={tooltipRef}
         className={cn(
-          "fixed z-50 pointer-events-none font-medium dark:bg-white dark:text-black bg-black text-white px-2 py-1 rounded-lg ease-out",
+          "fixed z-50 pointer-events-none font-medium bg-surface-inverted text-text-inverted px-2 py-1 rounded-lg ease-out",
           tooltip.isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95",
         )}
         style={{
@@ -178,10 +178,10 @@ const TooltipPortal = memo(
             : "opacity 200ms ease-out, transform 200ms ease-out, scale 200ms ease-out",
         }}
       >
-        <Body3 className="text-white dark:text-black whitespace-nowrap">{tooltip.content}</Body3>
+        <Body3 className="text-text-inverted whitespace-nowrap">{tooltip.content}</Body3>
         <div
           className={cn(
-            "w-2 h-2 bg-black dark:bg-white rounded-[2px] rotate-45 absolute top-full -mt-0.5 ease-out",
+            "w-2 h-2 bg-surface-inverted rounded-[2px] rotate-45 absolute top-full -mt-0.5 ease-out",
             shouldAnimate ? "transition-all duration-200" : "transition-none",
           )}
           style={{
@@ -238,9 +238,9 @@ const Tooltip = memo(
       return (
         <div className={cn("relative group/tooltip", className)} {...props}>
           {children}
-          <div className="absolute bottom-full mb-1 group-hover/tooltip:mb-2 left-1/2 pointer-events-none font-medium -translate-x-1/2 dark:bg-white dark:text-black bg-black text-white px-2 py-1 rounded-lg opacity-0 group-hover/tooltip:opacity-100 transition-all duration-200 delay-75">
-            <Body3 className="text-white dark:text-black whitespace-nowrap">{content}</Body3>
-            <div className="w-2 h-2 bg-black dark:bg-white -translate-y-1/2 rounded-[2px] rotate-45 absolute top-full left-1/2 -translate-x-1/2" />
+          <div className="absolute bottom-full mb-1 group-hover/tooltip:mb-2 left-1/2 pointer-events-none font-medium -translate-x-1/2 bg-surface-inverted text-text-inverted px-2 py-1 rounded-lg opacity-0 group-hover/tooltip:opacity-100 transition-all duration-200 delay-75">
+            <Body3 className="text-text-inverted whitespace-nowrap">{content}</Body3>
+            <div className="w-2 h-2 bg-surface-inverted -translate-y-1/2 rounded-[2px] rotate-45 absolute top-full left-1/2 -translate-x-1/2" />
           </div>
         </div>
       );

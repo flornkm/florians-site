@@ -10,11 +10,11 @@ export const CssCalculations = () => {
 
   return (
     <div className="space-y-2 flex items-center flex-col">
-      <div className="relative flex h-56 overflow-hidden rounded border border-neutral-200 dark:border-neutral-900">
+      <div className="relative flex h-56 overflow-hidden rounded border border-border-primary">
         <div className="w-48 h-full" />
         <div
           className={cn(
-            "transition-all duration-200 ease-out h-full bg-neutral-100 border-l border-l-neutral-200 dark:border-l-neutral-900 dark:bg-neutral-950",
+            "transition-all duration-200 ease-out h-full bg-surface-tertiary border-l border-l-border-primary",
             open ? "w-48" : "w-0 opacity-0",
           )}
         />
@@ -24,7 +24,7 @@ export const CssCalculations = () => {
           }}
           variant="secondary"
           className={cn(
-            "p-1 rounded-full bg-white border shadow-black/[.03] hover:bg-neutral-50 border-neutral-200 dark:border-neutral-900 absolute top-2 transition-all duration-200 ease-out",
+            "p-1 rounded-full bg-bg-primary border shadow-shadow hover:bg-surface-secondary border-border-primary absolute top-2 transition-all duration-200 ease-out",
             open ? "right-[calc(50%-1.3rem)] translate-x-1/2" : "right-2",
           )}
         >

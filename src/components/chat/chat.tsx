@@ -50,17 +50,14 @@ export const Chat = () => {
       <div
         ref={scrollContainerRef}
         className={cn(
-          "flex-1 lg:px-0 px-8 min-h-0 transition-all overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-neutral-200 scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2",
+          "flex-1 lg:px-0 px-8 min-h-0 transition-all overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-border-primary scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2",
           messages.length > 0 && "backdrop-blur-2xl lg:backdrop-blur-none",
         )}
       >
         {messages.map((message) => (
           <Body1
             key={message.id}
-            className={cn(
-              "leading-relaxed flex",
-              message.role === "user" ? "text-neutral-500 dark:text-neutral-400" : "text-black dark:text-white",
-            )}
+            className={cn("leading-relaxed flex", message.role === "user" ? "text-text-tertiary" : "text-text-primary")}
           >
             <span className="font-medium mr-1 w-14 shrink-0">{message.role === "user" ? "You:" : "Clone:"}</span>
             {message.parts.map((part, index) =>
@@ -91,8 +88,8 @@ export const Chat = () => {
             }}
             variant="tertiary"
             className={cn(
-              "border shrink-0 py-1 border-neutral-200 dark:border-neutral-800 rounded-full",
-              recommendation === input && "bg-neutral-50 dark:bg-neutral-900",
+              "border shrink-0 py-1 border-border-primary rounded-full",
+              recommendation === input && "bg-surface-secondary",
             )}
             key={index}
           >
@@ -124,7 +121,7 @@ export const Chat = () => {
         />
         <Button
           type="submit"
-          className="rounded-full absolute top-1/2 -translate-y-1/2 right-2.5 size-8 p-0 flex items-center justify-center bg-black text-white disabled:opacity-50"
+          className="rounded-full absolute top-1/2 -translate-y-1/2 right-2.5 size-8 p-0 flex items-center justify-center bg-accent-primary text-accent-foreground disabled:opacity-50"
           disabled={status !== "ready"}
         >
           <IconArrowUp className="size-4" />

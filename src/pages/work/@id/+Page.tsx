@@ -25,7 +25,7 @@ export default function Page() {
             <div className="flex-1 h-7">
               <div className="group-hover/link:translate-y-[-25.5px] group-focus-within/link:translate-y-[-25.5px] transition-all duration-200 ease-out pointer-events-none">
                 <H1 className="group-hover/link:blur-[1px] group-hover/link:opacity-0 group-focus-within/link:blur-[1px] group-focus-within/link:opacity-0 transition-all duration-200 ease-out">
-                  {project.title} <span className="text-neutral-400 text-ms">{project.date.split("/")[1]}</span>
+                  {project.title} <span className="text-text-quaternary text-ms">{project.date.split("/")[1]}</span>
                 </H1>
                 <span
                   className={cn(
@@ -44,7 +44,7 @@ export default function Page() {
               <Tooltip
                 content={collaborator}
                 key={collaborator}
-                className="w-6 h-6 rounded-full group border border-black/10 relative outline-2 -outline-offset-1 outline-white dark:outline-black hover:!z-[9999]"
+                className="w-6 h-6 rounded-full group border border-bg-inverted/10 relative outline-2 -outline-offset-1 outline-bg-primary hover:!z-[9999]"
                 style={{
                   marginLeft: index > 0 ? "-6px" : "0",
                   zIndex: (project.collaborators?.length || 0) - index + 1,
@@ -59,7 +59,7 @@ export default function Page() {
             ))}
             <Tooltip
               content="Florian Kiem"
-              className="w-6 h-6 hover:z-10 relative rounded-full border border-black/10 outline-2 -outline-offset-1 outline-white dark:outline-black"
+              className="w-6 h-6 hover:z-10 relative rounded-full border border-bg-inverted/10 outline-2 -outline-offset-1 outline-bg-primary"
               style={{ marginLeft: "-6px" }}
             >
               <img
@@ -75,14 +75,14 @@ export default function Page() {
         </div>
         <div className="w-full md:max-w-[calc(100%-5rem)] pt-8 justify-self-end flex flex-col justify-start items-start h-[calc(100%+6rem)]">
           {project.links && project.links.length > 0 && (
-            <div className="flex md:flex-col max-w-xs bg-black dark:bg-white z-20 rounded-[10px] mx-auto sticky w-auto top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 shadow-xl">
+            <div className="flex md:flex-col max-w-xs bg-surface-inverted z-20 rounded-[10px] mx-auto sticky w-auto top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 shadow-xl">
               <div className="flex gap-0.5 p-0.5">
                 {project.links?.map((link: string) => (
                   <Link
                     href={link}
                     className={cn(
                       buttonVariants({ variant: "tertiary" }),
-                      "flex items-center px-2 py-0.5 gap-2 text-white group dark:text-black dark:hover:bg-black dark:hover:text-white",
+                      "flex items-center px-2 py-0.5 gap-2 text-text-inverted group hover:text-text-primary",
                     )}
                   >
                     {link.replaceAll("https://", "").replaceAll("http://", "").replaceAll("www.", "").split("/")[0]}

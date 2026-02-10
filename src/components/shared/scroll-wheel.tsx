@@ -71,16 +71,14 @@ export default function ScrollWheel({ html }: { html: string }) {
 
   return (
     <nav className="space-y-2 text-ms">
-      <H4 className="font-medium text-neutral-800 mb-3">On this page</H4>
+      <H4 className="font-medium mb-3">On this page</H4>
       <ul className="space-y-2">
         {headings.map((heading) => (
           <li
             key={heading.id}
             className={cn(
-              "cursor-pointer transition-all duration-200 hover:text-neutral-800 dark:hover:text-neutral-500",
-              activeHeading === heading.id
-                ? "text-neutral-800 font-medium dark:text-neutral-200"
-                : "text-neutral-500 dark:text-neutral-400",
+              "cursor-pointer transition-all duration-200 hover:text-text-primary",
+              activeHeading === heading.id ? "text-text-primary font-medium" : "text-text-tertiary",
               heading.level > 1 ? `ml-${(heading.level - 1) * 2}` : "",
             )}
             onClick={() => scrollToHeading(heading.id)}

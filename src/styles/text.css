@@ -1,0 +1,88 @@
+@theme {
+  --font-sans: "Pretendard Variable", "Pretendard", "Inter", sans-serif;
+  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, "Liberation Mono", "Courier New", monospace;
+  --font-round: "Open Runde", sans-serif;
+}
+
+@utility type-display {
+  font-family: var(--font-sans);
+  font-size: theme(fontSize.2xl);
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+@utility type-title-1 {
+  font-family: var(--font-sans);
+  font-size: theme(fontSize.lg);
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+@utility type-title-2 {
+  font-family: var(--font-sans);
+  font-size: theme(fontSize.base);
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+@utility type-title-3 {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+}
+
+@utility type-title-4 {
+  font-family: var(--font-sans);
+  font-size: theme(fontSize.sm);
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+@utility type-title-5 {
+  font-family: var(--font-sans);
+  font-size: theme(fontSize.xs);
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+@utility type-body {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+@utility type-body-strong {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+@utility type-small {
+  font-size: theme(fontSize.sm);
+  line-height: 1.25rem;
+}
+
+@utility type-small-strong {
+  font-size: theme(fontSize.sm);
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+@utility type-tiny {
+  font-size: theme(fontSize.xs);
+  line-height: 1rem;
+}
+
+@utility type-tiny-strong {
+  font-size: theme(fontSize.xs);
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+@utility type-mono {
+  font-family: var(--font-mono);
+}
+
+@utility type-round {
+  font-family: var(--font-round);
+}

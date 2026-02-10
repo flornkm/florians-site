@@ -131,7 +131,7 @@ const TodoItem = React.forwardRef<HTMLDivElement, TodoItemProps>(
           attributes={attributes}
           listeners={listeners}
         />
-        <Body3 className="text-neutral-900 dark:text-neutral-100 font-medium">{todo.text}</Body3>
+        <Body3 className="text-text-primary font-medium">{todo.text}</Body3>
       </div>
     );
   },
@@ -152,7 +152,6 @@ function HandleButton({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   listeners?: any;
 }) {
-  // Use simple CSS-only approach: only one cursor class at a time
   const cursorClass = enableGrabClasses
     ? isDragging
       ? "cursor-grabbing"
@@ -163,7 +162,7 @@ function HandleButton({
     <button
       aria-label="Drag item"
       className={cn(
-        "p-2 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-md transition-all text-neutral-400 hover:text-black dark:hover:text-white",
+        "p-2 hover:bg-interactive-hover rounded-md transition-all text-text-quaternary hover:text-text-primary",
         cursorClass,
       )}
       {...attributes}

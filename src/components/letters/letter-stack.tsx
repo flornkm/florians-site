@@ -48,7 +48,6 @@ function DraggableLetter({
     });
   };
 
-  // Prevent page scroll while dragging (mobile + iOS Safari)
   usePreventScroll(isDragging);
 
   const handleMove = (clientX: number, clientY: number) => {
@@ -84,7 +83,7 @@ function DraggableLetter({
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault(); // Prevent scrolling
+    e.preventDefault();
     const touch = e.touches[0];
     handleMove(touch.clientX, touch.clientY);
   };
@@ -142,13 +141,13 @@ export function LetterStack() {
 
   if (!letters || isLoading)
     return (
-      <div className="aspect-a4 my-8 mx-auto max-w-[450px] w-full md:h-80 bg-neutral-200 dark:bg-neutral-800 animate-pulse rounded-lg"></div>
+      <div className="aspect-a4 my-8 mx-auto max-w-[450px] w-full md:h-80 bg-border-primary animate-pulse rounded-lg"></div>
     );
 
   if (letterOrder.length === 0)
     return (
-      <div className="aspect-a4 mx-auto my-8 max-w-[450px] w-full md:h-80 flex justify-center items-center border border-dashed rounded-lg border-neutral-200 dark:border-neutral-800">
-        <Body1 className="text-neutral-500 dark:text-neutral-400">No letters available.</Body1>
+      <div className="aspect-a4 mx-auto my-8 max-w-[450px] w-full md:h-80 flex justify-center items-center border border-dashed rounded-lg border-border-primary">
+        <Body1 className="text-text-tertiary">No letters available.</Body1>
       </div>
     );
 
