@@ -1,0 +1,67 @@
+---
+title: inlang
+description: Localization ecosystem for software
+cover: /images/inlang/inlang.webp
+date: 10 / 2023
+type: experiment
+collaborators: Samuel Stroschein, Nils Jacobsen, Niklas Buchfink, Jannes Blobel, Jan Johannes, Felix Haeberle
+links: https://inlang.com
+---
+
+# Reimagining i18n for developers
+
+One file format that is interoperable between multiple apps, built on git's core principles.
+
+![inlang redesign](/images/inlang/inlang-redesign.webp)
+
+inlang enables developers to easily setup and use one file format for their translations. In contrast to other translation tools which use databases, inlang is fully file-based and agnostic – making it significantly easier to integrate into any tech stack.
+
+![inlang timeline](/images/inlang/inlang-timeline.webp)
+
+## Marketplace
+
+My focus at inlang was building the marketplace and mini-apps for easier project management.
+
+
+```florians-site/src/content/work/inlang.mdx
+{
+  …,
+  "properties": {
+    …,
+    "icon": {
+      "type": "string",
+      "format": "uri",
+      "description": "Icon URL."
+    },
+    "gallery": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "Image URLs for gallery display."
+    },
+    "displayName": {
+      "type": "object",
+      "description": "Localized display names.",
+      "additionalProperties": { "type": "string" }
+    },
+  …    
+}
+```
+
+We transformed inlang.com from a simple landing page into a comprehensive marketplace with manifests that defined product metadata, integrating everything into one central hub.
+
+![inlang design](/images/inlang/inlang-design.webp)
+
+I refactored the markdown parsing system to remark/rehype and introduced custom lit web components that work across all frameworks, giving users the simplicity of markdown with interactive components.
+
+<Video webm="/images/inlang/inlang-badge.webm" className="rounded-xl" />
+
+## Installation wizard
+
+To simplify onboarding, I built a platform where users can open their inlang files and install products with just a few clicks.
+
+<Video webm="/images/inlang/inlang-install.webm" className="rounded-xl" />
+
+By early 2023, inlang's repository had accumulated over 9,000 commits, reached more than 850 stars, and attracted nearly 50 contributors. Given my sole design background, I was able to get a lot of hands-on Javascript and Typescript experience.

@@ -52,7 +52,7 @@ export default function Page() {
               </div>
             </div>
           </Link>
-          <Body2 className="mb-4">{project.description}</Body2>
+          <Body2 className="mb-4 text-secondary">{project.description}</Body2>
           <div className="mb-8 flex select-none">
             {project.collaborators?.map((collaborator: string, index: number) => (
               <Tooltip

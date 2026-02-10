@@ -11,26 +11,35 @@ links: https://sona.wtf, https://apps.apple.com/app/sona
 
 Sona captures conversations and meetings, delivering insights that matter most to you. It consists of iOS and watchOS apps backed by powerful infrastructure to process audio and extract valuable information.
 
-![Sona](/images/sona/sona.webp)
+![Sona Details](/images/sona/sona-details.webp)
 
 When taking walks with friends, chatting in the car, or simply having a call, we don't want to write down, we want to actively remember and talk to our conversation. Sona's idea was simple: Capturing these fleeting moments and making them accessible with the help of AI. Given that we started this project in January of 2024, there weren't a lot of AI native solutions out there and most iOS apps we were able to find used Apple's integrated iOS voice to text feature.
 
-![Sona Details](/images/sona/sona-details.webp)
+<Video webm="/images/sona/sona-hero.webm" className="rounded-xl" />
 
-## How we built it
+## Interactions & Animations
 
-**Building for ourselves first**
-We initially created Sona for ourselves and close friends, focusing on capturing the most important details. Early feedback showed us this tool could help many others.
+We put a lot of care into the micro-interactions and animations to make Sona feel polished and delightful to use.
 
-**Backend infrastructure**
-We built a custom Express backend running on our own GPUs to process audio data. Our pipeline includes automated actions like auto-filling speaker names and summarizing transcripts for high-quality insights.
+<Video webm="/images/sona/sona-mobile-modal.webm" className="rounded-xl" />
 
-**iOS + watchOS apps**
-We developed mobile apps with SwiftUI to provide a seamless experience. Users can record audio, view transcripts, and access insights all in one place.
+<div className="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <Video webm="/images/sona/bouncy-slider-sona.webm" className="rounded-xl" />
+  <Video webm="/images/sona/sona-subtle-animation.webm" className="rounded-xl" />
+</div>
 
-**Technical challenges**
-One major hurdle was receiving accurate user information in our backend. Apple's ecosystem made this difficult compared to platforms like Stripe. We leveraged App Store Connect API with Server Notifications v2, requiring extensive testing to ensure reliability.
+## Rive Animations
 
-<Video src="/videos/sona.webm" autoPlay muted loop playsInline />
+We used Rive to create smooth, interactive animations that bring the app to life while keeping performance buttery smooth on iOS.
+
+<div className="not-prose my-8">
+  <img src="/images/sona/sona-hero-animation-how.png" alt="Sona hero animation breakdown" className="w-full h-auto rounded-xl" />
+</div>
+
+<Video webm="/images/sona/rive_swift.webm" className="rounded-xl" />
+
+## Launch
+
+<Video src="/videos/sona.webm" className="rounded-xl" />
 
 Sona launched successfully on ProductHunt, reaching nearly 10,000 users in its first month. While we're working on new projects in the meantime, we still see a static increase in our user count.
