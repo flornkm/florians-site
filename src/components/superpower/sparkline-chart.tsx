@@ -129,16 +129,14 @@ export function SparklineChart({ biomarker, maxPoints = 4, width = 150 }: Sparkl
     [points, chartData.length],
   );
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<SVGSVGElement>) => {
+  const updateTooltipFromPosition = useCallback(
+    (clientX: number) => {
       if (!svgRef.current || points.length === 0) return;
 
       const rect = svgRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
+      const posX = clientX - rect.left;
 
-      const nearest = points.reduce((prev, curr) =>
-        Math.abs(curr.x - mouseX) < Math.abs(prev.x - mouseX) ? curr : prev,
-      );
+      const nearest = points.reduce((prev, curr) => (Math.abs(curr.x - posX) < Math.abs(prev.x - posX) ? curr : prev));
 
       const nearestIndex = points.indexOf(nearest);
       if (lastHoveredIndexRef.current === nearestIndex) return;
@@ -156,7 +154,38 @@ export function SparklineChart({ biomarker, maxPoints = 4, width = 150 }: Sparkl
     [points],
   );
 
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<SVGSVGElement>) => {
+      updateTooltipFromPosition(e.clientX);
+    },
+    [updateTooltipFromPosition],
+  );
+
   const handleMouseLeave = useCallback(() => {
+    lastHoveredIndexRef.current = null;
+    setTooltip(null);
+  }, []);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<SVGSVGElement>) => {
+      if (e.touches.length > 0) {
+        updateTooltipFromPosition(e.touches[0].clientX);
+      }
+    },
+    [updateTooltipFromPosition],
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent<SVGSVGElement>) => {
+      if (e.touches.length > 0) {
+        e.preventDefault();
+        updateTooltipFromPosition(e.touches[0].clientX);
+      }
+    },
+    [updateTooltipFromPosition],
+  );
+
+  const handleTouchEnd = useCallback(() => {
     lastHoveredIndexRef.current = null;
     setTooltip(null);
   }, []);
@@ -178,9 +207,12 @@ export function SparklineChart({ biomarker, maxPoints = 4, width = 150 }: Sparkl
           ref={svgRef}
           width={width}
           height={CHART_CONFIG.HEIGHT}
-          className="cursor-crosshair touch-manipulation overflow-visible"
+          className="cursor-crosshair touch-none overflow-visible"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {lines.map((line) => (
             <line

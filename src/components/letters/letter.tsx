@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
 
 const letterVariants = cva(
-  "aspect-a4 shrink-0 w-full shadow-2xl shadow-emphasis h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-primary rounded-xl border flex",
+  "aspect-a4 shrink-0 w-full shadow-2xl shadow-black/[.03] h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-primary rounded-xl border flex",
   {
     variants: {
       variant: {
@@ -28,7 +28,7 @@ const letterVariants = cva(
       {
         variant: "preview",
         isEmpty: false,
-        className: "scale-100 shadow-2xl shadow-emphasis",
+        className: "scale-100 shadow-2xl shadow-black/[.03]",
       },
       {
         variant: "preview",

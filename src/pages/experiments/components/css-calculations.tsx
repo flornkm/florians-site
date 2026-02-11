@@ -10,12 +10,12 @@ export const CssCalculations = () => {
 
   return (
     <div className="space-y-2 flex items-center flex-col">
-      <div className="relative flex h-56 overflow-hidden rounded border border-primary">
-        <div className="w-48 h-full" />
+      <div className="relative flex h-32 md:h-56 overflow-hidden rounded border border-primary">
+        <div className="w-24 md:w-48 h-full" />
         <div
           className={cn(
-            "transition-all duration-200 ease-out h-full bg-surface-tertiary border-l border-l-border-primary",
-            open ? "w-48" : "w-0 opacity-0",
+            "transition-all duration-200 ease-out h-full bg-surface-tertiary border-l border-l-primary",
+            open ? "w-24 md:w-48" : "w-0 opacity-0",
           )}
         />
         <Button
