@@ -11,7 +11,7 @@ collaborators: Anton Stallboerger
 An Arduino powered hardware device connected to a custom iOS app to output the right amounts of powdered supplements.
 
 <div className="not-prose my-8">
-  <img src="/images/boost/boost.webp" alt="Boost device" className="w-full h-auto rounded-xl" />
+  <img src="/images/boost/boost.webp" alt="Boost device" className="w-full h-auto rounded-lg" />
 </div>
 
 Despite widespread supplement use, most people don't know how much they should take or which products are best for their specific needs. The market is saturated with options, creating confusion rather than clarity for consumers.
@@ -21,12 +21,12 @@ Despite widespread supplement use, most people don't know how much they should t
 We developed a cohesive brand identity that reflects the precision and personalization at the core of Boost.
 
 <div className="not-prose my-8">
-  <img src="/images/boost/boost-branding.webp" alt="Boost branding" className="w-full h-auto rounded-xl" />
+  <img src="/images/boost/boost-branding.webp" alt="Boost branding" className="w-full h-auto rounded-lg" />
 </div>
 
 <div className="not-prose my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <img src="/images/boost/boost-custom-icons.webp" alt="Boost custom icons" className="w-full h-auto rounded-xl" />
-  <img src="/images/boost/boost-packaging.webp" alt="Boost packaging" className="w-full h-auto rounded-xl" />
+  <img src="/images/boost/boost-custom-icons.webp" alt="Boost custom icons" className="w-full h-auto rounded-lg" />
+  <img src="/images/boost/boost-packaging.webp" alt="Boost packaging" className="w-full h-auto rounded-lg bg-white" />
 </div>
 
 ## Hardware Device
@@ -34,7 +34,7 @@ We developed a cohesive brand identity that reflects the precision and personali
 We developed a hardware prototype to test functionality and user experience. After testing various motors, we selected the Nema 17 stepper motor for optimal performance. We programmed an ESP32 using Arduino IDE and created a NodeJS Express server to handle data transmission between the hardware and a quickly developed frontend.
 
 <div className="not-prose my-8">
-  <img src="/images/boost/boost-device.webp" alt="Boost hardware device" className="w-full h-auto rounded-xl" />
+  <img src="/images/boost/boost-device.webp" alt="Boost hardware device" className="w-full h-auto rounded-lg" />
 </div>
 
 Here's one of the 3D models we created during the prototyping process:
@@ -43,23 +43,23 @@ Here's one of the 3D models we created during the prototyping process:
 
 The final hardware prototype incorporated seven stepper motors, various sensors, a circular display, and two ESP32 controllers. We designed the system to transmit and receive data via HTTP requests, prioritizing reliability and creating a realistic user experience.
 
-<Video webm="/videos/powder_machine.webm" className="rounded-xl" />
+<Video webm="/videos/powder_machine.webm" className="rounded-lg" />
 
 ## Mobile App
 
 We designed the application to be fully functional even without hardware connection, allowing for independent testing. Starting with a comprehensive Figma prototype, we built the application using Ionic React, with a NodeJS Express backend and Prisma for database modeling.
 
 <div className="not-prose my-8">
-  <img src="/images/boost/boost-mobile-sketches.webp" alt="Boost mobile app sketches" className="w-full h-auto rounded-xl" />
+  <img src="/images/boost/boost-mobile-sketches.webp" alt="Boost mobile app sketches" className="w-full h-auto rounded-lg bg-white" />
 </div>
 
 We integrated Apple HealthKit and OpenWeather API to gather user data for calculating personalized vitamin recommendations.
 
 <div className="not-prose my-8">
-  <img src="/images/boost/boost-nutrition.webp" alt="Boost nutrition interface" className="w-full h-auto rounded-xl" />
+  <img src="/images/boost/boost-nutrition.webp" alt="Boost nutrition interface" className="w-full h-auto rounded-lg bg-white" />
 </div>
 
-<Video src="/videos/boost-device.mp4" className="rounded-xl" autoPlay muted loop playsInline />
+<Video src="/videos/boost-device.mp4" className="rounded-lg" autoPlay muted loop playsInline />
 
 ## Reception
 
