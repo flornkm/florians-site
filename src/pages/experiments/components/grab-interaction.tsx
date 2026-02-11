@@ -24,7 +24,7 @@ const initialTodos: Todo[] = [
 
 export const GrabInteraction = () => {
   return (
-    <div className="w-full max-w-xl ml-32 px-4 md:px-0 flex items-center gap-8">
+    <div className="w-full max-w-xl md:ml-32 px-4 md:px-0 flex items-center gap-8">
       <div className="flex flex-col items-start gap-0">
         <div className="mb-3 pl-3 flex items-center gap-1.5">
           <H4 className="font-medium">Without grab classes</H4>

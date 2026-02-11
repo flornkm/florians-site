@@ -29,7 +29,7 @@ export default function Toggle({ checked, onCheckedChange, className, ...props }
       <div
         className={cn(
           "p-0.5 transition-all cursor-pointer duration-200 ease-out relative w-8 rounded-full h-5",
-          checked ? "bg-accent-primary" : "bg-border-primary",
+          checked ? "bg-accent-primary" : "bg-(--border-primary)",
         )}
       >
         <div
