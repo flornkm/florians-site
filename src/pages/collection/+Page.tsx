@@ -108,7 +108,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full pb-96">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div
           className="relative bg-linear-to-b from-primary via-primary to-transparent pt-12 pb-8 -mb-16 z-50 lg:h-72 h-48 flex md:items-center items-start"
