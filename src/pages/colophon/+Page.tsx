@@ -6,6 +6,7 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { IconCentralIconSystem } from "central-icons/IconCentralIconSystem";
 import { IconGithub } from "central-icons/IconGithub";
+import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { INSPIRATION } from "./const/inspiration";
 import { PEOPLE } from "./const/people";
 
@@ -34,11 +35,12 @@ export default function Page() {
               target="_blank"
               className={cn(
                 buttonVariants({ variant: "tertiary" }),
-                "flex items-center px-2 py-0.5 gap-2 text-inverted group hover:bg-inverted hover:text-inverted-secondary",
+                "group flex items-center px-2 py-0.5 gap-2 text-inverted hover:text-primary",
               )}
             >
               <IconGithub className="size-4" />
               Open Source Repo
+              <IconArrowUpRight className="ml-1 inline h-4 w-4 transition-all duration-150 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
