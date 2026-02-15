@@ -15,6 +15,7 @@ export type Tab = {
 export const TABS = [
   { name: "Work", href: "/" },
   { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
   { name: "Collection", href: "/collection" },
 ] as Tab[];
 

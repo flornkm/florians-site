@@ -29,6 +29,12 @@ export type CollectionEntry = ContentEntry & {
   collaborators?: string | string[];
 };
 
+export type BlogEntry = ContentEntry & {
+  title: string;
+  description: string;
+  date: string;
+};
+
 export function isWorkEntry(entry: ContentEntry): entry is WorkEntry {
   return (
     typeof entry.title === "string" &&
@@ -40,6 +46,10 @@ export function isWorkEntry(entry: ContentEntry): entry is WorkEntry {
 
 export function isCollectionEntry(entry: ContentEntry): entry is CollectionEntry {
   return typeof entry.title === "string" && typeof entry.description === "string" && typeof entry.type === "string";
+}
+
+export function isBlogEntry(entry: ContentEntry): entry is BlogEntry {
+  return typeof entry.title === "string" && typeof entry.description === "string" && typeof entry.date === "string";
 }
 
 export function extractHeadings(content: string): Heading[] {
@@ -64,7 +74,7 @@ export function extractHeadings(content: string): Heading[] {
 }
 
 export async function getContentMeta(
-  category: "work" | "collection",
+  category: "work" | "collection" | "blog",
   slug: string,
 ): Promise<{ frontmatter: Record<string, unknown>; headings: Heading[] } | null> {
   const filePath = `./src/content/${category}/${slug}.mdx`;
@@ -79,7 +89,7 @@ export async function getContentMeta(
   }
 }
 
-export async function getContent(category: "work" | "collection"): Promise<ContentEntry[]> {
+export async function getContent(category: "work" | "collection" | "blog"): Promise<ContentEntry[]> {
   const contentRoot = `./src/content/${category}`;
   const entries: ContentEntry[] = [];
 

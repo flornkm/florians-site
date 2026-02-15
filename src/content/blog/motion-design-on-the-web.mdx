@@ -1,0 +1,29 @@
+---
+title: Motion Design on the Web
+description: Principles for creating meaningful animations that enhance user experience without getting in the way.
+date: 04 / 2025
+---
+
+# Motion Design on the Web
+
+Animation on the web has a reputation problem. Too often it means gratuitous loading spinners, bouncing elements, and transitions that slow users down. But when done with intention, motion is one of the most powerful tools in a designer's toolkit.
+
+## Purpose Over Flash
+
+Every animation should answer the question: what does this help the user understand? A button that subtly scales on press communicates responsiveness. A page transition that slides content in from the direction of navigation reinforces spatial awareness. These are not decorative choices. They are functional ones.
+
+## The Principles
+
+Three rules guide my approach to motion on the web.
+
+First, motion should be fast. Anything over 300 milliseconds starts to feel sluggish. Most micro-interactions should complete in 150 to 200 milliseconds.
+
+Second, motion should be interruptible. If a user triggers an animation and then changes their mind, the animation should gracefully adapt rather than forcing them to wait.
+
+Third, motion should be progressive. The core experience must work without animation. Motion enhances; it never gates functionality.
+
+## Technical Considerations
+
+Modern animation libraries like Framer Motion make it possible to build spring-based, physics-aware animations that feel natural. The key is to use springs over duration-based easings wherever possible. Springs respond to velocity, which means interrupted animations transition smoothly rather than jumping.
+
+Performance matters too. Stick to transforms and opacity for the smoothest results. Animating layout properties like width and height triggers expensive reflows that can make even simple animations feel janky.
