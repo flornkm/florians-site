@@ -60,7 +60,7 @@ function DraggableLetter({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const [isDragging, setIsDragging] = useState(false);
-  const hasDismissed = useRef(false);
+  const justDismissed = useRef(false);
 
   usePreventScroll(isDragging);
 
@@ -79,7 +79,6 @@ function DraggableLetter({
   );
 
   const handleDragStart = useCallback(() => {
-    hasDismissed.current = false;
     setIsDragging(true);
   }, []);
 
@@ -90,28 +89,23 @@ function DraggableLetter({
     const currentY = y.get();
     const distance = Math.sqrt(currentX * currentX + currentY * currentY);
 
-    if (distance > DRAG_DISMISS_THRESHOLD && !hasDismissed.current) {
-      hasDismissed.current = true;
-      const dirX = currentX / distance;
-      const dirY = currentY / distance;
-      const exitX = dirX * 60;
-      const exitY = dirY * 60;
+    if (distance > DRAG_DISMISS_THRESHOLD) {
+      justDismissed.current = true;
+      onDismiss();
 
-      animate(x, exitX, {
+      animate(x, 0, {
         type: "spring",
-        stiffness: 300,
-        damping: 30,
-        mass: 0.8,
+        stiffness: 200,
+        damping: 25,
+        mass: 1,
       });
-      animate(y, exitY, {
+      animate(y, 0, {
         type: "spring",
-        stiffness: 300,
-        damping: 30,
-        mass: 0.8,
+        stiffness: 200,
+        damping: 25,
+        mass: 1,
         onComplete: () => {
-          onDismiss();
-          x.jump(0);
-          y.jump(0);
+          justDismissed.current = false;
         },
       });
     } else {
@@ -129,6 +123,19 @@ function DraggableLetter({
       });
     }
   }, [x, y, onDismiss]);
+
+  const springTransition = {
+    type: "spring" as const,
+    stiffness: 400,
+    damping: 35,
+    mass: 0.8,
+  };
+
+  const instantTransition = {
+    duration: 0,
+  };
+
+  const isAnimatingBack = justDismissed.current;
 
   return (
     <motion.div
@@ -149,8 +156,8 @@ function DraggableLetter({
         scale,
       }}
       transition={{
-        translateY: { type: "spring", stiffness: 400, damping: 35, mass: 0.8 },
-        scale: { type: "spring", stiffness: 400, damping: 35, mass: 0.8 },
+        translateY: isAnimatingBack ? instantTransition : springTransition,
+        scale: isAnimatingBack ? instantTransition : springTransition,
       }}
       drag={isTopCard}
       dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
