@@ -1,15 +1,7 @@
 import { H1, H2 } from "@/components/design-system/heading";
-import { AgentWorkflow } from "./components/agent-workflow";
-import { ButtonAlignment } from "./components/button-alignment";
-import { CssCalculations } from "./components/css-calculations";
-import { GrabInteraction } from "./components/grab-interaction";
+import { AgentWorkflow } from "@/components/experiments/agent-workflow";
 
-const EXPERIMENTS = [
-  { title: "Agent Purchase", Component: AgentWorkflow },
-  { title: "Grab interactions", Component: GrabInteraction },
-  { title: "CSS Calculations", Component: CssCalculations },
-  { title: "Optical alignment", Component: ButtonAlignment },
-];
+const EXPERIMENTS = [{ title: "Agent Purchase", Component: AgentWorkflow }];
 
 export default function Page() {
   return (
