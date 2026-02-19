@@ -24,7 +24,7 @@ type Phase =
 
 const FILE_MESSAGES = [
   "Downloading receipt.pdf...",
-  "Saved to ~/Documents/Receipts/ZaraHome/",
+  "Saved to ~/Documents/",
   "Updated February expense tracker",
   "Linked to order #ZH-29841 in records",
 ];
@@ -347,19 +347,37 @@ export const AgentWorkflow = () => {
                   onTouchEnd={onUp}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="relative flex items-center justify-center rounded-full -outline-offset-1 outline outline-black/10 bg-primary h-8 w-36 text-xs select-none cursor-pointer overflow-hidden"
+                  className="relative flex items-center justify-center rounded-full -outline-offset-1 outline outline-black/10 bg-primary h-8 w-28 text-xs select-none cursor-pointer overflow-hidden"
                 >
                   <motion.div
                     className="absolute inset-0 rounded-full origin-left bg-emerald-500"
                     animate={{ scaleX: holdProg }}
                     transition={holdProg === 0 ? { type: "spring", stiffness: 300, damping: 25 } : { duration: 0 }}
                   />
-                  <span
-                    className={`relative z-10 text-xs font-medium transition-colors duration-100 ${
-                      holdProg > 0.35 ? "text-white" : "text-primary"
-                    }`}
-                  >
-                    Hold to confirm
+                  <span className="relative z-10 flex items-center justify-center w-full h-full">
+                    <AnimatePresence mode="wait">
+                      {holdProg < 0.35 ? (
+                        <motion.span
+                          key="hold"
+                          initial={{ opacity: 1, filter: "blur(0px)" }}
+                          exit={{ opacity: 0, filter: "blur(4px)" }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                          className="text-xs font-medium text-primary"
+                        >
+                          Hold to confirm
+                        </motion.span>
+                      ) : (
+                        <motion.span
+                          key="confirmed"
+                          initial={{ opacity: 0, filter: "blur(4px)" }}
+                          animate={{ opacity: 1, filter: "blur(0px)" }}
+                          transition={{ duration: 0.2, ease: "easeOut" }}
+                          className="text-xs font-medium text-white"
+                        >
+                          Confirmed
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
                   </span>
                 </motion.button>
               </div>
@@ -463,13 +481,16 @@ export const AgentWorkflow = () => {
                 height: { duration: 0.4, ease: "easeOut" },
                 opacity: { duration: 0.3, delay: 0.1 },
               }}
-              className="w-full bg-black/[0.03] dark:bg-white/[0.03] rounded-xl overflow-hidden"
+              className="w-full overflow-hidden"
             >
-              <motion.div layout="position" className="p-4">
+              <motion.div layout="position">
                 <div className="flex w-full">
-                  <div className="flex flex-col gap-2.5 overflow-hidden" style={{ width: `${splitPct}%` }}>
+                  <div
+                    className="flex flex-col gap-2.5 overflow-hidden bg-neutral-100 p-4 rounded-r-lg rounded-2xl"
+                    style={{ width: `${splitPct}%` }}
+                  >
                     <div className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-2 py-0.5 shadow-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 pl-1.5 pr-2 py-0.5 shadow-sm">
                         <IconFolder1 className="w-2.5 h-2.5 text-tertiary" />
                         <span className="text-[10px] text-secondary font-medium">File agent</span>
                       </span>
@@ -523,9 +544,9 @@ export const AgentWorkflow = () => {
                     <div className="w-1 h-4 rounded-full transition-all group-hover:h-5 group-active:h-7 bg-black/[0.06] dark:bg-white/[0.06] group-hover:bg-black/[0.15] dark:group-hover:bg-white/[0.15]" />
                   </div>
 
-                  <div className="flex-1 flex flex-col gap-2.5 overflow-hidden min-w-0">
+                  <div className="flex-1 flex flex-col gap-2.5 overflow-hidden min-w-0 bg-neutral-100 p-4 rounded-2xl rounded-l-lg">
                     <div className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-2 py-0.5 shadow-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 pl-1.5 pr-2 py-0.5 shadow-sm">
                         <IconCalendar1 className="w-2.5 h-2.5 text-tertiary" />
                         <span className="text-[10px] text-secondary font-medium">Calendar agent</span>
                       </span>
