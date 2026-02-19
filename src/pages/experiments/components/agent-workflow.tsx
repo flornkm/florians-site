@@ -31,7 +31,7 @@ const CalendarIcon = ({ className }: { className?: string }) => (
 );
 
 const SpinnerDot = () => (
-  <div className="flex gap-0.5 items-center h-3">
+  <div className="flex gap-0.5 items-center h-4 pl-5">
     {[0, 1, 2].map((i) => (
       <motion.div
         key={i}
@@ -57,15 +57,18 @@ type Phase =
   | "final";
 
 const FILE_MESSAGES = [
-  "Saving receipt.pdf to ~/Documents/Receipts/...",
-  "Filed under Zara Home / February 2026",
-  "Updated expense tracker spreadsheet",
+  "Downloading receipt.pdf...",
+  "Saved to ~/Documents/Receipts/ZaraHome/",
+  "Updated February expense tracker",
+  "Linked to order #ZH-29841 in records",
 ];
 
 const CAL_MESSAGES = [
-  "Creating delivery event for Mar 2-5...",
-  "Adding Zara Home order #ZH-29841 details",
-  "Calendar invite sent to jane@cooper.com",
+  "Creating delivery window event...",
+  "Set for March 2-5, 2026",
+  "Attached order details to event",
+  "Sent reminder to jane@cooper.com",
+  "Added 15-min prep reminder for Mar 2",
 ];
 
 export const AgentWorkflow = () => {
@@ -74,11 +77,29 @@ export const AgentWorkflow = () => {
   const holdStart = useRef(0);
   const raf = useRef(0);
   const hasStarted = useRef(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const [fileMessages, setFileMessages] = useState<number>(0);
-  const [calMessages, setCalMessages] = useState<number>(0);
+  const [fileStep, setFileStep] = useState(0);
+  const [calStep, setCalStep] = useState(0);
   const [fileLoading, setFileLoading] = useState(false);
   const [calLoading, setCalLoading] = useState(false);
+  const [fileDone, setFileDone] = useState(false);
+  const [calDone, setCalDone] = useState(false);
+
+  const scrollToBottom = useCallback(() => {
+    requestAnimationFrame(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTo({
+          top: scrollRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [phase, fileStep, calStep, fileLoading, calLoading, fileDone, calDone, scrollToBottom]);
 
   useEffect(() => {
     if (hasStarted.current) return;
@@ -99,9 +120,7 @@ export const AgentWorkflow = () => {
 
   useEffect(() => {
     if (phase !== "forking") return;
-    const t = setTimeout(() => {
-      setPhase("parallel");
-    }, 600);
+    const t = setTimeout(() => setPhase("parallel"), 600);
     return () => clearTimeout(t);
   }, [phase]);
 
@@ -109,43 +128,58 @@ export const AgentWorkflow = () => {
     if (phase !== "parallel") return;
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    const fileDelays = [400, 1800, 3400];
-    const calDelays = [600, 2400, 4200];
+    const fileDelays = [500, 1600, 2800, 3800];
+    const calDelays = [700, 2000, 3200, 4600, 5800];
 
     fileDelays.forEach((d, i) => {
-      timers.push(setTimeout(() => setFileLoading(true), d - 300));
+      timers.push(setTimeout(() => setFileLoading(true), d - 350));
       timers.push(
         setTimeout(() => {
-          setFileMessages(i + 1);
+          setFileStep(i + 1);
           setFileLoading(false);
         }, d)
       );
     });
 
     calDelays.forEach((d, i) => {
-      timers.push(setTimeout(() => setCalLoading(true), d - 300));
+      timers.push(setTimeout(() => setCalLoading(true), d - 350));
       timers.push(
         setTimeout(() => {
-          setCalMessages(i + 1);
+          setCalStep(i + 1);
           setCalLoading(false);
         }, d)
       );
     });
 
-    const mergeDelay = Math.max(...fileDelays, ...calDelays) + 800;
-    timers.push(setTimeout(() => setPhase("merging"), mergeDelay));
-    timers.push(setTimeout(() => setPhase("final"), mergeDelay + 800));
+    const fileFinalDelay = fileDelays[fileDelays.length - 1] + 500;
+    timers.push(setTimeout(() => setFileDone(true), fileFinalDelay));
+
+    const calFinalDelay = calDelays[calDelays.length - 1] + 500;
+    timers.push(setTimeout(() => setCalDone(true), calFinalDelay));
 
     return () => timers.forEach(clearTimeout);
   }, [phase]);
 
+  useEffect(() => {
+    if (fileDone && calDone && phase === "parallel") {
+      const t1 = setTimeout(() => setPhase("merging"), 600);
+      const t2 = setTimeout(() => setPhase("final"), 1400);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [fileDone, calDone, phase]);
+
   const reset = useCallback(() => {
     setPhase("idle");
     setHoldProg(0);
-    setFileMessages(0);
-    setCalMessages(0);
+    setFileStep(0);
+    setCalStep(0);
     setFileLoading(false);
     setCalLoading(false);
+    setFileDone(false);
+    setCalDone(false);
     hasStarted.current = false;
     setTimeout(() => {
       hasStarted.current = true;
@@ -192,7 +226,11 @@ export const AgentWorkflow = () => {
   const showFinal = phase === "final";
 
   return (
-    <div className="flex flex-col items-center w-full h-full px-6 py-8 overflow-y-auto">
+    <div
+      ref={scrollRef}
+      className="flex flex-col items-center w-full h-full px-6 py-8 overflow-y-auto"
+      style={{ maxHeight: "100%" }}
+    >
       <div className="w-full max-w-sm flex flex-col gap-4">
         <AnimatePresence>
           {showMessage && (
@@ -247,7 +285,7 @@ export const AgentWorkflow = () => {
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
                       CVV
                     </label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08] cursor-default">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
                       817
                     </div>
                   </div>
@@ -391,108 +429,105 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="flex flex-col items-center gap-0 w-full"
+              className="flex flex-col items-center w-full"
             >
-              <div className="flex items-start w-full relative">
-                <svg
-                  viewBox="0 0 360 32"
+              <svg
+                viewBox="0 0 320 40"
+                fill="none"
+                className="w-full"
+                style={{ height: 40 }}
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <motion.path
+                  d="M160 0 L160 12 Q160 20 120 20 L80 20 Q72 20 72 28 L72 40"
+                  stroke="var(--border-secondary)"
+                  strokeWidth="1.5"
                   fill="none"
-                  className="w-full h-8"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <line x1="180" y1="0" x2="180" y2="16" stroke="var(--border-secondary)" strokeWidth="1" />
-                  <line x1="90" y1="16" x2="270" y2="16" stroke="var(--border-secondary)" strokeWidth="1" />
-                  <line x1="90" y1="16" x2="90" y2="32" stroke="var(--border-secondary)" strokeWidth="1" />
-                  <line x1="270" y1="16" x2="270" y2="32" stroke="var(--border-secondary)" strokeWidth="1" />
-                </svg>
-              </div>
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                />
+                <motion.path
+                  d="M160 0 L160 12 Q160 20 200 20 L248 20 Q256 20 256 28 L256 40"
+                  stroke="var(--border-secondary)"
+                  strokeWidth="1.5"
+                  fill="none"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+                />
+              </svg>
 
-              <div className="flex gap-3 w-full">
-                <div className="flex-1 flex flex-col gap-0">
-                  <div className="flex items-center gap-1.5 mb-2">
+              <div className="flex w-full gap-4">
+                <div className="flex-1 flex flex-col gap-2">
+                  <div className="flex items-center gap-1.5 px-3">
                     <FolderIcon className="w-3 h-3 text-quaternary" />
-                    <span className="text-[9px] text-quaternary uppercase tracking-wider font-medium">File agent</span>
+                    <span className="text-[11px] text-quaternary font-medium">File agent</span>
                   </div>
-                  <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col gap-2 px-3">
                     <AnimatePresence>
-                      {showParallel && Array.from({ length: fileMessages }).map((_, i) => (
-                        <motion.div
+                      {showParallel && Array.from({ length: fileStep }).map((_, i) => (
+                        <motion.p
                           key={`file-${i}`}
                           initial={{ opacity: 0, y: 4 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.25, ease: "easeOut" }}
-                          className="text-[11px] text-tertiary leading-snug"
+                          className="text-[13px] text-tertiary leading-relaxed"
                         >
                           {FILE_MESSAGES[i]}
-                        </motion.div>
+                        </motion.p>
                       ))}
                     </AnimatePresence>
-                    {showParallel && fileLoading && (
+                    {showParallel && fileLoading && <SpinnerDot />}
+                    {fileDone && (
                       <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        <SpinnerDot />
-                      </motion.div>
-                    )}
-                    {showParallel && fileMessages === FILE_MESSAGES.length && !fileLoading && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="flex items-center gap-1 mt-1"
+                        className="flex items-center gap-1 pt-1"
                       >
-                        <div className="w-3 h-3 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center">
                           <CheckIcon className="w-2 h-2 text-white" />
                         </div>
-                        <span className="text-[10px] text-quaternary">Done</span>
+                        <span className="text-[11px] text-quaternary">Done</span>
                       </motion.div>
                     )}
                   </div>
                 </div>
 
-                <div className="w-px bg-border-secondary flex-shrink-0" />
+                <div className="w-px bg-border-secondary flex-shrink-0 self-stretch" />
 
-                <div className="flex-1 flex flex-col gap-0">
-                  <div className="flex items-center gap-1.5 mb-2">
+                <div className="flex-1 flex flex-col gap-2">
+                  <div className="flex items-center gap-1.5 px-3">
                     <CalendarIcon className="w-3 h-3 text-quaternary" />
-                    <span className="text-[9px] text-quaternary uppercase tracking-wider font-medium">Calendar agent</span>
+                    <span className="text-[11px] text-quaternary font-medium">Calendar agent</span>
                   </div>
-                  <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col gap-2 px-3">
                     <AnimatePresence>
-                      {showParallel && Array.from({ length: calMessages }).map((_, i) => (
-                        <motion.div
+                      {showParallel && Array.from({ length: calStep }).map((_, i) => (
+                        <motion.p
                           key={`cal-${i}`}
                           initial={{ opacity: 0, y: 4 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.25, ease: "easeOut" }}
-                          className="text-[11px] text-tertiary leading-snug"
+                          className="text-[13px] text-tertiary leading-relaxed"
                         >
                           {CAL_MESSAGES[i]}
-                        </motion.div>
+                        </motion.p>
                       ))}
                     </AnimatePresence>
-                    {showParallel && calLoading && (
+                    {showParallel && calLoading && <SpinnerDot />}
+                    {calDone && (
                       <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        <SpinnerDot />
-                      </motion.div>
-                    )}
-                    {showParallel && calMessages === CAL_MESSAGES.length && !calLoading && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="flex items-center gap-1 mt-1"
+                        className="flex items-center gap-1 pt-1"
                       >
-                        <div className="w-3 h-3 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center">
                           <CheckIcon className="w-2 h-2 text-white" />
                         </div>
-                        <span className="text-[10px] text-quaternary">Done</span>
+                        <span className="text-[11px] text-quaternary">Done</span>
                       </motion.div>
                     )}
                   </div>
@@ -500,24 +535,32 @@ export const AgentWorkflow = () => {
               </div>
 
               {showMerge && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full mt-1"
+                <svg
+                  viewBox="0 0 320 40"
+                  fill="none"
+                  className="w-full mt-2"
+                  style={{ height: 40 }}
+                  preserveAspectRatio="xMidYMid meet"
                 >
-                  <svg
-                    viewBox="0 0 360 32"
+                  <motion.path
+                    d="M72 0 L72 12 Q72 20 80 20 L120 20 Q160 20 160 28 L160 40"
+                    stroke="var(--border-secondary)"
+                    strokeWidth="1.5"
                     fill="none"
-                    className="w-full h-8"
-                    preserveAspectRatio="xMidYMid meet"
-                  >
-                    <line x1="90" y1="0" x2="90" y2="16" stroke="var(--border-secondary)" strokeWidth="1" />
-                    <line x1="270" y1="0" x2="270" y2="16" stroke="var(--border-secondary)" strokeWidth="1" />
-                    <line x1="90" y1="16" x2="270" y2="16" stroke="var(--border-secondary)" strokeWidth="1" />
-                    <line x1="180" y1="16" x2="180" y2="32" stroke="var(--border-secondary)" strokeWidth="1" />
-                  </svg>
-                </motion.div>
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                  />
+                  <motion.path
+                    d="M256 0 L256 12 Q256 20 248 20 L200 20 Q160 20 160 28 L160 40"
+                    stroke="var(--border-secondary)"
+                    strokeWidth="1.5"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+                  />
+                </svg>
               )}
             </motion.div>
           )}
@@ -529,10 +572,10 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="pl-5 flex flex-col gap-4"
+              className="pl-5 flex flex-col gap-4 pb-4"
             >
               <p className="text-[13px] text-tertiary leading-relaxed">
-                All done. Your receipt is filed, and a delivery reminder has been added to your calendar. Is there anything else I can help you with?
+                All done. Your receipt is filed and a delivery reminder has been added to your calendar. Is there anything else I can help you with?
               </p>
               <button
                 onClick={reset}
