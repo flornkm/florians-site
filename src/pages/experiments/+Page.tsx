@@ -18,7 +18,7 @@ export default function Page() {
       {EXPERIMENTS.map(({ title, Component }) => (
         <section className="h-[700px] w-full flex flex-col gap-2" key={title}>
           <H2>{title}</H2>
-          <div className="border border-primary rounded flex-1 flex flex-col gap-2 items-center justify-center relative">
+          <div className="border border-primary rounded flex-1 flex flex-col gap-2 items-center justify-center relative overflow-hidden">
             <Component />
           </div>
         </section>
