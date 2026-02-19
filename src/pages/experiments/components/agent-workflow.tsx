@@ -2,125 +2,173 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useMotionValue, animate } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const COL = {
-  memory: 100,
-  main: 220,
-  web: 340,
-  thinking: 460,
+const COL_GAP = 120;
+const COL_START = 40;
+const COLS = {
+  main: COL_START,
+  memory: COL_START + COL_GAP,
+  web: COL_START + COL_GAP * 2,
+  thinking: COL_START + COL_GAP * 3,
 };
 
-const ROW = 56;
-const DOT_R = 4;
-const CANVAS_W = 560;
+const ROW_H = 48;
+const DOT_R = 4.5;
+const STROKE_W = 1.5;
+const CANVAS_W = COL_START + COL_GAP * 3 + 140;
 
-interface NodeDef {
+const STEP_DELAY = 0.6;
+
+type Agent = "main" | "memory" | "web" | "thinking";
+
+interface Step {
   id: string;
   label: string;
-  agent: string;
-  x: number;
-  y: number;
-  phase: number;
+  agent: Agent;
+  col: number;
+  row: number;
+  seq: number;
 }
 
-const NODES: NodeDef[] = [
-  { id: "m1", label: "Initialize task", agent: "main", x: COL.main, y: 1 * ROW, phase: 0 },
-  { id: "m2", label: "Parse request", agent: "main", x: COL.main, y: 2 * ROW, phase: 1 },
-  { id: "m3", label: "Plan execution", agent: "main", x: COL.main, y: 3 * ROW, phase: 2 },
+const STEPS: Step[] = [
+  { id: "m1", label: "Initialize task", agent: "main", col: COLS.main, row: 0, seq: 0 },
+  { id: "m2", label: "Parse request", agent: "main", col: COLS.main, row: 1, seq: 1 },
+  { id: "m3", label: "Plan execution", agent: "main", col: COLS.main, row: 2, seq: 2 },
 
-  { id: "mem1", label: "Load context", agent: "memory", x: COL.memory, y: 5 * ROW, phase: 4 },
-  { id: "mem2", label: "Retrieve history", agent: "memory", x: COL.memory, y: 6 * ROW, phase: 5 },
+  { id: "mem1", label: "Load context", agent: "memory", col: COLS.memory, row: 4, seq: 4 },
+  { id: "mem2", label: "Retrieve history", agent: "memory", col: COLS.memory, row: 5, seq: 5 },
 
-  { id: "w1", label: "Search sources", agent: "web", x: COL.web, y: 5 * ROW, phase: 4 },
-  { id: "w2", label: "Extract data", agent: "web", x: COL.web, y: 6 * ROW, phase: 5 },
-  { id: "w3", label: "Validate findings", agent: "web", x: COL.web, y: 7 * ROW, phase: 6 },
+  { id: "w1", label: "Search sources", agent: "web", col: COLS.web, row: 4, seq: 4 },
+  { id: "w2", label: "Extract data", agent: "web", col: COLS.web, row: 5, seq: 5 },
+  { id: "w3", label: "Validate findings", agent: "web", col: COLS.web, row: 6, seq: 6 },
 
-  { id: "t1", label: "Analyze problem", agent: "thinking", x: COL.thinking, y: 5 * ROW, phase: 4 },
-  { id: "t2", label: "Generate options", agent: "thinking", x: COL.thinking, y: 6 * ROW, phase: 5 },
-  { id: "t3", label: "Evaluate tradeoffs", agent: "thinking", x: COL.thinking, y: 7 * ROW, phase: 6 },
-  { id: "t4", label: "Select approach", agent: "thinking", x: COL.thinking, y: 8 * ROW, phase: 7 },
+  { id: "t1", label: "Analyze problem", agent: "thinking", col: COLS.thinking, row: 4, seq: 4 },
+  { id: "t2", label: "Generate options", agent: "thinking", col: COLS.thinking, row: 5, seq: 5 },
+  { id: "t3", label: "Evaluate tradeoffs", agent: "thinking", col: COLS.thinking, row: 6, seq: 6 },
+  { id: "t4", label: "Select approach", agent: "thinking", col: COLS.thinking, row: 7, seq: 7 },
 
-  { id: "m4", label: "Merge results", agent: "main", x: COL.main, y: 10 * ROW, phase: 9 },
-  { id: "m5", label: "Compose response", agent: "main", x: COL.main, y: 11 * ROW, phase: 10 },
-  { id: "m6", label: "Deliver output", agent: "main", x: COL.main, y: 12 * ROW, phase: 11 },
+  { id: "m4", label: "Merge results", agent: "main", col: COLS.main, row: 9, seq: 9 },
+  { id: "m5", label: "Compose response", agent: "main", col: COLS.main, row: 10, seq: 10 },
+  { id: "m6", label: "Deliver output", agent: "main", col: COLS.main, row: 11, seq: 11 },
 ];
 
-const TOTAL_PHASES = 12;
-const PHASE_DURATION = 0.35;
+const TOTAL_SEQ = 12;
 
-const COLORS: Record<string, string> = {
+const Y_OFFSET = 50;
+
+function nodeY(row: number): number {
+  return Y_OFFSET + row * ROW_H;
+}
+
+const AGENT_COLORS: Record<Agent, string> = {
   main: "var(--text-primary)",
   memory: "var(--text-tertiary)",
-  web: "var(--text-quaternary)",
-  thinking: "var(--text-secondary)",
+  web: "var(--text-tertiary)",
+  thinking: "var(--text-tertiary)",
 };
 
-const TEXT_CLASSES: Record<string, string> = {
+const AGENT_TEXT: Record<Agent, string> = {
   main: "text-primary",
   memory: "text-tertiary",
-  web: "text-quaternary",
-  thinking: "text-secondary",
+  web: "text-tertiary",
+  thinking: "text-tertiary",
 };
 
-interface Seg {
-  from: [number, number];
-  to: [number, number];
-  agent: string;
-  phase: number;
+interface LineDef {
+  d: string;
+  agent: Agent;
+  seq: number;
 }
 
-const LINES: Seg[] = [
-  { from: [COL.main, 1 * ROW], to: [COL.main, 3 * ROW], agent: "main", phase: 0 },
-  { from: [COL.main, 3 * ROW], to: [COL.memory, 5 * ROW], agent: "memory", phase: 3 },
-  { from: [COL.main, 3 * ROW], to: [COL.web, 5 * ROW], agent: "web", phase: 3 },
-  { from: [COL.main, 3 * ROW], to: [COL.thinking, 5 * ROW], agent: "thinking", phase: 3 },
-  { from: [COL.memory, 5 * ROW], to: [COL.memory, 6 * ROW], agent: "memory", phase: 4 },
-  { from: [COL.web, 5 * ROW], to: [COL.web, 7 * ROW], agent: "web", phase: 4 },
-  { from: [COL.thinking, 5 * ROW], to: [COL.thinking, 8 * ROW], agent: "thinking", phase: 4 },
-  { from: [COL.memory, 6 * ROW], to: [COL.main, 10 * ROW], agent: "memory", phase: 8 },
-  { from: [COL.web, 7 * ROW], to: [COL.main, 10 * ROW], agent: "web", phase: 8 },
-  { from: [COL.thinking, 8 * ROW], to: [COL.main, 10 * ROW], agent: "thinking", phase: 8 },
-  { from: [COL.main, 10 * ROW], to: [COL.main, 12 * ROW], agent: "main", phase: 9 },
-];
+function buildLines(): LineDef[] {
+  const lines: LineDef[] = [];
+
+  for (let i = 0; i < 2; i++) {
+    const y1 = nodeY(i);
+    const y2 = nodeY(i + 1);
+    lines.push({
+      d: `M${COLS.main},${y1}L${COLS.main},${y2}`,
+      agent: "main",
+      seq: i,
+    });
+  }
+
+  const branchY = nodeY(2);
+  const forkEndY = nodeY(3);
+  const branchAgents: Agent[] = ["memory", "web", "thinking"];
+  for (const a of branchAgents) {
+    const col = COLS[a];
+    lines.push({
+      d: `M${COLS.main},${branchY}L${COLS.main},${forkEndY}L${col},${forkEndY}L${col},${nodeY(4)}`,
+      agent: a,
+      seq: 3,
+    });
+  }
+
+  const branchCommits: { agent: Agent; rows: number[] }[] = [
+    { agent: "memory", rows: [4, 5] },
+    { agent: "web", rows: [4, 5, 6] },
+    { agent: "thinking", rows: [4, 5, 6, 7] },
+  ];
+  for (const bc of branchCommits) {
+    for (let i = 0; i < bc.rows.length - 1; i++) {
+      lines.push({
+        d: `M${COLS[bc.agent]},${nodeY(bc.rows[i])}L${COLS[bc.agent]},${nodeY(bc.rows[i + 1])}`,
+        agent: bc.agent,
+        seq: bc.rows[i],
+      });
+    }
+  }
+
+  const mergeY = nodeY(8);
+  const mergeTargetY = nodeY(9);
+  const mergeSources: { agent: Agent; lastRow: number }[] = [
+    { agent: "memory", lastRow: 5 },
+    { agent: "web", lastRow: 6 },
+    { agent: "thinking", lastRow: 7 },
+  ];
+  for (const ms of mergeSources) {
+    const col = COLS[ms.agent];
+    lines.push({
+      d: `M${col},${nodeY(ms.lastRow)}L${col},${mergeY}L${COLS.main},${mergeY}L${COLS.main},${mergeTargetY}`,
+      agent: ms.agent,
+      seq: 8,
+    });
+  }
+
+  for (let i = 9; i < 11; i++) {
+    lines.push({
+      d: `M${COLS.main},${nodeY(i)}L${COLS.main},${nodeY(i + 1)}`,
+      agent: "main",
+      seq: i,
+    });
+  }
+
+  return lines;
+}
+
+const LINES = buildLines();
 
 interface AgentLabel {
   label: string;
-  agent: string;
+  agent: Agent;
   x: number;
   y: number;
-  phase: number;
+  seq: number;
 }
 
 const AGENT_LABELS: AgentLabel[] = [
-  { label: "Main Agent", agent: "main", x: COL.main, y: 0.3 * ROW, phase: 0 },
-  { label: "Memory", agent: "memory", x: COL.memory, y: 4.2 * ROW, phase: 3 },
-  { label: "Research", agent: "web", x: COL.web, y: 4.2 * ROW, phase: 3 },
-  { label: "Thinking", agent: "thinking", x: COL.thinking, y: 4.2 * ROW, phase: 3 },
+  { label: "Main Agent", agent: "main", x: COLS.main, y: nodeY(0) - 20, seq: 0 },
+  { label: "Memory", agent: "memory", x: COLS.memory, y: nodeY(4) - 16, seq: 3 },
+  { label: "Research", agent: "web", x: COLS.web, y: nodeY(4) - 16, seq: 3 },
+  { label: "Thinking", agent: "thinking", x: COLS.thinking, y: nodeY(4) - 16, seq: 3 },
 ];
 
-function curvePath(fx: number, fy: number, tx: number, ty: number): string {
-  if (fx === tx) return `M${fx},${fy}L${tx},${ty}`;
-  const my = fy + (ty - fy) * 0.45;
-  return `M${fx},${fy}C${fx},${my} ${tx},${my} ${tx},${ty}`;
-}
-
-function labelSide(agent: string): "left" | "right" {
-  if (agent === "memory") return "left";
-  return "right";
-}
-
-const VIEWPORT_H = 380;
-const CANVAS_H = 13.5 * ROW;
-
-function bottomYAtPhase(phase: number): number {
-  let maxY = 0;
-  for (const n of NODES) {
-    if (n.phase <= phase) maxY = Math.max(maxY, n.y);
-  }
-  return maxY;
-}
+const VIEWPORT_H = 420;
+const CANVAS_H = nodeY(12) + 40;
 
 export const AgentWorkflow = () => {
   const [playing, setPlaying] = useState(false);
+  const [activeSeq, setActiveSeq] = useState(-1);
   const [key, setKey] = useState(0);
   const [buttonVisible, setButtonVisible] = useState(true);
   const scrollY = useMotionValue(0);
@@ -129,12 +177,13 @@ export const AgentWorkflow = () => {
   const trigger = useCallback(() => {
     setButtonVisible(false);
     setTimeout(() => {
+      setActiveSeq(-1);
       setPlaying(false);
       setKey((k) => k + 1);
       requestAnimationFrame(() => {
         setPlaying(true);
       });
-    }, 300);
+    }, 250);
   }, []);
 
   useEffect(() => {
@@ -145,39 +194,46 @@ export const AgentWorkflow = () => {
 
     const timeouts: ReturnType<typeof setTimeout>[] = [];
 
-    for (let p = 0; p <= TOTAL_PHASES; p++) {
+    for (let s = 0; s <= TOTAL_SEQ; s++) {
       const t = setTimeout(() => {
-        const bottom = bottomYAtPhase(p);
-        const targetScroll = Math.max(0, bottom - VIEWPORT_H + 100);
-        animate(scrollY, -targetScroll, { duration: 0.5, ease: "easeInOut" });
-      }, p * PHASE_DURATION * 1000 + 200);
+        setActiveSeq(s);
+
+        let maxY = 0;
+        for (const step of STEPS) {
+          if (step.seq <= s) maxY = Math.max(maxY, nodeY(step.row));
+        }
+        const targetScroll = Math.max(0, maxY - VIEWPORT_H + 120);
+        animate(scrollY, -targetScroll, { duration: 0.45, ease: "easeInOut" });
+      }, s * STEP_DELAY * 1000 + 150);
       timeouts.push(t);
     }
 
     const resetTimeout = setTimeout(() => {
       setButtonVisible(true);
-    }, (TOTAL_PHASES + 2) * PHASE_DURATION * 1000 + 600);
+    }, (TOTAL_SEQ + 2) * STEP_DELAY * 1000 + 400);
     timeouts.push(resetTimeout);
 
     return () => timeouts.forEach(clearTimeout);
   }, [playing, key, scrollY]);
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full">
-      <AnimatePresence>
-        {buttonVisible && (
-          <motion.button
-            onClick={trigger}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.25 }}
-            className="rounded-full border border-secondary bg-primary px-5 py-2 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-surface-secondary"
-          >
-            Trigger
-          </motion.button>
-        )}
-      </AnimatePresence>
+    <div className="flex flex-col items-start gap-6 w-full h-full px-8 py-6">
+      <div className="w-full flex justify-start">
+        <AnimatePresence>
+          {buttonVisible && (
+            <motion.button
+              onClick={trigger}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="rounded-full border border-secondary bg-primary px-5 py-2 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-secondary"
+            >
+              Trigger
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
 
       <AnimatePresence mode="wait">
         {playing && (
@@ -186,88 +242,117 @@ export const AgentWorkflow = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-full flex justify-center overflow-hidden relative"
+            transition={{ duration: 0.25 }}
+            className="w-full overflow-hidden relative"
             style={{ height: VIEWPORT_H }}
             ref={containerRef}
           >
-            <motion.div style={{ y: scrollY }} className="relative">
+            <motion.div style={{ y: scrollY }}>
               <svg
                 width={CANVAS_W}
                 height={CANVAS_H}
                 viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
                 className="overflow-visible"
               >
-                {LINES.map((seg, i) => {
-                  const d = curvePath(seg.from[0], seg.from[1], seg.to[0], seg.to[1]);
-                  const delay = seg.phase * PHASE_DURATION;
+                {LINES.map((line, i) => {
+                  const visible = activeSeq >= line.seq;
                   return (
                     <motion.path
-                      key={`l${i}`}
-                      d={d}
+                      key={`line-${key}-${i}`}
+                      d={line.d}
                       fill="none"
-                      stroke={COLORS[seg.agent]}
-                      strokeWidth={1}
+                      stroke={AGENT_COLORS[line.agent]}
+                      strokeWidth={STROKE_W}
                       initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ pathLength: 1, opacity: 0.5 }}
-                      transition={{ delay, duration: 0.4, ease: "easeInOut" }}
+                      animate={
+                        visible
+                          ? { pathLength: 1, opacity: line.agent === "main" ? 0.6 : 0.35 }
+                          : { pathLength: 0, opacity: 0 }
+                      }
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                     />
                   );
                 })}
 
-                {NODES.map((node) => {
-                  const delay = node.phase * PHASE_DURATION;
-                  const side = labelSide(node.agent);
-                  const tx = side === "left" ? node.x - 10 : node.x + 10;
-                  const anchor = side === "left" ? "end" : "start";
-
-                  return (
-                    <g key={node.id}>
-                      <motion.circle
-                        cx={node.x}
-                        cy={node.y}
-                        r={DOT_R}
-                        fill={COLORS[node.agent]}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay, duration: 0.2, ease: "easeOut" }}
-                      />
-                      <motion.text
-                        x={tx}
-                        y={node.y + 3.5}
-                        textAnchor={anchor}
-                        fill="currentColor"
-                        className={cn("text-[10px]", TEXT_CLASSES[node.agent])}
-                        style={{ opacity: 0 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 0.7 }}
-                        transition={{ delay: delay + 0.1, duration: 0.25 }}
-                      >
-                        {node.label}
-                      </motion.text>
-                    </g>
-                  );
-                })}
-
                 {AGENT_LABELS.map((al) => {
-                  const delay = al.phase * PHASE_DURATION;
+                  const visible = activeSeq >= al.seq;
                   return (
                     <motion.text
-                      key={`al-${al.agent}`}
+                      key={`label-${key}-${al.agent}`}
                       x={al.x}
                       y={al.y}
-                      textAnchor="middle"
+                      textAnchor="start"
                       fill="currentColor"
                       className={cn(
-                        "text-[9px] font-medium uppercase tracking-widest",
-                        TEXT_CLASSES[al.agent],
+                        "text-[9px] font-medium uppercase tracking-[0.12em]",
+                        AGENT_TEXT[al.agent],
                       )}
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.5 }}
-                      transition={{ delay, duration: 0.3 }}
+                      animate={visible ? { opacity: 0.45 } : { opacity: 0 }}
+                      transition={{ duration: 0.3 }}
                     >
                       {al.label}
                     </motion.text>
+                  );
+                })}
+
+                {STEPS.map((step) => {
+                  const isActive = activeSeq === step.seq;
+                  const isComplete = activeSeq > step.seq;
+                  const isVisible = activeSeq >= step.seq;
+                  const x = step.col;
+                  const y = nodeY(step.row);
+
+                  return (
+                    <g key={`node-${key}-${step.id}`}>
+                      {isActive && (
+                        <motion.circle
+                          cx={x}
+                          cy={y}
+                          r={12}
+                          fill="none"
+                          stroke={AGENT_COLORS[step.agent]}
+                          strokeWidth={1}
+                          initial={{ scale: 0.5, opacity: 0 }}
+                          animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.15, 0.3, 0.15] }}
+                          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      )}
+
+                      <motion.circle
+                        cx={x}
+                        cy={y}
+                        r={DOT_R}
+                        fill={AGENT_COLORS[step.agent]}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={
+                          isVisible
+                            ? { scale: 1, opacity: isComplete ? 1 : 0.8 }
+                            : { scale: 0, opacity: 0 }
+                        }
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                      />
+
+                      <motion.text
+                        x={x + 14}
+                        y={y + 4}
+                        textAnchor="start"
+                        fill="currentColor"
+                        className={cn(
+                          "text-[11px]",
+                          step.agent === "main" ? "text-primary" : "text-tertiary",
+                        )}
+                        initial={{ opacity: 0, x: x + 10 }}
+                        animate={
+                          isVisible
+                            ? { opacity: isActive ? 0.9 : 0.55, x: x + 14 }
+                            : { opacity: 0, x: x + 10 }
+                        }
+                        transition={{ duration: 0.25 }}
+                      >
+                        {step.label}
+                      </motion.text>
+                    </g>
                   );
                 })}
               </svg>
