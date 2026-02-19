@@ -20,21 +20,21 @@ const CheckIcon = ({ className }: { className?: string }) => (
 const CreditCardFront = () => (
   <div className="w-full h-full rounded-lg bg-gradient-to-br from-[#1c1c1e] to-[#2c2c2e] p-2.5 flex flex-col justify-between text-white">
     <div className="flex items-center justify-between">
-      <div className="w-5 h-3.5 rounded-[3px] bg-gradient-to-br from-[#d4a944] to-[#c49a38] opacity-80" />
-      <svg viewBox="0 0 24 16" className="w-5 h-3.5 opacity-40">
+      <div className="w-5 h-3.5 rounded-[3px] bg-gradient-to-br from-[#d4a944] to-[#c49a38] opacity-70" />
+      <svg viewBox="0 0 24 16" className="w-5 h-3.5 opacity-35">
         <circle cx="8" cy="8" r="7" fill="#eb001b" opacity="0.8" />
         <circle cx="16" cy="8" r="7" fill="#f79e1b" opacity="0.8" />
       </svg>
     </div>
     <div className="space-y-1">
-      <p className="text-[7px] tracking-[0.18em] opacity-35 font-mono">
+      <p className="text-[7px] tracking-[0.16em] opacity-30 font-mono whitespace-nowrap">
         4532 8720 1193 4467
       </p>
       <div className="flex items-center justify-between">
-        <p className="text-[6px] tracking-wider opacity-30 font-mono uppercase">
+        <p className="text-[6px] tracking-wider opacity-25 font-mono uppercase">
           Jane Cooper
         </p>
-        <p className="text-[6px] opacity-30 font-mono">09/28</p>
+        <p className="text-[6px] opacity-25 font-mono">09/28</p>
       </div>
     </div>
   </div>
@@ -46,9 +46,9 @@ const CreditCardBack = () => (
     <div className="px-2.5 pb-2.5 space-y-1">
       <div className="flex items-center gap-1.5">
         <div className="flex-1 h-3.5 bg-[#2a2a2a] rounded-sm" />
-        <p className="text-[7px] text-white opacity-40 font-mono">817</p>
+        <p className="text-[7px] text-white opacity-35 font-mono">817</p>
       </div>
-      <p className="text-[5px] text-white opacity-20 font-mono">
+      <p className="text-[5px] text-white opacity-15 font-mono">
         Authorized signature
       </p>
     </div>
@@ -59,12 +59,10 @@ const MiniCreditCard = ({ flipped }: { flipped: boolean }) => (
   <motion.div
     className="w-[100px] h-[64px]"
     style={{ perspective: "400px" }}
-    animate={{ rotate: flipped ? -2 : 1 }}
-    transition={{ type: "spring", stiffness: 200, damping: 20 }}
   >
     <motion.div
       animate={{ rotateY: flipped ? 180 : 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: "spring", stiffness: 260, damping: 28 }}
       className="relative w-full h-full"
       style={{ transformStyle: "preserve-3d" }}
     >
@@ -89,7 +87,7 @@ export const AgentWorkflow = () => {
     "idle" | "message" | "form" | "holding" | "confirming" | "success" | "receipt"
   >("idle");
   const [holdProg, setHoldProg] = useState(0);
-  const [cvvFocused, setCvvFocused] = useState(false);
+  const [cardFlipped, setCardFlipped] = useState(false);
   const holdStart = useRef(0);
   const raf = useRef(0);
   const hasStarted = useRef(false);
@@ -108,7 +106,7 @@ export const AgentWorkflow = () => {
   const reset = useCallback(() => {
     setPhase("idle");
     setHoldProg(0);
-    setCvvFocused(false);
+    setCardFlipped(false);
     hasStarted.current = false;
     setTimeout(() => {
       hasStarted.current = true;
@@ -124,6 +122,9 @@ export const AgentWorkflow = () => {
     const tick = () => {
       const p = Math.min(1, (Date.now() - holdStart.current) / HOLD_MS);
       setHoldProg(p);
+      if (p >= 0.5 && !cardFlipped) {
+        setCardFlipped(true);
+      }
       if (p >= 1) {
         setPhase("confirming");
         setTimeout(() => setPhase("success"), 600);
@@ -133,12 +134,13 @@ export const AgentWorkflow = () => {
       raf.current = requestAnimationFrame(tick);
     };
     raf.current = requestAnimationFrame(tick);
-  }, [phase]);
+  }, [phase, cardFlipped]);
 
   const onUp = useCallback(() => {
     cancelAnimationFrame(raf.current);
     if (phase === "holding") {
       setHoldProg(0);
+      setCardFlipped(false);
       setPhase("form");
     }
   }, [phase]);
@@ -184,9 +186,9 @@ export const AgentWorkflow = () => {
                 duration: 0.4,
                 ease: "easeOut",
               }}
-              className="rounded-xl border border-secondary bg-primary p-4 flex flex-col gap-4"
+              className="rounded-2xl border border-black/[0.06] bg-primary p-5 flex flex-col gap-4"
               style={{
-                boxShadow: "0 4px 24px -4px rgba(0,0,0,0.06), 0 1px 4px -1px rgba(0,0,0,0.03)",
+                boxShadow: "0 6px 32px -6px rgba(0,0,0,0.05), 0 2px 8px -2px rgba(0,0,0,0.02)",
                 pointerEvents: formDone ? "none" : "auto",
               }}
             >
@@ -196,7 +198,7 @@ export const AgentWorkflow = () => {
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
                       Card number
                     </label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-md px-2.5 py-1.5 border border-secondary">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
                       4532 8720 1193 4467
                     </div>
                   </div>
@@ -205,7 +207,7 @@ export const AgentWorkflow = () => {
                       <label className="text-[10px] text-quaternary uppercase tracking-wider">
                         Expiry
                       </label>
-                      <div className="text-xs text-primary font-mono bg-surface-secondary rounded-md px-2.5 py-1.5 border border-secondary">
+                      <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
                         09/28
                       </div>
                     </div>
@@ -213,11 +215,7 @@ export const AgentWorkflow = () => {
                       <label className="text-[10px] text-quaternary uppercase tracking-wider">
                         CVV
                       </label>
-                      <div
-                        onMouseEnter={() => setCvvFocused(true)}
-                        onMouseLeave={() => setCvvFocused(false)}
-                        className="text-xs text-primary font-mono bg-surface-secondary rounded-md px-2.5 py-1.5 border border-secondary cursor-default"
-                      >
+                      <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04] cursor-default">
                         817
                       </div>
                     </div>
@@ -226,18 +224,20 @@ export const AgentWorkflow = () => {
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
                       Name on card
                     </label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-md px-2.5 py-1.5 border border-secondary">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
                       Jane Cooper
                     </div>
                   </div>
                 </div>
 
                 <div className="flex-shrink-0 pt-1">
-                  <MiniCreditCard flipped={cvvFocused} />
+                  <MiniCreditCard flipped={cardFlipped} />
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-1 border-t border-secondary">
+              <div className="border-t border-black/[0.04] mt-2" />
+
+              <div className="flex items-center justify-between pt-1">
                 <div className="flex flex-col">
                   <span className="text-[10px] text-quaternary">Total</span>
                   <span className="text-sm font-semibold text-primary">
@@ -265,13 +265,8 @@ export const AgentWorkflow = () => {
                     }
                   />
                   <span
-                    className="relative z-10 text-xs font-medium transition-colors duration-200"
-                    style={{
-                      color:
-                        holdProg > 0.45
-                          ? "#ffffff"
-                          : "var(--text-secondary)",
-                    }}
+                    className="relative z-10 text-xs font-medium text-white"
+                    style={{ mixBlendMode: "difference" }}
                   >
                     Hold to confirm
                   </span>
@@ -305,9 +300,9 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease: "easeOut", delay: 0.1 }}
-              className="rounded-xl border border-secondary bg-primary p-4 flex flex-col gap-3"
+              className="rounded-2xl border border-black/[0.06] bg-primary p-5 flex flex-col gap-3"
               style={{
-                boxShadow: "0 4px 24px -4px rgba(0,0,0,0.06), 0 1px 4px -1px rgba(0,0,0,0.03)",
+                boxShadow: "0 6px 32px -6px rgba(0,0,0,0.05), 0 2px 8px -2px rgba(0,0,0,0.02)",
               }}
             >
               <div className="flex items-center justify-between">
@@ -318,7 +313,7 @@ export const AgentWorkflow = () => {
                   #ZH-29841
                 </span>
               </div>
-              <div className="border-t border-secondary" />
+              <div className="border-t border-black/[0.04]" />
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-primary">
@@ -341,7 +336,7 @@ export const AgentWorkflow = () => {
                   </span>
                 </div>
               </div>
-              <div className="border-t border-secondary" />
+              <div className="border-t border-black/[0.04]" />
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-primary">
                   Total
