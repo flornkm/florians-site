@@ -94,6 +94,7 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
+              className="pl-5"
             >
               <p className="text-[13px] text-tertiary leading-relaxed">
                 Please confirm you want to buy this chair from Zara Home:
@@ -206,7 +207,7 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="flex gap-2 items-center"
+              className="flex gap-2 items-center pl-5"
             >
               <div className="w-4 h-4 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
                 <CheckIcon className="w-2.5 h-2.5 text-white" />
