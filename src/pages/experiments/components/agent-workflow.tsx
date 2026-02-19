@@ -31,7 +31,7 @@ const CalendarIcon = ({ className }: { className?: string }) => (
 );
 
 const SpinnerDot = () => (
-  <div className="flex gap-0.5 items-center h-4 pl-5">
+  <div className="flex gap-0.5 items-center h-4">
     {[0, 1, 2].map((i) => (
       <motion.div
         key={i}
@@ -78,6 +78,10 @@ export const AgentWorkflow = () => {
   const raf = useRef(0);
   const hasStarted = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const fileColRef = useRef<HTMLDivElement>(null);
+  const calColRef = useRef<HTMLDivElement>(null);
+  const [fileColH, setFileColH] = useState(0);
+  const [calColH, setCalColH] = useState(0);
 
   const [fileStep, setFileStep] = useState(0);
   const [calStep, setCalStep] = useState(0);
@@ -100,6 +104,11 @@ export const AgentWorkflow = () => {
   useEffect(() => {
     scrollToBottom();
   }, [phase, fileStep, calStep, fileLoading, calLoading, fileDone, calDone, scrollToBottom]);
+
+  useEffect(() => {
+    if (fileColRef.current) setFileColH(fileColRef.current.offsetHeight);
+    if (calColRef.current) setCalColH(calColRef.current.offsetHeight);
+  }, [fileStep, calStep, fileLoading, calLoading, fileDone, calDone]);
 
   useEffect(() => {
     if (hasStarted.current) return;
@@ -224,6 +233,9 @@ export const AgentWorkflow = () => {
   const showParallel = ["parallel", "merging", "final"].includes(phase);
   const showMerge = ["merging", "final"].includes(phase);
   const showFinal = phase === "final";
+
+  const maxColH = Math.max(fileColH, calColH, 1);
+  const mergeH = maxColH + 32;
 
   return (
     <div
@@ -429,28 +441,28 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
-              className="flex flex-col items-center w-full"
+              className="flex flex-col w-full"
             >
               <svg
-                viewBox="0 0 320 40"
+                viewBox="0 0 360 36"
                 fill="none"
                 className="w-full"
-                style={{ height: 40 }}
+                style={{ height: 36 }}
                 preserveAspectRatio="xMidYMid meet"
               >
                 <motion.path
-                  d="M160 0 L160 12 Q160 20 120 20 L80 20 Q72 20 72 28 L72 40"
+                  d="M180 0 L180 10 Q180 18 140 18 L90 18 Q82 18 82 26 L82 36"
                   stroke="var(--border-secondary)"
-                  strokeWidth="1.5"
+                  strokeWidth="1"
                   fill="none"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 />
                 <motion.path
-                  d="M160 0 L160 12 Q160 20 200 20 L248 20 Q256 20 256 28 L256 40"
+                  d="M180 0 L180 10 Q180 18 220 18 L270 18 Q278 18 278 26 L278 36"
                   stroke="var(--border-secondary)"
-                  strokeWidth="1.5"
+                  strokeWidth="1"
                   fill="none"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
@@ -458,13 +470,15 @@ export const AgentWorkflow = () => {
                 />
               </svg>
 
-              <div className="flex w-full gap-4">
-                <div className="flex-1 flex flex-col gap-2">
-                  <div className="flex items-center gap-1.5 px-3">
-                    <FolderIcon className="w-3 h-3 text-quaternary" />
-                    <span className="text-[11px] text-quaternary font-medium">File agent</span>
+              <div className="flex w-full gap-3">
+                <div className="flex-1 flex flex-col gap-2.5" ref={fileColRef}>
+                  <div className="flex items-center gap-1.5">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-black/[0.08] bg-surface-secondary px-2 py-0.5">
+                      <FolderIcon className="w-2.5 h-2.5 text-tertiary" />
+                      <span className="text-[10px] text-tertiary font-medium">File agent</span>
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-2 px-3">
+                  <div className="flex flex-col gap-2">
                     <AnimatePresence>
                       {showParallel && Array.from({ length: fileStep }).map((_, i) => (
                         <motion.p
@@ -484,25 +498,27 @@ export const AgentWorkflow = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="flex items-center gap-1 pt-1"
+                        className="flex items-center gap-1 pt-0.5"
                       >
-                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-emerald-500 flex items-center justify-center">
                           <CheckIcon className="w-2 h-2 text-white" />
                         </div>
-                        <span className="text-[11px] text-quaternary">Done</span>
+                        <span className="text-[10px] text-quaternary">Done</span>
                       </motion.div>
                     )}
                   </div>
                 </div>
 
-                <div className="w-px bg-border-secondary flex-shrink-0 self-stretch" />
+                <div className="w-px bg-border-secondary/50 flex-shrink-0 self-stretch" />
 
-                <div className="flex-1 flex flex-col gap-2">
-                  <div className="flex items-center gap-1.5 px-3">
-                    <CalendarIcon className="w-3 h-3 text-quaternary" />
-                    <span className="text-[11px] text-quaternary font-medium">Calendar agent</span>
+                <div className="flex-1 flex flex-col gap-2.5" ref={calColRef}>
+                  <div className="flex items-center gap-1.5">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-black/[0.08] bg-surface-secondary px-2 py-0.5">
+                      <CalendarIcon className="w-2.5 h-2.5 text-tertiary" />
+                      <span className="text-[10px] text-tertiary font-medium">Calendar agent</span>
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-2 px-3">
+                  <div className="flex flex-col gap-2">
                     <AnimatePresence>
                       {showParallel && Array.from({ length: calStep }).map((_, i) => (
                         <motion.p
@@ -522,12 +538,12 @@ export const AgentWorkflow = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="flex items-center gap-1 pt-1"
+                        className="flex items-center gap-1 pt-0.5"
                       >
-                        <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-emerald-500 flex items-center justify-center">
                           <CheckIcon className="w-2 h-2 text-white" />
                         </div>
-                        <span className="text-[11px] text-quaternary">Done</span>
+                        <span className="text-[10px] text-quaternary">Done</span>
                       </motion.div>
                     )}
                   </div>
@@ -536,25 +552,25 @@ export const AgentWorkflow = () => {
 
               {showMerge && (
                 <svg
-                  viewBox="0 0 320 40"
+                  viewBox={`0 0 360 ${mergeH}`}
                   fill="none"
-                  className="w-full mt-2"
-                  style={{ height: 40 }}
+                  className="w-full"
+                  style={{ height: mergeH }}
                   preserveAspectRatio="xMidYMid meet"
                 >
                   <motion.path
-                    d="M72 0 L72 12 Q72 20 80 20 L120 20 Q160 20 160 28 L160 40"
+                    d={`M82 0 L82 ${fileColH} Q82 ${fileColH + 8} 90 ${fileColH + 8} L140 ${fileColH + 8} Q180 ${fileColH + 8} 180 ${mergeH - 10} L180 ${mergeH}`}
                     stroke="var(--border-secondary)"
-                    strokeWidth="1.5"
+                    strokeWidth="1"
                     fill="none"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   />
                   <motion.path
-                    d="M256 0 L256 12 Q256 20 248 20 L200 20 Q160 20 160 28 L160 40"
+                    d={`M278 0 L278 ${calColH} Q278 ${calColH + 8} 270 ${calColH + 8} L220 ${calColH + 8} Q180 ${calColH + 8} 180 ${mergeH - 10} L180 ${mergeH}`}
                     stroke="var(--border-secondary)"
-                    strokeWidth="1.5"
+                    strokeWidth="1"
                     fill="none"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
