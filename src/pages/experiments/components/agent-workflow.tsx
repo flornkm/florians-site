@@ -17,77 +17,11 @@ const CheckIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const CreditCardFront = () => (
-  <div className="w-full h-full rounded-lg bg-gradient-to-br from-[#1c1c1e] to-[#2c2c2e] p-2.5 flex flex-col justify-between text-white">
-    <div className="flex items-center justify-between">
-      <div className="w-5 h-3.5 rounded-[3px] bg-gradient-to-br from-[#d4a944] to-[#c49a38] opacity-70" />
-      <svg viewBox="0 0 24 16" className="w-5 h-3.5 opacity-35">
-        <circle cx="8" cy="8" r="7" fill="#eb001b" opacity="0.8" />
-        <circle cx="16" cy="8" r="7" fill="#f79e1b" opacity="0.8" />
-      </svg>
-    </div>
-    <div className="space-y-1">
-      <p className="text-[7px] tracking-[0.16em] opacity-30 font-mono whitespace-nowrap">
-        4532 8720 1193 4467
-      </p>
-      <div className="flex items-center justify-between">
-        <p className="text-[6px] tracking-wider opacity-25 font-mono uppercase">
-          Jane Cooper
-        </p>
-        <p className="text-[6px] opacity-25 font-mono">09/28</p>
-      </div>
-    </div>
-  </div>
-);
-
-const CreditCardBack = () => (
-  <div className="w-full h-full rounded-lg bg-gradient-to-br from-[#1c1c1e] to-[#2c2c2e] flex flex-col justify-between overflow-hidden">
-    <div className="w-full h-4 bg-[#2a2a2a] mt-2.5" />
-    <div className="px-2.5 pb-2.5 space-y-1">
-      <div className="flex items-center gap-1.5">
-        <div className="flex-1 h-3.5 bg-[#2a2a2a] rounded-sm" />
-        <p className="text-[7px] text-white opacity-35 font-mono">817</p>
-      </div>
-      <p className="text-[5px] text-white opacity-15 font-mono">
-        Authorized signature
-      </p>
-    </div>
-  </div>
-);
-
-const MiniCreditCard = ({ flipped }: { flipped: boolean }) => (
-  <motion.div
-    className="w-[100px] h-[64px]"
-    style={{ perspective: "400px" }}
-  >
-    <motion.div
-      animate={{ rotateY: flipped ? 180 : 0 }}
-      transition={{ type: "spring", stiffness: 260, damping: 28 }}
-      className="relative w-full h-full"
-      style={{ transformStyle: "preserve-3d" }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{ backfaceVisibility: "hidden" }}
-      >
-        <CreditCardFront />
-      </div>
-      <div
-        className="absolute inset-0"
-        style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-      >
-        <CreditCardBack />
-      </div>
-    </motion.div>
-  </motion.div>
-);
-
 export const AgentWorkflow = () => {
   const [phase, setPhase] = useState<
     "idle" | "message" | "form" | "holding" | "confirming" | "success" | "receipt"
   >("idle");
   const [holdProg, setHoldProg] = useState(0);
-  const [cardFlipped, setCardFlipped] = useState(false);
   const holdStart = useRef(0);
   const raf = useRef(0);
   const hasStarted = useRef(false);
@@ -106,7 +40,6 @@ export const AgentWorkflow = () => {
   const reset = useCallback(() => {
     setPhase("idle");
     setHoldProg(0);
-    setCardFlipped(false);
     hasStarted.current = false;
     setTimeout(() => {
       hasStarted.current = true;
@@ -122,9 +55,6 @@ export const AgentWorkflow = () => {
     const tick = () => {
       const p = Math.min(1, (Date.now() - holdStart.current) / HOLD_MS);
       setHoldProg(p);
-      if (p >= 0.5 && !cardFlipped) {
-        setCardFlipped(true);
-      }
       if (p >= 1) {
         setPhase("confirming");
         setTimeout(() => setPhase("success"), 600);
@@ -134,13 +64,12 @@ export const AgentWorkflow = () => {
       raf.current = requestAnimationFrame(tick);
     };
     raf.current = requestAnimationFrame(tick);
-  }, [phase, cardFlipped]);
+  }, [phase]);
 
   const onUp = useCallback(() => {
     cancelAnimationFrame(raf.current);
     if (phase === "holding") {
       setHoldProg(0);
-      setCardFlipped(false);
       setPhase("form");
     }
   }, [phase]);
@@ -192,46 +121,40 @@ export const AgentWorkflow = () => {
                 pointerEvents: formDone ? "none" : "auto",
               }}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex flex-col gap-3 flex-1">
-                  <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[10px] text-quaternary uppercase tracking-wider">
+                    Card number
+                  </label>
+                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
+                    4532 8720 1193 4467
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="flex flex-col gap-1 flex-1">
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
-                      Card number
+                      Expiry
                     </label>
                     <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
-                      4532 8720 1193 4467
+                      09/28
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <div className="flex flex-col gap-1 flex-1">
-                      <label className="text-[10px] text-quaternary uppercase tracking-wider">
-                        Expiry
-                      </label>
-                      <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
-                        09/28
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-1 flex-1">
-                      <label className="text-[10px] text-quaternary uppercase tracking-wider">
-                        CVV
-                      </label>
-                      <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04] cursor-default">
-                        817
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 flex-1">
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
-                      Name on card
+                      CVV
                     </label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
-                      Jane Cooper
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04] cursor-default">
+                      817
                     </div>
                   </div>
                 </div>
-
-                <div className="flex-shrink-0 pt-1">
-                  <MiniCreditCard flipped={cardFlipped} />
+                <div className="flex flex-col gap-1">
+                  <label className="text-[10px] text-quaternary uppercase tracking-wider">
+                    Name on card
+                  </label>
+                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
+                    Jane Cooper
+                  </div>
                 </div>
               </div>
 
@@ -265,8 +188,9 @@ export const AgentWorkflow = () => {
                     }
                   />
                   <span
-                    className="relative z-10 text-xs font-medium text-white"
-                    style={{ mixBlendMode: "difference" }}
+                    className={`relative z-10 text-xs font-medium transition-colors duration-100 ${
+                      holdProg > 0.35 ? "text-white" : "text-primary"
+                    }`}
                   >
                     Hold to confirm
                   </span>
