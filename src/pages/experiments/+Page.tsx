@@ -5,7 +5,7 @@ import { CssCalculations } from "./components/css-calculations";
 import { GrabInteraction } from "./components/grab-interaction";
 
 const EXPERIMENTS = [
-  { title: "Agent Workflow", Component: AgentWorkflow },
+  { title: "Agent Purchase", Component: AgentWorkflow },
   { title: "Grab interactions", Component: GrabInteraction },
   { title: "CSS Calculations", Component: CssCalculations },
   { title: "Optical alignment", Component: ButtonAlignment },
