@@ -1,159 +1,117 @@
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, useMotionValue, animate } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-
-const X = 24;
-const ROW_H = 52;
-const DOT_R = 5;
-const STROKE_W = 1.5;
-const Y_START = 32;
-
-function nodeY(i: number): number {
-  return Y_START + i * ROW_H;
-}
+import { AnimatePresence, motion } from "motion/react";
+import { useCallback, useRef, useState } from "react";
 
 interface Step {
-  id: string;
   label: string;
-  sublabel?: string;
-  agent: "main" | "sub";
+  sub?: boolean;
 }
 
 const STEPS: Step[] = [
-  { id: "s0", label: "Initialize task", agent: "main" },
-  { id: "s1", label: "Parse request", agent: "main" },
-  { id: "s2", label: "Plan execution", agent: "main" },
-  { id: "s3", label: "Memory recall", sublabel: "Loading context + history", agent: "sub" },
-  { id: "s4", label: "Web research", sublabel: "Searching + validating sources", agent: "sub" },
-  { id: "s5", label: "Deep thinking", sublabel: "Analyzing tradeoffs", agent: "sub" },
-  { id: "s6", label: "Merge results", agent: "main" },
-  { id: "s7", label: "Compose response", agent: "main" },
-  { id: "s8", label: "Deliver output", agent: "main" },
+  { label: "Initialize task" },
+  { label: "Parse request" },
+  { label: "Plan execution" },
+  { label: "Memory recall", sub: true },
+  { label: "Web research", sub: true },
+  { label: "Deep thinking", sub: true },
+  { label: "Merge results" },
+  { label: "Compose response" },
+  { label: "Deliver output" },
 ];
 
-const HOLD_STEP_INDEX = 7;
-const HOLD_DURATION = 1200;
-const STEP_DELAY = 700;
-const VIEWPORT_H = 380;
-const CANVAS_W = 280;
-const CANVAS_H = nodeY(STEPS.length) + 20;
+const HOLD_INDEX = 7;
+const HOLD_MS = 1200;
+const STEP_MS = 600;
 
 export const AgentWorkflow = () => {
-  const [playing, setPlaying] = useState(false);
-  const [activeStep, setActiveStep] = useState(-1);
+  const [active, setActive] = useState(-1);
+  const [showBtn, setShowBtn] = useState(true);
   const [waiting, setWaiting] = useState(false);
-  const [holdProgress, setHoldProgress] = useState(0);
-  const [holdComplete, setHoldComplete] = useState(false);
-  const [buttonVisible, setButtonVisible] = useState(true);
-  const [key, setKey] = useState(0);
+  const [holdDone, setHoldDone] = useState(false);
+  const [holdProg, setHoldProg] = useState(0);
+  const [started, setStarted] = useState(false);
+  const [runKey, setRunKey] = useState(0);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const holdStart = useRef(0);
+  const raf = useRef(0);
 
-  const scrollY = useMotionValue(0);
-  const holdStartRef = useRef<number>(0);
-  const holdRafRef = useRef<number>(0);
-  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const clear = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+    cancelAnimationFrame(raf.current);
+  };
 
   const trigger = useCallback(() => {
-    setButtonVisible(false);
+    clear();
+    setShowBtn(false);
+    setActive(-1);
+    setWaiting(false);
+    setHoldDone(false);
+    setHoldProg(0);
+    setRunKey((k) => k + 1);
+
     setTimeout(() => {
-      setActiveStep(-1);
-      setWaiting(false);
-      setHoldProgress(0);
-      setHoldComplete(false);
-      setPlaying(false);
-      setKey((k) => k + 1);
-      requestAnimationFrame(() => {
-        setPlaying(true);
-      });
-    }, 200);
+      setStarted(true);
+      for (let i = 0; i < STEPS.length; i++) {
+        if (i >= HOLD_INDEX) break;
+        const t = setTimeout(() => {
+          setActive(i);
+          if (i === HOLD_INDEX - 1) {
+            setTimeout(() => setWaiting(true), 350);
+          }
+        }, i * STEP_MS + 80);
+        timers.current.push(t);
+      }
+    }, 250);
   }, []);
 
-  useEffect(() => {
-    if (!playing) {
-      scrollY.set(0);
-      return;
-    }
-
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
-    timeoutsRef.current = timeouts;
-
-    for (let s = 0; s < STEPS.length; s++) {
-      if (s >= HOLD_STEP_INDEX) break;
-
-      const t = setTimeout(() => {
-        setActiveStep(s);
-        const targetScroll = Math.max(0, nodeY(s) - VIEWPORT_H + 140);
-        animate(scrollY, -targetScroll, { duration: 0.4, ease: "easeInOut" });
-
-        if (s === HOLD_STEP_INDEX - 1) {
-          setTimeout(() => setWaiting(true), 400);
-        }
-      }, s * STEP_DELAY + 100);
-      timeouts.push(t);
-    }
-
-    return () => timeouts.forEach(clearTimeout);
-  }, [playing, key, scrollY]);
-
-  const continueAfterHold = useCallback(() => {
-    setHoldComplete(true);
+  const afterHold = useCallback(() => {
+    setHoldDone(true);
     setWaiting(false);
-
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
-
-    for (let s = HOLD_STEP_INDEX; s < STEPS.length; s++) {
-      const delay = (s - HOLD_STEP_INDEX) * STEP_DELAY + 300;
+    for (let i = HOLD_INDEX; i < STEPS.length; i++) {
       const t = setTimeout(() => {
-        setActiveStep(s);
-        const targetScroll = Math.max(0, nodeY(s) - VIEWPORT_H + 140);
-        animate(scrollY, -targetScroll, { duration: 0.4, ease: "easeInOut" });
-      }, delay);
-      timeouts.push(t);
+        setActive(i);
+        if (i === STEPS.length - 1) {
+          setTimeout(() => {
+            setShowBtn(true);
+            setStarted(false);
+          }, 800);
+        }
+      }, (i - HOLD_INDEX) * STEP_MS + 200);
+      timers.current.push(t);
     }
+  }, []);
 
-    const resetT = setTimeout(() => {
-      setButtonVisible(true);
-    }, (STEPS.length - HOLD_STEP_INDEX) * STEP_DELAY + 800);
-    timeouts.push(resetT);
-
-    timeoutsRef.current = timeouts;
-    return () => timeouts.forEach(clearTimeout);
-  }, [scrollY]);
-
-  const onHoldStart = useCallback(() => {
-    if (!waiting || holdComplete) return;
-    holdStartRef.current = Date.now();
-
+  const onDown = useCallback(() => {
+    if (!waiting || holdDone) return;
+    holdStart.current = Date.now();
     const tick = () => {
-      const elapsed = Date.now() - holdStartRef.current;
-      const p = Math.min(1, elapsed / HOLD_DURATION);
-      setHoldProgress(p);
+      const p = Math.min(1, (Date.now() - holdStart.current) / HOLD_MS);
+      setHoldProg(p);
       if (p >= 1) {
-        continueAfterHold();
+        afterHold();
         return;
       }
-      holdRafRef.current = requestAnimationFrame(tick);
+      raf.current = requestAnimationFrame(tick);
     };
-    holdRafRef.current = requestAnimationFrame(tick);
-  }, [waiting, holdComplete, continueAfterHold]);
+    raf.current = requestAnimationFrame(tick);
+  }, [waiting, holdDone, afterHold]);
 
-  const onHoldEnd = useCallback(() => {
-    cancelAnimationFrame(holdRafRef.current);
-    if (holdProgress < 1) {
-      setHoldProgress(0);
-    }
-  }, [holdProgress]);
+  const onUp = useCallback(() => {
+    cancelAnimationFrame(raf.current);
+    if (holdProg < 1) setHoldProg(0);
+  }, [holdProg]);
 
   return (
-    <div className="flex flex-col items-start gap-5 w-full h-full px-8 py-6">
+    <div className="flex flex-col items-start w-full h-full px-8 py-6 gap-4">
       <AnimatePresence>
-        {buttonVisible && (
+        {showBtn && (
           <motion.button
             onClick={trigger}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="rounded-full border border-secondary bg-primary px-5 py-2 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-secondary"
+            transition={{ duration: 0.15 }}
+            className="rounded-full border border-secondary bg-primary px-5 py-1.5 text-xs font-medium text-primary shadow-sm hover:bg-secondary transition-colors"
           >
             Trigger
           </motion.button>
@@ -161,186 +119,137 @@ export const AgentWorkflow = () => {
       </AnimatePresence>
 
       <AnimatePresence mode="wait">
-        {playing && (
+        {started && (
           <motion.div
-            key={key}
+            key={runKey}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="w-full overflow-hidden relative"
-            style={{ height: VIEWPORT_H }}
+            transition={{ duration: 0.15 }}
+            className="relative pl-4"
           >
-            <motion.div style={{ y: scrollY }}>
-              <svg
-                width={CANVAS_W}
-                height={CANVAS_H}
-                viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
-                className="overflow-visible"
-              >
-                {STEPS.map((step, i) => {
-                  if (i === 0) return null;
-                  const visible = activeStep >= i;
-                  const y1 = nodeY(i - 1);
-                  const y2 = nodeY(i);
+            <div className="absolute left-[5px] top-[6px] bottom-[6px] w-px bg-border-secondary" />
 
-                  return (
-                    <motion.line
-                      key={`line-${key}-${i}`}
-                      x1={X}
-                      y1={y1}
-                      x2={X}
-                      y2={y2}
-                      stroke="var(--border-secondary)"
-                      strokeWidth={STROKE_W}
-                      initial={{ pathLength: 0, opacity: 0 }}
+            <div className="flex flex-col gap-0">
+              {STEPS.map((step, i) => {
+                const visible = active >= i;
+                const isCurrent = active === i;
+
+                return (
+                  <div key={`${runKey}-${i}`}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 4 }}
                       animate={
                         visible
-                          ? { pathLength: 1, opacity: 1 }
-                          : { pathLength: 0, opacity: 0 }
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 4 }
                       }
-                      transition={{ duration: 0.35, ease: "easeOut" }}
-                    />
-                  );
-                })}
-
-                {STEPS.map((step, i) => {
-                  const isActive = activeStep === i;
-                  const isComplete = activeStep > i;
-                  const isVisible = activeStep >= i;
-                  const y = nodeY(i);
-                  const isMain = step.agent === "main";
-
-                  return (
-                    <g key={`node-${key}-${step.id}`}>
-                      <motion.circle
-                        cx={X}
-                        cy={y}
-                        r={DOT_R}
-                        fill={isVisible ? (isMain ? "var(--text-primary)" : "var(--text-tertiary)") : "transparent"}
-                        stroke="var(--bg-primary)"
-                        strokeWidth={2}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={
-                          isVisible
-                            ? { scale: 1, opacity: 1 }
-                            : { scale: 0, opacity: 0 }
-                        }
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                      />
-
-                      <motion.text
-                        x={X + 18}
-                        y={y + 1}
-                        textAnchor="start"
-                        dominantBaseline="middle"
-                        fill="currentColor"
-                        className={cn(
-                          "text-[11px] font-medium",
-                          isMain ? "text-primary" : "text-tertiary",
-                        )}
-                        initial={{ opacity: 0, x: X + 12 }}
-                        animate={
-                          isVisible
-                            ? { opacity: isActive ? 1 : 0.5, x: X + 18 }
-                            : { opacity: 0, x: X + 12 }
-                        }
-                        transition={{ duration: 0.25 }}
-                      >
-                        {step.label}
-                      </motion.text>
-
-                      {step.sublabel && (
-                        <motion.text
-                          x={X + 18}
-                          y={y + 14}
-                          textAnchor="start"
-                          dominantBaseline="middle"
-                          fill="currentColor"
-                          className="text-[9px] text-quaternary"
-                          initial={{ opacity: 0 }}
-                          animate={
-                            isVisible
-                              ? { opacity: isActive ? 0.5 : 0.25 }
-                              : { opacity: 0 }
-                          }
-                          transition={{ duration: 0.25 }}
-                        >
-                          {step.sublabel}
-                        </motion.text>
-                      )}
-
-                      {isActive && !waiting && !holdComplete && i < STEPS.length - 1 && (
-                        <motion.circle
-                          cx={X}
-                          cy={y}
-                          r={DOT_R + 4}
-                          fill="none"
-                          stroke={isMain ? "var(--text-primary)" : "var(--text-tertiary)"}
-                          strokeWidth={0.5}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: [0, 0.4, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                        />
-                      )}
-                    </g>
-                  );
-                })}
-              </svg>
-
-              <AnimatePresence>
-                {waiting && !holdComplete && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    transition={{ duration: 0.25 }}
-                    className="absolute"
-                    style={{
-                      left: X + 18,
-                      top: nodeY(HOLD_STEP_INDEX - 1) + 28,
-                    }}
-                  >
-                    <button
-                      onMouseDown={onHoldStart}
-                      onMouseUp={onHoldEnd}
-                      onMouseLeave={onHoldEnd}
-                      onTouchStart={onHoldStart}
-                      onTouchEnd={onHoldEnd}
-                      className="relative flex items-center gap-2 rounded-full border border-secondary bg-primary pl-3 pr-4 py-1.5 text-[11px] font-medium text-secondary shadow-sm select-none cursor-pointer overflow-hidden"
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="flex items-center gap-3 relative"
+                      style={{ height: 32 }}
                     >
                       <div
-                        className="absolute inset-0 bg-tertiary origin-left rounded-full"
+                        className="absolute -left-4 w-[11px] h-[11px] rounded-full border-[2px] border-bg-primary flex-shrink-0"
                         style={{
-                          transform: `scaleX(${holdProgress})`,
-                          opacity: 0.08,
-                          transition: holdProgress === 0 ? "transform 0.15s ease-out" : "none",
+                          backgroundColor: visible
+                            ? step.sub
+                              ? "var(--text-quaternary)"
+                              : "var(--text-primary)"
+                            : "transparent",
+                          borderColor: "var(--bg-primary)",
+                          boxShadow: visible ? "0 0 0 1px var(--border-secondary)" : "none",
                         }}
                       />
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="relative z-10">
-                        <circle
-                          cx="7"
-                          cy="7"
-                          r="5.5"
-                          stroke="currentColor"
-                          strokeWidth="1"
-                          strokeDasharray={`${Math.PI * 11}`}
-                          strokeDashoffset={`${Math.PI * 11 * (1 - holdProgress)}`}
-                          strokeLinecap="round"
-                          className="text-tertiary"
-                          style={{
-                            transition: holdProgress === 0 ? "stroke-dashoffset 0.15s ease-out" : "none",
-                            transform: "rotate(-90deg)",
-                            transformOrigin: "center",
-                          }}
-                        />
-                      </svg>
-                      <span className="relative z-10">Hold to confirm</span>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+                      <span
+                        className="text-xs select-none transition-opacity duration-200"
+                        style={{
+                          color: step.sub
+                            ? "var(--text-tertiary)"
+                            : "var(--text-primary)",
+                          opacity: isCurrent ? 1 : visible ? 0.45 : 0,
+                          fontWeight: step.sub ? 400 : 500,
+                        }}
+                      >
+                        {step.label}
+                      </span>
+                    </motion.div>
+
+                    {i === HOLD_INDEX - 1 && (
+                      <AnimatePresence>
+                        {waiting && !holdDone && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="py-2 pl-1">
+                              <button
+                                onMouseDown={onDown}
+                                onMouseUp={onUp}
+                                onMouseLeave={onUp}
+                                onTouchStart={onDown}
+                                onTouchEnd={onUp}
+                                className="relative flex items-center gap-1.5 rounded-full border border-secondary bg-primary px-3 py-1 text-[10px] text-tertiary select-none cursor-pointer overflow-hidden"
+                              >
+                                <div
+                                  className="absolute inset-0 bg-fill-secondary rounded-full origin-left"
+                                  style={{
+                                    transform: `scaleX(${holdProg})`,
+                                    transition:
+                                      holdProg === 0
+                                        ? "transform 0.12s ease-out"
+                                        : "none",
+                                  }}
+                                />
+                                <svg
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  className="relative z-10"
+                                >
+                                  <circle
+                                    cx="5"
+                                    cy="5"
+                                    r="3.5"
+                                    fill="none"
+                                    stroke="var(--border-secondary)"
+                                    strokeWidth="1"
+                                  />
+                                  <circle
+                                    cx="5"
+                                    cy="5"
+                                    r="3.5"
+                                    fill="none"
+                                    stroke="var(--text-tertiary)"
+                                    strokeWidth="1"
+                                    strokeDasharray={`${Math.PI * 7}`}
+                                    strokeDashoffset={`${Math.PI * 7 * (1 - holdProg)}`}
+                                    strokeLinecap="round"
+                                    style={{
+                                      transition:
+                                        holdProg === 0
+                                          ? "stroke-dashoffset 0.12s ease-out"
+                                          : "none",
+                                      transform: "rotate(-90deg)",
+                                      transformOrigin: "center",
+                                    }}
+                                  />
+                                </svg>
+                                <span className="relative z-10">
+                                  Hold to confirm
+                                </span>
+                              </button>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
