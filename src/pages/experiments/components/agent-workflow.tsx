@@ -1,365 +1,277 @@
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, animate } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-interface CommitNode {
+const COL = {
+  memory: 100,
+  main: 220,
+  web: 340,
+  thinking: 460,
+};
+
+const ROW = 56;
+const DOT_R = 4;
+const CANVAS_W = 560;
+
+interface NodeDef {
   id: string;
   label: string;
   agent: string;
   x: number;
   y: number;
+  phase: number;
 }
 
-interface PathSegment {
-  from: { x: number; y: number };
-  to: { x: number; y: number };
+const NODES: NodeDef[] = [
+  { id: "m1", label: "Initialize task", agent: "main", x: COL.main, y: 1 * ROW, phase: 0 },
+  { id: "m2", label: "Parse request", agent: "main", x: COL.main, y: 2 * ROW, phase: 1 },
+  { id: "m3", label: "Plan execution", agent: "main", x: COL.main, y: 3 * ROW, phase: 2 },
+
+  { id: "mem1", label: "Load context", agent: "memory", x: COL.memory, y: 5 * ROW, phase: 4 },
+  { id: "mem2", label: "Retrieve history", agent: "memory", x: COL.memory, y: 6 * ROW, phase: 5 },
+
+  { id: "w1", label: "Search sources", agent: "web", x: COL.web, y: 5 * ROW, phase: 4 },
+  { id: "w2", label: "Extract data", agent: "web", x: COL.web, y: 6 * ROW, phase: 5 },
+  { id: "w3", label: "Validate findings", agent: "web", x: COL.web, y: 7 * ROW, phase: 6 },
+
+  { id: "t1", label: "Analyze problem", agent: "thinking", x: COL.thinking, y: 5 * ROW, phase: 4 },
+  { id: "t2", label: "Generate options", agent: "thinking", x: COL.thinking, y: 6 * ROW, phase: 5 },
+  { id: "t3", label: "Evaluate tradeoffs", agent: "thinking", x: COL.thinking, y: 7 * ROW, phase: 6 },
+  { id: "t4", label: "Select approach", agent: "thinking", x: COL.thinking, y: 8 * ROW, phase: 7 },
+
+  { id: "m4", label: "Merge results", agent: "main", x: COL.main, y: 10 * ROW, phase: 9 },
+  { id: "m5", label: "Compose response", agent: "main", x: COL.main, y: 11 * ROW, phase: 10 },
+  { id: "m6", label: "Deliver output", agent: "main", x: COL.main, y: 12 * ROW, phase: 11 },
+];
+
+const TOTAL_PHASES = 12;
+const PHASE_DURATION = 0.35;
+
+const COLORS: Record<string, string> = {
+  main: "var(--text-primary)",
+  memory: "var(--text-tertiary)",
+  web: "var(--text-quaternary)",
+  thinking: "var(--text-secondary)",
+};
+
+const TEXT_CLASSES: Record<string, string> = {
+  main: "text-primary",
+  memory: "text-tertiary",
+  web: "text-quaternary",
+  thinking: "text-secondary",
+};
+
+interface Seg {
+  from: [number, number];
+  to: [number, number];
+  agent: string;
+  phase: number;
 }
 
-const AGENT_COLORS: Record<string, { dot: string; line: string; label: string }> = {
-  main: {
-    dot: "var(--text-primary)",
-    line: "var(--text-primary)",
-    label: "text-primary",
-  },
-  memory: {
-    dot: "var(--text-tertiary)",
-    line: "var(--text-tertiary)",
-    label: "text-tertiary",
-  },
-  web: {
-    dot: "var(--text-quaternary)",
-    line: "var(--text-quaternary)",
-    label: "text-quaternary",
-  },
-  thinking: {
-    dot: "var(--text-secondary)",
-    line: "var(--text-secondary)",
-    label: "text-secondary",
-  },
-};
-
-const COL = {
-  memory: 60,
-  main: 160,
-  web: 260,
-  thinking: 360,
-};
-
-const ROW_HEIGHT = 52;
-const NODE_RADIUS = 5;
-const SVG_WIDTH = 420;
-
-const COMMITS: CommitNode[] = [
-  { id: "m1", label: "Initialize task", agent: "main", x: COL.main, y: 1 * ROW_HEIGHT },
-  { id: "m2", label: "Parse user request", agent: "main", x: COL.main, y: 2 * ROW_HEIGHT },
-  { id: "m3", label: "Plan execution", agent: "main", x: COL.main, y: 3 * ROW_HEIGHT },
-
-  { id: "mem1", label: "Load context", agent: "memory", x: COL.memory, y: 4.5 * ROW_HEIGHT },
-  { id: "mem2", label: "Retrieve history", agent: "memory", x: COL.memory, y: 5.5 * ROW_HEIGHT },
-
-  { id: "w1", label: "Search sources", agent: "web", x: COL.web, y: 4.5 * ROW_HEIGHT },
-  { id: "w2", label: "Extract data", agent: "web", x: COL.web, y: 5.5 * ROW_HEIGHT },
-  { id: "w3", label: "Validate findings", agent: "web", x: COL.web, y: 6.5 * ROW_HEIGHT },
-
-  { id: "t1", label: "Analyze problem", agent: "thinking", x: COL.thinking, y: 4.5 * ROW_HEIGHT },
-  { id: "t2", label: "Generate options", agent: "thinking", x: COL.thinking, y: 5.5 * ROW_HEIGHT },
-  { id: "t3", label: "Evaluate tradeoffs", agent: "thinking", x: COL.thinking, y: 6.5 * ROW_HEIGHT },
-  { id: "t4", label: "Select approach", agent: "thinking", x: COL.thinking, y: 7.5 * ROW_HEIGHT },
-
-  { id: "m4", label: "Merge results", agent: "main", x: COL.main, y: 9 * ROW_HEIGHT },
-  { id: "m5", label: "Compose response", agent: "main", x: COL.main, y: 10 * ROW_HEIGHT },
-  { id: "m6", label: "Deliver output", agent: "main", x: COL.main, y: 11 * ROW_HEIGHT },
+const LINES: Seg[] = [
+  { from: [COL.main, 1 * ROW], to: [COL.main, 3 * ROW], agent: "main", phase: 0 },
+  { from: [COL.main, 3 * ROW], to: [COL.memory, 5 * ROW], agent: "memory", phase: 3 },
+  { from: [COL.main, 3 * ROW], to: [COL.web, 5 * ROW], agent: "web", phase: 3 },
+  { from: [COL.main, 3 * ROW], to: [COL.thinking, 5 * ROW], agent: "thinking", phase: 3 },
+  { from: [COL.memory, 5 * ROW], to: [COL.memory, 6 * ROW], agent: "memory", phase: 4 },
+  { from: [COL.web, 5 * ROW], to: [COL.web, 7 * ROW], agent: "web", phase: 4 },
+  { from: [COL.thinking, 5 * ROW], to: [COL.thinking, 8 * ROW], agent: "thinking", phase: 4 },
+  { from: [COL.memory, 6 * ROW], to: [COL.main, 10 * ROW], agent: "memory", phase: 8 },
+  { from: [COL.web, 7 * ROW], to: [COL.main, 10 * ROW], agent: "web", phase: 8 },
+  { from: [COL.thinking, 8 * ROW], to: [COL.main, 10 * ROW], agent: "thinking", phase: 8 },
+  { from: [COL.main, 10 * ROW], to: [COL.main, 12 * ROW], agent: "main", phase: 9 },
 ];
 
-const BRANCH_PATHS: PathSegment[] = [
-  { from: { x: COL.main, y: 3 * ROW_HEIGHT }, to: { x: COL.memory, y: 4.5 * ROW_HEIGHT } },
-  { from: { x: COL.main, y: 3 * ROW_HEIGHT }, to: { x: COL.web, y: 4.5 * ROW_HEIGHT } },
-  { from: { x: COL.main, y: 3 * ROW_HEIGHT }, to: { x: COL.thinking, y: 4.5 * ROW_HEIGHT } },
-];
-
-const MERGE_PATHS: PathSegment[] = [
-  { from: { x: COL.memory, y: 5.5 * ROW_HEIGHT }, to: { x: COL.main, y: 9 * ROW_HEIGHT } },
-  { from: { x: COL.web, y: 6.5 * ROW_HEIGHT }, to: { x: COL.main, y: 9 * ROW_HEIGHT } },
-  { from: { x: COL.thinking, y: 7.5 * ROW_HEIGHT }, to: { x: COL.main, y: 9 * ROW_HEIGHT } },
-];
-
-const AGENT_LINE_SEGMENTS: PathSegment[] = [
-  { from: { x: COL.main, y: 1 * ROW_HEIGHT }, to: { x: COL.main, y: 3 * ROW_HEIGHT } },
-  { from: { x: COL.memory, y: 4.5 * ROW_HEIGHT }, to: { x: COL.memory, y: 5.5 * ROW_HEIGHT } },
-  { from: { x: COL.web, y: 4.5 * ROW_HEIGHT }, to: { x: COL.web, y: 6.5 * ROW_HEIGHT } },
-  { from: { x: COL.thinking, y: 4.5 * ROW_HEIGHT }, to: { x: COL.thinking, y: 7.5 * ROW_HEIGHT } },
-  { from: { x: COL.main, y: 9 * ROW_HEIGHT }, to: { x: COL.main, y: 11 * ROW_HEIGHT } },
-];
-
-const AGENT_LABELS: { agent: string; label: string; x: number; y: number }[] = [
-  { agent: "main", label: "Main Agent", x: COL.main, y: 0.3 * ROW_HEIGHT },
-  { agent: "memory", label: "Memory Recap", x: COL.memory, y: 3.8 * ROW_HEIGHT },
-  { agent: "web", label: "Web Research", x: COL.web, y: 3.8 * ROW_HEIGHT },
-  { agent: "thinking", label: "Deep Thinking", x: COL.thinking, y: 3.8 * ROW_HEIGHT },
-];
-
-const LABEL_SIDE: Record<string, "left" | "right"> = {
-  main: "left",
-  memory: "left",
-  web: "right",
-  thinking: "right",
-};
-
-function getAgentForSegment(seg: PathSegment): string {
-  if (seg.from.x === COL.memory || seg.to.x === COL.memory) return "memory";
-  if (seg.from.x === COL.thinking || seg.to.x === COL.thinking) return "thinking";
-  if (seg.from.x === COL.web || seg.to.x === COL.web) return "web";
-  return "main";
-}
-
-function buildCurvePath(from: { x: number; y: number }, to: { x: number; y: number }): string {
-  if (from.x === to.x) {
-    return `M ${from.x} ${from.y} L ${to.x} ${to.y}`;
-  }
-  const midY = from.y + (to.y - from.y) * 0.4;
-  return `M ${from.x} ${from.y} C ${from.x} ${midY}, ${to.x} ${midY}, ${to.x} ${to.y}`;
-}
-
-const TOTAL_SVG_HEIGHT = 12 * ROW_HEIGHT;
-
-const PHASE_TIMING = {
-  mainInitial: 0,
-  labels: 0.3,
-  branching: 1.2,
-  branchCommits: 1.6,
-  merging: 3.2,
-  mainFinal: 3.8,
-};
-
-const AnimatedPath = ({
-  d,
-  color,
-  delay,
-  duration = 0.5,
-}: {
-  d: string;
-  color: string;
-  delay: number;
-  duration?: number;
-}) => (
-  <motion.path
-    d={d}
-    fill="none"
-    stroke={color}
-    strokeWidth={1.5}
-    initial={{ pathLength: 0, opacity: 0 }}
-    animate={{ pathLength: 1, opacity: 1 }}
-    transition={{ delay, duration, ease: "easeInOut" }}
-  />
-);
-
-const AnimatedDot = ({
-  cx,
-  cy,
-  color,
-  delay,
-}: {
-  cx: number;
-  cy: number;
-  color: string;
-  delay: number;
-}) => (
-  <motion.circle
-    cx={cx}
-    cy={cy}
-    r={NODE_RADIUS}
-    fill={color}
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    transition={{ delay, duration: 0.25, ease: "easeOut" }}
-  />
-);
-
-const AnimatedCommitLabel = ({
-  x,
-  y,
-  label,
-  agentKey,
-  delay,
-}: {
+interface AgentLabel {
+  label: string;
+  agent: string;
   x: number;
   y: number;
-  label: string;
-  agentKey: string;
-  delay: number;
-}) => {
-  const side = LABEL_SIDE[agentKey] || "right";
-  const textX = side === "left" ? x - 14 : x + 14;
-  const textAnchor = side === "left" ? "end" : "start";
+  phase: number;
+}
 
-  return (
-    <motion.text
-      x={textX}
-      y={y + 4}
-      textAnchor={textAnchor}
-      fill="currentColor"
-      className={cn("text-[11px]", AGENT_COLORS[agentKey].label)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay, duration: 0.3 }}
-    >
-      {label}
-    </motion.text>
-  );
-};
+const AGENT_LABELS: AgentLabel[] = [
+  { label: "Main Agent", agent: "main", x: COL.main, y: 0.3 * ROW, phase: 0 },
+  { label: "Memory", agent: "memory", x: COL.memory, y: 4.2 * ROW, phase: 3 },
+  { label: "Research", agent: "web", x: COL.web, y: 4.2 * ROW, phase: 3 },
+  { label: "Thinking", agent: "thinking", x: COL.thinking, y: 4.2 * ROW, phase: 3 },
+];
+
+function curvePath(fx: number, fy: number, tx: number, ty: number): string {
+  if (fx === tx) return `M${fx},${fy}L${tx},${ty}`;
+  const my = fy + (ty - fy) * 0.45;
+  return `M${fx},${fy}C${fx},${my} ${tx},${my} ${tx},${ty}`;
+}
+
+function labelSide(agent: string): "left" | "right" {
+  if (agent === "memory") return "left";
+  return "right";
+}
+
+const VIEWPORT_H = 380;
+const CANVAS_H = 13.5 * ROW;
+
+function bottomYAtPhase(phase: number): number {
+  let maxY = 0;
+  for (const n of NODES) {
+    if (n.phase <= phase) maxY = Math.max(maxY, n.y);
+  }
+  return maxY;
+}
 
 export const AgentWorkflow = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [animKey, setAnimKey] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [key, setKey] = useState(0);
+  const [buttonVisible, setButtonVisible] = useState(true);
+  const scrollY = useMotionValue(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleTrigger = useCallback(() => {
-    setIsPlaying(false);
-    setAnimKey((k) => k + 1);
-    requestAnimationFrame(() => {
-      setIsPlaying(true);
-    });
+  const trigger = useCallback(() => {
+    setButtonVisible(false);
+    setTimeout(() => {
+      setPlaying(false);
+      setKey((k) => k + 1);
+      requestAnimationFrame(() => {
+        setPlaying(true);
+      });
+    }, 300);
   }, []);
 
-  const getCommitDelay = (commit: CommitNode): number => {
-    if (commit.agent === "main" && commit.y <= 3 * ROW_HEIGHT) {
-      const index = ["m1", "m2", "m3"].indexOf(commit.id);
-      return PHASE_TIMING.mainInitial + index * 0.3;
+  useEffect(() => {
+    if (!playing) {
+      scrollY.set(0);
+      return;
     }
 
-    if (commit.agent === "memory") {
-      const index = ["mem1", "mem2"].indexOf(commit.id);
-      return PHASE_TIMING.branchCommits + index * 0.3;
-    }
-    if (commit.agent === "web") {
-      const index = ["w1", "w2", "w3"].indexOf(commit.id);
-      return PHASE_TIMING.branchCommits + index * 0.3;
-    }
-    if (commit.agent === "thinking") {
-      const index = ["t1", "t2", "t3", "t4"].indexOf(commit.id);
-      return PHASE_TIMING.branchCommits + index * 0.3;
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+
+    for (let p = 0; p <= TOTAL_PHASES; p++) {
+      const t = setTimeout(() => {
+        const bottom = bottomYAtPhase(p);
+        const targetScroll = Math.max(0, bottom - VIEWPORT_H + 100);
+        animate(scrollY, -targetScroll, { duration: 0.5, ease: "easeInOut" });
+      }, p * PHASE_DURATION * 1000 + 200);
+      timeouts.push(t);
     }
 
-    if (commit.id === "m4") return PHASE_TIMING.mainFinal;
-    if (commit.id === "m5") return PHASE_TIMING.mainFinal + 0.3;
-    if (commit.id === "m6") return PHASE_TIMING.mainFinal + 0.6;
+    const resetTimeout = setTimeout(() => {
+      setButtonVisible(true);
+    }, (TOTAL_PHASES + 2) * PHASE_DURATION * 1000 + 600);
+    timeouts.push(resetTimeout);
 
-    return 0;
-  };
+    return () => timeouts.forEach(clearTimeout);
+  }, [playing, key, scrollY]);
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      <button
-        onClick={handleTrigger}
-        className="rounded-full bg-accent-primary px-5 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-primary-hover"
-      >
-        Trigger
-      </button>
+    <div className="flex flex-col items-center gap-6 w-full">
+      <AnimatePresence>
+        {buttonVisible && (
+          <motion.button
+            onClick={trigger}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.25 }}
+            className="rounded-full border border-secondary bg-primary px-5 py-2 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-surface-secondary"
+          >
+            Trigger
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence mode="wait">
-        {isPlaying && (
+        {playing && (
           <motion.div
-            key={animKey}
+            key={key}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="relative"
+            className="w-full flex justify-center overflow-hidden relative"
+            style={{ height: VIEWPORT_H }}
+            ref={containerRef}
           >
-            <svg
-              width={SVG_WIDTH}
-              height={TOTAL_SVG_HEIGHT}
-              viewBox={`0 0 ${SVG_WIDTH} ${TOTAL_SVG_HEIGHT}`}
-              className="overflow-visible"
-            >
-              {AGENT_LINE_SEGMENTS.map((seg, i) => {
-                const agent = getAgentForSegment(seg);
-                let delay: number;
-                if (seg.from.y <= 3 * ROW_HEIGHT && seg.to.y <= 3 * ROW_HEIGHT) {
-                  delay = PHASE_TIMING.mainInitial;
-                } else if (seg.from.y >= 9 * ROW_HEIGHT) {
-                  delay = PHASE_TIMING.mainFinal;
-                } else {
-                  delay = PHASE_TIMING.branchCommits;
-                }
-                return (
-                  <AnimatedPath
-                    key={`line-${i}`}
-                    d={`M ${seg.from.x} ${seg.from.y} L ${seg.to.x} ${seg.to.y}`}
-                    color={AGENT_COLORS[agent].line}
-                    delay={delay}
-                    duration={0.6}
-                  />
-                );
-              })}
+            <motion.div style={{ y: scrollY }} className="relative">
+              <svg
+                width={CANVAS_W}
+                height={CANVAS_H}
+                viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
+                className="overflow-visible"
+              >
+                {LINES.map((seg, i) => {
+                  const d = curvePath(seg.from[0], seg.from[1], seg.to[0], seg.to[1]);
+                  const delay = seg.phase * PHASE_DURATION;
+                  return (
+                    <motion.path
+                      key={`l${i}`}
+                      d={d}
+                      fill="none"
+                      stroke={COLORS[seg.agent]}
+                      strokeWidth={1}
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 0.5 }}
+                      transition={{ delay, duration: 0.4, ease: "easeInOut" }}
+                    />
+                  );
+                })}
 
-              {BRANCH_PATHS.map((seg, i) => {
-                const agent = getAgentForSegment(seg);
-                return (
-                  <AnimatedPath
-                    key={`branch-${i}`}
-                    d={buildCurvePath(seg.from, seg.to)}
-                    color={AGENT_COLORS[agent].line}
-                    delay={PHASE_TIMING.branching + i * 0.1}
-                    duration={0.4}
-                  />
-                );
-              })}
+                {NODES.map((node) => {
+                  const delay = node.phase * PHASE_DURATION;
+                  const side = labelSide(node.agent);
+                  const tx = side === "left" ? node.x - 10 : node.x + 10;
+                  const anchor = side === "left" ? "end" : "start";
 
-              {MERGE_PATHS.map((seg, i) => {
-                const agent = getAgentForSegment(seg);
-                return (
-                  <AnimatedPath
-                    key={`merge-${i}`}
-                    d={buildCurvePath(seg.from, seg.to)}
-                    color={AGENT_COLORS[agent].line}
-                    delay={PHASE_TIMING.merging + i * 0.15}
-                    duration={0.5}
-                  />
-                );
-              })}
+                  return (
+                    <g key={node.id}>
+                      <motion.circle
+                        cx={node.x}
+                        cy={node.y}
+                        r={DOT_R}
+                        fill={COLORS[node.agent]}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay, duration: 0.2, ease: "easeOut" }}
+                      />
+                      <motion.text
+                        x={tx}
+                        y={node.y + 3.5}
+                        textAnchor={anchor}
+                        fill="currentColor"
+                        className={cn("text-[10px]", TEXT_CLASSES[node.agent])}
+                        style={{ opacity: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.7 }}
+                        transition={{ delay: delay + 0.1, duration: 0.25 }}
+                      >
+                        {node.label}
+                      </motion.text>
+                    </g>
+                  );
+                })}
 
-              {COMMITS.map((commit) => (
-                <AnimatedDot
-                  key={commit.id}
-                  cx={commit.x}
-                  cy={commit.y}
-                  color={AGENT_COLORS[commit.agent].dot}
-                  delay={getCommitDelay(commit)}
-                />
-              ))}
-
-              {COMMITS.map((commit) => (
-                <AnimatedCommitLabel
-                  key={`label-${commit.id}`}
-                  x={commit.x}
-                  y={commit.y}
-                  label={commit.label}
-                  agentKey={commit.agent}
-                  delay={getCommitDelay(commit) + 0.1}
-                />
-              ))}
-
-              {AGENT_LABELS.map((al) => (
-                <motion.text
-                  key={`agent-label-${al.agent}`}
-                  x={al.x}
-                  y={al.y}
-                  textAnchor="middle"
-                  fill="currentColor"
-                  className={cn(
-                    "text-[10px] font-semibold uppercase tracking-wider",
-                    AGENT_COLORS[al.agent].label,
-                  )}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    delay: al.agent === "main" ? PHASE_TIMING.labels : PHASE_TIMING.branching,
-                    duration: 0.3,
-                  }}
-                >
-                  {al.label}
-                </motion.text>
-              ))}
-            </svg>
+                {AGENT_LABELS.map((al) => {
+                  const delay = al.phase * PHASE_DURATION;
+                  return (
+                    <motion.text
+                      key={`al-${al.agent}`}
+                      x={al.x}
+                      y={al.y}
+                      textAnchor="middle"
+                      fill="currentColor"
+                      className={cn(
+                        "text-[9px] font-medium uppercase tracking-widest",
+                        TEXT_CLASSES[al.agent],
+                      )}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.5 }}
+                      transition={{ delay, duration: 0.3 }}
+                    >
+                      {al.label}
+                    </motion.text>
+                  );
+                })}
+              </svg>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
