@@ -2,188 +2,69 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useMotionValue, animate } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const COL_GAP = 120;
-const COL_START = 40;
-const COLS = {
-  main: COL_START,
-  memory: COL_START + COL_GAP,
-  web: COL_START + COL_GAP * 2,
-  thinking: COL_START + COL_GAP * 3,
-};
-
-const ROW_H = 48;
-const DOT_R = 4.5;
+const X = 24;
+const ROW_H = 52;
+const DOT_R = 5;
 const STROKE_W = 1.5;
-const CANVAS_W = COL_START + COL_GAP * 3 + 140;
+const Y_START = 32;
 
-const STEP_DELAY = 0.6;
-
-type Agent = "main" | "memory" | "web" | "thinking";
+function nodeY(i: number): number {
+  return Y_START + i * ROW_H;
+}
 
 interface Step {
   id: string;
   label: string;
-  agent: Agent;
-  col: number;
-  row: number;
-  seq: number;
+  sublabel?: string;
+  agent: "main" | "sub";
 }
 
 const STEPS: Step[] = [
-  { id: "m1", label: "Initialize task", agent: "main", col: COLS.main, row: 0, seq: 0 },
-  { id: "m2", label: "Parse request", agent: "main", col: COLS.main, row: 1, seq: 1 },
-  { id: "m3", label: "Plan execution", agent: "main", col: COLS.main, row: 2, seq: 2 },
-
-  { id: "mem1", label: "Load context", agent: "memory", col: COLS.memory, row: 4, seq: 4 },
-  { id: "mem2", label: "Retrieve history", agent: "memory", col: COLS.memory, row: 5, seq: 5 },
-
-  { id: "w1", label: "Search sources", agent: "web", col: COLS.web, row: 4, seq: 4 },
-  { id: "w2", label: "Extract data", agent: "web", col: COLS.web, row: 5, seq: 5 },
-  { id: "w3", label: "Validate findings", agent: "web", col: COLS.web, row: 6, seq: 6 },
-
-  { id: "t1", label: "Analyze problem", agent: "thinking", col: COLS.thinking, row: 4, seq: 4 },
-  { id: "t2", label: "Generate options", agent: "thinking", col: COLS.thinking, row: 5, seq: 5 },
-  { id: "t3", label: "Evaluate tradeoffs", agent: "thinking", col: COLS.thinking, row: 6, seq: 6 },
-  { id: "t4", label: "Select approach", agent: "thinking", col: COLS.thinking, row: 7, seq: 7 },
-
-  { id: "m4", label: "Merge results", agent: "main", col: COLS.main, row: 9, seq: 9 },
-  { id: "m5", label: "Compose response", agent: "main", col: COLS.main, row: 10, seq: 10 },
-  { id: "m6", label: "Deliver output", agent: "main", col: COLS.main, row: 11, seq: 11 },
+  { id: "s0", label: "Initialize task", agent: "main" },
+  { id: "s1", label: "Parse request", agent: "main" },
+  { id: "s2", label: "Plan execution", agent: "main" },
+  { id: "s3", label: "Memory recall", sublabel: "Loading context + history", agent: "sub" },
+  { id: "s4", label: "Web research", sublabel: "Searching + validating sources", agent: "sub" },
+  { id: "s5", label: "Deep thinking", sublabel: "Analyzing tradeoffs", agent: "sub" },
+  { id: "s6", label: "Merge results", agent: "main" },
+  { id: "s7", label: "Compose response", agent: "main" },
+  { id: "s8", label: "Deliver output", agent: "main" },
 ];
 
-const TOTAL_SEQ = 12;
-
-const Y_OFFSET = 50;
-
-function nodeY(row: number): number {
-  return Y_OFFSET + row * ROW_H;
-}
-
-const AGENT_COLORS: Record<Agent, string> = {
-  main: "var(--text-primary)",
-  memory: "var(--text-tertiary)",
-  web: "var(--text-tertiary)",
-  thinking: "var(--text-tertiary)",
-};
-
-const AGENT_TEXT: Record<Agent, string> = {
-  main: "text-primary",
-  memory: "text-tertiary",
-  web: "text-tertiary",
-  thinking: "text-tertiary",
-};
-
-interface LineDef {
-  d: string;
-  agent: Agent;
-  seq: number;
-}
-
-function buildLines(): LineDef[] {
-  const lines: LineDef[] = [];
-
-  for (let i = 0; i < 2; i++) {
-    const y1 = nodeY(i);
-    const y2 = nodeY(i + 1);
-    lines.push({
-      d: `M${COLS.main},${y1}L${COLS.main},${y2}`,
-      agent: "main",
-      seq: i,
-    });
-  }
-
-  const branchY = nodeY(2);
-  const forkEndY = nodeY(3);
-  const branchAgents: Agent[] = ["memory", "web", "thinking"];
-  for (const a of branchAgents) {
-    const col = COLS[a];
-    lines.push({
-      d: `M${COLS.main},${branchY}L${COLS.main},${forkEndY}L${col},${forkEndY}L${col},${nodeY(4)}`,
-      agent: a,
-      seq: 3,
-    });
-  }
-
-  const branchCommits: { agent: Agent; rows: number[] }[] = [
-    { agent: "memory", rows: [4, 5] },
-    { agent: "web", rows: [4, 5, 6] },
-    { agent: "thinking", rows: [4, 5, 6, 7] },
-  ];
-  for (const bc of branchCommits) {
-    for (let i = 0; i < bc.rows.length - 1; i++) {
-      lines.push({
-        d: `M${COLS[bc.agent]},${nodeY(bc.rows[i])}L${COLS[bc.agent]},${nodeY(bc.rows[i + 1])}`,
-        agent: bc.agent,
-        seq: bc.rows[i],
-      });
-    }
-  }
-
-  const mergeY = nodeY(8);
-  const mergeTargetY = nodeY(9);
-  const mergeSources: { agent: Agent; lastRow: number }[] = [
-    { agent: "memory", lastRow: 5 },
-    { agent: "web", lastRow: 6 },
-    { agent: "thinking", lastRow: 7 },
-  ];
-  for (const ms of mergeSources) {
-    const col = COLS[ms.agent];
-    lines.push({
-      d: `M${col},${nodeY(ms.lastRow)}L${col},${mergeY}L${COLS.main},${mergeY}L${COLS.main},${mergeTargetY}`,
-      agent: ms.agent,
-      seq: 8,
-    });
-  }
-
-  for (let i = 9; i < 11; i++) {
-    lines.push({
-      d: `M${COLS.main},${nodeY(i)}L${COLS.main},${nodeY(i + 1)}`,
-      agent: "main",
-      seq: i,
-    });
-  }
-
-  return lines;
-}
-
-const LINES = buildLines();
-
-interface AgentLabel {
-  label: string;
-  agent: Agent;
-  x: number;
-  y: number;
-  seq: number;
-}
-
-const AGENT_LABELS: AgentLabel[] = [
-  { label: "Main Agent", agent: "main", x: COLS.main, y: nodeY(0) - 20, seq: 0 },
-  { label: "Memory", agent: "memory", x: COLS.memory, y: nodeY(4) - 16, seq: 3 },
-  { label: "Research", agent: "web", x: COLS.web, y: nodeY(4) - 16, seq: 3 },
-  { label: "Thinking", agent: "thinking", x: COLS.thinking, y: nodeY(4) - 16, seq: 3 },
-];
-
-const VIEWPORT_H = 420;
-const CANVAS_H = nodeY(12) + 40;
+const HOLD_STEP_INDEX = 7;
+const HOLD_DURATION = 1200;
+const STEP_DELAY = 700;
+const VIEWPORT_H = 380;
+const CANVAS_W = 280;
+const CANVAS_H = nodeY(STEPS.length) + 20;
 
 export const AgentWorkflow = () => {
   const [playing, setPlaying] = useState(false);
-  const [activeSeq, setActiveSeq] = useState(-1);
-  const [key, setKey] = useState(0);
+  const [activeStep, setActiveStep] = useState(-1);
+  const [waiting, setWaiting] = useState(false);
+  const [holdProgress, setHoldProgress] = useState(0);
+  const [holdComplete, setHoldComplete] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
+  const [key, setKey] = useState(0);
+
   const scrollY = useMotionValue(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const holdStartRef = useRef<number>(0);
+  const holdRafRef = useRef<number>(0);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const trigger = useCallback(() => {
     setButtonVisible(false);
     setTimeout(() => {
-      setActiveSeq(-1);
+      setActiveStep(-1);
+      setWaiting(false);
+      setHoldProgress(0);
+      setHoldComplete(false);
       setPlaying(false);
       setKey((k) => k + 1);
       requestAnimationFrame(() => {
         setPlaying(true);
       });
-    }, 250);
+    }, 200);
   }, []);
 
   useEffect(() => {
@@ -193,47 +74,91 @@ export const AgentWorkflow = () => {
     }
 
     const timeouts: ReturnType<typeof setTimeout>[] = [];
+    timeoutsRef.current = timeouts;
 
-    for (let s = 0; s <= TOTAL_SEQ; s++) {
+    for (let s = 0; s < STEPS.length; s++) {
+      if (s >= HOLD_STEP_INDEX) break;
+
       const t = setTimeout(() => {
-        setActiveSeq(s);
+        setActiveStep(s);
+        const targetScroll = Math.max(0, nodeY(s) - VIEWPORT_H + 140);
+        animate(scrollY, -targetScroll, { duration: 0.4, ease: "easeInOut" });
 
-        let maxY = 0;
-        for (const step of STEPS) {
-          if (step.seq <= s) maxY = Math.max(maxY, nodeY(step.row));
+        if (s === HOLD_STEP_INDEX - 1) {
+          setTimeout(() => setWaiting(true), 400);
         }
-        const targetScroll = Math.max(0, maxY - VIEWPORT_H + 120);
-        animate(scrollY, -targetScroll, { duration: 0.45, ease: "easeInOut" });
-      }, s * STEP_DELAY * 1000 + 150);
+      }, s * STEP_DELAY + 100);
       timeouts.push(t);
     }
-
-    const resetTimeout = setTimeout(() => {
-      setButtonVisible(true);
-    }, (TOTAL_SEQ + 2) * STEP_DELAY * 1000 + 400);
-    timeouts.push(resetTimeout);
 
     return () => timeouts.forEach(clearTimeout);
   }, [playing, key, scrollY]);
 
+  const continueAfterHold = useCallback(() => {
+    setHoldComplete(true);
+    setWaiting(false);
+
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+
+    for (let s = HOLD_STEP_INDEX; s < STEPS.length; s++) {
+      const delay = (s - HOLD_STEP_INDEX) * STEP_DELAY + 300;
+      const t = setTimeout(() => {
+        setActiveStep(s);
+        const targetScroll = Math.max(0, nodeY(s) - VIEWPORT_H + 140);
+        animate(scrollY, -targetScroll, { duration: 0.4, ease: "easeInOut" });
+      }, delay);
+      timeouts.push(t);
+    }
+
+    const resetT = setTimeout(() => {
+      setButtonVisible(true);
+    }, (STEPS.length - HOLD_STEP_INDEX) * STEP_DELAY + 800);
+    timeouts.push(resetT);
+
+    timeoutsRef.current = timeouts;
+    return () => timeouts.forEach(clearTimeout);
+  }, [scrollY]);
+
+  const onHoldStart = useCallback(() => {
+    if (!waiting || holdComplete) return;
+    holdStartRef.current = Date.now();
+
+    const tick = () => {
+      const elapsed = Date.now() - holdStartRef.current;
+      const p = Math.min(1, elapsed / HOLD_DURATION);
+      setHoldProgress(p);
+      if (p >= 1) {
+        continueAfterHold();
+        return;
+      }
+      holdRafRef.current = requestAnimationFrame(tick);
+    };
+    holdRafRef.current = requestAnimationFrame(tick);
+  }, [waiting, holdComplete, continueAfterHold]);
+
+  const onHoldEnd = useCallback(() => {
+    cancelAnimationFrame(holdRafRef.current);
+    if (holdProgress < 1) {
+      setHoldProgress(0);
+    }
+  }, [holdProgress]);
+
   return (
-    <div className="flex flex-col items-start gap-6 w-full h-full px-8 py-6">
-      <div className="w-full flex justify-start">
-        <AnimatePresence>
-          {buttonVisible && (
-            <motion.button
-              onClick={trigger}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="rounded-full border border-secondary bg-primary px-5 py-2 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-secondary"
-            >
-              Trigger
-            </motion.button>
-          )}
-        </AnimatePresence>
-      </div>
+    <div className="flex flex-col items-start gap-5 w-full h-full px-8 py-6">
+      <AnimatePresence>
+        {buttonVisible && (
+          <motion.button
+            onClick={trigger}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="rounded-full border border-secondary bg-primary px-5 py-2 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-secondary"
+          >
+            Trigger
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence mode="wait">
         {playing && (
@@ -242,10 +167,9 @@ export const AgentWorkflow = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
             className="w-full overflow-hidden relative"
             style={{ height: VIEWPORT_H }}
-            ref={containerRef}
           >
             <motion.div style={{ y: scrollY }}>
               <svg
@@ -254,108 +178,168 @@ export const AgentWorkflow = () => {
                 viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
                 className="overflow-visible"
               >
-                {LINES.map((line, i) => {
-                  const visible = activeSeq >= line.seq;
+                {STEPS.map((step, i) => {
+                  if (i === 0) return null;
+                  const visible = activeStep >= i;
+                  const y1 = nodeY(i - 1);
+                  const y2 = nodeY(i);
+
                   return (
-                    <motion.path
+                    <motion.line
                       key={`line-${key}-${i}`}
-                      d={line.d}
-                      fill="none"
-                      stroke={AGENT_COLORS[line.agent]}
+                      x1={X}
+                      y1={y1}
+                      x2={X}
+                      y2={y2}
+                      stroke="var(--border-secondary)"
                       strokeWidth={STROKE_W}
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={
                         visible
-                          ? { pathLength: 1, opacity: line.agent === "main" ? 0.6 : 0.35 }
+                          ? { pathLength: 1, opacity: 1 }
                           : { pathLength: 0, opacity: 0 }
                       }
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
                     />
                   );
                 })}
 
-                {AGENT_LABELS.map((al) => {
-                  const visible = activeSeq >= al.seq;
-                  return (
-                    <motion.text
-                      key={`label-${key}-${al.agent}`}
-                      x={al.x}
-                      y={al.y}
-                      textAnchor="start"
-                      fill="currentColor"
-                      className={cn(
-                        "text-[9px] font-medium uppercase tracking-[0.12em]",
-                        AGENT_TEXT[al.agent],
-                      )}
-                      initial={{ opacity: 0 }}
-                      animate={visible ? { opacity: 0.45 } : { opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {al.label}
-                    </motion.text>
-                  );
-                })}
-
-                {STEPS.map((step) => {
-                  const isActive = activeSeq === step.seq;
-                  const isComplete = activeSeq > step.seq;
-                  const isVisible = activeSeq >= step.seq;
-                  const x = step.col;
-                  const y = nodeY(step.row);
+                {STEPS.map((step, i) => {
+                  const isActive = activeStep === i;
+                  const isComplete = activeStep > i;
+                  const isVisible = activeStep >= i;
+                  const y = nodeY(i);
+                  const isMain = step.agent === "main";
 
                   return (
                     <g key={`node-${key}-${step.id}`}>
-                      {isActive && (
-                        <motion.circle
-                          cx={x}
-                          cy={y}
-                          r={12}
-                          fill="none"
-                          stroke={AGENT_COLORS[step.agent]}
-                          strokeWidth={1}
-                          initial={{ scale: 0.5, opacity: 0 }}
-                          animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.15, 0.3, 0.15] }}
-                          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                        />
-                      )}
-
                       <motion.circle
-                        cx={x}
+                        cx={X}
                         cy={y}
                         r={DOT_R}
-                        fill={AGENT_COLORS[step.agent]}
+                        fill={isVisible ? (isMain ? "var(--text-primary)" : "var(--text-tertiary)") : "transparent"}
+                        stroke="var(--bg-primary)"
+                        strokeWidth={2}
                         initial={{ scale: 0, opacity: 0 }}
                         animate={
                           isVisible
-                            ? { scale: 1, opacity: isComplete ? 1 : 0.8 }
+                            ? { scale: 1, opacity: 1 }
                             : { scale: 0, opacity: 0 }
                         }
                         transition={{ duration: 0.2, ease: "easeOut" }}
                       />
 
                       <motion.text
-                        x={x + 14}
-                        y={y + 4}
+                        x={X + 18}
+                        y={y + 1}
                         textAnchor="start"
+                        dominantBaseline="middle"
                         fill="currentColor"
                         className={cn(
-                          "text-[11px]",
-                          step.agent === "main" ? "text-primary" : "text-tertiary",
+                          "text-[11px] font-medium",
+                          isMain ? "text-primary" : "text-tertiary",
                         )}
-                        initial={{ opacity: 0, x: x + 10 }}
+                        initial={{ opacity: 0, x: X + 12 }}
                         animate={
                           isVisible
-                            ? { opacity: isActive ? 0.9 : 0.55, x: x + 14 }
-                            : { opacity: 0, x: x + 10 }
+                            ? { opacity: isActive ? 1 : 0.5, x: X + 18 }
+                            : { opacity: 0, x: X + 12 }
                         }
                         transition={{ duration: 0.25 }}
                       >
                         {step.label}
                       </motion.text>
+
+                      {step.sublabel && (
+                        <motion.text
+                          x={X + 18}
+                          y={y + 14}
+                          textAnchor="start"
+                          dominantBaseline="middle"
+                          fill="currentColor"
+                          className="text-[9px] text-quaternary"
+                          initial={{ opacity: 0 }}
+                          animate={
+                            isVisible
+                              ? { opacity: isActive ? 0.5 : 0.25 }
+                              : { opacity: 0 }
+                          }
+                          transition={{ duration: 0.25 }}
+                        >
+                          {step.sublabel}
+                        </motion.text>
+                      )}
+
+                      {isActive && !waiting && !holdComplete && i < STEPS.length - 1 && (
+                        <motion.circle
+                          cx={X}
+                          cy={y}
+                          r={DOT_R + 4}
+                          fill="none"
+                          stroke={isMain ? "var(--text-primary)" : "var(--text-tertiary)"}
+                          strokeWidth={0.5}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: [0, 0.4, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      )}
                     </g>
                   );
                 })}
               </svg>
+
+              <AnimatePresence>
+                {waiting && !holdComplete && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.25 }}
+                    className="absolute"
+                    style={{
+                      left: X + 18,
+                      top: nodeY(HOLD_STEP_INDEX - 1) + 28,
+                    }}
+                  >
+                    <button
+                      onMouseDown={onHoldStart}
+                      onMouseUp={onHoldEnd}
+                      onMouseLeave={onHoldEnd}
+                      onTouchStart={onHoldStart}
+                      onTouchEnd={onHoldEnd}
+                      className="relative flex items-center gap-2 rounded-full border border-secondary bg-primary pl-3 pr-4 py-1.5 text-[11px] font-medium text-secondary shadow-sm select-none cursor-pointer overflow-hidden"
+                    >
+                      <div
+                        className="absolute inset-0 bg-tertiary origin-left rounded-full"
+                        style={{
+                          transform: `scaleX(${holdProgress})`,
+                          opacity: 0.08,
+                          transition: holdProgress === 0 ? "transform 0.15s ease-out" : "none",
+                        }}
+                      />
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="relative z-10">
+                        <circle
+                          cx="7"
+                          cy="7"
+                          r="5.5"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                          strokeDasharray={`${Math.PI * 11}`}
+                          strokeDashoffset={`${Math.PI * 11 * (1 - holdProgress)}`}
+                          strokeLinecap="round"
+                          className="text-tertiary"
+                          style={{
+                            transition: holdProgress === 0 ? "stroke-dashoffset 0.15s ease-out" : "none",
+                            transform: "rotate(-90deg)",
+                            transformOrigin: "center",
+                          }}
+                        />
+                      </svg>
+                      <span className="relative z-10">Hold to confirm</span>
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </motion.div>
         )}
