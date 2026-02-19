@@ -115,7 +115,7 @@ export const AgentWorkflow = () => {
                 duration: 0.4,
                 ease: "easeOut",
               }}
-              className="rounded-2xl border border-black/[0.06] bg-primary p-5 flex flex-col gap-4"
+              className="rounded-2xl border border-black/[0.1] bg-primary p-5 flex flex-col gap-4"
               style={{
                 boxShadow: "0 6px 32px -6px rgba(0,0,0,0.05), 0 2px 8px -2px rgba(0,0,0,0.02)",
                 pointerEvents: formDone ? "none" : "auto",
@@ -126,7 +126,7 @@ export const AgentWorkflow = () => {
                   <label className="text-[10px] text-quaternary uppercase tracking-wider">
                     Card number
                   </label>
-                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
+                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
                     4532 8720 1193 4467
                   </div>
                 </div>
@@ -135,7 +135,7 @@ export const AgentWorkflow = () => {
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
                       Expiry
                     </label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
                       09/28
                     </div>
                   </div>
@@ -143,7 +143,7 @@ export const AgentWorkflow = () => {
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">
                       CVV
                     </label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04] cursor-default">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08] cursor-default">
                       817
                     </div>
                   </div>
@@ -152,13 +152,13 @@ export const AgentWorkflow = () => {
                   <label className="text-[10px] text-quaternary uppercase tracking-wider">
                     Name on card
                   </label>
-                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.04]">
+                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
                     Jane Cooper
                   </div>
                 </div>
               </div>
 
-              <div className="border-t border-black/[0.04] mt-2" />
+              <div className="border-t border-black/[0.08] mt-2" />
 
               <div className="flex items-center justify-between pt-1">
                 <div className="flex flex-col">
@@ -224,7 +224,7 @@ export const AgentWorkflow = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease: "easeOut", delay: 0.1 }}
-              className="rounded-2xl border border-black/[0.06] bg-primary p-5 flex flex-col gap-3"
+              className="rounded-2xl border border-black/[0.1] bg-primary p-5 flex flex-col gap-3"
               style={{
                 boxShadow: "0 6px 32px -6px rgba(0,0,0,0.05), 0 2px 8px -2px rgba(0,0,0,0.02)",
               }}
@@ -237,7 +237,7 @@ export const AgentWorkflow = () => {
                   #ZH-29841
                 </span>
               </div>
-              <div className="border-t border-black/[0.04]" />
+              <div className="border-t border-black/[0.08]" />
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-primary">
@@ -260,7 +260,7 @@ export const AgentWorkflow = () => {
                   </span>
                 </div>
               </div>
-              <div className="border-t border-black/[0.04]" />
+              <div className="border-t border-black/[0.08]" />
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-primary">
                   Total
