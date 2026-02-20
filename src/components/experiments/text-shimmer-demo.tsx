@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import { TextShimmer } from "../text-shimmer";
+import { useState } from "react";
 
 const SAMPLE_TEXT =
   "I found 3 flights matching your criteria. The best option departs at 9:45 AM with a layover in Denver, arriving by 4:30 PM local time. Would you like me to book it?";
@@ -7,36 +6,58 @@ const SAMPLE_TEXT =
 const MIN_SPEED = 0.5;
 const MAX_SPEED = 5;
 const DEFAULT_SPEED = 3.5;
+const SPREAD = 480;
 
 export const TextShimmerDemo = () => {
   const [speed, setSpeed] = useState(DEFAULT_SPEED);
   const [grabbing, setGrabbing] = useState(false);
-  const [shimmerKey, setShimmerKey] = useState(0);
-  const committedSpeed = useRef(speed);
   const duration = MIN_SPEED + MAX_SPEED - speed;
-
-  useEffect(() => {
-    if (!grabbing) return;
-    const onUp = () => {
-      setGrabbing(false);
-      setShimmerKey((k) => k + 1);
-      committedSpeed.current = speed;
-    };
-    window.addEventListener("pointerup", onUp);
-    return () => window.removeEventListener("pointerup", onUp);
-  }, [grabbing, speed]);
 
   return (
     <div className="flex flex-col items-center gap-10 w-full max-w-md px-6">
+      <style>{`
+        @keyframes shimmer-slide {
+          0% { background-position: 100% center; }
+          100% { background-position: 0% center; }
+        }
+        .shimmer-text {
+          display: inline-block;
+          background-size: 250% 100%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-repeat: no-repeat, padding-box;
+          background-image:
+            linear-gradient(
+              90deg,
+              transparent calc(50% - ${SPREAD}px),
+              #171717 50%,
+              transparent calc(50% + ${SPREAD}px)
+            ),
+            linear-gradient(#d4d4d4, #d4d4d4);
+          animation: shimmer-slide linear infinite;
+        }
+        @media (prefers-color-scheme: dark) {
+          .shimmer-text {
+            background-image:
+              linear-gradient(
+                90deg,
+                transparent calc(50% - ${SPREAD}px),
+                #e5e5e5 50%,
+                transparent calc(50% + ${SPREAD}px)
+              ),
+              linear-gradient(#404040, #404040);
+          }
+        }
+      `}</style>
+
       <div className="w-full">
-        <TextShimmer
-          key={shimmerKey}
-          className="text-ms leading-relaxed [--base-color:#d4d4d4] [--base-gradient-color:#171717] dark:[--base-color:#404040] dark:[--base-gradient-color:#e5e5e5]"
-          duration={duration}
-          spread={3}
+        <p
+          className="shimmer-text text-ms leading-relaxed"
+          style={{ animationDuration: `${duration}s` }}
         >
           {SAMPLE_TEXT}
-        </TextShimmer>
+        </p>
       </div>
 
       <div className="flex items-center gap-3 w-full max-w-[240px]">
@@ -52,6 +73,8 @@ export const TextShimmerDemo = () => {
             value={speed}
             onChange={(e) => setSpeed(parseFloat(e.target.value))}
             onPointerDown={() => setGrabbing(true)}
+            onPointerUp={() => setGrabbing(false)}
+            onPointerCancel={() => setGrabbing(false)}
             className={[
               "w-full h-[3px] appearance-none rounded-full outline-none bg-surface-tertiary",
               grabbing ? "cursor-grabbing" : "cursor-grab",
