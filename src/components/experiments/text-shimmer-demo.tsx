@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShimmeringText } from "@/components/ui/shimmering-text";
+import { TextShimmer } from "@/components/ui/shimmering-text";
 
 const SAMPLE_TEXT =
   "I found 3 flights matching your criteria. The best option departs at 9:45 AM with a layover in Denver, arriving by 4:30 PM local time. Would you like me to book it?";
@@ -10,18 +10,21 @@ const DEFAULT_SPEED = 3.5;
 
 export const TextShimmerDemo = () => {
   const [speed, setSpeed] = useState(DEFAULT_SPEED);
+  const [committedSpeed, setCommittedSpeed] = useState(DEFAULT_SPEED);
   const [grabbing, setGrabbing] = useState(false);
-  const duration = MIN_SPEED + MAX_SPEED - speed;
+  const duration = MIN_SPEED + MAX_SPEED - committedSpeed;
 
   return (
     <div className="flex flex-col items-center gap-10 w-full max-w-md px-6">
       <div className="w-full">
-        <ShimmeringText
-          text={SAMPLE_TEXT}
+        <TextShimmer
+          key={duration}
           duration={duration}
           spread={2}
           className="text-ms leading-relaxed"
-        />
+        >
+          {SAMPLE_TEXT}
+        </TextShimmer>
       </div>
 
       <div className="flex items-center gap-3 w-full max-w-[240px]">
@@ -37,8 +40,14 @@ export const TextShimmerDemo = () => {
             value={speed}
             onChange={(e) => setSpeed(parseFloat(e.target.value))}
             onPointerDown={() => setGrabbing(true)}
-            onPointerUp={() => setGrabbing(false)}
-            onPointerCancel={() => setGrabbing(false)}
+            onPointerUp={() => {
+              setGrabbing(false);
+              setCommittedSpeed(speed);
+            }}
+            onPointerCancel={() => {
+              setGrabbing(false);
+              setCommittedSpeed(speed);
+            }}
             className={[
               "w-full h-[3px] appearance-none rounded-full outline-none bg-surface-tertiary",
               grabbing ? "cursor-grabbing" : "cursor-grab",
