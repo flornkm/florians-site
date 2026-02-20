@@ -25,11 +25,11 @@ function TextShimmerComponent({
     backgroundImage: `
       linear-gradient(
         90deg,
-        #a1a1aa 0%,
-        #a1a1aa calc(50% - ${dynamicSpread}px),
-        #000 50%,
-        #a1a1aa calc(50% + ${dynamicSpread}px),
-        #a1a1aa 100%
+        var(--shimmer-base) 0%,
+        var(--shimmer-base) calc(50% - ${dynamicSpread}px),
+        var(--shimmer-highlight) 50%,
+        var(--shimmer-base) calc(50% + ${dynamicSpread}px),
+        var(--shimmer-base) 100%
       )
     `,
     backgroundSize: "300% 100%",
@@ -38,7 +38,7 @@ function TextShimmerComponent({
     WebkitTextFillColor: "transparent",
     color: "transparent",
     animation: `shimmer-sweep ${duration}s linear infinite`,
-  };
+  } as React.CSSProperties;
 
   return (
     <>
@@ -55,7 +55,13 @@ function TextShimmerComponent({
 }`,
         }}
       />
-      <p className={cn(className)} style={shimmerStyles}>
+      <p
+        className={cn(
+          "[--shimmer-base:var(--text-tertiary)] [--shimmer-highlight:var(--text-primary)]",
+          className
+        )}
+        style={shimmerStyles}
+      >
         {children}
       </p>
     </>
