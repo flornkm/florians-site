@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useRef } from "react";
-import { motion, useInView, UseInViewOptions } from "motion/react";
+import { motion, useInView } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -14,7 +14,6 @@ interface ShimmeringTextProps {
   className?: string;
   startOnView?: boolean;
   once?: boolean;
-  inViewMargin?: UseInViewOptions["margin"];
   spread?: number;
   color?: string;
   shimmerColor?: string;
@@ -29,13 +28,12 @@ export function ShimmeringText({
   className,
   startOnView = true,
   once = false,
-  inViewMargin,
   spread = 2,
   color,
   shimmerColor,
 }: ShimmeringTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, margin: inViewMargin });
+  const isInView = useInView(ref, { once });
 
   const dynamicSpread = useMemo(() => {
     return text.length * spread;
