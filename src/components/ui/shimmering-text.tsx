@@ -8,6 +8,7 @@ export type TextShimmerProps = {
   className?: string;
   duration?: number;
   spread?: number;
+  stagger?: number;
 };
 
 function TextShimmerComponent({
@@ -16,45 +17,50 @@ function TextShimmerComponent({
   className,
   duration = 2,
   spread = 2,
+  stagger = 0.08,
 }: TextShimmerProps) {
-  const dynamicSpread = useMemo(() => {
-    return children.length * spread;
-  }, [children, spread]);
-
-  const shimmerGradient = `linear-gradient(90deg, transparent calc(50% - ${dynamicSpread}px), #a1a1aa, transparent calc(50% + ${dynamicSpread}px))`;
-  const baseGradient = `linear-gradient(transparent, transparent)`;
+  const words = useMemo(() => children.split(" "), [children]);
 
   return (
     <>
       <style
         dangerouslySetInnerHTML={{
           __html: `
-@keyframes text-shimmer {
+@keyframes word-shimmer {
   0% { background-position: 100% center; }
   100% { background-position: 0% center; }
-}
-@media (prefers-color-scheme: dark) {
-  .shimmer-text { --shimmer-color: #71717a !important; }
 }
 `,
         }}
       />
-      <Component
-        className={`shimmer-text ${className || ""}`}
-        style={{
-          display: "inline-block",
-          position: "relative",
-          backgroundImage: `${shimmerGradient}, ${baseGradient}`,
-          backgroundSize: "250% 100%, auto",
-          backgroundRepeat: "no-repeat, padding-box",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          color: "transparent",
-          animation: `text-shimmer ${duration}s linear infinite`,
-        }}
-      >
-        {children}
+      <Component className={className}>
+        {words.map((word, i) => {
+          const wordSpread = word.length * spread;
+          const shimmerGradient = `linear-gradient(90deg, transparent calc(50% - ${wordSpread}px), #a1a1aa, transparent calc(50% + ${wordSpread}px))`;
+          const baseGradient = `linear-gradient(transparent, transparent)`;
+
+          return (
+            <React.Fragment key={i}>
+              <span
+                style={{
+                  display: "inline",
+                  backgroundImage: `${shimmerGradient}, ${baseGradient}`,
+                  backgroundSize: "250% 100%, auto",
+                  backgroundRepeat: "no-repeat, padding-box",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  color: "transparent",
+                  animation: `word-shimmer ${duration}s linear infinite`,
+                  animationDelay: `${i * stagger}s`,
+                }}
+              >
+                {word}
+              </span>
+              {i < words.length - 1 ? " " : ""}
+            </React.Fragment>
+          );
+        })}
       </Component>
     </>
   );
