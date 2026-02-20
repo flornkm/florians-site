@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { TextShimmer } from "@/components/ui/shimmering-text";
 
-const SAMPLE_TEXT =
-  "I found 3 flights matching your criteria. The best option departs at 9:45 AM with a layover in Denver, arriving by 4:30 PM local time. Would you like me to book it?";
+const SAMPLE_TEXT = "Searching for the best flights to Denver...";
 
 const MIN_SPEED = 0.5;
 const MAX_SPEED = 5;
