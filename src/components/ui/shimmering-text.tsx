@@ -45,6 +45,14 @@ function TextShimmerComponent({
       <style
         dangerouslySetInnerHTML={{
           __html: `
+.shimmer-text {
+  --shimmer-base: #a1a1aa;
+  --shimmer-highlight: #000000;
+}
+.dark .shimmer-text {
+  --shimmer-base: #71717a;
+  --shimmer-highlight: #ffffff;
+}
 @keyframes shimmer-sweep {
   0% {
     background-position: 100% center;
@@ -56,11 +64,7 @@ function TextShimmerComponent({
         }}
       />
       <p
-        className={cn(
-          "[--shimmer-base:var(--text-secondary)] [--shimmer-highlight:#d4d4d4]",
-          "dark:[--shimmer-base:var(--text-secondary)] dark:[--shimmer-highlight:#525252]",
-          className
-        )}
+        className={cn("shimmer-text", className)}
         style={shimmerStyles}
       >
         {children}
