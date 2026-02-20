@@ -1,8 +1,4 @@
 {
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/ssr"
-    }
-  ]
+  "buildCommand": "pnpm run vercel-build",
+  "outputDirectory": "dist/client"
 }
