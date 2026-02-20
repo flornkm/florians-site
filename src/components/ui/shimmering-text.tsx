@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 
 export type TextShimmerProps = {
   children: string;
-  as?: React.ElementType;
   className?: string;
   duration?: number;
   spread?: number;
@@ -20,7 +19,6 @@ export type TextShimmerProps = {
 
 function TextShimmerComponent({
   children,
-  as: Component = "p",
   className,
   duration = 2,
   spread = 2,
@@ -29,44 +27,39 @@ function TextShimmerComponent({
   const measureRef = useRef<HTMLDivElement>(null);
   const [lines, setLines] = useState<string[]>([]);
 
-  const detectLines = useCallback(() => {
-    const measureEl = measureRef.current;
-    if (!measureEl) return;
+  const words = useMemo(() => children.split(/\s+/), [children]);
 
-    const spans = measureEl.querySelectorAll<HTMLSpanElement>(
-      "[data-shimmer-word]"
-    );
+  const detectLines = useCallback(() => {
+    const el = measureRef.current;
+    if (!el) return;
+
+    const spans = el.querySelectorAll<HTMLSpanElement>("span");
     if (spans.length === 0) return;
 
     const grouped: string[][] = [];
-    let currentLineTop: number | null = null;
+    let currentTop: number | null = null;
     let currentGroup: string[] = [];
 
     spans.forEach((span) => {
-      const top = Math.round(span.offsetTop);
-      if (currentLineTop === null || top !== currentLineTop) {
-        if (currentGroup.length > 0) {
-          grouped.push(currentGroup);
-        }
+      const top = Math.round(span.getBoundingClientRect().top);
+      if (currentTop === null || Math.abs(top - currentTop) > 2) {
+        if (currentGroup.length > 0) grouped.push(currentGroup);
         currentGroup = [span.textContent || ""];
-        currentLineTop = top;
+        currentTop = top;
       } else {
         currentGroup.push(span.textContent || "");
       }
     });
 
-    if (currentGroup.length > 0) {
-      grouped.push(currentGroup);
-    }
+    if (currentGroup.length > 0) grouped.push(currentGroup);
 
-    const newLines = grouped.map((words) => words.join(" "));
+    const newLines = grouped.map((g) => g.join(" "));
     setLines((prev) => {
       if (
         prev.length === newLines.length &&
         prev.every((l, i) => l === newLines[i])
-      ) {
+      )
         return prev;
-      }
       return newLines;
     });
   }, []);
@@ -76,95 +69,104 @@ function TextShimmerComponent({
   }, [children, detectLines]);
 
   useEffect(() => {
-    const observer = new ResizeObserver(() => {
-      detectLines();
-    });
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => detectLines());
+    observer.observe(el);
     return () => observer.disconnect();
   }, [detectLines]);
 
-  const words = useMemo(() => children.split(/\s+/), [children]);
+  const lineCount = lines.length || 1;
+  const totalCycle = duration * lineCount;
 
-  const lineCount = Math.max(lines.length, 1);
-  const totalDuration = duration * lineCount;
-
-  const keyframes = useMemo(() => {
-    if (lines.length === 0) return "";
+  const keyframesCSS = useMemo(() => {
+    if (lines.length <= 1) {
+      return `
+@keyframes shimmer-line-0 {
+  0% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}`;
+    }
 
     let css = "";
     for (let i = 0; i < lines.length; i++) {
-      const slotStart = (i / lineCount) * 100;
-      const slotEnd = ((i + 1) / lineCount) * 100;
+      const slotStart = ((i / lineCount) * 100).toFixed(2);
+      const slotEnd = (((i + 1) / lineCount) * 100).toFixed(2);
 
-      css += `
-@keyframes shimmer-line-${i}-of-${lineCount} {
+      if (i === 0) {
+        css += `
+@keyframes shimmer-line-${i} {
+  0% { background-position: 100% center; }
+  ${slotEnd}% { background-position: 0% center; }
+  ${slotEnd}% { background-position: 0% center; }
+  100% { background-position: 0% center; }
+}`;
+      } else if (i === lines.length - 1) {
+        css += `
+@keyframes shimmer-line-${i} {
+  0% { background-position: 100% center; }
+  ${slotStart}% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}`;
+      } else {
+        css += `
+@keyframes shimmer-line-${i} {
   0% { background-position: 100% center; }
   ${slotStart}% { background-position: 100% center; }
   ${slotEnd}% { background-position: 0% center; }
   100% { background-position: 0% center; }
 }`;
+      }
     }
     return css;
   }, [lines.length, lineCount]);
 
   return (
     <div ref={containerRef} className="relative">
-      <style dangerouslySetInnerHTML={{ __html: keyframes }} />
+      <style dangerouslySetInnerHTML={{ __html: keyframesCSS }} />
 
       <div
         ref={measureRef}
         aria-hidden="true"
-        style={{
-          position: "absolute",
-          visibility: "hidden",
-          pointerEvents: "none",
-          top: 0,
-          left: 0,
-          right: 0,
-          whiteSpace: "normal",
-          wordBreak: "break-word",
-        }}
-        className={className}
+        className={cn(
+          "pointer-events-none invisible absolute inset-x-0 top-0",
+          className
+        )}
       >
         {words.map((word, i) => (
-          <span key={i} data-shimmer-word="" style={{ whiteSpace: "nowrap" }}>
+          <span key={i} style={{ whiteSpace: "nowrap" }}>
             {word}
             {i < words.length - 1 ? " " : ""}
           </span>
         ))}
       </div>
 
-      <Component
+      <div
         className={cn(className)}
         style={{ visibility: lines.length > 0 ? "visible" : "hidden" }}
       >
-        {lines.map((line, lineIndex) => {
+        {lines.map((line, i) => {
           const dynamicSpread = line.length * spread;
 
           return (
-            <React.Fragment key={lineIndex}>
-              <span
-                style={{
-                  display: "inline",
-                  backgroundImage: `linear-gradient(90deg, transparent calc(50% - ${dynamicSpread}px), currentColor, transparent calc(50% + ${dynamicSpread}px)), linear-gradient(transparent, transparent)`,
-                  backgroundSize: "250% 100%",
-                  backgroundRepeat: "no-repeat, padding-box",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  color: "transparent",
-                  animation: `shimmer-line-${lineIndex}-of-${lineCount} ${totalDuration}s linear infinite`,
-                }}
-              >
-                {line}
-              </span>
-              {lineIndex < lines.length - 1 && <br />}
-            </React.Fragment>
+            <div
+              key={`${i}-${line.slice(0, 10)}`}
+              style={{
+                backgroundImage: `linear-gradient(90deg, transparent calc(50% - ${dynamicSpread}px), #000, transparent calc(50% + ${dynamicSpread}px)), linear-gradient(#a1a1aa, #a1a1aa)`,
+                backgroundSize: "250% 100%",
+                backgroundRepeat: "no-repeat, padding-box",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                color: "transparent",
+                animation: `shimmer-line-${i} ${totalCycle}s linear infinite`,
+              }}
+            >
+              {line}
+            </div>
           );
         })}
-      </Component>
+      </div>
     </div>
   );
 }
