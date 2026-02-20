@@ -57,7 +57,8 @@ function TextShimmerComponent({
       />
       <p
         className={cn(
-          "[--shimmer-base:var(--text-tertiary)] [--shimmer-highlight:var(--text-primary)]",
+          "[--shimmer-base:var(--text-secondary)] [--shimmer-highlight:var(--text-quaternary)]",
+          "dark:[--shimmer-base:var(--text-secondary)] dark:[--shimmer-highlight:var(--text-quaternary)]",
           className
         )}
         style={shimmerStyles}
