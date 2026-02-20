@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useMemo, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import React, { useMemo, useId } from "react";
+import { motion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,8 +12,6 @@ interface ShimmeringTextProps {
   repeat?: boolean;
   repeatDelay?: number;
   className?: string;
-  startOnView?: boolean;
-  once?: boolean;
   spread?: number;
   color?: string;
   shimmerColor?: string;
@@ -24,68 +22,55 @@ export function ShimmeringText({
   duration = 2,
   delay = 0,
   repeat = true,
-  repeatDelay = 0.5,
+  repeatDelay = 0,
   className,
-  startOnView = true,
-  once = false,
   spread = 2,
   color,
   shimmerColor,
 }: ShimmeringTextProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once });
+  const id = useId();
+  const animationName = `shimmer-${id.replace(/:/g, "")}`;
 
   const dynamicSpread = useMemo(() => {
     return text.length * spread;
   }, [text, spread]);
 
-  const shouldAnimate = !startOnView || isInView;
+  const totalDuration = duration + repeatDelay;
+
+  const activePercent = repeat
+    ? Math.round((duration / totalDuration) * 100)
+    : 100;
 
   return (
-    <motion.span
-      ref={ref}
-      className={cn(
-        "relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent",
-        "[--base-color:var(--text-quaternary)] [--shimmer-color:var(--text-primary)]",
-        "[background-repeat:no-repeat,padding-box]",
-        "[--shimmer-bg:linear-gradient(90deg,transparent_calc(50%-var(--spread)),var(--shimmer-color),transparent_calc(50%+var(--spread)))]",
-        className
-      )}
-      style={
-        {
-          "--spread": `${dynamicSpread}px`,
-          ...(color && { "--base-color": color }),
-          ...(shimmerColor && { "--shimmer-color": shimmerColor }),
-          backgroundImage: `var(--shimmer-bg), linear-gradient(var(--base-color), var(--base-color))`,
-        } as React.CSSProperties
-      }
-      initial={{
-        backgroundPosition: "100% center",
-        opacity: 0,
-      }}
-      animate={
-        shouldAnimate
-          ? {
-              backgroundPosition: "0% center",
-              opacity: 1,
-            }
-          : {}
-      }
-      transition={{
-        backgroundPosition: {
-          repeat: repeat ? Infinity : 0,
-          duration,
-          delay,
-          repeatDelay,
-          ease: "linear",
-        },
-        opacity: {
-          duration: 0.3,
-          delay,
-        },
-      }}
-    >
-      {text}
-    </motion.span>
+    <>
+      <style>{`
+        @keyframes ${animationName} {
+          0% { background-position: 100% center; }
+          ${activePercent}% { background-position: 0% center; }
+          100% { background-position: 0% center; }
+        }
+      `}</style>
+      <motion.span
+        className={cn(
+          "inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent",
+          "[background-repeat:no-repeat,padding-box]",
+          className
+        )}
+        style={
+          {
+            "--spread": `${dynamicSpread}px`,
+            "--base-color": color || "var(--text-quaternary)",
+            "--shimmer-color": shimmerColor || "var(--text-primary)",
+            backgroundImage: `linear-gradient(90deg, transparent calc(50% - var(--spread)), var(--shimmer-color), transparent calc(50% + var(--spread))), linear-gradient(var(--base-color), var(--base-color))`,
+            animation: `${animationName} ${totalDuration}s linear ${delay}s ${repeat ? "infinite" : "1"}`,
+          } as React.CSSProperties
+        }
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ opacity: { duration: 0.3, delay } }}
+      >
+        {text}
+      </motion.span>
+    </>
   );
 }

@@ -10,15 +10,13 @@ const DEFAULT_SPEED = 3.5;
 
 export const TextShimmerDemo = () => {
   const [speed, setSpeed] = useState(DEFAULT_SPEED);
-  const [committedSpeed, setCommittedSpeed] = useState(DEFAULT_SPEED);
   const [grabbing, setGrabbing] = useState(false);
-  const duration = MIN_SPEED + MAX_SPEED - committedSpeed;
+  const duration = MIN_SPEED + MAX_SPEED - speed;
 
   return (
     <div className="flex flex-col items-center gap-10 w-full max-w-md px-6">
       <div className="w-full">
         <ShimmeringText
-          key={duration}
           text={SAMPLE_TEXT}
           duration={duration}
           spread={2}
@@ -39,14 +37,8 @@ export const TextShimmerDemo = () => {
             value={speed}
             onChange={(e) => setSpeed(parseFloat(e.target.value))}
             onPointerDown={() => setGrabbing(true)}
-            onPointerUp={() => {
-              setGrabbing(false);
-              setCommittedSpeed(speed);
-            }}
-            onPointerCancel={() => {
-              setGrabbing(false);
-              setCommittedSpeed(speed);
-            }}
+            onPointerUp={() => setGrabbing(false)}
+            onPointerCancel={() => setGrabbing(false)}
             className={[
               "w-full h-[3px] appearance-none rounded-full outline-none bg-surface-tertiary",
               grabbing ? "cursor-grabbing" : "cursor-grab",
