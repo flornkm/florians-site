@@ -31,8 +31,9 @@ export const TextShimmerDemo = () => {
       <div className="w-full">
         <TextShimmer
           key={shimmerKey}
-          className="text-ms leading-relaxed"
+          className="text-ms leading-relaxed [--base-color:#d4d4d4] [--base-gradient-color:#171717] dark:[--base-color:#404040] dark:[--base-gradient-color:#e5e5e5]"
           duration={duration}
+          spread={3}
         >
           {SAMPLE_TEXT}
         </TextShimmer>
