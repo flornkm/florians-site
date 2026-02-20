@@ -8,6 +8,7 @@ export type TextShimmerProps = {
   className?: string;
   duration?: number;
   spread?: number;
+  paused?: boolean;
 };
 
 function TextShimmerComponent({
@@ -15,6 +16,7 @@ function TextShimmerComponent({
   className,
   duration = 2,
   spread = 2,
+  paused = false,
 }: TextShimmerProps) {
   const dynamicSpread = useMemo(
     () => children.length * spread,
@@ -22,7 +24,9 @@ function TextShimmerComponent({
   );
 
   const shimmerStyles: React.CSSProperties = {
-    backgroundImage: `
+    backgroundImage: paused
+      ? "none"
+      : `
       linear-gradient(
         90deg,
         var(--shimmer-base) 0%,
@@ -35,9 +39,10 @@ function TextShimmerComponent({
     backgroundSize: "300% 100%",
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
+    WebkitTextFillColor: paused ? "var(--shimmer-base)" : "transparent",
     color: "transparent",
-    animation: `shimmer-sweep ${duration}s linear infinite`,
+    animation: paused ? "none" : `shimmer-sweep ${duration}s linear infinite`,
+    transition: "color 0.3s ease",
   } as React.CSSProperties;
 
   return (

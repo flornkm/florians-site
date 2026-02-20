@@ -18,6 +18,7 @@ export const TextShimmerDemo = () => {
         <TextShimmer
           duration={duration}
           spread={2}
+          paused={grabbing}
           className="text-ms leading-relaxed text-center"
         >
           {SAMPLE_TEXT}
