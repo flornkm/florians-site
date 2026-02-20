@@ -32,7 +32,7 @@ function TextShimmerComponent({
         #a1a1aa 100%
       )
     `,
-    backgroundSize: "200% 100%",
+    backgroundSize: "300% 100%",
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
