@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextShimmer } from "@/components/ui/shimmering-text";
 
 const SAMPLE_TEXT = "Searching for the best flights to Denver...";
@@ -11,6 +11,17 @@ export const TextShimmerDemo = () => {
   const [speed, setSpeed] = useState(DEFAULT_SPEED);
   const [grabbing, setGrabbing] = useState(false);
   const duration = MIN_SPEED + MAX_SPEED - speed;
+
+  useEffect(() => {
+    if (!grabbing) return;
+    const release = () => setGrabbing(false);
+    window.addEventListener("pointerup", release);
+    window.addEventListener("pointercancel", release);
+    return () => {
+      window.removeEventListener("pointerup", release);
+      window.removeEventListener("pointercancel", release);
+    };
+  }, [grabbing]);
 
   return (
     <div className="flex flex-col items-center gap-10 w-full max-w-md px-6">
@@ -38,8 +49,6 @@ export const TextShimmerDemo = () => {
             value={speed}
             onChange={(e) => setSpeed(parseFloat(e.target.value))}
             onPointerDown={() => setGrabbing(true)}
-            onPointerUp={() => setGrabbing(false)}
-            onPointerCancel={() => setGrabbing(false)}
             className={[
               "w-full h-[3px] appearance-none rounded-full outline-none bg-surface-tertiary",
               grabbing ? "cursor-grabbing" : "cursor-grab",
