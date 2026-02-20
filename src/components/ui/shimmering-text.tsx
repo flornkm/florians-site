@@ -1,76 +1,58 @@
 "use client";
 
-import React, { useMemo, useId } from "react";
+import React, { useMemo, type JSX } from "react";
 import { motion } from "motion/react";
-
 import { cn } from "@/lib/utils";
 
-interface ShimmeringTextProps {
-  text: string;
-  duration?: number;
-  delay?: number;
-  repeat?: boolean;
-  repeatDelay?: number;
+export type TextShimmerProps = {
+  children: string;
+  as?: React.ElementType;
   className?: string;
+  duration?: number;
   spread?: number;
-  color?: string;
-  shimmerColor?: string;
-}
+};
 
-export function ShimmeringText({
-  text,
-  duration = 2,
-  delay = 0,
-  repeat = true,
-  repeatDelay = 0,
+function TextShimmerComponent({
+  children,
+  as: Component = "p",
   className,
+  duration = 2,
   spread = 2,
-  color,
-  shimmerColor,
-}: ShimmeringTextProps) {
-  const id = useId();
-  const animationName = `shimmer-${id.replace(/:/g, "")}`;
+}: TextShimmerProps) {
+  const MotionComponent = motion.create(
+    Component as keyof JSX.IntrinsicElements
+  );
 
   const dynamicSpread = useMemo(() => {
-    return text.length * spread;
-  }, [text, spread]);
-
-  const totalDuration = duration + repeatDelay;
-
-  const activePercent = repeat
-    ? Math.round((duration / totalDuration) * 100)
-    : 100;
+    return children.length * spread;
+  }, [children, spread]);
 
   return (
-    <>
-      <style>{`
-        @keyframes ${animationName} {
-          0% { background-position: 100% center; }
-          ${activePercent}% { background-position: 0% center; }
-          100% { background-position: 0% center; }
-        }
-      `}</style>
-      <motion.span
-        className={cn(
-          "inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent",
-          "[background-repeat:no-repeat,padding-box]",
-          className
-        )}
-        style={
-          {
-            "--spread": `${dynamicSpread}px`,
-            "--base-color": color || "var(--text-quaternary)",
-            "--shimmer-color": shimmerColor || "var(--text-primary)",
-            backgroundImage: `linear-gradient(90deg, transparent calc(50% - var(--spread)), var(--shimmer-color), transparent calc(50% + var(--spread))), linear-gradient(var(--base-color), var(--base-color))`,
-            animation: `${animationName} ${totalDuration}s linear ${delay}s ${repeat ? "infinite" : "1"}`,
-          } as React.CSSProperties
-        }
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ opacity: { duration: 0.3, delay } }}
-      >
-        {text}
-      </motion.span>
-    </>
+    <MotionComponent
+      className={cn(
+        "relative inline-block bg-[length:250%_100%,auto] bg-clip-text",
+        "text-transparent [--base-color:transparent] [--base-gradient-color:#a1a1aa]",
+        "[background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
+        "dark:[--base-gradient-color:#71717a] dark:[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
+        className
+      )}
+      initial={{ backgroundPosition: "100% center" }}
+      animate={{ backgroundPosition: "0% center" }}
+      transition={{
+        repeat: Infinity,
+        duration,
+        ease: "linear",
+      }}
+      style={
+        {
+          "--spread": `${dynamicSpread}px`,
+          backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
+        } as React.CSSProperties
+      }
+    >
+      {children}
+    </MotionComponent>
   );
 }
+
+export const TextShimmer = React.memo(TextShimmerComponent);
