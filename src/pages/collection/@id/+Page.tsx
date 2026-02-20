@@ -30,7 +30,7 @@ export default function Page() {
       <div className="relative mx-auto -mt-[7px] w-full max-w-5xl px-4 md:-mt-2 md:px-0">
         <Body4 className="mb-10 font-mono capitalize text-primary md:mb-4">{item.type}</Body4>
         <Link
-          href="/collection"
+          href={`/collection#section-${item.slug}`}
           className={cn(
             buttonVariants({ variant: "secondary" }),
             "absolute right-6 top-0 flex h-8 w-8 items-center justify-center rounded-full",

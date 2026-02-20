@@ -111,12 +111,17 @@ export default function Page() {
     <div className="w-full pb-96">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div
-          className="relative bg-linear-to-b from-primary via-primary to-transparent pt-12 pb-8 -mb-16 z-50 lg:h-72 h-48 flex md:items-center items-start"
+          className="relative bg-linear-to-b from-primary via-primary to-transparent -mt-24 pt-24 z-50 lg:h-56 h-48 flex md:items-center items-start"
           style={{ scrollSnapAlign: "start" }}
         >
           <H1 className="text-center mb-3 w-full">Updates & archive</H1>
         </div>
-        <div className="sticky z-10 top-16 md:top-28 flex flex-col items-center gap-4 h-0">
+        <div
+          className={cn(
+            "sticky top-16 md:top-28 flex flex-col items-center gap-4 h-0",
+            isTransitioning ? "z-[51]" : "z-10",
+          )}
+        >
           {items.map((item, index) => {
             const gotShown = index < activeIndex;
             const MDXContent = getMDXContent(item.slug);
@@ -171,9 +176,10 @@ export default function Page() {
             );
           })}
         </div>
-        {Array.from({ length: items.length }).map((_, index) => (
+        {items.map((item, index) => (
           <div
-            key={index}
+            key={item.slug}
+            id={`section-${item.slug}`}
             data-scroll-section
             data-index={index}
             className="h-[calc(100vh)] w-full"
