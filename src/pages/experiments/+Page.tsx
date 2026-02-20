@@ -10,7 +10,7 @@ export default function Page() {
       {EXPERIMENTS.map(({ title, Component }) => (
         <section className="w-full flex flex-col gap-2" key={title}>
           <H2>{title}</H2>
-          <div className="rounded-xl bg-secondary aspect-[4/3] flex items-center justify-center">
+          <div className="rounded-xl bg-primary border border-primary aspect-[4/3] flex items-center justify-center">
             <Component />
           </div>
         </section>
