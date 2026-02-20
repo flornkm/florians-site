@@ -19,7 +19,6 @@ export const TextShimmerDemo = () => {
         <TextShimmer
           duration={duration}
           spread={2}
-          stagger={0.06}
           className="text-ms leading-relaxed"
         >
           {SAMPLE_TEXT}
