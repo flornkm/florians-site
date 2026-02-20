@@ -32,13 +32,12 @@ function TextShimmerComponent({
         #a1a1aa 100%
       )
     `,
-    backgroundSize: "300% 100%",
-    backgroundPosition: "100% center",
+    backgroundSize: "200% 100%",
     backgroundClip: "text",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     color: "transparent",
-    animation: `shimmer-sweep ${duration}s ease-in-out infinite`,
+    animation: `shimmer-sweep ${duration}s linear infinite`,
   };
 
   return (
@@ -51,7 +50,7 @@ function TextShimmerComponent({
     background-position: 100% center;
   }
   100% {
-    background-position: -100% center;
+    background-position: 0% center;
   }
 }`,
         }}
