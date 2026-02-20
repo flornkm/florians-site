@@ -296,42 +296,41 @@ export const AgentWorkflow = () => {
                 scale: formDone ? 0.98 : 1,
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="rounded-2xl border border-black/[0.1] bg-primary p-5 flex flex-col gap-4 w-full max-w-sm"
+              className="rounded-2xl border border-primary bg-primary p-5 flex flex-col gap-4 w-full max-w-sm shadow-sm"
               style={{
-                boxShadow: "0 6px 32px -6px rgba(0,0,0,0.05), 0 2px 8px -2px rgba(0,0,0,0.02)",
                 pointerEvents: formDone ? "none" : "auto",
               }}
             >
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
                   <label className="text-[10px] text-quaternary uppercase tracking-wider">Card number</label>
-                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
+                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                     4532 8720 1193 4467
                   </div>
                 </div>
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-1 flex-1">
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">Expiry</label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                       09/28
                     </div>
                   </div>
                   <div className="flex flex-col gap-1 flex-1">
                     <label className="text-[10px] text-quaternary uppercase tracking-wider">CVV</label>
-                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
+                    <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                       817
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
                   <label className="text-[10px] text-quaternary uppercase tracking-wider">Name on card</label>
-                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-black/[0.08]">
+                  <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                     Jane Cooper
                   </div>
                 </div>
               </div>
 
-              <div className="border-t border-black/[0.08] mt-2" />
+              <div className="border-t border-primary mt-2" />
 
               <div className="flex items-center justify-between pt-1">
                 <div className="flex flex-col">
@@ -347,10 +346,10 @@ export const AgentWorkflow = () => {
                   onTouchEnd={onUp}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="relative flex items-center justify-center rounded-full -outline-offset-1 outline outline-black/10 bg-primary h-8 w-28 text-xs select-none cursor-pointer overflow-hidden"
+                  className="relative flex items-center justify-center rounded-full -outline-offset-1 outline outline-primary bg-primary h-8 w-28 text-xs select-none cursor-pointer overflow-hidden"
                 >
                   <motion.div
-                    className="absolute inset-0 rounded-full origin-left bg-emerald-500"
+                    className="absolute inset-0 rounded-full origin-left bg-success"
                     animate={{ scaleX: holdProg }}
                     transition={holdProg === 0 ? { type: "spring", stiffness: 300, damping: 25 } : { duration: 0 }}
                   />
@@ -410,24 +409,19 @@ export const AgentWorkflow = () => {
               className="flex flex-col gap-4 w-full items-center"
             >
               <div className="flex gap-2 items-center pl-5 w-full max-w-sm">
-                <div className="w-4 h-4 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                <div className="w-4 h-4 rounded-full bg-success flex items-center justify-center flex-shrink-0">
                   <IconCheckmark2Small className="w-2.5 h-2.5 text-white" />
                 </div>
                 <p className="text-[13px] text-tertiary leading-relaxed">
                   Successfully purchased! Here is your receipt:
                 </p>
               </div>
-              <div
-                className="rounded-2xl border border-black/[0.1] bg-primary p-5 flex flex-col gap-3 w-full max-w-sm"
-                style={{
-                  boxShadow: "0 6px 32px -6px rgba(0,0,0,0.05), 0 2px 8px -2px rgba(0,0,0,0.02)",
-                }}
-              >
+              <div className="rounded-2xl border border-primary bg-primary p-5 flex flex-col gap-3 w-full max-w-sm shadow-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-quaternary uppercase tracking-wider">Order confirmation</span>
                   <span className="text-[10px] text-quaternary font-mono">#ZH-29841</span>
                 </div>
-                <div className="border-t border-black/[0.08]" />
+                <div className="border-t border-primary" />
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-primary">Linen Accent Chair</span>
@@ -442,7 +436,7 @@ export const AgentWorkflow = () => {
                     <span className="text-xs text-tertiary font-mono">$20.42</span>
                   </div>
                 </div>
-                <div className="border-t border-black/[0.08]" />
+                <div className="border-t border-primary" />
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-primary">Total</span>
                   <span className="text-xs font-semibold text-primary font-mono">$269.42</span>
@@ -486,11 +480,11 @@ export const AgentWorkflow = () => {
               <motion.div layout="position">
                 <div className="flex w-full">
                   <div
-                    className="flex flex-col gap-2.5 overflow-hidden bg-neutral-100 p-4 rounded-r-lg rounded-2xl"
+                    className="flex flex-col gap-2.5 overflow-hidden bg-tertiary p-4 rounded-r-lg rounded-2xl"
                     style={{ width: `${splitPct}%` }}
                   >
                     <div className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 pl-1.5 pr-2 py-0.5 shadow-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-primary pl-1.5 pr-2 py-0.5 shadow-sm">
                         <IconFolder1 className="w-2.5 h-2.5 text-tertiary" />
                         <span className="text-[10px] text-secondary font-medium">File agent</span>
                       </span>
@@ -525,7 +519,7 @@ export const AgentWorkflow = () => {
                           transition={{ type: "spring", stiffness: 300, damping: 20 }}
                           className="flex items-center gap-1.5 pt-0.5"
                         >
-                          <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center">
+                          <div className="w-3.5 h-3.5 rounded-full bg-success flex items-center justify-center">
                             <IconCheckmark2Small className="w-2.5 h-2.5 text-white" />
                           </div>
                           <span className="text-[11px] text-tertiary">Done</span>
@@ -541,12 +535,12 @@ export const AgentWorkflow = () => {
                     onPointerUp={onSeparatorUp}
                     onPointerCancel={onSeparatorUp}
                   >
-                    <div className="w-1 h-4 rounded-full transition-all group-hover:h-5 group-active:h-7 bg-black/[0.06] dark:bg-white/[0.06] group-hover:bg-black/[0.15] dark:group-hover:bg-white/[0.15]" />
+                    <div className="w-1 h-4 rounded-full transition-all group-hover:h-5 group-active:h-7 bg-quaternary group-hover:bg-interactive-active" />
                   </div>
 
-                  <div className="flex-1 flex flex-col gap-2.5 overflow-hidden min-w-0 bg-neutral-100 p-4 rounded-2xl rounded-l-lg">
+                  <div className="flex-1 flex flex-col gap-2.5 overflow-hidden min-w-0 bg-tertiary p-4 rounded-2xl rounded-l-lg">
                     <div className="flex items-center gap-1.5">
-                      <span className="inline-flex items-center gap-1 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 pl-1.5 pr-2 py-0.5 shadow-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-primary pl-1.5 pr-2 py-0.5 shadow-sm">
                         <IconCalendar1 className="w-2.5 h-2.5 text-tertiary" />
                         <span className="text-[10px] text-secondary font-medium">Calendar agent</span>
                       </span>
@@ -581,7 +575,7 @@ export const AgentWorkflow = () => {
                           transition={{ type: "spring", stiffness: 300, damping: 20 }}
                           className="flex items-center gap-1.5 pt-0.5"
                         >
-                          <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center">
+                          <div className="w-3.5 h-3.5 rounded-full bg-success flex items-center justify-center">
                             <IconCheckmark2Small className="w-2.5 h-2.5 text-white" />
                           </div>
                           <span className="text-[11px] text-tertiary">Done</span>
@@ -609,7 +603,7 @@ export const AgentWorkflow = () => {
               </p>
               <button
                 onClick={reset}
-                className="self-start rounded-full border border-black/10 bg-primary px-4 py-1.5 text-[11px] text-tertiary hover:text-secondary hover:bg-secondary transition-colors cursor-pointer"
+                className="self-start rounded-full border border-primary bg-primary px-4 py-1.5 text-[11px] text-tertiary hover:text-secondary hover:bg-secondary transition-colors cursor-pointer"
               >
                 Reset
               </button>
