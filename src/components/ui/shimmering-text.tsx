@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { cn } from "@/lib/utils";
 
 export type TextShimmerProps = {
   children: string;
@@ -22,28 +21,38 @@ function TextShimmerComponent({
     return children.length * spread;
   }, [children, spread]);
 
+  const shimmerGradient = `linear-gradient(90deg, transparent calc(50% - ${dynamicSpread}px), #a1a1aa, transparent calc(50% + ${dynamicSpread}px))`;
+  const baseGradient = `linear-gradient(transparent, transparent)`;
+
   return (
     <>
       <style
         dangerouslySetInnerHTML={{
-          __html: `@keyframes text-shimmer{0%{background-position:100% center}to{background-position:0% center}}`,
+          __html: `
+@keyframes text-shimmer {
+  0% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+@media (prefers-color-scheme: dark) {
+  .shimmer-text { --shimmer-color: #71717a !important; }
+}
+`,
         }}
       />
       <Component
-        className={cn(
-          "relative inline-block bg-[length:250%_100%,auto] bg-clip-text",
-          "text-transparent [--base-color:transparent] [--base-gradient-color:#a1a1aa]",
-          "[background-repeat:no-repeat,padding-box]",
-          "dark:[--base-gradient-color:#71717a]",
-          className
-        )}
-        style={
-          {
-            "--spread": `${dynamicSpread}px`,
-            backgroundImage: `linear-gradient(90deg, #0000 calc(50% - var(--spread)), var(--base-gradient-color), #0000 calc(50% + var(--spread))), linear-gradient(var(--base-color), var(--base-color))`,
-            animation: `text-shimmer ${duration}s linear infinite`,
-          } as React.CSSProperties
-        }
+        className={`shimmer-text ${className || ""}`}
+        style={{
+          display: "inline-block",
+          position: "relative",
+          backgroundImage: `${shimmerGradient}, ${baseGradient}`,
+          backgroundSize: "250% 100%, auto",
+          backgroundRepeat: "no-repeat, padding-box",
+          WebkitBackgroundClip: "text",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          color: "transparent",
+          animation: `text-shimmer ${duration}s linear infinite`,
+        }}
       >
         {children}
       </Component>
