@@ -46,7 +46,7 @@ export default function Page() {
         <div className="h-7 flex-1 mt-0.5">
           <div className="pointer-events-none transition-all duration-200 ease-out group-hover/link:-translate-y-[22.5px] group-focus-within/link:-translate-y-[22.5px]">
             <H1 className="transition-all duration-200 ease-out group-hover/link:opacity-0 group-hover/link:blur-[1px] group-focus-within/link:opacity-0 group-focus-within/link:blur-[1px]">
-              {project.title} <span className="text-sm text-quaternary">{project.date.split("/")[1]}</span>
+              {project.title} <span className="text-sm text-quaternary">{project.date}</span>
             </H1>
             <span
               className={cn(

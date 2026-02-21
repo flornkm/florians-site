@@ -95,11 +95,13 @@ export async function getContent(category: "work" | "writing"): Promise<ContentE
 
     if (!dateA || !dateB) return 0;
 
-    const [monthA, yearA] = dateA.split("/").map((s) => parseInt(s.trim(), 10));
-    const [monthB, yearB] = dateB.split("/").map((s) => parseInt(s.trim(), 10));
+    // Extract the latest year from a date string (supports "2025", "2024–2025", "06 / 2025")
+    const latestYear = (d: string) => {
+      const nums = d.match(/\d{4}/g);
+      return nums ? Math.max(...nums.map(Number)) : 0;
+    };
 
-    if (yearA !== yearB) return yearB - yearA;
-    return monthB - monthA;
+    return latestYear(dateB) - latestYear(dateA);
   });
 
   return entries;

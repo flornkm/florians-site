@@ -5,7 +5,7 @@ import { Body3 } from "../design-system/body";
 
 export function TooltipProvider({ children }: { children: React.ReactNode }) {
   return (
-    <BaseTooltip.Provider delay={600} closeDelay={0} timeout={400}>
+    <BaseTooltip.Provider delay={150} closeDelay={0} timeout={100}>
       {children}
     </BaseTooltip.Provider>
   );
@@ -36,7 +36,7 @@ export default function Tooltip({ children, content, className, style }: Tooltip
             className={cn(
               "z-50 font-medium bg-surface-inverted text-inverted px-2 py-1 rounded-lg",
               "origin-[var(--transform-origin)]",
-              "transition-all duration-200 ease-out",
+              "transition-all duration-100 ease-out",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1",
               "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:translate-y-1",
             )}
@@ -61,7 +61,7 @@ export default function Tooltip({ children, content, className, style }: Tooltip
 
 // --- Animated tooltip group (for adjacent triggers with smooth transitions) ---
 
-const easing = "cubic-bezier(0.22,1,0.36,1)";
+const easing = "cubic-bezier(0.1,1,0.36,1)";
 
 interface TooltipGroupProps {
   children: React.ReactNode;
@@ -103,7 +103,7 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
                   "relative z-50 font-medium bg-surface-inverted text-inverted rounded-lg",
                   "h-[var(--popup-height,auto)] w-[var(--popup-width,auto)]",
                   `origin-[var(--transform-origin)]`,
-                  `transition-[width,height,opacity,scale] duration-[0.35s] ease-[${easing}]`,
+                  `transition-[width,height,opacity,scale] duration-[0.1s] ease-[${easing}]`,
                   "data-[starting-style]:opacity-0 data-[starting-style]:scale-90",
                   "data-[ending-style]:opacity-0 data-[ending-style]:scale-90",
                   "data-[instant]:transition-none",
@@ -205,7 +205,7 @@ export function RichTooltip({ children, content, className, maxWidth = 360 }: Ri
             className={cn(
               "z-50 bg-primary border border-primary rounded-lg shadow-lg p-3 overflow-hidden",
               "origin-[var(--transform-origin)]",
-              "transition-all duration-200 ease-out",
+              "transition-all duration-100 ease-out",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",
               "data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
             )}

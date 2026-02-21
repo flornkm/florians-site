@@ -131,7 +131,7 @@ export const Letter = forwardRef<
         )}
       </div>
       <div className="h-full shrink-0 w-px bg-border-primary" />
-      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between h-full">
+      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-end h-full">
         {signature && (
           <div className="w-full max-w-[200px]">
             <img src={signature} alt="Signature" className="w-full dark:invert" />

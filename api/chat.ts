@@ -1,9 +1,6 @@
 import { openai } from "@ai-sdk/openai";
-import { convertToModelMessages, generateObject, streamText } from "ai";
+import { convertToModelMessages, streamText } from "ai";
 
-const AVAILABLE_ACTIONS = ["None", "Wave", "Jump", "Sit"] as const;
-
-// these are presented when users ask for contact options.
 const CONTACT_OPTIONS = [
   "- Contact: /contact",
   "- Email: hello@floriankiem.com (mailto:hello@floriankiem.com)",
@@ -19,28 +16,6 @@ export async function POST(req: Request): Promise<Response> {
     const { messages } = await req.json();
     const uiMessages = Array.isArray(messages) ? messages : [];
     const modelMessages = convertToModelMessages(uiMessages);
-
-    let selectedAction: (typeof AVAILABLE_ACTIONS)[number] = "None";
-    try {
-      const { object } = await generateObject({
-        model: openai("gpt-4.1-nano"),
-        temperature: 0,
-        output: "enum",
-        enum: [...AVAILABLE_ACTIONS],
-        system: [
-          "You are Florian's clone. Decide if the user is asking to trigger a predefined action.",
-          "Only choose an action if it's clearly requested. Otherwise choose 'None'.",
-          `Available actions: ${AVAILABLE_ACTIONS.filter((a) => a !== "None").join(", ")}`,
-          "Return only a single enum value with no extra text.",
-        ].join(" \n"),
-        messages: modelMessages,
-      });
-      if (typeof object === "string" && (AVAILABLE_ACTIONS as readonly string[]).includes(object)) {
-        selectedAction = object as (typeof AVAILABLE_ACTIONS)[number];
-      }
-    } catch (e) {
-      console.warn("Action enum selection failed; defaulting to 'None'", e);
-    }
 
     const response = streamText({
       model: openai("gpt-4.1-nano"),
@@ -66,9 +41,6 @@ export async function POST(req: Request): Promise<Response> {
         CONTACT_OPTIONS,
         "- Prefer '/contact' and email first, then socials.",
         "- Never reveal or invent any surname; refer to me simply as Florian or Flo.",
-        selectedAction !== "None"
-          ? `Action selected: ${selectedAction}. Start your reply by briefly acknowledging you're doing it. Keep it to one short sentence before continuing.`
-          : "",
       ]
         .filter(Boolean)
         .join(" \n"),
@@ -80,7 +52,6 @@ export async function POST(req: Request): Promise<Response> {
         "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache",
         Connection: "keep-alive",
-        "X-Clone-Action": selectedAction,
       },
     });
   } catch (error) {

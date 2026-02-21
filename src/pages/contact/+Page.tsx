@@ -1,14 +1,13 @@
 import { Chat } from "@/components/chat/chat";
 import { ChatStatusProvider } from "@/components/chat/chat-status";
-import { Clone } from "@/components/shared/clone/Clone";
+import { H1 } from "@/components/design-system/heading";
 
 export default function Page() {
   return (
     <ChatStatusProvider>
-      <div className="lg:grid pb-4 flex -mt-8 flex-col grid-rows-[auto_1fr] lg:grid-rows-1 landscape:min-h-[calc(100vh-5rem)] landscape:h-none h-[calc(100vh-5rem)] lg:h-[calc(100vh-6rem)] landscape:lg:h-none landscape:lg:min-h-[calc(100vh-6rem)] lg:w-screen lg:max-w-[calc(32rem+100vw/2)] lg:-ml-[calc((100vw-64rem)/4)] relative lg:left-1/2 lg:-translate-x-1/2 lg:grid-cols-2 mx-auto overflow-hidden">
-        <div className="w-full shrink-0 h-96 landscape:hidden landscape:md:block lg:relative absolute mask-b-from-75% mask-b-to-100% pr-18 lg:pr-0 lg:h-full flex lg:items-center justify-center lg:mask-r-from-80% lg:mask-r-to-100%">
-          <Clone />
-        </div>
+      <div className="w-full max-w-5xl mx-auto px-4 md:px-0 flex flex-col min-h-[calc(100vh-6rem)]">
+        <H1 className="mb-1">Contact</H1>
+
         <Chat />
       </div>
     </ChatStatusProvider>
