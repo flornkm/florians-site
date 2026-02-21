@@ -16,7 +16,7 @@ Florian blends design and engineering to ship fast, polished interfaces. He tran
 ## Portfolio Overview
 - Work: Feature projects and case studies - [Boost](/work/boost), [Inlang](/work/inlang), [Sona](/work/sona).
 - About: Background, values, tools, and accolades - [/about](/about).
-- Collection: A blog-like stream of photos, experiments, and updates - [/collection](/collection).
+- Writing: A blog-like stream of photos, experiments, and updates - [/writing](/writing).
 - Contact: Chat-based contact and quick questions - [/contact](/contact).
 - Send a Postcard: A playful way to say hi - [/send-postcard](/send-postcard).
 - Colophon: Tech stack, inspirations, and credits - [/colophon](/colophon).

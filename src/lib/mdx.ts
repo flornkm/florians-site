@@ -16,7 +16,7 @@ export type WorkEntry = ContentEntry & {
   links?: string | string[];
 };
 
-export type CollectionEntry = ContentEntry & {
+export type WritingEntry = ContentEntry & {
   title: string;
   description: string;
   type: string;
@@ -32,11 +32,43 @@ export function isWorkEntry(entry: ContentEntry): entry is WorkEntry {
   );
 }
 
-export function isCollectionEntry(entry: ContentEntry): entry is CollectionEntry {
+export function isWritingEntry(entry: ContentEntry): entry is WritingEntry {
   return typeof entry.title === "string" && typeof entry.description === "string" && typeof entry.type === "string";
 }
 
-export async function getContent(category: "work" | "collection"): Promise<ContentEntry[]> {
+export type Heading = {
+  level: number;
+  text: string;
+  id: string;
+};
+
+export function extractHeadings(content: string): Heading[] {
+  const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+  const headings: Heading[] = [];
+  let match;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const text = match[2].trim();
+    const id = text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+    headings.push({ level, text, id });
+  }
+
+  return headings;
+}
+
+export async function getContentSource(category: "work" | "writing", slug: string): Promise<string> {
+  const source = await readFile(`./src/content/${category}/${slug}.mdx`, "utf-8");
+  const { content } = matter(source);
+  return content;
+}
+
+export async function getContent(category: "work" | "writing"): Promise<ContentEntry[]> {
   const contentRoot = `./src/content/${category}`;
   const entries: ContentEntry[] = [];
 

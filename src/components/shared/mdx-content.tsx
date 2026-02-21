@@ -224,17 +224,17 @@ const workModules = import.meta.glob("/content/work/*.mdx", { eager: true }) as 
   { default: ComponentType }
 >;
 
-const collectionModules = import.meta.glob("/content/collection/*.mdx", { eager: true }) as Record<
+const writingModules = import.meta.glob("/content/writing/*.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
 
 const moduleMap = {
   work: workModules,
-  collection: collectionModules,
+  writing: writingModules,
 } as const;
 
-export function useMdxContent(category: "work" | "collection", slug: string, className?: string) {
+export function useMdxContent(category: "work" | "writing", slug: string, className?: string) {
   const modulePath = `/content/${category}/${slug}.mdx`;
   const MDXContent = moduleMap[category][modulePath]?.default;
 
