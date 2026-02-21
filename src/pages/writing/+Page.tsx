@@ -142,7 +142,7 @@ export default function Page() {
                 key={item.slug}
                 className={cn(
                   "w-full absolute mt-8 transition-all duration-300 h-[450px] bg-primary",
-                  isTransitioning ? "mt-19 md:mt-16.5" : "dark:bg-secondary",
+                  isTransitioning && "mt-19 md:mt-16.5",
                 )}
               >
                 <div className="w-full h-full flex flex-col items-center">
