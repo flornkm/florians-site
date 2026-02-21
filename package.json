@@ -50,10 +50,12 @@
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",
     "remark-rehype": "^11.1.2",
+    "roughjs": "^4.6.6",
     "streamdown": "^1.2.0",
     "tailwind-merge": "^3.3.1",
     "three": "^0.178.0",
     "three-stdlib": "^2.36.0",
+    "use-animation-frame": "^0.2.1",
     "vike": "^0.4.240",
     "vike-react": "^0.5.13",
     "zod": "3.25.76"

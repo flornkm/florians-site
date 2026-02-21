@@ -5,13 +5,14 @@ import { RichTooltip } from "@/components/ui/tooltip";
 import { AppsTooltipContent } from "./components/apps-tooltip-content";
 import { BucketlistTooltipContent } from "./components/bucketlist-tooltip-content";
 import { CompaniesTooltipContent } from "./components/companies-tooltip-content";
+import { FloWording } from "./components/flo-wording";
 import { GlobeTooltipContent } from "./components/globe-tooltip-content";
 import { InstitutionsTooltipContent } from "./components/institutions-tooltip-content";
 import { VISITED_COUNTRIES } from "./const/visited-countries";
 
 export default function Page() {
   return (
-    <div className="w-full max-w-5xl flex justify-between mx-auto">
+    <div className="w-full max-w-5xl md:flex-row flex-col flex justify-between mx-auto">
       <div className="w-full max-w-sm px-4 md:px-0">
         {/* Preloading the globe */}
         <div className="hidden" aria-hidden>
@@ -79,6 +80,9 @@ export default function Page() {
             .
           </Body1>
         </div>
+      </div>
+      <div className="flex-1 min-h-96 flex items-center justify-center pt-2">
+        <FloWording />
       </div>
     </div>
   );

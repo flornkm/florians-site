@@ -195,7 +195,7 @@ export default function Navigation() {
             key="contact"
             className={cn(
               buttonVariants({ variant: "primary", size: "xs" }),
-              "text-sm text-accent-foreground hidden max-md:mr-px leading-[120%] min-[350px]:block font-medium relative z-10 px-2.5 py-1 md:py-0.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
+              "text-sm text-accent-foreground hidden max-md:mr-px leading-none items-center min-[350px]:flex font-medium relative z-10 px-2.5 py-1 md:py-0.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
               urlPathname === "/contact" && "bg-accent-primary",
             )}
           >

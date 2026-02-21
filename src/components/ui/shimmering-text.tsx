@@ -1,7 +1,5 @@
-"use client";
-
-import React, { useMemo } from "react";
 import { cn } from "@/lib/utils";
+import React, { useMemo } from "react";
 
 export type TextShimmerProps = {
   children: string;
@@ -11,17 +9,8 @@ export type TextShimmerProps = {
   paused?: boolean;
 };
 
-function TextShimmerComponent({
-  children,
-  className,
-  duration = 2,
-  spread = 2,
-  paused = false,
-}: TextShimmerProps) {
-  const dynamicSpread = useMemo(
-    () => children.length * spread,
-    [children, spread]
-  );
+function TextShimmerComponent({ children, className, duration = 2, spread = 2, paused = false }: TextShimmerProps) {
+  const dynamicSpread = useMemo(() => children.length * spread, [children, spread]);
 
   const shimmerStyles: React.CSSProperties = {
     backgroundImage: paused
@@ -54,9 +43,11 @@ function TextShimmerComponent({
   --shimmer-base: #a1a1aa;
   --shimmer-highlight: #000000;
 }
-.dark .shimmer-text {
-  --shimmer-base: #71717a;
-  --shimmer-highlight: #ffffff;
+@media (prefers-color-scheme: dark) {
+  .shimmer-text {
+    --shimmer-base: #71717a;
+    --shimmer-highlight: #ffffff;
+  }
 }
 @keyframes shimmer-sweep {
   0% {
@@ -68,10 +59,7 @@ function TextShimmerComponent({
 }`,
         }}
       />
-      <p
-        className={cn("shimmer-text", className)}
-        style={shimmerStyles}
-      >
+      <p className={cn("shimmer-text", className)} style={shimmerStyles}>
         {children}
       </p>
     </>
