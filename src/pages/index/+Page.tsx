@@ -2,7 +2,7 @@ import { Body2 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/icons/triangle-filled";
 import { LetterStack } from "@/components/letters/letter-stack";
-import Section from "@/components/shared/section";
+
 import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
@@ -25,14 +25,14 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
-        <Section className="items-end md:mb-12">
+        <section className="w-full md:grid grid-cols-[336px_1fr] gap-4 items-end md:mb-12">
           <H1 className="leading-tight md:mb-0 mb-10">
             Designer by day, <br /> <span className="text-quaternary">Engineer by night</span>
           </H1>
           <div className="w-col md:flex items-center justify-center">
             <H2 className="mb-2.5 md:mb-5">Latest Work</H2>
           </div>
-        </Section>
+        </section>
         <section className="w-full flex flex-col mb-12 group/section">
           {projects.map((project) => (
             <Link
@@ -52,12 +52,12 @@ export default function Page() {
                   )}
                 >
                   <TriangleFilled className="size-4 inline-block" />
-                  <span className="text-ms font-medium inline-block">Click to open</span>
+                  <span className="text-sm font-medium inline-block">Click to open</span>
                 </p>
               </div>
               <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-                <div className="w-full h-96 bg-surface-secondary rounded-md">
-                  <img src={project.cover} alt={project.title} className="w-full h-full object-cover rounded-lg" />
+                <div className="w-full h-96 bg-secondary p-8 rounded-md flex items-center">
+                  <img src={project.cover} alt={project.title} className="w-full h-auto object-cover rounded-sm" />
                 </div>
               </div>
             </Link>
@@ -68,9 +68,9 @@ export default function Page() {
           className="w-screen py-24 relative left-1/2 -translate-x-1/2 overflow-hidden flex flex-col gap-8 justify-center items-center mask-y-from-95% mask-y-to-100%"
         >
           <div className="flex flex-col items-center justify-center w-full md:px-0 px-4 md:w-auto">
-            <div className="mb-2">
+            <div className="md:mb-2">
               <H2 className="text-center mb-0.5">Digital Guestbook</H2>
-              <Body2 className="text-quaternary mb-2.5 text-center">Last three letters sent to this site.</Body2>
+              <Body2 className="text-quaternary md:mb-2.5 text-center">Last three letters sent to this site.</Body2>
             </div>
             <div className="min-[450px]:mt-[16vw] md:mt-0 w-full">
               <LetterStack />
@@ -78,13 +78,12 @@ export default function Page() {
             <Button
               variant="secondary"
               className="mt-4 mx-auto"
+              prefix={<IconPencil />}
               onClick={() => {
                 navigate("/send-postcard");
               }}
             >
-              <Body2 className="text-primary">
-                <IconPencil className="inline-block w-3.5 -mt-1 mr-1" /> Send Postcard
-              </Body2>
+              Send Postcard
             </Button>
           </div>
         </section>

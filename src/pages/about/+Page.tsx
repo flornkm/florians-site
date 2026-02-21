@@ -6,7 +6,7 @@ import { useRef } from "react";
 import type { GlobeMethods } from "react-globe.gl";
 
 import countriesData from "@/assets/data/countries.json";
-import Section from "@/components/shared/section";
+
 import { SmartVideo } from "@/components/shared/smart-video";
 import { Globe } from "@/components/ui/globe";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
@@ -56,7 +56,7 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="w-full max-w-5xl mx-auto px-4 md:px-0 space-y-16">
-        <Section className="grid-cols-[412px_1fr] gap-4 mb-12">
+        <section className="w-full md:grid grid-cols-[412px_1fr] gap-4 mb-12">
           {/* Left Column: Avatar + Headline + Interview Link */}
           <div className="flex flex-col items-start w-full">
             <div className="pb-8 w-full relative mb-8">
@@ -75,7 +75,7 @@ export default function Page() {
                       xlinkHref="#titleCurve"
                       startOffset="28%"
                       textAnchor="middle"
-                      className="text-ms"
+                      className="text-sm"
                     >
                       About Flo
                     </textPath>
@@ -100,7 +100,7 @@ export default function Page() {
               better products.
             </Body2>
           </div>
-        </Section>
+        </section>
         <section className="w-full mb-16">
           <div className="w-full grid md:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
             {LIFE.map((step, index) => (

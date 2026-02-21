@@ -4,7 +4,7 @@ import { STATUS_COLORS } from "./types";
 
 export function BiomarkerShowcase() {
   return (
-    <div className="not-prose my-8">
+    <div className="not-prose">
       <div className="space-y-2">
         {MOCK_BIOMARKERS.map((biomarker) => (
           <div

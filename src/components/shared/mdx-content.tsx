@@ -1,5 +1,7 @@
+import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { MDXProvider } from "@mdx-js/react";
+import { ComponentType, ReactNode } from "react";
 import { ModelViewer } from "../3d/model-viewer";
 import { BiomarkerShowcase } from "../superpower/biomarker-showcase";
 import { SVGShowcase } from "../superpower/svg-showcase";
@@ -111,19 +113,21 @@ export function Video({
   poster?: string;
 }) {
   return (
-    <div className="my-6">
-      <SmartVideo
-        src={src}
-        webm={webm}
-        mp4={mp4}
-        className={cn("w-full", className)}
-        autoPlay={autoPlay}
-        muted={muted}
-        loop={loop}
-        playsInline={playsInline}
-        controls={controls}
-        poster={poster}
-      />
+    <div className="not-prose my-8">
+      <div className="flex items-center justify-center rounded-sm bg-secondary p-8 md:p-12">
+        <SmartVideo
+          src={src}
+          webm={webm}
+          mp4={mp4}
+          className={cn("w-full rounded-sm outline -outline-offset-1 outline-white/15", className)}
+          autoPlay={autoPlay}
+          muted={muted}
+          loop={loop}
+          playsInline={playsInline}
+          controls={controls}
+          poster={poster}
+        />
+      </div>
     </div>
   );
 }
@@ -146,7 +150,7 @@ export function Model({
   metalType?: "steel" | "aluminum" | "copper" | "gold" | "chrome" | "titanium";
 }) {
   return (
-    <div className="my-6">
+    <div className="my-8">
       <ModelViewer
         src={src}
         height={height}
@@ -160,6 +164,41 @@ export function Model({
   );
 }
 
+function Img({ src, alt, className }: { src?: string; alt?: string; className?: string }) {
+  return (
+    <div className="not-prose my-8 first:mt-0 last:mb-0">
+      <div className="flex items-center justify-center rounded-lg bg-secondary p-8 md:p-12">
+        <img
+          src={src}
+          alt={alt}
+          className={cn(
+            "h-full w-full rounded-sm object-contain outline -outline-offset-1 outline-white/15",
+            className,
+          )}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function MobileImages({ images }: { images: { src: string; alt: string }[] }) {
+  return (
+    <div className="not-prose my-8">
+      <div className="flex gap-3 rounded-lg bg-secondary p-4 md:p-8">
+        {images.map((img) => (
+          <div key={img.src} className="flex-1 min-w-0 px-4">
+            <img
+              src={img.src}
+              alt={img.alt}
+              className="w-full h-auto rounded-sm object-contain outline -outline-offset-1 outline-white/15"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export const mdxComponents = {
   // Heading components with auto-generated IDs
   h1: H1,
@@ -168,6 +207,7 @@ export const mdxComponents = {
   h4: H4,
   h5: H5,
   h6: H6,
+  img: Img,
   // Custom components
   Video,
   Model,
@@ -175,4 +215,36 @@ export const mdxComponents = {
   SmartVideo,
   BiomarkerShowcase,
   SVGShowcase,
+  MobileImages,
 };
+
+// Pre-loaded MDX module maps (import.meta.glob must be at module level)
+const workModules = import.meta.glob("/content/work/*.mdx", { eager: true }) as Record<
+  string,
+  { default: ComponentType }
+>;
+
+const collectionModules = import.meta.glob("/content/collection/*.mdx", { eager: true }) as Record<
+  string,
+  { default: ComponentType }
+>;
+
+const moduleMap = {
+  work: workModules,
+  collection: collectionModules,
+} as const;
+
+export function useMdxContent(category: "work" | "collection", slug: string, className?: string) {
+  const modulePath = `/content/${category}/${slug}.mdx`;
+  const MDXContent = moduleMap[category][modulePath]?.default;
+
+  if (!MDXContent) return null;
+
+  return (
+    <article className={cn(proseVariants({ variant: "default" }), className)}>
+      <MDXProvider components={mdxComponents}>
+        <MDXContent />
+      </MDXProvider>
+    </article>
+  );
+}

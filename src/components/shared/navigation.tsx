@@ -139,7 +139,7 @@ export default function Navigation() {
                 if (selectInput) selectInput.value = false;
               }}
               href="/"
-              className="flex items-center gap-1 text-ms rounded-full py-1 touch-manipulation"
+              className="flex items-center gap-1 text-sm rounded-full py-1 touch-manipulation"
             >
               <RiveComponent className="w-5.5 dark:invert aspect-square" />
               <Body1 className="font-medium text-primary min-[500px]:block hidden">Florian</Body1>
@@ -178,7 +178,7 @@ export default function Navigation() {
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 className={cn(
-                  "text-ms rounded-full font-medium relative z-10 px-3 py-1 md:py-0.5 transition-colors duration-300 ease-in-out",
+                  "text-sm rounded-full font-medium relative z-10 px-3 py-1 md:py-0.5 transition-colors duration-300 ease-in-out",
                   activeIndex === index ? "text-primary" : "text-tertiary",
                 )}
               >
@@ -191,8 +191,8 @@ export default function Navigation() {
             href="/contact"
             key="contact"
             className={cn(
-              buttonVariants({ variant: "primary" }),
-              "text-ms text-accent-foreground hidden max-md:mr-px min-[350px]:block font-medium relative z-10 px-2.5 py-1 md:py-0.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
+              buttonVariants({ variant: "primary", size: "xs" }),
+              "text-sm text-accent-foreground hidden max-md:mr-px min-[350px]:block font-medium relative z-10 px-2.5 py-1 md:py-0.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
               urlPathname === "/contact" && "bg-accent-primary",
             )}
           >

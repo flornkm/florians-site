@@ -1,4 +1,4 @@
-import { getContent, getContentMeta, isWorkEntry, type Heading, type WorkEntry } from "@/lib/mdx";
+import { getContent, isWorkEntry, type WorkEntry } from "@/lib/mdx";
 import { useConfig } from "vike-react/useConfig";
 import type { PageContextServer } from "vike/types";
 
@@ -41,9 +41,6 @@ export const data = async (pageContext: PageContextServer) => {
     image: `/api/og?title=${project.title}`,
   });
 
-  const meta = await getContentMeta("work", project.slug);
-  const headings: Heading[] = meta?.headings ?? [];
-
   return {
     slug: project.slug,
     title: project.title,
@@ -51,6 +48,5 @@ export const data = async (pageContext: PageContextServer) => {
     collaborators: project.collaborators,
     links: project.links,
     date: project.date,
-    headings,
   };
 };

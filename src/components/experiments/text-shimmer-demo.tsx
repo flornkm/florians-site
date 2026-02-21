@@ -30,7 +30,7 @@ export const TextShimmerDemo = () => {
           duration={duration}
           spread={2}
           paused={grabbing}
-          className="text-ms leading-relaxed text-center"
+          className="text-sm leading-relaxed text-center"
         >
           {SAMPLE_TEXT}
         </TextShimmer>

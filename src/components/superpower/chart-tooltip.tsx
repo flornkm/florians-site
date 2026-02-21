@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { cn } from "@/lib/utils";
 
@@ -110,7 +111,7 @@ export const ChartTooltip = ({
 
   if (!renderState.shouldRender) return null;
 
-  return (
+  return createPortal(
     <div
       ref={tooltipRef}
       className={cn(
@@ -146,7 +147,8 @@ export const ChartTooltip = ({
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
