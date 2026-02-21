@@ -5,8 +5,8 @@ import React from "react";
 export const bodyVariants = cva("text-tertiary", {
   variants: {
     variant: {
-      body1: "text-ms",
-      body2: "text-ms",
+      body1: "text-sm",
+      body2: "text-sm",
       body3: "text-sm",
       body4: "text-xs",
     },

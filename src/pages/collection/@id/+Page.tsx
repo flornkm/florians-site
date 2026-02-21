@@ -1,28 +1,18 @@
 import { Body4 } from "@/components/design-system/body";
-import { mdxComponents } from "@/components/shared/mdx-content";
+import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils.js";
-import { MDXProvider } from "@mdx-js/react";
 import { IconMinimize45 } from "central-icons/IconMinimize45";
-import { ComponentType } from "react";
 import { useData } from "vike-react/useData";
 import type { Data } from "./+data.js";
 
-const mdxModules = import.meta.glob("/content/collection/*.mdx", { eager: true }) as Record<
-  string,
-  { default: ComponentType }
->;
-
 export default function Page() {
   const item = useData<Data>();
+  const content = useMdxContent("collection", item.slug, "-mt-7 w-full max-w-lg");
 
-  const modulePath = `/content/collection/${item.slug}.mdx`;
-  const MDXContent = mdxModules[modulePath]?.default;
-
-  if (!MDXContent) {
-    return <div>Content not found: {modulePath}</div>;
+  if (!content) {
+    return <div>Content not found</div>;
   }
 
   return (
@@ -39,11 +29,7 @@ export default function Page() {
           <IconMinimize45 className="h-4 w-4 shrink-0 animate-fade-in" />
         </Link>
         <div className="flex h-full w-full items-center justify-center pt-0">
-          <article className={cn(proseVariants({ variant: "default" }), "-mt-7 w-full max-w-lg")}>
-            <MDXProvider components={mdxComponents}>
-              <MDXContent />
-            </MDXProvider>
-          </article>
+          {content}
         </div>
       </div>
     </div>

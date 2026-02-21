@@ -146,14 +146,16 @@ export default function Page() {
                 <Button
                   onClick={() => handleOpen(index)}
                   className={cn(
-                    "absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
+                    "absolute top-6 right-6 transition-all duration-300",
                     isTransitioning && "top-12 right-2 md:right-6",
                   )}
                   variant="secondary"
+                  iconOnly
+                  rounded
                 >
                   <IconExpand45
                     className={cn(
-                      "w-4 h-4 shrink-0 transition-all duration-500",
+                      "transition-all duration-500",
                       isTransitioning && "opacity-0 blur-[1px]",
                     )}
                   />

@@ -87,8 +87,9 @@ export const Chat = () => {
               setInput(recommendation);
             }}
             variant="tertiary"
+            rounded
             className={cn(
-              "border shrink-0 py-1 border-primary rounded-full",
+              "border shrink-0 border-primary",
               recommendation === input && "bg-surface-secondary",
             )}
             key={index}
@@ -121,10 +122,13 @@ export const Chat = () => {
         />
         <Button
           type="submit"
-          className="rounded-full absolute top-1/2 -translate-y-1/2 right-2.5 size-8 p-0 flex items-center justify-center bg-accent-primary text-accent-foreground disabled:opacity-50"
+          variant="primary"
+          iconOnly
+          rounded
+          className="absolute top-1/2 -translate-y-1/2 right-2.5"
           disabled={status !== "ready"}
         >
-          <IconArrowUp className="size-4" />
+          <IconArrowUp />
         </Button>
       </form>
     </div>

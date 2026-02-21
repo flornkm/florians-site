@@ -106,13 +106,13 @@ export const Letter = forwardRef<
         <div
           className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
         >
-          <p className="text-ms max-w-xs">
+          <p className="text-sm max-w-xs">
             <span className="font-semibold">Dear Website,</span> <br />
             <span className="break-words">{message}</span>
           </p>
         </div>
         <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
-          <p className="text-ms font-medium text-tertiary">
+          <p className="text-sm font-medium text-tertiary">
             Sincerely,{" "}
             <span className="inline-flex items-center gap-1 translate-y-[3px]">
               <span className="w-4 h-4 rounded-full border border-primary relative">
@@ -132,7 +132,6 @@ export const Letter = forwardRef<
       </div>
       <div className="h-full shrink-0 w-px bg-border-primary" />
       <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between h-full">
-        <img src="/images/letters/letter-stamp.webp" alt="Stamp" className={stampVariants({ variant, isEmpty })} />
         {signature && (
           <div className="w-full max-w-[200px]">
             <img src={signature} alt="Signature" className="w-full dark:invert" />

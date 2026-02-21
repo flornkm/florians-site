@@ -1,4 +1,4 @@
-import { getContent, getContentMeta, isCollectionEntry, type CollectionEntry, type Heading } from "@/lib/mdx";
+import { getContent, isCollectionEntry, type CollectionEntry } from "@/lib/mdx";
 import { useConfig } from "vike-react/useConfig";
 import type { PageContextServer } from "vike/types";
 
@@ -33,14 +33,10 @@ export const data = async (pageContext: PageContextServer) => {
     image: `/api/og?title=${item.title}`,
   });
 
-  const meta = await getContentMeta("collection", item.slug);
-  const headings: Heading[] = meta?.headings ?? [];
-
   return {
     slug: item.slug,
     title: item.title,
     description: item.description,
     type: item.type,
-    headings,
   };
 };

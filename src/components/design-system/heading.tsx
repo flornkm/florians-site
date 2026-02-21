@@ -9,9 +9,9 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 export const headingVariants = cva("font-semibold text-primary", {
   variants: {
     size: {
-      h1: "text-lg font-semibold",
-      h2: "text-base font-semibold",
-      h3: "text-ms font-semibold",
+      h1: "text-base font-semibold",
+      h2: "text-sm font-semibold",
+      h3: "text-sm font-semibold",
       h4: "text-sm font-medium",
       h5: "text-xs font-medium",
       h6: "text-xs font-normal",
