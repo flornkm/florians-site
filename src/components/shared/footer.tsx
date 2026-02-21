@@ -10,7 +10,7 @@ import { cva } from "class-variance-authority";
 import { Body4 } from "../design-system/body";
 import { H4 } from "../design-system/heading";
 import { Link } from "../ui/link";
-import Tooltip from "../ui/tooltip";
+import { TooltipGroup, TooltipTrigger } from "../ui/tooltip";
 import { Tab, TABS } from "./navigation";
 
 interface SocialLink {
@@ -80,16 +80,24 @@ export default function Footer() {
         </div>
         <div className="w-full flex items-end justify-between flex-wrap gap-4">
           <div>
-            <div className="flex items-center mb-4">
-              {SOCIAL_LINKS.map((tab) => (
-                <Tooltip key={tab.name} content={tab.name}>
-                  <Link href={tab.href} target="_blank" className={cn(footerLinkVariants({ size: "medium" }), "px-1")}>
-                    <tab.icon className="w-4.5 h-4.5" />
-                  </Link>
-                </Tooltip>
-              ))}
-            </div>
-            <Body4 className="leading-relaxed">Thanks for taking the time to visit my area in the internet.</Body4>
+            <TooltipGroup>
+              <div className="flex items-center mb-4">
+                {SOCIAL_LINKS.map((tab) => (
+                  <TooltipTrigger key={tab.name} content={tab.name}>
+                    <Link
+                      href={tab.href}
+                      target="_blank"
+                      className={cn(footerLinkVariants({ size: "medium" }), "px-1")}
+                    >
+                      <tab.icon className="w-4.5 h-4.5" />
+                    </Link>
+                  </TooltipTrigger>
+                ))}
+              </div>
+            </TooltipGroup>
+            <Body4 className="leading-relaxed text-xs text-tertiary">
+              Thanks for taking the time to visit my area in the internet.
+            </Body4>
           </div>
           <div className="flex items-center gap-4 justify-end">
             {LEGAL_LINKS.map((tab) => (
