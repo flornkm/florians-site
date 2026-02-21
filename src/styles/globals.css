@@ -192,7 +192,3 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, transparent, black);
   mask-image: linear-gradient(to bottom, transparent, black);
 }
-
-#tooltip-portal {
-  font-family: var(--font-sans);
-}

@@ -1,8 +1,7 @@
-import { forwardRef, lazy, Suspense, useCallback, useEffect, useImperativeHandle, useRef } from "react";
+import { forwardRef, lazy, Suspense, useCallback, useImperativeHandle, useRef } from "react";
 import type { GlobeMethods, GlobeProps as ReactGlobeProps } from "react-globe.gl";
 import "./globe.css";
 
-// dynamic import of globegl for react
 const GlobeComponent = lazy(() => import("react-globe.gl").then((module) => ({ default: module.default })));
 
 export type GlobeInstance = GlobeMethods;
@@ -16,6 +15,12 @@ interface GlobeProps extends Omit<Partial<ReactGlobeProps>, "width" | "height" |
   enableZoom?: boolean;
   enablePan?: boolean;
   enableRotate?: boolean;
+  animateEntrance?: boolean;
+}
+
+// Expo out easing: fast start, smooth deceleration
+function easeOutExpo(t: number): number {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 }
 
 export const Globe = forwardRef<GlobeMethods, GlobeProps>(function Globe(
@@ -28,6 +33,7 @@ export const Globe = forwardRef<GlobeMethods, GlobeProps>(function Globe(
     enableZoom = false,
     enablePan = false,
     enableRotate = true,
+    animateEntrance = false,
     ...props
   },
   ref,
@@ -37,128 +43,92 @@ export const Globe = forwardRef<GlobeMethods, GlobeProps>(function Globe(
 
   useImperativeHandle(ref, () => globeRef.current!, []);
 
-  const setupAutoRotation = useCallback(
-    (globe: GlobeInstance) => {
-      if (!autoRotate || !globe) return;
+  const handleGlobeReady = useCallback(() => {
+    const globe = globeRef.current;
+    if (!globe) return;
 
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-        animationFrameRef.current = null;
-      }
+    if (onGlobeReady) {
+      onGlobeReady(globe);
+    }
 
+    // Animate the scene scale from 0 to 1
+    if (animateEntrance) {
       try {
-        if (globe.controls && typeof globe.controls === "function") {
-          const controls = globe.controls();
-          if (controls && typeof controls === "object") {
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = autoRotateSpeed;
-            controls.enableZoom = enableZoom;
-            controls.enablePan = enablePan;
-            controls.enableRotate = enableRotate;
-            controls.enabled = true;
+        const scene = globe.scene?.();
+        if (scene) {
+          scene.scale.set(0, 0, 0);
+          const duration = 900;
+          const start = performance.now();
 
-            const animate = () => {
-              try {
-                if (controls && controls.update) {
-                  controls.update();
-                  animationFrameRef.current = requestAnimationFrame(animate);
-                }
-              } catch (error) {
-                console.warn("Controls animation failed:", error);
-              }
-            };
-            animate();
-            return;
-          }
+          const animateScale = (now: number) => {
+            const elapsed = now - start;
+            const t = Math.min(elapsed / duration, 1);
+            const scale = easeOutExpo(t);
+            scene.scale.set(scale, scale, scale);
+            if (t < 1) {
+              requestAnimationFrame(animateScale);
+            }
+          };
+          requestAnimationFrame(animateScale);
         }
-      } catch (error) {
-        console.warn("Controls setup failed:", error);
+      } catch {
+        // Scene not available, skip entrance animation
       }
+    }
 
-      try {
-        if (globe.scene && typeof globe.scene === "function") {
-          const scene = globe.scene();
-          if (scene && scene.rotation) {
-            const rotateGlobe = () => {
-              try {
-                const currentScene = globe.scene();
-                if (currentScene && currentScene.rotation) {
-                  currentScene.rotation.y += 0.005 * autoRotateSpeed;
-                  animationFrameRef.current = requestAnimationFrame(rotateGlobe);
-                }
-              } catch (error) {
-                console.warn("Manual rotation failed:", error);
-              }
-            };
-            rotateGlobe();
-          }
-        }
-      } catch (error) {
-        console.warn("Scene rotation setup failed:", error);
-      }
-    },
-    [autoRotate, autoRotateSpeed, enableZoom, enablePan, enableRotate],
-  );
-
-  // poll dynamic import
-  useEffect(() => {
     if (!autoRotate) return;
 
-    let attempts = 0;
-    const maxAttempts = 30;
-    let pollInterval: NodeJS.Timeout;
+    // Clean up any previous animation frame
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
 
-    const trySetupRotation = () => {
-      attempts++;
+    // Try OrbitControls first
+    try {
+      if (globe.controls && typeof globe.controls === "function") {
+        const controls = globe.controls();
+        if (controls && typeof controls === "object") {
+          controls.autoRotate = true;
+          controls.autoRotateSpeed = autoRotateSpeed;
+          controls.enableZoom = enableZoom;
+          controls.enablePan = enablePan;
+          controls.enableRotate = enableRotate;
+          controls.enabled = true;
 
-      if (globeRef.current) {
-        const globe = globeRef.current as GlobeInstance;
-
-        const isReady =
-          globe &&
-          typeof globe === "object" &&
-          globe.scene &&
-          (globe.controls || (globe.scene() && globe.scene().rotation));
-
-        if (isReady) {
-          clearInterval(pollInterval);
-          setupAutoRotation(globe);
+          const animate = () => {
+            if (controls?.update) {
+              controls.update();
+              animationFrameRef.current = requestAnimationFrame(animate);
+            }
+          };
+          animate();
           return;
         }
       }
-
-      if (attempts >= maxAttempts) {
-        clearInterval(pollInterval);
-      }
-    };
-
-    const initialTimeout = setTimeout(() => {
-      trySetupRotation();
-      pollInterval = setInterval(trySetupRotation, 100);
-    }, 100);
-
-    return () => {
-      clearTimeout(initialTimeout);
-      clearInterval(pollInterval);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [autoRotate, setupAutoRotation]);
-
-  useEffect(() => {
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, []);
-
-  const handleGlobeReady = () => {
-    if (globeRef.current && onGlobeReady) {
-      onGlobeReady(globeRef.current as GlobeInstance);
+    } catch {
+      // Fall through to manual rotation
     }
-  };
+
+    // Fallback: manual scene rotation
+    try {
+      if (globe.scene && typeof globe.scene === "function") {
+        const scene = globe.scene();
+        if (scene?.rotation) {
+          const rotateGlobe = () => {
+            const currentScene = globe.scene();
+            if (currentScene?.rotation) {
+              currentScene.rotation.y += 0.005 * autoRotateSpeed;
+              animationFrameRef.current = requestAnimationFrame(rotateGlobe);
+            }
+          };
+          rotateGlobe();
+        }
+      }
+    } catch {
+      // Rotation setup failed silently
+    }
+  }, [animateEntrance, autoRotate, autoRotateSpeed, enableZoom, enablePan, enableRotate, onGlobeReady]);
 
   return (
     <div className="w-full flex items-center justify-center">

@@ -3,7 +3,7 @@ import { H1 } from "@/components/design-system/heading";
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import Tooltip from "@/components/ui/tooltip";
+import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils.js";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { IconChevronLeft } from "central-icons/IconChevronLeft";
@@ -60,36 +60,38 @@ export default function Page() {
         </div>
       </Link>
       <Body2 className="mb-4 text-secondary">{project.description}</Body2>
-      <div className="mb-8 flex select-none">
-        {project.collaborators?.map((collaborator: string, index: number) => (
-          <Tooltip
-            content={collaborator}
-            key={collaborator}
-            className="group relative h-6 w-6 rounded-full border border-bg-inverted/10 outline-2 -outline-offset-1 outline-(--bg-primary) hover:!z-[9999]"
-            style={{
-              marginLeft: index > 0 ? "-6px" : "0",
-              zIndex: (project.collaborators?.length || 0) - index + 1,
-            }}
+      <TooltipGroup>
+        <div className="mb-8 flex select-none">
+          {project.collaborators?.map((collaborator: string, index: number) => (
+            <TooltipTrigger
+              content={collaborator}
+              key={collaborator}
+              className="group relative h-6 w-6 rounded-full border border-bg-inverted/10 outline-2 -outline-offset-1 outline-(--bg-primary) hover:!z-[9999]"
+              style={{
+                marginLeft: index > 0 ? "-6px" : "0",
+                zIndex: (project.collaborators?.length || 0) - index + 1,
+              }}
+            >
+              <img
+                src={`/images/avatars/${collaborator.replaceAll(" ", "_").toLowerCase()}.jpg`}
+                className="relative h-full w-full rounded-full object-cover group-hover:!z-[100]"
+                alt={collaborator}
+              />
+            </TooltipTrigger>
+          ))}
+          <TooltipTrigger
+            content="Florian Kiem"
+            className="relative h-6 w-6 rounded-full border border-bg-inverted/10 outline-2 -outline-offset-1 outline-(--bg-primary) hover:z-10"
+            style={{ marginLeft: "-6px" }}
           >
             <img
-              src={`/images/avatars/${collaborator.replaceAll(" ", "_").toLowerCase()}.jpg`}
-              className="relative h-full w-full rounded-full object-cover group-hover:!z-[100]"
-              alt={collaborator}
+              src="/images/avatars/florian_kiem.webp"
+              alt="Florian Kiem"
+              className="h-full w-full rounded-full object-cover"
             />
-          </Tooltip>
-        ))}
-        <Tooltip
-          content="Florian Kiem"
-          className="relative h-6 w-6 rounded-full border border-bg-inverted/10 outline-2 -outline-offset-1 outline-(--bg-primary) hover:z-10"
-          style={{ marginLeft: "-6px" }}
-        >
-          <img
-            src="/images/avatars/florian_kiem.webp"
-            alt="Florian Kiem"
-            className="h-full w-full rounded-full object-cover"
-          />
-        </Tooltip>
-      </div>
+          </TooltipTrigger>
+        </div>
+      </TooltipGroup>
     </>
   );
 
