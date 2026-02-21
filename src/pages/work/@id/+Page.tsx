@@ -107,6 +107,7 @@ export default function Page() {
                   width: collapsed ? 0 : INFO_WIDTH,
                   opacity: collapsed ? 0 : 1,
                   x: collapsed ? -32 : 0,
+
                   filter: collapsed ? "blur(2px)" : "blur(0px)",
                 }
               : undefined
@@ -123,7 +124,12 @@ export default function Page() {
         <div className="w-full md:hidden">{infoPanel}</div>
 
         {/* Main content — naturally expands as the info panel collapses */}
-        <div className="flex min-w-0 flex-1 flex-col items-start justify-start pt-8">
+        <div
+          className={cn(
+            "flex min-w-0 flex-1 flex-col items-start justify-start pt-8 transition-all duration-300 ease-out",
+            collapsed ? "md:pt-64" : "",
+          )}
+        >
           {project.links && project.links.length > 0 && (
             <div className="sticky top-[calc(100dvh-6.75rem)] border border-black/10 z-20 mx-auto -mb-16 flex w-auto max-w-xs rounded-[10px] bg-surface-inverted shadow-xl md:top-[calc(100dvh-4.5rem)] md:flex-col">
               <div className="flex gap-0.5 p-0.5">

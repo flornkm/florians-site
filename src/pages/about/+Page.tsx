@@ -13,8 +13,7 @@ export default function Page() {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="w-full max-w-sm px-4 md:px-0">
-        <H1>Florian Kiem</H1>
-        <Body1 className="text-quaternary mb-8">Design Engineer</Body1>
+        <H1 className="mb-6 leading-tight ">Florian Kiem</H1>
 
         <div className="space-y-4">
           <Body1 className="leading-relaxed">
