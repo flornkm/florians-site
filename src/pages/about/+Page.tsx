@@ -11,9 +11,11 @@ import { VISITED_COUNTRIES } from "./const/visited-countries";
 
 export default function Page() {
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full max-w-5xl flex justify-between mx-auto">
       <div className="w-full max-w-sm px-4 md:px-0">
-        <H1 className="mb-6 leading-tight ">Florian Kiem</H1>
+        <div className="flex items-start gap-8 mb-6">
+          <H1 className="shrink-0 leading-tight">Florian Kiem</H1>
+        </div>
 
         <div className="space-y-4">
           <Body1 className="leading-relaxed">

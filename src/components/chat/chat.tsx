@@ -2,58 +2,38 @@ import { cn } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport } from "ai";
 import { IconArrowUp } from "central-icons/IconArrowUp";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Streamdown } from "streamdown";
 import { Body1 } from "../design-system/body";
 import { Code } from "../design-system/code";
 import Button from "../ui/button";
 import Input from "../ui/input";
-import { useChatActionEvents, useChatStatusEvents } from "./chat-status";
+import { useChatStatusEvents } from "./chat-status";
 
-const RECOMMENDATIONS = ["How can I contact you?", "Please jump up!"];
+const RECOMMENDATIONS = ["What do you work on?", "How can I reach you?", "Tell me about your projects"];
 
 export const Chat = () => {
   const [input, setInput] = useState("");
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const actionEvents = useChatActionEvents();
   const chatEvents = useChatStatusEvents();
   const { messages, sendMessage, status } = useChat({
     transport: new TextStreamChatTransport({
       api: "/api/chat",
       fetch: async (input, init) => {
         const res = await fetch(input, init);
-        try {
-          const action = res.headers.get("X-Clone-Action") || "None";
-          actionEvents.emit(action);
-          chatEvents.emit("streaming");
-        } catch (error) {
-          console.log(error);
-        }
+        chatEvents.emit("streaming");
         return res;
       },
     }),
   });
 
   useEffect(() => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    el.scrollTop = el.scrollHeight;
-  }, [messages]);
-
-  useEffect(() => {
     chatEvents.emit(status);
   }, [status, chatEvents]);
 
   return (
-    <div className="w-full lg:mt-0 landscape:mt-0 landscape:md:pb-16 landscape:pb-0 mt-52 pt-12 landscape:pt-0 md:pt-0 h-full relative z-10 min-h-0 overflow-hidden flex flex-col pb-16">
-      <div
-        ref={scrollContainerRef}
-        className={cn(
-          "flex-1 lg:px-0 px-8 min-h-0 transition-all overscroll-contain scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-border-primary scrollbar-track-transparent mask-y-from-[calc(100%-4rem)] py-12 mask-y-to-100% overflow-y-auto space-y-2",
-          messages.length > 0 && "backdrop-blur-2xl lg:backdrop-blur-none",
-        )}
-      >
+    <div className="flex flex-1 flex-col">
+      <div className="flex-1 space-y-2 py-4">
         {messages.map((message) => (
           <Body1
             key={message.id}
@@ -62,12 +42,7 @@ export const Chat = () => {
             <span className="font-medium mr-1 w-14 shrink-0">{message.role === "user" ? "You:" : "Clone:"}</span>
             {message.parts.map((part, index) =>
               part.type === "text" ? (
-                <Streamdown
-                  key={index}
-                  components={{
-                    code: Code,
-                  }}
-                >
+                <Streamdown key={index} components={{ code: Code }}>
                   {part.text}
                 </Streamdown>
               ) : null,
@@ -75,62 +50,39 @@ export const Chat = () => {
           </Body1>
         ))}
       </div>
-      <div
-        className={cn(
-          "flex overflow-x-auto shrink-0 scrollbar-none px-10 mask-x-from-[calc(100%-4rem)] mask-x-to-100% gap-2 transition-all",
-          messages.length > 0 ? "opacity-0 h-0" : "opacity-100 h-10 mb-2 py-1",
-        )}
-      >
-        {RECOMMENDATIONS.map((recommendation, index) => (
-          <Button
-            onClick={() => {
-              setInput(recommendation);
-            }}
-            variant="tertiary"
-            rounded
-            className={cn(
-              "border shrink-0 border-primary",
-              recommendation === input && "bg-surface-secondary",
-            )}
-            key={index}
-          >
-            {recommendation}
-          </Button>
-        ))}
-      </div>
-      <form
-        className="flex shrink-0 relative gap-2 w-full mx-auto lg:max-w-[calc(100%-5rem)] max-w-[calc(100%-4rem)]"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const value = input.trim();
-          if (value) {
-            chatEvents.emit("submitted");
-            sendMessage({ text: value });
-            setInput("");
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
-        }}
-      >
-        <Input
-          className="flex-1 text-ellipsis h-12 pl-4 pr-24 rounded-full"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          disabled={status !== "ready"}
-          placeholder="Contact my clone…"
-          required
-        />
-        <Button
-          type="submit"
-          variant="primary"
-          iconOnly
-          rounded
-          className="absolute top-1/2 -translate-y-1/2 right-2.5"
-          disabled={status !== "ready"}
+      <div className="sticky bottom-0 max-w-xs transition-all ease-out focus-within:max-w-lg w-full mx-auto bg-primary pt-2 pb-4">
+        <form
+          className="flex relative gap-2 w-full outline -outline-offset-3 shadow-xl shadow-black/5 outline-transparent focus-within:outline-(--bg-primary) rounded-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const value = input.trim();
+            if (value) {
+              chatEvents.emit("submitted");
+              sendMessage({ text: value });
+              setInput("");
+            }
+          }}
         >
-          <IconArrowUp />
-        </Button>
-      </form>
+          <Input
+            className="flex-1 text-ellipsis h-12 pl-4 pr-14 rounded-full"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={status !== "ready"}
+            placeholder="Ask my clone anything..."
+            required
+          />
+          <Button
+            type="submit"
+            variant="primary"
+            iconOnly
+            rounded
+            className="absolute top-1/2 -translate-y-1/2 right-2.5"
+            disabled={status !== "ready"}
+          >
+            <IconArrowUp />
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
