@@ -46,10 +46,12 @@
         "remark-frontmatter": "^5.0.0",
         "remark-mdx-frontmatter": "^5.2.0",
         "remark-rehype": "^11.1.2",
+        "roughjs": "^4.6.6",
         "streamdown": "^1.2.0",
         "tailwind-merge": "^3.3.1",
         "three": "^0.178.0",
         "three-stdlib": "^2.36.0",
+        "use-animation-frame": "^0.2.1",
         "vike": "^0.4.240",
         "vike-react": "^0.5.13",
         "zod": "3.25.76",
@@ -2154,6 +2156,8 @@
     "update-browserslist-db": ["update-browserslist-db@1.2.3", "", { "dependencies": { "escalade": "^3.2.0", "picocolors": "^1.1.1" }, "peerDependencies": { "browserslist": ">= 4.21.0" }, "bin": { "update-browserslist-db": "cli.js" } }, "sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w=="],
 
     "uri-js": ["uri-js@4.4.1", "", { "dependencies": { "punycode": "^2.1.0" } }, "sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg=="],
+
+    "use-animation-frame": ["use-animation-frame@0.2.1", "", { "peerDependencies": { "react": ">=16.8.0" } }, "sha512-jxNPYVWqAXspUWYi9HGmsJSk2t53PvfJcozWK3SWCTKgoK96UB3sl7OHhX1AaDsWsxX3HJzDyCa6LWX/eh4NQQ=="],
 
     "use-sync-external-store": ["use-sync-external-store@1.6.0", "", { "peerDependencies": { "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w=="],
 
