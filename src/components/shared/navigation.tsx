@@ -24,7 +24,10 @@ export default function Navigation() {
   const pageContext = usePageContext();
   const [scrolled, setScrolled] = useState(false);
   const { urlPathname } = pageContext;
-  const activeIndex = TABS.findIndex((tab) => tab.href === urlPathname);
+  const activeIndex = TABS.findIndex((tab) => {
+    if (tab.href === "/") return urlPathname === "/" || urlPathname.startsWith("/work/");
+    return urlPathname === tab.href || urlPathname.startsWith(tab.href + "/");
+  });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLAnchorElement | null)[]>([]);

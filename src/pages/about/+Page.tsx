@@ -13,6 +13,10 @@ export default function Page() {
   return (
     <div className="w-full max-w-5xl flex justify-between mx-auto">
       <div className="w-full max-w-sm px-4 md:px-0">
+        {/* Preloading the globe */}
+        <div className="hidden" aria-hidden>
+          <GlobeTooltipContent />
+        </div>
         <div className="flex items-start gap-8 mb-6">
           <H1 className="shrink-0 leading-tight">Florian Kiem</H1>
         </div>

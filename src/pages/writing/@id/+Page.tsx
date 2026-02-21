@@ -1,4 +1,5 @@
 import { useMdxContent } from "@/components/shared/mdx-content";
+import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 import { IconChevronLeft } from "central-icons/IconChevronLeft";
@@ -81,55 +82,51 @@ export default function Page() {
 
   return (
     <div className="w-full">
-      <div className="relative mx-auto -mt-[7px] w-full max-w-5xl px-4 pt-9 md:-mt-2 md:px-0 md:pt-9">
-        <aside
-          className="hidden md:block fixed top-20 w-44 z-10"
-          style={{ left: "max(1rem, calc((100vw - 64rem) / 2))" }}
-        >
-          <motion.div
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Link
-              href="/writing"
-              className="flex items-center gap-1 text-sm font-medium text-secondary hover:text-primary transition-colors mb-4"
+      <div className="relative mx-auto -mt-[7px] w-full max-w-5xl px-4 pt-9 md:-mt-2 md:px-0">
+        <aside className="hidden md:block absolute left-0 top-0 bottom-0 w-44 z-10">
+          <div className="sticky top-20">
+            <motion.div
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <IconChevronLeft className="h-4 w-4" />
-              Go back
-            </Link>
-          </motion.div>
-          {item.headings.length > 0 && (
-            <nav className="pl-5 max-w-26">
-              <ul className="flex flex-col gap-1">
-                {item.headings.map((heading, i) => (
-                  <motion.li
-                    key={heading.id}
-                    initial={{ opacity: 0, x: -8, filter: "blur(2px)" }}
-                    animate={{ opacity: 1, x: 0, filter: "blur(0)" }}
-                    transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <a
-                      href={`#${heading.id}`}
-                      onClick={(e) => handleAnchorClick(e, heading.id)}
-                      className={cn(
-                        "text-sm transition-colors",
-                        activeId === heading.id ? "text-primary font-medium" : "text-quaternary hover:text-primary",
-                      )}
+              <Link
+                href="/writing"
+                className="flex items-center gap-1 text-sm font-medium text-secondary hover:text-primary transition-colors mb-4"
+              >
+                <IconChevronLeft className="h-4 w-4" />
+                Go back
+              </Link>
+            </motion.div>
+            {item.headings.length > 0 && (
+              <nav className="pl-5 max-w-26">
+                <ul className="flex flex-col gap-1">
+                  {item.headings.map((heading, i) => (
+                    <motion.li
+                      key={heading.id}
+                      initial={{ opacity: 0, x: -8, filter: "blur(2px)" }}
+                      animate={{ opacity: 1, x: 0, filter: "blur(0)" }}
+                      transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      {heading.text}
-                    </a>
-                  </motion.li>
-                ))}
-              </ul>
-            </nav>
-          )}
+                      <a
+                        href={`#${heading.id}`}
+                        onClick={(e) => handleAnchorClick(e, heading.id)}
+                        className={cn(
+                          "text-sm transition-colors",
+                          activeId === heading.id ? "text-primary font-medium" : "text-quaternary hover:text-primary",
+                        )}
+                      >
+                        {heading.text}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+          </div>
         </aside>
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 md:hidden">
-          <Link
-            href="/writing"
-            className="flex items-center gap-1 text-sm font-medium text-secondary hover:text-primary transition-colors bg-surface-primary/80 backdrop-blur-sm px-4 py-2 rounded-full border border-primary shadow-sm"
-          >
+        <div className="sticky top-[calc(100dvh-6.75rem)] z-10 md:hidden flex justify-center h-0">
+          <Link href="/writing" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "gap-1")}>
             <IconChevronLeft className="h-4 w-4" />
             Go back
           </Link>

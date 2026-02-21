@@ -50,7 +50,7 @@ export const Chat = () => {
           </Body1>
         ))}
       </div>
-      <div className="sticky bottom-0 max-w-xs transition-all ease-out focus-within:max-w-lg w-full mx-auto bg-primary pt-2 pb-4">
+      <div className="sticky bottom-16 md:bottom-0 max-w-xs transition-all ease-out focus-within:max-w-lg w-full mx-auto bg-primary pt-2 pb-4">
         <form
           className="flex relative gap-2 w-full outline -outline-offset-3 shadow-xl shadow-black/5 outline-transparent focus-within:outline-(--bg-primary) rounded-full"
           onSubmit={(e) => {
