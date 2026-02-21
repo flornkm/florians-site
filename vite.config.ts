@@ -13,7 +13,7 @@ import { getContent } from "./src/lib/mdx";
 const BASE_URL = "https://floriankiem.com" as const;
 const EXCLUDED = ["/imprint/", "/privacy-policy/"];
 
-const [projects, items] = await Promise.all([getContent("work"), getContent("collection")]);
+const [projects, items] = await Promise.all([getContent("work"), getContent("writing")]);
 
 export default defineConfig({
   root: "src",

@@ -15,7 +15,7 @@ export type Tab = {
 export const TABS = [
   { name: "Work", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Collection", href: "/collection" },
+  { name: "Writing", href: "/writing" },
 ] as Tab[];
 
 type TabDimensions = { left: number; width: number };

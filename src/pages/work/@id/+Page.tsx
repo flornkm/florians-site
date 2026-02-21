@@ -12,7 +12,7 @@ import { useState, useSyncExternalStore } from "react";
 import { useData } from "vike-react/useData";
 import type { Data } from "./+data.js";
 
-const INFO_WIDTH = 430;
+const INFO_WIDTH = 440;
 const SCROLL_THRESHOLD = 80;
 const spring = { type: "spring" as const, stiffness: 180, damping: 24, mass: 1 };
 
@@ -101,7 +101,6 @@ export default function Page() {
         {/* Desktop: animated collapsing info panel */}
         <motion.div
           className="hidden md:block"
-          initial={{ opacity: 0 }}
           animate={
             isDesktop
               ? {
@@ -124,12 +123,7 @@ export default function Page() {
         <div className="w-full md:hidden">{infoPanel}</div>
 
         {/* Main content — naturally expands as the info panel collapses */}
-        <motion.div
-          className="flex min-w-0 flex-1 flex-col items-start justify-start pt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-        >
+        <div className="flex min-w-0 flex-1 flex-col items-start justify-start pt-8">
           {project.links && project.links.length > 0 && (
             <div className="sticky top-[calc(100dvh-6.75rem)] border border-black/10 z-20 mx-auto -mb-16 flex w-auto max-w-xs rounded-[10px] bg-surface-inverted shadow-xl md:top-[calc(100dvh-4.5rem)] md:flex-col">
               <div className="flex gap-0.5 p-0.5">
@@ -150,7 +144,7 @@ export default function Page() {
             </div>
           )}
           {content}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

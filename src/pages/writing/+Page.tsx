@@ -1,4 +1,3 @@
-import { Body4 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
 import { mdxComponents } from "@/components/shared/mdx-content";
 import Button from "@/components/ui/button";
@@ -6,13 +5,12 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { IconExpand45 } from "central-icons/IconExpand45";
 import { ComponentType, useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { navigate } from "vike/client/router";
-import { CollectionItem } from "./types";
+import { WritingItem } from "./types";
 
-const mdxModules = import.meta.glob("/content/collection/*.mdx", { eager: true }) as Record<
+const mdxModules = import.meta.glob("/content/writing/*.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
@@ -26,7 +24,7 @@ export default function Page() {
   const rafIdRef = useRef<number | null>(null);
   const baseTopRef = useRef<number>(0);
 
-  const items = pageContext.data as CollectionItem[];
+  const items = pageContext.data as WritingItem[];
   const isMobile = width! < 768;
 
   useEffect(() => {
@@ -82,7 +80,7 @@ export default function Page() {
   const handleOpen = (index: number) => {
     setIsTransitioning(true);
 
-    const item = document.getElementById(`collection-item-${items[index].slug}`);
+    const item = document.getElementById(`writing-item-${items[index].slug}`);
     const boundingRectTop = item?.getBoundingClientRect().top || 0;
     const itemDistanceToTopScreen = isMobile ? boundingRectTop + 30 : boundingRectTop - 28;
 
@@ -98,12 +96,12 @@ export default function Page() {
     }
 
     setTimeout(() => {
-      navigate(`/collection/${items[index].slug}`);
+      navigate(`/writing/${items[index].slug}`);
     }, 500);
   };
 
   const getMDXContent = (slug: string) => {
-    const modulePath = `/content/collection/${slug}.mdx`;
+    const modulePath = `/content/writing/${slug}.mdx`;
     return mdxModules[modulePath]?.default;
   };
 
@@ -111,14 +109,17 @@ export default function Page() {
     <div className="w-full pb-96">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <div
-          className="relative bg-linear-to-b from-primary via-primary to-transparent -mt-24 pt-24 z-50 lg:h-56 h-48 flex md:items-center items-start"
+          className={cn(
+            "relative transition-all ease-out bg-linear-to-b from-primary via-primary to-transparent -mt-24 pt-24 z-50 flex md:items-center items-start",
+            isTransitioning && "-ml-2 opacity-0 blur-[2px]",
+          )}
           style={{ scrollSnapAlign: "start" }}
         >
-          <H1 className="text-center mb-3 w-full">Updates & archive</H1>
+          <H1 className="w-full">Writing</H1>
         </div>
         <div
           className={cn(
-            "sticky top-16 md:top-28 flex flex-col items-center gap-4 h-0",
+            "sticky md:mt-24 top-16 md:top-28 flex flex-col items-center gap-4 h-0",
             isTransitioning ? "z-[51]" : "z-10",
           )}
         >
@@ -130,39 +131,22 @@ export default function Page() {
               <div
                 style={{
                   zIndex: items.length - Math.abs(activeIndex - index),
-                  top: `-${Math.abs(activeIndex - index) * (isMobile ? 5 : 6)}vh`,
+                  top: `-${Math.abs(activeIndex - index) * 0}px`,
                   pointerEvents: activeIndex === index ? "auto" : "none",
                   visibility: gotShown ? "hidden" : "visible",
                   transform: `scale(${gotShown ? 1.05 : Math.max(0.2, 1 - Math.abs(activeIndex - index) * 0.1)})`,
                   opacity: gotShown ? 0 : 1,
+                  filter: gotShown ? "blur(2px)" : "none",
                 }}
-                id={`collection-item-${item.slug}`}
+                id={`writing-item-${item.slug}`}
                 key={item.slug}
                 className={cn(
-                  "w-full absolute mt-8 transition-all duration-300 h-[calc(100vh-14rem)] bg-primary shadow-xl dark:shadow-none shadow-emphasis rounded-2xl p-8 border border-primary",
-                  isTransitioning ? "mt-10 md:mt-8" : "dark:bg-secondary",
+                  "w-full absolute mt-8 transition-all duration-300 h-[450px] bg-primary",
+                  isTransitioning ? "mt-19 md:mt-16.5" : "dark:bg-secondary",
                 )}
               >
-                <Button
-                  onClick={() => handleOpen(index)}
-                  className={cn(
-                    "absolute top-6 right-6 transition-all duration-300",
-                    isTransitioning && "top-12 right-2 md:right-6",
-                  )}
-                  variant="secondary"
-                  iconOnly
-                  rounded
-                >
-                  <IconExpand45
-                    className={cn(
-                      "transition-all duration-500",
-                      isTransitioning && "opacity-0 blur-[1px]",
-                    )}
-                  />
-                </Button>
-                <Body4 className="capitalize text-primary mb-10 md:mb-4 font-mono">{item.type}</Body4>
-                <div className="w-full h-full flex items-start justify-center">
-                  <div className="w-full h-full max-w-lg -mt-7 mask-b-from-70%">
+                <div className="w-full h-full flex flex-col items-center">
+                  <div className="w-full flex-1 max-w-lg -mt-7 mask-b-from-70% overflow-hidden">
                     {MDXContent ? (
                       <article className={proseVariants({ variant: "default" })}>
                         <MDXProvider components={mdxComponents}>
@@ -173,6 +157,14 @@ export default function Page() {
                       <div>Content not found</div>
                     )}
                   </div>
+                  <Button
+                    onClick={() => handleOpen(index)}
+                    className={cn("transition-opacity duration-300", isTransitioning && "opacity-0")}
+                    variant="secondary"
+                    size="sm"
+                  >
+                    Read more
+                  </Button>
                 </div>
               </div>
             );

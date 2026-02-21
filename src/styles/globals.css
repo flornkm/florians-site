@@ -14,7 +14,7 @@
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/pretendard/PretendardVariable.woff2) format("woff2-variations");
+  src: url(/fonts/pretendard/PretendardVariable.ttf) format("truetype");
 }
 
 @font-face {
