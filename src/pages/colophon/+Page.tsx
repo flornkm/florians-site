@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { IconCentralIconSystem } from "central-icons/IconCentralIconSystem";
 import { IconGithub } from "central-icons/IconGithub";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
-import { INSPIRATION } from "./const/inspiration";
-import { PEOPLE } from "./const/people";
+import { INSPIRATION } from "@/features/colophon/const/inspiration";
+import { PEOPLE } from "@/features/colophon/const/people";
 
 function renderLinkedList(items: { name: string; href: string }[]) {
   return items.map((item, i, arr) => (

@@ -1,5 +1,5 @@
-import { Chat } from "@/components/chat/chat";
-import { ChatStatusProvider } from "@/components/chat/chat-status";
+import { Chat } from "@/features/contact/components/chat";
+import { ChatStatusProvider } from "@/features/contact/components/chat-status";
 import { H1 } from "@/components/design-system/heading";
 
 export default function Page() {

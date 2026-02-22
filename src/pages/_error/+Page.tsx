@@ -51,7 +51,7 @@ export default function Page() {
     <div className="w-full h-screen flex flex-col items-start justify-center max-w-sm mx-auto px-4">
       <h1 className="text-lg font-semibold mb-1">500 Error</h1>
       <p className="text-sm text-tertiary mb-5">Internal server error. Please try again later.</p>
-      <Button variant="primary" onClick={() => window.location.reload()} className="flex-0">
+      <Button variant="primary" onClick={() => window.location.reload()}>
         Reload
       </Button>
     </div>

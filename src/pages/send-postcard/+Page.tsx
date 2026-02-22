@@ -1,6 +1,6 @@
-import { LetterEditorProvider } from "@/components/letters/letter-editor-provider";
-import LetterForm from "@/components/letters/letter-form";
-import LetterPreview from "@/components/letters/letter-preview";
+import { LetterEditorProvider } from "@/features/letters/components/letter-editor-provider";
+import LetterForm from "@/features/letters/components/letter-form";
+import LetterPreview from "@/features/letters/components/letter-preview";
 
 export default function Page() {
   return (

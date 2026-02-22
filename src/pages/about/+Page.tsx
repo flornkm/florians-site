@@ -2,13 +2,13 @@ import { Body1 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
 import { Link } from "@/components/ui/link";
 import { RichTooltip } from "@/components/ui/tooltip";
-import { AppsTooltipContent } from "./components/apps-tooltip-content";
-import { BucketlistTooltipContent } from "./components/bucketlist-tooltip-content";
-import { CompaniesTooltipContent } from "./components/companies-tooltip-content";
-import { FloWording } from "./components/flo-wording";
-import { GlobeTooltipContent } from "./components/globe-tooltip-content";
-import { InstitutionsTooltipContent } from "./components/institutions-tooltip-content";
-import { VISITED_COUNTRIES } from "./const/visited-countries";
+import { AppsTooltipContent } from "@/features/about/components/apps-tooltip-content";
+import { BucketlistTooltipContent } from "@/features/about/components/bucketlist-tooltip-content";
+import { CompaniesTooltipContent } from "@/features/about/components/companies-tooltip-content";
+import { FloWording } from "@/features/about/components/flo-wording";
+import { GlobeTooltipContent } from "@/features/about/components/globe-tooltip-content";
+import { InstitutionsTooltipContent } from "@/features/about/components/institutions-tooltip-content";
+import { VISITED_COUNTRIES } from "@/features/about/const/visited-countries";
 
 export default function Page() {
   return (

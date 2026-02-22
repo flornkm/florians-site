@@ -1,10 +1,10 @@
+import { Body1 } from "@/components/design-system/body";
 import { usePreventScroll } from "@/hooks/use-prevent-scroll";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Body1 } from "../design-system/body";
 import { Letter } from "./letter";
 
 interface LetterData {
@@ -70,13 +70,10 @@ function DraggableLetter({
   const zIndex = totalVisible - stackIndex;
 
   const rotate = useTransform(x, [-300, 0, 300], [-12, 0, 12]);
-  const opacity = useTransform(
-    [x, y],
-    ([latestX, latestY]: number[]) => {
-      const distance = Math.sqrt(latestX * latestX + latestY * latestY);
-      return Math.max(0, 1 - distance / 600);
-    },
-  );
+  const opacity = useTransform([x, y], ([latestX, latestY]: number[]) => {
+    const distance = Math.sqrt(latestX * latestX + latestY * latestY);
+    return Math.max(0, 1 - distance / 600);
+  });
 
   const handleDragStart = useCallback(() => {
     setIsDragging(true);
