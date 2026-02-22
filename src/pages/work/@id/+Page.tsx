@@ -4,11 +4,12 @@ import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
+import { useScrollThreshold } from "@/hooks/use-scroll-threshold";
 import { cn } from "@/lib/utils.js";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { IconChevronLeft } from "central-icons/IconChevronLeft";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useState, useSyncExternalStore } from "react";
+import { motion } from "motion/react";
+import { useSyncExternalStore } from "react";
 import { useData } from "vike-react/useData";
 import type { Data } from "./+data.js";
 
@@ -29,9 +30,7 @@ export default function Page() {
     () => false,
   );
 
-  const { scrollY } = useScroll();
-  const [collapsed, setCollapsed] = useState(() => scrollY.get() > SCROLL_THRESHOLD);
-  useMotionValueEvent(scrollY, "change", (y) => setCollapsed(y > SCROLL_THRESHOLD));
+  const collapsed = useScrollThreshold(SCROLL_THRESHOLD);
 
   const content = useMdxContent("work", project.slug);
 
