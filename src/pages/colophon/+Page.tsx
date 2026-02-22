@@ -27,15 +27,15 @@ export default function Page() {
       <div className="mb-16">
         <H1>Colophon</H1>
       </div>
-      <div className="w-full z-20 md:max-w-[calc(100%-27rem)] justify-self-end space-y-2 sticky top-[calc(100dvh-6.75rem)] md:top-[calc(100dvh-4.5rem)] -mb-16 ">
-        <div className="flex md:flex-col bg-surface-inverted rounded-[10px] mx-auto w-fit shadow-xl">
+      <div className="w-full z-20 md:max-w-[calc(100%-27rem)] justify-self-end -mb-16">
+        <div className="sticky top-[calc(100dvh-6.75rem)] border border-black/10 z-20 mx-auto flex w-auto max-w-xs rounded-[10px] bg-surface-inverted shadow-xl md:top-[calc(100dvh-4.5rem)] md:flex-col">
           <div className="flex gap-0.5 p-0.5">
             <Link
               href="https://github.com/flornkm/florians-site"
               target="_blank"
               className={cn(
-                buttonVariants({ variant: "tertiary" }),
-                "group flex items-center px-2 py-0.5 gap-2 text-inverted hover:text-primary",
+                buttonVariants({ variant: "primary" }),
+                "group flex items-center gap-2 px-2 py-0.5 text-inverted",
               )}
             >
               <IconGithub className="size-4" />
