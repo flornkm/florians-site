@@ -114,7 +114,7 @@ export function Video({
 }) {
   return (
     <div className="not-prose my-8">
-      <div className="flex items-center justify-center rounded-sm bg-secondary p-8 md:p-12">
+      <div className="flex items-center justify-center rounded-sm bg-secondary p-4 md:p-12">
         <SmartVideo
           src={src}
           webm={webm}
@@ -167,7 +167,7 @@ export function Model({
 function Img({ src, alt, className }: { src?: string; alt?: string; className?: string }) {
   return (
     <div className="not-prose my-8 first:mt-0 last:mb-0">
-      <div className="flex items-center justify-center rounded-lg bg-secondary p-8 md:p-12">
+      <div className="flex items-center justify-center rounded-lg bg-secondary p-4 md:p-12">
         <img
           src={src}
           alt={alt}
@@ -184,9 +184,9 @@ function Img({ src, alt, className }: { src?: string; alt?: string; className?: 
 export function MobileImages({ images }: { images: { src: string; alt: string }[] }) {
   return (
     <div className="not-prose my-8">
-      <div className="flex gap-3 rounded-lg bg-secondary p-4 md:p-8">
+      <div className="flex gap-3 rounded-lg bg-secondary p-2 py-4 md:py-12 md:p-10">
         {images.map((img) => (
-          <div key={img.src} className="flex-1 min-w-0 px-4">
+          <div key={img.src} className="flex-1 min-w-0 px-2">
             <img
               src={img.src}
               alt={img.alt}
