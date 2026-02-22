@@ -27,22 +27,17 @@ export default function Page() {
       <div className="mb-16">
         <H1>Colophon</H1>
       </div>
-      <div className="w-full z-20 md:max-w-[calc(100%-27rem)] justify-self-end -mb-16">
-        <div className="sticky top-[calc(100dvh-6.75rem)] border border-black/10 z-20 mx-auto flex w-auto max-w-xs rounded-[10px] bg-surface-inverted shadow-xl md:top-[calc(100dvh-4.5rem)] md:flex-col">
-          <div className="flex gap-0.5 p-0.5">
-            <Link
-              href="https://github.com/flornkm/florians-site"
-              target="_blank"
-              className={cn(
-                buttonVariants({ variant: "primary" }),
-                "group flex items-center gap-2 px-2 py-0.5 text-inverted",
-              )}
-            >
-              <IconGithub className="size-4" />
-              Open Source Repo
-              <IconArrowUpRight className="ml-1 inline h-4 w-4 transition-all duration-150 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </div>
+      <div className="sticky top-[calc(100dvh-6.75rem)] border border-black/10 z-20 mx-auto -mb-16 flex w-auto max-w-xs rounded-[10px] bg-surface-inverted shadow-xl md:top-[calc(100dvh-4.5rem)] md:max-w-[calc(100%-27rem)] md:justify-self-end md:flex-col">
+        <div className="flex gap-0.5 p-0.5">
+          <Link
+            href="https://github.com/flornkm/florians-site"
+            target="_blank"
+            className={cn(buttonVariants({ variant: "primary" }), "group flex items-center gap-2 px-2 py-0.5 text-inverted")}
+          >
+            <IconGithub className="size-4" />
+            Open Source Repo
+            <IconArrowUpRight className="ml-1 inline h-4 w-4 transition-all duration-150 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
         </div>
       </div>
       <section className="w-full relative min-h-screen">
