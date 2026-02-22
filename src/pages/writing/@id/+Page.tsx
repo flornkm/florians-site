@@ -83,7 +83,7 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="relative mx-auto -mt-[7px] w-full max-w-5xl px-4 pt-9 md:-mt-2 md:px-0">
-        <aside className="hidden md:block absolute left-0 top-0 bottom-0 w-44 z-10">
+        <aside className="hidden md:block absolute left-0 top-0 bottom-0 w-44 lg:w-52 xl:w-60 z-10">
           <div className="sticky top-20">
             <motion.div
               initial={{ opacity: 0, x: -8 }}
@@ -92,15 +92,15 @@ export default function Page() {
             >
               <Link
                 href="/writing"
-                className="flex items-center gap-1 text-sm font-medium text-secondary hover:text-primary transition-colors mb-4"
+                className="flex items-center gap-1 text-sm font-medium text-secondary hover:text-primary transition-colors mb-5"
               >
                 <IconChevronLeft className="h-4 w-4" />
                 Go back
               </Link>
             </motion.div>
             {item.headings.length > 0 && (
-              <nav className="pl-5 max-w-26">
-                <ul className="flex flex-col gap-1">
+              <nav className="pl-5 lg:pl-6 max-w-32 lg:max-w-40 xl:max-w-48">
+                <ul className="flex flex-col gap-1.5">
                   {item.headings.map((heading, i) => (
                     <motion.li
                       key={heading.id}
@@ -112,7 +112,7 @@ export default function Page() {
                         href={`#${heading.id}`}
                         onClick={(e) => handleAnchorClick(e, heading.id)}
                         className={cn(
-                          "text-sm transition-colors",
+                          "text-sm leading-relaxed transition-colors",
                           activeId === heading.id ? "text-primary font-medium" : "text-quaternary hover:text-primary",
                         )}
                       >
