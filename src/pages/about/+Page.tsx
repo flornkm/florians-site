@@ -81,7 +81,7 @@ export default function Page() {
           </Body1>
         </div>
       </div>
-      <div className="flex-1 min-h-96 flex items-center justify-center pt-2">
+      <div className="flex-1 min-h-40 flex items-center justify-center pt-2">
         <FloWording />
       </div>
     </div>

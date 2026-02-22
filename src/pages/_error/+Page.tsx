@@ -36,7 +36,7 @@ export default function Page() {
             <li className="text-sm" key={link.href}>
               <Link
                 href={link.href}
-                className={buttonVariants({ variant: index === 0 ? "primary" : "secondary", size: "sm" })}
+                className={buttonVariants({ variant: index === 0 ? "primary" : "secondary", size: "md" })}
               >
                 {link.label}
               </Link>
