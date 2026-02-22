@@ -118,7 +118,7 @@ export default function Navigation() {
   const isVisible = hasActiveTab || isHovering;
 
   return (
-    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-[99] px-2 xs:px-3 md:w-screen bg-primary md:px-4 border md:border-none border-tertiary md:max-w-none mx-auto w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
+    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-[99] px-2.5 xs:px-3 md:w-screen bg-primary md:px-4 border md:border-none border-tertiary md:max-w-none mx-auto w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
       <div
         className={cn(
           "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-300 ease-out h-px -translate-x-1/2 bottom-0 bg-(--border-primary)",
@@ -195,7 +195,7 @@ export default function Navigation() {
             key="contact"
             className={cn(
               buttonVariants({ variant: "primary", size: "xs" }),
-              "text-sm text-accent-foreground hidden max-md:mr-px leading-none items-center min-[350px]:flex font-medium relative z-10 px-2.5 py-1 md:py-0.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
+              "text-sm text-accent-foreground hidden max-md:mr-px leading-none items-center min-[350px]:flex font-medium relative z-10 px-2.5 h-6.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
               urlPathname === "/contact" && "bg-accent-primary",
             )}
           >
