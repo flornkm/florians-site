@@ -8,7 +8,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { ComponentType, useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 import { navigate } from "vike/client/router";
-import { WritingItem } from "./types";
+import { WritingItem } from "@/features/writing/types";
 
 const mdxModules = import.meta.glob("/content/writing/*.mdx", { eager: true }) as Record<
   string,

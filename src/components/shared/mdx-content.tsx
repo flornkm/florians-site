@@ -2,9 +2,9 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
 import { ComponentType, ReactNode } from "react";
+import { BiomarkerShowcase } from "../../features/work/components/superpower/biomarker-showcase";
+import { SVGShowcase } from "../../features/work/components/superpower/svg-showcase";
 import { ModelViewer } from "../3d/model-viewer";
-import { BiomarkerShowcase } from "../superpower/biomarker-showcase";
-import { SVGShowcase } from "../superpower/svg-showcase";
 import { SmartVideo } from "./smart-video";
 
 // Generate a slug ID from heading text (matches extractHeadings in mdx.ts)

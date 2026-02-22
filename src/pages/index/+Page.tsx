@@ -1,7 +1,7 @@
 import { Body2 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
-import TriangleFilled from "@/components/icons/triangle-filled";
-import { LetterStack } from "@/components/letters/letter-stack";
+import TriangleFilled from "@/components/shared/triangle-filled";
+import { LetterStack } from "@/features/letters/components/letter-stack";
 
 import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
@@ -56,7 +56,7 @@ export default function Page() {
                 </p>
               </div>
               <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-                <div className="w-full bg-secondary p-8 rounded-md flex items-center">
+                <div className="w-full bg-secondary p-4 md:p-8 rounded-md flex items-center">
                   <img src={project.cover} alt={project.title} className="w-full h-auto object-cover rounded-sm" />
                 </div>
               </div>

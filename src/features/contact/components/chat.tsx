@@ -1,13 +1,13 @@
+import { Body1 } from "@/components/design-system/body";
+import { Code } from "@/components/design-system/code";
+import Button from "@/components/ui/button";
+import Input from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport } from "ai";
 import { IconArrowUp } from "central-icons/IconArrowUp";
 import { useEffect, useState } from "react";
 import { Streamdown } from "streamdown";
-import { Body1 } from "../design-system/body";
-import { Code } from "../design-system/code";
-import Button from "../ui/button";
-import Input from "../ui/input";
 import { useChatStatusEvents } from "./chat-status";
 
 const RECOMMENDATIONS = ["What do you work on?", "How can I reach you?", "Tell me about your projects"];

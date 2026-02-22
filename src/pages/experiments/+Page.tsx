@@ -1,5 +1,5 @@
 import { H1, H2 } from "@/components/design-system/heading";
-import { TextShimmerDemo } from "@/components/experiments/text-shimmer-demo";
+import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 
 const EXPERIMENTS = [{ title: "Text Shimmer", Component: TextShimmerDemo }];
 
