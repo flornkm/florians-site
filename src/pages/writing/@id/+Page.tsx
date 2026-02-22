@@ -83,7 +83,7 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="relative mx-auto -mt-[7px] w-full max-w-5xl px-4 pt-9 md:-mt-2 md:px-0">
-        <aside className="hidden md:block absolute left-0 top-0 bottom-0 w-44 lg:w-52 xl:w-60 z-10">
+        <aside className="hidden lg:block absolute left-0 top-0 bottom-0 w-44 lg:w-52 xl:w-60 z-10">
           <div className="sticky top-20">
             <motion.div
               initial={{ opacity: 0, x: -8 }}
@@ -125,7 +125,7 @@ export default function Page() {
             )}
           </div>
         </aside>
-        <div className="sticky top-[calc(100dvh-6.75rem)] z-10 md:hidden flex justify-center h-0">
+        <div className="sticky top-[calc(100dvh-6.75rem)] z-10 lg:hidden flex justify-center h-0">
           <Link href="/writing" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "gap-1")}>
             <IconChevronLeft className="h-4 w-4" />
             Go back
