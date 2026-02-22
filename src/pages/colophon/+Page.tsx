@@ -32,7 +32,10 @@ export default function Page() {
           <Link
             href="https://github.com/flornkm/florians-site"
             target="_blank"
-            className={cn(buttonVariants({ variant: "primary" }), "group flex items-center gap-2 px-2 py-0.5 text-inverted")}
+            className={cn(
+              buttonVariants({ variant: "primary" }),
+              "group w-auto shrink-0 self-center md:self-auto flex items-center gap-2 px-2 py-0.5 text-inverted",
+            )}
           >
             <IconGithub className="size-4" />
             Open Source Repo
