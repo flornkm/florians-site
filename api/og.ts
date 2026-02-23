@@ -15,6 +15,12 @@ const OPTS = {
 };
 const FONT_SIZE = 80;
 
+const fontData = fs.readFileSync(path.join(process.cwd(), "public/fonts/commit-mono/commit-mono-regular.otf"));
+const FONT_ARRAY_BUFFER = fontData.buffer.slice(
+  fontData.byteOffset,
+  fontData.byteOffset + fontData.byteLength,
+) as ArrayBuffer;
+
 export default async function handler(req: Request | VercelRequest, res?: VercelResponse): Promise<Response | void> {
   try {
     const isEdge = req instanceof Request;
@@ -27,12 +33,6 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
     const title = fullTitle.split(" ")[0];
     const width = clampInt(searchParams.get("width"), 1200, 100, 2000);
     const height = clampInt(searchParams.get("height"), 630, 100, 2000);
-
-    const fontData = fs.readFileSync(path.join(process.cwd(), "public/fonts/commit-mono/commit-mono-regular.otf"));
-    const fontArrayBuffer = fontData.buffer.slice(
-      fontData.byteOffset,
-      fontData.byteOffset + fontData.byteLength,
-    ) as ArrayBuffer;
 
     const textW = title.length * FONT_SIZE * 0.6;
     const rx = textW / 2 + 80;
@@ -77,7 +77,7 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
           }),
         ],
       }),
-      { width, height, fonts: [{ name: "CommitMono", data: fontArrayBuffer, weight: 400, style: "normal" }] },
+      { width, height, fonts: [{ name: "CommitMono", data: FONT_ARRAY_BUFFER, weight: 400, style: "normal" }] },
     );
 
     if (!isEdge && res) {
