@@ -5,15 +5,16 @@ import * as THREE from "three";
 const COLS = 18;
 const ROWS = 32;
 const SPACING = 0.045;
-const GRAVITY = new THREE.Vector3(0, -4.0, 0);
-const DAMPING = 0.988;
-const TIMESTEP = 0.008;
-const SUB_STEPS = 4;
-const CONSTRAINT_ITERS = 8;
-const BEND_COMPLIANCE = 0.15;
+const GRAVITY = new THREE.Vector3(0, -3.0, 0);
+const DAMPING = 0.992;
+const TIMESTEP = 0.007;
+const SUB_STEPS = 5;
+const CONSTRAINT_ITERS = 12;
+const BEND_COMPLIANCE = 0.06;
 const INFLUENCE_RADIUS = 1;
-const INFLUENCE_FALLOFF = 1.5;
-const MAX_DISPLACEMENT = 0.35;
+const INFLUENCE_FALLOFF = 2.0;
+const MAX_DISPLACEMENT = 0.2;
+const GRAB_SPRING = 0.35;
 
 const STRUCT_REST = SPACING;
 const SHEAR_REST = SPACING * Math.SQRT2;
@@ -305,47 +306,42 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
         const gi = grab.current.idx * 3;
         const gp = grab.current.point;
 
-        const gdx = gp.x - rest[gi];
-        const gdy = gp.y - rest[gi + 1];
-        const gdz = gp.z - rest[gi + 2];
+        const targetX = gp.x;
+        const targetY = gp.y;
+        const targetZ = gp.z;
+
+        pos[gi] += (targetX - pos[gi]) * GRAB_SPRING;
+        pos[gi + 1] += (targetY - pos[gi + 1]) * GRAB_SPRING;
+        pos[gi + 2] += (targetZ - pos[gi + 2]) * GRAB_SPRING;
+
+        const gdx = pos[gi] - rest[gi];
+        const gdy = pos[gi + 1] - rest[gi + 1];
+        const gdz = pos[gi + 2] - rest[gi + 2];
         const gDisp = Math.sqrt(gdx * gdx + gdy * gdy + gdz * gdz);
-        let clampedX = gp.x, clampedY = gp.y, clampedZ = gp.z;
         if (gDisp > MAX_DISPLACEMENT) {
           const gScale = MAX_DISPLACEMENT / gDisp;
-          clampedX = rest[gi] + gdx * gScale;
-          clampedY = rest[gi + 1] + gdy * gScale;
-          clampedZ = rest[gi + 2] + gdz * gScale;
+          pos[gi] = rest[gi] + gdx * gScale;
+          pos[gi + 1] = rest[gi + 1] + gdy * gScale;
+          pos[gi + 2] = rest[gi + 2] + gdz * gScale;
         }
 
-        old[gi] = clampedX;
-        old[gi + 1] = clampedY;
-        old[gi + 2] = clampedZ;
-        pos[gi] = clampedX;
-        pos[gi + 1] = clampedY;
-        pos[gi + 2] = clampedZ;
-
-        const cc = grab.current.idx % COLS;
-        const cr = Math.floor(grab.current.idx / COLS);
-        const origGx = (cc - (COLS - 1) / 2) * SPACING;
-        const origGy = ((ROWS - 1) / 2 - cr) * SPACING;
-        const deltaX = clampedX - origGx;
-        const deltaY = clampedY - origGy;
-        const deltaZ = clampedZ;
+        old[gi] = pos[gi];
+        old[gi + 1] = pos[gi + 1];
+        old[gi + 2] = pos[gi + 2];
 
         for (const inf of grab.current.influenced) {
           if (pinned[inf.idx]) continue;
           const ii = inf.idx * 3;
-          const ic = inf.idx % COLS;
-          const ir = Math.floor(inf.idx / COLS);
-          const origX = (ic - (COLS - 1) / 2) * SPACING;
-          const origY = ((ROWS - 1) / 2 - ir) * SPACING;
-          const targetX = origX + deltaX * inf.weight;
-          const targetY = origY + deltaY * inf.weight;
-          const targetZ = deltaZ * inf.weight;
-          const blend = inf.weight * 0.85;
-          pos[ii] = pos[ii] + (targetX - pos[ii]) * blend;
-          pos[ii + 1] = pos[ii + 1] + (targetY - pos[ii + 1]) * blend;
-          pos[ii + 2] = pos[ii + 2] + (targetZ - pos[ii + 2]) * blend;
+          const deltaX = pos[gi] - rest[gi];
+          const deltaY = pos[gi + 1] - rest[gi + 1];
+          const deltaZ = pos[gi + 2] - rest[gi + 2];
+          const tx = rest[ii] + deltaX * inf.weight;
+          const ty = rest[ii + 1] + deltaY * inf.weight;
+          const tz = rest[ii + 2] + deltaZ * inf.weight;
+          const blend = inf.weight * 0.4;
+          pos[ii] += (tx - pos[ii]) * blend;
+          pos[ii + 1] += (ty - pos[ii + 1]) * blend;
+          pos[ii + 2] += (tz - pos[ii + 2]) * blend;
           old[ii] = pos[ii];
           old[ii + 1] = pos[ii + 1];
           old[ii + 2] = pos[ii + 2];
