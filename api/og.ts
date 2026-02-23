@@ -16,13 +16,14 @@ const ROUGH_OPTS = {
 
 const TEXT_ROUGH_OPTS = {
   stroke: "black",
-  strokeWidth: 1.2,
-  roughness: 1.2,
-  bowing: 0.8,
-  maxRandomnessOffset: 0.8,
+  strokeWidth: 1.5,
+  roughness: 1.8,
+  bowing: 1.2,
+  maxRandomnessOffset: 1.2,
   fill: "black" as const,
-  fillStyle: "solid" as const,
-  fillWeight: 1,
+  fillStyle: "hachure" as const,
+  fillWeight: 1.5,
+  hachureGap: 3,
 };
 
 /** Word-wrap title into lines no wider than maxWidth px at given fontSize. */
