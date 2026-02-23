@@ -3,7 +3,7 @@ import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 
 const EXPERIMENTS = [
-  { title: "Paper", Component: PaperRollDemo },
+  { title: "Receipt", Component: PaperRollDemo },
   { title: "Text Shimmer", Component: TextShimmerDemo },
 ];
 
