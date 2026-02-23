@@ -194,7 +194,7 @@ function createReceiptTexture(): THREE.CanvasTexture {
 
   const addSpace = (px: number) => { curY += px; };
 
-  drawText("THE PAPER SHOP", 22, "#222", "center", true);
+  drawText("THE FLORNKM SHOP", 22, "#222", "center", true);
   addSpace(2);
   drawText("42 Mesh Lane, WebGL City", 13, "#666", "center");
   drawText("Tel: (555) 042-1337", 13, "#666", "center");
@@ -240,7 +240,7 @@ function createReceiptTexture(): THREE.CanvasTexture {
 
   drawText("Thank you for visiting!", 13, "#888", "center");
   addSpace(4);
-  drawText("github.com/floriandwt", 12, "#aaa", "center");
+  drawText("github.com/flornkm", 12, "#aaa", "center");
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;
@@ -290,7 +290,7 @@ const fragShader = `
     float edgeX = smoothstep(0.0, 0.04, vUv.x) * smoothstep(1.0, 0.96, vUv.x);
     float edgeY = smoothstep(0.0, 0.03, vUv.y) * smoothstep(1.0, 0.97, vUv.y);
     float edgeShadow = edgeX * edgeY;
-    float edgeDarken = mix(0.92, 1.0, edgeShadow);
+    float edgeDarken = mix(1.0, 1.0, edgeShadow);
 
     float back = gl_FrontFacing ? 1.0 : 0.88;
 
@@ -680,7 +680,7 @@ function PaperShadow({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
           vec2 c = vUv - 0.5;
           float d = length(c * vec2(1.0, 1.6));
           float alpha = smoothstep(0.5, 0.15, d) * uOpacity;
-          gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
+          gl_FragColor = vec4(1.0, 1.0, 1.0, alpha);
         }
       `,
     });
