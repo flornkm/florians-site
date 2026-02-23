@@ -1,9 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
+import { createRequire } from "node:module";
 import path from "node:path";
-import * as opentype from "opentype.js";
 import { jsx } from "react/jsx-runtime";
 import rough from "roughjs";
+const opentype = createRequire(import.meta.url)("opentype.js") as typeof import("opentype.js");
 
 const ROUGH_OPTS = {
   stroke: "black",
