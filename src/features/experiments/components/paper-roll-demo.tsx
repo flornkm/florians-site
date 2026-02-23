@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 const COLS = 18;
-const ROWS = 42;
+const ROWS = 32;
 const SPACING = 0.045;
 const GRAVITY = new THREE.Vector3(0, -4.0, 0);
 const DAMPING = 0.988;
@@ -49,34 +49,33 @@ function buildConstraints(): Constraint[] {
 
 function createReceiptTexture(): THREE.CanvasTexture {
   const w = 512;
-  const h = 1024;
+  const h = 768;
   const canvas = document.createElement("canvas");
   canvas.width = w;
   canvas.height = h;
   const ctx = canvas.getContext("2d")!;
 
-  ctx.fillStyle = "#fafafa";
+  ctx.fillStyle = "#fcfcfa";
   ctx.fillRect(0, 0, w, h);
 
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x += 4) {
-      const noise = (Math.random() - 0.5) * 6;
-      const r = 250 + noise;
-      const g = 250 + noise;
-      const b = 249 + noise;
+      const noise = (Math.random() - 0.5) * 5;
+      const r = 252 + noise;
+      const g = 252 + noise;
+      const b = 250 + noise;
       ctx.fillStyle = `rgb(${r},${g},${b})`;
       ctx.fillRect(x, y, 4, 1);
     }
   }
 
   const marginX = 48;
-  let curY = 60;
+  let curY = 50;
 
   const drawText = (text: string, size: number, color: string, align: "left" | "center" | "right" = "left", bold = false) => {
     ctx.font = `${bold ? "bold " : ""}${size}px "Courier New", "Courier", monospace`;
     ctx.fillStyle = color;
     ctx.textBaseline = "top";
-    const textW = w - marginX * 2;
     if (align === "center") {
       ctx.textAlign = "center";
       ctx.fillText(text, w / 2, curY);
@@ -98,7 +97,7 @@ function createReceiptTexture(): THREE.CanvasTexture {
     ctx.moveTo(marginX, curY);
     ctx.lineTo(w - marginX, curY);
     ctx.stroke();
-    curY += 12;
+    curY += 10;
   };
 
   const drawDashedLine = () => {
@@ -110,7 +109,7 @@ function createReceiptTexture(): THREE.CanvasTexture {
     ctx.lineTo(w - marginX, curY);
     ctx.stroke();
     ctx.setLineDash([]);
-    curY += 12;
+    curY += 10;
   };
 
   const drawRow = (left: string, right: string, size: number, color: string, bold = false) => {
@@ -130,14 +129,14 @@ function createReceiptTexture(): THREE.CanvasTexture {
   addSpace(2);
   drawText("42 Mesh Lane, WebGL City", 13, "#666", "center");
   drawText("Tel: (555) 042-1337", 13, "#666", "center");
-  addSpace(10);
+  addSpace(8);
 
   drawLine();
   addSpace(4);
 
   drawText("Date: 2026-02-23  14:17", 13, "#444");
   drawText("Order: #00382", 13, "#444");
-  addSpace(8);
+  addSpace(6);
 
   drawDashedLine();
   addSpace(4);
@@ -151,7 +150,7 @@ function createReceiptTexture(): THREE.CanvasTexture {
   drawRow("UV Unwrap", "$1.50", 14, "#333");
   addSpace(2);
   drawRow("Cloth Simulation", "$6.00", 14, "#333");
-  addSpace(8);
+  addSpace(6);
 
   drawDashedLine();
   addSpace(4);
@@ -159,16 +158,16 @@ function createReceiptTexture(): THREE.CanvasTexture {
   drawRow("Subtotal", "$18.00", 14, "#444");
   addSpace(2);
   drawRow("Tax (8%)", "$1.44", 13, "#666");
-  addSpace(8);
+  addSpace(6);
 
   drawLine();
   addSpace(4);
 
   drawRow("TOTAL", "$19.44", 18, "#111", true);
-  addSpace(16);
+  addSpace(12);
 
   drawDashedLine();
-  addSpace(12);
+  addSpace(10);
 
   drawText("Thank you for visiting!", 13, "#888", "center");
   addSpace(4);
@@ -206,23 +205,29 @@ const fragShader = `
 
     vec3 n = normalize(vNormal);
     vec3 v = normalize(cameraPosition - vWorldPos);
-    vec3 l1 = normalize(vec3(0.3, 0.6, 1.0));
-    vec3 l2 = normalize(vec3(-0.5, 0.3, 0.8));
 
-    float d1 = max(dot(n, l1), 0.0);
-    float d2 = max(dot(n, l2), 0.0);
-    float wrap = max(dot(n, l1) * 0.5 + 0.5, 0.0);
-    float lit = 0.4 + d1 * 0.38 + d2 * 0.1 + wrap * 0.12;
+    vec3 sunDir = normalize(vec3(0.8, 1.0, 0.6));
+    vec3 fillDir = normalize(vec3(-0.4, 0.3, 0.8));
 
-    float spec = pow(max(dot(n, normalize(l1 + v)), 0.0), 80.0) * 0.06;
-    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.04;
-    float back = mix(1.0, 0.7, step(dot(n, v), 0.0));
+    float sunDiff = max(dot(n, sunDir), 0.0);
+    float fillDiff = max(dot(n, fillDir), 0.0);
+    float wrap = max(dot(n, sunDir) * 0.5 + 0.5, 0.0);
 
-    vec3 col = texColor * lit * back + vec3(spec + fres);
+    float ambient = 0.55;
+    float lit = ambient + sunDiff * 0.32 + fillDiff * 0.08 + wrap * 0.05;
+
+    vec3 halfVec = normalize(sunDir + v);
+    float spec = pow(max(dot(n, halfVec), 0.0), 60.0) * 0.08;
+    vec3 specColor = vec3(1.0, 0.98, 0.95) * spec;
+
+    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.03;
+    float back = mix(1.0, 0.75, step(dot(n, v), 0.0));
+
+    vec3 col = texColor * lit * back + specColor + vec3(fres);
 
     float ex = smoothstep(0.0, 0.008, vUv.x) * smoothstep(0.0, 0.008, 1.0 - vUv.x);
     float ey = smoothstep(0.0, 0.005, vUv.y) * smoothstep(0.0, 0.005, 1.0 - vUv.y);
-    col *= 0.95 + 0.05 * ex * ey;
+    col *= 0.96 + 0.04 * ex * ey;
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -475,6 +480,55 @@ function computeInfluenced(centerIdx: number): { idx: number; weight: number }[]
   return result;
 }
 
+function PaperShadow({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  const shadowMaterial = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      uniforms: {
+        uOpacity: { value: 0.18 },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float uOpacity;
+        varying vec2 vUv;
+        void main() {
+          vec2 center = vUv - 0.5;
+          float dist = length(center * vec2(1.0, 0.7));
+          float alpha = smoothstep(0.5, 0.1, dist) * uOpacity;
+          gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
+        }
+      `,
+    });
+  }, []);
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    meshRef.current.position.set(0.03, -0.08, -0.15);
+    const baseScale = grab.current.active ? 1.05 : 1.0;
+    meshRef.current.scale.set(
+      (COLS - 1) * SPACING * 1.6 * baseScale,
+      (ROWS - 1) * SPACING * 1.3 * baseScale,
+      1
+    );
+    shadowMaterial.uniforms.uOpacity.value = grab.current.active ? 0.22 : 0.18;
+  });
+
+  return (
+    <mesh ref={meshRef} material={shadowMaterial}>
+      <planeGeometry args={[1, 1]} />
+    </mesh>
+  );
+}
+
 function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   const { camera, gl, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster());
@@ -580,8 +634,8 @@ function SceneSetup() {
   const { camera } = useThree();
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.position.set(0, 0.05, 2.8);
-      camera.lookAt(0, -0.15, 0);
+      camera.position.set(0, 0.02, 2.4);
+      camera.lookAt(0, -0.1, 0);
     }
   }, [camera]);
   return null;
@@ -608,9 +662,10 @@ export const PaperRollDemo = () => {
           camera={{ fov: 35, near: 0.1, far: 100 }}
         >
           <SceneSetup />
-          <ambientLight intensity={0.55} />
-          <directionalLight position={[2, 3, 5]} intensity={0.65} />
-          <directionalLight position={[-3, 1, 3]} intensity={0.2} />
+          <ambientLight intensity={0.45} />
+          <directionalLight position={[3, 4, 5]} intensity={0.7} color="#fffaf0" />
+          <directionalLight position={[-2, 1, 3]} intensity={0.15} />
+          <PaperShadow grab={grab} />
           <PaperCloth grab={grab} />
           <Interaction grab={grab} />
         </Canvas>
