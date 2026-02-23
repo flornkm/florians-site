@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
 import { jsx } from "react/jsx-runtime";
 import rough from "roughjs";
-import { H, measureText, renderText, roughEllipsePaths } from "./utils/rough-text";
+import { H, measureText, renderText, roughEllipsePaths } from "./utils/rough-text.js";
 
 export default async function handler(req: Request | VercelRequest, res?: VercelResponse): Promise<Response | void> {
   try {
