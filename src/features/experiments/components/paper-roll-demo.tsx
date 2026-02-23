@@ -2,24 +2,21 @@ import { useEffect, useRef, useMemo, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const COLS = 28;
-const ROWS = 36;
-const SPACING = 0.065;
+const COLS = 22;
+const ROWS = 52;
+const SPACING = 0.055;
 const GRAVITY = new THREE.Vector3(0, -5.5, 0);
 const DAMPING = 0.993;
 const TIMESTEP = 0.009;
 const SUB_STEPS = 4;
 const CONSTRAINT_ITERS = 5;
-const BEND_COMPLIANCE = 0.4;
-const INFLUENCE_RADIUS = 5;
-const INFLUENCE_FALLOFF = 0.6;
+const BEND_COMPLIANCE = 0.35;
+const INFLUENCE_RADIUS = 1;
+const INFLUENCE_FALLOFF = 1.2;
 
 const STRUCT_REST = SPACING;
 const SHEAR_REST = SPACING * Math.SQRT2;
 const BEND_REST = SPACING * 2;
-
-const PAPER_W = (COLS - 1) * SPACING;
-const PAPER_H = (ROWS - 1) * SPACING;
 
 function idx(c: number, r: number) {
   return r * COLS + c;
@@ -91,18 +88,168 @@ const fragShader = `
     return v;
   }
 
+  float charBlock(vec2 p, float seed) {
+    float h = hash(vec2(seed, seed * 1.731));
+    if (h < 0.15) return 0.0;
+
+    vec2 inner = fract(p);
+    float cx = inner.x;
+    float cy = inner.y;
+
+    float v = 0.0;
+    float r1 = hash(vec2(seed * 0.37, seed * 2.19));
+    float r2 = hash(vec2(seed * 1.53, seed * 0.81));
+    float r3 = hash(vec2(seed * 2.71, seed * 1.17));
+
+    if (r1 < 0.25) {
+      v += step(0.2, cx) * step(cx, 0.8) * step(0.7, cy) * step(cy, 0.85);
+      v += step(0.2, cx) * step(cx, 0.35) * step(0.2, cy) * step(cy, 0.85);
+      v += step(0.2, cx) * step(cx, 0.8) * step(0.2, cy) * step(cy, 0.35);
+    } else if (r1 < 0.5) {
+      v += step(0.2, cx) * step(cx, 0.35) * step(0.15, cy) * step(cy, 0.85);
+      v += step(0.2, cx) * step(cx, 0.8) * step(0.45, cy) * step(cy, 0.6);
+      v += step(0.65, cx) * step(cx, 0.8) * step(0.15, cy) * step(cy, 0.6);
+    } else if (r1 < 0.75) {
+      float d = length(vec2(cx - 0.5, cy - 0.5) * vec2(1.0, 1.4));
+      v += step(0.2, d) * step(d, 0.35);
+    } else {
+      v += step(0.2, cx) * step(cx, 0.8) * step(0.7, cy) * step(cy, 0.85);
+      v += step(0.45, cx) * step(cx, 0.6) * step(0.15, cy) * step(cy, 0.85);
+    }
+
+    if (r2 > 0.6) {
+      v += step(0.5, cx) * step(cx, 0.8) * step(0.15, cy) * step(cy, 0.3);
+    }
+    if (r3 > 0.7) {
+      v += step(0.35, cx) * step(cx, 0.65) * step(0.4, cy) * step(cy, 0.55);
+    }
+
+    return clamp(v, 0.0, 1.0);
+  }
+
   void main() {
-    vec3 base = vec3(0.97, 0.95, 0.91);
-    base += vec3(fbm(vUv * 80.0) * 0.03);
-    base += vec3(noise(vec2(vUv.x * 400.0, vUv.y * 60.0)) * 0.008);
+    vec3 base = vec3(0.96, 0.95, 0.93);
+    base += vec3(fbm(vUv * 60.0) * 0.02);
+    base += vec3(noise(vec2(vUv.x * 300.0, vUv.y * 40.0)) * 0.006);
 
-    float ls = 1.0 / 34.0;
-    float lm = mod(vUv.y + 0.001, ls);
-    float line = 1.0 - smoothstep(0.0, 0.0012, abs(lm - ls * 0.5));
-    base = mix(base, vec3(0.72, 0.80, 0.92), line * 0.2);
+    float margin = 0.12;
+    float textAreaX = 1.0 - margin * 2.0;
+    float textAreaY = 0.88;
+    float topY = 0.92;
 
-    float mg = 1.0 - smoothstep(0.0, 0.002, abs(vUv.x - 0.11));
-    base = mix(base, vec3(0.88, 0.50, 0.50), mg * 0.3);
+    float headerY = topY;
+    float headerH = 0.04;
+    float hLocal = (vUv.y - (headerY - headerH)) / headerH;
+    float hLocalX = (vUv.x - margin) / textAreaX;
+    if (hLocal > 0.0 && hLocal < 1.0 && hLocalX > 0.15 && hLocalX < 0.85) {
+      vec2 hGrid = vec2(hLocalX * 10.0, hLocal * 2.0);
+      float hc = charBlock(hGrid, floor(hGrid.x) * 7.0 + 100.0);
+      base = mix(base, vec3(0.15), hc * 0.8);
+    }
+
+    float divY1 = headerY - headerH - 0.01;
+    float divLine1 = 1.0 - smoothstep(0.0, 0.002, abs(vUv.y - divY1));
+    float divInX1 = step(margin, vUv.x) * step(vUv.x, 1.0 - margin);
+    base = mix(base, vec3(0.7), divLine1 * 0.3 * divInX1);
+
+    float bodyStart = divY1 - 0.02;
+    float lineH = 0.022;
+    float localY = bodyStart - vUv.y;
+
+    if (localY > 0.0 && localY < lineH * 18.0) {
+      float lineIdx = floor(localY / lineH);
+      float lineLocal = fract(localY / lineH);
+
+      if (lineLocal > 0.15 && lineLocal < 0.85) {
+        float localX = (vUv.x - margin) / textAreaX;
+        if (localX > 0.0 && localX < 1.0) {
+          float charsPerLine = 24.0;
+          float lineHash = hash(vec2(lineIdx * 3.7, 42.0));
+          float lineLen = 0.3 + lineHash * 0.7;
+
+          if (lineIdx == 0.0 || lineIdx == 5.0 || lineIdx == 10.0 || lineIdx == 15.0) {
+            lineLen = 0.0;
+          }
+
+          float rightAlignStart = 0.65;
+          bool isAmountLine = (lineIdx == 2.0 || lineIdx == 3.0 || lineIdx == 4.0 ||
+                               lineIdx == 7.0 || lineIdx == 8.0 || lineIdx == 9.0 ||
+                               lineIdx == 12.0 || lineIdx == 13.0);
+
+          if (localX < lineLen) {
+            vec2 grid = vec2(localX * charsPerLine, lineLocal * 1.4);
+            float seed = floor(grid.x) + lineIdx * charsPerLine + 200.0;
+            float ch = charBlock(grid, seed);
+            base = mix(base, vec3(0.2), ch * 0.7);
+          }
+
+          if (isAmountLine) {
+            float amtLen = 0.1 + hash(vec2(lineIdx * 1.3, 99.0)) * 0.12;
+            float amtStart = 1.0 - amtLen;
+            if (localX > amtStart && localX < 1.0) {
+              float amtLocalX = (localX - amtStart) / amtLen;
+              vec2 amtGrid = vec2(amtLocalX * 6.0, lineLocal * 1.4);
+              float amtSeed = floor(amtGrid.x) + lineIdx * 10.0 + 500.0;
+              float amtCh = charBlock(amtGrid, amtSeed);
+              base = mix(base, vec3(0.2), amtCh * 0.7);
+            }
+          }
+        }
+      }
+    }
+
+    float totalY = bodyStart - lineH * 16.5;
+    float divLine2 = 1.0 - smoothstep(0.0, 0.002, abs(vUv.y - totalY));
+    float divInX2 = step(margin, vUv.x) * step(vUv.x, 1.0 - margin);
+    base = mix(base, vec3(0.5), divLine2 * 0.4 * divInX2);
+
+    float totalTextY = totalY - 0.01;
+    float totalLocal = totalTextY - vUv.y;
+    if (totalLocal > 0.0 && totalLocal < lineH * 2.0) {
+      float tLineIdx = floor(totalLocal / lineH);
+      float tLineLocal = fract(totalLocal / lineH);
+      if (tLineLocal > 0.15 && tLineLocal < 0.85) {
+        float localX = (vUv.x - margin) / textAreaX;
+        if (localX > 0.0 && localX < 0.3) {
+          vec2 grid = vec2(localX * 20.0, tLineLocal * 1.4);
+          float seed = floor(grid.x) + tLineIdx * 30.0 + 800.0;
+          float ch = charBlock(grid, seed);
+          float weight = tLineIdx == 0.0 ? 0.85 : 0.65;
+          base = mix(base, vec3(0.15), ch * weight);
+        }
+        if (localX > 0.7 && localX < 1.0) {
+          float amtLocalX = (localX - 0.7) / 0.3;
+          vec2 grid = vec2(amtLocalX * 8.0, tLineLocal * 1.4);
+          float seed = floor(grid.x) + tLineIdx * 20.0 + 900.0;
+          float ch = charBlock(grid, seed);
+          float weight = tLineIdx == 0.0 ? 0.85 : 0.65;
+          base = mix(base, vec3(0.15), ch * weight);
+        }
+      }
+    }
+
+    float footerY = totalTextY - lineH * 3.5;
+    float footerLocal = footerY - vUv.y;
+    if (footerLocal > 0.0 && footerLocal < lineH * 2.0) {
+      float fLineLocal = fract(footerLocal / lineH);
+      if (fLineLocal > 0.2 && fLineLocal < 0.8) {
+        float localX = (vUv.x - margin) / textAreaX;
+        float centered = abs(localX - 0.5);
+        if (centered < 0.25) {
+          float cLocalX = (localX - 0.25) / 0.5;
+          vec2 grid = vec2(cLocalX * 12.0, fLineLocal * 1.4);
+          float seed = floor(grid.x) + 1200.0 + floor(footerLocal / lineH) * 50.0;
+          float ch = charBlock(grid, seed);
+          base = mix(base, vec3(0.45), ch * 0.5);
+        }
+      }
+    }
+
+    float dashes = step(margin * 0.5, vUv.x) * step(vUv.x, 1.0 - margin * 0.5);
+    float dashY = footerY - lineH * 0.5;
+    float dashLine = 1.0 - smoothstep(0.0, 0.001, abs(vUv.y - dashY));
+    float dashPattern = step(0.5, fract(vUv.x * 40.0));
+    base = mix(base, vec3(0.7), dashLine * dashPattern * 0.3 * dashes);
 
     vec3 n = normalize(vNormal);
     vec3 v = normalize(cameraPosition - vWorldPos);
@@ -112,17 +259,17 @@ const fragShader = `
     float d1 = max(dot(n, l1), 0.0);
     float d2 = max(dot(n, l2), 0.0);
     float wrap = max(dot(n, l1) * 0.5 + 0.5, 0.0);
-    float lit = 0.32 + d1 * 0.42 + d2 * 0.14 + wrap * 0.12;
+    float lit = 0.35 + d1 * 0.40 + d2 * 0.12 + wrap * 0.13;
 
-    float spec = pow(max(dot(n, normalize(l1 + v)), 0.0), 80.0) * 0.06;
-    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.07;
-    float back = mix(1.0, 0.7, step(dot(n, v), 0.0));
+    float spec = pow(max(dot(n, normalize(l1 + v)), 0.0), 60.0) * 0.04;
+    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.05;
+    float back = mix(1.0, 0.75, step(dot(n, v), 0.0));
 
     vec3 col = base * lit * back + vec3(spec + fres);
 
-    float ex = smoothstep(0.0, 0.008, vUv.x) * smoothstep(0.0, 0.008, 1.0 - vUv.x);
-    float ey = smoothstep(0.0, 0.005, vUv.y) * smoothstep(0.0, 0.005, 1.0 - vUv.y);
-    col *= 1.0 - (1.0 - ex * ey) * 0.1;
+    float ex = smoothstep(0.0, 0.006, vUv.x) * smoothstep(0.0, 0.006, 1.0 - vUv.x);
+    float ey = smoothstep(0.0, 0.004, vUv.y) * smoothstep(0.0, 0.004, 1.0 - vUv.y);
+    col *= 1.0 - (1.0 - ex * ey) * 0.08;
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -445,8 +592,8 @@ function SceneSetup() {
   const { camera } = useThree();
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.position.set(0, 0.1, 3.2);
-      camera.lookAt(0, -0.1, 0);
+      camera.position.set(0, 0.1, 3.8);
+      camera.lookAt(0, -0.2, 0);
     }
   }, [camera]);
   return null;
@@ -481,7 +628,7 @@ export const PaperRollDemo = () => {
         </Canvas>
       </div>
       <p className="text-xs text-quaternary pb-4 opacity-60">
-        Grab and drag the paper
+        Grab and drag the receipt
       </p>
     </div>
   );
