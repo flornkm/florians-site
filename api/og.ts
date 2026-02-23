@@ -1,11 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
-import { promises as fsp } from "node:fs";
 import path from "node:path";
+import * as opentype from "opentype.js";
 import { jsx } from "react/jsx-runtime";
 import rough from "roughjs";
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const opentype = require("opentype.js") as typeof import("opentype.js");
 
 const ROUGH_OPTS = {
   stroke: "black",
@@ -88,7 +86,10 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
     const ellipseDrawable = gen.ellipse(cx, cy, rx * 2, ry * 2, { ...ROUGH_OPTS, seed: 42 });
     const ellipsePaths = gen
       .toPaths(ellipseDrawable)
-      .map((p) => `<path d="${p.d}" stroke="${p.stroke}" stroke-width="${p.strokeWidth}" fill="none" stroke-linecap="round" />`)
+      .map(
+        (p) =>
+          `<path d="${p.d}" stroke="${p.stroke}" stroke-width="${p.strokeWidth}" fill="none" stroke-linecap="round" />`,
+      )
       .join("");
 
     // Build rough text paths — each line centered
@@ -105,7 +106,10 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
         .toPaths(drawable)
         .map((p) => {
           const fillAttr = p.fill && p.fill !== "none" ? ` fill="${p.fill}"` : ` fill="none"`;
-          const strokeAttr = p.stroke && p.stroke !== "none" ? ` stroke="${p.stroke}" stroke-width="${p.strokeWidth}"` : ` stroke="none"`;
+          const strokeAttr =
+            p.stroke && p.stroke !== "none"
+              ? ` stroke="${p.stroke}" stroke-width="${p.strokeWidth}"`
+              : ` stroke="none"`;
           return `<path d="${p.d}"${strokeAttr}${fillAttr} stroke-linecap="round" />`;
         })
         .join("");
@@ -153,10 +157,4 @@ function clampInt(value: string | null, fallback: number, min: number, max: numb
   const n = value ? Number.parseInt(value, 10) : Number.NaN;
   if (!Number.isFinite(n)) return fallback;
   return Math.max(min, Math.min(max, n));
-}
-
-async function readPublicFileAsArrayBuffer(relPath: string): Promise<ArrayBuffer> {
-  const fsPath = path.join(process.cwd(), "public", relPath);
-  const buf = await fsp.readFile(fsPath);
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
 }
