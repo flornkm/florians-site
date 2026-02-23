@@ -2,17 +2,18 @@ import { useEffect, useRef, useMemo, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const COLS = 22;
-const ROWS = 52;
-const SPACING = 0.055;
-const GRAVITY = new THREE.Vector3(0, -5.5, 0);
-const DAMPING = 0.993;
-const TIMESTEP = 0.009;
+const COLS = 18;
+const ROWS = 42;
+const SPACING = 0.045;
+const GRAVITY = new THREE.Vector3(0, -4.0, 0);
+const DAMPING = 0.988;
+const TIMESTEP = 0.008;
 const SUB_STEPS = 4;
-const CONSTRAINT_ITERS = 5;
-const BEND_COMPLIANCE = 0.35;
+const CONSTRAINT_ITERS = 8;
+const BEND_COMPLIANCE = 0.15;
 const INFLUENCE_RADIUS = 1;
-const INFLUENCE_FALLOFF = 1.2;
+const INFLUENCE_FALLOFF = 1.5;
+const MAX_DISPLACEMENT = 0.35;
 
 const STRUCT_REST = SPACING;
 const SHEAR_REST = SPACING * Math.SQRT2;
@@ -244,6 +245,7 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
     const count = COLS * ROWS;
     const pos = new Float32Array(count * 3);
     const old = new Float32Array(count * 3);
+    const rest = new Float32Array(count * 3);
     const pinned = new Uint8Array(count);
 
     for (let r = 0; r < ROWS; r++) {
@@ -257,16 +259,19 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
         old[i * 3] = x;
         old[i * 3 + 1] = y;
         old[i * 3 + 2] = 0;
+        rest[i * 3] = x;
+        rest[i * 3 + 1] = y;
+        rest[i * 3 + 2] = 0;
         if (r === 0) pinned[i] = 1;
       }
     }
 
     const constraints = buildConstraints();
-    return { pos, old, pinned, constraints, count };
+    return { pos, old, rest, pinned, constraints, count };
   }, []);
 
   useFrame(() => {
-    const { pos, old, pinned, constraints, count } = sim;
+    const { pos, old, rest, pinned, constraints, count } = sim;
 
     const grabbedSet = new Set<number>();
     if (grab.current.active) {
@@ -293,25 +298,49 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
         pos[ix] += vx + GRAVITY.x * TIMESTEP * TIMESTEP;
         pos[iy] += vy + GRAVITY.y * TIMESTEP * TIMESTEP;
         pos[iz] += vz + GRAVITY.z * TIMESTEP * TIMESTEP;
+
+        const dx = pos[ix] - rest[ix];
+        const dy = pos[iy] - rest[iy];
+        const dz = pos[iz] - rest[iz];
+        const disp = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (disp > MAX_DISPLACEMENT) {
+          const scale = MAX_DISPLACEMENT / disp;
+          pos[ix] = rest[ix] + dx * scale;
+          pos[iy] = rest[iy] + dy * scale;
+          pos[iz] = rest[iz] + dz * scale;
+        }
       }
 
       if (grab.current.active && grab.current.idx >= 0) {
         const gi = grab.current.idx * 3;
         const gp = grab.current.point;
-        old[gi] = gp.x;
-        old[gi + 1] = gp.y;
-        old[gi + 2] = gp.z;
-        pos[gi] = gp.x;
-        pos[gi + 1] = gp.y;
-        pos[gi + 2] = gp.z;
 
-        const gc = grab.current.idx % COLS;
-        const gr = Math.floor(grab.current.idx / COLS);
-        const origGx = (gc - (COLS - 1) / 2) * SPACING;
-        const origGy = ((ROWS - 1) / 2 - gr) * SPACING;
-        const deltaX = gp.x - origGx;
-        const deltaY = gp.y - origGy;
-        const deltaZ = gp.z;
+        const gdx = gp.x - rest[gi];
+        const gdy = gp.y - rest[gi + 1];
+        const gdz = gp.z - rest[gi + 2];
+        const gDisp = Math.sqrt(gdx * gdx + gdy * gdy + gdz * gdz);
+        let clampedX = gp.x, clampedY = gp.y, clampedZ = gp.z;
+        if (gDisp > MAX_DISPLACEMENT) {
+          const gScale = MAX_DISPLACEMENT / gDisp;
+          clampedX = rest[gi] + gdx * gScale;
+          clampedY = rest[gi + 1] + gdy * gScale;
+          clampedZ = rest[gi + 2] + gdz * gScale;
+        }
+
+        old[gi] = clampedX;
+        old[gi + 1] = clampedY;
+        old[gi + 2] = clampedZ;
+        pos[gi] = clampedX;
+        pos[gi + 1] = clampedY;
+        pos[gi + 2] = clampedZ;
+
+        const cc = grab.current.idx % COLS;
+        const cr = Math.floor(grab.current.idx / COLS);
+        const origGx = (cc - (COLS - 1) / 2) * SPACING;
+        const origGy = ((ROWS - 1) / 2 - cr) * SPACING;
+        const deltaX = clampedX - origGx;
+        const deltaY = clampedY - origGy;
+        const deltaZ = clampedZ;
 
         for (const inf of grab.current.influenced) {
           if (pinned[inf.idx]) continue;
@@ -551,8 +580,8 @@ function SceneSetup() {
   const { camera } = useThree();
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.position.set(0, 0.1, 3.8);
-      camera.lookAt(0, -0.2, 0);
+      camera.position.set(0, 0.05, 2.8);
+      camera.lookAt(0, -0.15, 0);
     }
   }, [camera]);
   return null;
