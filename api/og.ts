@@ -1,8 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { ImageResponse } from "@vercel/og";
 import fs from "node:fs";
 import path from "node:path";
-import { jsx, jsxs } from "react/jsx-runtime";
 import rough from "roughjs";
 
 const OPTS = {
@@ -15,18 +13,13 @@ const OPTS = {
 };
 const FONT_SIZE = 80;
 
-const fontData = fs.readFileSync(path.join(process.cwd(), "public/fonts/commit-mono/commit-mono-regular.otf"));
-const FONT_ARRAY_BUFFER = fontData.buffer.slice(
-  fontData.byteOffset,
-  fontData.byteOffset + fontData.byteLength,
-) as ArrayBuffer;
+const fontBase64 = fs
+  .readFileSync(path.join(process.cwd(), "public/fonts/commit-mono/commit-mono-regular.otf"))
+  .toString("base64");
 
-export default async function handler(req: Request | VercelRequest, res?: VercelResponse): Promise<Response | void> {
+export default function handler(req: VercelRequest, res: VercelResponse): void {
   try {
-    const isEdge = req instanceof Request;
-    const url = isEdge
-      ? new URL((req as Request).url)
-      : new URL(`http://localhost${typeof (req as VercelRequest).url === "string" ? (req as VercelRequest).url : "/"}`);
+    const url = new URL(`http://localhost${typeof req.url === "string" ? req.url : "/"}`);
     const { searchParams } = url;
 
     const fullTitle = (searchParams.get("title") || "Florian").slice(0, 120);
@@ -50,49 +43,27 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
       )
       .join("");
 
-    const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="white"/>${ellipsePaths}</svg>`;
-    const svgDataUrl = `data:image/svg+xml;base64,${Buffer.from(svgContent).toString("base64")}`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'CommitMono';
+        src: url('data:font/otf;base64,${fontBase64}') format('opentype');
+      }
+    </style>
+  </defs>
+  <rect width="${width}" height="${height}" fill="white"/>
+  ${ellipsePaths}
+  <text x="${cx}" y="${cy + FONT_SIZE * 0.35}" text-anchor="middle" font-family="CommitMono, monospace" font-size="${FONT_SIZE}" fill="black">${escapeXml(title)}</text>
+</svg>`;
 
-    const imageResponse = new ImageResponse(
-      jsxs("div", {
-        style: {
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-        },
-        children: [
-          jsx("img", { src: svgDataUrl, width, height, style: { position: "absolute", inset: 0 } }),
-          jsx("span", {
-            style: {
-              fontFamily: "CommitMono",
-              fontSize: FONT_SIZE,
-              fontWeight: 400,
-              color: "black",
-              position: "relative",
-            },
-            children: title,
-          }),
-        ],
-      }),
-      { width, height, fonts: [{ name: "CommitMono", data: FONT_ARRAY_BUFFER, weight: 400, style: "normal" }] },
-    );
-
-    if (!isEdge && res) {
-      const arrayBuf = await imageResponse.arrayBuffer();
-      const buf = Buffer.from(arrayBuf);
-      res.setHeader("Content-Type", "image/png");
-      res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
-      res.status(200).send(buf);
-      return;
-    }
-    return imageResponse;
+    res.setHeader("Content-Type", "image/svg+xml");
+    res.setHeader("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
+    res.status(200).send(svg);
   } catch (e: unknown) {
     if (e instanceof Error) console.log(e.message);
     else console.log(String(e));
-    return new Response(`Failed to generate the image`, { status: 500 });
+    res.status(500).send("Failed to generate the image");
   }
 }
 
@@ -100,4 +71,8 @@ function clampInt(value: string | null, fallback: number, min: number, max: numb
   const n = value ? Number.parseInt(value, 10) : Number.NaN;
   if (!Number.isFinite(n)) return fallback;
   return Math.max(min, Math.min(max, n));
+}
+
+function escapeXml(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
