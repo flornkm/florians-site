@@ -2,14 +2,17 @@ import { useEffect, useRef, useMemo, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const COLS = 32;
-const ROWS = 44;
-const SPACING = 0.08;
-const GRAVITY = new THREE.Vector3(0, -4.0, 0);
-const DAMPING = 0.997;
-const TIMESTEP = 0.008;
-const SUB_STEPS = 5;
-const CONSTRAINT_ITERS = 8;
+const COLS = 28;
+const ROWS = 36;
+const SPACING = 0.065;
+const GRAVITY = new THREE.Vector3(0, -5.5, 0);
+const DAMPING = 0.993;
+const TIMESTEP = 0.009;
+const SUB_STEPS = 4;
+const CONSTRAINT_ITERS = 5;
+const BEND_COMPLIANCE = 0.4;
+const INFLUENCE_RADIUS = 5;
+const INFLUENCE_FALLOFF = 0.6;
 
 const STRUCT_REST = SPACING;
 const SHEAR_REST = SPACING * Math.SQRT2;
@@ -26,20 +29,21 @@ interface Constraint {
   i: number;
   j: number;
   rest: number;
+  bend: boolean;
 }
 
 function buildConstraints(): Constraint[] {
   const out: Constraint[] = [];
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
-      if (c < COLS - 1) out.push({ i: idx(c, r), j: idx(c + 1, r), rest: STRUCT_REST });
-      if (r < ROWS - 1) out.push({ i: idx(c, r), j: idx(c, r + 1), rest: STRUCT_REST });
+      if (c < COLS - 1) out.push({ i: idx(c, r), j: idx(c + 1, r), rest: STRUCT_REST, bend: false });
+      if (r < ROWS - 1) out.push({ i: idx(c, r), j: idx(c, r + 1), rest: STRUCT_REST, bend: false });
       if (c < COLS - 1 && r < ROWS - 1) {
-        out.push({ i: idx(c, r), j: idx(c + 1, r + 1), rest: SHEAR_REST });
-        out.push({ i: idx(c + 1, r), j: idx(c, r + 1), rest: SHEAR_REST });
+        out.push({ i: idx(c, r), j: idx(c + 1, r + 1), rest: SHEAR_REST, bend: false });
+        out.push({ i: idx(c + 1, r), j: idx(c, r + 1), rest: SHEAR_REST, bend: false });
       }
-      if (c < COLS - 2) out.push({ i: idx(c, r), j: idx(c + 2, r), rest: BEND_REST });
-      if (r < ROWS - 2) out.push({ i: idx(c, r), j: idx(c, r + 2), rest: BEND_REST });
+      if (c < COLS - 2) out.push({ i: idx(c, r), j: idx(c + 2, r), rest: BEND_REST, bend: true });
+      if (r < ROWS - 2) out.push({ i: idx(c, r), j: idx(c, r + 2), rest: BEND_REST, bend: true });
     }
   }
   return out;
@@ -129,6 +133,7 @@ interface GrabInfo {
   idx: number;
   plane: THREE.Plane;
   point: THREE.Vector3;
+  influenced: { idx: number; weight: number }[];
 }
 
 function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
@@ -159,15 +164,21 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
     return { pos, old, pinned, constraints, count };
   }, []);
 
-  const diff = useMemo(() => new THREE.Vector3(), []);
-
   useFrame(() => {
     const { pos, old, pinned, constraints, count } = sim;
+
+    const grabbedSet = new Set<number>();
+    if (grab.current.active) {
+      grabbedSet.add(grab.current.idx);
+      for (const inf of grab.current.influenced) {
+        grabbedSet.add(inf.idx);
+      }
+    }
 
     for (let s = 0; s < SUB_STEPS; s++) {
       for (let i = 0; i < count; i++) {
         if (pinned[i]) continue;
-        if (grab.current.active && grab.current.idx === i) continue;
+        if (grabbedSet.has(i)) continue;
 
         const ix = i * 3, iy = ix + 1, iz = ix + 2;
         const vx = (pos[ix] - old[ix]) * DAMPING;
@@ -192,6 +203,33 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
         pos[gi] = gp.x;
         pos[gi + 1] = gp.y;
         pos[gi + 2] = gp.z;
+
+        const gc = grab.current.idx % COLS;
+        const gr = Math.floor(grab.current.idx / COLS);
+        const origGx = (gc - (COLS - 1) / 2) * SPACING;
+        const origGy = ((ROWS - 1) / 2 - gr) * SPACING;
+        const deltaX = gp.x - origGx;
+        const deltaY = gp.y - origGy;
+        const deltaZ = gp.z;
+
+        for (const inf of grab.current.influenced) {
+          if (pinned[inf.idx]) continue;
+          const ii = inf.idx * 3;
+          const ic = inf.idx % COLS;
+          const ir = Math.floor(inf.idx / COLS);
+          const origX = (ic - (COLS - 1) / 2) * SPACING;
+          const origY = ((ROWS - 1) / 2 - ir) * SPACING;
+          const targetX = origX + deltaX * inf.weight;
+          const targetY = origY + deltaY * inf.weight;
+          const targetZ = deltaZ * inf.weight;
+          const blend = inf.weight * 0.85;
+          pos[ii] = pos[ii] + (targetX - pos[ii]) * blend;
+          pos[ii + 1] = pos[ii + 1] + (targetY - pos[ii + 1]) * blend;
+          pos[ii + 2] = pos[ii + 2] + (targetZ - pos[ii + 2]) * blend;
+          old[ii] = pos[ii];
+          old[ii + 1] = pos[ii + 1];
+          old[ii + 2] = pos[ii + 2];
+        }
       }
 
       for (let iter = 0; iter < CONSTRAINT_ITERS; iter++) {
@@ -203,13 +241,15 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
           const dz = pos[bi + 2] - pos[ai + 2];
           const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
           if (dist < 1e-6) continue;
-          const diff = (dist - cn.rest) / dist * 0.5;
+
+          const stiffness = cn.bend ? (1 - BEND_COMPLIANCE) : 1;
+          const diff = (dist - cn.rest) / dist * 0.5 * stiffness;
           const ox = dx * diff;
           const oy = dy * diff;
           const oz = dz * diff;
 
-          const aPinned = pinned[cn.i] || (grab.current.active && grab.current.idx === cn.i);
-          const bPinned = pinned[cn.j] || (grab.current.active && grab.current.idx === cn.j);
+          const aPinned = pinned[cn.i] || grabbedSet.has(cn.i);
+          const bPinned = pinned[cn.j] || grabbedSet.has(cn.j);
 
           if (aPinned && bPinned) continue;
           if (aPinned) {
@@ -278,6 +318,28 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   );
 }
 
+function computeInfluenced(centerIdx: number): { idx: number; weight: number }[] {
+  const cc = centerIdx % COLS;
+  const cr = Math.floor(centerIdx / COLS);
+  const result: { idx: number; weight: number }[] = [];
+
+  for (let dr = -INFLUENCE_RADIUS; dr <= INFLUENCE_RADIUS; dr++) {
+    for (let dc = -INFLUENCE_RADIUS; dc <= INFLUENCE_RADIUS; dc++) {
+      if (dr === 0 && dc === 0) continue;
+      const nr = cr + dr;
+      const nc = cc + dc;
+      if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS) continue;
+      if (nr === 0) continue;
+      const dist = Math.sqrt(dr * dr + dc * dc);
+      if (dist > INFLUENCE_RADIUS) continue;
+      const weight = Math.pow(1 - dist / (INFLUENCE_RADIUS + 1), INFLUENCE_FALLOFF);
+      result.push({ idx: idx(nc, nr), weight });
+    }
+  }
+
+  return result;
+}
+
 function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   const { camera, gl, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster());
@@ -340,6 +402,7 @@ function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
       grab.current.active = true;
       grab.current.idx = pi;
       grab.current.point.copy(hit.point);
+      grab.current.influenced = computeInfluenced(pi);
       grab.current.plane.setFromNormalAndCoplanarPoint(
         new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion),
         hit.point
@@ -360,6 +423,7 @@ function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
       canvas.releasePointerCapture(e.pointerId);
       grab.current.active = false;
       grab.current.idx = -1;
+      grab.current.influenced = [];
     };
 
     canvas.addEventListener("pointerdown", onDown);
@@ -381,8 +445,8 @@ function SceneSetup() {
   const { camera } = useThree();
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.position.set(0, 0.2, 4.5);
-      camera.lookAt(0, -0.2, 0);
+      camera.position.set(0, 0.1, 3.2);
+      camera.lookAt(0, -0.1, 0);
     }
   }, [camera]);
   return null;
@@ -394,6 +458,7 @@ export const PaperRollDemo = () => {
     idx: -1,
     plane: new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
     point: new THREE.Vector3(),
+    influenced: [],
   });
 
   return (
