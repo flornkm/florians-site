@@ -2,8 +2,10 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
 import { promises as fsp } from "node:fs";
 import path from "node:path";
-import { jsx, jsxs } from "react/jsx-runtime";
+import { jsx } from "react/jsx-runtime";
 import rough from "roughjs";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const opentype = require("opentype.js") as typeof import("opentype.js");
 
 const ROUGH_OPTS = {
   stroke: "black",
@@ -11,19 +13,36 @@ const ROUGH_OPTS = {
   roughness: 2,
   bowing: 1.5,
   maxRandomnessOffset: 1.5,
-  fill: "transparent",
+  fill: "none" as const,
 };
 
-function buildRoughCirclePaths(cx: number, cy: number, rx: number, ry: number, seed: number): string {
-  const gen = rough.generator();
-  const drawable = gen.ellipse(cx, cy, rx * 2, ry * 2, { ...ROUGH_OPTS, seed });
-  return gen
-    .toPaths(drawable)
-    .map(
-      (p) =>
-        `<path d="${p.d}" stroke="${p.stroke}" stroke-width="${p.strokeWidth}" fill="none" stroke-linecap="round" />`,
-    )
-    .join("");
+const TEXT_ROUGH_OPTS = {
+  stroke: "black",
+  strokeWidth: 1.2,
+  roughness: 1.2,
+  bowing: 0.8,
+  maxRandomnessOffset: 0.8,
+  fill: "black" as const,
+  fillStyle: "solid" as const,
+  fillWeight: 1,
+};
+
+/** Word-wrap title into lines no wider than maxWidth px at given fontSize. */
+function wrapLines(font: opentype.Font, title: string, fontSize: number, maxWidth: number): string[] {
+  const words = title.split(" ");
+  const lines: string[] = [];
+  let current = "";
+  for (const word of words) {
+    const test = current ? `${current} ${word}` : word;
+    if (font.getAdvanceWidth(test, fontSize) <= maxWidth) {
+      current = test;
+    } else {
+      if (current) lines.push(current);
+      current = word;
+    }
+  }
+  if (current) lines.push(current);
+  return lines;
 }
 
 export default async function handler(req: Request | VercelRequest, res?: VercelResponse): Promise<Response | void> {
@@ -38,104 +57,82 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
     const width = clampInt(searchParams.get("width"), 1200, 100, 2000);
     const height = clampInt(searchParams.get("height"), 630, 100, 2000);
 
-    const pretendardMedium = await readPublicFileAsArrayBuffer("fonts/pretendard/Pretendard-Medium.woff");
-    const background = await readPublicFileAsDataUrl("images/og-background.png", "image/png");
+    // Load font for path generation
+    const fontPath = path.join(process.cwd(), "public/fonts/pretendard/PretendardVariable.ttf");
+    const font = opentype.loadSync(fontPath);
 
-    // Estimate circle size from title length — longer titles get a bigger ellipse.
-    // Base font size for the title inside the circle.
-    const maxCharsPerLine = 14;
-    const lines = Math.ceil(title.length / maxCharsPerLine);
-    const fontSize = Math.max(40, Math.min(72, Math.floor(width * 0.06)));
-    const lineHeight = fontSize * 1.2;
-    // rx/ry sized to comfortably wrap title text
-    const ry = Math.max(160, lines * lineHeight * 0.75 + 80);
-    const rx = Math.max(220, Math.min(width * 0.38, ry * 1.4));
+    const fontSize = 80;
+    const lineHeightPx = fontSize * 1.25;
+    const maxLineWidth = width * 0.4; // max text width inside circle
 
-    const cx = rx + 24;
+    const lines = wrapLines(font, title, fontSize, maxLineWidth);
+    const scale = fontSize / font.unitsPerEm;
+    const ascender = font.ascender * scale;
+    const descender = font.descender * scale;
+    const lineH = ascender - descender;
+
+    // Total text block height
+    const textBlockH = lines.length * lineHeightPx - (lineHeightPx - lineH);
+
+    // Circle sized to contain the text with padding
+    const textMaxW = Math.max(...lines.map((l) => font.getAdvanceWidth(l, fontSize)));
+    const rx = textMaxW / 2 + 80;
+    const ry = textBlockH / 2 + 80;
+
+    const cx = width / 2;
     const cy = height / 2;
-    const svgW = cx + rx + 30;
-    const svgH = height;
 
-    const roughPaths = buildRoughCirclePaths(cx, cy, rx, ry, 42);
+    const gen = rough.generator();
+
+    // Build rough ellipse paths
+    const ellipseDrawable = gen.ellipse(cx, cy, rx * 2, ry * 2, { ...ROUGH_OPTS, seed: 42 });
+    const ellipsePaths = gen
+      .toPaths(ellipseDrawable)
+      .map((p) => `<path d="${p.d}" stroke="${p.stroke}" stroke-width="${p.strokeWidth}" fill="none" stroke-linecap="round" />`)
+      .join("");
+
+    // Build rough text paths — each line centered
+    const textTopY = cy - textBlockH / 2 + ascender;
+    let textPaths = "";
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const lineW = font.getAdvanceWidth(line, fontSize);
+      const x = cx - lineW / 2;
+      const y = textTopY + i * lineHeightPx;
+      const pathData = font.getPath(line, x, y, fontSize).toPathData(2);
+      const drawable = gen.path(pathData, { ...TEXT_ROUGH_OPTS, seed: 100 + i });
+      textPaths += gen
+        .toPaths(drawable)
+        .map((p) => {
+          const fillAttr = p.fill && p.fill !== "none" ? ` fill="${p.fill}"` : ` fill="none"`;
+          const strokeAttr = p.stroke && p.stroke !== "none" ? ` stroke="${p.stroke}" stroke-width="${p.strokeWidth}"` : ` stroke="none"`;
+          return `<path d="${p.d}"${strokeAttr}${fillAttr} stroke-linecap="round" />`;
+        })
+        .join("");
+    }
+
+    const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${ellipsePaths}${textPaths}</svg>`;
+    const svgDataUrl = `data:image/svg+xml;base64,${Buffer.from(svgContent).toString("base64")}`;
 
     const imageResponse = new ImageResponse(
-      jsxs("div", {
-        tw: "bg-white flex w-full h-full text-black",
+      jsx("div", {
         style: {
-          fontFamily: "Pretendard, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-          position: "relative",
+          width: "100%",
+          height: "100%",
+          background: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         },
-        children: [
-          jsx("img", {
-            tw: "absolute inset-0",
-            src: background,
-            style: { width: "100%", height: "100%", objectFit: "cover" },
-          }),
-          // Rough circle with title
-          jsx("div", {
-            style: {
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: svgW,
-              height: svgH,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-            children: jsx("img", {
-              src: `data:image/svg+xml;base64,${Buffer.from(
-                `<svg xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH}" viewBox="0 0 ${svgW} ${svgH}">${roughPaths}</svg>`,
-              ).toString("base64")}`,
-              width: svgW,
-              height: svgH,
-            }),
-          }),
-          // Title text centered in circle
-          jsx("div", {
-            style: {
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: cx * 2,
-              height: svgH,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0 32px",
-            },
-            children: jsx("p", {
-              style: {
-                fontSize,
-                textAlign: "center",
-                lineHeight: 1.2,
-                maxWidth: rx * 1.5,
-                margin: 0,
-                wordBreak: "break-word",
-              },
-              children: title,
-            }),
-          }),
-          // Site name — right side
-          jsx("div", {
-            style: {
-              position: "absolute",
-              right: 48,
-              bottom: 48,
-              display: "flex",
-              fontSize: 32,
-              color: "#737373",
-            },
-            children: "Florians Personal Site",
-          }),
-        ],
+        children: jsx("img", {
+          src: svgDataUrl,
+          width,
+          height,
+        }),
       }),
-      {
-        width,
-        height,
-        fonts: [{ name: "Pretendard", data: pretendardMedium, weight: 500, style: "normal" }],
-      },
+      { width, height },
     );
+
     if (!isEdge && res) {
       const arrayBuf = await imageResponse.arrayBuffer();
       const buf = Buffer.from(arrayBuf);
@@ -148,9 +145,7 @@ export default async function handler(req: Request | VercelRequest, res?: Vercel
   } catch (e: unknown) {
     if (e instanceof Error) console.log(e.message);
     else console.log(String(e));
-    return new Response(`Failed to generate the image`, {
-      status: 500,
-    });
+    return new Response(`Failed to generate the image`, { status: 500 });
   }
 }
 
@@ -164,10 +159,4 @@ async function readPublicFileAsArrayBuffer(relPath: string): Promise<ArrayBuffer
   const fsPath = path.join(process.cwd(), "public", relPath);
   const buf = await fsp.readFile(fsPath);
   return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
-}
-
-async function readPublicFileAsDataUrl(relPath: string, mime: string): Promise<string> {
-  const fsPath = path.join(process.cwd(), "public", relPath);
-  const buf = await fsp.readFile(fsPath);
-  return `data:${mime};base64,${buf.toString("base64")}`;
 }
