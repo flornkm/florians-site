@@ -46,6 +46,140 @@ function buildConstraints(): Constraint[] {
   return out;
 }
 
+function createReceiptTexture(): THREE.CanvasTexture {
+  const w = 512;
+  const h = 1024;
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d")!;
+
+  ctx.fillStyle = "#fafafa";
+  ctx.fillRect(0, 0, w, h);
+
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x += 4) {
+      const noise = (Math.random() - 0.5) * 6;
+      const r = 250 + noise;
+      const g = 250 + noise;
+      const b = 249 + noise;
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.fillRect(x, y, 4, 1);
+    }
+  }
+
+  const marginX = 48;
+  let curY = 60;
+
+  const drawText = (text: string, size: number, color: string, align: "left" | "center" | "right" = "left", bold = false) => {
+    ctx.font = `${bold ? "bold " : ""}${size}px "Courier New", "Courier", monospace`;
+    ctx.fillStyle = color;
+    ctx.textBaseline = "top";
+    const textW = w - marginX * 2;
+    if (align === "center") {
+      ctx.textAlign = "center";
+      ctx.fillText(text, w / 2, curY);
+    } else if (align === "right") {
+      ctx.textAlign = "right";
+      ctx.fillText(text, w - marginX, curY);
+    } else {
+      ctx.textAlign = "left";
+      ctx.fillText(text, marginX, curY);
+    }
+    curY += size + 4;
+  };
+
+  const drawLine = () => {
+    ctx.strokeStyle = "#d0d0d0";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(marginX, curY);
+    ctx.lineTo(w - marginX, curY);
+    ctx.stroke();
+    curY += 12;
+  };
+
+  const drawDashedLine = () => {
+    ctx.strokeStyle = "#c0c0c0";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(marginX, curY);
+    ctx.lineTo(w - marginX, curY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    curY += 12;
+  };
+
+  const drawRow = (left: string, right: string, size: number, color: string, bold = false) => {
+    ctx.font = `${bold ? "bold " : ""}${size}px "Courier New", "Courier", monospace`;
+    ctx.fillStyle = color;
+    ctx.textBaseline = "top";
+    ctx.textAlign = "left";
+    ctx.fillText(left, marginX, curY);
+    ctx.textAlign = "right";
+    ctx.fillText(right, w - marginX, curY);
+    curY += size + 4;
+  };
+
+  const addSpace = (px: number) => { curY += px; };
+
+  drawText("THE PAPER SHOP", 22, "#222", "center", true);
+  addSpace(2);
+  drawText("42 Mesh Lane, WebGL City", 13, "#666", "center");
+  drawText("Tel: (555) 042-1337", 13, "#666", "center");
+  addSpace(10);
+
+  drawLine();
+  addSpace(4);
+
+  drawText("Date: 2026-02-23  14:17", 13, "#444");
+  drawText("Order: #00382", 13, "#444");
+  addSpace(8);
+
+  drawDashedLine();
+  addSpace(4);
+
+  drawRow("Vertex Shader", "$4.20", 14, "#333");
+  addSpace(2);
+  drawRow("Fragment Shader", "$3.50", 14, "#333");
+  addSpace(2);
+  drawRow("Normal Map", "$2.80", 14, "#333");
+  addSpace(2);
+  drawRow("UV Unwrap", "$1.50", 14, "#333");
+  addSpace(2);
+  drawRow("Cloth Simulation", "$6.00", 14, "#333");
+  addSpace(8);
+
+  drawDashedLine();
+  addSpace(4);
+
+  drawRow("Subtotal", "$18.00", 14, "#444");
+  addSpace(2);
+  drawRow("Tax (8%)", "$1.44", 13, "#666");
+  addSpace(8);
+
+  drawLine();
+  addSpace(4);
+
+  drawRow("TOTAL", "$19.44", 18, "#111", true);
+  addSpace(16);
+
+  drawDashedLine();
+  addSpace(12);
+
+  drawText("Thank you for visiting!", 13, "#888", "center");
+  addSpace(4);
+  drawText("github.com/floriandwt", 12, "#aaa", "center");
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.anisotropy = 8;
+  return texture;
+}
+
 const vertShader = `
   varying vec2 vUv;
   varying vec3 vNormal;
@@ -61,195 +195,13 @@ const vertShader = `
 `;
 
 const fragShader = `
+  uniform sampler2D uReceiptTex;
   varying vec2 vUv;
   varying vec3 vNormal;
   varying vec3 vWorldPos;
 
-  float hash(vec2 p) {
-    vec3 p3 = fract(vec3(p.xyx) * 0.1031);
-    p3 += dot(p3, p3.yzx + 33.33);
-    return fract((p3.x + p3.y) * p3.z);
-  }
-
-  float noise(vec2 p) {
-    vec2 i = floor(p);
-    vec2 f = fract(p);
-    f = f * f * (3.0 - 2.0 * f);
-    return mix(
-      mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
-      mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
-      f.y
-    );
-  }
-
-  float fbm(vec2 p) {
-    float v = 0.0, a = 0.5;
-    for (int i = 0; i < 4; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
-    return v;
-  }
-
-  float charBlock(vec2 p, float seed) {
-    float h = hash(vec2(seed, seed * 1.731));
-    if (h < 0.15) return 0.0;
-
-    vec2 inner = fract(p);
-    float cx = inner.x;
-    float cy = inner.y;
-
-    float v = 0.0;
-    float r1 = hash(vec2(seed * 0.37, seed * 2.19));
-    float r2 = hash(vec2(seed * 1.53, seed * 0.81));
-    float r3 = hash(vec2(seed * 2.71, seed * 1.17));
-
-    if (r1 < 0.25) {
-      v += step(0.2, cx) * step(cx, 0.8) * step(0.7, cy) * step(cy, 0.85);
-      v += step(0.2, cx) * step(cx, 0.35) * step(0.2, cy) * step(cy, 0.85);
-      v += step(0.2, cx) * step(cx, 0.8) * step(0.2, cy) * step(cy, 0.35);
-    } else if (r1 < 0.5) {
-      v += step(0.2, cx) * step(cx, 0.35) * step(0.15, cy) * step(cy, 0.85);
-      v += step(0.2, cx) * step(cx, 0.8) * step(0.45, cy) * step(cy, 0.6);
-      v += step(0.65, cx) * step(cx, 0.8) * step(0.15, cy) * step(cy, 0.6);
-    } else if (r1 < 0.75) {
-      float d = length(vec2(cx - 0.5, cy - 0.5) * vec2(1.0, 1.4));
-      v += step(0.2, d) * step(d, 0.35);
-    } else {
-      v += step(0.2, cx) * step(cx, 0.8) * step(0.7, cy) * step(cy, 0.85);
-      v += step(0.45, cx) * step(cx, 0.6) * step(0.15, cy) * step(cy, 0.85);
-    }
-
-    if (r2 > 0.6) {
-      v += step(0.5, cx) * step(cx, 0.8) * step(0.15, cy) * step(cy, 0.3);
-    }
-    if (r3 > 0.7) {
-      v += step(0.35, cx) * step(cx, 0.65) * step(0.4, cy) * step(cy, 0.55);
-    }
-
-    return clamp(v, 0.0, 1.0);
-  }
-
   void main() {
-    vec3 base = vec3(0.96, 0.95, 0.93);
-    base += vec3(fbm(vUv * 60.0) * 0.02);
-    base += vec3(noise(vec2(vUv.x * 300.0, vUv.y * 40.0)) * 0.006);
-
-    float margin = 0.12;
-    float textAreaX = 1.0 - margin * 2.0;
-    float textAreaY = 0.88;
-    float topY = 0.92;
-
-    float headerY = topY;
-    float headerH = 0.04;
-    float hLocal = (vUv.y - (headerY - headerH)) / headerH;
-    float hLocalX = (vUv.x - margin) / textAreaX;
-    if (hLocal > 0.0 && hLocal < 1.0 && hLocalX > 0.15 && hLocalX < 0.85) {
-      vec2 hGrid = vec2(hLocalX * 10.0, hLocal * 2.0);
-      float hc = charBlock(hGrid, floor(hGrid.x) * 7.0 + 100.0);
-      base = mix(base, vec3(0.15), hc * 0.8);
-    }
-
-    float divY1 = headerY - headerH - 0.01;
-    float divLine1 = 1.0 - smoothstep(0.0, 0.002, abs(vUv.y - divY1));
-    float divInX1 = step(margin, vUv.x) * step(vUv.x, 1.0 - margin);
-    base = mix(base, vec3(0.7), divLine1 * 0.3 * divInX1);
-
-    float bodyStart = divY1 - 0.02;
-    float lineH = 0.022;
-    float localY = bodyStart - vUv.y;
-
-    if (localY > 0.0 && localY < lineH * 18.0) {
-      float lineIdx = floor(localY / lineH);
-      float lineLocal = fract(localY / lineH);
-
-      if (lineLocal > 0.15 && lineLocal < 0.85) {
-        float localX = (vUv.x - margin) / textAreaX;
-        if (localX > 0.0 && localX < 1.0) {
-          float charsPerLine = 24.0;
-          float lineHash = hash(vec2(lineIdx * 3.7, 42.0));
-          float lineLen = 0.3 + lineHash * 0.7;
-
-          if (lineIdx == 0.0 || lineIdx == 5.0 || lineIdx == 10.0 || lineIdx == 15.0) {
-            lineLen = 0.0;
-          }
-
-          float rightAlignStart = 0.65;
-          bool isAmountLine = (lineIdx == 2.0 || lineIdx == 3.0 || lineIdx == 4.0 ||
-                               lineIdx == 7.0 || lineIdx == 8.0 || lineIdx == 9.0 ||
-                               lineIdx == 12.0 || lineIdx == 13.0);
-
-          if (localX < lineLen) {
-            vec2 grid = vec2(localX * charsPerLine, lineLocal * 1.4);
-            float seed = floor(grid.x) + lineIdx * charsPerLine + 200.0;
-            float ch = charBlock(grid, seed);
-            base = mix(base, vec3(0.2), ch * 0.7);
-          }
-
-          if (isAmountLine) {
-            float amtLen = 0.1 + hash(vec2(lineIdx * 1.3, 99.0)) * 0.12;
-            float amtStart = 1.0 - amtLen;
-            if (localX > amtStart && localX < 1.0) {
-              float amtLocalX = (localX - amtStart) / amtLen;
-              vec2 amtGrid = vec2(amtLocalX * 6.0, lineLocal * 1.4);
-              float amtSeed = floor(amtGrid.x) + lineIdx * 10.0 + 500.0;
-              float amtCh = charBlock(amtGrid, amtSeed);
-              base = mix(base, vec3(0.2), amtCh * 0.7);
-            }
-          }
-        }
-      }
-    }
-
-    float totalY = bodyStart - lineH * 16.5;
-    float divLine2 = 1.0 - smoothstep(0.0, 0.002, abs(vUv.y - totalY));
-    float divInX2 = step(margin, vUv.x) * step(vUv.x, 1.0 - margin);
-    base = mix(base, vec3(0.5), divLine2 * 0.4 * divInX2);
-
-    float totalTextY = totalY - 0.01;
-    float totalLocal = totalTextY - vUv.y;
-    if (totalLocal > 0.0 && totalLocal < lineH * 2.0) {
-      float tLineIdx = floor(totalLocal / lineH);
-      float tLineLocal = fract(totalLocal / lineH);
-      if (tLineLocal > 0.15 && tLineLocal < 0.85) {
-        float localX = (vUv.x - margin) / textAreaX;
-        if (localX > 0.0 && localX < 0.3) {
-          vec2 grid = vec2(localX * 20.0, tLineLocal * 1.4);
-          float seed = floor(grid.x) + tLineIdx * 30.0 + 800.0;
-          float ch = charBlock(grid, seed);
-          float weight = tLineIdx == 0.0 ? 0.85 : 0.65;
-          base = mix(base, vec3(0.15), ch * weight);
-        }
-        if (localX > 0.7 && localX < 1.0) {
-          float amtLocalX = (localX - 0.7) / 0.3;
-          vec2 grid = vec2(amtLocalX * 8.0, tLineLocal * 1.4);
-          float seed = floor(grid.x) + tLineIdx * 20.0 + 900.0;
-          float ch = charBlock(grid, seed);
-          float weight = tLineIdx == 0.0 ? 0.85 : 0.65;
-          base = mix(base, vec3(0.15), ch * weight);
-        }
-      }
-    }
-
-    float footerY = totalTextY - lineH * 3.5;
-    float footerLocal = footerY - vUv.y;
-    if (footerLocal > 0.0 && footerLocal < lineH * 2.0) {
-      float fLineLocal = fract(footerLocal / lineH);
-      if (fLineLocal > 0.2 && fLineLocal < 0.8) {
-        float localX = (vUv.x - margin) / textAreaX;
-        float centered = abs(localX - 0.5);
-        if (centered < 0.25) {
-          float cLocalX = (localX - 0.25) / 0.5;
-          vec2 grid = vec2(cLocalX * 12.0, fLineLocal * 1.4);
-          float seed = floor(grid.x) + 1200.0 + floor(footerLocal / lineH) * 50.0;
-          float ch = charBlock(grid, seed);
-          base = mix(base, vec3(0.45), ch * 0.5);
-        }
-      }
-    }
-
-    float dashes = step(margin * 0.5, vUv.x) * step(vUv.x, 1.0 - margin * 0.5);
-    float dashY = footerY - lineH * 0.5;
-    float dashLine = 1.0 - smoothstep(0.0, 0.001, abs(vUv.y - dashY));
-    float dashPattern = step(0.5, fract(vUv.x * 40.0));
-    base = mix(base, vec3(0.7), dashLine * dashPattern * 0.3 * dashes);
+    vec3 texColor = texture2D(uReceiptTex, vUv).rgb;
 
     vec3 n = normalize(vNormal);
     vec3 v = normalize(cameraPosition - vWorldPos);
@@ -259,17 +211,17 @@ const fragShader = `
     float d1 = max(dot(n, l1), 0.0);
     float d2 = max(dot(n, l2), 0.0);
     float wrap = max(dot(n, l1) * 0.5 + 0.5, 0.0);
-    float lit = 0.35 + d1 * 0.40 + d2 * 0.12 + wrap * 0.13;
+    float lit = 0.4 + d1 * 0.38 + d2 * 0.1 + wrap * 0.12;
 
-    float spec = pow(max(dot(n, normalize(l1 + v)), 0.0), 60.0) * 0.04;
-    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.05;
-    float back = mix(1.0, 0.75, step(dot(n, v), 0.0));
+    float spec = pow(max(dot(n, normalize(l1 + v)), 0.0), 80.0) * 0.06;
+    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.04;
+    float back = mix(1.0, 0.7, step(dot(n, v), 0.0));
 
-    vec3 col = base * lit * back + vec3(spec + fres);
+    vec3 col = texColor * lit * back + vec3(spec + fres);
 
-    float ex = smoothstep(0.0, 0.006, vUv.x) * smoothstep(0.0, 0.006, 1.0 - vUv.x);
-    float ey = smoothstep(0.0, 0.004, vUv.y) * smoothstep(0.0, 0.004, 1.0 - vUv.y);
-    col *= 1.0 - (1.0 - ex * ey) * 0.08;
+    float ex = smoothstep(0.0, 0.008, vUv.x) * smoothstep(0.0, 0.008, 1.0 - vUv.x);
+    float ey = smoothstep(0.0, 0.005, vUv.y) * smoothstep(0.0, 0.005, 1.0 - vUv.y);
+    col *= 0.95 + 0.05 * ex * ey;
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -285,6 +237,8 @@ interface GrabInfo {
 
 function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   const geoRef = useRef<THREE.BufferGeometry>(null);
+
+  const receiptTexture = useMemo(() => createReceiptTexture(), []);
 
   const sim = useMemo(() => {
     const count = COLS * ROWS;
@@ -453,12 +407,17 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
     return geo;
   }, [sim]);
 
+  const uniforms = useMemo(() => ({
+    uReceiptTex: { value: receiptTexture },
+  }), [receiptTexture]);
+
   return (
     <mesh>
       <primitive object={geometry} ref={geoRef} attach="geometry" />
       <shaderMaterial
         vertexShader={vertShader}
         fragmentShader={fragShader}
+        uniforms={uniforms}
         side={THREE.DoubleSide}
       />
     </mesh>
