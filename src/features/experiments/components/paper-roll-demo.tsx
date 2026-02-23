@@ -55,19 +55,8 @@ function createReceiptTexture(): THREE.CanvasTexture {
   canvas.height = h;
   const ctx = canvas.getContext("2d")!;
 
-  ctx.fillStyle = "#fcfcfa";
+  ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, w, h);
-
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x += 4) {
-      const noise = (Math.random() - 0.5) * 5;
-      const r = 252 + noise;
-      const g = 252 + noise;
-      const b = 250 + noise;
-      ctx.fillStyle = `rgb(${r},${g},${b})`;
-      ctx.fillRect(x, y, 4, 1);
-    }
-  }
 
   const marginX = 48;
   let curY = 50;
@@ -211,23 +200,19 @@ const fragShader = `
 
     float sunDiff = max(dot(n, sunDir), 0.0);
     float fillDiff = max(dot(n, fillDir), 0.0);
-    float wrap = max(dot(n, sunDir) * 0.5 + 0.5, 0.0);
 
-    float ambient = 0.55;
-    float lit = ambient + sunDiff * 0.32 + fillDiff * 0.08 + wrap * 0.05;
+    float ambient = 0.75;
+    float lit = ambient + sunDiff * 0.2 + fillDiff * 0.05;
 
     vec3 halfVec = normalize(sunDir + v);
-    float spec = pow(max(dot(n, halfVec), 0.0), 60.0) * 0.08;
-    vec3 specColor = vec3(1.0, 0.98, 0.95) * spec;
+    float spec = pow(max(dot(n, halfVec), 0.0), 80.0) * 0.04;
+    vec3 specColor = vec3(1.0, 1.0, 1.0) * spec;
 
-    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.03;
-    float back = mix(1.0, 0.75, step(dot(n, v), 0.0));
+    float back = gl_FrontFacing ? 1.0 : 0.88;
 
-    vec3 col = texColor * lit * back + specColor + vec3(fres);
+    vec3 col = texColor * lit * back + specColor;
 
-    float ex = smoothstep(0.0, 0.008, vUv.x) * smoothstep(0.0, 0.008, 1.0 - vUv.x);
-    float ey = smoothstep(0.0, 0.005, vUv.y) * smoothstep(0.0, 0.005, 1.0 - vUv.y);
-    col *= 0.96 + 0.04 * ex * ey;
+    col = min(col, vec3(1.0));
 
     gl_FragColor = vec4(col, 1.0);
   }
@@ -480,55 +465,6 @@ function computeInfluenced(centerIdx: number): { idx: number; weight: number }[]
   return result;
 }
 
-function PaperShadow({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  const shadowMaterial = useMemo(() => {
-    return new THREE.ShaderMaterial({
-      transparent: true,
-      depthWrite: false,
-      uniforms: {
-        uOpacity: { value: 0.18 },
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float uOpacity;
-        varying vec2 vUv;
-        void main() {
-          vec2 center = vUv - 0.5;
-          float dist = length(center * vec2(1.0, 0.7));
-          float alpha = smoothstep(0.5, 0.1, dist) * uOpacity;
-          gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
-        }
-      `,
-    });
-  }, []);
-
-  useFrame(() => {
-    if (!meshRef.current) return;
-    meshRef.current.position.set(0.03, -0.08, -0.15);
-    const baseScale = grab.current.active ? 1.05 : 1.0;
-    meshRef.current.scale.set(
-      (COLS - 1) * SPACING * 1.6 * baseScale,
-      (ROWS - 1) * SPACING * 1.3 * baseScale,
-      1
-    );
-    shadowMaterial.uniforms.uOpacity.value = grab.current.active ? 0.22 : 0.18;
-  });
-
-  return (
-    <mesh ref={meshRef} material={shadowMaterial}>
-      <planeGeometry args={[1, 1]} />
-    </mesh>
-  );
-}
-
 function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   const { camera, gl, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster());
@@ -662,10 +598,9 @@ export const PaperRollDemo = () => {
           camera={{ fov: 35, near: 0.1, far: 100 }}
         >
           <SceneSetup />
-          <ambientLight intensity={0.45} />
-          <directionalLight position={[3, 4, 5]} intensity={0.7} color="#fffaf0" />
-          <directionalLight position={[-2, 1, 3]} intensity={0.15} />
-          <PaperShadow grab={grab} />
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[3, 4, 5]} intensity={0.5} color="#ffffff" />
+          <directionalLight position={[-2, 1, 3]} intensity={0.1} />
           <PaperCloth grab={grab} />
           <Interaction grab={grab} />
         </Canvas>
