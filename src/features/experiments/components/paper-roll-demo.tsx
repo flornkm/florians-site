@@ -56,7 +56,86 @@ function createReceiptTexture(): THREE.CanvasTexture {
   canvas.height = h;
   const ctx = canvas.getContext("2d")!;
 
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#fefefe";
+  ctx.fillRect(0, 0, w, h);
+
+  const imgData = ctx.getImageData(0, 0, w, h);
+  const data = imgData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const noise = (Math.random() - 0.5) * 8;
+    data[i] = Math.min(255, Math.max(0, data[i] + noise));
+    data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
+    data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise));
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+  for (let i = 0; i < 5; i++) {
+    const cx = Math.random() * w;
+    const cy = Math.random() * h;
+    const rx = 40 + Math.random() * 80;
+    const ry = 30 + Math.random() * 60;
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(rx, ry));
+    grad.addColorStop(0, "rgba(245, 242, 238, 0.15)");
+    grad.addColorStop(1, "rgba(254, 254, 254, 0)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx, ry, Math.random() * Math.PI, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  const creases = [
+    { y: h * 0.32, angle: 0.01, opacity: 0.06 },
+    { y: h * 0.58, angle: -0.008, opacity: 0.05 },
+    { y: h * 0.78, angle: 0.005, opacity: 0.04 },
+  ];
+
+  for (const crease of creases) {
+    ctx.save();
+    ctx.translate(0, crease.y);
+    ctx.rotate(crease.angle);
+
+    ctx.strokeStyle = `rgba(0, 0, 0, ${crease.opacity})`;
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(w, 0);
+    ctx.stroke();
+
+    ctx.strokeStyle = `rgba(255, 255, 255, ${crease.opacity * 1.5})`;
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(0, 1.5);
+    ctx.lineTo(w, 1.5);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  ctx.save();
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.03)";
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(w * 0.15, 0);
+  ctx.lineTo(w * 0.55, h);
+  ctx.stroke();
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(w * 0.15 + 1.5, 0);
+  ctx.lineTo(w * 0.55 + 1.5, h);
+  ctx.stroke();
+  ctx.restore();
+
+  const cornerGrad = ctx.createRadialGradient(w, h, 0, w, h, 200);
+  cornerGrad.addColorStop(0, "rgba(240, 237, 233, 0.08)");
+  cornerGrad.addColorStop(1, "rgba(254, 254, 254, 0)");
+  ctx.fillStyle = cornerGrad;
+  ctx.fillRect(0, 0, w, h);
+
+  const topGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 180);
+  topGrad.addColorStop(0, "rgba(240, 237, 233, 0.06)");
+  topGrad.addColorStop(1, "rgba(254, 254, 254, 0)");
+  ctx.fillStyle = topGrad;
   ctx.fillRect(0, 0, w, h);
 
   const marginX = 48;
@@ -196,22 +275,26 @@ const fragShader = `
     vec3 n = normalize(vNormal);
     vec3 v = normalize(cameraPosition - vWorldPos);
 
-    vec3 sunDir = normalize(vec3(0.8, 1.0, 0.6));
+    vec3 sunDir = normalize(vec3(0.6, 0.9, 0.7));
     vec3 fillDir = normalize(vec3(-0.4, 0.3, 0.8));
 
     float sunDiff = max(dot(n, sunDir), 0.0);
     float fillDiff = max(dot(n, fillDir), 0.0);
 
-    float ambient = 0.75;
-    float lit = ambient + sunDiff * 0.2 + fillDiff * 0.05;
+    float ambient = 0.78;
+    float lit = ambient + sunDiff * 0.18 + fillDiff * 0.04;
 
     vec3 halfVec = normalize(sunDir + v);
-    float spec = pow(max(dot(n, halfVec), 0.0), 80.0) * 0.04;
-    vec3 specColor = vec3(1.0, 1.0, 1.0) * spec;
+    float spec = pow(max(dot(n, halfVec), 0.0), 120.0) * 0.03;
+
+    float edgeX = smoothstep(0.0, 0.04, vUv.x) * smoothstep(1.0, 0.96, vUv.x);
+    float edgeY = smoothstep(0.0, 0.03, vUv.y) * smoothstep(1.0, 0.97, vUv.y);
+    float edgeShadow = edgeX * edgeY;
+    float edgeDarken = mix(0.92, 1.0, edgeShadow);
 
     float back = gl_FrontFacing ? 1.0 : 0.88;
 
-    vec3 col = texColor * lit * back + specColor;
+    vec3 col = texColor * lit * back * edgeDarken + vec3(spec);
 
     col = min(col, vec3(1.0));
 
@@ -573,6 +656,51 @@ function SceneSetup() {
   return null;
 }
 
+function PaperShadow({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  const shadowMaterial = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      uniforms: {
+        uOpacity: { value: 0.12 },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float uOpacity;
+        varying vec2 vUv;
+        void main() {
+          vec2 c = vUv - 0.5;
+          float d = length(c * vec2(1.0, 1.6));
+          float alpha = smoothstep(0.5, 0.15, d) * uOpacity;
+          gl_FragColor = vec4(0.0, 0.0, 0.0, alpha);
+        }
+      `,
+    });
+  }, []);
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    const isGrabbing = grab.current.active;
+    shadowMaterial.uniforms.uOpacity.value = isGrabbing ? 0.15 : 0.12;
+    meshRef.current.position.z = -0.12;
+    meshRef.current.position.y = -0.06;
+  });
+
+  return (
+    <mesh ref={meshRef} material={shadowMaterial}>
+      <planeGeometry args={[1.2, 2.0]} />
+    </mesh>
+  );
+}
+
 export const PaperRollDemo = () => {
   const grab = useRef<GrabInfo>({
     active: false,
@@ -595,8 +723,9 @@ export const PaperRollDemo = () => {
         >
           <SceneSetup />
           <ambientLight intensity={0.6} />
-          <directionalLight position={[3, 4, 5]} intensity={0.5} color="#ffffff" />
+          <directionalLight position={[3, 4, 5]} intensity={0.4} color="#fffdf8" />
           <directionalLight position={[-2, 1, 3]} intensity={0.1} />
+          <PaperShadow grab={grab} />
           <PaperCloth grab={grab} />
           <Interaction grab={grab} />
         </Canvas>
