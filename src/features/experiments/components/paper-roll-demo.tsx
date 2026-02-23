@@ -2,88 +2,67 @@ import { useEffect, useRef, useMemo, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const PAPER_WIDTH = 3.0;
-const PAPER_HEIGHT = 4.2;
-const HALF_H = PAPER_HEIGHT / 2;
-const SEGMENTS_X = 80;
-const SEGMENTS_Y = 400;
-const MIN_ROLL_Y = -HALF_H;
-const MAX_ROLL_Y = HALF_H * 0.98;
-const BASE_RADIUS = 0.06;
-const LAYER_THICKNESS = 0.004;
+const COLS = 32;
+const ROWS = 44;
+const SPACING = 0.08;
+const GRAVITY = new THREE.Vector3(0, -4.0, 0);
+const DAMPING = 0.997;
+const TIMESTEP = 0.008;
+const SUB_STEPS = 5;
+const CONSTRAINT_ITERS = 8;
 
-const paperVertexShader = `
-  uniform float uRollY;
-  uniform float uRadius;
-  uniform float uTime;
-  uniform float uPaperHeight;
+const STRUCT_REST = SPACING;
+const SHEAR_REST = SPACING * Math.SQRT2;
+const BEND_REST = SPACING * 2;
 
+const PAPER_W = (COLS - 1) * SPACING;
+const PAPER_H = (ROWS - 1) * SPACING;
+
+function idx(c: number, r: number) {
+  return r * COLS + c;
+}
+
+interface Constraint {
+  i: number;
+  j: number;
+  rest: number;
+}
+
+function buildConstraints(): Constraint[] {
+  const out: Constraint[] = [];
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      if (c < COLS - 1) out.push({ i: idx(c, r), j: idx(c + 1, r), rest: STRUCT_REST });
+      if (r < ROWS - 1) out.push({ i: idx(c, r), j: idx(c, r + 1), rest: STRUCT_REST });
+      if (c < COLS - 1 && r < ROWS - 1) {
+        out.push({ i: idx(c, r), j: idx(c + 1, r + 1), rest: SHEAR_REST });
+        out.push({ i: idx(c + 1, r), j: idx(c, r + 1), rest: SHEAR_REST });
+      }
+      if (c < COLS - 2) out.push({ i: idx(c, r), j: idx(c + 2, r), rest: BEND_REST });
+      if (r < ROWS - 2) out.push({ i: idx(c, r), j: idx(c, r + 2), rest: BEND_REST });
+    }
+  }
+  return out;
+}
+
+const vertShader = `
   varying vec2 vUv;
   varying vec3 vNormal;
   varying vec3 vWorldPos;
-  varying float vCurlFactor;
-
-  #define PI 3.14159265359
 
   void main() {
     vUv = uv;
-    vec3 pos = position;
-    float rollY = uRollY;
-    float r = uRadius;
-
-    if (pos.y > rollY) {
-      float dist = pos.y - rollY;
-      float angle = dist / r;
-
-      float wraps = angle / (2.0 * PI);
-      float currentR = r + wraps * ${LAYER_THICKNESS.toFixed(4)};
-
-      float cx = 0.0;
-      float cy = rollY;
-      float cz = -currentR;
-
-      pos.y = cy + sin(angle) * currentR;
-      pos.z = cz + cos(angle) * currentR;
-
-      float dAngle = 0.01;
-      float nAngle = angle + dAngle;
-      float nR = r + (nAngle / (2.0 * PI)) * ${LAYER_THICKNESS.toFixed(4)};
-      vec3 tangent = normalize(vec3(0.0, cos(nAngle) * nR - cos(angle) * currentR, -sin(nAngle) * nR + sin(angle) * currentR));
-      vNormal = normalize(vec3(0.0, sin(angle), cos(angle)));
-
-      vCurlFactor = clamp(dist / (r * 3.0), 0.0, 1.0);
-    } else {
-      float distBelow = rollY - pos.y;
-      float totalFlat = rollY - (-uPaperHeight * 0.5);
-      float normalizedDist = distBelow / max(totalFlat, 0.001);
-
-      float cornerLift = (1.0 - normalizedDist) * 0.003;
-      float xEdge = abs(vUv.x - 0.5) * 2.0;
-      cornerLift *= xEdge * xEdge;
-
-      float subtleWave = sin(pos.y * 6.0 + uTime * 0.3) * 0.001 * (1.0 - normalizedDist * 0.5);
-      pos.z += cornerLift + subtleWave;
-
-      vNormal = vec3(0.0, 0.0, 1.0);
-      vCurlFactor = 0.0;
-    }
-
-    vec4 worldPos = modelMatrix * vec4(pos, 1.0);
-    vWorldPos = worldPos.xyz;
-    gl_Position = projectionMatrix * viewMatrix * worldPos;
+    vNormal = normalize(normalMatrix * normal);
+    vec4 wp = modelMatrix * vec4(position, 1.0);
+    vWorldPos = wp.xyz;
+    gl_Position = projectionMatrix * viewMatrix * wp;
   }
 `;
 
-const paperFragmentShader = `
-  uniform float uRollY;
-  uniform float uPaperHeight;
-  uniform vec3 uLightDir;
-  uniform vec3 uLightDir2;
-
+const fragShader = `
   varying vec2 vUv;
   varying vec3 vNormal;
   varying vec3 vWorldPos;
-  varying float vCurlFactor;
 
   float hash(vec2 p) {
     vec3 p3 = fract(vec3(p.xyx) * 0.1031);
@@ -95,325 +74,326 @@ const paperFragmentShader = `
     vec2 i = floor(p);
     vec2 f = fract(p);
     f = f * f * (3.0 - 2.0 * f);
-    float a = hash(i);
-    float b = hash(i + vec2(1.0, 0.0));
-    float c = hash(i + vec2(0.0, 1.0));
-    float d = hash(i + vec2(1.0, 1.0));
-    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+    return mix(
+      mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+      mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
+      f.y
+    );
   }
 
   float fbm(vec2 p) {
-    float v = 0.0;
-    float a = 0.5;
-    for (int i = 0; i < 4; i++) {
-      v += a * noise(p);
-      p *= 2.0;
-      a *= 0.5;
-    }
+    float v = 0.0, a = 0.5;
+    for (int i = 0; i < 4; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
     return v;
   }
 
   void main() {
-    vec3 paperBase = vec3(0.97, 0.95, 0.91);
+    vec3 base = vec3(0.97, 0.95, 0.91);
+    base += vec3(fbm(vUv * 80.0) * 0.03);
+    base += vec3(noise(vec2(vUv.x * 400.0, vUv.y * 60.0)) * 0.008);
 
-    float n = fbm(vUv * 80.0) * 0.04;
-    float fiber = noise(vec2(vUv.x * 500.0, vUv.y * 50.0)) * 0.012;
-    vec3 paperColor = paperBase + vec3(n + fiber) - vec3(0.012, 0.006, 0.0);
+    float ls = 1.0 / 34.0;
+    float lm = mod(vUv.y + 0.001, ls);
+    float line = 1.0 - smoothstep(0.0, 0.0012, abs(lm - ls * 0.5));
+    base = mix(base, vec3(0.72, 0.80, 0.92), line * 0.2);
 
-    float lineSpacing = 1.0 / 30.0;
-    float lineY = mod(vUv.y + lineSpacing * 0.5, lineSpacing);
-    float lineMask = 1.0 - smoothstep(0.0, 0.001, abs(lineY - lineSpacing * 0.5));
-    float lineNoise = noise(vUv * vec2(300.0, 8.0)) * 0.2;
-    paperColor = mix(paperColor, vec3(0.70, 0.78, 0.90), lineMask * (0.22 + lineNoise * 0.06));
+    float mg = 1.0 - smoothstep(0.0, 0.002, abs(vUv.x - 0.11));
+    base = mix(base, vec3(0.88, 0.50, 0.50), mg * 0.3);
 
-    float marginX = 0.10;
-    float margin = 1.0 - smoothstep(0.0, 0.0018, abs(vUv.x - marginX));
-    paperColor = mix(paperColor, vec3(0.85, 0.45, 0.45), margin * 0.4);
+    vec3 n = normalize(vNormal);
+    vec3 v = normalize(cameraPosition - vWorldPos);
+    vec3 l1 = normalize(vec3(0.3, 0.6, 1.0));
+    vec3 l2 = normalize(vec3(-0.5, 0.3, 0.8));
 
-    vec3 normal = normalize(vNormal);
-    if (!gl_FrontFacing) {
-      normal = -normal;
-    }
+    float d1 = max(dot(n, l1), 0.0);
+    float d2 = max(dot(n, l2), 0.0);
+    float wrap = max(dot(n, l1) * 0.5 + 0.5, 0.0);
+    float lit = 0.32 + d1 * 0.42 + d2 * 0.14 + wrap * 0.12;
 
-    vec3 l1 = normalize(uLightDir);
-    vec3 l2 = normalize(uLightDir2);
+    float spec = pow(max(dot(n, normalize(l1 + v)), 0.0), 80.0) * 0.06;
+    float fres = pow(1.0 - max(dot(n, v), 0.0), 4.0) * 0.07;
+    float back = mix(1.0, 0.7, step(dot(n, v), 0.0));
 
-    float diff1 = max(dot(normal, l1), 0.0);
-    float diff2 = max(dot(normal, l2), 0.0);
-    float ambient = 0.35;
-    float lighting = ambient + diff1 * 0.50 + diff2 * 0.15;
+    vec3 col = base * lit * back + vec3(spec + fres);
 
-    vec3 viewDir = normalize(cameraPosition - vWorldPos);
-    vec3 h1 = normalize(l1 + viewDir);
-    vec3 h2 = normalize(l2 + viewDir);
-    float spec1 = pow(max(dot(normal, h1), 0.0), 80.0) * 0.10;
-    float spec2 = pow(max(dot(normal, h2), 0.0), 40.0) * 0.04;
+    float ex = smoothstep(0.0, 0.008, vUv.x) * smoothstep(0.0, 0.008, 1.0 - vUv.x);
+    float ey = smoothstep(0.0, 0.005, vUv.y) * smoothstep(0.0, 0.005, 1.0 - vUv.y);
+    col *= 1.0 - (1.0 - ex * ey) * 0.1;
 
-    vec3 finalColor = paperColor * lighting + vec3(spec1 + spec2);
-
-    if (!gl_FrontFacing) {
-      finalColor *= 0.60;
-      float n2 = fbm(vUv * 40.0 + 7.0) * 0.03;
-      finalColor += vec3(n2 * 0.5);
-    }
-
-    if (vCurlFactor > 0.0) {
-      float fresnel = pow(1.0 - abs(dot(normal, viewDir)), 4.0) * 0.07;
-      finalColor += vec3(fresnel);
-    }
-
-    float edgeX = smoothstep(0.0, 0.006, vUv.x) * smoothstep(0.0, 0.006, 1.0 - vUv.x);
-    float edgeY = smoothstep(0.0, 0.004, vUv.y) * smoothstep(0.0, 0.004, 1.0 - vUv.y);
-    finalColor *= mix(0.90, 1.0, edgeX * edgeY);
-
-    gl_FragColor = vec4(finalColor, 1.0);
+    gl_FragColor = vec4(col, 1.0);
   }
 `;
 
-const shadowVertexShader = `
-  varying vec2 vUv;
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-const shadowFragmentShader = `
-  uniform float uRollY;
-  uniform float uPaperHeight;
-  uniform float uRadius;
-
-  varying vec2 vUv;
-
-  void main() {
-    float halfH = uPaperHeight * 0.5;
-    float rollNorm = (uRollY + halfH) / (2.0 * halfH);
-    float rollUvY = 1.0 - rollNorm;
-
-    float dist = rollUvY - vUv.y;
-    float shadowWidth = 0.04 + uRadius * 0.6;
-    float intensity = smoothstep(-0.005, shadowWidth * 0.15, dist) * (1.0 - smoothstep(0.0, shadowWidth, dist));
-    intensity *= 0.35 * smoothstep(-halfH + 0.1, -halfH + 0.5, uRollY);
-
-    float xFade = smoothstep(0.0, 0.08, vUv.x) * smoothstep(0.0, 0.08, 1.0 - vUv.x);
-    intensity *= xFade;
-
-    gl_FragColor = vec4(0.0, 0.0, 0.0, intensity);
-  }
-`;
-
-interface DragState {
-  rollY: number;
-  velocity: number;
-  isDragging: boolean;
-  grabWorldY: number;
-  grabRollY: number;
-  prevWorldY: number;
-  prevTime: number;
-  smoothedVelocity: number;
+interface GrabInfo {
+  active: boolean;
+  idx: number;
+  plane: THREE.Plane;
+  point: THREE.Vector3;
 }
 
-function PaperScene({
-  dragRef,
-}: {
-  dragRef: React.MutableRefObject<DragState>;
-}) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const matRef = useRef<THREE.ShaderMaterial>(null);
-  const shadowMatRef = useRef<THREE.ShaderMaterial>(null);
-  const clockRef = useRef(0);
-  const { camera, gl, raycaster, size } = useThree();
-  const planeRef = useRef(new THREE.Plane(new THREE.Vector3(0, 0, 1), 0));
-  const pointerNDC = useRef(new THREE.Vector2());
-  const intersection = useRef(new THREE.Vector3());
+function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
+  const geoRef = useRef<THREE.BufferGeometry>(null);
 
-  useEffect(() => {
-    if (camera instanceof THREE.PerspectiveCamera) {
-      camera.position.set(0, 0.0, 5.0);
-      camera.lookAt(0, 0, 0);
-      camera.updateProjectionMatrix();
+  const sim = useMemo(() => {
+    const count = COLS * ROWS;
+    const pos = new Float32Array(count * 3);
+    const old = new Float32Array(count * 3);
+    const pinned = new Uint8Array(count);
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const i = idx(c, r);
+        const x = (c - (COLS - 1) / 2) * SPACING;
+        const y = ((ROWS - 1) / 2 - r) * SPACING;
+        pos[i * 3] = x;
+        pos[i * 3 + 1] = y;
+        pos[i * 3 + 2] = 0;
+        old[i * 3] = x;
+        old[i * 3 + 1] = y;
+        old[i * 3 + 2] = 0;
+        if (r === 0) pinned[i] = 1;
+      }
     }
-  }, [camera]);
 
-  const getWorldY = useCallback(
-    (clientX: number, clientY: number): number => {
-      const rect = gl.domElement.getBoundingClientRect();
-      pointerNDC.current.x = ((clientX - rect.left) / rect.width) * 2 - 1;
-      pointerNDC.current.y = -((clientY - rect.top) / rect.height) * 2 + 1;
-      raycaster.setFromCamera(pointerNDC.current, camera);
-      raycaster.ray.intersectPlane(planeRef.current, intersection.current);
-      return intersection.current.y;
-    },
-    [camera, gl, raycaster]
+    const constraints = buildConstraints();
+    return { pos, old, pinned, constraints, count };
+  }, []);
+
+  const diff = useMemo(() => new THREE.Vector3(), []);
+
+  useFrame(() => {
+    const { pos, old, pinned, constraints, count } = sim;
+
+    for (let s = 0; s < SUB_STEPS; s++) {
+      for (let i = 0; i < count; i++) {
+        if (pinned[i]) continue;
+        if (grab.current.active && grab.current.idx === i) continue;
+
+        const ix = i * 3, iy = ix + 1, iz = ix + 2;
+        const vx = (pos[ix] - old[ix]) * DAMPING;
+        const vy = (pos[iy] - old[iy]) * DAMPING;
+        const vz = (pos[iz] - old[iz]) * DAMPING;
+
+        old[ix] = pos[ix];
+        old[iy] = pos[iy];
+        old[iz] = pos[iz];
+
+        pos[ix] += vx + GRAVITY.x * TIMESTEP * TIMESTEP;
+        pos[iy] += vy + GRAVITY.y * TIMESTEP * TIMESTEP;
+        pos[iz] += vz + GRAVITY.z * TIMESTEP * TIMESTEP;
+      }
+
+      if (grab.current.active && grab.current.idx >= 0) {
+        const gi = grab.current.idx * 3;
+        const gp = grab.current.point;
+        old[gi] = gp.x;
+        old[gi + 1] = gp.y;
+        old[gi + 2] = gp.z;
+        pos[gi] = gp.x;
+        pos[gi + 1] = gp.y;
+        pos[gi + 2] = gp.z;
+      }
+
+      for (let iter = 0; iter < CONSTRAINT_ITERS; iter++) {
+        for (let c = 0; c < constraints.length; c++) {
+          const cn = constraints[c];
+          const ai = cn.i * 3, bi = cn.j * 3;
+          const dx = pos[bi] - pos[ai];
+          const dy = pos[bi + 1] - pos[ai + 1];
+          const dz = pos[bi + 2] - pos[ai + 2];
+          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          if (dist < 1e-6) continue;
+          const diff = (dist - cn.rest) / dist * 0.5;
+          const ox = dx * diff;
+          const oy = dy * diff;
+          const oz = dz * diff;
+
+          const aPinned = pinned[cn.i] || (grab.current.active && grab.current.idx === cn.i);
+          const bPinned = pinned[cn.j] || (grab.current.active && grab.current.idx === cn.j);
+
+          if (aPinned && bPinned) continue;
+          if (aPinned) {
+            pos[bi] -= ox * 2;
+            pos[bi + 1] -= oy * 2;
+            pos[bi + 2] -= oz * 2;
+          } else if (bPinned) {
+            pos[ai] += ox * 2;
+            pos[ai + 1] += oy * 2;
+            pos[ai + 2] += oz * 2;
+          } else {
+            pos[ai] += ox;
+            pos[ai + 1] += oy;
+            pos[ai + 2] += oz;
+            pos[bi] -= ox;
+            pos[bi + 1] -= oy;
+            pos[bi + 2] -= oz;
+          }
+        }
+      }
+    }
+
+    if (!geoRef.current) return;
+    const attr = geoRef.current.getAttribute("position") as THREE.BufferAttribute;
+    (attr.array as Float32Array).set(pos);
+    attr.needsUpdate = true;
+    geoRef.current.computeVertexNormals();
+  });
+
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    const positions = new Float32Array(sim.pos);
+    const uvs = new Float32Array(sim.count * 2);
+    const indices: number[] = [];
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const i = idx(c, r);
+        uvs[i * 2] = c / (COLS - 1);
+        uvs[i * 2 + 1] = 1 - r / (ROWS - 1);
+      }
+    }
+    for (let r = 0; r < ROWS - 1; r++) {
+      for (let c = 0; c < COLS - 1; c++) {
+        const a = idx(c, r), b = a + 1, d = idx(c, r + 1), e = d + 1;
+        indices.push(a, d, b, b, d, e);
+      }
+    }
+
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+    geo.setIndex(indices);
+    geo.computeVertexNormals();
+    return geo;
+  }, [sim]);
+
+  return (
+    <mesh>
+      <primitive object={geometry} ref={geoRef} attach="geometry" />
+      <shaderMaterial
+        vertexShader={vertShader}
+        fragmentShader={fragShader}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
   );
+}
+
+function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
+  const { camera, gl, scene } = useThree();
+  const raycaster = useRef(new THREE.Raycaster());
+  const ndc = useRef(new THREE.Vector2());
+  const hitPoint = useRef(new THREE.Vector3());
+  const paperMesh = useRef<THREE.Mesh | null>(null);
+
+  useFrame(() => {
+    if (!paperMesh.current) {
+      scene.traverse((obj) => {
+        if (
+          obj instanceof THREE.Mesh &&
+          obj.geometry?.getAttribute("position")?.count === COLS * ROWS
+        ) {
+          paperMesh.current = obj;
+        }
+      });
+    }
+  });
+
+  const toNDC = useCallback(
+    (e: PointerEvent) => {
+      const rect = gl.domElement.getBoundingClientRect();
+      ndc.current.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      ndc.current.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    },
+    [gl]
+  );
+
+  const findNearest = useCallback((point: THREE.Vector3, geo: THREE.BufferGeometry) => {
+    const pa = geo.getAttribute("position") as THREE.BufferAttribute;
+    let best = -1, bestD = Infinity;
+    for (let i = 0; i < pa.count; i++) {
+      const dx = pa.getX(i) - point.x;
+      const dy = pa.getY(i) - point.y;
+      const dz = pa.getZ(i) - point.z;
+      const d = dx * dx + dy * dy + dz * dz;
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    return best;
+  }, []);
 
   useEffect(() => {
     const canvas = gl.domElement;
 
-    const onPointerDown = (e: PointerEvent) => {
-      e.preventDefault();
+    const onDown = (e: PointerEvent) => {
+      if (!paperMesh.current) return;
+      toNDC(e);
+      raycaster.current.setFromCamera(ndc.current, camera);
+      const hits = raycaster.current.intersectObject(paperMesh.current, false);
+      if (hits.length === 0) return;
+
+      const hit = hits[0];
+      const pi = findNearest(hit.point, paperMesh.current!.geometry);
+      if (pi < 0) return;
+      const row = Math.floor(pi / COLS);
+      if (row === 0) return;
+
       canvas.setPointerCapture(e.pointerId);
-
-      const worldY = getWorldY(e.clientX, e.clientY);
-      const d = dragRef.current;
-      d.isDragging = true;
-      d.grabWorldY = worldY;
-      d.grabRollY = d.rollY;
-      d.prevWorldY = worldY;
-      d.prevTime = performance.now();
-      d.smoothedVelocity = 0;
-      d.velocity = 0;
+      grab.current.active = true;
+      grab.current.idx = pi;
+      grab.current.point.copy(hit.point);
+      grab.current.plane.setFromNormalAndCoplanarPoint(
+        new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion),
+        hit.point
+      );
     };
 
-    const onPointerMove = (e: PointerEvent) => {
-      const d = dragRef.current;
-      if (!d.isDragging) return;
-
-      const worldY = getWorldY(e.clientX, e.clientY);
-      const now = performance.now();
-      const dt = Math.max(now - d.prevTime, 1) / 1000;
-
-      const deltaFromGrab = worldY - d.grabWorldY;
-      const newRollY = d.grabRollY + deltaFromGrab;
-
-      const instantV = (worldY - d.prevWorldY) / dt;
-      d.smoothedVelocity = d.smoothedVelocity * 0.75 + instantV * 0.25;
-
-      d.rollY = newRollY;
-      d.prevWorldY = worldY;
-      d.prevTime = now;
+    const onMove = (e: PointerEvent) => {
+      if (!grab.current.active) return;
+      toNDC(e);
+      raycaster.current.setFromCamera(ndc.current, camera);
+      if (raycaster.current.ray.intersectPlane(grab.current.plane, hitPoint.current)) {
+        grab.current.point.copy(hitPoint.current);
+      }
     };
 
-    const onPointerUp = (e: PointerEvent) => {
-      const d = dragRef.current;
-      if (!d.isDragging) return;
+    const onUp = (e: PointerEvent) => {
+      if (!grab.current.active) return;
       canvas.releasePointerCapture(e.pointerId);
-      d.isDragging = false;
-      d.velocity = d.smoothedVelocity * 0.9;
+      grab.current.active = false;
+      grab.current.idx = -1;
     };
 
-    canvas.addEventListener("pointerdown", onPointerDown);
-    canvas.addEventListener("pointermove", onPointerMove);
-    canvas.addEventListener("pointerup", onPointerUp);
-    canvas.addEventListener("pointercancel", onPointerUp);
-
+    canvas.addEventListener("pointerdown", onDown);
+    canvas.addEventListener("pointermove", onMove);
+    canvas.addEventListener("pointerup", onUp);
+    canvas.addEventListener("pointercancel", onUp);
     return () => {
-      canvas.removeEventListener("pointerdown", onPointerDown);
-      canvas.removeEventListener("pointermove", onPointerMove);
-      canvas.removeEventListener("pointerup", onPointerUp);
-      canvas.removeEventListener("pointercancel", onPointerUp);
+      canvas.removeEventListener("pointerdown", onDown);
+      canvas.removeEventListener("pointermove", onMove);
+      canvas.removeEventListener("pointerup", onUp);
+      canvas.removeEventListener("pointercancel", onUp);
     };
-  }, [gl, getWorldY, dragRef]);
+  }, [camera, gl, grab, toNDC, findNearest]);
 
-  const paperUniforms = useMemo(
-    () => ({
-      uRollY: { value: MIN_ROLL_Y },
-      uRadius: { value: BASE_RADIUS },
-      uPaperHeight: { value: PAPER_HEIGHT },
-      uLightDir: { value: new THREE.Vector3(0.3, 0.5, 1.0) },
-      uLightDir2: { value: new THREE.Vector3(-0.5, 0.3, 0.7) },
-      uTime: { value: 0.0 },
-    }),
-    []
-  );
+  return null;
+}
 
-  const shadowUniforms = useMemo(
-    () => ({
-      uRollY: { value: MIN_ROLL_Y },
-      uPaperHeight: { value: PAPER_HEIGHT },
-      uRadius: { value: BASE_RADIUS },
-    }),
-    []
-  );
-
-  useFrame((_, delta) => {
-    const d = dragRef.current;
-    clockRef.current += delta;
-
-    if (!d.isDragging) {
-      const friction = 3.5;
-      d.velocity *= Math.exp(-friction * delta);
-
-      if (d.rollY < MIN_ROLL_Y) {
-        const overshoot = MIN_ROLL_Y - d.rollY;
-        const springK = 40.0;
-        const damping = 10.0;
-        d.velocity += overshoot * springK * delta;
-        d.velocity *= Math.exp(-damping * delta);
-      } else if (d.rollY > MAX_ROLL_Y) {
-        const overshoot = MAX_ROLL_Y - d.rollY;
-        const springK = 40.0;
-        const damping = 10.0;
-        d.velocity += overshoot * springK * delta;
-        d.velocity *= Math.exp(-damping * delta);
-      }
-
-      d.rollY += d.velocity * delta;
-
-      if (Math.abs(d.velocity) < 0.001 && d.rollY >= MIN_ROLL_Y && d.rollY <= MAX_ROLL_Y) {
-        d.velocity = 0;
-      }
+function SceneSetup() {
+  const { camera } = useThree();
+  useEffect(() => {
+    if (camera instanceof THREE.PerspectiveCamera) {
+      camera.position.set(0, 0.2, 4.5);
+      camera.lookAt(0, -0.2, 0);
     }
-
-    const clampedRollY = Math.max(MIN_ROLL_Y - 0.15, Math.min(MAX_ROLL_Y + 0.15, d.rollY));
-    const rollFraction = (clampedRollY - MIN_ROLL_Y) / (MAX_ROLL_Y - MIN_ROLL_Y);
-    const totalPaperLength = Math.max(0, clampedRollY - MIN_ROLL_Y);
-    const numWraps = totalPaperLength / (2 * Math.PI * BASE_RADIUS);
-    const radius = BASE_RADIUS + numWraps * LAYER_THICKNESS;
-
-    if (matRef.current) {
-      matRef.current.uniforms.uRollY.value = clampedRollY;
-      matRef.current.uniforms.uRadius.value = radius;
-      matRef.current.uniforms.uTime.value = clockRef.current;
-    }
-    if (shadowMatRef.current) {
-      shadowMatRef.current.uniforms.uRollY.value = clampedRollY;
-      shadowMatRef.current.uniforms.uRadius.value = radius;
-    }
-  });
-
-  return (
-    <>
-      <ambientLight intensity={0.45} />
-      <directionalLight position={[2, 3, 5]} intensity={0.65} />
-      <directionalLight position={[-3, 1, 4]} intensity={0.2} />
-
-      <mesh position={[0, 0, -0.03]}>
-        <planeGeometry args={[PAPER_WIDTH * 1.05, PAPER_HEIGHT, 1, SEGMENTS_Y]} />
-        <shaderMaterial
-          ref={shadowMatRef}
-          vertexShader={shadowVertexShader}
-          fragmentShader={shadowFragmentShader}
-          uniforms={shadowUniforms}
-          transparent
-          depthWrite={false}
-        />
-      </mesh>
-
-      <mesh ref={meshRef}>
-        <planeGeometry args={[PAPER_WIDTH, PAPER_HEIGHT, SEGMENTS_X, SEGMENTS_Y]} />
-        <shaderMaterial
-          ref={matRef}
-          vertexShader={paperVertexShader}
-          fragmentShader={paperFragmentShader}
-          uniforms={paperUniforms}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-    </>
-  );
+  }, [camera]);
+  return null;
 }
 
 export const PaperRollDemo = () => {
-  const dragRef = useRef<DragState>({
-    rollY: MIN_ROLL_Y,
-    velocity: 0,
-    isDragging: false,
-    grabWorldY: 0,
-    grabRollY: MIN_ROLL_Y,
-    prevWorldY: 0,
-    prevTime: 0,
-    smoothedVelocity: 0,
+  const grab = useRef<GrabInfo>({
+    active: false,
+    idx: -1,
+    plane: new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),
+    point: new THREE.Vector3(),
   });
 
   return (
@@ -427,11 +407,16 @@ export const PaperRollDemo = () => {
           style={{ width: "100%", height: "100%" }}
           camera={{ fov: 35, near: 0.1, far: 100 }}
         >
-          <PaperScene dragRef={dragRef} />
+          <SceneSetup />
+          <ambientLight intensity={0.55} />
+          <directionalLight position={[2, 3, 5]} intensity={0.65} />
+          <directionalLight position={[-3, 1, 3]} intensity={0.2} />
+          <PaperCloth grab={grab} />
+          <Interaction grab={grab} />
         </Canvas>
       </div>
       <p className="text-xs text-quaternary pb-4 opacity-60">
-        Drag the paper up to roll it
+        Grab and drag the paper
       </p>
     </div>
   );
