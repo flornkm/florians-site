@@ -298,8 +298,8 @@ export function IosContextMenuDemo() {
             onPointerCancel={up}
             onMouseMove={btnMove}
           >
-            <div className="absolute inset-0 rounded-[17px] overflow-hidden bg-white flex items-center justify-center">
-              <span className="text-[24px] leading-none select-none">💬</span>
+            <div className="absolute inset-0 rounded-[17px] bg-white flex items-center justify-center">
+              <span className="text-[20px] leading-none select-none font-medium" style={{ fontFamily: "Commit Mono, monospace" }}>F</span>
             </div>
             <div
               className="absolute inset-0 rounded-[17px] pointer-events-none"
