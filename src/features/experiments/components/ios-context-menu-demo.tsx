@@ -301,13 +301,13 @@ export function IosContextMenuDemo() {
             <div
               className="absolute inset-0 rounded-[17px]"
               style={{
-                background: "linear-gradient(to bottom, oklch(0.72 0.16 230), oklch(0.62 0.22 350))",
+                background: "white",
               }}
             />
             <div
               className="absolute inset-0 rounded-[17px] pointer-events-none"
               style={{
-                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.55)",
+                boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.06)",
               }}
             />
             <motion.div
