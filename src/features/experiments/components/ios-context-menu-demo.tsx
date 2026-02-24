@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
-import Rive from "@rive-app/react-canvas";
+import { useRive } from "@rive-app/react-canvas";
 
 const HOLD_MS = 350;
 const SP = { stiffness: 420, damping: 30, mass: 0.65 };
@@ -74,6 +74,13 @@ export function IosContextMenuDemo() {
   const [hovered, setHovered] = useState<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const btnEl = useRef<HTMLDivElement>(null);
+
+  const { RiveComponent } = useRive({
+    src: "/animations/florian.riv",
+    autoplay: true,
+    artboard: "face",
+    stateMachines: "State Machine 1",
+  });
 
   const relX = useMotionValue(0.5);
   const relY = useMotionValue(0.5);
@@ -300,13 +307,11 @@ export function IosContextMenuDemo() {
             onMouseMove={btnMove}
           >
             <div
-              className="absolute inset-0 rounded-[17px] overflow-hidden"
+              className="absolute inset-0 rounded-[17px] overflow-hidden bg-white"
             >
-              <Rive
-                src="/animations/florian.riv"
-                className="size-full"
-                autoplay
-              />
+              {RiveComponent && (
+                <RiveComponent className="size-full dark:invert" />
+              )}
             </div>
             <div
               className="absolute inset-0 rounded-[17px] pointer-events-none"
