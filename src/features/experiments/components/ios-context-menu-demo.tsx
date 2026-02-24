@@ -284,12 +284,13 @@ export function IosContextMenuDemo() {
             className={cn(
               "relative overflow-hidden touch-none",
               "w-[60px] h-[60px] rounded-[17px]",
+              "border border-white/[0.15]",
               open ? "cursor-default" : "cursor-pointer",
             )}
             style={{
               scale: sc,
               boxShadow: bShadow,
-              background: "linear-gradient(145deg, oklch(0.68 0.16 265), oklch(0.52 0.19 275))",
+              backgroundColor: "oklch(0.55 0.19 270)",
             }}
             onPointerDown={down}
             onPointerUp={up}
@@ -300,13 +301,8 @@ export function IosContextMenuDemo() {
             onMouseMove={btnMove}
           >
             <div className="absolute inset-0 flex items-center justify-center text-white/90">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                <path
-                  d="M14 6v16M6 14h16"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                />
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
               </svg>
             </div>
             <motion.div
