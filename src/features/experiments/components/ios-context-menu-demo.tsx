@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 
-const HOLD_MS = 400;
+const HOLD_MS = 350;
 const SP = { stiffness: 420, damping: 30, mass: 0.65 };
-const SP_MENU = { stiffness: 340, damping: 26, mass: 0.6 };
+const SP_MENU = { stiffness: 500, damping: 32, mass: 0.55 };
 
 const ITEMS = [
   { label: "Remove App", icon: "remove", destructive: true },
@@ -100,7 +100,8 @@ export function IosContextMenuDemo() {
     const y2 = (0 + v * 8).toFixed(1);
     const b2 = (1 + v * 14).toFixed(1);
     const a2 = (0.02 + v * 0.06).toFixed(4);
-    return `0 ${y1}px ${b1}px rgba(0,0,0,${a1}), 0 ${y2}px ${b2}px rgba(0,0,0,${a2})`;
+    const inset = (1 + v * 1).toFixed(1);
+    return `0 ${y1}px ${b1}px rgba(0,0,0,${a1}), 0 ${y2}px ${b2}px rgba(0,0,0,${a2}), inset 0 0 0 ${inset}px rgba(255,255,255,0.15)`;
   });
 
   const iconDarken = useTransform(
@@ -193,13 +194,13 @@ export function IosContextMenuDemo() {
         <AnimatePresence>
           {open && (
             <motion.div
-              className="fixed inset-0 z-10 backdrop-blur-md"
-              style={{ backgroundColor: "rgba(0,0,0,0.22)" }}
+              className="fixed inset-0 z-10 backdrop-blur-sm"
+              style={{ backgroundColor: "rgba(0,0,0,0.25)" }}
               onClick={close}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
             />
           )}
         </AnimatePresence>
@@ -215,9 +216,9 @@ export function IosContextMenuDemo() {
                   translateX: "-50%",
                   transformOrigin: "bottom center",
                 }}
-                initial={{ opacity: 0, scale: 0.35, y: 20, filter: "blur(8px)" }}
-                animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.35, y: 16, filter: "blur(6px)" }}
+                initial={{ opacity: 0, scale: 0.35, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.35, y: 16 }}
                 transition={{ type: "spring", ...SP_MENU }}
               >
                 <div
@@ -282,9 +283,8 @@ export function IosContextMenuDemo() {
           <motion.div
             ref={btnEl}
             className={cn(
-              "relative overflow-hidden touch-none",
+              "relative overflow-hidden touch-none will-change-transform",
               "w-[60px] h-[60px] rounded-[17px]",
-              "border border-white/[0.15]",
               open ? "cursor-default" : "cursor-pointer",
             )}
             style={{
