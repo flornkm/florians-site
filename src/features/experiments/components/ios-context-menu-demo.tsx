@@ -223,15 +223,15 @@ export function IosContextMenuDemo() {
                 <div
                   className={cn(
                     "overflow-hidden rounded-[16px] min-w-[220px]",
-                    "bg-surface/75 dark:bg-surface-secondary/80",
+                    "bg-white/90 dark:bg-surface-secondary/80",
                     "backdrop-blur-2xl backdrop-saturate-[1.8]",
-                    "border border-primary/[0.06]",
+                    "border border-black/[0.06] dark:border-white/[0.08]",
                     "shadow-[0_12px_48px_rgba(0,0,0,0.14),0_2px_10px_rgba(0,0,0,0.06)]",
                   )}
                 >
                   {groups.map((group, gi) => (
                     <div key={gi}>
-                      {gi > 0 && <div className="h-px bg-primary/[0.08]" />}
+                      {gi > 0 && <div className="h-px bg-black/[0.08] dark:bg-white/[0.08]" />}
                       <div className="py-[4px]">
                         {group.map((item) => {
                           const idx = globalIdx++;
