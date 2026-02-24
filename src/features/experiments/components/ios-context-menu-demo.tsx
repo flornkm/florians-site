@@ -125,7 +125,7 @@ export function IosContextMenuDemo() {
       setPhase("menu");
       sc.set(1.05);
       lft.set(1);
-      darkOverlay.set(0.6);
+      darkOverlay.set(0);
     }, HOLD_MS);
   }, [phase, sc, lft, darkOverlay, clr]);
 
@@ -221,7 +221,7 @@ export function IosContextMenuDemo() {
             >
               <div
                 className={cn(
-                  "overflow-hidden rounded-[14px] min-w-[220px]",
+                  "overflow-hidden rounded-[16px] min-w-[220px]",
                   "bg-surface/75 dark:bg-surface-secondary/80",
                   "backdrop-blur-2xl backdrop-saturate-[1.8]",
                   "border border-primary/[0.06]",
@@ -237,13 +237,12 @@ export function IosContextMenuDemo() {
                         <motion.button
                           key={item.label}
                           className={cn(
-                            "flex w-full items-center gap-3 px-4 py-[9px]",
+                            "flex w-full items-center justify-between gap-3 px-4 py-[9px]",
                             "text-[15px] font-normal tracking-[-0.01em]",
                             "transition-colors duration-[40ms] ease-out",
                             ii < group.length - 1 && "border-b border-primary/[0.06]",
                             item.destructive ? "text-destructive" : "text-primary",
-                            hovered === idx && !item.destructive && "bg-primary/[0.08] dark:bg-white/[0.08]",
-                            hovered === idx && item.destructive && "bg-primary/[0.08] dark:bg-white/[0.08]",
+                            hovered === idx && "bg-primary/[0.08] dark:bg-white/[0.08]",
                           )}
                           onMouseEnter={() => setHovered(idx)}
                           onMouseLeave={() => setHovered(null)}
@@ -255,10 +254,10 @@ export function IosContextMenuDemo() {
                           animate={{ opacity: 1 }}
                           transition={{ duration: 0.1, delay: 0.015 * idx }}
                         >
-                          <span className="flex-shrink-0 opacity-80">
+                          <span className="flex-1 text-left">{item.label}</span>
+                          <span className="flex-shrink-0">
                             <Icon name={item.icon} />
                           </span>
-                          <span className="flex-1 text-left">{item.label}</span>
                         </motion.button>
                       );
                     })}
@@ -273,7 +272,7 @@ export function IosContextMenuDemo() {
           ref={btnEl}
           className={cn(
             "relative overflow-hidden touch-none",
-            "w-[60px] h-[60px] rounded-[14px]",
+            "w-[60px] h-[60px] rounded-[16px]",
             "bg-gradient-to-b from-blue-400 to-blue-600",
             "dark:from-blue-500 dark:to-blue-700",
             open ? "cursor-default" : "cursor-pointer",
