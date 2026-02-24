@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
+import Rive from "@rive-app/react-canvas";
 
 const HOLD_MS = 350;
 const SP = { stiffness: 420, damping: 30, mass: 0.65 };
@@ -105,7 +106,7 @@ export function IosContextMenuDemo() {
 
   const iconDarken = useTransform(
     darkOverlay,
-    (v: number) => `rgba(0,0,0,${(v * 0.35).toFixed(3)})`,
+    (v: number) => `rgba(0,0,0,${(v * 0.18).toFixed(3)})`,
   );
 
   const clr = useCallback(() => {
@@ -299,11 +300,14 @@ export function IosContextMenuDemo() {
             onMouseMove={btnMove}
           >
             <div
-              className="absolute inset-0 rounded-[17px]"
-              style={{
-                background: "white",
-              }}
-            />
+              className="absolute inset-0 rounded-[17px] overflow-hidden"
+            >
+              <Rive
+                src="/animations/florian.riv"
+                className="size-full"
+                autoplay
+              />
+            </div>
             <div
               className="absolute inset-0 rounded-[17px] pointer-events-none"
               style={{
