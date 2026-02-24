@@ -188,136 +188,138 @@ export function IosContextMenuDemo() {
   let globalIdx = 0;
 
   return (
-    <div className="relative flex flex-col items-center justify-center gap-5 select-none" onMouseMove={areaMove}>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-10 backdrop-blur-md"
-            style={{ backgroundColor: "rgba(0,0,0,0.22)" }}
-            onClick={close}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          />
-        )}
-      </AnimatePresence>
-
-      <div className="relative z-20">
+    <div className="flex flex-col items-center w-full h-full select-none" onMouseMove={areaMove}>
+      <div className="flex-1 flex items-center justify-center relative">
         <AnimatePresence>
           {open && (
             <motion.div
-              className="absolute bottom-full left-1/2 mb-3"
-              style={{
-                x: snX,
-                y: snY,
-                translateX: "-50%",
-                transformOrigin: "bottom center",
-              }}
-              initial={{ opacity: 0, scale: 0.35, y: 20, filter: "blur(8px)" }}
-              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.35, y: 16, filter: "blur(6px)" }}
-              transition={{ type: "spring", ...SP_MENU }}
-            >
-              <div
-                className={cn(
-                  "overflow-hidden rounded-[16px] min-w-[220px]",
-                  "bg-surface/75 dark:bg-surface-secondary/80",
-                  "backdrop-blur-2xl backdrop-saturate-[1.8]",
-                  "border border-primary/[0.06]",
-                  "shadow-[0_12px_48px_rgba(0,0,0,0.14),0_2px_10px_rgba(0,0,0,0.06)]",
-                )}
-              >
-                {groups.map((group, gi) => (
-                  <div key={gi}>
-                    {gi > 0 && <div className="h-px bg-primary/[0.08]" />}
-                    <div className="py-[3px]">
-                      {group.map((item) => {
-                        const idx = globalIdx++;
-                        const isHovered = hovered === idx;
-                        return (
-                          <motion.button
-                            key={item.label}
-                            className={cn(
-                              "relative flex w-full items-center justify-between gap-3 px-[5px] py-[1px]",
-                              "text-[15px] font-normal tracking-[-0.01em]",
-                              item.destructive ? "text-destructive" : "text-primary",
-                            )}
-                            onMouseEnter={() => setHovered(idx)}
-                            onMouseLeave={() => setHovered(null)}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              close();
-                            }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.1, delay: 0.015 * idx }}
-                          >
-                            <span
-                              className={cn(
-                                "absolute inset-x-[4px] inset-y-[1px] rounded-[9px] transition-colors duration-[40ms] ease-out",
-                                isHovered
-                                  ? "bg-primary/[0.08] dark:bg-white/[0.1]"
-                                  : "bg-transparent",
-                              )}
-                            />
-                            <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">
-                              {item.label}
-                            </span>
-                            <span className="relative z-[1] flex-shrink-0 pr-[10px]">
-                              <Icon name={item.icon} />
-                            </span>
-                          </motion.button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+              className="fixed inset-0 z-10 backdrop-blur-md"
+              style={{ backgroundColor: "rgba(0,0,0,0.22)" }}
+              onClick={close}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            />
           )}
         </AnimatePresence>
 
-        <motion.div
-          ref={btnEl}
-          className={cn(
-            "relative overflow-hidden touch-none",
-            "w-[60px] h-[60px] rounded-[16px]",
-            "bg-gradient-to-b from-blue-400 to-blue-600",
-            "dark:from-blue-500 dark:to-blue-700",
-            open ? "cursor-default" : "cursor-pointer",
-          )}
-          style={{ scale: sc, boxShadow: bShadow }}
-          onPointerDown={down}
-          onPointerUp={up}
-          onPointerLeave={() => {
-            if (phase === "pressing") up();
-          }}
-          onPointerCancel={up}
-          onMouseMove={btnMove}
-        >
-          <div className="absolute inset-0 flex items-center justify-center text-white/90">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <path
-                d="M14 6v16M6 14h16"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
+        <div className="relative z-20">
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                className="absolute bottom-full left-1/2 mb-3"
+                style={{
+                  x: snX,
+                  y: snY,
+                  translateX: "-50%",
+                  transformOrigin: "bottom center",
+                }}
+                initial={{ opacity: 0, scale: 0.35, y: 20, filter: "blur(8px)" }}
+                animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.35, y: 16, filter: "blur(6px)" }}
+                transition={{ type: "spring", ...SP_MENU }}
+              >
+                <div
+                  className={cn(
+                    "overflow-hidden rounded-[16px] min-w-[220px]",
+                    "bg-surface/75 dark:bg-surface-secondary/80",
+                    "backdrop-blur-2xl backdrop-saturate-[1.8]",
+                    "border border-primary/[0.06]",
+                    "shadow-[0_12px_48px_rgba(0,0,0,0.14),0_2px_10px_rgba(0,0,0,0.06)]",
+                  )}
+                >
+                  {groups.map((group, gi) => (
+                    <div key={gi}>
+                      {gi > 0 && <div className="h-px bg-primary/[0.08]" />}
+                      <div className="py-[4px]">
+                        {group.map((item) => {
+                          const idx = globalIdx++;
+                          const isHovered = hovered === idx;
+                          return (
+                            <motion.button
+                              key={item.label}
+                              className={cn(
+                                "relative flex w-full items-center justify-between gap-3 px-[5px] py-[1px]",
+                                "text-[15px] font-normal tracking-[-0.01em]",
+                                item.destructive ? "text-destructive" : "text-primary",
+                              )}
+                              onMouseEnter={() => setHovered(idx)}
+                              onMouseLeave={() => setHovered(null)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                close();
+                              }}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.1, delay: 0.015 * idx }}
+                            >
+                              <span
+                                className={cn(
+                                  "absolute inset-x-[4px] inset-y-[1px] rounded-[9px] transition-colors duration-[40ms] ease-out",
+                                  isHovered
+                                    ? "bg-primary/[0.12] dark:bg-white/[0.14]"
+                                    : "bg-transparent",
+                                )}
+                              />
+                              <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">
+                                {item.label}
+                              </span>
+                              <span className="relative z-[1] flex-shrink-0 pr-[10px]">
+                                <Icon name={item.icon} />
+                              </span>
+                            </motion.button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <motion.div
-            className="pointer-events-none absolute inset-0"
-            style={{ background: shimmer }}
-          />
-          <motion.div
-            className="pointer-events-none absolute inset-0"
-            style={{ backgroundColor: iconDarken }}
-          />
-        </motion.div>
+            ref={btnEl}
+            className={cn(
+              "relative overflow-hidden touch-none",
+              "w-[60px] h-[60px] rounded-[16px]",
+              "bg-gradient-to-b from-blue-400 to-blue-600",
+              "dark:from-blue-500 dark:to-blue-700",
+              open ? "cursor-default" : "cursor-pointer",
+            )}
+            style={{ scale: sc, boxShadow: bShadow }}
+            onPointerDown={down}
+            onPointerUp={up}
+            onPointerLeave={() => {
+              if (phase === "pressing") up();
+            }}
+            onPointerCancel={up}
+            onMouseMove={btnMove}
+          >
+            <div className="absolute inset-0 flex items-center justify-center text-white/90">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path
+                  d="M14 6v16M6 14h16"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+            <motion.div
+              className="pointer-events-none absolute inset-0"
+              style={{ background: shimmer }}
+            />
+            <motion.div
+              className="pointer-events-none absolute inset-0"
+              style={{ backgroundColor: iconDarken }}
+            />
+          </motion.div>
+        </div>
       </div>
 
-      <p className="text-xs text-quaternary opacity-60">
+      <p className="text-xs text-quaternary pb-4 opacity-60">
         Press and hold to open menu
       </p>
     </div>
