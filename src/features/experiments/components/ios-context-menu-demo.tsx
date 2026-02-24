@@ -310,7 +310,11 @@ export function IosContextMenuDemo() {
               className="absolute inset-0 rounded-[17px] overflow-hidden bg-white"
             >
               {RiveComponent && (
-                <RiveComponent className="size-full dark:invert" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-[62%] h-[62%]">
+                    <RiveComponent className="size-full dark:invert" />
+                  </div>
+                </div>
               )}
             </div>
             <div
