@@ -307,7 +307,7 @@ export function IosContextMenuDemo() {
             <div
               className="absolute inset-0 rounded-[17px] pointer-events-none"
               style={{
-                boxShadow: "inset 0 0 0 2.5px rgba(255,255,255,0.55)",
+                boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.55)",
               }}
             />
             <motion.div
