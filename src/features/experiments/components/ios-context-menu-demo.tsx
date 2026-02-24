@@ -258,7 +258,7 @@ export function IosContextMenuDemo() {
                                 className={cn(
                                   "absolute inset-x-[4px] inset-y-[1px] rounded-[9px] transition-colors duration-[40ms] ease-out",
                                   isHovered
-                                    ? "bg-primary/[0.12] dark:bg-white/[0.14]"
+                                    ? "bg-black/[0.08] dark:bg-white/[0.10]"
                                     : "bg-transparent",
                                 )}
                               />
@@ -283,12 +283,14 @@ export function IosContextMenuDemo() {
             ref={btnEl}
             className={cn(
               "relative overflow-hidden touch-none",
-              "w-[60px] h-[60px] rounded-[16px]",
-              "bg-gradient-to-b from-blue-400 to-blue-600",
-              "dark:from-blue-500 dark:to-blue-700",
+              "w-[60px] h-[60px] rounded-[17px]",
               open ? "cursor-default" : "cursor-pointer",
             )}
-            style={{ scale: sc, boxShadow: bShadow }}
+            style={{
+              scale: sc,
+              boxShadow: bShadow,
+              background: "linear-gradient(145deg, oklch(0.68 0.16 265), oklch(0.52 0.19 275))",
+            }}
             onPointerDown={down}
             onPointerUp={up}
             onPointerLeave={() => {
