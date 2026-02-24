@@ -222,7 +222,7 @@ export function IosContextMenuDemo() {
               >
                 <div
                   className={cn(
-                    "overflow-hidden rounded-[16px] min-w-[220px]",
+                    "overflow-hidden rounded-[14px] min-w-[220px]",
                     "bg-white/90 dark:bg-surface-secondary/80",
                     "backdrop-blur-2xl backdrop-saturate-[1.8]",
                     "border border-black/[0.06] dark:border-white/[0.08]",
