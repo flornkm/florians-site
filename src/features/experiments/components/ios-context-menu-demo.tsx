@@ -4,33 +4,33 @@ import { cn } from "@/lib/utils";
 
 const HOLD_MS = 420;
 const SP = { stiffness: 400, damping: 28, mass: 0.7 };
-const SP_POP = { stiffness: 280, damping: 19, mass: 0.55 };
+const SP_POP = { stiffness: 300, damping: 22, mass: 0.55 };
 
 const ITEMS = [
   { label: "Copy", icon: "copy" },
   { label: "Share", icon: "share" },
-  { label: "Delete", icon: "trash" },
+  { label: "Delete", icon: "trash", destructive: true },
 ] as const;
 
-function Icon({ name }: { name: string }) {
-  const sw = 1.35;
+function Icon({ name, size = 15 }: { name: string; size?: number }) {
+  const sw = 1.4;
   if (name === "copy")
     return (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
         <rect x="5" y="1.5" width="8.5" height="8.5" rx="2" stroke="currentColor" strokeWidth={sw} />
         <path d="M2.5 6v6a2 2 0 002 2h6" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
       </svg>
     );
   if (name === "share")
     return (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
         <path d="M8 2v8" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
         <path d="M5.5 4.5L8 2l2.5 2.5" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" />
         <path d="M3 9.5v3a2 2 0 002 2h6a2 2 0 002-2v-3" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
       </svg>
     );
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
       <path d="M3 4h10" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
       <path d="M5.5 4l.3-1.3a1 1 0 01.97-.7h2.46a1 1 0 01.97.7L10.5 4" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" />
       <path d="M4 4v8.5a1.5 1.5 0 001.5 1.5h5a1.5 1.5 0 001.5-1.5V4" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
@@ -116,8 +116,8 @@ export function IosContextMenuDemo() {
     (e: React.MouseEvent) => {
       if (phase !== "menu" || !btnEl.current) return;
       const r = btnEl.current.getBoundingClientRect();
-      nX.set((e.clientX - (r.left + r.width / 2)) * 0.015);
-      nY.set((e.clientY - (r.top - 60)) * 0.01);
+      nX.set((e.clientX - (r.left + r.width / 2)) * 0.012);
+      nY.set((e.clientY - (r.top - 60)) * 0.008);
     },
     [phase, nX, nY],
   );
@@ -141,12 +141,12 @@ export function IosContextMenuDemo() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-10 bg-black/20 backdrop-blur-[2px]"
+            className="fixed inset-0 z-10 bg-black/25 backdrop-blur-sm"
             onClick={close}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.18 }}
           />
         )}
       </AnimatePresence>
@@ -155,50 +155,48 @@ export function IosContextMenuDemo() {
         <AnimatePresence>
           {open && (
             <motion.div
-              className="absolute bottom-full left-1/2 mb-2.5 flex gap-1.5"
+              className="absolute bottom-full left-1/2 mb-2.5"
               style={{ x: snX, y: snY, translateX: "-50%" }}
-              initial={{ opacity: 0, scale: 0.3, y: 20 }}
+              initial={{ opacity: 0, scale: 0.4, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.55, y: 14 }}
+              exit={{ opacity: 0, scale: 0.5, y: 12 }}
               transition={{ type: "spring", ...SP_POP }}
             >
-              {ITEMS.map((item, i) => (
-                <motion.button
-                  key={item.label}
-                  className={cn(
-                    "flex flex-col items-center justify-center gap-1 rounded-[14px] min-w-[64px] px-3.5 py-2.5",
-                    "border backdrop-blur-2xl backdrop-saturate-150",
-                    "transition-[background,border-color,box-shadow] duration-75",
-                    hovered === i
-                      ? "bg-surface-tertiary/95 border-secondary/40 text-primary"
-                      : "bg-surface/55 border-primary/15 text-secondary",
-                  )}
-                  style={{
-                    boxShadow:
-                      hovered === i
-                        ? "0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.12)"
-                        : "0 1px 3px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.06)",
-                  }}
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    close();
-                  }}
-                  initial={{ opacity: 0, y: 14, scale: 0.55 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    type: "spring",
-                    ...SP_POP,
-                    delay: 0.02 + i * 0.035,
-                  }}
-                  whileHover={{ scale: 1.06, y: -1.5 }}
-                  whileTap={{ scale: 0.92 }}
-                >
-                  <Icon name={item.icon} />
-                  <span className="text-[10px] font-medium leading-none mt-0.5">{item.label}</span>
-                </motion.button>
-              ))}
+              <div
+                className={cn(
+                  "overflow-hidden rounded-[14px] min-w-[160px]",
+                  "border border-primary/[0.08]",
+                  "bg-surface/70 backdrop-blur-2xl backdrop-saturate-[1.6]",
+                  "shadow-[0_8px_40px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.06)]",
+                )}
+              >
+                {ITEMS.map((item, i) => (
+                  <motion.button
+                    key={item.label}
+                    className={cn(
+                      "flex w-full items-center justify-between gap-6 px-3.5 py-2.5",
+                      "text-[13px] font-[420] tracking-[-0.01em]",
+                      "transition-colors duration-75",
+                      i < ITEMS.length - 1 && "border-b border-primary/[0.06]",
+                      item.destructive ? "text-destructive" : "text-primary",
+                      hovered === i && !item.destructive && "bg-accent-primary text-accent-foreground",
+                      hovered === i && item.destructive && "bg-destructive text-white",
+                    )}
+                    onMouseEnter={() => setHovered(i)}
+                    onMouseLeave={() => setHovered(null)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      close();
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.12, delay: 0.01 + i * 0.025 }}
+                  >
+                    <span>{item.label}</span>
+                    <Icon name={item.icon} />
+                  </motion.button>
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
