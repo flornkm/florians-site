@@ -100,8 +100,7 @@ export function IosContextMenuDemo() {
     const y2 = (0 + v * 8).toFixed(1);
     const b2 = (1 + v * 14).toFixed(1);
     const a2 = (0.02 + v * 0.06).toFixed(4);
-    const inset = (1 + v * 1).toFixed(1);
-    return `0 ${y1}px ${b1}px rgba(0,0,0,${a1}), 0 ${y2}px ${b2}px rgba(0,0,0,${a2}), inset 0 0 0 ${inset}px rgba(255,255,255,0.15)`;
+    return `0 ${y1}px ${b1}px rgba(0,0,0,${a1}), 0 ${y2}px ${b2}px rgba(0,0,0,${a2})`;
   });
 
   const iconDarken = useTransform(
@@ -290,7 +289,6 @@ export function IosContextMenuDemo() {
             style={{
               scale: sc,
               boxShadow: bShadow,
-              backgroundColor: "oklch(0.55 0.19 270)",
             }}
             onPointerDown={down}
             onPointerUp={up}
@@ -300,17 +298,30 @@ export function IosContextMenuDemo() {
             onPointerCancel={up}
             onMouseMove={btnMove}
           >
-            <div className="absolute inset-0 flex items-center justify-center text-white/90">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12zM7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
-              </svg>
-            </div>
+            <div
+              className="absolute inset-0 rounded-[17px]"
+              style={{
+                background: "linear-gradient(145deg, oklch(0.62 0.22 300), oklch(0.55 0.24 265), oklch(0.50 0.20 235))",
+              }}
+            />
+            <div
+              className="absolute inset-0 rounded-[17px]"
+              style={{
+                background: "radial-gradient(circle at 30% 25%, oklch(0.72 0.18 330 / 0.7) 0%, transparent 50%), radial-gradient(circle at 75% 70%, oklch(0.58 0.22 200 / 0.6) 0%, transparent 45%)",
+              }}
+            />
+            <div
+              className="absolute inset-0 rounded-[17px] pointer-events-none"
+              style={{
+                boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.15)",
+              }}
+            />
             <motion.div
               className="pointer-events-none absolute inset-0"
               style={{ background: shimmer }}
             />
             <motion.div
-              className="pointer-events-none absolute inset-0"
+              className="pointer-events-none absolute inset-0 rounded-[17px]"
               style={{ backgroundColor: iconDarken }}
             />
           </motion.div>
