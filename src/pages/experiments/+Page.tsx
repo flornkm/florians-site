@@ -1,7 +1,11 @@
 import { H1, H2 } from "@/components/design-system/heading";
+import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 
-const EXPERIMENTS = [{ title: "Text Shimmer", Component: TextShimmerDemo }];
+const EXPERIMENTS = [
+  { title: "Receipt", Component: PaperRollDemo },
+  { title: "Text Shimmer", Component: TextShimmerDemo },
+];
 
 export default function Page() {
   return (
