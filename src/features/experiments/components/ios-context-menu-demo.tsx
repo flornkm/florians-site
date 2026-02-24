@@ -91,7 +91,7 @@ export function IosContextMenuDemo() {
 
   const sc = useSpring(1, SP);
   const lft = useSpring(0, SP);
-  const darkOverlay = useSpring(0, { stiffness: 300, damping: 30 });
+  const darkOverlay = useSpring(0, { stiffness: 500, damping: 34 });
 
   const bShadow = useTransform(lft, (v: number) => {
     const y1 = (1 + v * 22).toFixed(1);
@@ -125,7 +125,7 @@ export function IosContextMenuDemo() {
       setPhase("menu");
       sc.set(1.05);
       lft.set(1);
-      darkOverlay.set(0);
+      darkOverlay.jump(0);
     }, HOLD_MS);
   }, [phase, sc, lft, darkOverlay, clr]);
 
@@ -188,7 +188,7 @@ export function IosContextMenuDemo() {
   let globalIdx = 0;
 
   return (
-    <div className="relative flex items-center justify-center select-none" onMouseMove={areaMove}>
+    <div className="relative flex flex-col items-center justify-center gap-5 select-none" onMouseMove={areaMove}>
       <AnimatePresence>
         {open && (
           <motion.div
@@ -231,36 +231,46 @@ export function IosContextMenuDemo() {
                 {groups.map((group, gi) => (
                   <div key={gi}>
                     {gi > 0 && <div className="h-px bg-primary/[0.08]" />}
-                    {group.map((item, ii) => {
-                      const idx = globalIdx++;
-                      return (
-                        <motion.button
-                          key={item.label}
-                          className={cn(
-                            "flex w-full items-center justify-between gap-3 px-4 py-[9px]",
-                            "text-[15px] font-normal tracking-[-0.01em]",
-                            "transition-colors duration-[40ms] ease-out",
-                            ii < group.length - 1 && "border-b border-primary/[0.06]",
-                            item.destructive ? "text-destructive" : "text-primary",
-                            hovered === idx && "bg-primary/[0.08] dark:bg-white/[0.08]",
-                          )}
-                          onMouseEnter={() => setHovered(idx)}
-                          onMouseLeave={() => setHovered(null)}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            close();
-                          }}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.1, delay: 0.015 * idx }}
-                        >
-                          <span className="flex-1 text-left">{item.label}</span>
-                          <span className="flex-shrink-0">
-                            <Icon name={item.icon} />
-                          </span>
-                        </motion.button>
-                      );
-                    })}
+                    <div className="py-[3px]">
+                      {group.map((item) => {
+                        const idx = globalIdx++;
+                        const isHovered = hovered === idx;
+                        return (
+                          <motion.button
+                            key={item.label}
+                            className={cn(
+                              "relative flex w-full items-center justify-between gap-3 px-[5px] py-[1px]",
+                              "text-[15px] font-normal tracking-[-0.01em]",
+                              item.destructive ? "text-destructive" : "text-primary",
+                            )}
+                            onMouseEnter={() => setHovered(idx)}
+                            onMouseLeave={() => setHovered(null)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              close();
+                            }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.1, delay: 0.015 * idx }}
+                          >
+                            <span
+                              className={cn(
+                                "absolute inset-x-[4px] inset-y-[1px] rounded-[9px] transition-colors duration-[40ms] ease-out",
+                                isHovered
+                                  ? "bg-primary/[0.08] dark:bg-white/[0.1]"
+                                  : "bg-transparent",
+                              )}
+                            />
+                            <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">
+                              {item.label}
+                            </span>
+                            <span className="relative z-[1] flex-shrink-0 pr-[10px]">
+                              <Icon name={item.icon} />
+                            </span>
+                          </motion.button>
+                        );
+                      })}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -306,6 +316,10 @@ export function IosContextMenuDemo() {
           />
         </motion.div>
       </div>
+
+      <p className="text-xs text-quaternary opacity-60">
+        Press and hold to open menu
+      </p>
     </div>
   );
 }
