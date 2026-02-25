@@ -154,8 +154,8 @@ function Minimap({
   trackDirection: boolean;
 }) {
   const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
-  const sectionHeight = 44;
-  const gap = 10;
+  const sectionHeight = 48;
+  const gap = 5;
   const totalHeight =
     SECTIONS.length * sectionHeight + (SECTIONS.length - 1) * gap;
   const viewportRatio = 0.3;
@@ -179,7 +179,7 @@ function Minimap({
   return (
     <div
       className="relative flex flex-col"
-      style={{ height: totalHeight, width: 96, gap }}
+      style={{ height: totalHeight, width: 80, gap }}
     >
       <motion.div
         className="absolute left-0 right-0 rounded-[3px]"
@@ -204,8 +204,8 @@ function Minimap({
         transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.5 }}
       >
         <motion.svg
-          width="10"
-          height="10"
+          width="14"
+          height="14"
           viewBox="0 0 8 8"
           className="text-tertiary"
           animate={{ rotate: arrowDirection === "up" ? 180 : 0 }}
@@ -214,7 +214,7 @@ function Minimap({
           <path
             d="M4 1.5L4 6.5M4 6.5L1.5 4M4 6.5L6.5 4"
             stroke="currentColor"
-            strokeWidth="1.2"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
@@ -229,14 +229,14 @@ function Minimap({
         return (
           <div
             key={section.id}
-            className="relative z-10 flex flex-col justify-center gap-[4px] shrink-0"
+            className="relative z-10 flex flex-col justify-center gap-[5px] shrink-0"
             style={{ height: sectionHeight }}
           >
             {section.lines.map((width, li) => (
               <motion.div
                 key={li}
                 className="rounded-full"
-                style={{ height: 2.5, width: `${width}%` }}
+                style={{ height: 3, width: `${width}%` }}
                 animate={{
                   backgroundColor: isActive
                     ? "var(--text-quaternary)"
@@ -265,7 +265,7 @@ export function ScrollDirectionDemo() {
   const activeLabel = SECTIONS.find((s) => s.id === activeId)?.label ?? "";
   const arrowDirection = trackDirection ? scrollDirection : "down";
 
-  const totalHeight = SECTIONS.length * 44 + (SECTIONS.length - 1) * 10;
+  const totalHeight = SECTIONS.length * 48 + (SECTIONS.length - 1) * 5;
   const viewportH = totalHeight * 0.3;
   const labelTop = scrollProgress * (totalHeight - viewportH) + viewportH / 2;
 
@@ -326,7 +326,7 @@ export function ScrollDirectionDemo() {
               <AnimatePresence mode="wait">
                 <motion.span
                   key={activeId}
-                  className="whitespace-nowrap text-xs font-medium text-secondary"
+                  className="whitespace-nowrap text-sm font-medium text-secondary"
                   initial={{
                     opacity: 0,
                     y: arrowDirection === "down" ? -4 : 4,
