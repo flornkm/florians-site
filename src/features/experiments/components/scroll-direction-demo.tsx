@@ -209,11 +209,9 @@ function Minimap({
         style={{ height: observerBandHeight }}
         animate={{
           top: observerTop,
-          borderColor: trackDirection
-            ? "var(--border-secondary)"
-            : "var(--border-primary)",
+          borderColor: "var(--border-secondary)",
           backgroundColor: "var(--bg-quaternary)",
-          opacity: trackDirection ? 0.8 : 0.5,
+          opacity: 0.8,
         }}
         transition={{
           type: "spring",
@@ -288,13 +286,18 @@ export function ScrollDirectionDemo() {
 
   return (
     <div className="flex flex-col items-center gap-5 w-full max-w-md px-4">
-      <div className="relative w-full">
+      <div className="relative w-full" style={{ height: "420px" }}>
         <div
           ref={containerRef}
-          className="h-[380px] overflow-y-auto"
+          className="h-full overflow-y-auto"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%)",
           }}
         >
           <div>
