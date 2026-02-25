@@ -2,25 +2,33 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 const SECTIONS = [
-  { id: "intro", label: "Introduction" },
-  { id: "design", label: "Design" },
-  { id: "engineering", label: "Engineering" },
-  { id: "craft", label: "Craft" },
-  { id: "motion", label: "Motion" },
-  { id: "systems", label: "Systems" },
-  { id: "details", label: "Details" },
-  { id: "closing", label: "Closing" },
+  { id: "intro", label: "Introduction", lines: 3 },
+  { id: "design", label: "Design", lines: 2 },
+  { id: "engineering", label: "Engineering", lines: 4 },
+  { id: "craft", label: "Craft", lines: 2 },
+  { id: "motion", label: "Motion", lines: 3 },
+  { id: "systems", label: "Systems", lines: 3 },
+  { id: "details", label: "Details", lines: 2 },
+  { id: "closing", label: "Closing", lines: 3 },
 ];
 
 const SECTION_CONTENT: Record<string, string> = {
-  intro: "Good interfaces feel inevitable. They don't demand attention, they reward it.",
-  design: "Hierarchy is the foundation. Without it, nothing communicates. With it, everything is clear.",
-  engineering: "The best code disappears. It becomes the experience itself, invisible and seamless.",
-  craft: "Craft is the difference between something that works and something that feels right.",
-  motion: "Animation is not decoration. It is the language of state change, of spatial continuity.",
-  systems: "A system is a set of constraints that makes the next thousand decisions easier.",
-  details: "The details are not details. They make the product. Every pixel is a choice.",
-  closing: "Ship it. Then make it better. Then make it better again.",
+  intro:
+    "Good interfaces feel inevitable. They don't demand attention, they reward it. The best products feel like they were always there.",
+  design:
+    "Hierarchy is the foundation. Without it, nothing communicates. With it, everything is clear.",
+  engineering:
+    "The best code disappears. It becomes the experience itself, invisible and seamless. Every abstraction should earn its place.",
+  craft:
+    "Craft is the difference between something that works and something that feels right.",
+  motion:
+    "Animation is not decoration. It is the language of state change, of spatial continuity. It guides attention.",
+  systems:
+    "A system is a set of constraints that makes the next thousand decisions easier. Consistency compounds.",
+  details:
+    "The details are not details. They make the product. Every pixel is a choice.",
+  closing:
+    "Ship it. Then make it better. Then make it better again. Momentum matters more than perfection.",
 };
 
 function useActiveSection(
@@ -75,9 +83,7 @@ function useActiveSection(
 
     function createObserver(direction: "down" | "up") {
       const margin =
-        direction === "down"
-          ? "-70% 0px 0px 0px"
-          : "0px 0px -70% 0px";
+        direction === "down" ? "-70% 0px 0px 0px" : "0px 0px -70% 0px";
 
       return new IntersectionObserver(
         (entries) => {
@@ -115,53 +121,78 @@ function useActiveSection(
   return activeId;
 }
 
-function TableOfContents({ activeId }: { activeId: string }) {
+const SKELETON_WIDTHS: Record<number, number[]> = {
+  2: [100, 60],
+  3: [100, 80, 45],
+  4: [100, 90, 75, 35],
+};
+
+function Minimap({
+  activeId,
+  trackDirection,
+}: {
+  activeId: string;
+  trackDirection: boolean;
+}) {
   const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
+  const sectionHeight = 28;
+  const gap = 6;
+  const totalHeight = SECTIONS.length * sectionHeight + (SECTIONS.length - 1) * gap;
+  const viewportHeight = totalHeight * 0.3;
+
+  const observerTop = trackDirection
+    ? activeIndex * (sectionHeight + gap)
+    : totalHeight - viewportHeight;
 
   return (
-    <div className="flex flex-col items-center gap-2.5 py-2">
+    <div
+      className="relative flex flex-col"
+      style={{ height: totalHeight, width: 44, gap }}
+    >
+      <motion.div
+        className="absolute left-0 right-0 rounded-[4px] border border-secondary bg-interactive-hover"
+        style={{ height: viewportHeight }}
+        animate={{ top: observerTop }}
+        transition={{
+          type: "spring",
+          stiffness: 400,
+          damping: 38,
+          mass: 0.6,
+        }}
+      />
+
       {SECTIONS.map((section, i) => {
         const isActive = section.id === activeId;
         const isPast = i < activeIndex;
+        const lines = SKELETON_WIDTHS[section.lines] ?? [100, 70];
 
         return (
-          <div key={section.id} className="relative flex items-center justify-center">
-            <motion.div
-              className="rounded-full"
-              animate={{
-                width: isActive ? 8 : isPast ? 5 : 4,
-                height: isActive ? 8 : isPast ? 5 : 4,
-                backgroundColor: isActive
-                  ? "var(--text-primary)"
-                  : isPast
-                    ? "var(--text-quaternary)"
-                    : "var(--border-primary)",
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 500,
-                damping: 35,
-                mass: 0.5,
-              }}
-            />
-            <AnimatePresence>
-              {isActive && (
-                <motion.div
-                  className="absolute left-1/2 top-1/2 rounded-full bg-primary"
-                  style={{
-                    border: "1px solid var(--text-quaternary)",
-                  }}
-                  initial={{ width: 4, height: 4, x: "-50%", y: "-50%", opacity: 0 }}
-                  animate={{ width: 16, height: 16, x: "-50%", y: "-50%", opacity: 0.15 }}
-                  exit={{ width: 4, height: 4, x: "-50%", y: "-50%", opacity: 0 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 30,
-                  }}
-                />
-              )}
-            </AnimatePresence>
+          <div
+            key={section.id}
+            className="relative flex flex-col justify-center gap-[3px] shrink-0"
+            style={{ height: sectionHeight }}
+          >
+            {lines.map((width, li) => (
+              <motion.div
+                key={li}
+                className="rounded-full"
+                style={{ height: 2, width: `${width}%` }}
+                animate={{
+                  backgroundColor: isActive
+                    ? "var(--text-primary)"
+                    : isPast
+                      ? "var(--text-quaternary)"
+                      : "var(--border-primary)",
+                  opacity: isActive ? 1 : isPast ? 0.6 : 0.35,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 35,
+                  mass: 0.4,
+                }}
+              />
+            ))}
           </div>
         );
       })}
@@ -173,13 +204,13 @@ function SectionBlock({ id, index }: { id: string; index: number }) {
   return (
     <div
       data-section-id={id}
-      className="flex flex-col justify-center px-6 py-16"
-      style={{ minHeight: "45%" }}
+      className="flex flex-col justify-center px-6 py-20"
+      style={{ minHeight: "55%" }}
     >
-      <p className="type-small text-quaternary mb-2 tabular-nums">
+      <p className="type-tiny text-quaternary mb-3 tabular-nums tracking-wide">
         {String(index + 1).padStart(2, "0")}
       </p>
-      <p className="type-body text-secondary leading-relaxed max-w-[280px]">
+      <p className="type-body text-secondary leading-relaxed max-w-[300px]">
         {SECTION_CONTENT[id]}
       </p>
     </div>
@@ -204,8 +235,12 @@ export function ScrollDirectionDemo() {
           <motion.div
             className="w-8 h-[18px] rounded-full border transition-colors"
             animate={{
-              backgroundColor: trackDirection ? "var(--text-primary)" : "var(--bg-tertiary)",
-              borderColor: trackDirection ? "var(--text-primary)" : "var(--border-secondary)",
+              backgroundColor: trackDirection
+                ? "var(--text-primary)"
+                : "var(--bg-tertiary)",
+              borderColor: trackDirection
+                ? "var(--text-primary)"
+                : "var(--border-secondary)",
             }}
             transition={{ duration: 0.15 }}
           />
@@ -214,7 +249,9 @@ export function ScrollDirectionDemo() {
             style={{ width: 12, height: 12 }}
             animate={{
               left: trackDirection ? 17 : 3,
-              backgroundColor: trackDirection ? "var(--text-inverted)" : "var(--text-quaternary)",
+              backgroundColor: trackDirection
+                ? "var(--text-inverted)"
+                : "var(--text-quaternary)",
             }}
             transition={{
               type: "spring",
@@ -231,7 +268,7 @@ export function ScrollDirectionDemo() {
       <div className="relative w-full">
         <div
           ref={containerRef}
-          className="h-[320px] overflow-y-auto rounded-lg border border-primary scrollbar-thin scrollbar-thumb-quaternary scrollbar-track-transparent"
+          className="h-[380px] overflow-y-auto rounded-lg border border-primary"
         >
           <div className="divide-y divide-primary">
             {SECTIONS.map((section, i) => (
@@ -239,16 +276,25 @@ export function ScrollDirectionDemo() {
             ))}
           </div>
         </div>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2">
-          <TableOfContents activeId={activeId} />
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <Minimap activeId={activeId} trackDirection={trackDirection} />
         </div>
       </div>
 
-      <p className="type-small text-quaternary text-center max-w-[300px] leading-relaxed">
-        {trackDirection
-          ? "Scroll both ways. The active section updates immediately when a new section enters the viewport."
-          : "Scroll down, then back up. Without direction tracking, the highlight sticks to the bottom-most visited section."}
-      </p>
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={trackDirection ? "on" : "off"}
+          className="type-small text-quaternary text-center max-w-[320px] leading-relaxed"
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.2 }}
+        >
+          {trackDirection
+            ? "The observer viewport follows the scroll direction. Sections highlight as they enter from either edge."
+            : "The observer is stuck at the bottom. Scroll up and notice how late it takes to pick up the previous section."}
+        </motion.p>
+      </AnimatePresence>
     </div>
   );
 }
