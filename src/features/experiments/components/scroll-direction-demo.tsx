@@ -317,13 +317,11 @@ export function ScrollDirectionDemo() {
               height: totalHeight,
             }}
           >
-            <div
+            <motion.div
               className="absolute left-0"
-              style={{
-                top: labelTop,
-                transform: "translateY(-50%)",
-                transition: "top 0.15s ease-out",
-              }}
+              style={{ transform: "translateY(-50%)" }}
+              animate={{ top: labelTop }}
+              transition={{ type: "spring", stiffness: 600, damping: 45, mass: 0.4 }}
             >
               <AnimatePresence mode="wait">
                 <motion.span
@@ -346,7 +344,7 @@ export function ScrollDirectionDemo() {
                   {activeLabel}
                 </motion.span>
               </AnimatePresence>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
