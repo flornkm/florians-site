@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const HOLD_MS = 350;
 const SP = { stiffness: 420, damping: 30, mass: 0.65 };
@@ -29,7 +29,12 @@ function Icon({ name, size = 16 }: { name: string; size?: number }) {
   if (name === "faceid")
     return (
       <svg {...props}>
-        <path d="M2.5 6V4a1.5 1.5 0 011.5-1.5h2M12 2.5h2A1.5 1.5 0 0115.5 4v2M15.5 12v2a1.5 1.5 0 01-1.5 1.5h-2M6 15.5H4A1.5 1.5 0 012.5 14v-2" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
+        <path
+          d="M2.5 6V4a1.5 1.5 0 011.5-1.5h2M12 2.5h2A1.5 1.5 0 0115.5 4v2M15.5 12v2a1.5 1.5 0 01-1.5 1.5h-2M6 15.5H4A1.5 1.5 0 012.5 14v-2"
+          stroke="currentColor"
+          strokeWidth={sw}
+          strokeLinecap="round"
+        />
         <circle cx="6.8" cy="7" r="0.7" fill="currentColor" />
         <circle cx="11.2" cy="7" r="0.7" fill="currentColor" />
         <path d="M7 11.5a2.5 2.5 0 004 0" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" />
@@ -48,8 +53,19 @@ function Icon({ name, size = 16 }: { name: string; size?: number }) {
     return (
       <svg {...props}>
         <path d="M9 2.5v8" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
-        <path d="M6.5 5L9 2.5 11.5 5" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M3.5 10.5v4a1.5 1.5 0 001.5 1.5h8a1.5 1.5 0 001.5-1.5v-4" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" />
+        <path
+          d="M6.5 5L9 2.5 11.5 5"
+          stroke="currentColor"
+          strokeWidth={sw}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M3.5 10.5v4a1.5 1.5 0 001.5 1.5h8a1.5 1.5 0 001.5-1.5v-4"
+          stroke="currentColor"
+          strokeWidth={sw}
+          strokeLinecap="round"
+        />
       </svg>
     );
   if (name === "search")
@@ -74,16 +90,6 @@ export function IosContextMenuDemo() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const btnEl = useRef<HTMLDivElement>(null);
 
-  const relX = useMotionValue(0.5);
-  const relY = useMotionValue(0.5);
-  const sX = useSpring(relX, { stiffness: 200, damping: 24 });
-  const sY = useSpring(relY, { stiffness: 200, damping: 24 });
-  const shimmer = useTransform(
-    [sX, sY],
-    ([x, y]: number[]) =>
-      `radial-gradient(circle 30px at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.06) 0%, transparent 100%)`,
-  );
-
   const nudgeX = useMotionValue(0);
   const nudgeY = useMotionValue(0);
   const snX = useSpring(nudgeX, { stiffness: 400, damping: 30 });
@@ -92,6 +98,7 @@ export function IosContextMenuDemo() {
   const sc = useSpring(1, SP);
   const lft = useSpring(0, SP);
   const darkOverlay = useSpring(0, { stiffness: 500, damping: 34 });
+  const iconDarken = useTransform(darkOverlay, (v: number) => `rgba(0,0,0,${(v * 0.18).toFixed(3)})`);
 
   const bShadow = useTransform(lft, (v: number) => {
     const y1 = (1 + v * 22).toFixed(1);
@@ -102,11 +109,6 @@ export function IosContextMenuDemo() {
     const a2 = (0.02 + v * 0.06).toFixed(4);
     return `0 ${y1}px ${b1}px rgba(0,0,0,${a1}), 0 ${y2}px ${b2}px rgba(0,0,0,${a2})`;
   });
-
-  const iconDarken = useTransform(
-    darkOverlay,
-    (v: number) => `rgba(0,0,0,${(v * 0.18).toFixed(3)})`,
-  );
 
   const clr = useCallback(() => {
     if (timer.current) {
@@ -159,17 +161,7 @@ export function IosContextMenuDemo() {
     [phase, nudgeX, nudgeY],
   );
 
-  const btnMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!btnEl.current || phase === "menu") return;
-      const r = btnEl.current.getBoundingClientRect();
-      relX.set((e.clientX - r.left) / r.width);
-      relY.set((e.clientY - r.top) / r.height);
-    },
-    [relX, relY, phase],
-  );
-
-  useEffect(() => clr, [clr]);
+  useEffect(() => () => clr(), [clr]);
 
   const open = phase === "menu";
 
@@ -215,9 +207,9 @@ export function IosContextMenuDemo() {
                   translateX: "-50%",
                   transformOrigin: "bottom center",
                 }}
-                initial={{ opacity: 0, scale: 0.35, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.35, y: 16 }}
+                initial={{ opacity: 0, scale: 0.35, y: 20, filter: "blur(2px)" }}
+                animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.35, y: 16, filter: "blur(2px)" }}
                 transition={{ type: "spring", ...SP_MENU }}
               >
                 <div
@@ -225,7 +217,7 @@ export function IosContextMenuDemo() {
                     "overflow-hidden rounded-[14px] min-w-[220px]",
                     "bg-white/90 dark:bg-surface-secondary/80",
                     "backdrop-blur-2xl backdrop-saturate-[1.8]",
-                    "border border-black/[0.06] dark:border-white/[0.08]",
+                    "border border-white/[0.5]",
                     "shadow-[0_12px_48px_rgba(0,0,0,0.14),0_2px_10px_rgba(0,0,0,0.06)]",
                   )}
                 >
@@ -257,14 +249,10 @@ export function IosContextMenuDemo() {
                               <span
                                 className={cn(
                                   "absolute inset-x-[4px] inset-y-[1px] rounded-[9px] transition-colors duration-[40ms] ease-out",
-                                  isHovered
-                                    ? "bg-black/[0.08] dark:bg-white/[0.10]"
-                                    : "bg-transparent",
+                                  isHovered ? "bg-black/[0.08] dark:bg-white/[0.10]" : "bg-transparent",
                                 )}
                               />
-                              <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">
-                                {item.label}
-                              </span>
+                              <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">{item.label}</span>
                               <span className="relative z-[1] flex-shrink-0 pr-[10px]">
                                 <Icon name={item.icon} />
                               </span>
@@ -283,7 +271,7 @@ export function IosContextMenuDemo() {
             ref={btnEl}
             className={cn(
               "relative overflow-hidden touch-none will-change-transform",
-              "w-[52px] h-[52px] rounded-[14px]",
+              "w-[52px] h-[52px] rounded-[15px]",
               open ? "cursor-default" : "cursor-pointer",
             )}
             style={{
@@ -296,32 +284,30 @@ export function IosContextMenuDemo() {
               if (phase === "pressing") up();
             }}
             onPointerCancel={up}
-            onMouseMove={btnMove}
           >
-            <div className="absolute inset-0 rounded-[17px] bg-white flex items-center justify-center">
-              <span className="text-[20px] leading-none select-none font-medium" style={{ fontFamily: "Commit Mono, monospace" }}>F</span>
+            <div className="absolute inset-0 rounded-[15px] bg-white flex items-center justify-center">
+              <span
+                className="text-[20px] text-black leading-none select-none font-medium"
+                style={{ fontFamily: "Commit Mono, monospace" }}
+              >
+                F
+              </span>
             </div>
             <div
-              className="absolute inset-0 rounded-[17px] pointer-events-none"
+              className="absolute inset-0 rounded-[15px] pointer-events-none"
               style={{
-                boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.06)",
+                boxShadow: open ? "inset 0 0 0 1px rgba(256,256,256,0.06)" : "inset 0 0 0 1px rgba(0,0,0,0.06)",
               }}
             />
             <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{ background: shimmer }}
-            />
-            <motion.div
-              className="pointer-events-none absolute inset-0 rounded-[17px]"
+              className="pointer-events-none absolute inset-0 rounded-[15px]"
               style={{ backgroundColor: iconDarken }}
             />
           </motion.div>
         </div>
       </div>
 
-      <p className="text-xs text-quaternary pb-4 opacity-60">
-        Press and hold to open menu
-      </p>
+      <p className="text-xs text-quaternary pb-4 opacity-60">Press and hold to open menu</p>
     </div>
   );
 }
