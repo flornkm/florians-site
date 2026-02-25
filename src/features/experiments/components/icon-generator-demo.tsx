@@ -1,10 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-const spring = { type: "spring" as const, stiffness: 500, damping: 28 };
-const softSpring = { type: "spring" as const, stiffness: 300, damping: 24 };
-
-function Sun({ size = 32 }: { size?: number }) {
+function Sun({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="4" />
@@ -13,7 +10,7 @@ function Sun({ size = 32 }: { size?: number }) {
   );
 }
 
-function Cloud({ size = 32 }: { size?: number }) {
+function Cloud({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M17.5 19H9.5A7.5 7.5 0 0 1 9.5 4a7.46 7.46 0 0 1 5.25 2.15A5.5 5.5 0 1 1 17.5 19z" />
@@ -21,7 +18,7 @@ function Cloud({ size = 32 }: { size?: number }) {
   );
 }
 
-function Drop({ size = 32 }: { size?: number }) {
+function Drop({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
@@ -29,16 +26,7 @@ function Drop({ size = 32 }: { size?: number }) {
   );
 }
 
-function Umbrella({ size = 32 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2v1M12 15v5a2 2 0 0 0 4 0" />
-      <path d="M22 13a10 10 0 0 0-20 0z" />
-    </svg>
-  );
-}
-
-function Heart({ size = 32 }: { size?: number }) {
+function Heart({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
@@ -46,7 +34,7 @@ function Heart({ size = 32 }: { size?: number }) {
   );
 }
 
-function Music({ size = 32 }: { size?: number }) {
+function Music({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M9 18V5l12-2v13" />
@@ -56,7 +44,7 @@ function Music({ size = 32 }: { size?: number }) {
   );
 }
 
-function Star({ size = 32 }: { size?: number }) {
+function Star({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -64,15 +52,7 @@ function Star({ size = 32 }: { size?: number }) {
   );
 }
 
-function Sparkle({ size = 32 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3z" />
-    </svg>
-  );
-}
-
-function Zap({ size = 32 }: { size?: number }) {
+function Zap({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -80,7 +60,7 @@ function Zap({ size = 32 }: { size?: number }) {
   );
 }
 
-function Shield({ size = 32 }: { size?: number }) {
+function Shield({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -88,7 +68,15 @@ function Shield({ size = 32 }: { size?: number }) {
   );
 }
 
-function Playlist({ size = 32 }: { size?: number }) {
+function Sparkle({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3z" />
+    </svg>
+  );
+}
+
+function Playlist({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M21 15V6M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
@@ -97,7 +85,7 @@ function Playlist({ size = 32 }: { size?: number }) {
   );
 }
 
-function RainCloud({ size = 32 }: { size?: number }) {
+function RainCloud({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M17.5 17H9.5A7.5 7.5 0 0 1 9.5 2a7.46 7.46 0 0 1 5.25 2.15A5.5 5.5 0 1 1 17.5 17z" />
@@ -106,7 +94,7 @@ function RainCloud({ size = 32 }: { size?: number }) {
   );
 }
 
-function Trophy({ size = 32 }: { size?: number }) {
+function Trophy({ size = 24 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
       <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2" />
@@ -121,169 +109,80 @@ const COMBINATIONS = [
   { inputs: [Zap, Shield, Sparkle], output: Trophy, label: "achievement" },
 ];
 
-export default function IconGeneratorDemo() {
-  const [combo, setCombo] = useState(0);
-  const [phase, setPhase] = useState<"idle" | "shuffling" | "result">("idle");
-  const [shuffleIcons, setShuffleIcons] = useState<number[]>([0, 0, 0]);
-  const shuffleRef = useRef<ReturnType<typeof setInterval>[]>([]);
-  const current = COMBINATIONS[combo];
+const transition = { type: "spring" as const, stiffness: 400, damping: 26 };
 
-  const allIcons = [Sun, Cloud, Drop, Heart, Music, Star, Zap, Shield, Sparkle, Umbrella];
-
-  const clearIntervals = useCallback(() => {
-    shuffleRef.current.forEach(clearInterval);
-    shuffleRef.current = [];
-  }, []);
-
-  useEffect(() => {
-    return clearIntervals;
-  }, [clearIntervals]);
-
-  const generate = useCallback(() => {
-    if (phase === "shuffling") return;
-    setPhase("shuffling");
-
-    const nextCombo = (combo + 1) % COMBINATIONS.length;
-    setShuffleIcons([0, 0, 0]);
-
-    [0, 1, 2].forEach((slot) => {
-      let tick = 0;
-      const interval = setInterval(() => {
-        tick++;
-        setShuffleIcons((prev) => {
-          const next = [...prev];
-          next[slot] = (next[slot] + 1) % allIcons.length;
-          return next;
-        });
-      }, 60 + slot * 15);
-
-      shuffleRef.current.push(interval);
-
-      setTimeout(() => {
-        clearInterval(interval);
-      }, 600 + slot * 200);
-    });
-
-    setTimeout(() => {
-      setCombo(nextCombo);
-      setPhase("result");
-    }, 1300);
-  }, [phase, combo, allIcons.length, clearIntervals]);
-
-  const InputIcon = useCallback(
-    ({ index }: { index: number }) => {
-      if (phase === "shuffling") {
-        const Icon = allIcons[shuffleIcons[index]];
-        return <Icon size={20} />;
-      }
-      const Icon = current.inputs[index];
-      return <Icon size={20} />;
-    },
-    [phase, shuffleIcons, current, allIcons],
+function Tile({
+  children,
+  dark,
+  delay = 0,
+  id,
+}: {
+  children: React.ReactNode;
+  dark?: boolean;
+  delay?: number;
+  id: string;
+}) {
+  return (
+    <div
+      className={`flex size-12 items-center justify-center rounded-[14px] ${dark ? "bg-primary text-inverted" : "bg-tertiary text-primary"}`}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={id}
+          initial={{ opacity: 0, scale: 0.6, filter: "blur(4px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.6, filter: "blur(4px)" }}
+          transition={{ ...transition, delay }}
+          className="flex items-center justify-center"
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
+}
 
-  const ResultIcon = current.output;
+export default function IconGeneratorDemo() {
+  const [index, setIndex] = useState(0);
+  const combo = COMBINATIONS[index];
+
+  const next = () => {
+    setIndex((i) => (i + 1) % COMBINATIONS.length);
+  };
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      <div className="flex items-center gap-2">
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            className="relative flex size-14 items-center justify-center overflow-hidden rounded-[14px] bg-tertiary text-primary"
-            animate={
-              phase === "shuffling"
-                ? { scale: [1, 0.92, 1], y: [0, -2, 0] }
-                : { scale: 1, y: 0 }
-            }
-            transition={
-              phase === "shuffling"
-                ? { duration: 0.3, repeat: 3, delay: i * 0.1 }
-                : softSpring
-            }
-          >
-            <AnimatePresence mode="popLayout">
-              <motion.div
-                key={phase === "shuffling" ? `shuffle-${shuffleIcons[i]}` : `input-${combo}-${i}`}
-                initial={{ y: 8, opacity: 0, filter: "blur(4px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                exit={{ y: -8, opacity: 0, filter: "blur(4px)" }}
-                transition={{ duration: 0.12 }}
-                className="flex items-center justify-center"
-              >
-                <InputIcon index={i} />
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="flex flex-col items-center gap-3">
-        <motion.div
-          className="flex size-24 items-center justify-center rounded-[22px] bg-primary text-inverted"
-          layout
-          transition={spring}
-        >
-          <AnimatePresence mode="wait">
-            {phase === "result" ? (
-              <motion.div
-                key={`result-${combo}`}
-                initial={{ scale: 0.5, opacity: 0, filter: "blur(8px)", rotate: -30 }}
-                animate={{ scale: 1, opacity: 1, filter: "blur(0px)", rotate: 0 }}
-                exit={{ scale: 0.5, opacity: 0, filter: "blur(8px)" }}
-                transition={softSpring}
-                className="flex items-center justify-center"
-              >
-                <ResultIcon size={36} />
-              </motion.div>
-            ) : phase === "shuffling" ? (
-              <motion.div
-                key="generating"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: [0.3, 0.6, 0.3], scale: [0.85, 1, 0.85] }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="flex items-center justify-center"
-              >
-                <Sparkle size={36} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key={`idle-result-${combo}`}
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={softSpring}
-                className="flex items-center justify-center"
-              >
-                <ResultIcon size={36} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={`label-${combo}-${phase}`}
-            initial={{ opacity: 0, y: 4, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -4, filter: "blur(4px)" }}
-            transition={{ duration: 0.2 }}
-            className="text-sm text-tertiary"
-          >
-            {phase === "shuffling" ? "generating..." : current.label}
-          </motion.span>
-        </AnimatePresence>
-      </div>
-
-      <motion.button
-        onClick={generate}
-        disabled={phase === "shuffling"}
-        className="rounded-full bg-tertiary px-5 py-2 text-sm font-medium text-primary transition-colors hover:bg-quaternary disabled:opacity-40"
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.96 }}
-        transition={spring}
+    <div className="flex flex-col items-center gap-5">
+      <motion.div
+        className="flex cursor-pointer items-center gap-2"
+        onClick={next}
+        whileTap={{ scale: 0.97 }}
+        transition={transition}
       >
-        Generate
-      </motion.button>
+        {combo.inputs.map((Icon, i) => (
+          <Tile key={i} delay={i * 0.04} id={`${index}-${i}`}>
+            <Icon size={22} />
+          </Tile>
+        ))}
+
+        <span className="px-1 text-xs font-medium text-quaternary">=</span>
+
+        <Tile dark delay={0.14} id={`result-${index}`}>
+          <combo.output size={22} />
+        </Tile>
+      </motion.div>
+
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 4, filter: "blur(3px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: -4, filter: "blur(3px)" }}
+          transition={{ duration: 0.15 }}
+          className="text-xs text-tertiary"
+        >
+          {combo.label}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 }
