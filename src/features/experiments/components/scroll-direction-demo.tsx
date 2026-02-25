@@ -154,8 +154,8 @@ function Minimap({
   trackDirection: boolean;
 }) {
   const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
-  const sectionHeight = 28;
-  const gap = 6;
+  const sectionHeight = 44;
+  const gap = 10;
   const totalHeight =
     SECTIONS.length * sectionHeight + (SECTIONS.length - 1) * gap;
   const viewportRatio = 0.3;
@@ -179,7 +179,7 @@ function Minimap({
   return (
     <div
       className="relative flex flex-col"
-      style={{ height: totalHeight, width: 64, gap }}
+      style={{ height: totalHeight, width: 96, gap }}
     >
       <motion.div
         className="absolute left-0 right-0 rounded-[3px]"
@@ -204,8 +204,8 @@ function Minimap({
         transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.5 }}
       >
         <motion.svg
-          width="8"
-          height="8"
+          width="10"
+          height="10"
           viewBox="0 0 8 8"
           className="text-tertiary"
           animate={{ rotate: arrowDirection === "up" ? 180 : 0 }}
@@ -229,14 +229,14 @@ function Minimap({
         return (
           <div
             key={section.id}
-            className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
+            className="relative z-10 flex flex-col justify-center gap-[4px] shrink-0"
             style={{ height: sectionHeight }}
           >
             {section.lines.map((width, li) => (
               <motion.div
                 key={li}
                 className="rounded-full"
-                style={{ height: 2, width: `${width}%` }}
+                style={{ height: 2.5, width: `${width}%` }}
                 animate={{
                   backgroundColor: isActive
                     ? "var(--text-quaternary)"
@@ -265,13 +265,13 @@ export function ScrollDirectionDemo() {
   const activeLabel = SECTIONS.find((s) => s.id === activeId)?.label ?? "";
   const arrowDirection = trackDirection ? scrollDirection : "down";
 
-  const totalHeight = SECTIONS.length * 28 + (SECTIONS.length - 1) * 6;
+  const totalHeight = SECTIONS.length * 44 + (SECTIONS.length - 1) * 10;
   const viewportH = totalHeight * 0.3;
   const labelTop = scrollProgress * (totalHeight - viewportH) + viewportH / 2;
 
   return (
-    <div className="flex flex-col items-center gap-5 w-full max-w-xl px-4">
-      <div className="flex gap-6 w-full" style={{ height: 420 }}>
+    <div className="flex flex-col items-center gap-5 w-full max-w-2xl px-4">
+      <div className="flex gap-6 w-full" style={{ height: 440 }}>
         <div
           ref={containerRef}
           className="flex-1 overflow-y-auto"
