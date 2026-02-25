@@ -1,5 +1,5 @@
 import { H1, H2 } from "@/components/design-system/heading";
-import { IconGeneratorDemo } from "@/features/experiments/components/icon-generator-demo";
+import IconGeneratorDemo from "@/features/experiments/components/icon-generator-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
