@@ -291,9 +291,13 @@ export function ScrollDirectionDemo() {
       <div className="relative w-full">
         <div
           ref={containerRef}
-          className="h-[380px] overflow-y-auto rounded-lg border border-primary"
+          className="h-[380px] overflow-y-auto"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
         >
-          <div className="divide-y divide-primary">
+          <div>
             {SECTIONS.map((section, i) => (
               <SectionBlock key={section.id} id={section.id} index={i} />
             ))}
