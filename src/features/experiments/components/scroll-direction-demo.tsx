@@ -243,7 +243,7 @@ function Minimap({
                     : isPast
                       ? "var(--text-quaternary)"
                       : "var(--border-primary)",
-                  opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
+                  opacity: isActive ? 0.7 : isPast ? 0.3 : 0.2,
                 }}
                 transition={SPRING}
               />
