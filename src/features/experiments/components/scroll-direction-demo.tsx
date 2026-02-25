@@ -186,7 +186,7 @@ function Minimap({
   return (
     <div
       className="relative flex flex-col"
-      style={{ height: totalHeight, width: 44, gap }}
+      style={{ height: totalHeight, width: 64, gap }}
     >
       <motion.div
         className="absolute left-0 right-0 rounded-[3px]"
@@ -236,7 +236,7 @@ function Minimap({
               <motion.div
                 key={li}
                 className="rounded-full"
-                style={{ height: 1.5, width: `${width}%` }}
+                style={{ height: 2, width: `${width}%` }}
                 animate={{
                   backgroundColor: isActive
                     ? "var(--text-primary)"
@@ -306,7 +306,7 @@ export function ScrollDirectionDemo() {
             ))}
           </div>
         </div>
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+        <div className="absolute right-6 top-1/2 -translate-y-1/2">
           <Minimap
             activeId={activeId}
             scrollProgress={scrollProgress}
