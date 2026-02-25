@@ -45,39 +45,70 @@ function useActiveSection(
 
     setActiveId(SECTIONS[0].id);
     lastScrollTop.current = container.scrollTop;
-
     container.addEventListener("scroll", handleScroll, { passive: true });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute("data-section-id");
-          if (!id) return;
-
-          if (trackDirection) {
-            if (entry.isIntersecting) {
-              setActiveId(id);
-            }
-          } else {
-            if (entry.isIntersecting && scrollDirRef.current === "down") {
-              setActiveId(id);
-            }
+    if (!trackDirection) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const id = entry.target.getAttribute("data-section-id");
+            if (id) setActiveId(id);
           }
-        });
-      },
-      {
-        root: container,
-        threshold: 0.45,
-      },
-    );
+        },
+        {
+          root: container,
+          rootMargin: "-70% 0px 0px 0px",
+          threshold: 0,
+        },
+      );
 
-    container.querySelectorAll("[data-section-id]").forEach((el) => {
-      observer.observe(el);
+      container.querySelectorAll("[data-section-id]").forEach((el) => {
+        observer.observe(el);
+      });
+
+      return () => {
+        container.removeEventListener("scroll", handleScroll);
+        observer.disconnect();
+      };
+    }
+
+    function createObserver(direction: "down" | "up") {
+      const margin =
+        direction === "down"
+          ? "-70% 0px 0px 0px"
+          : "0px 0px -70% 0px";
+
+      return new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            if (scrollDirRef.current !== direction) continue;
+            const id = entry.target.getAttribute("data-section-id");
+            if (id) setActiveId(id);
+          }
+        },
+        {
+          root: container,
+          rootMargin: margin,
+          threshold: 0,
+        },
+      );
+    }
+
+    const downObserver = createObserver("down");
+    const upObserver = createObserver("up");
+    const sections = container.querySelectorAll("[data-section-id]");
+
+    sections.forEach((el) => {
+      downObserver.observe(el);
+      upObserver.observe(el);
     });
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
+      downObserver.disconnect();
+      upObserver.disconnect();
     };
   }, [containerRef, trackDirection, handleScroll]);
 
