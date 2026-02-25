@@ -209,11 +209,10 @@ function Minimap({
         animate={{
           top: observerTop,
           borderColor: trackDirection
-            ? "var(--border-interactive)"
-            : "var(--border-secondary)",
-          backgroundColor: trackDirection
-            ? "rgba(99, 102, 241, 0.06)"
-            : "rgba(128, 128, 128, 0.04)",
+            ? "var(--border-secondary)"
+            : "var(--border-primary)",
+          backgroundColor: "var(--bg-quaternary)",
+          opacity: trackDirection ? 0.5 : 0.3,
         }}
         transition={{
           type: "spring",
