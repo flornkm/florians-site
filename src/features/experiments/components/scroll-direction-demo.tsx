@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
+import Toggle from "@/components/ui/toggle";
 
 const SECTIONS = [
   { id: "intro", label: "Introduction", lines: 2 },
@@ -287,47 +288,6 @@ export function ScrollDirectionDemo() {
 
   return (
     <div className="flex flex-col items-center gap-5 w-full max-w-md px-4">
-      <label className="flex items-center gap-2.5 select-none cursor-pointer group">
-        <div className="relative">
-          <input
-            type="checkbox"
-            checked={trackDirection}
-            onChange={(e) => setTrackDirection(e.target.checked)}
-            className="peer sr-only"
-          />
-          <motion.div
-            className="w-8 h-[18px] rounded-full border transition-colors"
-            animate={{
-              backgroundColor: trackDirection
-                ? "var(--text-primary)"
-                : "var(--bg-tertiary)",
-              borderColor: trackDirection
-                ? "var(--text-primary)"
-                : "var(--border-secondary)",
-            }}
-            transition={{ duration: 0.15 }}
-          />
-          <motion.div
-            className="absolute top-[3px] rounded-full bg-primary shadow-sm"
-            style={{ width: 12, height: 12 }}
-            animate={{
-              left: trackDirection ? 17 : 3,
-              backgroundColor: trackDirection
-                ? "var(--text-inverted)"
-                : "var(--text-quaternary)",
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 500,
-              damping: 35,
-            }}
-          />
-        </div>
-        <span className="type-small text-tertiary group-hover:text-secondary transition-colors">
-          Track scroll direction
-        </span>
-      </label>
-
       <div className="relative w-full">
         <div
           ref={containerRef}
@@ -349,20 +309,15 @@ export function ScrollDirectionDemo() {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={trackDirection ? "on" : "off"}
-          className="type-small text-quaternary text-center max-w-[320px] leading-relaxed"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -4 }}
-          transition={{ duration: 0.2 }}
-        >
-          {trackDirection
-            ? "The observation band follows scroll direction — it shifts to the leading edge, picking up sections immediately."
-            : "The observation band is always at the bottom. Scroll up and watch how it lags behind — sections highlight late."}
-        </motion.p>
-      </AnimatePresence>
+      <label className="flex items-center gap-2.5 cursor-pointer select-none">
+        <Toggle
+          checked={trackDirection}
+          onCheckedChange={setTrackDirection}
+        />
+        <span className="type-small text-tertiary">
+          Track scroll direction
+        </span>
+      </label>
     </div>
   );
 }
