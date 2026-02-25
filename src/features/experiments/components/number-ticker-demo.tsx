@@ -63,10 +63,7 @@ function DigitFlash({ digit, prevDigit }: { digit: number; prevDigit: number }) 
 }
 
 function RollingSpark({ digit, springY }: { digit: number; springY: ReturnType<typeof useSpring> }) {
-  const velocity = useTransform(springY, (latest) => {
-    const v = springY.getVelocity();
-    return Math.abs(v);
-  });
+  const velocity = useTransform(springY, () => Math.abs(springY.getVelocity()));
 
   const sparkOpacity = useTransform(velocity, [0, 500, 3000], [0, 0.3, 1]);
   const sparkScale = useTransform(velocity, [0, 500, 3000], [0.5, 1, 1.8]);
@@ -79,7 +76,7 @@ function RollingSpark({ digit, springY }: { digit: number; springY: ReturnType<t
         opacity: sparkOpacity,
         scaleX: sparkScale,
         background: `linear-gradient(90deg, transparent, ${sparkColor}, transparent)`,
-        filter: `blur(1px)`,
+        filter: "blur(1px)",
       }}
     />
   );
@@ -376,6 +373,137 @@ function RainbowBar() {
   );
 }
 
+function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+
+  return reduced;
+}
+
+function StrobeFlash({ id, color }: { id: number; color: string }) {
+  return (
+    <motion.div
+      key={id}
+      className="pointer-events-none absolute -inset-6 z-40 rounded-2xl"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0.9, 0.15, 0.75, 0] }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+      style={{
+        background: `radial-gradient(circle at 50% 50%, ${color}66 0%, transparent 65%)`,
+        filter: "blur(2px)",
+      }}
+    />
+  );
+}
+
+function ChromaticSplit({ tick, color }: { tick: number; color: string }) {
+  return (
+    <AnimatePresence>
+      {tick > 0 && (
+        <motion.div
+          key={tick}
+          className="pointer-events-none absolute inset-0 z-35"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.75, 0] }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.22, ease: "easeOut" }}
+        >
+          <div
+            className="absolute inset-0 rounded-xl"
+            style={{
+              boxShadow: `inset 0 0 0 1px ${color}22, 0 0 0 1px rgba(0,0,0,0.02)`,
+            }}
+          />
+          <div
+            className="absolute inset-0 rounded-xl"
+            style={{
+              transform: "translate3d(-1px, 0, 0)",
+              mixBlendMode: "screen",
+              boxShadow: `0 0 0 1px rgba(255, 0, 128, 0.18)`,
+            }}
+          />
+          <div
+            className="absolute inset-0 rounded-xl"
+            style={{
+              transform: "translate3d(1px, 0, 0)",
+              mixBlendMode: "screen",
+              boxShadow: `0 0 0 1px rgba(0, 255, 255, 0.14)`,
+            }}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function Scanlines({ tick }: { tick: number }) {
+  return (
+    <AnimatePresence>
+      {tick > 0 && (
+        <motion.div
+          key={tick}
+          className="pointer-events-none absolute inset-0 z-30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.35, 0] }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          style={{
+            background:
+              "repeating-linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 1px, transparent 1px, transparent 6px)",
+            mixBlendMode: "overlay",
+          }}
+        />
+      )}
+    </AnimatePresence>
+  );
+}
+
+function OrbitComet({ active, color }: { active: boolean; color: string }) {
+  return (
+    <motion.div
+      className="pointer-events-none absolute -inset-6 z-10"
+      animate={{ rotate: active ? 360 : 0 }}
+      transition={{ duration: active ? 0.8 : 4, ease: "linear", repeat: Infinity }}
+    >
+      <motion.div
+        className="absolute left-1/2 top-0"
+        style={{
+          transform: "translateX(-50%)",
+          filter: "blur(0.2px)",
+        }}
+      >
+        <div
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: 9999,
+            background: color,
+            boxShadow: `0 0 18px ${color}66, 0 0 6px ${color}66`,
+          }}
+        />
+        <div
+          style={{
+            width: 26,
+            height: 2,
+            marginTop: -4,
+            marginLeft: -24,
+            background: `linear-gradient(90deg, transparent, ${color}88)`,
+            filter: "blur(1px)",
+          }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export function NumberTickerDemo() {
   const [value, setValue] = useState(1234);
   const [burstId, setBurstId] = useState(0);
@@ -392,6 +520,10 @@ export function NumberTickerDemo() {
   const [tilt, setTilt] = useState(0);
   const [squeeze, setSqueeze] = useState(false);
   const [wobble, setWobble] = useState({ x: 0, y: 0 });
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [strobeId, setStrobeId] = useState(0);
+  const [glitchId, setGlitchId] = useState(0);
+  const [cometActive, setCometActive] = useState(false);
 
   const set = useCallback(
     (n: number) => {
@@ -403,6 +535,19 @@ export function NumberTickerDemo() {
 
       setPrevDigits(String(Math.abs(prev.current)).split("").map(Number));
       setChangeTick((t) => t + 1);
+
+      if (!prefersReducedMotion) {
+        setCometActive(true);
+        window.setTimeout(() => setCometActive(false), 650);
+
+        if (absDiff >= 80) {
+          setStrobeId((s) => s + 1);
+        }
+
+        if (absDiff > 0 && Math.random() < Math.min(0.65, absDiff / 120)) {
+          setGlitchId((g) => g + 1);
+        }
+      }
 
       const tiltAmount = Math.max(-20, Math.min(20, diff * 1.2));
       setTilt(tiltAmount);
@@ -438,7 +583,7 @@ export function NumberTickerDemo() {
       prev.current = c;
       setValue(c);
     },
-    [],
+    [prefersReducedMotion],
   );
 
   const onPointerDown = useCallback(
@@ -534,6 +679,8 @@ export function NumberTickerDemo() {
       <div className="relative">
         <AuraGlow value={value} activeColor={activeColor} />
 
+        {!prefersReducedMotion && <OrbitComet active={cometActive} color={activeColor} />}
+
         <motion.div
           ref={wrapRef}
           className={cn(
@@ -556,6 +703,9 @@ export function NumberTickerDemo() {
             boxShadow: `0 2px 8px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03)`,
           }}
         >
+          {!prefersReducedMotion && <ChromaticSplit tick={changeTick} color={activeColor} />}
+          {!prefersReducedMotion && strobeId > 0 && <StrobeFlash id={strobeId} color={activeColor} />}
+
           <AnimatePresence>
             {burstId > 0 && <Burst key={burstId} id={burstId} intensity={burstIntensity} />}
           </AnimatePresence>
@@ -584,11 +734,12 @@ export function NumberTickerDemo() {
           </motion.button>
 
           <div
-            className="rounded-lg overflow-hidden bg-secondary"
+            className="relative rounded-lg overflow-hidden bg-secondary"
             style={{
               boxShadow: `inset 0 2px 6px rgba(0,0,0,0.06), inset 0 0 0 0.5px rgba(0,0,0,0.04)`,
             }}
           >
+            {!prefersReducedMotion && <Scanlines tick={glitchId} />}
             <OdometerDisplay value={value} changeTick={changeTick} prevDigits={prevDigits} />
           </div>
 
