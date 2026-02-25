@@ -158,7 +158,6 @@ function Minimap({
   trackDirection: boolean;
 }) {
   const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
-  const activeLabel = SECTIONS[activeIndex]?.label ?? "";
   const sectionHeight = 28;
   const gap = 6;
   const totalHeight =
@@ -170,11 +169,10 @@ function Minimap({
   const baseTop = scrollProgress * scrollableRange;
 
   let observerTop: number;
+  const bandSize = viewportHeight * viewportRatio;
   if (!trackDirection) {
-    const bandSize = viewportHeight * viewportRatio;
     observerTop = baseTop + (viewportHeight - bandSize);
   } else {
-    const bandSize = viewportHeight * viewportRatio;
     if (scrollDirection === "down") {
       observerTop = baseTop + (viewportHeight - bandSize);
     } else {
@@ -182,128 +180,105 @@ function Minimap({
     }
   }
 
-  const observerBandHeight = viewportHeight * viewportRatio;
-
+  const observerBandHeight = bandSize;
   const arrowDirection = trackDirection ? scrollDirection : "down";
 
   return (
-    <div className="flex items-center gap-3">
-      <div
-        className="relative flex flex-col"
-        style={{ height: totalHeight, width: 64, gap }}
+    <div
+      className="relative flex flex-col"
+      style={{ height: totalHeight, width: 64, gap }}
+    >
+      <motion.div
+        className="absolute left-0 right-0 rounded-[3px]"
+        style={{
+          height: viewportHeight,
+          backgroundColor: "var(--bg-tertiary)",
+          opacity: 0.6,
+        }}
+        animate={{ top: baseTop }}
+        transition={{
+          type: "spring",
+          stiffness: 600,
+          damping: 45,
+          mass: 0.4,
+        }}
+      />
+
+      <motion.div
+        className="absolute left-0 right-0 rounded-[3px] border flex items-center justify-center overflow-hidden"
+        style={{ height: observerBandHeight }}
+        animate={{
+          top: observerTop,
+          borderColor: "var(--border-secondary)",
+          backgroundColor: "var(--bg-quaternary)",
+          opacity: 0.8,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 40,
+          mass: 0.5,
+        }}
       >
-        <motion.div
-          className="absolute left-0 right-0 rounded-[3px]"
-          style={{
-            height: viewportHeight,
-            backgroundColor: "var(--bg-tertiary)",
-            opacity: 0.6,
-          }}
-          animate={{ top: baseTop }}
+        <motion.svg
+          width="8"
+          height="8"
+          viewBox="0 0 8 8"
+          className="text-tertiary"
+          animate={{ rotate: arrowDirection === "up" ? 180 : 0 }}
           transition={{
             type: "spring",
             stiffness: 600,
-            damping: 45,
-            mass: 0.4,
-          }}
-        />
-
-        <motion.div
-          className="absolute left-0 right-0 rounded-[3px] border flex items-center justify-center overflow-hidden"
-          style={{ height: observerBandHeight }}
-          animate={{
-            top: observerTop,
-            borderColor: "var(--border-secondary)",
-            backgroundColor: "var(--bg-quaternary)",
-            opacity: 0.8,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 500,
-            damping: 40,
-            mass: 0.5,
+            damping: 35,
+            mass: 0.3,
           }}
         >
-          <motion.svg
-            width="8"
-            height="8"
-            viewBox="0 0 8 8"
-            className="text-tertiary"
-            animate={{ rotate: arrowDirection === "up" ? 180 : 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 600,
-              damping: 35,
-              mass: 0.3,
-            }}
+          <path
+            d="M4 1.5L4 6.5M4 6.5L1.5 4M4 6.5L6.5 4"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </motion.svg>
+      </motion.div>
+
+      {SECTIONS.map((section, i) => {
+        const isActive = section.id === activeId;
+        const isPast = i < activeIndex;
+        const lines = SKELETON_WIDTHS[section.lines] ?? [100, 70];
+
+        return (
+          <div
+            key={section.id}
+            className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
+            style={{ height: sectionHeight }}
           >
-            <path
-              d="M4 1.5L4 6.5M4 6.5L1.5 4M4 6.5L6.5 4"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-          </motion.svg>
-        </motion.div>
-
-        {SECTIONS.map((section, i) => {
-          const isActive = section.id === activeId;
-          const isPast = i < activeIndex;
-          const lines = SKELETON_WIDTHS[section.lines] ?? [100, 70];
-
-          return (
-            <div
-              key={section.id}
-              className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
-              style={{ height: sectionHeight }}
-            >
-              {lines.map((width, li) => (
-                <motion.div
-                  key={li}
-                  className="rounded-full"
-                  style={{ height: 2, width: `${width}%` }}
-                  animate={{
-                    backgroundColor: isActive
+            {lines.map((width, li) => (
+              <motion.div
+                key={li}
+                className="rounded-full"
+                style={{ height: 2, width: `${width}%` }}
+                animate={{
+                  backgroundColor: isActive
+                    ? "var(--text-quaternary)"
+                    : isPast
                       ? "var(--text-quaternary)"
-                      : isPast
-                        ? "var(--text-quaternary)"
-                        : "var(--border-primary)",
-                    opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 35,
-                    mass: 0.4,
-                  }}
-                />
-              ))}
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="flex flex-col gap-1 min-w-[72px]">
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={activeId}
-            className="type-tiny text-tertiary whitespace-nowrap"
-            initial={{ opacity: 0, y: arrowDirection === "down" ? -4 : 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: arrowDirection === "down" ? 4 : -4 }}
-            transition={{
-              type: "spring",
-              stiffness: 500,
-              damping: 30,
-              mass: 0.4,
-            }}
-          >
-            {activeLabel}
-          </motion.span>
-        </AnimatePresence>
-      </div>
+                      : "var(--border-primary)",
+                  opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 35,
+                  mass: 0.4,
+                }}
+              />
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -312,7 +287,7 @@ function SectionBlock({ id, index }: { id: string; index: number }) {
   return (
     <div
       data-section-id={id}
-      className="flex flex-col justify-center px-6 pr-28 py-20"
+      className="flex flex-col justify-center px-6 py-20"
       style={{ minHeight: "55%" }}
     >
       <p className="type-tiny text-quaternary mb-3 tabular-nums tracking-wide">
@@ -332,12 +307,16 @@ export function ScrollDirectionDemo() {
     useScrollState(containerRef);
   const activeId = useActiveSection(containerRef, trackDirection, dirRef);
 
+  const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
+  const activeLabel = SECTIONS[activeIndex]?.label ?? "";
+  const arrowDirection = trackDirection ? scrollDirection : "down";
+
   return (
-    <div className="flex flex-col items-center gap-5 w-full max-w-md px-4">
-      <div className="relative w-full" style={{ height: "420px" }}>
+    <div className="flex flex-col items-center gap-5 w-full max-w-lg px-4">
+      <div className="flex gap-6 w-full" style={{ height: "420px" }}>
         <div
           ref={containerRef}
-          className="h-full overflow-y-auto"
+          className="flex-1 overflow-y-auto"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
@@ -354,7 +333,26 @@ export function ScrollDirectionDemo() {
             ))}
           </div>
         </div>
-        <div className="absolute right-6 top-1/2 -translate-y-1/2">
+
+        <div className="flex flex-col items-start justify-center gap-3 shrink-0">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={activeId}
+              className="type-tiny text-tertiary whitespace-nowrap"
+              initial={{ opacity: 0, y: arrowDirection === "down" ? -4 : 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: arrowDirection === "down" ? 4 : -4 }}
+              transition={{
+                type: "spring",
+                stiffness: 500,
+                damping: 30,
+                mass: 0.4,
+              }}
+            >
+              {activeLabel}
+            </motion.span>
+          </AnimatePresence>
+
           <Minimap
             activeId={activeId}
             scrollProgress={scrollProgress}
