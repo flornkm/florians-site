@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Toggle from "@/components/ui/toggle";
 
 const SECTIONS = [
@@ -158,6 +158,7 @@ function Minimap({
   trackDirection: boolean;
 }) {
   const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
+  const activeLabel = SECTIONS[activeIndex]?.label ?? "";
   const sectionHeight = 28;
   const gap = 6;
   const totalHeight =
@@ -183,79 +184,126 @@ function Minimap({
 
   const observerBandHeight = viewportHeight * viewportRatio;
 
+  const arrowDirection = trackDirection ? scrollDirection : "down";
+
   return (
-    <div
-      className="relative flex flex-col"
-      style={{ height: totalHeight, width: 64, gap }}
-    >
-      <motion.div
-        className="absolute left-0 right-0 rounded-[3px]"
-        style={{
-          height: viewportHeight,
-          backgroundColor: "var(--bg-tertiary)",
-          opacity: 0.6,
-        }}
-        animate={{ top: baseTop }}
-        transition={{
-          type: "spring",
-          stiffness: 600,
-          damping: 45,
-          mass: 0.4,
-        }}
-      />
+    <div className="flex items-center gap-3">
+      <div
+        className="relative flex flex-col"
+        style={{ height: totalHeight, width: 64, gap }}
+      >
+        <motion.div
+          className="absolute left-0 right-0 rounded-[3px]"
+          style={{
+            height: viewportHeight,
+            backgroundColor: "var(--bg-tertiary)",
+            opacity: 0.6,
+          }}
+          animate={{ top: baseTop }}
+          transition={{
+            type: "spring",
+            stiffness: 600,
+            damping: 45,
+            mass: 0.4,
+          }}
+        />
 
-      <motion.div
-        className="absolute left-0 right-0 rounded-[3px] border"
-        style={{ height: observerBandHeight }}
-        animate={{
-          top: observerTop,
-          borderColor: "var(--border-secondary)",
-          backgroundColor: "var(--bg-quaternary)",
-          opacity: 0.8,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 40,
-          mass: 0.5,
-        }}
-      />
-
-      {SECTIONS.map((section, i) => {
-        const isActive = section.id === activeId;
-        const isPast = i < activeIndex;
-        const lines = SKELETON_WIDTHS[section.lines] ?? [100, 70];
-
-        return (
-          <div
-            key={section.id}
-            className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
-            style={{ height: sectionHeight }}
+        <motion.div
+          className="absolute left-0 right-0 rounded-[3px] border flex items-center justify-center overflow-hidden"
+          style={{ height: observerBandHeight }}
+          animate={{
+            top: observerTop,
+            borderColor: "var(--border-secondary)",
+            backgroundColor: "var(--bg-quaternary)",
+            opacity: 0.8,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 40,
+            mass: 0.5,
+          }}
+        >
+          <motion.svg
+            width="8"
+            height="8"
+            viewBox="0 0 8 8"
+            className="text-tertiary"
+            animate={{ rotate: arrowDirection === "up" ? 180 : 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 600,
+              damping: 35,
+              mass: 0.3,
+            }}
           >
-            {lines.map((width, li) => (
-              <motion.div
-                key={li}
-                className="rounded-full"
-                style={{ height: 2, width: `${width}%` }}
-                animate={{
-                  backgroundColor: isActive
-                    ? "var(--text-quaternary)"
-                    : isPast
+            <path
+              d="M4 1.5L4 6.5M4 6.5L1.5 4M4 6.5L6.5 4"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+          </motion.svg>
+        </motion.div>
+
+        {SECTIONS.map((section, i) => {
+          const isActive = section.id === activeId;
+          const isPast = i < activeIndex;
+          const lines = SKELETON_WIDTHS[section.lines] ?? [100, 70];
+
+          return (
+            <div
+              key={section.id}
+              className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
+              style={{ height: sectionHeight }}
+            >
+              {lines.map((width, li) => (
+                <motion.div
+                  key={li}
+                  className="rounded-full"
+                  style={{ height: 2, width: `${width}%` }}
+                  animate={{
+                    backgroundColor: isActive
                       ? "var(--text-quaternary)"
-                      : "var(--border-primary)",
-                  opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 35,
-                  mass: 0.4,
-                }}
-              />
-            ))}
-          </div>
-        );
-      })}
+                      : isPast
+                        ? "var(--text-quaternary)"
+                        : "var(--border-primary)",
+                    opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 35,
+                    mass: 0.4,
+                  }}
+                />
+              ))}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-col gap-1 min-w-[72px]">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={activeId}
+            className="type-tiny text-tertiary whitespace-nowrap"
+            initial={{ opacity: 0, y: arrowDirection === "down" ? -4 : 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: arrowDirection === "down" ? 4 : -4 }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 30,
+              mass: 0.4,
+            }}
+          >
+            {activeLabel}
+          </motion.span>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
