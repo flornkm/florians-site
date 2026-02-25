@@ -23,12 +23,11 @@ const SECTION_CONTENT: Record<string, string> = {
   closing: "Ship it. Then make it better. Then make it better again.",
 };
 
-function useScrollDirection(
+function useActiveSection(
   containerRef: React.RefObject<HTMLElement | null>,
-  enabled: boolean,
+  trackDirection: boolean,
 ) {
-  const [activeIds, setActiveIds] = useState<Set<string>>(new Set());
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
   const scrollDirRef = useRef<"down" | "up">("down");
   const lastScrollTop = useRef(0);
 
@@ -36,7 +35,7 @@ function useScrollDirection(
     const el = containerRef.current;
     if (!el) return;
     const st = el.scrollTop;
-    scrollDirRef.current = st > lastScrollTop.current ? "down" : "up";
+    scrollDirRef.current = st >= lastScrollTop.current ? "down" : "up";
     lastScrollTop.current = st;
   }, [containerRef]);
 
@@ -44,84 +43,68 @@ function useScrollDirection(
     const container = containerRef.current;
     if (!container) return;
 
+    setActiveId(SECTIONS[0].id);
+    lastScrollTop.current = container.scrollTop;
+
     container.addEventListener("scroll", handleScroll, { passive: true });
 
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
-        setActiveIds((prev) => {
-          const next = new Set(prev);
-          entries.forEach((entry) => {
-            const id = entry.target.getAttribute("data-section-id");
-            if (!id) return;
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute("data-section-id");
+          if (!id) return;
 
-            if (enabled) {
-              if (entry.isIntersecting) {
-                next.add(id);
-              } else {
-                next.delete(id);
-              }
-            } else {
-              if (entry.isIntersecting && scrollDirRef.current === "down") {
-                next.add(id);
-              }
-              if (!entry.isIntersecting && scrollDirRef.current === "down") {
-                // keep it
-              }
-              if (entry.isIntersecting && scrollDirRef.current === "up") {
-                // naive: don't remove when scrolling up without tracking
-              }
-              if (!entry.isIntersecting && scrollDirRef.current === "up") {
-                // without direction tracking, we don't properly remove
-              }
+          if (trackDirection) {
+            if (entry.isIntersecting) {
+              setActiveId(id);
             }
-          });
-          return next;
+          } else {
+            if (entry.isIntersecting && scrollDirRef.current === "down") {
+              setActiveId(id);
+            }
+          }
         });
       },
       {
         root: container,
-        threshold: 0.4,
+        threshold: 0.45,
       },
     );
 
     container.querySelectorAll("[data-section-id]").forEach((el) => {
-      observerRef.current?.observe(el);
+      observer.observe(el);
     });
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
-      observerRef.current?.disconnect();
+      observer.disconnect();
     };
-  }, [containerRef, enabled, handleScroll]);
+  }, [containerRef, trackDirection, handleScroll]);
 
-  return activeIds;
+  return activeId;
 }
 
-function TableOfContents({ activeIds }: { activeIds: Set<string> }) {
+function TableOfContents({ activeId }: { activeId: string }) {
+  const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
+
   return (
     <div className="flex flex-col items-center gap-2.5 py-2">
       {SECTIONS.map((section, i) => {
-        const isActive = activeIds.has(section.id);
-        const sectionIndex = SECTIONS.findIndex((s) => activeIds.has(s.id));
-        const lastActiveIndex = [...SECTIONS].reverse().findIndex((s) => activeIds.has(s.id));
-        const lastActive = lastActiveIndex >= 0 ? SECTIONS.length - 1 - lastActiveIndex : -1;
-        const isPast = sectionIndex >= 0 && i < sectionIndex;
-        const isBetween = sectionIndex >= 0 && i >= sectionIndex && i <= lastActive;
+        const isActive = section.id === activeId;
+        const isPast = i < activeIndex;
 
         return (
           <div key={section.id} className="relative flex items-center justify-center">
             <motion.div
               className="rounded-full"
               animate={{
-                width: isActive ? 8 : isBetween ? 6 : isPast ? 5 : 4,
-                height: isActive ? 8 : isBetween ? 6 : isPast ? 5 : 4,
+                width: isActive ? 8 : isPast ? 5 : 4,
+                height: isActive ? 8 : isPast ? 5 : 4,
                 backgroundColor: isActive
                   ? "var(--text-primary)"
-                  : isBetween
-                    ? "var(--text-tertiary)"
-                    : isPast
-                      ? "var(--text-quaternary)"
-                      : "var(--border-primary)",
+                  : isPast
+                    ? "var(--text-quaternary)"
+                    : "var(--border-primary)",
               }}
               transition={{
                 type: "spring",
@@ -175,7 +158,7 @@ function SectionBlock({ id, index }: { id: string; index: number }) {
 export function ScrollDirectionDemo() {
   const [trackDirection, setTrackDirection] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const activeIds = useScrollDirection(containerRef, trackDirection);
+  const activeId = useActiveSection(containerRef, trackDirection);
 
   return (
     <div className="flex flex-col items-center gap-5 w-full max-w-md px-4">
@@ -226,14 +209,14 @@ export function ScrollDirectionDemo() {
           </div>
         </div>
         <div className="absolute right-3 top-1/2 -translate-y-1/2">
-          <TableOfContents activeIds={activeIds} />
+          <TableOfContents activeId={activeId} />
         </div>
       </div>
 
       <p className="type-small text-quaternary text-center max-w-[300px] leading-relaxed">
         {trackDirection
-          ? "Sections accurately highlight and unhighlight as they enter and leave the viewport."
-          : "Try scrolling down then back up. Without direction tracking, sections stay highlighted."}
+          ? "Scroll both ways. The active section updates immediately when a new section enters the viewport."
+          : "Scroll down, then back up. Without direction tracking, the highlight sticks to the bottom-most visited section."}
       </p>
     </div>
   );
