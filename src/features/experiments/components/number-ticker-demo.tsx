@@ -1,49 +1,43 @@
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-const CELL = 56;
-const SPRING = { stiffness: 160, damping: 20, mass: 1.4 };
+const CELL = 48;
+const SPRING = { stiffness: 180, damping: 22, mass: 1.2 };
 const POP = { stiffness: 400, damping: 24, mass: 0.5 };
+const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Drum({ digit, index }: { digit: number; index: number }) {
-  const mv = useMotionValue(digit);
+  const mv = useMotionValue(-digit * CELL);
   const spring = useSpring(mv, SPRING);
 
   useEffect(() => {
-    mv.set(digit);
+    mv.set(-digit * CELL);
   }, [digit, mv]);
-
-  const y = useTransform(spring, (v) => -v * CELL);
-
-  const slots = 30;
 
   return (
     <motion.div
       className="relative overflow-hidden"
-      style={{ height: CELL, width: 36 }}
+      style={{ height: CELL, width: 32 }}
       initial={{ opacity: 0, scaleY: 0, width: 0 }}
-      animate={{ opacity: 1, scaleY: 1, width: 36 }}
+      animate={{ opacity: 1, scaleY: 1, width: 32 }}
       exit={{ opacity: 0, scaleY: 0, width: 0 }}
-      transition={{ type: "spring", ...POP, delay: index * 0.045 }}
+      transition={{ type: "spring", ...POP, delay: index * 0.04 }}
     >
       <div
         className="pointer-events-none absolute inset-0 z-10"
         style={{
           background:
-            "linear-gradient(to bottom, var(--bg-secondary) 0%, transparent 30%, transparent 70%, var(--bg-secondary) 100%)",
+            "linear-gradient(to bottom, var(--bg-secondary) 0%, transparent 25%, transparent 75%, var(--bg-secondary) 100%)",
         }}
       />
 
-      <motion.div className="absolute inset-x-0" style={{ y, top: CELL * 10 }}>
-        {Array.from({ length: slots }).map((_, i) => {
-          const d = ((i - 10) % 10 + 10) % 10;
-          return (
-            <div key={i} className="flex items-center justify-center" style={{ height: CELL }}>
-              <span className="text-xl font-semibold tabular-nums text-primary select-none">{d}</span>
-            </div>
-          );
-        })}
+      <motion.div className="absolute inset-x-0" style={{ y: spring }}>
+        {DIGITS.map((d) => (
+          <div key={d} className="flex items-center justify-center" style={{ height: CELL }}>
+            <span className="text-lg font-semibold tabular-nums text-primary select-none">{d}</span>
+          </div>
+        ))}
       </motion.div>
     </motion.div>
   );
@@ -51,11 +45,12 @@ function Drum({ digit, index }: { digit: number; index: number }) {
 
 function OdometerDisplay({ value }: { value: number }) {
   const abs = Math.abs(value);
-  const places = useMemo(() => Math.max(1, String(abs).length), [abs]);
   const digitArr = useMemo(() => {
-    const str = String(abs).padStart(places, "0");
+    const str = String(abs);
     return str.split("").map(Number);
-  }, [abs, places]);
+  }, [abs]);
+
+  const places = digitArr.length;
 
   return (
     <div className="flex items-center">
@@ -64,12 +59,12 @@ function OdometerDisplay({ value }: { value: number }) {
           <motion.div
             key="neg"
             initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: 18 }}
+            animate={{ opacity: 1, width: 16 }}
             exit={{ opacity: 0, width: 0 }}
             transition={{ type: "spring", ...POP }}
             className="flex items-center justify-center overflow-hidden"
           >
-            <span className="text-xl font-semibold text-primary select-none">-</span>
+            <span className="text-lg font-semibold text-primary select-none">-</span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -83,7 +78,7 @@ function OdometerDisplay({ value }: { value: number }) {
                 {i > 0 && (
                   <div
                     className="absolute left-0 top-[15%] bottom-[15%] w-px z-20"
-                    style={{ background: "var(--border-tertiary)", opacity: 0.5 }}
+                    style={{ background: "var(--border-tertiary)", opacity: 0.4 }}
                   />
                 )}
                 <Drum digit={d} index={i} />
@@ -224,11 +219,11 @@ export function NumberTickerDemo() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full h-full justify-center select-none">
+    <div className="flex flex-col items-center gap-5 w-full h-full justify-center select-none">
       <div
         ref={wrapRef}
         className={cn(
-          "relative flex items-center gap-3 rounded-2xl border border-primary bg-primary p-3",
+          "relative flex items-center gap-2.5 rounded-xl border border-primary bg-primary p-2",
           dragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={onPointerDown}
@@ -240,15 +235,15 @@ export function NumberTickerDemo() {
           <Sparkle key={s.id} x={s.x} y={s.y} delay={s.delay} />
         ))}
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1">
           <motion.button
             onClick={() => set(value + 1)}
             whileTap={{ scale: 0.82, y: -2 }}
             whileHover={{ scale: 1.08 }}
             transition={{ type: "spring", stiffness: 500, damping: 18 }}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
+            className="flex items-center justify-center w-7 h-7 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
               <path d="M3 9l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </motion.button>
@@ -257,15 +252,15 @@ export function NumberTickerDemo() {
             whileTap={{ scale: 0.82, y: 2 }}
             whileHover={{ scale: 1.08 }}
             transition={{ type: "spring", stiffness: 500, damping: 18 }}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
+            className="flex items-center justify-center w-7 h-7 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
               <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </motion.button>
         </div>
 
-        <div className="rounded-xl overflow-hidden border border-primary bg-secondary px-1">
+        <div className="rounded-lg overflow-hidden border border-primary bg-secondary">
           <OdometerDisplay value={value} />
         </div>
       </div>
