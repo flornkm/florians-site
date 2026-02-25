@@ -103,7 +103,7 @@ function useActiveSection(
 
     function createObserver(direction: "down" | "up") {
       const margin =
-        direction === "down" ? "-70% 0px 0px 0px" : "0px 0px -70% 0px";
+        "-40% 0px -40% 0px";
 
       return new IntersectionObserver(
         (entries) => {
@@ -165,15 +165,13 @@ function Minimap({
   const baseTop = scrollProgress * scrollableRange;
 
   let observerTop: number;
-  const bandSize = viewportHeight * viewportRatio;
+  let bandSize: number;
   if (!trackDirection) {
+    bandSize = viewportHeight * viewportRatio;
     observerTop = baseTop + (viewportHeight - bandSize);
   } else {
-    if (scrollDirection === "down") {
-      observerTop = baseTop + (viewportHeight - bandSize);
-    } else {
-      observerTop = baseTop;
-    }
+    bandSize = viewportHeight * 0.67;
+    observerTop = baseTop + (viewportHeight - bandSize) / 2;
   }
 
   const arrowDirection = trackDirection ? scrollDirection : "down";
