@@ -24,7 +24,7 @@ function digitColor(d: number, offset: number = 0) {
   return CANDY[(d + offset) % CANDY.length];
 }
 
-function Drum({ digit, index, total }: { digit: number; index: number; total: number }) {
+function Drum({ digit, index }: { digit: number; index: number; total: number }) {
   const mv = useMotionValue(-digit * CELL);
   const spring = useSpring(mv, SPRING);
 
@@ -124,46 +124,26 @@ function OdometerDisplay({ value }: { value: number }) {
   );
 }
 
-const PRESETS = [
-  { label: "0", value: 0, emoji: "🫥" },
-  { label: "42", value: 42, emoji: "🪐" },
-  { label: "69", value: 69, emoji: "😏" },
-  { label: "404", value: 404, emoji: "🫠" },
-  { label: "777", value: 777, emoji: "🎰" },
-  { label: "1,234", value: 1234, emoji: "📈" },
-  { label: "9,999", value: 9999, emoji: "🤯" },
-];
+const PRESETS = [0, 42, 100, 404, 777, 1234, 9999];
 
 function Particle({ x, y, delay, color, size }: { x: number; y: number; delay: number; color: string; size: number }) {
-  const shape = useMemo(() => Math.random() > 0.5, []);
   return (
     <motion.div
       className="pointer-events-none absolute"
       style={{ left: "50%", top: "50%" }}
       initial={{ opacity: 1, scale: 0, x: 0, y: 0 }}
       animate={{
-        opacity: [1, 1, 0],
-        scale: [0, 1.8, 0],
+        opacity: [1, 0.8, 0],
+        scale: [0, 1, 0.3],
         x: x,
         y: y,
-        rotate: [0, 200 + Math.random() * 400],
+        rotate: [0, 120 + Math.random() * 240],
       }}
-      transition={{ duration: 1, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      {shape ? (
-        <svg width={size} height={size} viewBox="0 0 10 10" fill="none">
-          <path d="M5 0L6.12 3.88L10 5L6.12 6.12L5 10L3.88 6.12L0 5L3.88 3.88L5 0Z" fill={color} />
-        </svg>
-      ) : (
-        <div
-          style={{
-            width: size,
-            height: size,
-            borderRadius: Math.random() > 0.5 ? "50%" : "2px",
-            background: color,
-          }}
-        />
-      )}
+      <svg width={size} height={size} viewBox="0 0 10 10" fill="none">
+        <circle cx="5" cy="5" r="4" fill={color} />
+      </svg>
     </motion.div>
   );
 }
@@ -171,16 +151,16 @@ function Particle({ x, y, delay, color, size }: { x: number; y: number; delay: n
 function Burst({ id }: { id: number }) {
   const particles = useMemo(
     () =>
-      Array.from({ length: 24 }).map((_, i) => {
-        const angle = (i / 24) * Math.PI * 2 + Math.random() * 0.5;
-        const dist = 50 + Math.random() * 80;
+      Array.from({ length: 12 }).map((_, i) => {
+        const angle = (i / 12) * Math.PI * 2 + Math.random() * 0.4;
+        const dist = 40 + Math.random() * 60;
         return {
           id: i,
           x: Math.cos(angle) * dist,
-          y: Math.sin(angle) * dist - 30,
-          delay: Math.random() * 0.12,
+          y: Math.sin(angle) * dist - 20,
+          delay: Math.random() * 0.08,
           color: CANDY[Math.floor(Math.random() * CANDY.length)],
-          size: 4 + Math.random() * 6,
+          size: 3 + Math.random() * 5,
         };
       }),
     [],
@@ -195,31 +175,30 @@ function Burst({ id }: { id: number }) {
   );
 }
 
-function FloatingEmoji({ emoji, id }: { emoji: string; id: number }) {
-  const x = useMemo(() => -60 + Math.random() * 120, []);
+function PulseRing({ color, trigger }: { color: string; trigger: number }) {
   return (
-    <motion.div
-      className="pointer-events-none absolute left-1/2 top-1/2 text-lg"
-      initial={{ opacity: 1, y: 0, x: 0, scale: 0, rotate: 0 }}
-      animate={{
-        opacity: [1, 1, 0],
-        y: -80 - Math.random() * 60,
-        x: x,
-        scale: [0, 1.4, 0.8],
-        rotate: [-20 + Math.random() * 40],
-      }}
-      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {emoji}
-    </motion.div>
+    <AnimatePresence>
+      {trigger > 0 && (
+        <motion.div
+          key={trigger}
+          className="pointer-events-none absolute inset-0 rounded-xl"
+          initial={{ opacity: 0.5, scale: 1 }}
+          animate={{ opacity: 0, scale: 1.15 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{
+            border: `1.5px solid ${color}`,
+          }}
+        />
+      )}
+    </AnimatePresence>
   );
 }
 
 export function NumberTickerDemo() {
   const [value, setValue] = useState(1234);
   const [burstId, setBurstId] = useState(0);
-  const [floatingEmojis, setFloatingEmojis] = useState<{ id: number; emoji: string }[]>([]);
-  const emojiId = useRef(0);
+  const [pulseId, setPulseId] = useState(0);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const dxStart = useRef(0);
@@ -232,12 +211,6 @@ export function NumberTickerDemo() {
     setBurstId((b) => b + 1);
   }, []);
 
-  const spawnEmoji = useCallback((emoji: string) => {
-    const id = emojiId.current++;
-    setFloatingEmojis((e) => [...e, { id, emoji }]);
-    setTimeout(() => setFloatingEmojis((e) => e.filter((em) => em.id !== id)), 1400);
-  }, []);
-
   const set = useCallback(
     (n: number) => {
       const c = Math.min(99999, Math.max(-9999, n));
@@ -248,19 +221,10 @@ export function NumberTickerDemo() {
       setTilt(Math.max(-12, Math.min(12, diff * 0.8)));
       setTimeout(() => setTilt(0), 200);
 
-      if (nl > ol && nl > 1) {
-        triggerBurst();
-        spawnEmoji(["🎉", "🔥", "✨", "💥", "🚀"][Math.floor(Math.random() * 5)]);
-      }
+      setPulseId((p) => p + 1);
 
-      if (c === 69) spawnEmoji("😏");
-      if (c === 420) spawnEmoji("🌿");
-      if (c === 777) spawnEmoji("🍀");
-      if (c === 404) spawnEmoji("👻");
-      if (c === 1337) spawnEmoji("🧠");
-      if (c === 9999) {
+      if (nl !== ol && nl > 1) {
         triggerBurst();
-        spawnEmoji("🤯");
       }
 
       if (Math.abs(diff) > 100) {
@@ -271,7 +235,7 @@ export function NumberTickerDemo() {
       prev.current = c;
       setValue(c);
     },
-    [triggerBurst, spawnEmoji],
+    [triggerBurst],
   );
 
   const onPointerDown = useCallback(
@@ -360,11 +324,11 @@ export function NumberTickerDemo() {
   }, [value]);
 
   return (
-    <div className="flex flex-col items-center gap-5 w-full h-full justify-center select-none">
+    <div className="flex flex-col items-center gap-4 w-full h-full justify-center select-none">
       <motion.div
         ref={wrapRef}
         className={cn(
-          "relative flex items-center gap-2 rounded-2xl border border-primary bg-primary p-2",
+          "relative flex items-center gap-1.5 rounded-xl border border-primary bg-primary p-1.5",
           dragging ? "cursor-grabbing" : "cursor-grab",
         )}
         animate={{
@@ -378,16 +342,13 @@ export function NumberTickerDemo() {
         onPointerUp={onPointerUp}
         style={{
           touchAction: "none",
-          boxShadow: `0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03), 0 0 0 1px ${activeColor}08`,
+          boxShadow: `0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03)`,
         }}
       >
+        <PulseRing color={activeColor} trigger={pulseId} />
+
         <AnimatePresence>
           {burstId > 0 && <Burst key={burstId} id={burstId} />}
-        </AnimatePresence>
-        <AnimatePresence>
-          {floatingEmojis.map((e) => (
-            <FloatingEmoji key={e.id} id={e.id} emoji={e.emoji} />
-          ))}
         </AnimatePresence>
 
         <motion.button
@@ -396,19 +357,19 @@ export function NumberTickerDemo() {
           onPointerLeave={stopHold}
           onClick={(e) => e.preventDefault()}
           whileTap={{ scale: 0.75, rotate: -8 }}
-          whileHover={{ scale: 1.12, y: -1 }}
+          whileHover={{ scale: 1.08 }}
           transition={{ type: "spring", stiffness: 500, damping: 14 }}
-          className="flex items-center justify-center w-9 h-9 rounded-xl bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
+          className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M3 7h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2.5 6h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </motion.button>
 
         <div
-          className="rounded-xl overflow-hidden bg-secondary px-0.5"
+          className="rounded-lg overflow-hidden bg-secondary px-0.5"
           style={{
-            boxShadow: `inset 0 1px 4px rgba(0,0,0,0.06), inset 0 0 0 0.5px ${activeColor}15`,
+            boxShadow: `inset 0 1px 3px rgba(0,0,0,0.05)`,
           }}
         >
           <OdometerDisplay value={value} />
@@ -420,56 +381,51 @@ export function NumberTickerDemo() {
           onPointerLeave={stopHold}
           onClick={(e) => e.preventDefault()}
           whileTap={{ scale: 0.75, rotate: 8 }}
-          whileHover={{ scale: 1.12, y: -1 }}
+          whileHover={{ scale: 1.08 }}
           transition={{ type: "spring", stiffness: 500, damping: 14 }}
-          className="flex items-center justify-center w-9 h-9 rounded-xl bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
+          className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M7 3v8M3 7h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 2.5v7M2.5 6h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </motion.button>
       </motion.div>
 
-      <div className="flex flex-wrap items-center justify-center gap-1.5 max-w-sm">
+      <div className="flex flex-wrap items-center justify-center gap-1.5">
         {PRESETS.map((p) => (
           <motion.button
-            key={p.value}
-            onClick={() => set(p.value)}
-            whileTap={{ scale: 0.85, y: 2 }}
-            whileHover={{ y: -3, scale: 1.05 }}
+            key={p}
+            onClick={() => set(p)}
+            whileTap={{ scale: 0.88 }}
+            whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 500, damping: 18 }}
             className={cn(
-              "rounded-full px-2.5 py-1 text-xs tabular-nums transition-all duration-200 cursor-pointer flex items-center gap-1",
-              value === p.value
-                ? "font-medium shadow-sm"
+              "rounded-full px-2.5 py-1 text-xs tabular-nums transition-all duration-200 cursor-pointer",
+              value === p
+                ? "font-medium text-inverted"
                 : "text-quaternary hover:text-secondary hover:bg-interactive-hover",
             )}
             style={
-              value === p.value
+              value === p
                 ? {
-                    background: digitColor(String(p.value).split("").map(Number)[0] ?? 0, 0),
-                    color: "#fff",
+                    background: digitColor(String(p).split("").map(Number)[0] ?? 0, 0),
                   }
                 : undefined
             }
           >
-            <span className="text-[10px] leading-none">{p.emoji}</span>
-            {p.label}
+            {p.toLocaleString()}
           </motion.button>
         ))}
         <motion.button
           onClick={() => set(Math.floor(Math.random() * 10000))}
-          whileTap={{ scale: 0.7, rotate: 360 }}
-          whileHover={{ y: -3, rotate: 15 }}
+          whileTap={{ scale: 0.7, rotate: 180 }}
+          whileHover={{ y: -2 }}
           transition={{ type: "spring", stiffness: 400, damping: 18 }}
-          className="rounded-full px-2.5 py-1 text-xs text-quaternary hover:text-secondary hover:bg-interactive-hover transition-all duration-200 cursor-pointer flex items-center gap-1"
+          className="rounded-full px-2.5 py-1 text-xs text-quaternary hover:text-secondary hover:bg-interactive-hover transition-all duration-200 cursor-pointer"
         >
-          <span className="text-[10px] leading-none">🎲</span>
-          Shuffle
+          Random
         </motion.button>
       </div>
-
-      <p className="text-[11px] text-quaternary">drag / hold buttons / arrow keys / hit 69</p>
     </div>
   );
 }
