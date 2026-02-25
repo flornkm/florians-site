@@ -192,7 +192,7 @@ function Minimap({
         style={{
           height: viewportHeight,
           backgroundColor: "var(--bg-tertiary)",
-          opacity: 0.35,
+          opacity: 0.6,
         }}
         animate={{ top: baseTop }}
         transition={{
@@ -212,7 +212,7 @@ function Minimap({
             ? "var(--border-secondary)"
             : "var(--border-primary)",
           backgroundColor: "var(--bg-quaternary)",
-          opacity: trackDirection ? 0.5 : 0.3,
+          opacity: trackDirection ? 0.8 : 0.5,
         }}
         transition={{
           type: "spring",
