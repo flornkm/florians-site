@@ -239,11 +239,11 @@ function Minimap({
                 style={{ height: 2, width: `${width}%` }}
                 animate={{
                   backgroundColor: isActive
-                    ? "var(--text-primary)"
+                    ? "var(--text-quaternary)"
                     : isPast
                       ? "var(--text-quaternary)"
                       : "var(--border-primary)",
-                  opacity: isActive ? 1 : isPast ? 0.5 : 0.25,
+                  opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
                 }}
                 transition={{
                   type: "spring",
@@ -264,7 +264,7 @@ function SectionBlock({ id, index }: { id: string; index: number }) {
   return (
     <div
       data-section-id={id}
-      className="flex flex-col justify-center px-6 py-20"
+      className="flex flex-col justify-center px-6 pr-28 py-20"
       style={{ minHeight: "55%" }}
     >
       <p className="type-tiny text-quaternary mb-3 tabular-nums tracking-wide">
