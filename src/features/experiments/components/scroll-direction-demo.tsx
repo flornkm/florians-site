@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 const SECTIONS = [
-  { id: "intro", label: "Introduction", lines: 3 },
-  { id: "design", label: "Design", lines: 2 },
-  { id: "engineering", label: "Engineering", lines: 4 },
-  { id: "craft", label: "Craft", lines: 2 },
-  { id: "motion", label: "Motion", lines: 3 },
-  { id: "systems", label: "Systems", lines: 3 },
-  { id: "details", label: "Details", lines: 2 },
-  { id: "closing", label: "Closing", lines: 3 },
+  { id: "intro", label: "Introduction", lines: 2 },
+  { id: "design", label: "Design", lines: 1 },
+  { id: "engineering", label: "Engineering", lines: 3 },
+  { id: "craft", label: "Craft", lines: 1 },
+  { id: "motion", label: "Motion", lines: 2 },
+  { id: "systems", label: "Systems", lines: 2 },
+  { id: "details", label: "Details", lines: 1 },
+  { id: "closing", label: "Closing", lines: 2 },
 ];
 
 const SECTION_CONTENT: Record<string, string> = {
@@ -140,9 +140,9 @@ function useActiveSection(
 }
 
 const SKELETON_WIDTHS: Record<number, number[]> = {
-  2: [100, 60],
-  3: [100, 80, 45],
-  4: [100, 90, 75, 35],
+  1: [60],
+  2: [80, 45],
+  3: [90, 60, 35],
 };
 
 function Minimap({
@@ -191,8 +191,8 @@ function Minimap({
         className="absolute left-0 right-0 rounded-[3px]"
         style={{
           height: viewportHeight,
-          backgroundColor: "var(--bg-secondary)",
-          opacity: 0.5,
+          backgroundColor: "var(--bg-tertiary)",
+          opacity: 0.35,
         }}
         animate={{ top: baseTop }}
         transition={{
@@ -204,13 +204,16 @@ function Minimap({
       />
 
       <motion.div
-        className="absolute left-0 right-0 rounded-[3px] border border-secondary"
+        className="absolute left-0 right-0 rounded-[3px] border"
         style={{ height: observerBandHeight }}
         animate={{
           top: observerTop,
           borderColor: trackDirection
             ? "var(--border-interactive)"
             : "var(--border-secondary)",
+          backgroundColor: trackDirection
+            ? "rgba(99, 102, 241, 0.06)"
+            : "rgba(128, 128, 128, 0.04)",
         }}
         transition={{
           type: "spring",
@@ -235,14 +238,14 @@ function Minimap({
               <motion.div
                 key={li}
                 className="rounded-full"
-                style={{ height: 2, width: `${width}%` }}
+                style={{ height: 1.5, width: `${width}%` }}
                 animate={{
                   backgroundColor: isActive
                     ? "var(--text-primary)"
                     : isPast
                       ? "var(--text-quaternary)"
                       : "var(--border-primary)",
-                  opacity: isActive ? 1 : isPast ? 0.6 : 0.35,
+                  opacity: isActive ? 1 : isPast ? 0.5 : 0.25,
                 }}
                 transition={{
                   type: "spring",
