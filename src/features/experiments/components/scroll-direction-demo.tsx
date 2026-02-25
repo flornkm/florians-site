@@ -308,24 +308,40 @@ export function ScrollDirectionDemo() {
             trackDirection={trackDirection}
           />
 
-          <div className="relative" style={{ width: 100, height: "100%" }}>
+          <div
+            className="relative"
+            style={{
+              width: 100,
+              height:
+                SECTIONS.length * 28 + (SECTIONS.length - 1) * 6,
+            }}
+          >
             <AnimatePresence mode="wait">
               <motion.span
                 key={activeId}
                 className="absolute left-0 whitespace-nowrap text-xs font-medium text-secondary"
-                style={{
-                  top: `${scrollProgress * 70 + 10}%`,
-                }}
                 initial={{
                   opacity: 0,
                   y: arrowDirection === "down" ? -6 : 6,
                 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  top:
+                    scrollProgress *
+                      (SECTIONS.length * 28 +
+                        (SECTIONS.length - 1) * 6 -
+                        (SECTIONS.length * 28 + (SECTIONS.length - 1) * 6) *
+                          0.3) +
+                    ((SECTIONS.length * 28 + (SECTIONS.length - 1) * 6) * 0.3) /
+                      2,
+                }}
                 exit={{
                   opacity: 0,
                   y: arrowDirection === "down" ? 6 : -6,
                 }}
                 transition={SPRING}
+                style={{ transform: "translateY(-50%)" }}
               >
                 {activeLabel}
               </motion.span>
