@@ -1,85 +1,92 @@
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-const DIGIT_HEIGHT = 40;
-const SPRING_CONFIG = { stiffness: 300, damping: 30, mass: 0.8 };
+const CELL = 56;
+const SPRING = { stiffness: 160, damping: 20, mass: 1.4 };
+const POP = { stiffness: 400, damping: 24, mass: 0.5 };
 
-function Digit({ value, place }: { value: number; place: number }) {
-  const raw = useSpring(value, SPRING_CONFIG);
+function Drum({ digit, index }: { digit: number; index: number }) {
+  const mv = useMotionValue(digit);
+  const spring = useSpring(mv, SPRING);
 
   useEffect(() => {
-    raw.set(value);
-  }, [value, raw]);
+    mv.set(digit);
+  }, [digit, mv]);
 
-  const y = useTransform(raw, (v) => {
-    const digit = Math.floor(v / Math.pow(10, place)) % 10;
-    return -digit * DIGIT_HEIGHT;
-  });
+  const y = useTransform(spring, (v) => -v * CELL);
+
+  const slots = 30;
 
   return (
-    <div
+    <motion.div
       className="relative overflow-hidden"
-      style={{ height: DIGIT_HEIGHT, width: 24 }}
+      style={{ height: CELL, width: 36 }}
+      initial={{ opacity: 0, scaleY: 0, width: 0 }}
+      animate={{ opacity: 1, scaleY: 1, width: 36 }}
+      exit={{ opacity: 0, scaleY: 0, width: 0 }}
+      transition={{ type: "spring", ...POP, delay: index * 0.045 }}
     >
-      <motion.div className="absolute left-0 right-0" style={{ y }}>
-        {Array.from({ length: 10 }).map((_, i) => (
-          <div
-            key={i}
-            className="flex items-center justify-center tabular-nums"
-            style={{ height: DIGIT_HEIGHT }}
-          >
-            <span className="text-lg font-semibold text-primary">{i}</span>
-          </div>
-        ))}
+      <div
+        className="pointer-events-none absolute inset-0 z-10"
+        style={{
+          background:
+            "linear-gradient(to bottom, var(--bg-secondary) 0%, transparent 30%, transparent 70%, var(--bg-secondary) 100%)",
+        }}
+      />
+
+      <motion.div className="absolute inset-x-0" style={{ y, top: CELL * 10 }}>
+        {Array.from({ length: slots }).map((_, i) => {
+          const d = ((i - 10) % 10 + 10) % 10;
+          return (
+            <div key={i} className="flex items-center justify-center" style={{ height: CELL }}>
+              <span className="text-xl font-semibold tabular-nums text-primary select-none">{d}</span>
+            </div>
+          );
+        })}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
-function AnimatedNumber({ value }: { value: number }) {
-  const absValue = Math.abs(value);
-  const digits = useMemo(() => {
-    const str = String(absValue);
-    return str.length;
-  }, [absValue]);
+function OdometerDisplay({ value }: { value: number }) {
+  const abs = Math.abs(value);
+  const places = useMemo(() => Math.max(1, String(abs).length), [abs]);
+  const digitArr = useMemo(() => {
+    const str = String(abs).padStart(places, "0");
+    return str.split("").map(Number);
+  }, [abs, places]);
 
   return (
     <div className="flex items-center">
       <AnimatePresence mode="popLayout">
         {value < 0 && (
-          <motion.span
-            key="minus"
-            initial={{ opacity: 0, width: 0, filter: "blur(4px)" }}
-            animate={{ opacity: 1, width: 12, filter: "blur(0px)" }}
-            exit={{ opacity: 0, width: 0, filter: "blur(4px)" }}
-            transition={{ type: "spring", ...SPRING_CONFIG }}
-            className="text-lg font-semibold text-primary overflow-hidden"
+          <motion.div
+            key="neg"
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: 18 }}
+            exit={{ opacity: 0, width: 0 }}
+            transition={{ type: "spring", ...POP }}
+            className="flex items-center justify-center overflow-hidden"
           >
-            -
-          </motion.span>
+            <span className="text-xl font-semibold text-primary select-none">-</span>
+          </motion.div>
         )}
       </AnimatePresence>
+
       <div className="flex">
         <AnimatePresence mode="popLayout" initial={false}>
-          {Array.from({ length: digits }).map((_, i) => {
-            const place = digits - 1 - i;
+          {digitArr.map((d, i) => {
+            const place = places - 1 - i;
             return (
-              <motion.div
-                key={`place-${place}`}
-                initial={{ opacity: 0, scale: 0.5, filter: "blur(8px)", width: 0 }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)", width: 24 }}
-                exit={{ opacity: 0, scale: 0.5, filter: "blur(8px)", width: 0 }}
-                transition={{
-                  type: "spring",
-                  stiffness: SPRING_CONFIG.stiffness,
-                  damping: SPRING_CONFIG.damping,
-                  mass: SPRING_CONFIG.mass,
-                  delay: i * 0.03,
-                }}
-                className="overflow-hidden"
-              >
-                <Digit value={absValue} place={place} />
+              <motion.div key={`p${place}`} className="relative flex">
+                {i > 0 && (
+                  <div
+                    className="absolute left-0 top-[15%] bottom-[15%] w-px z-20"
+                    style={{ background: "var(--border-tertiary)", opacity: 0.5 }}
+                  />
+                )}
+                <Drum digit={d} index={i} />
               </motion.div>
             );
           })}
@@ -89,24 +96,83 @@ function AnimatedNumber({ value }: { value: number }) {
   );
 }
 
-const PRESETS = [0, 42, 100, 999, 1234, 9999] as const;
+const PRESETS = [
+  { label: "0", value: 0 },
+  { label: "42", value: 42 },
+  { label: "123", value: 123 },
+  { label: "404", value: 404 },
+  { label: "777", value: 777 },
+  { label: "1,234", value: 1234 },
+  { label: "9,999", value: 9999 },
+];
+
+function Sparkle({ x, y, delay }: { x: number; y: number; delay: number }) {
+  return (
+    <motion.div
+      className="pointer-events-none absolute"
+      style={{ left: x, top: y }}
+      initial={{ opacity: 1, scale: 0 }}
+      animate={{
+        opacity: [1, 1, 0],
+        scale: [0, 1.4, 0],
+        y: [0, -30 - Math.random() * 40],
+        x: [-20 + Math.random() * 40],
+        rotate: [0, 120 + Math.random() * 240],
+      }}
+      transition={{ duration: 0.7, delay, ease: "easeOut" }}
+    >
+      <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
+        <path
+          d="M5 0L6.12 3.88L10 5L6.12 6.12L5 10L3.88 6.12L0 5L3.88 3.88L5 0Z"
+          fill="currentColor"
+          className="text-quaternary"
+        />
+      </svg>
+    </motion.div>
+  );
+}
 
 export function NumberTickerDemo() {
   const [value, setValue] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragStartX = useRef(0);
-  const dragStartValue = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number; delay: number }[]>([]);
+  const sid = useRef(0);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [dragging, setDragging] = useState(false);
+  const dxStart = useRef(0);
+  const dvStart = useRef(0);
+  const prev = useRef(0);
 
-  const increment = useCallback(() => setValue((v) => Math.min(v + 1, 99999)), []);
-  const decrement = useCallback(() => setValue((v) => Math.max(v - 1, -9999)), []);
+  const pop = useCallback(() => {
+    if (!wrapRef.current) return;
+    const r = wrapRef.current.getBoundingClientRect();
+    const batch = Array.from({ length: 8 }).map((_, i) => ({
+      id: sid.current++,
+      x: Math.random() * r.width,
+      y: Math.random() * r.height * 0.6,
+      delay: i * 0.035,
+    }));
+    setSparkles((s) => [...s, ...batch]);
+    setTimeout(() => setSparkles((s) => s.filter((sp) => !batch.find((b) => b.id === sp.id))), 1200);
+  }, []);
+
+  const set = useCallback(
+    (n: number) => {
+      const c = Math.min(99999, Math.max(-9999, n));
+      const ol = String(Math.abs(prev.current)).length;
+      const nl = String(Math.abs(c)).length;
+      if (nl > ol && nl > 1) pop();
+      prev.current = c;
+      setValue(c);
+    },
+    [pop],
+  );
 
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
       if ((e.target as HTMLElement).closest("button")) return;
-      setIsDragging(true);
-      dragStartX.current = e.clientX;
-      dragStartValue.current = value;
+      setDragging(true);
+      dxStart.current = e.clientX;
+      dvStart.current = value;
       (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     },
     [value],
@@ -114,91 +180,126 @@ export function NumberTickerDemo() {
 
   const onPointerMove = useCallback(
     (e: React.PointerEvent) => {
-      if (!isDragging) return;
-      const dx = e.clientX - dragStartX.current;
-      const delta = Math.round(dx / 8);
-      const next = Math.min(99999, Math.max(-9999, dragStartValue.current + delta));
-      setValue(next);
+      if (!dragging) return;
+      const delta = Math.round((e.clientX - dxStart.current) / 5);
+      set(dvStart.current + delta);
     },
-    [isDragging],
+    [dragging, set],
   );
 
-  const onPointerUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
+  const onPointerUp = useCallback(() => setDragging(false), []);
 
   useEffect(() => {
-    if (!isDragging) return;
-    const handleUp = () => setIsDragging(false);
-    window.addEventListener("pointerup", handleUp);
-    window.addEventListener("pointercancel", handleUp);
+    if (!dragging) return;
+    const up = () => setDragging(false);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
     return () => {
-      window.removeEventListener("pointerup", handleUp);
-      window.removeEventListener("pointercancel", handleUp);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
     };
-  }, [isDragging]);
+  }, [dragging]);
+
+  useEffect(() => {
+    const fn = (e: KeyboardEvent) => {
+      if (e.key === "ArrowUp" || e.key === "ArrowRight") {
+        e.preventDefault();
+        setValue((v) => {
+          const n = Math.min(v + 1, 99999);
+          prev.current = n;
+          return n;
+        });
+      }
+      if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        setValue((v) => {
+          const n = Math.max(v - 1, -9999);
+          prev.current = n;
+          return n;
+        });
+      }
+    };
+    window.addEventListener("keydown", fn);
+    return () => window.removeEventListener("keydown", fn);
+  }, []);
 
   return (
-    <div className="flex flex-col items-center gap-8 w-full h-full justify-center select-none">
+    <div className="flex flex-col items-center gap-6 w-full h-full justify-center select-none">
       <div
-        ref={containerRef}
+        ref={wrapRef}
         className={cn(
-          "flex items-center gap-3 rounded-2xl border border-primary bg-primary px-5 py-3",
-          "transition-shadow duration-200",
-          isDragging ? "cursor-grabbing shadow-lg" : "cursor-grab",
+          "relative flex items-center gap-3 rounded-2xl border border-primary bg-primary p-3",
+          dragging ? "cursor-grabbing" : "cursor-grab",
         )}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         style={{ touchAction: "none" }}
       >
-        <motion.button
-          onClick={decrement}
-          whileTap={{ scale: 0.85 }}
-          transition={{ type: "spring", stiffness: 500, damping: 25 }}
-          className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M3 7h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </motion.button>
+        {sparkles.map((s) => (
+          <Sparkle key={s.id} x={s.x} y={s.y} delay={s.delay} />
+        ))}
 
-        <div className="min-w-[72px] flex justify-center">
-          <AnimatedNumber value={value} />
+        <div className="flex flex-col gap-1.5">
+          <motion.button
+            onClick={() => set(value + 1)}
+            whileTap={{ scale: 0.82, y: -2 }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 500, damping: 18 }}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 9l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.button>
+          <motion.button
+            onClick={() => set(value - 1)}
+            whileTap={{ scale: 0.82, y: 2 }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 500, damping: 18 }}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.button>
         </div>
 
-        <motion.button
-          onClick={increment}
-          whileTap={{ scale: 0.85 }}
-          transition={{ type: "spring", stiffness: 500, damping: 25 }}
-          className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-tertiary hover:bg-interactive-active text-secondary transition-colors cursor-pointer"
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M7 3v8M3 7h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </motion.button>
+        <div className="rounded-xl overflow-hidden border border-primary bg-secondary px-1">
+          <OdometerDisplay value={value} />
+        </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-1.5">
-        {PRESETS.map((preset) => (
+      <div className="flex flex-wrap items-center justify-center gap-1.5 max-w-xs">
+        {PRESETS.map((p) => (
           <motion.button
-            key={preset}
-            onClick={() => setValue(preset)}
-            whileTap={{ scale: 0.92 }}
+            key={p.value}
+            onClick={() => set(p.value)}
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ y: -1 }}
             transition={{ type: "spring", stiffness: 500, damping: 25 }}
             className={cn(
-              "rounded-full px-3 py-1 text-xs font-mono transition-colors cursor-pointer",
-              value === preset
-                ? "bg-surface-tertiary text-primary"
+              "rounded-full px-3 py-1 text-xs tabular-nums transition-colors cursor-pointer",
+              value === p.value
+                ? "bg-surface-tertiary text-primary font-medium"
                 : "text-quaternary hover:text-secondary hover:bg-interactive-hover",
             )}
           >
-            {preset.toLocaleString()}
+            {p.label}
           </motion.button>
         ))}
+        <motion.button
+          onClick={() => set(Math.floor(Math.random() * 10000))}
+          whileTap={{ scale: 0.88, rotate: 12 }}
+          whileHover={{ y: -1 }}
+          transition={{ type: "spring", stiffness: 500, damping: 25 }}
+          className="rounded-full px-3 py-1 text-xs text-quaternary hover:text-secondary hover:bg-interactive-hover transition-colors cursor-pointer"
+        >
+          Random
+        </motion.button>
       </div>
 
-      <p className="text-xs text-quaternary opacity-60">Click buttons or drag horizontally to change the value</p>
+      <p className="text-xs text-quaternary opacity-50">Drag to scrub, arrow keys to step, or pick a preset</p>
     </div>
   );
 }
