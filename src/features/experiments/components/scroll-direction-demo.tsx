@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 const SECTIONS = [
@@ -31,29 +31,49 @@ const SECTION_CONTENT: Record<string, string> = {
     "Ship it. Then make it better. Then make it better again. Momentum matters more than perfection.",
 };
 
+function useScrollState(containerRef: React.RefObject<HTMLElement | null>) {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<"down" | "up">("down");
+  const lastScrollTop = useRef(0);
+  const dirRef = useRef<"down" | "up">("down");
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    function onScroll() {
+      const container = containerRef.current;
+      if (!container) return;
+      const st = container.scrollTop;
+      const maxScroll = container.scrollHeight - container.clientHeight;
+      const progress = maxScroll > 0 ? st / maxScroll : 0;
+      setScrollProgress(progress);
+
+      const dir = st >= lastScrollTop.current ? "down" : "up";
+      dirRef.current = dir;
+      setScrollDirection(dir);
+      lastScrollTop.current = st;
+    }
+
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [containerRef]);
+
+  return { scrollProgress, scrollDirection, dirRef };
+}
+
 function useActiveSection(
   containerRef: React.RefObject<HTMLElement | null>,
   trackDirection: boolean,
+  dirRef: React.MutableRefObject<"down" | "up">,
 ) {
   const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
-  const scrollDirRef = useRef<"down" | "up">("down");
-  const lastScrollTop = useRef(0);
-
-  const handleScroll = useCallback(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const st = el.scrollTop;
-    scrollDirRef.current = st >= lastScrollTop.current ? "down" : "up";
-    lastScrollTop.current = st;
-  }, [containerRef]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     setActiveId(SECTIONS[0].id);
-    lastScrollTop.current = container.scrollTop;
-    container.addEventListener("scroll", handleScroll, { passive: true });
 
     if (!trackDirection) {
       const observer = new IntersectionObserver(
@@ -76,7 +96,6 @@ function useActiveSection(
       });
 
       return () => {
-        container.removeEventListener("scroll", handleScroll);
         observer.disconnect();
       };
     }
@@ -89,7 +108,7 @@ function useActiveSection(
         (entries) => {
           for (const entry of entries) {
             if (!entry.isIntersecting) continue;
-            if (scrollDirRef.current !== direction) continue;
+            if (dirRef.current !== direction) continue;
             const id = entry.target.getAttribute("data-section-id");
             if (id) setActiveId(id);
           }
@@ -112,11 +131,10 @@ function useActiveSection(
     });
 
     return () => {
-      container.removeEventListener("scroll", handleScroll);
       downObserver.disconnect();
       upObserver.disconnect();
     };
-  }, [containerRef, trackDirection, handleScroll]);
+  }, [containerRef, trackDirection, dirRef]);
 
   return activeId;
 }
@@ -129,20 +147,40 @@ const SKELETON_WIDTHS: Record<number, number[]> = {
 
 function Minimap({
   activeId,
+  scrollProgress,
+  scrollDirection,
   trackDirection,
 }: {
   activeId: string;
+  scrollProgress: number;
+  scrollDirection: "down" | "up";
   trackDirection: boolean;
 }) {
   const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
   const sectionHeight = 28;
   const gap = 6;
-  const totalHeight = SECTIONS.length * sectionHeight + (SECTIONS.length - 1) * gap;
-  const viewportHeight = totalHeight * 0.3;
+  const totalHeight =
+    SECTIONS.length * sectionHeight + (SECTIONS.length - 1) * gap;
+  const viewportRatio = 0.3;
+  const viewportHeight = totalHeight * viewportRatio;
+  const scrollableRange = totalHeight - viewportHeight;
 
-  const observerTop = trackDirection
-    ? activeIndex * (sectionHeight + gap)
-    : totalHeight - viewportHeight;
+  const baseTop = scrollProgress * scrollableRange;
+
+  let observerTop: number;
+  if (!trackDirection) {
+    const bandSize = viewportHeight * viewportRatio;
+    observerTop = baseTop + (viewportHeight - bandSize);
+  } else {
+    const bandSize = viewportHeight * viewportRatio;
+    if (scrollDirection === "down") {
+      observerTop = baseTop + (viewportHeight - bandSize);
+    } else {
+      observerTop = baseTop;
+    }
+  }
+
+  const observerBandHeight = viewportHeight * viewportRatio;
 
   return (
     <div
@@ -150,14 +188,35 @@ function Minimap({
       style={{ height: totalHeight, width: 44, gap }}
     >
       <motion.div
-        className="absolute left-0 right-0 rounded-[4px] border border-secondary bg-interactive-hover"
-        style={{ height: viewportHeight }}
-        animate={{ top: observerTop }}
+        className="absolute left-0 right-0 rounded-[3px]"
+        style={{
+          height: viewportHeight,
+          backgroundColor: "var(--bg-secondary)",
+          opacity: 0.5,
+        }}
+        animate={{ top: baseTop }}
         transition={{
           type: "spring",
-          stiffness: 400,
-          damping: 38,
-          mass: 0.6,
+          stiffness: 600,
+          damping: 45,
+          mass: 0.4,
+        }}
+      />
+
+      <motion.div
+        className="absolute left-0 right-0 rounded-[3px] border border-secondary"
+        style={{ height: observerBandHeight }}
+        animate={{
+          top: observerTop,
+          borderColor: trackDirection
+            ? "var(--border-interactive)"
+            : "var(--border-secondary)",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 40,
+          mass: 0.5,
         }}
       />
 
@@ -169,7 +228,7 @@ function Minimap({
         return (
           <div
             key={section.id}
-            className="relative flex flex-col justify-center gap-[3px] shrink-0"
+            className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
             style={{ height: sectionHeight }}
           >
             {lines.map((width, li) => (
@@ -220,7 +279,9 @@ function SectionBlock({ id, index }: { id: string; index: number }) {
 export function ScrollDirectionDemo() {
   const [trackDirection, setTrackDirection] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const activeId = useActiveSection(containerRef, trackDirection);
+  const { scrollProgress, scrollDirection, dirRef } =
+    useScrollState(containerRef);
+  const activeId = useActiveSection(containerRef, trackDirection, dirRef);
 
   return (
     <div className="flex flex-col items-center gap-5 w-full max-w-md px-4">
@@ -277,7 +338,12 @@ export function ScrollDirectionDemo() {
           </div>
         </div>
         <div className="absolute right-4 top-1/2 -translate-y-1/2">
-          <Minimap activeId={activeId} trackDirection={trackDirection} />
+          <Minimap
+            activeId={activeId}
+            scrollProgress={scrollProgress}
+            scrollDirection={scrollDirection}
+            trackDirection={trackDirection}
+          />
         </div>
       </div>
 
@@ -291,8 +357,8 @@ export function ScrollDirectionDemo() {
           transition={{ duration: 0.2 }}
         >
           {trackDirection
-            ? "The observer viewport follows the scroll direction. Sections highlight as they enter from either edge."
-            : "The observer is stuck at the bottom. Scroll up and notice how late it takes to pick up the previous section."}
+            ? "The observation band follows scroll direction — it shifts to the leading edge, picking up sections immediately."
+            : "The observation band is always at the bottom. Scroll up and watch how it lags behind — sections highlight late."}
         </motion.p>
       </AnimatePresence>
     </div>
