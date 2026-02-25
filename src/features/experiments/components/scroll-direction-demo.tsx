@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from "motion/react";
 import Toggle from "@/components/ui/toggle";
 
 const SECTIONS = [
-  { id: "intro", label: "Introduction", lines: 2 },
-  { id: "design", label: "Design", lines: 1 },
-  { id: "engineering", label: "Engineering", lines: 3 },
-  { id: "craft", label: "Craft", lines: 1 },
-  { id: "motion", label: "Motion", lines: 2 },
-  { id: "systems", label: "Systems", lines: 2 },
-  { id: "details", label: "Details", lines: 1 },
-  { id: "closing", label: "Closing", lines: 2 },
+  { id: "intro", label: "Introduction", lines: [80, 45] },
+  { id: "design", label: "Design", lines: [60] },
+  { id: "engineering", label: "Engineering", lines: [90, 60, 35] },
+  { id: "craft", label: "Craft", lines: [60] },
+  { id: "motion", label: "Motion", lines: [80, 45] },
+  { id: "systems", label: "Systems", lines: [70, 50] },
+  { id: "details", label: "Details", lines: [55] },
+  { id: "closing", label: "Closing", lines: [75, 40] },
 ];
 
 const SECTION_CONTENT: Record<string, string> = {
@@ -140,11 +140,7 @@ function useActiveSection(
   return activeId;
 }
 
-const SKELETON_WIDTHS: Record<number, number[]> = {
-  1: [60],
-  2: [80, 45],
-  3: [90, 60, 35],
-};
+const SPRING = { type: "spring" as const, stiffness: 500, damping: 35, mass: 0.4 };
 
 function Minimap({
   activeId,
@@ -180,7 +176,6 @@ function Minimap({
     }
   }
 
-  const observerBandHeight = bandSize;
   const arrowDirection = trackDirection ? scrollDirection : "down";
 
   return (
@@ -196,29 +191,19 @@ function Minimap({
           opacity: 0.6,
         }}
         animate={{ top: baseTop }}
-        transition={{
-          type: "spring",
-          stiffness: 600,
-          damping: 45,
-          mass: 0.4,
-        }}
+        transition={{ type: "spring", stiffness: 600, damping: 45, mass: 0.4 }}
       />
 
       <motion.div
         className="absolute left-0 right-0 rounded-[3px] border flex items-center justify-center overflow-hidden"
-        style={{ height: observerBandHeight }}
+        style={{ height: bandSize }}
         animate={{
           top: observerTop,
           borderColor: "var(--border-secondary)",
           backgroundColor: "var(--bg-quaternary)",
           opacity: 0.8,
         }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 40,
-          mass: 0.5,
-        }}
+        transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.5 }}
       >
         <motion.svg
           width="8"
@@ -226,12 +211,7 @@ function Minimap({
           viewBox="0 0 8 8"
           className="text-tertiary"
           animate={{ rotate: arrowDirection === "up" ? 180 : 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 600,
-            damping: 35,
-            mass: 0.3,
-          }}
+          transition={{ type: "spring", stiffness: 600, damping: 35, mass: 0.3 }}
         >
           <path
             d="M4 1.5L4 6.5M4 6.5L1.5 4M4 6.5L6.5 4"
@@ -247,7 +227,6 @@ function Minimap({
       {SECTIONS.map((section, i) => {
         const isActive = section.id === activeId;
         const isPast = i < activeIndex;
-        const lines = SKELETON_WIDTHS[section.lines] ?? [100, 70];
 
         return (
           <div
@@ -255,7 +234,7 @@ function Minimap({
             className="relative z-10 flex flex-col justify-center gap-[3px] shrink-0"
             style={{ height: sectionHeight }}
           >
-            {lines.map((width, li) => (
+            {section.lines.map((width, li) => (
               <motion.div
                 key={li}
                 className="rounded-full"
@@ -268,34 +247,12 @@ function Minimap({
                       : "var(--border-primary)",
                   opacity: isActive ? 0.7 : isPast ? 0.5 : 0.25,
                 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 35,
-                  mass: 0.4,
-                }}
+                transition={SPRING}
               />
             ))}
           </div>
         );
       })}
-    </div>
-  );
-}
-
-function SectionBlock({ id, index }: { id: string; index: number }) {
-  return (
-    <div
-      data-section-id={id}
-      className="flex flex-col justify-center px-6 py-20"
-      style={{ minHeight: "55%" }}
-    >
-      <p className="type-tiny text-quaternary mb-3 tabular-nums tracking-wide">
-        {String(index + 1).padStart(2, "0")}
-      </p>
-      <p className="type-body text-secondary leading-relaxed max-w-[300px]">
-        {SECTION_CONTENT[id]}
-      </p>
     </div>
   );
 }
@@ -307,58 +264,73 @@ export function ScrollDirectionDemo() {
     useScrollState(containerRef);
   const activeId = useActiveSection(containerRef, trackDirection, dirRef);
 
-  const activeIndex = SECTIONS.findIndex((s) => s.id === activeId);
-  const activeLabel = SECTIONS[activeIndex]?.label ?? "";
+  const activeLabel = SECTIONS.find((s) => s.id === activeId)?.label ?? "";
   const arrowDirection = trackDirection ? scrollDirection : "down";
 
   return (
-    <div className="flex flex-col items-center gap-5 w-full max-w-lg px-4">
-      <div className="flex gap-6 w-full" style={{ height: "420px" }}>
+    <div className="flex flex-col items-center gap-5 w-full max-w-xl px-4">
+      <div className="flex gap-6 w-full" style={{ height: 420 }}>
         <div
           ref={containerRef}
           className="flex-1 overflow-y-auto"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
-            WebkitOverflowScrolling: "touch",
             maskImage:
               "linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%)",
             WebkitMaskImage:
               "linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%)",
           }}
         >
-          <div>
-            {SECTIONS.map((section, i) => (
-              <SectionBlock key={section.id} id={section.id} index={i} />
-            ))}
-          </div>
+          <style>{`div::-webkit-scrollbar { display: none; }`}</style>
+          {SECTIONS.map((section) => (
+            <div
+              key={section.id}
+              data-section-id={section.id}
+              className="flex flex-col justify-center px-6 py-20"
+              style={{ minHeight: "55%" }}
+            >
+              <h3 className="text-base font-medium text-secondary">
+                {section.label}
+              </h3>
+              <p className="mt-2 text-sm text-quaternary leading-relaxed max-w-[300px]">
+                {SECTION_CONTENT[section.id]}
+              </p>
+            </div>
+          ))}
         </div>
 
-        <div className="flex flex-col items-start justify-center gap-3 shrink-0">
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={activeId}
-              className="type-tiny text-tertiary whitespace-nowrap"
-              initial={{ opacity: 0, y: arrowDirection === "down" ? -4 : 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: arrowDirection === "down" ? 4 : -4 }}
-              transition={{
-                type: "spring",
-                stiffness: 500,
-                damping: 30,
-                mass: 0.4,
-              }}
-            >
-              {activeLabel}
-            </motion.span>
-          </AnimatePresence>
-
+        <div className="relative flex items-start gap-3 shrink-0">
           <Minimap
             activeId={activeId}
             scrollProgress={scrollProgress}
             scrollDirection={scrollDirection}
             trackDirection={trackDirection}
           />
+
+          <div className="relative" style={{ width: 100, height: "100%" }}>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeId}
+                className="absolute left-0 whitespace-nowrap text-xs font-medium text-secondary"
+                style={{
+                  top: `${scrollProgress * 70 + 10}%`,
+                }}
+                initial={{
+                  opacity: 0,
+                  y: arrowDirection === "down" ? -6 : 6,
+                }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  opacity: 0,
+                  y: arrowDirection === "down" ? 6 : -6,
+                }}
+                transition={SPRING}
+              >
+                {activeLabel}
+              </motion.span>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 
