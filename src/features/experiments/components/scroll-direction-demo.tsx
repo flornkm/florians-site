@@ -267,6 +267,10 @@ export function ScrollDirectionDemo() {
   const activeLabel = SECTIONS.find((s) => s.id === activeId)?.label ?? "";
   const arrowDirection = trackDirection ? scrollDirection : "down";
 
+  const totalHeight = SECTIONS.length * 28 + (SECTIONS.length - 1) * 6;
+  const viewportH = totalHeight * 0.3;
+  const labelTop = scrollProgress * (totalHeight - viewportH) + viewportH / 2;
+
   return (
     <div className="flex flex-col items-center gap-5 w-full max-w-xl px-4">
       <div className="flex gap-6 w-full" style={{ height: 420 }}>
@@ -312,40 +316,39 @@ export function ScrollDirectionDemo() {
             className="relative"
             style={{
               width: 100,
-              height:
-                SECTIONS.length * 28 + (SECTIONS.length - 1) * 6,
+              height: totalHeight,
             }}
           >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={activeId}
-                className="absolute left-0 whitespace-nowrap text-xs font-medium text-secondary"
-                initial={{
-                  opacity: 0,
-                  y: arrowDirection === "down" ? -6 : 6,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  top:
-                    scrollProgress *
-                      (SECTIONS.length * 28 +
-                        (SECTIONS.length - 1) * 6 -
-                        (SECTIONS.length * 28 + (SECTIONS.length - 1) * 6) *
-                          0.3) +
-                    ((SECTIONS.length * 28 + (SECTIONS.length - 1) * 6) * 0.3) /
-                      2,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: arrowDirection === "down" ? 6 : -6,
-                }}
-                transition={SPRING}
-                style={{ transform: "translateY(-50%)" }}
-              >
-                {activeLabel}
-              </motion.span>
-            </AnimatePresence>
+            <div
+              className="absolute left-0"
+              style={{
+                top: labelTop,
+                transform: "translateY(-50%)",
+                transition: "top 0.15s ease-out",
+              }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={activeId}
+                  className="whitespace-nowrap text-xs font-medium text-secondary"
+                  initial={{
+                    opacity: 0,
+                    y: arrowDirection === "down" ? -4 : 4,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: arrowDirection === "down" ? 4 : -4,
+                  }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                >
+                  {activeLabel}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
