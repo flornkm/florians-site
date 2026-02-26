@@ -59,8 +59,8 @@ function AvatarPlane({ modules, src }: { modules: ThreeModules; src: string }) {
   texture.colorSpace = THREE.SRGBColorSpace;
 
   return (
-    <mesh position={[0, 0, -0.6] as Vec3}>
-      <circleGeometry args={[1.1, 64]} />
+    <mesh position={[0, 0, -0.8] as Vec3}>
+      <circleGeometry args={[1.4, 64]} />
       <meshBasicMaterial map={texture} toneMapped={false} />
     </mesh>
   );
@@ -81,11 +81,11 @@ function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: G
 
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 5, 5]} intensity={0.8} color="#ffffff" />
-      <directionalLight position={[-3, -1, 3]} intensity={0.3} color="#b0c4ff" />
-
-      <Environment preset="city" />
+      <color attach="background" args={["#ffffff"]} />
+      <ambientLight intensity={1.2} />
+      <directionalLight position={[3, 3, 5]} intensity={0.4} color="#ffffff" />
+      <directionalLight position={[-2, -1, 3]} intensity={0.15} color="#c8d8ff" />
+      <Environment preset="city" background={false} />
 
       <group ref={groupRef}>
         <Suspense fallback={null}>
@@ -99,21 +99,17 @@ function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: G
             resolution={512}
             transmission={1}
             roughness={settings.roughness}
-            thickness={3.0}
+            thickness={2.5}
             ior={1.5}
-            chromaticAberration={0.06}
-            anisotropy={0.1}
+            chromaticAberration={0.04}
             distortion={settings.distortion}
             distortionScale={0.3}
             temporalDistortion={0.1}
-            clearcoat={1}
-            clearcoatRoughness={0.0}
-            attenuationDistance={1.2}
+            attenuationDistance={1.5}
             attenuationColor={settings.tint}
             backside
-            backsideThickness={1.0}
-            envMapIntensity={0.5}
-            transparent
+            backsideThickness={0.5}
+            envMapIntensity={0.3}
           />
         </mesh>
       </group>
@@ -177,8 +173,8 @@ export function GlassAvatarsDemo() {
             key={textureKey}
             camera={{ position: [0, 0, 3.2] as Vec3, fov: 30 }}
             dpr={[1, 2]}
-            gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-            style={{ width: "100%", height: "100%", background: "transparent" }}
+            gl={{ antialias: true, powerPreference: "high-performance" }}
+            style={{ width: "100%", height: "100%" }}
           >
             <Suspense fallback={null}>
               <GlassSphere modules={modules} settings={settings} />
