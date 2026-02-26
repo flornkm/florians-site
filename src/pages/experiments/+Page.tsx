@@ -1,9 +1,11 @@
 import { H1, H2 } from "@/components/design-system/heading";
+import { GlassAvatarsDemo } from "@/features/experiments/components/glass-avatars-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 
 const EXPERIMENTS = [
+  { title: "Glass Avatars", Component: GlassAvatarsDemo },
   { title: "iOS Context Menu", Component: IosContextMenuDemo },
   { title: "Receipt", Component: PaperRollDemo },
   { title: "Text Shimmer", Component: TextShimmerDemo },
