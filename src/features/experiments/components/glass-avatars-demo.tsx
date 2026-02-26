@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 export interface GlassAvatar3DProps {
   src: string;
@@ -58,64 +58,62 @@ function InnerAvatar({
   const { useFrame, useLoader, MeshTransmissionMaterial, Environment, THREE } = modules;
   const texture = useLoader(THREE.TextureLoader, src);
 
-  const glassRef = useRef<any>(null);
   const groupRef = useRef<any>(null);
 
   useFrame(({ clock }: { clock: { getElapsedTime: () => number } }) => {
     const t = clock.getElapsedTime();
-
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(t * 0.25) * 0.18;
-      groupRef.current.rotation.x = Math.cos(t * 0.2) * 0.08;
-    }
-
-    if (glassRef.current) {
-      glassRef.current.rotation.z = Math.sin(t * 0.15) * 0.08;
+      groupRef.current.rotation.y = Math.sin(t * 0.3) * 0.15;
+      groupRef.current.rotation.x = Math.cos(t * 0.25) * 0.06;
     }
   });
 
-  const glassColor = useMemo(() => "#f4f7ff", []);
-
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[3, 3, 3]} intensity={1.4} />
-      <directionalLight position={[-3, 1.5, 2]} intensity={0.35} color="#b8c6ff" />
-      <pointLight position={[0, 0, 2.2]} intensity={0.5} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[3, 3, 4]} intensity={1.6} />
+      <directionalLight position={[-2, 2, 3]} intensity={0.4} color="#c4d0ff" />
+      <pointLight position={[0, 0, 3]} intensity={0.6} color="#ffffff" />
 
       <group ref={groupRef}>
-        <mesh position={[0, 0, -0.25]}>
-          <circleGeometry args={[1, 80]} />
-          <meshStandardMaterial map={texture} roughness={0.45} metalness={0.0} toneMapped={false} />
+        <mesh position={[0, 0, -0.35]}>
+          <circleGeometry args={[1.05, 96]} />
+          <meshStandardMaterial map={texture} roughness={0.5} metalness={0.0} toneMapped={false} />
         </mesh>
 
-        <mesh ref={glassRef} position={[0, 0, 0.12]}>
-          <cylinderGeometry args={[1.02, 1.02, 0.28, 80, 1, true]} />
+        <mesh position={[0, 0, 0.15]} scale={[1.05, 1.05, 0.55]}>
+          <sphereGeometry args={[1, 96, 96]} />
           <MeshTransmissionMaterial
-            samples={10}
-            resolution={256}
-            transmission={0.98}
-            roughness={0.12}
-            thickness={1.2}
-            ior={1.5}
-            chromaticAberration={0.08}
-            anisotropy={0.35}
-            distortion={0.35}
-            distortionScale={0.22}
-            temporalDistortion={0.18}
+            samples={16}
+            resolution={512}
+            transmission={0.97}
+            roughness={0.05}
+            thickness={2.0}
+            ior={1.45}
+            chromaticAberration={0.06}
+            anisotropy={0.2}
+            distortion={0.2}
+            distortionScale={0.15}
+            temporalDistortion={0.12}
             clearcoat={1}
             clearcoatRoughness={0.0}
-            attenuationDistance={0.35}
-            attenuationColor="#e7ecff"
-            color={glassColor}
+            attenuationDistance={0.6}
+            attenuationColor="#e8edff"
+            color="#f8faff"
             backside
-            backsideThickness={0.4}
+            backsideThickness={0.5}
           />
         </mesh>
 
-        <mesh position={[0, 0, 0.21]}>
-          <ringGeometry args={[0.985, 1.02, 96]} />
-          <meshStandardMaterial color="#ffffff" roughness={0.2} metalness={0.1} transparent opacity={0.55} />
+        <mesh position={[0, 0, 0.58]}>
+          <ringGeometry args={[0.98, 1.06, 128]} />
+          <meshStandardMaterial
+            color="#ffffff"
+            roughness={0.15}
+            metalness={0.15}
+            transparent
+            opacity={0.35}
+          />
         </mesh>
       </group>
 
@@ -172,13 +170,13 @@ const AVATARS: { src: string; alt: string }[] = [
 export function GlassAvatarsDemo() {
   return (
     <div className="w-full h-full flex items-center justify-center px-6">
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-6">
         {AVATARS.map((avatar) => (
           <GlassAvatar3D
             key={avatar.src}
             src={avatar.src}
             alt={avatar.alt}
-            size={84}
+            size={120}
             className="bg-secondary border border-primary"
           />
         ))}
