@@ -10,8 +10,8 @@ interface GlassSettings {
 }
 
 const DEFAULT_SETTINGS: GlassSettings = {
-  roughness: 0.12,
-  distortion: 0.3,
+  roughness: 0.15,
+  distortion: 0.2,
   tint: "#c8d8ff",
   imageSrc: "/images/avatars/florian_kiem.webp",
 };
@@ -21,6 +21,7 @@ type ThreeModules = {
   useFrame: any;
   useLoader: any;
   MeshTransmissionMaterial: any;
+  Environment: any;
   THREE: typeof import("three");
 };
 
@@ -38,6 +39,7 @@ function useThreeModules() {
           useFrame: fiber.useFrame,
           useLoader: fiber.useLoader,
           MeshTransmissionMaterial: drei.MeshTransmissionMaterial,
+          Environment: drei.Environment,
           THREE: THREE as unknown as typeof import("three"),
         });
       },
@@ -51,54 +53,67 @@ function useThreeModules() {
   return modules;
 }
 
-function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: GlassSettings }) {
-  const { useFrame, useLoader, MeshTransmissionMaterial, THREE } = modules;
-
-  const texture = useLoader(THREE.TextureLoader, settings.imageSrc);
+function AvatarPlane({ modules, src }: { modules: ThreeModules; src: string }) {
+  const { useLoader, THREE } = modules;
+  const texture = useLoader(THREE.TextureLoader, src);
   texture.colorSpace = THREE.SRGBColorSpace;
+
+  return (
+    <mesh position={[0, 0, -0.6] as Vec3}>
+      <circleGeometry args={[1.1, 64]} />
+      <meshBasicMaterial map={texture} toneMapped={false} />
+    </mesh>
+  );
+}
+
+function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: GlassSettings }) {
+  const { useFrame, MeshTransmissionMaterial, Environment } = modules;
 
   const groupRef = useRef<any>(null);
 
   useFrame(({ clock }: { clock: { getElapsedTime: () => number } }) => {
     const t = clock.getElapsedTime();
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(t * 0.3) * 0.12;
-      groupRef.current.rotation.x = Math.cos(t * 0.25) * 0.06;
+      groupRef.current.rotation.y = Math.sin(t * 0.4) * 0.08;
+      groupRef.current.rotation.x = Math.cos(t * 0.3) * 0.04;
     }
   });
 
   return (
     <>
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[3, 3, 5]} intensity={0.3} color="#ffffff" />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[5, 5, 5]} intensity={0.8} color="#ffffff" />
+      <directionalLight position={[-3, -1, 3]} intensity={0.3} color="#b0c4ff" />
+
+      <Environment preset="city" />
 
       <group ref={groupRef}>
-        <mesh>
-          <sphereGeometry args={[0.92, 128, 128]} />
-          <meshStandardMaterial map={texture} roughness={0.1} metalness={0.0} toneMapped={false} />
-        </mesh>
+        <Suspense fallback={null}>
+          <AvatarPlane modules={modules} src={settings.imageSrc} />
+        </Suspense>
 
         <mesh>
           <sphereGeometry args={[1.0, 128, 128]} />
           <MeshTransmissionMaterial
             samples={16}
             resolution={512}
-            transmission={0.98}
+            transmission={1}
             roughness={settings.roughness}
-            thickness={1.0}
-            ior={1.35}
-            chromaticAberration={0.04}
+            thickness={3.0}
+            ior={1.5}
+            chromaticAberration={0.06}
             anisotropy={0.1}
             distortion={settings.distortion}
-            distortionScale={0.2}
-            temporalDistortion={0.05}
+            distortionScale={0.3}
+            temporalDistortion={0.1}
             clearcoat={1}
             clearcoatRoughness={0.0}
-            attenuationDistance={3.0}
+            attenuationDistance={1.2}
             attenuationColor={settings.tint}
             backside
-            backsideThickness={0.5}
-            envMapIntensity={0.1}
+            backsideThickness={1.0}
+            envMapIntensity={0.5}
+            transparent
           />
         </mesh>
       </group>
@@ -154,13 +169,13 @@ export function GlassAvatarsDemo() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-8 px-6 py-8">
       <div
-        style={{ width: 220, height: 220, borderRadius: 9999, overflow: "hidden" }}
+        style={{ width: 240, height: 240, borderRadius: 9999, overflow: "hidden" }}
         className="shadow-2xl shadow-black/10"
       >
         {modules ? (
           <modules.Canvas
             key={textureKey}
-            camera={{ position: [0, 0, 3.0] as Vec3, fov: 32 }}
+            camera={{ position: [0, 0, 3.2] as Vec3, fov: 30 }}
             dpr={[1, 2]}
             gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             style={{ width: "100%", height: "100%", background: "transparent" }}
