@@ -21,7 +21,6 @@ type ThreeModules = {
   useFrame: any;
   useLoader: any;
   MeshTransmissionMaterial: any;
-  Environment: any;
   THREE: typeof import("three");
 };
 
@@ -39,7 +38,6 @@ function useThreeModules() {
           useFrame: fiber.useFrame,
           useLoader: fiber.useLoader,
           MeshTransmissionMaterial: drei.MeshTransmissionMaterial,
-          Environment: drei.Environment,
           THREE: THREE as unknown as typeof import("three"),
         });
       },
@@ -54,7 +52,7 @@ function useThreeModules() {
 }
 
 function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: GlassSettings }) {
-  const { useFrame, useLoader, MeshTransmissionMaterial, Environment, THREE } = modules;
+  const { useFrame, useLoader, MeshTransmissionMaterial, THREE } = modules;
 
   const texture = useLoader(THREE.TextureLoader, settings.imageSrc);
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -71,44 +69,39 @@ function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: G
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={2.0} color="#ffffff" />
-      <directionalLight position={[-3, 2, 4]} intensity={0.6} color="#d0d8ff" />
-      <pointLight position={[0, -2, 4]} intensity={0.4} color="#ffffff" />
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[3, 3, 5]} intensity={0.3} color="#ffffff" />
 
       <group ref={groupRef}>
         <mesh>
           <sphereGeometry args={[0.92, 128, 128]} />
-          <meshStandardMaterial map={texture} roughness={0.5} metalness={0.05} toneMapped={false} />
+          <meshStandardMaterial map={texture} roughness={0.1} metalness={0.0} toneMapped={false} />
         </mesh>
 
-        <mesh scale={[1.0, 1.0, 1.0] as Vec3}>
+        <mesh>
           <sphereGeometry args={[1.0, 128, 128]} />
           <MeshTransmissionMaterial
             samples={16}
             resolution={512}
-            transmission={0.97}
+            transmission={0.98}
             roughness={settings.roughness}
-            thickness={4.0}
-            ior={1.45}
-            chromaticAberration={0.06}
-            anisotropy={0.2}
+            thickness={1.0}
+            ior={1.35}
+            chromaticAberration={0.04}
+            anisotropy={0.1}
             distortion={settings.distortion}
-            distortionScale={0.3}
-            temporalDistortion={0.1}
+            distortionScale={0.2}
+            temporalDistortion={0.05}
             clearcoat={1}
             clearcoatRoughness={0.0}
-            attenuationDistance={0.6}
+            attenuationDistance={3.0}
             attenuationColor={settings.tint}
-            color={settings.tint}
             backside
-            backsideThickness={1.5}
-            envMapIntensity={1.5}
+            backsideThickness={0.5}
+            envMapIntensity={0.1}
           />
         </mesh>
       </group>
-
-      <Environment preset="studio" />
     </>
   );
 }
