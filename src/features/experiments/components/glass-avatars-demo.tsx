@@ -10,8 +10,8 @@ interface GlassSettings {
 }
 
 const DEFAULT_SETTINGS: GlassSettings = {
-  roughness: 0.15,
-  distortion: 0.2,
+  roughness: 0.25,
+  distortion: 0.08,
   tint: "#c8d8ff",
   imageSrc: "/images/avatars/florian_kiem.webp",
 };
@@ -21,6 +21,7 @@ type ThreeModules = {
   useFrame: any;
   useLoader: any;
   MeshTransmissionMaterial: any;
+  Float: any;
   THREE: typeof import("three");
 };
 
@@ -38,6 +39,7 @@ function useThreeModules() {
           useFrame: fiber.useFrame,
           useLoader: fiber.useLoader,
           MeshTransmissionMaterial: drei.MeshTransmissionMaterial,
+          Float: drei.Float,
           THREE: THREE as unknown as typeof import("three"),
         });
       },
@@ -57,60 +59,68 @@ function AvatarPlane({ modules, src }: { modules: ThreeModules; src: string }) {
   texture.colorSpace = THREE.SRGBColorSpace;
 
   return (
-    <mesh position={[0, 0, -0.8] as Vec3}>
-      <circleGeometry args={[1.4, 64]} />
+    <mesh position={[0, 0, -1.2] as Vec3}>
+      <planeGeometry args={[2.4, 2.4]} />
       <meshBasicMaterial map={texture} toneMapped={false} />
     </mesh>
   );
 }
 
 function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: GlassSettings }) {
-  const { useFrame, MeshTransmissionMaterial } = modules;
+  const { useFrame, MeshTransmissionMaterial, Float } = modules;
 
   const groupRef = useRef<any>(null);
 
   useFrame(({ clock }: { clock: { getElapsedTime: () => number } }) => {
     const t = clock.getElapsedTime();
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(t * 0.4) * 0.08;
-      groupRef.current.rotation.x = Math.cos(t * 0.3) * 0.04;
+      groupRef.current.rotation.y = Math.sin(t * 0.3) * 0.06;
+      groupRef.current.rotation.x = Math.cos(t * 0.25) * 0.03;
     }
   });
 
   return (
     <>
       <color attach="background" args={["#ffffff"]} />
-      <ambientLight intensity={1.8} />
-      <directionalLight position={[4, 4, 6]} intensity={0.6} color="#ffffff" />
-      <directionalLight position={[-3, -2, 4]} intensity={0.3} color="#e0e8ff" />
-      <directionalLight position={[0, 0, -4]} intensity={0.2} color="#ffffff" />
+      <ambientLight intensity={2.2} />
+      <directionalLight position={[3, 3, 5]} intensity={0.4} color="#ffffff" />
+      <directionalLight position={[-2, -1, 3]} intensity={0.15} color="#e8ecff" />
 
-      <group ref={groupRef}>
-        <Suspense fallback={null}>
-          <AvatarPlane modules={modules} src={settings.imageSrc} />
-        </Suspense>
+      <Float speed={1.5} rotationIntensity={0.02} floatIntensity={0.03} floatingRange={[-0.01, 0.01]}>
+        <group ref={groupRef}>
+          <Suspense fallback={null}>
+            <AvatarPlane modules={modules} src={settings.imageSrc} />
+          </Suspense>
 
-        <mesh>
-          <sphereGeometry args={[1.0, 128, 128]} />
-          <MeshTransmissionMaterial
-            samples={16}
-            resolution={512}
-            transmission={1}
-            roughness={settings.roughness}
-            thickness={2.5}
-            ior={1.5}
-            chromaticAberration={0.04}
-            distortion={settings.distortion}
-            distortionScale={0.3}
-            temporalDistortion={0.1}
-            attenuationDistance={1.5}
-            attenuationColor={settings.tint}
-            backside
-            backsideThickness={0.5}
-            envMapIntensity={0}
-          />
-        </mesh>
-      </group>
+          <mesh>
+            <sphereGeometry args={[1.0, 128, 128]} />
+            <MeshTransmissionMaterial
+              samples={12}
+              resolution={512}
+              transmission={1}
+              roughness={settings.roughness}
+              thickness={0.4}
+              ior={1.07}
+              chromaticAberration={0.015}
+              distortion={settings.distortion}
+              distortionScale={0.15}
+              temporalDistortion={0.05}
+              attenuationDistance={3.0}
+              attenuationColor={settings.tint}
+              backside
+              backsideThickness={0.15}
+              envMapIntensity={0}
+              clearcoat={1}
+              clearcoatRoughness={0.1}
+            />
+          </mesh>
+
+          <mesh>
+            <torusGeometry args={[1.005, 0.008, 16, 128]} />
+            <meshStandardMaterial color="#ffffff" metalness={0.6} roughness={0.2} transparent opacity={0.5} />
+          </mesh>
+        </group>
+      </Float>
     </>
   );
 }
@@ -169,7 +179,7 @@ export function GlassAvatarsDemo() {
         {modules ? (
           <modules.Canvas
             key={textureKey}
-            camera={{ position: [0, 0, 3.2] as Vec3, fov: 30 }}
+            camera={{ position: [0, 0, 3.8] as Vec3, fov: 28 }}
             dpr={[1, 2]}
             gl={{ antialias: true, powerPreference: "high-performance" }}
             style={{ width: "100%", height: "100%" }}
@@ -201,7 +211,7 @@ export function GlassAvatarsDemo() {
           label="Distortion"
           value={settings.distortion}
           min={0}
-          max={1}
+          max={0.5}
           step={0.01}
           onChange={update("distortion")}
         />
