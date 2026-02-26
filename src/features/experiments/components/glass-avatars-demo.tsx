@@ -21,7 +21,6 @@ type ThreeModules = {
   useFrame: any;
   useLoader: any;
   MeshTransmissionMaterial: any;
-  Environment: any;
   THREE: typeof import("three");
 };
 
@@ -39,7 +38,6 @@ function useThreeModules() {
           useFrame: fiber.useFrame,
           useLoader: fiber.useLoader,
           MeshTransmissionMaterial: drei.MeshTransmissionMaterial,
-          Environment: drei.Environment,
           THREE: THREE as unknown as typeof import("three"),
         });
       },
@@ -67,7 +65,7 @@ function AvatarPlane({ modules, src }: { modules: ThreeModules; src: string }) {
 }
 
 function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: GlassSettings }) {
-  const { useFrame, MeshTransmissionMaterial, Environment } = modules;
+  const { useFrame, MeshTransmissionMaterial } = modules;
 
   const groupRef = useRef<any>(null);
 
@@ -82,10 +80,10 @@ function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: G
   return (
     <>
       <color attach="background" args={["#ffffff"]} />
-      <ambientLight intensity={1.2} />
-      <directionalLight position={[3, 3, 5]} intensity={0.4} color="#ffffff" />
-      <directionalLight position={[-2, -1, 3]} intensity={0.15} color="#c8d8ff" />
-      <Environment preset="city" background={false} />
+      <ambientLight intensity={1.8} />
+      <directionalLight position={[4, 4, 6]} intensity={0.6} color="#ffffff" />
+      <directionalLight position={[-3, -2, 4]} intensity={0.3} color="#e0e8ff" />
+      <directionalLight position={[0, 0, -4]} intensity={0.2} color="#ffffff" />
 
       <group ref={groupRef}>
         <Suspense fallback={null}>
@@ -109,7 +107,7 @@ function GlassSphere({ modules, settings }: { modules: ThreeModules; settings: G
             attenuationColor={settings.tint}
             backside
             backsideThickness={0.5}
-            envMapIntensity={0.3}
+            envMapIntensity={0}
           />
         </mesh>
       </group>
