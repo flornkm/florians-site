@@ -1,51 +1,32 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type NotifState = "idle" | "loading" | "success" | "error" | "remind";
+type NotifState = "idle" | "loading" | "success";
 
-const SPRING = { stiffness: 400, damping: 30, mass: 0.8 };
-const CONTENT_TRANSITION = { duration: 0.15, ease: "easeOut" as const };
+const SPRING = { type: "spring" as const, stiffness: 300, damping: 35, mass: 0.6 };
 
-const STATE_DIMENSIONS: Record<NotifState, { width: number; height: number; radius: number }> = {
-  idle: { width: 120, height: 36, radius: 18 },
-  loading: { width: 160, height: 40, radius: 20 },
-  success: { width: 200, height: 44, radius: 22 },
-  error: { width: 190, height: 44, radius: 22 },
-  remind: { width: 240, height: 44, radius: 22 },
+const DIMENSIONS: Record<NotifState, { width: number; height: number }> = {
+  idle: { width: 44, height: 32 },
+  loading: { width: 44, height: 32 },
+  success: { width: 96, height: 32 },
 };
 
-function SpinnerIcon() {
+function Spinner() {
   return (
-    <svg className="h-4 w-4 animate-spin" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.25" />
-      <path d="M8 1.5A6.5 6.5 0 0114.5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
+    <motion.svg className="h-3.5 w-3.5 animate-spin" viewBox="0 0 14 14" fill="none">
+      <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" opacity="0.2" />
+      <path d="M7 1.5A5.5 5.5 0 0112.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </motion.svg>
   );
 }
 
-function CheckIcon() {
+function Check() {
   return (
-    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-      <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function XIcon() {
-  return (
-    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-      <path d="M4.5 4.5L11.5 11.5M11.5 4.5L4.5 11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function BellIcon() {
-  return (
-    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none">
+    <svg className="h-3.5 w-3.5" viewBox="0 0 14 14" fill="none">
       <path
-        d="M6 13a2 2 0 004 0M8 1.5a4.5 4.5 0 00-4.5 4.5c0 2.5-1 3.5-1.5 4h12c-.5-.5-1.5-1.5-1.5-4A4.5 4.5 0 008 1.5z"
+        d="M3 7.5L5.5 10L11 4"
         stroke="currentColor"
-        strokeWidth="1.3"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -53,52 +34,22 @@ function BellIcon() {
   );
 }
 
-function DotIcon() {
-  return (
-    <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
-      <circle cx="6" cy="6" r="3" fill="currentColor" opacity="0.5" />
-    </svg>
-  );
-}
-
-function NotifContent({ state }: { state: NotifState }) {
+function ContentInner({ state }: { state: NotifState }) {
   return (
     <motion.div
       key={state}
-      initial={{ opacity: 0, scale: 0.85, filter: "blur(4px)" }}
-      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-      exit={{ opacity: 0, scale: 0.85, filter: "blur(4px)" }}
-      transition={CONTENT_TRANSITION}
-      className="flex items-center justify-center gap-2"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.15, ease: "easeOut" }}
+      className="flex items-center justify-center gap-1.5"
     >
-      {state === "idle" && (
-        <>
-          <DotIcon />
-          <span className="text-xs font-medium opacity-60">Notification</span>
-        </>
-      )}
-      {state === "loading" && (
-        <>
-          <SpinnerIcon />
-          <span className="text-xs font-medium">Sending...</span>
-        </>
-      )}
+      {state === "idle" && <span className="h-1.5 w-1.5 rounded-full bg-white/50" />}
+      {state === "loading" && <Spinner />}
       {state === "success" && (
         <>
-          <CheckIcon />
-          <span className="text-xs font-medium">Sent!</span>
-        </>
-      )}
-      {state === "error" && (
-        <>
-          <XIcon />
-          <span className="text-xs font-medium">Failed</span>
-        </>
-      )}
-      {state === "remind" && (
-        <>
-          <BellIcon />
-          <span className="text-xs font-medium">Reminder set for 3pm</span>
+          <Check />
+          <span className="text-xs font-medium">Done</span>
         </>
       )}
     </motion.div>
@@ -110,90 +61,42 @@ export const DynamicNotificationDemo = () => {
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const isRunning = state !== "idle";
 
-  const clearAllTimeouts = useCallback(() => {
+  const clearTimeouts = useCallback(() => {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
   }, []);
 
-  useEffect(() => {
-    return () => clearAllTimeouts();
-  }, [clearAllTimeouts]);
+  useEffect(() => clearTimeouts, [clearTimeouts]);
 
-  const schedule = useCallback(
-    (fn: () => void, ms: number) => {
-      const id = setTimeout(fn, ms);
-      timeoutsRef.current.push(id);
-      return id;
-    },
-    [],
-  );
-
-  const triggerSend = useCallback(() => {
+  const trigger = useCallback(() => {
     if (isRunning) return;
-    clearAllTimeouts();
+    clearTimeouts();
     setState("loading");
-    schedule(() => setState("success"), 1200);
-    schedule(() => setState("idle"), 3700);
-  }, [isRunning, clearAllTimeouts, schedule]);
+    const t1 = setTimeout(() => setState("success"), 1000);
+    const t2 = setTimeout(() => setState("idle"), 2800);
+    timeoutsRef.current.push(t1, t2);
+  }, [isRunning, clearTimeouts]);
 
-  const triggerError = useCallback(() => {
-    if (isRunning) return;
-    clearAllTimeouts();
-    setState("loading");
-    schedule(() => setState("error"), 800);
-    schedule(() => setState("idle"), 3300);
-  }, [isRunning, clearAllTimeouts, schedule]);
-
-  const triggerRemind = useCallback(() => {
-    if (isRunning) return;
-    clearAllTimeouts();
-    setState("remind");
-    schedule(() => setState("idle"), 2500);
-  }, [isRunning, clearAllTimeouts, schedule]);
-
-  const dims = STATE_DIMENSIONS[state];
+  const dims = DIMENSIONS[state];
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      <motion.div
+    <div className="flex flex-col items-center gap-5">
+      <motion.button
+        onClick={trigger}
+        disabled={isRunning}
         layout
         animate={{
           width: dims.width,
           height: dims.height,
-          borderRadius: dims.radius,
         }}
-        transition={{ layout: SPRING, ...SPRING }}
-        className="flex items-center justify-center overflow-hidden bg-[#1a1a1a] text-white shadow-lg shadow-black/20"
-        style={{ willChange: "width, height, border-radius" }}
+        transition={SPRING}
+        className="flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-[#1a1a1a] text-white disabled:cursor-default"
       >
         <AnimatePresence mode="wait">
-          <NotifContent state={state} />
+          <ContentInner state={state} />
         </AnimatePresence>
-      </motion.div>
-
-      <div className="flex items-center gap-2">
-        <button
-          onClick={triggerSend}
-          disabled={isRunning}
-          className="rounded-md px-3 py-1.5 text-xs text-tertiary transition-colors duration-150 hover:bg-interactive-hover hover:text-secondary disabled:pointer-events-none disabled:opacity-40"
-        >
-          Send
-        </button>
-        <button
-          onClick={triggerError}
-          disabled={isRunning}
-          className="rounded-md px-3 py-1.5 text-xs text-tertiary transition-colors duration-150 hover:bg-interactive-hover hover:text-secondary disabled:pointer-events-none disabled:opacity-40"
-        >
-          Error
-        </button>
-        <button
-          onClick={triggerRemind}
-          disabled={isRunning}
-          className="rounded-md px-3 py-1.5 text-xs text-tertiary transition-colors duration-150 hover:bg-interactive-hover hover:text-secondary disabled:pointer-events-none disabled:opacity-40"
-        >
-          Remind
-        </button>
-      </div>
+      </motion.button>
+      <span className="text-xs text-quaternary">{isRunning ? "\u00A0" : "Click the pill"}</span>
     </div>
   );
 };
