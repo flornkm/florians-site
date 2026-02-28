@@ -1,4 +1,5 @@
 import { H1, H2 } from "@/components/design-system/heading";
+import { GravityAttractorDemo } from "@/features/experiments/components/gravity-attractor-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
 import { MagneticFieldDemo } from "@/features/experiments/components/magnetic-field-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
@@ -8,6 +9,7 @@ import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-
 const EXPERIMENTS = [
   { title: "Particle Wormhole", Component: ParticleWormholeDemo },
   { title: "Magnetic Field Lines", Component: MagneticFieldDemo },
+  { title: "Gravity Attractor", Component: GravityAttractorDemo },
   { title: "iOS Context Menu", Component: IosContextMenuDemo },
   { title: "Receipt", Component: PaperRollDemo },
   { title: "Text Shimmer", Component: TextShimmerDemo },
