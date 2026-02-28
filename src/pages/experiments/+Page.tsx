@@ -3,6 +3,7 @@ import { FluidRippleDemo } from "@/features/experiments/components/fluid-ripple-
 import { GravityAttractorDemo } from "@/features/experiments/components/gravity-attractor-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
 import { MagneticFieldDemo } from "@/features/experiments/components/magnetic-field-demo";
+import { NoiseTerrainDemo } from "@/features/experiments/components/noise-terrain-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
 import { ParticleWormholeDemo } from "@/features/experiments/components/particle-wormhole-demo";
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
@@ -12,6 +13,7 @@ const EXPERIMENTS = [
   { title: "Magnetic Field Lines", Component: MagneticFieldDemo },
   { title: "Gravity Attractor", Component: GravityAttractorDemo },
   { title: "Fluid Ripple", Component: FluidRippleDemo },
+  { title: "Noise Terrain", Component: NoiseTerrainDemo },
   { title: "iOS Context Menu", Component: IosContextMenuDemo },
   { title: "Receipt", Component: PaperRollDemo },
   { title: "Text Shimmer", Component: TextShimmerDemo },
