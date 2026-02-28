@@ -1,5 +1,5 @@
 import { H1, H2 } from "@/components/design-system/heading";
-import { AuroraDemo } from "@/features/experiments/components/aurora-demo";
+import { DnaHelixDemo } from "@/features/experiments/components/dna-helix-demo";
 import { FluidRippleDemo } from "@/features/experiments/components/fluid-ripple-demo";
 import { GravityAttractorDemo } from "@/features/experiments/components/gravity-attractor-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
@@ -10,7 +10,7 @@ import { ParticleWormholeDemo } from "@/features/experiments/components/particle
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 
 const EXPERIMENTS = [
-  { title: "Aurora Borealis", Component: AuroraDemo },
+  { title: "DNA Helix", Component: DnaHelixDemo },
   { title: "Particle Wormhole", Component: ParticleWormholeDemo },
   { title: "Magnetic Field Lines", Component: MagneticFieldDemo },
   { title: "Gravity Attractor", Component: GravityAttractorDemo },
