@@ -1,8 +1,10 @@
 import { H1, H2 } from "@/components/design-system/heading";
+import { BlackHoleDemo } from "@/features/experiments/components/black-hole-demo";
 import { DnaHelixDemo } from "@/features/experiments/components/dna-helix-demo";
 import { FluidRippleDemo } from "@/features/experiments/components/fluid-ripple-demo";
 import { GravityAttractorDemo } from "@/features/experiments/components/gravity-attractor-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
+import { LiquidCrystalDemo } from "@/features/experiments/components/liquid-crystal-demo";
 import { MagneticFieldDemo } from "@/features/experiments/components/magnetic-field-demo";
 import { NoiseTerrainDemo } from "@/features/experiments/components/noise-terrain-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
@@ -10,6 +12,8 @@ import { ParticleWormholeDemo } from "@/features/experiments/components/particle
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 
 const EXPERIMENTS = [
+  { title: "Liquid Crystal", Component: LiquidCrystalDemo },
+  { title: "Black Hole", Component: BlackHoleDemo },
   { title: "DNA Helix", Component: DnaHelixDemo },
   { title: "Particle Wormhole", Component: ParticleWormholeDemo },
   { title: "Magnetic Field Lines", Component: MagneticFieldDemo },
