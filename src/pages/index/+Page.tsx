@@ -69,7 +69,7 @@ export default function Page() {
         >
           <div className="flex flex-col items-center justify-center w-full md:px-0 px-4 md:w-auto">
             <div className="md:mb-2 min-[450px]:mb-0 mb-8">
-              <H2 className="text-center mb-0.5">Digital Guestbook</H2>
+              <H1 className="text-center mb-0.5">Digital Guestbook</H1>
               <Body2 className="text-quaternary md:mb-2.5 text-center">Last three letters sent to this site.</Body2>
             </div>
             <div className="min-[450px]:mt-[16vw] md:mt-0 w-full">
