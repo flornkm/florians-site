@@ -27,7 +27,7 @@ export default function handler(req: VercelRequest, res: VercelResponse): void {
     const width = clampInt(searchParams.get("width"), 1200, 100, 2000);
     const height = clampInt(searchParams.get("height"), 630, 100, 2000);
 
-    const textW = title.length * FONT_SIZE * 0.9;
+    const textW = title.length * FONT_SIZE * 0.75;
     const rx = textW / 2 + 80;
     const ry = FONT_SIZE / 2 + 70;
     const cx = width / 2;
@@ -54,7 +54,7 @@ export default function handler(req: VercelRequest, res: VercelResponse): void {
   </defs>
   <rect width="${width}" height="${height}" fill="white"/>
   ${ellipsePaths}
-  <text x="${cx}" y="${cy + FONT_SIZE * 0.35}" text-anchor="middle" font-family="SFZimmerman, sans-serif" font-size="${FONT_SIZE}" letter-spacing="0.3em" fill="black">${escapeXml(title)}</text>
+  <text x="${cx}" y="${cy + FONT_SIZE * 0.35}" text-anchor="middle" font-family="SFZimmerman, sans-serif" font-size="${FONT_SIZE}" letter-spacing="0.15em" fill="black">${escapeXml(title)}</text>
 </svg>`;
 
     res.setHeader("Content-Type", "image/svg+xml");
