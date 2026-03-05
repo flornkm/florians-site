@@ -30,7 +30,7 @@ export default function Page() {
             Designer by day, <br /> <span className="text-quaternary">Engineer by night</span>
           </H1>
           <div className="w-col md:flex items-center justify-center">
-            <H2 className="mb-2.5 md:mb-5 text-3xl md:text-5xl">Latest Work</H2>
+            <H2 className="mb-2.5 md:mb-5 text-xl md:text-3xl">Latest Work</H2>
           </div>
         </section>
         <section className="w-full flex flex-col mb-12 group/section">
