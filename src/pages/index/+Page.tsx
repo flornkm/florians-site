@@ -1,5 +1,5 @@
 import { Body2 } from "@/components/design-system/body";
-import { H1, H2, H3 } from "@/components/design-system/heading";
+import { H1, H3 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/shared/triangle-filled";
 import { LetterStack } from "@/features/letters/components/letter-stack";
 
@@ -27,11 +27,8 @@ export default function Page() {
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <section className="w-full md:grid grid-cols-[336px_1fr] gap-4 items-end md:mb-12">
           <H1 className="text-xl md:text-2xl leading-tight md:mb-0 mb-10">
-            Designer by day, <br /> <span className="text-quaternary">Engineer by night</span>
+            Designer by day, <br /> <span className="text-red-500">Engineer by night</span>
           </H1>
-          <div className="w-col md:flex items-center justify-center">
-            <H2 className="mb-2.5 md:mb-5 text-sm md:text-base">Latest Work</H2>
-          </div>
         </section>
         <section className="w-full flex flex-col mb-12 group/section">
           {projects.map((project) => (
