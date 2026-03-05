@@ -26,7 +26,7 @@ export default function Page() {
     <div className="w-full">
       <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
         <section className="w-full md:grid grid-cols-[336px_1fr] gap-4 items-end md:mb-12">
-          <H1 className="text-2xl md:text-3xl leading-tight md:mb-0 mb-10">
+          <H1 className="text-xl md:text-2xl leading-tight md:mb-0 mb-10">
             Designer by day, <br /> <span className="text-quaternary">Engineer by night</span>
           </H1>
           <div className="w-col md:flex items-center justify-center">
