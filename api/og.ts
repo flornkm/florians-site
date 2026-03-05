@@ -14,7 +14,7 @@ const OPTS = {
 const FONT_SIZE = 80;
 
 const fontBase64 = fs
-  .readFileSync(path.join(process.cwd(), "public/fonts/imaginary-friend/MyImaginaryFriend-XP99.ttf"))
+  .readFileSync(path.join(process.cwd(), "public/fonts/sf-zimmerman/sf-zimmerman.regular.ttf"))
   .toString("base64");
 
 export default function handler(req: VercelRequest, res: VercelResponse): void {
@@ -47,14 +47,14 @@ export default function handler(req: VercelRequest, res: VercelResponse): void {
   <defs>
     <style>
       @font-face {
-        font-family: 'ImaginaryFriend';
+        font-family: 'SFZimmerman';
         src: url('data:font/ttf;base64,${fontBase64}') format('truetype');
       }
     </style>
   </defs>
   <rect width="${width}" height="${height}" fill="white"/>
   ${ellipsePaths}
-  <text x="${cx}" y="${cy + FONT_SIZE * 0.35}" text-anchor="middle" font-family="ImaginaryFriend, sans-serif" font-size="${FONT_SIZE}" fill="black">${escapeXml(title)}</text>
+  <text x="${cx}" y="${cy + FONT_SIZE * 0.35}" text-anchor="middle" font-family="SFZimmerman, sans-serif" font-size="${FONT_SIZE}" fill="black">${escapeXml(title)}</text>
 </svg>`;
 
     res.setHeader("Content-Type", "image/svg+xml");
