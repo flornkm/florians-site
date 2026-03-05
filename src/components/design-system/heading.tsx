@@ -11,7 +11,7 @@ export const headingVariants = cva("font-semibold text-primary", {
     size: {
       h1: "text-base font-semibold",
       h2: "text-sm font-semibold",
-      h3: "text-sm font-semibold",
+      h3: "text-base font-semibold",
       h4: "text-sm font-medium",
       h5: "text-xs font-medium",
       h6: "text-xs font-normal",
