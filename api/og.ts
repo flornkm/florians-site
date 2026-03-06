@@ -54,7 +54,7 @@ export default function handler(req: VercelRequest, res: VercelResponse): void {
   </defs>
   <rect width="${width}" height="${height}" fill="white"/>
   ${ellipsePaths}
-  <text x="${cx}" y="${cy + FONT_SIZE * 0.2}" text-anchor="middle" font-family="SFZimmerman, sans-serif" font-size="${FONT_SIZE}" letter-spacing="0.15em" fill="black">${escapeXml(title)}</text>
+  <text x="${cx}" y="${cy + FONT_SIZE * 0.1}" text-anchor="middle" font-family="SFZimmerman, sans-serif" font-size="${FONT_SIZE}" letter-spacing="0.15em" fill="black">${escapeXml(title)}</text>
 </svg>`;
 
     res.setHeader("Content-Type", "image/svg+xml");
