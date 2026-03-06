@@ -28,8 +28,8 @@ export default function handler(req: VercelRequest, res: VercelResponse): void {
     const height = clampInt(searchParams.get("height"), 630, 100, 2000);
 
     const textW = title.length * FONT_SIZE * 0.75;
-    const rx = textW / 2 + 80;
-    const ry = FONT_SIZE / 2 + 70;
+    const rx = textW / 2 + 40;
+    const ry = FONT_SIZE / 2 + 35;
     const cx = width / 2;
     const cy = height / 2;
 
