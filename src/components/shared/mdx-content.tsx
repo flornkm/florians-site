@@ -119,7 +119,7 @@ export function Video({
           src={src}
           webm={webm}
           mp4={mp4}
-          className={cn("w-full rounded-sm outline -outline-offset-1 outline-white/15", className)}
+          className={cn("w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15", className)}
           autoPlay={autoPlay}
           muted={muted}
           loop={loop}
@@ -172,7 +172,7 @@ function Img({ src, alt, className }: { src?: string; alt?: string; className?: 
           src={src}
           alt={alt}
           className={cn(
-            "h-full w-full rounded-sm object-contain outline -outline-offset-1 outline-white/15",
+            "h-full w-full rounded-sm object-contain outline -outline-offset-1 outline-black/5 dark:outline-white/15",
             className,
           )}
         />
@@ -186,11 +186,11 @@ export function MobileImages({ images }: { images: { src: string; alt: string }[
     <div className="not-prose my-8">
       <div className="flex gap-3 rounded-lg bg-secondary p-2 py-4 md:py-12 md:p-10">
         {images.map((img) => (
-          <div key={img.src} className="flex-1 min-w-0 px-2">
+          <div key={img.src} className="flex-1 min-w-0 px-2 @container">
             <img
               src={img.src}
               alt={img.alt}
-              className="w-full h-auto rounded-sm object-contain outline -outline-offset-1 outline-white/15"
+              className="w-full h-auto rounded-[16cqi] object-contain outline -outline-offset-1 outline-black/5 dark:outline-white/15"
             />
           </div>
         ))}
