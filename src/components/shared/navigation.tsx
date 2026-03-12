@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
+import { useLocation } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useLocation } from "@tanstack/react-router";
 import { Body1 } from "../design-system/body";
 import { buttonVariants } from "../ui/button";
 import { Link } from "../ui/link";

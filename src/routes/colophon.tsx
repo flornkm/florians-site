@@ -2,14 +2,14 @@ import { Body1 } from "@/components/design-system/body";
 import { H1, H3 } from "@/components/design-system/heading";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import { INSPIRATION } from "@/features/colophon/const/inspiration";
+import { PEOPLE } from "@/features/colophon/const/people";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { IconCentralIconSystem } from "central-icons/IconCentralIconSystem";
 import { IconGithub } from "central-icons/IconGithub";
-import { INSPIRATION } from "@/features/colophon/const/inspiration";
-import { PEOPLE } from "@/features/colophon/const/people";
 
 function renderLinkedList(items: { name: string; href: string }[]) {
   return items.map((item, i, arr) => (

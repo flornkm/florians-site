@@ -1,13 +1,7 @@
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import {
-  extractHeadings,
-  getContent,
-  getContentSource,
-  isWritingEntry,
-  type WritingEntry,
-} from "@/lib/mdx";
+import { extractHeadings, getContent, getContentSource, isWritingEntry, type WritingEntry } from "@/lib/mdx";
 import { cn } from "@/lib/utils";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";

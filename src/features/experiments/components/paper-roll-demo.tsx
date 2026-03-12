@@ -1,5 +1,5 @@
-import { useEffect, useRef, useMemo, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 const COLS = 18;
@@ -141,7 +141,13 @@ function createReceiptTexture(): THREE.CanvasTexture {
   const marginX = 48;
   let curY = 50;
 
-  const drawText = (text: string, size: number, color: string, align: "left" | "center" | "right" = "left", bold = false) => {
+  const drawText = (
+    text: string,
+    size: number,
+    color: string,
+    align: "left" | "center" | "right" = "left",
+    bold = false,
+  ) => {
     ctx.font = `${bold ? "bold " : ""}${size}px "Courier New", "Courier", monospace`;
     ctx.fillStyle = color;
     ctx.textBaseline = "top";
@@ -192,7 +198,9 @@ function createReceiptTexture(): THREE.CanvasTexture {
     curY += size + 4;
   };
 
-  const addSpace = (px: number) => { curY += px; };
+  const addSpace = (px: number) => {
+    curY += px;
+  };
 
   drawText("THE FLORNKM SHOP", 22, "#222", "center", true);
   addSpace(2);
@@ -360,7 +368,9 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
         if (pinned[i]) continue;
         if (grabbedSet.has(i)) continue;
 
-        const ix = i * 3, iy = ix + 1, iz = ix + 2;
+        const ix = i * 3,
+          iy = ix + 1,
+          iz = ix + 2;
         const vx = (pos[ix] - old[ix]) * DAMPING;
         const vy = (pos[iy] - old[iy]) * DAMPING;
         const vz = (pos[iz] - old[iz]) * DAMPING;
@@ -434,15 +444,16 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
       for (let iter = 0; iter < CONSTRAINT_ITERS; iter++) {
         for (let c = 0; c < constraints.length; c++) {
           const cn = constraints[c];
-          const ai = cn.i * 3, bi = cn.j * 3;
+          const ai = cn.i * 3,
+            bi = cn.j * 3;
           const dx = pos[bi] - pos[ai];
           const dy = pos[bi + 1] - pos[ai + 1];
           const dz = pos[bi + 2] - pos[ai + 2];
           const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
           if (dist < 1e-6) continue;
 
-          const stiffness = cn.bend ? (1 - BEND_COMPLIANCE) : 1;
-          const diff = (dist - cn.rest) / dist * 0.5 * stiffness;
+          const stiffness = cn.bend ? 1 - BEND_COMPLIANCE : 1;
+          const diff = ((dist - cn.rest) / dist) * 0.5 * stiffness;
           const ox = dx * diff;
           const oy = dy * diff;
           const oz = dz * diff;
@@ -493,7 +504,10 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
     }
     for (let r = 0; r < ROWS - 1; r++) {
       for (let c = 0; c < COLS - 1; c++) {
-        const a = idx(c, r), b = a + 1, d = idx(c, r + 1), e = d + 1;
+        const a = idx(c, r),
+          b = a + 1,
+          d = idx(c, r + 1),
+          e = d + 1;
         indices.push(a, d, b, b, d, e);
       }
     }
@@ -505,9 +519,12 @@ function PaperCloth({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
     return geo;
   }, [sim]);
 
-  const uniforms = useMemo(() => ({
-    uReceiptTex: { value: receiptTexture },
-  }), [receiptTexture]);
+  const uniforms = useMemo(
+    () => ({
+      uReceiptTex: { value: receiptTexture },
+    }),
+    [receiptTexture],
+  );
 
   return (
     <mesh>
@@ -554,10 +571,7 @@ function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   useFrame(() => {
     if (!paperMesh.current) {
       scene.traverse((obj) => {
-        if (
-          obj instanceof THREE.Mesh &&
-          obj.geometry?.getAttribute("position")?.count === COLS * ROWS
-        ) {
+        if (obj instanceof THREE.Mesh && obj.geometry?.getAttribute("position")?.count === COLS * ROWS) {
           paperMesh.current = obj;
         }
       });
@@ -570,18 +584,22 @@ function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
       ndc.current.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       ndc.current.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     },
-    [gl]
+    [gl],
   );
 
   const findNearest = useCallback((point: THREE.Vector3, geo: THREE.BufferGeometry) => {
     const pa = geo.getAttribute("position") as THREE.BufferAttribute;
-    let best = -1, bestD = Infinity;
+    let best = -1,
+      bestD = Infinity;
     for (let i = 0; i < pa.count; i++) {
       const dx = pa.getX(i) - point.x;
       const dy = pa.getY(i) - point.y;
       const dz = pa.getZ(i) - point.z;
       const d = dx * dx + dy * dy + dz * dz;
-      if (d < bestD) { bestD = d; best = i; }
+      if (d < bestD) {
+        bestD = d;
+        best = i;
+      }
     }
     return best;
   }, []);
@@ -609,7 +627,7 @@ function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
       grab.current.influenced = computeInfluenced(pi);
       grab.current.plane.setFromNormalAndCoplanarPoint(
         new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion),
-        hit.point
+        hit.point,
       );
     };
 
@@ -711,10 +729,7 @@ export const PaperRollDemo = () => {
   });
 
   return (
-    <div
-      className="flex flex-col items-center w-full h-full select-none"
-      style={{ touchAction: "none" }}
-    >
+    <div className="flex flex-col items-center w-full h-full select-none" style={{ touchAction: "none" }}>
       <div className="w-full flex-1 min-h-0 cursor-grab active:cursor-grabbing">
         <Canvas
           gl={{ antialias: true, alpha: true }}
@@ -730,9 +745,7 @@ export const PaperRollDemo = () => {
           <Interaction grab={grab} />
         </Canvas>
       </div>
-      <p className="text-xs text-quaternary pb-4 opacity-60">
-        Grab and drag the receipt
-      </p>
+      <p className="text-xs text-quaternary pb-4 opacity-60">Grab and drag the receipt</p>
     </div>
   );
 };

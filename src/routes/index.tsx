@@ -20,9 +20,7 @@ const getProjects = createServerFn().handler(async () => {
 export const Route = createFileRoute("/")({
   loader: () => getProjects(),
   head: () => ({
-    meta: [
-      { property: "og:image", content: "/api/og?title=Work" },
-    ],
+    meta: [{ property: "og:image", content: "/api/og?title=Work" }],
   }),
   component: IndexPage,
 });

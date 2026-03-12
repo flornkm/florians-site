@@ -1,6 +1,8 @@
 import { H1 } from "@/components/design-system/heading";
 import { mdxComponents } from "@/components/shared/mdx-content";
 import Button from "@/components/ui/button";
+import { WritingItem } from "@/features/writing/types";
+import { getContent } from "@/lib/mdx";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
@@ -8,8 +10,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { ComponentType, useEffect, useRef, useState } from "react";
-import { getContent } from "@/lib/mdx";
-import { WritingItem } from "@/features/writing/types";
 
 const mdxModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<
   string,
