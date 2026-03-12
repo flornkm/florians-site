@@ -4,7 +4,15 @@ import { readdir } from "fs/promises";
 const BASE_URL = "https://floriankiem.com";
 const EXCLUDED = ["/imprint", "/privacy-policy"];
 
-const STATIC_PAGES = ["/", "/about", "/contact", "/writing", "/experiments", "/colophon", "/send-postcard"];
+const STATIC_PAGES = [
+  "/",
+  "/about",
+  "/contact",
+  "/writing",
+  "/experiments",
+  "/colophon",
+  "/send-postcard",
+];
 
 async function getContentSlugs(category: string): Promise<string[]> {
   const contentRoot = `./src/content/${category}`;
@@ -13,9 +21,15 @@ async function getContentSlugs(category: string): Promise<string[]> {
 }
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {
-  const [workSlugs, writingSlugs] = await Promise.all([getContentSlugs("work"), getContentSlugs("writing")]);
+  const [workSlugs, writingSlugs] = await Promise.all([
+    getContentSlugs("work"),
+    getContentSlugs("writing"),
+  ]);
 
-  const dynamicPages = [...workSlugs.map((s) => `/work/${s}`), ...writingSlugs.map((s) => `/writing/${s}`)];
+  const dynamicPages = [
+    ...workSlugs.map((s) => `/work/${s}`),
+    ...writingSlugs.map((s) => `/writing/${s}`),
+  ];
 
   const allPages = [...STATIC_PAGES, ...dynamicPages].filter((p) => !EXCLUDED.includes(p));
 

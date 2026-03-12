@@ -32,7 +32,11 @@ export function isWorkEntry(entry: ContentEntry): entry is WorkEntry {
 }
 
 export function isWritingEntry(entry: ContentEntry): entry is WritingEntry {
-  return typeof entry.title === "string" && typeof entry.description === "string" && typeof entry.type === "string";
+  return (
+    typeof entry.title === "string" &&
+    typeof entry.description === "string" &&
+    typeof entry.type === "string"
+  );
 }
 
 export type Heading = {
@@ -68,8 +72,14 @@ type MdxModule = {
 };
 
 // Resolve all MDX content at build time — uses compiled modules with frontmatter exports
-const workModules = import.meta.glob("/src/content/work/*.mdx", { eager: true }) as Record<string, MdxModule>;
-const writingModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<string, MdxModule>;
+const workModules = import.meta.glob("/src/content/work/*.mdx", { eager: true }) as Record<
+  string,
+  MdxModule
+>;
+const writingModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<
+  string,
+  MdxModule
+>;
 
 const moduleMap = {
   work: workModules,
@@ -97,7 +107,10 @@ export function getContent(category: "work" | "writing"): ContentEntry[] {
 
   for (const [filePath, mod] of Object.entries(modules)) {
     const data = mod.frontmatter || {};
-    const slug = filePath.split("/").pop()!.replace(/\.mdx$/, "");
+    const slug = filePath
+      .split("/")
+      .pop()!
+      .replace(/\.mdx$/, "");
 
     entries.push({
       ...data,

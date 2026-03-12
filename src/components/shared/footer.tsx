@@ -64,7 +64,11 @@ export default function Footer() {
           <div className="flex flex-col items-start gap-2">
             <H4 className="mb-1">Pages</H4>
             {TABS.map((tab) => (
-              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "medium" })}>
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={footerLinkVariants({ size: "medium" })}
+              >
                 {tab.name}
               </Link>
             ))}
@@ -72,7 +76,11 @@ export default function Footer() {
           <div className="flex flex-col items-start gap-2">
             <H4 className="mb-1">More</H4>
             {MORE_LINKS.map((tab) => (
-              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "medium" })}>
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={footerLinkVariants({ size: "medium" })}
+              >
                 {tab.name}
               </Link>
             ))}
@@ -101,7 +109,11 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4 justify-end">
             {LEGAL_LINKS.map((tab) => (
-              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "small" })}>
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={footerLinkVariants({ size: "small" })}
+              >
                 {tab.name}
               </Link>
             ))}

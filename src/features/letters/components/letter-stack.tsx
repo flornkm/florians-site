@@ -183,7 +183,9 @@ export function LetterStack() {
 
   const [letterOrder, setLetterOrder] = useState<string[]>([]);
 
-  const letters: Record<string, LetterData> | undefined = IS_DEV ? MOCK_LETTERS : data?.data?.letters;
+  const letters: Record<string, LetterData> | undefined = IS_DEV
+    ? MOCK_LETTERS
+    : data?.data?.letters;
 
   useEffect(() => {
     if (letters) {

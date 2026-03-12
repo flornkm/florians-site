@@ -93,20 +93,32 @@ export default function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button className={cn(buttonVariants({ variant, size, iconOnly, rounded }), className)} {...props}>
+    <button
+      className={cn(buttonVariants({ variant, size, iconOnly, rounded }), className)}
+      {...props}
+    >
       {!iconOnly && prefix && (
-        <span className={cn(slotVariants({ size }), "inline-flex shrink-0 items-center justify-center")} aria-hidden>
+        <span
+          className={cn(slotVariants({ size }), "inline-flex shrink-0 items-center justify-center")}
+          aria-hidden
+        >
           {prefix}
         </span>
       )}
       {!iconOnly && <span className={contentPaddingVariants({ size })}>{children}</span>}
       {!iconOnly && suffix && (
-        <span className={cn(slotVariants({ size }), "inline-flex shrink-0 items-center justify-center")} aria-hidden>
+        <span
+          className={cn(slotVariants({ size }), "inline-flex shrink-0 items-center justify-center")}
+          aria-hidden
+        >
           {suffix}
         </span>
       )}
       {iconOnly && (
-        <span className={cn(slotVariants({ size }), "inline-flex shrink-0 items-center justify-center")} aria-hidden>
+        <span
+          className={cn(slotVariants({ size }), "inline-flex shrink-0 items-center justify-center")}
+          aria-hidden
+        >
           {prefix ?? children ?? suffix}
         </span>
       )}

@@ -36,7 +36,9 @@ export function GlobeTooltipContent() {
           polygonsData={countries}
           polygonCapColor={(feat: object) => (isCountryVisited(feat) ? "#f43f5e" : "transparent")}
           polygonSideColor={(feat: object) => (isCountryVisited(feat) ? "#e879f9" : "transparent")}
-          polygonStrokeColor={(feat: object) => (isCountryVisited(feat) ? "#9f1239" : "transparent")}
+          polygonStrokeColor={(feat: object) =>
+            isCountryVisited(feat) ? "#9f1239" : "transparent"
+          }
           polygonAltitude={(feat: object) => (isCountryVisited(feat) ? 0.01 : 0)}
           polygonsTransitionDuration={0}
           autoRotate={true}

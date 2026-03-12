@@ -15,12 +15,19 @@ interface Segment {
   color: string;
 }
 
-function buildSegments(dimensions: ChartDimensions, svgHeight: number, padding: number, gap: number): Segment[] {
+function buildSegments(
+  dimensions: ChartDimensions,
+  svgHeight: number,
+  padding: number,
+  gap: number,
+): Segment[] {
   const segments: Segment[] = [];
-  const { chartMaxValue, normalHigh, optimalHigh, optimalLow, normalLow, chartMinValue } = dimensions;
+  const { chartMaxValue, normalHigh, optimalHigh, optimalLow, normalLow, chartMinValue } =
+    dimensions;
 
   const hasNormalRange = normalLow !== optimalLow || normalHigh !== optimalHigh;
-  const getY = (value: number) => (valueToYPercent(dimensions, value) / 100) * (svgHeight - 2 * padding) + padding;
+  const getY = (value: number) =>
+    (valueToYPercent(dimensions, value) / 100) * (svgHeight - 2 * padding) + padding;
 
   const rangeDefinitions: Array<{ from: number; to: number; color: string }> = [];
 
@@ -75,7 +82,13 @@ export interface RangeStackProps {
   padding?: number;
 }
 
-export function RangeStack({ ranges, values, dimensions: providedDimensions, height, padding }: RangeStackProps) {
+export function RangeStack({
+  ranges,
+  values,
+  dimensions: providedDimensions,
+  height,
+  padding,
+}: RangeStackProps) {
   const svgHeight = height ?? CONFIG.HEIGHT;
   const svgPadding = padding ?? CONFIG.PADDING;
 

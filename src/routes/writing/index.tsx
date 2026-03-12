@@ -26,7 +26,10 @@ export const Route = createFileRoute("/writing/")({
   head: () => ({
     meta: [
       { title: "Writing • Florian - Design Engineer" },
-      { name: "description", content: "Writing contains thoughts, ideas, and experiences from Florian." },
+      {
+        name: "description",
+        content: "Writing contains thoughts, ideas, and experiences from Florian.",
+      },
       { property: "og:image", content: "/api/og?title=Writing" },
     ],
   }),
@@ -51,7 +54,9 @@ function WritingPage() {
     document.documentElement.style.scrollSnapType = "y mandatory";
     document.documentElement.style.scrollBehavior = "smooth";
 
-    sectionsRef.current = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-section]"));
+    sectionsRef.current = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-scroll-section]"),
+    );
 
     const computeBaseTop = () => {
       const first = sectionsRef.current?.[0] || null;
@@ -152,7 +157,7 @@ function WritingPage() {
               <div
                 style={{
                   zIndex: items.length - Math.abs(activeIndex - index),
-                  top: `-${Math.abs(activeIndex - index) * 0}px`,
+                  top: "0px",
                   pointerEvents: activeIndex === index ? "auto" : "none",
                   visibility: gotShown ? "hidden" : "visible",
                   transform: `scale(${gotShown ? 1.05 : Math.max(0.2, 1 - Math.abs(activeIndex - index) * 0.1)})`,
@@ -180,7 +185,10 @@ function WritingPage() {
                   </div>
                   <Button
                     onClick={() => handleOpen(index)}
-                    className={cn("transition-opacity duration-300", isTransitioning && "opacity-0")}
+                    className={cn(
+                      "transition-opacity duration-300",
+                      isTransitioning && "opacity-0",
+                    )}
                     variant="secondary"
                     size="sm"
                   >

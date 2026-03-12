@@ -110,7 +110,11 @@ export default function Navigation() {
     }
   }, [hasActiveTab, isHovering, hasAnimatedIn]);
 
-  const displayIndex = isHovering ? hoveredIndex : hasActiveTab ? activeIndex : lastHoveredIndexRef.current;
+  const displayIndex = isHovering
+    ? hoveredIndex
+    : hasActiveTab
+      ? activeIndex
+      : lastHoveredIndexRef.current;
 
   const selectorDimensions = tabDimensions[displayIndex];
   const showSelector = isReady && selectorDimensions;
@@ -165,8 +169,12 @@ export default function Navigation() {
                   opacity: isVisible ? 1 : 0,
                 }}
                 transition={{
-                  left: shouldAnimatePosition ? { type: "spring", stiffness: 400, damping: 30 } : { duration: 0 },
-                  width: shouldAnimatePosition ? { type: "spring", stiffness: 400, damping: 30 } : { duration: 0 },
+                  left: shouldAnimatePosition
+                    ? { type: "spring", stiffness: 400, damping: 30 }
+                    : { duration: 0 },
+                  width: shouldAnimatePosition
+                    ? { type: "spring", stiffness: 400, damping: 30 }
+                    : { duration: 0 },
                   opacity: { duration: 0.2, ease: "easeOut" },
                 }}
               />

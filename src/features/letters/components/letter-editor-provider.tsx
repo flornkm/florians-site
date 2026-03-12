@@ -89,7 +89,7 @@ export function LetterEditorProvider({ children, onSuccess, onError }: LetterEdi
   });
 
   const isEmpty = useCallback(() => {
-    const { handle, ...fieldsToCheck } = formValues;
+    const { handle: _handle, ...fieldsToCheck } = formValues;
     return !Object.values(fieldsToCheck).every((value) => value) || !signature;
   }, [formValues, signature]);
 
@@ -105,5 +105,7 @@ export function LetterEditorProvider({ children, onSuccess, onError }: LetterEdi
     isEmpty: isEmpty(),
   };
 
-  return <LetterEditorContext.Provider value={contextValue}>{children}</LetterEditorContext.Provider>;
+  return (
+    <LetterEditorContext.Provider value={contextValue}>{children}</LetterEditorContext.Provider>
+  );
 }

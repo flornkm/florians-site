@@ -10,8 +10,6 @@ import { useEffect, useState } from "react";
 import { Streamdown } from "streamdown";
 import { useChatStatusEvents } from "./chat-status";
 
-const RECOMMENDATIONS = ["What do you work on?", "How can I reach you?", "Tell me about your projects"];
-
 export const Chat = () => {
   const [input, setInput] = useState("");
 
@@ -37,9 +35,14 @@ export const Chat = () => {
         {messages.map((message) => (
           <Body1
             key={message.id}
-            className={cn("leading-relaxed flex", message.role === "user" ? "text-tertiary" : "text-primary")}
+            className={cn(
+              "leading-relaxed flex",
+              message.role === "user" ? "text-tertiary" : "text-primary",
+            )}
           >
-            <span className="font-medium mr-1 w-14 shrink-0">{message.role === "user" ? "You:" : "Clone:"}</span>
+            <span className="font-medium mr-1 w-14 shrink-0">
+              {message.role === "user" ? "You:" : "Clone:"}
+            </span>
             {message.parts.map((part, index) =>
               part.type === "text" ? (
                 <Streamdown key={index} components={{ code: Code }}>

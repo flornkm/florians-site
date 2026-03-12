@@ -40,8 +40,9 @@ function AboutPage() {
 
         <div className="space-y-4">
           <Body1 className="leading-relaxed">
-            I was born in southern Germany on <code>110101(DDMMYY)</code>. During my childhood I played a lot of
-            Minecraft, sold services on Fiverr, and somehow found my way into product design.
+            I was born in southern Germany on <code>110101(DDMMYY)</code>. During my childhood I
+            played a lot of Minecraft, sold services on Fiverr, and somehow found my way into
+            product design.
           </Body1>
 
           <Body1 className="leading-relaxed">
@@ -49,8 +50,9 @@ function AboutPage() {
             <RichTooltip content={<InstitutionsTooltipContent />} maxWidth={280}>
               university
             </RichTooltip>
-            , the University of Design in Schwaebisch Gmuend, Germany, and the TU Delft in Delft, the Netherlands. Since
-            then, my biggest strength is to work as an interpreter from design to code.
+            , the University of Design in Schwaebisch Gmuend, Germany, and the TU Delft in Delft,
+            the Netherlands. Since then, my biggest strength is to work as an interpreter from
+            design to code.
           </Body1>
 
           <Body1 className="leading-relaxed">

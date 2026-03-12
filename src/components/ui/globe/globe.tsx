@@ -2,7 +2,9 @@ import { forwardRef, lazy, Suspense, useCallback, useImperativeHandle, useRef } 
 import type { GlobeMethods, GlobeProps as ReactGlobeProps } from "react-globe.gl";
 import "./globe.css";
 
-const GlobeComponent = lazy(() => import("react-globe.gl").then((module) => ({ default: module.default })));
+const GlobeComponent = lazy(() =>
+  import("react-globe.gl").then((module) => ({ default: module.default })),
+);
 
 export type GlobeInstance = GlobeMethods;
 
@@ -128,7 +130,15 @@ export const Globe = forwardRef<GlobeMethods, GlobeProps>(function Globe(
     } catch {
       // Rotation setup failed silently
     }
-  }, [animateEntrance, autoRotate, autoRotateSpeed, enableZoom, enablePan, enableRotate, onGlobeReady]);
+  }, [
+    animateEntrance,
+    autoRotate,
+    autoRotateSpeed,
+    enableZoom,
+    enablePan,
+    enableRotate,
+    onGlobeReady,
+  ]);
 
   return (
     <div className="w-full flex items-center justify-center">

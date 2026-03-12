@@ -4,7 +4,7 @@ import { IconFolder1 } from "central-icons/IconFolder1";
 import { IconLoader } from "central-icons/IconLoader";
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useRef, useState } from "react";
-import { TextShimmer } from "../text-shimmer";
+import { TextShimmer } from "@/components/shared/text-shimmer";
 
 const HOLD_MS = 1400;
 
@@ -97,6 +97,7 @@ export const AgentWorkflow = () => {
 
       const runFile = async () => {
         for (let i = 0; i < fileDelays.length; i++) {
+          // oxlint-disable-next-line no-await-in-loop -- intentional sequential animation steps
           await abortableDelay(i === 0 ? fileDelays[0] : fileDelays[i] - fileDelays[i - 1], signal);
           setFileStep(i + 1);
           scrollToBottom();
@@ -108,6 +109,7 @@ export const AgentWorkflow = () => {
 
       const runCal = async () => {
         for (let i = 0; i < calDelays.length; i++) {
+          // oxlint-disable-next-line no-await-in-loop -- intentional sequential animation steps
           await abortableDelay(i === 0 ? calDelays[0] : calDelays[i] - calDelays[i - 1], signal);
           setCalStep(i + 1);
           scrollToBottom();
@@ -245,12 +247,26 @@ export const AgentWorkflow = () => {
   const showMessage = phase !== "idle";
   const showForm = phase !== "idle" && phase !== "message";
   const showLoading = phase === "loading";
-  const showReceipt = !["idle", "message", "form", "holding", "confirming", "success", "loading"].includes(phase);
-  const showSuccess = showReceipt;
+  const showReceipt = ![
+    "idle",
+    "message",
+    "form",
+    "holding",
+    "confirming",
+    "success",
+    "loading",
+  ].includes(phase);
   const formDone = !["idle", "message", "form", "holding"].includes(phase);
-  const showFork = !["idle", "message", "form", "holding", "confirming", "success", "loading", "receipt"].includes(
-    phase,
-  );
+  const showFork = ![
+    "idle",
+    "message",
+    "form",
+    "holding",
+    "confirming",
+    "success",
+    "loading",
+    "receipt",
+  ].includes(phase);
   const showParallel = ![
     "idle",
     "message",
@@ -303,27 +319,35 @@ export const AgentWorkflow = () => {
             >
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-quaternary uppercase tracking-wider">Card number</label>
+                  <label className="text-[10px] text-quaternary uppercase tracking-wider">
+                    Card number
+                  </label>
                   <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                     4532 8720 1193 4467
                   </div>
                 </div>
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-1 flex-1">
-                    <label className="text-[10px] text-quaternary uppercase tracking-wider">Expiry</label>
+                    <label className="text-[10px] text-quaternary uppercase tracking-wider">
+                      Expiry
+                    </label>
                     <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                       09/28
                     </div>
                   </div>
                   <div className="flex flex-col gap-1 flex-1">
-                    <label className="text-[10px] text-quaternary uppercase tracking-wider">CVV</label>
+                    <label className="text-[10px] text-quaternary uppercase tracking-wider">
+                      CVV
+                    </label>
                     <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                       817
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-quaternary uppercase tracking-wider">Name on card</label>
+                  <label className="text-[10px] text-quaternary uppercase tracking-wider">
+                    Name on card
+                  </label>
                   <div className="text-xs text-primary font-mono bg-surface-secondary rounded-lg px-2.5 py-1.5 border border-primary">
                     Jane Cooper
                   </div>
@@ -351,7 +375,11 @@ export const AgentWorkflow = () => {
                   <motion.div
                     className="absolute inset-0 rounded-full origin-left bg-success"
                     animate={{ scaleX: holdProg }}
-                    transition={holdProg === 0 ? { type: "spring", stiffness: 300, damping: 25 } : { duration: 0 }}
+                    transition={
+                      holdProg === 0
+                        ? { type: "spring", stiffness: 300, damping: 25 }
+                        : { duration: 0 }
+                    }
                   />
                   <span className="relative z-10 flex items-center justify-center w-full h-full">
                     <AnimatePresence mode="wait">
@@ -418,7 +446,9 @@ export const AgentWorkflow = () => {
               </div>
               <div className="rounded-2xl border border-primary bg-primary p-5 flex flex-col gap-3 w-full max-w-sm shadow-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-quaternary uppercase tracking-wider">Order confirmation</span>
+                  <span className="text-[10px] text-quaternary uppercase tracking-wider">
+                    Order confirmation
+                  </span>
                   <span className="text-[10px] text-quaternary font-mono">#ZH-29841</span>
                 </div>
                 <div className="border-t border-primary" />
@@ -458,7 +488,9 @@ export const AgentWorkflow = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="pl-5 w-full max-w-sm"
             >
-              <p className="text-[13px] text-tertiary leading-relaxed">Orchestrating 2 sub-agents...</p>
+              <p className="text-[13px] text-tertiary leading-relaxed">
+                Orchestrating 2 sub-agents...
+              </p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -502,11 +534,16 @@ export const AgentWorkflow = () => {
                                 transition={{ duration: 0.25, ease: "easeOut" }}
                               >
                                 {isLatest ? (
-                                  <TextShimmer className="text-[13px] leading-relaxed" duration={1.5}>
+                                  <TextShimmer
+                                    className="text-[13px] leading-relaxed"
+                                    duration={1.5}
+                                  >
                                     {FILE_MESSAGES[i]}
                                   </TextShimmer>
                                 ) : (
-                                  <p className="text-[13px] text-tertiary leading-relaxed">{FILE_MESSAGES[i]}</p>
+                                  <p className="text-[13px] text-tertiary leading-relaxed">
+                                    {FILE_MESSAGES[i]}
+                                  </p>
                                 )}
                               </motion.div>
                             );
@@ -542,7 +579,9 @@ export const AgentWorkflow = () => {
                     <div className="flex items-center gap-1.5">
                       <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-primary pl-1.5 pr-2 py-0.5 shadow-sm">
                         <IconCalendar1 className="w-2.5 h-2.5 text-tertiary" />
-                        <span className="text-[10px] text-secondary font-medium">Calendar agent</span>
+                        <span className="text-[10px] text-secondary font-medium">
+                          Calendar agent
+                        </span>
                       </span>
                     </div>
                     <div className="flex flex-col gap-2 pl-3">
@@ -558,11 +597,16 @@ export const AgentWorkflow = () => {
                                 transition={{ duration: 0.25, ease: "easeOut" }}
                               >
                                 {isLatest ? (
-                                  <TextShimmer className="text-[13px] leading-relaxed" duration={1.5}>
+                                  <TextShimmer
+                                    className="text-[13px] leading-relaxed"
+                                    duration={1.5}
+                                  >
                                     {CAL_MESSAGES[i]}
                                   </TextShimmer>
                                 ) : (
-                                  <p className="text-[13px] text-tertiary leading-relaxed">{CAL_MESSAGES[i]}</p>
+                                  <p className="text-[13px] text-tertiary leading-relaxed">
+                                    {CAL_MESSAGES[i]}
+                                  </p>
                                 )}
                               </motion.div>
                             );
@@ -598,8 +642,8 @@ export const AgentWorkflow = () => {
               className="pl-5 flex flex-col gap-3 pb-4 w-full max-w-sm"
             >
               <p className="text-[13px] text-tertiary leading-relaxed">
-                Everything is properly done. Your receipt has been filed and a delivery reminder is on your calendar.
-                What would you like to do next?
+                Everything is properly done. Your receipt has been filed and a delivery reminder is
+                on your calendar. What would you like to do next?
               </p>
               <button
                 onClick={reset}

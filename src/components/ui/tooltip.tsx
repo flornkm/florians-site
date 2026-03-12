@@ -25,7 +25,11 @@ export default function Tooltip({ children, content, className, style }: Tooltip
     <BaseTooltip.Root>
       <BaseTooltip.Trigger
         render={(triggerProps) => (
-          <div {...triggerProps} className={cn("relative", className, triggerProps.className)} style={style}>
+          <div
+            {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> })}
+            className={cn("relative", className, triggerProps.className)}
+            style={style}
+          >
             {children}
           </div>
         )}
@@ -74,7 +78,9 @@ interface TooltipTriggerProps {
   style?: React.CSSProperties;
 }
 
-const TooltipGroupContext = React.createContext<BaseTooltip.Handle<React.ComponentType> | null>(null);
+const TooltipGroupContext = React.createContext<BaseTooltip.Handle<React.ComponentType> | null>(
+  null,
+);
 
 export function TooltipGroup({ children }: TooltipGroupProps) {
   const handle = useMemo(() => BaseTooltip.createHandle<React.ComponentType>(), []);
@@ -164,7 +170,11 @@ export function TooltipTrigger({ children, content, className, style }: TooltipT
       handle={handle}
       payload={ContentComponent}
       render={(triggerProps) => (
-        <div {...triggerProps} className={cn("relative", className, triggerProps.className)} style={style}>
+        <div
+          {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> })}
+          className={cn("relative", className, triggerProps.className)}
+          style={style}
+        >
           {children}
         </div>
       )}
@@ -187,7 +197,7 @@ export function RichTooltip({ children, content, className, maxWidth = 360 }: Ri
       <BaseTooltip.Trigger
         render={(triggerProps) => (
           <span
-            {...triggerProps}
+            {...(triggerProps as React.HTMLAttributes<HTMLSpanElement> & { ref?: React.Ref<HTMLSpanElement> })}
             tabIndex={0}
             className={cn(
               "underline decoration-muted underline-offset-2 hover:decoration-emphasis/50 cursor-context-menu transition-colors duration-200 outline-none focus-visible:decoration-emphasis/50",

@@ -89,7 +89,8 @@ export function getValueStatus(dimensions: ChartDimensions, value: number): Stat
   }
 
   const hasNormalRange =
-    dimensions.normalLow !== dimensions.optimalLow || dimensions.normalHigh !== dimensions.optimalHigh;
+    dimensions.normalLow !== dimensions.optimalLow ||
+    dimensions.normalHigh !== dimensions.optimalHigh;
 
   if (hasNormalRange) {
     const maxHigh = Math.max(dimensions.normalHigh, dimensions.optimalHigh);
@@ -121,7 +122,11 @@ export function prepareChartData(data: DataPoint[], maxPoints: number): DataPoin
 export function getNewestDataPoint(biomarker: Biomarker): DataPoint | null {
   if (!biomarker.data.length) return null;
 
-  return [...biomarker.data].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0] ?? null;
+  return (
+    [...biomarker.data].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    )[0] ?? null
+  );
 }
 
 /**
@@ -129,6 +134,19 @@ export function getNewestDataPoint(biomarker: Biomarker): DataPoint | null {
  */
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }

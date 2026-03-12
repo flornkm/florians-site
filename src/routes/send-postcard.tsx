@@ -9,7 +9,8 @@ export const Route = createFileRoute("/send-postcard")({
       { title: "Send Postcard • Florian - Design Engineer" },
       {
         name: "description",
-        content: "Sending a postcard on florians site is similar to entering your name on a guestbook, just digitally.",
+        content:
+          "Sending a postcard on florians site is similar to entering your name on a guestbook, just digitally.",
       },
       { property: "og:image", content: "/api/og?title=Send Postcard" },
     ],

@@ -35,8 +35,10 @@ function buildConstraints(): Constraint[] {
   const out: Constraint[] = [];
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
-      if (c < COLS - 1) out.push({ i: idx(c, r), j: idx(c + 1, r), rest: STRUCT_REST, bend: false });
-      if (r < ROWS - 1) out.push({ i: idx(c, r), j: idx(c, r + 1), rest: STRUCT_REST, bend: false });
+      if (c < COLS - 1)
+        out.push({ i: idx(c, r), j: idx(c + 1, r), rest: STRUCT_REST, bend: false });
+      if (r < ROWS - 1)
+        out.push({ i: idx(c, r), j: idx(c, r + 1), rest: STRUCT_REST, bend: false });
       if (c < COLS - 1 && r < ROWS - 1) {
         out.push({ i: idx(c, r), j: idx(c + 1, r + 1), rest: SHEAR_REST, bend: false });
         out.push({ i: idx(c + 1, r), j: idx(c, r + 1), rest: SHEAR_REST, bend: false });
@@ -571,7 +573,10 @@ function Interaction({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   useFrame(() => {
     if (!paperMesh.current) {
       scene.traverse((obj) => {
-        if (obj instanceof THREE.Mesh && obj.geometry?.getAttribute("position")?.count === COLS * ROWS) {
+        if (
+          obj instanceof THREE.Mesh &&
+          obj.geometry?.getAttribute("position")?.count === COLS * ROWS
+        ) {
           paperMesh.current = obj;
         }
       });
@@ -729,7 +734,10 @@ export const PaperRollDemo = () => {
   });
 
   return (
-    <div className="flex flex-col items-center w-full h-full select-none" style={{ touchAction: "none" }}>
+    <div
+      className="flex flex-col items-center w-full h-full select-none"
+      style={{ touchAction: "none" }}
+    >
       <div className="w-full flex-1 min-h-0 cursor-grab active:cursor-grabbing">
         <Canvas
           gl={{ antialias: true, alpha: true }}

@@ -5,7 +5,12 @@ export function InstitutionsTooltipContent() {
   return (
     <div className="flex gap-6 p-1 items-center">
       {INSTITUTIONS.map((inst) => (
-        <Link key={inst.name} href={inst.url} target="_blank" className="flex items-center justify-center h-10 group">
+        <Link
+          key={inst.name}
+          href={inst.url}
+          target="_blank"
+          className="flex items-center justify-center h-10 group"
+        >
           <img
             src={inst.logo}
             alt={inst.name}

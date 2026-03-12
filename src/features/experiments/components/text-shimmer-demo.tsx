@@ -26,7 +26,12 @@ export const TextShimmerDemo = () => {
   return (
     <div className="flex flex-col items-center gap-10 w-full max-w-md px-6">
       <div className="w-full">
-        <TextShimmer duration={duration} spread={2} paused={grabbing} className="text-sm leading-relaxed text-center">
+        <TextShimmer
+          duration={duration}
+          spread={2}
+          paused={grabbing}
+          className="text-sm leading-relaxed text-center"
+        >
           {SAMPLE_TEXT}
         </TextShimmer>
       </div>
@@ -54,8 +59,12 @@ export const TextShimmerDemo = () => {
               "[&::-webkit-slider-thumb]:transition-transform",
               "[&::-webkit-slider-thumb]:duration-300",
               "[&::-webkit-slider-thumb]:[transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)]",
-              grabbing ? "[&::-webkit-slider-thumb]:scale-75" : "[&::-webkit-slider-thumb]:scale-100",
-              grabbing ? "[&::-webkit-slider-thumb]:cursor-grabbing" : "[&::-webkit-slider-thumb]:cursor-grab",
+              grabbing
+                ? "[&::-webkit-slider-thumb]:scale-75"
+                : "[&::-webkit-slider-thumb]:scale-100",
+              grabbing
+                ? "[&::-webkit-slider-thumb]:cursor-grabbing"
+                : "[&::-webkit-slider-thumb]:cursor-grab",
               "[&::-moz-range-thumb]:w-3",
               "[&::-moz-range-thumb]:h-3",
               "[&::-moz-range-thumb]:rounded-full",
@@ -67,7 +76,9 @@ export const TextShimmerDemo = () => {
               "[&::-moz-range-thumb]:duration-300",
               "[&::-moz-range-thumb]:[transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)]",
               grabbing ? "[&::-moz-range-thumb]:scale-75" : "[&::-moz-range-thumb]:scale-100",
-              grabbing ? "[&::-moz-range-thumb]:cursor-grabbing" : "[&::-moz-range-thumb]:cursor-grab",
+              grabbing
+                ? "[&::-moz-range-thumb]:cursor-grabbing"
+                : "[&::-moz-range-thumb]:cursor-grab",
             ].join(" ")}
           />
         </div>

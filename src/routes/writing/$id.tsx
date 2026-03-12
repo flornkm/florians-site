@@ -1,7 +1,13 @@
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import { extractHeadings, getContent, getContentSource, isWritingEntry, type WritingEntry } from "@/lib/mdx";
+import {
+  extractHeadings,
+  getContent,
+  getContentSource,
+  isWritingEntry,
+  type WritingEntry,
+} from "@/lib/mdx";
 import { cn } from "@/lib/utils";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
@@ -45,13 +51,16 @@ const getWritingItem = createServerFn({ method: "GET" })
 
 export const Route = createFileRoute("/writing/$id")({
   loader: ({ params }) => getWritingItem({ data: params.id }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData.title} • Florian - Design Engineer` },
-      { name: "description", content: loaderData.description },
-      { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    return {
+      meta: [
+        { title: `${loaderData.title} • Florian - Design Engineer` },
+        { name: "description", content: loaderData.description },
+        { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
+      ],
+    };
+  },
   component: WritingDetailPage,
 });
 
@@ -153,14 +162,20 @@ function WritingDetailPage() {
                       key={heading.id}
                       initial={{ opacity: 0, x: -8, filter: "blur(2px)" }}
                       animate={{ opacity: 1, x: 0, filter: "blur(0)" }}
-                      transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.1 + i * 0.05,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                     >
                       <a
                         href={`#${heading.id}`}
                         onClick={(e) => handleAnchorClick(e, heading.id)}
                         className={cn(
                           "text-sm leading-relaxed transition-colors",
-                          activeId === heading.id ? "text-primary font-medium" : "text-quaternary hover:text-primary",
+                          activeId === heading.id
+                            ? "text-primary font-medium"
+                            : "text-quaternary hover:text-primary",
                         )}
                       >
                         {heading.text}
@@ -173,7 +188,10 @@ function WritingDetailPage() {
           </div>
         </aside>
         <div className="sticky top-[calc(100dvh-6.75rem)] z-10 lg:hidden flex justify-center h-0">
-          <Link href="/writing" className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "gap-1")}>
+          <Link
+            href="/writing"
+            className={cn(buttonVariants({ variant: "secondary", size: "sm" }), "gap-1")}
+          >
             <IconChevronLeft className="h-4 w-4" />
             Go back
           </Link>

@@ -29,7 +29,9 @@ function extractTextFromChildren(children: ReactNode): string {
     return children.map(extractTextFromChildren).join("");
   }
   if (children && typeof children === "object" && "props" in children) {
-    return extractTextFromChildren((children as { props: { children?: ReactNode } }).props.children);
+    return extractTextFromChildren(
+      (children as { props: { children?: ReactNode } }).props.children,
+    );
   }
   return "";
 }
@@ -119,7 +121,10 @@ export function Video({
           src={src}
           webm={webm}
           mp4={mp4}
-          className={cn("w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15", className)}
+          className={cn(
+            "w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
+            className,
+          )}
           autoPlay={autoPlay}
           muted={muted}
           loop={loop}

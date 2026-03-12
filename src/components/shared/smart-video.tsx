@@ -23,14 +23,22 @@ export function SmartVideo({
     if (typeof navigator === "undefined") return false;
     const ua = navigator.userAgent;
     // Safari on iOS/macOS: contains "Safari" but not Chrome/Edge/Firefox iOS tokens
-    const isSafariLike = /Safari/i.test(ua) && !/Chrome|CriOS|Edg|EdgiOS|FxiOS|OPR|SamsungBrowser/i.test(ua);
+    const isSafariLike =
+      /Safari/i.test(ua) && !/Chrome|CriOS|Edg|EdgiOS|FxiOS|OPR|SamsungBrowser/i.test(ua);
     return isSafariLike;
   }, []);
 
   // Until mounted, avoid attaching sources to prevent the browser from preloading the wrong one during SSR
   if (!mounted) {
     return (
-      <video {...videoProps} muted={muted} loop={loop} autoPlay={autoPlay} playsInline={playsInline} preload="none" />
+      <video
+        {...videoProps}
+        muted={muted}
+        loop={loop}
+        autoPlay={autoPlay}
+        playsInline={playsInline}
+        preload="none"
+      />
     );
   }
 
@@ -50,7 +58,14 @@ export function SmartVideo({
 
   // Dual-source mode with Safari-aware ordering
   return (
-    <video {...videoProps} muted={muted} loop={loop} autoPlay={autoPlay} playsInline={playsInline} preload={preload}>
+    <video
+      {...videoProps}
+      muted={muted}
+      loop={loop}
+      autoPlay={autoPlay}
+      playsInline={playsInline}
+      preload={preload}
+    >
       {isSafari ? (
         // Safari: prefer MP4, but fall back to WebM if MP4 is not available
         mp4 ? (

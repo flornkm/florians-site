@@ -14,7 +14,10 @@ export const Route = createFileRoute("/experiments")({
   head: () => ({
     meta: [
       { title: "Experiments • Florian - Design Engineer" },
-      { name: "description", content: "A page collecting different design engineering experiments." },
+      {
+        name: "description",
+        content: "A page collecting different design engineering experiments.",
+      },
       { property: "og:image", content: "/api/og?title=Experiments" },
     ],
   }),
