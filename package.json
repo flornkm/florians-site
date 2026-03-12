@@ -39,6 +39,7 @@
     "firebase-admin": "^13.5.0",
     "gray-matter": "^4.0.3",
     "motion": "^12.34.0",
+    "nitro": "^3.0.1-20260312-093400-ba5147a5",
     "openai": "^5.20.2",
     "opentype.js": "^1.3.4",
     "postprocessing": "^6.37.8",
@@ -82,7 +83,7 @@
     "tw-animate-css": "^1.3.8",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.43.0",
-    "vite": "^6.3.6"
+    "vite": "^8.0.0"
   },
   "type": "module"
 }

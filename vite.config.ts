@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
       }),
     },
     tanstackStart(),
+    nitro(),
     react(),
     tailwindcss(),
   ],
