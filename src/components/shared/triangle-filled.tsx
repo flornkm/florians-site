@@ -1,4 +1,4 @@
-export default function TriangleFilled(props: React.SVGProps<SVGSVGElement>) {
+export default function TriangleFilled(_props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

@@ -70,7 +70,11 @@ function IndexPage() {
               </div>
               <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
                 <div className="w-full bg-secondary p-4 md:p-8 rounded-md flex items-center">
-                  <img src={project.cover} alt={project.title} className="w-full h-auto object-cover rounded-sm" />
+                  <img
+                    src={project.cover}
+                    alt={project.title}
+                    className="w-full h-auto object-cover rounded-sm"
+                  />
                 </div>
               </div>
             </Link>
@@ -83,7 +87,9 @@ function IndexPage() {
           <div className="flex flex-col items-center justify-center w-full md:px-0 px-4 md:w-auto">
             <div className="md:mb-2 min-[450px]:mb-0 mb-8">
               <H2 className="text-center mb-0.5">Digital Guestbook</H2>
-              <Body2 className="text-quaternary md:mb-2.5 text-center">Last three letters sent to this site.</Body2>
+              <Body2 className="text-quaternary md:mb-2.5 text-center">
+                Last three letters sent to this site.
+              </Body2>
             </div>
             <div className="min-[450px]:mt-[16vw] md:mt-0 w-full">
               <LetterStack />

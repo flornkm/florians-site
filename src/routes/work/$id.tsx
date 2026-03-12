@@ -52,13 +52,16 @@ const getProject = createServerFn({ method: "GET" })
 
 export const Route = createFileRoute("/work/$id")({
   loader: ({ params }) => getProject({ data: params.id }),
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData.title} • Florian - Design Engineer` },
-      { name: "description", content: loaderData.description },
-      { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    return {
+      meta: [
+        { title: `${loaderData.title} • Florian - Design Engineer` },
+        { name: "description", content: loaderData.description },
+        { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
+      ],
+    };
+  },
   component: WorkPage,
 });
 
@@ -159,7 +162,9 @@ function WorkPage() {
                 }
               : undefined
           }
-          transition={collapsed ? spring : { ...spring, opacity: { duration: 0.5, ease: "easeOut" } }}
+          transition={
+            collapsed ? spring : { ...spring, opacity: { duration: 0.5, ease: "easeOut" } }
+          }
         >
           {/* Fixed-width inner so content doesn't reflow as the outer shrinks */}
           <div style={{ width: INFO_WIDTH }} className="pr-4">
@@ -189,7 +194,13 @@ function WorkPage() {
                       "group flex items-center gap-2 px-2 py-0.5 text-inverted",
                     )}
                   >
-                    {link.replaceAll("https://", "").replaceAll("http://", "").replaceAll("www.", "").split("/")[0]}
+                    {
+                      link
+                        .replaceAll("https://", "")
+                        .replaceAll("http://", "")
+                        .replaceAll("www.", "")
+                        .split("/")[0]
+                    }
                     <IconArrowUpRight className="ml-1 inline h-4 w-4 transition-all duration-150 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </Link>
                 ))}

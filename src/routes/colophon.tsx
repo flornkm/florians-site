@@ -167,7 +167,8 @@ function ColophonPage() {
               <Link href="https://base-ui.com/" target="_blank">
                 Base UI
               </Link>{" "}
-              is a good starting point if you want to create custom components and a big inspiration.
+              is a good starting point if you want to create custom components and a big
+              inspiration.
             </Body1>
           </div>
         </div>
@@ -254,7 +255,8 @@ function ColophonPage() {
             )}
           >
             <Body1>
-              The following sites contain parts which were used as inspiration: {renderLinkedList(INSPIRATION)}.
+              The following sites contain parts which were used as inspiration:{" "}
+              {renderLinkedList(INSPIRATION)}.
             </Body1>
           </div>
         </div>
@@ -267,8 +269,9 @@ function ColophonPage() {
             )}
           >
             <Body1>
-              The following is a list of people that I got to know, are my friends, build something great, or I find
-              simply inspirational. Make sure to check them out: {renderLinkedList(PEOPLE)}.
+              The following is a list of people that I got to know, are my friends, build something
+              great, or I find simply inspirational. Make sure to check them out:{" "}
+              {renderLinkedList(PEOPLE)}.
             </Body1>
           </div>
         </div>

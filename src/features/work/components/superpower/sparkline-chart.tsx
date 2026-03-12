@@ -4,7 +4,13 @@ import { ChartTooltip } from "./chart-tooltip";
 import { RangeStack } from "./range-stack";
 import type { Biomarker, Status } from "./types";
 import { STATUS_COLORS } from "./types";
-import { calculateChartDimensions, formatDate, getValueStatus, prepareChartData, valueToYPercent } from "./utils";
+import {
+  calculateChartDimensions,
+  formatDate,
+  getValueStatus,
+  prepareChartData,
+  valueToYPercent,
+} from "./utils";
 
 const CHART_CONFIG = {
   HEIGHT: 64,
@@ -47,11 +53,17 @@ export function SparklineChart({ biomarker, maxPoints = 4, width = 150 }: Sparkl
   }, []);
 
   // Prepare chart data
-  const chartData = useMemo(() => prepareChartData(biomarker.data, maxPoints), [biomarker.data, maxPoints]);
+  const chartData = useMemo(
+    () => prepareChartData(biomarker.data, maxPoints),
+    [biomarker.data, maxPoints],
+  );
 
   const values = useMemo(() => chartData.map((d) => d.value), [chartData]);
 
-  const dimensions = useMemo(() => calculateChartDimensions(biomarker.ranges, values), [biomarker.ranges, values]);
+  const dimensions = useMemo(
+    () => calculateChartDimensions(biomarker.ranges, values),
+    [biomarker.ranges, values],
+  );
 
   // Calculate point positions
   const points = useMemo((): PointData[] => {
@@ -136,7 +148,9 @@ export function SparklineChart({ biomarker, maxPoints = 4, width = 150 }: Sparkl
       const rect = svgRef.current.getBoundingClientRect();
       const posX = clientX - rect.left;
 
-      const nearest = points.reduce((prev, curr) => (Math.abs(curr.x - posX) < Math.abs(prev.x - posX) ? curr : prev));
+      const nearest = points.reduce((prev, curr) =>
+        Math.abs(curr.x - posX) < Math.abs(prev.x - posX) ? curr : prev,
+      );
 
       const nearestIndex = points.indexOf(nearest);
       if (lastHoveredIndexRef.current === nearestIndex) return;
@@ -191,7 +205,9 @@ export function SparklineChart({ biomarker, maxPoints = 4, width = 150 }: Sparkl
   }, []);
 
   if (!chartData.length) {
-    return <div className="flex h-16 items-center justify-center text-sm text-tertiary">No data</div>;
+    return (
+      <div className="flex h-16 items-center justify-center text-sm text-tertiary">No data</div>
+    );
   }
 
   return (

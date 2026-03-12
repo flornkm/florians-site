@@ -29,11 +29,17 @@ export function BiomarkerShowcase() {
 
       <div className="mt-4 flex items-center justify-center gap-6 text-xs text-secondary">
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full" style={{ backgroundColor: STATUS_COLORS.optimal }} />
+          <span
+            className="size-2.5 rounded-full"
+            style={{ backgroundColor: STATUS_COLORS.optimal }}
+          />
           <span>Optimal</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full" style={{ backgroundColor: STATUS_COLORS.normal }} />
+          <span
+            className="size-2.5 rounded-full"
+            style={{ backgroundColor: STATUS_COLORS.normal }}
+          />
           <span>Normal</span>
         </div>
         <div className="flex items-center gap-1.5">

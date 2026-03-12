@@ -9,7 +9,13 @@ export type TextShimmerProps = {
   paused?: boolean;
 };
 
-function TextShimmerComponent({ children, className, duration = 2, spread = 2, paused = false }: TextShimmerProps) {
+function TextShimmerComponent({
+  children,
+  className,
+  duration = 2,
+  spread = 2,
+  paused = false,
+}: TextShimmerProps) {
   const dynamicSpread = useMemo(() => children.length * spread, [children, spread]);
 
   const shimmerStyles: React.CSSProperties = {

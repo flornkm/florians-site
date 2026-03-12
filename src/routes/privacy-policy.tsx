@@ -21,8 +21,8 @@ function PrivacyPolicyPage() {
         <Body1>
           This is a personal site and contains links to other websites (just as any other website).
           <br />
-          It doesn't specifically track any personal data (besides storing information of users using the letters
-          interaction).
+          It doesn't specifically track any personal data (besides storing information of users
+          using the letters interaction).
           <br />
           <br />
           Privacy requests won't be answered as this site doesn't earn revenue.

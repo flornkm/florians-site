@@ -2,7 +2,9 @@ import { forwardRef, lazy, Suspense, useEffect, useImperativeHandle, useRef } fr
 import type { GlobeMethods, GlobeProps as ReactGlobeProps } from "react-globe.gl";
 
 // dynamic import of globegl for react
-const GlobeComponent = lazy(() => import("react-globe.gl").then((module) => ({ default: module.default })));
+const GlobeComponent = lazy(() =>
+  import("react-globe.gl").then((module) => ({ default: module.default })),
+);
 
 export type GlobeInstance = GlobeMethods;
 
@@ -21,7 +23,11 @@ interface GlobeProps extends Omit<Partial<ReactGlobeProps>, "width" | "height" |
 function waitForGlobeReady(globe: GlobeInstance): Promise<GlobeInstance> {
   return new Promise((resolve) => {
     const checkReady = () => {
-      const isReady = globe && typeof globe === "object" && globe.scene && (globe.controls || globe.scene().rotation);
+      const isReady =
+        globe &&
+        typeof globe === "object" &&
+        globe.scene &&
+        (globe.controls || globe.scene().rotation);
 
       if (isReady) {
         resolve(globe);

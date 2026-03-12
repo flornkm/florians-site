@@ -3,7 +3,13 @@ import rough from "roughjs";
 import useAnimationFrame from "use-animation-frame";
 
 const FRAME_INTERVAL = 0.4; // seconds
-const OPTS = { stroke: "currentColor", strokeWidth: 2.5, roughness: 2, bowing: 1.5, maxRandomnessOffset: 1.5 };
+const OPTS = {
+  stroke: "currentColor",
+  strokeWidth: 2.5,
+  roughness: 2,
+  bowing: 1.5,
+  maxRandomnessOffset: 1.5,
+};
 
 const FRAMES: string[] = (() => {
   if (typeof document === "undefined") return [];

@@ -44,7 +44,7 @@ const letterVariants = cva(
   },
 );
 
-const stampVariants = cva(
+const _stampVariants = cva(
   "w-16 mr-4 transition-all pointer-events-none object-contain duration-300 delay-100 max-w-[35%] ease-out perspective-normal origin-bottom-left relative z-10 dark:invert dark:selection:bg-amber-500/25",
   {
     variants: {
@@ -101,10 +101,18 @@ export const Letter = forwardRef<
   } = props;
 
   return (
-    <div ref={ref} className={letterVariants({ variant, isEmpty, isDragging, className })} {...restProps}>
+    <div
+      ref={ref}
+      className={letterVariants({ variant, isEmpty, isDragging, className })}
+      {...restProps}
+    >
       <div className="flex-1 max-w-1/2 flex flex-col h-full gap-2 pr-8">
         <div
-          className={cn("transition-all duration-300 w-full flex-1", message && "opacity-100", !message && "opacity-0")}
+          className={cn(
+            "transition-all duration-300 w-full flex-1",
+            message && "opacity-100",
+            !message && "opacity-0",
+          )}
         >
           <p className="text-sm max-w-xs">
             <span className="font-semibold">Dear Website,</span> <br />
@@ -116,7 +124,11 @@ export const Letter = forwardRef<
             Sincerely,{" "}
             <span className="inline-flex items-center gap-1 translate-y-[3px]">
               <span className="w-4 h-4 rounded-full border border-primary relative">
-                <img src={`https://unavatar.io/${handle}`} alt={handle} className="relative z-10 rounded-full" />
+                <img
+                  src={`https://unavatar.io/${handle}`}
+                  alt={handle}
+                  className="relative z-10 rounded-full"
+                />
                 <span className="absolute inset-0 animate-pulse" />
               </span>
               @{handle}

@@ -37,7 +37,12 @@ function Icon({ name, size = 16 }: { name: string; size?: number }) {
         />
         <circle cx="6.8" cy="7" r="0.7" fill="currentColor" />
         <circle cx="11.2" cy="7" r="0.7" fill="currentColor" />
-        <path d="M7 11.5a2.5 2.5 0 004 0" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" />
+        <path
+          d="M7 11.5a2.5 2.5 0 004 0"
+          stroke="currentColor"
+          strokeWidth={1.2}
+          strokeLinecap="round"
+        />
       </svg>
     );
   if (name === "edit")
@@ -46,7 +51,15 @@ function Icon({ name, size = 16 }: { name: string; size?: number }) {
         <rect x="2.5" y="2.5" width="5" height="5" rx="1" stroke="currentColor" strokeWidth={sw} />
         <rect x="10.5" y="2.5" width="5" height="5" rx="1" stroke="currentColor" strokeWidth={sw} />
         <rect x="2.5" y="10.5" width="5" height="5" rx="1" stroke="currentColor" strokeWidth={sw} />
-        <rect x="10.5" y="10.5" width="5" height="5" rx="1" stroke="currentColor" strokeWidth={sw} />
+        <rect
+          x="10.5"
+          y="10.5"
+          width="5"
+          height="5"
+          rx="1"
+          stroke="currentColor"
+          strokeWidth={sw}
+        />
       </svg>
     );
   if (name === "share")
@@ -98,7 +111,10 @@ export function IosContextMenuDemo() {
   const sc = useSpring(1, SP);
   const lft = useSpring(0, SP);
   const darkOverlay = useSpring(0, { stiffness: 500, damping: 34 });
-  const iconDarken = useTransform(darkOverlay, (v: number) => `rgba(0,0,0,${(v * 0.18).toFixed(3)})`);
+  const iconDarken = useTransform(
+    darkOverlay,
+    (v: number) => `rgba(0,0,0,${(v * 0.18).toFixed(3)})`,
+  );
 
   const bShadow = useTransform(lft, (v: number) => {
     const y1 = (1 + v * 22).toFixed(1);
@@ -249,10 +265,14 @@ export function IosContextMenuDemo() {
                               <span
                                 className={cn(
                                   "absolute inset-x-[4px] inset-y-[1px] rounded-[9px] transition-colors duration-[40ms] ease-out",
-                                  isHovered ? "bg-black/[0.08] dark:bg-white/[0.10]" : "bg-transparent",
+                                  isHovered
+                                    ? "bg-black/[0.08] dark:bg-white/[0.10]"
+                                    : "bg-transparent",
                                 )}
                               />
-                              <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">{item.label}</span>
+                              <span className="relative z-[1] flex-1 text-left px-[10px] py-[7px]">
+                                {item.label}
+                              </span>
                               <span className="relative z-[1] flex-shrink-0 pr-[10px]">
                                 <Icon name={item.icon} />
                               </span>
@@ -296,7 +316,9 @@ export function IosContextMenuDemo() {
             <div
               className="absolute inset-0 rounded-[15px] pointer-events-none"
               style={{
-                boxShadow: open ? "inset 0 0 0 1px rgba(256,256,256,0.06)" : "inset 0 0 0 1px rgba(0,0,0,0.06)",
+                boxShadow: open
+                  ? "inset 0 0 0 1px rgba(256,256,256,0.06)"
+                  : "inset 0 0 0 1px rgba(0,0,0,0.06)",
               }}
             />
             <motion.div

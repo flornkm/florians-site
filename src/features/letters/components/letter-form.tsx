@@ -39,7 +39,15 @@ const FormField = memo(function FormField({
   return (
     <div className="w-full flex flex-col gap-1">
       <Label htmlFor={id}>{label}</Label>
-      <Component id={id} name={id} type={type} value={value} onChange={handleChange} disabled={disabled} {...props} />
+      <Component
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        onChange={handleChange}
+        disabled={disabled}
+        {...props}
+      />
     </div>
   );
 });
@@ -94,7 +102,13 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
           />
         </div>
       </div>
-      <Button type="button" variant="tertiary" className="mb-6" onClick={clearSignature} disabled={!signature}>
+      <Button
+        type="button"
+        variant="tertiary"
+        className="mb-6"
+        onClick={clearSignature}
+        disabled={!signature}
+      >
         Clear signature
       </Button>
       <input type="hidden" name="signature" value={signature || ""} />
@@ -103,7 +117,8 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
 });
 
 export default function LetterForm() {
-  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty, success } = useLetterEditor();
+  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty, success } =
+    useLetterEditor();
   const navigate = useNavigate();
 
   const handleFieldChange = useCallback(

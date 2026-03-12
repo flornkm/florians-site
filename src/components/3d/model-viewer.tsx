@@ -110,7 +110,7 @@ function Scene({
   }
 
   return (
-    <Canvas className="bg-surface-secondary">
+    <Canvas style={{ background: "var(--color-surface-secondary)" }}>
       <PerspectiveCamera makeDefault position={cameraPosition} />
       <ambientLight intensity={0.8} />
       <directionalLight position={[10, 10, 5]} intensity={2.0} castShadow />

@@ -3,8 +3,9 @@
  * as a named export `rawContent` from the compiled MDX module.
  */
 export function remarkRawContent() {
-  return (tree: { children: Array<{ type: string }> }, file: { value: string }) => {
-    const raw = file.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (tree: any, file: any) => {
+    const raw = String(file.value);
     // Strip frontmatter
     const match = raw.match(/^---[\s\S]*?---\s*/);
     const content = match ? raw.slice(match[0].length) : raw;
@@ -36,6 +37,6 @@ export function remarkRawContent() {
           ],
         },
       },
-    } as never);
+    });
   };
 }

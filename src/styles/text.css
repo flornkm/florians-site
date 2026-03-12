@@ -1,6 +1,7 @@
 @theme {
   --font-sans: "Pretendard Variable", "Pretendard", "Inter", sans-serif;
-  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    "Commit Mono", ui-monospace, SFMono-Regular, "Liberation Mono", "Courier New", monospace;
   --font-round: "Open Runde", sans-serif;
 }
 
