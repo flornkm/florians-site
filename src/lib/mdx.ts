@@ -64,6 +64,7 @@ export function extractHeadings(content: string): Heading[] {
 type MdxModule = {
   default: ComponentType;
   frontmatter: Record<string, string>;
+  rawContent: string;
 };
 
 // Resolve all MDX content at build time — uses compiled modules with frontmatter exports
@@ -75,35 +76,15 @@ const moduleMap = {
   writing: writingModules,
 } as const;
 
-// Raw MDX sources for heading extraction — uses ?rawmdx query to bypass MDX compiler
-const workRawSources = import.meta.glob("/src/content/work/*.mdx", {
-  query: "?rawmdx",
-  eager: true,
-  import: "default",
-}) as Record<string, string>;
-
-const writingRawSources = import.meta.glob("/src/content/writing/*.mdx", {
-  query: "?rawmdx",
-  eager: true,
-  import: "default",
-}) as Record<string, string>;
-
-const rawSourceMap = {
-  work: workRawSources,
-  writing: writingRawSources,
-} as const;
-
 /**
  * Get raw markdown content for a specific entry (used for heading extraction).
- * Resolved at build time — no fs access needed.
+ * Uses the rawContent export injected by the remarkRawContent plugin.
  */
 export function getContentSource(category: "work" | "writing", slug: string): string {
   const modulePath = `/src/content/${category}/${slug}.mdx`;
-  const raw = rawSourceMap[category][modulePath];
-  if (!raw) throw new Error(`Content not found: ${modulePath}`);
-  // Strip frontmatter
-  const match = raw.match(/^---[\s\S]*?---\s*/);
-  return match ? raw.slice(match[0].length) : raw;
+  const mod = moduleMap[category][modulePath];
+  if (!mod) throw new Error(`Content not found: ${modulePath}`);
+  return mod.rawContent;
 }
 
 /**
