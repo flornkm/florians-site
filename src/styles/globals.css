@@ -6,7 +6,7 @@
 @plugin "@tailwindcss/typography";
 @plugin 'tailwind-scrollbar';
 
-@source "../node_modules/streamdown/dist/index.js";
+@source "../../node_modules/streamdown/dist/index.js";
 
 @font-face {
   font-family: "Pretendard Variable";

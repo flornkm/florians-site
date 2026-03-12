@@ -1,7 +1,19 @@
 import { Body1 } from "@/components/design-system/body";
 import { H2 } from "@/components/design-system/heading";
+import { createFileRoute } from "@tanstack/react-router";
 
-export default function Page() {
+export const Route = createFileRoute("/imprint")({
+  head: () => ({
+    meta: [
+      { title: "Imprint • Florian - Design Engineer" },
+      { name: "description", content: "The usual imprint page." },
+      { property: "og:image", content: "/api/og?title=Imprint" },
+    ],
+  }),
+  component: ImprintPage,
+});
+
+function ImprintPage() {
   return (
     <div className="w-full max-w-5xl mx-auto md:px-0 px-4">
       <section className="w-full max-w-80">

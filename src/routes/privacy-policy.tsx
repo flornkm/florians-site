@@ -1,7 +1,19 @@
 import { Body1 } from "@/components/design-system/body";
 import { H2 } from "@/components/design-system/heading";
+import { createFileRoute } from "@tanstack/react-router";
 
-export default function Page() {
+export const Route = createFileRoute("/privacy-policy")({
+  head: () => ({
+    meta: [
+      { title: "Privacy Policy • Florian - Design Engineer" },
+      { name: "description", content: "The usual privacy policy page." },
+      { property: "og:image", content: "/api/og?title=Privacy Policy" },
+    ],
+  }),
+  component: PrivacyPolicyPage,
+});
+
+function PrivacyPolicyPage() {
   return (
     <div className="w-full max-w-5xl mx-auto md:px-0 px-4">
       <section className="w-full max-w-80">

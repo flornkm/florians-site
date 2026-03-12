@@ -7,20 +7,35 @@ import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 
+import { getContent } from "@/lib/mdx";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { IconPencil } from "central-icons/IconPencil";
-import { usePageContext } from "vike-react/usePageContext";
-import { navigate } from "vike/client/router";
 
-export default function Page() {
-  const pageContext = usePageContext();
+const getProjects = createServerFn().handler(async () => {
+  const projects = await getContent("work");
+  return projects;
+});
 
-  const projects = pageContext.data as {
+export const Route = createFileRoute("/")({
+  loader: () => getProjects(),
+  head: () => ({
+    meta: [
+      { property: "og:image", content: "/api/og?title=Work" },
+    ],
+  }),
+  component: IndexPage,
+});
+
+function IndexPage() {
+  const projects = Route.useLoaderData() as {
     title: string;
     description: string;
     slug: string;
     date: string;
     cover: string;
   }[];
+  const navigate = useNavigate();
 
   return (
     <div className="w-full">
@@ -80,7 +95,7 @@ export default function Page() {
               className="mt-4 mx-auto"
               prefix={<IconPencil />}
               onClick={() => {
-                navigate("/send-postcard");
+                navigate({ to: "/send-postcard" });
               }}
             >
               Send Postcard

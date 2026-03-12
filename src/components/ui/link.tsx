@@ -1,10 +1,26 @@
+import { Link as RouterLink } from "@tanstack/react-router";
 import React from "react";
 
 type AnchorProps = React.ComponentPropsWithRef<"a">;
 
 export const Link = React.forwardRef<HTMLAnchorElement, AnchorProps>(function Link(props, ref) {
-  const { href, ...rest } = props;
-  return <a ref={ref} href={href} {...rest} />;
+  const { href, target, ...rest } = props;
+
+  // External links, mailto, tel, hash-only, or target="_blank" → use plain <a>
+  const isExternal =
+    !href ||
+    target === "_blank" ||
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:") ||
+    href.startsWith("#");
+
+  if (isExternal) {
+    return <a ref={ref} href={href} target={target} {...rest} />;
+  }
+
+  // Internal links → use TanStack Router for client-side navigation
+  return <RouterLink ref={ref} to={href} {...rest} />;
 });
 
 Link.displayName = "Link";

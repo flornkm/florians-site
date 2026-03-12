@@ -5,20 +5,69 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
 import { useScrollThreshold } from "@/hooks/use-scroll-threshold";
-import { cn } from "@/lib/utils.js";
+import { getContent, isWorkEntry, type WorkEntry } from "@/lib/mdx";
+import { cn } from "@/lib/utils";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { IconChevronLeft } from "central-icons/IconChevronLeft";
 import { motion } from "motion/react";
 import { useSyncExternalStore } from "react";
-import { useData } from "vike-react/useData";
-import type { Data } from "./+data.js";
+
+const getProject = createServerFn({ method: "GET" })
+  .inputValidator((slug: string) => slug)
+  .handler(async ({ data: slug }) => {
+    const projects = await getContent("work");
+    const projectRaw = projects.find((p) => p.slug === slug);
+
+    if (!projectRaw) {
+      throw notFound();
+    }
+
+    if (!isWorkEntry(projectRaw)) {
+      throw new Error(`Project ${slug} is missing required fields`);
+    }
+
+    const project: WorkEntry = projectRaw;
+
+    const collaborators =
+      typeof project.collaborators === "string"
+        ? project.collaborators.split(",").map((item: string) => item.trim())
+        : project.collaborators || [];
+
+    const links =
+      typeof project.links === "string"
+        ? project.links.split(",").map((item: string) => item.trim())
+        : project.links || [];
+
+    return {
+      slug: project.slug,
+      title: project.title,
+      description: project.description,
+      collaborators,
+      links,
+      date: project.date,
+    };
+  });
+
+export const Route = createFileRoute("/work/$id")({
+  loader: ({ params }) => getProject({ data: params.id }),
+  head: ({ loaderData }) => ({
+    meta: [
+      { title: `${loaderData.title} • Florian - Design Engineer` },
+      { name: "description", content: loaderData.description },
+      { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
+    ],
+  }),
+  component: WorkPage,
+});
 
 const INFO_WIDTH = 440;
 const SCROLL_THRESHOLD = 80;
 const spring = { type: "spring" as const, stiffness: 180, damping: 24, mass: 1 };
 
-export default function Page() {
-  const project = useData<Data>();
+function WorkPage() {
+  const project = Route.useLoaderData();
 
   const isDesktop = useSyncExternalStore(
     (cb) => {
@@ -106,7 +155,6 @@ export default function Page() {
                   width: collapsed ? 0 : INFO_WIDTH,
                   opacity: collapsed ? 0 : 1,
                   x: collapsed ? -32 : 0,
-
                   filter: collapsed ? "blur(2px)" : "blur(0px)",
                 }
               : undefined

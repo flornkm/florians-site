@@ -219,12 +219,12 @@ export const mdxComponents = {
 };
 
 // Pre-loaded MDX module maps (import.meta.glob must be at module level)
-const workModules = import.meta.glob("/content/work/*.mdx", { eager: true }) as Record<
+const workModules = import.meta.glob("/src/content/work/*.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
 
-const writingModules = import.meta.glob("/content/writing/*.mdx", { eager: true }) as Record<
+const writingModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
@@ -235,7 +235,7 @@ const moduleMap = {
 } as const;
 
 export function useMdxContent(category: "work" | "writing", slug: string, className?: string) {
-  const modulePath = `/content/${category}/${slug}.mdx`;
+  const modulePath = `/src/content/${category}/${slug}.mdx`;
   const MDXContent = moduleMap[category][modulePath]?.default;
 
   if (!MDXContent) return null;

@@ -4,9 +4,10 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
+import { createFileRoute } from "@tanstack/react-router";
+import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { IconCentralIconSystem } from "central-icons/IconCentralIconSystem";
 import { IconGithub } from "central-icons/IconGithub";
-import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { INSPIRATION } from "@/features/colophon/const/inspiration";
 import { PEOPLE } from "@/features/colophon/const/people";
 
@@ -21,7 +22,22 @@ function renderLinkedList(items: { name: string; href: string }[]) {
   ));
 }
 
-export default function Page() {
+export const Route = createFileRoute("/colophon")({
+  head: () => ({
+    meta: [
+      { title: "Colophon • Florian - Design Engineer" },
+      {
+        name: "description",
+        content:
+          "The colophon page of Florian provides information about the website, tech stack, inspiration as well as credits.",
+      },
+      { property: "og:image", content: "/api/og?title=Colophon" },
+    ],
+  }),
+  component: ColophonPage,
+});
+
+function ColophonPage() {
   return (
     <div className="w-full max-w-5xl mx-auto md:px-0 px-4">
       <div className="mb-16">
@@ -61,8 +77,8 @@ export default function Page() {
                 Vite
               </Link>
               , and{" "}
-              <Link href="https://vike.dev" target="_blank">
-                Vike
+              <Link href="https://tanstack.com/start" target="_blank">
+                TanStack Start
               </Link>
             </Body1>
           </div>
