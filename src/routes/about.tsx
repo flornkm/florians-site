@@ -17,7 +17,8 @@ export const Route = createFileRoute("/about")({
       { title: "About • Florian - Design Engineer" },
       {
         name: "description",
-        content: "How I got to design and coding, what I learned and accomplished so far, and why I love doing what I do.",
+        content:
+          "How I got to design and coding, what I learned and accomplished so far, and why I love doing what I do.",
       },
       { property: "og:image", content: "/api/og?title=About" },
     ],

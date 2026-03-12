@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "bun run build",
+  "outputDirectory": ".output",
   "headers": [
     {
       "source": "/api/(.*)",

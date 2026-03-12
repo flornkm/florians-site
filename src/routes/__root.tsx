@@ -1,11 +1,6 @@
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  HeadContent,
-  Outlet,
-  Scripts,
-  createRootRoute,
-} from "@tanstack/react-router";
+import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
 
 import Footer from "@/components/shared/footer";
@@ -110,12 +105,8 @@ function NotFoundPage() {
         }}
         className="absolute dark:invert animate-in fade-in zoom-in inset-0 -z-10 pointer-events-none [@media(max-height:500px)]:hidden h-80 w-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
       />
-      <h1 className="text-base font-semibold mb-0.5">
-        Someone cut out this page out.
-      </h1>
-      <p className="text-sm text-tertiary mb-5">
-        But no worries, these here are still there:
-      </p>
+      <h1 className="text-base font-semibold mb-0.5">Someone cut out this page out.</h1>
+      <p className="text-sm text-tertiary mb-5">But no worries, these here are still there:</p>
       <ul className="space-x-2 flex flex-wrap">
         {errorLinks.map((link, index) => (
           <li className="text-sm" key={link.href}>
@@ -139,9 +130,7 @@ function ErrorPage() {
   return (
     <div className="w-full h-screen flex flex-col items-start justify-center max-w-sm mx-auto px-4">
       <h1 className="text-lg font-semibold mb-1">500 Error</h1>
-      <p className="text-sm text-tertiary mb-5">
-        Internal server error. Please try again later.
-      </p>
+      <p className="text-sm text-tertiary mb-5">Internal server error. Please try again later.</p>
       <Button variant="primary" onClick={() => window.location.reload()}>
         Reload
       </Button>
