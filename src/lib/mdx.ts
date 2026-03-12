@@ -75,16 +75,35 @@ const moduleMap = {
   writing: writingModules,
 } as const;
 
+// Raw MDX sources for heading extraction — uses ?rawmdx query to bypass MDX compiler
+const workRawSources = import.meta.glob("/src/content/work/*.mdx", {
+  query: "?rawmdx",
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+const writingRawSources = import.meta.glob("/src/content/writing/*.mdx", {
+  query: "?rawmdx",
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+const rawSourceMap = {
+  work: workRawSources,
+  writing: writingRawSources,
+} as const;
+
 /**
  * Get raw markdown content for a specific entry (used for heading extraction).
- * Uses dynamic fs import — only called inside createServerFn handlers.
+ * Resolved at build time — no fs access needed.
  */
-export async function getContentSource(category: "work" | "writing", slug: string): Promise<string> {
-  const { readFile } = await import("fs/promises");
-  const source = await readFile(`./src/content/${category}/${slug}.mdx`, "utf-8");
+export function getContentSource(category: "work" | "writing", slug: string): string {
+  const modulePath = `/src/content/${category}/${slug}.mdx`;
+  const raw = rawSourceMap[category][modulePath];
+  if (!raw) throw new Error(`Content not found: ${modulePath}`);
   // Strip frontmatter
-  const match = source.match(/^---[\s\S]*?---\s*/);
-  return match ? source.slice(match[0].length) : source;
+  const match = raw.match(/^---[\s\S]*?---\s*/);
+  return match ? raw.slice(match[0].length) : raw;
 }
 
 /**
