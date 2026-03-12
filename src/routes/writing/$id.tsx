@@ -1,12 +1,67 @@
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import {
+  extractHeadings,
+  getContent,
+  getContentSource,
+  isWritingEntry,
+  type WritingEntry,
+} from "@/lib/mdx";
 import { cn } from "@/lib/utils";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { IconChevronLeft } from "central-icons/IconChevronLeft";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { useData } from "vike-react/useData";
-import type { Data } from "./+data.js";
+
+const getWritingItem = createServerFn({ method: "GET" })
+  .inputValidator((slug: string) => slug)
+  .handler(async ({ data: slug }) => {
+    const items = await getContent("writing");
+    const itemRaw = items.find((i) => i.slug === slug);
+
+    if (!itemRaw) {
+      throw notFound();
+    }
+
+    if (!isWritingEntry(itemRaw)) {
+      throw new Error(`Item ${slug} is missing required fields`);
+    }
+
+    const item: WritingEntry = itemRaw;
+
+    const collaborators =
+      typeof item.collaborators === "string"
+        ? item.collaborators.split(",").map((c: string) => c.trim())
+        : item.collaborators || [];
+
+    const source = await getContentSource("writing", item.slug);
+    const headings = extractHeadings(source).filter((h) => h.level > 1);
+
+    return {
+      slug: item.slug,
+      title: item.title,
+      description: item.description,
+      type: item.type,
+      collaborators,
+      headings,
+    };
+  });
+
+export const Route = createFileRoute("/writing/$id")({
+  loader: ({ params }) => getWritingItem({ data: params.id }),
+  head: ({ loaderData }) => ({
+    meta: [
+      { title: `${loaderData.title} • Florian - Design Engineer` },
+      { name: "description", content: loaderData.description },
+      { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
+    ],
+  }),
+  component: WritingDetailPage,
+});
+
+const SCROLL_OFFSET = 80;
 
 function useActiveHeading(headingIds: string[]) {
   const [activeId, setActiveId] = useState<string>("");
@@ -61,8 +116,6 @@ function useActiveHeading(headingIds: string[]) {
   return activeId;
 }
 
-const SCROLL_OFFSET = 80;
-
 function handleAnchorClick(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
   e.preventDefault();
   const el = document.getElementById(id);
@@ -71,8 +124,8 @@ function handleAnchorClick(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
   window.scrollTo({ top, behavior: "smooth" });
 }
 
-export default function Page() {
-  const item = useData<Data>();
+function WritingDetailPage() {
+  const item = Route.useLoaderData();
   const content = useMdxContent("writing", item.slug, "-mt-7 w-full max-w-lg");
   const activeId = useActiveHeading(item.headings.map((h) => h.id));
 

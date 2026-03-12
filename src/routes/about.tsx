@@ -9,8 +9,23 @@ import { FloWording } from "@/features/about/components/flo-wording";
 import { GlobeTooltipContent } from "@/features/about/components/globe-tooltip-content";
 import { InstitutionsTooltipContent } from "@/features/about/components/institutions-tooltip-content";
 import { VISITED_COUNTRIES } from "@/features/about/const/visited-countries";
+import { createFileRoute } from "@tanstack/react-router";
 
-export default function Page() {
+export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: "About • Florian - Design Engineer" },
+      {
+        name: "description",
+        content: "How I got to design and coding, what I learned and accomplished so far, and why I love doing what I do.",
+      },
+      { property: "og:image", content: "/api/og?title=About" },
+    ],
+  }),
+  component: AboutPage,
+});
+
+function AboutPage() {
   return (
     <div className="w-full max-w-5xl md:flex-row flex-col flex justify-between mx-auto">
       <div className="w-full max-w-sm px-4 md:px-0">

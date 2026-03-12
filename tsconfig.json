@@ -7,17 +7,16 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "noEmit": true,
     "target": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client", "vike-react"],
-    "jsx": "preserve",
-    "jsxImportSource": "react",
+    "types": ["vite/client"],
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@public": ["./public"],
+      "@public": ["./public"]
     }
   },
-  "exclude": ["dist"],
+  "exclude": ["dist", "node_modules"]
 }

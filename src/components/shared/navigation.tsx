@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { usePageContext } from "vike-react/usePageContext";
+import { useLocation } from "@tanstack/react-router";
 import { Body1 } from "../design-system/body";
 import { buttonVariants } from "../ui/button";
 import { Link } from "../ui/link";
@@ -21,9 +21,9 @@ export const TABS = [
 type TabDimensions = { left: number; width: number };
 
 export default function Navigation() {
-  const pageContext = usePageContext();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const { urlPathname } = pageContext;
+  const urlPathname = location.pathname;
   const activeIndex = TABS.findIndex((tab) => {
     if (tab.href === "/") return urlPathname === "/" || urlPathname.startsWith("/work/");
     return urlPathname === tab.href || urlPathname.startsWith(tab.href + "/");

@@ -4,27 +4,45 @@ import Button from "@/components/ui/button";
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { ComponentType, useEffect, useRef, useState } from "react";
-import { usePageContext } from "vike-react/usePageContext";
-import { navigate } from "vike/client/router";
+import { getContent } from "@/lib/mdx";
 import { WritingItem } from "@/features/writing/types";
 
-const mdxModules = import.meta.glob("/content/writing/*.mdx", { eager: true }) as Record<
+const mdxModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
 
-export default function Page() {
+const getWritingItems = createServerFn().handler(async () => {
+  const items = await getContent("writing");
+  return items;
+});
+
+export const Route = createFileRoute("/writing/")({
+  loader: () => getWritingItems(),
+  head: () => ({
+    meta: [
+      { title: "Writing • Florian - Design Engineer" },
+      { name: "description", content: "Writing contains thoughts, ideas, and experiences from Florian." },
+      { property: "og:image", content: "/api/og?title=Writing" },
+    ],
+  }),
+  component: WritingPage,
+});
+
+function WritingPage() {
   const { width } = useWindowSize();
-  const pageContext = usePageContext();
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const sectionsRef = useRef<HTMLElement[] | null>(null);
   const rafIdRef = useRef<number | null>(null);
   const baseTopRef = useRef<number>(0);
 
-  const items = pageContext.data as WritingItem[];
+  const items = Route.useLoaderData() as WritingItem[];
   const isMobile = width! < 768;
 
   useEffect(() => {
@@ -99,12 +117,12 @@ export default function Page() {
     }
 
     setTimeout(() => {
-      navigate(`/writing/${items[index].slug}`);
+      navigate({ to: "/writing/$id", params: { id: items[index].slug } });
     }, 500);
   };
 
   const getMDXContent = (slug: string) => {
-    const modulePath = `/content/writing/${slug}.mdx`;
+    const modulePath = `/src/content/writing/${slug}.mdx`;
     return mdxModules[modulePath]?.default;
   };
 
