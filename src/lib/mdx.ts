@@ -1,5 +1,4 @@
-import { readdir, readFile } from "fs/promises";
-import matter from "gray-matter";
+import type { ComponentType } from "react";
 
 export type ContentEntry = {
   slug: string;
@@ -62,30 +61,49 @@ export function extractHeadings(content: string): Heading[] {
   return headings;
 }
 
+type MdxModule = {
+  default: ComponentType;
+  frontmatter: Record<string, string>;
+};
+
+// Resolve all MDX content at build time — uses compiled modules with frontmatter exports
+const workModules = import.meta.glob("/src/content/work/*.mdx", { eager: true }) as Record<string, MdxModule>;
+const writingModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<string, MdxModule>;
+
+const moduleMap = {
+  work: workModules,
+  writing: writingModules,
+} as const;
+
+/**
+ * Get raw markdown content for a specific entry (used for heading extraction).
+ * Uses dynamic fs import — only called inside createServerFn handlers.
+ */
 export async function getContentSource(category: "work" | "writing", slug: string): Promise<string> {
+  const { readFile } = await import("fs/promises");
   const source = await readFile(`./src/content/${category}/${slug}.mdx`, "utf-8");
-  const { content } = matter(source);
-  return content;
+  // Strip frontmatter
+  const match = source.match(/^---[\s\S]*?---\s*/);
+  return match ? source.slice(match[0].length) : source;
 }
 
-export async function getContent(category: "work" | "writing"): Promise<ContentEntry[]> {
-  const contentRoot = `./src/content/${category}`;
+/**
+ * Get all content entries for a category. Uses compiled MDX module frontmatter
+ * so no fs access is needed — works on both client and server.
+ */
+export function getContent(category: "work" | "writing"): ContentEntry[] {
+  const modules = moduleMap[category];
   const entries: ContentEntry[] = [];
 
-  const files = await readdir(contentRoot);
-
-  for (const file of files) {
-    if (!file.endsWith(".mdx")) continue;
-
-    const source = await readFile(`${contentRoot}/${file}`, "utf-8");
-    const { data, content } = matter(source);
-    const slug = file.replace(/\.mdx$/, "");
+  for (const [filePath, mod] of Object.entries(modules)) {
+    const data = mod.frontmatter || {};
+    const slug = filePath.split("/").pop()!.replace(/\.mdx$/, "");
 
     entries.push({
       ...data,
       slug,
       url: `/${category}/${slug}`,
-      short: content.length < 2000,
+      short: true,
     } as ContentEntry);
   }
 
@@ -95,7 +113,6 @@ export async function getContent(category: "work" | "writing"): Promise<ContentE
 
     if (!dateA || !dateB) return 0;
 
-    // Extract the latest year from a date string (supports "2025", "2024–2025", "06 / 2025")
     const latestYear = (d: string) => {
       const nums = d.match(/\d{4}/g);
       return nums ? Math.max(...nums.map(Number)) : 0;
