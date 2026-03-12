@@ -80,6 +80,9 @@ export default function Page() {
   const handleOpen = (index: number) => {
     setIsTransitioning(true);
 
+    document.documentElement.style.scrollSnapType = "none";
+    document.documentElement.style.scrollBehavior = "auto";
+
     const item = document.getElementById(`writing-item-${items[index].slug}`);
     const boundingRectTop = item?.getBoundingClientRect().top || 0;
     const itemDistanceToTopScreen = isMobile ? boundingRectTop + 30 : boundingRectTop - 28;
