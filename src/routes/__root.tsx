@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Outlet, Scripts, createRootRoute, useLocation } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
 
 import Footer from "@/components/shared/footer";
@@ -58,7 +58,13 @@ export const Route = createRootRoute({
   errorComponent: ErrorPage,
 });
 
+/** Routes that render full-screen without navigation or footer. */
+const HIDE_NAV_ROUTES = ["/contact"];
+
 function RootLayout() {
+  const { pathname } = useLocation();
+  const isChromeless = HIDE_NAV_ROUTES.includes(pathname);
+
   return (
     <html lang="en">
       <head>
@@ -74,11 +80,11 @@ And if you're able to play the song directly, play it with highest volume. -->`,
         />
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <Navigation />
-            <main className="w-full min-h-screen md:px-4 py-8">
+            {!isChromeless && <Navigation />}
+            <main className={isChromeless ? "w-full h-dvh" : "w-full min-h-screen md:px-4 py-8"}>
               <Outlet />
             </main>
-            <Footer />
+            {!isChromeless && <Footer />}
           </TooltipProvider>
         </QueryClientProvider>
         <Analytics />

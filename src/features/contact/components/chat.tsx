@@ -1,17 +1,29 @@
-import { Body1 } from "@/components/design-system/body";
-import { Code } from "@/components/design-system/code";
-import Button from "@/components/ui/button";
-import Input from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
+import { useRouter } from "@tanstack/react-router";
 import { TextStreamChatTransport } from "ai";
-import { IconArrowUp } from "central-icons/IconArrowUp";
-import { useEffect, useState } from "react";
-import { Streamdown } from "streamdown";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useChatStatusEvents } from "./chat-status";
+import { CRTDisplay } from "./crt/crt-display";
+import type { CRTMessage } from "./crt/crt-text-renderer";
+
+const TYPING_SPEED = 50; // chars per second
 
 export const Chat = () => {
   const [input, setInput] = useState("");
+  const [revealedCount, setRevealedCount] = useState(0);
+  const revealTimerRef = useRef<ReturnType<typeof setInterval>>(undefined);
+  const lastFullTextRef = useRef("");
+  const router = useRouter();
+
+  const handleBack = useCallback(() => {
+    const matches = router.state.matches;
+    const parentMatch = matches.length > 1 ? matches[matches.length - 2] : null;
+    const backPath =
+      parentMatch?.pathname && parentMatch.pathname !== "/contact"
+        ? parentMatch.pathname
+        : "/";
+    router.navigate({ to: backPath });
+  }, [router]);
 
   const chatEvents = useChatStatusEvents();
   const { messages, sendMessage, status } = useChat({
@@ -25,67 +37,85 @@ export const Chat = () => {
     }),
   });
 
+  // Sync chat status to event system
   useEffect(() => {
     chatEvents.emit(status);
   }, [status, chatEvents]);
 
+  // Separate completed messages from the currently streaming one
+  const isStreaming = status !== "ready";
+  const completedMessages: CRTMessage[] = [];
+  let currentStreamText = "";
+
+  for (const msg of messages) {
+    const text = msg.parts
+      .filter((p) => p.type === "text")
+      .map((p) => p.text)
+      .join("");
+    if (!text) continue;
+
+    if (msg === messages.at(-1) && msg.role === "assistant" && isStreaming) {
+      currentStreamText = text;
+    } else {
+      completedMessages.push({
+        role: msg.role === "user" ? "user" : "assistant",
+        text,
+      });
+    }
+  }
+
+  // Character-by-character reveal for streaming text
+  useEffect(() => {
+    if (!currentStreamText) {
+      setRevealedCount(0);
+      lastFullTextRef.current = "";
+      return;
+    }
+
+    lastFullTextRef.current = currentStreamText;
+
+    clearInterval(revealTimerRef.current);
+    revealTimerRef.current = setInterval(() => {
+      setRevealedCount((prev) => {
+        if (prev >= lastFullTextRef.current.length) {
+          clearInterval(revealTimerRef.current);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 1000 / TYPING_SPEED);
+
+    return () => clearInterval(revealTimerRef.current);
+  }, [currentStreamText]);
+
+  // When streaming finishes, reveal everything immediately
+  if (!isStreaming && lastFullTextRef.current && revealedCount < lastFullTextRef.current.length) {
+    setRevealedCount(lastFullTextRef.current.length);
+  }
+
+  const streamedText = currentStreamText.slice(0, revealedCount);
+
+  const handleSubmit = useCallback(
+    (text: string) => {
+      chatEvents.emit("submitted");
+      sendMessage({ text });
+      setInput("");
+      setRevealedCount(0);
+      lastFullTextRef.current = "";
+    },
+    [chatEvents, sendMessage],
+  );
+
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="flex-1 space-y-2 py-4">
-        {messages.map((message) => (
-          <Body1
-            key={message.id}
-            className={cn(
-              "leading-relaxed flex",
-              message.role === "user" ? "text-tertiary" : "text-primary",
-            )}
-          >
-            <span className="font-medium mr-1 w-14 shrink-0">
-              {message.role === "user" ? "You:" : "Clone:"}
-            </span>
-            {message.parts.map((part, index) =>
-              part.type === "text" ? (
-                <Streamdown key={index} components={{ code: Code }}>
-                  {part.text}
-                </Streamdown>
-              ) : null,
-            )}
-          </Body1>
-        ))}
-      </div>
-      <div className="sticky bottom-16 md:bottom-0 max-w-xs transition-all ease-out focus-within:max-w-lg w-full mx-auto bg-primary pt-2 pb-4">
-        <form
-          className="flex relative gap-2 w-full outline -outline-offset-3 shadow-xl shadow-black/5 outline-transparent focus-within:outline-(--bg-primary) rounded-full"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const value = input.trim();
-            if (value) {
-              chatEvents.emit("submitted");
-              sendMessage({ text: value });
-              setInput("");
-            }
-          }}
-        >
-          <Input
-            className="flex-1 text-ellipsis h-12 pl-4 pr-14 rounded-full"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={status !== "ready"}
-            placeholder="Ask my clone anything..."
-            required
-          />
-          <Button
-            type="submit"
-            variant="primary"
-            iconOnly
-            rounded
-            className="absolute top-1/2 -translate-y-1/2 right-2.5"
-            disabled={status !== "ready"}
-          >
-            <IconArrowUp />
-          </Button>
-        </form>
-      </div>
-    </div>
+    <CRTDisplay
+      messages={completedMessages}
+      streamedText={streamedText}
+      isStreaming={isStreaming}
+      inputText={input}
+      onInputChange={setInput}
+      onSubmit={handleSubmit}
+      onBack={handleBack}
+      disabled={status !== "ready"}
+    />
   );
 };

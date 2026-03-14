@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "target": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
