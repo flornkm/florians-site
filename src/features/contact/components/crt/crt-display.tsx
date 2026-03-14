@@ -285,7 +285,13 @@ export function CRTDisplay({
         ref={hiddenInputRef}
         type="text"
         className="fixed pointer-events-none"
-        style={{ fontSize: "16px", left: "-9999px", top: "-9999px", opacity: 0, caretColor: "transparent" }}
+        style={{
+          fontSize: "16px",
+          left: "-9999px",
+          top: "-9999px",
+          opacity: 0,
+          caretColor: "transparent",
+        }}
         value={inputText}
         onChange={(e) => onInputChange(e.target.value)}
         onKeyDown={handleKeyDown}
