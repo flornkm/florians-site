@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import React, { useMemo } from "react";
+import { createContext, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Body3 } from "../design-system/body";
 
 export function TooltipProvider({ children }: { children: React.ReactNode }) {
@@ -78,7 +78,7 @@ interface TooltipTriggerProps {
   style?: React.CSSProperties;
 }
 
-const TooltipGroupContext = React.createContext<BaseTooltip.Handle<React.ComponentType> | null>(
+const TooltipGroupContext = createContext<BaseTooltip.Handle<React.ComponentType> | null>(
   null,
 );
 
@@ -154,7 +154,7 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
 }
 
 export function TooltipTrigger({ children, content, className, style }: TooltipTriggerProps) {
-  const handle = React.useContext(TooltipGroupContext);
+  const handle = useContext(TooltipGroupContext);
   if (!handle) {
     throw new Error("TooltipTrigger must be used inside a TooltipGroup");
   }
@@ -192,13 +192,64 @@ interface RichTooltipProps {
 }
 
 export function RichTooltip({ children, content, className, maxWidth = 360 }: RichTooltipProps) {
+  const [open, setOpen] = useState(false);
+  const touchOpenedRef = useRef(false);
+  const id = useId();
+
+  // Close this tooltip when another one opens (isolation)
+  useEffect(() => {
+    const handleCloseOthers = ((e: CustomEvent<string>) => {
+      if (e.detail !== id && touchOpenedRef.current) {
+        touchOpenedRef.current = false;
+        setOpen(false);
+      }
+    }) as EventListener;
+
+    document.addEventListener("rich-tooltip-open", handleCloseOthers);
+    return () => document.removeEventListener("rich-tooltip-open", handleCloseOthers);
+  }, []);
+
+  // Close on outside tap when touch-opened
+  useEffect(() => {
+    if (!open || !touchOpenedRef.current) return;
+
+    const handleOutside = (e: PointerEvent) => {
+      if ((e.target as Element).closest?.("[data-rich-tooltip]")) return;
+      touchOpenedRef.current = false;
+      setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handleOutside);
+    return () => document.removeEventListener("pointerdown", handleOutside);
+  }, [open]);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    e.preventDefault();
+    const willOpen = !touchOpenedRef.current;
+    touchOpenedRef.current = willOpen;
+    setOpen(willOpen);
+    if (willOpen) {
+      document.dispatchEvent(
+        new CustomEvent("rich-tooltip-open", { detail: id }),
+      );
+    }
+  }, []);
+
+  const handleOpenChange = useCallback((nextOpen: boolean) => {
+    // If touch-opened, ignore hover events from base-ui
+    if (touchOpenedRef.current) return;
+    setOpen(nextOpen);
+  }, []);
+
   return (
-    <BaseTooltip.Root>
+    <BaseTooltip.Root open={open} onOpenChange={handleOpenChange}>
       <BaseTooltip.Trigger
         render={(triggerProps) => (
           <span
             {...(triggerProps as React.HTMLAttributes<HTMLSpanElement> & { ref?: React.Ref<HTMLSpanElement> })}
+            data-rich-tooltip
             tabIndex={0}
+            onTouchEnd={handleTouchEnd}
             className={cn(
               "underline decoration-muted underline-offset-2 hover:decoration-emphasis/50 cursor-context-menu transition-colors duration-200 outline-none focus-visible:decoration-emphasis/50",
               className,
@@ -212,6 +263,7 @@ export function RichTooltip({ children, content, className, maxWidth = 360 }: Ri
       <BaseTooltip.Portal>
         <BaseTooltip.Positioner sideOffset={12}>
           <BaseTooltip.Popup
+            data-rich-tooltip
             className={cn(
               "z-50 bg-primary border border-primary rounded-lg shadow-lg p-3 overflow-hidden",
               "origin-[var(--transform-origin)]",

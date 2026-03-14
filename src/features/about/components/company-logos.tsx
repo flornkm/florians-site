@@ -1,21 +1,21 @@
 import { Link } from "@/components/ui/link";
 import { COMPANIES } from "../const/companies";
 
-export function CompaniesTooltipContent() {
+export function CompanyLogos() {
   return (
-    <div className="grid grid-cols-3 gap-6 p-1 w-[300px]">
+    <div className="flex flex-wrap items-center gap-x-8 gap-y-6">
       {COMPANIES.map((company) => (
         <Link
           key={company.name}
           href={company.url}
           target="_blank"
-          className="flex items-center justify-center h-12 group"
+          className="flex items-center justify-center group"
         >
           <img
             src={company.logo}
             alt={company.name}
-            style={{ width: Math.min(company.width, 80) }}
-            className="max-w-none opacity-60 px-1 group-hover:opacity-100 transition-opacity dark:invert"
+            style={{ width: company.width }}
+            className="max-w-none opacity-40 group-hover:opacity-80 transition-opacity dark:invert"
           />
         </Link>
       ))}

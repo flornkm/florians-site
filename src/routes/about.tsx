@@ -57,7 +57,7 @@ function AboutPage() {
 
           <Body1 className="leading-relaxed">
             I've been fortunate to work with a lot of{" "}
-            <RichTooltip content={<CompaniesTooltipContent />} maxWidth={340}>
+            <RichTooltip content={<CompaniesTooltipContent />} maxWidth={400}>
               talented teams
             </RichTooltip>{" "}
             in the past.
