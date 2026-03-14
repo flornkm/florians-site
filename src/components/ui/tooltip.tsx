@@ -1,6 +1,15 @@
 import { cn } from "@/lib/utils";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import { createContext, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Body3 } from "../design-system/body";
 
 export function TooltipProvider({ children }: { children: React.ReactNode }) {
@@ -26,7 +35,9 @@ export default function Tooltip({ children, content, className, style }: Tooltip
       <BaseTooltip.Trigger
         render={(triggerProps) => (
           <div
-            {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> })}
+            {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & {
+              ref?: React.Ref<HTMLDivElement>;
+            })}
             className={cn("relative", className, triggerProps.className)}
             style={style}
           >
@@ -78,9 +89,7 @@ interface TooltipTriggerProps {
   style?: React.CSSProperties;
 }
 
-const TooltipGroupContext = createContext<BaseTooltip.Handle<React.ComponentType> | null>(
-  null,
-);
+const TooltipGroupContext = createContext<BaseTooltip.Handle<React.ComponentType> | null>(null);
 
 export function TooltipGroup({ children }: TooltipGroupProps) {
   const handle = useMemo(() => BaseTooltip.createHandle<React.ComponentType>(), []);
@@ -171,7 +180,9 @@ export function TooltipTrigger({ children, content, className, style }: TooltipT
       payload={ContentComponent}
       render={(triggerProps) => (
         <div
-          {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> })}
+          {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & {
+            ref?: React.Ref<HTMLDivElement>;
+          })}
           className={cn("relative", className, triggerProps.className)}
           style={style}
         >
@@ -229,9 +240,7 @@ export function RichTooltip({ children, content, className, maxWidth = 360 }: Ri
     touchOpenedRef.current = willOpen;
     setOpen(willOpen);
     if (willOpen) {
-      document.dispatchEvent(
-        new CustomEvent("rich-tooltip-open", { detail: id }),
-      );
+      document.dispatchEvent(new CustomEvent("rich-tooltip-open", { detail: id }));
     }
   }, []);
 
@@ -246,7 +255,9 @@ export function RichTooltip({ children, content, className, maxWidth = 360 }: Ri
       <BaseTooltip.Trigger
         render={(triggerProps) => (
           <span
-            {...(triggerProps as React.HTMLAttributes<HTMLSpanElement> & { ref?: React.Ref<HTMLSpanElement> })}
+            {...(triggerProps as React.HTMLAttributes<HTMLSpanElement> & {
+              ref?: React.Ref<HTMLSpanElement>;
+            })}
             data-rich-tooltip
             tabIndex={0}
             onTouchEnd={handleTouchEnd}

@@ -19,9 +19,7 @@ export const Chat = () => {
     const matches = router.state.matches;
     const parentMatch = matches.length > 1 ? matches[matches.length - 2] : null;
     const backPath =
-      parentMatch?.pathname && parentMatch.pathname !== "/contact"
-        ? parentMatch.pathname
-        : "/";
+      parentMatch?.pathname && parentMatch.pathname !== "/contact" ? parentMatch.pathname : "/";
     router.navigate({ to: backPath });
   }, [router]);
 
