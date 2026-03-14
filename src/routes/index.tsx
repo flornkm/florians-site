@@ -1,10 +1,11 @@
 import { Body2 } from "@/components/design-system/body";
-import { H1, H2, H3 } from "@/components/design-system/heading";
+import { H1, H2, H3, H4 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/shared/triangle-filled";
 import { LetterStack } from "@/features/letters/components/letter-stack";
 
 import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import { CompanyLogos } from "@/features/about/components/company-logos";
 import { cn } from "@/lib/utils";
 
 import { getContent } from "@/lib/mdx";
@@ -79,6 +80,12 @@ function IndexPage() {
               </div>
             </Link>
           ))}
+        </section>
+        <section className="w-full my-20 flex flex-col md:gap-0 gap-4 md:grid grid-cols-[290px_1fr] items-start">
+          <H4 className="text-quaternary mb-4">Teams I had the opportunity to ship with</H4>
+          <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
+            <CompanyLogos />
+          </div>
         </section>
         <section
           id="letters"

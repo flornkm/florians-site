@@ -95,7 +95,7 @@ const errorLinks = [
 
 function NotFoundPage() {
   return (
-    <div className="w-full h-screen flex flex-col items-start justify-center max-w-sm mx-auto px-8">
+    <div className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-10rem)] flex flex-col items-start justify-center max-w-sm mx-auto px-8">
       <Animation
         riveParams={{
           src: "/animations/florian.riv",
@@ -105,7 +105,7 @@ function NotFoundPage() {
         }}
         className="absolute dark:invert animate-in fade-in zoom-in inset-0 -z-10 pointer-events-none [@media(max-height:500px)]:hidden h-80 w-full left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
       />
-      <h1 className="text-base font-semibold mb-0.5">Someone cut out this page out.</h1>
+      <h1 className="text-base font-semibold mb-0.5">Oops, someone cut this page loose.</h1>
       <p className="text-sm text-tertiary mb-5">But no worries, these here are still there:</p>
       <ul className="space-x-2 flex flex-wrap">
         {errorLinks.map((link, index) => (

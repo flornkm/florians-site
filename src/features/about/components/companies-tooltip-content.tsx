@@ -3,13 +3,13 @@ import { COMPANIES } from "../const/companies";
 
 export function CompaniesTooltipContent() {
   return (
-    <div className="grid grid-cols-4 gap-4 p-1 w-[300px]">
+    <div className="grid grid-cols-3 gap-6 p-1 w-[300px]">
       {COMPANIES.map((company) => (
         <Link
           key={company.name}
           href={company.url}
           target="_blank"
-          className="flex items-center justify-center h-10 group"
+          className="flex items-center justify-center h-12 group"
         >
           <img
             src={company.logo}
