@@ -59,11 +59,11 @@ export const Route = createRootRoute({
 });
 
 /** Routes that render full-screen without navigation or footer. */
-const HIDE_NAV_ROUTES = ["/contact"];
+const CHROMELESS = new Set(["/contact"]);
 
 function RootLayout() {
   const { pathname } = useLocation();
-  const isChromeless = HIDE_NAV_ROUTES.includes(pathname);
+  const isChromeless = CHROMELESS.has(pathname);
 
   return (
     <html lang="en">
