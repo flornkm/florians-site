@@ -6,6 +6,26 @@ export const COMPANIES = [
     url: "https://superpower.com",
   },
   {
+    name: "Morphic",
+    logo: "/images/companies/morphic-logo.svg",
+    width: 72,
+    url: "https://morphic.com",
+  },
+
+  {
+    name: "Dash0",
+    logo: "/images/companies/dash0-logo.svg",
+    width: 72,
+    url: "https://dash0.com",
+  },
+
+  {
+    name: "Kalshi",
+    logo: "/images/companies/kalshi-logo.svg",
+    width: 56,
+    url: "https://kalshi.com",
+  },
+  {
     name: "Opral",
     logo: "/images/companies/opral-logo.svg",
     width: 40,
@@ -18,33 +38,9 @@ export const COMPANIES = [
     url: "https://3daistudio.com",
   },
   {
-    name: "Morphic",
-    logo: "/images/companies/morphic-logo.svg",
-    width: 72,
-    url: "https://morphic.com",
-  },
-  {
     name: "Novis",
     logo: "/images/companies/novis-logo.svg",
     width: 48,
     url: "https://novis.ai",
-  },
-  {
-    name: "Remove.tech",
-    logo: "/images/companies/remove-tech-logo.svg",
-    width: 112,
-    url: "https://remove.tech",
-  },
-  {
-    name: "Dash0",
-    logo: "/images/companies/dash0-logo.svg",
-    width: 72,
-    url: "https://dash0.com",
-  },
-  {
-    name: "Studio Lenzing",
-    logo: "/images/companies/studio-lenzing-logo.svg",
-    width: 128,
-    url: "https://studiolenzing.com",
   },
 ];
