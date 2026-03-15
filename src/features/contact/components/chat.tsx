@@ -18,39 +18,44 @@ const FALLBACK_SUGGESTIONS = [
   "How can I reach him?",
 ];
 
-async function streamSuggestions(onUpdate: (suggestions: string[]) => void) {
-  try {
-    const res = await fetch("/api/chat/suggestions", { method: "POST" });
-    if (!res.ok || !res.body) throw new Error("no body");
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
-    let chunk = await reader.read();
-    while (!chunk.done) {
-      buffer += decoder.decode(chunk.value, { stream: true });
-      const lastBrace = buffer.lastIndexOf("}");
-      if (lastBrace !== -1) {
-        let depth = 0;
-        let start = -1;
-        for (let i = lastBrace; i >= 0; i--) {
-          if (buffer[i] === "}") depth++;
-          if (buffer[i] === "{") depth--;
-          if (depth === 0) { start = i; break; }
-        }
-        if (start !== -1) {
-          try {
-            const parsed = JSON.parse(buffer.slice(start, lastBrace + 1));
-            if (parsed.suggestions?.length) {
-              onUpdate(parsed.suggestions.filter(Boolean));
-            }
-          } catch { /* incomplete */ }
-        }
-      }
-      chunk = await reader.read();
-    }
-  } catch {
-    onUpdate(FALLBACK_SUGGESTIONS);
+function parseLastJson(buffer: string): string[] | null {
+  const lastBrace = buffer.lastIndexOf("}");
+  if (lastBrace === -1) return null;
+  let depth = 0;
+  let start = -1;
+  for (let i = lastBrace; i >= 0; i--) {
+    if (buffer[i] === "}") depth++;
+    if (buffer[i] === "{") depth--;
+    if (depth === 0) { start = i; break; }
   }
+  if (start === -1) return null;
+  try {
+    const parsed = JSON.parse(buffer.slice(start, lastBrace + 1));
+    return parsed.suggestions?.filter(Boolean) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function streamSuggestions(onUpdate: (suggestions: string[]) => void) {
+  fetch("/api/chat/suggestions", { method: "POST" })
+    .then((res) => {
+      if (!res.ok || !res.body) throw new Error("no body");
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      function read(): Promise<void> {
+        return reader.read().then(({ done, value }) => {
+          if (done) return;
+          buffer += decoder.decode(value, { stream: true });
+          const suggestions = parseLastJson(buffer);
+          if (suggestions?.length) onUpdate(suggestions);
+          return read();
+        });
+      }
+      return read();
+    })
+    .catch(() => onUpdate(FALLBACK_SUGGESTIONS));
 }
 
 export const Chat = () => {
