@@ -1,9 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "bun scripts/extract-content.ts && vite dev",
     "preview": "vercel dev",
-    "build": "vite build",
+    "build": "bun scripts/extract-content.ts && vite build",
     "start": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint -D correctness -D perf --import-plugin --jsx-a11y-plugin src/",
