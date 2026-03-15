@@ -186,12 +186,12 @@ export function CRTDisplay({
           ctx.globalAlpha = 0.7;
 
           if (isDarkRef.current) {
-            // Invert logo via compositing — ctx.filter="invert(1)" isn't supported on all mobile browsers
+            // Recolor logo to white for dark mode — draw then fill with source-atop to keep alpha
             const offCtx = logoOffscreen.getContext("2d")!;
             offCtx.clearRect(0, 0, LOGO_SIZE, LOGO_SIZE);
             offCtx.globalCompositeOperation = "source-over";
             offCtx.drawImage(riveCanvas, 0, 0, LOGO_SIZE, LOGO_SIZE);
-            offCtx.globalCompositeOperation = "difference";
+            offCtx.globalCompositeOperation = "source-atop";
             offCtx.fillStyle = "#ffffff";
             offCtx.fillRect(0, 0, LOGO_SIZE, LOGO_SIZE);
             ctx.drawImage(logoOffscreen, logoX, logoY);
