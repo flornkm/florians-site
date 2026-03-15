@@ -1,7 +1,14 @@
 import { openai } from "@ai-sdk/openai";
 import { streamObject } from "ai";
 import { z } from "zod";
-import { SYSTEM_PROMPT } from "../chat.ts";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const SYSTEM_PROMPT: string = JSON.parse(
+  readFileSync(join(__dirname, "../content-data.json"), "utf-8"),
+).systemPrompt;
 
 const suggestionsSchema = z.object({
   suggestions: z.array(z.string()),
@@ -10,7 +17,7 @@ const suggestionsSchema = z.object({
 export async function POST(): Promise<Response> {
   try {
     const result = streamObject({
-      model: openai("gpt-5-nano"),
+      model: openai("gpt-4.1-nano"),
       system: SYSTEM_PROMPT,
       prompt:
         "A visitor just arrived. Suggest 3 short questions they might ask about Florian. Only ask about things you actually know from your system prompt — his work, projects, companies, tech stack, travel, or contact. Never suggest speculative questions. Under 40 chars each, casual tone, vary them each time.",

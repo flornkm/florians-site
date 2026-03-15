@@ -5,19 +5,15 @@ import { IconLinkedin } from "central-icons/IconLinkedin";
 import { IconPhone } from "central-icons/IconPhone";
 import { IconX } from "central-icons/IconX";
 
+import { CONTACTS } from "@/const/contacts";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
+import type { ComponentType } from "react";
 import { Body4 } from "../design-system/body";
 import { H4 } from "../design-system/heading";
 import { Link } from "../ui/link";
 import { TooltipGroup, TooltipTrigger } from "../ui/tooltip";
 import { Tab, TABS } from "./navigation";
-
-interface SocialLink {
-  name: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
 
 const footerLinkVariants = cva(
   "font-medium flex items-center gap-2 text-tertiary hover:text-secondary transition-all",
@@ -38,15 +34,20 @@ const MORE_LINKS: Tab[] = [
   { name: "Contact", href: "/contact" },
 ];
 
-const SOCIAL_LINKS: SocialLink[] = [
-  { name: "X (Twitter)", href: "https://twitter.com/flornkm", icon: IconX },
+const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
+  "X (Twitter)": IconX,
+  GitHub: IconGithub,
+  LinkedIn: IconLinkedin,
+  Instagram: IconInstagram,
+  Email: IconEmail2,
+  iMessage: IconPhone,
+};
 
-  { name: "GitHub", href: "https://github.com/flornkm", icon: IconGithub },
-  { name: "LinkedIn", href: "https://linkedin.com/in/flornkm", icon: IconLinkedin },
-  { name: "Instagram", href: "https://instagram.com/flornkm", icon: IconInstagram },
-  { name: "Email", href: "mailto:hello@floriankiem.com", icon: IconEmail2 },
-  { name: "iMessage", href: "imessage://hello@floriankiem.com", icon: IconPhone },
-];
+const SOCIAL_LINKS = CONTACTS.map((c) => ({
+  name: c.name,
+  href: c.href,
+  icon: ICON_MAP[c.name],
+})).filter((l) => l.icon);
 
 const LEGAL_LINKS: Tab[] = [
   { name: "Imprint", href: "/imprint" },
