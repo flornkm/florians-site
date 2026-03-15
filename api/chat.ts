@@ -59,7 +59,7 @@ export async function POST(req: Request): Promise<Response> {
             {
               role: "user" as const,
               content:
-                "Suggest 3 natural follow-up questions based on the conversation. They must only ask about things covered in your system prompt (his work, projects, tech, companies, travel, contact). Never suggest anything speculative or outside your knowledge. Under 40 chars each. Casual tone.",
+                "Suggest 3 natural follow-up questions based on the conversation. Always phrase questions using 'Florian' or 'he/him', never 'you'. They must only ask about things covered in your system prompt (his work, projects, tech, companies, travel, contact). Never suggest anything speculative or outside your knowledge. Under 40 chars each. Casual tone.",
             },
           ],
           schema: suggestionsSchema,

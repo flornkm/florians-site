@@ -32,6 +32,7 @@ export function CRTDisplay({
   suggestions,
   onSuggestionClick,
 }: CRTDisplayProps) {
+  const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const glCanvasRef = useRef<HTMLCanvasElement>(null);
   const textCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -77,7 +78,8 @@ export function CRTDisplay({
     const glCanvas = glCanvasRef.current!;
     const textCanvas = textCanvasRef.current!;
     const container = containerRef.current;
-    if (!glCanvas || !textCanvas || !container) return;
+    const outer = outerRef.current;
+    if (!glCanvas || !textCanvas || !container || !outer) return;
 
     const shader = new CRTShaderRenderer(glCanvas);
     const textRenderer = new CRTTextRenderer(textCanvas);
@@ -86,10 +88,11 @@ export function CRTDisplay({
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // Resize canvas to fill the full window (never changes for keyboard)
+    // Resize canvases to fill the inner container (max-w-5xl)
     function resize() {
-      const w = Math.floor(window.innerWidth * dpr);
-      const h = Math.floor(window.innerHeight * dpr);
+      const rect = container.getBoundingClientRect();
+      const w = Math.floor(rect.width * dpr);
+      const h = Math.floor(rect.height * dpr);
       shader.resize(w, h);
       textRenderer.resize(w, h);
       updateVisibleHeight();
@@ -115,7 +118,7 @@ export function CRTDisplay({
       e.preventDefault();
       textRenderer.scroll(e.deltaY);
     }
-    container.addEventListener("wheel", onWheel, { passive: false });
+    outer.addEventListener("wheel", onWheel, { passive: false });
 
     // Touch scroll — translate touch drags into scroll deltas
     let touchStartY = 0;
@@ -130,8 +133,8 @@ export function CRTDisplay({
       lastTouchY = y;
       textRenderer.scroll(delta);
     }
-    container.addEventListener("touchstart", onTouchStart, { passive: true });
-    container.addEventListener("touchmove", onTouchMove, { passive: true });
+    outer.addEventListener("touchstart", onTouchStart, { passive: true });
+    outer.addEventListener("touchmove", onTouchMove, { passive: true });
 
     // Color scheme
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
@@ -140,6 +143,11 @@ export function CRTDisplay({
       isDarkRef.current = e.matches;
     };
     mql.addEventListener("change", onSchemeChange);
+
+    // Offscreen canvas for logo inversion (reused each frame)
+    const logoOffscreen = document.createElement("canvas");
+    logoOffscreen.width = LOGO_SIZE;
+    logoOffscreen.height = LOGO_SIZE;
 
     // Render loop
     const startTime = performance.now();
@@ -171,16 +179,26 @@ export function CRTDisplay({
       if (riveCanvas && textCanvas.width > 0) {
         const ctx = textCanvas.getContext("2d");
         if (ctx) {
+          const logoX = textCanvas.width - LOGO_SIZE - LOGO_MARGIN;
+          const logoY = LOGO_MARGIN;
+
           ctx.save();
           ctx.globalAlpha = 0.7;
-          if (isDarkRef.current) ctx.filter = "invert(1)";
-          ctx.drawImage(
-            riveCanvas,
-            textCanvas.width - LOGO_SIZE - LOGO_MARGIN,
-            LOGO_MARGIN,
-            LOGO_SIZE,
-            LOGO_SIZE,
-          );
+
+          if (isDarkRef.current) {
+            // Invert logo via compositing — ctx.filter="invert(1)" isn't supported on all mobile browsers
+            const offCtx = logoOffscreen.getContext("2d")!;
+            offCtx.clearRect(0, 0, LOGO_SIZE, LOGO_SIZE);
+            offCtx.globalCompositeOperation = "source-over";
+            offCtx.drawImage(riveCanvas, 0, 0, LOGO_SIZE, LOGO_SIZE);
+            offCtx.globalCompositeOperation = "difference";
+            offCtx.fillStyle = "#ffffff";
+            offCtx.fillRect(0, 0, LOGO_SIZE, LOGO_SIZE);
+            ctx.drawImage(logoOffscreen, logoX, logoY);
+          } else {
+            ctx.drawImage(riveCanvas, logoX, logoY, LOGO_SIZE, LOGO_SIZE);
+          }
+
           ctx.restore();
         }
       }
@@ -196,9 +214,9 @@ export function CRTDisplay({
       window.removeEventListener("resize", resize);
       window.visualViewport?.removeEventListener("resize", updateVisibleHeight);
       window.visualViewport?.removeEventListener("scroll", updateVisibleHeight);
-      container!.removeEventListener("wheel", onWheel);
-      container!.removeEventListener("touchstart", onTouchStart);
-      container!.removeEventListener("touchmove", onTouchMove);
+      outer!.removeEventListener("wheel", onWheel);
+      outer!.removeEventListener("touchstart", onTouchStart);
+      outer!.removeEventListener("touchmove", onTouchMove);
       mql.removeEventListener("change", onSchemeChange);
       shader.dispose();
       shaderRef.current = null;
@@ -281,21 +299,26 @@ export function CRTDisplay({
 
   return (
     <div
-      ref={containerRef}
-      className="fixed inset-0 cursor-text bg-primary overflow-hidden overscroll-contain touch-none select-none"
+      ref={outerRef}
+      className="fixed inset-0 bg-black overflow-hidden overscroll-contain touch-none select-none"
       onClick={handleClick}
       onMouseMove={handleMouseMove}
     >
-      <canvas ref={textCanvasRef} className="hidden" />
-      <canvas ref={glCanvasRef} className="absolute inset-0 w-full h-full" />
-
-      {/* Hidden Rive canvas — drawn onto text layer each frame */}
       <div
-        ref={riveContainerRef}
-        className="absolute w-12 h-12 opacity-0 pointer-events-none"
-        aria-hidden="true"
+        ref={containerRef}
+        className="relative max-w-5xl mx-auto h-full cursor-text rounded-3xl overflow-hidden"
       >
-        <RiveComponent className="w-full h-full" />
+        <canvas ref={textCanvasRef} className="hidden" />
+        <canvas ref={glCanvasRef} className="absolute inset-0 w-full h-full" />
+
+        {/* Hidden Rive canvas — drawn onto text layer each frame */}
+        <div
+          ref={riveContainerRef}
+          className="absolute w-12 h-12 opacity-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <RiveComponent className="w-full h-full" />
+        </div>
       </div>
 
       <input
