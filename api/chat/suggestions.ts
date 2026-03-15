@@ -20,7 +20,7 @@ export async function POST(): Promise<Response> {
       model: openai("gpt-4.1-nano"),
       system: SYSTEM_PROMPT,
       prompt:
-        "A visitor just arrived. Suggest 3 short questions they might ask about Florian. Only ask about things you actually know from your system prompt — his work, projects, companies, tech stack, travel, or contact. Never suggest speculative questions. Under 40 chars each, casual tone, vary them each time.",
+        "A visitor just arrived. Suggest 3 short questions they might ask about Florian. Always phrase questions using 'Florian' or 'he/him', never 'you'. Only ask about things you actually know from your system prompt — his work, projects, companies, tech stack, travel, or contact. Never suggest speculative questions. Under 40 chars each, casual tone, vary them each time.",
       schema: suggestionsSchema,
     });
 

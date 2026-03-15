@@ -14,7 +14,7 @@ uniform vec2 uResolution;
 uniform float uTime;
 uniform float uTurnOn; // 0.0 = off, 1.0 = fully on
 
-const float CURVATURE       = 2.0;
+const float CURVATURE       = 4.0;
 const float CHROMA_SHIFT    = 0.0015;
 const float SCANLINE_WEIGHT = 0.12;
 const float SCANLINE_COUNT  = 240.0;
