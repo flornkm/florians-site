@@ -44,8 +44,12 @@ function readCategory(category: string): Entry[] {
 const companies = COMPANIES.map((c) => c.name).join(", ");
 const education = INSTITUTIONS.map((i) => i.name).join(" and ");
 const countries = VISITED_COUNTRIES.map((c) => c.name).join(", ");
-const completedGoals = BUCKETLIST.filter((b) => b.completed).map((b) => b.title).join(", ");
-const pendingGoals = BUCKETLIST.filter((b) => !b.completed).map((b) => b.title).join(", ");
+const completedGoals = BUCKETLIST.filter((b) => b.completed)
+  .map((b) => b.title)
+  .join(", ");
+const pendingGoals = BUCKETLIST.filter((b) => !b.completed)
+  .map((b) => b.title)
+  .join(", ");
 const lifeStory = LIFE.map((l) => l.description).join(" ");
 const contacts = CONTACTS.filter((c) => c.name !== "iMessage")
   .map((c) => {

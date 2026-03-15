@@ -96,9 +96,8 @@ async function streamSuggestions(
       id: dataPartId,
       type: "data-suggestions",
       data:
-        chunk.suggestions?.filter(
-          (suggestion): suggestion is string => suggestion !== undefined,
-        ) ?? [],
+        chunk.suggestions?.filter((suggestion): suggestion is string => suggestion !== undefined) ??
+        [],
     });
   }
 }

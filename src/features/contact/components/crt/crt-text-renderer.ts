@@ -105,9 +105,6 @@ function stripMarkdown(text: string): string {
     .replace(/^[-*]\s+/gm, ""); // list markers
 }
 
-
-
-
 export class CRTTextRenderer {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -188,8 +185,7 @@ export class CRTTextRenderer {
     const contentStartY = backY + lineH + BACK_PADDING_BOTTOM;
     const inputAreaHeight = lineH + 12;
     const suggestionsHeight = this.getSuggestionsHeight(state.suggestions, lineH);
-    const contentHeight =
-      visibleH - contentStartY - PADDING - inputAreaHeight - suggestionsHeight;
+    const contentHeight = visibleH - contentStartY - PADDING - inputAreaHeight - suggestionsHeight;
 
     // Extract all links from a message for lookup
     const extractLinks = (text: string): Map<string, string> => {
@@ -388,10 +384,7 @@ export class CRTTextRenderer {
     return result;
   }
 
-  private getSuggestionsHeight(
-    suggestions: string[] | undefined,
-    lineH: number,
-  ): number {
+  private getSuggestionsHeight(suggestions: string[] | undefined, lineH: number): number {
     if (!suggestions?.length) return 0;
     // Each suggestion: lineH for text + 1px border. Plus top border + padding.
     return suggestions.length * (lineH + 1) + 1 + 16;

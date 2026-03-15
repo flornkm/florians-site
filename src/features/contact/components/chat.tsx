@@ -12,6 +12,47 @@ import type { CRTMessage } from "./crt/crt-text-renderer";
 
 const BOOT_MESSAGE = "Bot initialized. Version 2.6.6. Ready to chat about Florian with user.";
 
+const FALLBACK_SUGGESTIONS = [
+  "What does Florian do?",
+  "What projects has he built?",
+  "How can I reach him?",
+];
+
+async function streamSuggestions(onUpdate: (suggestions: string[]) => void) {
+  try {
+    const res = await fetch("/api/chat/suggestions", { method: "POST" });
+    if (!res.ok || !res.body) throw new Error("no body");
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let chunk = await reader.read();
+    while (!chunk.done) {
+      buffer += decoder.decode(chunk.value, { stream: true });
+      const lastBrace = buffer.lastIndexOf("}");
+      if (lastBrace !== -1) {
+        let depth = 0;
+        let start = -1;
+        for (let i = lastBrace; i >= 0; i--) {
+          if (buffer[i] === "}") depth++;
+          if (buffer[i] === "{") depth--;
+          if (depth === 0) { start = i; break; }
+        }
+        if (start !== -1) {
+          try {
+            const parsed = JSON.parse(buffer.slice(start, lastBrace + 1));
+            if (parsed.suggestions?.length) {
+              onUpdate(parsed.suggestions.filter(Boolean));
+            }
+          } catch { /* incomplete */ }
+        }
+      }
+      chunk = await reader.read();
+    }
+  } catch {
+    onUpdate(FALLBACK_SUGGESTIONS);
+  }
+}
+
 export const Chat = () => {
   const [input, setInput] = useState("");
   const [initialSuggestions, setInitialSuggestions] = useState<string[]>([]);
@@ -32,48 +73,7 @@ export const Chat = () => {
     if (!bootComplete) return;
     if (initialSuggestions.length > 0) return; // already fetched
 
-    fetch("/api/chat/suggestions", { method: "POST" })
-      .then(async (res) => {
-        if (!res.ok || !res.body) throw new Error("no body");
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = "";
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          // Each chunk is a complete JSON object concatenated — find the last one
-          const lastBrace = buffer.lastIndexOf("}");
-          if (lastBrace === -1) continue;
-          // Find the opening brace for this last object
-          let depth = 0;
-          let start = -1;
-          for (let i = lastBrace; i >= 0; i--) {
-            if (buffer[i] === "}") depth++;
-            if (buffer[i] === "{") depth--;
-            if (depth === 0) {
-              start = i;
-              break;
-            }
-          }
-          if (start === -1) continue;
-          try {
-            const parsed = JSON.parse(buffer.slice(start, lastBrace + 1));
-            if (parsed.suggestions?.length) {
-              setInitialSuggestions(parsed.suggestions.filter(Boolean));
-            }
-          } catch {
-            // incomplete, wait for more
-          }
-        }
-      })
-      .catch(() => {
-        setInitialSuggestions([
-          "What does Florian do?",
-          "What projects has he built?",
-          "How can I reach him?",
-        ]);
-      });
+    streamSuggestions(setInitialSuggestions);
   }, [bootComplete, initialSuggestions.length]);
 
   const chatEvents = useChatStatusEvents();
