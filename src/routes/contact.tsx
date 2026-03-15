@@ -8,7 +8,8 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact • Florian - Design Engineer" },
       {
         name: "description",
-        content: "Talk to my AI clone in realtime in order to contact and get in touch with me.",
+        content:
+          "Ask questions about Florian, his work, and projects — or get in touch directly.",
       },
       { property: "og:image", content: "/api/og?title=Contact (AI)" },
     ],

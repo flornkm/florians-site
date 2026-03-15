@@ -22,6 +22,8 @@ export interface CRTTextState {
   inputFocused: boolean;
   /** Visible height in canvas pixels (for virtual keyboard). Defaults to canvas height. */
   visibleHeight?: number;
+  /** Follow-up question suggestions to display as clickable buttons. */
+  suggestions?: string[];
 }
 
 const FONT_SIZE = 26;
@@ -29,7 +31,7 @@ const LINE_HEIGHT = 1.4;
 const PADDING = 48;
 const CURSOR_BLINK_RATE = 530; // ms
 const USER_LABEL = "YOU> ";
-const CLONE_LABEL = "FLO> ";
+const CLONE_LABEL = "BOT> ";
 const INPUT_PROMPT = "> ";
 const BACK_TEXT = "< BACK";
 const BACK_PADDING_BOTTOM = 16;
@@ -74,7 +76,37 @@ export interface HitArea {
   width: number;
   height: number;
   id: string;
+  url?: string;
 }
+
+/** A segment of text on a line — either plain text or a clickable link. */
+interface TextSegment {
+  text: string;
+  url?: string;
+}
+
+/** A rendered line with color and parsed segments. */
+interface RenderedLine {
+  segments: TextSegment[];
+  color: string;
+}
+
+/** Regex to match markdown links: [text](url) */
+const MD_LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+/** Strip markdown formatting (bold, italic, headers, list markers) but preserve link syntax. */
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1") // bold
+    .replace(/\*(.+?)\*/g, "$1") // italic
+    .replace(/__(.+?)__/g, "$1") // bold alt
+    .replace(/_(.+?)_/g, "$1") // italic alt
+    .replace(/^#{1,6}\s+/gm, "") // headers
+    .replace(/^[-*]\s+/gm, ""); // list markers
+}
+
+
+
 
 export class CRTTextRenderer {
   private canvas: HTMLCanvasElement;
@@ -155,31 +187,78 @@ export class CRTTextRenderer {
     // Content area bounds — use visibleH so input stays above keyboard
     const contentStartY = backY + lineH + BACK_PADDING_BOTTOM;
     const inputAreaHeight = lineH + 12;
-    const contentHeight = visibleH - contentStartY - PADDING - inputAreaHeight;
+    const suggestionsHeight = this.getSuggestionsHeight(state.suggestions, lineH);
+    const contentHeight =
+      visibleH - contentStartY - PADDING - inputAreaHeight - suggestionsHeight;
+
+    // Extract all links from a message for lookup
+    const extractLinks = (text: string): Map<string, string> => {
+      const links = new Map<string, string>();
+      for (const m of text.matchAll(MD_LINK_RE)) {
+        links.set(m[1], m[2]);
+      }
+      return links;
+    };
+
+    // Build segments for a wrapped line using the link map
+    const buildLineSegments = (line: string, links: Map<string, string>): TextSegment[] => {
+      if (links.size === 0) return [{ text: line }];
+      const segments: TextSegment[] = [];
+      let remaining = line;
+      while (remaining.length > 0) {
+        let earliestIdx = remaining.length;
+        let matchedLabel = "";
+        let matchedUrl = "";
+        for (const [label, url] of links) {
+          const idx = remaining.indexOf(label);
+          if (idx !== -1 && idx < earliestIdx) {
+            earliestIdx = idx;
+            matchedLabel = label;
+            matchedUrl = url;
+          }
+        }
+        if (!matchedLabel) {
+          segments.push({ text: remaining });
+          break;
+        }
+        if (earliestIdx > 0) {
+          segments.push({ text: remaining.slice(0, earliestIdx) });
+        }
+        segments.push({ text: matchedLabel, url: matchedUrl });
+        remaining = remaining.slice(earliestIdx + matchedLabel.length);
+      }
+      return segments;
+    };
 
     // Build all lines from messages
-    const lines: { text: string; color: string }[] = [];
+    const lines: RenderedLine[] = [];
 
     for (const msg of state.messages) {
       const label = msg.role === "user" ? USER_LABEL : CLONE_LABEL;
       const color = msg.role === "user" ? theme.dim : theme.text;
-      const wrapped = this.wrapText(label + msg.text, this.cols);
+      const links = extractLinks(msg.text);
+      const plainText = stripMarkdown((label + msg.text).replace(MD_LINK_RE, "$1"));
+      const wrapped = this.wrapText(plainText, this.cols);
       for (const line of wrapped) {
-        lines.push({ text: line, color });
+        lines.push({ segments: buildLineSegments(line, links), color });
       }
-      lines.push({ text: "", color: theme.text });
+      lines.push({ segments: [{ text: "" }], color: theme.text });
     }
 
     // Streaming text (partial response)
     if (state.isStreaming && state.streamedText) {
-      const wrapped = this.wrapText(CLONE_LABEL + state.streamedText, this.cols);
+      const plainText = stripMarkdown((CLONE_LABEL + state.streamedText).replace(MD_LINK_RE, "$1"));
+      const wrapped = this.wrapText(plainText, this.cols);
       for (const line of wrapped) {
-        lines.push({ text: line, color: theme.text });
+        lines.push({ segments: [{ text: line }], color: theme.text });
       }
       const cursorVisible = Math.floor(now / CURSOR_BLINK_RATE) % 2 === 0;
       if (cursorVisible) {
         const lastLine = lines[lines.length - 1];
-        if (lastLine) lastLine.text += "█";
+        if (lastLine) {
+          const lastSeg = lastLine.segments[lastLine.segments.length - 1];
+          if (lastSeg) lastSeg.text += "█";
+        }
       }
     }
 
@@ -218,11 +297,44 @@ export class CRTTextRenderer {
       const y = contentStartY + i * lineH - this._scrollY;
       // Skip lines outside visible area
       if (y + lineH < contentStartY || y > contentStartY + contentHeight) continue;
-      ctx.fillStyle = lines[i].color;
-      ctx.fillText(lines[i].text, PADDING, y);
+
+      const line = lines[i];
+      let x = PADDING;
+
+      for (const seg of line.segments) {
+        const segWidth = ctx.measureText(seg.text).width;
+
+        if (seg.url) {
+          // Link: use underline + different color on hover
+          const linkId = `link-${i}-${Math.round(x)}`;
+          const isLinkHovered = this._hoveredId === linkId;
+          ctx.fillStyle = isLinkHovered ? theme.backHover : theme.back;
+          ctx.fillText(seg.text, x, y);
+          // Underline
+          const underlineY = y + FONT_SIZE + 2;
+          ctx.fillRect(x, underlineY, segWidth, 1);
+          // Hit area
+          this._hitAreas.push({
+            id: linkId,
+            x,
+            y,
+            width: segWidth,
+            height: lineH,
+            url: seg.url,
+          });
+        } else {
+          ctx.fillStyle = line.color;
+          ctx.fillText(seg.text, x, y);
+        }
+
+        x += segWidth;
+      }
     }
 
     ctx.restore();
+
+    // Draw suggestions above input
+    this.renderSuggestions(state.suggestions, theme, visibleH, lineH);
 
     // Draw input area at bottom of visible area
     this.renderInputLine(state, now, theme, visibleH);
@@ -274,6 +386,73 @@ export class CRTTextRenderer {
       }
     }
     return result;
+  }
+
+  private getSuggestionsHeight(
+    suggestions: string[] | undefined,
+    lineH: number,
+  ): number {
+    if (!suggestions?.length) return 0;
+    // Each suggestion: lineH for text + 1px border. Plus top border + padding.
+    return suggestions.length * (lineH + 1) + 1 + 16;
+  }
+
+  private renderSuggestions(
+    suggestions: string[] | undefined,
+    theme: ThemeColors,
+    visibleH: number,
+    lineH: number,
+  ): void {
+    if (!suggestions?.length) return;
+    const { ctx } = this;
+    const totalH = this.getSuggestionsHeight(suggestions, lineH);
+    const inputAreaHeight = lineH + 12;
+    const startY = visibleH - PADDING - inputAreaHeight - totalH;
+    const boxX = PADDING;
+    const boxW = this.canvas.width - PADDING * 2;
+
+    ctx.font = `bold ${FONT_SIZE}px "Commit Mono", ui-monospace, monospace`;
+
+    // Top border
+    ctx.fillStyle = theme.dim;
+    ctx.fillRect(boxX, startY, boxW, 1);
+
+    for (let i = 0; i < suggestions.length; i++) {
+      const id = `suggestion-${i}`;
+      const isHovered = this._hoveredId === id;
+      const rowY = startY + 1 + i * (lineH + 1);
+
+      // Hover: invert colors (teletext selection style)
+      if (isHovered) {
+        ctx.fillStyle = theme.text;
+        ctx.fillRect(boxX, rowY, boxW, lineH);
+        ctx.fillStyle = theme.bg;
+      } else {
+        ctx.fillStyle = theme.text;
+      }
+
+      // Truncate text if needed
+      let label = suggestions[i];
+      const maxChars = Math.floor((boxW - 24) / (FONT_SIZE * 0.6));
+      if (label.length > maxChars) {
+        label = label.slice(0, maxChars - 1) + "…";
+      }
+
+      ctx.fillText(label, boxX + 12, rowY + 2);
+
+      // Bottom border
+      ctx.fillStyle = theme.dim;
+      ctx.fillRect(boxX, rowY + lineH, boxW, 1);
+
+      // Hit area
+      this._hitAreas.push({
+        id,
+        x: boxX,
+        y: rowY,
+        width: boxW,
+        height: lineH,
+      });
+    }
   }
 
   private wordWrap(text: string, maxCols: number): string[] {
