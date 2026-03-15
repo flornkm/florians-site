@@ -1,15 +1,65 @@
 import { openai } from "@ai-sdk/openai";
-import { convertToModelMessages, streamText } from "ai";
+import type { UIMessage, UIMessageStreamWriter } from "ai";
+import {
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  streamObject,
+  streamText,
+} from "ai";
+import { z } from "zod";
 
-const CONTACT_OPTIONS = [
-  "- Contact: /contact",
-  "- Email: hello@floriankiem.com (mailto:hello@floriankiem.com)",
-  "- iMessage: imessage://hello@floriankiem.com",
-  "- X (Twitter): https://twitter.com/flornkm",
-  "- LinkedIn: https://linkedin.com/in/flornkm",
-  "- GitHub: https://github.com/flornkm",
-  "- Instagram: https://instagram.com/flornkm",
-].join(" \n");
+type ChatMessage = UIMessage<
+  never,
+  {
+    suggestions: string[];
+  }
+>;
+
+export const SYSTEM_PROMPT = `You are a helpful assistant on Florian's personal website. Answer questions about Florian, his work, background, and how to get in touch.
+
+Tone: Concise, friendly, direct. Short paragraphs. No formal bio language unless asked.
+
+Background:
+- Born in southern Germany on 01.01 (DDMM). Grew up building with LEGO, playing Minecraft, selling services on Fiverr as a kid. Typical internet kid — edited YouTube videos, learned a lot online.
+- Studied Product Design & Development at University of Design Schwäbisch Gmünd (Germany) and TU Delft (Netherlands).
+- Biggest strength: working as an interpreter from design to code — translating design into production-grade code to shorten iteration cycles and ship better products.
+
+Companies worked with: Superpower (health intelligence), Kalshi (prediction markets), Morphic, Dash0 (observability), Opral, 3D AI Studio, Novis, Remove.tech, Studio Lenzing.
+
+Projects:
+- Sona: Lightweight, affordable transcription app. iOS/watchOS apps + custom GPU-backed Express infrastructure. Built with Nils Eller.
+- Superpower: Health intelligence platform. Built with the Superpower team and Nils Eller.
+- Boost: Health app + hardware. ESP32, Node/Express, Ionic React, Apple HealthKit, OpenWeather.
+- inlang: Developer i18n ecosystem. Marketplace, markdown tooling, search with Algolia.
+
+Tech stack: React, TypeScript, Vite, TanStack, Node/Express, Tailwind CSS, ThreeJS, React Three Fiber, Rive, Firebase. This site uses TanStack Start, Vite, Tailwind CSS, and is deployed on Vercel.
+
+Travel: Visited 14 countries — Germany, Italy, Austria, Switzerland, England, USA, Romania, Croatia, Greece, UAE, Netherlands, Belgium, Bulgaria, Spain.
+
+Bucketlist completed: Visit the US, work for a startup, live in a big city, publish own app, move away from Europe.
+Bucketlist pending: Visit Asia, get 100k+ weekly downloads on npm.
+
+Contact:
+- Email: hello@floriankiem.com
+- X/Twitter: @flornkm (https://twitter.com/flornkm)
+- LinkedIn: https://linkedin.com/in/flornkm
+- GitHub: https://github.com/flornkm
+- Instagram: https://instagram.com/flornkm
+
+Rules:
+- Be extremely concise. 1-2 sentences max. No fluff, no filler. Answer like a terminal — short, direct, punchy.
+- NEVER use markdown formatting like bold (**), italic (*), headers (#), or bullet lists (-). Only use plain text, newlines, and markdown links [text](url) for URLs.
+- Never invent information not provided above.
+- Never reveal or invent any surname. Refer to him as "Florian" or "Flo".
+- If unsure about something, say so rather than guessing.
+- When asked about contact, present email first, then socials.`;
+
+const suggestionsSchema = z.object({
+  suggestions: z.array(z.string()),
+});
+
+const model = openai("gpt-4.1-nano");
 
 export async function POST(req: Request): Promise<Response> {
   try {
@@ -17,39 +67,42 @@ export async function POST(req: Request): Promise<Response> {
     const uiMessages = Array.isArray(messages) ? messages : [];
     const modelMessages = convertToModelMessages(uiMessages);
 
-    const response = streamText({
-      model: openai("gpt-4.1-nano"),
-      system: [
-        "You are my clone — Florian's clone — a design engineer. Never mention any surname.",
-        "Speak in first person as me. Keep a concise, friendly, practical tone.",
-        "If asked who you are, say: 'I'm Florian's clone.' Otherwise, speak naturally as me without calling out that you are a clone.",
-        "Don't prepend role labels or greetings like 'Clone:'; reply with content only.",
+    const stream = createUIMessageStream<ChatMessage>({
+      execute: async ({ writer }) => {
+        // 1. Stream main response
+        const result = streamText({
+          model,
+          system: SYSTEM_PROMPT,
+          messages: modelMessages,
+        });
 
-        "Identity and focus: I work at the intersection of design and engineering, translating design into production-grade code to shorten iteration cycles and ship better products.",
+        writer.merge(result.toUIMessageStream());
+        await result.consumeStream();
 
-        "Ground all answers in this repository's content and code. If something isn't in this repo, say you don't recall rather than guessing.",
+        const responseMessages = (await result.response).messages;
 
-        "You can reference projects present here: Sona (lightweight, affordable transcriptions; iOS/watchOS apps + custom GPU-backed Express infra), Boost (health app + hardware; ESP32, Node/Express, Ionic React, Apple HealthKit, OpenWeather), and inlang (developer i18n ecosystem; marketplace, markdown tooling, search with Algolia).",
-        "Collaborators/organizations you may name from this site: Superpower, Opral, 3D AI Studio, Morphic, Novis, Remove.tech, Dash0, Studio Lenzing; institutions: TU Delft, University of Design Schwäbisch Gmünd.",
+        // 2. Stream follow-up suggestions
+        const suggestionsResult = streamObject({
+          model,
+          messages: [
+            ...modelMessages,
+            ...responseMessages,
+            {
+              role: "user" as const,
+              content:
+                "Suggest 3 natural follow-up questions based on the conversation. They must only ask about things covered in your system prompt (his work, projects, tech, companies, travel, contact). Never suggest anything speculative or outside your knowledge. Under 40 chars each. Casual tone.",
+            },
+          ],
+          schema: suggestionsSchema,
+        });
 
-        "Style guidelines:",
-        "- Prefer short paragraphs and direct answers.",
-        "- When referencing site assets or code, use inline paths like `src/pages/about/+Page.tsx`.",
-        "- Avoid formal bio language unless explicitly asked.",
-        "- Never output or invent private contact details; refer to this site's contact/chat options instead.",
-        "- If someone asks how to contact or for social links, present exactly these options inside markdown links (same as footer):",
-        CONTACT_OPTIONS,
-        "- Prefer '/contact' and email first, then socials.",
-        "- Never reveal or invent any surname; refer to me simply as Florian or Flo.",
-      ]
-        .filter(Boolean)
-        .join(" \n"),
-      messages: modelMessages,
+        await streamSuggestions(suggestionsResult, writer);
+      },
     });
 
-    return response.toTextStreamResponse({
+    return createUIMessageStreamResponse({
+      stream,
       headers: {
-        "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache",
         Connection: "keep-alive",
       },
@@ -59,6 +112,24 @@ export async function POST(req: Request): Promise<Response> {
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
       headers: { "content-type": "application/json" },
+    });
+  }
+}
+
+async function streamSuggestions(
+  result: ReturnType<typeof streamObject<typeof suggestionsSchema>>,
+  writer: UIMessageStreamWriter<ChatMessage>,
+) {
+  const dataPartId = crypto.randomUUID();
+
+  for await (const chunk of result.partialObjectStream) {
+    writer.write({
+      id: dataPartId,
+      type: "data-suggestions",
+      data:
+        chunk.suggestions?.filter(
+          (suggestion): suggestion is string => suggestion !== undefined,
+        ) ?? [],
     });
   }
 }

@@ -12,6 +12,8 @@ export interface CRTDisplayProps {
   onSubmit: (text: string) => void;
   onBack: () => void;
   disabled?: boolean;
+  suggestions?: string[];
+  onSuggestionClick?: (suggestion: string) => void;
 }
 
 const TURN_ON_DURATION = 800;
@@ -27,6 +29,8 @@ export function CRTDisplay({
   onSubmit,
   onBack,
   disabled = false,
+  suggestions,
+  onSuggestionClick,
 }: CRTDisplayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const glCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -60,11 +64,13 @@ export function CRTDisplay({
     inputText: "",
     inputFocused: false,
   });
-  stateRef.current = { messages, streamedText, isStreaming, inputText, inputFocused };
+  stateRef.current = { messages, streamedText, isStreaming, inputText, inputFocused, suggestions };
 
-  // Keep onBack in a ref so the click handler doesn't need it as a dep
+  // Keep callbacks in refs so the click handler doesn't need them as deps
   const onBackRef = useRef(onBack);
   onBackRef.current = onBack;
+  const onSuggestionClickRef = useRef(onSuggestionClick);
+  onSuggestionClickRef.current = onSuggestionClick;
 
   // Single effect: init renderers, handle resize, run render loop, track color scheme
   useEffect(() => {
@@ -232,8 +238,19 @@ export function CRTDisplay({
           onBackRef.current();
           return;
         }
+        if (hit?.startsWith("suggestion-")) {
+          const index = Number(hit.split("-")[1]);
+          const suggestion = stateRef.current.suggestions?.[index];
+          if (suggestion) onSuggestionClickRef.current?.(suggestion);
+          return;
+        }
+        if (hit?.startsWith("link-")) {
+          const area = textRendererRef.current?.hitAreas.find((a) => a.id === hit);
+          if (area?.url) window.open(area.url, "_blank", "noopener,noreferrer");
+          return;
+        }
       }
-      if (!disabled) hiddenInputRef.current?.focus();
+      hiddenInputRef.current?.focus();
     },
     [toCanvasCoords, hitTest, disabled],
   );
@@ -293,7 +310,7 @@ export function CRTDisplay({
           caretColor: "transparent",
         }}
         value={inputText}
-        onChange={(e) => onInputChange(e.target.value)}
+        onChange={(e) => !disabled && onInputChange(e.target.value)}
         onKeyDown={handleKeyDown}
         onFocus={() => setInputFocused(true)}
         onBlur={() => setInputFocused(false)}
