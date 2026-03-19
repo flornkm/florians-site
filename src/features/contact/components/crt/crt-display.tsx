@@ -10,10 +10,14 @@ export interface CRTDisplayProps {
   inputText: string;
   onInputChange: (text: string) => void;
   onSubmit: (text: string) => void;
-  onBack: () => void;
+  onBack?: () => void;
   disabled?: boolean;
   suggestions?: string[];
   onSuggestionClick?: (suggestion: string) => void;
+  /** Whether to show the Rive logo. Defaults to true. */
+  showLogo?: boolean;
+  /** Whether to render fullscreen (fixed inset-0) or inline (w-full h-full). Defaults to true. */
+  fullscreen?: boolean;
 }
 
 const TURN_ON_DURATION = 800;
@@ -31,6 +35,8 @@ export function CRTDisplay({
   disabled = false,
   suggestions,
   onSuggestionClick,
+  showLogo = true,
+  fullscreen = true,
 }: CRTDisplayProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -65,13 +71,15 @@ export function CRTDisplay({
     inputText: "",
     inputFocused: false,
   });
-  stateRef.current = { messages, streamedText, isStreaming, inputText, inputFocused, suggestions };
+  stateRef.current = { messages, streamedText, isStreaming, inputText, inputFocused, suggestions, showBack: !!onBack };
 
   // Keep callbacks in refs so the click handler doesn't need them as deps
   const onBackRef = useRef(onBack);
   onBackRef.current = onBack;
   const onSuggestionClickRef = useRef(onSuggestionClick);
   onSuggestionClickRef.current = onSuggestionClick;
+  const showLogoRef = useRef(showLogo);
+  showLogoRef.current = showLogo;
 
   // Single effect: init renderers, handle resize, run render loop, track color scheme
   useEffect(() => {
@@ -90,7 +98,7 @@ export function CRTDisplay({
 
     // Resize canvases to fill the inner container (max-w-5xl)
     function resize() {
-      const rect = container.getBoundingClientRect();
+      const rect = container!.getBoundingClientRect();
       const w = Math.floor(rect.width * dpr);
       const h = Math.floor(rect.height * dpr);
       shader.resize(w, h);
@@ -174,9 +182,9 @@ export function CRTDisplay({
         visibleHeight: visibleCurrentRef.current,
       });
 
-      // Composite Rive logo onto text canvas
+      // Composite Rive logo onto text canvas (when enabled)
       const riveCanvas = riveContainerRef.current?.querySelector("canvas");
-      if (riveCanvas && textCanvas.width > 0) {
+      if (showLogoRef.current && riveCanvas && textCanvas.width > 0) {
         const ctx = textCanvas.getContext("2d");
         if (ctx) {
           const logoX = textCanvas.width - LOGO_SIZE - LOGO_MARGIN;
@@ -252,7 +260,7 @@ export function CRTDisplay({
       const coords = toCanvasCoords(e);
       if (coords) {
         const hit = hitTest(coords.x, coords.y);
-        if (hit === "back") {
+        if (hit === "back" && onBackRef.current) {
           onBackRef.current();
           return;
         }
@@ -300,13 +308,21 @@ export function CRTDisplay({
   return (
     <div
       ref={outerRef}
-      className="fixed inset-0 bg-black overflow-hidden overscroll-contain touch-none select-none"
+      className={
+        fullscreen
+          ? "fixed inset-0 bg-black overflow-hidden overscroll-contain touch-none select-none"
+          : "relative w-full h-full bg-black overflow-hidden touch-none select-none p-6"
+      }
       onClick={handleClick}
       onMouseMove={handleMouseMove}
     >
       <div
         ref={containerRef}
-        className="relative max-w-5xl mx-auto h-full cursor-text rounded-3xl overflow-hidden"
+        className={
+          fullscreen
+            ? "relative max-w-5xl mx-auto h-full cursor-text rounded-3xl overflow-hidden"
+            : "relative w-full h-full cursor-text overflow-hidden rounded-lg"
+        }
       >
         <canvas ref={textCanvasRef} className="hidden" />
         <canvas ref={glCanvasRef} className="absolute inset-0 w-full h-full" />
