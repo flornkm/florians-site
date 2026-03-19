@@ -24,9 +24,11 @@ export interface CRTTextState {
   visibleHeight?: number;
   /** Follow-up question suggestions to display as clickable buttons. */
   suggestions?: string[];
+  /** Whether to show the back button. Defaults to true. */
+  showBack?: boolean;
 }
 
-const FONT_SIZE = 26;
+const FONT_SIZE = 38;
 const LINE_HEIGHT = 1.4;
 const PADDING = 48;
 const CURSOR_BLINK_RATE = 530; // ms
@@ -166,23 +168,26 @@ export class CRTTextRenderer {
 
     const lineH = FONT_SIZE * LINE_HEIGHT;
 
-    // ── Back button at top ──
+    // ── Back button at top (optional) ──
+    const showBack = state.showBack !== false;
     const backY = PADDING;
-    const isBackHovered = this._hoveredId === "back";
-    ctx.fillStyle = isBackHovered ? theme.backHover : theme.back;
-    ctx.fillText(BACK_TEXT, PADDING, backY);
-    const backWidth = ctx.measureText(BACK_TEXT).width;
-    const hitPad = 20;
-    this._hitAreas.push({
-      id: "back",
-      x: PADDING - hitPad,
-      y: backY - hitPad,
-      width: backWidth + hitPad * 2,
-      height: lineH + hitPad * 2,
-    });
+    if (showBack) {
+      const isBackHovered = this._hoveredId === "back";
+      ctx.fillStyle = isBackHovered ? theme.backHover : theme.back;
+      ctx.fillText(BACK_TEXT, PADDING, backY);
+      const backWidth = ctx.measureText(BACK_TEXT).width;
+      const hitPad = 20;
+      this._hitAreas.push({
+        id: "back",
+        x: PADDING - hitPad,
+        y: backY - hitPad,
+        width: backWidth + hitPad * 2,
+        height: lineH + hitPad * 2,
+      });
+    }
 
     // Content area bounds — use visibleH so input stays above keyboard
-    const contentStartY = backY + lineH + BACK_PADDING_BOTTOM;
+    const contentStartY = showBack ? backY + lineH + BACK_PADDING_BOTTOM : PADDING;
     const inputAreaHeight = lineH + 12;
     const suggestionsHeight = this.getSuggestionsHeight(state.suggestions, lineH);
     const contentHeight = visibleH - contentStartY - PADDING - inputAreaHeight - suggestionsHeight;

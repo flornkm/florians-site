@@ -1,10 +1,12 @@
 import { H1, H2 } from "@/components/design-system/heading";
+import { CrtChatDemo } from "@/features/experiments/components/crt-chat-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
+  { title: "CRT Terminal", Component: CrtChatDemo },
   { title: "iOS Context Menu", Component: IosContextMenuDemo },
   { title: "Receipt", Component: PaperRollDemo },
   { title: "Text Shimmer", Component: TextShimmerDemo },
@@ -31,7 +33,7 @@ function ExperimentsPage() {
       {EXPERIMENTS.map(({ title, Component }) => (
         <section className="w-full flex flex-col gap-2" key={title}>
           <H2>{title}</H2>
-          <div className="rounded-xl bg-primary border border-primary aspect-[4/3] flex items-center justify-center">
+          <div className="rounded-xl bg-primary border border-primary aspect-[4/3] flex items-center justify-center overflow-hidden">
             <Component />
           </div>
         </section>

@@ -1,5 +1,6 @@
-import { Chat } from "@/features/contact/components/chat";
-import { ChatStatusProvider } from "@/features/contact/components/chat-status";
+import { H1 } from "@/components/design-system/heading";
+import { Link } from "@/components/ui/link";
+import { CONTACTS } from "@/const/contacts";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/contact")({
@@ -8,9 +9,9 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact • Florian - Design Engineer" },
       {
         name: "description",
-        content: "Ask questions about Florian, his work, and projects — or get in touch directly.",
+        content: "Get in touch with Florian — email, socials, and more.",
       },
-      { property: "og:image", content: "/api/og?title=Contact (AI)" },
+      { property: "og:image", content: "/api/og?title=Contact" },
     ],
   }),
   component: ContactPage,
@@ -18,10 +19,23 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   return (
-    <ChatStatusProvider>
-      <div className="w-full h-full flex flex-col">
-        <Chat />
+    <div className="w-full max-w-5xl mx-auto md:px-0 px-4">
+      <H1 className="mb-8">Contact</H1>
+      <div className="flex flex-col gap-3">
+        {CONTACTS.filter((c) => c.name !== "iMessage").map((contact) => (
+          <Link
+            key={contact.name}
+            href={contact.href}
+            target={contact.href.startsWith("mailto:") ? undefined : "_blank"}
+            className="flex items-center justify-between py-3 px-4 -mx-4 rounded-lg hover:bg-interactive-hover transition-colors group"
+          >
+            <span className="text-secondary group-hover:text-primary transition-colors">
+              {contact.name}
+            </span>
+            <span className="text-tertiary text-sm">{contact.handle}</span>
+          </Link>
+        ))}
       </div>
-    </ChatStatusProvider>
+    </div>
   );
 }
