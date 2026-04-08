@@ -71,7 +71,15 @@ export function CRTDisplay({
     inputText: "",
     inputFocused: false,
   });
-  stateRef.current = { messages, streamedText, isStreaming, inputText, inputFocused, suggestions, showBack: !!onBack };
+  stateRef.current = {
+    messages,
+    streamedText,
+    isStreaming,
+    inputText,
+    inputFocused,
+    suggestions,
+    showBack: !!onBack,
+  };
 
   // Keep callbacks in refs so the click handler doesn't need them as deps
   const onBackRef = useRef(onBack);

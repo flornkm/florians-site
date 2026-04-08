@@ -1,13 +1,18 @@
-import { createContext, ReactNode, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  type MutableRefObject,
+  ReactNode,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import type { FormValues } from "../types";
 
-export interface FormValues extends Record<string, string> {
-  handle: string;
-  email: string;
-  message: string;
-}
+export type { FormValues };
 
 interface LetterEditorContextType {
   formValues: FormValues;
@@ -19,8 +24,12 @@ interface LetterEditorContextType {
   isSubmitting: boolean;
   submitLetter: (formData: FormData) => void;
 
-  resetSignature: boolean;
-  success: boolean | null;
+  /** Ref for the child to register its canvas-clear callback */
+  signatureClearRef: MutableRefObject<(() => void) | null>;
+
+  /** Handle value committed on blur — used for the stamp to avoid per-keystroke re-renders */
+  stampHandle: string;
+  commitStampHandle: () => void;
 
   isEmpty: boolean;
 }
@@ -48,8 +57,12 @@ export function LetterEditorProvider({ children, onSuccess, onError }: LetterEdi
     message: "",
   });
   const [signature, setSignature] = useState<string | null>(null);
-  const [resetSignature, setResetSignature] = useState(false);
-  const [success, setSuccess] = useState<boolean | null>(null);
+  const [stampHandle, setStampHandle] = useState("");
+  const signatureClearRef = useRef<(() => void) | null>(null);
+
+  const commitStampHandle = useCallback(() => {
+    setStampHandle(formValues.handle);
+  }, [formValues.handle]);
 
   const setFormValue = useCallback((field: keyof FormValues, value: string) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
@@ -74,16 +87,14 @@ export function LetterEditorProvider({ children, onSuccess, onError }: LetterEdi
       });
     },
     onSuccess: () => {
-      setSuccess(true);
       setFormValues({ handle: "", email: "", message: "" });
       setSignature(null);
-      setResetSignature(true);
-      setTimeout(() => setResetSignature(false), 100);
+      setStampHandle("");
+      signatureClearRef.current?.();
       onSuccess?.();
     },
     onError: (error: Error) => {
       console.error(error);
-      setSuccess(false);
       onError?.(error);
     },
   });
@@ -100,8 +111,9 @@ export function LetterEditorProvider({ children, onSuccess, onError }: LetterEdi
     setSignature,
     isSubmitting: mutation.isPending,
     submitLetter: mutation.mutate,
-    resetSignature,
-    success,
+    signatureClearRef,
+    stampHandle,
+    commitStampHandle,
     isEmpty: isEmpty(),
   };
 

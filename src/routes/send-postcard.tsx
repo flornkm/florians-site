@@ -1,7 +1,7 @@
 import { LetterEditorProvider } from "@/features/letters/components/letter-editor-provider";
 import LetterForm from "@/features/letters/components/letter-form";
 import LetterPreview from "@/features/letters/components/letter-preview";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/send-postcard")({
   head: () => ({
@@ -19,10 +19,11 @@ export const Route = createFileRoute("/send-postcard")({
 });
 
 function SendPostcardPage() {
+  const navigate = useNavigate();
   return (
     <section className="w-full overflow-hidden flex flex-col md:h-[calc(100dvh-1rem)] -mt-8 md:-mt-16">
       <div className="w-full h-full flex-1 flex md:flex-row flex-col-reverse items-center gap-20 md:gap-0">
-        <LetterEditorProvider>
+        <LetterEditorProvider onSuccess={() => navigate({ to: "/", hash: "letters" })}>
           <div className="flex-1 flex flex-col items-end w-full pl-8 md:pl-0">
             <LetterForm />
           </div>

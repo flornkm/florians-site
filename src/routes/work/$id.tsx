@@ -136,7 +136,7 @@ function WorkPage() {
             style={{ marginLeft: "-6px" }}
           >
             <img
-              src="/images/avatars/florian_kiem.webp"
+              src="/images/avatars/florian_kiem.jpg"
               alt="Florian Kiem"
               className="h-full w-full rounded-full object-cover"
             />

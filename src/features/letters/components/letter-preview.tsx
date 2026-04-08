@@ -4,7 +4,7 @@ import { Letter } from "./letter";
 import { useLetterEditor } from "./letter-editor-provider";
 
 export default function LetterPreview() {
-  const { formValues, signature, isEmpty } = useLetterEditor();
+  const { formValues, signature, isEmpty, stampHandle } = useLetterEditor();
   const nodeRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -31,6 +31,7 @@ export default function LetterPreview() {
           variant="preview"
           message={formValues.message}
           handle={formValues.handle}
+          stampHandle={stampHandle}
           signature={signature}
           isEmpty={isEmpty}
           isDragging={isDragging}

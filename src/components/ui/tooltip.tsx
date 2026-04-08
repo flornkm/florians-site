@@ -51,7 +51,7 @@ export default function Tooltip({ children, content, className, style }: Tooltip
             className={cn(
               "z-50 font-medium bg-surface-inverted text-inverted px-2 py-1 rounded-lg",
               "origin-[var(--transform-origin)]",
-              "transition-all duration-100 ease-out",
+              "transition-all duration-50 ease-out",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1",
               "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:translate-y-1",
             )}
@@ -109,7 +109,7 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
                 "h-[var(--positioner-height)] w-[var(--positioner-width)]",
                 "max-w-[var(--available-width)]",
                 "transition-[top,left,right,bottom,transform]",
-                `duration-[0.35s] ease-[${easing}]`,
+                `duration-[0.1s] ease-[${easing}]`,
                 "data-[instant]:transition-none",
               )}
             >
@@ -132,11 +132,11 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
                     // Current content
                     "[&_[data-current]]:w-[calc(var(--popup-width)-2*var(--vip))]",
                     "[&_[data-current]]:translate-x-0 [&_[data-current]]:opacity-100",
-                    `[&_[data-current]]:transition-[translate,opacity] [&_[data-current]]:duration-[350ms,175ms] [&_[data-current]]:ease-[${easing}]`,
+                    `[&_[data-current]]:transition-[translate,opacity] [&_[data-current]]:duration-[250ms,175ms] [&_[data-current]]:ease-[${easing}]`,
                     // Previous content
                     "[&_[data-previous]]:w-[calc(var(--popup-width)-2*var(--vip))]",
                     "[&_[data-previous]]:translate-x-0 [&_[data-previous]]:opacity-100",
-                    `[&_[data-previous]]:transition-[translate,opacity] [&_[data-previous]]:duration-[350ms,175ms] [&_[data-previous]]:ease-[${easing}]`,
+                    `[&_[data-previous]]:transition-[translate,opacity] [&_[data-previous]]:duration-[250ms,175ms] [&_[data-previous]]:ease-[${easing}]`,
                     // Direction-aware slide animations
                     "data-[activation-direction~='left']:[&_[data-current][data-starting-style]]:-translate-x-1/2",
                     "data-[activation-direction~='left']:[&_[data-current][data-starting-style]]:opacity-0",
