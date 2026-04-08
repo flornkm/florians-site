@@ -4,8 +4,8 @@ import { useLocation } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Body1 } from "../design-system/body";
-import { buttonVariants } from "../ui/button";
 import { Link } from "../ui/link";
+import ContactDialog from "./contact-dialog";
 
 export type Tab = {
   name: string;
@@ -197,18 +197,7 @@ export default function Navigation() {
               </Link>
             ))}
           </div>
-          <Link
-            id="contact"
-            href="/contact"
-            key="contact"
-            className={cn(
-              buttonVariants({ variant: "primary", size: "xs" }),
-              "text-sm text-accent-foreground hidden max-md:mr-px leading-none items-center min-[350px]:flex font-medium relative z-10 px-2.5 h-7.5 md:h-6.5 transition-colors duration-300 ease-in-out w-auto rounded-full",
-              urlPathname === "/contact" && "bg-accent-primary",
-            )}
-          >
-            Contact
-          </Link>
+          <ContactDialog />
         </div>
       </div>
     </nav>

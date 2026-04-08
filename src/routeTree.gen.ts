@@ -13,7 +13,6 @@ import { Route as SendPostcardRouteImport } from './routes/send-postcard'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
-import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ColophonRouteImport } from './routes/colophon'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -39,11 +38,6 @@ const ImprintRoute = ImprintRouteImport.update({
 const ExperimentsRoute = ExperimentsRouteImport.update({
   id: '/experiments',
   path: '/experiments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ColophonRoute = ColophonRouteImport.update({
@@ -81,7 +75,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/colophon': typeof ColophonRoute
-  '/contact': typeof ContactRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -94,7 +87,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/colophon': typeof ColophonRoute
-  '/contact': typeof ContactRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -108,7 +100,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/colophon': typeof ColophonRoute
-  '/contact': typeof ContactRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -123,7 +114,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/colophon'
-    | '/contact'
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
@@ -136,7 +126,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/colophon'
-    | '/contact'
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
@@ -149,7 +138,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/colophon'
-    | '/contact'
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
@@ -163,7 +151,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ColophonRoute: typeof ColophonRoute
-  ContactRoute: typeof ContactRoute
   ExperimentsRoute: typeof ExperimentsRoute
   ImprintRoute: typeof ImprintRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
@@ -201,13 +188,6 @@ declare module '@tanstack/react-router' {
       path: '/experiments'
       fullPath: '/experiments'
       preLoaderRoute: typeof ExperimentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/colophon': {
@@ -259,7 +239,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ColophonRoute: ColophonRoute,
-  ContactRoute: ContactRoute,
   ExperimentsRoute: ExperimentsRoute,
   ImprintRoute: ImprintRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
