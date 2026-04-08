@@ -56,7 +56,7 @@ export default function ContactDialog() {
   return (
     <MotionConfig transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}>
       <div ref={containerRef} className="relative z-10 hidden min-[350px]:flex items-center">
-        <div className="h-7.5 md:h-6.5" />
+        <div className="h-7.5 md:h-6.5 px-2.5 text-sm font-medium invisible">Contact</div>
         <motion.div
           layout
           onClick={() => !isOpen && setIsOpen(true)}
