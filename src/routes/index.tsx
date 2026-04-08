@@ -52,17 +52,15 @@ function IndexPage() {
             <Link
               href={`/work/${project.slug}`}
               key={project.slug}
-              className="w-full md:grid grid-cols-[290px_1fr] items-start group/item hover:opacity-100 group-hover/section:opacity-30 transition-opacity duration-300 ease-out py-4"
+              className="w-full md:grid grid-cols-[290px_1fr] items-start group/item [@media(hover:hover)]:hover:opacity-100 [@media(hover:hover)]:group-hover/section:opacity-30 transition-opacity duration-300 ease-out py-4"
             >
               <div className="flex flex-col gap-0.5 w-full items-start md:sticky top-16">
                 <H3>{project.title}</H3>
                 <Body2 className="mb-5 md:mb-3 text-tertiary">{project.description}</Body2>
                 <p
                   className={cn(
-                    "items-center pointer-events-none hidden lg:flex gap-1 opacity-0 -ml-2 blur-[1px] transition-all duration-150 ease-out focus:hidden",
-                    "group-hover/item:opacity-100 group-hover/item:ml-0 group-hover/item:blur-none",
-                    "group-focus-within/item:opacity-100 group-focus-within/item:ml-0 group-focus-within/item:blur-none",
-                    "group-active/item:opacity-100",
+                    "items-center pointer-events-none hidden [@media(hover:hover)]:lg:flex gap-1 opacity-0 -ml-2 blur-[1px] transition-all duration-150 ease-out",
+                    "[@media(hover:hover)]:group-hover/item:opacity-100 [@media(hover:hover)]:group-hover/item:ml-0 [@media(hover:hover)]:group-hover/item:blur-none",
                   )}
                 >
                   <TriangleFilled className="size-4 inline-block" />

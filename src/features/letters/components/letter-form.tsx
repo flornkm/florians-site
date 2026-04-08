@@ -138,7 +138,7 @@ export default function LetterForm() {
       <form action={submitLetter} className="w-full flex flex-col gap-4">
         <FormField
           id="handle"
-          label="Handle (e.g. @handle)"
+          label="Handle (e.g. flornkm)"
           maxLength={16}
           value={formValues.handle}
           onChange={handleFieldChange("handle")}
