@@ -26,7 +26,10 @@ function parseLastJson(buffer: string): string[] | null {
   for (let i = lastBrace; i >= 0; i--) {
     if (buffer[i] === "}") depth++;
     if (buffer[i] === "{") depth--;
-    if (depth === 0) { start = i; break; }
+    if (depth === 0) {
+      start = i;
+      break;
+    }
   }
   if (start === -1) return null;
   try {

@@ -4,16 +4,9 @@ import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { animate, motion, useMotionValue, useTransform } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
+import type { LetterData } from "../types";
 import { Letter } from "./letter";
-
-interface LetterData {
-  handle: string;
-  message: string;
-  signature: string | null;
-  email?: string;
-  createdAt?: string;
-}
 
 interface ApiResponse {
   letters: Record<string, LetterData>;
@@ -27,7 +20,7 @@ const MOCK_LETTERS: Record<string, LetterData> = {
     createdAt: "2025-01-15T10:30:00.000Z",
   },
   mock_2: {
-    handle: "janedoe",
+    handle: "johndoe",
     message: "Found this through a friend. The experiments page is really cool, nice work.",
     signature: null,
     createdAt: "2025-02-20T14:15:00.000Z",
@@ -181,24 +174,22 @@ export function LetterStack() {
     enabled: !IS_DEV,
   });
 
-  const [letterOrder, setLetterOrder] = useState<string[]>([]);
+  const [dismissCount, setDismissCount] = useState(0);
 
   const letters: Record<string, LetterData> | undefined = IS_DEV
     ? MOCK_LETTERS
     : data?.data?.letters;
 
-  useEffect(() => {
-    if (letters) {
-      const initialOrder = Object.keys(letters).reverse();
-      setLetterOrder(initialOrder);
-    }
-  }, [letters]);
+  const letterOrder = useMemo(() => {
+    if (!letters) return [];
+    const keys = Object.keys(letters).reverse();
+    if (keys.length === 0) return [];
+    const offset = dismissCount % keys.length;
+    return [...keys.slice(offset), ...keys.slice(0, offset)];
+  }, [letters, dismissCount]);
 
-  const handleDismiss = useCallback((dismissedId: string) => {
-    setLetterOrder((current) => {
-      const withoutDismissed = current.filter((id) => id !== dismissedId);
-      return [...withoutDismissed, dismissedId];
-    });
+  const handleDismiss = useCallback(() => {
+    setDismissCount((c) => c + 1);
   }, []);
 
   if (!IS_DEV && (!letters || isLoading))
@@ -226,12 +217,13 @@ export function LetterStack() {
             key={id}
             stackIndex={index}
             totalVisible={visibleLetters.length}
-            onDismiss={() => handleDismiss(id)}
+            onDismiss={handleDismiss}
           >
             <Letter
               handle={letter.handle}
               message={letter.message}
               signature={letter.signature}
+              showStamp={index === 0}
               className="select-none"
             />
           </DraggableLetter>

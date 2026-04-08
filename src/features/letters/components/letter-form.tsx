@@ -5,8 +5,7 @@ import Input from "@/components/ui/input";
 import Label from "@/components/ui/label";
 import Textarea from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { useNavigate } from "@tanstack/react-router";
-import React, { memo, useCallback, useEffect, useRef } from "react";
+import React, { memo, useCallback, useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { FormValues, useLetterEditor } from "./letter-editor-provider";
 
@@ -53,14 +52,17 @@ const FormField = memo(function FormField({
 });
 
 const SignatureField = memo(function SignatureField({ disabled }: { disabled?: boolean }) {
-  const { signature, setSignature, resetSignature } = useLetterEditor();
+  const { signature, setSignature, signatureClearRef } = useLetterEditor();
   const sigRef = useRef<SignatureCanvas>(null);
 
-  React.useEffect(() => {
-    if (resetSignature && sigRef.current) {
-      sigRef.current.clear();
-    }
-  }, [resetSignature]);
+  // Register the clear function with the provider via callback ref
+  const canvasRef = useCallback(
+    (canvas: SignatureCanvas | null) => {
+      sigRef.current = canvas;
+      signatureClearRef.current = canvas ? () => canvas.clear() : null;
+    },
+    [signatureClearRef],
+  );
 
   const handleSignatureEnd = useCallback(() => {
     if (sigRef.current) {
@@ -97,7 +99,7 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
               className: "dark:invert h-40 w-full",
               id: "signature",
             }}
-            ref={sigRef}
+            ref={canvasRef}
             onEnd={handleSignatureEnd}
           />
         </div>
@@ -117,9 +119,8 @@ const SignatureField = memo(function SignatureField({ disabled }: { disabled?: b
 });
 
 export default function LetterForm() {
-  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty, success } =
+  const { formValues, setFormValue, isSubmitting, submitLetter, isEmpty, commitStampHandle } =
     useLetterEditor();
-  const navigate = useNavigate();
 
   const handleFieldChange = useCallback(
     (field: keyof FormValues) => (value: string) => {
@@ -127,12 +128,6 @@ export default function LetterForm() {
     },
     [setFormValue],
   );
-
-  useEffect(() => {
-    if (success) {
-      navigate({ to: "/", hash: "letters" });
-    }
-  }, [success, navigate]);
 
   return (
     <div className="w-full md:max-w-lg pr-8">
@@ -144,9 +139,10 @@ export default function LetterForm() {
         <FormField
           id="handle"
           label="Handle (e.g. @handle)"
-          maxLength={12}
+          maxLength={16}
           value={formValues.handle}
           onChange={handleFieldChange("handle")}
+          onBlur={commitStampHandle}
           disabled={isSubmitting}
         />
         <FormField

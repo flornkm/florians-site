@@ -233,7 +233,7 @@ export function IosContextMenuDemo() {
                     "overflow-hidden rounded-[14px] min-w-[220px]",
                     "bg-white/90 dark:bg-surface-secondary/80",
                     "backdrop-blur-2xl backdrop-saturate-[1.8]",
-                    "border border-white/[0.5]",
+                    "border border-white/[0.15]",
                     "shadow-[0_12px_48px_rgba(0,0,0,0.14),0_2px_10px_rgba(0,0,0,0.06)]",
                   )}
                 >
@@ -305,9 +305,9 @@ export function IosContextMenuDemo() {
             }}
             onPointerCancel={up}
           >
-            <div className="absolute inset-0 rounded-[15px] bg-white flex items-center justify-center">
+            <div className="absolute inset-0 rounded-[15px] bg-white dark:bg-black dark:border dark:border-white/10 flex items-center justify-center">
               <span
-                className="text-[20px] text-black leading-none select-none font-medium"
+                className="text-[20px] text-black dark:text-white leading-none select-none font-medium"
                 style={{ fontFamily: "Commit Mono, monospace" }}
               >
                 F
@@ -317,7 +317,7 @@ export function IosContextMenuDemo() {
               className="absolute inset-0 rounded-[15px] pointer-events-none"
               style={{
                 boxShadow: open
-                  ? "inset 0 0 0 1px rgba(256,256,256,0.06)"
+                  ? "inset 0 0 0 1px rgba(255,255,255,0.06)"
                   : "inset 0 0 0 1px rgba(0,0,0,0.06)",
               }}
             />

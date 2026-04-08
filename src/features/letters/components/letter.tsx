@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef } from "react";
+import { PostStamp } from "./post-stamp";
 
 const letterVariants = cva(
   "aspect-a4 shrink-0 w-full shadow-2xl shadow-black/[.03] h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-primary rounded-xl border flex",
@@ -44,38 +45,6 @@ const letterVariants = cva(
   },
 );
 
-const _stampVariants = cva(
-  "w-16 mr-4 transition-all pointer-events-none object-contain duration-300 delay-100 max-w-[35%] ease-out perspective-normal origin-bottom-left relative z-10 dark:invert dark:selection:bg-amber-500/25",
-  {
-    variants: {
-      variant: {
-        preview: "",
-        display: "opacity-100 scale-100 rotate-4",
-      },
-      isEmpty: {
-        true: "",
-        false: "",
-      },
-    },
-    compoundVariants: [
-      {
-        variant: "preview",
-        isEmpty: true,
-        className: "opacity-0 scale-105 shadow-2xl dark:shadow-white rotate-2",
-      },
-      {
-        variant: "preview",
-        isEmpty: false,
-        className: "opacity-100 scale-100 rotate-4",
-      },
-    ],
-    defaultVariants: {
-      variant: "display",
-      isEmpty: false,
-    },
-  },
-);
-
 export const Letter = forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<"div"> &
@@ -85,6 +54,9 @@ export const Letter = forwardRef<
       signature: string | null;
       email?: string;
       createdAt?: string;
+      showStamp?: boolean;
+      /** Committed handle for the stamp — avoids re-rendering the WebGL canvas on every keystroke */
+      stampHandle?: string;
     }
 >((props, ref) => {
   const {
@@ -94,11 +66,15 @@ export const Letter = forwardRef<
     isEmpty = false,
     variant = "display",
     isDragging = false,
+    showStamp = true,
+    stampHandle,
     email,
     createdAt,
     className,
     ...restProps
   } = props;
+
+  const resolvedStampHandle = stampHandle ?? handle;
 
   return (
     <div
@@ -120,20 +96,7 @@ export const Letter = forwardRef<
           </p>
         </div>
         <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
-          <p className="text-sm font-medium text-tertiary">
-            Sincerely,{" "}
-            <span className="inline-flex items-center gap-1 translate-y-[3px]">
-              <span className="w-4 h-4 rounded-full border border-primary relative">
-                <img
-                  src={`https://unavatar.io/${handle}`}
-                  alt={handle}
-                  className="relative z-10 rounded-full"
-                />
-                <span className="absolute inset-0 animate-pulse" />
-              </span>
-              @{handle}
-            </span>
-          </p>
+          <p className="text-sm font-medium text-tertiary">Sincerely, @{handle}</p>
         </div>
         {variant === "display" && (email || createdAt) && (
           <div className="text-xs text-quaternary space-y-1">
@@ -143,7 +106,10 @@ export const Letter = forwardRef<
         )}
       </div>
       <div className="h-full shrink-0 w-px bg-border-primary" />
-      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-end h-full">
+      <div className="flex-1 shrink-0 w-full flex flex-col items-end justify-between h-full">
+        {resolvedStampHandle && showStamp && (
+          <PostStamp handle={resolvedStampHandle} className="rotate-3" />
+        )}
         {signature && (
           <div className="w-full max-w-[200px]">
             <img src={signature} alt="Signature" className="w-full dark:invert" />
