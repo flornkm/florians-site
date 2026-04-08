@@ -62,7 +62,9 @@ export default function ContactDialog() {
           onClick={() => !isOpen && setIsOpen(true)}
           className={cn(
             "absolute right-0 bottom-0 md:bottom-auto md:top-0 bg-accent-primary text-accent-foreground overflow-hidden",
-            isOpen ? "w-64 border border-white/10 dark:border-black/10" : "cursor-pointer hover:bg-accent-primary-hover",
+            isOpen
+              ? "w-64 border border-white/10 dark:border-black/10"
+              : "cursor-pointer hover:bg-accent-primary-hover",
           )}
           style={{ borderRadius: isOpen ? 12 : 999 }}
         >
