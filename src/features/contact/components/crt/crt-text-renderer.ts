@@ -28,15 +28,15 @@ export interface CRTTextState {
   showBack?: boolean;
 }
 
-const FONT_SIZE = 38;
+const BASE_FONT_SIZE = 38;
 const LINE_HEIGHT = 1.4;
-const PADDING = 48;
+const BASE_PADDING = 48;
 const CURSOR_BLINK_RATE = 530; // ms
 const USER_LABEL = "YOU> ";
 const CLONE_LABEL = "BOT> ";
 const INPUT_PROMPT = "> ";
 const BACK_TEXT = "< BACK";
-const BACK_PADDING_BOTTOM = 16;
+const BASE_BACK_PADDING_BOTTOM = 16;
 const SCROLL_FRICTION = 0.92;
 const SCROLL_SNAP_THRESHOLD = 0.5;
 
@@ -114,6 +114,11 @@ export class CRTTextRenderer {
   private _hitAreas: HitArea[] = [];
   private _hoveredId: string | null = null;
 
+  // Scaled sizing constants
+  private _fontSize: number;
+  private _padding: number;
+  private _backPadBottom: number;
+
   // Smooth scrolling state (pixel-based)
   private _scrollY: number = 0; // current scroll position in pixels
   private _scrollVelocity: number = 0; // momentum velocity
@@ -121,11 +126,15 @@ export class CRTTextRenderer {
   private _userScrolled: boolean = false;
   private _maxScrollY: number = 0;
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(canvas: HTMLCanvasElement, scale = 1) {
     this.canvas = canvas;
     const ctx = canvas.getContext("2d", { willReadFrequently: false });
     if (!ctx) throw new Error("Canvas 2D not supported");
     this.ctx = ctx;
+
+    this._fontSize = Math.round(BASE_FONT_SIZE * scale);
+    this._padding = Math.round(BASE_PADDING * scale);
+    this._backPadBottom = Math.round(BASE_BACK_PADDING_BOTTOM * scale);
   }
 
   get hitAreas(): HitArea[] {
@@ -146,12 +155,12 @@ export class CRTTextRenderer {
   resize(width: number, height: number): void {
     this.canvas.width = width;
     this.canvas.height = height;
-    this.cols = Math.floor((width - PADDING * 2) / (FONT_SIZE * 0.6));
+    this.cols = Math.floor((width - this._padding * 2) / (this._fontSize * 0.6));
   }
 
   /** Render the full CRT text display. */
   render(state: CRTTextState): void {
-    const { ctx, canvas } = this;
+    const { ctx, canvas, _fontSize: fs, _padding: pad } = this;
     const now = performance.now();
     const theme = getTheme();
     this._hitAreas = [];
@@ -163,23 +172,23 @@ export class CRTTextRenderer {
     ctx.fillStyle = theme.bg;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.font = `bold ${FONT_SIZE}px "Commit Mono", ui-monospace, monospace`;
+    ctx.font = `bold ${fs}px "Commit Mono", ui-monospace, monospace`;
     ctx.textBaseline = "top";
 
-    const lineH = FONT_SIZE * LINE_HEIGHT;
+    const lineH = fs * LINE_HEIGHT;
 
     // ── Back button at top (optional) ──
     const showBack = state.showBack !== false;
-    const backY = PADDING;
+    const backY = pad;
     if (showBack) {
       const isBackHovered = this._hoveredId === "back";
       ctx.fillStyle = isBackHovered ? theme.backHover : theme.back;
-      ctx.fillText(BACK_TEXT, PADDING, backY);
+      ctx.fillText(BACK_TEXT, pad, backY);
       const backWidth = ctx.measureText(BACK_TEXT).width;
       const hitPad = 20;
       this._hitAreas.push({
         id: "back",
-        x: PADDING - hitPad,
+        x: pad - hitPad,
         y: backY - hitPad,
         width: backWidth + hitPad * 2,
         height: lineH + hitPad * 2,
@@ -187,10 +196,10 @@ export class CRTTextRenderer {
     }
 
     // Content area bounds — use visibleH so input stays above keyboard
-    const contentStartY = showBack ? backY + lineH + BACK_PADDING_BOTTOM : PADDING;
+    const contentStartY = showBack ? backY + lineH + this._backPadBottom : pad;
     const inputAreaHeight = lineH + 12;
     const suggestionsHeight = this.getSuggestionsHeight(state.suggestions, lineH);
-    const contentHeight = visibleH - contentStartY - PADDING - inputAreaHeight - suggestionsHeight;
+    const contentHeight = visibleH - contentStartY - pad - inputAreaHeight - suggestionsHeight;
 
     // Extract all links from a message for lookup
     const extractLinks = (text: string): Map<string, string> => {
@@ -300,7 +309,7 @@ export class CRTTextRenderer {
       if (y + lineH < contentStartY || y > contentStartY + contentHeight) continue;
 
       const line = lines[i];
-      let x = PADDING;
+      let x = pad;
 
       for (const seg of line.segments) {
         const segWidth = ctx.measureText(seg.text).width;
@@ -312,7 +321,7 @@ export class CRTTextRenderer {
           ctx.fillStyle = isLinkHovered ? theme.backHover : theme.back;
           ctx.fillText(seg.text, x, y);
           // Underline
-          const underlineY = y + FONT_SIZE + 2;
+          const underlineY = y + fs + 2;
           ctx.fillRect(x, underlineY, segWidth, 1);
           // Hit area
           this._hitAreas.push({
@@ -347,14 +356,14 @@ export class CRTTextRenderer {
     theme: ThemeColors,
     visibleH: number,
   ): void {
-    const { ctx } = this;
-    const lineH = FONT_SIZE * LINE_HEIGHT;
-    const inputY = visibleH - PADDING - lineH;
+    const { ctx, _fontSize: fs, _padding: pad } = this;
+    const lineH = fs * LINE_HEIGHT;
+    const inputY = visibleH - pad - lineH;
 
     // Separator line
     ctx.fillStyle = theme.dim;
     const sepY = inputY - 8;
-    ctx.fillRect(PADDING, sepY, this.canvas.width - PADDING * 2, 1);
+    ctx.fillRect(pad, sepY, this.canvas.width - pad * 2, 1);
 
     // Input text
     ctx.fillStyle = theme.prompt;
@@ -370,7 +379,7 @@ export class CRTTextRenderer {
       }
     }
 
-    ctx.fillText(displayText, PADDING, inputY);
+    ctx.fillText(displayText, pad, inputY);
   }
 
   /** Split text on explicit newlines, then word-wrap each paragraph. */
@@ -402,14 +411,14 @@ export class CRTTextRenderer {
     lineH: number,
   ): void {
     if (!suggestions?.length) return;
-    const { ctx } = this;
+    const { ctx, _fontSize: fs, _padding: pad } = this;
     const totalH = this.getSuggestionsHeight(suggestions, lineH);
     const inputAreaHeight = lineH + 12;
-    const startY = visibleH - PADDING - inputAreaHeight - totalH;
-    const boxX = PADDING;
-    const boxW = this.canvas.width - PADDING * 2;
+    const startY = visibleH - pad - inputAreaHeight - totalH;
+    const boxX = pad;
+    const boxW = this.canvas.width - pad * 2;
 
-    ctx.font = `bold ${FONT_SIZE}px "Commit Mono", ui-monospace, monospace`;
+    ctx.font = `bold ${fs}px "Commit Mono", ui-monospace, monospace`;
 
     // Top border
     ctx.fillStyle = theme.dim;
@@ -431,7 +440,7 @@ export class CRTTextRenderer {
 
       // Truncate text if needed
       let label = suggestions[i];
-      const maxChars = Math.floor((boxW - 24) / (FONT_SIZE * 0.6));
+      const maxChars = Math.floor((boxW - 24) / (fs * 0.6));
       if (label.length > maxChars) {
         label = label.slice(0, maxChars - 1) + "…";
       }

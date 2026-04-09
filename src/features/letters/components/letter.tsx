@@ -111,7 +111,7 @@ export const Letter = forwardRef<
           <PostStamp handle={resolvedStampHandle} className="rotate-3" />
         )}
         {signature && (
-          <div className="w-full max-w-[200px]">
+          <div className="w-full max-w-[200px] mt-auto">
             <img src={signature} alt="Signature" className="w-full dark:invert" />
           </div>
         )}

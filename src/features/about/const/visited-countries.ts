@@ -18,6 +18,8 @@ export const VISITED_COUNTRIES: CountryData[] = [
   { name: "Belgium", iso_a2: "BE" },
   { name: "Bulgaria", iso_a2: "BG" },
   { name: "Spain", iso_a2: "ES" },
+  { name: "Thailand", iso_a2: "TH" },
+  { name: "Indonesia", iso_a2: "ID" },
 ];
 
 export const VISITED_COUNTRY_CODES = new Set(VISITED_COUNTRIES.map((country) => country.iso_a2));
