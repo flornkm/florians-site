@@ -18,6 +18,8 @@ export interface CRTDisplayProps {
   showLogo?: boolean;
   /** Whether to render fullscreen (fixed inset-0) or inline (w-full h-full). Defaults to true. */
   fullscreen?: boolean;
+  /** Scale factor for text rendering (font size, padding). Defaults to 1. */
+  scale?: number;
 }
 
 const TURN_ON_DURATION = 800;
@@ -37,6 +39,7 @@ export function CRTDisplay({
   onSuggestionClick,
   showLogo = true,
   fullscreen = true,
+  scale = 1,
 }: CRTDisplayProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,7 +101,7 @@ export function CRTDisplay({
     if (!glCanvas || !textCanvas || !container || !outer) return;
 
     const shader = new CRTShaderRenderer(glCanvas);
-    const textRenderer = new CRTTextRenderer(textCanvas);
+    const textRenderer = new CRTTextRenderer(textCanvas, scale);
     shaderRef.current = shader;
     textRendererRef.current = textRenderer;
 

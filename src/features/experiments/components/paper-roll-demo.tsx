@@ -3,8 +3,8 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 const COLS = 18;
-const ROWS = 32;
-const SPACING = 0.045;
+const ROWS = 28;
+const SPACING = 0.038;
 const GRAVITY = new THREE.Vector3(0, -3.0, 0);
 const DAMPING = 0.992;
 const TIMESTEP = 0.007;
@@ -13,7 +13,7 @@ const CONSTRAINT_ITERS = 12;
 const BEND_COMPLIANCE = 0.06;
 const INFLUENCE_RADIUS = 1;
 const INFLUENCE_FALLOFF = 2.0;
-const MAX_DISPLACEMENT = 0.2;
+const MAX_DISPLACEMENT = 0.17;
 const GRAB_SPRING = 0.35;
 
 const STRUCT_REST = SPACING;
@@ -672,8 +672,8 @@ function SceneSetup() {
   const { camera } = useThree();
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
-      camera.position.set(0, 0.02, 2.4);
-      camera.lookAt(0, -0.1, 0);
+      camera.position.set(0, 0.02, 2.8);
+      camera.lookAt(0, -0.08, 0);
     }
   }, [camera]);
   return null;
@@ -713,13 +713,13 @@ function PaperShadow({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
     if (!meshRef.current) return;
     const isGrabbing = grab.current.active;
     shadowMaterial.uniforms.uOpacity.value = isGrabbing ? 0.15 : 0.12;
-    meshRef.current.position.z = -0.12;
-    meshRef.current.position.y = -0.06;
+    meshRef.current.position.z = -0.1;
+    meshRef.current.position.y = -0.05;
   });
 
   return (
     <mesh ref={meshRef} material={shadowMaterial}>
-      <planeGeometry args={[1.2, 2.0]} />
+      <planeGeometry args={[1.0, 1.6]} />
     </mesh>
   );
 }
