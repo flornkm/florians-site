@@ -7,7 +7,7 @@ const MIN_SPEED = 0.5;
 const MAX_SPEED = 5;
 const DEFAULT_SPEED = 3.5;
 
-export const TextShimmerDemo = () => {
+export const TextShimmerExperiment = () => {
   const [speed, setSpeed] = useState(DEFAULT_SPEED);
   const [grabbing, setGrabbing] = useState(false);
   const duration = MIN_SPEED + MAX_SPEED - speed;

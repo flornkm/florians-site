@@ -59,7 +59,7 @@ function streamSuggestions(onUpdate: (suggestions: string[]) => void) {
     .catch(() => onUpdate(FALLBACK_SUGGESTIONS));
 }
 
-export const CrtChatDemo = () => {
+export const CrtChat = () => {
   const [input, setInput] = useState("");
   const [initialSuggestions, setInitialSuggestions] = useState<string[]>([]);
   const bootText = useTypingAnimation(BOOT_MESSAGE);
