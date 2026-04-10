@@ -1,3 +1,4 @@
+import React from "react";
 import { Body2 } from "@/components/design-system/body";
 import { H1, H2, H3, H4 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/shared/triangle-filled";
@@ -6,6 +7,7 @@ import { LetterStack } from "@/features/letters/components/letter-stack";
 import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { CompanyLogos } from "@/features/about/components/company-logos";
+import { COMPANIES } from "@/features/about/const/companies";
 import { cn } from "@/lib/utils";
 
 import { getContent } from "@/lib/mdx";
@@ -32,8 +34,9 @@ function IndexPage() {
     description: string;
     slug: string;
     date: string;
-    cover: string;
+    cover: string | string[];
   }[];
+  const projectNames = new Set(projects.map((p) => p.title));
   const navigate = useNavigate();
 
   return (
@@ -68,21 +71,70 @@ function IndexPage() {
                 </p>
               </div>
               <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-                <div className="w-full bg-secondary p-4 md:p-8 rounded-md flex items-center">
-                  <img
-                    src={project.cover}
-                    alt={project.title}
-                    className="w-full h-auto object-cover rounded-sm"
-                  />
-                </div>
+                {Array.isArray(project.cover) ? (
+                  <div className="w-full bg-secondary p-2 py-4 md:py-8 md:p-8 rounded-md flex gap-3">
+                    {project.cover.map((src) => (
+                      <div key={src} className="flex-1 min-w-0 px-2 @container">
+                        <img
+                          src={src}
+                          alt={project.title}
+                          className="w-full h-auto rounded-[16cqi] object-contain outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="w-full bg-secondary p-4 md:p-8 rounded-md flex items-center">
+                    <img
+                      src={project.cover}
+                      alt={project.title}
+                      className="w-full h-auto object-cover rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+                    />
+                  </div>
+                )}
               </div>
             </Link>
           ))}
         </section>
-        <section className="w-full my-20 flex flex-col md:gap-0 gap-4 md:grid grid-cols-[290px_1fr] items-start">
-          <H4 className="text-quaternary mb-4">Teams I had the opportunity to ship with</H4>
+        <section className="w-full mb-12 flex flex-col md:gap-0 gap-4 md:grid grid-cols-[290px_1fr] items-start">
+          <div className="md:sticky top-16">
+            <H3>Teams I was fortunate to ship with</H3>
+          </div>
           <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-            <CompanyLogos />
+            <div className="flex flex-col group/companies">
+              {COMPANIES.map((company, index) => (
+                <React.Fragment key={company.name}>
+                {company.url ? (
+                  <a
+                    href={company.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between py-2 border-b border-primary/5 group/company [@media(hover:hover)]:hover:opacity-100 [@media(hover:hover)]:group-hover/companies:opacity-30 transition-opacity duration-300 ease-out"
+                  >
+                    <span className="flex items-center gap-3 text-sm font-medium">
+                      {company.name}
+                      <span
+                        className={cn(
+                          "inline-flex gap-1 items-center opacity-0 -ml-0.5 blur-[2px] transition-all duration-150 ease-out",
+                          "[@media(hover:hover)]:group-hover/company:opacity-100 [@media(hover:hover)]:group-hover/company:ml-0 [@media(hover:hover)]:group-hover/company:blur-none",
+                        )}
+                      >
+                          <TriangleFilled className="size-3.5" />
+                          Visit website
+                      </span>
+                    </span>
+                    <span className="text-sm text-tertiary tabular-nums">{company.date}</span>
+                  </a>
+                ) : (
+                  <div className="flex items-center justify-between py-2 border-b border-primary/5">
+                    <span className="text-sm font-medium">{company.name}</span>
+                    <span className="text-sm text-tertiary tabular-nums">{company.date}</span>
+                  </div>
+                )}
+                {COMPANIES.length - 1 !== index && <hr className="border-t border-t-primary" />}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         </section>
         <section
