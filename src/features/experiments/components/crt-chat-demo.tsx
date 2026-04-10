@@ -149,7 +149,7 @@ export const CrtChatDemo = () => {
       onSuggestionClick={handleSuggestionClick}
       showLogo={false}
       fullscreen={false}
-      scale={0.7}
+      scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.63 : 0.7}
     />
   );
 };
