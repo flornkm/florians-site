@@ -32,7 +32,6 @@ const footerLinkVariants = cva(
 const MORE_LINKS: Tab[] = [
   { name: "Colophon", href: "/colophon" },
   { name: "Experiments", href: "/experiments" },
-  { name: "Contact", href: "/contact" },
 ];
 
 const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
