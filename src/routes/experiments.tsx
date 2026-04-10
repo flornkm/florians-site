@@ -1,7 +1,5 @@
 import { H1, H2 } from "@/components/design-system/heading";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
-import { DigitalClock } from "@/features/experiments/components/digital-clock-demo";
-import { FoggyMirror } from "@/features/experiments/components/foggy-mirror-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { MonoWatch } from "@/features/experiments/components/monowatch";
 import { PaperRoll } from "@/features/experiments/components/paper-roll-demo";
@@ -10,9 +8,7 @@ import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
-  { title: "Foggy Mirror", Component: FoggyMirror },
   { title: "Stopwatch", Component: MonoWatch },
-  { title: "Digital Clock", Component: DigitalClock },
   { title: "CRT Terminal", Component: CrtChat },
   { title: "iOS Context Menu", Component: IosContextMenu },
   { title: "Receipt", Component: PaperRoll, aspect: "aspect-[9/16] md:aspect-[4/3]" },

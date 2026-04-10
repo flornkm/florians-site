@@ -95,13 +95,13 @@ function WorkPage() {
       <Link href="/" className="group/link mb-2 flex w-auto items-start gap-2 text-sm font-medium">
         <IconChevronLeft className="mt-1.5 h-4 w-4" />
         <div className="h-7 flex-1 mt-0.5">
-          <div className="pointer-events-none transition-all duration-200 ease-out group-hover/link:-translate-y-[22.5px] group-focus-within/link:-translate-y-[22.5px]">
-            <H1 className="transition-all duration-200 ease-out group-hover/link:opacity-0 group-hover/link:blur-[1px] group-focus-within/link:opacity-0 group-focus-within/link:blur-[1px]">
+          <div className="pointer-events-none transition-all duration-200 ease-out sm:group-hover/link:-translate-y-[22.5px] sm:group-focus-within/link:-translate-y-[22.5px]">
+            <H1 className="transition-all duration-200 ease-out group-hover/link:opacity-0 sm:group-hover/link:blur-[1px] sm:group-focus-within/link:opacity-0 sm:group-focus-within/link:blur-[1px]">
               {project.title} <span className="text-sm text-quaternary">{project.date}</span>
             </H1>
             <span
               className={cn(
-                "truncate opacity-0 blur-[1px] transition-all duration-200 ease-out focus:hidden",
+                "truncate opacity-0 blur-[1px] hidden sm:block transition-all duration-200 ease-out focus:hidden",
                 "group-hover/link:opacity-100 group-hover/link:blur-none group-active/link:opacity-100 group-focus-within/link:opacity-100 group-focus-within/link:blur-none",
               )}
             >
