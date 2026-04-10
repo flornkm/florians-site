@@ -1,8 +1,7 @@
 import { motion } from "motion/react";
-import { memo, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 type GlyphCharacter = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | ":";
-type Listener = () => void;
 type SlotStatus = "active" | "exiting";
 
 interface AnimatedSlot {
@@ -64,12 +63,8 @@ const GLYPH_POSITIONS: Record<GlyphCharacter, readonly number[]> = {
   ":": toPositions(GLYPH_ROWS[":"]),
 };
 
-let timeoutId: number | null = null;
-const listeners = new Set<Listener>();
-
 function toPositions(rows: readonly string[]) {
   const positions: number[] = [];
-
   rows.forEach((row, rowIndex) => {
     row.split("").forEach((slot, columnIndex) => {
       if (slot === "1") {
@@ -77,49 +72,7 @@ function toPositions(rows: readonly string[]) {
       }
     });
   });
-
   return positions;
-}
-
-function getDelayToNextSecond(now: Date) {
-  return 1000 - now.getMilliseconds();
-}
-
-function scheduleNextTick() {
-  if (typeof window === "undefined") return;
-
-  timeoutId = window.setTimeout(() => {
-    timeoutId = null;
-
-    for (const listener of listeners) {
-      listener();
-    }
-
-    if (listeners.size > 0) {
-      scheduleNextTick();
-    }
-  }, getDelayToNextSecond(new Date()));
-}
-
-function subscribe(listener: Listener) {
-  listeners.add(listener);
-
-  if (listeners.size === 1 && timeoutId === null) {
-    scheduleNextTick();
-  }
-
-  return () => {
-    listeners.delete(listener);
-
-    if (listeners.size === 0 && timeoutId !== null) {
-      window.clearTimeout(timeoutId);
-      timeoutId = null;
-    }
-  };
-}
-
-function getSnapshot() {
-  return Date.now();
 }
 
 function getPositionDistance(from: number, to: number) {
@@ -127,7 +80,6 @@ function getPositionDistance(from: number, to: number) {
   const fromRow = Math.floor(from / GLYPH_WIDTH);
   const toColumn = to % GLYPH_WIDTH;
   const toRow = Math.floor(to / GLYPH_WIDTH);
-
   return Math.abs(fromColumn - toColumn) + Math.abs(fromRow - toRow);
 }
 
@@ -156,7 +108,6 @@ function matchSlotsToPositions(slots: readonly AnimatedSlot[], positions: readon
     ) {
       continue;
     }
-
     usedSlotIndexes.add(candidate.slotIndex);
     usedPositionIndexes.add(candidate.positionIndex);
     matches.push({ slotIndex: candidate.slotIndex, positionIndex: candidate.positionIndex });
@@ -168,7 +119,6 @@ function matchSlotsToPositions(slots: readonly AnimatedSlot[], positions: readon
 function getSlotStyle(position: number) {
   const column = position % GLYPH_WIDTH;
   const row = Math.floor(position / GLYPH_WIDTH);
-
   return {
     left: `calc(${column} * (${SLOT_WIDTH} + ${COLUMN_GAP}em))`,
     top: `calc(${row} * (${SLOT_HEIGHT} + ${ROW_GAP}em))`,
@@ -182,7 +132,6 @@ function formatElapsed(ms: number) {
   const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
   const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
   const seconds = String(totalSeconds % 60).padStart(2, "0");
-
   return `${hours}:${minutes}:${seconds}`;
 }
 
@@ -209,15 +158,13 @@ function useAnimatedGlyphSlots(glyph: GlyphCharacter) {
       for (const slot of currentSlots) {
         if (slot.status === "active") {
           activeSlots.push(slot);
-          continue;
+        } else {
+          alreadyExitingSlots.push(slot);
         }
-
-        alreadyExitingSlots.push(slot);
       }
 
       const { matches, usedPositionIndexes } = matchSlotsToPositions(activeSlots, positions);
       const matchedSlotIndexes = new Set(matches.map((match) => match.slotIndex));
-
       const nextSlots: AnimatedSlot[] = [];
 
       for (const match of matches) {
@@ -233,7 +180,6 @@ function useAnimatedGlyphSlots(glyph: GlyphCharacter) {
 
       positions.forEach((position, positionIndex) => {
         if (usedPositionIndexes.has(positionIndex)) return;
-
         nextSlots.push({
           id: nextIdRef.current++,
           position,
@@ -245,7 +191,6 @@ function useAnimatedGlyphSlots(glyph: GlyphCharacter) {
 
       activeSlots.forEach((slot, slotIndex) => {
         if (matchedSlotIndexes.has(slotIndex)) return;
-
         nextSlots.push({
           id: slot.id,
           position: slot.position,
@@ -326,13 +271,56 @@ const MatrixGlyph = memo(function MatrixGlyph({ glyph }: { glyph: GlyphCharacter
 });
 
 export const MonoWatch = () => {
-  const now = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
-  const [accumulatedMs, setAccumulatedMs] = useState(0);
-  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [displayTime, setDisplayTime] = useState("00:00:00");
+  const startedAtRef = useRef<number | null>(null);
+  const accumulatedRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const [running, setRunning] = useState(false);
 
-  const isRunning = startedAt !== null;
-  const elapsedMs = accumulatedMs + (isRunning ? now - startedAt : 0);
-  const glyphs = formatElapsed(elapsedMs).split("") as GlyphCharacter[];
+  const tick = useCallback(() => {
+    if (startedAtRef.current === null) return;
+    const elapsed = accumulatedRef.current + (Date.now() - startedAtRef.current);
+    setDisplayTime(formatElapsed(elapsed));
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  const start = useCallback(() => {
+    startedAtRef.current = Date.now();
+    setRunning(true);
+    rafRef.current = requestAnimationFrame(tick);
+  }, [tick]);
+
+  const stop = useCallback(() => {
+    if (startedAtRef.current !== null) {
+      accumulatedRef.current += Date.now() - startedAtRef.current;
+      startedAtRef.current = null;
+    }
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    setRunning(false);
+    setDisplayTime(formatElapsed(accumulatedRef.current));
+  }, []);
+
+  const reset = useCallback(() => {
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    startedAtRef.current = null;
+    accumulatedRef.current = 0;
+    setRunning(false);
+    setDisplayTime("00:00:00");
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  const glyphs = displayTime.split("") as GlyphCharacter[];
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center gap-8 rounded-[inherit] bg-primary text-primary">
@@ -345,11 +333,8 @@ export const MonoWatch = () => {
       <div className="inline-flex items-center gap-4 font-mono text-[10px] sm:text-xs">
         <button
           className="cursor-pointer text-secondary transition-colors hover:text-primary disabled:cursor-default disabled:opacity-30"
-          disabled={isRunning}
-          onClick={() => {
-            if (isRunning) return;
-            setStartedAt(now);
-          }}
+          disabled={running}
+          onClick={start}
           type="button"
         >
           start
@@ -357,15 +342,20 @@ export const MonoWatch = () => {
 
         <button
           className="cursor-pointer text-secondary transition-colors hover:text-primary disabled:cursor-default disabled:opacity-30"
-          disabled={!isRunning}
-          onClick={() => {
-            if (!isRunning || startedAt === null) return;
-            setAccumulatedMs((current) => current + (now - startedAt));
-            setStartedAt(null);
-          }}
+          disabled={!running}
+          onClick={stop}
           type="button"
         >
           stop
+        </button>
+
+        <button
+          className="cursor-pointer text-secondary transition-colors hover:text-primary disabled:cursor-default disabled:opacity-30"
+          disabled={running || accumulatedRef.current === 0}
+          onClick={reset}
+          type="button"
+        >
+          reset
         </button>
       </div>
       <p className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-xs text-quaternary opacity-60">
