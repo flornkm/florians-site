@@ -3,12 +3,13 @@ import { CrtChatDemo } from "@/features/experiments/components/crt-chat-demo";
 import { IosContextMenuDemo } from "@/features/experiments/components/ios-context-menu-demo";
 import { PaperRollDemo } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerDemo } from "@/features/experiments/components/text-shimmer-demo";
+import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
   { title: "CRT Terminal", Component: CrtChatDemo },
   { title: "iOS Context Menu", Component: IosContextMenuDemo },
-  { title: "Receipt", Component: PaperRollDemo },
+  { title: "Receipt", Component: PaperRollDemo, aspect: "aspect-[9/16] md:aspect-[4/3]" },
   { title: "Text Shimmer", Component: TextShimmerDemo },
 ];
 
@@ -30,10 +31,10 @@ function ExperimentsPage() {
   return (
     <div className="w-full max-w-5xl mx-auto md:px-0 px-4 space-y-12">
       <H1 className="mb-8">Experiments</H1>
-      {EXPERIMENTS.map(({ title, Component }) => (
+      {EXPERIMENTS.map(({ title, Component, aspect }) => (
         <section className="w-full flex flex-col gap-2" key={title}>
           <H2>{title}</H2>
-          <div className="rounded-xl bg-primary border border-primary aspect-[4/3] flex items-center justify-center">
+          <div className={cn("rounded-xl bg-primary border border-primary flex items-center justify-center", aspect || "aspect-[4/3]")}>
             <Component />
           </div>
         </section>
