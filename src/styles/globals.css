@@ -151,6 +151,27 @@
   --aspect-a4: 1.4142857143/1;
   --animate-fade-in: fade-in 0.5s ease-out;
 
+  --shadow-sm:
+    0 18px 47px 0 rgba(0, 0, 0, 0.03), 0 7.5px 19px 0 rgba(0, 0, 0, 0.02),
+    0 4px 10.5px 0 rgba(0, 0, 0, 0.02), 0 2.3px 5.8px 0 rgba(0, 0, 0, 0.01),
+    0 1.2px 3.1px 0 rgba(0, 0, 0, 0.01), 0 0.5px 1.3px 0 rgba(0, 0, 0, 0.01);
+  --shadow-md:
+    0 17.54px 23.39px 0 rgba(0, 0, 0, 0.04), 0 9.4px 12.5px 0 rgba(0, 0, 0, 0.03),
+    0 5.25px 7px 0 rgba(0, 0, 0, 0.02), 0 2.79px 3.72px -2px rgba(0, 0, 0, 0.01),
+    0 1.16px 1.5px 0 rgba(0, 0, 0, 0.01);
+  --shadow-lg:
+    0 25px 50px 0 rgba(0, 0, 0, 0.05), 0 12px 24px 0 rgba(0, 0, 0, 0.04),
+    0 6px 12px 0 rgba(0, 0, 0, 0.03), 0 3px 6px 0 rgba(0, 0, 0, 0.02),
+    0 1.5px 3px 0 rgba(0, 0, 0, 0.02);
+  --shadow-xl:
+    0 40px 80px 0 rgba(0, 0, 0, 0.06), 0 20px 40px 0 rgba(0, 0, 0, 0.05),
+    0 10px 20px 0 rgba(0, 0, 0, 0.04), 0 5px 10px 0 rgba(0, 0, 0, 0.03),
+    0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  --shadow-2xl:
+    0 9px 14px 0 rgba(0, 0, 0, 0.07), 0 22px 33px 0 rgba(0, 0, 0, 0.1),
+    0 40px 63px 0 rgba(0, 0, 0, 0.13), 0 73px 111px 0 rgba(0, 0, 0, 0.15),
+    0 136px 208px 0 rgba(0, 0, 0, 0.18), 0 326px 250px 0 rgba(0, 0, 0, 0.25);
+
   @keyframes fade-in {
     0% {
       filter: blur(1px);
