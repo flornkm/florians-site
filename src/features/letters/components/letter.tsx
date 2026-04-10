@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import { PostStamp } from "./post-stamp";
 
 const letterVariants = cva(
-  "aspect-a4 shrink-0 w-full shadow-2xl shadow-black/[.03] h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-primary rounded-xl border flex",
+  "aspect-a4 shrink-0 w-full shadow-xl shadow-black/[.03] h-64 md:h-80 active:cursor-grabbing mx-auto p-4 bg-surface border-primary rounded-xl border flex",
   {
     variants: {
       variant: {
@@ -29,7 +29,7 @@ const letterVariants = cva(
       {
         variant: "preview",
         isEmpty: false,
-        className: "scale-100 shadow-2xl shadow-black/[.03]",
+        className: "scale-100 shadow-xl shadow-black/[.03]",
       },
       {
         variant: "preview",
