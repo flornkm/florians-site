@@ -34,7 +34,12 @@ function ExperimentsPage() {
       {EXPERIMENTS.map(({ title, Component, aspect }) => (
         <section className="w-full flex flex-col gap-2" key={title}>
           <H2>{title}</H2>
-          <div className={cn("rounded-xl bg-primary border border-primary flex items-center justify-center", aspect || "aspect-[4/3]")}>
+          <div
+            className={cn(
+              "rounded-xl bg-primary border border-primary flex items-center justify-center",
+              aspect || "aspect-[4/3]",
+            )}
+          >
             <Component />
           </div>
         </section>

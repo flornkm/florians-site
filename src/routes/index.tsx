@@ -104,34 +104,34 @@ function IndexPage() {
             <div className="flex flex-col group/companies">
               {COMPANIES.map((company, index) => (
                 <React.Fragment key={company.name}>
-                {company.url ? (
-                  <a
-                    href={company.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2 border-b border-primary/5 group/company [@media(hover:hover)]:hover:opacity-100 [@media(hover:hover)]:group-hover/companies:opacity-30 transition-opacity duration-300 ease-out"
-                  >
-                    <span className="flex items-center gap-3 text-sm font-medium">
-                      {company.name}
-                      <span
-                        className={cn(
-                          "inline-flex gap-1 items-center opacity-0 -ml-0.5 blur-[2px] transition-all duration-150 ease-out",
-                          "[@media(hover:hover)]:group-hover/company:opacity-100 [@media(hover:hover)]:group-hover/company:ml-0 [@media(hover:hover)]:group-hover/company:blur-none",
-                        )}
-                      >
+                  {company.url ? (
+                    <a
+                      href={company.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between py-2 border-b border-primary/5 group/company [@media(hover:hover)]:hover:opacity-100 [@media(hover:hover)]:group-hover/companies:opacity-30 transition-opacity duration-300 ease-out"
+                    >
+                      <span className="flex items-center gap-3 text-sm font-medium">
+                        {company.name}
+                        <span
+                          className={cn(
+                            "inline-flex gap-1 items-center opacity-0 -ml-0.5 blur-[2px] transition-all duration-150 ease-out",
+                            "[@media(hover:hover)]:group-hover/company:opacity-100 [@media(hover:hover)]:group-hover/company:ml-0 [@media(hover:hover)]:group-hover/company:blur-none",
+                          )}
+                        >
                           <TriangleFilled className="size-3.5" />
                           Visit website
+                        </span>
                       </span>
-                    </span>
-                    <span className="text-sm text-tertiary tabular-nums">{company.date}</span>
-                  </a>
-                ) : (
-                  <div className="flex items-center justify-between py-2 border-b border-primary/5">
-                    <span className="text-sm font-medium">{company.name}</span>
-                    <span className="text-sm text-tertiary tabular-nums">{company.date}</span>
-                  </div>
-                )}
-                {COMPANIES.length - 1 !== index && <hr className="border-t border-t-primary" />}
+                      <span className="text-sm text-tertiary tabular-nums">{company.date}</span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center justify-between py-2 border-b border-primary/5">
+                      <span className="text-sm font-medium">{company.name}</span>
+                      <span className="text-sm text-tertiary tabular-nums">{company.date}</span>
+                    </div>
+                  )}
+                  {COMPANIES.length - 1 !== index && <hr className="border-t border-t-primary" />}
                 </React.Fragment>
               ))}
             </div>
