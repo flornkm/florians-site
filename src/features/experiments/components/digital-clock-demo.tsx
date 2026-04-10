@@ -851,7 +851,12 @@ export const DigitalClock = () => {
           )}
         </AnimatePresence>
       </div>
-      <p className="pointer-events-none absolute inset-x-0 bottom-4 z-10 text-center text-xs opacity-60" style={{ color: "oklch(0.24 0.01 255 / 0.72)" }}>Click a city to see its time</p>
+      <p
+        className="pointer-events-none absolute inset-x-0 bottom-4 z-10 text-center text-xs opacity-60"
+        style={{ color: "oklch(0.24 0.01 255 / 0.72)" }}
+      >
+        Click a city to see its time
+      </p>
     </div>
   );
 };

@@ -259,7 +259,13 @@ function isOverButton(nx: number, ny: number, b: ButtonBounds): boolean {
   return cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h;
 }
 
-function isRevealed(maskCtx: CanvasRenderingContext2D, px: number, py: number, w: number, h: number): boolean {
+function isRevealed(
+  maskCtx: CanvasRenderingContext2D,
+  px: number,
+  py: number,
+  w: number,
+  h: number,
+): boolean {
   const x = Math.round(Math.max(0, Math.min(px, w - 1)));
   const y = Math.round(Math.max(0, Math.min(py, h - 1)));
   const data = maskCtx.getImageData(x, y, 1, 1).data;
@@ -308,11 +314,7 @@ export const FoggyMirror = () => {
     gl.bindVertexArray(vao);
     const buf = gl.createBuffer()!;
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-      gl.STATIC_DRAW,
-    );
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const posLoc = gl.getAttribLocation(prog, "a_position");
     gl.enableVertexAttribArray(posLoc);
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
@@ -321,9 +323,29 @@ export const FoggyMirror = () => {
     const blurTex = makeTex(gl);
     const maskTex = makeTex(gl);
     const cursorTex = makeTex(gl);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      1,
+      1,
+      0,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      new Uint8Array([0, 0, 0, 0]),
+    );
     const pointerTex = makeTex(gl);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      1,
+      1,
+      0,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      new Uint8Array([0, 0, 0, 0]),
+    );
 
     gl.uniform1i(gl.getUniformLocation(prog, "u_original"), 0);
     gl.uniform1i(gl.getUniformLocation(prog, "u_blurred"), 1);
@@ -507,10 +529,7 @@ export const FoggyMirror = () => {
       if (!c) return;
 
       // If clicking a revealed button, don't paint — handle the click
-      if (
-        isOverButton(c.nx, c.ny, s.buttonBounds) &&
-        isRevealed(s.maskCtx, c.px, c.py, s.w, s.h)
-      ) {
+      if (isOverButton(c.nx, c.ny, s.buttonBounds) && isRevealed(s.maskCtx, c.px, c.py, s.w, s.h)) {
         return;
       }
 
@@ -543,29 +562,25 @@ export const FoggyMirror = () => {
 
       // Button hover detection
       const over =
-        isOverButton(c.nx, c.ny, s.buttonBounds) &&
-        isRevealed(s.maskCtx, c.px, c.py, s.w, s.h);
+        isOverButton(c.nx, c.ny, s.buttonBounds) && isRevealed(s.maskCtx, c.px, c.py, s.w, s.h);
       updateButtonHover(s, over);
     },
     [coords],
   );
 
-  const onPointerUp = useCallback(
-    (e: React.PointerEvent<HTMLCanvasElement>) => {
-      const s = stateRef.current;
-      if (!s) return;
-      s.cursor.pressing = false;
-      s.lastPaint = null;
-      const rect = s.canvas.getBoundingClientRect();
-      const inside =
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom;
-      if (!inside) s.cursor.hovering = false;
-    },
-    [],
-  );
+  const onPointerUp = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
+    const s = stateRef.current;
+    if (!s) return;
+    s.cursor.pressing = false;
+    s.lastPaint = null;
+    const rect = s.canvas.getBoundingClientRect();
+    const inside =
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom;
+    if (!inside) s.cursor.hovering = false;
+  }, []);
 
   const onPointerEnter = useCallback(() => {
     const s = stateRef.current;
@@ -593,7 +608,9 @@ export const FoggyMirror = () => {
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
       />
-      <p className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-xs text-quaternary opacity-60">Press and drag to wipe the fog</p>
+      <p className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-xs text-quaternary opacity-60">
+        Press and drag to wipe the fog
+      </p>
     </div>
   );
 };

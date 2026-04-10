@@ -368,7 +368,9 @@ export const MonoWatch = () => {
           stop
         </button>
       </div>
-      <p className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-xs text-quaternary opacity-60">Press start to begin timing</p>
+      <p className="pointer-events-none absolute inset-x-0 bottom-4 text-center text-xs text-quaternary opacity-60">
+        Press start to begin timing
+      </p>
     </div>
   );
 };
