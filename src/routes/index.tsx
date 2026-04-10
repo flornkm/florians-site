@@ -1,12 +1,12 @@
 import React from "react";
 import { Body2 } from "@/components/design-system/body";
-import { H1, H2, H3, H4 } from "@/components/design-system/heading";
+import { H1, H2, H3 } from "@/components/design-system/heading";
 import TriangleFilled from "@/components/shared/triangle-filled";
 import { LetterStack } from "@/features/letters/components/letter-stack";
 
 import Button from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import { CompanyLogos } from "@/features/about/components/company-logos";
+
 import { COMPANIES } from "@/features/about/const/companies";
 import { cn } from "@/lib/utils";
 
@@ -36,7 +36,6 @@ function IndexPage() {
     date: string;
     cover: string | string[];
   }[];
-  const projectNames = new Set(projects.map((p) => p.title));
   const navigate = useNavigate();
 
   return (
