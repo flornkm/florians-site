@@ -9,7 +9,7 @@ export type ContentEntry = {
 export type WorkEntry = ContentEntry & {
   title: string;
   description: string;
-  cover: string;
+  cover: string | string[];
   date: string;
   collaborators?: string | string[];
   links?: string | string[];
@@ -26,7 +26,7 @@ export function isWorkEntry(entry: ContentEntry): entry is WorkEntry {
   return (
     typeof entry.title === "string" &&
     typeof entry.description === "string" &&
-    typeof entry.cover === "string" &&
+    (typeof entry.cover === "string" || Array.isArray(entry.cover)) &&
     typeof entry.date === "string"
   );
 }
