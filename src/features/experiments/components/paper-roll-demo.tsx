@@ -724,7 +724,7 @@ function PaperShadow({ grab }: { grab: React.MutableRefObject<GrabInfo> }) {
   );
 }
 
-export const PaperRollDemo = () => {
+export const PaperRoll = () => {
   const grab = useRef<GrabInfo>({
     active: false,
     idx: -1,

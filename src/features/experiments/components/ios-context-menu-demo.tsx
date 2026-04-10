@@ -97,7 +97,7 @@ function Icon({ name, size = 16 }: { name: string; size?: number }) {
 
 type Phase = "idle" | "pressing" | "menu";
 
-export function IosContextMenuDemo() {
+export function IosContextMenu() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [hovered, setHovered] = useState<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
