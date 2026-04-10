@@ -1,5 +1,6 @@
 import { H1, H2 } from "@/components/design-system/heading";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
+import { DepthInput } from "@/features/experiments/components/depth-input";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { MonoWatch } from "@/features/experiments/components/monowatch";
 import { PaperRoll } from "@/features/experiments/components/paper-roll-demo";
@@ -8,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
+  { title: "Depth Input", Component: DepthInput },
   { title: "Stopwatch", Component: MonoWatch },
   { title: "CRT Terminal", Component: CrtChat },
   { title: "iOS Context Menu", Component: IosContextMenu },
