@@ -49,6 +49,7 @@
         "remark-mdx-frontmatter": "^5.2.0",
         "remark-rehype": "^11.1.2",
         "roughjs": "^4.6.6",
+        "shadow-plugin": "1.1.1",
         "streamdown": "^1.2.0",
         "tailwind-merge": "^3.3.1",
         "three": "^0.178.0",
@@ -1873,6 +1874,8 @@
     "seroval": ["seroval@1.5.1", "", {}, "sha512-OwrZRZAfhHww0WEnKHDY8OM0U/Qs8OTfIDWhUD4BLpNJUfXK4cGmjiagGze086m+mhI+V2nD0gfbHEnJjb9STA=="],
 
     "seroval-plugins": ["seroval-plugins@1.5.1", "", { "peerDependencies": { "seroval": "^1.0" } }, "sha512-4FbuZ/TMl02sqv0RTFexu0SP6V+ywaIe5bAWCCEik0fk17BhALgwvUDVF7e3Uvf9pxmwCEJsRPmlkUE6HdzLAw=="],
+
+    "shadow-plugin": ["shadow-plugin@1.1.1", "", {}, "sha512-hYv609UmRekE0TP9TVrfGdk/MiEnOaqGOCyNOpnHKoGK/0KC38PI0oy86EUUox2GFqoqLEyxOJbt1o8ZKVwyTw=="],
 
     "shebang-command": ["shebang-command@2.0.0", "", { "dependencies": { "shebang-regex": "^3.0.0" } }, "sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA=="],
 
