@@ -21,7 +21,7 @@ export const BUCKETLIST = [
   },
   {
     title: "Visit Asia",
-    completed: false,
+    completed: true,
   },
   {
     title: "Get 100k+ weekly downloads on npm",
