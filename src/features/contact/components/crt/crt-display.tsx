@@ -1,4 +1,3 @@
-import { useRive } from "@rive-app/react-canvas";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CRTShaderRenderer } from "./crt-shader";
 import { CRTTextRenderer, type CRTMessage, type CRTTextState } from "./crt-text-renderer";
@@ -14,8 +13,6 @@ export interface CRTDisplayProps {
   disabled?: boolean;
   suggestions?: string[];
   onSuggestionClick?: (suggestion: string) => void;
-  /** Whether to show the Rive logo. Defaults to true. */
-  showLogo?: boolean;
   /** Whether to render fullscreen (fixed inset-0) or inline (w-full h-full). Defaults to true. */
   fullscreen?: boolean;
   /** Scale factor for text rendering (font size, padding). Defaults to 1. */
@@ -23,8 +20,6 @@ export interface CRTDisplayProps {
 }
 
 const TURN_ON_DURATION = 800;
-const LOGO_SIZE = 48;
-const LOGO_MARGIN = 40;
 
 export function CRTDisplay({
   messages,
@@ -37,7 +32,6 @@ export function CRTDisplay({
   disabled = false,
   suggestions,
   onSuggestionClick,
-  showLogo = true,
   fullscreen = true,
   scale = 1,
 }: CRTDisplayProps) {
@@ -46,7 +40,6 @@ export function CRTDisplay({
   const glCanvasRef = useRef<HTMLCanvasElement>(null);
   const textCanvasRef = useRef<HTMLCanvasElement>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
-  const riveContainerRef = useRef<HTMLDivElement>(null);
 
   const shaderRef = useRef<CRTShaderRenderer | null>(null);
   const textRendererRef = useRef<CRTTextRenderer | null>(null);
@@ -54,13 +47,6 @@ export function CRTDisplay({
   const isDarkRef = useRef(false);
 
   const [inputFocused, setInputFocused] = useState(false);
-
-  const { RiveComponent } = useRive({
-    src: "/animations/florian.riv",
-    autoplay: true,
-    artboard: "face",
-    stateMachines: "State Machine 1",
-  });
 
   // Animated visible height — lerps toward target each frame for smooth keyboard transition
   const visibleTargetRef = useRef<number | undefined>(undefined);
@@ -89,8 +75,6 @@ export function CRTDisplay({
   onBackRef.current = onBack;
   const onSuggestionClickRef = useRef(onSuggestionClick);
   onSuggestionClickRef.current = onSuggestionClick;
-  const showLogoRef = useRef(showLogo);
-  showLogoRef.current = showLogo;
 
   // Single effect: init renderers, handle resize, run render loop, track color scheme
   useEffect(() => {
@@ -163,11 +147,6 @@ export function CRTDisplay({
     };
     mql.addEventListener("change", onSchemeChange);
 
-    // Offscreen canvas for logo inversion (reused each frame)
-    const logoOffscreen = document.createElement("canvas");
-    logoOffscreen.width = LOGO_SIZE;
-    logoOffscreen.height = LOGO_SIZE;
-
     // Render loop
     const startTime = performance.now();
     let running = true;
@@ -192,35 +171,6 @@ export function CRTDisplay({
         ...stateRef.current,
         visibleHeight: visibleCurrentRef.current,
       });
-
-      // Composite Rive logo onto text canvas (when enabled)
-      const riveCanvas = riveContainerRef.current?.querySelector("canvas");
-      if (showLogoRef.current && riveCanvas && textCanvas.width > 0) {
-        const ctx = textCanvas.getContext("2d");
-        if (ctx) {
-          const logoX = textCanvas.width - LOGO_SIZE - LOGO_MARGIN;
-          const logoY = LOGO_MARGIN;
-
-          ctx.save();
-          ctx.globalAlpha = 0.7;
-
-          if (isDarkRef.current) {
-            // Recolor logo to white for dark mode — draw then fill with source-atop to keep alpha
-            const offCtx = logoOffscreen.getContext("2d")!;
-            offCtx.clearRect(0, 0, LOGO_SIZE, LOGO_SIZE);
-            offCtx.globalCompositeOperation = "source-over";
-            offCtx.drawImage(riveCanvas, 0, 0, LOGO_SIZE, LOGO_SIZE);
-            offCtx.globalCompositeOperation = "source-atop";
-            offCtx.fillStyle = "#ffffff";
-            offCtx.fillRect(0, 0, LOGO_SIZE, LOGO_SIZE);
-            ctx.drawImage(logoOffscreen, logoX, logoY);
-          } else {
-            ctx.drawImage(riveCanvas, logoX, logoY, LOGO_SIZE, LOGO_SIZE);
-          }
-
-          ctx.restore();
-        }
-      }
 
       shader.render(textCanvas);
       rafRef.current = requestAnimationFrame(loop);
@@ -337,15 +287,6 @@ export function CRTDisplay({
       >
         <canvas ref={textCanvasRef} className="hidden" />
         <canvas ref={glCanvasRef} className="absolute inset-0 w-full h-full" />
-
-        {/* Hidden Rive canvas — drawn onto text layer each frame */}
-        <div
-          ref={riveContainerRef}
-          className="absolute w-12 h-12 opacity-0 pointer-events-none"
-          aria-hidden="true"
-        >
-          <RiveComponent className="w-full h-full" />
-        </div>
       </div>
 
       <input
