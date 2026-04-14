@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { useLocation } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { RoughFLogo } from "./rough-f-logo";
 import { Body1 } from "../design-system/body";
 import { Link } from "../ui/link";
 import ContactDialog from "./contact-dialog";
@@ -37,15 +37,7 @@ export default function Navigation() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [hasAnimatedIn, setHasAnimatedIn] = useState(false);
   const lastHoveredIndexRef = useRef<number>(0);
-
-  const { rive, RiveComponent } = useRive({
-    src: "/animations/florian.riv",
-    autoplay: true,
-    artboard: "face",
-    stateMachines: "State Machine 1",
-  });
-
-  const selectInput = useStateMachineInput(rive, "State Machine 1", "select");
+  const [logoHovered, setLogoHovered] = useState(false);
 
   const measureTabs = useCallback(() => {
     const container = containerRef.current;
@@ -94,22 +86,6 @@ export default function Navigation() {
   const hasActiveTab = activeIndex !== -1;
   const isHovering = hoveredIndex !== null;
 
-  useEffect(() => {
-    if (hoveredIndex !== null) {
-      lastHoveredIndexRef.current = hoveredIndex;
-    }
-  }, [hoveredIndex]);
-
-  useEffect(() => {
-    if (!hasActiveTab && isHovering && !hasAnimatedIn) {
-      requestAnimationFrame(() => {
-        setHasAnimatedIn(true);
-      });
-    } else if (!hasActiveTab && !isHovering) {
-      setHasAnimatedIn(false);
-    }
-  }, [hasActiveTab, isHovering, hasAnimatedIn]);
-
   const displayIndex = isHovering
     ? hoveredIndex
     : hasActiveTab
@@ -133,22 +109,14 @@ export default function Navigation() {
         <div className="w-auto md:w-full max-w-[calc(341px)] items-center justify-between hidden min-[450px]:mr-2 min-[450px]:flex">
           <div className="flex items-center gap-4">
             <Link
-              onMouseEnter={() => {
-                if (selectInput) selectInput.value = true;
-              }}
-              onMouseLeave={() => {
-                if (selectInput) selectInput.value = false;
-              }}
-              onTouchStart={() => {
-                if (selectInput) selectInput.value = true;
-              }}
-              onTouchEnd={() => {
-                if (selectInput) selectInput.value = false;
-              }}
+              onMouseEnter={() => setLogoHovered(true)}
+              onMouseLeave={() => setLogoHovered(false)}
+              onTouchStart={() => setLogoHovered(true)}
+              onTouchEnd={() => setLogoHovered(false)}
               href="/"
               className="flex items-center gap-1 text-sm rounded-full py-1 touch-manipulation"
             >
-              <RiveComponent className="w-5.5 dark:invert aspect-square" />
+              <RoughFLogo isAnimating={logoHovered} className="w-4.5 aspect-square" />
               <Body1 className="font-medium text-primary min-[500px]:block hidden">Florian</Body1>
             </Link>
           </div>
@@ -157,7 +125,10 @@ export default function Navigation() {
           <div
             ref={containerRef}
             className="flex min-[350px]:mr-2 md:mr-auto items-center justify-center gap-3 relative md:px-4 md:flex-1 md:w-full md:max-w-[calc(341px)]"
-            onMouseLeave={() => setHoveredIndex(null)}
+            onMouseLeave={() => {
+              setHoveredIndex(null);
+              if (!hasActiveTab) setHasAnimatedIn(false);
+            }}
           >
             {showSelector && (
               <motion.div
@@ -187,7 +158,13 @@ export default function Navigation() {
                 ref={(el) => {
                   tabRefs.current[index] = el;
                 }}
-                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseEnter={() => {
+                  setHoveredIndex(index);
+                  lastHoveredIndexRef.current = index;
+                  if (!hasActiveTab && !hasAnimatedIn) {
+                    requestAnimationFrame(() => setHasAnimatedIn(true));
+                  }
+                }}
                 className={cn(
                   "text-sm rounded-full font-medium relative z-10 px-3 py-1 md:py-0.5 transition-colors duration-300 ease-in-out",
                   activeIndex === index ? "text-primary" : "text-tertiary",

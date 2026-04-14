@@ -147,7 +147,6 @@ export const CrtChat = () => {
       disabled={status !== "ready" || !bootComplete}
       suggestions={suggestions as string[]}
       onSuggestionClick={handleSuggestionClick}
-      showLogo={false}
       fullscreen={false}
       scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.63 : 0.7}
     />
