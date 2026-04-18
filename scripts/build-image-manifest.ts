@@ -80,8 +80,8 @@ async function processImage(absPath: string): Promise<[string, Entry] | null> {
 
   const blurBuffer = await image
     .clone()
-    .resize(16, undefined, { fit: "inside" })
-    .jpeg({ quality: 40 })
+    .resize(40, undefined, { fit: "inside" })
+    .jpeg({ quality: 45 })
     .toBuffer();
   const blurDataURL = `data:image/jpeg;base64,${blurBuffer.toString("base64")}`;
 

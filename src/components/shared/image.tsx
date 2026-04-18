@@ -4,37 +4,20 @@ import { cn } from "@/lib/utils";
 
 type ObjectFit = "cover" | "contain" | "fill" | "none" | "scale-down";
 
-export interface ImageProps extends Omit<
-  ImgHTMLAttributes<HTMLImageElement>,
-  "width" | "height" | "placeholder"
-> {
+export interface ImageProps
+  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "width" | "height" | "placeholder"> {
   src: string;
   alt: string;
-  /** Wrapper className. Controls size, aspect, rounding, outline. */
   className?: string;
-  /** Extra className applied to the inner <img> only. */
   imgClassName?: string;
-  /** Override the intrinsic aspect ratio. */
   width?: number;
   height?: number;
   objectFit?: ObjectFit;
-  /** If true, loads eagerly with high priority (above-the-fold images). */
   priority?: boolean;
-  /** Style for the wrapper. */
   style?: CSSProperties;
-  /** Style for the inner <img>. */
   imgStyle?: CSSProperties;
 }
 
-/**
- * Shared image component that:
- *  - reserves layout space using intrinsic width/height from the build-time
- *    image manifest (no CLS);
- *  - shows a base64 blur placeholder that fades out once the real image loads;
- *  - lazy-loads by default (opt out via `priority`).
- *
- * SVGs and anything missing from the manifest fall back to a normal lazy <img>.
- */
 export function Image({
   src,
   alt,
@@ -53,10 +36,9 @@ export function Image({
   ...rest
 }: ImageProps) {
   const entry = imageManifest[src];
-  const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const [loaded, setLoaded] = useState(false);
 
-  // If the image was already in cache, React may miss the load event.
   useEffect(() => {
     if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
       setLoaded(true);
@@ -71,8 +53,6 @@ export function Image({
   const effectiveDecoding = decoding ?? "async";
   const effectiveFetchPriority = fetchPriority ?? (priority ? "high" : "auto");
 
-  // Fallback: no manifest entry and no explicit dims — render a plain img.
-  // Still lazy by default so we at least get deferred network work.
   if (!hasDims) {
     return (
       <img
@@ -89,26 +69,22 @@ export function Image({
     );
   }
 
-  const wrapperStyle: CSSProperties = {
-    aspectRatio: `${w} / ${h}`,
-    ...style,
-  };
-
   return (
     <div
       className={cn("relative overflow-hidden", className)}
-      style={wrapperStyle}
-      data-loaded={loaded ? "true" : "false"}
+      style={{ aspectRatio: `${w} / ${h}`, ...style }}
     >
-      {entry?.blurDataURL && !loaded && (
-        <span
+      {entry?.blurDataURL && (
+        <img
+          src={entry.blurDataURL}
+          alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 scale-110"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-110"
           style={{
-            backgroundImage: `url(${entry.blurDataURL})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            objectFit,
             filter: "blur(20px)",
+            opacity: loaded ? 0 : 1,
+            transition: "opacity 400ms ease-out",
           }}
         />
       )}
@@ -125,12 +101,13 @@ export function Image({
           setLoaded(true);
           onLoad?.(e);
         }}
-        className={cn(
-          "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out",
-          loaded ? "opacity-100" : "opacity-0",
-          imgClassName,
-        )}
-        style={{ objectFit, ...imgStyle }}
+        className={cn("absolute inset-0 h-full w-full", imgClassName)}
+        style={{
+          objectFit,
+          opacity: loaded ? 1 : 0,
+          transition: "opacity 400ms ease-out",
+          ...imgStyle,
+        }}
         {...rest}
       />
     </div>
