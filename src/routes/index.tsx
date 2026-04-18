@@ -1,6 +1,7 @@
 import React from "react";
 import { Body2 } from "@/components/design-system/body";
 import { H1, H2, H3 } from "@/components/design-system/heading";
+import { Image } from "@/components/shared/image";
 import TriangleFilled from "@/components/shared/triangle-filled";
 import { LetterStack } from "@/features/letters/components/letter-stack";
 
@@ -74,20 +75,21 @@ function IndexPage() {
                   <div className="w-full bg-secondary p-2 py-4 md:py-8 md:p-8 rounded-md flex gap-3">
                     {project.cover.map((src) => (
                       <div key={src} className="flex-1 min-w-0 px-2 @container">
-                        <img
+                        <Image
                           src={src}
                           alt={project.title}
-                          className="w-full h-auto rounded-[16cqi] object-contain outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+                          objectFit="contain"
+                          className="w-full h-auto rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
                         />
                       </div>
                     ))}
                   </div>
                 ) : (
                   <div className="w-full bg-secondary p-4 md:p-8 rounded-md flex items-center">
-                    <img
+                    <Image
                       src={project.cover}
                       alt={project.title}
-                      className="w-full h-auto object-cover rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+                      className="w-full h-auto rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
                     />
                   </div>
                 )}

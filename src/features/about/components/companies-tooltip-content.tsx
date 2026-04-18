@@ -1,3 +1,4 @@
+import { Image } from "@/components/shared/image";
 import { Link } from "@/components/ui/link";
 import { COMPANIES } from "../const/companies";
 
@@ -11,9 +12,10 @@ export function CompaniesTooltipContent() {
           target="_blank"
           className="flex items-center justify-center h-12 group"
         >
-          <img
+          <Image
             src={company.logo}
             alt={company.name}
+            objectFit="contain"
             style={{ width: Math.min(company.width!, 80) }}
             className="max-w-none opacity-60 px-1 group-hover:opacity-100 transition-opacity dark:invert"
           />
