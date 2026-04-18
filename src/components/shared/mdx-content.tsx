@@ -5,6 +5,7 @@ import { ComponentType, ReactNode } from "react";
 import { BiomarkerShowcase } from "../../features/work/components/superpower/biomarker-showcase";
 import { SVGShowcase } from "../../features/work/components/superpower/svg-showcase";
 import { ModelViewer } from "../3d/model-viewer";
+import { Image } from "./image";
 import { SmartVideo } from "./smart-video";
 
 // Generate a slug ID from heading text (matches extractHeadings in mdx.ts)
@@ -172,12 +173,13 @@ export function Model({
 function Img({ src, alt, className }: { src?: string; alt?: string; className?: string }) {
   return (
     <div className="not-prose my-8 first:mt-0 last:mb-0">
-      <div className="flex items-center justify-center rounded-lg bg-secondary p-4 md:p-12">
-        <img
-          src={src}
-          alt={alt}
+      <div className="rounded-lg bg-secondary p-4 md:p-12">
+        <Image
+          src={src ?? ""}
+          alt={alt ?? ""}
+          objectFit="contain"
           className={cn(
-            "h-full w-full rounded-sm object-contain outline -outline-offset-1 outline-black/5 dark:outline-white/15",
+            "w-full h-auto rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
             className,
           )}
         />
@@ -192,10 +194,11 @@ export function MobileImages({ images }: { images: { src: string; alt: string }[
       <div className="flex gap-3 rounded-lg bg-secondary p-2 py-4 md:py-12 md:p-10">
         {images.map((img) => (
           <div key={img.src} className="flex-1 min-w-0 px-2 @container">
-            <img
+            <Image
               src={img.src}
               alt={img.alt}
-              className="w-full h-auto rounded-[16cqi] object-contain outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+              objectFit="contain"
+              className="w-full h-auto rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
             />
           </div>
         ))}
@@ -246,7 +249,7 @@ export function useMdxContent(category: "work" | "writing", slug: string, classN
   if (!MDXContent) return null;
 
   return (
-    <article className={cn(proseVariants({ variant: "default" }), className)}>
+    <article className={cn("w-full", proseVariants({ variant: "default" }), className)}>
       <MDXProvider components={mdxComponents}>
         <MDXContent />
       </MDXProvider>

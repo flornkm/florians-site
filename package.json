@@ -1,9 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "bun scripts/extract-content.ts && vite dev",
+    "dev": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && vite dev",
     "preview": "vercel dev",
-    "build": "bun scripts/extract-content.ts && vite build",
+    "build": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && vite build",
     "start": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint -D correctness -D perf --import-plugin --jsx-a11y-plugin src/",
@@ -76,6 +76,7 @@
     "dotenv-cli": "^8.0.0",
     "oxfmt": "^0.40.0",
     "oxlint": "^1.55.0",
+    "sharp": "^0.34.5",
     "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^4.1.13",
     "tw-animate-css": "^1.3.8",

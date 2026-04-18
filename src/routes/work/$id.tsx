@@ -1,5 +1,6 @@
 import { Body2 } from "@/components/design-system/body";
 import { H1 } from "@/components/design-system/heading";
+import { Image } from "@/components/shared/image";
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
@@ -123,10 +124,10 @@ function WorkPage() {
                 zIndex: (project.collaborators?.length || 0) - index + 1,
               }}
             >
-              <img
+              <Image
                 src={`/images/avatars/${collaborator.replaceAll(" ", "_").toLowerCase()}.jpg`}
-                className="relative h-full w-full rounded-full object-cover group-hover:!z-[100]"
                 alt={collaborator}
+                className="relative h-full w-full rounded-full group-hover:!z-[100]"
               />
             </TooltipTrigger>
           ))}
@@ -135,10 +136,10 @@ function WorkPage() {
             className="relative h-6 w-6 rounded-full border border-bg-inverted/10 outline-2 -outline-offset-1 outline-(--bg-primary) hover:z-10"
             style={{ marginLeft: "-6px" }}
           >
-            <img
+            <Image
               src="/images/avatars/florian_kiem.jpg"
               alt="Florian Kiem"
-              className="h-full w-full rounded-full object-cover"
+              className="h-full w-full rounded-full"
             />
           </TooltipTrigger>
         </div>
