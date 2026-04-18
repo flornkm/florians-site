@@ -1,9 +1,10 @@
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
-import { ComponentType, ReactNode } from "react";
+import { ComponentType, ReactNode, useState } from "react";
 import { BiomarkerShowcase } from "../../features/work/components/superpower/biomarker-showcase";
 import { SVGShowcase } from "../../features/work/components/superpower/svg-showcase";
+import { videoManifest } from "@/videoMap.gen";
 import { ModelViewer } from "../3d/model-viewer";
 import { Image } from "./image";
 import { SmartVideo } from "./smart-video";
@@ -115,24 +116,52 @@ export function Video({
   controls?: boolean;
   poster?: string;
 }) {
+  const [ready, setReady] = useState(false);
+  const lookupKey = webm ?? mp4 ?? src;
+  const entry = lookupKey ? videoManifest[lookupKey] : undefined;
+
   return (
     <div className="not-prose my-8">
-      <div className="flex items-center justify-center rounded-sm bg-secondary p-4 md:p-12">
-        <SmartVideo
-          src={src}
-          webm={webm}
-          mp4={mp4}
-          className={cn(
-            "w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
-            className,
+      <div className="rounded-sm bg-secondary p-4 md:p-12">
+        <div
+          className="relative overflow-hidden w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+          style={entry ? { aspectRatio: `${entry.width} / ${entry.height}` } : undefined}
+          data-ready={ready ? "true" : "false"}
+        >
+          {entry?.blurDataURL && (
+            <img
+              src={entry.blurDataURL}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover scale-110"
+              style={{
+                filter: "blur(20px)",
+                opacity: ready ? 0 : 1,
+                transition: "opacity 400ms ease-out",
+              }}
+            />
           )}
-          autoPlay={autoPlay}
-          muted={muted}
-          loop={loop}
-          playsInline={playsInline}
-          controls={controls}
-          poster={poster}
-        />
+          <SmartVideo
+            src={src}
+            webm={webm}
+            mp4={mp4}
+            className={cn(
+              entry
+                ? "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out"
+                : "w-full transition-opacity duration-300 ease-out",
+              entry && !ready ? "opacity-0" : "opacity-100",
+              className,
+            )}
+            autoPlay={autoPlay}
+            muted={muted}
+            loop={loop}
+            playsInline={playsInline}
+            controls={controls}
+            poster={poster}
+            onCanPlay={() => setReady(true)}
+            onLoadedData={() => setReady(true)}
+          />
+        </div>
       </div>
     </div>
   );
@@ -217,6 +246,7 @@ export const mdxComponents = {
   h6: H6,
   img: Img,
   // Custom components
+  Image,
   Video,
   Model,
   ModelViewer,

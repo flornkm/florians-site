@@ -1,9 +1,9 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && vite dev",
+    "dev": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && vite dev",
     "preview": "vercel dev",
-    "build": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && vite build",
+    "build": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && vite build",
     "start": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint -D correctness -D perf --import-plugin --jsx-a11y-plugin src/",
