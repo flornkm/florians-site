@@ -198,6 +198,7 @@ export function IosContextMenu() {
   return (
     <div
       data-menu-open={open || undefined}
+      data-block-scroll={open || undefined}
       className="flex flex-col items-center w-full h-full select-none"
       onMouseMove={areaMove}
     >
