@@ -90,7 +90,7 @@ function RootLayout() {
    /_/   /_/\\____/_/     /_/\\__,_/_/ /_/
 
    Personal site of Florian. You just found another
-   easter egg — let me know you found it!
+   easter egg. Let me know you found it!
 `,
             )}));`,
           }}

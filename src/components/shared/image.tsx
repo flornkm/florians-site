@@ -4,8 +4,10 @@ import { cn } from "@/lib/utils";
 
 type ObjectFit = "cover" | "contain" | "fill" | "none" | "scale-down";
 
-export interface ImageProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "width" | "height" | "placeholder"> {
+export interface ImageProps extends Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  "width" | "height" | "placeholder"
+> {
   src: string;
   alt: string;
   className?: string;
