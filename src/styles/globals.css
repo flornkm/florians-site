@@ -185,6 +185,12 @@ body {
   font-weight: 450;
 }
 
+html:has([data-block-scroll]),
+body:has([data-block-scroll]) {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 *:not([class*="outline-"]):not(input):not(textarea) {
   @apply outline-0 outline-transparent;
 }
