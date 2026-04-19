@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
-  { title: "Lazy Image", Component: LazyImage, aspect: "aspect-[9/16] md:aspect-[4/3]" },
+  { title: "Lazy Image", Component: LazyImage, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Depth Input", Component: DepthInput },
   { title: "CRT Terminal", Component: CrtChat },
   { title: "iOS Context Menu", Component: IosContextMenu },
