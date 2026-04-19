@@ -181,6 +181,15 @@ export function IosContextMenu() {
 
   const open = phase === "menu";
 
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   const groups: { label: string; icon: string; destructive?: boolean }[][] = [];
   let current: { label: string; icon: string; destructive?: boolean }[] = [];
   for (const item of ITEMS) {
