@@ -196,7 +196,11 @@ export function IosContextMenu() {
   let globalIdx = 0;
 
   return (
-    <div className="flex flex-col items-center w-full h-full select-none" onMouseMove={areaMove}>
+    <div
+      data-menu-open={open || undefined}
+      className="flex flex-col items-center w-full h-full select-none"
+      onMouseMove={areaMove}
+    >
       <div className="flex-1 flex items-center justify-center relative">
         <AnimatePresence>
           {open && (

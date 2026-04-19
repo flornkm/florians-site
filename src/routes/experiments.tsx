@@ -40,7 +40,7 @@ function ExperimentsPage() {
           <H2>{title}</H2>
           <div
             className={cn(
-              "rounded-xl bg-transparent border border-primary flex items-center justify-center",
+              "rounded-xl bg-transparent border border-primary flex items-center justify-center overflow-hidden isolate has-[[data-menu-open]]:overflow-visible",
               aspect || "aspect-[4/3]",
             )}
           >
