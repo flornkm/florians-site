@@ -149,6 +149,7 @@ export const CrtChat = () => {
       onSuggestionClick={handleSuggestionClick}
       fullscreen={false}
       scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.63 : 0.7}
+      autoFocus={false}
     />
   );
 };

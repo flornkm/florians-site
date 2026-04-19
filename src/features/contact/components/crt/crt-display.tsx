@@ -17,6 +17,8 @@ export interface CRTDisplayProps {
   fullscreen?: boolean;
   /** Scale factor for text rendering (font size, padding). Defaults to 1. */
   scale?: number;
+  /** Whether the hidden input should auto-focus on mount. Defaults to true. */
+  autoFocus?: boolean;
 }
 
 const TURN_ON_DURATION = 800;
@@ -34,6 +36,7 @@ export function CRTDisplay({
   onSuggestionClick,
   fullscreen = true,
   scale = 1,
+  autoFocus = true,
 }: CRTDisplayProps) {
   const outerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -307,7 +310,7 @@ export function CRTDisplay({
         onKeyDown={handleKeyDown}
         onFocus={() => setInputFocused(true)}
         onBlur={() => setInputFocused(false)}
-        autoFocus
+        autoFocus={autoFocus}
         autoComplete="off"
         aria-label="Chat input"
       />
