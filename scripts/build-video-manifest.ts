@@ -128,7 +128,9 @@ ${body}
 `;
 
   fs.writeFileSync(OUTPUT_PATH, source);
-  console.log(`[video-manifest] wrote ${sorted.length} entries to ${path.relative(ROOT, OUTPUT_PATH)}`);
+  console.log(
+    `[video-manifest] wrote ${sorted.length} entries to ${path.relative(ROOT, OUTPUT_PATH)}`,
+  );
 }
 
 main().catch((err) => {

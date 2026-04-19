@@ -116,14 +116,11 @@ export function CRTDisplay({
     window.visualViewport?.addEventListener("resize", updateVisibleHeight);
     window.visualViewport?.addEventListener("scroll", updateVisibleHeight);
 
-    // Wheel scroll — must be non-passive to preventDefault
+    // Wheel/touch scroll — only capture when fullscreen; otherwise let the page scroll.
     function onWheel(e: WheelEvent) {
       e.preventDefault();
       textRenderer.scroll(e.deltaY);
     }
-    outer.addEventListener("wheel", onWheel, { passive: false });
-
-    // Touch scroll — translate touch drags into scroll deltas
     let touchStartY = 0;
     let lastTouchY = 0;
     function onTouchStart(e: TouchEvent) {
@@ -132,12 +129,15 @@ export function CRTDisplay({
     }
     function onTouchMove(e: TouchEvent) {
       const y = e.touches[0].clientY;
-      const delta = lastTouchY - y; // drag up = scroll down
+      const delta = lastTouchY - y;
       lastTouchY = y;
       textRenderer.scroll(delta);
     }
-    outer.addEventListener("touchstart", onTouchStart, { passive: true });
-    outer.addEventListener("touchmove", onTouchMove, { passive: true });
+    if (fullscreen) {
+      outer.addEventListener("wheel", onWheel, { passive: false });
+      outer.addEventListener("touchstart", onTouchStart, { passive: true });
+      outer.addEventListener("touchmove", onTouchMove, { passive: true });
+    }
 
     // Color scheme
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
@@ -183,9 +183,11 @@ export function CRTDisplay({
       window.removeEventListener("resize", resize);
       window.visualViewport?.removeEventListener("resize", updateVisibleHeight);
       window.visualViewport?.removeEventListener("scroll", updateVisibleHeight);
-      outer!.removeEventListener("wheel", onWheel);
-      outer!.removeEventListener("touchstart", onTouchStart);
-      outer!.removeEventListener("touchmove", onTouchMove);
+      if (fullscreen) {
+        outer!.removeEventListener("wheel", onWheel);
+        outer!.removeEventListener("touchstart", onTouchStart);
+        outer!.removeEventListener("touchmove", onTouchMove);
+      }
       mql.removeEventListener("change", onSchemeChange);
       shader.dispose();
       shaderRef.current = null;
@@ -272,7 +274,7 @@ export function CRTDisplay({
       className={
         fullscreen
           ? "fixed inset-0 bg-black overflow-hidden overscroll-contain touch-none select-none"
-          : "relative w-full h-full bg-black overflow-hidden touch-none select-none p-6"
+          : "relative w-full h-full bg-black overflow-hidden select-none p-6"
       }
       onClick={handleClick}
       onMouseMove={handleMouseMove}

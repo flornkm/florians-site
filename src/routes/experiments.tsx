@@ -2,6 +2,7 @@ import { H1, H2 } from "@/components/design-system/heading";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
+import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
 import { MonoWatch } from "@/features/experiments/components/monowatch";
 import { PaperRoll } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerExperiment } from "@/features/experiments/components/text-shimmer-demo";
@@ -9,8 +10,9 @@ import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
+  { title: "Lazy Image", Component: LazyImage },
   { title: "Depth Input", Component: DepthInput },
-  { title: "Stopwatch", Component: MonoWatch },
+  { title: "Monowatch", Component: MonoWatch },
   { title: "CRT Terminal", Component: CrtChat },
   { title: "iOS Context Menu", Component: IosContextMenu },
   { title: "Receipt", Component: PaperRoll, aspect: "aspect-[9/16] md:aspect-[4/3]" },
@@ -40,7 +42,7 @@ function ExperimentsPage() {
           <H2>{title}</H2>
           <div
             className={cn(
-              "rounded-xl bg-primary border border-primary flex items-center justify-center",
+              "rounded-xl bg-transparent border border-primary flex items-center justify-center",
               aspect || "aspect-[4/3]",
             )}
           >
