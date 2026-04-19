@@ -3,16 +3,14 @@ import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
-import { MonoWatch } from "@/features/experiments/components/monowatch";
 import { PaperRoll } from "@/features/experiments/components/paper-roll-demo";
 import { TextShimmerExperiment } from "@/features/experiments/components/text-shimmer-demo";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
-  { title: "Lazy Image", Component: LazyImage },
+  { title: "Lazy Image", Component: LazyImage, aspect: "aspect-[9/16] md:aspect-[4/3]" },
   { title: "Depth Input", Component: DepthInput },
-  { title: "Monowatch", Component: MonoWatch },
   { title: "CRT Terminal", Component: CrtChat },
   { title: "iOS Context Menu", Component: IosContextMenu },
   { title: "Receipt", Component: PaperRoll, aspect: "aspect-[9/16] md:aspect-[4/3]" },
