@@ -185,6 +185,10 @@ body {
   font-weight: 450;
 }
 
+html:has([data-menu-open]) {
+  overflow: hidden;
+}
+
 *:not([class*="outline-"]):not(input):not(textarea) {
   @apply outline-0 outline-transparent;
 }
