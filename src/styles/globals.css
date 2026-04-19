@@ -185,7 +185,7 @@ body {
   font-weight: 450;
 }
 
-html:has([data-menu-open]) {
+html:has([data-block-scroll]) {
   overflow: hidden;
 }
 
