@@ -1,13 +1,14 @@
 /**
  * Scans public/images for raster images and emits a manifest with intrinsic
- * dimensions + a tiny base64 blur placeholder, so the shared <Image> component
- * can reserve space (no layout shift) and render a Next-style blur-up.
+ * dimensions + a ThumbHash placeholder (base64 of ~25 bytes), so the shared
+ * <Image> component can reserve space (no layout shift) and render a blur-up.
  *
- * Output: src/generated/image-manifest.ts
+ * Output: src/imageMap.gen.ts
  */
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
+import { rgbaToThumbHash } from "thumbhash";
 
 const ROOT = path.resolve(import.meta.dirname!, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
@@ -20,7 +21,7 @@ const SVG = ".svg";
 interface Entry {
   width: number;
   height: number;
-  blurDataURL: string | null;
+  thumbhash: string | null;
 }
 
 function parseSvgDimensions(source: string): { width: number; height: number } | null {
@@ -69,7 +70,7 @@ async function processImage(absPath: string): Promise<[string, Entry] | null> {
   if (ext === SVG) {
     const dims = parseSvgDimensions(fs.readFileSync(absPath, "utf-8"));
     if (!dims) return null;
-    return [publicPath, { width: dims.width, height: dims.height, blurDataURL: null }];
+    return [publicPath, { width: dims.width, height: dims.height, thumbhash: null }];
   }
 
   if (!RASTER.has(ext)) return null;
@@ -78,14 +79,16 @@ async function processImage(absPath: string): Promise<[string, Entry] | null> {
   const meta = await image.metadata();
   if (!meta.width || !meta.height) return null;
 
-  const blurBuffer = await image
+  const { data, info } = await image
     .clone()
-    .resize(40, undefined, { fit: "inside" })
-    .jpeg({ quality: 45 })
-    .toBuffer();
-  const blurDataURL = `data:image/jpeg;base64,${blurBuffer.toString("base64")}`;
+    .resize(100, 100, { fit: "inside" })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const hash = rgbaToThumbHash(info.width, info.height, data);
+  const thumbhash = Buffer.from(hash).toString("base64");
 
-  return [publicPath, { width: meta.width, height: meta.height, blurDataURL }];
+  return [publicPath, { width: meta.width, height: meta.height, thumbhash }];
 }
 
 async function main() {
@@ -104,9 +107,9 @@ async function main() {
   const sorted = Object.keys(manifest).sort();
   const body = sorted
     .map((k) => {
-      const { width, height, blurDataURL } = manifest[k];
-      const blur = blurDataURL === null ? "null" : JSON.stringify(blurDataURL);
-      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, blurDataURL: ${blur} },`;
+      const { width, height, thumbhash } = manifest[k];
+      const hash = thumbhash === null ? "null" : JSON.stringify(thumbhash);
+      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, thumbhash: ${hash} },`;
     })
     .join("\n");
 
@@ -114,7 +117,7 @@ async function main() {
 export interface ImageManifestEntry {
   width: number;
   height: number;
-  blurDataURL: string | null;
+  thumbhash: string | null;
 }
 
 export const imageManifest: Record<string, ImageManifestEntry> = {
