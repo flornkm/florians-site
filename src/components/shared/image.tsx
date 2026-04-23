@@ -1,5 +1,13 @@
-import { type CSSProperties, type ImgHTMLAttributes, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  type ImgHTMLAttributes,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { imageManifest } from "@/imageMap.gen";
+import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
 
 type ObjectFit = "cover" | "contain" | "fill" | "none" | "scale-down";
@@ -40,6 +48,7 @@ export function Image({
   const entry = imageManifest[src];
   const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
 
   useEffect(() => {
     if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
@@ -76,9 +85,9 @@ export function Image({
       className={cn("relative overflow-hidden", className)}
       style={{ aspectRatio: `${w} / ${h}`, ...style }}
     >
-      {entry?.blurDataURL && (
+      {placeholder && (
         <img
-          src={entry.blurDataURL}
+          src={placeholder}
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full scale-110"

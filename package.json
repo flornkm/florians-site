@@ -62,6 +62,7 @@
     "tailwind-merge": "^3.3.1",
     "three": "^0.178.0",
     "three-stdlib": "^2.36.0",
+    "thumbhash": "^0.1.1",
     "use-animation-frame": "^0.2.1",
     "zod": "3.25.76"
   },

@@ -1,7 +1,7 @@
 /**
  * Scans public/videos for video files and emits a manifest with intrinsic
- * dimensions + a tiny base64 first-frame blur, so the shared <Video>
- * component can reserve space and render a blur-up poster.
+ * dimensions + a ThumbHash placeholder derived from the first frame, so the
+ * shared <Video> component can reserve space and render a blur-up poster.
  *
  * Output: src/videoMap.gen.ts
  */
@@ -10,6 +10,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import sharp from "sharp";
+import { rgbaToThumbHash } from "thumbhash";
 
 const ROOT = path.resolve(import.meta.dirname!, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
@@ -21,7 +22,7 @@ const VIDEO_EXT = new Set([".webm", ".mp4", ".mov", ".m4v"]);
 interface Entry {
   width: number;
   height: number;
-  blurDataURL: string | null;
+  thumbhash: string | null;
 }
 
 function walk(dir: string, out: string[] = []): string[] {
@@ -60,7 +61,7 @@ function probeDimensions(absPath: string): { width: number; height: number } | n
   }
 }
 
-async function extractBlur(absPath: string): Promise<string | null> {
+async function extractThumbhash(absPath: string): Promise<string | null> {
   const tmp = path.join(os.tmpdir(), `mediamanifest-${process.pid}-${Date.now()}.png`);
   try {
     execFileSync(
@@ -69,11 +70,13 @@ async function extractBlur(absPath: string): Promise<string | null> {
       { stdio: ["ignore", "ignore", "ignore"] },
     );
     if (!fs.existsSync(tmp)) return null;
-    const buf = await sharp(tmp)
-      .resize(40, undefined, { fit: "inside" })
-      .jpeg({ quality: 45 })
-      .toBuffer();
-    return `data:image/jpeg;base64,${buf.toString("base64")}`;
+    const { data, info } = await sharp(tmp)
+      .resize(100, 100, { fit: "inside" })
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    const hash = rgbaToThumbHash(info.width, info.height, data);
+    return Buffer.from(hash).toString("base64");
   } catch {
     return null;
   } finally {
@@ -87,10 +90,10 @@ async function processVideo(absPath: string): Promise<[string, Entry] | null> {
 
   const dims = probeDimensions(absPath);
   if (!dims) return null;
-  const blurDataURL = await extractBlur(absPath);
+  const thumbhash = await extractThumbhash(absPath);
 
   const publicPath = "/" + path.relative(PUBLIC_DIR, absPath).split(path.sep).join("/");
-  return [publicPath, { width: dims.width, height: dims.height, blurDataURL }];
+  return [publicPath, { width: dims.width, height: dims.height, thumbhash }];
 }
 
 async function main() {
@@ -109,9 +112,9 @@ async function main() {
   const sorted = Object.keys(manifest).sort();
   const body = sorted
     .map((k) => {
-      const { width, height, blurDataURL } = manifest[k];
-      const blur = blurDataURL === null ? "null" : JSON.stringify(blurDataURL);
-      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, blurDataURL: ${blur} },`;
+      const { width, height, thumbhash } = manifest[k];
+      const hash = thumbhash === null ? "null" : JSON.stringify(thumbhash);
+      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, thumbhash: ${hash} },`;
     })
     .join("\n");
 
@@ -119,7 +122,7 @@ async function main() {
 export interface VideoManifestEntry {
   width: number;
   height: number;
-  blurDataURL: string | null;
+  thumbhash: string | null;
 }
 
 export const videoManifest: Record<string, VideoManifestEntry> = {

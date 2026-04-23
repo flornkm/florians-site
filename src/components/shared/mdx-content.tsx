@@ -1,9 +1,10 @@
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
-import { ComponentType, ReactNode, useState } from "react";
+import { ComponentType, ReactNode, useMemo, useState } from "react";
 import { BiomarkerShowcase } from "../../features/work/components/superpower/biomarker-showcase";
 import { SVGShowcase } from "../../features/work/components/superpower/svg-showcase";
+import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { videoManifest } from "@/videoMap.gen";
 import { ModelViewer } from "../3d/model-viewer";
 import { Image } from "./image";
@@ -119,6 +120,7 @@ export function Video({
   const [ready, setReady] = useState(false);
   const lookupKey = webm ?? mp4 ?? src;
   const entry = lookupKey ? videoManifest[lookupKey] : undefined;
+  const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
 
   return (
     <div className="not-prose my-8">
@@ -128,9 +130,9 @@ export function Video({
           style={entry ? { aspectRatio: `${entry.width} / ${entry.height}` } : undefined}
           data-ready={ready ? "true" : "false"}
         >
-          {entry?.blurDataURL && (
+          {placeholder && (
             <img
-              src={entry.blurDataURL}
+              src={placeholder}
               alt=""
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 h-full w-full object-cover scale-110"
