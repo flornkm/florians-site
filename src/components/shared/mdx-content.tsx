@@ -151,6 +151,7 @@ export function Video({
               entry
                 ? "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out"
                 : "w-full transition-opacity duration-300 ease-out",
+              "rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
               entry && !ready ? "opacity-0" : "opacity-100",
               className,
             )}
