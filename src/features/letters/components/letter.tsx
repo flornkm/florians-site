@@ -74,7 +74,8 @@ export const Letter = forwardRef<
     ...restProps
   } = props;
 
-  const resolvedStampHandle = stampHandle ?? handle;
+  const normalizedHandle = handle?.replace(/^@+/, "");
+  const resolvedStampHandle = (stampHandle ?? handle)?.replace(/^@+/, "");
 
   return (
     <div
@@ -96,7 +97,7 @@ export const Letter = forwardRef<
           </p>
         </div>
         <div className={cn("flex items-end", handle && "opacity-100", !handle && "opacity-0")}>
-          <p className="text-sm font-medium text-tertiary">Sincerely, @{handle}</p>
+          <p className="text-sm font-medium text-tertiary">Sincerely, @{normalizedHandle}</p>
         </div>
         {variant === "display" && (email || createdAt) && (
           <div className="text-xs text-quaternary space-y-1">
