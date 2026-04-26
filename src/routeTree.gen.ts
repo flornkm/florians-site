@@ -8,230 +8,230 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as SendPostcardRouteImport } from "./routes/send-postcard";
-import { Route as PrivacyPolicyRouteImport } from "./routes/privacy-policy";
-import { Route as ImprintRouteImport } from "./routes/imprint";
-import { Route as ExperimentsRouteImport } from "./routes/experiments";
-import { Route as ColophonRouteImport } from "./routes/colophon";
-import { Route as AboutRouteImport } from "./routes/about";
-import { Route as IndexRouteImport } from "./routes/index";
-import { Route as WritingIndexRouteImport } from "./routes/writing/index";
-import { Route as WritingIdRouteImport } from "./routes/writing/$id";
-import { Route as WorkIdRouteImport } from "./routes/work/$id";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SendPostcardRouteImport } from './routes/send-postcard'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as ImprintRouteImport } from './routes/imprint'
+import { Route as ExperimentsRouteImport } from './routes/experiments'
+import { Route as ColophonRouteImport } from './routes/colophon'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as WritingIndexRouteImport } from './routes/writing/index'
+import { Route as WritingIdRouteImport } from './routes/writing/$id'
+import { Route as WorkIdRouteImport } from './routes/work/$id'
 
 const SendPostcardRoute = SendPostcardRouteImport.update({
-  id: "/send-postcard",
-  path: "/send-postcard",
+  id: '/send-postcard',
+  path: '/send-postcard',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: "/privacy-policy",
-  path: "/privacy-policy",
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ImprintRoute = ImprintRouteImport.update({
-  id: "/imprint",
-  path: "/imprint",
+  id: '/imprint',
+  path: '/imprint',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ExperimentsRoute = ExperimentsRouteImport.update({
-  id: "/experiments",
-  path: "/experiments",
+  id: '/experiments',
+  path: '/experiments',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ColophonRoute = ColophonRouteImport.update({
-  id: "/colophon",
-  path: "/colophon",
+  id: '/colophon',
+  path: '/colophon',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AboutRoute = AboutRouteImport.update({
-  id: "/about",
-  path: "/about",
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const WritingIndexRoute = WritingIndexRouteImport.update({
-  id: "/writing/",
-  path: "/writing/",
+  id: '/writing/',
+  path: '/writing/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const WritingIdRoute = WritingIdRouteImport.update({
-  id: "/writing/$id",
-  path: "/writing/$id",
+  id: '/writing/$id',
+  path: '/writing/$id',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const WorkIdRoute = WorkIdRouteImport.update({
-  id: "/work/$id",
-  path: "/work/$id",
+  id: '/work/$id',
+  path: '/work/$id',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/colophon": typeof ColophonRoute;
-  "/experiments": typeof ExperimentsRoute;
-  "/imprint": typeof ImprintRoute;
-  "/privacy-policy": typeof PrivacyPolicyRoute;
-  "/send-postcard": typeof SendPostcardRoute;
-  "/work/$id": typeof WorkIdRoute;
-  "/writing/$id": typeof WritingIdRoute;
-  "/writing/": typeof WritingIndexRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/colophon': typeof ColophonRoute
+  '/experiments': typeof ExperimentsRoute
+  '/imprint': typeof ImprintRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/send-postcard': typeof SendPostcardRoute
+  '/work/$id': typeof WorkIdRoute
+  '/writing/$id': typeof WritingIdRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/colophon": typeof ColophonRoute;
-  "/experiments": typeof ExperimentsRoute;
-  "/imprint": typeof ImprintRoute;
-  "/privacy-policy": typeof PrivacyPolicyRoute;
-  "/send-postcard": typeof SendPostcardRoute;
-  "/work/$id": typeof WorkIdRoute;
-  "/writing/$id": typeof WritingIdRoute;
-  "/writing": typeof WritingIndexRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/colophon': typeof ColophonRoute
+  '/experiments': typeof ExperimentsRoute
+  '/imprint': typeof ImprintRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/send-postcard': typeof SendPostcardRoute
+  '/work/$id': typeof WorkIdRoute
+  '/writing/$id': typeof WritingIdRoute
+  '/writing': typeof WritingIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/colophon": typeof ColophonRoute;
-  "/experiments": typeof ExperimentsRoute;
-  "/imprint": typeof ImprintRoute;
-  "/privacy-policy": typeof PrivacyPolicyRoute;
-  "/send-postcard": typeof SendPostcardRoute;
-  "/work/$id": typeof WorkIdRoute;
-  "/writing/$id": typeof WritingIdRoute;
-  "/writing/": typeof WritingIndexRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/colophon': typeof ColophonRoute
+  '/experiments': typeof ExperimentsRoute
+  '/imprint': typeof ImprintRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/send-postcard': typeof SendPostcardRoute
+  '/work/$id': typeof WorkIdRoute
+  '/writing/$id': typeof WritingIdRoute
+  '/writing/': typeof WritingIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
-    | "/about"
-    | "/colophon"
-    | "/experiments"
-    | "/imprint"
-    | "/privacy-policy"
-    | "/send-postcard"
-    | "/work/$id"
-    | "/writing/$id"
-    | "/writing/";
-  fileRoutesByTo: FileRoutesByTo;
+    | '/'
+    | '/about'
+    | '/colophon'
+    | '/experiments'
+    | '/imprint'
+    | '/privacy-policy'
+    | '/send-postcard'
+    | '/work/$id'
+    | '/writing/$id'
+    | '/writing/'
+  fileRoutesByTo: FileRoutesByTo
   to:
-    | "/"
-    | "/about"
-    | "/colophon"
-    | "/experiments"
-    | "/imprint"
-    | "/privacy-policy"
-    | "/send-postcard"
-    | "/work/$id"
-    | "/writing/$id"
-    | "/writing";
+    | '/'
+    | '/about'
+    | '/colophon'
+    | '/experiments'
+    | '/imprint'
+    | '/privacy-policy'
+    | '/send-postcard'
+    | '/work/$id'
+    | '/writing/$id'
+    | '/writing'
   id:
-    | "__root__"
-    | "/"
-    | "/about"
-    | "/colophon"
-    | "/experiments"
-    | "/imprint"
-    | "/privacy-policy"
-    | "/send-postcard"
-    | "/work/$id"
-    | "/writing/$id"
-    | "/writing/";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/colophon'
+    | '/experiments'
+    | '/imprint'
+    | '/privacy-policy'
+    | '/send-postcard'
+    | '/work/$id'
+    | '/writing/$id'
+    | '/writing/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AboutRoute: typeof AboutRoute;
-  ColophonRoute: typeof ColophonRoute;
-  ExperimentsRoute: typeof ExperimentsRoute;
-  ImprintRoute: typeof ImprintRoute;
-  PrivacyPolicyRoute: typeof PrivacyPolicyRoute;
-  SendPostcardRoute: typeof SendPostcardRoute;
-  WorkIdRoute: typeof WorkIdRoute;
-  WritingIdRoute: typeof WritingIdRoute;
-  WritingIndexRoute: typeof WritingIndexRoute;
+  IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ColophonRoute: typeof ColophonRoute
+  ExperimentsRoute: typeof ExperimentsRoute
+  ImprintRoute: typeof ImprintRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SendPostcardRoute: typeof SendPostcardRoute
+  WorkIdRoute: typeof WorkIdRoute
+  WritingIdRoute: typeof WritingIdRoute
+  WritingIndexRoute: typeof WritingIndexRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/send-postcard": {
-      id: "/send-postcard";
-      path: "/send-postcard";
-      fullPath: "/send-postcard";
-      preLoaderRoute: typeof SendPostcardRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/privacy-policy": {
-      id: "/privacy-policy";
-      path: "/privacy-policy";
-      fullPath: "/privacy-policy";
-      preLoaderRoute: typeof PrivacyPolicyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/imprint": {
-      id: "/imprint";
-      path: "/imprint";
-      fullPath: "/imprint";
-      preLoaderRoute: typeof ImprintRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/experiments": {
-      id: "/experiments";
-      path: "/experiments";
-      fullPath: "/experiments";
-      preLoaderRoute: typeof ExperimentsRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/colophon": {
-      id: "/colophon";
-      path: "/colophon";
-      fullPath: "/colophon";
-      preLoaderRoute: typeof ColophonRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/about": {
-      id: "/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AboutRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/writing/": {
-      id: "/writing/";
-      path: "/writing";
-      fullPath: "/writing/";
-      preLoaderRoute: typeof WritingIndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/writing/$id": {
-      id: "/writing/$id";
-      path: "/writing/$id";
-      fullPath: "/writing/$id";
-      preLoaderRoute: typeof WritingIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/work/$id": {
-      id: "/work/$id";
-      path: "/work/$id";
-      fullPath: "/work/$id";
-      preLoaderRoute: typeof WorkIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/send-postcard': {
+      id: '/send-postcard'
+      path: '/send-postcard'
+      fullPath: '/send-postcard'
+      preLoaderRoute: typeof SendPostcardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imprint': {
+      id: '/imprint'
+      path: '/imprint'
+      fullPath: '/imprint'
+      preLoaderRoute: typeof ImprintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiments': {
+      id: '/experiments'
+      path: '/experiments'
+      fullPath: '/experiments'
+      preLoaderRoute: typeof ExperimentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colophon': {
+      id: '/colophon'
+      path: '/colophon'
+      fullPath: '/colophon'
+      preLoaderRoute: typeof ColophonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing/': {
+      id: '/writing/'
+      path: '/writing'
+      fullPath: '/writing/'
+      preLoaderRoute: typeof WritingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/writing/$id': {
+      id: '/writing/$id'
+      path: '/writing/$id'
+      fullPath: '/writing/$id'
+      preLoaderRoute: typeof WritingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/$id': {
+      id: '/work/$id'
+      path: '/work/$id'
+      fullPath: '/work/$id'
+      preLoaderRoute: typeof WorkIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,16 +246,16 @@ const rootRouteChildren: RootRouteChildren = {
   WorkIdRoute: WorkIdRoute,
   WritingIdRoute: WritingIdRoute,
   WritingIndexRoute: WritingIndexRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from "./router.tsx";
-import type { createStart } from "@tanstack/react-start";
-declare module "@tanstack/react-start" {
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true;
-    router: Awaited<ReturnType<typeof getRouter>>;
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
