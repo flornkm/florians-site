@@ -1,0 +1,68 @@
+.smf-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-quaternary) transparent;
+}
+.smf-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.smf-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.smf-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--text-quaternary);
+  border-radius: 999px;
+}
+
+@property --smf-top {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --smf-bottom {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 56px;
+}
+
+.smf-scroller {
+  --smf-top: 0px;
+  --smf-bottom: 56px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black var(--smf-top),
+    black calc(100% - var(--smf-bottom)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black var(--smf-top),
+    black calc(100% - var(--smf-bottom)),
+    transparent 100%
+  );
+  animation:
+    smf-top linear both,
+    smf-bottom linear both;
+  animation-timeline: scroll(self), scroll(self);
+  animation-range:
+    0 1rem,
+    calc(100% - 1rem) 100%;
+}
+
+@keyframes smf-top {
+  from {
+    --smf-top: 0px;
+  }
+  to {
+    --smf-top: 56px;
+  }
+}
+@keyframes smf-bottom {
+  from {
+    --smf-bottom: 56px;
+  }
+  to {
+    --smf-bottom: 0px;
+  }
+}
