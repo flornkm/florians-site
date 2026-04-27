@@ -31,9 +31,9 @@ export const ScrollMaskFade = () => {
   const [masked, setMasked] = useState(true);
 
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5 w-full max-w-full px-4 py-4">
       <div
-        className={`smf-scrollbar ${masked ? "smf-scroller" : ""} h-64 w-96 px-10 overflow-y-auto`}
+        className={`smf-scrollbar ${masked ? "smf-scroller" : ""} h-56 w-full max-w-96 px-4 sm:px-10 overflow-y-auto`}
       >
         <div className="flex flex-col gap-5 p-3">
           {CONVO.map((m, i) =>
