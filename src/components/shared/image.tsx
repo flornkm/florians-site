@@ -112,7 +112,7 @@ export function Image({
           setLoaded(true);
           onLoad?.(e);
         }}
-        className={cn("absolute inset-0 h-full w-full", imgClassName)}
+        className={cn("absolute inset-0 h-full w-full", className, imgClassName)}
         style={{
           objectFit,
           opacity: loaded ? 1 : 0,
