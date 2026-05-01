@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
-  { title: "Scroll Mask Fade", Component: ScrollMaskFade },
+  { title: "Scroll Mask Fade", Component: ScrollMaskFade, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Font Smoothing", Component: FontSmoothing },
   { title: "Lazy Image", Component: LazyImage, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Depth Input", Component: DepthInput },

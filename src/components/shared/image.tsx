@@ -2,6 +2,7 @@ import {
   type CSSProperties,
   type ImgHTMLAttributes,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -9,6 +10,8 @@ import {
 import { imageManifest } from "@/imageMap.gen";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type ObjectFit = "cover" | "contain" | "fill" | "none" | "scale-down";
 
@@ -48,13 +51,20 @@ export function Image({
   const entry = imageManifest[src];
   const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const cachedOnMount = useRef(false);
   const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
 
-  useEffect(() => {
-    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+  useIsomorphicLayoutEffect(() => {
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth > 0) {
+      cachedOnMount.current = true;
       setLoaded(true);
+    } else {
+      cachedOnMount.current = false;
     }
   }, [src]);
+
+  const fadeTransition = cachedOnMount.current ? undefined : "opacity 400ms ease-out";
 
   const w = width ?? entry?.width;
   const h = height ?? entry?.height;
@@ -95,7 +105,7 @@ export function Image({
             objectFit,
             filter: "blur(20px)",
             opacity: loaded ? 0 : 1,
-            transition: "opacity 400ms ease-out",
+            transition: fadeTransition,
           }}
         />
       )}
@@ -116,7 +126,7 @@ export function Image({
         style={{
           objectFit,
           opacity: loaded ? 1 : 0,
-          transition: "opacity 400ms ease-out",
+          transition: fadeTransition,
           ...imgStyle,
         }}
         {...rest}
