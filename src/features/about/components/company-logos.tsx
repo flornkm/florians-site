@@ -17,7 +17,8 @@ export function CompanyLogos() {
             alt={company.name}
             objectFit="contain"
             style={{ width: company.width }}
-            className="max-w-none opacity-40 group-hover:opacity-80 transition-opacity dark:invert"
+            className="max-w-none opacity-40 group-hover:opacity-80 transition-opacity"
+            imgClassName="dark:invert"
           />
         </Link>
       ))}

@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+const loadedSrcs = new Set<string>();
+
 type ObjectFit = "cover" | "contain" | "fill" | "none" | "scale-down";
 
 export interface ImageProps extends Omit<
@@ -50,21 +52,26 @@ export function Image({
 }: ImageProps) {
   const entry = imageManifest[src];
   const imgRef = useRef<HTMLImageElement>(null);
-  const [loaded, setLoaded] = useState(false);
-  const cachedOnMount = useRef(false);
+  const wasPreloaded = loadedSrcs.has(src);
+  const [loaded, setLoaded] = useState(wasPreloaded);
+  const skipFadeRef = useRef(wasPreloaded);
   const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
 
   useIsomorphicLayoutEffect(() => {
     const img = imgRef.current;
     if (img?.complete && img.naturalWidth > 0) {
-      cachedOnMount.current = true;
-      setLoaded(true);
-    } else {
-      cachedOnMount.current = false;
+      skipFadeRef.current = true;
+      loadedSrcs.add(src);
+      if (!loaded) setLoaded(true);
     }
-  }, [src]);
+  }, [src, loaded]);
 
-  const fadeTransition = cachedOnMount.current ? undefined : "opacity 400ms ease-out";
+  const markLoaded = () => {
+    loadedSrcs.add(src);
+    setLoaded(true);
+  };
+
+  const fadeTransition = skipFadeRef.current ? undefined : "opacity 400ms ease-out";
 
   const w = width ?? entry?.width;
   const h = height ?? entry?.height;
@@ -84,7 +91,10 @@ export function Image({
         loading={effectiveLoading}
         decoding={effectiveDecoding}
         fetchPriority={effectiveFetchPriority}
-        onLoad={onLoad}
+        onLoad={(e) => {
+          loadedSrcs.add(src);
+          onLoad?.(e);
+        }}
         {...rest}
       />
     );
@@ -100,7 +110,7 @@ export function Image({
           src={placeholder}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full scale-110"
+          className="pointer-events-none absolute inset-0 m-0! h-full w-full scale-110"
           style={{
             objectFit,
             filter: "blur(20px)",
@@ -119,10 +129,10 @@ export function Image({
         decoding={effectiveDecoding}
         fetchPriority={effectiveFetchPriority}
         onLoad={(e) => {
-          setLoaded(true);
+          markLoaded();
           onLoad?.(e);
         }}
-        className={cn("absolute inset-0 h-full w-full", className, imgClassName)}
+        className={cn("absolute inset-0 m-0! h-full w-full", className, imgClassName)}
         style={{
           objectFit,
           opacity: loaded ? 1 : 0,
