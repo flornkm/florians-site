@@ -17,7 +17,8 @@ export function InstitutionsTooltipContent() {
             alt={inst.name}
             objectFit="contain"
             style={{ width: Math.min(inst.width, 80) }}
-            className="opacity-60 group-hover:opacity-100 px-1 transition-opacity dark:invert"
+            className="opacity-60 group-hover:opacity-100 px-1 transition-opacity"
+            imgClassName="dark:invert"
           />
         </Link>
       ))}

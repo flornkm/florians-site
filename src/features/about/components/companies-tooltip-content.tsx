@@ -17,7 +17,8 @@ export function CompaniesTooltipContent() {
             alt={company.name}
             objectFit="contain"
             style={{ width: Math.min(company.width!, 80) }}
-            className="max-w-none opacity-60 px-1 group-hover:opacity-100 transition-opacity dark:invert"
+            className="max-w-none opacity-60 px-1 group-hover:opacity-100 transition-opacity"
+            imgClassName="dark:invert"
           />
         </Link>
       ))}
