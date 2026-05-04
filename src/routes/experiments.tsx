@@ -2,6 +2,7 @@ import { H1, H2 } from "@/components/design-system/heading";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
 import { FontSmoothing } from "@/features/experiments/components/font-smoothing-demo";
+import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
 import { PaperRoll } from "@/features/experiments/components/paper-roll-demo";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
+  { title: "Frosted Camera", Component: FrostedCamera, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Scroll Mask Fade", Component: ScrollMaskFade, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Font Smoothing", Component: FontSmoothing },
   { title: "Lazy Image", Component: LazyImage, aspect: "aspect-[4/5] md:aspect-[4/3]" },
