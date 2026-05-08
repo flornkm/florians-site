@@ -7,11 +7,13 @@ import { IosContextMenu } from "@/features/experiments/components/ios-context-me
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
 import { PaperRoll } from "@/features/experiments/components/paper-roll-demo";
 import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
+import { SlopDetector } from "@/features/experiments/components/slop-detector";
 import { TextShimmerExperiment } from "@/features/experiments/components/text-shimmer-demo";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
 const EXPERIMENTS = [
+  { title: "Slop Detector", Component: SlopDetector, aspect: "aspect-[4/5] md:aspect-[16/10]" },
   { title: "Frosted Camera", Component: FrostedCamera, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Scroll Mask Fade", Component: ScrollMaskFade, aspect: "aspect-[4/5] md:aspect-[4/3]" },
   { title: "Font Smoothing", Component: FontSmoothing },
