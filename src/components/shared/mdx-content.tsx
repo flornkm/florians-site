@@ -2,8 +2,6 @@ import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
 import { ComponentType, ReactNode, useMemo, useState } from "react";
-import { BiomarkerShowcase } from "../../features/work/components/superpower/biomarker-showcase";
-import { SVGShowcase } from "../../features/work/components/superpower/svg-showcase";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { videoManifest } from "@/videoMap.gen";
 import { ModelViewer } from "../3d/model-viewer";
@@ -254,8 +252,6 @@ export const mdxComponents = {
   Model,
   ModelViewer,
   SmartVideo,
-  BiomarkerShowcase,
-  SVGShowcase,
   MobileImages,
 };
 

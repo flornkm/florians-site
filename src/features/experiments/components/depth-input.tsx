@@ -13,11 +13,11 @@ export const DepthInput = () => {
         onChange={(e) => setValue(e.target.value)}
         placeholder="Type something..."
         className={cn(
-          "w-full max-w-md ring-transparent rounded-full bg-transparent px-5 py-3 -outline-offset-2 text-sm font-medium text-primary outline placeholder:text-quaternary",
-          "border transition-all duration-300 ease-out",
+          "w-full max-w-md rounded-full px-5 py-3 -outline-offset-1 text-sm font-medium text-primary outline placeholder:text-quaternary",
+          "ring-1 ring-black/5 transition-all duration-300 ease-out",
           depth
-            ? "border-primary focus-visible:ring-primary/5 bg-tertiary/85 outline-white dark:outline-black shadow-sm ring-0 focus:ring-4 focus:ring-primary/15"
-            : "border-primary bg-primary shadow-none outline-transparent ring-0",
+            ? "bg-tertiary/50 outline-white dark:outline-black shadow-md focus:ring-4 focus:ring-black/[0.03]"
+            : "bg-primary outline-[rgb(255_255_255_/_0)] dark:outline-[rgb(0_0_0_/_0)] shadow-[0_17.54px_23.39px_0_rgba(0,0,0,0),0_9.4px_12.5px_0_rgba(0,0,0,0),0_5.25px_7px_0_rgba(0,0,0,0),0_2.79px_3.72px_-2px_rgba(0,0,0,0),0_1.16px_1.5px_0_rgba(0,0,0,0)]",
         )}
       />
 
