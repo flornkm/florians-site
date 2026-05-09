@@ -126,8 +126,8 @@ export function getContent(category: "work" | "writing"): ContentEntry[] {
 
     if (!dateA || !dateB) return 0;
 
-    const latestYear = (d: string) => {
-      const nums = d.match(/\d{4}/g);
+    const latestYear = (d: string | number) => {
+      const nums = String(d).match(/\d{4}/g);
       return nums ? Math.max(...nums.map(Number)) : 0;
     };
 
