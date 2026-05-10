@@ -1,9 +1,38 @@
 import { Environment, Lightformer, OrthographicCamera } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
 import * as THREE from "three";
 import { GeigerCounter } from "./GeigerCounter";
 import { SoundManager } from "./SoundManager";
+
+/** On mobile (< md breakpoint) the device sits roughly half size compared
+ *  to desktop. Desktop is unchanged. We force the zoom imperatively each
+ *  frame because drei's OrthographicCamera doesn't always re-apply changes
+ *  to its zoom prop after `makeDefault` has registered the camera. */
+function ResponsiveCamera() {
+  const cameraRef = useRef<THREE.OrthographicCamera>(null);
+  const { size } = useThree();
+  useFrame(() => {
+    const cam = cameraRef.current;
+    if (!cam) return;
+    const target = size.width < 768 ? 1700 : 3400;
+    if (cam.zoom !== target) {
+      cam.zoom = target;
+      cam.updateProjectionMatrix();
+    }
+  });
+  return (
+    <OrthographicCamera
+      ref={cameraRef}
+      makeDefault
+      position={[0, 0.5, 0]}
+      rotation={[-Math.PI / 2, 0, 0]}
+      zoom={3400}
+      near={0.01}
+      far={3}
+    />
+  );
+}
 
 export function Scene() {
   return (
@@ -30,14 +59,7 @@ export function Scene() {
           "drop-shadow(12px 22px 40px rgba(20,30,35,0.14))",
       }}
     >
-      <OrthographicCamera
-        makeDefault
-        position={[0, 0.5, 0]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        zoom={3400}
-        near={0.01}
-        far={3}
-      />
+      <ResponsiveCamera />
 
       <hemisphereLight args={["#fff4e0", "#23282a", 0.55]} />
       <ambientLight intensity={0.18} color="#f4ead8" />
