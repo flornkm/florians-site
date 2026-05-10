@@ -39,8 +39,12 @@ export function SlopDetector() {
       <div
         ref={containerRef}
         className="relative w-full h-full overflow-hidden bg-primary text-primary select-none"
+        style={{ touchAction: "none" }}
       >
-        <div className="relative z-[1] h-full w-full overflow-y-auto">
+        <div
+          className="relative z-[1] h-full w-full overflow-y-auto"
+          style={{ touchAction: "none" }}
+        >
           <div className="max-w-[440px] pl-8 md:pl-14 pr-8 md:pr-40 py-14 md:py-20">
             <div className="flex flex-col gap-12">
               {SAMPLE_POSTS.map((p) => (
