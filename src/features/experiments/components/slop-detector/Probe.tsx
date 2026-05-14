@@ -191,10 +191,7 @@ export function Probe({ node }: { node: THREE.Object3D }) {
     if (dragging.current) {
       yawTarget = Math.atan2(-pz, px);
     } else {
-      yawTarget =
-        REST_ANGLE +
-        Math.sin(t * 0.55) * 0.05 +
-        Math.sin(t * 1.13 + 1.7) * 0.025;
+      yawTarget = REST_ANGLE + Math.sin(t * 0.55) * 0.05 + Math.sin(t * 1.13 + 1.7) * 0.025;
     }
     let diff = yawTarget - node.rotation.y;
     while (diff > Math.PI) diff -= Math.PI * 2;
@@ -205,8 +202,7 @@ export function Probe({ node }: { node: THREE.Object3D }) {
       const VEL_TILT = 32;
       const sway = Math.sin(t * 1.6) * 0.05 + Math.sin(t * 0.9 + 1.3) * 0.03;
       const tiltZTarget = THREE.MathUtils.clamp(-velocity.x * VEL_TILT, -0.7, 0.7);
-      const tiltXTarget =
-        THREE.MathUtils.clamp(velocity.z * VEL_TILT, -0.7, 0.7) + sway;
+      const tiltXTarget = THREE.MathUtils.clamp(velocity.z * VEL_TILT, -0.7, 0.7) + sway;
       node.rotation.z += (tiltZTarget - node.rotation.z) * 0.28;
       node.rotation.x += (tiltXTarget - node.rotation.x) * 0.28;
     } else {

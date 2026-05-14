@@ -55,9 +55,7 @@ export function Sticker({
     const bbox = new THREE.Box3().setFromObject(bodyRoot);
     const bodyCenter = bbox.getCenter(new THREE.Vector3());
 
-    const groupMatrixInv = new THREE.Matrix4()
-      .copy(groupRef.current.matrixWorld)
-      .invert();
+    const groupMatrixInv = new THREE.Matrix4().copy(groupRef.current.matrixWorld).invert();
 
     const verts: number[] = [];
     const uvs: number[] = [];

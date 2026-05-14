@@ -8,13 +8,7 @@ import { VerletRope } from "./lib/verletRope";
 
 const N = 28;
 
-export function Cable({
-  from,
-  to,
-}: {
-  from: THREE.Object3D | null;
-  to: THREE.Object3D | null;
-}) {
+export function Cable({ from, to }: { from: THREE.Object3D | null; to: THREE.Object3D | null }) {
   const ref = useRef<Line2>(null!);
   const a = useMemo(() => new THREE.Vector3(), []);
   const b = useMemo(() => new THREE.Vector3(), []);

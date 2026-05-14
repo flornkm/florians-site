@@ -6,10 +6,10 @@ const PAD = 0;
 const FADE_MS = 220;
 const MAX_PARTICLES = 200000;
 
-const DENSITY_NORMAL = 0.090;
-const DENSITY_ALARM = 0.180;
+const DENSITY_NORMAL = 0.09;
+const DENSITY_ALARM = 0.18;
 const FLOW_SPEED_NORMAL = 0.045;
-const FLOW_SPEED_ALARM = 0.20;
+const FLOW_SPEED_ALARM = 0.2;
 
 const GREEN_TO_YELLOW_LOW = 0.25;
 const GREEN_TO_YELLOW_HIGH = 0.32;
@@ -132,7 +132,7 @@ function initParticles() {
     positions[i * 2 + 1] = Math.random();
     const depth = Math.pow(Math.random(), 1.7);
     const size = 0.5 + depth * 0.9;
-    const alpha = 0.40 + depth * 0.45;
+    const alpha = 0.4 + depth * 0.45;
     meta[i * 3] = size;
     meta[i * 3 + 1] = alpha;
     meta[i * 3 + 2] = 0.5 + depth * 0.9;
@@ -162,13 +162,13 @@ function stepFlow(count: number, t: number, dt: number, flowSpeed: number) {
       sin(py * k1 + t * w1) -
       cos(py * k2 + t * w2 + 1.7) +
       0.55 * sin(py * k3 + t * w3 + 2.3) +
-      0.30 * cos(py * k4 + t * w4 + 0.6);
+      0.3 * cos(py * k4 + t * w4 + 0.6);
 
     let vy =
       cos(px * k1 - t * w1) +
       sin(px * k2 + t * w2 + 0.4) +
       0.55 * cos(px * k3 - t * w3 + 1.1) +
-      0.30 * sin(px * k4 - t * w4 + 2.7);
+      0.3 * sin(px * k4 - t * w4 + 2.7);
 
     vx *= 0.16;
     vy *= 0.16;
@@ -204,15 +204,12 @@ type Renderer = {
 };
 
 function makeWebGLRenderer(canvas: HTMLCanvasElement): Renderer | null {
-  let gl: WebGL2RenderingContext | WebGLRenderingContext | null = canvas.getContext(
-    "webgl2",
-    {
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: false,
-      preserveDrawingBuffer: false,
-    },
-  ) as WebGL2RenderingContext | null;
+  let gl: WebGL2RenderingContext | WebGLRenderingContext | null = canvas.getContext("webgl2", {
+    alpha: true,
+    premultipliedAlpha: true,
+    antialias: false,
+    preserveDrawingBuffer: false,
+  }) as WebGL2RenderingContext | null;
 
   const isWebGL2 = !!gl;
 
@@ -504,7 +501,12 @@ export function HighlightOverlay() {
           lerp(neutral[2], b / sum, tierIntensity),
         ];
       };
-      const darkColor = blend(COLOR_NEUTRAL_DARK, COLOR_GREEN_DARK, COLOR_YELLOW_DARK, COLOR_RED_DARK);
+      const darkColor = blend(
+        COLOR_NEUTRAL_DARK,
+        COLOR_GREEN_DARK,
+        COLOR_YELLOW_DARK,
+        COLOR_RED_DARK,
+      );
       const lightColor = blend(
         COLOR_NEUTRAL_LIGHT,
         COLOR_GREEN_LIGHT,

@@ -48,10 +48,7 @@ export function DeviceTilt({ children }: { children: React.ReactNode }) {
       offX.current += (0 - offX.current) * DOCK_EASE;
       offZ.current += (0 - offZ.current) * DOCK_EASE;
 
-      if (
-        Math.abs(offX.current) < DOCKED_THRESHOLD &&
-        Math.abs(offZ.current) < DOCKED_THRESHOLD
-      ) {
+      if (Math.abs(offX.current) < DOCKED_THRESHOLD && Math.abs(offZ.current) < DOCKED_THRESHOLD) {
         offX.current = 0;
         offZ.current = 0;
         docked.current = true;
@@ -76,19 +73,14 @@ export function DeviceTilt({ children }: { children: React.ReactNode }) {
 
       ref.current.position.x = offX.current;
       ref.current.position.z = offZ.current;
-      ref.current.rotation.x =
-        TILT_X_REST + x.current * PUSH_MAX + pitchFromOffset;
+      ref.current.rotation.x = TILT_X_REST + x.current * PUSH_MAX + pitchFromOffset;
       ref.current.rotation.y = TILT_Y + yawFromOffset;
       ref.current.rotation.z = TILT_Z;
     }
   });
 
   return (
-    <group
-      ref={ref}
-      position={[INITIAL_OFFSET_X, 0, 0]}
-      rotation={[TILT_X_REST, TILT_Y, TILT_Z]}
-    >
+    <group ref={ref} position={[INITIAL_OFFSET_X, 0, 0]} rotation={[TILT_X_REST, TILT_Y, TILT_Z]}>
       {children}
     </group>
   );

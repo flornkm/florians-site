@@ -9,7 +9,7 @@ const W = 384;
 const H = 132;
 
 const SCREEN_POS: [number, number, number] = [-0.025, 0.01865, -0.012];
-const SCREEN_SIZE: [number, number] = [0.030, 0.011];
+const SCREEN_SIZE: [number, number] = [0.03, 0.011];
 const DOME_OVERHANG = 0.0018;
 const DOME_RISE = 0.0024;
 
@@ -135,11 +135,7 @@ export function Display({ hidden }: { hidden: THREE.Object3D | null }) {
 
   const domeGeom = useMemo(
     () =>
-      makeDomeGeometry(
-        SCREEN_SIZE[0] + DOME_OVERHANG,
-        SCREEN_SIZE[1] + DOME_OVERHANG,
-        DOME_RISE,
-      ),
+      makeDomeGeometry(SCREEN_SIZE[0] + DOME_OVERHANG, SCREEN_SIZE[1] + DOME_OVERHANG, DOME_RISE),
     [],
   );
 

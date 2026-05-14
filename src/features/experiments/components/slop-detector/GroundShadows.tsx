@@ -1,17 +1,17 @@
-import { ContactShadows } from "@react-three/drei"
-import { useFrame } from "@react-three/fiber"
-import { useMemo, useRef } from "react"
-import * as THREE from "three"
+import { ContactShadows } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useMemo, useRef } from "react";
+import * as THREE from "three";
 
 export function GroundShadows({ anchor }: { anchor: THREE.Object3D | null }) {
-  const ref = useRef<THREE.Group>(null!)
-  const wp = useMemo(() => new THREE.Vector3(), [])
+  const ref = useRef<THREE.Group>(null!);
+  const wp = useMemo(() => new THREE.Vector3(), []);
 
   useFrame(() => {
-    if (!anchor || !ref.current) return
-    anchor.getWorldPosition(wp)
-    ref.current.position.set(wp.x + 0.004, -0.0008, wp.z + 0.004)
-  })
+    if (!anchor || !ref.current) return;
+    anchor.getWorldPosition(wp);
+    ref.current.position.set(wp.x + 0.004, -0.0008, wp.z + 0.004);
+  });
 
   return (
     <group ref={ref}>
@@ -25,5 +25,5 @@ export function GroundShadows({ anchor }: { anchor: THREE.Object3D | null }) {
         color="#0a1310"
       />
     </group>
-  )
+  );
 }

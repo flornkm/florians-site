@@ -86,12 +86,7 @@ export function ElementHighlighter({ probeTip }: { probeTip: THREE.Object3D | nu
       return;
     }
     const bounds = containerEl.getBoundingClientRect();
-    if (
-      x < bounds.left ||
-      y < bounds.top ||
-      x > bounds.right ||
-      y > bounds.bottom
-    ) {
+    if (x < bounds.left || y < bounds.top || x > bounds.right || y > bounds.bottom) {
       if (current.current) {
         current.current = null;
         useStore.getState().setHighlighted(null);

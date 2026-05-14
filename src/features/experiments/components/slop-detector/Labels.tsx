@@ -16,10 +16,10 @@ type Label = {
 
 const LABELS: Label[] = [
   { text: "slop detector", pos: [-0.025, Y, -0.0245], worldHeight: 0.0028 },
-  { text: "speaker", pos: [0.020, Y, -0.0265], worldHeight: 0.0022 },
-  { text: "scan · radiation", pos: [-0.025, Y, -0.0030], worldHeight: 0.0017 },
-  { text: "slop / h", pos: [-0.025, Y, +0.0060], worldHeight: 0.0018, color: CABLE_ORANGE },
-  { text: "pwr", pos: [-0.030, Y, +0.0205], worldHeight: 0.0024 },
+  { text: "speaker", pos: [0.02, Y, -0.0265], worldHeight: 0.0022 },
+  { text: "scan · radiation", pos: [-0.025, Y, -0.003], worldHeight: 0.0017 },
+  { text: "slop / h", pos: [-0.025, Y, +0.006], worldHeight: 0.0018, color: CABLE_ORANGE },
+  { text: "pwr", pos: [-0.03, Y, +0.0205], worldHeight: 0.0024 },
   { text: "scan", pos: [-0.012, Y, +0.0205], worldHeight: 0.0024 },
   { text: "amp +", pos: [0.008, Y, +0.0205], worldHeight: 0.0024 },
   { text: "amp −", pos: [0.026, Y, +0.0205], worldHeight: 0.0024 },
@@ -46,12 +46,7 @@ function LabelMesh({ label, ready }: { label: Label; ready: boolean }) {
       receiveShadow={false}
     >
       <planeGeometry args={[w, h]} />
-      <meshBasicMaterial
-        map={tex.texture}
-        transparent
-        depthWrite={false}
-        toneMapped={false}
-      />
+      <meshBasicMaterial map={tex.texture} transparent depthWrite={false} toneMapped={false} />
     </mesh>
   );
 }

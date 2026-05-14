@@ -6,8 +6,8 @@ import { useStore } from "./lib/store";
 const AUDIO = "/audio/slop-detector";
 
 const TIERS: { url: string; max: number }[] = [
-  { url: `${AUDIO}/normal.mp3`, max: 0.20 },
-  { url: `${AUDIO}/medium.mp3`, max: 0.40 },
+  { url: `${AUDIO}/normal.mp3`, max: 0.2 },
+  { url: `${AUDIO}/medium.mp3`, max: 0.4 },
   { url: `${AUDIO}/high.mp3`, max: 0.62 },
   { url: `${AUDIO}/super-high.mp3`, max: 0.85 },
   { url: `${AUDIO}/ultra.mp3`, max: 1.01 },

@@ -194,7 +194,9 @@ export function LetterStack() {
 
   if (!IS_DEV && (!letters || isLoading))
     return (
-      <div className="aspect-a4 my-8 mx-auto max-w-[450px] w-full md:h-80 bg-border-primary animate-pulse rounded-lg"></div>
+      <div className="relative h-72 md:h-96 md:w-[512px] w-full flex justify-center items-center">
+        <div className="aspect-a4 max-w-[450px] w-full rounded-xl bg-secondary animate-pulse" />
+      </div>
     );
 
   if (letterOrder.length === 0)
