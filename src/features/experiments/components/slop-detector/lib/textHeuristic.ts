@@ -173,8 +173,8 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bbased\b/gi,
   /\bcope\b/gi,
   /\bseeth(?:e|ing)\b/gi,
-  /\bmald(?:ing)?\b/gi
-]
+  /\bmald(?:ing)?\b/gi,
+];
 
 // =============================================================================
 // Multi-word phrase markers — high-signal, count fully
@@ -218,19 +218,19 @@ const PHRASE_MARKERS: RegExp[] = [
   /\bmost people (?:i know|don'?t)\b/gi,
   /\bbuilt (?:your|their|our|my|his|her) whole identity\b/gi,
   /\bsmart(?:est)? (?:person|one) in the room\b/gi,
-  /\b(?:we'?re|we are) entering (?:a |an |the )?\w*\s*era\b/gi
-]
+  /\b(?:we'?re|we are) entering (?:a |an |the )?\w*\s*era\b/gi,
+];
 
 // =============================================================================
 // Pattern markers — structural / grammatical AI tells
 // =============================================================================
 
 const NOT_JUST_X_ITS_Y =
-  /\b(?:it'?s|that'?s|this is|here'?s) not (?:just|simply|merely|only)\s+[^,.!?\n]{2,40}[,.;]?\s+(?:it'?s|that'?s|this is|here'?s)\s+/gi
+  /\b(?:it'?s|that'?s|this is|here'?s) not (?:just|simply|merely|only)\s+[^,.!?\n]{2,40}[,.;]?\s+(?:it'?s|that'?s|this is|here'?s)\s+/gi;
 const I_DONT_JUST_X =
-  /\b(?:i|you|we|they) (?:don'?t|do not) (?:just|simply|merely|only)\s+[^,.!?\n]{2,40}[,.;]?\s+(?:i|you|we|they)\s+/gi
+  /\b(?:i|you|we|they) (?:don'?t|do not) (?:just|simply|merely|only)\s+[^,.!?\n]{2,40}[,.;]?\s+(?:i|you|we|they)\s+/gi;
 const NOT_X_BUT_Y =
-  /\bnot (?:just|simply|merely|only) (?:a |an |the )?\w+(?:\s+\w+){0,3}\s+but (?:also|rather)\s+(?:a |an |the )?\w+/gi
+  /\bnot (?:just|simply|merely|only) (?:a |an |the )?\w+(?:\s+\w+){0,3}\s+but (?:also|rather)\s+(?:a |an |the )?\w+/gi;
 
 const GENERIC_OPENERS: RegExp[] = [
   /^\s*in today'?s fast[\s-]paced/i,
@@ -246,8 +246,8 @@ const GENERIC_OPENERS: RegExp[] = [
   /^\s*we'?re entering /i,
   /^\s*we are entering /i,
   /^\s*first (?:the|a|an)\s+\w+/i,
-  /^\s*for the (?:last|past) /i
-]
+  /^\s*for the (?:last|past) /i,
+];
 
 // Sentence-starting transition words — LLMs over-use these as paragraph openers
 const TRANSITION_OPENERS = [
@@ -269,267 +269,288 @@ const TRANSITION_OPENERS = [
   "significantly",
   "ultimately",
   "essentially",
-  "fundamentally"
-]
+  "fundamentally",
+];
 
 const HUMBLE_BRAG =
-  /\b(?:humbled|grateful|honored|blessed|thrilled|proud to (?:announce|share))\b/gi
+  /\b(?:humbled|grateful|honored|blessed|thrilled|proud to (?:announce|share))\b/gi;
 const NUMBERED_INSIGHT =
-  /\b\d+\s+(?:things?|lessons?|insights?|takeaways?|tips?|reasons?|ways?|truths?|principles?|rules?|secrets?|signs?)\s+(?:i\s+)?(?:learned|from|to|about|for|that|why)\b/i
+  /\b\d+\s+(?:things?|lessons?|insights?|takeaways?|tips?|reasons?|ways?|truths?|principles?|rules?|secrets?|signs?)\s+(?:i\s+)?(?:learned|from|to|about|for|that|why)\b/i;
 const CTA =
-  /\b(?:what'?s your take|drop a comment|let me know in the comments?|share your thoughts|thoughts\??$|agree\??$|am i wrong\??|curious what you think|curious to hear|what (?:do|would) you think)/i
+  /\b(?:what'?s your take|drop a comment|let me know in the comments?|share your thoughts|thoughts\??$|agree\??$|am i wrong\??|curious what you think|curious to hear|what (?:do|would) you think)/i;
 const GENERIC_CONCLUSION =
-  /\b(?:future is bright|just the beginning|sky'?s the limit|next level|change the world|stay tuned|trust the process|onward and upward|together we|the rest is history)\b/gi
+  /\b(?:future is bright|just the beginning|sky'?s the limit|next level|change the world|stay tuned|trust the process|onward and upward|together we|the rest is history)\b/gi;
 
-const ANY_EMOJI = /\p{Extended_Pictographic}/gu
-const HASHTAG = /(?:^|\s)#\w+/g
-const ELLIPSIS = /…|\.{3,}/g
+const ANY_EMOJI = /\p{Extended_Pictographic}/gu;
+const HASHTAG = /(?:^|\s)#\w+/g;
+const ELLIPSIS = /…|\.{3,}/g;
 // "First the X. Then the Y. And now Z." escalation hook
 const FIRST_THEN_NOW =
-  /\bfirst\b[^.!?\n]{3,80}[.!?]\s+then\b[^.!?\n]{3,80}[.!?]\s+(?:and\s+)?now\b/i
+  /\bfirst\b[^.!?\n]{3,80}[.!?]\s+then\b[^.!?\n]{3,80}[.!?]\s+(?:and\s+)?now\b/i;
 
 // Words that don't count for anaphora detection (too common to be meaningful)
 const ANAPHORA_STOPWORDS = new Set([
-  "the", "a", "an", "and", "but", "or", "so", "i", "we", "you", "it",
-  "this", "that", "they", "he", "she", "in", "on", "of", "to", "for",
-  "with", "from", "as", "by", "is", "was", "are", "were", "be", "been"
-])
+  "the",
+  "a",
+  "an",
+  "and",
+  "but",
+  "or",
+  "so",
+  "i",
+  "we",
+  "you",
+  "it",
+  "this",
+  "that",
+  "they",
+  "he",
+  "she",
+  "in",
+  "on",
+  "of",
+  "to",
+  "for",
+  "with",
+  "from",
+  "as",
+  "by",
+  "is",
+  "was",
+  "are",
+  "were",
+  "be",
+  "been",
+]);
 
 // "X, Y, and Z" rule-of-three with 1-3 word items, used to detect AI list-style
 const RULE_OF_THREE =
-  /\b(\w+(?:\s\w+){0,2}),\s+(\w+(?:\s\w+){0,2}),?\s+and\s+(\w+(?:\s\w+){0,2})\b/g
+  /\b(\w+(?:\s\w+){0,2}),\s+(\w+(?:\s\w+){0,2}),?\s+and\s+(\w+(?:\s\w+){0,2})\b/g;
 
 // Bold-headers pattern: **text** at start of line — typical of LLM markdown
-const BOLD_HEADER = /^\s*\*\*[^*\n]{2,40}\*\*\s*[:\n]/gm
+const BOLD_HEADER = /^\s*\*\*[^*\n]{2,40}\*\*\s*[:\n]/gm;
 
 // Bullet lines starting with emojis or arrows
-const EMOJI_BULLETS =
-  /^\s*(?:[•→✨🚀💡🎯⚡🔥📈🌟✅\u{1F539}\u{1F538}]|\*|-)\s+\S/gmu
+const EMOJI_BULLETS = /^\s*(?:[•→✨🚀💡🎯⚡🔥📈🌟✅\u{1F539}\u{1F538}]|\*|-)\s+\S/gmu;
 
 // =============================================================================
 
 export type TextScore = {
-  rating: number
-  signals: string[]
-}
+  rating: number;
+  signals: string[];
+};
 
 export function scoreText(raw: string): TextScore {
-  const signals: string[] = []
-  if (!raw) return { rating: 0, signals }
-  const text = raw.trim()
-  if (text.length < 20) return { rating: 0, signals }
+  const signals: string[] = [];
+  if (!raw) return { rating: 0, signals };
+  const text = raw.trim();
+  if (text.length < 20) return { rating: 0, signals };
 
-  let score = 0
-  const words = text.split(/\s+/)
-  const wc = words.length || 1
+  let score = 0;
+  const words = text.split(/\s+/);
+  const wc = words.length || 1;
 
   // --- Vocabulary markers (per 100-word rate)
-  let vocabHits = 0
-  const matchedVocab: string[] = []
+  let vocabHits = 0;
+  const matchedVocab: string[] = [];
   for (const re of VOCAB_MARKERS) {
-    const matches = text.match(re)
+    const matches = text.match(re);
     if (matches) {
-      vocabHits += matches.length
-      if (matchedVocab.length < 5) matchedVocab.push(matches[0].toLowerCase())
+      vocabHits += matches.length;
+      if (matchedVocab.length < 5) matchedVocab.push(matches[0].toLowerCase());
     }
   }
-  const vocabRate = (vocabHits / wc) * 100
+  const vocabRate = (vocabHits / wc) * 100;
   if (vocabRate >= 0.2) {
-    score += Math.min(0.55, vocabRate * 0.22)
+    score += Math.min(0.55, vocabRate * 0.22);
     signals.push(
-      `vocab: ${matchedVocab.slice(0, 4).join(", ")}${
-        vocabHits > 4 ? ` (+${vocabHits - 4})` : ""
-      }`
-    )
+      `vocab: ${matchedVocab.slice(0, 4).join(", ")}${vocabHits > 4 ? ` (+${vocabHits - 4})` : ""}`,
+    );
   }
 
   // --- Phrase markers
-  let phraseHits = 0
-  const matchedPhrases: string[] = []
+  let phraseHits = 0;
+  const matchedPhrases: string[] = [];
   for (const re of PHRASE_MARKERS) {
-    const matches = text.match(re)
+    const matches = text.match(re);
     if (matches) {
-      phraseHits += matches.length
-      if (matchedPhrases.length < 3)
-        matchedPhrases.push(matches[0].slice(0, 30).toLowerCase())
+      phraseHits += matches.length;
+      if (matchedPhrases.length < 3) matchedPhrases.push(matches[0].slice(0, 30).toLowerCase());
     }
   }
   if (phraseHits >= 1) {
-    score += Math.min(0.40, phraseHits * 0.14)
-    signals.push(`AI phrases: ${matchedPhrases.join("; ")}`)
+    score += Math.min(0.4, phraseHits * 0.14);
+    signals.push(`AI phrases: ${matchedPhrases.join("; ")}`);
   }
 
   // --- Em-dashes (LLMs love them)
-  const emDashes = (text.match(/—/g) || []).length
-  const emDashRate = (emDashes / wc) * 100
+  const emDashes = (text.match(/—/g) || []).length;
+  const emDashRate = (emDashes / wc) * 100;
   if (emDashRate >= 0.2) {
-    score += Math.min(0.32, emDashRate * 0.20)
-    signals.push(`em-dashes ×${emDashes}`)
+    score += Math.min(0.32, emDashRate * 0.2);
+    signals.push(`em-dashes ×${emDashes}`);
   }
 
   // --- Pattern constructions
   if (NOT_JUST_X_ITS_Y.test(text)) {
-    score += 0.30
-    signals.push("not-just-X-it's-Y")
+    score += 0.3;
+    signals.push("not-just-X-it's-Y");
   }
   if (I_DONT_JUST_X.test(text)) {
-    score += 0.30
-    signals.push("don't-just-X-Y")
+    score += 0.3;
+    signals.push("don't-just-X-Y");
   }
   if (NOT_X_BUT_Y.test(text)) {
-    score += 0.18
-    signals.push("not-just-X-but-Y")
+    score += 0.18;
+    signals.push("not-just-X-but-Y");
   }
 
   // --- Generic openers
   for (const re of GENERIC_OPENERS) {
     if (re.test(text)) {
-      score += 0.30
-      signals.push("generic LLM opener")
-      break
+      score += 0.3;
+      signals.push("generic LLM opener");
+      break;
     }
   }
 
   // --- Transition openers at sentence boundaries
-  let transitionHits = 0
+  let transitionHits = 0;
   for (const word of TRANSITION_OPENERS) {
-    const re = new RegExp(`(?:^|[.!?]\\s+)${word},`, "gi")
-    const matches = text.match(re)
-    if (matches) transitionHits += matches.length
+    const re = new RegExp(`(?:^|[.!?]\\s+)${word},`, "gi");
+    const matches = text.match(re);
+    if (matches) transitionHits += matches.length;
   }
   if (transitionHits >= 1) {
-    score += Math.min(0.25, transitionHits * 0.10)
-    signals.push(`transition openers ×${transitionHits}`)
+    score += Math.min(0.25, transitionHits * 0.1);
+    signals.push(`transition openers ×${transitionHits}`);
   }
 
   // --- Sentence-shaped specifics
   if (NUMBERED_INSIGHT.test(text)) {
-    score += 0.18
-    signals.push("numbered insights")
+    score += 0.18;
+    signals.push("numbered insights");
   }
   if (HUMBLE_BRAG.test(text)) {
-    score += 0.12
-    signals.push("humble-brag")
+    score += 0.12;
+    signals.push("humble-brag");
   }
   if (CTA.test(text)) {
-    score += 0.12
-    signals.push("LinkedIn-style CTA")
+    score += 0.12;
+    signals.push("LinkedIn-style CTA");
   }
   if (GENERIC_CONCLUSION.test(text)) {
-    score += 0.12
-    signals.push("generic conclusion")
+    score += 0.12;
+    signals.push("generic conclusion");
   }
 
   // --- Markdown / formatting tells
-  const boldHeaders = (text.match(BOLD_HEADER) || []).length
+  const boldHeaders = (text.match(BOLD_HEADER) || []).length;
   if (boldHeaders >= 1) {
-    score += Math.min(0.20, boldHeaders * 0.12)
-    signals.push(`**bold** headers ×${boldHeaders}`)
+    score += Math.min(0.2, boldHeaders * 0.12);
+    signals.push(`**bold** headers ×${boldHeaders}`);
   }
-  const emojiBullets = (text.match(EMOJI_BULLETS) || []).length
+  const emojiBullets = (text.match(EMOJI_BULLETS) || []).length;
   if (emojiBullets >= 2) {
-    score += Math.min(0.25, emojiBullets * 0.07)
-    signals.push(`emoji bullets ×${emojiBullets}`)
+    score += Math.min(0.25, emojiBullets * 0.07);
+    signals.push(`emoji bullets ×${emojiBullets}`);
   }
 
   // --- Emoji density
-  const emojis = text.match(ANY_EMOJI) || []
+  const emojis = text.match(ANY_EMOJI) || [];
   if (emojis.length >= 2) {
-    score += Math.min(0.30, (emojis.length - 1) * 0.08)
-    signals.push(`emojis ×${emojis.length}`)
+    score += Math.min(0.3, (emojis.length - 1) * 0.08);
+    signals.push(`emojis ×${emojis.length}`);
   }
 
   // --- Hashtag density
-  const hashtags = text.match(HASHTAG) || []
+  const hashtags = text.match(HASHTAG) || [];
   if (hashtags.length >= 2) {
-    score += Math.min(0.20, (hashtags.length - 1) * 0.06)
-    signals.push(`hashtags ×${hashtags.length}`)
+    score += Math.min(0.2, (hashtags.length - 1) * 0.06);
+    signals.push(`hashtags ×${hashtags.length}`);
   }
 
   // --- Rule-of-three constructions ("X, Y, and Z")
-  const ruleOfThree = (text.match(RULE_OF_THREE) || []).length
-  const r3Rate = (ruleOfThree / wc) * 100
+  const ruleOfThree = (text.match(RULE_OF_THREE) || []).length;
+  const r3Rate = (ruleOfThree / wc) * 100;
   if (r3Rate >= 0.4 && ruleOfThree >= 2) {
-    score += Math.min(0.18, r3Rate * 0.08)
-    signals.push(`rule-of-three ×${ruleOfThree}`)
+    score += Math.min(0.18, r3Rate * 0.08);
+    signals.push(`rule-of-three ×${ruleOfThree}`);
   }
 
   // --- Ellipses (LLMs love trailing ellipses for "dramatic pause")
-  const ellipses = (text.match(ELLIPSIS) || []).length
+  const ellipses = (text.match(ELLIPSIS) || []).length;
   if (ellipses >= 1) {
-    score += Math.min(0.18, ellipses * 0.10)
-    signals.push(`ellipses ×${ellipses}`)
+    score += Math.min(0.18, ellipses * 0.1);
+    signals.push(`ellipses ×${ellipses}`);
   }
 
   // --- "First X. Then Y. And now Z." escalation hook
   if (FIRST_THEN_NOW.test(text)) {
-    score += 0.30
-    signals.push("first/then/now hook")
+    score += 0.3;
+    signals.push("first/then/now hook");
   }
 
   // --- Sentence-shaped analysis
   const sentences = text
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
-    .filter((s) => s.length >= 5)
+    .filter((s) => s.length >= 5);
 
   // --- Anaphora: 3+ consecutive-style sentences starting with the same word.
   // Catches "Whether... Whether... Whether..." / "First... Then... Now..."
   if (sentences.length >= 3) {
-    const counts: Record<string, number> = {}
+    const counts: Record<string, number> = {};
     for (const s of sentences) {
       const first = s
         .replace(/^[\s"'“"]+/, "")
         .split(/\s+/)[0]
         ?.toLowerCase()
-        .replace(/[^\w']/g, "")
-      if (!first || first.length < 3) continue
-      if (ANAPHORA_STOPWORDS.has(first)) continue
-      counts[first] = (counts[first] || 0) + 1
+        .replace(/[^\w']/g, "");
+      if (!first || first.length < 3) continue;
+      if (ANAPHORA_STOPWORDS.has(first)) continue;
+      counts[first] = (counts[first] || 0) + 1;
     }
-    let bestWord = ""
-    let bestCount = 0
+    let bestWord = "";
+    let bestCount = 0;
     for (const w in counts) {
       if (counts[w] > bestCount) {
-        bestCount = counts[w]
-        bestWord = w
+        bestCount = counts[w];
+        bestWord = w;
       }
     }
     if (bestCount >= 3) {
-      score += Math.min(0.35, bestCount * 0.12)
-      signals.push(`anaphora "${bestWord}…" ×${bestCount}`)
+      score += Math.min(0.35, bestCount * 0.12);
+      signals.push(`anaphora "${bestWord}…" ×${bestCount}`);
     }
   }
 
   // --- Many short punchy sentences (LinkedIn / engagement-bait formatting)
   if (sentences.length >= 6) {
-    const short = sentences.filter((s) => s.split(/\s+/).length <= 8).length
-    const ratio = short / sentences.length
+    const short = sentences.filter((s) => s.split(/\s+/).length <= 8).length;
+    const ratio = short / sentences.length;
     if (ratio >= 0.4) {
-      score += Math.min(0.20, ratio * 0.30)
-      signals.push(`short sentences ${Math.round(ratio * 100)}%`)
+      score += Math.min(0.2, ratio * 0.3);
+      signals.push(`short sentences ${Math.round(ratio * 100)}%`);
     }
   }
 
   // --- Sentence-length uniformity (LLMs cluster around 12-18 words)
   if (sentences.length >= 4) {
-    const lens = sentences.map((s) => s.split(/\s+/).length)
-    const mean = lens.reduce((a, b) => a + b, 0) / lens.length
-    const variance =
-      lens.reduce((a, b) => a + (b - mean) ** 2, 0) / lens.length
-    const sd = Math.sqrt(variance)
-    const cv = sd / mean
-    if (mean >= 6 && cv < 0.40) {
-      const inc = Math.min(0.25, (0.40 - cv) * 1.2)
-      score += inc
-      signals.push(
-        `uniform sentences (μ=${mean.toFixed(1)}, cv=${cv.toFixed(2)})`
-      )
+    const lens = sentences.map((s) => s.split(/\s+/).length);
+    const mean = lens.reduce((a, b) => a + b, 0) / lens.length;
+    const variance = lens.reduce((a, b) => a + (b - mean) ** 2, 0) / lens.length;
+    const sd = Math.sqrt(variance);
+    const cv = sd / mean;
+    if (mean >= 6 && cv < 0.4) {
+      const inc = Math.min(0.25, (0.4 - cv) * 1.2);
+      score += inc;
+      signals.push(`uniform sentences (μ=${mean.toFixed(1)}, cv=${cv.toFixed(2)})`);
     }
   }
 
   // Floor for any scoreable text so the verdict always lights the overlay,
   // even on clearly-human passages (low rating reads as green).
-  const rating = Math.max(0.05, Math.min(1, score))
-  return { rating, signals }
+  const rating = Math.max(0.05, Math.min(1, score));
+  return { rating, signals };
 }

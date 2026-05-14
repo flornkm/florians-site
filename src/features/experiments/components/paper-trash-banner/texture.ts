@@ -16,7 +16,9 @@ interface BannerOptions {
   hover: boolean;
 }
 
-export function createCookieBannerTexture(opts: BannerOptions = { hover: false }): THREE.CanvasTexture {
+export function createCookieBannerTexture(
+  opts: BannerOptions = { hover: false },
+): THREE.CanvasTexture {
   const w = BANNER_W;
   const h = BANNER_H;
   const canvas = document.createElement("canvas");
@@ -98,7 +100,7 @@ export function createBannerShadowTexture(): THREE.CanvasTexture {
     { spread: 90, opacity: 0.04, offsetY: 60 },
     { spread: 60, opacity: 0.06, offsetY: 38 },
     { spread: 32, opacity: 0.08, offsetY: 18 },
-    { spread: 14, opacity: 0.10, offsetY: 6 },
+    { spread: 14, opacity: 0.1, offsetY: 6 },
   ];
   for (const layer of layers) {
     ctx.save();
@@ -140,7 +142,7 @@ function drawCookie(ctx: CanvasRenderingContext2D, x: number, y: number, r: numb
   ctx.fillStyle = "#3a2010";
   const chips: [number, number, number][] = [
     [-0.32, -0.27, 0.13],
-    [0.27, -0.21, 0.10],
+    [0.27, -0.21, 0.1],
     [0.11, 0.27, 0.13],
     [-0.21, 0.32, 0.09],
     [0.37, 0.11, 0.08],

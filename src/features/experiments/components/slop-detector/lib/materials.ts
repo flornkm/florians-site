@@ -13,8 +13,8 @@ const GRAIN_PROFILE: Record<
 > = {
   GC_PlasticBody: { repeat: 16, normalScale: 0.32, envMapIntensity: 0.22 },
   GC_Button: { repeat: 12, normalScale: 0.26, envMapIntensity: 0.28 },
-  GC_Orange: { repeat: 11, normalScale: 0.20, envMapIntensity: 0.22 },
-  GC_Green: { repeat: 11, normalScale: 0.20, envMapIntensity: 0.22 },
+  GC_Orange: { repeat: 11, normalScale: 0.2, envMapIntensity: 0.22 },
+  GC_Green: { repeat: 11, normalScale: 0.2, envMapIntensity: 0.22 },
   GC_PlasticDark: { repeat: 14, normalScale: 0.24, envMapIntensity: 0.2 },
 };
 

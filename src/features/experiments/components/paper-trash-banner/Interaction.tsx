@@ -120,11 +120,7 @@ export function Interaction({ grab, flow }: { grab: GrabRef; flow: FlowRef }) {
         const now = performance.now();
         const dtMs = Math.max(8, now - f.lastPointerTime);
         const dt = dtMs / 1000;
-        f.ballVelocity.set(
-          (tmp.x - f.lastPointerPos.x) / dt,
-          (tmp.y - f.lastPointerPos.y) / dt,
-          0,
-        );
+        f.ballVelocity.set((tmp.x - f.lastPointerPos.x) / dt, (tmp.y - f.lastPointerPos.y) / dt, 0);
         f.lastPointerPos.copy(tmp);
         f.lastPointerTime = now;
         f.ballPosition.copy(tmp).add(f.ballGrabOffset);

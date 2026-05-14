@@ -11,8 +11,8 @@ const FONT: Record<string, string[]> = {
   "9": ["01110", "10001", "10001", "01111", "00001", "00010", "01100"],
   ":": ["00000", "00000", "00100", "00000", "00100", "00000", "00000"],
   ".": ["00000", "00000", "00000", "00000", "00000", "00100", "00100"],
-  " ": ["00000", "00000", "00000", "00000", "00000", "00000", "00000"]
-}
+  " ": ["00000", "00000", "00000", "00000", "00000", "00000", "00000"],
+};
 
 export function drawDotText(
   ctx: CanvasRenderingContext2D,
@@ -21,21 +21,21 @@ export function drawDotText(
   y: number,
   cell: number,
   color: string,
-  offColor?: string
+  offColor?: string,
 ) {
-  const r = cell * 0.34
-  const gap = cell * 0.18
+  const r = cell * 0.34;
+  const gap = cell * 0.18;
   for (let ci = 0; ci < text.length; ci++) {
-    const rows = FONT[text[ci]] ?? FONT[" "]
-    const ox = x + ci * (cell * 5 + gap * 2)
+    const rows = FONT[text[ci]] ?? FONT[" "];
+    const ox = x + ci * (cell * 5 + gap * 2);
     for (let ry = 0; ry < 7; ry++) {
       for (let rx = 0; rx < 5; rx++) {
-        const on = rows[ry][rx] === "1"
-        if (!on && !offColor) continue
-        ctx.fillStyle = on ? color : offColor!
-        ctx.beginPath()
-        ctx.arc(ox + rx * cell + cell / 2, y + ry * cell + cell / 2, r, 0, Math.PI * 2)
-        ctx.fill()
+        const on = rows[ry][rx] === "1";
+        if (!on && !offColor) continue;
+        ctx.fillStyle = on ? color : offColor!;
+        ctx.beginPath();
+        ctx.arc(ox + rx * cell + cell / 2, y + ry * cell + cell / 2, r, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
   }

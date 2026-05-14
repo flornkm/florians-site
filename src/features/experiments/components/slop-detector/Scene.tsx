@@ -64,10 +64,34 @@ export function Scene() {
       <hemisphereLight args={["#fff4e0", "#23282a", 0.55]} />
       <ambientLight intensity={0.18} color="#f4ead8" />
 
-      <pointLight position={[-0.8, 0.35, 0]} intensity={0.55} color="#fff2dc" distance={2.5} decay={1.4} />
-      <pointLight position={[0.8, 0.35, 0]} intensity={0.55} color="#eef2f8" distance={2.5} decay={1.4} />
-      <pointLight position={[0, 0.3, 0.9]} intensity={0.35} color="#f4ead8" distance={2.2} decay={1.6} />
-      <pointLight position={[0, 0.3, -0.9]} intensity={0.3} color="#e8eef5" distance={2.2} decay={1.6} />
+      <pointLight
+        position={[-0.8, 0.35, 0]}
+        intensity={0.55}
+        color="#fff2dc"
+        distance={2.5}
+        decay={1.4}
+      />
+      <pointLight
+        position={[0.8, 0.35, 0]}
+        intensity={0.55}
+        color="#eef2f8"
+        distance={2.5}
+        decay={1.4}
+      />
+      <pointLight
+        position={[0, 0.3, 0.9]}
+        intensity={0.35}
+        color="#f4ead8"
+        distance={2.2}
+        decay={1.6}
+      />
+      <pointLight
+        position={[0, 0.3, -0.9]}
+        intensity={0.3}
+        color="#e8eef5"
+        distance={2.2}
+        decay={1.6}
+      />
 
       <Suspense fallback={null}>
         <Environment frames={1} resolution={512} background={false}>

@@ -46,10 +46,8 @@ export function buildConstraints(): Constraint[] {
         out.push({ i: idx(c, r), j: idx(c + 1, r + 1), rest: SHEAR_REST, bend: false });
         out.push({ i: idx(c + 1, r), j: idx(c, r + 1), rest: SHEAR_REST, bend: false });
       }
-      if (c < COLS - 2)
-        out.push({ i: idx(c, r), j: idx(c + 2, r), rest: BEND_REST, bend: true });
-      if (r < ROWS - 2)
-        out.push({ i: idx(c, r), j: idx(c, r + 2), rest: BEND_REST, bend: true });
+      if (c < COLS - 2) out.push({ i: idx(c, r), j: idx(c + 2, r), rest: BEND_REST, bend: true });
+      if (r < ROWS - 2) out.push({ i: idx(c, r), j: idx(c, r + 2), rest: BEND_REST, bend: true });
     }
   }
   return out;

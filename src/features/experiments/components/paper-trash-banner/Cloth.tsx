@@ -204,10 +204,8 @@ export function Cloth({ grab, flow }: { grab: GrabRef; flow: FlowRef }) {
     for (let i = 0; i < count; i++) {
       const ix = i * 3;
       effRest[ix] = learnedRest[ix] + (ballRest[ix] - learnedRest[ix]) * ballBlend;
-      effRest[ix + 1] =
-        learnedRest[ix + 1] + (ballRest[ix + 1] - learnedRest[ix + 1]) * ballBlend;
-      effRest[ix + 2] =
-        learnedRest[ix + 2] + (ballRest[ix + 2] - learnedRest[ix + 2]) * ballBlend;
+      effRest[ix + 1] = learnedRest[ix + 1] + (ballRest[ix + 1] - learnedRest[ix + 1]) * ballBlend;
+      effRest[ix + 2] = learnedRest[ix + 2] + (ballRest[ix + 2] - learnedRest[ix + 2]) * ballBlend;
     }
 
     const ballMode = f.phase !== "flat";

@@ -8,7 +8,7 @@ const MODEL_URL = "/models/trash-bin.glb";
 useGLTF.preload(MODEL_URL);
 
 export const BIN_SCALE = 1.5;
-export const BIN_HEIGHT = 0.30 * BIN_SCALE;
+export const BIN_HEIGHT = 0.3 * BIN_SCALE;
 export const BIN_RESTING_Y = -0.62;
 export const BIN_HIDDEN_Y = -1.6;
 export const BIN_MOUTH_Y = BIN_RESTING_Y + BIN_HEIGHT;

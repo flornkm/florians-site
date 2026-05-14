@@ -14,7 +14,7 @@ const BIN_HIDDEN_Y = -1.6;
 const PAPER_Y = 0.0;
 const BALL_THRESHOLD = 0.85;
 // Bin mouth + interior in WORLD-Y (matches the GLB scaled to BIN_SCALE).
-const BIN_MOUTH_Y = BIN_RESTING_Y + 0.30 * BIN_SCALE;
+const BIN_MOUTH_Y = BIN_RESTING_Y + 0.3 * BIN_SCALE;
 const BIN_INSIDE_Y = BIN_RESTING_Y + 0.04;
 const BIN_RIM_RADIUS = 0.122 * BIN_SCALE;
 
@@ -65,10 +65,10 @@ function tuneRealisticMaterials(root: THREE.Object3D) {
     } else if (name.includes("recycle")) {
       mat = new THREE.MeshPhysicalMaterial({
         color: new THREE.Color("#2c63c4"),
-        metalness: 0.10,
+        metalness: 0.1,
         roughness: 0.45,
         clearcoat: 0.85,
-        clearcoatRoughness: 0.20,
+        clearcoatRoughness: 0.2,
         emissive: new THREE.Color("#3679d4"),
         emissiveIntensity: 0.15,
         envMapIntensity: 1.0,
@@ -80,7 +80,7 @@ function tuneRealisticMaterials(root: THREE.Object3D) {
         metalness: 1.0,
         roughness: 0.18,
         clearcoat: 0.6,
-        clearcoatRoughness: 0.10,
+        clearcoatRoughness: 0.1,
         envMapIntensity: 1.3,
       });
     }
@@ -132,8 +132,7 @@ function Bin({ ballRef }: { ballRef: React.MutableRefObject<BallState> }) {
     const dt = Math.min(0.033, delta);
     const stiffness = 70;
     const damping = 18;
-    const accel =
-      -stiffness * (progressRef.current - target) - damping * velocityRef.current;
+    const accel = -stiffness * (progressRef.current - target) - damping * velocityRef.current;
     velocityRef.current += accel * dt;
     progressRef.current += velocityRef.current * dt;
 
@@ -185,7 +184,7 @@ function CrumpledPaper({
   ballRef: React.MutableRefObject<BallState>;
 }) {
   const W = 1.05;
-  const H = 0.30;
+  const H = 0.3;
   const COLS = 56;
   const ROWS = 18;
   const { camera, gl } = useThree();
@@ -218,14 +217,11 @@ function CrumpledPaper({
         const u = c / (COLS - 1);
         const v = r / (ROWS - 1);
         const tx =
-          (fbm(u * 1.8, v * 1.8, 11) - 0.5) * 0.46 +
-          (fbm(u * 7.0, v * 7.0, 12) - 0.5) * 0.10;
+          (fbm(u * 1.8, v * 1.8, 11) - 0.5) * 0.46 + (fbm(u * 7.0, v * 7.0, 12) - 0.5) * 0.1;
         const ty =
-          (fbm(u * 1.8, v * 1.8, 22) - 0.5) * 0.46 +
-          (fbm(u * 7.0, v * 7.0, 23) - 0.5) * 0.10;
+          (fbm(u * 1.8, v * 1.8, 22) - 0.5) * 0.46 + (fbm(u * 7.0, v * 7.0, 23) - 0.5) * 0.1;
         const tz =
-          (fbm(u * 1.8, v * 1.8, 33) - 0.5) * 0.55 +
-          (fbm(u * 7.0, v * 7.0, 34) - 0.5) * 0.13;
+          (fbm(u * 1.8, v * 1.8, 33) - 0.5) * 0.55 + (fbm(u * 7.0, v * 7.0, 34) - 0.5) * 0.13;
         ballTarget[i * 3] = tx;
         ballTarget[i * 3 + 1] = ty;
         ballTarget[i * 3 + 2] = tz;
@@ -259,18 +255,14 @@ function CrumpledPaper({
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
         const i = r * COLS + c;
-        if (c < COLS - 1)
-          constraints.push({ i, j: i + 1, rest: restH, bend: false });
-        if (r < ROWS - 1)
-          constraints.push({ i, j: i + COLS, rest: restV, bend: false });
+        if (c < COLS - 1) constraints.push({ i, j: i + 1, rest: restH, bend: false });
+        if (r < ROWS - 1) constraints.push({ i, j: i + COLS, rest: restV, bend: false });
         if (c < COLS - 1 && r < ROWS - 1) {
           constraints.push({ i, j: i + COLS + 1, rest: restDiag, bend: false });
           constraints.push({ i: i + 1, j: i + COLS, rest: restDiag, bend: false });
         }
-        if (c < COLS - 2)
-          constraints.push({ i, j: i + 2, rest: restH * 2, bend: true });
-        if (r < ROWS - 2)
-          constraints.push({ i, j: i + COLS * 2, rest: restV * 2, bend: true });
+        if (c < COLS - 2) constraints.push({ i, j: i + 2, rest: restH * 2, bend: true });
+        if (r < ROWS - 2) constraints.push({ i, j: i + COLS * 2, rest: restV * 2, bend: true });
       }
     }
 
@@ -283,10 +275,7 @@ function CrumpledPaper({
   }, []);
 
   const bannerTex = useMemo(() => createCookieBannerTexture({ hover: false }), []);
-  const bannerHoverTex = useMemo(
-    () => createCookieBannerTexture({ hover: true }),
-    [],
-  );
+  const bannerHoverTex = useMemo(() => createCookieBannerTexture({ hover: true }), []);
   const hoverRef = useRef(false);
   const lastHover = useRef(false);
   const matRef = useRef<THREE.ShaderMaterial>(null);
@@ -451,7 +440,7 @@ function CrumpledPaper({
     const { pos, old, flatRest, ballTarget, count, constraints } = sim;
 
     const DAMPING = 0.78;
-    const ANCHOR = 0.10;
+    const ANCHOR = 0.1;
     const SUB_STEPS = 2;
     const ITERS = 14;
     const BEND_STIFFNESS = 0.94;
@@ -605,11 +594,7 @@ function CrumpledPaper({
     }
 
     if (groupRef.current) {
-      groupRef.current.position.set(
-        ball.position.x,
-        ball.position.y,
-        ball.position.z,
-      );
+      groupRef.current.position.set(ball.position.x, ball.position.y, ball.position.z);
     }
 
     if (hoverRef.current !== lastHover.current) {
@@ -627,100 +612,100 @@ function CrumpledPaper({
 
   return (
     <group ref={groupRef}>
-    <mesh
-      position={[0, PAPER_Y, 0]}
-      geometry={geometry}
-      castShadow
-      onPointerDown={(e) => {
-        e.stopPropagation();
-        const wp = e.point;
-        const ball = ballRef.current;
-        const now = performance.now();
+      <mesh
+        position={[0, PAPER_Y, 0]}
+        geometry={geometry}
+        castShadow
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          const wp = e.point;
+          const ball = ballRef.current;
+          const now = performance.now();
 
-        // Ball-drag mode: once the paper is crumpled enough, the cursor
-        // moves the whole wad rather than tugging individual vertices.
-        if (
-          crumpleRef.current >= BALL_THRESHOLD &&
-          (ball.mode === "cloth" || ball.mode === "fall")
-        ) {
+          // Ball-drag mode: once the paper is crumpled enough, the cursor
+          // moves the whole wad rather than tugging individual vertices.
+          if (
+            crumpleRef.current >= BALL_THRESHOLD &&
+            (ball.mode === "cloth" || ball.mode === "fall")
+          ) {
+            try {
+              gl.domElement.setPointerCapture(e.pointerId);
+            } catch {}
+            ball.mode = "drag";
+            // Drag plane goes through the wad's *current* world centre so the
+            // cursor maps 1:1 to a believable depth.
+            const ballWorld = new THREE.Vector3(
+              ball.position.x,
+              PAPER_Y + ball.position.y,
+              ball.position.z,
+            );
+            grabRef.current.plane.setFromNormalAndCoplanarPoint(
+              new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion),
+              ballWorld,
+            );
+            ball.lastCursor.copy(wp);
+            ball.lastTime = now;
+            ball.velocity.set(0, 0, 0);
+            hoverRef.current = false;
+            return;
+          }
+
+          // Cloth-grab mode: tug a single vertex.
+          let bestIdx = -1;
+          let bestD = Infinity;
+          const arr = sim.pos;
+          for (let i = 0; i < sim.count; i++) {
+            const ix = i * 3;
+            const dx = arr[ix] - wp.x;
+            const dy = arr[ix + 1] + PAPER_Y - wp.y;
+            const dz = arr[ix + 2] - wp.z;
+            const d = dx * dx + dy * dy + dz * dz;
+            if (d < bestD) {
+              bestD = d;
+              bestIdx = i;
+            }
+          }
+          if (bestIdx < 0) return;
           try {
             gl.domElement.setPointerCapture(e.pointerId);
           } catch {}
-          ball.mode = "drag";
-          // Drag plane goes through the wad's *current* world centre so the
-          // cursor maps 1:1 to a believable depth.
-          const ballWorld = new THREE.Vector3(
-            ball.position.x,
-            PAPER_Y + ball.position.y,
-            ball.position.z,
-          );
           grabRef.current.plane.setFromNormalAndCoplanarPoint(
             new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion),
-            ballWorld,
+            wp,
           );
-          ball.lastCursor.copy(wp);
-          ball.lastTime = now;
-          ball.velocity.set(0, 0, 0);
+          grabRef.current.active = true;
+          grabRef.current.idx = bestIdx;
+          grabRef.current.point.set(wp.x, wp.y - PAPER_Y, wp.z);
+          grabRef.current.start.copy(grabRef.current.point);
           hoverRef.current = false;
-          return;
-        }
-
-        // Cloth-grab mode: tug a single vertex.
-        let bestIdx = -1;
-        let bestD = Infinity;
-        const arr = sim.pos;
-        for (let i = 0; i < sim.count; i++) {
-          const ix = i * 3;
-          const dx = arr[ix] - wp.x;
-          const dy = arr[ix + 1] + PAPER_Y - wp.y;
-          const dz = arr[ix + 2] - wp.z;
-          const d = dx * dx + dy * dy + dz * dz;
-          if (d < bestD) {
-            bestD = d;
-            bestIdx = i;
+        }}
+        onPointerMove={(e) => {
+          // Hover detection still runs unless the paper is heavily folded or
+          // we're actively grabbing (so a slight crumple doesn't kill hover).
+          if (grabRef.current.active || crumpleRef.current > 0.25) {
+            hoverRef.current = false;
+            return;
           }
-        }
-        if (bestIdx < 0) return;
-        try {
-          gl.domElement.setPointerCapture(e.pointerId);
-        } catch {}
-        grabRef.current.plane.setFromNormalAndCoplanarPoint(
-          new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion),
-          wp,
-        );
-        grabRef.current.active = true;
-        grabRef.current.idx = bestIdx;
-        grabRef.current.point.set(wp.x, wp.y - PAPER_Y, wp.z);
-        grabRef.current.start.copy(grabRef.current.point);
-        hoverRef.current = false;
-      }}
-      onPointerMove={(e) => {
-        // Hover detection still runs unless the paper is heavily folded or
-        // we're actively grabbing (so a slight crumple doesn't kill hover).
-        if (grabRef.current.active || crumpleRef.current > 0.25) {
+          const uv = e.uv;
+          if (!uv) return;
+          hoverRef.current =
+            uv.x >= BUTTON_UV.uMin &&
+            uv.x <= BUTTON_UV.uMax &&
+            uv.y >= BUTTON_UV.vMin &&
+            uv.y <= BUTTON_UV.vMax;
+        }}
+        onPointerOut={() => {
           hoverRef.current = false;
-          return;
-        }
-        const uv = e.uv;
-        if (!uv) return;
-        hoverRef.current =
-          uv.x >= BUTTON_UV.uMin &&
-          uv.x <= BUTTON_UV.uMax &&
-          uv.y >= BUTTON_UV.vMin &&
-          uv.y <= BUTTON_UV.vMax;
-      }}
-      onPointerOut={() => {
-        hoverRef.current = false;
-      }}
-    >
-      <shaderMaterial
-        ref={matRef}
-        vertexShader={paperVertShader}
-        fragmentShader={paperFragShader}
-        uniforms={paperUniforms}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
+        }}
+      >
+        <shaderMaterial
+          ref={matRef}
+          vertexShader={paperVertShader}
+          fragmentShader={paperFragShader}
+          uniforms={paperUniforms}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
     </group>
   );
 }
@@ -747,7 +732,7 @@ function FitCamera() {
     // Fit both vertical content (bin → top of paper, ~1.7 units) and
     // horizontal content (banner ~1.2 wide). Whichever needs more z wins.
     const targetHeight = 1.95;
-    const targetWidth = 1.30;
+    const targetWidth = 1.3;
     const zForHeight = targetHeight / (2 * Math.tan(fovRad / 2));
     const zForWidth = targetWidth / (2 * Math.tan(fovRad / 2) * Math.max(0.4, aspect));
     const z = Math.max(zForHeight, zForWidth);
