@@ -59,12 +59,13 @@ export default function ContactDialog() {
         <div className="h-7.5 md:h-6.5 px-2.5 text-sm font-medium invisible">Contact</div>
         <motion.div
           layout
-          onClick={() => !isOpen && setIsOpen(true)}
+          aria-label={isOpen ? "Contact" : undefined}
+          role={isOpen ? "dialog" : undefined}
           className={cn(
-            "absolute right-0 bottom-0 md:bottom-auto md:top-0 bg-accent-primary text-accent-foreground overflow-hidden",
+            "absolute right-0 bottom-0 md:bottom-auto md:top-0 bg-accent-primary text-accent-foreground overflow-hidden outline outline-transparent outline-offset-0 transition-[outline-color,outline-offset,outline-width] duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-300",
             isOpen
               ? "w-64 border border-white/10 dark:border-black/10"
-              : "cursor-pointer hover:bg-accent-primary-hover",
+              : "hover:bg-accent-primary-hover",
           )}
           style={{ borderRadius: 14 }}
         >
@@ -104,17 +105,20 @@ export default function ContactDialog() {
                 </div>
               </motion.div>
             ) : (
-              <motion.span
+              <motion.button
+                type="button"
                 key="button"
                 layout="position"
+                onClick={() => setIsOpen(true)}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="text-sm font-medium leading-none whitespace-nowrap px-2.5 h-7.5 md:h-6.5 flex items-center"
+                className="text-sm font-medium leading-none whitespace-nowrap px-2.5 h-7.5 md:h-6.5 flex items-center cursor-pointer"
+                style={{ borderRadius: 14 }}
               >
                 Contact
-              </motion.span>
+              </motion.button>
             )}
           </AnimatePresence>
         </motion.div>
