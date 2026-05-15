@@ -35,10 +35,22 @@ export const Route = createRootRoute({
         content:
           "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
       },
+      { property: "og:title", content: "Florian - Design Engineer" },
       {
-        property: "og:image",
-        content: "/api/og?title=Florian%20-%20Design%20Engineer",
+        property: "og:description",
+        content:
+          "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
       },
+      { property: "og:image", content: "/api/og?title=Florian%20-%20Design%20Engineer" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Florian - Design Engineer" },
+      {
+        name: "twitter:description",
+        content:
+          "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
+      },
+      { name: "twitter:image", content: "/api/og?title=Florian%20-%20Design%20Engineer" },
     ],
     links: [
       {

@@ -31,7 +31,18 @@ export const Route = createFileRoute("/writing/")({
         name: "description",
         content: "Writing contains thoughts, ideas, and experiences from Florian.",
       },
+      { property: "og:title", content: "Writing" },
+      {
+        property: "og:description",
+        content: "Writing contains thoughts, ideas, and experiences from Florian.",
+      },
       { property: "og:image", content: "/api/og?title=Writing" },
+      { name: "twitter:title", content: "Writing" },
+      {
+        name: "twitter:description",
+        content: "Writing contains thoughts, ideas, and experiences from Florian.",
+      },
+      { name: "twitter:image", content: "/api/og?title=Writing" },
     ],
   }),
   component: WritingPage,

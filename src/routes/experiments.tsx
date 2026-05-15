@@ -33,7 +33,18 @@ export const Route = createFileRoute("/experiments")({
         name: "description",
         content: "A page collecting different design engineering experiments.",
       },
+      { property: "og:title", content: "Experiments" },
+      {
+        property: "og:description",
+        content: "A page collecting different design engineering experiments.",
+      },
       { property: "og:image", content: "/api/og?title=Experiments" },
+      { name: "twitter:title", content: "Experiments" },
+      {
+        name: "twitter:description",
+        content: "A page collecting different design engineering experiments.",
+      },
+      { name: "twitter:image", content: "/api/og?title=Experiments" },
     ],
   }),
   component: ExperimentsPage,

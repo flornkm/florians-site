@@ -31,7 +31,20 @@ export const Route = createFileRoute("/colophon")({
         content:
           "The colophon page of Florian provides information about the website, tech stack, inspiration as well as credits.",
       },
+      { property: "og:title", content: "Colophon" },
+      {
+        property: "og:description",
+        content:
+          "The colophon page of Florian provides information about the website, tech stack, inspiration as well as credits.",
+      },
       { property: "og:image", content: "/api/og?title=Colophon" },
+      { name: "twitter:title", content: "Colophon" },
+      {
+        name: "twitter:description",
+        content:
+          "The colophon page of Florian provides information about the website, tech stack, inspiration as well as credits.",
+      },
+      { name: "twitter:image", content: "/api/og?title=Colophon" },
     ],
   }),
   component: ColophonPage,
