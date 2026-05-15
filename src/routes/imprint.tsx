@@ -7,7 +7,12 @@ export const Route = createFileRoute("/imprint")({
     meta: [
       { title: "Imprint • Florian - Design Engineer" },
       { name: "description", content: "The usual imprint page." },
+      { property: "og:title", content: "Imprint" },
+      { property: "og:description", content: "The usual imprint page." },
       { property: "og:image", content: "/api/og?title=Imprint" },
+      { name: "twitter:title", content: "Imprint" },
+      { name: "twitter:description", content: "The usual imprint page." },
+      { name: "twitter:image", content: "/api/og?title=Imprint" },
     ],
   }),
   component: ImprintPage,

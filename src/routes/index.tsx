@@ -23,7 +23,25 @@ const getProjects = createServerFn().handler(async () => {
 export const Route = createFileRoute("/")({
   loader: () => getProjects(),
   head: () => ({
-    meta: [{ property: "og:image", content: "/api/og?title=Work" }],
+    meta: [
+      { title: "Work • Florian - Design Engineer" },
+      {
+        name: "description",
+        content: "Selected design and engineering work by Florian Kiem.",
+      },
+      { property: "og:title", content: "Work" },
+      {
+        property: "og:description",
+        content: "Selected design and engineering work by Florian Kiem.",
+      },
+      { property: "og:image", content: "/api/og?title=Work" },
+      { name: "twitter:title", content: "Work" },
+      {
+        name: "twitter:description",
+        content: "Selected design and engineering work by Florian Kiem.",
+      },
+      { name: "twitter:image", content: "/api/og?title=Work" },
+    ],
   }),
   component: IndexPage,
 });

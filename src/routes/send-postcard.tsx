@@ -12,7 +12,20 @@ export const Route = createFileRoute("/send-postcard")({
         content:
           "Sending a postcard on florians site is similar to entering your name on a guestbook, just digitally.",
       },
+      { property: "og:title", content: "Send Postcard" },
+      {
+        property: "og:description",
+        content:
+          "Sending a postcard on florians site is similar to entering your name on a guestbook, just digitally.",
+      },
       { property: "og:image", content: "/api/og?title=Send Postcard" },
+      { name: "twitter:title", content: "Send Postcard" },
+      {
+        name: "twitter:description",
+        content:
+          "Sending a postcard on florians site is similar to entering your name on a guestbook, just digitally.",
+      },
+      { name: "twitter:image", content: "/api/og?title=Send Postcard" },
     ],
   }),
   component: SendPostcardPage,
