@@ -7,7 +7,6 @@ import { IconX } from "central-icons/IconX";
 
 import { CONTACTS } from "@/const/contacts";
 import { cn } from "@/lib/utils";
-import { useLocation } from "@tanstack/react-router";
 import { cva } from "class-variance-authority";
 import type { ComponentType } from "react";
 import { Body4 } from "../design-system/body";
@@ -55,14 +54,8 @@ const LEGAL_LINKS: Tab[] = [
 ];
 
 export default function Footer() {
-  const { pathname } = useLocation();
-  const isWriting = pathname.startsWith("/writing");
-
   return (
-    <footer
-      className="md:pb-8 pb-24 px-4 mt-24 relative z-10 pt-12 mask-t-from-90% mask-t-to-100% bg-primary"
-      style={isWriting ? { scrollSnapAlign: "start" } : undefined}
-    >
+    <footer className="md:pb-8 pb-24 px-4 mt-24 relative z-10 pt-12 mask-t-from-90% mask-t-to-100% bg-primary">
       <div className="container mx-auto max-w-5xl space-y-12">
         <div className="w-full grid grid-cols-4 mx-auto">
           <div className="flex flex-col items-start gap-2">
