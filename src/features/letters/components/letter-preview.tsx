@@ -19,7 +19,7 @@ export default function LetterPreview() {
   }, []);
 
   return (
-    <div className="w-full px-8 py-8 flex-1 sticky flex justify-center items-center h-full bg-surface-tertiary overflow-hidden">
+    <div className="w-full px-8 py-8 flex-1 sticky flex justify-center items-center h-full overflow-hidden">
       <Draggable
         nodeRef={nodeRef}
         position={position}
