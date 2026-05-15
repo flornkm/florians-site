@@ -59,7 +59,11 @@ export const Route = createFileRoute("/work/$id")({
       meta: [
         { title: `${loaderData.title} • Florian - Design Engineer` },
         { name: "description", content: loaderData.description },
+        { property: "og:title", content: loaderData.title },
+        { property: "og:description", content: loaderData.description },
         { property: "og:image", content: `/api/og?title=${encodeURIComponent(loaderData.title)}` },
+        { name: "twitter:title", content: loaderData.title },
+        { name: "twitter:description", content: loaderData.description },
       ],
     };
   },
