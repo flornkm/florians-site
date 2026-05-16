@@ -63,12 +63,35 @@ function balancedWrap(title: string, lineCount: number): string[] {
   return lines;
 }
 
-function palette(seed: number): { bg: string; fg: string } {
-  const hue = seed % 360;
-  return {
-    bg: `hsl(${hue}, 55%, 10%)`,
-    fg: `hsl(${(hue + 8) % 360}, 90%, 65%)`,
+function orbGradient(seed: number): string {
+  const rand = (n: number) => {
+    let s = (seed + n * 2654435761) >>> 0;
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 0xffffffff;
   };
+
+  const baseHue = seed % 360;
+  // Analogous hues — stay within ~60° of the base so the orb feels harmonious
+  const hues = [0, 18, 38, -15, -32].map(
+    (offset) => (baseHue + offset + 360 + Math.floor(rand(offset + 100) * 10)) % 360,
+  );
+
+  const blobs = hues.map((hue, i) => {
+    const x = Math.round(15 + rand(i * 2 + 1) * 70);
+    const y = Math.round(15 + rand(i * 2 + 2) * 70);
+    const radius = Math.round(45 + rand(i * 2 + 3) * 30);
+    const sat = 92 + Math.floor(rand(i * 2 + 4) * 8);
+    const light = 68 + Math.floor(rand(i * 2 + 5) * 18);
+    const alpha = (0.8 + rand(i * 2 + 6) * 0.2).toFixed(2);
+    return `radial-gradient(circle at ${x}% ${y}%, hsla(${hue}, ${sat}%, ${light}%, ${alpha}) 0%, hsla(${hue}, ${sat}%, ${light}%, 0) ${radius}%)`;
+  });
+
+  // Base layer fills any gaps so the orb is never washed out
+  blobs.push(
+    `radial-gradient(circle at 50% 55%, hsl(${hues[0]}, 95%, 70%) 0%, hsl(${hues[2]}, 85%, 52%) 100%)`,
+  );
+
+  return blobs.join(", ");
 }
 
 function hashString(s: string): number {
@@ -85,9 +108,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const rawTitle = Array.isArray(req.query.title) ? req.query.title[0] : req.query.title;
     const title = (rawTitle || "Florian").slice(0, 200);
 
-    const { bg, fg } = palette(hashString(title));
+    const orb = orbGradient(hashString(title));
     const { font: fontSize, lineCount } = chooseSize(title);
     const lines = balancedWrap(title, lineCount);
+    const dotSize = fontSize * LINE_HEIGHT;
 
     const image = new ImageResponse(
       (
@@ -100,8 +124,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             alignItems: "center",
             justifyContent: "center",
             padding: PADDING,
-            background: bg,
-            color: fg,
+            background: "#ffffff",
+            color: "#111111",
             fontFamily: "Pretendard",
             fontSize,
             fontWeight: 500,
@@ -111,7 +135,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }}
         >
           {lines.map((line, i) => (
-            <div key={i}>{line}</div>
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: `${fontSize * 0.3}px`,
+              }}
+            >
+              {i === 0 && (
+                <div
+                  style={{
+                    width: dotSize,
+                    height: dotSize,
+                    borderRadius: "9999px",
+                    background: orb,
+                    flexShrink: 0,
+                    boxShadow: "inset 0 0 0 2px rgba(0,0,0,0.1)",
+                  }}
+                />
+              )}
+              <span>{line}</span>
+            </div>
           ))}
         </div>
       ),
