@@ -5,7 +5,7 @@ import path from "node:path";
 import React from "react";
 
 const fontData = fs.readFileSync(
-  path.join(process.cwd(), "public/fonts/pretendard/Pretendard-Regular.woff"),
+  path.join(process.cwd(), "public/fonts/pretendard/Pretendard-Medium.woff"),
 );
 
 const LINE_HEIGHT = 1.1;
@@ -104,7 +104,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             color: fg,
             fontFamily: "Pretendard",
             fontSize,
-            fontWeight: 400,
+            fontWeight: 500,
             letterSpacing: "-0.03em",
             lineHeight: LINE_HEIGHT,
             textAlign: "center",
@@ -122,7 +122,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           {
             name: "Pretendard",
             data: fontData,
-            weight: 400,
+            weight: 500,
             style: "normal",
           },
         ],
