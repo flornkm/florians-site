@@ -1,3 +1,4 @@
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
 import fs from "node:fs";
 import path from "node:path";
@@ -79,16 +80,16 @@ function hashString(s: string): number {
   return h >>> 0;
 }
 
-export default async function handler(req: Request): Promise<Response> {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    const url = new URL(req.url);
-    const title = (url.searchParams.get("title") || "Florian").slice(0, 200);
+    const rawTitle = Array.isArray(req.query.title) ? req.query.title[0] : req.query.title;
+    const title = (rawTitle || "Florian").slice(0, 200);
 
     const { bg, fg } = palette(hashString(title));
     const { font: fontSize, lineCount } = chooseSize(title);
     const lines = balancedWrap(title, lineCount);
 
-    return new ImageResponse(
+    const image = new ImageResponse(
       (
         <div
           style={{
@@ -127,8 +128,13 @@ export default async function handler(req: Request): Promise<Response> {
         ],
       },
     );
+
+    const buffer = Buffer.from(await image.arrayBuffer());
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
+    res.status(200).send(buffer);
   } catch (e) {
     console.error(e);
-    return new Response("Failed to generate the image", { status: 500 });
+    res.status(500).send("Failed to generate the image");
   }
 }
