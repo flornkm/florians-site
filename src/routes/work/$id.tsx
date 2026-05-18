@@ -101,7 +101,7 @@ function WorkPage() {
         <IconChevronLeft className="mt-1.5 h-4 w-4" />
         <div className="h-7 flex-1 mt-0.5">
           <div className="pointer-events-none transition-all duration-200 ease-out sm:group-hover/link:-translate-y-[22.5px] sm:group-focus-within/link:-translate-y-[22.5px]">
-            <H1 className="transition-all duration-200 ease-out group-hover/link:opacity-0 sm:group-hover/link:blur-[1px] sm:group-focus-within/link:opacity-0 sm:group-focus-within/link:blur-[1px]">
+            <H1 className="transition-all duration-200 ease-out sm:group-hover/link:opacity-0 sm:group-hover/link:blur-[1px] sm:group-focus-within/link:opacity-0 sm:group-focus-within/link:blur-[1px]">
               {project.title} <span className="text-sm text-quaternary">{project.date}</span>
             </H1>
             <span
