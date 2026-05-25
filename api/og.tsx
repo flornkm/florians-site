@@ -2,11 +2,22 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
 import fs from "node:fs";
 import path from "node:path";
+import opentype from "opentype.js";
 import React from "react";
 import rough from "roughjs";
 
 const fontData = fs.readFileSync(
   path.join(process.cwd(), "public/fonts/pretendard/Pretendard-SemiBold.woff"),
+);
+
+const titleFontBuf = fs.readFileSync(
+  path.join(process.cwd(), "public/fonts/pretendard/PretendardVariable.ttf"),
+);
+const titleFont = opentype.parse(
+  titleFontBuf.buffer.slice(
+    titleFontBuf.byteOffset,
+    titleFontBuf.byteOffset + titleFontBuf.byteLength,
+  ),
 );
 
 const WIDTH = 1200;
@@ -64,34 +75,42 @@ function slugToTitle(slug: string): string {
 
 const ROUTE_CHAIN = discoverRoutes();
 
-// Estimated character width: chars × fontSize × CHAR_WIDTH_RATIO.
-// Pretendard SemiBold runs around 0.6–0.65 on average; use a slightly
-// conservative value so wide characters (W/M) don't poke past the ellipse.
+// Estimated character width — used to pick a font size that leaves slack
+// around the title so the rough strokes don't crowd the ellipse. The
+// final ellipse is sized from actual opentype measurements.
 const CHAR_WIDTH_RATIO = 0.7;
 const FONT_LADDER = [140, 130, 120, 110, 100, 90, 80, 72, 64, 56, 48] as const;
+const LINE_HEIGHT = 1.15;
 const rxPadFor = (font: number) => font * 0.55;
-const ryPadFor = (font: number) => font * 0.35;
+const ryPadFor = (font: number) => font * 0.4;
+// Extra clearance between the glyph paths and the ellipse stroke — the
+// roughened glyph outlines wobble outward a few pixels, so the ellipse
+// has to start a bit further out than the geometric glyph box.
+const TEXT_SAFETY = 24;
 
-function chooseLayout(title: string): { font: number; lines: string[] } {
+function measureWidth(text: string, fontSize: number): number {
+  return titleFont.getAdvanceWidth(text, fontSize);
+}
+
+function chooseLayout(title: string): { fontSize: number; lines: string[] } {
   const maxRx = WIDTH / 2 - 60;
   const maxRy = HEIGHT / 2 - 60;
 
   for (const font of FONT_LADDER) {
     const rxPad = rxPadFor(font);
     const ryPad = ryPadFor(font);
-    const maxTextWidth = (maxRx - rxPad) * 2;
-    const maxTextHeight = (maxRy - ryPad) / 0.65;
+    const maxTextWidth = (maxRx - rxPad - TEXT_SAFETY) * 2;
+    const maxTextHeight = (maxRy - ryPad - TEXT_SAFETY) * 2;
     const maxCharsPerLine = Math.max(6, Math.floor(maxTextWidth / (font * CHAR_WIDTH_RATIO)));
     const lines = balancedWrap(title, maxCharsPerLine);
     const longest = lines.reduce((m, l) => Math.max(m, l.length), 0);
     const textWidth = longest * font * CHAR_WIDTH_RATIO;
-    const textHeight = lines.length * font * 1.05;
+    const textHeight = lines.length * font * LINE_HEIGHT;
     if (textWidth <= maxTextWidth && textHeight <= maxTextHeight) {
-      return { font, lines };
+      return { fontSize: font, lines };
     }
   }
-
-  return { font: 44, lines: balancedWrap(title, 28) };
+  return { fontSize: 44, lines: balancedWrap(title, 28) };
 }
 
 function balancedWrap(title: string, maxCharsPerLine: number): string[] {
@@ -140,19 +159,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const prev = idx >= 0 ? ROUTE_CHAIN[(idx - 1 + n) % n] : null;
     const next = idx >= 0 ? ROUTE_CHAIN[(idx + 1) % n] : null;
 
-    const { font: fontSize, lines: titleLines } = chooseLayout(title);
-    const longestLine = titleLines.reduce((m, l) => Math.max(m, l.length), 0);
-    const halfCenter = (longestLine * fontSize * CHAR_WIDTH_RATIO) / 2;
+    const { fontSize, lines: titleLines } = chooseLayout(title);
+    const longestLineWidth = titleLines.reduce(
+      (m, l) => Math.max(m, measureWidth(l, fontSize)),
+      0,
+    );
+    const halfCenter = longestLineWidth / 2;
     const GAP = 80;
     const offset = halfCenter + GAP;
-    const lineHeight = 1.05;
-    const totalTextHeight = titleLines.length * fontSize * lineHeight;
+    const totalTextHeight = titleLines.length * fontSize * LINE_HEIGHT;
 
-    // Hand-drawn ellipse around the centered title — same vibe as the
-    // FloWording outline on the about page.
     const gen = rough.generator();
-    const ellipseRx = halfCenter + rxPadFor(fontSize);
-    const ellipseRy = totalTextHeight * 0.65 + ryPadFor(fontSize);
+
+    // Hand-drawn ellipse around the title — same vibe as FloWording.
+    const ellipseRx = halfCenter + rxPadFor(fontSize) + TEXT_SAFETY;
+    const ellipseRy = totalTextHeight / 2 + ryPadFor(fontSize) + TEXT_SAFETY;
     const ellipseDrawable = gen.ellipse(
       WIDTH / 2,
       HEIGHT / 2,
@@ -170,6 +191,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     );
     const ellipsePaths = gen.toPaths(ellipseDrawable);
 
+    // Render each line of the title as rough.js sketched glyph outlines —
+    // same approach FloWording uses for the "Flo" word, generalized via
+    // opentype.js for arbitrary text.
+    const titleRoughPaths: { d: string; stroke: string; strokeWidth: number }[] = [];
+    const firstBaselineY = HEIGHT / 2 - totalTextHeight / 2 + fontSize * 0.82;
+    titleLines.forEach((line, i) => {
+      const lineWidth = measureWidth(line, fontSize);
+      const lineX = (WIDTH - lineWidth) / 2;
+      const baselineY = firstBaselineY + i * fontSize * LINE_HEIGHT;
+      const glyphPath = titleFont.getPath(line, lineX, baselineY, fontSize).toPathData(2);
+      const drawable = gen.path(glyphPath, {
+        stroke: "#111111",
+        strokeWidth: 2.5,
+        roughness: 2,
+        bowing: 1.5,
+        maxRandomnessOffset: 1.5,
+        fill: "none",
+        seed: 42 + i,
+      });
+      for (const p of gen.toPaths(drawable)) {
+        titleRoughPaths.push({
+          d: p.d,
+          stroke: p.stroke || "#111111",
+          strokeWidth: p.strokeWidth ?? 2.5,
+        });
+      }
+    });
+
     const image = new ImageResponse(
       (
         <div
@@ -181,7 +230,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             fontFamily: "Pretendard",
             fontWeight: 600,
             letterSpacing: "-0.03em",
-            fontSize,
+            fontSize: 44,
             lineHeight: 1,
             overflow: "hidden",
             display: "flex",
@@ -208,7 +257,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           >
             {ellipsePaths.map((p, i) => (
               <path
-                key={i}
+                key={`e-${i}`}
                 d={p.d}
                 stroke={p.stroke || "#111111"}
                 strokeWidth={p.strokeWidth}
@@ -216,27 +265,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 strokeLinecap="round"
               />
             ))}
-          </svg>
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              color: "#111111",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              lineHeight,
-            }}
-          >
-            {titleLines.map((line, i) => (
-              <div key={i} style={{ whiteSpace: "nowrap" }}>
-                {line}
-              </div>
+            {titleRoughPaths.map((p, i) => (
+              <path
+                key={`t-${i}`}
+                d={p.d}
+                stroke={p.stroke}
+                strokeWidth={p.strokeWidth}
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             ))}
-          </div>
+          </svg>
           <div
             style={{
               position: "absolute",
