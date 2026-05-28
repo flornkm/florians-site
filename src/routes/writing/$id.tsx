@@ -140,6 +140,7 @@ function WritingDetailPage() {
     "-mt-7 w-full max-w-lg lg:[&>h1]:block [&>h1]:hidden",
   );
   const activeId = useActiveHeading(item.headings.map((h) => h.id));
+  const [hovered, setHovered] = useState(false);
 
   if (!content) {
     return <div>Content not found</div>;
@@ -148,28 +149,56 @@ function WritingDetailPage() {
   return (
     <div className="w-full">
       <div className="absolute md:flex hidden pointer-events-none top-0 items-center justify-center left-0 h-full max-w-32">
-        <div className="py-16 pr-4 w-full pointer-events-auto sticky group top-1/2 -translate-y-1/2">
+        <div className="py-16 pr-4 w-full pointer-events-auto sticky top-1/2 -translate-y-1/2">
           {item.headings.length > 0 && (
-            <nav className="pl-5 lg:pl-6 bg-inverted p-4 pr-8 -translate-x-52 duration-150 w-56 max-h-24 group-hover:max-h-96 group-hover:translate-x-4 transition-all ease-out rounded-xl">
-              <ul className="flex flex-col gap-1.5">
-                {item.headings.map((heading) => (
-                  <li key={heading.id}>
-                    <a
-                      href={`#${heading.id}`}
-                      onClick={(e) => handleAnchorClick(e, heading.id)}
+            <motion.nav
+              onHoverStart={() => setHovered(true)}
+              onHoverEnd={() => setHovered(false)}
+              className="flex flex-col gap-2 pl-5 lg:pl-6"
+            >
+              {item.headings.map((heading) => {
+                const isActive = activeId === heading.id;
+                const barWidth = Math.min(Math.max(heading.text.length * 4, 14), 72);
+                const indent = (heading.level - 2) * 10;
+                return (
+                  <a
+                    key={heading.id}
+                    href={`#${heading.id}`}
+                    onClick={(e) => handleAnchorClick(e, heading.id)}
+                    aria-label={heading.text}
+                    className="group/toc relative flex items-center gap-3 py-1"
+                    style={{ paddingLeft: indent }}
+                  >
+                    <motion.span
+                      aria-hidden
+                      className="block shrink-0 rounded-full bg-(--text-primary)"
+                      initial={false}
+                      animate={{
+                        width: isActive ? barWidth + 8 : barWidth,
+                        height: isActive ? 3 : 2,
+                        opacity: isActive ? 0.8 : hovered ? 0.3 : 0.12,
+                      }}
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                    <motion.span
+                      aria-hidden
                       className={cn(
-                        "text-sm leading-relaxed transition-colors",
-                        activeId === heading.id
-                          ? "text-(--surface) font-medium"
-                          : "text-(--surface-tertiary)/75 hover:text-(--surface)/90",
+                        "whitespace-nowrap text-xs leading-none transition-colors",
+                        isActive ? "text-primary" : "text-secondary",
                       )}
+                      initial={false}
+                      animate={{
+                        opacity: hovered ? 1 : 0,
+                        x: hovered ? 0 : -6,
+                      }}
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
                     >
                       {heading.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+                    </motion.span>
+                  </a>
+                );
+              })}
+            </motion.nav>
           )}
         </div>
       </div>
