@@ -30,6 +30,35 @@ interface ModelViewerProps {
   metalType?: "steel" | "aluminum" | "copper" | "gold" | "chrome" | "titanium";
 }
 
+type MetalType = "steel" | "aluminum" | "copper" | "gold" | "chrome" | "titanium";
+
+interface LoaderProps {
+  src: string;
+  metalType?: MetalType;
+}
+
+function ModelRenderer({
+  src,
+  metalType,
+  STLLoader,
+  OBJLoader,
+}: {
+  src: string;
+  metalType: MetalType;
+  STLLoader: React.ComponentType<LoaderProps>;
+  OBJLoader: React.ComponentType<LoaderProps>;
+}) {
+  const fileExtension = src.split(".").pop()?.toLowerCase();
+
+  if (fileExtension === "stl") {
+    return <STLLoader src={src} metalType={metalType} />;
+  } else if (fileExtension === "obj") {
+    return <OBJLoader src={src} metalType={metalType} />;
+  } else {
+    throw new Error(`Unsupported file format: ${fileExtension}`);
+  }
+}
+
 function ErrorFallback({ error }: { error: string }) {
   return (
     <div className="flex items-center justify-center w-full h-96 bg-destructive/10 rounded-lg border border-destructive/20">
@@ -97,18 +126,6 @@ function Scene({
 
   const { Canvas, PerspectiveCamera, OrbitControls, STLLoader, OBJLoader } = ThreeComponents;
 
-  function ModelRenderer({ src }: { src: string }) {
-    const fileExtension = src.split(".").pop()?.toLowerCase();
-
-    if (fileExtension === "stl") {
-      return <STLLoader src={src} metalType={metalType} />;
-    } else if (fileExtension === "obj") {
-      return <OBJLoader src={src} metalType={metalType} />;
-    } else {
-      throw new Error(`Unsupported file format: ${fileExtension}`);
-    }
-  }
-
   return (
     <Canvas style={{ background: "var(--color-surface-secondary)" }}>
       <PerspectiveCamera makeDefault position={cameraPosition} />
@@ -120,7 +137,12 @@ function Scene({
       <pointLight position={[-5, -5, -5]} intensity={0.8} />
 
       <Suspense fallback={null}>
-        <ModelRenderer src={src} />
+        <ModelRenderer
+          src={src}
+          metalType={metalType}
+          STLLoader={STLLoader}
+          OBJLoader={OBJLoader}
+        />
       </Suspense>
 
       <OrbitControls
