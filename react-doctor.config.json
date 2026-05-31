@@ -1,7 +1,9 @@
-{ "rules": {
-  "react-doctor/no-adjust-state-on-prop-change": "off",
-  "react-doctor/effect-needs-cleanup": "off",
-  "react-doctor/no-nested-component-definition": "off",
-  "react-doctor/no-effect-with-fresh-deps": "off",
-  "react-doctor/alt-text": "off"
-} }
+{
+  "$schema": "https://www.react.doctor/schema/config.json",
+  "rules": {
+    "react-doctor/no-unknown-property": "off"
+  },
+  "ignore": {
+    "files": ["api/**"]
+  }
+}

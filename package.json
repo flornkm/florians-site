@@ -24,7 +24,6 @@
     "@tanstack/react-router": "^1.166.7",
     "@tanstack/react-start": "^1.166.8",
     "@types/three": "^0.178.1",
-    "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^1.5.0",
     "@vercel/node": "^5.3.22",
     "@vercel/og": "^0.8.5",

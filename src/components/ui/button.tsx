@@ -95,6 +95,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
+      type="button"
       className={cn(buttonVariants({ variant, size, iconOnly, rounded }), className)}
       {...props}
     >

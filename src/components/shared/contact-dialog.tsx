@@ -122,7 +122,9 @@ export default function ContactDialog({
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm font-[550] pl-1">Contact</span>
                   <button
+                    type="button"
                     onClick={close}
+                    aria-label="Close contact dialog"
                     className="size-6 flex items-center justify-center rounded-sm text-neutral-500 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
                   >
                     <IconCrossSmall className="size-4" />

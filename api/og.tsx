@@ -80,6 +80,7 @@ function writingCard(_title: string, iconBase64?: string) {
     >
       {iconBase64 ? (
         <img
+          alt=""
           width={360}
           height={360}
           src={`data:image/svg+xml;base64,${iconBase64}`}

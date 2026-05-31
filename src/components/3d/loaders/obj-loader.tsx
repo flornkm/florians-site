@@ -27,7 +27,11 @@ export function OBJLoader({ src, metalType = "steel" }: OBJLoaderProps) {
       const center = bbox.getCenter(new THREE.Vector3());
       const size = bbox.getSize(new THREE.Vector3());
 
-      obj.position.sub(center);
+      obj.position.set(
+        obj.position.x - center.x,
+        obj.position.y - center.y,
+        obj.position.z - center.z,
+      );
 
       const maxDimension = Math.max(size.x, size.y, size.z);
       const scale = 3 / maxDimension; // fit in a 3-unit cube

@@ -1,26 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const CHARS_PER_TICK = 3;
 const TICK_INTERVAL_MS = 16;
 
 export function useTypingAnimation(text: string | undefined) {
   const [displayedText, setDisplayedText] = useState("");
-  const previousTextRef = useRef<string | undefined>(undefined);
+  const [trackedText, setTrackedText] = useState<string | undefined>(undefined);
+
+  // Reset synchronously during render when the target text changes. Doing this
+  // in an effect would commit one stale frame (old text) before the reset lands.
+  if (text !== trackedText) {
+    setTrackedText(text);
+    setDisplayedText("");
+  }
 
   useEffect(() => {
-    if (!text) {
-      setDisplayedText("");
-      return;
-    }
+    if (!text) return;
 
-    // Same text (e.g. from cache) skips the animation.
-    if (text === previousTextRef.current) {
-      setDisplayedText(text);
-      return;
-    }
-
-    previousTextRef.current = text;
-    setDisplayedText("");
     let currentIndex = 0;
 
     const intervalId = setInterval(() => {
