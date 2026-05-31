@@ -1,10 +1,4 @@
-/**
- * Scans public/images for raster images and emits a manifest with intrinsic
- * dimensions + a ThumbHash placeholder (base64 of ~25 bytes), so the shared
- * <Image> component can reserve space (no layout shift) and render a blur-up.
- *
- * Output: src/imageMap.gen.ts
- */
+// Emits src/imageMap.gen.ts with image dimensions + a ThumbHash so <Image> avoids layout shift and shows a blur-up.
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";

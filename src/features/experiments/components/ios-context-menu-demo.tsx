@@ -204,17 +204,7 @@ export function IosContextMenu() {
     >
       <div className="flex-1 flex items-center justify-center relative">
         <AnimatePresence>
-          {open && (
-            <motion.div
-              className="fixed inset-0 z-10 backdrop-blur-sm"
-              style={{ backgroundColor: "rgba(0,0,0,0.25)" }}
-              onClick={close}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-            />
-          )}
+          {open && <motion.div className="fixed inset-0 z-10" onClick={close} />}
         </AnimatePresence>
 
         <div className="relative z-20">

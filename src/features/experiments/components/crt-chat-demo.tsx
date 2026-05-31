@@ -1,7 +1,7 @@
 import { useChat } from "@ai-sdk/react";
 import type { UIMessage } from "ai";
 import { DefaultChatTransport } from "ai";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTypingAnimation } from "../../../hooks/use-typing-animation";
 import { CRTDisplay } from "../../contact/components/crt/crt-display";
 import type { CRTMessage } from "../../contact/components/crt/crt-text-renderer";
@@ -127,11 +127,9 @@ export const CrtChat = () => {
     [sendMessage, status],
   );
 
-  const displayMessages = useMemo(() => {
-    if (!bootComplete) return [];
-    const boot: CRTMessage = { role: "assistant", text: BOOT_MESSAGE };
-    return [boot, ...completedMessages];
-  }, [bootComplete, completedMessages]);
+  const displayMessages: CRTMessage[] = bootComplete
+    ? [{ role: "assistant", text: BOOT_MESSAGE }, ...completedMessages]
+    : [];
 
   const displayStreamText = !bootComplete ? bootText : rawStreamText;
   const displayIsStreaming = !bootComplete || isStreaming;

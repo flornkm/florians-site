@@ -38,7 +38,6 @@ export async function POST(req: Request): Promise<Response> {
 
     const stream = createUIMessageStream<ChatMessage>({
       execute: async ({ writer }) => {
-        // 1. Stream main response
         const result = streamText({
           model,
           system: SYSTEM_PROMPT,
@@ -50,7 +49,6 @@ export async function POST(req: Request): Promise<Response> {
 
         const responseMessages = (await result.response).messages;
 
-        // 2. Stream follow-up suggestions
         const suggestionsResult = streamObject({
           model,
           messages: [

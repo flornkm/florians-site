@@ -1,16 +1,4 @@
-// Heuristic AI-text scorer. Pure functions, no IO. Returns a rating in [0, 1]
-// plus a list of signals so the device readout can explain itself if needed.
-//
-// The list is biased toward the markers that actually correlate with current
-// LLM output (mid-2026 GPT/Claude/Gemini families). Update over time.
-
-// =============================================================================
-// Vocabulary markers — words/phrases LLMs reach for far more than humans do.
-// Grouped only for readability; all are scanned together.
-// =============================================================================
-
 const VOCAB_MARKERS: RegExp[] = [
-  // The classic slop
   /\bdelve(?:s|d|ing)?\b/gi,
   /\btapestry\b/gi,
   /\bnavigate(?:s|d|ing)?\b/gi,
@@ -48,7 +36,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bstate[\s-]of[\s-]the[\s-]art\b/gi,
   /\bparadigm\b/gi,
 
-  // Transformation / disruption
   /\btransformat(?:ive|ion|ional)\b/gi,
   /\bgroundbreaking\b/gi,
   /\brevolutioni[sz](?:e|es|ed|ing)\b/gi,
@@ -70,7 +57,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bspearhead(?:s|ed|ing)?\b/gi,
   /\bfoster(?:s|ed|ing)?\b/gi,
 
-  // Abstract / philosophical filler
   /\b(?:journey|odyssey|voyage|expedition)\b/gi,
   /\b(?:frontier|horizon|trajectory)\b/gi,
   /\b(?:kaleidoscope|symphony|orchestration)\b/gi,
@@ -83,7 +69,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\b(?:cusp|threshold|watershed|inflection point)\b/gi,
   /\b(?:beacon|lodestar|north star|guiding light)\b/gi,
 
-  // Transition / hedge words (LLMs love these as sentence openers)
   /\bindeed\b/gi,
   /\btruly\b/gi,
   /\bgenuinely\b/gi,
@@ -104,7 +89,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bnoteworthy\b/gi,
   /\bremarkably\b/gi,
 
-  // Aspirational nouns / business poetry
   /\baspiration(?:s|al)?\b/gi,
   /\bvision(?:ary|aries)\b/gi,
   /\bpioneer(?:s|ed|ing)?\b/gi,
@@ -118,7 +102,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bunparalleled\b/gi,
   /\bunprecedented\b/gi,
 
-  // LinkedIn / coach-speak / "AI essay" lexicon
   /\bcommoditi[sz](?:e|es|ed|ing|ation)\b/gi,
   /\bconsciousness\b/gi,
   /\bself[\s-]?aware(?:ness)?\b/gi,
@@ -133,7 +116,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bintention(?:al|ality|ally)?\b/gi,
   /\bmindful(?:ness|ly)?\b/gi,
 
-  // Brain-rot / Gen-Alpha slop lexicon (engagement-bait & bots-pretending-young)
   /\bskibidi\b/gi,
   /\b(?:rizz|rizzler|rizzed)\b/gi,
   /\bgyat?t\b/gi,
@@ -176,10 +158,6 @@ const VOCAB_MARKERS: RegExp[] = [
   /\bmald(?:ing)?\b/gi,
 ];
 
-// =============================================================================
-// Multi-word phrase markers — high-signal, count fully
-// =============================================================================
-
 const PHRASE_MARKERS: RegExp[] = [
   /\bit'?s worth (?:noting|mentioning|remembering)\b/gi,
   /\bit'?s important to (?:note|remember|understand|recognize|consider)\b/gi,
@@ -205,7 +183,6 @@ const PHRASE_MARKERS: RegExp[] = [
   /\bhave you ever wondered\b/gi,
   /\bwe live in (?:a |an |the )?\w+\s+(?:world|era|age|society)\b/gi,
   /\bin (?:our|today'?s) increasingly\b/gi,
-  // Coach / "consciousness" / AI-essay phrasings
   /\bin real time\b/gi,
   /\bwhat actually matters\b/gi,
   /\bwhat doesn'?t \w+\b/gi,
@@ -220,10 +197,6 @@ const PHRASE_MARKERS: RegExp[] = [
   /\bsmart(?:est)? (?:person|one) in the room\b/gi,
   /\b(?:we'?re|we are) entering (?:a |an |the )?\w*\s*era\b/gi,
 ];
-
-// =============================================================================
-// Pattern markers — structural / grammatical AI tells
-// =============================================================================
 
 const NOT_JUST_X_ITS_Y =
   /\b(?:it'?s|that'?s|this is|here'?s) not (?:just|simply|merely|only)\s+[^,.!?\n]{2,40}[,.;]?\s+(?:it'?s|that'?s|this is|here'?s)\s+/gi;
@@ -249,7 +222,7 @@ const GENERIC_OPENERS: RegExp[] = [
   /^\s*for the (?:last|past) /i,
 ];
 
-// Sentence-starting transition words — LLMs over-use these as paragraph openers
+// LLMs over-use these as paragraph openers.
 const TRANSITION_OPENERS = [
   "however",
   "moreover",
@@ -284,11 +257,10 @@ const GENERIC_CONCLUSION =
 const ANY_EMOJI = /\p{Extended_Pictographic}/gu;
 const HASHTAG = /(?:^|\s)#\w+/g;
 const ELLIPSIS = /…|\.{3,}/g;
-// "First the X. Then the Y. And now Z." escalation hook
 const FIRST_THEN_NOW =
   /\bfirst\b[^.!?\n]{3,80}[.!?]\s+then\b[^.!?\n]{3,80}[.!?]\s+(?:and\s+)?now\b/i;
 
-// Words that don't count for anaphora detection (too common to be meaningful)
+// Excluded from anaphora detection — too common to be meaningful.
 const ANAPHORA_STOPWORDS = new Set([
   "the",
   "a",
@@ -323,17 +295,12 @@ const ANAPHORA_STOPWORDS = new Set([
   "been",
 ]);
 
-// "X, Y, and Z" rule-of-three with 1-3 word items, used to detect AI list-style
 const RULE_OF_THREE =
   /\b(\w+(?:\s\w+){0,2}),\s+(\w+(?:\s\w+){0,2}),?\s+and\s+(\w+(?:\s\w+){0,2})\b/g;
 
-// Bold-headers pattern: **text** at start of line — typical of LLM markdown
 const BOLD_HEADER = /^\s*\*\*[^*\n]{2,40}\*\*\s*[:\n]/gm;
 
-// Bullet lines starting with emojis or arrows
 const EMOJI_BULLETS = /^\s*(?:[•→✨🚀💡🎯⚡🔥📈🌟✅\u{1F539}\u{1F538}]|\*|-)\s+\S/gmu;
-
-// =============================================================================
 
 export type TextScore = {
   rating: number;
@@ -350,7 +317,6 @@ export function scoreText(raw: string): TextScore {
   const words = text.split(/\s+/);
   const wc = words.length || 1;
 
-  // --- Vocabulary markers (per 100-word rate)
   let vocabHits = 0;
   const matchedVocab: string[] = [];
   for (const re of VOCAB_MARKERS) {
@@ -368,7 +334,6 @@ export function scoreText(raw: string): TextScore {
     );
   }
 
-  // --- Phrase markers
   let phraseHits = 0;
   const matchedPhrases: string[] = [];
   for (const re of PHRASE_MARKERS) {
@@ -383,7 +348,6 @@ export function scoreText(raw: string): TextScore {
     signals.push(`AI phrases: ${matchedPhrases.join("; ")}`);
   }
 
-  // --- Em-dashes (LLMs love them)
   const emDashes = (text.match(/—/g) || []).length;
   const emDashRate = (emDashes / wc) * 100;
   if (emDashRate >= 0.2) {
@@ -391,7 +355,6 @@ export function scoreText(raw: string): TextScore {
     signals.push(`em-dashes ×${emDashes}`);
   }
 
-  // --- Pattern constructions
   if (NOT_JUST_X_ITS_Y.test(text)) {
     score += 0.3;
     signals.push("not-just-X-it's-Y");
@@ -405,7 +368,6 @@ export function scoreText(raw: string): TextScore {
     signals.push("not-just-X-but-Y");
   }
 
-  // --- Generic openers
   for (const re of GENERIC_OPENERS) {
     if (re.test(text)) {
       score += 0.3;
@@ -414,7 +376,6 @@ export function scoreText(raw: string): TextScore {
     }
   }
 
-  // --- Transition openers at sentence boundaries
   let transitionHits = 0;
   for (const word of TRANSITION_OPENERS) {
     const re = new RegExp(`(?:^|[.!?]\\s+)${word},`, "gi");
@@ -426,7 +387,6 @@ export function scoreText(raw: string): TextScore {
     signals.push(`transition openers ×${transitionHits}`);
   }
 
-  // --- Sentence-shaped specifics
   if (NUMBERED_INSIGHT.test(text)) {
     score += 0.18;
     signals.push("numbered insights");
@@ -444,7 +404,6 @@ export function scoreText(raw: string): TextScore {
     signals.push("generic conclusion");
   }
 
-  // --- Markdown / formatting tells
   const boldHeaders = (text.match(BOLD_HEADER) || []).length;
   if (boldHeaders >= 1) {
     score += Math.min(0.2, boldHeaders * 0.12);
@@ -456,21 +415,18 @@ export function scoreText(raw: string): TextScore {
     signals.push(`emoji bullets ×${emojiBullets}`);
   }
 
-  // --- Emoji density
   const emojis = text.match(ANY_EMOJI) || [];
   if (emojis.length >= 2) {
     score += Math.min(0.3, (emojis.length - 1) * 0.08);
     signals.push(`emojis ×${emojis.length}`);
   }
 
-  // --- Hashtag density
   const hashtags = text.match(HASHTAG) || [];
   if (hashtags.length >= 2) {
     score += Math.min(0.2, (hashtags.length - 1) * 0.06);
     signals.push(`hashtags ×${hashtags.length}`);
   }
 
-  // --- Rule-of-three constructions ("X, Y, and Z")
   const ruleOfThree = (text.match(RULE_OF_THREE) || []).length;
   const r3Rate = (ruleOfThree / wc) * 100;
   if (r3Rate >= 0.4 && ruleOfThree >= 2) {
@@ -478,27 +434,22 @@ export function scoreText(raw: string): TextScore {
     signals.push(`rule-of-three ×${ruleOfThree}`);
   }
 
-  // --- Ellipses (LLMs love trailing ellipses for "dramatic pause")
   const ellipses = (text.match(ELLIPSIS) || []).length;
   if (ellipses >= 1) {
     score += Math.min(0.18, ellipses * 0.1);
     signals.push(`ellipses ×${ellipses}`);
   }
 
-  // --- "First X. Then Y. And now Z." escalation hook
   if (FIRST_THEN_NOW.test(text)) {
     score += 0.3;
     signals.push("first/then/now hook");
   }
 
-  // --- Sentence-shaped analysis
   const sentences = text
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
     .filter((s) => s.length >= 5);
 
-  // --- Anaphora: 3+ consecutive-style sentences starting with the same word.
-  // Catches "Whether... Whether... Whether..." / "First... Then... Now..."
   if (sentences.length >= 3) {
     const counts: Record<string, number> = {};
     for (const s of sentences) {
@@ -525,7 +476,6 @@ export function scoreText(raw: string): TextScore {
     }
   }
 
-  // --- Many short punchy sentences (LinkedIn / engagement-bait formatting)
   if (sentences.length >= 6) {
     const short = sentences.filter((s) => s.split(/\s+/).length <= 8).length;
     const ratio = short / sentences.length;
@@ -535,7 +485,7 @@ export function scoreText(raw: string): TextScore {
     }
   }
 
-  // --- Sentence-length uniformity (LLMs cluster around 12-18 words)
+  // LLMs cluster sentence length around 12-18 words; low variance is a tell.
   if (sentences.length >= 4) {
     const lens = sentences.map((s) => s.split(/\s+/).length);
     const mean = lens.reduce((a, b) => a + b, 0) / lens.length;
@@ -549,8 +499,7 @@ export function scoreText(raw: string): TextScore {
     }
   }
 
-  // Floor for any scoreable text so the verdict always lights the overlay,
-  // even on clearly-human passages (low rating reads as green).
+  // Floor so the verdict always lights the overlay (low rating reads as green).
   const rating = Math.max(0.05, Math.min(1, score));
   return { rating, signals };
 }

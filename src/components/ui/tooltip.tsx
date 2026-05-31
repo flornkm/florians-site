@@ -20,8 +20,6 @@ export function TooltipProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// --- Standalone tooltip (for isolated triggers) ---
-
 interface TooltipProps {
   children: React.ReactNode;
   content: string;
@@ -74,8 +72,6 @@ export default function Tooltip({ children, content, className, style }: Tooltip
   );
 }
 
-// --- Animated tooltip group (for adjacent triggers with smooth transitions) ---
-
 const easing = "cubic-bezier(0.1,1,0.36,1)";
 
 interface TooltipGroupProps {
@@ -96,10 +92,8 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
 
   return (
     <>
-      {/* Provide handle to triggers */}
       <TooltipGroupContext.Provider value={handle}>{children}</TooltipGroupContext.Provider>
 
-      {/* Shared popup root */}
       <BaseTooltip.Root handle={handle}>
         {({ payload: Payload }) => (
           <BaseTooltip.Portal>
@@ -129,15 +123,12 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
                     "[--vip:0.5rem]",
                     "relative h-full w-full overflow-clip",
                     "px-[var(--vip)] py-1",
-                    // Current content
                     "[&_[data-current]]:w-[calc(var(--popup-width)-2*var(--vip))]",
                     "[&_[data-current]]:translate-x-0 [&_[data-current]]:opacity-100",
                     `[&_[data-current]]:transition-[translate,opacity] [&_[data-current]]:duration-[250ms,175ms] [&_[data-current]]:ease-[${easing}]`,
-                    // Previous content
                     "[&_[data-previous]]:w-[calc(var(--popup-width)-2*var(--vip))]",
                     "[&_[data-previous]]:translate-x-0 [&_[data-previous]]:opacity-100",
                     `[&_[data-previous]]:transition-[translate,opacity] [&_[data-previous]]:duration-[250ms,175ms] [&_[data-previous]]:ease-[${easing}]`,
-                    // Direction-aware slide animations
                     "data-[activation-direction~='left']:[&_[data-current][data-starting-style]]:-translate-x-1/2",
                     "data-[activation-direction~='left']:[&_[data-current][data-starting-style]]:opacity-0",
                     "data-[activation-direction~='right']:[&_[data-current][data-starting-style]]:translate-x-1/2",
@@ -146,7 +137,6 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
                     "data-[activation-direction~='left']:[&_[data-previous][data-ending-style]]:opacity-0",
                     "data-[activation-direction~='right']:[&_[data-previous][data-ending-style]]:-translate-x-1/2",
                     "data-[activation-direction~='right']:[&_[data-previous][data-ending-style]]:opacity-0",
-                    // Instant mode
                     "[[data-instant]_&_[data-previous]]:transition-none",
                     "[[data-instant]_&_[data-current]]:transition-none",
                   )}
@@ -192,8 +182,6 @@ export function TooltipTrigger({ children, content, className, style }: TooltipT
     />
   );
 }
-
-// --- Rich tooltip (for large component content) ---
 
 interface RichTooltipProps {
   children: React.ReactNode;

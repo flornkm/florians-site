@@ -1,10 +1,4 @@
-/**
- * Scans public/videos for video files and emits a manifest with intrinsic
- * dimensions + a ThumbHash placeholder derived from the first frame, so the
- * shared <Video> component can reserve space and render a blur-up poster.
- *
- * Output: src/videoMap.gen.ts
- */
+// Emits src/videoMap.gen.ts with video dimensions + a first-frame ThumbHash so <Video> reserves space and shows a blur-up.
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";

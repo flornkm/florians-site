@@ -9,7 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SendPostcardRouteImport } from './routes/send-postcard'
+import { Route as TemporaryRouteImport } from './routes/temporary'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
@@ -18,11 +18,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WritingIndexRouteImport } from './routes/writing/index'
 import { Route as WritingIdRouteImport } from './routes/writing/$id'
-import { Route as WorkIdRouteImport } from './routes/work/$id'
 
-const SendPostcardRoute = SendPostcardRouteImport.update({
-  id: '/send-postcard',
-  path: '/send-postcard',
+const TemporaryRoute = TemporaryRouteImport.update({
+  id: '/temporary',
+  path: '/temporary',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -65,11 +64,6 @@ const WritingIdRoute = WritingIdRouteImport.update({
   path: '/writing/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WorkIdRoute = WorkIdRouteImport.update({
-  id: '/work/$id',
-  path: '/work/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,8 +72,7 @@ export interface FileRoutesByFullPath {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/send-postcard': typeof SendPostcardRoute
-  '/work/$id': typeof WorkIdRoute
+  '/temporary': typeof TemporaryRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -90,8 +83,7 @@ export interface FileRoutesByTo {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/send-postcard': typeof SendPostcardRoute
-  '/work/$id': typeof WorkIdRoute
+  '/temporary': typeof TemporaryRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing': typeof WritingIndexRoute
 }
@@ -103,8 +95,7 @@ export interface FileRoutesById {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/send-postcard': typeof SendPostcardRoute
-  '/work/$id': typeof WorkIdRoute
+  '/temporary': typeof TemporaryRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -117,8 +108,7 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/send-postcard'
-    | '/work/$id'
+    | '/temporary'
     | '/writing/$id'
     | '/writing/'
   fileRoutesByTo: FileRoutesByTo
@@ -129,8 +119,7 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/send-postcard'
-    | '/work/$id'
+    | '/temporary'
     | '/writing/$id'
     | '/writing'
   id:
@@ -141,8 +130,7 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/send-postcard'
-    | '/work/$id'
+    | '/temporary'
     | '/writing/$id'
     | '/writing/'
   fileRoutesById: FileRoutesById
@@ -154,19 +142,18 @@ export interface RootRouteChildren {
   ExperimentsRoute: typeof ExperimentsRoute
   ImprintRoute: typeof ImprintRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  SendPostcardRoute: typeof SendPostcardRoute
-  WorkIdRoute: typeof WorkIdRoute
+  TemporaryRoute: typeof TemporaryRoute
   WritingIdRoute: typeof WritingIdRoute
   WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/send-postcard': {
-      id: '/send-postcard'
-      path: '/send-postcard'
-      fullPath: '/send-postcard'
-      preLoaderRoute: typeof SendPostcardRouteImport
+    '/temporary': {
+      id: '/temporary'
+      path: '/temporary'
+      fullPath: '/temporary'
+      preLoaderRoute: typeof TemporaryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -225,13 +212,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WritingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/work/$id': {
-      id: '/work/$id'
-      path: '/work/$id'
-      fullPath: '/work/$id'
-      preLoaderRoute: typeof WorkIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -242,8 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExperimentsRoute: ExperimentsRoute,
   ImprintRoute: ImprintRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
-  SendPostcardRoute: SendPostcardRoute,
-  WorkIdRoute: WorkIdRoute,
+  TemporaryRoute: TemporaryRoute,
   WritingIdRoute: WritingIdRoute,
   WritingIndexRoute: WritingIndexRoute,
 }
