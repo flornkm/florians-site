@@ -48,9 +48,7 @@ interface ExperimentsSearch {
 export const Route = createFileRoute("/experiments")({
   validateSearch: (search: Record<string, unknown>): ExperimentsSearch => {
     const demo = search.demo;
-    return typeof demo === "string" && EXPERIMENTS.some((e) => e.slug === demo)
-      ? { demo }
-      : {};
+    return typeof demo === "string" && EXPERIMENTS.some((e) => e.slug === demo) ? { demo } : {};
   },
   head: () => ({
     meta: [
@@ -85,10 +83,7 @@ function ExperimentsPage() {
     (slug: string) => navigate({ search: { demo: slug }, resetScroll: false }),
     [navigate],
   );
-  const close = useCallback(
-    () => navigate({ search: {}, resetScroll: false }),
-    [navigate],
-  );
+  const close = useCallback(() => navigate({ search: {}, resetScroll: false }), [navigate]);
 
   const activeSlug = demo;
 

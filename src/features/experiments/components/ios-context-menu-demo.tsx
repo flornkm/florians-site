@@ -204,12 +204,7 @@ export function IosContextMenu() {
     >
       <div className="flex-1 flex items-center justify-center relative">
         <AnimatePresence>
-          {open && (
-            <motion.div
-              className="fixed inset-0 z-10"
-              onClick={close}
-            />
-          )}
+          {open && <motion.div className="fixed inset-0 z-10" onClick={close} />}
         </AnimatePresence>
 
         <div className="relative z-20">

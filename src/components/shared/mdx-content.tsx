@@ -204,14 +204,17 @@ function Img({ src, alt, className }: { src?: string; alt?: string; className?: 
   const isDiagram = (src ?? "").toLowerCase().endsWith(".svg");
   return (
     <figure className={cn("not-prose my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}>
-      <div className={cn(isDiagram ? "figure-dots p-4 md:p-8" : "rounded-lg bg-secondary p-4 md:p-12")}>
+      <div
+        className={cn(isDiagram ? "figure-dots p-4 md:p-8" : "rounded-lg bg-secondary p-4 md:p-12")}
+      >
         <Image
           src={src ?? ""}
           alt={alt ?? ""}
           objectFit="contain"
           className={cn(
             "h-auto w-full",
-            !isDiagram && "rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
+            !isDiagram &&
+              "rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
             className,
           )}
         />

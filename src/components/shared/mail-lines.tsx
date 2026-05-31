@@ -119,9 +119,7 @@ export function MailLines({
               initial={reduceMotion ? false : { y: s.mail.y + s.mail.h, height: 0 }}
               animate={{ y: target.y, height: target.h }}
               transition={
-                reduceMotion
-                  ? { duration: 0 }
-                  : { delay: delayFor(s.x), duration: 0.3, ease: EASE }
+                reduceMotion ? { duration: 0 } : { delay: delayFor(s.x), duration: 0.3, ease: EASE }
               }
             />
           );

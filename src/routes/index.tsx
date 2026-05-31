@@ -76,7 +76,11 @@ function WorkVideo({ src, alt }: { src: string; alt: string }) {
             alt=""
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover"
-            style={{ filter: "blur(20px)", opacity: ready ? 0 : 1, transition: "opacity 400ms ease-out" }}
+            style={{
+              filter: "blur(20px)",
+              opacity: ready ? 0 : 1,
+              transition: "opacity 400ms ease-out",
+            }}
           />
         )}
         <SmartVideo

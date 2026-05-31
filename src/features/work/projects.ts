@@ -58,7 +58,11 @@ export const PROJECTS: Project[] = [
       ],
       ["/images/sona/transcript.webp", "/images/sona/sharing.webp", "/images/sona/follow-up.webp"],
       "/videos/sona/sona-use.webm",
-      ["/images/sona/overview.webp", "/images/sona/export.webp", "/images/sona/mobile-protocol.webp"],
+      [
+        "/images/sona/overview.webp",
+        "/images/sona/export.webp",
+        "/images/sona/mobile-protocol.webp",
+      ],
       ["/images/sona/settings.webp", "/images/sona/upsell-modal.webp", "/images/sona/upsell.webp"],
       ["/images/sona/select.webp", "/images/sona/selected.webp", "/images/sona/bulk-delete.webp"],
       ["/images/sona/invite-user.webp", "/images/sona/faq.webp", "/images/sona/subscriber.webp"],

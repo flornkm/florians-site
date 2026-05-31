@@ -80,8 +80,8 @@ function AboutPage() {
             </p>
             <p>
               Today my work spans multiple disciplines. I like working in high quality but still
-              move fast. AI is enabling unprecedented possibilities that give design opportunities to
-              participate in actual product development, which is where I see my chance to bring
+              move fast. AI is enabling unprecedented possibilities that give design opportunities
+              to participate in actual product development, which is where I see my chance to bring
               worlds together.
             </p>
             <p>

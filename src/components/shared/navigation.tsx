@@ -35,7 +35,11 @@ export default function Navigation() {
     <nav className="relative z-50 bg-primary">
       <div className="mx-auto grid w-full max-w-[2000px] grid-cols-9 items-center gap-x-6 px-6 pt-6 pb-4">
         {/* w-fit keeps the link hugging the logo so its footprint isn't the whole 2-column track. */}
-        <Link href="/" className="flex w-fit items-center col-span-2 justify-self-start" aria-label="Home">
+        <Link
+          href="/"
+          className="flex w-fit items-center col-span-2 justify-self-start"
+          aria-label="Home"
+        >
           <span
             className="relative flex shrink-0 items-center"
             style={{ width: LOGO_HOVER_WIDTH }}

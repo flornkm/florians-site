@@ -15,7 +15,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-accent-primary text-sm text-accent-foreground hover:bg-accent-primary-hover",
-        secondary: "bg-interactive-secondary text-sm text-primary hover:bg-interactive-secondary-hover",
+        secondary:
+          "bg-interactive-secondary text-sm text-primary hover:bg-interactive-secondary-hover",
         tertiary: "text-tertiary text-sm hover:text-secondary hover:bg-interactive-hover",
       },
       size: sizeVariants,

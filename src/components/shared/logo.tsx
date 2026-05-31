@@ -34,17 +34,31 @@ export function Logo({ className, progress }: LogoProps) {
   const filter = useMotionTemplate`blur(${blur}px)`;
 
   return (
-    <span className={cn("relative inline-flex items-center text-primary", className)} role="img" aria-label="Florian Kiem">
+    <span
+      className={cn("relative inline-flex items-center text-primary", className)}
+      role="img"
+      aria-label="Florian Kiem"
+    >
       <svg height={HEIGHT} width={px(8.078)} viewBox="0 0 8.078 11" fill="none" aria-hidden>
-        <path d="M1.498 1.62414V4.25614H4.802V5.74014H1.498V9.94014H0V0.140137H5.782V1.62414H1.498Z" fill="currentColor" />
+        <path
+          d="M1.498 1.62414V4.25614H4.802V5.74014H1.498V9.94014H0V0.140137H5.782V1.62414H1.498Z"
+          fill="currentColor"
+        />
       </svg>
 
       {/* Spacer reserving the small-k width so the collapsed box hugs "Fk" */}
       <span aria-hidden style={{ width: px(7) }} />
 
-      <motion.span className="absolute top-0 inline-flex" style={{ left: px(8.078), opacity: progress, filter }} aria-hidden>
+      <motion.span
+        className="absolute top-0 inline-flex"
+        style={{ left: px(8.078), opacity: progress, filter }}
+        aria-hidden
+      >
         <svg height={HEIGHT} width={px(MIDDLE_WIDTH)} viewBox="8.078 0 56.842 11" fill="none">
-          <path d="M8.07812 9.94014V0.140137H9.57613V8.45614H13.8601V9.94014H8.07812Z" fill="currentColor" />
+          <path
+            d="M8.07812 9.94014V0.140137H9.57613V8.45614H13.8601V9.94014H8.07812Z"
+            fill="currentColor"
+          />
           <path
             d="M20.9831 6.622V3.458C20.9831 2.086 19.9471 1.484 18.9671 1.484C17.9871 1.484 16.9511 2.086 16.9511 3.458V6.622C16.9511 7.994 17.9871 8.596 18.9671 8.596C19.9471 8.596 20.9831 7.994 20.9831 6.622ZM15.4531 6.622V3.458C15.4531 1.344 16.8671 0 18.9671 0C21.0671 0 22.4811 1.344 22.4811 3.458V6.622C22.4811 8.736 21.0671 10.08 18.9671 10.08C16.8671 10.08 15.4531 8.736 15.4531 6.622Z"
             fill="currentColor"
@@ -69,12 +83,21 @@ export function Logo({ className, progress }: LogoProps) {
       </motion.span>
 
       <span className="absolute top-0 left-0" aria-hidden>
-        <svg height={HEIGHT} width={px(K_VIEW_WIDTH)} viewBox={`0 0 ${K_VIEW_WIDTH} 11`} fill="none">
+        <svg
+          height={HEIGHT}
+          width={px(K_VIEW_WIDTH)}
+          viewBox={`0 0 ${K_VIEW_WIDTH} 11`}
+          fill="none"
+        >
           <motion.path d={kPath} fill="currentColor" />
         </svg>
       </span>
 
-      <motion.span className="absolute top-0 inline-flex" style={{ left: px(73.742), opacity: progress, filter }} aria-hidden>
+      <motion.span
+        className="absolute top-0 inline-flex"
+        style={{ left: px(73.742), opacity: progress, filter }}
+        aria-hidden
+      >
         <svg height={HEIGHT} width={px(23.258)} viewBox="73.742 0 23.258 11" fill="none">
           <path
             d="M79.5242 1.62414H77.3822V8.45614H79.5242V9.94014H73.7422V8.45614H75.8842V1.62414H73.7422V0.140137H79.5242V1.62414Z"

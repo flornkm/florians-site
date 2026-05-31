@@ -83,7 +83,12 @@ export default function ContactDialog({
   // value: a full radius next to the 4px left corner would trigger CSS proportional-radius
   // reduction and flatten the left side. Half-height reads as fully rounded while keeping left at 4px.
   const closedRadius = roundedRightWhenClosed
-    ? { borderTopLeftRadius: 4, borderBottomLeftRadius: 4, borderTopRightRadius: 15, borderBottomRightRadius: 15 }
+    ? {
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 4,
+        borderTopRightRadius: 15,
+        borderBottomRightRadius: 15,
+      }
     : { borderRadius: 4 };
 
   return (
@@ -148,10 +153,7 @@ export default function ContactDialog({
                       className="flex flex-col rounded-sm bg-black/5 dark:bg-white/5 p-3 text-left hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
                     >
                       <div className="relative flex-1 min-h-0">
-                        <MailLines
-                          shape={copied ? "check" : "mail"}
-                          className="absolute inset-0"
-                        />
+                        <MailLines shape={copied ? "check" : "mail"} className="absolute inset-0" />
                       </div>
                       <div className="mt-3 text-sm font-medium">
                         <AnimatePresence mode="wait" initial={false}>
