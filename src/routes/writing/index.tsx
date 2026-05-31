@@ -56,7 +56,7 @@ function WritingPage() {
 
   return (
     <div className="md:grid md:grid-cols-9 md:gap-x-6">
-      <div className="grid grid-cols-2 gap-1 md:col-start-3 md:col-span-5 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 md:col-start-3 md:col-span-5 md:grid-cols-3">
         {items.map((item) => (
           <Link key={item.slug} href={`/writing/${item.slug}`} className="group/item flex flex-col">
             <div className="flex aspect-[3/2] w-full items-center justify-center bg-image-card transition-colors duration-200 group-hover/item:bg-[#e7e7e7] dark:group-hover/item:bg-[#1c1c1c]">
