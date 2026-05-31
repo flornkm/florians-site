@@ -1,10 +1,7 @@
 import { cn } from "@/lib/utils";
-import flubber from "flubber";
+import { interpolate } from "flubber";
 import { motion, useMotionTemplate, useTransform, type MotionValue } from "motion/react";
 import { useMemo } from "react";
-
-// flubber is CommonJS; named ESM imports fail under Vite SSR, so destructure the default.
-const { interpolate } = flubber;
 
 interface LogoProps {
   className?: string;
