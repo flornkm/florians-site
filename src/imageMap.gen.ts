@@ -50,6 +50,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/experiments/frosted-camera-light.webp": { width: 2048, height: 1575, thumbhash: "7feFBIAjtwiIeIl0t1/G93iMcYd3CMiHCQ==" },
   "/images/experiments/office.webp": { width: 2000, height: 2666, thumbhash: "GgiKDAAPGftZOZd1pj+Z+oKKhwd3CIhwAA==" },
   "/images/experiments/slop-detector-sticker.png": { width: 938, height: 938, thumbhash: "3oyGJQgs+Yd4iHVzp/h4h3IHCFiId3CDWA==" },
+  "/images/icons/favicon-dark.svg": { width: 16, height: 16, thumbhash: null },
   "/images/icons/favicon.svg": { width: 16, height: 16, thumbhash: null },
   "/images/institutions/hfg-logo.svg": { width: 620, height: 200, thumbhash: null },
   "/images/institutions/tudelft-logo.svg": { width: 600, height: 201, thumbhash: null },

@@ -9,6 +9,7 @@ import os
 from fontTools.ttLib import TTFont, newTable
 from fontTools.ttLib.tables._f_v_a_r import NamedInstance
 from fontTools.varLib.instancer import instantiateVariableFont
+from fontTools.otlLib.builder import buildStatTable
 
 SRC = "CironVariableUnlicensedTrialVersion-CironVariable.ttf"
 OUT_TTF = "CironText-VF.ttf"
@@ -71,8 +72,29 @@ for fid in (2, 17):
 name.setName("Ciron Text", 4, 3, 1, 0x409)
 name.setName("CironText-Regular", 6, 3, 1, 0x409)
 ft["OS/2"].usWeightClass = 400
+
+# Rebuild a STAT table for the new 100-900 wght axis. Required by Apple's
+# CoreText (Safari / all iOS browsers): a variable font with a missing or
+# inconsistent STAT is rejected there and silently falls back, even though
+# Chrome/Firefox render it fine. The old STAT carried the pre-remap axis
+# values, so we discard it and build a fresh one matching the new scale.
 if "STAT" in ft:
-    del ft["STAT"]  # stale axis values; optional for web, drop to avoid inconsistency
+    del ft["STAT"]
+buildStatTable(ft, [{
+    "tag": "wght",
+    "name": "Weight",
+    "values": [
+        {"value": 100, "name": "Thin"},
+        {"value": 200, "name": "ExtraLight"},
+        {"value": 300, "name": "Light"},
+        {"value": 400, "name": "Regular", "flags": 0x2},  # ElidableAxisValueName
+        {"value": 500, "name": "Medium"},
+        {"value": 600, "name": "SemiBold"},
+        {"value": 700, "name": "Bold"},
+        {"value": 800, "name": "ExtraBold"},
+        {"value": 900, "name": "Black"},
+    ],
+}])
 
 ft.save(OUT_TTF)
 ft.flavor = "woff"

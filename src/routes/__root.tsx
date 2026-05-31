@@ -105,7 +105,7 @@ export const Route = createRootRoute({
 });
 
 /** Routes that render full-screen without navigation or footer. */
-const CHROMELESS = new Set<string>([]);
+const CHROMELESS = new Set<string>(["/temporary"]);
 
 function RootLayout() {
   const { pathname } = useLocation();
