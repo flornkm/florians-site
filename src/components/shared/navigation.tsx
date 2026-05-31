@@ -71,8 +71,8 @@ export default function Navigation() {
 
       {/* Mobile-only floating bar; on desktop the tabs and Contact live in the top nav above. */}
       <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
-        <div className="flex items-center gap-1 rounded-full border border-primary bg-primary p-1.5 shadow-lg">
-          {TABS.map((tab, index) => {
+        <div className="flex items-center gap-1 rounded-[14px] border border-primary bg-primary p-1.5 shadow-lg">
+          {TABS.map((tab) => {
             const active = isActive(tab.href);
             return (
               <Link
@@ -88,16 +88,7 @@ export default function Navigation() {
                   <motion.span
                     layoutId="nav-active-pill"
                     transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
-                    className="absolute inset-0 bg-surface-tertiary"
-                    // Per-corner radii in px (not `rounded-l-full`): a full corner next to a 4px
-                    // corner triggers CSS proportional-radius reduction that zeroes the 4px side.
-                    // The bar's left end uses half the pill height (≈full) so the right stays 4px.
-                    style={{
-                      borderTopLeftRadius: index === 0 ? 16 : 4,
-                      borderBottomLeftRadius: index === 0 ? 16 : 4,
-                      borderTopRightRadius: 4,
-                      borderBottomRightRadius: 4,
-                    }}
+                    className="absolute inset-0 rounded-lg bg-surface-tertiary"
                   />
                 )}
                 <span className="relative">{tab.name}</span>

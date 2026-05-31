@@ -79,22 +79,14 @@ export default function ContactDialog({
     return () => window.removeEventListener("mousedown", handleClick);
   }, [isOpen, close]);
 
-  // Right corners use half the closed pill height (h-7.5 = 30px) rather than a huge "full"
-  // value: a full radius next to the 4px left corner would trigger CSS proportional-radius
-  // reduction and flatten the left side. Half-height reads as fully rounded while keeping left at 4px.
-  const closedRadius = roundedRightWhenClosed
-    ? {
-        borderTopLeftRadius: 4,
-        borderBottomLeftRadius: 4,
-        borderTopRightRadius: 15,
-        borderBottomRightRadius: 15,
-      }
-    : { borderRadius: 4 };
+  // In the mobile bottom bar the pill matches the morphing nav pill's 8px radius so every
+  // element shares one roundness; standalone (desktop) it keeps its tighter 4px corners.
+  const closedRadius = roundedRightWhenClosed ? { borderRadius: 8 } : { borderRadius: 4 };
 
   return (
     <MotionConfig transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}>
       <div ref={containerRef} className="relative z-10 hidden min-[350px]:flex items-center">
-        <div className="h-7.5 md:h-6.5 px-2.5 text-sm font-[550] invisible">Contact</div>
+        <div className="h-8 md:h-6.5 px-2.5 text-sm font-[550] invisible">Contact</div>
         <motion.div
           layout
           aria-label={isOpen ? "Contact" : undefined}
@@ -185,7 +177,7 @@ export default function ContactDialog({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="text-sm font-[550] leading-none whitespace-nowrap px-2.5 h-7.5 md:h-6.5 flex items-center cursor-pointer"
+                className="text-sm font-[550] leading-none whitespace-nowrap px-2.5 h-8 md:h-6.5 flex items-center cursor-pointer"
                 style={{ borderRadius: 4 }}
               >
                 Contact
