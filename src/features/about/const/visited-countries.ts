@@ -21,6 +21,3 @@ export const VISITED_COUNTRIES: CountryData[] = [
   { name: "Thailand", iso_a2: "TH" },
   { name: "Indonesia", iso_a2: "ID" },
 ];
-
-export const VISITED_COUNTRY_CODES = new Set(VISITED_COUNTRIES.map((country) => country.iso_a2));
-export const VISITED_COUNTRY_NAMES = new Set(VISITED_COUNTRIES.map((country) => country.name));

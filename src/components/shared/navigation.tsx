@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
 import { useLocation } from "@tanstack/react-router";
-import { motion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { RoughFLogo } from "./rough-f-logo";
-import { Body1 } from "../design-system/body";
-import { Link } from "../ui/link";
+import { animate, motion, useMotionValue } from "motion/react";
 import ContactDialog from "./contact-dialog";
+import { Logo } from "./logo";
+import { Link } from "../ui/link";
+
+const logoTransition = { type: "spring", duration: 0.3, bounce: 0 } as const;
+// Width of the expanded "FLORIAN KIEM" so the hover zone covers the whole word, not just the tiny collapsed logo.
+const LOGO_HOVER_WIDTH = 108;
 
 export type Tab = {
   name: string;
@@ -18,163 +20,91 @@ export const TABS = [
   { name: "Writing", href: "/writing" },
 ] as Tab[];
 
-type TabDimensions = { left: number; width: number };
-
 export default function Navigation() {
-  const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
-  const urlPathname = location.pathname;
-  const activeIndex = TABS.findIndex((tab) => {
-    if (tab.href === "/") return urlPathname === "/" || urlPathname.startsWith("/work/");
-    return urlPathname === tab.href || urlPathname.startsWith(tab.href + "/");
-  });
+  const { pathname } = useLocation();
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const tabRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const [tabDimensions, setTabDimensions] = useState<TabDimensions[]>([]);
-  const [isReady, setIsReady] = useState(false);
+  // Lives here so the whole Home link (spanning the overflow area) opens the logo and keeps it open without flicker.
+  const logoProgress = useMotionValue(0);
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [hasAnimatedIn, setHasAnimatedIn] = useState(false);
-  const lastHoveredIndexRef = useRef<number>(0);
-  const [logoHovered, setLogoHovered] = useState(false);
-
-  const measureTabs = useCallback(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const dimensions: TabDimensions[] = [];
-
-    tabRefs.current.forEach((tab) => {
-      if (tab) {
-        const tabRect = tab.getBoundingClientRect();
-        dimensions.push({
-          left: tabRect.left - containerRect.left,
-          width: tabRect.width,
-        });
-      }
-    });
-
-    if (dimensions.length === TABS.length) {
-      setTabDimensions(dimensions);
-      setIsReady(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    measureTabs();
-
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(measureTabs);
-    }
-
-    window.addEventListener("resize", measureTabs);
-    return () => window.removeEventListener("resize", measureTabs);
-  }, [measureTabs]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (typeof window === "undefined") return;
-      if (window.innerWidth < 768) return;
-      setScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const hasActiveTab = activeIndex !== -1;
-  const isHovering = hoveredIndex !== null;
-
-  const displayIndex = isHovering
-    ? hoveredIndex
-    : hasActiveTab
-      ? activeIndex
-      : lastHoveredIndexRef.current;
-
-  const selectorDimensions = tabDimensions[displayIndex];
-  const showSelector = isReady && selectorDimensions;
-  const shouldAnimatePosition = hasActiveTab || hasAnimatedIn;
-  const isVisible = hasActiveTab || isHovering;
+  const isActive = (href: string) =>
+    href === "/"
+      ? pathname === "/" || pathname.startsWith("/work")
+      : pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <nav className="sticky top-[calc(100dvh-4rem)] -mb-12 md:mb-0 md:top-0 z-[99] px-2 xs:px-3 md:w-screen bg-primary md:px-4 border md:border-none border-tertiary md:max-w-none mx-auto w-fit max-w-[calc(100%-2rem)] md:rounded-none rounded-full">
-      <div
-        className={cn(
-          "pointer-events-none hidden md:block absolute left-1/2 w-full transition-all duration-300 ease-out h-px -translate-x-1/2 bottom-0 bg-(--border-primary)",
-          scrolled ? "max-w-[100vw]" : "max-w-5xl opacity-0",
-        )}
-      />
-      <div className="mx-auto flex md:w-full max-w-5xl items-center justify-between md:py-2.5 py-2 gap-2 md:gap-4 relative">
-        <div className="w-auto md:w-full max-w-[calc(341px)] items-center justify-between hidden min-[450px]:mr-2 min-[450px]:flex">
-          <div className="flex items-center gap-4">
-            <Link
-              onMouseEnter={() => setLogoHovered(true)}
-              onMouseLeave={() => setLogoHovered(false)}
-              onTouchStart={() => setLogoHovered(true)}
-              onTouchEnd={() => setLogoHovered(false)}
-              href="/"
-              className="flex items-center gap-1 text-sm rounded-full py-1 touch-manipulation"
-            >
-              <RoughFLogo isAnimating={logoHovered} className="w-4.5 aspect-square" />
-              <Body1 className="font-medium text-primary min-[500px]:block hidden">Florian</Body1>
-            </Link>
-          </div>
-        </div>
-        <div className="md:flex-1 flex items-center justify-between relative">
-          <div
-            ref={containerRef}
-            className="flex min-[350px]:mr-2 md:mr-auto items-center justify-center gap-3 relative md:px-4 md:flex-1 md:w-full md:max-w-[calc(341px)]"
-            onMouseLeave={() => {
-              setHoveredIndex(null);
-              if (!hasActiveTab) setHasAnimatedIn(false);
-            }}
+    <nav className="relative z-50 bg-primary">
+      <div className="mx-auto grid w-full max-w-[2000px] grid-cols-9 items-center gap-x-6 px-6 pt-6 pb-4">
+        {/* w-fit keeps the link hugging the logo so its footprint isn't the whole 2-column track. */}
+        <Link
+          href="/"
+          className="flex w-fit items-center col-span-2 justify-self-start"
+          aria-label="Home"
+        >
+          <span
+            className="relative flex shrink-0 items-center"
+            style={{ width: LOGO_HOVER_WIDTH }}
+            onMouseEnter={() => animate(logoProgress, 1, logoTransition)}
+            onMouseLeave={() => animate(logoProgress, 0, logoTransition)}
           >
-            {showSelector && (
-              <motion.div
-                className="absolute md:h-7 h-8 bg-surface-tertiary rounded-full top-1/2 -translate-y-1/2"
-                initial={false}
-                animate={{
-                  left: selectorDimensions.left,
-                  width: selectorDimensions.width,
-                  opacity: isVisible ? 1 : 0,
-                }}
-                transition={{
-                  left: shouldAnimatePosition
-                    ? { type: "spring", stiffness: 400, damping: 30 }
-                    : { duration: 0 },
-                  width: shouldAnimatePosition
-                    ? { type: "spring", stiffness: 400, damping: 30 }
-                    : { duration: 0 },
-                  opacity: { duration: 0.2, ease: "easeOut" },
-                }}
-              />
-            )}
-            {TABS.map((tab, index) => (
+            <Logo className="h-3 w-auto text-primary" progress={logoProgress} />
+          </span>
+        </Link>
+        <div className="hidden items-center gap-4 col-span-5 md:flex md:gap-6">
+          {TABS.map((tab) => (
+            <Link
+              key={tab.name}
+              href={tab.href}
+              className={cn(
+                "text-sm font-medium transition-colors",
+                isActive(tab.href) ? "text-primary" : "text-tertiary hover:text-secondary",
+              )}
+            >
+              {tab.name}
+            </Link>
+          ))}
+        </div>
+        {/* Desktop only: fixed and anchored to the content's right edge (not the viewport) so it stays aligned past the 2000px max-width. On mobile the Contact button lives in the bottom bar instead. */}
+        <div className="hidden justify-end col-span-2 md:flex md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2000px)/2+1.5rem))]">
+          <ContactDialog />
+        </div>
+      </div>
+
+      {/* Mobile-only floating bar; on desktop the tabs and Contact live in the top nav above. */}
+      <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
+        <div className="flex items-center gap-1 rounded-full border border-primary bg-primary p-1.5 shadow-lg">
+          {TABS.map((tab, index) => {
+            const active = isActive(tab.href);
+            return (
               <Link
-                id={tab.href}
-                href={tab.href}
                 key={tab.name}
-                ref={(el) => {
-                  tabRefs.current[index] = el;
-                }}
-                onMouseEnter={() => {
-                  setHoveredIndex(index);
-                  lastHoveredIndexRef.current = index;
-                  if (!hasActiveTab && !hasAnimatedIn) {
-                    requestAnimationFrame(() => setHasAnimatedIn(true));
-                  }
-                }}
+                href={tab.href}
                 className={cn(
-                  "text-sm rounded-full font-medium relative z-10 px-3 py-1 md:py-0.5 transition-colors duration-300 ease-in-out",
-                  activeIndex === index ? "text-primary" : "text-tertiary",
+                  "relative px-4 py-1.5 text-sm font-medium transition-colors",
+                  active ? "text-primary" : "text-tertiary hover:text-secondary",
                 )}
               >
-                {tab.name}
+                {/* Shared-layout pill: Framer slides this single element between tabs when the active route changes. */}
+                {active && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
+                    className="absolute inset-0 bg-surface-tertiary"
+                    // Per-corner radii in px (not `rounded-l-full`): a full corner next to a 4px
+                    // corner triggers CSS proportional-radius reduction that zeroes the 4px side.
+                    // The bar's left end uses half the pill height (≈full) so the right stays 4px.
+                    style={{
+                      borderTopLeftRadius: index === 0 ? 16 : 4,
+                      borderBottomLeftRadius: index === 0 ? 16 : 4,
+                      borderTopRightRadius: 4,
+                      borderBottomRightRadius: 4,
+                    }}
+                  />
+                )}
+                <span className="relative">{tab.name}</span>
               </Link>
-            ))}
-          </div>
-          <ContactDialog />
+            );
+          })}
+          <ContactDialog roundedRightWhenClosed />
         </div>
       </div>
     </nav>

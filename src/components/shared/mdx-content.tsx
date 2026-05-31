@@ -8,7 +8,7 @@ import { ModelViewer } from "../3d/model-viewer";
 import { Image } from "./image";
 import { SmartVideo } from "./smart-video";
 
-// Generate a slug ID from heading text (matches extractHeadings in mdx.ts)
+// Slug must match the IDs the table of contents links to.
 function generateHeadingId(children: ReactNode): string {
   const text = extractTextFromChildren(children);
   return text
@@ -37,7 +37,6 @@ function extractTextFromChildren(children: ReactNode): string {
   return "";
 }
 
-// Heading components with auto-generated IDs
 function H1({ children, ...props }: { children?: ReactNode }) {
   const id = generateHeadingId(children);
   return (
@@ -201,20 +200,36 @@ export function Model({
 }
 
 function Img({ src, alt, className }: { src?: string; alt?: string; className?: string }) {
+  // SVGs render borderless on a panel; photos keep the framed look.
+  const isDiagram = (src ?? "").toLowerCase().endsWith(".svg");
   return (
-    <div className="not-prose my-8 first:mt-0 last:mb-0">
-      <div className="rounded-lg bg-secondary p-4 md:p-12">
+    <figure className={cn("not-prose my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}>
+      {/* On mobile the panel breaks out of all ancestor padding to sit 4px from
+          each screen edge; from md up it's a normal in-flow block. */}
+      <div
+        className={cn(
+          "max-md:ml-[50%] max-md:w-[calc(100vw-8px)] max-md:-translate-x-1/2",
+          isDiagram ? "figure-dots p-4 md:p-8" : "rounded-lg bg-secondary p-4 md:p-12",
+        )}
+      >
         <Image
           src={src ?? ""}
           alt={alt ?? ""}
           objectFit="contain"
           className={cn(
-            "w-full h-auto rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
+            "h-auto w-full",
+            !isDiagram &&
+              "rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
             className,
           )}
         />
       </div>
-    </div>
+      {isDiagram && alt && (
+        <figcaption className="mx-auto mt-3 max-w-[460px] font-serif text-[11px] font-normal italic text-tertiary dark:text-secondary">
+          {alt}
+        </figcaption>
+      )}
+    </figure>
   );
 }
 
@@ -238,7 +253,6 @@ export function MobileImages({ images }: { images: { src: string; alt: string }[
 }
 
 export const mdxComponents = {
-  // Heading components with auto-generated IDs
   h1: H1,
   h2: H2,
   h3: H3,
@@ -246,7 +260,6 @@ export const mdxComponents = {
   h5: H5,
   h6: H6,
   img: Img,
-  // Custom components
   Image,
   Video,
   Model,
@@ -255,13 +268,13 @@ export const mdxComponents = {
   MobileImages,
 };
 
-// Pre-loaded MDX module maps (import.meta.glob must be at module level)
-const workModules = import.meta.glob("/src/content/work/*.mdx", { eager: true }) as Record<
+// import.meta.glob must be at module level.
+const workModules = import.meta.glob("/src/work/*/article.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
 
-const writingModules = import.meta.glob("/src/content/writing/*.mdx", { eager: true }) as Record<
+const writingModules = import.meta.glob("/src/writing/*/article.mdx", { eager: true }) as Record<
   string,
   { default: ComponentType }
 >;
@@ -272,7 +285,7 @@ const moduleMap = {
 } as const;
 
 export function useMdxContent(category: "work" | "writing", slug: string, className?: string) {
-  const modulePath = `/src/content/${category}/${slug}.mdx`;
+  const modulePath = `/src/${category}/${slug}/article.mdx`;
   const MDXContent = moduleMap[category][modulePath]?.default;
 
   if (!MDXContent) return null;

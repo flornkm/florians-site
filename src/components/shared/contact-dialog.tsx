@@ -7,6 +7,7 @@ import { IconInstagram } from "central-icons/IconInstagram";
 import { IconLinkedin } from "central-icons/IconLinkedin";
 import { IconPhone } from "central-icons/IconPhone";
 import { IconX } from "central-icons/IconX";
+import { MailLines } from "./mail-lines";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import type { ComponentType } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -27,11 +28,36 @@ const SOCIAL_LINKS = CONTACTS.map((c) => ({
   icon: ICON_MAP[c.name],
 })).filter((l) => l.icon);
 
-export default function ContactDialog() {
+// Email is the large featured link; the rest fill the left column.
+const FEATURED_LINK = SOCIAL_LINKS.find((l) => l.name === "Email");
+const COLUMN_LINKS = SOCIAL_LINKS.filter((l) => l !== FEATURED_LINK);
+
+const isExternal = (href: string) => href.startsWith("http");
+
+export default function ContactDialog({
+  roundedRightWhenClosed = false,
+}: {
+  // When the closed pill sits at the right end of the mobile bottom bar, round its
+  // right corners fully so it nests into the bar's fully-rounded right edge.
+  roundedRightWhenClosed?: boolean;
+} = {}) {
   const [isOpen, setIsOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const copyTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const close = useCallback(() => setIsOpen(false), []);
+
+  const copyEmail = useCallback(() => {
+    const email = FEATURED_LINK?.handle;
+    if (!email) return;
+    void navigator.clipboard?.writeText(email);
+    setCopied(true);
+    clearTimeout(copyTimeout.current);
+    copyTimeout.current = setTimeout(() => setCopied(false), 2400);
+  }, []);
+
+  useEffect(() => () => clearTimeout(copyTimeout.current), []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -53,21 +79,34 @@ export default function ContactDialog() {
     return () => window.removeEventListener("mousedown", handleClick);
   }, [isOpen, close]);
 
+  // Right corners use half the closed pill height (h-7.5 = 30px) rather than a huge "full"
+  // value: a full radius next to the 4px left corner would trigger CSS proportional-radius
+  // reduction and flatten the left side. Half-height reads as fully rounded while keeping left at 4px.
+  const closedRadius = roundedRightWhenClosed
+    ? {
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 4,
+        borderTopRightRadius: 15,
+        borderBottomRightRadius: 15,
+      }
+    : { borderRadius: 4 };
+
   return (
     <MotionConfig transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}>
       <div ref={containerRef} className="relative z-10 hidden min-[350px]:flex items-center">
-        <div className="h-7.5 md:h-6.5 px-2.5 text-sm font-medium invisible">Contact</div>
+        <div className="h-7.5 md:h-6.5 px-2.5 text-sm font-[550] invisible">Contact</div>
         <motion.div
           layout
           aria-label={isOpen ? "Contact" : undefined}
           role={isOpen ? "dialog" : undefined}
           className={cn(
-            "absolute right-0 bottom-0 md:bottom-auto md:top-0 bg-accent-primary text-accent-foreground overflow-hidden outline outline-transparent outline-offset-0 transition-[outline-color,outline-offset,outline-width] duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-300",
+            "bg-interactive-secondary text-primary overflow-hidden outline outline-transparent outline-offset-0 transition-[outline-color,outline-offset,outline-width,background-color] duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-300",
             isOpen
-              ? "w-64 border border-white/10 dark:border-black/10"
-              : "hover:bg-accent-primary-hover",
+              ? // Mobile: pin to the viewport, capped at 380px and centered (mx-auto, not a transform, so it doesn't fight the layout animation) so it never grows too wide or overflows. Desktop: anchored top-right like before.
+                "fixed inset-x-0 bottom-20 mx-auto w-[380px] max-w-[calc(100vw-1rem)] md:absolute md:inset-x-auto md:mx-0 md:bottom-auto md:right-0 md:top-0 md:w-[380px] md:max-w-none"
+              : "absolute right-0 bottom-0 md:bottom-auto md:top-0 hover:bg-interactive-secondary-hover",
           )}
-          style={{ borderRadius: 14 }}
+          style={isOpen ? { borderRadius: 8 } : closedRadius}
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {isOpen ? (
@@ -81,27 +120,59 @@ export default function ContactDialog() {
                 className="p-1.5"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-semibold pl-1">Contact</span>
+                  <span className="text-sm font-[550] pl-1">Contact</span>
                   <button
+                    type="button"
                     onClick={close}
-                    className="size-6 flex items-center justify-center rounded-full hover:bg-white/15 dark:hover:bg-black/10 transition-colors cursor-pointer"
+                    aria-label="Close contact dialog"
+                    className="size-6 flex items-center justify-center rounded-sm text-neutral-500 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
                   >
                     <IconCrossSmall className="size-4" />
                   </button>
                 </div>
-                <div className="flex flex-col gap-0.5">
-                  {SOCIAL_LINKS.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-2.5 px-1.5 py-1.5 rounded-lg hover:bg-white/15 dark:hover:bg-black/10 transition-colors text-sm"
+                <div className="grid grid-cols-2 gap-1.5">
+                  <div className="flex flex-col gap-0.5">
+                    {COLUMN_LINKS.map((link) => (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        target={isExternal(link.href) ? "_blank" : undefined}
+                        rel={isExternal(link.href) ? "noopener noreferrer" : undefined}
+                        className="flex items-center gap-2.5 px-1.5 py-1.5 rounded-sm hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm"
+                      >
+                        <link.icon className="size-4 shrink-0" />
+                        <span className="font-medium">{link.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                  {FEATURED_LINK && (
+                    <button
+                      type="button"
+                      onClick={copyEmail}
+                      aria-label={
+                        copied ? "Email address copied" : `Copy email ${FEATURED_LINK.handle}`
+                      }
+                      className="flex flex-col rounded-sm bg-black/5 dark:bg-white/5 p-3 text-left hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
                     >
-                      <link.icon className="size-4 shrink-0" />
-                      <span className="font-medium">{link.name}</span>
-                    </a>
-                  ))}
+                      <div className="relative flex-1 min-h-0">
+                        <MailLines shape={copied ? "check" : "mail"} className="absolute inset-0" />
+                      </div>
+                      <div className="mt-3 text-sm font-medium">
+                        <AnimatePresence mode="wait" initial={false}>
+                          <motion.span
+                            key={copied ? "copied" : "email"}
+                            className="block origin-left"
+                            initial={{ opacity: 0, scale: 0.98, filter: "blur(2px)" }}
+                            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, scale: 0.98, filter: "blur(2px)" }}
+                            transition={{ duration: 0.18, ease: "easeOut" }}
+                          >
+                            {copied ? "Copied" : "Copy Email"}
+                          </motion.span>
+                        </AnimatePresence>
+                      </div>
+                    </button>
+                  )}
                 </div>
               </motion.div>
             ) : (
@@ -114,8 +185,8 @@ export default function ContactDialog() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="text-sm font-medium leading-none whitespace-nowrap px-2.5 h-7.5 md:h-6.5 flex items-center cursor-pointer"
-                style={{ borderRadius: 14 }}
+                className="text-sm font-[550] leading-none whitespace-nowrap px-2.5 h-7.5 md:h-6.5 flex items-center cursor-pointer"
+                style={{ borderRadius: 4 }}
               >
                 Contact
               </motion.button>

@@ -29,13 +29,13 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      { title: "Florian - Design Engineer" },
+      { title: "Florian Design Engineer" },
       {
         name: "description",
         content:
           "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
       },
-      { property: "og:title", content: "Florian - Design Engineer" },
+      { property: "og:title", content: "Florian Design Engineer" },
       {
         property: "og:description",
         content:
@@ -44,7 +44,7 @@ export const Route = createRootRoute({
       { property: "og:image", content: "/api/og?title=Design%20Engineer" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Florian - Design Engineer" },
+      { name: "twitter:title", content: "Florian Design Engineer" },
       {
         name: "twitter:description",
         content:
@@ -54,13 +54,39 @@ export const Route = createRootRoute({
     ],
     links: [
       {
+        // crossOrigin is required for the font preload to be reused.
+        rel: "preload",
+        href: "/fonts/ciron-text/CironText-VF.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      // Chrome/Edge ignore `media` here and take the first icon, so the light
+      // SVG self-adapts via an embedded prefers-color-scheme query and stays
+      // correct there; Firefox honors `media` and picks the dark SVG.
+      {
+        rel: "icon",
+        href: "/images/icons/favicon.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        rel: "icon",
+        href: "/images/icons/favicon-dark.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+      // .ico fallbacks for browsers without SVG favicon support.
+      {
         rel: "icon",
         href: "/images/icons/favicon.ico",
+        type: "image/x-icon",
         media: "(prefers-color-scheme: light)",
       },
       {
         rel: "icon",
         href: "/images/icons/favicon-dark.ico",
+        type: "image/x-icon",
         media: "(prefers-color-scheme: dark)",
       },
     ],
@@ -79,11 +105,14 @@ export const Route = createRootRoute({
 });
 
 /** Routes that render full-screen without navigation or footer. */
-const CHROMELESS = new Set<string>([]);
+const CHROMELESS = new Set<string>(["/temporary"]);
 
 function RootLayout() {
   const { pathname } = useLocation();
   const isChromeless = CHROMELESS.has(pathname);
+  const isHome = pathname === "/";
+  // Home already shows Colophon/Experiments in its sidebar, so its footer drops the "More" column.
+  const footerVariant = isHome ? "indent" : "default";
 
   return (
     <html lang="en">
@@ -110,10 +139,16 @@ function RootLayout() {
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             {!isChromeless && <Navigation />}
-            <main className={isChromeless ? "w-full h-dvh" : "w-full min-h-screen md:px-4 py-8"}>
+            <main
+              className={
+                isChromeless
+                  ? "w-full h-dvh"
+                  : `mx-auto w-full max-w-[2000px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`
+              }
+            >
               <Outlet />
             </main>
-            {!isChromeless && <Footer />}
+            {!isChromeless && <Footer variant={footerVariant} />}
           </TooltipProvider>
         </QueryClientProvider>
         <Analytics />

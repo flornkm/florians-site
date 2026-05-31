@@ -3,10 +3,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 const sizeVariants = {
-  xs: "h-6 rounded-md text-xs font-medium px-1.5",
-  sm: "h-7 rounded-lg text-sm font-medium px-2",
-  md: "h-8 rounded-lg text-sm font-medium px-2 gap-0.5",
-  lg: "h-9 rounded-lg text-sm font-medium px-2.5 gap-0.5",
+  xs: "h-6 rounded-xs text-xs font-medium px-1.5",
+  sm: "h-7 rounded-sm text-sm font-medium px-2",
+  md: "h-7.5 rounded-sm text-sm font-medium px-2 gap-0.5",
+  lg: "h-9 rounded-sm text-sm font-medium px-2.5 gap-0.5",
 } as const;
 
 export const buttonVariants = cva(
@@ -15,7 +15,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-accent-primary text-sm text-accent-foreground hover:bg-accent-primary-hover",
-        secondary: "bg-surface-tertiary text-sm text-primary hover:bg-interactive-active",
+        secondary:
+          "bg-interactive-secondary text-sm text-primary hover:bg-interactive-secondary-hover",
         tertiary: "text-tertiary text-sm hover:text-secondary hover:bg-interactive-hover",
       },
       size: sizeVariants,
@@ -94,6 +95,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
+      type="button"
       className={cn(buttonVariants({ variant, size, iconOnly, rounded }), className)}
       {...props}
     >

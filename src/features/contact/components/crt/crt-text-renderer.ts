@@ -1,10 +1,3 @@
-/**
- * Canvas 2D text renderer for the CRT display.
- *
- * Renders chat messages and input as monospace bitmap text onto an offscreen
- * canvas that gets fed into the WebGL CRT shader.
- */
-
 export interface CRTMessage {
   role: "user" | "assistant";
   text: string;
@@ -12,26 +5,20 @@ export interface CRTMessage {
 
 export interface CRTTextState {
   messages: CRTMessage[];
-  /** Characters of the current streaming response revealed so far. */
   streamedText: string;
-  /** Whether the assistant is currently streaming. */
   isStreaming: boolean;
-  /** Current user input text. */
   inputText: string;
-  /** Whether the input field is focused. */
   inputFocused: boolean;
-  /** Visible height in canvas pixels (for virtual keyboard). Defaults to canvas height. */
+  /** Visible height in canvas pixels — shrinks when virtual keyboard covers the bottom. */
   visibleHeight?: number;
-  /** Follow-up question suggestions to display as clickable buttons. */
   suggestions?: string[];
-  /** Whether to show the back button. Defaults to true. */
   showBack?: boolean;
 }
 
 const BASE_FONT_SIZE = 38;
 const LINE_HEIGHT = 1.4;
 const BASE_PADDING = 48;
-const CURSOR_BLINK_RATE = 530; // ms
+const CURSOR_BLINK_RATE = 530;
 const USER_LABEL = "YOU> ";
 const CLONE_LABEL = "BOT> ";
 const INPUT_PROMPT = "> ";
@@ -81,30 +68,26 @@ export interface HitArea {
   url?: string;
 }
 
-/** A segment of text on a line — either plain text or a clickable link. */
 interface TextSegment {
   text: string;
   url?: string;
 }
 
-/** A rendered line with color and parsed segments. */
 interface RenderedLine {
   segments: TextSegment[];
   color: string;
 }
 
-/** Regex to match markdown links: [text](url) */
 const MD_LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
 
-/** Strip markdown formatting (bold, italic, headers, list markers) but preserve link syntax. */
 function stripMarkdown(text: string): string {
   return text
-    .replace(/\*\*(.+?)\*\*/g, "$1") // bold
-    .replace(/\*(.+?)\*/g, "$1") // italic
-    .replace(/__(.+?)__/g, "$1") // bold alt
-    .replace(/_(.+?)_/g, "$1") // italic alt
-    .replace(/^#{1,6}\s+/gm, "") // headers
-    .replace(/^[-*]\s+/gm, ""); // list markers
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^[-*]\s+/gm, "");
 }
 
 export class CRTTextRenderer {
@@ -114,15 +97,13 @@ export class CRTTextRenderer {
   private _hitAreas: HitArea[] = [];
   private _hoveredId: string | null = null;
 
-  // Scaled sizing constants
   private _fontSize: number;
   private _padding: number;
   private _backPadBottom: number;
 
-  // Smooth scrolling state (pixel-based)
-  private _scrollY: number = 0; // current scroll position in pixels
-  private _scrollVelocity: number = 0; // momentum velocity
-  private _targetScrollY: number = 0; // target for auto-scroll
+  private _scrollY: number = 0;
+  private _scrollVelocity: number = 0;
+  private _targetScrollY: number = 0;
   private _userScrolled: boolean = false;
   private _maxScrollY: number = 0;
 
@@ -145,30 +126,25 @@ export class CRTTextRenderer {
     this._hoveredId = id;
   }
 
-  /** Apply a pixel scroll delta (from wheel events). */
   scroll(deltaPixels: number): void {
     this._scrollVelocity += deltaPixels;
     this._userScrolled = true;
   }
 
-  /** Resize the text canvas. Recalculates column count. */
   resize(width: number, height: number): void {
     this.canvas.width = width;
     this.canvas.height = height;
     this.cols = Math.floor((width - this._padding * 2) / (this._fontSize * 0.6));
   }
 
-  /** Render the full CRT text display. */
   render(state: CRTTextState): void {
     const { ctx, canvas, _fontSize: fs, _padding: pad } = this;
     const now = performance.now();
     const theme = getTheme();
     this._hitAreas = [];
 
-    // Use visibleHeight for layout (keyboard may cover the bottom)
     const visibleH = state.visibleHeight ?? canvas.height;
 
-    // Background
     ctx.fillStyle = theme.bg;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -177,7 +153,6 @@ export class CRTTextRenderer {
 
     const lineH = fs * LINE_HEIGHT;
 
-    // ── Back button at top (optional) ──
     const showBack = state.showBack !== false;
     const backY = pad;
     if (showBack) {
@@ -195,13 +170,11 @@ export class CRTTextRenderer {
       });
     }
 
-    // Content area bounds — use visibleH so input stays above keyboard
     const contentStartY = showBack ? backY + lineH + this._backPadBottom : pad;
     const inputAreaHeight = lineH + 12;
     const suggestionsHeight = this.getSuggestionsHeight(state.suggestions, lineH);
     const contentHeight = visibleH - contentStartY - pad - inputAreaHeight - suggestionsHeight;
 
-    // Extract all links from a message for lookup
     const extractLinks = (text: string): Map<string, string> => {
       const links = new Map<string, string>();
       for (const m of text.matchAll(MD_LINK_RE)) {
@@ -210,7 +183,6 @@ export class CRTTextRenderer {
       return links;
     };
 
-    // Build segments for a wrapped line using the link map
     const buildLineSegments = (line: string, links: Map<string, string>): TextSegment[] => {
       if (links.size === 0) return [{ text: line }];
       const segments: TextSegment[] = [];
@@ -240,7 +212,6 @@ export class CRTTextRenderer {
       return segments;
     };
 
-    // Build all lines from messages
     const lines: RenderedLine[] = [];
 
     for (const msg of state.messages) {
@@ -255,7 +226,6 @@ export class CRTTextRenderer {
       lines.push({ segments: [{ text: "" }], color: theme.text });
     }
 
-    // Streaming text (partial response)
     if (state.isStreaming && state.streamedText) {
       const plainText = stripMarkdown((CLONE_LABEL + state.streamedText).replace(MD_LINK_RE, "$1"));
       const wrapped = this.wrapText(plainText, this.cols);
@@ -272,11 +242,9 @@ export class CRTTextRenderer {
       }
     }
 
-    // Calculate max scroll
     const totalContentHeight = lines.length * lineH;
     this._maxScrollY = Math.max(0, totalContentHeight - contentHeight);
 
-    // Apply momentum scrolling
     if (Math.abs(this._scrollVelocity) > SCROLL_SNAP_THRESHOLD) {
       this._scrollY += this._scrollVelocity;
       this._scrollVelocity *= SCROLL_FRICTION;
@@ -284,20 +252,16 @@ export class CRTTextRenderer {
       this._scrollVelocity = 0;
     }
 
-    // Clamp scroll position
     this._scrollY = Math.max(0, Math.min(this._maxScrollY, this._scrollY));
 
-    // Auto-scroll to bottom when not user-scrolled
     if (!this._userScrolled) {
       this._scrollY = this._maxScrollY;
     }
 
-    // Re-enable auto-scroll when at the bottom
     if (this._userScrolled && this._scrollY >= this._maxScrollY - 1) {
       this._userScrolled = false;
     }
 
-    // Draw lines with clip region
     ctx.save();
     ctx.beginPath();
     ctx.rect(0, contentStartY, canvas.width, contentHeight);
@@ -305,7 +269,6 @@ export class CRTTextRenderer {
 
     for (let i = 0; i < lines.length; i++) {
       const y = contentStartY + i * lineH - this._scrollY;
-      // Skip lines outside visible area
       if (y + lineH < contentStartY || y > contentStartY + contentHeight) continue;
 
       const line = lines[i];
@@ -315,15 +278,12 @@ export class CRTTextRenderer {
         const segWidth = ctx.measureText(seg.text).width;
 
         if (seg.url) {
-          // Link: use underline + different color on hover
           const linkId = `link-${i}-${Math.round(x)}`;
           const isLinkHovered = this._hoveredId === linkId;
           ctx.fillStyle = isLinkHovered ? theme.backHover : theme.back;
           ctx.fillText(seg.text, x, y);
-          // Underline
           const underlineY = y + fs + 2;
           ctx.fillRect(x, underlineY, segWidth, 1);
-          // Hit area
           this._hitAreas.push({
             id: linkId,
             x,
@@ -343,10 +303,7 @@ export class CRTTextRenderer {
 
     ctx.restore();
 
-    // Draw suggestions above input
     this.renderSuggestions(state.suggestions, theme, visibleH, lineH);
-
-    // Draw input area at bottom of visible area
     this.renderInputLine(state, now, theme, visibleH);
   }
 
@@ -360,16 +317,13 @@ export class CRTTextRenderer {
     const lineH = fs * LINE_HEIGHT;
     const inputY = visibleH - pad - lineH;
 
-    // Separator line
     ctx.fillStyle = theme.dim;
     const sepY = inputY - 8;
     ctx.fillRect(pad, sepY, this.canvas.width - pad * 2, 1);
 
-    // Input text
     ctx.fillStyle = theme.prompt;
     let displayText = INPUT_PROMPT + state.inputText;
 
-    // Blinking cursor
     if (state.inputFocused) {
       const cursorVisible = Math.floor(now / CURSOR_BLINK_RATE) % 2 === 0;
       if (cursorVisible) {
@@ -382,7 +336,6 @@ export class CRTTextRenderer {
     ctx.fillText(displayText, pad, inputY);
   }
 
-  /** Split text on explicit newlines, then word-wrap each paragraph. */
   private wrapText(text: string, maxCols: number): string[] {
     const paragraphs = text.split("\n");
     const result: string[] = [];
@@ -400,7 +353,6 @@ export class CRTTextRenderer {
 
   private getSuggestionsHeight(suggestions: string[] | undefined, lineH: number): number {
     if (!suggestions?.length) return 0;
-    // Each suggestion: lineH for text + 1px border. Plus top border + padding.
     return suggestions.length * (lineH + 1) + 1 + 16;
   }
 
@@ -420,7 +372,6 @@ export class CRTTextRenderer {
 
     ctx.font = `bold ${fs}px "Commit Mono", ui-monospace, monospace`;
 
-    // Top border
     ctx.fillStyle = theme.dim;
     ctx.fillRect(boxX, startY, boxW, 1);
 
@@ -429,7 +380,6 @@ export class CRTTextRenderer {
       const isHovered = this._hoveredId === id;
       const rowY = startY + 1 + i * (lineH + 1);
 
-      // Hover: invert colors (teletext selection style)
       if (isHovered) {
         ctx.fillStyle = theme.text;
         ctx.fillRect(boxX, rowY, boxW, lineH);
@@ -438,7 +388,6 @@ export class CRTTextRenderer {
         ctx.fillStyle = theme.text;
       }
 
-      // Truncate text if needed
       let label = suggestions[i];
       const maxChars = Math.floor((boxW - 24) / (fs * 0.6));
       if (label.length > maxChars) {
@@ -447,11 +396,9 @@ export class CRTTextRenderer {
 
       ctx.fillText(label, boxX + 12, rowY + 2);
 
-      // Bottom border
       ctx.fillStyle = theme.dim;
       ctx.fillRect(boxX, rowY + lineH, boxW, 1);
 
-      // Hit area
       this._hitAreas.push({
         id,
         x: boxX,

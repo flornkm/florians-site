@@ -1,18 +1,9 @@
-// Special-case detection for social posts (Twitter/X tweets, LinkedIn posts)
-// and video elements. Mostly DOM-aware extraction so we score the right thing
-// rather than the surrounding chrome (author handles, like counts, timestamps).
-
 import { scoreImage, type ImageScore } from "./imageDetect";
 import { scoreText, type TextScore } from "./textHeuristic";
 
 const onTwitter = () => /(?:^|\.)(?:twitter|x)\.com$/.test(location.hostname);
 const onLinkedIn = () => /(?:^|\.)linkedin\.com$/.test(location.hostname);
 
-// -----------------------------------------------------------------------------
-// Twitter / X
-// -----------------------------------------------------------------------------
-
-/** Walk up the DOM looking for a tweet article container. */
 function findTweetContainer(el: Element): Element | null {
   let cur: Element | null = el;
   while (cur && cur !== document.body) {
@@ -33,11 +24,6 @@ export function isTwitterTweet(el: Element): boolean {
   return findTweetContainer(el) !== null;
 }
 
-// -----------------------------------------------------------------------------
-// LinkedIn
-// -----------------------------------------------------------------------------
-
-/** Walk up to a LinkedIn feed post container. */
 function findLinkedInPost(el: Element): Element | null {
   let cur: Element | null = el;
   while (cur && cur !== document.body) {
@@ -58,7 +44,6 @@ function findLinkedInPost(el: Element): Element | null {
   return null;
 }
 
-/** Pull the post commentary text from a LinkedIn post container. */
 function extractLinkedInText(container: Element): string {
   const selectors = [
     '[data-test-id*="commentary"]',
@@ -82,13 +67,6 @@ function extractLinkedInText(container: Element): string {
   return best.length >= 20 ? best : "";
 }
 
-// -----------------------------------------------------------------------------
-// Combined: when an image is hovered inside a social post, fold the post text
-// into the rating. Simple "max" merge — most reliable, no false positives from
-// the URL heuristic blocking a clearly-AI caption (or vice versa).
-// -----------------------------------------------------------------------------
-
-/** Get post commentary text near `el`, on supported social hosts. */
 export function findSocialPostText(el: Element): string {
   if (onTwitter()) {
     const tweet = findTweetContainer(el);
@@ -104,11 +82,11 @@ export function findSocialPostText(el: Element): string {
   return "";
 }
 
-/** Image score combined with the surrounding social post's text score. */
 export async function scoreSocialImage(src: string, postText: string): Promise<ImageScore> {
   const img = await scoreImage(src);
   if (!postText) return img;
   const text = scoreText(postText);
+  // Max merge: avoids the URL heuristic masking a clearly-AI caption or vice versa.
   return {
     rating: Math.max(img.rating, text.rating),
     signals: [...img.signals, ...text.signals.map((s) => `post: ${s}`)],
@@ -123,7 +101,7 @@ export function scoreTwitterTweet(el: Element): TextScore | null {
   if (!text) return null;
   const score = scoreText(text);
 
-  // Author bot-like handle bump — many auto-posted accounts end in numerics.
+  // Auto-posted bot accounts often end in numerics.
   const handleEl = container.querySelector('a[href*="/status/"][role="link"] [dir="ltr"]');
   const handle = handleEl?.textContent?.trim() ?? "";
   if (/^@[a-z]+\d{4,}$/i.test(handle) || /bot$/i.test(handle)) {
@@ -131,7 +109,6 @@ export function scoreTwitterTweet(el: Element): TextScore | null {
     score.signals.push(`bot-like handle: ${handle}`);
   }
 
-  // Twitter labels generated content as "Created with AI" sometimes.
   const aiBadge = container.querySelector(
     '[data-testid*="aiGenerated"], [aria-label*="generated with AI" i]',
   );
@@ -142,10 +119,6 @@ export function scoreTwitterTweet(el: Element): TextScore | null {
 
   return score;
 }
-
-// -----------------------------------------------------------------------------
-// Video elements (raw <video>) + IFRAME embeds
-// -----------------------------------------------------------------------------
 
 const AI_VIDEO_HOSTS: RegExp[] = [
   /(?:^|\.)runwayml\.com$/i,
@@ -184,7 +157,7 @@ export async function scoreVideoElement(el: HTMLVideoElement): Promise<ImageScor
       host = u.hostname;
       path = u.pathname + u.search;
     } catch {
-      // not a URL — fine, fall through
+      // not a URL — fall through with path = url
     }
 
     for (const re of AI_VIDEO_HOSTS) {
@@ -203,22 +176,17 @@ export async function scoreVideoElement(el: HTMLVideoElement): Promise<ImageScor
     }
   }
 
-  // If poster looks AI-generated, fold its image score in.
   if (el.poster) {
     const posterScore = await scoreImage(el.poster);
     score = Math.max(score, posterScore.rating);
     for (const s of posterScore.signals) signals.push(`poster: ${s}`);
   }
 
-  // TODO: read C2PA manifest from the video stream once c2pa-js is wired.
-  // TODO: peek the <track kind="metadata"> children if any (rare but exists).
-
   return { rating: Math.max(0.05, Math.min(1, score)), signals };
 }
 
 export function isVideoLike(el: Element): boolean {
   if (el.tagName === "VIDEO") return true;
-  // YouTube/Vimeo iframe embeds
   if (el.tagName === "IFRAME") {
     const src = (el as HTMLIFrameElement).src || "";
     return /(?:youtube\.com\/embed|player\.vimeo\.com|tiktok\.com\/embed)/i.test(src);
@@ -231,9 +199,7 @@ export async function scoreIframeEmbed(el: HTMLIFrameElement): Promise<ImageScor
   let score = 0;
   const src = el.src || "";
 
-  // We can't read the inside of cross-origin iframes, but the src URL itself
-  // is often enough to identify AI-content channels (e.g. someone embeds a
-  // known AI-generator share link).
+  // Cross-origin iframe contents are unreadable; the src URL alone often identifies an AI generator.
   let host = "";
   try {
     host = new URL(src).hostname;
@@ -255,7 +221,6 @@ export async function scoreIframeEmbed(el: HTMLIFrameElement): Promise<ImageScor
     }
   }
 
-  // Some embeds expose title via the iframe's title attribute.
   const title = el.title || el.getAttribute("aria-label") || "";
   if (title) {
     const t = scoreText(title);

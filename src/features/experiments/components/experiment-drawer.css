@@ -1,0 +1,79 @@
+/* Styling for the Base UI Drawer used on mobile. Base UI drives the swipe/snap and
+   open/close motion via these data attributes and CSS variables; we only provide the
+   visual container and the slide transform contract. */
+
+.experiment-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  /* Fades proportionally as the sheet is swiped away. */
+  opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  transition: opacity 0.4s ease;
+}
+.experiment-drawer__backdrop[data-starting-style],
+.experiment-drawer__backdrop[data-ending-style] {
+  opacity: 0;
+}
+.experiment-drawer__backdrop[data-swiping] {
+  transition-duration: 0ms;
+}
+
+.experiment-drawer__viewport {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  align-items: flex-end;
+  /* Let taps on the area above the sheet reach the backdrop to dismiss. */
+  pointer-events: none;
+}
+
+.experiment-drawer__popup {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 86vh;
+  overflow: hidden;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: var(--surface);
+  transform: translateY(
+    calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px))
+  );
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+/* Let an experiment's menu (the iOS context menu) overflow the sheet while open. */
+.experiment-drawer__popup:has([data-menu-open]) {
+  overflow: visible;
+}
+.experiment-drawer__popup[data-starting-style],
+.experiment-drawer__popup[data-ending-style] {
+  transform: translateY(100%);
+}
+.experiment-drawer__popup[data-swiping] {
+  transition-duration: 0ms;
+}
+.experiment-drawer__popup[data-ending-style] {
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * 400ms);
+}
+
+@media (prefers-color-scheme: dark) {
+  .experiment-drawer__popup {
+    background-color: var(--surface-tertiary);
+  }
+}
+
+.experiment-drawer__content {
+  position: relative;
+  flex: 1 1 0%;
+  min-height: 0;
+  /* Center whatever the experiment renders within the available space. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

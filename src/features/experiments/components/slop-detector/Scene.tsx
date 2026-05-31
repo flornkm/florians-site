@@ -5,10 +5,7 @@ import * as THREE from "three";
 import { GeigerCounter } from "./GeigerCounter";
 import { SoundManager } from "./SoundManager";
 
-/** On mobile (< md breakpoint) the device sits roughly half size compared
- *  to desktop. Desktop is unchanged. We force the zoom imperatively each
- *  frame because drei's OrthographicCamera doesn't always re-apply changes
- *  to its zoom prop after `makeDefault` has registered the camera. */
+// Zoom set imperatively each frame: drei's OrthographicCamera ignores zoom prop changes after makeDefault.
 function ResponsiveCamera() {
   const cameraRef = useRef<THREE.OrthographicCamera>(null);
   const { size } = useThree();

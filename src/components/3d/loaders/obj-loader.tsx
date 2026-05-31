@@ -8,7 +8,6 @@ interface OBJLoaderProps {
   metalType?: "steel" | "aluminum" | "copper" | "gold" | "chrome" | "titanium";
 }
 
-// Metal material presets - brighter and more reflective
 const METAL_PRESETS = {
   steel: { color: "#D4D8E0", metalness: 0.9, roughness: 0.1 },
   aluminum: { color: "#F5F5F5", metalness: 0.95, roughness: 0.05 },
@@ -24,22 +23,22 @@ export function OBJLoader({ src, metalType = "steel" }: OBJLoaderProps) {
 
   useEffect(() => {
     if (obj && groupRef.current) {
-      // Calculate bounding box
       const bbox = new THREE.Box3().setFromObject(obj);
       const center = bbox.getCenter(new THREE.Vector3());
       const size = bbox.getSize(new THREE.Vector3());
 
-      // Center the object
-      obj.position.sub(center);
+      obj.position.set(
+        obj.position.x - center.x,
+        obj.position.y - center.y,
+        obj.position.z - center.z,
+      );
 
-      // Scale to fit in view
       const maxDimension = Math.max(size.x, size.y, size.z);
-      const scale = 3 / maxDimension; // Scale to fit in a 3-unit cube
+      const scale = 3 / maxDimension; // fit in a 3-unit cube
       obj.scale.setScalar(scale);
 
       const metalPreset = METAL_PRESETS[metalType];
 
-      // Apply materials to all meshes
       obj.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           child.material = new THREE.MeshStandardMaterial({
@@ -50,14 +49,12 @@ export function OBJLoader({ src, metalType = "steel" }: OBJLoaderProps) {
             envMapIntensity: 0.8,
           });
 
-          // Compute normals for proper lighting
           if (child.geometry) {
             child.geometry.computeVertexNormals();
           }
         }
       });
 
-      // Clear any existing children and add the loaded object
       while (groupRef.current.children.length > 0) {
         groupRef.current.remove(groupRef.current.children[0]);
       }
