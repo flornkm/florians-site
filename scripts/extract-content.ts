@@ -1,7 +1,4 @@
-/**
- * Generates the chat system prompt from website data and writes it to a JSON file.
- * Run before build/dev so the API has everything it needs without cross-file imports.
- */
+// Run before build/dev: bakes site data into a JSON prompt so the API needs no cross-file imports.
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -40,7 +37,6 @@ function readCategory(category: string): Entry[] {
     });
 }
 
-// Build all sections
 const companies = COMPANIES.map((c) => c.name).join(", ");
 const education = INSTITUTIONS.map((i) => i.name).join(" and ");
 const countries = VISITED_COUNTRIES.map((c) => c.name).join(", ");

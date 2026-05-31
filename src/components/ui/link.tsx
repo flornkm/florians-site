@@ -6,7 +6,6 @@ type AnchorProps = React.ComponentPropsWithRef<"a">;
 export const Link = React.forwardRef<HTMLAnchorElement, AnchorProps>(function Link(props, ref) {
   const { href, target, ...rest } = props;
 
-  // External links, mailto, tel, hash-only, or target="_blank" → use plain <a>
   const isExternal =
     !href ||
     target === "_blank" ||
@@ -19,7 +18,6 @@ export const Link = React.forwardRef<HTMLAnchorElement, AnchorProps>(function Li
     return <a ref={ref} href={href} target={target} {...rest} />;
   }
 
-  // Internal links → use TanStack Router for client-side navigation
   return <RouterLink ref={ref} to={href} {...rest} />;
 });
 

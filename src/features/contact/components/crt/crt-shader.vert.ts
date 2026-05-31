@@ -1,4 +1,3 @@
-/** Fullscreen quad vertex shader — passes UV coordinates to fragment stage. */
 export const vertexShaderSource = `
 attribute vec2 aPosition;
 varying vec2 vUv;

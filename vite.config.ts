@@ -3,18 +3,21 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
-import { remarkRawContent } from "./src/lib/remark-raw-content";
 
 export default defineConfig({
   plugins: [
     {
       enforce: "pre",
       ...mdx({
-        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkRawContent],
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+        // Standalone images render as block components (a <div> card), so they
+        // must not be wrapped in a <p> — that's invalid HTML and breaks SSR.
+        rehypePlugins: [rehypeUnwrapImages],
         providerImportSource: "@mdx-js/react",
       }),
     },
@@ -28,9 +31,6 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-  },
-  ssr: {
-    noExternal: ["react-globe.gl", "globe.gl", "three-globe", "streamdown"],
   },
   resolve: {
     alias: {

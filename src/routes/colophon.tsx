@@ -25,7 +25,7 @@ function renderLinkedList(items: { name: string; href: string }[]) {
 export const Route = createFileRoute("/colophon")({
   head: () => ({
     meta: [
-      { title: "Colophon • Florian - Design Engineer" },
+      { title: "Colophon ‹ Florian Design Engineer" },
       {
         name: "description",
         content:
@@ -52,9 +52,9 @@ export const Route = createFileRoute("/colophon")({
 
 function ColophonPage() {
   return (
-    <div className="w-full max-w-5xl mx-auto md:px-0 px-4">
-      <div className="mb-16">
-        <H1>Colophon</H1>
+    <div className="w-full">
+      <div className="mb-16 grid grid-cols-9 gap-x-6">
+        <H1 className="col-start-1 col-span-9 md:col-start-3 md:col-span-2">Colophon</H1>
       </div>
       <div className="sticky top-[calc(100dvh-6.75rem)] border border-black/10 z-20 mx-auto -mb-16 flex w-fit rounded-[10px] bg-surface-inverted shadow-xl md:top-[calc(100dvh-4.5rem)] md:max-w-[calc(100%-27rem)] md:justify-self-end md:flex-col">
         <div className="flex gap-0.5 p-0.5">
@@ -73,11 +73,11 @@ function ColophonPage() {
         </div>
       </div>
       <section className="w-full relative min-h-screen">
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Tech Stack</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Tech Stack</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
@@ -96,18 +96,18 @@ function ColophonPage() {
             </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Typography</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Typography</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
             <Body1>
               Sans:{" "}
-              <Link href="https://github.com/fonts-archive/Pretendard" target="_blank">
-                Pretendard
+              <Link href="https://raoulgottschling.de/ciron-text/" target="_blank">
+                Ciron Text
               </Link>
             </Body1>
             <Body1 className="font-mono">
@@ -116,19 +116,13 @@ function ColophonPage() {
                 Commit Mono
               </Link>
             </Body1>
-            <Body1 className="font-round">
-              Round:{" "}
-              <Link href="https://github.com/lauridskern/open-runde" target="_blank">
-                Open Runde
-              </Link>
-            </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Icons</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Icons</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
@@ -141,11 +135,11 @@ function ColophonPage() {
             </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Mockups</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Mockups</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
@@ -163,11 +157,11 @@ function ColophonPage() {
             </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">UI</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">UI</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
@@ -185,41 +179,35 @@ function ColophonPage() {
             </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Special Packages</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Special Packages</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
             <Body1>
-              3D:{" "}
-              <Link href="https://threejs.org/" target="_blank">
-                ThreeJS
-              </Link>{" "}
-              and{" "}
-              <Link href="https://react-three-fiber.org/" target="_blank">
-                https://globe.gl/
-              </Link>
-            </Body1>
-            <Body1>
               Animations: Pure{" "}
               <Link href="https://tailwindcss.com/" target="_blank">
                 Tailwind
-              </Link>{" "}
-              or{" "}
+              </Link>
+              ,{" "}
               <Link href="https://rive.app/" target="_blank">
                 Rive
+              </Link>
+              , or{" "}
+              <Link href="https://motion.dev/" target="_blank">
+                Framer Motion
               </Link>
             </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Hosting</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Hosting</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
@@ -229,41 +217,13 @@ function ColophonPage() {
                 Vercel
               </Link>
             </Body1>
-            <Body1>
-              Postcards:{" "}
-              <Link href="https://firebase.google.com/" target="_blank">
-                Firebase
-              </Link>
-            </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">AI</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Inspiration</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
-              proseVariants({ variant: "default" }),
-            )}
-          >
-            <Body1>
-              Package:{" "}
-              <Link href="https://www.ai-sdk.dev/" target="_blank">
-                AI SDK
-              </Link>
-            </Body1>
-            <Body1>
-              Provider:{" "}
-              <Link href="https://openai.com/" target="_blank">
-                OpenAI
-              </Link>
-            </Body1>
-          </div>
-        </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Inspiration</H3>
-          <div
-            className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >
@@ -273,11 +233,11 @@ function ColophonPage() {
             </Body1>
           </div>
         </div>
-        <div className="flex items-start justify-between">
-          <H3 className="w-40 shrink-0">Great people</H3>
+        <div className="grid grid-cols-9 gap-x-6 items-start">
+          <H3 className="col-span-9 md:col-start-1 md:col-span-2">Great people</H3>
           <div
             className={cn(
-              "w-full md:max-w-[calc(100%-27rem)] justify-self-end space-y-2",
+              "col-span-9 md:col-start-3 md:col-span-2 space-y-2",
               proseVariants({ variant: "default" }),
             )}
           >

@@ -1,30 +1,29 @@
-import { Body2 } from "@/components/design-system/body";
-import { H1, H2, H3 } from "@/components/design-system/heading";
 import { Image } from "@/components/shared/image";
-import TriangleFilled from "@/components/shared/triangle-filled";
-import { LetterStack } from "@/features/letters/components/letter-stack";
-
-import Button from "@/components/ui/button";
+import { SmartVideo } from "@/components/shared/smart-video";
 import { Link } from "@/components/ui/link";
-
-import { COMPANIES } from "@/features/about/const/companies";
+import { PROJECTS, type Project } from "@/features/work/projects";
+import { useActiveSection } from "@/hooks/use-active-section";
+import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
+import { videoManifest } from "@/videoMap.gen";
+import { createFileRoute } from "@tanstack/react-router";
+import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
+import { motion } from "motion/react";
+import { useMemo, useState } from "react";
 
-import { getContent } from "@/lib/mdx";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import { IconPencil } from "central-icons/IconPencil";
+const isVideo = (src: string) => /\.(webm|mp4)$/i.test(src);
 
-const getProjects = createServerFn().handler(async () => {
-  const projects = await getContent("work");
-  return projects;
-});
+const MORE_LINKS = [
+  { name: "Colophon", href: "/colophon" },
+  { name: "Experiments", href: "/experiments" },
+];
+
+const projectId = (project: Project) => `project-${project.name.toLowerCase()}`;
 
 export const Route = createFileRoute("/")({
-  loader: () => getProjects(),
   head: () => ({
     meta: [
-      { title: "Work • Florian - Design Engineer" },
+      { title: "Work ‹ Florian Design Engineer" },
       {
         name: "description",
         content: "Selected design and engineering work by Florian Kiem.",
@@ -46,140 +45,149 @@ export const Route = createFileRoute("/")({
   component: IndexPage,
 });
 
-function IndexPage() {
-  const projects = Route.useLoaderData() as {
-    title: string;
-    description: string;
-    slug: string;
-    date: string;
-    cover: string | string[];
-  }[];
-  const navigate = useNavigate();
+function WideImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="bg-image-card p-4 md:p-12">
+      <Image
+        src={src}
+        alt={alt}
+        objectFit="contain"
+        className="h-auto w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+      />
+    </div>
+  );
+}
+
+function WorkVideo({ src, alt }: { src: string; alt: string }) {
+  const [ready, setReady] = useState(false);
+  const entry = videoManifest[src];
+  const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
+  const isWebm = /\.webm$/i.test(src);
 
   return (
-    <div className="w-full">
-      <div className="w-full max-w-5xl md:px-0 px-4 mx-auto">
-        <section className="w-full md:grid grid-cols-[336px_1fr] gap-4 items-end md:mb-12">
-          <H1 className="leading-tight md:mb-0 mb-10">
-            Designer by day, <br /> <span className="text-quaternary">Engineer by night</span>
-          </H1>
-          <div className="w-col md:flex items-center justify-center">
-            <H2 className="mb-2.5 md:mb-5">Latest Work</H2>
-          </div>
-        </section>
-        <section className="w-full flex flex-col mb-12 group/section">
-          {projects.map((project) => (
-            <Link
-              href={`/work/${project.slug}`}
-              key={project.slug}
-              className="w-full md:grid grid-cols-[290px_1fr] items-start group/item py-4"
-            >
-              <div className="flex flex-col gap-0.5 w-full items-start md:sticky top-16">
-                <H3 className="relative transition-[padding] duration-200 ease-out [@media(hover:hover)]:lg:group-hover/item:pl-3">
-                  <span
-                    className={cn(
-                      "hidden [@media(hover:hover)]:lg:inline-flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 origin-left opacity-0 scale-90 blur-[2px] transition-all duration-200 ease-out",
-                      "[@media(hover:hover)]:group-hover/item:translate-x-0 [@media(hover:hover)]:group-hover/item:opacity-100 [@media(hover:hover)]:group-hover/item:scale-100 [@media(hover:hover)]:group-hover/item:blur-none",
-                    )}
-                  >
-                    <TriangleFilled className="size-4" />
-                  </span>
-                  {project.title}
-                </H3>
-                <Body2 className="mb-5 md:mb-3 text-tertiary">{project.description}</Body2>
-              </div>
-              <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-                {Array.isArray(project.cover) ? (
-                  <div className="w-full bg-secondary p-2 py-4 md:py-8 md:p-8 rounded-md flex gap-3">
-                    {project.cover.map((src) => (
-                      <div key={src} className="flex-1 min-w-0 px-2 @container">
-                        <Image
-                          src={src}
-                          alt={project.title}
-                          objectFit="contain"
-                          className="w-full h-auto rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="w-full bg-secondary p-4 md:p-8 rounded-md flex items-center">
-                    <Image
-                      src={project.cover}
-                      alt={project.title}
-                      className="w-full h-auto rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
-                    />
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
-        </section>
-        <section className="w-full mb-12 flex flex-col md:gap-0 gap-4 md:grid grid-cols-[290px_1fr] items-start">
-          <div className="md:sticky top-16">
-            <H3>Teams I was fortunate to ship with</H3>
-          </div>
-          <div className="w-full md:max-w-[calc(100%-136px)] justify-self-end">
-            <div className="flex flex-col group/companies">
-              {COMPANIES.map((company) => {
-                const [start, end] = company.date.split(/\s*[–-]\s*/);
-                const displayDate = end ? company.date : `${start} – ${start}`;
-                return company.url ? (
+    <div className="bg-image-card p-4 md:p-12">
+      <div
+        className="relative w-full overflow-hidden rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+        style={entry ? { aspectRatio: `${entry.width} / ${entry.height}` } : undefined}
+      >
+        {placeholder && (
+          <img
+            src={placeholder}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover"
+            style={{ filter: "blur(20px)", opacity: ready ? 0 : 1, transition: "opacity 400ms ease-out" }}
+          />
+        )}
+        <SmartVideo
+          webm={isWebm ? src : undefined}
+          mp4={isWebm ? undefined : src}
+          aria-label={alt}
+          className={cn(
+            "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out",
+            ready ? "opacity-100" : "opacity-0",
+          )}
+          onCanPlay={() => setReady(true)}
+          onLoadedData={() => setReady(true)}
+        />
+      </div>
+    </div>
+  );
+}
+
+function MobileRow({ images, alt }: { images: string[]; alt: string }) {
+  return (
+    <div className="flex gap-3 bg-image-card p-2 py-4 md:p-10 md:py-12">
+      {images.map((src) => (
+        <div key={src} className="min-w-0 flex-1 px-2 @container">
+          <Image
+            src={src}
+            alt={alt}
+            objectFit="contain"
+            className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function IndexPage() {
+  const withMedia = PROJECTS.filter((project) => project.media && project.media.length > 0);
+  const active = useActiveSection(withMedia.map(projectId));
+
+  return (
+    <div className="md:grid md:grid-cols-9 md:gap-x-6">
+      <aside className="mb-16 md:col-span-2 md:mb-0 md:sticky md:top-4 md:z-20 md:flex md:h-[calc(100dvh-2rem)] md:flex-col">
+        <h1 className="mb-12 max-w-[15rem] text-base font-medium leading-snug text-primary md:shrink-0">
+          An engineer with a background in design, combining both.
+        </h1>
+        <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
+          <h2 className="mb-4 text-sm font-medium text-primary">Helped build</h2>
+          <ul className="flex flex-col items-start gap-1.5">
+            {PROJECTS.map((project, index) => {
+              const isActive = !!project.media?.length && active === projectId(project);
+              return (
+                <motion.li
+                  key={project.name}
+                  initial={{ opacity: 0, x: -16, filter: "blur(2px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.06,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
                   <a
-                    key={company.name}
-                    href={company.url}
+                    href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative flex items-center justify-between py-2 px-3 -mx-3 group/company [@media(hover:hover)]:hover:opacity-100 [@media(hover:hover)]:group-hover/companies:opacity-30 transition-opacity duration-300 ease-out"
+                    className={cn(
+                      "group inline-flex items-center gap-1 text-sm font-medium transition-colors",
+                      isActive ? "text-primary" : "text-tertiary hover:text-secondary",
+                    )}
                   >
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 rounded-md bg-secondary opacity-0 scale-[0.99] transition-transform duration-200 ease-out [@media(hover:hover)]:group-hover/company:opacity-100 [@media(hover:hover)]:group-hover/company:scale-100"
-                    />
-                    <span className="relative text-sm font-medium">{company.name}</span>
-                    <span className="relative text-sm text-tertiary tabular-nums">
-                      {displayDate}
-                    </span>
+                    {project.name}
+                    <IconArrowUpRight className="size-3.5 -translate-x-0.5 translate-y-0.5 opacity-0 blur-[2px] transition duration-150 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none" />
                   </a>
-                ) : (
-                  <div
-                    key={company.name}
-                    className="flex items-center justify-between py-2 px-3 -mx-3"
-                  >
-                    <span className="text-sm font-medium">{company.name}</span>
-                    <span className="text-sm text-tertiary tabular-nums">{displayDate}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-        <section
-          id="letters"
-          className="w-screen py-24 relative left-1/2 -translate-x-1/2 overflow-hidden flex flex-col gap-8 justify-center items-center mask-y-from-95% mask-y-to-100%"
-        >
-          <div className="flex flex-col items-center justify-center w-full md:px-0 px-4 md:w-auto">
-            <div className="md:mb-2 min-[450px]:mb-0 mb-8">
-              <H2 className="text-center mb-0.5">Digital Guestbook</H2>
-              <Body2 className="text-quaternary md:mb-2.5 text-center">
-                Last three letters sent to this site.
-              </Body2>
-            </div>
-            <div className="min-[450px]:mt-[16vw] md:mt-0 w-full">
-              <LetterStack />
-            </div>
-            <Button
-              variant="secondary"
-              className="mt-4 mx-auto"
-              prefix={<IconPencil />}
-              onClick={() => {
-                navigate({ to: "/send-postcard" });
-              }}
+                </motion.li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="mt-12 flex items-center gap-4 md:mt-0 md:shrink-0 md:pt-12">
+          {MORE_LINKS.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-tertiary transition-colors hover:text-secondary"
             >
-              Send Postcard
-            </Button>
-          </div>
-        </section>
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      </aside>
+
+      <div className="flex flex-col gap-1 md:col-start-3 md:col-span-5">
+        {withMedia.map((project) => (
+          <section
+            key={project.name}
+            id={projectId(project)}
+            className="flex scroll-mt-24 flex-col gap-1"
+          >
+            {project.media?.map((block, index) =>
+              Array.isArray(block) ? (
+                <MobileRow key={index} images={block} alt={project.name} />
+              ) : isVideo(block) ? (
+                <WorkVideo key={block} src={block} alt={project.name} />
+              ) : (
+                <WideImage key={block} src={block} alt={project.name} />
+              ),
+            )}
+          </section>
+        ))}
+        {/* Extends the column so the sticky sidebar settles into the footer's Pages row. */}
+        <div aria-hidden className="hidden md:block md:h-48" />
       </div>
     </div>
   );

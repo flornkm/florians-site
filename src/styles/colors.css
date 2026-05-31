@@ -1,6 +1,7 @@
 :root {
-  --bg-primary: #ffffff;
+  --bg-primary: #fdfdfc;
   --bg-secondary: #fafafa;
+  --bg-image-card: #f4f4f4;
   --bg-tertiary: #f5f5f5;
   --bg-quaternary: #e5e5e5;
   --bg-inverted: #000000;
@@ -24,9 +25,26 @@
   --interactive-hover: #f5f5f5;
   --interactive-active: #e5e5e5;
 
+  /* Filled secondary controls (secondary button, contact pill, article back button). */
+  --interactive-secondary: #d4d4d4;
+  --interactive-secondary-hover: #c7c7c7;
+
   --accent-primary: #171717;
   --accent-primary-hover: #262626;
   --accent-foreground: #ffffff;
+
+  /* Illustration / blog-icon accent palette. Theme-independent (inherited into
+     dark). Mirrored literally in src/features/writing/lib/icon-svg.ts — SVGs
+     rendered as <img> or by the OG function can't read CSS variables, so the
+     hex values must be kept in sync there. */
+  --accent-yellow: #f2c94c;
+  --accent-orange: #e8643c;
+  --accent-olive: #8d9150;
+  --accent-sage: #6fae9f;
+  --accent-clay: #d98e5a;
+  --accent-rose: #b8607a;
+  --accent-blue: #7e9cc4;
+  --accent-gold: #caa84a;
 
   --destructive: #dc2626;
   --warning: #f59e0b;
@@ -41,6 +59,7 @@
   :root {
     --bg-primary: #000000;
     --bg-secondary: #0a0a0a;
+    --bg-image-card: #141414;
     --bg-tertiary: #171717;
     --bg-quaternary: #262626;
     --bg-inverted: #ffffff;
@@ -51,9 +70,9 @@
     --surface-inverted: #ffffff;
 
     --text-primary: #ffffff;
-    --text-secondary: #a3a3a3;
-    --text-tertiary: #737373;
-    --text-quaternary: #525252;
+    --text-secondary: #bdbdbd;
+    --text-tertiary: #969696;
+    --text-quaternary: #6b6b6b;
     --text-inverted: #000000;
     --text-inverted-secondary: #525252;
 
@@ -63,6 +82,9 @@
 
     --interactive-hover: #262626;
     --interactive-active: #404040;
+
+    --interactive-secondary: #404040;
+    --interactive-secondary-hover: #4a4a4a;
 
     --accent-primary: #ffffff;
     --accent-primary-hover: #e5e5e5;
@@ -100,6 +122,7 @@
      =========================================== */
   --background-color-primary: var(--bg-primary);
   --background-color-secondary: var(--bg-secondary);
+  --background-color-image-card: var(--bg-image-card);
   --background-color-tertiary: var(--bg-tertiary);
   --background-color-quaternary: var(--bg-quaternary);
   --background-color-inverted: var(--bg-inverted);
@@ -111,6 +134,8 @@
   --background-color-accent-primary-hover: var(--accent-primary-hover);
   --background-color-interactive-hover: var(--interactive-hover);
   --background-color-interactive-active: var(--interactive-active);
+  --background-color-interactive-secondary: var(--interactive-secondary);
+  --background-color-interactive-secondary-hover: var(--interactive-secondary-hover);
   --background-color-destructive: var(--destructive);
   --background-color-warning: var(--warning);
   --background-color-success: var(--success);
@@ -158,6 +183,19 @@
   --stroke-primary: var(--text-primary);
   --stroke-secondary: var(--text-secondary);
   --stroke-tertiary: var(--text-tertiary);
+
+  /* ===========================================
+     ACCENT PALETTE (bg-/text-/fill-/stroke-/border-accent-*)
+     Illustration colors shared with the blog icons.
+     =========================================== */
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-olive: var(--accent-olive);
+  --color-accent-sage: var(--accent-sage);
+  --color-accent-clay: var(--accent-clay);
+  --color-accent-rose: var(--accent-rose);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-gold: var(--accent-gold);
 
   /* ===========================================
      SHADOW COLORS (shadow-*)
