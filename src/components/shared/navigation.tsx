@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useLocation } from "@tanstack/react-router";
-import { animate, useMotionValue } from "motion/react";
+import { animate, motion, useMotionValue } from "motion/react";
 import ContactDialog from "./contact-dialog";
 import { Logo } from "./logo";
 import { Link } from "../ui/link";
@@ -45,7 +45,7 @@ export default function Navigation() {
             <Logo className="h-3 w-auto text-primary" progress={logoProgress} />
           </span>
         </Link>
-        <div className="flex items-center gap-4 col-span-5 md:gap-6">
+        <div className="hidden items-center gap-4 col-span-5 md:flex md:gap-6">
           {TABS.map((tab) => (
             <Link
               key={tab.name}
@@ -59,9 +59,48 @@ export default function Navigation() {
             </Link>
           ))}
         </div>
-        {/* Fixed on desktop, anchored to the content's right edge (not the viewport) so it stays aligned past the 2000px max-width. */}
-        <div className="flex justify-end col-span-2 md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2000px)/2+1.5rem))]">
+        {/* Desktop only: fixed and anchored to the content's right edge (not the viewport) so it stays aligned past the 2000px max-width. On mobile the Contact button lives in the bottom bar instead. */}
+        <div className="hidden justify-end col-span-2 md:flex md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2000px)/2+1.5rem))]">
           <ContactDialog />
+        </div>
+      </div>
+
+      {/* Mobile-only floating bar; on desktop the tabs and Contact live in the top nav above. */}
+      <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
+        <div className="flex items-center gap-1 rounded-full border border-primary bg-primary p-1.5 shadow-lg">
+          {TABS.map((tab, index) => {
+            const active = isActive(tab.href);
+            return (
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={cn(
+                  "relative px-4 py-1.5 text-sm font-medium transition-colors",
+                  active ? "text-primary" : "text-tertiary hover:text-secondary",
+                )}
+              >
+                {/* Shared-layout pill: Framer slides this single element between tabs when the active route changes. */}
+                {active && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
+                    className="absolute inset-0 bg-surface-tertiary"
+                    // Per-corner radii in px (not `rounded-l-full`): a full corner next to a 4px
+                    // corner triggers CSS proportional-radius reduction that zeroes the 4px side.
+                    // The bar's left end uses half the pill height (≈full) so the right stays 4px.
+                    style={{
+                      borderTopLeftRadius: index === 0 ? 16 : 4,
+                      borderBottomLeftRadius: index === 0 ? 16 : 4,
+                      borderTopRightRadius: 4,
+                      borderBottomRightRadius: 4,
+                    }}
+                  />
+                )}
+                <span className="relative">{tab.name}</span>
+              </Link>
+            );
+          })}
+          <ContactDialog roundedRightWhenClosed />
         </div>
       </div>
     </nav>

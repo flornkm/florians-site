@@ -44,7 +44,11 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
   return (
     <footer
-      className={cn("relative z-10 bg-primary pt-12", variant === "indent" ? "-mt-[156px]" : "mt-24")}
+      className={cn(
+        "relative z-10 bg-primary pt-12",
+        // Indent (home): overlap the content on desktop, but use normal spacing on mobile where the sidebar links move into the footer.
+        variant === "indent" ? "mt-24 md:-mt-[156px]" : "mt-24",
+      )}
     >
       <div className="mx-auto w-full max-w-[2000px] px-6">
         <div className="grid gap-y-12 md:grid-cols-9">
@@ -57,20 +61,20 @@ export default function Footer({ variant = "default" }: FooterProps) {
             ))}
           </div>
 
-          {variant === "default" && (
-            <div className="flex flex-col items-start gap-2 md:col-start-3 md:col-span-2">
-              <H4 className="mb-1">More</H4>
-              {MORE_LINKS.map((tab) => (
-                <Link
-                  key={tab.name}
-                  href={tab.href}
-                  className={footerLinkVariants({ size: "medium" })}
-                >
-                  {tab.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          {/* On the indent (home) variant these links live in the page sidebar on desktop, so the footer hides the column there — but on mobile the sidebar hides them, so the footer shows them. */}
+          <div
+            className={cn(
+              "flex flex-col items-start gap-2 md:col-start-3 md:col-span-2",
+              variant === "indent" && "md:hidden",
+            )}
+          >
+            <H4 className="mb-1">More</H4>
+            {MORE_LINKS.map((tab) => (
+              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "medium" })}>
+                {tab.name}
+              </Link>
+            ))}
+          </div>
 
           <div className="flex flex-col items-start gap-2 md:col-start-8 md:col-span-2">
             <H4 className="mb-1">Legal</H4>
@@ -82,7 +86,8 @@ export default function Footer({ variant = "default" }: FooterProps) {
           </div>
         </div>
 
-        <FlorianKiemLines className="mt-16 mb-8" />
+        {/* Extra bottom space on mobile so the floating tab bar doesn't cover the wordmark. */}
+        <FlorianKiemLines className="mt-16 mb-24 md:mb-8" />
       </div>
     </footer>
   );

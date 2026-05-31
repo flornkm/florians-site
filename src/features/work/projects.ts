@@ -7,6 +7,8 @@ export type Project = {
   url?: string;
   /** Projects without media are listed in the sidebar but not scrolled to. */
   media?: ProjectMedia[];
+  /** Lower values lead the home page media column; the sidebar keeps array order regardless. */
+  mediaOrder?: number;
 };
 
 export const PROJECTS: Project[] = [
@@ -41,10 +43,13 @@ export const PROJECTS: Project[] = [
       "/images/superpower/login-visual.webp",
     ],
   },
+  { name: "Kalshi", date: "2025", url: "https://kalshi.com" },
+  { name: "Snaptrude", date: "2025", url: "https://snaptrude.com" },
   {
     name: "Sona",
     date: "2024 – 2025",
     url: "https://sona.wtf",
+    mediaOrder: 0,
     media: [
       [
         "/images/sona/recording.webp",
@@ -63,8 +68,6 @@ export const PROJECTS: Project[] = [
       "/images/sona/download-cta.webp",
     ],
   },
-  { name: "Kalshi", date: "2025", url: "https://kalshi.com" },
-  { name: "Snaptrude", date: "2025", url: "https://snaptrude.com" },
   { name: "Morphic", date: "2024", url: "https://morphic.com" },
   { name: "Dash0", date: "2024", url: "https://dash0.com" },
   { name: "Opral", date: "2023 – 2024", url: "https://opral.com" },

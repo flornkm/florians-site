@@ -34,7 +34,13 @@ const COLUMN_LINKS = SOCIAL_LINKS.filter((l) => l !== FEATURED_LINK);
 
 const isExternal = (href: string) => href.startsWith("http");
 
-export default function ContactDialog() {
+export default function ContactDialog({
+  roundedRightWhenClosed = false,
+}: {
+  // When the closed pill sits at the right end of the mobile bottom bar, round its
+  // right corners fully so it nests into the bar's fully-rounded right edge.
+  roundedRightWhenClosed?: boolean;
+} = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,6 +79,13 @@ export default function ContactDialog() {
     return () => window.removeEventListener("mousedown", handleClick);
   }, [isOpen, close]);
 
+  // Right corners use half the closed pill height (h-7.5 = 30px) rather than a huge "full"
+  // value: a full radius next to the 4px left corner would trigger CSS proportional-radius
+  // reduction and flatten the left side. Half-height reads as fully rounded while keeping left at 4px.
+  const closedRadius = roundedRightWhenClosed
+    ? { borderTopLeftRadius: 4, borderBottomLeftRadius: 4, borderTopRightRadius: 15, borderBottomRightRadius: 15 }
+    : { borderRadius: 4 };
+
   return (
     <MotionConfig transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}>
       <div ref={containerRef} className="relative z-10 hidden min-[350px]:flex items-center">
@@ -82,12 +95,13 @@ export default function ContactDialog() {
           aria-label={isOpen ? "Contact" : undefined}
           role={isOpen ? "dialog" : undefined}
           className={cn(
-            "absolute right-0 bottom-0 md:bottom-auto md:top-0 bg-interactive-secondary text-primary overflow-hidden outline outline-transparent outline-offset-0 transition-[outline-color,outline-offset,outline-width,background-color] duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-300",
+            "bg-interactive-secondary text-primary overflow-hidden outline outline-transparent outline-offset-0 transition-[outline-color,outline-offset,outline-width,background-color] duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-300",
             isOpen
-              ? "w-[380px]"
-              : "hover:bg-interactive-secondary-hover",
+              ? // Mobile: pin to the viewport, capped at 380px and centered (mx-auto, not a transform, so it doesn't fight the layout animation) so it never grows too wide or overflows. Desktop: anchored top-right like before.
+                "fixed inset-x-0 bottom-20 mx-auto w-[380px] max-w-[calc(100vw-1rem)] md:absolute md:inset-x-auto md:mx-0 md:bottom-auto md:right-0 md:top-0 md:w-[380px] md:max-w-none"
+              : "absolute right-0 bottom-0 md:bottom-auto md:top-0 hover:bg-interactive-secondary-hover",
           )}
-          style={{ borderRadius: isOpen ? 8 : 4 }}
+          style={isOpen ? { borderRadius: 8 } : closedRadius}
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {isOpen ? (

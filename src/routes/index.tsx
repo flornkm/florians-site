@@ -113,7 +113,9 @@ function MobileRow({ images, alt }: { images: string[]; alt: string }) {
 }
 
 function IndexPage() {
-  const withMedia = PROJECTS.filter((project) => project.media && project.media.length > 0);
+  const withMedia = PROJECTS.filter((project) => project.media && project.media.length > 0).sort(
+    (a, b) => (a.mediaOrder ?? Number.MAX_SAFE_INTEGER) - (b.mediaOrder ?? Number.MAX_SAFE_INTEGER),
+  );
   const active = useActiveSection(withMedia.map(projectId));
 
   return (
@@ -155,7 +157,8 @@ function IndexPage() {
             })}
           </ul>
         </div>
-        <div className="mt-12 flex items-center gap-4 md:mt-0 md:shrink-0 md:pt-12">
+        {/* Desktop shows these in the sidebar; on mobile they move into the footer's "More" column instead. */}
+        <div className="mt-12 hidden items-center gap-4 md:mt-0 md:flex md:shrink-0 md:pt-12">
           {MORE_LINKS.map((link) => (
             <Link
               key={link.name}
