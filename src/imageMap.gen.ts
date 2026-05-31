@@ -6,6 +6,16 @@ export interface ImageManifestEntry {
 }
 
 export const imageManifest: Record<string, ImageManifestEntry> = {
+  "/images/about/amsterdam-bikes.webp": { width: 1524, height: 1120, thumbhash: "UwgKBYDImXqPdpZphbiHduCsArmF" },
+  "/images/about/amsterdam-toilet.webp": { width: 760, height: 604, thumbhash: "yBgGDoAFand4h3iRa2eZVoh5BYNBMAc=" },
+  "/images/about/bali-fish.webp": { width: 900, height: 744, thumbhash: "BggGBoCBhYeQeGpoqZSXcna0YIKYcGU=" },
+  "/images/about/denmark-house-2.webp": { width: 1072, height: 760, thumbhash: "nQgKNYh21mafqpJxVXp4eVNwMwU3" },
+  "/images/about/denmark-house.webp": { width: 1252, height: 740, thumbhash: "FAgOBIIHhpiGd4h0iod/bqt/1w==" },
+  "/images/about/living-room.webp": { width: 1072, height: 744, thumbhash: "UggGBYD+WGahpXhXaViIih3GwFAN" },
+  "/images/about/nyc-buildings-2.webp": { width: 636, height: 904, thumbhash: "XucJJQSGiIB3h4mHh3iHh4ZwZwh3" },
+  "/images/about/nyc-buildings.webp": { width: 1168, height: 772, thumbhash: "osYJLYaAZqmfhomaiYeJeImQlwh5" },
+  "/images/about/office.webp": { width: 912, height: 884, thumbhash: "FQgOB4Alanp/lZeHd4l4eId3p29o+4QH" },
+  "/images/about/phuket-ocean.webp": { width: 900, height: 1080, thumbhash: "3RgCBgBNdpmleUdWZm9ZmNaHX0b0ZVQ=" },
   "/images/apps/app_chatgpt.jpg": { width: 256, height: 256, thumbhash: "MggOBwD4p4h3eIiPdnV3p1eICAAAAAAA" },
   "/images/apps/app_cron.jpg": { width: 256, height: 256, thumbhash: "W0wHDwKijIi2WXqaZ/h0mnmI2W/V7zYL" },
   "/images/apps/app_family.jpg": { width: 256, height: 256, thumbhash: "KyYJDwR4Bzd4h4d3dYpoB6eFgvRnGH8D" },
@@ -88,4 +98,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/superpower/waiting-screen.webp": { width: 5040, height: 3000, thumbhash: "PQgCBIDXSJdxfYOCfIBFh0CTBw==" },
   "/images/superpower/wearables.webp": { width: 5040, height: 3000, thumbhash: "/fcFBIDFJYhxjHaBjXCmm0+j+g==" },
   "/images/writing/ai-evolution.webp": { width: 1200, height: 630, thumbhash: "PfgBBICYqdS+d3dvZUVoQGD5qg==" },
+  "/images/writing/code-from-all-sides.svg": { width: 600, height: 270, thumbhash: null },
+  "/images/writing/cost-of-software.svg": { width: 600, height: 210, thumbhash: null },
 };

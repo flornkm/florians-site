@@ -13,13 +13,12 @@ export function useTypingAnimation(text: string | undefined) {
       return;
     }
 
-    // If text is the same as before (e.g., from cache), show immediately
+    // Same text (e.g. from cache) skips the animation.
     if (text === previousTextRef.current) {
       setDisplayedText(text);
       return;
     }
 
-    // New text - animate it
     previousTextRef.current = text;
     setDisplayedText("");
     let currentIndex = 0;

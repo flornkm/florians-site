@@ -10,104 +10,6 @@
 @source "../../node_modules/streamdown/dist/index.js";
 
 @font-face {
-  font-family: "Pretendard Variable";
-  font-weight: 45 920;
-  font-style: normal;
-  font-display: swap;
-  src: url(/fonts/pretendard/PretendardVariable.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 900;
-  font-display: swap;
-  src:
-    local("Pretendard Black"),
-    url(/fonts/pretendard/Pretendard-Black.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-Black.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 800;
-  font-display: swap;
-  src:
-    local("Pretendard ExtraBold"),
-    url(/fonts/pretendard/Pretendard-ExtraBold.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-ExtraBold.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local("Pretendard Bold"),
-    url(/fonts/pretendard/Pretendard-Bold.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-Bold.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 600;
-  font-display: swap;
-  src:
-    local("Pretendard SemiBold"),
-    url(/fonts/pretendard/Pretendard-SemiBold.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-SemiBold.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 500;
-  font-display: swap;
-  src:
-    local("Pretendard Medium"),
-    url(/fonts/pretendard/Pretendard-Medium.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-Medium.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local("Pretendard Regular"),
-    url(/fonts/pretendard/Pretendard-Regular.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-Regular.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 300;
-  font-display: swap;
-  src:
-    local("Pretendard Light"),
-    url(/fonts/pretendard/Pretendard-Light.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-Light.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 200;
-  font-display: swap;
-  src:
-    local("Pretendard ExtraLight"),
-    url(/fonts/pretendard/Pretendard-ExtraLight.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-ExtraLight.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 100;
-  font-display: swap;
-  src:
-    local("Pretendard Thin"),
-    url(/fonts/pretendard/Pretendard-Thin.woff2) format("woff2"),
-    url(/fonts/pretendard/Pretendard-Thin.woff) format("woff");
-}
-
-@font-face {
   font-family: "Commit Mono";
   font-weight: 400 600;
   font-style: normal;
@@ -116,35 +18,114 @@
 }
 
 @font-face {
-  font-family: "Open Runde";
+  font-family: "FK Roman";
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Thin.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-ThinOblique.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Light.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-LightOblique.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-Regular.woff2) format("woff2");
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Regular.otf) format("opentype");
 }
 
 @font-face {
-  font-family: "Open Runde";
+  font-family: "FK Roman";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Oblique.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-Medium.woff2) format("woff2");
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Medium.otf) format("opentype");
 }
 
 @font-face {
-  font-family: "Open Runde";
-  font-weight: 600;
-  font-style: normal;
+  font-family: "FK Roman";
+  font-weight: 500;
+  font-style: italic;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-SemiBold.woff2) format("woff2");
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-MediumOblique.otf) format("opentype");
 }
 
 @font-face {
-  font-family: "Open Runde";
+  font-family: "FK Roman";
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/open-runde/OpenRunde-Bold.woff2) format("woff2");
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Bold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-BoldOblique.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-Black.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FK Roman";
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/fk-roman/FKRomanStandardTrial-BlackOblique.otf) format("opentype");
+}
+
+/* TEMPORARY tryout: Ciron Text as sans (trial font, unlicensed). Remove to restore Pretendard.
+   Subset variable woff2 (upright "Text" flavor only) with the weight axis remapped to a normal
+   100–900 scale, so standard CSS weights work as usual (400=Regular, 500=Medium, 700=Bold).
+   Built from the trial TTF via build_ciron.py in this folder. */
+@font-face {
+  font-family: "Ciron Text";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src:
+    url(/fonts/ciron-text/CironText-VF.woff2) format("woff2"),
+    url(/fonts/ciron-text/CironText-VF.woff) format("woff"),
+    url(/fonts/ciron-text/CironText-VF.ttf) format("truetype");
 }
 
 @theme {
@@ -185,6 +166,10 @@ body {
   font-weight: 450;
 }
 
+p {
+  letter-spacing: -0.01em;
+}
+
 html:has([data-block-scroll]),
 body:has([data-block-scroll]) {
   overflow: hidden;
@@ -204,4 +189,79 @@ body:has([data-block-scroll]) {
   backdrop-filter: blur(40px);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black);
   mask-image: linear-gradient(to bottom, transparent, black);
+}
+
+/* Fine 1px dot grid for figure/illustration backgrounds. Shared across all
+   figures so they align to the same grid; dots stay 1px at any scale. */
+.figure-dots {
+  --figure-dot: #d9d9d9;
+  background-image: radial-gradient(circle, var(--figure-dot) 0.5px, transparent 0.6px);
+  background-size: 10px 10px;
+}
+@media (prefers-color-scheme: dark) {
+  .figure-dots {
+    --figure-dot: #2a2a2a;
+  }
+}
+
+/*
+ * scroll-mask: fades the top/bottom edges of a scroll container.
+ * The top fade grows in once you've scrolled, the bottom fade shrinks as you
+ * reach the end — so an edge only fades while there's content hidden past it.
+ * Apply to an `overflow-y-auto` element. Override the fade height with
+ * `[--scroll-mask-size:4rem]`. Falls back to no mask when not scrollable.
+ */
+@property --scroll-mask-top {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --scroll-mask-bottom {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@utility scroll-mask {
+  --scroll-mask-size: 3rem;
+  --scroll-mask-top: 0px;
+  --scroll-mask-bottom: 0px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black var(--scroll-mask-top),
+    black calc(100% - var(--scroll-mask-bottom)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black var(--scroll-mask-top),
+    black calc(100% - var(--scroll-mask-bottom)),
+    transparent 100%
+  );
+  animation:
+    scroll-mask-top linear both,
+    scroll-mask-bottom linear both;
+  animation-timeline: scroll(self), scroll(self);
+  animation-range:
+    0 var(--scroll-mask-size),
+    calc(100% - var(--scroll-mask-size)) 100%;
+}
+
+@keyframes scroll-mask-top {
+  from {
+    --scroll-mask-top: 0px;
+  }
+  to {
+    --scroll-mask-top: var(--scroll-mask-size);
+  }
+}
+@keyframes scroll-mask-bottom {
+  from {
+    --scroll-mask-bottom: var(--scroll-mask-size);
+  }
+  to {
+    --scroll-mask-bottom: 0px;
+  }
 }

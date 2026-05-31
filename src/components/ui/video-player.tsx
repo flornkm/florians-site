@@ -48,7 +48,7 @@ export function VideoPlayer({ src, poster, className }: VideoPlayerProps) {
           "--media-range-thumb-height": "0px",
           "--media-tooltip-distance": "6px",
           "--media-text-color": "#ffffff",
-          "--media-font-family": "var(--font-sans, 'Pretendard Variable', system-ui, sans-serif)",
+          "--media-font-family": "var(--font-sans, system-ui, sans-serif)",
           "--media-font-weight": "500",
           "--media-font-size": "13px",
           "--media-button-icon-width": "20px",

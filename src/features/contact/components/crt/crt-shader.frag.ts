@@ -1,9 +1,3 @@
-/**
- * CRT fragment shader — single-pass post-process.
- *
- * Effects: barrel distortion, chromatic aberration, phosphor mask,
- * scanlines, bloom, vignette, flicker/noise, turn-on fade.
- */
 export const fragmentShaderSource = `
 precision mediump float;
 
@@ -93,11 +87,10 @@ void main() {
   // Brightness
   color *= BRIGHTNESS;
 
-  // Turn-on: simple fade from black with slight vertical squeeze
+  // Turn-on: fade from black, revealing vertically from the center outward.
   if (uTurnOn < 1.0) {
-    float t = uTurnOn * uTurnOn; // ease-in
-    // Vertical reveal from center
-    float distFromCenter = abs(vUv.y - 0.5) * 2.0; // 0 at center, 1 at edges
+    float t = uTurnOn * uTurnOn;
+    float distFromCenter = abs(vUv.y - 0.5) * 2.0;
     float reveal = smoothstep(1.0, 0.0, distFromCenter - t);
     color *= reveal * t;
   }

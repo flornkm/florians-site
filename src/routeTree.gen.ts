@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SendPostcardRouteImport } from './routes/send-postcard'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
@@ -18,13 +17,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WritingIndexRouteImport } from './routes/writing/index'
 import { Route as WritingIdRouteImport } from './routes/writing/$id'
-import { Route as WorkIdRouteImport } from './routes/work/$id'
 
-const SendPostcardRoute = SendPostcardRouteImport.update({
-  id: '/send-postcard',
-  path: '/send-postcard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
@@ -65,11 +58,6 @@ const WritingIdRoute = WritingIdRouteImport.update({
   path: '/writing/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WorkIdRoute = WorkIdRouteImport.update({
-  id: '/work/$id',
-  path: '/work/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,8 +66,6 @@ export interface FileRoutesByFullPath {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/send-postcard': typeof SendPostcardRoute
-  '/work/$id': typeof WorkIdRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -90,8 +76,6 @@ export interface FileRoutesByTo {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/send-postcard': typeof SendPostcardRoute
-  '/work/$id': typeof WorkIdRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing': typeof WritingIndexRoute
 }
@@ -103,8 +87,6 @@ export interface FileRoutesById {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/send-postcard': typeof SendPostcardRoute
-  '/work/$id': typeof WorkIdRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -117,8 +99,6 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/send-postcard'
-    | '/work/$id'
     | '/writing/$id'
     | '/writing/'
   fileRoutesByTo: FileRoutesByTo
@@ -129,8 +109,6 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/send-postcard'
-    | '/work/$id'
     | '/writing/$id'
     | '/writing'
   id:
@@ -141,8 +119,6 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/send-postcard'
-    | '/work/$id'
     | '/writing/$id'
     | '/writing/'
   fileRoutesById: FileRoutesById
@@ -154,21 +130,12 @@ export interface RootRouteChildren {
   ExperimentsRoute: typeof ExperimentsRoute
   ImprintRoute: typeof ImprintRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  SendPostcardRoute: typeof SendPostcardRoute
-  WorkIdRoute: typeof WorkIdRoute
   WritingIdRoute: typeof WritingIdRoute
   WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/send-postcard': {
-      id: '/send-postcard'
-      path: '/send-postcard'
-      fullPath: '/send-postcard'
-      preLoaderRoute: typeof SendPostcardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
@@ -225,13 +192,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WritingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/work/$id': {
-      id: '/work/$id'
-      path: '/work/$id'
-      fullPath: '/work/$id'
-      preLoaderRoute: typeof WorkIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -242,8 +202,6 @@ const rootRouteChildren: RootRouteChildren = {
   ExperimentsRoute: ExperimentsRoute,
   ImprintRoute: ImprintRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
-  SendPostcardRoute: SendPostcardRoute,
-  WorkIdRoute: WorkIdRoute,
   WritingIdRoute: WritingIdRoute,
   WritingIndexRoute: WritingIndexRoute,
 }

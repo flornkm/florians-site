@@ -1,17 +1,12 @@
 import { fragmentShaderSource } from "./crt-shader.frag";
 import { vertexShaderSource } from "./crt-shader.vert";
 
-/**
- * Manages a WebGL context that renders a fullscreen quad with a CRT post-process
- * shader. Feed it a Canvas2D element (the "text layer") each frame via `render()`.
- */
 export class CRTShaderRenderer {
   private gl: WebGLRenderingContext;
   private program: WebGLProgram;
   private texture: WebGLTexture;
   private posBuffer: WebGLBuffer;
 
-  // Uniform locations
   private uTexture: WebGLUniformLocation;
   private uResolution: WebGLUniformLocation;
   private uTime: WebGLUniformLocation;
@@ -30,7 +25,6 @@ export class CRTShaderRenderer {
     this.gl = gl;
     this.startTime = performance.now();
 
-    // Compile shaders & link program
     this.program = this.createProgram(vertexShaderSource, fragmentShaderSource);
     gl.useProgram(this.program);
 
@@ -44,7 +38,6 @@ export class CRTShaderRenderer {
     gl.enableVertexAttribArray(aPosition);
     gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
 
-    // Texture for the Canvas2D content
     this.texture = gl.createTexture()!;
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -52,7 +45,6 @@ export class CRTShaderRenderer {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-    // Uniform locations
     this.uTexture = gl.getUniformLocation(this.program, "uTexture")!;
     this.uResolution = gl.getUniformLocation(this.program, "uResolution")!;
     this.uTime = gl.getUniformLocation(this.program, "uTime")!;
@@ -63,7 +55,6 @@ export class CRTShaderRenderer {
     this._turnOnProgress = Math.min(1, Math.max(0, value));
   }
 
-  /** Upload the text canvas as a texture and draw the CRT quad. */
   render(sourceCanvas: HTMLCanvasElement): void {
     const { gl } = this;
 
@@ -73,29 +64,24 @@ export class CRTShaderRenderer {
 
     gl.useProgram(this.program);
 
-    // Upload source canvas as texture
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, this.texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sourceCanvas);
     gl.uniform1i(this.uTexture, 0);
 
-    // Set uniforms
     gl.uniform2f(this.uResolution, gl.canvas.width, gl.canvas.height);
     gl.uniform1f(this.uTime, (performance.now() - this.startTime) / 1000);
     gl.uniform1f(this.uTurnOn, this._turnOnProgress);
 
-    // Draw
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 
-  /** Resize the WebGL viewport to match the canvas dimensions. */
   resize(width: number, height: number): void {
     const canvas = this.gl.canvas as HTMLCanvasElement;
     canvas.width = width;
     canvas.height = height;
   }
 
-  /** Release all WebGL resources. */
   dispose(): void {
     const { gl } = this;
     gl.deleteTexture(this.texture);

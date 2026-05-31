@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
-      { title: "Imprint • Florian - Design Engineer" },
+      { title: "Imprint ‹ Florian Design Engineer" },
       { name: "description", content: "The usual imprint page." },
       { property: "og:title", content: "Imprint" },
       { property: "og:description", content: "The usual imprint page." },
@@ -20,8 +20,8 @@ export const Route = createFileRoute("/imprint")({
 
 function ImprintPage() {
   return (
-    <div className="w-full max-w-5xl mx-auto md:px-0 px-4">
-      <section className="w-full max-w-80">
+    <div className="grid grid-cols-9 gap-x-6">
+      <section className="col-start-1 col-span-9 md:col-start-3 md:col-span-5">
         <H2 className="mb-4">Imprint</H2>
         <Body1>
           Florian Kiem <br />

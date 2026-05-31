@@ -8,7 +8,6 @@ interface STLLoaderProps {
   metalType?: "steel" | "aluminum" | "copper" | "gold" | "chrome" | "titanium";
 }
 
-// Metal material presets - brighter and more reflective
 const METAL_PRESETS = {
   steel: { color: "#D4D8E0", metalness: 0.9, roughness: 0.1 },
   aluminum: { color: "#F5F5F5", metalness: 0.95, roughness: 0.05 },
@@ -24,7 +23,6 @@ export function STLLoader({ src, metalType = "steel" }: STLLoaderProps) {
 
   useEffect(() => {
     if (geometry && meshRef.current) {
-      // Center the geometry
       geometry.computeBoundingBox();
       const bbox = geometry.boundingBox;
       if (bbox) {
@@ -32,13 +30,11 @@ export function STLLoader({ src, metalType = "steel" }: STLLoaderProps) {
         geometry.translate(-center.x, -center.y, -center.z);
       }
 
-      // Compute normals for proper lighting
       geometry.computeVertexNormals();
 
-      // Scale to fit in view
       const size = bbox ? bbox.getSize(new THREE.Vector3()) : new THREE.Vector3(1, 1, 1);
       const maxDimension = Math.max(size.x, size.y, size.z);
-      const scale = 3 / maxDimension; // Scale to fit in a 3-unit cube
+      const scale = 3 / maxDimension; // fit in a 3-unit cube
       meshRef.current.scale.setScalar(scale);
     }
   }, [geometry]);

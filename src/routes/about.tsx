@@ -1,20 +1,34 @@
-import { Body1 } from "@/components/design-system/body";
-import { H1 } from "@/components/design-system/heading";
+import { Image } from "@/components/shared/image";
 import { Link } from "@/components/ui/link";
-import { RichTooltip } from "@/components/ui/tooltip";
-import { AppsTooltipContent } from "@/features/about/components/apps-tooltip-content";
-import { BucketlistTooltipContent } from "@/features/about/components/bucketlist-tooltip-content";
-import { CompaniesTooltipContent } from "@/features/about/components/companies-tooltip-content";
-import { FloWording } from "@/features/about/components/flo-wording";
-import { GlobeTooltipContent } from "@/features/about/components/globe-tooltip-content";
-import { InstitutionsTooltipContent } from "@/features/about/components/institutions-tooltip-content";
-import { VISITED_COUNTRIES } from "@/features/about/const/visited-countries";
+import { PHOTOS } from "@/features/about/const/photos";
 import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "motion/react";
+
+const CONTACT_LINKS = [
+  { name: "Twitter", href: "https://x.com/flornkm" },
+  { name: "Email", href: "mailto:hello@floriankiem.com" },
+];
+
+const AVATAR = { src: "/images/avatars/florian_kiem.jpg", alt: "Florian Kiem" };
+
+// Per-photo grid placement, indexed to match PHOTOS order.
+const PHOTO_LAYOUT = [
+  "col-start-1 col-span-4 md:col-start-2 md:col-span-2",
+  "col-start-3 col-span-4 mt-6 md:col-start-5 md:col-span-2 md:mt-20",
+  "col-start-2 col-span-4 mt-2 md:col-start-8 md:col-span-2 md:mt-40",
+  "col-start-1 col-span-4 mt-8 md:col-start-1 md:col-span-1 md:mt-12",
+  "col-start-3 col-span-4 mt-2 md:col-start-3 md:col-span-2 md:mt-36",
+  "col-start-1 col-span-5 mt-8 md:col-start-6 md:col-span-2 md:mt-12",
+  "col-start-2 col-span-4 mt-2 md:col-start-8 md:col-span-1 md:mt-28",
+  "col-start-3 col-span-4 mt-8 md:col-start-4 md:col-span-1 md:mt-24",
+  "col-start-1 col-span-5 mt-2 md:col-start-7 md:col-span-2 md:mt-20",
+  "col-start-2 col-span-4 mt-8 md:col-start-2 md:col-span-2 md:mt-28",
+];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About • Florian - Design Engineer" },
+      { title: "About ‹ Florian Design Engineer" },
       {
         name: "description",
         content:
@@ -41,79 +55,77 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <div className="w-full max-w-5xl md:flex-row flex-col flex justify-between mx-auto">
-      <div className="w-full max-w-sm px-4 md:px-0">
-        {/* Preloading the globe */}
-        <div className="hidden" aria-hidden>
-          <GlobeTooltipContent />
+    <div>
+      <div className="grid grid-cols-9 gap-x-6">
+        <div className="col-start-1 col-span-9 mb-10 flex flex-col md:col-start-3 md:col-span-2 md:mb-0">
+          <h1 className="text-base font-[550] leading-snug text-primary">Florian Kiem</h1>
+          <p className="text-base font-[550] leading-snug text-tertiary">Designer, Engineer</p>
+          <div className="order-first mb-8 max-w-40 md:order-none md:mt-12 md:mb-0">
+            <Image
+              src={AVATAR.src}
+              alt={AVATAR.alt}
+              objectFit="cover"
+              priority
+              className="h-auto w-full"
+            />
+          </div>
         </div>
-        <div className="flex items-start gap-8 mb-6">
-          <H1 className="shrink-0 leading-tight">Florian Kiem</H1>
-        </div>
 
-        <div className="space-y-4">
-          <Body1 className="leading-relaxed">
-            I was born in southern Germany on <code>110101(DDMMYY)</code>. During my childhood I
-            played a lot of Minecraft, sold services on Fiverr, and somehow found my way into
-            product design.
-          </Body1>
-
-          <Body1 className="leading-relaxed">
-            I studied product design and development in{" "}
-            <RichTooltip content={<InstitutionsTooltipContent />} maxWidth={280}>
-              university
-            </RichTooltip>
-            , the University of Design in Schwaebisch Gmuend, Germany, and the TU Delft in Delft,
-            the Netherlands. Since then, my biggest strength is to work as an interpreter from
-            design to code.
-          </Body1>
-
-          <Body1 className="leading-relaxed">
-            I've been fortunate to work with a lot of{" "}
-            <RichTooltip content={<CompaniesTooltipContent />} maxWidth={400}>
-              talented teams
-            </RichTooltip>{" "}
-            in the past.
-          </Body1>
-
-          <Body1 className="leading-relaxed">
-            Outside of work, I keep a{" "}
-            <RichTooltip content={<BucketlistTooltipContent />} maxWidth={260}>
-              bucketlist
-            </RichTooltip>{" "}
-            that I check off, I've travelled to{" "}
-            <RichTooltip content={<GlobeTooltipContent />} maxWidth={320}>
-              {VISITED_COUNTRIES.length} countries
-            </RichTooltip>{" "}
-            so far, and I spend time using my set of{" "}
-            <RichTooltip content={<AppsTooltipContent />} maxWidth={280}>
-              everyday apps
-            </RichTooltip>
-            .
-          </Body1>
-
-          <Body1 className="leading-relaxed text-tertiary">
-            You can reach me at{" "}
-            <Link
-              href="https://x.com/flornkm"
-              target="_blank"
-              className="hover:text-primary underline decoration-muted underline-offset-2 hover:decoration-emphasis transition-colors"
-            >
-              @flornkm
-            </Link>{" "}
-            or{" "}
-            <Link
-              href="mailto:hello@floriankiem.com"
-              className="hover:text-primary underline decoration-muted underline-offset-2 hover:decoration-emphasis transition-colors"
-            >
-              hello@floriankiem.com
-            </Link>
-            .
-          </Body1>
+        <div className="col-start-3 col-span-7 md:col-start-6 md:col-span-4 lg:col-span-2">
+          <div className="space-y-6 text-sm leading-relaxed text-primary">
+            <p>
+              Born in the South of Germany, I began playing with digital design early on. While I
+              eventually found my obsession in making software feel and look great, I tried out a
+              bunch of different disciplines ranging from graphic design to video editing.
+            </p>
+            <p>
+              Today my work spans multiple disciplines. I like working in high quality but still
+              move fast. AI is enabling unprecedented possibilities that give design opportunities to
+              participate in actual product development, which is where I see my chance to bring
+              worlds together.
+            </p>
+            <p>
+              In the past I've worked with companies like Rogo, Superpower, Delphi, and many more.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              {CONTACT_LINKS.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="text-sm text-tertiary transition-colors hover:text-secondary"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex-1 min-h-40 flex items-center justify-center pt-2">
-        <FloWording />
+
+      <div className="mt-28 grid grid-cols-6 items-start gap-x-3 gap-y-2 md:mt-44 md:grid-cols-9 md:gap-x-6 md:gap-y-4">
+        {PHOTOS.map((photo, index) => (
+          <motion.figure
+            key={photo.src}
+            className={PHOTO_LAYOUT[index]}
+            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: "some", margin: "0px 0px 15% 0px" }}
+            transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.caption}
+              objectFit="cover"
+              priority={index < 2}
+              className="h-auto w-full outline -outline-offset-1 outline-black/5 dark:outline-white/[0.075]"
+            />
+            <figcaption className="mt-2 font-serif font-normal text-[10px] italic text-primary">
+              {photo.caption}
+            </figcaption>
+          </motion.figure>
+        ))}
       </div>
     </div>
   );

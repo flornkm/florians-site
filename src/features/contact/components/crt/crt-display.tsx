@@ -13,11 +13,8 @@ export interface CRTDisplayProps {
   disabled?: boolean;
   suggestions?: string[];
   onSuggestionClick?: (suggestion: string) => void;
-  /** Whether to render fullscreen (fixed inset-0) or inline (w-full h-full). Defaults to true. */
   fullscreen?: boolean;
-  /** Scale factor for text rendering (font size, padding). Defaults to 1. */
   scale?: number;
-  /** Whether the hidden input should auto-focus on mount. Defaults to true. */
   autoFocus?: boolean;
 }
 
@@ -51,11 +48,10 @@ export function CRTDisplay({
 
   const [inputFocused, setInputFocused] = useState(false);
 
-  // Animated visible height — lerps toward target each frame for smooth keyboard transition
   const visibleTargetRef = useRef<number | undefined>(undefined);
   const visibleCurrentRef = useRef<number | undefined>(undefined);
 
-  // Ref for latest state — avoids re-creating the render loop on every prop change
+  // Ref for latest state so the render loop isn't re-created on every prop change.
   const stateRef = useRef<CRTTextState>({
     messages: [],
     streamedText: "",
@@ -73,13 +69,12 @@ export function CRTDisplay({
     showBack: !!onBack,
   };
 
-  // Keep callbacks in refs so the click handler doesn't need them as deps
+  // Keep callbacks in refs so the click handler doesn't need them as deps.
   const onBackRef = useRef(onBack);
   onBackRef.current = onBack;
   const onSuggestionClickRef = useRef(onSuggestionClick);
   onSuggestionClickRef.current = onSuggestionClick;
 
-  // Single effect: init renderers, handle resize, run render loop, track color scheme
   useEffect(() => {
     const glCanvas = glCanvasRef.current!;
     const textCanvas = textCanvasRef.current!;
@@ -94,17 +89,15 @@ export function CRTDisplay({
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // Resize canvases to fill the inner container (max-w-5xl)
+    // Use clientWidth/Height, not getBoundingClientRect, so a CSS transform mid-morph can't skew the cursor→canvas mapping.
     function resize() {
-      const rect = container!.getBoundingClientRect();
-      const w = Math.floor(rect.width * dpr);
-      const h = Math.floor(rect.height * dpr);
+      const w = Math.floor(container!.clientWidth * dpr);
+      const h = Math.floor(container!.clientHeight * dpr);
       shader.resize(w, h);
       textRenderer.resize(w, h);
       updateVisibleHeight();
     }
 
-    // Track visible height target — the area above the virtual keyboard
     function updateVisibleHeight() {
       const vv = window.visualViewport;
       if (vv && Math.abs(vv.height - window.innerHeight) > 50) {
@@ -116,10 +109,13 @@ export function CRTDisplay({
 
     resize();
     window.addEventListener("resize", resize);
+    // Container resizes without a window resize during the tile→dialog morph; observe it directly.
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
     window.visualViewport?.addEventListener("resize", updateVisibleHeight);
     window.visualViewport?.addEventListener("scroll", updateVisibleHeight);
 
-    // Wheel/touch scroll — only capture when fullscreen; otherwise let the page scroll.
+    // Capture scroll only when fullscreen; otherwise let the page scroll.
     function onWheel(e: WheelEvent) {
       e.preventDefault();
       textRenderer.scroll(e.deltaY);
@@ -142,7 +138,6 @@ export function CRTDisplay({
       outer.addEventListener("touchmove", onTouchMove, { passive: true });
     }
 
-    // Color scheme
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
     isDarkRef.current = mql.matches;
     const onSchemeChange = (e: MediaQueryListEvent) => {
@@ -150,7 +145,6 @@ export function CRTDisplay({
     };
     mql.addEventListener("change", onSchemeChange);
 
-    // Render loop
     const startTime = performance.now();
     let running = true;
 
@@ -160,12 +154,11 @@ export function CRTDisplay({
       const elapsed = performance.now() - startTime;
       shader.turnOnProgress = Math.min(1, elapsed / TURN_ON_DURATION);
 
-      // Lerp visible height toward target for smooth keyboard animation
       const target = visibleTargetRef.current;
       const canvasH = textCanvas.height;
       const targetH = target ?? canvasH;
       const currentH = visibleCurrentRef.current ?? canvasH;
-      const LERP_SPEED = 0.15; // per frame, ~9 frames to 90%
+      const LERP_SPEED = 0.15;
       const diff = targetH - currentH;
       const nextH = Math.abs(diff) < 1 ? targetH : currentH + diff * LERP_SPEED;
       visibleCurrentRef.current = nextH === canvasH ? undefined : nextH;
@@ -184,6 +177,7 @@ export function CRTDisplay({
       running = false;
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
+      resizeObserver.disconnect();
       window.visualViewport?.removeEventListener("resize", updateVisibleHeight);
       window.visualViewport?.removeEventListener("scroll", updateVisibleHeight);
       if (fullscreen) {
@@ -198,7 +192,6 @@ export function CRTDisplay({
     };
   }, []);
 
-  // Convert mouse event to text-canvas coordinates
   const toCanvasCoords = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const container = containerRef.current;
     if (!container) return null;
