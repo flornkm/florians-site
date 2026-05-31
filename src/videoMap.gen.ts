@@ -5,6 +5,4 @@ export interface VideoManifestEntry {
   thumbhash: string | null;
 }
 
-export const videoManifest: Record<string, VideoManifestEntry> = {
-
-};
+export const videoManifest: Record<string, VideoManifestEntry> = {};

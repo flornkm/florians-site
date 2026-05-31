@@ -20,7 +20,9 @@ export interface WordmarkRect {
 // bounding box and snap x to the 8.1 grid so strokes align with the background grid lines.
 export function parseWordmarkRects(): WordmarkRect[] {
   const rects: WordmarkRect[] = [];
-  const subpaths = FLORIAN_KIEM_PATH.split("Z").map((s) => s.trim()).filter(Boolean);
+  const subpaths = FLORIAN_KIEM_PATH.split("Z")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   for (const sub of subpaths) {
     const tokens = sub.match(/[MLHV]|-?\d*\.?\d+(?:e-?\d+)?/gi);

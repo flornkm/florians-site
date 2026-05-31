@@ -41,7 +41,6 @@ const LEGAL_LINKS: Tab[] = [
 type FooterProps = VariantProps<typeof pagesColumnVariants>;
 
 export default function Footer({ variant = "default" }: FooterProps) {
-
   return (
     <footer
       className={cn(
@@ -55,7 +54,11 @@ export default function Footer({ variant = "default" }: FooterProps) {
           <div className={pagesColumnVariants({ variant })}>
             <H4 className="mb-1">Pages</H4>
             {TABS.map((tab) => (
-              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "medium" })}>
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={footerLinkVariants({ size: "medium" })}
+              >
                 {tab.name}
               </Link>
             ))}
@@ -70,7 +73,11 @@ export default function Footer({ variant = "default" }: FooterProps) {
           >
             <H4 className="mb-1">More</H4>
             {MORE_LINKS.map((tab) => (
-              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "medium" })}>
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={footerLinkVariants({ size: "medium" })}
+              >
                 {tab.name}
               </Link>
             ))}
@@ -79,7 +86,11 @@ export default function Footer({ variant = "default" }: FooterProps) {
           <div className="flex flex-col items-start gap-2 md:col-start-8 md:col-span-2">
             <H4 className="mb-1">Legal</H4>
             {LEGAL_LINKS.map((tab) => (
-              <Link key={tab.name} href={tab.href} className={footerLinkVariants({ size: "medium" })}>
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={footerLinkVariants({ size: "medium" })}
+              >
                 {tab.name}
               </Link>
             ))}
