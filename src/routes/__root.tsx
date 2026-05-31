@@ -61,14 +61,32 @@ export const Route = createRootRoute({
         type: "font/woff2",
         crossOrigin: "anonymous",
       },
+      // Chrome/Edge ignore `media` here and take the first icon, so the light
+      // SVG self-adapts via an embedded prefers-color-scheme query and stays
+      // correct there; Firefox honors `media` and picks the dark SVG.
+      {
+        rel: "icon",
+        href: "/images/icons/favicon.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        rel: "icon",
+        href: "/images/icons/favicon-dark.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+      // .ico fallbacks for browsers without SVG favicon support.
       {
         rel: "icon",
         href: "/images/icons/favicon.ico",
+        type: "image/x-icon",
         media: "(prefers-color-scheme: light)",
       },
       {
         rel: "icon",
         href: "/images/icons/favicon-dark.ico",
+        type: "image/x-icon",
         media: "(prefers-color-scheme: dark)",
       },
     ],
