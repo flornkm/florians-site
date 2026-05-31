@@ -11,7 +11,4 @@ declare module "flubber" {
   ) => (t: number) => string;
 
   export const interpolate: Interpolator;
-
-  const flubber: { interpolate: Interpolator };
-  export default flubber;
 }
