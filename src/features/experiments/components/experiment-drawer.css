@@ -64,7 +64,7 @@
 
 @media (prefers-color-scheme: dark) {
   .experiment-drawer__popup {
-    background-color: var(--surface-tertiary);
+    background-color: var(--color-neutral-950);
   }
 }
 

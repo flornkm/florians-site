@@ -1,0 +1,137 @@
+/**
+ * Captures a poster for each experiment by opening its dialog in a headless Chrome
+ * and screenshotting the open box on a TRANSPARENT background, so a single image
+ * works on both light and dark grids. Components that paint their own background
+ * (3D scenes, video, the CRT) simply stay opaque. Run with the dev server up:
+ *
+ *   bun run dev            # in one shell
+ *   bun scripts/capture-experiments.ts
+ *
+ * Output: public/experiments/<slug>.webp (transparent where the component allows)
+ */
+import { chromium } from "playwright-core";
+import { spawnSync } from "node:child_process";
+import { mkdir, rm } from "node:fs/promises";
+
+const BASE = process.env.CAPTURE_BASE ?? "http://localhost:3000";
+const OUT = "public/experiments";
+
+// Posters render at ~200px in the grid (and briefly mid-morph), so downscale the
+// retina screenshot and encode to webp (alpha-aware) with cwebp.
+const MAX_WIDTH = 1000;
+const WEBP_QUALITY = 80;
+
+function toWebp(png: string, webp: string) {
+  spawnSync(
+    "cwebp",
+    ["-q", String(WEBP_QUALITY), "-resize", String(MAX_WIDTH), "0", png, "-o", webp],
+    { stdio: "ignore" },
+  );
+}
+
+// Components whose root still paints an opaque fill that must be cleared for a
+// transparent capture. (slop-detector / frosted-camera / depth-input now inherit the
+// dialog background instead, so they no longer need stripping.)
+const STRIP_ROOT_BG = new Set<string>([]);
+
+// Settle time applied to every capture on top of the per-slug time below, so
+// animations finish and any transient dev overlay has come and gone.
+const BASE_SETTLE = 2500;
+
+// slug → extra settle time (ms) for things that animate or boot slowly.
+const SLUGS: Record<string, number> = {
+  "video-player": 1500,
+  "slop-detector": 3500, // WebGL boot + first render
+  "frosted-camera": 2500, // fake camera stream
+  "scroll-mask-fade": 1200,
+  "font-smoothing": 800,
+  "lazy-image": 2500, // progressive load
+  "depth-input": 1000,
+  "crt-terminal": 2500, // typing animation
+  "ios-context-menu": 1000,
+  "text-shimmer": 1500,
+};
+
+async function main() {
+  await mkdir(OUT, { recursive: true });
+
+  const browser = await chromium.launch({
+    channel: "chrome",
+    headless: true,
+    args: [
+      "--use-fake-ui-for-media-stream",
+      "--use-fake-device-for-media-stream",
+      "--ignore-gpu-blocklist",
+      "--enable-gpu",
+      "--use-gl=angle",
+      "--use-angle=swiftshader",
+    ],
+  });
+
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 900 },
+    deviceScaleFactor: 2, // retina-crisp posters
+    permissions: ["camera"],
+    colorScheme: "light",
+  });
+
+  // react-scan is injected in dev (import.meta.env.DEV) and paints render badges
+  // over the UI. Block it outright so captures are clean against any server.
+  await context.route(
+    (url) => url.href.includes("react-scan"),
+    (route) => route.abort(),
+  );
+
+  for (const [slug, settle] of Object.entries(SLUGS)) {
+    const page = await context.newPage();
+    try {
+      await page.goto(`${BASE}/experiments?demo=${slug}`, { waitUntil: "networkidle" });
+      const dialog = page.locator('[data-experiment-tile="open"]');
+      await dialog.waitFor({ state: "visible", timeout: 15000 });
+
+      // Isolate the dialog so the screenshot's only opaque pixels are the ones the
+      // component itself paints. omitBackground removes the browser default, but the
+      // app's own body bg + the z-[100] backdrop sit *behind* the (transparent) dialog
+      // and would show through — so hide everything via visibility and clear page bgs,
+      // then re-show just the dialog subtree (visibility:visible cascades to children).
+      await page.evaluate((stripRootBg) => {
+        document.documentElement.style.background = "transparent";
+        document.body.style.background = "transparent";
+        document.body.style.visibility = "hidden";
+        const el = document.querySelector('[data-experiment-tile="open"]') as HTMLElement | null;
+        if (el) {
+          el.style.visibility = "visible";
+          el.style.background = "transparent";
+          el.style.borderRadius = "0";
+        }
+        if (stripRootBg) {
+          // First .bg-primary is the component's root fill; clear only that.
+          const root = el?.querySelector(".bg-primary") as HTMLElement | null;
+          if (root) root.style.background = "transparent";
+        }
+        const close = document.querySelector('[aria-label="Close"]') as HTMLElement | null;
+        if (close) close.style.display = "none";
+      }, STRIP_ROOT_BG.has(slug));
+
+      await page.waitForTimeout(BASE_SETTLE + settle);
+
+      const png = `${OUT}/${slug}.png`;
+      const webp = `${OUT}/${slug}.webp`;
+      await dialog.screenshot({ path: png, type: "png", omitBackground: true });
+      toWebp(png, webp);
+      await rm(png, { force: true });
+      console.log(`✓ ${slug}.webp`);
+    } catch (err) {
+      console.error(`✗ ${slug}:`, err instanceof Error ? err.message : err);
+    } finally {
+      await page.close();
+    }
+  }
+
+  await browser.close();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

@@ -57,6 +57,7 @@
         "dotenv-cli": "^8.0.0",
         "oxfmt": "^0.40.0",
         "oxlint": "^1.55.0",
+        "playwright-core": "^1.60.0",
         "rehype-unwrap-images": "^1.0.0",
         "sharp": "^0.34.5",
         "tailwind-scrollbar": "^4.0.2",
@@ -1411,6 +1412,8 @@
     "picomatch": ["picomatch@4.0.3", "", {}, "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q=="],
 
     "pip-requirements-js": ["pip-requirements-js@1.0.2", "", { "dependencies": { "ohm-js": "^17.1.0" } }, "sha512-awqoNOSOl4Blu4E4Hzp7jL0g8WKEhCwO+s7C2ibtIW3CAJMwspgoTXd4vnHd21UmhdrsI44Pn8FFSuA8QKrzvg=="],
+
+    "playwright-core": ["playwright-core@1.60.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-9bW6zvX/m0lEbgTKJ6YppOKx8H3VOPBMOCFh2irXFOT4BbHgrx5hPjwJYLT40Lu+4qtD36qKc/Hn56StUW57IA=="],
 
     "postcss": ["postcss@8.5.8", "", { "dependencies": { "nanoid": "^3.3.11", "picocolors": "^1.1.1", "source-map-js": "^1.2.1" } }, "sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg=="],
 

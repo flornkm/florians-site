@@ -7,7 +7,7 @@ export const DepthInput = () => {
   const [value, setValue] = useState("");
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-6 rounded-[inherit] bg-primary px-6 text-primary">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-6 rounded-[inherit] px-6 text-primary">
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}

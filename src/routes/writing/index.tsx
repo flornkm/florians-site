@@ -51,24 +51,57 @@ function formatDate(date: string | undefined) {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+function getYear(date: string | undefined) {
+  if (!date) return "";
+  const matches = String(date).match(/\d{4}/g);
+  return matches ? String(Math.max(...matches.map(Number))) : "";
+}
+
+function groupByYear(items: WritingListItem[]) {
+  const groups: { year: string; items: WritingListItem[] }[] = [];
+  for (const item of items) {
+    const year = getYear(item.date);
+    const last = groups[groups.length - 1];
+    if (last && last.year === year) {
+      last.items.push(item);
+    } else {
+      groups.push({ year, items: [item] });
+    }
+  }
+  return groups;
+}
+
 function WritingPage() {
   const items = Route.useLoaderData();
+  const groups = groupByYear(items);
 
   return (
-    <div className="md:grid md:grid-cols-9 md:gap-x-6">
-      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 md:col-start-3 md:col-span-5 md:grid-cols-3">
-        {items.map((item) => (
-          <Link key={item.slug} href={`/writing/${item.slug}`} className="group/item flex flex-col">
-            <div className="flex aspect-[3/2] w-full items-center justify-center bg-image-card transition-colors duration-200 group-hover/item:bg-[#e7e7e7] dark:group-hover/item:bg-[#1c1c1c]">
-              <PostIcon slug={item.slug} className="h-14 w-14" />
-            </div>
-            <div className="mt-2 flex min-w-0 flex-col gap-0.5">
-              <H3>{item.title}</H3>
-              <Body2 className="text-tertiary">{formatDate(item.date)}</Body2>
-            </div>
-          </Link>
-        ))}
-      </div>
+    <div className="flex flex-col gap-12">
+      {groups.map((group) => (
+        <section key={group.year} className="md:grid md:grid-cols-9 md:gap-x-6">
+          <div className="flex flex-col gap-3 md:col-start-1 md:col-span-7">
+            <H3 className="text-tertiary">{group.year}</H3>
+            <div className="border-t border-primary" />
+          </div>
+          <div className="mt-4 flex flex-col md:col-start-3 md:col-span-5">
+            {group.items.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/writing/${item.slug}`}
+                className="group/item flex items-center gap-4 py-3"
+              >
+                <div className="flex size-12 shrink-0 items-center justify-center bg-image-card transition-colors duration-200 group-hover/item:bg-[#e7e7e7] dark:group-hover/item:bg-[#1c1c1c]">
+                  <PostIcon slug={item.slug} className="size-6" />
+                </div>
+                <div className="flex min-w-0 flex-col gap-0.5">
+                  <H3>{item.title}</H3>
+                  <Body2 className="text-tertiary">{formatDate(item.date)}</Body2>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
