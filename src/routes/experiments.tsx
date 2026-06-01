@@ -15,28 +15,39 @@ import { createFileRoute } from "@tanstack/react-router";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import type { ComponentType } from "react";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 
 interface Experiment {
   slug: string;
   title: string;
+  tag: string;
+  // A single transparent poster at public/experiments/<slug>.webp works on both light
+  // and dark grids. Until the file exists the tile falls back to a plain panel.
+  poster: string;
   Component: ComponentType;
 }
 
-// Same box as the grid tiles so the morph is a clean uniform scale.
+// The centered modal the tile morphs into when opened.
 const DIALOG_SIZE = "h-[min(88vh,33rem)] w-[min(92vw,44rem)]";
 
+const experiment = (
+  slug: string,
+  title: string,
+  tag: string,
+  Component: ComponentType,
+): Experiment => ({ slug, title, tag, poster: `/experiments/${slug}.webp`, Component });
+
 const EXPERIMENTS: Experiment[] = [
-  { slug: "video-player", title: "Video Player", Component: VideoPlayerExperiment },
-  { slug: "slop-detector", title: "Slop Detector", Component: SlopDetector },
-  { slug: "frosted-camera", title: "Frosted Camera", Component: FrostedCamera },
-  { slug: "scroll-mask-fade", title: "Scroll Mask Fade", Component: ScrollMaskFade },
-  { slug: "font-smoothing", title: "Font Smoothing", Component: FontSmoothing },
-  { slug: "lazy-image", title: "Lazy Image", Component: LazyImage },
-  { slug: "depth-input", title: "Depth Input", Component: DepthInput },
-  { slug: "crt-terminal", title: "CRT Terminal", Component: CrtChat },
-  { slug: "ios-context-menu", title: "iOS Context Menu", Component: IosContextMenu },
-  { slug: "text-shimmer", title: "Text Shimmer", Component: TextShimmerExperiment },
+  experiment("video-player", "Video Player", "Video", VideoPlayerExperiment),
+  experiment("slop-detector", "Slop Detector", "3D", SlopDetector),
+  experiment("frosted-camera", "Frosted Camera", "Camera", FrostedCamera),
+  experiment("scroll-mask-fade", "Scroll Mask Fade", "Scroll", ScrollMaskFade),
+  experiment("font-smoothing", "Font Smoothing", "Type", FontSmoothing),
+  experiment("lazy-image", "Lazy Image", "Image", LazyImage),
+  experiment("depth-input", "Depth Input", "Input", DepthInput),
+  experiment("crt-terminal", "CRT Terminal", "Terminal", CrtChat),
+  experiment("ios-context-menu", "iOS Context Menu", "Menu", IosContextMenu),
+  experiment("text-shimmer", "Text Shimmer", "Type", TextShimmerExperiment),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
@@ -99,17 +110,16 @@ function ExperimentsPage() {
 
   return (
     <MotionConfig transition={TRANSITION}>
-      {/* Inner wrapper clips the outer border of each edge cell, leaving only interior grid lines. */}
       <div className="md:grid md:grid-cols-9 md:gap-x-6">
-        <div className="overflow-hidden md:col-span-5 md:col-start-3">
-          <ul className="-mb-px -mr-px grid grid-cols-1 lg:grid-cols-2">
-            {EXPERIMENTS.map((experiment) => (
+        <div className="md:col-span-9">
+          <ul className="grid grid-cols-1 gap-1 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-9">
+            {EXPERIMENTS.map((item) => (
               <ExperimentTile
-                key={experiment.slug}
-                experiment={experiment}
-                isActive={activeSlug === experiment.slug}
+                key={item.slug}
+                experiment={item}
+                isActive={activeSlug === item.slug}
                 morph={!isMobile}
-                onOpen={() => open(experiment.slug)}
+                onOpen={() => open(item.slug)}
                 onClose={close}
               />
             ))}
@@ -154,14 +164,23 @@ interface ExperimentTileProps {
 }
 
 function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: ExperimentTileProps) {
-  const { title, Component } = experiment;
+  const { title, poster, Component } = experiment;
   const expanded = isActive && morph;
 
+  // Hide a missing poster gracefully instead of showing a broken-image glyph.
+  const [posterError, setPosterError] = useState(false);
+
   return (
+    // 4:3 cell — matches the poster ratio (so object-cover never crops) and the dialog ratio
+    // (so the open morph is a clean uniform scale).
     // Fixed-size placeholder so the grid never reflows while the tile lifts into the expanded view.
-    <li className="relative aspect-[4/3] border-b border-r border-primary">
+    <li className="relative aspect-[4/3]">
       <motion.div
         layout
+        data-experiment-tile={expanded ? "open" : "closed"}
+        onKeyDown={(e) => {
+          if (expanded && e.key === "Escape") onClose();
+        }}
         className={cn(
           "group overflow-hidden",
           expanded
@@ -169,23 +188,56 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
               // aspect-ratio would be ignored and the height would stretch to the viewport.
               // has-[[data-menu-open]]: lets the iOS context menu overflow instead of clipping.
               cn(
-                "fixed inset-0 z-[110] m-auto rounded-lg bg-surface dark:bg-surface-tertiary has-[[data-menu-open]]:overflow-visible",
+                "fixed inset-0 z-[110] m-auto rounded-lg bg-surface dark:bg-neutral-950 has-[[data-menu-open]]:overflow-visible",
                 DIALOG_SIZE,
               )
-            : "absolute inset-0",
+            : "absolute inset-0 bg-surface-secondary",
         )}
       >
-        {/* Never unmounts — it just morphs. */}
+        {/* Resting state: a poster preview — no live component, so the grid stays cheap and the
+            morph has nothing to resize. Fades out as the tile expands. */}
         <div
           className={cn(
-            "absolute inset-0 flex items-center justify-center transition-opacity duration-200",
-            expanded
-              ? "pointer-events-auto opacity-100"
-              : "pointer-events-none select-none opacity-70 group-hover:opacity-100",
+            "absolute inset-0 transition-opacity duration-200",
+            expanded ? "pointer-events-none opacity-0" : "opacity-100",
           )}
         >
-          <Component />
+          {!posterError && (
+            <img
+              src={poster}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              onError={() => setPosterError(true)}
+              className="absolute inset-0 size-full object-cover"
+            />
+          )}
+
+          <div className="absolute inset-x-0 bottom-0 p-3">
+            {/* White + difference inverts against whatever poster is behind, so the title
+                stays legible over light and dark previews alike. */}
+            <span className="type-tiny-strong leading-tight text-white mix-blend-difference">
+              {title}
+            </span>
+          </div>
         </div>
+
+        {/* Live component mounts only when expanded, laid out at the final dialog size so it
+            never resizes during the morph; it cross-fades in over the box scale. */}
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              key="live"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <Component />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {!expanded && (
           <button
@@ -201,6 +253,9 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
             <motion.button
               type="button"
               onClick={onClose}
+              // Pulls focus into the dialog on open so Escape (handled on the container
+              // above) is reachable without a global key listener.
+              autoFocus
               aria-label="Close"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}

@@ -12,6 +12,10 @@ function ResponsiveCamera() {
   useFrame(() => {
     const cam = cameraRef.current;
     if (!cam) return;
+    // Own the camera height here so React never resets it; x/z are driven by the
+    // centering pan in GeigerCounter. (A static `position` prop would re-zero x/z on
+    // every re-render the open morph triggers, knocking the device off-center.)
+    cam.position.y = 0.5;
     const target = size.width < 768 ? 1700 : 3400;
     if (cam.zoom !== target) {
       cam.zoom = target;
@@ -22,7 +26,6 @@ function ResponsiveCamera() {
     <OrthographicCamera
       ref={cameraRef}
       makeDefault
-      position={[0, 0.5, 0]}
       rotation={[-Math.PI / 2, 0, 0]}
       zoom={3400}
       near={0.01}
@@ -35,6 +38,10 @@ export function Scene() {
   return (
     <Canvas
       dpr={[1, 2]}
+      // Measure the element's layout size (offsetWidth/Height), not its bounding rect —
+      // the open morph applies a CSS transform: scale(), and the bounding rect would
+      // otherwise freeze the canvas at a mid-animation size (wrong zoom + off-center).
+      resize={{ offsetSize: true }}
       shadows={{ type: THREE.VSMShadowMap }}
       gl={{
         alpha: true,

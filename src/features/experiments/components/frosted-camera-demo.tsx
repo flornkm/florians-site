@@ -43,7 +43,7 @@ export const FrostedCamera = () => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-between gap-6 px-6 pt-6 pb-8 bg-primary">
+    <div className="flex h-full w-full flex-col items-center justify-between gap-6 px-6 pt-6 pb-8">
       <div className="relative flex flex-1 w-full items-center justify-center overflow-hidden">
         <AnimatePresence initial={false}>
           <motion.img

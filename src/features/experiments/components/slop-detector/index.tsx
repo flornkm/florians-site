@@ -14,7 +14,7 @@ export function SlopDetector() {
     <ContainerContext.Provider value={container}>
       <div
         ref={containerRef}
-        className="relative w-full h-full overflow-hidden bg-primary text-primary select-none"
+        className="relative w-full h-full overflow-hidden text-primary select-none"
         style={{ touchAction: "none" }}
       >
         <div className="absolute inset-0 z-[10] pointer-events-none">

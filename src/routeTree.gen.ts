@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TemporaryRouteImport } from './routes/temporary'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
@@ -19,11 +18,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WritingIndexRouteImport } from './routes/writing/index'
 import { Route as WritingIdRouteImport } from './routes/writing/$id'
 
-const TemporaryRoute = TemporaryRouteImport.update({
-  id: '/temporary',
-  path: '/temporary',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
@@ -72,7 +66,6 @@ export interface FileRoutesByFullPath {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/temporary': typeof TemporaryRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -83,7 +76,6 @@ export interface FileRoutesByTo {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/temporary': typeof TemporaryRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing': typeof WritingIndexRoute
 }
@@ -95,7 +87,6 @@ export interface FileRoutesById {
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/temporary': typeof TemporaryRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
 }
@@ -108,7 +99,6 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/temporary'
     | '/writing/$id'
     | '/writing/'
   fileRoutesByTo: FileRoutesByTo
@@ -119,7 +109,6 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/temporary'
     | '/writing/$id'
     | '/writing'
   id:
@@ -130,7 +119,6 @@ export interface FileRouteTypes {
     | '/experiments'
     | '/imprint'
     | '/privacy-policy'
-    | '/temporary'
     | '/writing/$id'
     | '/writing/'
   fileRoutesById: FileRoutesById
@@ -142,20 +130,12 @@ export interface RootRouteChildren {
   ExperimentsRoute: typeof ExperimentsRoute
   ImprintRoute: typeof ImprintRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  TemporaryRoute: typeof TemporaryRoute
   WritingIdRoute: typeof WritingIdRoute
   WritingIndexRoute: typeof WritingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/temporary': {
-      id: '/temporary'
-      path: '/temporary'
-      fullPath: '/temporary'
-      preLoaderRoute: typeof TemporaryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
@@ -222,7 +202,6 @@ const rootRouteChildren: RootRouteChildren = {
   ExperimentsRoute: ExperimentsRoute,
   ImprintRoute: ImprintRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
-  TemporaryRoute: TemporaryRoute,
   WritingIdRoute: WritingIdRoute,
   WritingIndexRoute: WritingIndexRoute,
 }

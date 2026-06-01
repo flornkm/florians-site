@@ -1,5 +1,6 @@
 import { useGLTF } from "@react-three/drei";
-import { useMemo } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { AIDetector } from "./AIDetector";
 import { ButtonIcons } from "./ButtonIcons";
@@ -62,6 +63,23 @@ export function GeigerCounter() {
   }, [scene]);
 
   if (parts.cableMesh) parts.cableMesh.visible = false;
+
+  // Pan the top-down camera onto the device body every frame so it stays centered in
+  // the view — the device drifts slightly via DeviceTilt, so a one-off center wouldn't
+  // hold. Panning the camera (vs moving the model) keeps the shadow, lights and probe
+  // in sync since nothing moves in world space.
+  const { camera } = useThree();
+  const aabb = useRef(new THREE.Box3());
+  const mid = useRef(new THREE.Vector3());
+  useFrame(() => {
+    const body = parts.body;
+    if (!body) return;
+    aabb.current.setFromObject(body);
+    if (aabb.current.isEmpty()) return;
+    aabb.current.getCenter(mid.current);
+    camera.position.x = mid.current.x;
+    camera.position.z = mid.current.z;
+  });
 
   return (
     <>
