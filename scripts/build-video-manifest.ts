@@ -97,10 +97,22 @@ async function main() {
   }
 
   const files = walk(VIDEOS_DIR);
+  const videoCount = files.filter((f) => VIDEO_EXT.has(path.extname(f).toLowerCase())).length;
   const entries = await Promise.all(files.map(processVideo));
   const manifest: Record<string, Entry> = {};
   for (const e of entries) {
     if (e) manifest[e[0]] = e[1];
+  }
+
+  // If there are videos but we probed none, ffprobe/ffmpeg is unavailable (e.g.
+  // on the Vercel build image, which has neither). Bail without writing so the
+  // committed manifest survives — overwriting it with an empty map drops every
+  // aspect ratio, collapsing the video containers to zero height in production.
+  if (videoCount > 0 && Object.keys(manifest).length === 0) {
+    console.warn(
+      `[video-manifest] probed 0 of ${videoCount} videos (ffprobe/ffmpeg missing?); keeping existing ${path.relative(ROOT, OUTPUT_PATH)}`,
+    );
+    return;
   }
 
   const sorted = Object.keys(manifest).sort();
