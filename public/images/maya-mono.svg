@@ -1,0 +1,21 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mono-mr" x1="12" y1="0" x2="88" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0b29a" />
+      <stop offset="1" stop-color="#e895a1" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" fill="url(#mono-mr)" />
+  <text
+    x="50"
+    y="50"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="-apple-system, system-ui, 'Helvetica Neue', Arial, sans-serif"
+    font-size="35"
+    font-weight="500"
+    letter-spacing="0.5"
+    fill="#ffffff"
+    fill-opacity="0.95"
+  >MR</text>
+</svg>
