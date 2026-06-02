@@ -236,7 +236,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute inset-0 flex items-center justify-center font-pretendard"
             >
               <Component />
             </motion.div>

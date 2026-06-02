@@ -59,6 +59,13 @@ const ONLY = process.env.CAPTURE_ONLY?.split(",")
   .map((s) => s.trim())
   .filter(Boolean);
 
+// Optional click (selector inside the open dialog) to put a slug into a more telling
+// state before the shot — e.g. Figma Select no longer auto-selects, so we select the
+// avatar here to show the selection chrome in the poster.
+const CLICKS: Record<string, string> = {
+  "figma-select": 'img[alt="Florian Kiem"]',
+};
+
 async function main() {
   await mkdir(OUT, { recursive: true });
 
@@ -96,6 +103,13 @@ async function main() {
       await page.goto(`${BASE}/experiments?demo=${slug}`, { waitUntil: "networkidle" });
       const dialog = page.locator('[data-experiment-tile="open"]');
       await dialog.waitFor({ state: "visible", timeout: 15000 });
+
+      const click = CLICKS[slug];
+      if (click)
+        await dialog
+          .locator(click)
+          .click()
+          .catch(() => {});
 
       // Isolate the dialog so the screenshot's only opaque pixels are the ones the
       // component itself paints. omitBackground removes the browser default, but the

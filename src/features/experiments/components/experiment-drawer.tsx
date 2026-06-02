@@ -24,7 +24,10 @@ export function ExperimentDrawer({ open, title, Component, onOpenChange }: Exper
               <IconCrossSmall className="size-4" />
             </Drawer.Close>
             {/* The experiment opts out of swipe so its own gestures aren't hijacked. */}
-            <Drawer.Content className="experiment-drawer__content" data-base-ui-swipe-ignore>
+            <Drawer.Content
+              className="experiment-drawer__content font-pretendard"
+              data-base-ui-swipe-ignore
+            >
               <Drawer.Title className="sr-only">{title}</Drawer.Title>
               <Component />
             </Drawer.Content>
