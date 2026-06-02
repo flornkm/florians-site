@@ -40,6 +40,8 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
+  copy: 1200,
+  "figma-select": 1200,
   "video-player": 1500,
   "slop-detector": 3500, // WebGL boot + first render
   "frosted-camera": 2500, // fake camera stream
@@ -51,6 +53,11 @@ const SLUGS: Record<string, number> = {
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
 };
+
+// Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
+const ONLY = process.env.CAPTURE_ONLY?.split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
 async function main() {
   await mkdir(OUT, { recursive: true });
@@ -83,6 +90,7 @@ async function main() {
   );
 
   for (const [slug, settle] of Object.entries(SLUGS)) {
+    if (ONLY && !ONLY.includes(slug)) continue;
     const page = await context.newPage();
     try {
       await page.goto(`${BASE}/experiments?demo=${slug}`, { waitUntil: "networkidle" });

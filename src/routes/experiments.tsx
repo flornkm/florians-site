@@ -1,5 +1,7 @@
+import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
+import { FigmaSelect } from "@/features/experiments/components/figma-select-demo";
 import { FontSmoothing } from "@/features/experiments/components/font-smoothing-demo";
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
@@ -38,6 +40,8 @@ const experiment = (
 ): Experiment => ({ slug, title, tag, poster: `/experiments/${slug}.webp`, Component });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("copy", "Copy", "Motion", CopyExperiment),
+  experiment("figma-select", "Figma Select", "UI", FigmaSelect),
   experiment("video-player", "Video Player", "Video", VideoPlayerExperiment),
   experiment("slop-detector", "Slop Detector", "3D", SlopDetector),
   experiment("frosted-camera", "Frosted Camera", "Camera", FrostedCamera),
