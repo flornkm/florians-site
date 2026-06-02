@@ -1,8 +1,8 @@
 <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="mono-mr" x1="12" y1="0" x2="88" y2="100" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f0b29a" />
-      <stop offset="1" stop-color="#e895a1" />
+    <linearGradient id="mono-mr" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f5cfbd" />
+      <stop offset="1" stop-color="#f0c1aa" />
     </linearGradient>
   </defs>
   <rect width="100" height="100" fill="url(#mono-mr)" />
@@ -15,7 +15,6 @@
     font-size="35"
     font-weight="500"
     letter-spacing="0.5"
-    fill="#ffffff"
-    fill-opacity="0.95"
+    fill="#973a2e"
   >MR</text>
 </svg>

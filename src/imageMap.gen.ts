@@ -202,10 +202,12 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     height: 938,
     thumbhash: "3oyGJQgs+Yd4iHVzp/h4h3IHCFiId3CDWA==",
   },
+  "/images/florian-mono.svg": { width: 100, height: 100, thumbhash: null },
   "/images/icons/favicon-dark.svg": { width: 16, height: 16, thumbhash: null },
   "/images/icons/favicon.svg": { width: 16, height: 16, thumbhash: null },
   "/images/institutions/hfg-logo.svg": { width: 620, height: 200, thumbhash: null },
   "/images/institutions/tudelft-logo.svg": { width: 600, height: 201, thumbhash: null },
+  "/images/maya-mono.svg": { width: 100, height: 100, thumbhash: null },
   "/images/misc/macos-cursor.svg": { width: 32, height: 32, thumbhash: null },
   "/images/misc/macos-pointer-cursor.svg": { width: 32, height: 33, thumbhash: null },
   "/images/og-background.png": {
@@ -222,6 +224,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     width: 595,
     height: 842,
     thumbhash: "JwgODQKm2FiYJ4j3eXtnmViPdvVK",
+  },
+  "/images/slack.png": {
+    width: 512,
+    height: 512,
+    thumbhash: "oviBDQQjiGa5BndHkIKAlweHCIeIh3B7hw==",
   },
   "/images/sona/bulk-delete.webp": {
     width: 1380,
