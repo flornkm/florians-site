@@ -128,6 +128,18 @@
     url(/fonts/ciron-text/CironText-VF.ttf) format("truetype");
 }
 
+/* Pretendard (variable) — used only inside the experiment demos via the font-pretendard
+   utility; the rest of the site stays on Ciron Text. */
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src:
+    url(/fonts/pretendard/PretendardVariable.woff2) format("woff2"),
+    url(/fonts/pretendard/PretendardVariable.ttf) format("truetype");
+}
+
 @theme {
   --spacing-col: 248px;
   --aspect-a4: 1.4142857143/1;

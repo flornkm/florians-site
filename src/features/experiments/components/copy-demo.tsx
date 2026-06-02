@@ -233,7 +233,7 @@ export const CopyExperiment = () => {
 
               <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                 <div className="flex items-center gap-2">
-                  <span className="truncate text-sm font-medium text-primary">{m.name}</span>
+                  <span className="truncate text-sm font-semibold text-primary">{m.name}</span>
                   <span className="ml-auto shrink-0 text-xs text-tertiary">{m.time}</span>
                 </div>
 
