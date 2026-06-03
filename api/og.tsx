@@ -5,7 +5,10 @@ import path from "node:path";
 import React from "react";
 
 const mediumFont = fs.readFileSync(
-  path.join(process.cwd(), "public/fonts/pretendard/Pretendard-Medium.woff"),
+  path.join(
+    process.cwd(),
+    "public/fonts/ciron-text/CironTextUnlicensedTrialVersion-Medium.otf",
+  ),
 );
 
 const WIDTH = 1200;
@@ -27,7 +30,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const image = new ImageResponse(element, {
       width: WIDTH,
       height: HEIGHT,
-      fonts: [{ name: "Pretendard", data: mediumFont, weight: 500, style: "normal" }],
+      fonts: [{ name: "Ciron Text", data: mediumFont, weight: 500, style: "normal" }],
     });
 
     const buffer = Buffer.from(await image.arrayBuffer());
@@ -47,7 +50,7 @@ function defaultCard(subtitle: string) {
         width: "100%",
         height: "100%",
         background: "#ffffff",
-        fontFamily: "Pretendard",
+        fontFamily: "Ciron Text",
         letterSpacing: "-0.03em",
         display: "flex",
         flexDirection: "column",
