@@ -58,10 +58,10 @@ function defaultCard(subtitle: string) {
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <div style={{ fontSize: 48, fontWeight: 500, color: "#111111", lineHeight: 1.1 }}>
+        <div style={{ fontSize: 48, fontWeight: 500, color: "#9a9a9a", lineHeight: 1.1 }}>
           Florian Kiem
         </div>
-        <div style={{ fontSize: 48, fontWeight: 500, color: "#9a9a9a", lineHeight: 1.1 }}>
+        <div style={{ fontSize: 48, fontWeight: 500, color: "#111111", lineHeight: 1.1 }}>
           {subtitle}
         </div>
       </div>
