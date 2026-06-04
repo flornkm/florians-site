@@ -176,6 +176,12 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
   // Hide a missing poster gracefully instead of showing a broken-image glyph.
   const [posterError, setPosterError] = useState(false);
 
+  // The morph back into the grid is a `layout` animation, not an unmount — so the box keeps
+  // painting at its old DOM position. Without an elevated z-index for the whole animation it
+  // would slide back *under* the neighbouring tiles. Hold the lift until the layout settles.
+  const [morphing, setMorphing] = useState(false);
+  const elevated = expanded || morphing;
+
   return (
     // 4:3 cell — matches the poster ratio (so object-cover never crops) and the dialog ratio
     // (so the open morph is a clean uniform scale).
@@ -184,6 +190,9 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
       <motion.div
         layout
         data-experiment-tile={expanded ? "open" : "closed"}
+        onLayoutAnimationStart={() => setMorphing(true)}
+        onLayoutAnimationComplete={() => setMorphing(false)}
+        style={{ zIndex: elevated ? 110 : undefined }}
         onKeyDown={(e) => {
           if (expanded && e.key === "Escape") onClose();
         }}
@@ -194,7 +203,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
               // aspect-ratio would be ignored and the height would stretch to the viewport.
               // has-[[data-menu-open]]: lets the iOS context menu overflow instead of clipping.
               cn(
-                "fixed inset-0 z-[110] m-auto rounded-lg bg-surface dark:bg-neutral-950 has-[[data-menu-open]]:overflow-visible",
+                "fixed inset-0 m-auto rounded-lg bg-surface dark:bg-neutral-950 has-[[data-menu-open]]:overflow-visible",
                 DIALOG_SIZE,
               )
             : "absolute inset-0 bg-surface-secondary",

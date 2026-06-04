@@ -225,7 +225,7 @@ function Img({ src, alt, className }: { src?: string; alt?: string; className?: 
         />
       </div>
       {isDiagram && alt && (
-        <figcaption className="mx-auto mt-3 max-w-[460px] font-serif text-[11px] font-normal italic text-tertiary dark:text-secondary">
+        <figcaption className="mx-auto mt-3 max-w-[460px] font-serif text-[11px] font-normal italic text-primary">
           {alt}
         </figcaption>
       )}
