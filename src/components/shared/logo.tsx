@@ -1,8 +1,13 @@
 import { cn } from "@/lib/utils";
-// flubber is CommonJS; a named import breaks the SSR module runner ("interpolate not
-// found"). Default-import the module and destructure so it resolves in both SSR and client.
-import flubber from "flubber";
-const { interpolate } = flubber;
+import * as flubberModule from "flubber";
+
+// flubber exposes `interpolate` as a named export from its ESM entry (what the Vercel
+// production bundler resolves) but only via the default/CJS export in the dev SSR
+// runner. Read whichever the active bundler hands us so both builds work.
+const flubber = flubberModule as typeof flubberModule & {
+  default?: { interpolate: typeof flubberModule.interpolate };
+};
+const interpolate = flubber.interpolate ?? flubber.default!.interpolate;
 import { motion, useMotionTemplate, useTransform, type MotionValue } from "motion/react";
 import { useMemo } from "react";
 
