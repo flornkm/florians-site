@@ -90,26 +90,15 @@ export const Route = createRootRoute({
         media: "(prefers-color-scheme: dark)",
       },
     ],
-    scripts: import.meta.env.DEV
-      ? [
-          {
-            src: "//unpkg.com/react-scan/dist/auto.global.js",
-            crossOrigin: "anonymous",
-          },
-        ]
-      : [],
+    scripts: [],
   }),
   component: RootLayout,
   notFoundComponent: NotFoundPage,
   errorComponent: ErrorPage,
 });
 
-/** Routes that render full-screen without navigation or footer. */
-const CHROMELESS = new Set<string>(["/temporary"]);
-
 function RootLayout() {
   const { pathname } = useLocation();
-  const isChromeless = CHROMELESS.has(pathname);
   const isHome = pathname === "/";
   // Home already shows Colophon/Experiments in its sidebar, so its footer drops the "More" column.
   const footerVariant = isHome ? "indent" : "default";
@@ -138,17 +127,13 @@ function RootLayout() {
         />
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            {!isChromeless && <Navigation />}
+            <Navigation />
             <main
-              className={
-                isChromeless
-                  ? "w-full h-dvh"
-                  : `mx-auto w-full max-w-[2000px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`
-              }
+              className={`mx-auto w-full max-w-[2000px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`}
             >
               <Outlet />
             </main>
-            {!isChromeless && <Footer variant={footerVariant} />}
+            <Footer variant={footerVariant} />
           </TooltipProvider>
         </QueryClientProvider>
         <Analytics />
