@@ -1,3 +1,4 @@
+import { ClipboardPredict } from "@/features/experiments/components/clipboard-predict-demo";
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
@@ -41,6 +42,7 @@ const experiment = (
 
 const EXPERIMENTS: Experiment[] = [
   experiment("copy", "Copy", "Motion", CopyExperiment),
+  experiment("clipboard-predict", "Clipboard Predict", "Input", ClipboardPredict),
   experiment("figma-select", "Figma Select", "UI", FigmaSelect),
   experiment("video-player", "Video Player", "Video", VideoPlayerExperiment),
   experiment("slop-detector", "Slop Detector", "3D", SlopDetector),

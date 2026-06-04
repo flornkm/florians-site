@@ -52,6 +52,7 @@ const SLUGS: Record<string, number> = {
   "crt-terminal": 2500, // typing animation
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
+  "clipboard-predict": 1000,
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
