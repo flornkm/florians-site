@@ -73,8 +73,9 @@ function WritingDetailPage() {
   const content = useMdxContent(
     "writing",
     item.slug,
-    // Prose <h1> is hidden (the header above is the title); text is capped/centered while media stays full width.
-    "w-full [&>h1]:hidden [&>h1+*]:mt-0 [&>*:not(h1)]:mx-auto [&>:not(div):not(figure):not(h1)]:max-w-[460px]",
+    // Prose <h1> is hidden (the header above is the title). On mobile everything spans the full content
+    // width; from md up, text is capped/centered while media stays full width.
+    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px]",
   );
   const parsedDate = dayjs(item.date);
   const formattedDate = item.date && parsedDate.isValid() ? parsedDate.format("MMMM D, YYYY") : "";
@@ -85,8 +86,9 @@ function WritingDetailPage() {
 
   return (
     <div className="w-full">
-      {/* Mirror the /writing index grid so the article column lines up with it. */}
-      <div className="-mt-[7px] px-4 pt-2.5 md:-mt-2 md:grid md:grid-cols-9 md:gap-x-6 md:px-0 lg:pt-9">
+      {/* Mirror the /writing index grid so the article column lines up with it. The root layout
+          already supplies the mobile side padding (px-6), so no extra px here. */}
+      <div className="-mt-[7px] pt-2.5 md:-mt-2 md:grid md:grid-cols-9 md:gap-x-6 lg:pt-9">
         <aside className="hidden md:col-span-2 md:col-start-1 md:-mt-7 md:block">
           <div className="md:sticky md:top-9">
             <Link
