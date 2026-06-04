@@ -204,11 +204,11 @@ function Img({ src, alt, className }: { src?: string; alt?: string; className?: 
   const isDiagram = (src ?? "").toLowerCase().endsWith(".svg");
   return (
     <figure className={cn("not-prose my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}>
-      {/* On mobile the panel breaks out of all ancestor padding to sit 4px from
-          each screen edge; from md up it's a normal in-flow block. */}
+      {/* On mobile the panel breaks out of ancestor padding to line up with the body
+          text's 24px side padding (the root layout's px-6); from md up it's a normal in-flow block. */}
       <div
         className={cn(
-          "max-md:ml-[50%] max-md:w-[calc(100vw-8px)] max-md:-translate-x-1/2",
+          "max-md:ml-[50%] max-md:w-[calc(100vw-48px)] max-md:-translate-x-1/2",
           isDiagram ? "figure-dots p-4 md:p-8" : "rounded-lg bg-secondary p-4 md:p-12",
         )}
       >
