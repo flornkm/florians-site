@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils";
-import { interpolate } from "flubber";
+// flubber is CommonJS; a named import breaks the SSR module runner ("interpolate not
+// found"). Default-import the module and destructure so it resolves in both SSR and client.
+import flubber from "flubber";
+const { interpolate } = flubber;
 import { motion, useMotionTemplate, useTransform, type MotionValue } from "motion/react";
 import { useMemo } from "react";
 

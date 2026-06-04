@@ -24,9 +24,11 @@ interface Experiment {
   slug: string;
   title: string;
   tag: string;
-  // A single transparent poster at public/experiments/<slug>.webp works on both light
-  // and dark grids. Until the file exists the tile falls back to a plain panel.
+  // Transparent posters at public/experiments/<slug>.webp (light) and <slug>-dark.webp
+  // (dark). A <picture> media source swaps them by prefers-color-scheme — no JS. Until
+  // the files exist the tile falls back to a plain panel.
   poster: string;
+  posterDark: string;
   Component: ComponentType;
 }
 
@@ -38,7 +40,14 @@ const experiment = (
   title: string,
   tag: string,
   Component: ComponentType,
-): Experiment => ({ slug, title, tag, poster: `/experiments/${slug}.webp`, Component });
+): Experiment => ({
+  slug,
+  title,
+  tag,
+  poster: `/experiments/${slug}.webp`,
+  posterDark: `/experiments/${slug}-dark.webp`,
+  Component,
+});
 
 const EXPERIMENTS: Experiment[] = [
   experiment("copy", "Copy", "Motion", CopyExperiment),
@@ -170,7 +179,7 @@ interface ExperimentTileProps {
 }
 
 function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: ExperimentTileProps) {
-  const { title, poster, Component } = experiment;
+  const { title, poster, posterDark, Component } = experiment;
   const expanded = isActive && morph;
 
   // Hide a missing poster gracefully instead of showing a broken-image glyph.
@@ -218,14 +227,20 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
           )}
         >
           {!posterError && (
-            <img
-              src={poster}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              onError={() => setPosterError(true)}
-              className="absolute inset-0 size-full object-cover"
-            />
+            // <picture> lets the browser pick the dark capture by media query, so the
+            // grid never needs to read theme state in JS. onError on the <img> still
+            // covers a missing light poster (the resting fallback panel).
+            <picture>
+              <source srcSet={posterDark} media="(prefers-color-scheme: dark)" />
+              <img
+                src={poster}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                onError={() => setPosterError(true)}
+                className="absolute inset-0 size-full object-cover"
+              />
+            </picture>
           )}
 
           <div className="absolute inset-x-0 bottom-0 p-3">

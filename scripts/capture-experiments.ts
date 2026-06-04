@@ -1,13 +1,17 @@
 /**
  * Captures a poster for each experiment by opening its dialog in a headless Chrome
- * and screenshotting the open box on a TRANSPARENT background, so a single image
- * works on both light and dark grids. Components that paint their own background
- * (3D scenes, video, the CRT) simply stay opaque. Run with the dev server up:
+ * and screenshotting the open box on a TRANSPARENT background. We capture twice —
+ * once in each color scheme — so the components (which theme themselves via
+ * prefers-color-scheme CSS variables) render their light and dark chrome. The grid
+ * then swaps the two via a <picture> media source, so dark mode costs no JS.
+ * Components that paint their own background (3D scenes, video, the CRT) stay opaque.
+ * Run with the dev server up:
  *
  *   bun run dev            # in one shell
  *   bun scripts/capture-experiments.ts
  *
- * Output: public/experiments/<slug>.webp (transparent where the component allows)
+ * Output: public/experiments/<slug>.webp       (light, transparent where allowed)
+ *         public/experiments/<slug>-dark.webp   (dark)
  */
 import { chromium } from "playwright-core";
 import { spawnSync } from "node:child_process";
@@ -67,9 +71,11 @@ const CLICKS: Record<string, string> = {
   "figma-select": 'img[alt="Florian Kiem"]',
 };
 
-async function main() {
-  await mkdir(OUT, { recursive: true });
-
+// Capture every slug in one color scheme. `suffix` is appended to the output name
+// ("" for light, "-dark" for dark) so the grid can pick the file by media query. The
+// dark pass relies on each component theming itself via prefers-color-scheme, which
+// Playwright drives through the context's `colorScheme`.
+async function captureScheme(scheme: "light" | "dark", suffix: string) {
   const browser = await chromium.launch({
     channel: "chrome",
     headless: true,
@@ -87,7 +93,7 @@ async function main() {
     viewport: { width: 1440, height: 900 },
     deviceScaleFactor: 2, // retina-crisp posters
     permissions: ["camera"],
-    colorScheme: "light",
+    colorScheme: scheme,
   });
 
   // react-scan is injected in dev (import.meta.env.DEV) and paints render badges
@@ -138,20 +144,32 @@ async function main() {
 
       await page.waitForTimeout(BASE_SETTLE + settle);
 
-      const png = `${OUT}/${slug}.png`;
-      const webp = `${OUT}/${slug}.webp`;
+      const png = `${OUT}/${slug}${suffix}.png`;
+      const webp = `${OUT}/${slug}${suffix}.webp`;
       await dialog.screenshot({ path: png, type: "png", omitBackground: true });
       toWebp(png, webp);
       await rm(png, { force: true });
-      console.log(`✓ ${slug}.webp`);
+      console.log(`✓ ${slug}${suffix}.webp`);
     } catch (err) {
-      console.error(`✗ ${slug}:`, err instanceof Error ? err.message : err);
+      console.error(`✗ ${slug}${suffix}:`, err instanceof Error ? err.message : err);
     } finally {
       await page.close();
     }
   }
 
+  await context.close();
   await browser.close();
+}
+
+// IMPORTANT: run this file directly (`bun scripts/capture-experiments.ts`), NOT via
+// `bun run capture:experiments`. bunfig's `[run] bun = true` routes package scripts
+// through Bun's node shim, which breaks Playwright's screenshot pipeline and yields
+// blank, fully-transparent posters.
+async function main() {
+  await mkdir(OUT, { recursive: true });
+
+  await captureScheme("light", "");
+  await captureScheme("dark", "-dark");
 }
 
 main().catch((err) => {

@@ -131,6 +131,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     height: 1250,
     thumbhash: "bRgOFwT4d1h/iHZyhuh3Z1iKeHBIB4cD",
   },
+  "/images/avatars/florian_kiem.webp": {
+    width: 1250,
+    height: 1250,
+    thumbhash: "1yiKDQI3OMZ7iXC6ZzeMcLMICJeDd3lKhw==",
+  },
   "/images/avatars/jan_johannes.jpg": {
     width: 384,
     height: 384,
