@@ -129,7 +129,7 @@ function IndexPage() {
           An engineer with a background in design, combining both.
         </h1>
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
-          <h2 className="mb-4 text-sm font-medium text-primary">Helped build</h2>
+          <h2 className="mb-4 text-sm font-medium text-primary">Selected work</h2>
           <ul className="flex flex-col items-start gap-1.5">
             {PROJECTS.map((project, index) => {
               const isActive = !!project.media?.length && active === projectId(project);

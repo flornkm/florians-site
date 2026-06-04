@@ -9,7 +9,7 @@ const CONTACT_LINKS = [
   { name: "Email", href: "mailto:hello@floriankiem.com" },
 ];
 
-const AVATAR = { src: "/images/avatars/florian_kiem.jpg", alt: "Florian Kiem" };
+const AVATAR = { src: "/images/avatars/florian_kiem.webp", alt: "Florian Kiem" };
 
 // Per-photo grid placement, indexed to match PHOTOS order.
 const PHOTO_LAYOUT = [

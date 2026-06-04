@@ -12,6 +12,34 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
+  { name: "Rogo", date: "2025 – 2026", url: "https://rogo.ai" },
+  {
+    name: "Sona",
+    date: "2024 – 2025",
+    url: "https://sona.wtf",
+    mediaOrder: 0,
+    media: [
+      [
+        "/images/sona/recording.webp",
+        "/images/sona/processing.webp",
+        "/images/sona/key-insights.webp",
+      ],
+      ["/images/sona/transcript.webp", "/images/sona/sharing.webp", "/images/sona/follow-up.webp"],
+      "/videos/sona/sona-use.webm",
+      [
+        "/images/sona/overview.webp",
+        "/images/sona/export.webp",
+        "/images/sona/mobile-protocol.webp",
+      ],
+      ["/images/sona/settings.webp", "/images/sona/upsell-modal.webp", "/images/sona/upsell.webp"],
+      ["/images/sona/select.webp", "/images/sona/selected.webp", "/images/sona/bulk-delete.webp"],
+      ["/images/sona/invite-user.webp", "/images/sona/faq.webp", "/images/sona/subscriber.webp"],
+      ["/images/sona/login.webp", "/images/sona/otp.webp", "/images/sona/otp-loading.webp"],
+      "/videos/sona/hero-video.webm",
+      "/images/sona/devices.webp",
+      "/images/sona/download-cta.webp",
+    ],
+  },
   {
     name: "Superpower",
     date: "2025 – 2026",
@@ -43,35 +71,9 @@ export const PROJECTS: Project[] = [
       "/images/superpower/login-visual.webp",
     ],
   },
+  { name: "Delphi", date: "2026", url: "https://delphi.ai" },
   { name: "Kalshi", date: "2025", url: "https://kalshi.com" },
   { name: "Snaptrude", date: "2025", url: "https://snaptrude.com" },
-  {
-    name: "Sona",
-    date: "2024 – 2025",
-    url: "https://sona.wtf",
-    mediaOrder: 0,
-    media: [
-      [
-        "/images/sona/recording.webp",
-        "/images/sona/processing.webp",
-        "/images/sona/key-insights.webp",
-      ],
-      ["/images/sona/transcript.webp", "/images/sona/sharing.webp", "/images/sona/follow-up.webp"],
-      "/videos/sona/sona-use.webm",
-      [
-        "/images/sona/overview.webp",
-        "/images/sona/export.webp",
-        "/images/sona/mobile-protocol.webp",
-      ],
-      ["/images/sona/settings.webp", "/images/sona/upsell-modal.webp", "/images/sona/upsell.webp"],
-      ["/images/sona/select.webp", "/images/sona/selected.webp", "/images/sona/bulk-delete.webp"],
-      ["/images/sona/invite-user.webp", "/images/sona/faq.webp", "/images/sona/subscriber.webp"],
-      ["/images/sona/login.webp", "/images/sona/otp.webp", "/images/sona/otp-loading.webp"],
-      "/videos/sona/hero-video.webm",
-      "/images/sona/devices.webp",
-      "/images/sona/download-cta.webp",
-    ],
-  },
   { name: "Morphic", date: "2024", url: "https://morphic.com" },
   { name: "Dash0", date: "2024", url: "https://dash0.com" },
   { name: "Opral", date: "2023 – 2024", url: "https://opral.com" },
