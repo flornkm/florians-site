@@ -60,7 +60,7 @@ function AboutPage() {
         <div className="col-start-1 col-span-9 mb-10 flex flex-col md:col-start-3 md:col-span-2 md:mb-0">
           <h1 className="text-base font-[550] leading-snug text-primary">Florian Kiem</h1>
           <p className="text-base font-[550] leading-snug text-tertiary">Designer, Engineer</p>
-          <div className="order-first mb-8 max-w-40 md:order-none md:mt-12 md:mb-0">
+          <div className="order-first mb-8 max-w-40 bg-[#FDFDFC] md:order-none md:mt-12 md:mb-0">
             <Image
               src={AVATAR.src}
               alt={AVATAR.alt}

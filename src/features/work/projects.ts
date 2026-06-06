@@ -13,10 +13,25 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    name: "Flow",
+    date: "2026",
+    url: "https://flowengineering.com",
+    mediaOrder: 1,
+    media: [
+      "/images/flow/hero.webp",
+      "/images/flow/explainer.webp",
+      "/images/flow/customer.webp",
+      "/images/flow/company.webp",
+      "/images/flow/testimonials.webp",
+      "/images/flow/pricing.webp",
+      "/images/flow/open-roles.webp",
+    ],
+  },
+  {
     name: "Sona",
     date: "2024 – 2025",
     url: "https://sona.wtf",
-    mediaOrder: 0,
+    mediaOrder: 2,
     media: [
       [
         "/images/sona/recording.webp",
