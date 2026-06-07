@@ -3,6 +3,7 @@ import { SmartVideo } from "@/components/shared/smart-video";
 import { Link } from "@/components/ui/link";
 import { PROJECTS, type Project } from "@/features/work/projects";
 import { useActiveSection } from "@/hooks/use-active-section";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
 import { videoManifest } from "@/videoMap.gen";
@@ -121,6 +122,9 @@ function IndexPage() {
     (a, b) => (a.mediaOrder ?? Number.MAX_SAFE_INTEGER) - (b.mediaOrder ?? Number.MAX_SAFE_INTEGER),
   );
   const active = useActiveSection(withMedia.map(projectId));
+  // The sidebar is only sticky from md up, so scroll-based highlighting only makes
+  // sense there. On mobile every item stays highlighted.
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
     <div className="md:grid md:grid-cols-9 md:gap-x-6">
@@ -132,7 +136,8 @@ function IndexPage() {
           <h2 className="mb-4 text-sm font-medium text-primary">Selected work</h2>
           <ul className="flex flex-col items-start gap-1.5">
             {PROJECTS.map((project, index) => {
-              const isActive = !!project.media?.length && active === projectId(project);
+              const isActive =
+                !isDesktop || (!!project.media?.length && active === projectId(project));
               return (
                 <motion.li
                   key={project.name}
