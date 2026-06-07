@@ -5,6 +5,7 @@ import { ComponentType, ReactNode, useMemo, useState } from "react";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { videoManifest } from "@/videoMap.gen";
 import { ModelViewer } from "../3d/model-viewer";
+import { FigureImage } from "./figure-image";
 import { Image } from "./image";
 import { SmartVideo } from "./smart-video";
 
@@ -200,37 +201,7 @@ export function Model({
 }
 
 function Img({ src, alt, className }: { src?: string; alt?: string; className?: string }) {
-  // SVGs render borderless on a panel; photos keep the framed look.
-  const isDiagram = (src ?? "").toLowerCase().endsWith(".svg");
-  return (
-    <figure className={cn("not-prose my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}>
-      {/* On mobile the panel breaks out of ancestor padding to line up with the body
-          text's 24px side padding (the root layout's px-6); from md up it's a normal in-flow block. */}
-      <div
-        className={cn(
-          "max-md:ml-[50%] max-md:w-[calc(100vw-48px)] max-md:-translate-x-1/2",
-          isDiagram ? "figure-dots p-4 md:p-8" : "rounded-lg bg-secondary p-4 md:p-12",
-        )}
-      >
-        <Image
-          src={src ?? ""}
-          alt={alt ?? ""}
-          objectFit="contain"
-          className={cn(
-            "h-auto w-full",
-            !isDiagram &&
-              "rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15",
-            className,
-          )}
-        />
-      </div>
-      {isDiagram && alt && (
-        <figcaption className="mx-auto mt-3 max-w-[460px] font-serif text-[11px] font-normal italic text-primary">
-          {alt}
-        </figcaption>
-      )}
-    </figure>
-  );
+  return <FigureImage src={src ?? ""} alt={alt ?? ""} className={className} />;
 }
 
 export function MobileImages({ images }: { images: { src: string; alt: string }[] }) {
