@@ -71,6 +71,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/references/lovers-magazine-preview.webp": { width: 595, height: 842, thumbhash: "JwgODQKm2FiYJ4j3eXtnmViPdvVK" },
   "/images/rogo/buttons.webp": { width: 5040, height: 3000, thumbhash: "PfgBBID1W3V5hnmIZ4kHeDT6Zw==" },
   "/images/rogo/colors.webp": { width: 5040, height: 3000, thumbhash: "/gcCBIDS31iIZ5d2iHXvVHpwiA==" },
+  "/images/rogo/description.webp": { width: 5040, height: 3000, thumbhash: "fggCBID3KbZyjXR3iIoHfbgPSw==" },
   "/images/rogo/design-landing.webp": { width: 5040, height: 3000, thumbhash: "NfgRBID4R4h4h3h8hIf3eIyP2A==" },
   "/images/rogo/design-system.webp": { width: 5040, height: 3000, thumbhash: "PvgBBID2eZd3iIh7hHcfZYRr+A==" },
   "/images/rogo/dropdowns.webp": { width: 5040, height: 3000, thumbhash: "PggCBID2WqeId4mKdYMMeqhQVg==" },
