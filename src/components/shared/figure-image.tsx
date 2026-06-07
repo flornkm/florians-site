@@ -1,6 +1,7 @@
 import { Dialog } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { useState } from "react";
 import { Image } from "./image";
 
 // The figure caption fades in one word at a time, each blurring into focus.
@@ -47,9 +48,10 @@ interface FigureImageProps {
 export function FigureImage({ src, alt, className }: FigureImageProps) {
   // SVGs render borderless on a dot panel; photos keep the framed look.
   const isDiagram = src.toLowerCase().endsWith(".svg");
+  const [open, setOpen] = useState(false);
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <figure className={cn("not-prose my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}>
         {/* On mobile the panel breaks out of ancestor padding to line up with the body
             text's 24px side padding (the root layout's px-6); from md up it's a normal block. */}
@@ -84,7 +86,13 @@ export function FigureImage({ src, alt, className }: FigureImageProps) {
 
       <Dialog.Portal>
         <Dialog.Backdrop blur="soft" />
-        <Dialog.Popup variant="headless" className="cursor-zoom-out">
+        {/* Clicking anywhere on the zoomed figure dismisses it (the zoom-out cursor
+            promises this); base-ui only closes on backdrop/Escape on its own. */}
+        <Dialog.Popup
+          variant="headless"
+          className="cursor-zoom-out"
+          onClick={() => setOpen(false)}
+        >
           <Dialog.Title className="sr-only">{alt || "Image"}</Dialog.Title>
           <div className="rounded-lg bg-surface p-6 shadow-emphasis md:p-10 dark:bg-neutral-950">
             {/* Plain <img>: the popup shrink-wraps to the natural size, and the source is
