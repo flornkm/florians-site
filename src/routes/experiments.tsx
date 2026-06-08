@@ -1,4 +1,3 @@
-import { ClipboardPredict } from "@/features/experiments/components/clipboard-predict-demo";
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
@@ -8,6 +7,8 @@ import { FrostedCamera } from "@/features/experiments/components/frosted-camera-
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
 import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
+import { ScrollbarGutter } from "@/features/experiments/components/scrollbar-gutter-demo";
+import { ShadowRing } from "@/features/experiments/components/shadow-ring-demo";
 import { SlopDetector } from "@/features/experiments/components/slop-detector";
 import { TextShimmerExperiment } from "@/features/experiments/components/text-shimmer-demo";
 import { VideoPlayerExperiment } from "@/features/experiments/components/video-player-demo";
@@ -50,8 +51,9 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("shadow-ring", "Shadow Ring", "Shadow", ShadowRing),
+  experiment("scrollbar-gutter", "Scrollbar Gutter", "Layout", ScrollbarGutter),
   experiment("copy", "Copy", "Motion", CopyExperiment),
-  experiment("clipboard-predict", "Clipboard Predict", "Input", ClipboardPredict),
   experiment("figma-select", "Figma Select", "UI", FigmaSelect),
   experiment("video-player", "Video Player", "Video", VideoPlayerExperiment),
   experiment("slop-detector", "Slop Detector", "3D", SlopDetector),

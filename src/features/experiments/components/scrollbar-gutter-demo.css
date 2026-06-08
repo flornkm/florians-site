@@ -1,0 +1,51 @@
+.sg-scroll {
+  overflow-y: auto;
+}
+
+/* Force a classic, space-occupying scrollbar. macOS/Safari and Chrome default to
+   overlay scrollbars that take zero layout width — with those, `stable` and `auto`
+   look identical and the demo shows nothing. Defining ::-webkit-scrollbar opts the
+   element into a real, space-consuming bar on every webkit/blink engine. */
+.sg-scroll::-webkit-scrollbar {
+  width: 14px;
+}
+.sg-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sg-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--text-quaternary);
+  border-radius: 999px;
+  /* Inset the thumb inside the 14px track so the bar reads slim while the gutter
+     it occupies stays a full 14px — that 14px is exactly what `stable` reserves. */
+  border: 4px solid transparent;
+  background-clip: padding-box;
+}
+
+.sg-stable {
+  scrollbar-gutter: stable;
+}
+
+/* Typewriter caret. Solid while typing; blinks only when paused at the end (data-blink). */
+.sg-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.15em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  transform: translateY(-0.1em);
+  background: currentColor;
+  border-radius: 1px;
+}
+.sg-caret[data-blink="true"] {
+  animation: sg-caret-blink 1.05s step-end infinite;
+}
+@keyframes sg-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
