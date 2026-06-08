@@ -3,6 +3,7 @@
 @import "shadow-plugin";
 @import "./colors.css";
 @import "./text.css";
+@import "./shadow-ring.css";
 
 @plugin "@tailwindcss/typography";
 @plugin 'tailwind-scrollbar';

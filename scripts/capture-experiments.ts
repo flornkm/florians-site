@@ -44,6 +44,8 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
+  "scrollbar-gutter": 1000, // land on the fully-typed / scrollbar-visible frame
+  "shadow-ring": 1200, // spring settles
   copy: 1200,
   "figma-select": 1200,
   "video-player": 1500,
@@ -56,7 +58,6 @@ const SLUGS: Record<string, number> = {
   "crt-terminal": 2500, // typing animation
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
-  "clipboard-predict": 1000,
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
