@@ -1,5 +1,5 @@
 ---
-title: The art of not shipping every feature
+title: The art of not shipping everything
 description: We live in a time where everyone can build everything, building features got cheap, leading to many startups to believe shipping everything, all at once is the right approach.
 date: 2026-05-17
 type: note
@@ -13,13 +13,13 @@ For many this is common knowledge, I still believe it's hard to grasp what happe
 
 This has changed.
 
-Two years ago I wrote 95% of code by hand. Cursor and GitHub Copilot were useful for auto-suggestions. Then, one year ago, I was doing 70% of the work manually. AI has gotten significantly better, but I still neede to tweak almost every output. Now I'm barely doing anything manually anymore. I'm reviewing code, but I often don't even have to touch the files themselves anymore. AI has gotten incredibly good at writing code.
+Two years ago I wrote 95% of code by hand. Cursor and GitHub Copilot were useful for auto-suggestions. Then, one year ago, I was doing 70% of the work manually. AI has gotten significantly better, but I still needed to tweak almost every output. Now I'm barely doing anything manually anymore. I'm reviewing code, but I often don't even have to touch the files themselves anymore. AI has gotten incredibly good at writing code.
 
 ![Fig 1: The cost of building software, decaying toward zero.](/images/writing/cost-of-software.svg)
 
 While the amount of features I'm committing increased, the amount of lines of code I'm writing decreased. At the same time the code I'm reviewing, not only from myself, but from non-technical folks drastically increased too.
 
-The pattern is clear: Much more people can contribute to the success of products. PMs, designers, marketing, and sales all, for the first time, have the tools to actually execute what they have in mind.
+The pattern is clear: Many more people can contribute to the success of products. PMs, designers, marketing, and sales all, for the first time, have the tools to actually execute what they have in mind.
 
 ![Fig 2: With building this cheap, code flows in from every direction.](/images/writing/code-from-all-sides.svg)
 
@@ -29,7 +29,25 @@ I've seen that most companies measure their efficiency by lines of code changed,
 
 This is a problem.
 
-If everyone is just adding things, who is the one staying in control? Who is the one making sure the design aligns with other features and doesn't look and feel like _slop_? Who is even testing these new features and making sure users actually need them? <br />
+If everyone is just adding things, who is the one staying in control? Who is the one making sure the design aligns with other features and doesn't look and feel like _slop_? Who is even testing these new features and making sure users actually need them?
+
 There are hundreds of more questions like these, but I think the point gets clear: Software companies don't need to care about having enough employees to ship something. The cost to create software will go to zero. Instead the challenge will be: If resources are unlimited, how do we even know what to ship?
 
-## Testing, Analytics, QA
+## The hard part isn't building anymore
+
+There's a strong need to automate reviews, but most of what we have only finds out if things work or don't. That's the easy part. The testing I'd expect goes further:
+
+- Test features against actual needs
+- Open PRs in a preview
+- Look at changes and whatever they affected
+- Give an estimate of the extent a new feature is needed vs. refactoring something that already exists
+
+None of this is about writing more code. It's about deciding whether the code should exist at all.
+
+## Knowing what to ship
+
+With more code, more reviews, more tokens, come more bugs. This is wrong. What should happen instead is that agents know a codebase well enough to loop around what already exists, rather than creating new UX challenges that aren't necessary at all.
+
+![Fig 3: Everything arrives. The work is deciding what gets through.](/images/writing/knowing-what-to-ship.svg)
+
+Shipping a lot of features is not the benchmark. Knowing what to ship is.
