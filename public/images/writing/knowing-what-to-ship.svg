@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="600" height="240" role="img" aria-label="Many feature arrows arriving at a gate from the left; only one passes through to the right, illustrating selection — knowing what to ship.">
+  <style>
+    :root { --fb: #7e9cc4; --ink: #171717; }
+    @media (prefers-color-scheme: dark) { :root { --fb: #9bb4da; --ink: #ededed; } }
+    .fline  { fill: none; stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; }
+    .farea  { fill: var(--fb); opacity: 0.14; }
+    .stems  { opacity: 0.5; }
+    .stems line { stroke: var(--fb); stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .farrows line { stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+    .fhead  { fill: var(--fb); }
+    .fmark  { fill: var(--fb); fill-opacity: 0.14; stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+    .imark  { fill: var(--fb); stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-linejoin: miter; }
+    .ix     { fill: none; stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+    .axis   { fill: none; stroke: var(--ink); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <g class="farrows">
+      <line x1="120" y1="30" x2="303" y2="30" />
+      <line x1="120" y1="60" x2="303" y2="60" />
+      <line x1="120" y1="90" x2="303" y2="90" />
+      <line x1="120" y1="120" x2="460" y2="120" />
+      <line x1="120" y1="150" x2="303" y2="150" />
+      <line x1="120" y1="180" x2="303" y2="180" />
+      <line x1="120" y1="210" x2="303" y2="210" />
+  </g>
+  <g class="fhead">
+      <path d="M313 30 L303 25.5 L303 34.5 Z" />
+      <path d="M313 60 L303 55.5 L303 64.5 Z" />
+      <path d="M313 90 L303 85.5 L303 94.5 Z" />
+      <path d="M470 120 L460 115.5 L460 124.5 Z" />
+      <path d="M313 150 L303 145.5 L303 154.5 Z" />
+      <path d="M313 180 L303 175.5 L303 184.5 Z" />
+      <path d="M313 210 L303 205.5 L303 214.5 Z" />
+  </g>
+  <path class="fline" d="M320 30 V108 M320 132 V210" />
+  <g class="ix">
+      <path d="M106.5 26.5 L113.5 33.5 M113.5 26.5 L106.5 33.5" />
+      <path d="M106.5 56.5 L113.5 63.5 M113.5 56.5 L106.5 63.5" />
+      <path d="M106.5 86.5 L113.5 93.5 M113.5 86.5 L106.5 93.5" />
+      <path d="M106.5 116.5 L113.5 123.5 M113.5 116.5 L106.5 123.5" />
+      <path d="M106.5 146.5 L113.5 153.5 M113.5 146.5 L106.5 153.5" />
+      <path d="M106.5 176.5 L113.5 183.5 M113.5 176.5 L106.5 183.5" />
+      <path d="M106.5 206.5 L113.5 213.5 M113.5 206.5 L106.5 213.5" />
+  </g>
+</svg>
