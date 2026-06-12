@@ -2,16 +2,16 @@
   <style>
     :root { --fb: #7e9cc4; --ink: #171717; }
     @media (prefers-color-scheme: dark) { :root { --fb: #9bb4da; --ink: #ededed; } }
-    .fline  { fill: none; stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; }
+    .fline  { fill: none; stroke: var(--fb); stroke-width: 1.6; stroke-linecap: butt; stroke-linejoin: miter; }
     .farea  { fill: var(--fb); opacity: 0.14; }
     .stems  { opacity: 0.5; }
-    .stems line { stroke: var(--fb); stroke-width: 1; vector-effect: non-scaling-stroke; }
-    .farrows line { stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+    .stems line { stroke: var(--fb); stroke-width: 1; }
+    .farrows line { stroke: var(--fb); stroke-width: 1.6; }
     .fhead  { fill: var(--fb); }
-    .fmark  { fill: var(--fb); fill-opacity: 0.14; stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
-    .imark  { fill: var(--fb); stroke: #171717; stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-linejoin: miter; }
-    .ix     { fill: none; stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
-    .axis   { fill: none; stroke: var(--ink); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+    .fmark  { fill: var(--fb); fill-opacity: 0.14; stroke: var(--fb); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+    .imark  { fill: var(--fb); stroke: #171717; stroke-width: 1.4; stroke-linejoin: miter; }
+    .ix     { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+    .axis   { fill: none; stroke: var(--ink); stroke-width: 1.3; }
   </style>
 
   <path class="farea" d="M150,30 L154.84,36.04 L159.68,41.84 L164.52,47.43 L169.35,52.8 L174.19,58.01 L179.03,63.04 L183.87,67.93 L188.71,72.66 L193.55,77.25 L198.39,81.71 L203.23,86.04 L208.06,90.22 L212.9,94.29 L217.74,98.22 L222.58,102.03 L227.42,105.7 L232.26,109.23 L237.1,112.63 L241.94,115.89 L246.77,119.01 L251.61,121.99 L256.45,124.83 L261.29,127.53 L266.13,130.09 L270.97,132.51 L275.81,134.79 L280.65,136.95 L285.48,138.97 L290.32,140.88 L295.16,142.66 L300,144.34 L304.84,145.91 L309.68,147.39 L314.52,148.77 L319.35,150.07 L324.19,151.29 L329.03,152.45 L333.87,153.54 L338.71,154.57 L343.55,155.56 L348.39,156.5 L353.23,157.4 L358.06,158.27 L362.9,159.1 L367.74,159.92 L372.58,160.7 L377.42,161.47 L382.26,162.22 L387.1,162.95 L391.94,163.66 L396.77,164.36 L401.61,165.04 L406.45,165.71 L411.29,166.36 L416.13,166.99 L420.97,167.61 L425.81,168.2 L430.65,168.78 L435.48,169.34 L440.32,169.87 L445.16,170.39 L450,170.88 L450,180 L150,180 Z" />
@@ -84,6 +84,6 @@
   <polyline class="fline" points="150,30 154.84,36.04 159.68,41.84 164.52,47.43 169.35,52.8 174.19,58.01 179.03,63.04 183.87,67.93 188.71,72.66 193.55,77.25 198.39,81.71 203.23,86.04 208.06,90.22 212.9,94.29 217.74,98.22 222.58,102.03 227.42,105.7 232.26,109.23 237.1,112.63 241.94,115.89 246.77,119.01 251.61,121.99 256.45,124.83 261.29,127.53 266.13,130.09 270.97,132.51 275.81,134.79 280.65,136.95 285.48,138.97 290.32,140.88 295.16,142.66 300,144.34 304.84,145.91 309.68,147.39 314.52,148.77 319.35,150.07 324.19,151.29 329.03,152.45 333.87,153.54 338.71,154.57 343.55,155.56 348.39,156.5 353.23,157.4 358.06,158.27 362.9,159.1 367.74,159.92 372.58,160.7 377.42,161.47 382.26,162.22 387.1,162.95 391.94,163.66 396.77,164.36 401.61,165.04 406.45,165.71 411.29,166.36 416.13,166.99 420.97,167.61 425.81,168.2 430.65,168.78 435.48,169.34 440.32,169.87 445.16,170.39 450,170.88" />
   <g>
     <path class="imark" d="M443 163.88 H457 V177.88 H443 Z" />
-    <path d="M447 167.88 L453 173.88 M453 167.88 L447 173.88" fill="none" stroke="#171717" stroke-width="1.4" vector-effect="non-scaling-stroke" />
+    <path d="M447 167.88 L453 173.88 M453 167.88 L447 173.88" fill="none" stroke="#171717" stroke-width="1.4" />
   </g>
 </svg>

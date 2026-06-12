@@ -6,6 +6,7 @@ import { FontSmoothing } from "@/features/experiments/components/font-smoothing-
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
+import { MessageQueue } from "@/features/experiments/components/message-queue-demo";
 import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
 import { ScrollbarGutter } from "@/features/experiments/components/scrollbar-gutter-demo";
 import { ShadowRing } from "@/features/experiments/components/shadow-ring-demo";
@@ -51,6 +52,7 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("message-queue", "Message Queue", "Queue", MessageQueue),
   experiment("shadow-ring", "Shadow Ring", "Shadow", ShadowRing),
   experiment("scrollbar-gutter", "Scrollbar Gutter", "Layout", ScrollbarGutter),
   experiment("copy", "Copy", "Motion", CopyExperiment),
