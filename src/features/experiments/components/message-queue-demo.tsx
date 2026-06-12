@@ -1,5 +1,8 @@
+import Button from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { IconArrowCornerDownLeft } from "central-icons/IconArrowCornerDownLeft";
+import { IconCrossSmall } from "central-icons/IconCrossSmall";
+import { IconPencil } from "central-icons/IconPencil";
 import { AnimatePresence, motion, Reorder } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -47,7 +50,7 @@ export const MessageQueue = () => {
     <div className="flex h-full w-full items-center justify-center px-6">
       {/* Bottom-justified fixed-height stage: the input never moves while the
           tray above it grows and shrinks. */}
-      <div className="flex h-72 w-full max-w-sm flex-col justify-end">
+      <div className="flex h-72 w-full max-w-88 flex-col justify-end">
         <AnimatePresence initial={false}>
           {queue.length > 0 && (
             <motion.div
@@ -90,15 +93,49 @@ export const MessageQueue = () => {
                         onDragStart={() => setDraggingId(message.id)}
                         onDragEnd={() => setDraggingId(null)}
                         className={cn(
-                          "relative flex cursor-grab select-none items-center rounded-lg px-3 py-2",
+                          // Named group: the experiment tile wrapper is itself a bare
+                          // `.group`, so an unnamed `group-hover` would fire for the
+                          // whole dialog and reveal every row's icons at once.
+                          "group/row relative flex cursor-grab select-none items-center rounded-lg py-1.5 pl-3 pr-1.5",
                           "text-[13px] font-medium text-secondary",
-                          "transition-[background-color,box-shadow,color] duration-200",
+                          // background-color deliberately not transitioned — the
+                          // hover tint snapping in makes the rows feel fast.
+                          "transition-[box-shadow,color] duration-200",
                           !dragging && "hover:bg-interactive-hover",
                           dragging &&
                             "z-10 cursor-grabbing bg-surface text-primary shadow-ring-sm hairline-black/8 dark:hairline-white/10",
                         )}
                       >
-                        <span className="min-w-0 truncate">{message.text}</span>
+                        <span className="min-w-0 flex-1 truncate">{message.text}</span>
+                        {/* Decorative affordances only — the demo is about the
+                            queue, so they don't act and never take focus. Absolutely
+                            positioned so they're out of flow: they add no width (the
+                            text's right inset stays equal to the vertical padding) and
+                            no height (the row can't grow when they appear). `hidden`
+                            (not opacity) makes the hover toggle instant, no transition. */}
+                        <div
+                          aria-hidden
+                          className="absolute inset-y-0 right-1.5 hidden items-center gap-0.5 group-hover/row:flex"
+                        >
+                          <Button
+                            variant="tertiary"
+                            size="xs"
+                            iconOnly
+                            tabIndex={-1}
+                            className="pointer-events-none"
+                          >
+                            <IconPencil />
+                          </Button>
+                          <Button
+                            variant="tertiary"
+                            size="xs"
+                            iconOnly
+                            tabIndex={-1}
+                            className="pointer-events-none"
+                          >
+                            <IconCrossSmall />
+                          </Button>
+                        </div>
                       </Reorder.Item>
                     );
                   })}
@@ -139,7 +176,7 @@ export const MessageQueue = () => {
               transition={{ duration: 0.15, ease: "easeOut" }}
               className="grid size-5 place-items-center rounded-md bg-surface-secondary text-tertiary"
             >
-              <IconArrowCornerDownLeft className="size-3" />
+              <IconArrowCornerDownLeft className="size-3.5" />
             </motion.span>
           </div>
         </form>
