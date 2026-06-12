@@ -12,36 +12,13 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  {
-    name: "Rogo",
-    date: "2025 – 2026",
-    url: "https://rogo.ai",
-    mediaOrder: 0,
-    media: [
-      "/images/rogo/design-landing.webp",
-      "/images/rogo/description.webp",
-      "/images/rogo/open-roles.webp",
-      "/images/rogo/design-system.webp",
-      "/images/rogo/colors.webp",
-      "/images/rogo/buttons.webp",
-      "/images/rogo/dropdowns.webp",
-      "/images/rogo/loading-state.webp",
-    ],
-  },
+  { name: "Rogo", date: "2025 – 2026", url: "https://rogo.ai" },
   {
     name: "Flow",
     date: "2026",
     url: "https://flowengineering.com",
-    mediaOrder: 1,
-    media: [
-      "/images/flow/hero.webp",
-      "/images/flow/explainer.webp",
-      "/images/flow/customer.webp",
-      "/images/flow/company.webp",
-      "/images/flow/testimonials.webp",
-      "/images/flow/pricing.webp",
-      "/images/flow/open-roles.webp",
-    ],
+    mediaOrder: 0,
+    media: ["/images/flow/hero.webp", "/images/flow/company.webp"],
   },
   {
     name: "Sona",
@@ -67,7 +44,6 @@ export const PROJECTS: Project[] = [
       ["/images/sona/login.webp", "/images/sona/otp.webp", "/images/sona/otp-loading.webp"],
       "/videos/sona/hero-video.webm",
       "/images/sona/devices.webp",
-      "/images/sona/download-cta.webp",
     ],
   },
   {

@@ -2,16 +2,17 @@
   <style>
     :root { --fb: #7e9cc4; --ink: #171717; }
     @media (prefers-color-scheme: dark) { :root { --fb: #9bb4da; --ink: #ededed; } }
-    .fline  { fill: none; stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; }
+    .fline  { fill: none; stroke: var(--fb); stroke-width: 1.6; stroke-linecap: butt; stroke-linejoin: miter; }
     .farea  { fill: var(--fb); opacity: 0.14; }
     .stems  { opacity: 0.5; }
-    .stems line { stroke: var(--fb); stroke-width: 1; vector-effect: non-scaling-stroke; }
-    .farrows line { stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+    .stems line { stroke: var(--fb); stroke-width: 1; }
+    .farrows line { stroke: var(--fb); stroke-width: 1.6; }
     .fhead  { fill: var(--fb); }
-    .fmark  { fill: var(--fb); fill-opacity: 0.14; stroke: var(--fb); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
-    .imark  { fill: var(--fb); stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-linejoin: miter; }
-    .ix     { fill: none; stroke: var(--ink); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
-    .axis   { fill: none; stroke: var(--ink); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+    /* The mark sits in a scale(2.5) group: 0.64 × 2.5 = 1.6, matching the arrows. */
+    .fmark  { fill: var(--fb); fill-opacity: 0.14; stroke: var(--fb); stroke-width: 0.64; stroke-linejoin: round; stroke-linecap: round; }
+    .imark  { fill: var(--fb); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: miter; }
+    .ix     { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+    .axis   { fill: none; stroke: var(--ink); stroke-width: 1.3; }
   </style>
 
   <g class="farrows">

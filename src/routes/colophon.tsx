@@ -166,16 +166,11 @@ function ColophonPage() {
             )}
           >
             <Body1>
-              Many elements are self-created for practice purposes. Obviously,{" "}
-              <Link href="https://ui.shadcn.com/" target="_blank">
-                shadcn/ui
-              </Link>{" "}
-              or{" "}
+              Using{" "}
               <Link href="https://base-ui.com/" target="_blank">
                 Base UI
               </Link>{" "}
-              is a good starting point if you want to create custom components and a big
-              inspiration.
+              for this portfolio.
             </Body1>
           </div>
         </div>
