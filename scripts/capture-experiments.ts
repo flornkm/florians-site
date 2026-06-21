@@ -60,7 +60,6 @@ const SLUGS: Record<string, number> = {
   "crt-terminal": 2500, // typing animation
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
-  "message-queue": 1000, // queue starts empty — poster is the resting input
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
@@ -76,41 +75,8 @@ const CLICKS: Record<string, string> = {
 };
 
 // Optional interaction to stage a slug right before the shot (after the settle
-// wait, so the queued rows are still well inside their 5s lifetime) — the live
-// demo is untouched. message-queue starts empty and bottom-anchors its stage,
-// which reads as a lone off-center input in a poster crop, so queue a few rows
-// and center the stage for the capture only.
-const PREPARE: Record<string, (dialog: Locator, page: Page) => Promise<void>> = {
-  "message-queue": async (dialog, page) => {
-    const input = dialog.locator("input");
-    const rows = [
-      "Summarize the design review",
-      "Draft tomorrow's changelog",
-      "Reply to the launch thread",
-    ];
-    for (const text of rows) {
-      await input.fill(text);
-      await input.press("Enter");
-    }
-    await page.evaluate(() => {
-      const form = document.querySelector<HTMLElement>('[data-experiment-tile="open"] form');
-      const stage = form?.parentElement;
-      if (stage) stage.style.justifyContent = "center";
-      // The capture strips the dialog's white bg, so the grid tile's #fafafa shows
-      // through — the same value as the light tray, which would erase its shape.
-      // One step down the grey ramp keeps the live demo's 5-unit delta. (The dark
-      // tray is white-alpha and already composites correctly over the dark tile.)
-      const tray = document.querySelector<HTMLElement>(
-        '[data-experiment-tile="open"] ul',
-      )?.parentElement;
-      const dark = matchMedia("(prefers-color-scheme: dark)").matches;
-      if (tray && !dark) tray.style.background = "#f5f5f5";
-      // Drop focus so the poster has no blinking caret next to the placeholder.
-      (document.activeElement as HTMLElement | null)?.blur();
-    });
-    await page.waitForTimeout(900); // tray spring settles
-  },
-};
+// wait) — the live demo is untouched.
+const PREPARE: Record<string, (dialog: Locator, page: Page) => Promise<void>> = {};
 
 // Capture every slug in one color scheme. `suffix` is appended to the output name
 // ("" for light, "-dark" for dark) so the grid can pick the file by media query. The
