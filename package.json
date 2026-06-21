@@ -11,7 +11,7 @@
     "lint:fix": "oxlint --fix -D correctness -D perf --import-plugin --jsx-a11y-plugin src/",
     "format": "oxfmt --write 'src/**' '*.json' '*.ts'",
     "format:check": "oxfmt --check 'src/**' '*.json' '*.ts'",
-    "install-icons": "dotenv -- bun add central-icons@npm:@central-icons-react/square-outlined-radius-0-stroke-2 central-icons-filled@npm:@central-icons-react/square-filled-radius-0-stroke-2"
+    "install-icons": "dotenv -- bun add central-icons@npm:@central-icons-react/round-outlined-radius-1-stroke-2 central-icons-filled@npm:@central-icons-react/round-filled-radius-1-stroke-2"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.30",
@@ -30,8 +30,8 @@
     "@vercel/og": "^0.8.5",
     "@vitejs/plugin-react": "^4.7.0",
     "ai": "^5.0.44",
-    "central-icons": "npm:@central-icons-react/square-outlined-radius-0-stroke-2@^0.0.36",
-    "central-icons-filled": "npm:@central-icons-react/square-filled-radius-0-stroke-2@^0.0.36",
+    "central-icons": "npm:@central-icons-react/round-outlined-radius-1-stroke-2@^0.0.36",
+    "central-icons-filled": "npm:@central-icons-react/round-filled-radius-1-stroke-2@^0.0.36",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.21",
