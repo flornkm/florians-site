@@ -4,7 +4,7 @@ export const proseVariants = cva("text-tertiary", {
   variants: {
     variant: {
       default: [
-        "prose max-w-none mb-8 font-[450] [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
+        "prose max-w-none mb-8 font-[430] [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
         "prose-p:text-primary prose-p:text-sm prose-p:leading-relaxed",
         "prose-li:text-primary prose-li:text-sm prose-li:leading-relaxed prose-li:marker:text-quaternary/50",
         "prose-h1:text-primary prose-h1:text-base prose-h1:font-[550] prose-h1:scroll-mt-20",

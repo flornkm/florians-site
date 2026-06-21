@@ -2,19 +2,28 @@ import { Body2 } from "@/components/design-system/body";
 import { H3 } from "@/components/design-system/heading";
 import { Link } from "@/components/ui/link";
 import { PostIcon } from "@/features/writing/components/post-icon";
+import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent } from "@/lib/mdx";
 import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 
-type WritingListItem = { slug: string; title: string; date: string };
+type WritingListItem = { slug: string; title: string; date: string; type: string };
 
 const getWritingItems = createServerFn().handler(async (): Promise<WritingListItem[]> => {
   const items = await getContent("writing");
-  return items.map((item) => ({
+  const newestRunDate = await fetchNewestRunDate();
+
+  const list = items.map((item) => ({
     slug: item.slug,
     title: String(item.title ?? item.slug),
-    date: String(item.date ?? ""),
+    type: String(item.type ?? ""),
+    // Live posts (e.g. runs) carry no frontmatter date — they take the newest run's date.
+    date: item.type === "live" && newestRunDate ? newestRunDate : String(item.date ?? ""),
   }));
+
+  // Newest first, so the live "runs" post moves with its latest run.
+  list.sort((a, b) => b.date.localeCompare(a.date));
+  return list;
 });
 
 export const Route = createFileRoute("/writing/")({
@@ -73,18 +82,25 @@ function groupByYear(items: WritingListItem[]) {
 
 function WritingPage() {
   const items = Route.useLoaderData();
-  const groups = groupByYear(items);
+  const liveItems = items.filter((item) => item.type === "live");
+  const datedItems = items.filter((item) => item.type !== "live");
+
+  // "Live" section first, then the usual year groups.
+  const sections = [
+    ...(liveItems.length > 0 ? [{ label: "Live", items: liveItems }] : []),
+    ...groupByYear(datedItems).map((group) => ({ label: group.year, items: group.items })),
+  ];
 
   return (
     <div className="flex flex-col gap-12">
-      {groups.map((group) => (
-        <section key={group.year} className="md:grid md:grid-cols-9 md:gap-x-6">
+      {sections.map((section) => (
+        <section key={section.label} className="md:grid md:grid-cols-9 md:gap-x-6">
           <div className="flex flex-col gap-3 md:col-start-1 md:col-span-7">
-            <H3 className="text-tertiary">{group.year}</H3>
+            <H3 className="text-tertiary">{section.label}</H3>
             <div className="border-t border-primary" />
           </div>
           <div className="mt-4 flex flex-col md:col-start-3 md:col-span-5">
-            {group.items.map((item) => (
+            {section.items.map((item) => (
               <Link
                 key={item.slug}
                 href={`/writing/${item.slug}`}

@@ -2,6 +2,7 @@ import { H1 } from "@/components/design-system/heading";
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { Link } from "@/components/ui/link";
 import { resolvePostIcon } from "@/features/writing/lib/post-icon";
+import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { toStandaloneSvg } from "@/features/writing/lib/icon-svg";
 import { getContent, isWritingEntry, type WritingEntry } from "@/lib/mdx";
 import { createFileRoute, notFound } from "@tanstack/react-router";
@@ -30,6 +31,13 @@ const getWritingItem = createServerFn({ method: "GET" })
         ? item.collaborators.split(",").map((c: string) => c.trim())
         : item.collaborators || [];
 
+    // Live posts (e.g. runs) carry no frontmatter date — they show their newest synced run's date.
+    let date = typeof item.date === "string" ? item.date : "";
+    if (item.type === "live") {
+      const newestRunDate = await fetchNewestRunDate();
+      if (newestRunDate) date = newestRunDate;
+    }
+
     // Pre-render the mark so the OG card shows the same icon as the grid.
     const iconSvg = toStandaloneSvg(resolvePostIcon(item.slug), 200);
     const icon = Buffer.from(iconSvg).toString("base64");
@@ -39,7 +47,7 @@ const getWritingItem = createServerFn({ method: "GET" })
       title: item.title,
       description: item.description,
       type: item.type,
-      date: typeof item.date === "string" ? item.date : "",
+      date,
       collaborators,
       icon,
     };
@@ -79,6 +87,7 @@ function WritingDetailPage() {
   );
   const parsedDate = dayjs(item.date);
   const formattedDate = item.date && parsedDate.isValid() ? parsedDate.format("MMMM D, YYYY") : "";
+  const dateLabel = item.type === "live" ? `Last update: ${formattedDate}` : formattedDate;
 
   if (!content) {
     return <div>Content not found</div>;
@@ -112,7 +121,7 @@ function WritingDetailPage() {
           </div>
           <header className="mb-8 md:-mt-7 md:mb-10">
             <H1 className="text-sm">{item.title}</H1>
-            {formattedDate && <p className="mt-1.5 text-sm text-tertiary">{formattedDate}</p>}
+            {formattedDate && <p className="mt-1.5 text-sm text-tertiary">{dateLabel}</p>}
           </header>
           <div className="pb-16 md:pb-24">{content}</div>
         </div>

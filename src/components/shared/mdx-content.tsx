@@ -4,6 +4,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { ComponentType, ReactNode, useMemo, useState } from "react";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { videoManifest } from "@/videoMap.gen";
+import { RunsFeed } from "@/features/writing/components/runs-feed";
 import { ModelViewer } from "../3d/model-viewer";
 import { FigureImage } from "./figure-image";
 import { Image } from "./image";
@@ -237,6 +238,7 @@ export const mdxComponents = {
   ModelViewer,
   SmartVideo,
   MobileImages,
+  Runs: RunsFeed,
 };
 
 // import.meta.glob must be at module level.
