@@ -45,6 +45,7 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
+  "drawer-drag": 1500, // two floating drawers slide in + the photo decodes
   "scrollbar-gutter": 1000, // land on the fully-typed / scrollbar-visible frame
   "shadow-ring": 1200, // spring settles
   copy: 1200,

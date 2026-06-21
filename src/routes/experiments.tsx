@@ -1,6 +1,7 @@
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
+import { DragImageDrawer } from "@/features/experiments/components/drag-image-drawer-demo";
 import { FigmaSelect } from "@/features/experiments/components/figma-select-demo";
 import { FontSmoothing } from "@/features/experiments/components/font-smoothing-demo";
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
@@ -52,6 +53,7 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("drawer-drag", "Drawer", "Base UI", DragImageDrawer),
   experiment("message-queue", "Message Queue", "Queue", MessageQueue),
   experiment("shadow-ring", "Shadow Ring", "Shadow", ShadowRing),
   experiment("scrollbar-gutter", "Scrollbar Gutter", "Layout", ScrollbarGutter),
