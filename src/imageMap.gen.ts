@@ -46,6 +46,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/companies/snaptrude.svg": { width: 1767, height: 512, thumbhash: null },
   "/images/companies/superpower-logo.svg": { width: 450, height: 72, thumbhash: null },
   "/images/earth-texture.jpg": { width: 2560, height: 1280, thumbhash: "rWYFFIZ4h2eBd4h/d4gTf21V+A==" },
+  "/images/experiments/drawer-photo.webp": { width: 800, height: 982, thumbhash: "nBgONgxnhgeFh1d6h3mXd4eGWFCSByQ=" },
   "/images/experiments/frosted-camera-dark.webp": { width: 2048, height: 1575, thumbhash: "0PeBBIAjtwiHeIqD9xqVb1N2gYd3CMiHCQ==" },
   "/images/experiments/frosted-camera-grey.webp": { width: 2048, height: 1575, thumbhash: "4veFBIAktwiId4l0h2/H+nV9gXeHCMiHCQ==" },
   "/images/experiments/frosted-camera-light.webp": { width: 2048, height: 1575, thumbhash: "7feFBIAjtwiIeIl0t1/G93iMcYd3CMiHCQ==" },

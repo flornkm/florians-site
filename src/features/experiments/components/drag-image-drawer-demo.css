@@ -1,0 +1,71 @@
+/* A contained, floating Base UI Drawer used by the drag-image-drawer experiment.
+   Same swipe/snap contract as experiment-drawer.css, but scoped to its frame: the
+   parts are portalled into a `position: relative` container and positioned absolutely
+   instead of fixed, and the popup floats with padding to every edge (rounded all
+   corners) rather than sitting flush at the bottom. */
+
+.dragdrawer__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.04);
+  /* Fades proportionally as the sheet is swiped away. */
+  opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  transition: opacity 0.4s ease;
+}
+.dragdrawer__backdrop[data-starting-style],
+.dragdrawer__backdrop[data-ending-style] {
+  opacity: 0;
+}
+.dragdrawer__backdrop[data-swiping] {
+  transition-duration: 0ms;
+}
+
+.dragdrawer__viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  /* The floating inset — padding to every edge. Concentric with the frame's
+     rounded-3xl (24px): 24px − 8px padding = the popup's 16px radius. */
+  padding: 0.5rem;
+  /* pointer-events is left to Base UI, which spreads the swipe pointer handlers on
+     this element and toggles it to `none` only while closed. Forcing `none` here
+     would swallow every pointerdown and the drawer could never be swiped. */
+}
+
+.dragdrawer__popup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: var(--surface);
+  box-shadow: var(--shadow-ring-lg);
+  /* Claim the vertical gesture so the browser doesn't treat the drag as a scroll. */
+  touch-action: none;
+  transform: translateY(
+    calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px))
+  );
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+.dragdrawer__popup[data-starting-style],
+.dragdrawer__popup[data-ending-style] {
+  /* Clear the popup AND the viewport's bottom padding so it fully leaves the frame. */
+  transform: translateY(calc(100% + 0.5rem));
+}
+.dragdrawer__popup[data-swiping] {
+  transition-duration: 0ms;
+}
+.dragdrawer__popup[data-ending-style] {
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * 400ms);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dragdrawer__popup {
+    background-color: var(--color-neutral-900);
+  }
+}
