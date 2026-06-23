@@ -6,70 +6,10 @@ export interface VideoManifestEntry {
 }
 
 export const videoManifest: Record<string, VideoManifestEntry> = {
-  "/videos/animated-icons-bottomtabs.webm": {
-    width: 1436,
-    height: 1080,
-    thumbhash: "NggODYL4N4iGeYeHeKdXeQiNh8Bo",
-  },
-  "/videos/boost-device.mp4": {
-    width: 1280,
-    height: 720,
-    thumbhash: "HggGDIL0mVqYdHV6hnQocJMCRw==",
-  },
-  "/videos/bouncy-slider-sona.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "PggCBYDIh3d4h4d/hHeIgQAAAAAA",
-  },
-  "/videos/floating-menu-react-native.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "OggKBYL3OId4h3iHeKZoiwd9dtBn",
-  },
-  "/videos/inlang-badge.webm": {
-    width: 2488,
-    height: 1470,
-    thumbhash: "/fcBBIDA6a3LNkVTdJW4msD/Rg==",
-  },
-  "/videos/inlang-install.webm": {
-    width: 3420,
-    height: 1958,
-    thumbhash: "+/cBBID16rl6o2qZd5fnj3n9qA==",
-  },
-  "/videos/inlang-installer.mp4": {
-    width: 1668,
-    height: 1080,
-    thumbhash: "/vcBBYD2S3R2iHefUatYc/eHf2/4",
-  },
-  "/videos/personalized-micro-interaction.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "okkOJYZYh6eAd4d1i2enhtiPePyH",
-  },
-  "/videos/pixelated-water.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "4VUFHYh0dneQeXiZh4d4eKaPefqY",
-  },
-  "/videos/powder_machine.webm": {
+  "/videos/flow/company.webm": {
     width: 1920,
-    height: 1080,
-    thumbhash: "KAgODIAMXHiMh4d0eIq+r7f2SQ==",
-  },
-  "/videos/rive_swift.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "+wcGBYD4R3h7hXmEe4V3iOePAgAA",
-  },
-  "/videos/rive_swift_sona.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "+wcGBYD4R3h7hXmEe4V3iOePAgAA",
-  },
-  "/videos/sigma-camera.webm": {
-    width: 1440,
-    height: 1080,
-    thumbhash: "KAgaBYDEiZmId3ivdod3iHA+BOhD",
+    height: 1144,
+    thumbhash: "r/cRFICWiYaMdpeKd4B3cAIL1w==",
   },
   "/videos/sona/hero-video.webm": {
     width: 2520,

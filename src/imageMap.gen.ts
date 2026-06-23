@@ -56,76 +56,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     height: 1080,
     thumbhash: "3RgCBgBNdpmleUdWZm9ZmNaHX0b0ZVQ=",
   },
-  "/images/apps/app_chatgpt.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "MggOBwD4p4h3eIiPdnV3p1eICAAAAAAA",
-  },
-  "/images/apps/app_cron.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "W0wHDwKijIi2WXqaZ/h0mnmI2W/V7zYL",
-  },
-  "/images/apps/app_family.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "KyYJDwR4Bzd4h4d3dYpoB6eFgvRnGH8D",
-  },
-  "/images/apps/app_flighty.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "z/cJBwAHiad7h3iAfWaYd2h4igz4mIMP",
-  },
-  "/images/apps/app_github.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "0vcJBwAnCJeJdomAd36XKNiFepIIJ4kA",
-  },
-  "/images/apps/app_messages.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "KSkRHxIoZ4h8iHeAeol4h5eHeW34KHkA",
-  },
-  "/images/apps/app_notion.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "LQgOBwDV2Nt4h4ifd4aIt3eICgAAAAAA",
-  },
-  "/images/apps/app_popcorn.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "L/gJDwKW+PeJh4eJfHWH+FeHv5DkgJwH",
-  },
-  "/images/apps/app_spotify.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "TngJDw4HSGh3iHhxh5t4N8iHdnAX+IgO",
-  },
-  "/images/apps/app_superpower.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "CwgSBwAHmKiHeIiCe4iHWJiHCgAAAAAA",
-  },
-  "/images/apps/app_uber.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "BQgKBwBYZ4iHeIhwiol32GeGBAAAAAAA",
-  },
-  "/images/apps/app_x.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "CPgJBwAIiKeHeIeCjIaGWYh3imDm+KcD",
-  },
-  "/images/avatars/anton_stallboerger.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "LRgSDwTIiId/eIaCh+lnZ2iJiHBICIYE",
-  },
-  "/images/avatars/felix_haeberle.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "49cZFwbIiIePdnZ2h1eImId4hwGWF3AJ",
-  },
   "/images/avatars/florian_kiem.jpg": {
     width: 1250,
     height: 1250,
@@ -136,52 +66,12 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     height: 1250,
     thumbhash: "1yiKDQI3OMZ7iXC6ZzeMcLMICJeDd3lKhw==",
   },
-  "/images/avatars/jan_johannes.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "l9kJJwSgp3Zeh3Z0eKdoh4h6JvlWH6EI",
-  },
-  "/images/avatars/jannes_blobel.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "bwgKDwb4OHiAioeMdXl3iGaIOPQnCIkG",
-  },
-  "/images/avatars/niklas_buchfink.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "IQgODwTteXhveHRyl6lol3eIiJAoCIgC",
-  },
-  "/images/avatars/nils_eller.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "EwgKDwSaqFiPeHZhh7aIqHh2iXAnBnYE",
-  },
-  "/images/avatars/nils_jacobsen.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "3hgKJwYCiKtkmnd4lrl4iVh5CKWGUHoH",
-  },
-  "/images/avatars/samuel_stroschein.jpg": {
-    width: 384,
-    height: 384,
-    thumbhash: "3vcJDwQHknlvpYd8N4hHmYeaVmCzBkUJ",
-  },
-  "/images/avatars/superpower_team.jpg": {
-    width: 256,
-    height: 256,
-    thumbhash: "zgeSBQAPB4iHeIOKR+eDj8EHBxd4eHCAFw==",
-  },
   "/images/companies/dash0-logo.svg": { width: 420, height: 80, thumbhash: null },
   "/images/companies/kalshi-logo.svg": { width: 300, height: 79, thumbhash: null },
   "/images/companies/morphic-logo.svg": { width: 450, height: 112, thumbhash: null },
   "/images/companies/opral-logo.svg": { width: 300, height: 117, thumbhash: null },
   "/images/companies/snaptrude.svg": { width: 1767, height: 512, thumbhash: null },
   "/images/companies/superpower-logo.svg": { width: 450, height: 72, thumbhash: null },
-  "/images/earth-texture.jpg": {
-    width: 2560,
-    height: 1280,
-    thumbhash: "rWYFFIZ4h2eBd4h/d4gTf21V+A==",
-  },
   "/images/experiments/drawer-photo.webp": {
     width: 800,
     height: 982,
@@ -213,103 +103,16 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     thumbhash: "3oyGJQgs+Yd4iHVzp/h4h3IHCFiId3CDWA==",
   },
   "/images/florian-mono.svg": { width: 100, height: 100, thumbhash: null },
-  "/images/flow/company.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "9PcRBIB2h5h2d4iPiIufld1X+A==",
-  },
-  "/images/flow/customer.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "UecJFIJwZXd1h4iHiHdvhPhWmA==",
-  },
-  "/images/flow/explainer.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "/vcBBICE941kh4qKl3fbd79t9w==",
-  },
   "/images/flow/hero.webp": {
     width: 5040,
     height: 3000,
     thumbhash: "KggWFIB4hZh/mHd3iISHgFMJOA==",
-  },
-  "/images/flow/open-roles.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "OwgKDIBg2r1Cl6qZebyf3vjofA==",
-  },
-  "/images/flow/pricing.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "/vcBBIDVpqlnc61gimb4joHvCA==",
-  },
-  "/images/flow/testimonials.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "JAgOBIDH+Lh/hYeOeJqHWABiGg==",
   },
   "/images/icons/favicon-dark.svg": { width: 16, height: 16, thumbhash: null },
   "/images/icons/favicon.svg": { width: 16, height: 16, thumbhash: null },
   "/images/institutions/hfg-logo.svg": { width: 620, height: 200, thumbhash: null },
   "/images/institutions/tudelft-logo.svg": { width: 600, height: 201, thumbhash: null },
   "/images/maya-mono.svg": { width: 100, height: 100, thumbhash: null },
-  "/images/misc/macos-cursor.svg": { width: 32, height: 32, thumbhash: null },
-  "/images/misc/macos-pointer-cursor.svg": { width: 32, height: 33, thumbhash: null },
-  "/images/og-background.png": {
-    width: 1200,
-    height: 630,
-    thumbhash: "AAiCA4ABAAAAAAAAAAAAAJ+ZIHWXulk=",
-  },
-  "/images/readme-banner.png": {
-    width: 2400,
-    height: 1260,
-    thumbhash: "DgiCA4AS3agwZpwAAAAAACp4anSBDFg=",
-  },
-  "/images/references/lovers-magazine-preview.webp": {
-    width: 595,
-    height: 842,
-    thumbhash: "JwgODQKm2FiYJ4j3eXtnmViPdvVK",
-  },
-  "/images/rogo/buttons.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "PfgBBID1W3V5hnmIZ4kHeDT6Zw==",
-  },
-  "/images/rogo/colors.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "/gcCBIDS31iIZ5d2iHXvVHpwiA==",
-  },
-  "/images/rogo/description.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "fggCBID3KbZyjXR3iIoHfbgPSw==",
-  },
-  "/images/rogo/design-landing.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "NfgRBID4R4h4h3h8hIf3eIyP2A==",
-  },
-  "/images/rogo/design-system.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "PvgBBID2eZd3iIh7hHcfZYRr+A==",
-  },
-  "/images/rogo/dropdowns.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "PggCBID2WqeId4mKdYMMeqhQVg==",
-  },
-  "/images/rogo/loading-state.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "PvgBBID4F8h4h3h/gIcHd7CP+A==",
-  },
-  "/images/rogo/open-roles.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "fggCBID3KaV2inWJd4gHiYO/xw==",
-  },
   "/images/slack.png": {
     width: 512,
     height: 512,
@@ -324,11 +127,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     width: 5040,
     height: 3000,
     thumbhash: "+QcKBIDHd3iPh3dzhozxulogGQ==",
-  },
-  "/images/sona/download-cta.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "OwgKBICXiXePd4eBd31CT0vxow==",
   },
   "/images/sona/export.webp": {
     width: 1380,
@@ -514,11 +312,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     width: 5040,
     height: 3000,
     thumbhash: "/fcFBIDFJYhxjHaBjXCmm0+j+g==",
-  },
-  "/images/writing/ai-evolution.webp": {
-    width: 1200,
-    height: 630,
-    thumbhash: "PfgBBICYqdS+d3dvZUVoQGD5qg==",
   },
   "/images/writing/code-from-all-sides.svg": { width: 600, height: 270, thumbhash: null },
   "/images/writing/cost-of-software.svg": { width: 600, height: 210, thumbhash: null },

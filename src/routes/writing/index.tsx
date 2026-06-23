@@ -4,30 +4,35 @@ import { Link } from "@/components/ui/link";
 import { PostIcon } from "@/features/writing/components/post-icon";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent } from "@/lib/mdx";
-import { createFileRoute } from "@tanstack/react-router";
+import { Await, createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import { Suspense } from "react";
 
 type WritingListItem = { slug: string; title: string; date: string; type: string };
 
-const getWritingItems = createServerFn().handler(async (): Promise<WritingListItem[]> => {
-  const items = await getContent("writing");
-  const newestRunDate = await fetchNewestRunDate();
-
-  const list = items.map((item) => ({
+const getWritingItems = createServerFn().handler((): WritingListItem[] => {
+  const list = getContent("writing").map((item) => ({
     slug: item.slug,
     title: String(item.title ?? item.slug),
     type: String(item.type ?? ""),
-    // Live posts (e.g. runs) carry no frontmatter date — they take the newest run's date.
-    date: item.type === "live" && newestRunDate ? newestRunDate : String(item.date ?? ""),
+    date: String(item.date ?? ""),
   }));
 
-  // Newest first, so the live "runs" post moves with its latest run.
+  // Newest first. Live posts (e.g. runs) carry no frontmatter date so they sort last,
+  // but render in their own "Live" section first regardless of position.
   list.sort((a, b) => b.date.localeCompare(a.date));
   return list;
 });
 
+// Server-only Firebase read. Kept separate and deferred so the writing list never
+// blocks navigation on it — the run's date streams in after the page renders.
+const getNewestRunDate = createServerFn().handler(() => fetchNewestRunDate());
+
 export const Route = createFileRoute("/writing/")({
-  loader: () => getWritingItems(),
+  loader: async () => ({
+    items: await getWritingItems(),
+    newestRunDate: getNewestRunDate(),
+  }),
   head: () => ({
     meta: [
       { title: "Writing ‹ Florian Design Engineer" },
@@ -80,8 +85,39 @@ function groupByYear(items: WritingListItem[]) {
   return groups;
 }
 
+function PostDateSkeleton() {
+  // h-5 matches Body2's text-sm line box so the date resolving in causes no shift.
+  return (
+    <div className="flex h-5 items-center">
+      <div className="h-3.5 w-24 animate-pulse rounded-sm bg-tertiary" />
+    </div>
+  );
+}
+
+function PostDate({
+  item,
+  newestRunDate,
+}: {
+  item: WritingListItem;
+  newestRunDate: Promise<string | null>;
+}) {
+  if (item.type !== "live") {
+    return <Body2 className="text-tertiary">{formatDate(item.date)}</Body2>;
+  }
+
+  // Live "runs" date comes from Firebase via a deferred promise; show a skeleton
+  // until it streams in.
+  return (
+    <Suspense fallback={<PostDateSkeleton />}>
+      <Await promise={newestRunDate}>
+        {(runDate) => <Body2 className="text-tertiary">{formatDate(runDate ?? item.date)}</Body2>}
+      </Await>
+    </Suspense>
+  );
+}
+
 function WritingPage() {
-  const items = Route.useLoaderData();
+  const { items, newestRunDate } = Route.useLoaderData();
   const liveItems = items.filter((item) => item.type === "live");
   const datedItems = items.filter((item) => item.type !== "live");
 
@@ -111,7 +147,7 @@ function WritingPage() {
                 </div>
                 <div className="flex min-w-0 flex-col gap-0.5">
                   <H3>{item.title}</H3>
-                  <Body2 className="text-tertiary">{formatDate(item.date)}</Body2>
+                  <PostDate item={item} newestRunDate={newestRunDate} />
                 </div>
               </Link>
             ))}
