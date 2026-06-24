@@ -10,7 +10,10 @@ import { Suspense } from "react";
 
 type WritingListItem = { slug: string; title: string; date: string; type: string };
 
-const getWritingItems = createServerFn().handler((): WritingListItem[] => {
+// Plain (non-server) function: getContent reads from a bundled eager glob, so it runs on
+// the client too. Wrapping it in createServerFn would force an RPC round-trip on every
+// client-side navigation — the reason /writing felt slow to open.
+function getWritingItems(): WritingListItem[] {
   const list = getContent("writing").map((item) => ({
     slug: item.slug,
     title: String(item.title ?? item.slug),
@@ -22,15 +25,15 @@ const getWritingItems = createServerFn().handler((): WritingListItem[] => {
   // but render in their own "Live" section first regardless of position.
   list.sort((a, b) => b.date.localeCompare(a.date));
   return list;
-});
+}
 
 // Server-only Firebase read. Kept separate and deferred so the writing list never
 // blocks navigation on it — the run's date streams in after the page renders.
 const getNewestRunDate = createServerFn().handler(() => fetchNewestRunDate());
 
 export const Route = createFileRoute("/writing/")({
-  loader: async () => ({
-    items: await getWritingItems(),
+  loader: () => ({
+    items: getWritingItems(),
     newestRunDate: getNewestRunDate(),
   }),
   head: () => ({
