@@ -10,7 +10,7 @@ import { videoManifest } from "@/videoMap.gen";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import { motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const isVideo = (src: string) => /\.(webm|mp4)$/i.test(src);
 
@@ -60,13 +60,41 @@ function WideImage({ src, alt }: { src: string; alt: string }) {
 }
 
 function WorkVideo({ src, alt }: { src: string; alt: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
   const [ready, setReady] = useState(false);
   const entry = videoManifest[src];
   const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
-  const isWebm = /\.webm$/i.test(src);
+
+  // Codec fallback: Chrome/Firefox decode the webm, Safari/iOS need the mp4. The
+  // manifest lists every file under public/videos, so a sibling's presence there
+  // tells us which sources actually exist before we advertise them.
+  const webmPath = src.replace(/\.mp4$/i, ".webm");
+  const mp4Path = src.replace(/\.webm$/i, ".mp4");
+  const webm = webmPath in videoManifest ? webmPath : undefined;
+  const mp4 = mp4Path in videoManifest ? mp4Path : undefined;
+
+  // Start fetching once the clip is within a viewport of being visible, so it has
+  // buffered by the time it scrolls in. Muted autoplay videos otherwise only begin
+  // loading on reaching the viewport and visibly pop in late.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setActive(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100% 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="bg-image-card p-4 md:p-12">
+    <div ref={containerRef} className="bg-image-card p-4 md:p-12">
       <div
         className="relative w-full overflow-hidden rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
         style={entry ? { aspectRatio: `${entry.width} / ${entry.height}` } : undefined}
@@ -84,17 +112,20 @@ function WorkVideo({ src, alt }: { src: string; alt: string }) {
             }}
           />
         )}
-        <SmartVideo
-          webm={isWebm ? src : undefined}
-          mp4={isWebm ? undefined : src}
-          aria-label={alt}
-          className={cn(
-            "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out",
-            ready ? "opacity-100" : "opacity-0",
-          )}
-          onCanPlay={() => setReady(true)}
-          onLoadedData={() => setReady(true)}
-        />
+        {active && (
+          <SmartVideo
+            webm={webm}
+            mp4={mp4}
+            preload="auto"
+            aria-label={alt}
+            className={cn(
+              "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out",
+              ready ? "opacity-100" : "opacity-0",
+            )}
+            onCanPlay={() => setReady(true)}
+            onLoadedData={() => setReady(true)}
+          />
+        )}
       </div>
     </div>
   );
