@@ -102,7 +102,8 @@ async function renderRenditions(
   publicPath: string,
   sourceWidth: number,
 ): Promise<number[]> {
-  const targets = RENDITION_WIDTHS.filter((w) => w < sourceWidth);
+  // Only widths that are a real downscale — a rendition ~equal to the source is just a bigger re-encode.
+  const targets = RENDITION_WIDTHS.filter((w) => w <= sourceWidth * 0.9);
   await Promise.all(
     targets.map(async (w) => {
       const outPath = path.join(PUBLIC_DIR, renditionRelPath(publicPath, w));
