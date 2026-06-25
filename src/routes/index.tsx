@@ -53,6 +53,7 @@ function WideImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         objectFit="contain"
+        sizes="(min-width: 2000px) 980px, (min-width: 768px) 55vw, 92vw"
         className="h-auto w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
       />
     </div>
@@ -140,6 +141,7 @@ function MobileRow({ images, alt }: { images: string[]; alt: string }) {
             src={src}
             alt={alt}
             objectFit="contain"
+            sizes="(min-width: 768px) 320px, 30vw"
             className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
           />
         </div>

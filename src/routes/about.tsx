@@ -119,7 +119,7 @@ function AboutPage() {
               alt={photo.caption}
               objectFit="cover"
               priority={index < 2}
-              className="h-auto w-full outline -outline-offset-1 outline-black/5 dark:outline-white/[0.075]"
+              className="h-auto w-full"
             />
             <figcaption className="mt-2 font-serif font-normal text-[10px] italic text-primary">
               {photo.caption}

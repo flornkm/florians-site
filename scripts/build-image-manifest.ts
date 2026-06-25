@@ -1,12 +1,16 @@
 // Emits src/imageMap.gen.ts with image dimensions + a ThumbHash so <Image> avoids layout shift and shows a blur-up.
+// Also pre-renders sharpened, display-sized WebP renditions into public/_gen so <Image> can serve a srcset matched
+// to the device — a 5040px source downscaled ~5x in the browser looks soft, especially on fine UI text.
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 import { rgbaToThumbHash } from "thumbhash";
+import { renditionRelPath, RENDITION_WIDTHS } from "../src/lib/rendition";
 
 const ROOT = path.resolve(import.meta.dirname!, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const IMAGES_DIR = path.join(PUBLIC_DIR, "images");
+const GEN_DIR = path.join(PUBLIC_DIR, "_gen");
 const OUTPUT_PATH = path.join(ROOT, "src/imageMap.gen.ts");
 
 const RASTER = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
@@ -16,6 +20,7 @@ interface Entry {
   width: number;
   height: number;
   thumbhash: string | null;
+  widths?: number[];
 }
 
 function parseSvgDimensions(source: string): { width: number; height: number } | null {
@@ -82,7 +87,34 @@ async function processImage(absPath: string): Promise<[string, Entry] | null> {
   const hash = rgbaToThumbHash(info.width, info.height, data);
   const thumbhash = Buffer.from(hash).toString("base64");
 
-  return [publicPath, { width: meta.width, height: meta.height, thumbhash }];
+  const widths = await renderRenditions(absPath, publicPath, meta.width);
+
+  return [
+    publicPath,
+    { width: meta.width, height: meta.height, thumbhash, ...(widths.length ? { widths } : {}) },
+  ];
+}
+
+// Lanczos downscale + a light unsharp recovers the crispness the browser's fast downscaler loses, and re-spends
+// the byte budget on the pixels actually shown (a 15MP source at ~0.08 bits/px vs ~0.6 at display size).
+async function renderRenditions(
+  absPath: string,
+  publicPath: string,
+  sourceWidth: number,
+): Promise<number[]> {
+  const targets = RENDITION_WIDTHS.filter((w) => w < sourceWidth);
+  await Promise.all(
+    targets.map(async (w) => {
+      const outPath = path.join(PUBLIC_DIR, renditionRelPath(publicPath, w));
+      fs.mkdirSync(path.dirname(outPath), { recursive: true });
+      await sharp(absPath)
+        .resize({ width: w, kernel: "lanczos3" })
+        .sharpen({ sigma: 0.6 })
+        .webp({ quality: 80, effort: 5 })
+        .toFile(outPath);
+    }),
+  );
+  return targets;
 }
 
 async function main() {
@@ -90,6 +122,9 @@ async function main() {
     console.warn(`[image-manifest] ${IMAGES_DIR} does not exist, skipping`);
     return;
   }
+
+  // Wipe so removed/renamed sources never leave orphan renditions behind; the tree is rebuilt below.
+  fs.rmSync(GEN_DIR, { recursive: true, force: true });
 
   const files = walk(IMAGES_DIR);
   const entries = await Promise.all(files.map(processImage));
@@ -101,9 +136,10 @@ async function main() {
   const sorted = Object.keys(manifest).sort();
   const body = sorted
     .map((k) => {
-      const { width, height, thumbhash } = manifest[k];
+      const { width, height, thumbhash, widths } = manifest[k];
       const hash = thumbhash === null ? "null" : JSON.stringify(thumbhash);
-      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, thumbhash: ${hash} },`;
+      const widthsField = widths?.length ? `, widths: [${widths.join(", ")}]` : "";
+      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, thumbhash: ${hash}${widthsField} },`;
     })
     .join("\n");
 
@@ -112,6 +148,7 @@ export interface ImageManifestEntry {
   width: number;
   height: number;
   thumbhash: string | null;
+  widths?: number[];
 }
 
 export const imageManifest: Record<string, ImageManifestEntry> = {
