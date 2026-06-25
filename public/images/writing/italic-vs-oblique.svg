@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 230" width="600" height="230" role="img" aria-label="The same lowercase a shown three ways: upright roman, a true italic with redrawn shapes, and an oblique which is the roman slanted.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200" role="img" aria-label="The same lowercase a shown three ways: upright roman, a true italic with redrawn shapes, and an oblique which is the roman slanted.">
   <style>
     :root { --fb: #d98e5a; --ink: #171717; }
     @media (prefers-color-scheme: dark) { :root { --fb: #e6a878; --ink: #ededed; } }
@@ -7,7 +7,6 @@
     .ghost  { fill: var(--fb); opacity: 0.24; }
     .base   { stroke: var(--ink); stroke-width: 1; opacity: 0.18; }
     .lbl    { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 500; fill: var(--ink); }
-    .sub    { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 12px; fill: var(--fb); }
   </style>
 
   <line class="base" x1="40" y1="135" x2="560" y2="135" />
@@ -30,11 +29,6 @@
   </g>
 
   <text class="lbl" x="110" y="178" text-anchor="middle">Roman</text>
-  <text class="sub" x="110" y="197" text-anchor="middle">upright</text>
-
   <text class="lbl" x="300" y="178" text-anchor="middle">Italic</text>
-  <text class="sub" x="300" y="197" text-anchor="middle">redrawn shapes</text>
-
   <text class="lbl" x="482" y="178" text-anchor="middle">Oblique</text>
-  <text class="sub" x="482" y="197" text-anchor="middle">same shape, slanted</text>
 </svg>
