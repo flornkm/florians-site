@@ -303,3 +303,8 @@ body:has([data-block-scroll]) {
     --scroll-mask-bottom: 0px;
   }
 }
+
+/* Italic font should in all normal cases be serif */
+em, i {
+  @apply font-serif font-medium tracking-[-0.04em];
+}
