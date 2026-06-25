@@ -117,6 +117,18 @@ async function renderRenditions(
   return targets;
 }
 
+function ensureRenditionDirs(files: string[]): void {
+  const dirs = new Set<string>();
+  for (const f of files) {
+    if (!RASTER.has(path.extname(f).toLowerCase())) continue;
+    const publicPath = "/" + path.relative(PUBLIC_DIR, f).split(path.sep).join("/");
+    dirs.add(
+      path.dirname(path.join(PUBLIC_DIR, renditionRelPath(publicPath, RENDITION_WIDTHS[0]))),
+    );
+  }
+  for (const dir of dirs) fs.mkdirSync(dir, { recursive: true });
+}
+
 async function main() {
   if (!fs.existsSync(IMAGES_DIR)) {
     console.warn(`[image-manifest] ${IMAGES_DIR} does not exist, skipping`);
@@ -127,6 +139,8 @@ async function main() {
   fs.rmSync(GEN_DIR, { recursive: true, force: true });
 
   const files = walk(IMAGES_DIR);
+  // Create the mirror dirs up front; doing it inside the parallel writes races on shared parents.
+  ensureRenditionDirs(files);
   const entries = await Promise.all(files.map(processImage));
   const manifest: Record<string, Entry> = {};
   for (const e of entries) {
