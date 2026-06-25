@@ -17,6 +17,8 @@ export const proseVariants = cva("text-tertiary", {
         "prose-figcaption:text-tertiary prose-figcaption:text-[10px] prose-figcaption:mt-3",
         "prose-hr:border-primary",
         "prose-pre:bg-surface-secondary prose-code:text-secondary prose-code:text-xs prose-code:font-mono",
+        "prose-code:before:content-none prose-code:after:content-none",
+        "[&_:not(pre)>code]:bg-surface-tertiary [&_:not(pre)>code]:rounded-[4px] [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5",
         "md:prose-img:max-w-xl",
       ],
     },

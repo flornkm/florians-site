@@ -110,6 +110,12 @@ function ColophonPage() {
                 Ciron Text
               </Link>
             </Body1>
+            <Body1 className="font-serif italic">
+              Serif:{" "}
+              <Link href="https://fonts.floriankarsten.com/fk-roman-standard" target="_blank">
+                FK Roman
+              </Link>
+            </Body1>
             <Body1 className="font-mono">
               Mono:{" "}
               <Link href="https://commitmono.com/" target="_blank">

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 230" width="600" height="230" role="img" aria-label="The same lowercase a shown three ways: upright roman, a true italic with redrawn shapes, and an oblique which is the roman slanted.">
+  <style>
+    :root { --fb: #d98e5a; --ink: #171717; }
+    @media (prefers-color-scheme: dark) { :root { --fb: #e6a878; --ink: #ededed; } }
+    .glyph  { font-family: Georgia, "Times New Roman", serif; font-size: 120px; }
+    .solid  { fill: var(--ink); }
+    .ghost  { fill: var(--fb); opacity: 0.24; }
+    .base   { stroke: var(--ink); stroke-width: 1; opacity: 0.18; }
+    .lbl    { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 500; fill: var(--ink); }
+    .sub    { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 12px; fill: var(--fb); }
+  </style>
+
+  <line class="base" x1="40" y1="135" x2="560" y2="135" />
+
+  <!-- Roman: the reference, upright -->
+  <g transform="translate(110,135)">
+    <text class="glyph solid" text-anchor="middle">a</text>
+  </g>
+
+  <!-- Italic: ghost roman behind, true italic on top — the shapes don't match -->
+  <g transform="translate(300,135)">
+    <text class="glyph ghost" text-anchor="middle">a</text>
+    <text class="glyph solid" text-anchor="middle" font-style="italic">a</text>
+  </g>
+
+  <!-- Oblique: ghost roman behind, same roman skewed on top — same shape, leaned -->
+  <g transform="translate(482,135)">
+    <text class="glyph ghost" text-anchor="middle">a</text>
+    <text class="glyph solid" text-anchor="middle" transform="skewX(-12)">a</text>
+  </g>
+
+  <text class="lbl" x="110" y="178" text-anchor="middle">Roman</text>
+  <text class="sub" x="110" y="197" text-anchor="middle">upright</text>
+
+  <text class="lbl" x="300" y="178" text-anchor="middle">Italic</text>
+  <text class="sub" x="300" y="197" text-anchor="middle">redrawn shapes</text>
+
+  <text class="lbl" x="482" y="178" text-anchor="middle">Oblique</text>
+  <text class="sub" x="482" y="197" text-anchor="middle">same shape, slanted</text>
+</svg>
