@@ -106,7 +106,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/flow/hero.webp": {
     width: 5040,
     height: 3000,
-    thumbhash: "KggWFIB4hZh/mHd3iISHgFMJOA==",
+    thumbhash: "6fchDIB4d4h/iHiEd3e1zrCvJw==",
   },
   "/images/icons/favicon-dark.svg": { width: 16, height: 16, thumbhash: null },
   "/images/icons/favicon.svg": { width: 16, height: 16, thumbhash: null },
@@ -228,35 +228,10 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     height: 3000,
     thumbhash: "OfiFAgAPp48nmJcJe/dhyAgYh4eAcAc=",
   },
-  "/images/superpower/biological-age.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "MfgJBIJ4KPh2eYZ7dYbxhnV/tw==",
-  },
-  "/images/superpower/digital-twin.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "PQgCBID3GNd3iIeKdYgHdXRgWA==",
-  },
   "/images/superpower/download-mobile-app.webp": {
     width: 5040,
     height: 3000,
     thumbhash: "8vcFBIBWdndzinaAjnNVvD+x+g==",
-  },
-  "/images/superpower/learn-more-screen.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "VroGHIjwmFiZWJiYd3vzmUqfqQ==",
-  },
-  "/images/superpower/login-visual.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "5EgeNIyPhIl4eIeHd4agaQaKZw==",
-  },
-  "/images/superpower/mobile-ai-model.webp": {
-    width: 1380,
-    height: 3000,
-    thumbhash: "OAiGAgAPx39XuCg4iIBzCAgYh4eAcAc=",
   },
   "/images/superpower/mobile-data-categories.webp": {
     width: 1380,
@@ -268,50 +243,20 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     height: 3000,
     thumbhash: "O/iFAgAPhoMHFzefz3cI5wgYh4eAcAc=",
   },
-  "/images/superpower/mobile-protocol-start.webp": {
-    width: 1380,
-    height: 3000,
-    thumbhash: "PAiCAgAP+IimiCgYdYBSBwgYh4eAcAc=",
-  },
   "/images/superpower/mobile-protocol.webp": {
     width: 1380,
     height: 3000,
     thumbhash: "PQiCAgAPoHxziFe/pfFNLAgYh4eAcAc=",
-  },
-  "/images/superpower/mobile-rest-easy.webp": {
-    width: 1380,
-    height: 3000,
-    thumbhash: "cxiOEgIPd3eH+Jhoj5L2KAgYh4eAcAc=",
   },
   "/images/superpower/modal.webp": {
     width: 5040,
     height: 3000,
     thumbhash: "9fcFBIAHeLeGeYeDe3X3lqcNtw==",
   },
-  "/images/superpower/overview.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "/PcFBIDmV3hgjYWAfYHvh5YK+Q==",
-  },
-  "/images/superpower/superpower-ai-share.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "LQgKDIL3SIdxjHV2eYwHfnXQZw==",
-  },
   "/images/superpower/superpower-ai.webp": {
     width: 5040,
     height: 3000,
     thumbhash: "PAgGBIDWSGZwe3WCa4N2hoBASA==",
-  },
-  "/images/superpower/waiting-screen.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "PQgCBIDXSJdxfYOCfIBFh0CTBw==",
-  },
-  "/images/superpower/wearables.webp": {
-    width: 5040,
-    height: 3000,
-    thumbhash: "/fcFBIDFJYhxjHaBjXCmm0+j+g==",
   },
   "/images/writing/code-from-all-sides.svg": { width: 600, height: 270, thumbhash: null },
   "/images/writing/cost-of-software.svg": { width: 600, height: 210, thumbhash: null },
