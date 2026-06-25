@@ -86,7 +86,7 @@ export default function ContactDialog({
   return (
     <MotionConfig transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}>
       <div ref={containerRef} className="relative z-10 hidden min-[350px]:flex items-center">
-        <div className="h-8 md:h-6.5 px-2.5 text-sm font-[550] invisible">Contact</div>
+        <div className="h-8 md:h-6.5 px-2.5 text-sm fw-medium invisible">Contact</div>
         <motion.div
           layout
           aria-label={isOpen ? "Contact" : undefined}
@@ -112,7 +112,7 @@ export default function ContactDialog({
                 className="p-1.5"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-[550] pl-1">Contact</span>
+                  <span className="text-sm fw-medium pl-1">Contact</span>
                   <button
                     type="button"
                     onClick={close}
@@ -177,7 +177,7 @@ export default function ContactDialog({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="text-sm font-[550] leading-none whitespace-nowrap px-2.5 h-8 md:h-6.5 flex items-center cursor-pointer"
+                className="text-sm fw-medium leading-none whitespace-nowrap px-2.5 h-8 md:h-6.5 flex items-center cursor-pointer"
                 style={{ borderRadius: 4 }}
               >
                 Contact

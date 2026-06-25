@@ -176,7 +176,32 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: var(--text-sm);
-  font-weight: 430;
+  font-weight: 400;
+  font-variation-settings: "wght" 430;
+}
+
+@layer base {
+  strong,
+  b,
+  th,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  [class*="font-thin"],
+  [class*="font-extralight"],
+  [class*="font-light"],
+  [class*="font-normal"],
+  [class*="font-medium"],
+  [class*="font-semibold"],
+  [class*="font-bold"],
+  [class*="font-extrabold"],
+  [class*="font-black"],
+  [class*="font-["] {
+    font-variation-settings: normal;
+  }
 }
 
 p {
