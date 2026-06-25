@@ -56,7 +56,7 @@ async function fetchRuns(): Promise<Run[]> {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col">
-      <span className="text-2xl font-[550] tracking-tight text-primary">{value}</span>
+      <span className="text-2xl fw-medium tracking-tight text-primary">{value}</span>
       <span className="mt-1 text-xs text-tertiary">{label}</span>
     </div>
   );
