@@ -9,3 +9,6 @@ dist
 .env*.local
 vite.config.ts.timestamp*
 .output
+
+# Generated, display-sized image renditions (rebuilt by scripts/build-image-manifest.ts)
+/public/_gen

@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { imageManifest } from "@/imageMap.gen";
+import { buildSrcSet, renditionUrl } from "@/lib/rendition";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +32,8 @@ export interface ImageProps extends Omit<
   priority?: boolean;
   style?: CSSProperties;
   imgStyle?: CSSProperties;
+  /** Matches the layout so the browser picks the right rendition; defaults to 100vw. */
+  sizes?: string;
 }
 
 export function Image({
@@ -47,6 +50,8 @@ export function Image({
   loading,
   decoding,
   fetchPriority,
+  sizes,
+  srcSet: _ignoredSrcSet,
   onLoad,
   ...rest
 }: ImageProps) {
@@ -77,6 +82,12 @@ export function Image({
   const h = height ?? entry?.height;
   const hasDims = typeof w === "number" && typeof h === "number";
 
+  // Serve the pre-rendered display-sized renditions when they exist; the original is the largest fallback.
+  const renditions = entry?.widths;
+  const srcSet = renditions?.length ? buildSrcSet(src, renditions) : undefined;
+  const imgSrc = renditions?.length ? renditionUrl(src, renditions[renditions.length - 1]) : src;
+  const imgSizes = srcSet ? (sizes ?? "100vw") : undefined;
+
   const effectiveLoading = loading ?? (priority ? "eager" : "lazy");
   const effectiveDecoding = decoding ?? "async";
   const effectiveFetchPriority = fetchPriority ?? (priority ? "high" : "auto");
@@ -84,7 +95,9 @@ export function Image({
   if (!hasDims) {
     return (
       <img
-        src={src}
+        src={imgSrc}
+        srcSet={srcSet}
+        sizes={imgSizes}
         alt={alt}
         className={cn(className, imgClassName)}
         style={{ ...style, ...imgStyle }}
@@ -121,7 +134,9 @@ export function Image({
       )}
       <img
         ref={imgRef}
-        src={src}
+        src={imgSrc}
+        srcSet={srcSet}
+        sizes={imgSizes}
         alt={alt}
         width={w}
         height={h}
