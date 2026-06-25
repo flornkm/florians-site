@@ -5,56 +5,73 @@ import { resolvePostIcon } from "@/features/writing/lib/post-icon";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { toStandaloneSvg } from "@/features/writing/lib/icon-svg";
 import { getContent, isWritingEntry, type WritingEntry } from "@/lib/mdx";
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { Await, createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { IconArrowUndoUp } from "central-icons/IconArrowUndoUp";
 import dayjs from "dayjs";
+import { Suspense } from "react";
 
-const getWritingItem = createServerFn({ method: "GET" })
-  .inputValidator((slug: string) => slug)
-  .handler(async ({ data: slug }) => {
-    const items = await getContent("writing");
-    const itemRaw = items.find((i) => i.slug === slug);
+// Isomorphic base64 so the loader can build the OG icon on the client (no round-trip)
+// while producing identical markup on the server. Buffer on SSR, TextEncoder in the browser.
+function encodeBase64(str: string): string {
+  if (typeof Buffer !== "undefined") return Buffer.from(str, "utf-8").toString("base64");
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
 
-    if (!itemRaw) {
-      throw notFound();
-    }
+// Plain (non-server) function: getContent reads from a bundled eager glob and the icon
+// helpers are pure string ops, so this runs on the client too. Wrapping it in
+// createServerFn would force an RPC round-trip on every navigation into a post — the
+// reason detail pages felt slow to open.
+function getWritingItem(slug: string) {
+  const items = getContent("writing");
+  const itemRaw = items.find((i) => i.slug === slug);
 
-    if (!isWritingEntry(itemRaw)) {
-      throw new Error(`Item ${slug} is missing required fields`);
-    }
+  if (!itemRaw) {
+    throw notFound();
+  }
 
-    const item: WritingEntry = itemRaw;
+  if (!isWritingEntry(itemRaw)) {
+    throw new Error(`Item ${slug} is missing required fields`);
+  }
 
-    const collaborators =
-      typeof item.collaborators === "string"
-        ? item.collaborators.split(",").map((c: string) => c.trim())
-        : item.collaborators || [];
+  const item: WritingEntry = itemRaw;
 
-    // Live posts (e.g. runs) carry no frontmatter date — they show their newest synced run's date.
-    let date = typeof item.date === "string" ? item.date : "";
-    if (item.type === "live") {
-      const newestRunDate = await fetchNewestRunDate();
-      if (newestRunDate) date = newestRunDate;
-    }
+  const collaborators =
+    typeof item.collaborators === "string"
+      ? item.collaborators.split(",").map((c: string) => c.trim())
+      : item.collaborators || [];
 
-    // Pre-render the mark so the OG card shows the same icon as the grid.
-    const iconSvg = toStandaloneSvg(resolvePostIcon(item.slug), 200);
-    const icon = Buffer.from(iconSvg).toString("base64");
+  // Pre-render the mark so the OG card shows the same icon as the grid.
+  const iconSvg = toStandaloneSvg(resolvePostIcon(item.slug), 200);
+  const icon = encodeBase64(iconSvg);
 
-    return {
-      slug: item.slug,
-      title: item.title,
-      description: item.description,
-      type: item.type,
-      date,
-      collaborators,
-      icon,
-    };
-  });
+  return {
+    slug: item.slug,
+    title: item.title,
+    description: item.description,
+    type: item.type,
+    // Live posts (e.g. runs) carry no frontmatter date — their date streams in via newestRunDate.
+    date: typeof item.date === "string" ? item.date : "",
+    collaborators,
+    icon,
+  };
+}
+
+// Server-only Firebase read. Kept separate and deferred so navigation never blocks on it —
+// only the live "runs" post needs it, and its date streams in after the page renders.
+const getNewestRunDate = createServerFn().handler(() => fetchNewestRunDate());
 
 export const Route = createFileRoute("/writing/$id")({
-  loader: ({ params }) => getWritingItem({ data: params.id }),
+  loader: ({ params }) => {
+    const item = getWritingItem(params.id);
+    return {
+      ...item,
+      newestRunDate: item.type === "live" ? getNewestRunDate() : null,
+    };
+  },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const ogImage =
@@ -76,6 +93,40 @@ export const Route = createFileRoute("/writing/$id")({
   component: WritingDetailPage,
 });
 
+function formatLongDate(date: string) {
+  const parsed = dayjs(date);
+  return date && parsed.isValid() ? parsed.format("MMMM D, YYYY") : "";
+}
+
+function HeaderDate({
+  type,
+  date,
+  newestRunDate,
+}: {
+  type: string;
+  date: string;
+  newestRunDate: Promise<string | null> | null;
+}) {
+  if (type !== "live" || !newestRunDate) {
+    const formatted = formatLongDate(date);
+    if (!formatted) return null;
+    return <p className="mt-1.5 text-sm text-tertiary">{formatted}</p>;
+  }
+
+  // Live "runs" date comes from Firebase via a deferred promise; render once it streams in.
+  return (
+    <Suspense fallback={null}>
+      <Await promise={newestRunDate}>
+        {(runDate) => {
+          const formatted = formatLongDate(runDate ?? date);
+          if (!formatted) return null;
+          return <p className="mt-1.5 text-sm text-tertiary">{`Last update: ${formatted}`}</p>;
+        }}
+      </Await>
+    </Suspense>
+  );
+}
+
 function WritingDetailPage() {
   const item = Route.useLoaderData();
   const content = useMdxContent(
@@ -85,9 +136,6 @@ function WritingDetailPage() {
     // width; from md up, text is capped/centered while media stays full width.
     "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px]",
   );
-  const parsedDate = dayjs(item.date);
-  const formattedDate = item.date && parsedDate.isValid() ? parsedDate.format("MMMM D, YYYY") : "";
-  const dateLabel = item.type === "live" ? `Last update: ${formattedDate}` : formattedDate;
 
   if (!content) {
     return <div>Content not found</div>;
@@ -121,7 +169,7 @@ function WritingDetailPage() {
           </div>
           <header className="mb-8 md:-mt-7 md:mb-10">
             <H1 className="text-sm">{item.title}</H1>
-            {formattedDate && <p className="mt-1.5 text-sm text-tertiary">{dateLabel}</p>}
+            <HeaderDate type={item.type} date={item.date} newestRunDate={item.newestRunDate} />
           </header>
           <div className="pb-16 md:pb-24">{content}</div>
         </div>
