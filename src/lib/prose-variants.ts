@@ -11,7 +11,7 @@ export const proseVariants = cva("text-tertiary", {
         "prose-h2:text-primary prose-h2:text-sm prose-h2:fw-medium prose-h2:scroll-mt-20",
         "prose-h3:text-primary prose-h3:text-sm prose-h3:fw-medium prose-h3:scroll-mt-20",
         "prose-h4:text-primary prose-h4:scroll-mt-20 prose-h5:text-primary prose-h6:text-primary",
-        "prose-strong:text-primary",
+        "prose-strong:text-primary prose-strong:fw-medium",
         "prose-img:rounded-sm",
         "prose-a:text-primary prose-a:fw-link prose-a:transition-all prose-a:duration-200 prose-a:underline prose-a:decoration-tertiary/40 prose-a:hover:decoration-tertiary/70 prose-a:underline-offset-[3px] prose-a:active:no-underline",
         "prose-figcaption:text-tertiary prose-figcaption:text-[10px] prose-figcaption:mt-3",

@@ -144,7 +144,7 @@ export default function ContactDialog({
                       aria-label={
                         copied ? "Email address copied" : `Copy email ${FEATURED_LINK.handle}`
                       }
-                      className="flex flex-col rounded-sm bg-black/5 dark:bg-white/5 p-3 text-left hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                      className="flex flex-col rounded-sm bg-black/5 dark:bg-white/5 p-3 pb-2 text-left hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
                     >
                       <div className="relative flex-1 min-h-0">
                         <MailLines shape={copied ? "check" : "mail"} className="absolute inset-0" />

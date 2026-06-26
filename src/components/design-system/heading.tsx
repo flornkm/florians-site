@@ -9,12 +9,12 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 export const headingVariants = cva("fw-medium text-primary", {
   variants: {
     size: {
-      h1: "text-base fw-medium",
-      h2: "text-sm fw-medium",
-      h3: "text-sm fw-medium",
-      h4: "text-sm font-medium",
-      h5: "text-xs font-medium",
-      h6: "text-xs font-normal",
+      h1: "text-base",
+      h2: "text-sm",
+      h3: "text-sm",
+      h4: "text-sm",
+      h5: "text-xs",
+      h6: "text-xs",
     },
   },
 });
