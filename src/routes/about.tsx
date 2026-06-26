@@ -72,7 +72,7 @@ function AboutPage() {
         </div>
 
         <div className="col-start-3 col-span-7 md:col-start-6 md:col-span-4 lg:col-span-2">
-          <div className="space-y-6 text-sm leading-relaxed text-primary">
+          <div className="space-y-6 text-justify text-sm leading-relaxed text-primary">
             <p>
               Born in the South of Germany, I began playing with digital design early on. While I
               eventually found my obsession in making software feel and look great, I tried out a
@@ -94,7 +94,7 @@ function AboutPage() {
                   href={link.href}
                   target={link.href.startsWith("http") ? "_blank" : undefined}
                   rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="text-sm text-tertiary transition-colors hover:text-secondary"
+                  className="text-sm fw-link text-tertiary transition-colors hover:text-secondary"
                 >
                   {link.name}
                 </Link>

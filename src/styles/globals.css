@@ -129,8 +129,22 @@
     url(/fonts/ciron-text/CironText-VF.ttf) format("truetype");
 }
 
+/* TEMPORARY tryout: Haas Recast as sans (variable trial font, unlicensed). Currently the active
+   sans (see --font-sans in text.css). Default instance is upright, full width (wdth 100), neutral
+   tracking (TRAK 0) — so standard CSS weights map normally (400=Regular, 500=Medium, 700=Bold).
+   Axes available for play: wght 100–900, wdth 50–100, ital 0–1, TRAK -35–0. */
+@font-face {
+  font-family: "Haas Recast";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src:
+    url(/fonts/haas-recast/HaasRecastVF-Trial.woff2) format("woff2"),
+    url(/fonts/haas-recast/HaasRecastVF_Trial_TrakWdthWghtItal.ttf) format("truetype");
+}
+
 /* Pretendard (variable) — used only inside the experiment demos via the font-pretendard
-   utility; the rest of the site stays on Ciron Text. */
+   utility; the rest of the site stays on the sans tryout above. */
 @font-face {
   font-family: "Pretendard Variable";
   font-weight: 45 920;
@@ -176,32 +190,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: var(--text-sm);
-  font-weight: 400;
-  font-variation-settings: "wght" 430;
-}
-
-@layer base {
-  strong,
-  b,
-  th,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  [class*="font-thin"],
-  [class*="font-extralight"],
-  [class*="font-light"],
-  [class*="font-normal"],
-  [class*="font-medium"],
-  [class*="font-semibold"],
-  [class*="font-bold"],
-  [class*="font-extrabold"],
-  [class*="font-black"],
-  [class*="font-["] {
-    font-variation-settings: normal;
-  }
+  font-weight: 450;
 }
 
 p {
@@ -305,6 +294,7 @@ body:has([data-block-scroll]) {
 }
 
 /* Italic font should in all normal cases be serif */
-em, i {
+em,
+i {
   @apply font-serif font-medium tracking-[-0.04em];
 }

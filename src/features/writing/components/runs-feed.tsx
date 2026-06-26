@@ -1,6 +1,8 @@
 import { Body2 } from "@/components/design-system/body";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useEffect, useId, useRef, useState } from "react";
 
 type RoutePath = { d: string; w: number; h: number };
 
@@ -16,6 +18,24 @@ type Run = {
 
 // Keeps the stroke from clipping at the edges of the normalized viewBox.
 const ROUTE_PADDING = 6;
+
+// Colors from the /writing/runs post icon, so the tracing pointer reads as the same accent.
+const ROUTE_POINTER_FILL = "#6fae9f";
+const ROUTE_POINTER_BORDER = "#171717";
+
+// Rendered half-length of the pointer, in CSS px. Kept constant across routes by sizing the
+// arrow geometry against the measured user→screen scale (see RunRoute).
+const POINTER_SIZE_PX = 8;
+
+// An arrowhead pointing along +x — the direction offset-path orients to — centered on the
+// origin so it rides the route at its current point. `size` is in viewBox units.
+function pointerPath(size: number): string {
+  const tip = size;
+  const back = -size * 0.7;
+  const wing = size * 0.82;
+  const notch = -size * 0.25;
+  return `M ${tip} 0 L ${back} ${-wing} L ${notch} 0 L ${back} ${wing} Z`;
+}
 
 function formatKm(meters: number): string {
   return (meters / 1000).toLocaleString("en-US", {
@@ -56,19 +76,48 @@ async function fetchRuns(): Promise<Run[]> {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col">
-      <span className="text-2xl fw-medium tracking-tight text-primary">{value}</span>
+      <span className="font-mono text-2xl fw-medium tracking-[-0.02em] text-primary">{value}</span>
       <span className="mt-1 text-xs text-tertiary">{label}</span>
     </div>
   );
 }
 
 function RunRoute({ path }: { path: RoutePath | null }) {
+  const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<SVGPathElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.35 });
+  const maskId = `route-${useId().replace(/:/g, "")}`;
+  // The arrow is a filled shape, so unlike the non-scaling line it grows with the route. Measure
+  // the user→screen scale (it shifts with the column width) and size the arrow inversely so it
+  // renders at a constant px on every card.
+  const [scale, setScale] = useState(5);
+
+  useEffect(() => {
+    const el = lineRef.current;
+    if (!el) return;
+    const measure = () => {
+      const ctm = el.getScreenCTM();
+      if (ctm) setScale(Math.hypot(ctm.a, ctm.b) || 5);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [path]);
+
   if (!path) return null;
 
   const origin = -ROUTE_PADDING;
-  const viewBox = `${origin} ${origin} ${path.w + ROUTE_PADDING * 2} ${path.h + ROUTE_PADDING * 2}`;
+  const width = path.w + ROUTE_PADDING * 2;
+  const height = path.h + ROUTE_PADDING * 2;
+  const viewBox = `${origin} ${origin} ${width} ${height}`;
+  const drawn = reduceMotion || inView;
   return (
-    <div className="mt-5 h-80 w-full rounded-sm bg-secondary p-4 md:h-96 md:p-8">
+    <div
+      ref={ref}
+      className="mt-5 h-[26rem] w-full rounded-sm bg-secondary p-3 md:h-[34rem] md:p-5"
+    >
       <svg
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
@@ -79,8 +128,58 @@ function RunRoute({ path }: { path: RoutePath | null }) {
         className="h-full w-full text-primary"
         aria-hidden="true"
       >
-        {/* Non-scaling stroke keeps the line crisp and thin at any width. */}
-        <path d={path.d} strokeWidth={1.5} vectorEffect="non-scaling-stroke" />
+        {/* The visible line keeps a constant 1.5px via non-scaling-stroke, but that decouples a
+            stroke-dash draw from the viewBox units. So the Strava-style reveal is done with a
+            wide masking stroke that DOES scale with the route: as motion animates its pathLength
+            from 0→1 it uncovers the thin line beneath, no per-route length measurement needed. */}
+        <mask
+          id={maskId}
+          maskUnits="userSpaceOnUse"
+          x={origin}
+          y={origin}
+          width={width}
+          height={height}
+        >
+          <motion.path
+            d={path.d}
+            stroke="white"
+            strokeWidth={3}
+            initial={reduceMotion ? false : { pathLength: 0 }}
+            animate={{ pathLength: drawn ? 1 : 0 }}
+            transition={{ duration: 2.8, ease: "linear" }}
+          />
+        </mask>
+        <path
+          ref={lineRef}
+          d={path.d}
+          strokeWidth={1.5}
+          vectorEffect="non-scaling-stroke"
+          mask={`url(#${maskId})`}
+        />
+        {/* A green arrow rides the leading edge of the draw, pointing the way the route is being
+            run (offset-path auto-rotates it to the path's heading), then fades out as it reaches
+            the finish. Sized via the measured scale so it stays present and constant; its border
+            stays crisp via non-scaling-stroke. */}
+        <motion.path
+          d={pointerPath(POINTER_SIZE_PX / scale)}
+          fill={ROUTE_POINTER_FILL}
+          stroke={ROUTE_POINTER_BORDER}
+          strokeWidth={1.4}
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+          style={{ offsetPath: `path('${path.d}')` }}
+          initial={reduceMotion ? false : { offsetDistance: "0%", opacity: 0 }}
+          animate={
+            drawn && !reduceMotion
+              ? { offsetDistance: "100%", opacity: [0, 1, 1, 0] }
+              : { offsetDistance: "0%", opacity: 0 }
+          }
+          transition={{
+            duration: 2.8,
+            ease: "linear",
+            opacity: { duration: 2.8, ease: "linear", times: [0, 0.06, 0.88, 1] },
+          }}
+        />
       </svg>
     </div>
   );
@@ -93,7 +192,7 @@ function RunStats({ run }: { run: Run }) {
         <Stat value={formatKm(run.distanceMeters)} label="km" />
         <Stat value={formatDuration(run.movingSeconds)} label="duration" />
       </div>
-      <span className="text-sm text-tertiary">{formatDate(run.startDate)}</span>
+      <span className="text-sm text-tertiary tracking-[-0.02em]">{formatDate(run.startDate)}</span>
     </div>
   );
 }
@@ -122,7 +221,7 @@ function RunsSkeleton() {
               </div>
               <div className="h-3.5 w-24 animate-pulse rounded-sm bg-tertiary" />
             </div>
-            <div className="mt-5 h-80 w-full animate-pulse rounded-sm bg-tertiary md:h-96" />
+            <div className="mt-5 h-[26rem] w-full animate-pulse rounded-sm bg-tertiary md:h-[34rem]" />
           </li>
         ))}
       </ul>
