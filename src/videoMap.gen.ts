@@ -6,6 +6,8 @@ export interface VideoManifestEntry {
 }
 
 export const videoManifest: Record<string, VideoManifestEntry> = {
+  "/videos/flow/404.mp4": { width: 1920, height: 1144, thumbhash: "/QcCBIDxSWjPa3SIu0UwzUhQiQ==" },
+  "/videos/flow/404.webm": { width: 1920, height: 1144, thumbhash: "/QcCBIDxSWjPa3SIu0UwzUhQig==" },
   "/videos/flow/company.mp4": {
     width: 1920,
     height: 1144,

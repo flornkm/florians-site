@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
     date: "2026",
     url: "https://flowengineering.com",
     mediaOrder: 0,
-    media: ["/images/flow/hero.webp", "/videos/flow/company.webm"],
+    media: ["/images/flow/hero.webp", "/videos/flow/company.webm", "/videos/flow/404.webm"],
   },
   {
     name: "Sona",
