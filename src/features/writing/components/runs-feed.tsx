@@ -1,8 +1,8 @@
 import { Body2 } from "@/components/design-system/body";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { motion, useInView, useReducedMotion } from "motion/react";
-import { useEffect, useId, useRef, useState } from "react";
+import { useInView, useReducedMotion } from "motion/react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type RoutePath = { d: string; w: number; h: number };
 
@@ -27,7 +27,7 @@ const ROUTE_POINTER_BORDER = "#171717";
 // arrow geometry against the measured user→screen scale (see RunRoute).
 const POINTER_SIZE_PX = 8;
 
-// An arrowhead pointing along +x — the direction offset-path orients to — centered on the
+// An arrowhead pointing along +x (rotated to the path heading at render time), centered on the
 // origin so it rides the route at its current point. `size` is in viewBox units.
 function pointerPath(size: number): string {
   const tip = size;
@@ -35,6 +35,48 @@ function pointerPath(size: number): string {
   const wing = size * 0.82;
   const notch = -size * 0.25;
   return `M ${tip} 0 L ${back} ${-wing} L ${notch} 0 L ${back} ${wing} Z`;
+}
+
+type RouteGeometry = { points: [number, number][]; cum: number[]; total: number };
+
+// Parse the normalized polyline into points + cumulative arc-lengths. The draw grows the path's
+// own `d` (pure geometry) rather than animating stroke-dash / pathLength / mask / offset-path — all
+// of which misrender on iOS Safari. setAttribute("d", …) renders identically everywhere.
+function parsePolyline(d: string): RouteGeometry {
+  const nums = (d.match(/-?\d*\.?\d+/g) ?? []).map(Number);
+  const points: [number, number][] = [];
+  for (let i = 0; i + 1 < nums.length; i += 2) points.push([nums[i], nums[i + 1]]);
+  const cum = [0];
+  for (let i = 1; i < points.length; i++) {
+    const dx = points[i][0] - points[i - 1][0];
+    const dy = points[i][1] - points[i - 1][1];
+    cum.push(cum[i - 1] + Math.hypot(dx, dy));
+  }
+  return { points, cum, total: cum[cum.length - 1] || 1 };
+}
+
+// The route drawn up to progress p (0→1 along arc-length): the partial `d`, plus the leading
+// point and heading so the marker can ride the tip.
+function routeAtProgress(geom: RouteGeometry, p: number) {
+  const { points, cum, total } = geom;
+  const start = points[0];
+  const target = p * total;
+  if (target <= 0) return { d: "", x: start[0], y: start[1], angle: 0 };
+
+  let i = 0;
+  while (i < points.length - 2 && cum[i + 1] < target) i++;
+  const a = points[i];
+  const b = points[i + 1] ?? a;
+  const segLength = cum[i + 1] - cum[i] || 1;
+  const t = Math.min(1, Math.max(0, (target - cum[i]) / segLength));
+  const x = a[0] + (b[0] - a[0]) * t;
+  const y = a[1] + (b[1] - a[1]) * t;
+
+  let d = `M${start[0]} ${start[1]}`;
+  for (let k = 1; k <= i; k++) d += `L${points[k][0]} ${points[k][1]}`;
+  d += `L${x} ${y}`;
+  const angle = (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180) / Math.PI;
+  return { d, x, y, angle };
 }
 
 function formatKm(meters: number): string {
@@ -82,22 +124,25 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
+const DRAW_DURATION = 2.8;
+
 function RunRoute({ path }: { path: RoutePath | null }) {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
+  const arrowRef = useRef<SVGPathElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.35 });
-  const maskId = `route-${useId().replace(/:/g, "")}`;
-  // The arrow is a filled shape, so unlike the non-scaling line it grows with the route. Measure
-  // the user→screen scale (it shifts with the column width) and size the arrow inversely so it
-  // renders at a constant px on every card.
+  const geom = useMemo(() => (path ? parsePolyline(path.d) : null), [path]);
+
+  // The line and arrow both scale with the route as it fills the box. Measure the user→screen
+  // scale (it shifts with the column width) and size them inversely so they render at a constant px.
   const [scale, setScale] = useState(5);
 
   useEffect(() => {
-    const el = lineRef.current;
-    if (!el) return;
+    const line = lineRef.current;
+    if (!line) return;
     const measure = () => {
-      const ctm = el.getScreenCTM();
+      const ctm = line.getScreenCTM();
       if (ctm) setScale(Math.hypot(ctm.a, ctm.b) || 5);
     };
     measure();
@@ -106,13 +151,50 @@ function RunRoute({ path }: { path: RoutePath | null }) {
     return () => observer.disconnect();
   }, [path]);
 
+  // Draw the line by growing its own `d` and ride the marker on the tip, from one 0→1 progress on a
+  // plain requestAnimationFrame loop. Only geometry (`d`) and a transform change per frame — both
+  // render identically in every browser, unlike stroke-dash / pathLength / mask / offset-path, which
+  // all misbehave on iOS Safari.
+  useEffect(() => {
+    const line = lineRef.current;
+    if (!geom) return;
+
+    const render = (p: number) => {
+      const state = routeAtProgress(geom, p);
+      line?.setAttribute("d", state.d);
+      const arrow = arrowRef.current;
+      if (!arrow) return;
+      arrow.setAttribute("transform", `translate(${state.x} ${state.y}) rotate(${state.angle})`);
+      // Fade in at the start, ride the tip, fade out into the finish.
+      const fade = p <= 0.06 ? p / 0.06 : p >= 0.88 ? Math.max(0, (1 - p) / 0.12) : 1;
+      arrow.style.opacity = String(fade);
+    };
+
+    render(0);
+    if (reduceMotion) {
+      render(1);
+      return;
+    }
+    if (!inView) return;
+
+    let frame = 0;
+    let startTime = 0;
+    const tick = (now: number) => {
+      if (!startTime) startTime = now;
+      const p = Math.min(1, (now - startTime) / (DRAW_DURATION * 1000));
+      render(p);
+      if (p < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [inView, reduceMotion, geom]);
+
   if (!path) return null;
 
   const origin = -ROUTE_PADDING;
   const width = path.w + ROUTE_PADDING * 2;
   const height = path.h + ROUTE_PADDING * 2;
   const viewBox = `${origin} ${origin} ${width} ${height}`;
-  const drawn = reduceMotion || inView;
   return (
     <div
       ref={ref}
@@ -128,57 +210,20 @@ function RunRoute({ path }: { path: RoutePath | null }) {
         className="h-full w-full text-primary"
         aria-hidden="true"
       >
-        {/* The visible line keeps a constant 1.5px via non-scaling-stroke, but that decouples a
-            stroke-dash draw from the viewBox units. So the Strava-style reveal is done with a
-            wide masking stroke that DOES scale with the route: as motion animates its pathLength
-            from 0→1 it uncovers the thin line beneath, no per-route length measurement needed. */}
-        <mask
-          id={maskId}
-          maskUnits="userSpaceOnUse"
-          x={origin}
-          y={origin}
-          width={width}
-          height={height}
-        >
-          <motion.path
-            d={path.d}
-            stroke="white"
-            strokeWidth={3}
-            initial={reduceMotion ? false : { pathLength: 0 }}
-            animate={{ pathLength: drawn ? 1 : 0 }}
-            transition={{ duration: 2.8, ease: "linear" }}
-          />
-        </mask>
+        {/* `d` is set imperatively by the draw loop, so it isn't passed here (React would clobber it). */}
+        <path ref={lineRef} strokeWidth={1.5 / scale} />
+        {/* A green arrow rides the leading edge of the draw, pointing the way the route is run
+            (heading sampled from the path), then fades out at the finish. Positioned imperatively
+            via a transform; its border stays crisp via non-scaling-stroke. */}
         <path
-          ref={lineRef}
-          d={path.d}
-          strokeWidth={1.5}
-          vectorEffect="non-scaling-stroke"
-          mask={`url(#${maskId})`}
-        />
-        {/* A green arrow rides the leading edge of the draw, pointing the way the route is being
-            run (offset-path auto-rotates it to the path's heading), then fades out as it reaches
-            the finish. Sized via the measured scale so it stays present and constant; its border
-            stays crisp via non-scaling-stroke. */}
-        <motion.path
+          ref={arrowRef}
           d={pointerPath(POINTER_SIZE_PX / scale)}
           fill={ROUTE_POINTER_FILL}
           stroke={ROUTE_POINTER_BORDER}
           strokeWidth={1.4}
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          style={{ offsetPath: `path('${path.d}')` }}
-          initial={reduceMotion ? false : { offsetDistance: "0%", opacity: 0 }}
-          animate={
-            drawn && !reduceMotion
-              ? { offsetDistance: "100%", opacity: [0, 1, 1, 0] }
-              : { offsetDistance: "0%", opacity: 0 }
-          }
-          transition={{
-            duration: 2.8,
-            ease: "linear",
-            opacity: { duration: 2.8, ease: "linear", times: [0, 0.06, 0.88, 1] },
-          }}
+          style={{ opacity: 0 }}
         />
       </svg>
     </div>

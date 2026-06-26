@@ -11,28 +11,28 @@
   font-family: var(--font-sans);
   font-size: theme(fontSize.2xl);
   line-height: 2rem;
-  font-weight: 550;
+  font-weight: 530;
 }
 
 @utility type-title-1 {
   font-family: var(--font-sans);
   font-size: theme(fontSize.lg);
   line-height: 1.75rem;
-  font-weight: 550;
+  font-weight: 530;
 }
 
 @utility type-title-2 {
   font-family: var(--font-sans);
   font-size: theme(fontSize.base);
   line-height: 1.5rem;
-  font-weight: 550;
+  font-weight: 530;
 }
 
 @utility type-title-3 {
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   line-height: 1.375rem;
-  font-weight: 550;
+  font-weight: 530;
 }
 
 @utility type-title-4 {
@@ -87,7 +87,7 @@
 }
 
 @utility fw-medium {
-  font-weight: 550;
+  font-weight: 530;
 }
 
 @utility fw-link {
