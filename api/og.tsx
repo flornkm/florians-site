@@ -4,11 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 import React from "react";
 
+// Static weight-500 instance of the variable Haas Recast (the site sans). @vercel/og's Satori
+// can't parse the variable TTF, and it must be a git-tracked file or Vercel won't deploy it.
 const mediumFont = fs.readFileSync(
-  path.join(
-    process.cwd(),
-    "public/fonts/ciron-text/CironTextUnlicensedTrialVersion-Medium.otf",
-  ),
+  path.join(process.cwd(), "public/fonts/haas-recast/HaasRecast-OG-Medium.ttf"),
 );
 
 const WIDTH = 1200;
@@ -30,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const image = new ImageResponse(element, {
       width: WIDTH,
       height: HEIGHT,
-      fonts: [{ name: "Ciron Text", data: mediumFont, weight: 500, style: "normal" }],
+      fonts: [{ name: "Haas Recast", data: mediumFont, weight: 500, style: "normal" }],
     });
 
     const buffer = Buffer.from(await image.arrayBuffer());
@@ -50,7 +49,7 @@ function defaultCard(subtitle: string) {
         width: "100%",
         height: "100%",
         background: "#ffffff",
-        fontFamily: "Ciron Text",
+        fontFamily: "Haas Recast",
         letterSpacing: "-0.03em",
         display: "flex",
         flexDirection: "column",
