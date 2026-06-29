@@ -106,8 +106,11 @@ function ColophonPage() {
           >
             <Body1>
               Sans:{" "}
-              <Link href="https://raoulgottschling.de/ciron-text/" target="_blank">
-                Ciron Text
+              <Link
+                href="https://www.daltonmaag.com/font-library/haas-recast.html"
+                target="_blank"
+              >
+                Haas Recast
               </Link>
             </Body1>
             <Body1 className="font-serif italic">
