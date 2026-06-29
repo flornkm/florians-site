@@ -4,10 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 import React from "react";
 
-// Static weight-600 instance of the variable Haas Recast (the site sans). @vercel/og's Satori
+// Static weight-550 instance of the variable Haas Recast (the site sans). @vercel/og's Satori
 // can't parse the variable TTF, and it must be a git-tracked file or Vercel won't deploy it.
-const semiBoldFont = fs.readFileSync(
-  path.join(process.cwd(), "public/fonts/haas-recast/HaasRecast-OG-SemiBold.ttf"),
+const ogFont = fs.readFileSync(
+  path.join(process.cwd(), "public/fonts/haas-recast/HaasRecast-OG.ttf"),
 );
 
 const WIDTH = 1200;
@@ -29,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const image = new ImageResponse(element, {
       width: WIDTH,
       height: HEIGHT,
-      fonts: [{ name: "Haas Recast", data: semiBoldFont, weight: 600, style: "normal" }],
+      fonts: [{ name: "Haas Recast", data: ogFont, weight: 550, style: "normal" }],
     });
 
     const buffer = Buffer.from(await image.arrayBuffer());
@@ -57,10 +57,10 @@ function defaultCard(subtitle: string) {
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <div style={{ fontSize: 48, fontWeight: 600, color: "#9a9a9a", lineHeight: 1.1 }}>
+        <div style={{ fontSize: 48, fontWeight: 550, color: "#9a9a9a", lineHeight: 1.1 }}>
           Florian Kiem
         </div>
-        <div style={{ fontSize: 48, fontWeight: 600, color: "#111111", lineHeight: 1.1 }}>
+        <div style={{ fontSize: 48, fontWeight: 550, color: "#111111", lineHeight: 1.1 }}>
           {subtitle}
         </div>
       </div>
