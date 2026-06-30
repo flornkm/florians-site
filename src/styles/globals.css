@@ -114,6 +114,33 @@
   src: url(/fonts/fk-roman/FKRomanStandardTrial-BlackOblique.otf) format("opentype");
 }
 
+/* Wagram (Non-Commercial trial) — the active serif. Ships italic styles only (Light/Regular/Medium),
+   which is all the site needs since the serif is used exclusively in italic contexts (em/i, captions,
+   colophon). Upright serif falls back to FK Roman → Georgia via --font-serif in text.css. */
+@font-face {
+  font-family: "Wagram";
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/wagram/WagramNonCommercial-LightItalic.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Wagram";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/wagram/WagramNonCommercial-Italic.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Wagram";
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url(/fonts/wagram/WagramNonCommercial-MediumItalic.otf) format("opentype");
+}
+
 /* TEMPORARY tryout: Ciron Text as sans (trial font, unlicensed). Remove to restore Pretendard.
    Subset variable woff2 (upright "Text" flavor only) with the weight axis remapped to a normal
    100–900 scale, so standard CSS weights work as usual (400=Regular, 500=Medium, 700=Bold).
