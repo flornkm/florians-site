@@ -115,8 +115,8 @@ function ColophonPage() {
             </Body1>
             <Body1 className="font-serif italic">
               Serif:{" "}
-              <Link href="https://fonts.floriankarsten.com/fk-roman-standard" target="_blank">
-                FK Roman
+              <Link href="https://www.dblzr.com/fonts/00-wagram" target="_blank">
+                Wagram
               </Link>
             </Body1>
             <Body1 className="font-mono">
