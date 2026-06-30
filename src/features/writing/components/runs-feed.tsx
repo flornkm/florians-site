@@ -237,7 +237,7 @@ function RunStats({ run }: { run: Run }) {
         <Stat value={formatKm(run.distanceMeters)} label="km" />
         <Stat value={formatDuration(run.movingSeconds)} label="duration" />
       </div>
-      <span className="text-sm text-tertiary tracking-[-0.02em]">{formatDate(run.startDate)}</span>
+      <span className="text-sm text-tertiary">{formatDate(run.startDate)}</span>
     </div>
   );
 }
