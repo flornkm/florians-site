@@ -9,7 +9,7 @@ type: note
 
 Italic and oblique get used as if they mean the same thing. They don't. They describe two different ways to make a slanted letter, and the difference shows up in two practical places: the styles you license, and the CSS you write to use them.
 
-FK Roman, the typeface this site uses, is a clear example. Its slanted styles aren't called Italic. They're called Oblique, and the name is exact.
+Wagram, the typeface this site uses, is a clear example. Its slanted styles are a true italic. The letters are redrawn, not just tipped over, and the name on each style says so.
 
 ## Two ways to lean
 
@@ -21,13 +21,13 @@ An _oblique_ is the upright letters, slanted. Same shapes, pushed over a few deg
 
 ![A true italic redraws the letters. An oblique just slants the upright ones.](/images/writing/italic-vs-oblique.svg)
 
-The split usually follows the category. Most sans-serifs ship obliques. Helvetica's "italic" is one. Serifs almost always draw a true italic instead. That convention is what makes FK Roman worth a closer look.
+The split usually follows the category. Most sans-serifs ship obliques. Helvetica's "italic" is one. Serifs almost always draw a true italic instead, and Wagram follows that convention.
 
-## A serif that obliques on purpose
+## A serif that draws a true italic
 
-FK Roman is a serif, so by convention it should carry a cursive italic. It slants instead. That's a deliberate decision. The leaning styles stay in the same upright, rational world as the roman rather than switching to a flowing, handwritten voice, which on a clean contemporary face would read as out of place.
+Wagram is a serif, so by tradition it carries a cursive italic, and it does. Slant the emphasis on this page and the letters don't merely lean: the _a_ drops to a single story, the _f_ grows a tail, the roman gives way to a flowing, handwritten voice. The shapes change, not just their angle.
 
-The name on each style states the choice plainly. Oblique, not Italic.
+The name on each style states the choice plainly. Italic, not Oblique.
 
 ## The browser only knows one slot
 
@@ -37,13 +37,13 @@ There are two style values, `font-style: italic` and `font-style: oblique`, but 
 
 ```css
 @font-face {
-  font-family: "FK Roman";
+  font-family: "Wagram";
   font-style: italic; /* the slot, not a claim about the design */
-  src: url(/fonts/fk-roman/FKRomanStandard-Oblique.woff2) format("woff2");
+  src: url(/fonts/wagram/WagramNonCommercial-Italic.otf) format("opentype");
 }
 ```
 
-The file is an oblique, filed under `italic`. From there, `font-style: italic` resolves to it, and so do `<em>` and `<i>`, since they default to italic. The browser draws no distinction, and neither does the reader.
+A true italic and an oblique both file under `italic` here; the slot is the same either way. From there, `font-style: italic` resolves to it, and so do `<em>` and `<i>`, since they default to italic. The browser draws no distinction, and neither does the reader.
 
 Without a slanted face, the browser makes one. It shears the roman by roughly 14 degrees, the synthetic version of a naive oblique and a step below a face drawn for the purpose. That slant can also be requested directly with `font-style: oblique 14deg`.
 
