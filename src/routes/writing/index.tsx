@@ -105,7 +105,7 @@ function PostDate({
   newestRunDate: Promise<string | null>;
 }) {
   if (item.type !== "live") {
-    return <Body2 className="text-tertiary proportional-nums">{formatDate(item.date)}</Body2>;
+    return <Body2 className="text-tertiary">{formatDate(item.date)}</Body2>;
   }
 
   // Live "runs" date comes from Firebase via a deferred promise; show a skeleton
@@ -113,9 +113,7 @@ function PostDate({
   return (
     <Suspense fallback={<PostDateSkeleton />}>
       <Await promise={newestRunDate}>
-        {(runDate) => (
-          <Body2 className="text-tertiary proportional-nums">{formatDate(runDate ?? item.date)}</Body2>
-        )}
+        {(runDate) => <Body2 className="text-tertiary">{formatDate(runDate ?? item.date)}</Body2>}
       </Await>
     </Suspense>
   );

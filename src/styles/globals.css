@@ -191,6 +191,10 @@ body {
   color: var(--text-primary);
   font-size: var(--text-sm);
   font-weight: 460;
+  /* Haas Recast defaults to tabular figures (every digit shares one advance), which pads
+     narrow digits and makes dates/numbers in prose read loosely tracked. Proportional is the
+     right default for running text; the few spots needing aligned digits opt into tabular-nums. */
+  font-variant-numeric: proportional-nums;
 }
 
 p {
