@@ -2,7 +2,7 @@
   --font-sans: "Haas Recast", "Ciron Text", "Inter", sans-serif;
   --font-mono:
     "Commit Mono", ui-monospace, SFMono-Regular, "Liberation Mono", "Courier New", monospace;
-  --font-serif: "Wagram", "FK Roman", Georgia, "Times New Roman", serif;
+  --font-serif: "Wagram", Georgia, "Times New Roman", serif;
   /* Scoped to the experiment demos (font-pretendard utility), not the global UI. */
   --font-pretendard: "Pretendard Variable", "Inter", sans-serif;
 }
