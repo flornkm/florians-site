@@ -1,0 +1,944 @@
+/* Windows XP "Luna" recreation, scoped entirely under .xp-root so none of these raw
+   period-accurate colors leak into the rest of the site's design tokens. This is a deliberate
+   off-brand pixel recreation — hardcoded XP hex values are the point here. */
+
+.xp-root {
+  /* Luna palette */
+  --xp-face: #ece9d8; /* dialog / control beige-gray */
+  --xp-face-shadow: #aca899;
+  --xp-face-hilite: #ffffff;
+  --xp-frame: #0054e3; /* active window border blue */
+  --xp-select: #316ac5; /* list selection */
+  --xp-field-border: #7f9db9; /* input border blue-gray */
+  --xp-link: #0066cc;
+  --xp-green-taskbar: linear-gradient(
+    180deg,
+    #3168d5 0%,
+    #4993e6 3%,
+    #2358c6 6%,
+    #2358c6 88%,
+    #1941a5 92%,
+    #1941a5 100%
+  );
+
+  /* Exact Luna active-caption gradient from xp.css. */
+  --xp-title-active: linear-gradient(
+    180deg,
+    #0997ff,
+    #0053ee 8%,
+    #0050ee 40%,
+    #06f 88%,
+    #06f 93%,
+    #005bff 95%,
+    #003dd7 96%,
+    #003dd7
+  );
+
+  /* Thin bitmap pixel face for body/buttons/UI; smooth Tahoma kept for the few elements that
+     need it (start button, title caption). */
+  --xp-font: "Pixelated MS Sans Serif", Tahoma, Verdana, Geneva, sans-serif;
+  --xp-font-smooth: Tahoma, "Segoe UI", Verdana, Geneva, sans-serif;
+
+  font-family: var(--xp-font);
+  font-size: 11px;
+  line-height: 1.35;
+  color: #000;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  user-select: none;
+  cursor: default;
+}
+
+/* ---------- Desktop scene ---------- */
+.xp-desktop {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3a7d34;
+}
+/* The real "Bliss" photo on its own layer so the pixelation filter only touches the wallpaper
+   (the "display"), never the readable bitmap text on top of it. */
+.xp-wallpaper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #3a7d34 url(/images/xp-wallpaper.jpg) center / cover no-repeat;
+  filter: url(#xp-pixelate);
+}
+.xp-window,
+.xp-term {
+  position: relative;
+  z-index: 10;
+}
+
+/* ---------- Taskbar ---------- */
+.xp-taskbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  display: flex;
+  align-items: stretch;
+  background: var(--xp-green-taskbar);
+  border-top: 1px solid #0a3bd0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  z-index: 40;
+}
+.xp-start {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 16px 2px 9px;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--xp-font-smooth);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(
+    180deg,
+    #5eac56 0%,
+    #4e9c3f 8%,
+    #3f8a31 50%,
+    #357c2a 92%,
+    #2c6e23 100%
+  );
+  border-right: 1px solid #2c6e23;
+  border-top-right-radius: 9px 14px;
+  border-bottom-right-radius: 9px 14px;
+}
+.xp-start-orb {
+  width: 16px;
+  height: 16px;
+}
+.xp-tasks {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 3px 4px;
+}
+.xp-task-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 160px;
+  height: 22px;
+  padding: 0 8px;
+  color: #fff;
+  font-family: var(--xp-font);
+  font-size: 11px;
+  background: linear-gradient(180deg, #3f8af6 0%, #1c6cf0 50%, #1351d8 100%);
+  border: 1px solid #1648b8;
+  border-radius: 3px;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.35),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.xp-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  color: #fff;
+  font-family: var(--xp-font);
+  background: linear-gradient(180deg, #1391e8 0%, #128ee0 50%, #1187d8 100%);
+  border-left: 1px solid #0e6fc0;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- Window ---------- */
+/* The whole window is the blue Luna resize-frame; content sits inset by 3px on the sides
+   and bottom, while the title bar bleeds back out to span the full width. */
+.xp-window {
+  width: 506px;
+  background: #ece9d8;
+  border-radius: 8px 8px 0 0;
+  padding: 0 3px 3px 3px;
+  /* Exact Luna resize-frame: six layered inset shadows draw the 3px blue border. */
+  box-shadow:
+    inset -1px -1px #00138c,
+    inset 1px 1px #0831d9,
+    inset -2px -2px #001ea0,
+    inset 2px 2px #166aee,
+    inset -3px -3px #003bda,
+    inset 3px 3px #0855dd,
+    0 9px 28px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+.xp-titlebar {
+  display: flex;
+  align-items: center;
+  height: 27px;
+  margin: 0 -3px;
+  padding: 0 3px 0 5px;
+  background: var(--xp-title-active);
+  border-radius: 8px 8px 0 0;
+  border-top: 1px solid #0831d9;
+}
+.xp-title-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+  flex: none;
+}
+.xp-title-text {
+  flex: 1;
+  /* Genuine bitmap pixels (same face as the rest of the XP UI) — crisp and readable at this
+     small size, where the canvas-pixelation trick fell apart. */
+  font-family: "Pixelated MS Sans Serif", Tahoma, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: #fff;
+  -webkit-font-smoothing: none;
+  text-shadow: 1px 1px 0 #0f1089;
+  padding-left: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.xp-title-btns {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+/* Pixel-exact Luna caption buttons — the glyph SVGs are the real xp.css renderings. */
+.xp-tbtn {
+  width: 21px;
+  height: 21px;
+  display: block;
+  margin-left: 2px;
+  border: none;
+  box-shadow: none;
+  background-color: #0050ee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+.xp-tbtn-min {
+  background-image: url(/images/xp/min.svg);
+}
+.xp-tbtn-min:hover {
+  background-image: url(/images/xp/min-hover.svg);
+}
+.xp-tbtn-max {
+  background-image: url(/images/xp/max.svg);
+}
+.xp-tbtn-max:hover {
+  background-image: url(/images/xp/max-hover.svg);
+}
+.xp-tbtn-close {
+  cursor: pointer;
+  background-image: url(/images/xp/close.svg);
+}
+.xp-tbtn-close:hover {
+  background-image: url(/images/xp/close-hover.svg);
+}
+.xp-tbtn-close:active {
+  background-image: url(/images/xp/close-active.svg);
+}
+.xp-tbtn[data-disabled] {
+  opacity: 0.55;
+}
+
+/* ---------- Wizard body ---------- */
+/* Fixed height across every step so the window never resizes or re-centers between pages. */
+.xp-body {
+  display: flex;
+  flex-direction: column;
+  height: 308px;
+  background: var(--xp-face);
+}
+
+/* exterior (welcome / finish) pages */
+.xp-exterior {
+  display: flex;
+  height: 100%;
+  background: #fff;
+}
+.xp-banner {
+  width: 164px;
+  flex: none;
+  background:
+    radial-gradient(120% 80% at 30% 8%, rgba(255, 255, 255, 0.25), transparent 60%),
+    linear-gradient(165deg, #244ea8 0%, #1b3e90 40%, #16357d 70%, #0f2a66 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 10px;
+  position: relative;
+}
+.xp-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-right: 1px solid #b9b9a8;
+  pointer-events: none;
+}
+.xp-banner-art {
+  width: 136px;
+  height: auto;
+}
+.xp-banner-word {
+  margin-top: 20px;
+}
+.xp-banner-sub {
+  margin-top: 2px;
+  color: #b9cdf2;
+  font-size: 11px;
+  text-align: center;
+}
+.xp-exterior-main {
+  flex: 1;
+  padding: 22px 22px 12px 22px;
+  display: flex;
+  flex-direction: column;
+}
+.xp-exterior-title {
+  margin-bottom: 12px;
+}
+.xp-exterior-text {
+  font-family: var(--xp-font);
+  font-size: 11px;
+  line-height: 1.6;
+  color: #000;
+  -webkit-font-smoothing: none;
+}
+.xp-exterior-text p {
+  margin: 0 0 12px 0;
+}
+
+/* interior (license / location / components / installing) pages */
+.xp-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fff;
+  padding: 10px 12px 11px 16px;
+  border-bottom: 1px solid #b9b9a8;
+  box-shadow: inset 0 -1px 0 #fff;
+}
+.xp-header-text {
+  flex: 1;
+}
+.xp-header-title {
+  font-weight: 700;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+.xp-header-sub {
+  font-size: 11px;
+  padding-left: 12px;
+}
+.xp-header-icon {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+.xp-content {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.xp-content p {
+  margin: 0 0 10px 0;
+}
+
+/* ---------- Controls ---------- */
+/* Exact xp.css button. */
+.xp-btn {
+  box-sizing: border-box;
+  min-width: 75px;
+  min-height: 23px;
+  height: 23px;
+  padding: 0 12px;
+  font-family: var(--xp-font);
+  font-size: 11px;
+  color: #000;
+  background: linear-gradient(180deg, #fff, #ecebe5 86%, #d8d0c4);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.xp-btn:hover:not([disabled]) {
+  background: linear-gradient(180deg, #fff, #fdf6da 86%, #ffd98e);
+  border-color: #003c74;
+}
+.xp-btn:active:not([disabled]) {
+  background: linear-gradient(180deg, #cdc9bd, #e0ddd1 8%, #ebe9e2);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.xp-btn[disabled] {
+  color: #a0a0a0;
+  text-shadow: 1px 1px 0 #fff;
+  background: #ece9d8;
+  border-color: #91a7c4;
+  cursor: default;
+}
+/* A field-height button (e.g. Browse) so it lines up with a text input. */
+.xp-btn-field {
+  min-width: 0;
+  min-height: 21px;
+  height: 21px;
+  padding: 0 9px;
+}
+/* Default button keeps the focused blue ring XP draws on the primary action. */
+.xp-btn[data-default]:not([disabled]) {
+  box-shadow: 0 0 0 1px #5a8fdc;
+}
+/* XP focus: the dotted focus rectangle inset inside a button. */
+.xp-btn:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+}
+.xp-btn[data-default]:focus-visible {
+  outline-color: #000;
+}
+/* Text fields gain the blue focus border. */
+.xp-field:focus {
+  outline: none;
+  border-color: #2a6fd6;
+  border-top-color: #2a6fd6;
+  border-left-color: #2a6fd6;
+}
+/* Radios / checkboxes / list rows get the dotted focus marquee. */
+.xp-radio input:focus-visible,
+.xp-check input:focus-visible {
+  outline: 1px dotted #2a2a2a;
+  outline-offset: 2px;
+}
+.xp-comp-row:focus-visible {
+  outline: 1px dotted #fff;
+  outline-offset: -3px;
+}
+
+.xp-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  align-items: center;
+  padding: 9px 12px;
+  border-top: 1px solid #fff;
+  box-shadow: inset 0 1px 0 #aca899;
+  background: var(--xp-face);
+}
+.xp-footer-spacer {
+  flex: 1;
+}
+
+/* sunken group / fields */
+.xp-sunken {
+  background: #fff;
+  border: 1px solid #7f9db9;
+  border-top-color: #4a6a8a;
+  border-left-color: #4a6a8a;
+}
+.xp-eula {
+  height: 116px;
+  overflow-y: auto;
+  padding: 6px 8px;
+  font-size: 11px;
+  line-height: 1.45;
+  user-select: text;
+  cursor: auto;
+}
+.xp-eula h4 {
+  margin: 0 0 8px 0;
+  font-size: 11px;
+}
+.xp-eula p {
+  margin: 0 0 9px 0;
+}
+
+.xp-group {
+  border: 1px solid #aca899;
+  border-top-color: #fff;
+  border-left-color: #fff;
+  position: relative;
+  padding: 14px 12px 12px;
+  margin-top: 8px;
+}
+.xp-group > legend,
+.xp-group-label {
+  position: absolute;
+  top: -7px;
+  left: 9px;
+  background: var(--xp-face);
+  padding: 0 4px;
+  font-size: 11px;
+}
+
+.xp-field {
+  flex: 1;
+  height: 21px;
+  padding: 0 5px;
+  font-family: var(--xp-font);
+  font-size: 11px;
+  background: #fff;
+  border: 1px solid #7f9db9;
+  border-top-color: #4a6a8a;
+  border-left-color: #4a6a8a;
+  color: #000;
+}
+
+.xp-radio,
+.xp-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+.xp-radio input,
+.xp-check input {
+  margin: 1px 0 0 0;
+  accent-color: #316ac5;
+  cursor: pointer;
+}
+.xp-check[data-disabled],
+.xp-radio[data-disabled] {
+  cursor: default;
+  color: #84827b;
+}
+
+.xp-complist {
+  height: 96px;
+  overflow-y: auto;
+  padding: 5px 6px;
+}
+.xp-comp-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 4px;
+  border-radius: 0;
+  cursor: pointer;
+}
+.xp-comp-row[data-active] {
+  background: var(--xp-select);
+  color: #fff;
+}
+.xp-comp-row[data-disabled] {
+  cursor: default;
+}
+.xp-desc-box {
+  margin-top: 8px;
+  padding: 7px 8px;
+  min-height: 40px;
+  font-size: 11px;
+}
+
+/* retro "copying files" animation: pages flying from the DVD-ROM into a folder */
+.xp-copyanim {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px 12px;
+  margin-bottom: 4px;
+}
+.xp-copyflow {
+  position: relative;
+  flex: 1;
+  height: 26px;
+}
+.xp-copyflow::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 50%;
+  border-top: 1px dotted #9a9a8c;
+}
+.xp-page {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 11px;
+  height: 13px;
+  margin-top: -6px;
+  border: 1px solid #8a8a78;
+  /* a little document: blue title strip, faint text lines, white body */
+  background:
+    linear-gradient(#5b9bf8, #4a86ec) no-repeat 0 0 / 100% 3px,
+    repeating-linear-gradient(#c4d0e4 0 1px, transparent 1px 3px) no-repeat 1px 5px / 8px 7px,
+    #fff;
+  clip-path: polygon(0 0, 68% 0, 100% 26%, 100% 100%, 0 100%);
+  animation: xp-fly 1.7s linear infinite;
+}
+.xp-page:nth-child(2) {
+  animation-delay: 0.57s;
+}
+.xp-page:nth-child(3) {
+  animation-delay: 1.14s;
+}
+@keyframes xp-fly {
+  0% {
+    left: 0;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  12% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: calc(100% - 10px);
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xp-page {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* progress bar (XP segmented) */
+.xp-progress {
+  height: 17px;
+  padding: 1px;
+  background: #fff;
+  border: 1px solid #7f9db9;
+  border-top-color: #4a6a8a;
+  border-left-color: #4a6a8a;
+  display: flex;
+  gap: 1px;
+  overflow: hidden;
+}
+.xp-progress-seg {
+  width: 9px;
+  flex: none;
+  background: linear-gradient(180deg, #b4e08f 0%, #5db021 45%, #3f9012 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+.xp-log {
+  height: 70px;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding: 4px 6px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.xp-log div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.xp-link {
+  color: var(--xp-link);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- Message box (cancel confirm) ---------- */
+.xp-msg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.06);
+  display: grid;
+  place-items: center;
+  z-index: 30;
+}
+.xp-msgbox {
+  width: 322px;
+  background: var(--xp-face);
+  border: 1px solid var(--xp-frame);
+  border-top: none;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+}
+.xp-msg-body {
+  display: flex;
+  gap: 12px;
+  padding: 16px 16px 6px;
+}
+.xp-msg-icon {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+.xp-msg-text {
+  font-size: 11px;
+  padding-top: 2px;
+}
+.xp-msg-footer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 14px;
+}
+
+/* ---------- Terminal payoff window ---------- */
+.xp-term {
+  width: 460px;
+  background: #ece9d8;
+  border: 1px solid var(--xp-frame);
+  border-top: none;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+}
+.xp-term-screen {
+  background: #0a0a0a;
+  color: #d6d3c4;
+  font-family: "Commit Mono", "Lucida Console", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  height: 188px;
+  overflow: hidden;
+}
+.xp-term-screen .amber {
+  color: #ffb454;
+}
+.xp-term-screen .green {
+  color: #8ae234;
+}
+.xp-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: #d6d3c4;
+  vertical-align: text-bottom;
+  animation: xp-blink 1s steps(1) infinite;
+}
+@keyframes xp-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Mascot (post-install Office-Assistant-style helper) ---------- */
+/* Centered where the installer window was. */
+.mascot {
+  position: relative;
+  z-index: 60;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  animation: mascot-pop 0.42s cubic-bezier(0.22, 1.35, 0.4, 1) both;
+}
+@keyframes mascot-pop {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.mascot-bubble {
+  position: relative;
+  background: #ffffe1;
+  border: 1px solid #6a6a4a;
+  border-radius: 7px;
+  padding: 9px 10px;
+  box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.3);
+  font-family: var(--xp-font);
+  color: #000;
+}
+.mascot-bubble::after {
+  content: "";
+  position: absolute;
+  right: 32px;
+  bottom: -9px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-top: 10px solid #ffffe1;
+  filter: drop-shadow(1px 1px 0 #6a6a4a);
+}
+.mascot-you {
+  font-size: 10px;
+  color: #6a6a4a;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mascot-bubble-text {
+  font-size: 11px;
+  line-height: 1.5;
+  min-height: 34px;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+}
+.mascot-think {
+  color: #6a6a4a;
+  font-style: italic;
+}
+.mascot-caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  margin-left: 2px;
+  background: #555;
+  vertical-align: text-bottom;
+  animation: xp-blink 1s steps(1) infinite;
+}
+.mascot-form {
+  display: flex;
+  gap: 4px;
+}
+.mascot-form .xp-field {
+  flex: 1;
+}
+.mascot-char {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 26px;
+  margin-top: 2px;
+}
+.mascot-face {
+  display: block;
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.35));
+}
+.mascot-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-blink 3.6s infinite;
+}
+@keyframes mascot-blink {
+  0%,
+  93%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot,
+  .mascot-eyes {
+    animation: none;
+  }
+}
+
+/* ---------- Post-install run scene: Notepad++ behind, Claude mascot in front ---------- */
+.xp-run-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.xp-run-stack {
+  position: relative;
+}
+.xp-run-stack .xp-notepad {
+  position: relative;
+  z-index: 20;
+}
+/* Claude sits in front of the editor, perched over its bottom-right corner. */
+.xp-run-stack .mascot {
+  position: absolute;
+  right: -34px;
+  bottom: -48px;
+  z-index: 30;
+  margin: 0;
+}
+
+.xp-notepad {
+  width: 600px;
+}
+.np-menubar {
+  display: flex;
+  gap: 1px;
+  margin: 0;
+  padding: 2px 4px;
+  background: #ece9d8;
+  border-bottom: 1px solid #aca899;
+  box-shadow: inset 0 -1px 0 #fff;
+}
+.np-menu {
+  padding: 2px 7px 3px;
+  border-radius: 2px;
+}
+.np-menu:hover {
+  background: #316ac5;
+  color: #fff;
+}
+.np-editor {
+  display: flex;
+  height: 268px;
+  margin: 3px 0 2px;
+  background: #fff;
+  border: 1px solid #7f9db9;
+  border-top-color: #4a6a8a;
+  border-left-color: #4a6a8a;
+  overflow: hidden;
+  /* Period XP monospace (Lucida Console was Notepad's face; Courier New is the cross-platform
+     fallback). Antialiasing off below gives it the same crisp, faintly-pixelated edges the
+     bitmap UI text already has — no filter needed. */
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: none;
+}
+.np-gutter {
+  flex: none;
+  width: 30px;
+  padding: 5px 6px 5px 0;
+  text-align: right;
+  color: #9a9a9a;
+  background: #f3f3f3;
+  border-right: 1px solid #e2e2e2;
+  user-select: none;
+}
+.np-code {
+  flex: 1;
+  padding: 5px 0 5px 8px;
+  color: #1a1a1a;
+  white-space: pre;
+  overflow: auto;
+  user-select: text;
+  cursor: text;
+  font-weight: 600;
+}
+.np-cmt {
+  color: #1f9d3a;
+  font-style: italic;
+}
+.np-kw {
+  color: #0a48d6;
+  font-weight: 700;
+}
+.np-fn {
+  color: #8a2be2;
+}
+.np-str {
+  color: #9a7000;
+}
+.np-status {
+  display: flex;
+  margin: 0;
+  padding: 2px 0;
+  background: #ece9d8;
+  border-top: 1px solid #fff;
+  box-shadow: inset 0 1px 0 #aca899;
+  color: #3a3a3a;
+}
+.np-status span {
+  padding: 0 12px;
+  border-right: 1px solid #b8b4a3;
+}
+.np-status span:last-child {
+  border-right: none;
+}
