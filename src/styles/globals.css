@@ -155,6 +155,24 @@
     url(/fonts/pretendard/PretendardVariable.ttf) format("truetype");
 }
 
+/* MS Sans Serif (bitmap reproduction) — used only for the /claude-installation wizard headings
+   so they read as clean, chunky pixels. */
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  src: url(/fonts/ms-sans-serif/ms-sans-serif.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+  src: url(/fonts/ms-sans-serif/ms-sans-serif-bold.woff2) format("woff2");
+}
+
 @theme {
   --spacing-col: 248px;
   --aspect-a4: 1.4142857143/1;

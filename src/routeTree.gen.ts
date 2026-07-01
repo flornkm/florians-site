@@ -13,6 +13,7 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
 import { Route as ColophonRouteImport } from './routes/colophon'
+import { Route as ClaudeInstallationRouteImport } from './routes/claude-installation'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WritingIndexRouteImport } from './routes/writing/index'
@@ -36,6 +37,11 @@ const ExperimentsRoute = ExperimentsRouteImport.update({
 const ColophonRoute = ColophonRouteImport.update({
   id: '/colophon',
   path: '/colophon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaudeInstallationRoute = ClaudeInstallationRouteImport.update({
+  id: '/claude-installation',
+  path: '/claude-installation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -62,6 +68,7 @@ const WritingIdRoute = WritingIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claude-installation': typeof ClaudeInstallationRoute
   '/colophon': typeof ColophonRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claude-installation': typeof ClaudeInstallationRoute
   '/colophon': typeof ColophonRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claude-installation': typeof ClaudeInstallationRoute
   '/colophon': typeof ColophonRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/claude-installation'
     | '/colophon'
     | '/experiments'
     | '/imprint'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/claude-installation'
     | '/colophon'
     | '/experiments'
     | '/imprint'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/claude-installation'
     | '/colophon'
     | '/experiments'
     | '/imprint'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ClaudeInstallationRoute: typeof ClaudeInstallationRoute
   ColophonRoute: typeof ColophonRoute
   ExperimentsRoute: typeof ExperimentsRoute
   ImprintRoute: typeof ImprintRoute
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ColophonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/claude-installation': {
+      id: '/claude-installation'
+      path: '/claude-installation'
+      fullPath: '/claude-installation'
+      preLoaderRoute: typeof ClaudeInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ClaudeInstallationRoute: ClaudeInstallationRoute,
   ColophonRoute: ColophonRoute,
   ExperimentsRoute: ExperimentsRoute,
   ImprintRoute: ImprintRoute,
