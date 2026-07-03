@@ -333,7 +333,7 @@ function ColorLegend({ metric }: { metric: Metric }) {
   return (
     <div
       aria-hidden
-      className="flex items-center gap-2 font-serif text-xs leading-none text-tertiary"
+      className="flex items-center gap-2 font-serif text-xs font-normal italic leading-none text-tertiary"
     >
       <span>{low}</span>
       <span className="h-1.5 w-14" style={{ background: gradient }} />
