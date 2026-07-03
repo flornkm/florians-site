@@ -45,6 +45,8 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
+  "login-error": 800, // static login form, no boot animation
+  "variable-weight": 800, // static text sample at rest
   "drawer-drag": 1500, // two floating drawers slide in + the photo decodes
   "scrollbar-gutter": 1000, // land on the fully-typed / scrollbar-visible frame
   "shadow-ring": 1200, // spring settles

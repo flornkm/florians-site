@@ -1,4 +1,3 @@
-import { openai } from "@ai-sdk/openai";
 import type { UIMessage, UIMessageStreamWriter } from "ai";
 import {
   convertToModelMessages,
@@ -28,7 +27,7 @@ const suggestionsSchema = z.object({
   suggestions: z.array(z.string()),
 });
 
-const model = openai("gpt-4.1-nano");
+const model = "openai/gpt-4.1-nano";
 
 export async function POST(req: Request): Promise<Response> {
   try {

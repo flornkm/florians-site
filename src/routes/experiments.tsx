@@ -7,11 +7,13 @@ import { FontSmoothing } from "@/features/experiments/components/font-smoothing-
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
+import { LoginError } from "@/features/experiments/components/login-error-demo";
 import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
 import { ScrollbarGutter } from "@/features/experiments/components/scrollbar-gutter-demo";
 import { ShadowRing } from "@/features/experiments/components/shadow-ring-demo";
 import { SlopDetector } from "@/features/experiments/components/slop-detector";
 import { TextShimmerExperiment } from "@/features/experiments/components/text-shimmer-demo";
+import { VariableWeight } from "@/features/experiments/components/variable-weight-demo";
 import { VideoPlayerExperiment } from "@/features/experiments/components/video-player-demo";
 import { ExperimentDrawer } from "@/features/experiments/components/experiment-drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -52,6 +54,8 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("login-error", "Login", "UX", LoginError),
+  experiment("variable-weight", "Variable Weight", "Type", VariableWeight),
   experiment("drawer-drag", "Drawer", "Base UI", DragImageDrawer),
   experiment("shadow-ring", "Shadow Ring", "Shadow", ShadowRing),
   experiment("scrollbar-gutter", "Scrollbar Gutter", "Layout", ScrollbarGutter),

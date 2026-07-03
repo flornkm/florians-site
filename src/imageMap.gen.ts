@@ -127,6 +127,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     thumbhash: "6fchDIB4d4h/iHiEd3e1zrCvJw==",
     widths: [640, 1280, 2048],
   },
+  "/images/google-logo.svg": { width: 268.1522, height: 273.8827, thumbhash: null },
   "/images/icons/favicon-dark.svg": { width: 16, height: 16, thumbhash: null },
   "/images/icons/favicon.svg": { width: 16, height: 16, thumbhash: null },
   "/images/institutions/hfg-logo.svg": { width: 620, height: 200, thumbhash: null },
@@ -307,6 +308,5 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   },
   "/images/writing/code-from-all-sides.svg": { width: 600, height: 270, thumbhash: null },
   "/images/writing/cost-of-software.svg": { width: 600, height: 210, thumbhash: null },
-  "/images/writing/italic-vs-oblique.svg": { width: 600, height: 200, thumbhash: null },
   "/images/writing/knowing-what-to-ship.svg": { width: 600, height: 240, thumbhash: null },
 };
