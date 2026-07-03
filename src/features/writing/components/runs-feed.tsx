@@ -1,5 +1,7 @@
 import { Body2 } from "@/components/design-system/body";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { IconChevronBottom } from "central-icons/IconChevronBottom";
 import { useQuery } from "@tanstack/react-query";
 import { useInView, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -14,34 +16,87 @@ type Run = {
   movingSeconds: number;
   elapsedSeconds: number;
   path: RoutePath | null;
+  temperature: number | null;
+  temperatures: number[] | null;
+  averageHeartRate: number | null;
+  heartRates: number[] | null;
+  description: string | null;
 };
+
+type Metric = "temperature" | "heartrate";
 
 // Keeps the stroke from clipping at the edges of the normalized viewBox.
 const ROUTE_PADDING = 6;
 
-// Colors from the /writing/runs post icon, so the tracing pointer reads as the same accent.
-const ROUTE_POINTER_FILL = "#6fae9f";
-const ROUTE_POINTER_BORDER = "#171717";
+// Neutral fallback when the selected metric has no data for a run — resolves to the SVG's
+// own text color (text-primary) so those runs still read as a normal line.
+const NEUTRAL = "currentColor";
 
-// Rendered half-length of the pointer, in CSS px. Kept constant across routes by sizing the
-// arrow geometry against the measured user→screen scale (see RunRoute).
-const POINTER_SIZE_PX = 8;
+type Ramp = { at: number; rgb: [number, number, number] }[];
 
-// An arrowhead pointing along +x (rotated to the path heading at render time), centered on the
-// origin so it rides the route at its current point. `size` is in viewBox units.
-function pointerPath(size: number): string {
-  const tip = size;
-  const back = -size * 0.7;
-  const wing = size * 0.82;
-  const notch = -size * 0.25;
-  return `M ${tip} 0 L ${back} ${-wing} L ${notch} 0 L ${back} ${wing} Z`;
+// Absolute temperature scale on the site's accent palette (blue → sage → gold → orange),
+// used for the uniform-line fallback when a run has no per-point series.
+const TEMP_STOPS: Ramp = [
+  { at: 0, rgb: [126, 156, 196] }, // cold
+  { at: 12, rgb: [111, 174, 159] }, // mild
+  { at: 22, rgb: [202, 168, 74] }, // warm
+  { at: 32, rgb: [232, 100, 60] }, // hot
+];
+
+// The same palette over 0→1, for the line itself. Each run's series is normalized to its
+// own min→max before sampling, so even a 1–2°C or few-bpm swing spreads across the full
+// palette and reads as a visible gradient — relative within a run, absolute in the readout.
+const LINE_RAMP: Ramp = [
+  { at: 0, rgb: [126, 156, 196] },
+  { at: 0.38, rgb: [111, 174, 159] },
+  { at: 0.7, rgb: [202, 168, 74] },
+  { at: 1, rgb: [232, 100, 60] },
+];
+
+// A run with a nearly flat series shouldn't stretch sensor noise into a full rainbow —
+// below this span the gradient stays intentionally mild.
+const MIN_SPAN: Record<Metric, number> = { temperature: 2, heartrate: 12 };
+
+// Per-point colors for a series, normalized to its own range (centered when the floor kicks in).
+function seriesColors(metric: Metric, series: number[]): string[] {
+  let min = Infinity;
+  let max = -Infinity;
+  for (const v of series) {
+    if (v < min) min = v;
+    if (v > max) max = v;
+  }
+  const span = Math.max(max - min, MIN_SPAN[metric]);
+  const lo = (min + max) / 2 - span / 2;
+  return series.map((v) => rampColor(LINE_RAMP, (v - lo) / span));
+}
+
+function toRgb([r, g, b]: [number, number, number]): string {
+  return `rgb(${Math.round(r)} ${Math.round(g)} ${Math.round(b)})`;
+}
+
+function rampColor(stops: Ramp, value: number): string {
+  const first = stops[0];
+  const last = stops[stops.length - 1];
+  if (value <= first.at) return toRgb(first.rgb);
+  if (value >= last.at) return toRgb(last.rgb);
+  for (let i = 0; i < stops.length - 1; i++) {
+    const a = stops[i];
+    const b = stops[i + 1];
+    if (value <= b.at) {
+      const t = (value - a.at) / (b.at - a.at || 1);
+      return toRgb([
+        a.rgb[0] + (b.rgb[0] - a.rgb[0]) * t,
+        a.rgb[1] + (b.rgb[1] - a.rgb[1]) * t,
+        a.rgb[2] + (b.rgb[2] - a.rgb[2]) * t,
+      ]);
+    }
+  }
+  return toRgb(last.rgb);
 }
 
 type RouteGeometry = { points: [number, number][]; cum: number[]; total: number };
 
-// Parse the normalized polyline into points + cumulative arc-lengths. The draw grows the path's
-// own `d` (pure geometry) rather than animating stroke-dash / pathLength / mask / offset-path — all
-// of which misrender on iOS Safari. setAttribute("d", …) renders identically everywhere.
+// Parse the normalized polyline into points + cumulative arc-lengths.
 function parsePolyline(d: string): RouteGeometry {
   const nums = (d.match(/-?\d*\.?\d+/g) ?? []).map(Number);
   const points: [number, number][] = [];
@@ -55,30 +110,6 @@ function parsePolyline(d: string): RouteGeometry {
   return { points, cum, total: cum[cum.length - 1] || 1 };
 }
 
-// The route drawn up to progress p (0→1 along arc-length): the partial `d`, plus the leading
-// point and heading so the marker can ride the tip.
-function routeAtProgress(geom: RouteGeometry, p: number) {
-  const { points, cum, total } = geom;
-  const start = points[0];
-  const target = p * total;
-  if (target <= 0) return { d: "", x: start[0], y: start[1], angle: 0 };
-
-  let i = 0;
-  while (i < points.length - 2 && cum[i + 1] < target) i++;
-  const a = points[i];
-  const b = points[i + 1] ?? a;
-  const segLength = cum[i + 1] - cum[i] || 1;
-  const t = Math.min(1, Math.max(0, (target - cum[i]) / segLength));
-  const x = a[0] + (b[0] - a[0]) * t;
-  const y = a[1] + (b[1] - a[1]) * t;
-
-  let d = `M${start[0]} ${start[1]}`;
-  for (let k = 1; k <= i; k++) d += `L${points[k][0]} ${points[k][1]}`;
-  d += `L${x} ${y}`;
-  const angle = (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180) / Math.PI;
-  return { d, x, y, angle };
-}
-
 function formatKm(meters: number): string {
   return (meters / 1000).toLocaleString("en-US", {
     minimumFractionDigits: 1,
@@ -86,11 +117,11 @@ function formatKm(meters: number): string {
   });
 }
 
-function formatDuration(seconds: number): string {
+function formatDuration(seconds: number): { value: string; unit: string } {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
-  if (hours > 0) return `${hours}h ${String(minutes).padStart(2, "0")}m`;
-  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
+  if (hours > 0) return { value: `${hours}:${String(minutes).padStart(2, "0")}`, unit: "hrs" };
+  return { value: `${minutes}:${String(seconds % 60).padStart(2, "0")}`, unit: "mins" };
 }
 
 // Strava's start_date_local is already the athlete's wall-clock time (with a misleading
@@ -115,34 +146,62 @@ async function fetchRuns(): Promise<Run[]> {
   return data.runs;
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function Stat({ value, unit }: { value: string; unit: string }) {
   return (
-    <div className="flex flex-col">
-      <span className="font-mono text-2xl fw-medium tracking-[-0.02em] text-primary">{value}</span>
-      <span className="mt-1 text-xs text-tertiary">{label}</span>
-    </div>
+    <span className="text-2xl font-medium tracking-[-0.02em] text-primary">
+      {value} <span className="text-quaternary">{unit}</span>
+    </span>
   );
 }
 
 const DRAW_DURATION = 2.8;
 
-function RunRoute({ path }: { path: RoutePath | null }) {
+function RunRoute({
+  path,
+  metric,
+  onMetricChange,
+  temperature,
+  temperatures,
+  heartRates,
+}: {
+  path: RoutePath | null;
+  metric: Metric;
+  onMetricChange: (m: Metric) => void;
+  temperature: number | null;
+  temperatures: number[] | null;
+  heartRates: number[] | null;
+}) {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<SVGPathElement>(null);
-  const arrowRef = useRef<SVGPathElement>(null);
+  const groupRef = useRef<SVGGElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.35 });
   const geom = useMemo(() => (path ? parsePolyline(path.d) : null), [path]);
 
-  // The line and arrow both scale with the route as it fills the box. Measure the user→screen
-  // scale (it shifts with the column width) and size them inversely so they render at a constant px.
+  // One color per segment, normalized to the run's own range so even small swings read as a
+  // gradient. Temperature falls back to a uniform absolute color for runs without a series.
+  const segmentColors = useMemo(() => {
+    if (!geom) return [];
+    const segmentCount = geom.points.length - 1;
+    const series = metric === "temperature" ? temperatures : heartRates;
+    if (series && series.length) {
+      return seriesColors(metric, series.slice(0, segmentCount));
+    }
+    const uniform =
+      metric === "temperature" && temperature != null
+        ? rampColor(TEMP_STOPS, temperature)
+        : NEUTRAL;
+    return Array.from({ length: segmentCount }, () => uniform);
+  }, [geom, metric, temperature, temperatures, heartRates]);
+
+  // The line scales with the route as it fills the box. Measure the user→screen scale (it shifts
+  // with the column width) and size the stroke inversely so it renders at a constant px width.
   const [scale, setScale] = useState(5);
 
   useEffect(() => {
-    const line = lineRef.current;
-    if (!line) return;
+    const group = groupRef.current;
+    if (!group) return;
     const measure = () => {
-      const ctm = line.getScreenCTM();
+      const ctm = group.getScreenCTM();
       if (ctm) setScale(Math.hypot(ctm.a, ctm.b) || 5);
     };
     measure();
@@ -151,23 +210,34 @@ function RunRoute({ path }: { path: RoutePath | null }) {
     return () => observer.disconnect();
   }, [path]);
 
-  // Draw the line by growing its own `d` and ride the marker on the tip, from one 0→1 progress on a
-  // plain requestAnimationFrame loop. Only geometry (`d`) and a transform change per frame — both
-  // render identically in every browser, unlike stroke-dash / pathLength / mask / offset-path, which
-  // all misbehave on iOS Safari.
+  // Draw by growing each segment's own `d` on a plain requestAnimationFrame loop. Only geometry
+  // (`d`) changes per frame, which renders identically everywhere — unlike stroke-dash / pathLength
+  // / mask / offset-path, which all misbehave on iOS Safari. Segments (vs one path) let each stretch
+  // carry its own color for the gradient.
   useEffect(() => {
-    const line = lineRef.current;
-    if (!geom) return;
+    const group = groupRef.current;
+    if (!geom || !group) return;
+    const { points, cum, total } = geom;
 
     const render = (p: number) => {
-      const state = routeAtProgress(geom, p);
-      line?.setAttribute("d", state.d);
-      const arrow = arrowRef.current;
-      if (!arrow) return;
-      arrow.setAttribute("transform", `translate(${state.x} ${state.y}) rotate(${state.angle})`);
-      // Fade in at the start, ride the tip, fade out into the finish.
-      const fade = p <= 0.06 ? p / 0.06 : p >= 0.88 ? Math.max(0, (1 - p) / 0.12) : 1;
-      arrow.style.opacity = String(fade);
+      const target = p * total;
+      for (let i = 0; i < points.length - 1; i++) {
+        const seg = group.children[i] as SVGPathElement | undefined;
+        if (!seg) continue;
+        const a = points[i];
+        const b = points[i + 1];
+        if (target >= cum[i + 1]) {
+          seg.setAttribute("d", `M${a[0]} ${a[1]}L${b[0]} ${b[1]}`);
+        } else if (target <= cum[i]) {
+          seg.setAttribute("d", "");
+        } else {
+          const t = (target - cum[i]) / (cum[i + 1] - cum[i] || 1);
+          seg.setAttribute(
+            "d",
+            `M${a[0]} ${a[1]}L${a[0] + (b[0] - a[0]) * t} ${a[1] + (b[1] - a[1]) * t}`,
+          );
+        }
+      }
     };
 
     render(0);
@@ -196,10 +266,7 @@ function RunRoute({ path }: { path: RoutePath | null }) {
   const height = path.h + ROUTE_PADDING * 2;
   const viewBox = `${origin} ${origin} ${width} ${height}`;
   return (
-    <div
-      ref={ref}
-      className="mt-5 h-[26rem] w-full rounded-sm bg-secondary p-3 md:h-[34rem] md:p-5"
-    >
+    <div ref={ref} className="relative mt-5 h-[26rem] w-full bg-secondary p-3 md:h-[34rem] md:p-5">
       <svg
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
@@ -210,45 +277,96 @@ function RunRoute({ path }: { path: RoutePath | null }) {
         className="h-full w-full text-primary"
         aria-hidden="true"
       >
-        {/* `d` is set imperatively by the draw loop, so it isn't passed here (React would clobber it). */}
-        <path ref={lineRef} strokeWidth={1.5 / scale} />
-        {/* A green arrow rides the leading edge of the draw, pointing the way the route is run
-            (heading sampled from the path), then fades out at the finish. Positioned imperatively
-            via a transform; its border stays crisp via non-scaling-stroke. */}
-        <path
-          ref={arrowRef}
-          d={pointerPath(POINTER_SIZE_PX / scale)}
-          fill={ROUTE_POINTER_FILL}
-          stroke={ROUTE_POINTER_BORDER}
-          strokeWidth={1.4}
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          style={{ opacity: 0 }}
-        />
+        {/* Each segment's `d` is set imperatively by the draw loop, so it isn't passed here (React
+            would clobber it); only the per-segment color + stroke width flow through props. */}
+        <g ref={groupRef}>
+          {segmentColors.map((color, i) => (
+            <path key={i} stroke={color} strokeWidth={1.5 / scale} />
+          ))}
+        </g>
       </svg>
+
+      {/* Map-style controls in the box corners: toggle left, color key right. */}
+      <div className="absolute bottom-3 left-3 md:bottom-5 md:left-5">
+        <MetricSwitch metric={metric} onChange={onMetricChange} />
+      </div>
+      <div className="absolute bottom-3 right-3 md:bottom-5 md:right-5">
+        <ColorLegend metric={metric} />
+      </div>
     </div>
   );
 }
 
+// Hanging gutter left of the content column on desktop — shared by the km stat and the
+// "AI Summary:" label so their LEFT edges align. The width is sized to the label
+// ("AI Summary:" ≈ 5.4rem), keeping both close to the column; wider values (14.1 km)
+// overflow rightward into the margin gap, which is harmless. nowrap: absolutely
+// positioned boxes shrink-wrap to min-content and would break "5.0 km" in two.
+const GUTTER = "md:absolute md:right-full md:top-0 md:mr-3 md:w-[5.5rem] md:whitespace-nowrap";
+
 function RunStats({ run }: { run: Run }) {
+  const duration = formatDuration(run.movingSeconds);
+
   return (
-    <div className="mx-auto flex w-full max-w-[460px] items-start justify-between">
-      <div className="flex gap-6">
-        <Stat value={formatKm(run.distanceMeters)} label="km" />
-        <Stat value={formatDuration(run.movingSeconds)} label="duration" />
+    <div className="relative mx-auto flex w-full max-w-[460px] items-start justify-between">
+      <div className="flex items-baseline gap-6">
+        {/* Hangs in the left gutter on desktop (over the AI Summary label below), leaving
+            the mins stat on the column's left edge; inline next to mins on mobile. */}
+        <span className={GUTTER}>
+          <Stat value={formatKm(run.distanceMeters)} unit="km" />
+        </span>
+        <Stat value={duration.value} unit={duration.unit} />
       </div>
       <span className="text-sm text-tertiary">{formatDate(run.startDate)}</span>
     </div>
   );
 }
 
-function StatSkeleton({ valueWidth }: { valueWidth: string }) {
+// Legend for the line colors, cool to warm. The line is normalized per run, so the honest
+// labels are the range endpoints, not absolute values.
+function ColorLegend({ metric }: { metric: Metric }) {
+  const [low, high] = metric === "temperature" ? ["Cooler", "Warmer"] : ["Easy", "Hard"];
+  // The bar is the real ramp, not an approximation — built from the same stops the line samples.
+  const gradient = `linear-gradient(to right, ${LINE_RAMP.map(
+    (stop) => `${toRgb(stop.rgb)} ${stop.at * 100}%`,
+  ).join(", ")})`;
   return (
-    <div className="flex flex-col gap-1.5">
-      <div className={cn("h-7 animate-pulse rounded-sm bg-tertiary", valueWidth)} />
-      <div className="h-2.5 w-8 animate-pulse rounded-sm bg-tertiary" />
+    <div
+      aria-hidden
+      className="flex items-center gap-2 font-serif text-xs leading-none text-tertiary"
+    >
+      <span>{low}</span>
+      <span className="h-1.5 w-14" style={{ background: gradient }} />
+      <span>{high}</span>
     </div>
   );
+}
+
+// Plain select in the button primitive's ghost (tertiary) style plus a hairline outline,
+// sized to sit inside the route box like a map control.
+function MetricSwitch({ metric, onChange }: { metric: Metric; onChange: (m: Metric) => void }) {
+  return (
+    <div className="relative">
+      <select
+        aria-label="Route color metric"
+        value={metric}
+        onChange={(e) => onChange(e.target.value as Metric)}
+        className={cn(
+          buttonVariants({ variant: "tertiary", size: "sm" }),
+          "appearance-none bg-transparent pl-2 pr-7 shadow-ring-xs",
+          "outline-none focus-visible:ring-2 focus-visible:ring-default",
+        )}
+      >
+        <option value="temperature">°C</option>
+        <option value="heartrate">bpm</option>
+      </select>
+      <IconChevronBottom className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-tertiary" />
+    </div>
+  );
+}
+
+function StatSkeleton({ valueWidth }: { valueWidth: string }) {
+  return <div className={cn("h-7 animate-pulse rounded-sm bg-tertiary", valueWidth)} />;
 }
 
 // Mirrors the loaded layout exactly: same root <div> (so prose's max-w rule doesn't cap the
@@ -256,21 +374,55 @@ function StatSkeleton({ valueWidth }: { valueWidth: string }) {
 function RunsSkeleton() {
   return (
     <div className="not-prose mt-12 w-full">
-      <ul className="flex flex-col gap-16">
+      <ul className="flex flex-col gap-20">
         {Array.from({ length: 2 }).map((_, index) => (
           <li key={index}>
-            <div className="mx-auto flex w-full max-w-[460px] items-start justify-between">
+            <div className="relative mx-auto flex w-full max-w-[460px] items-start justify-between">
               <div className="flex gap-6">
-                <StatSkeleton valueWidth="w-14" />
+                <span className={GUTTER}>
+                  <StatSkeleton valueWidth="w-14" />
+                </span>
                 <StatSkeleton valueWidth="w-20" />
               </div>
               <div className="h-3.5 w-24 animate-pulse rounded-sm bg-tertiary" />
             </div>
-            <div className="mt-5 h-[26rem] w-full animate-pulse rounded-sm bg-tertiary md:h-[34rem]" />
+            <div className="mx-auto mt-3 w-full max-w-[460px] space-y-1.5">
+              <div className="h-3.5 w-full animate-pulse rounded-sm bg-tertiary" />
+              <div className="h-3.5 w-2/3 animate-pulse rounded-sm bg-tertiary" />
+            </div>
+            <div className="mt-5 h-[26rem] w-full animate-pulse bg-tertiary md:h-[34rem]" />
           </li>
         ))}
       </ul>
     </div>
+  );
+}
+
+// Each entry carries its own metric toggle, so one run can show temperature while the
+// next shows heart rate.
+function RunItem({ run }: { run: Run }) {
+  const [metric, setMetric] = useState<Metric>("temperature");
+  return (
+    <li>
+      <RunStats run={run} />
+      {run.description && (
+        <p className="relative mx-auto mt-3 w-full max-w-[460px] text-balance text-sm leading-[1.5] text-primary">
+          {/* Hangs in the left margin on desktop (baseline-aligned via matching text size and
+              leading) so the note text keeps the column's left edge; inline on mobile where
+              there's no margin to hang into. */}
+          <span className={cn("font-serif font-medium italic", GUTTER)}>AI Summary: </span>
+          {run.description}
+        </p>
+      )}
+      <RunRoute
+        path={run.path}
+        metric={metric}
+        onMetricChange={setMetric}
+        temperature={run.temperature}
+        temperatures={run.temperatures}
+        heartRates={run.heartRates}
+      />
+    </li>
   );
 }
 
@@ -291,12 +443,9 @@ export function RunsFeed() {
 
   return (
     <div className="not-prose mt-12 w-full">
-      <ul className="flex flex-col gap-16">
+      <ul className="flex flex-col gap-20">
         {runs.map((run) => (
-          <li key={run.id}>
-            <RunStats run={run} />
-            <RunRoute path={run.path} />
-          </li>
+          <RunItem key={run.id} run={run} />
         ))}
       </ul>
     </div>

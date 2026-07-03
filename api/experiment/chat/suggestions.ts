@@ -1,4 +1,3 @@
-import { openai } from "@ai-sdk/openai";
 import { streamObject } from "ai";
 import { z } from "zod";
 
@@ -9,7 +8,7 @@ const suggestionsSchema = z.object({
 export async function POST(): Promise<Response> {
   try {
     const result = streamObject({
-      model: openai("gpt-4.1-nano"),
+      model: "openai/gpt-4.1-nano",
       prompt:
         "Suggest 3 short, interesting questions a user might ask a general-purpose AI assistant. Topics: science, history, coding, fun facts, how things work. Under 40 chars each, casual tone, vary them each time.",
       schema: suggestionsSchema,

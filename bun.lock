@@ -4,7 +4,6 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "@ai-sdk/openai": "^2.0.30",
         "@ai-sdk/react": "^2.0.44",
         "@base-ui/react": "^1.2.0",
         "@mdx-js/react": "^3.1.1",
@@ -32,7 +31,6 @@
         "media-chrome": "^4.19.0",
         "motion": "^12.34.0",
         "nitro": "^3.0.1-20260312-093400-ba5147a5",
-        "openai": "^5.20.2",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "remark-frontmatter": "^5.0.0",
@@ -70,8 +68,6 @@
   },
   "packages": {
     "@ai-sdk/gateway": ["@ai-sdk/gateway@2.0.35", "", { "dependencies": { "@ai-sdk/provider": "2.0.1", "@ai-sdk/provider-utils": "3.0.20", "@vercel/oidc": "3.1.0" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-fMzhC9artgY2s2GgXEWB+cECRJEHHoFJKzDpzsuneguNQ656vydPHhvDdoMjbWW+UtLc4nGf3VwlqG0t4FeQ/w=="],
-
-    "@ai-sdk/openai": ["@ai-sdk/openai@2.0.89", "", { "dependencies": { "@ai-sdk/provider": "2.0.1", "@ai-sdk/provider-utils": "3.0.20" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-4+qWkBCbL9HPKbgrUO/F2uXZ8GqrYxHa8SWEYIzxEJ9zvWw3ISr3t1/27O1i8MGSym+PzEyHBT48EV4LAwWaEw=="],
 
     "@ai-sdk/provider": ["@ai-sdk/provider@2.0.1", "", { "dependencies": { "json-schema": "^0.4.0" } }, "sha512-KCUwswvsC5VsW2PWFqF8eJgSCu5Ysj7m1TxiHTVA6g7k360bk0RNQENT8KTMAYEs+8fWPD3Uu4dEmzGHc+jGng=="],
 
@@ -1372,8 +1368,6 @@
     "ohm-js": ["ohm-js@17.3.0", "", {}, "sha512-LySMdjweN1hKBMMV8lM44+1wiewkndDNNJxtgVAscs7y683MXCdQZLsIaw64/p8NuqYbKOWZoHIOA5DU/xchoA=="],
 
     "once": ["once@1.4.0", "", { "dependencies": { "wrappy": "1" } }, "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w=="],
-
-    "openai": ["openai@5.23.2", "", { "peerDependencies": { "ws": "^8.18.0", "zod": "^3.23.8" }, "optionalPeers": ["ws", "zod"], "bin": { "openai": "bin/cli" } }, "sha512-MQBzmTulj+MM5O8SKEk/gL8a7s5mktS9zUtAkU257WjvobGc9nKcBuVwjyEEcb9SI8a8Y2G/mzn3vm9n1Jlleg=="],
 
     "oxfmt": ["oxfmt@0.40.0", "", { "dependencies": { "tinypool": "2.1.0" }, "optionalDependencies": { "@oxfmt/binding-android-arm-eabi": "0.40.0", "@oxfmt/binding-android-arm64": "0.40.0", "@oxfmt/binding-darwin-arm64": "0.40.0", "@oxfmt/binding-darwin-x64": "0.40.0", "@oxfmt/binding-freebsd-x64": "0.40.0", "@oxfmt/binding-linux-arm-gnueabihf": "0.40.0", "@oxfmt/binding-linux-arm-musleabihf": "0.40.0", "@oxfmt/binding-linux-arm64-gnu": "0.40.0", "@oxfmt/binding-linux-arm64-musl": "0.40.0", "@oxfmt/binding-linux-ppc64-gnu": "0.40.0", "@oxfmt/binding-linux-riscv64-gnu": "0.40.0", "@oxfmt/binding-linux-riscv64-musl": "0.40.0", "@oxfmt/binding-linux-s390x-gnu": "0.40.0", "@oxfmt/binding-linux-x64-gnu": "0.40.0", "@oxfmt/binding-linux-x64-musl": "0.40.0", "@oxfmt/binding-openharmony-arm64": "0.40.0", "@oxfmt/binding-win32-arm64-msvc": "0.40.0", "@oxfmt/binding-win32-ia32-msvc": "0.40.0", "@oxfmt/binding-win32-x64-msvc": "0.40.0" }, "bin": { "oxfmt": "bin/oxfmt" } }, "sha512-g0C3I7xUj4b4DcagevM9kgH6+pUHytikxUcn3/VUkvzTNaaXBeyZqb7IBsHwojeXm4mTBEC/aBjBTMVUkZwWUQ=="],
 
