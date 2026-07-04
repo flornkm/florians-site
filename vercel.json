@@ -5,6 +5,10 @@
   "crons": [{ "path": "/api/runs/sync", "schedule": "0 4 * * *" }],
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [
         { "key": "Vary", "value": "Origin" },
