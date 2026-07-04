@@ -30,6 +30,9 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       { title: "Florian Design Engineer" },
+      // Keep the site out of search engines entirely (paired with the
+      // X-Robots-Tag header in vercel.json for non-HTML responses).
+      { name: "robots", content: "noindex, nofollow" },
       {
         name: "description",
         content:
