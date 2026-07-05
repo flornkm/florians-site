@@ -2,6 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "bun run build",
   "outputDirectory": ".output",
+  "functions": {
+    "api/runs/sync.ts": { "maxDuration": 60 }
+  },
   "crons": [{ "path": "/api/runs/sync", "schedule": "0 4 * * *" }],
   "headers": [
     {
