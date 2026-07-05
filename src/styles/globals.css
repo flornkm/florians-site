@@ -142,7 +142,9 @@ body:has([data-block-scroll]) {
   @apply outline-0 outline-transparent;
 }
 
-:focus-visible:not(input):not(textarea) {
+/* [data-focus-via="pointer"] opts out elements (e.g. <select>) that browsers consider
+   :focus-visible even when focused with the mouse. */
+:focus-visible:not(input):not(textarea):not([data-focus-via="pointer"]) {
   @apply outline-2 outline-offset-2 outline-blue-300 transition-all duration-150;
 }
 

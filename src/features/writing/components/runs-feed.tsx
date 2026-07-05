@@ -343,18 +343,33 @@ function ColorLegend({ metric }: { metric: Metric }) {
 }
 
 // Plain select in the button primitive's ghost (tertiary) style plus a hairline outline,
-// sized to sit inside the route box like a map control.
+// sized to sit inside the route box like a map control. The focus outline comes from the
+// global :focus-visible rule (same offset ring as buttons), but browsers treat a focused
+// <select> as :focus-visible even for mouse focus — so track the modality ourselves and
+// mark pointer-initiated focus, which the global rule skips.
 function MetricSwitch({ metric, onChange }: { metric: Metric; onChange: (m: Metric) => void }) {
+  const pointerDownRef = useRef(false);
+  const [pointerFocused, setPointerFocused] = useState(false);
+
   return (
     <div className="relative">
       <select
         aria-label="Route color metric"
         value={metric}
         onChange={(e) => onChange(e.target.value as Metric)}
+        onPointerDown={() => {
+          pointerDownRef.current = true;
+        }}
+        onFocus={() => {
+          setPointerFocused(pointerDownRef.current);
+          pointerDownRef.current = false;
+        }}
+        onBlur={() => setPointerFocused(false)}
+        onKeyDown={() => setPointerFocused(false)}
+        data-focus-via={pointerFocused ? "pointer" : undefined}
         className={cn(
           buttonVariants({ variant: "tertiary", size: "sm" }),
           "appearance-none bg-transparent pl-2 pr-7 shadow-ring-xs",
-          "outline-none focus-visible:ring-2 focus-visible:ring-default",
         )}
       >
         <option value="temperature">°C</option>
