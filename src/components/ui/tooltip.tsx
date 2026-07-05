@@ -55,16 +55,6 @@ export default function Tooltip({ children, content, className, style }: Tooltip
             )}
           >
             <Body3 className="text-inverted whitespace-nowrap">{content}</Body3>
-            <BaseTooltip.Arrow
-              className={cn(
-                "data-[side=bottom]:top-[-4px]",
-                "data-[side=top]:bottom-[-4px]",
-                "data-[side=left]:right-[-4px]",
-                "data-[side=right]:left-[-4px]",
-              )}
-            >
-              <div className="w-2 h-2 bg-surface-inverted rounded-[2px] rotate-45" />
-            </BaseTooltip.Arrow>
           </BaseTooltip.Popup>
         </BaseTooltip.Positioner>
       </BaseTooltip.Portal>
