@@ -10,13 +10,20 @@ const STRAVA_ACTIVITY_URL = "https://www.strava.com/api/v3/activities";
 // Only ever sync runs from this date onward (the live post starts in May 2026).
 const SYNC_AFTER_EPOCH = Math.floor(Date.UTC(2026, 4, 1) / 1000); // 2026-05-01
 
-const RUN_TYPES = new Set(["Run", "TrailRun", "VirtualRun"]);
+// Outdoor runs only — VirtualRun (Zwift etc.) is deliberately excluded, and trainer
+// covers treadmill runs that Strava still files under plain "Run".
+const RUN_TYPES = new Set(["Run", "TrailRun"]);
+
+function isOutdoorRun(activity: StravaActivity): boolean {
+  return RUN_TYPES.has(activity.sport_type) && !activity.trainer;
+}
 
 export type { RoutePath };
 
 type StravaActivity = {
   id: number;
   sport_type: string;
+  trainer?: boolean;
   start_date: string;
   start_date_local?: string;
   distance: number;
@@ -169,12 +176,13 @@ async function toStoredRun(
   };
 }
 
-// Re-syncs the whole window every call (idempotent upsert by Strava id), so a
-// missed trigger self-heals on the next run or the daily cron.
+// Re-syncs the whole window every call and replaces the stored set wholesale, so a
+// missed trigger self-heals on the next run or the daily cron — and runs that no longer
+// qualify (e.g. indoor runs synced before the filter existed) get deleted, not orphaned.
 export async function syncRuns(): Promise<{ synced: number; total: number }> {
   const accessToken = await getAccessToken();
   const activities = await fetchActivities(accessToken);
-  const runs = activities.filter((a) => RUN_TYPES.has(a.sport_type));
+  const runs = activities.filter(isOutdoorRun);
 
   // Existing runs carry already-fetched temp/HR so toStoredRun can skip re-fetching them.
   const existingSnap = await db.ref("runs").once("value");
@@ -213,7 +221,7 @@ export async function syncRuns(): Promise<{ synced: number; total: number }> {
     );
   }
 
-  await Promise.all(stored.map((run) => db.ref(`runs/${run.id}`).set(run)));
+  await db.ref("runs").set(Object.fromEntries(stored.map((run) => [run.id, run])));
 
   return { synced: runs.length, total: activities.length };
 }

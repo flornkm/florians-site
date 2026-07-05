@@ -17,7 +17,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const snapshot = await runsRef.once("value");
     const runsMap = (snapshot.val() ?? {}) as Record<string, StoredRun>;
-    const runs = Object.values(runsMap).sort((a, b) => b.startDate.localeCompare(a.startDate));
+    // Indoor runs synced before the sync-side filter existed may still sit in Firebase
+    // until the next sync replaces the node — hide them here too. Route-less runs are
+    // treadmill runs (no GPS); VirtualRuns carry a virtual route, so check both.
+    const runs = Object.values(runsMap)
+      .filter((run) => run.path !== null && run.sportType !== "VirtualRun")
+      .sort((a, b) => b.startDate.localeCompare(a.startDate));
 
     res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=86400");
     res.statusCode = 200;
