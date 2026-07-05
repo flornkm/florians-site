@@ -365,7 +365,18 @@ function MetricSwitch({ metric, onChange }: { metric: Metric; onChange: (m: Metr
           pointerDownRef.current = false;
         }}
         onBlur={() => setPointerFocused(false)}
-        onKeyDown={() => setPointerFocused(false)}
+        onKeyDown={(e) => {
+          setPointerFocused(false);
+          // Native selects only open on Space/Alt+Down; make Enter open the picker too.
+          if (e.key === "Enter") {
+            e.preventDefault();
+            try {
+              e.currentTarget.showPicker();
+            } catch {
+              // showPicker is unsupported in some browsers — Space still works there.
+            }
+          }
+        }}
         data-focus-via={pointerFocused ? "pointer" : undefined}
         className={cn(
           buttonVariants({ variant: "tertiary", size: "sm" }),
