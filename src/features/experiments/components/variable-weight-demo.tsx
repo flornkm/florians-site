@@ -1,23 +1,35 @@
 import { cn } from "@/lib/utils";
-import { IconSandbox } from "central-icons/IconSandbox";
+import { IconPencilLine } from "central-icons/IconPencilLine";
+import { IconShareOs } from "central-icons/IconShareOs";
+import { IconTrashCan } from "central-icons/IconTrashCan";
 import { animate, motion, useMotionTemplate, useMotionValue } from "motion/react";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 // Variable fonts expose a continuous weight axis, so you aren't stuck on the named
-// stops. Pretendard's `Regular` sits at 400, but nudging the `wght` axis to 450 gives
-// text a touch more presence at reading sizes without tipping into medium. This demo
-// animates the axis between the two so the (subtle) difference is easy to feel.
-const WEIGHTS = [400, 450] as const;
+// stops. Pretendard's Regular (400) reads a touch thin next to bolder UI icons;
+// nudging the `wght` axis to 450 restores the balance without jumping to Medium.
+// 500 is included so the sweet spot is visible from both sides. The demo animates
+// the axis, so the fractional in-between values — exactly what a static font can't
+// render — are easy to feel.
+const WEIGHTS = [400, 450, 500] as const;
 type Weight = (typeof WEIGHTS)[number];
 
 // Snappy, no overshoot — the switch should feel instant but still glide.
 const SPRING = { type: "spring", stiffness: 700, damping: 40, mass: 0.6 } as const;
 
+const PILL_X: Record<Weight, string> = { 400: "0%", 450: "100%", 500: "200%" };
+
+const ITEMS = [
+  { Icon: IconShareOs, label: "Share" },
+  { Icon: IconPencilLine, label: "Rename" },
+  { Icon: IconTrashCan, label: "Delete" },
+];
+
 export const VariableWeight = () => {
   const [weight, setWeight] = useState<Weight>(400);
 
-  // A single animated axis value drives every glyph; the fractional in-between values
-  // are exactly what a static font can't render.
+  // A single animated axis value drives every label; the icons keep their fixed
+  // stroke weight, so only the text moves against them.
   const wght = useMotionValue<number>(400);
   const fontVariationSettings = useMotionTemplate`"wght" ${wght}`;
 
@@ -27,37 +39,37 @@ export const VariableWeight = () => {
   };
 
   return (
-    <div className="font-pretendard mx-auto flex h-full w-full max-w-sm flex-col justify-center gap-6 px-8 py-8 sm:px-10">
-      <motion.div
+    <div className="font-pretendard flex h-full w-full flex-col items-center justify-center gap-8 px-8 py-8">
+      <motion.ul
         style={{ fontVariationSettings }}
-        className="flex flex-col gap-2.5 text-pretty text-[0.9375rem] leading-[1.4] text-primary sm:text-base"
+        className="flex w-52 flex-col rounded-xl bg-surface p-1 shadow-ring-sm"
       >
-        <p>
-          Sometimes, text looks too thin, especially when used with bolder icons
-          {/* text-primary explicitly: `text-accent-primary` doesn't exist as a text token, so it
-              silently generated nothing and the color only worked via inheritance. */}
-          <IconSandbox className="ml-1 inline size-[1em] -translate-y-[0.05em] text-primary will-change-transform" />
-          .
-        </p>
-        <p>
-          In such cases, using 450 weight in variable fonts is a nice option without making the text
-          too bold.
-        </p>
-      </motion.div>
+        {ITEMS.map(({ Icon, label }, index) => (
+          <Fragment key={label}>
+            {/* Inset like iOS list separators: the left edge lines up with the labels
+                (row padding + icon + gap), so the hairline never runs under the icons. */}
+            {index > 0 && <li aria-hidden className="ml-9 mr-2.5 border-t border-primary" />}
+            <li className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm text-primary">
+              <Icon className="size-4 shrink-0" />
+              {label}
+            </li>
+          </Fragment>
+        ))}
+      </motion.ul>
 
       <div
         role="group"
         aria-label="Font weight"
-        className="relative flex self-start rounded-full bg-surface-tertiary p-1"
+        className="relative flex rounded-full bg-surface-tertiary p-1"
       >
         {/* Plain CSS transform, not a Framer `layout` animation — the pill sits outside
             Framer's layout tree, so the tile's open/close morph can't sweep it along.
-            Two equal (flex-1) cells, so the pill is half-width and slides by exactly its
-            own width. */}
+            Three equal (flex-1) cells, so the pill is a third wide and slides by exact
+            multiples of its own width. */}
         <span
           aria-hidden
-          style={{ transform: weight === 400 ? "translateX(0)" : "translateX(100%)" }}
-          className="pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-full bg-surface shadow-ring-sm transition-transform duration-200 ease-out"
+          style={{ transform: `translateX(${PILL_X[weight]})` }}
+          className="pointer-events-none absolute inset-y-1 left-1 w-[calc((100%-0.5rem)/3)] rounded-full bg-surface shadow-ring-sm transition-transform duration-200 ease-out"
         />
         {WEIGHTS.map((w) => {
           const active = weight === w;
@@ -77,11 +89,6 @@ export const VariableWeight = () => {
           );
         })}
       </div>
-
-      <p className="text-xs leading-[1.5] text-tertiary">
-        Reach for 450 when text sits next to heavier icons or on dark backgrounds, where 400 starts
-        to read a little thin.
-      </p>
     </div>
   );
 };
