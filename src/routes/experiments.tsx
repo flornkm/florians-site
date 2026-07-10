@@ -259,13 +259,6 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
             </picture>
           )}
 
-          <div className="absolute inset-x-0 bottom-0 p-3">
-            {/* White + difference inverts against whatever poster is behind, so the title
-                stays legible over light and dark previews alike. */}
-            <span className="type-tiny-strong leading-tight text-white mix-blend-difference">
-              {title}
-            </span>
-          </div>
         </div>
 
         {/* Live component mounts only when expanded, laid out at the final dialog size so it
