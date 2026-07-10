@@ -1,3 +1,5 @@
+import { AbsolutePosition } from "@/features/experiments/components/absolute-position-demo";
+import { BlurFade } from "@/features/experiments/components/blur-fade-demo";
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
@@ -54,6 +56,8 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("blur-fade", "Blur Fade", "Motion", BlurFade),
+  experiment("absolute-position", "Absolute Position", "Layout", AbsolutePosition),
   experiment("login-error", "Login", "UX", LoginError),
   experiment("variable-weight", "Variable Weight", "Type", VariableWeight),
   experiment("drawer-drag", "Drawer", "Base UI", DragImageDrawer),
@@ -230,8 +234,12 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
             morph has nothing to resize. Fades out as the tile expands. */}
         <div
           className={cn(
-            "absolute inset-0 transition-opacity duration-200",
-            expanded ? "pointer-events-none opacity-0" : "opacity-100",
+            "absolute inset-0",
+            // Fade out on open only; on close it snaps back instantly (no transition class)
+            // so the poster — not the live component — is what scales down with the box.
+            expanded
+              ? "pointer-events-none opacity-0 transition-opacity duration-200"
+              : "opacity-100",
           )}
         >
           {!posterError && (
@@ -261,21 +269,19 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         </div>
 
         {/* Live component mounts only when expanded, laid out at the final dialog size so it
-            never resizes during the morph; it cross-fades in over the box scale. */}
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              key="live"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 flex items-center justify-center font-pretendard"
-            >
-              <Component />
-            </motion.div>
-          )}
-        </AnimatePresence>
+            never resizes during the morph; it fades in over the box scale. No exit animation:
+            on close it unmounts instantly and the poster underneath scales down instead. */}
+        {expanded && (
+          <motion.div
+            key="live"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 flex items-center justify-center font-pretendard"
+          >
+            <Component />
+          </motion.div>
+        )}
 
         {!expanded && (
           <button
@@ -286,30 +292,29 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
           />
         )}
 
-        <AnimatePresence initial={false}>
-          {expanded && (
-            <motion.button
-              type="button"
-              onClick={onClose}
-              // Pulls focus into the dialog on open so Escape (handled on the container
-              // above) is reachable without a global key listener.
-              autoFocus
-              aria-label="Close"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.15 }}
-              className={cn(
-                "absolute right-3 top-3 z-10 flex size-6 items-center justify-center rounded-sm",
-                "text-neutral-500 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5",
-                "cursor-pointer transition-colors",
-                "outline-none focus-visible:ring-2 focus-visible:ring-default",
-              )}
-            >
-              <IconCrossSmall className="size-4" />
-            </motion.button>
-          )}
-        </AnimatePresence>
+        {/* No exit animation: unmounts instantly on close so it doesn't distort while
+            the box scales back into the grid. */}
+        {expanded && (
+          <motion.button
+            type="button"
+            onClick={onClose}
+            // Pulls focus into the dialog on open so Escape (handled on the container
+            // above) is reachable without a global key listener.
+            autoFocus
+            aria-label="Close"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.15 }}
+            className={cn(
+              "absolute right-3 top-3 z-10 flex size-6 items-center justify-center rounded-sm",
+              "text-neutral-500 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5",
+              "cursor-pointer transition-colors",
+              "outline-none focus-visible:ring-2 focus-visible:ring-default",
+            )}
+          >
+            <IconCrossSmall className="size-4" />
+          </motion.button>
+        )}
       </motion.div>
     </li>
   );

@@ -45,6 +45,7 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
+  "absolute-position": 1500, // land on the 12,847-hold, badge overlapping Archive
   "login-error": 800, // static login form, no boot animation
   "variable-weight": 800, // static text sample at rest
   "drawer-drag": 1500, // two floating drawers slide in + the photo decodes
@@ -62,6 +63,7 @@ const SLUGS: Record<string, number> = {
   "crt-terminal": 2500, // typing animation
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
+  "blur-fade": 800,
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
