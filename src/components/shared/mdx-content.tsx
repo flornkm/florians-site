@@ -1,11 +1,13 @@
 import { proseVariants } from "@/lib/prose-variants";
 import { cn } from "@/lib/utils";
 import { MDXProvider } from "@mdx-js/react";
-import { ComponentType, ReactNode, useMemo, useState } from "react";
+import { ComponentProps, ComponentType, ReactNode, useMemo, useState } from "react";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { videoManifest } from "@/videoMap.gen";
+import { Link } from "@/components/ui/link";
 import { RunsFeed } from "@/features/writing/components/runs-feed";
 import { ModelViewer } from "../3d/model-viewer";
+import { Comparison } from "./comparison";
 import { FigureImage } from "./figure-image";
 import { Image } from "./image";
 import { SmartVideo } from "./smart-video";
@@ -205,6 +207,13 @@ function Img({ src, alt, className }: { src?: string; alt?: string; className?: 
   return <FigureImage src={src ?? ""} alt={alt ?? ""} className={className} />;
 }
 
+// Markdown links behave like the colophon's: external ones open in a new tab,
+// internal ones navigate through the router.
+function Anchor({ href, ...props }: ComponentProps<"a">) {
+  const isExternal = !!href && /^(https?:|mailto:|tel:)/.test(href);
+  return <Link href={href} target={isExternal ? "_blank" : undefined} {...props} />;
+}
+
 export function MobileImages({ images }: { images: { src: string; alt: string }[] }) {
   return (
     <div className="not-prose my-8">
@@ -224,6 +233,22 @@ export function MobileImages({ images }: { images: { src: string; alt: string }[
   );
 }
 
+export function Footnotes({ children }: { children?: ReactNode }) {
+  return (
+    <footer
+      className={cn(
+        "not-prose mt-16 space-y-1.5 border-t border-primary pt-5",
+        "text-[11px] leading-relaxed text-tertiary",
+        "[&_sup]:mr-1 [&_sup]:text-[9px]",
+        // Mirrors prose-a (see prose-variants.ts) minus the text color, which stays footnote-tertiary.
+        "[&_a]:fw-link [&_a]:transition-all [&_a]:duration-200 [&_a]:underline [&_a]:decoration-tertiary/40 [&_a]:hover:decoration-tertiary/70 [&_a]:underline-offset-[3px] [&_a]:active:no-underline",
+      )}
+    >
+      {children}
+    </footer>
+  );
+}
+
 export const mdxComponents = {
   h1: H1,
   h2: H2,
@@ -232,12 +257,15 @@ export const mdxComponents = {
   h5: H5,
   h6: H6,
   img: Img,
+  a: Anchor,
   Image,
   Video,
   Model,
   ModelViewer,
   SmartVideo,
   MobileImages,
+  Comparison,
+  Footnotes,
   Runs: RunsFeed,
 };
 
