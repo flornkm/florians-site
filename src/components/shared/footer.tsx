@@ -97,8 +97,13 @@ export default function Footer({ variant = "default" }: FooterProps) {
           </div>
         </div>
 
+        <p className="mt-16 text-xs font-medium text-tertiary">
+          © {new Date().getFullYear()} Florian Kiem. All rights reserved. No
+          reproduction or AI training without permission.
+        </p>
+
         {/* Extra bottom space on mobile so the floating tab bar doesn't cover the wordmark. */}
-        <FlorianKiemLines className="mt-16 mb-24 md:mb-8" />
+        <FlorianKiemLines className="mt-8 mb-24 md:mb-8" />
       </div>
     </footer>
   );

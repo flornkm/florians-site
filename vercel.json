@@ -9,7 +9,10 @@
   "headers": [
     {
       "source": "/(.*)",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "tdm-reservation", "value": "1" }
+      ]
     },
     {
       "source": "/api/(.*)",
