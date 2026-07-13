@@ -72,7 +72,7 @@ function AboutPage() {
         </div>
 
         <div className="col-start-3 col-span-7 md:col-start-6 md:col-span-4 lg:col-span-2">
-          <div className="hyphens-auto space-y-6 text-justify text-sm leading-relaxed text-primary">
+          <div className="hyphens-auto space-y-6 text-justify text-sm leading-relaxed text-primary md:max-w-72">
             <p>
               Born in the South of Germany, I began playing with digital design early on. While I
               eventually found my obsession in making software feel and look great, I tried out a
