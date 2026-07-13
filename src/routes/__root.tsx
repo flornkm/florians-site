@@ -132,7 +132,7 @@ function RootLayout() {
           <TooltipProvider>
             <Navigation />
             <main
-              className={`mx-auto w-full max-w-[2000px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`}
+              className={`mx-auto w-full max-w-[2560px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`}
             >
               <Outlet />
             </main>
