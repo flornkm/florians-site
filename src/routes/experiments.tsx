@@ -1,5 +1,3 @@
-import { AbsolutePosition } from "@/features/experiments/components/absolute-position-demo";
-import { BlurFade } from "@/features/experiments/components/blur-fade-demo";
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
@@ -10,6 +8,7 @@ import { FrostedCamera } from "@/features/experiments/components/frosted-camera-
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
 import { LoginError } from "@/features/experiments/components/login-error-demo";
+import { PromptInput } from "@/features/experiments/components/prompt-input-demo";
 import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
 import { ScrollbarGutter } from "@/features/experiments/components/scrollbar-gutter-demo";
 import { ShadowRing } from "@/features/experiments/components/shadow-ring-demo";
@@ -56,8 +55,7 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
-  experiment("blur-fade", "Blur Fade", "Motion", BlurFade),
-  experiment("absolute-position", "Absolute Position", "Layout", AbsolutePosition),
+  experiment("prompt-input", "Prompt Input", "Input", PromptInput),
   experiment("login-error", "Login", "UX", LoginError),
   experiment("variable-weight", "Variable Weight", "Type", VariableWeight),
   experiment("drawer-drag", "Drawer", "Base UI", DragImageDrawer),
@@ -258,7 +256,6 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
               />
             </picture>
           )}
-
         </div>
 
         {/* Live component mounts only when expanded, laid out at the final dialog size so it
