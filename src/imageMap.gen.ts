@@ -74,7 +74,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/writing/products-that-look-better-used/aesop-unused.webp": { width: 2800, height: 2000, thumbhash: "JfiBBIARiHZ/gHhHh/gnh4+DcI53SKeHBg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/aesop-used.webp": { width: 2800, height: 2000, thumbhash: "IviBBIARiHePcIhXh/hIh36AcI54R7d3Bg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/rimowa-unused.webp": { width: 2800, height: 2000, thumbhash: "6geCBIBGbKCOdFM7VwJD2s+LcIl4V5iIBg==", widths: [640, 1280, 2048] },
-  "/images/writing/products-that-look-better-used/rimowa-used.webp": { width: 2800, height: 2000, thumbhash: "J/iFBIBGfJCMZWdIRyn3lYSPcIl4Z5iIBg==", widths: [640, 1280, 2048] },
+  "/images/writing/products-that-look-better-used/rimowa-used.webp": { width: 2800, height: 2000, thumbhash: "KPiFBIBGfJCMZWdINyn3p4WPcIl4Z5iIBg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/skatedeck-unused.webp": { width: 2800, height: 2000, thumbhash: "miiCBIIid4h/gHRrh5j4eIl/gH6IZ5h3Bg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/skatedeck-used.webp": { width: 2800, height: 2000, thumbhash: "HxiCBIAid4iLdIBPh2f3eIV/gH6IZ5h3Bg==", widths: [640, 1280, 2048] },
 };
