@@ -45,7 +45,7 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
-  "absolute-position": 1500, // land on the 12,847-hold, badge overlapping Archive
+  "prompt-input": 1200, // pasted chip is staged via CLICKS, spring settles
   "login-error": 800, // static login form, no boot animation
   "variable-weight": 800, // static text sample at rest
   "drawer-drag": 1500, // two floating drawers slide in + the photo decodes
@@ -63,7 +63,6 @@ const SLUGS: Record<string, number> = {
   "crt-terminal": 2500, // typing animation
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
-  "blur-fade": 800,
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
@@ -76,6 +75,8 @@ const ONLY = process.env.CAPTURE_ONLY?.split(",")
 // avatar here to show the selection chrome in the poster.
 const CLICKS: Record<string, string> = {
   "figma-select": 'img[alt="Florian Kiem"]',
+  // Stage the pasted-text chip so the poster shows the point of the experiment.
+  "prompt-input": "button[data-sample]",
 };
 
 // Optional interaction to stage a slug right before the shot (after the settle
