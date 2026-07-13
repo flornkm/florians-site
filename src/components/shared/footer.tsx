@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { H4 } from "../design-system/heading";
 import { Link } from "../ui/link";
-import { FlorianKiemLines } from "./florian-kiem-lines";
+import { FlorianLines } from "./florian-lines";
 import { Tab, TABS } from "./navigation";
 
 const footerLinkVariants = cva(
@@ -49,7 +49,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
         variant === "indent" ? "mt-24 md:-mt-[156px]" : "mt-24",
       )}
     >
-      <div className="mx-auto w-full max-w-[2000px] px-6">
+      <div className="mx-auto w-full max-w-[2560px] px-6">
         <div className="grid gap-y-12 md:grid-cols-9">
           <div className={pagesColumnVariants({ variant })}>
             <H4 className="mb-1">Pages</H4>
@@ -97,7 +97,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
           </div>
         </div>
 
-        <FlorianKiemLines className="mt-16" />
+        <FlorianLines className="mt-16" />
 
         {/* Extra bottom space on mobile so the floating tab bar doesn't cover the copyright. */}
         <div className="mt-16 mb-24 grid gap-y-2 md:mb-8 md:grid-cols-9">

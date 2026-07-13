@@ -33,7 +33,7 @@ export default function Navigation() {
 
   return (
     <nav className="relative z-50 bg-primary">
-      <div className="mx-auto grid w-full max-w-[2000px] grid-cols-9 items-center gap-x-6 px-6 pt-6 pb-4">
+      <div className="mx-auto grid w-full max-w-[2560px] grid-cols-9 items-center gap-x-6 px-6 pt-6 pb-4">
         {/* w-fit keeps the link hugging the logo so its footprint isn't the whole 2-column track. */}
         <Link
           href="/"
@@ -63,8 +63,8 @@ export default function Navigation() {
             </Link>
           ))}
         </div>
-        {/* Desktop only: fixed and anchored to the content's right edge (not the viewport) so it stays aligned past the 2000px max-width. On mobile the Contact button lives in the bottom bar instead. */}
-        <div className="hidden justify-end col-span-2 md:flex md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2000px)/2+1.5rem))]">
+        {/* Desktop only: fixed and anchored to the content's right edge (not the viewport) so it stays aligned past the 2560px max-width. On mobile the Contact button lives in the bottom bar instead. */}
+        <div className="hidden justify-end col-span-2 md:flex md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2560px)/2+1.5rem))]">
           <ContactDialog />
         </div>
       </div>

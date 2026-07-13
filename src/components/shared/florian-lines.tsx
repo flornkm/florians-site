@@ -7,7 +7,7 @@ import {
   WORDMARK_VIEW_H,
 } from "./florian-kiem-path";
 
-interface FlorianKiemLinesProps {
+interface FlorianLinesProps {
   className?: string;
 }
 
@@ -21,19 +21,24 @@ const GRID_XS = Array.from(
   (_, i) => i * WORDMARK_SPACING,
 );
 
+// Screen-pixel stroke width; non-scaling-stroke keeps it constant while the SVG scales with the page.
+const STROKE_PX = 1.5;
+
+// Center each line in the 1-unit-wide column its rect used to occupy.
+const centerOf = (x: number) => x + WORDMARK_STROKE / 2;
+
 const SWEEP = 0.7; // seconds for the build to cross the full width
 const delayFor = (x: number) => (x / VIEW_W) * SWEEP;
 
 const strokeVariants: Variants = {
-  hidden: ({ y, h }: { y: number; h: number }) => ({ height: 0, y: y + h }),
-  visible: ({ x, y, h }: { x: number; y: number; h: number }) => ({
-    height: h,
-    y,
+  hidden: ({ y, h }: { y: number; h: number }) => ({ y1: y + h }),
+  visible: ({ x, y }: { x: number; y: number }) => ({
+    y1: y,
     transition: { delay: delayFor(x), duration: 0.45, ease: "easeOut" },
   }),
 };
 
-export function FlorianKiemLines({ className }: FlorianKiemLinesProps) {
+export function FlorianLines({ className }: FlorianLinesProps) {
   const reduceMotion = useReducedMotion();
   // Observe a wrapping DOM element rather than the inner <g>: iOS Safari's
   // IntersectionObserver is unreliable on SVG sub-elements and would otherwise
@@ -45,32 +50,42 @@ export function FlorianKiemLines({ className }: FlorianKiemLinesProps) {
     <div ref={ref} className={className}>
       <svg
         viewBox={`0 0 ${VIEW_W} ${WORDMARK_VIEW_H}`}
-        className="block h-auto w-full"
+        className="block h-auto w-full overflow-visible"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
         role="img"
         aria-label="Florian"
       >
-        <g className="fill-[#e5e5e5] dark:fill-[#262626]" aria-hidden>
+        <g className="stroke-[#e5e5e5] dark:stroke-[#262626]" strokeWidth={STROKE_PX} aria-hidden>
           {GRID_XS.map((x) => (
-            <rect key={x} x={x} y={0} width={WORDMARK_STROKE} height={WORDMARK_VIEW_H} />
+            <line
+              key={x}
+              x1={centerOf(x)}
+              x2={centerOf(x)}
+              y1={0}
+              y2={WORDMARK_VIEW_H}
+              vectorEffect="non-scaling-stroke"
+            />
           ))}
         </g>
 
         <motion.g
-          className="fill-[#aeaeae] dark:fill-[#5c5c5c]"
+          className="stroke-[#aeaeae] dark:stroke-[#5c5c5c]"
+          strokeWidth={STROKE_PX}
           aria-hidden
           initial={reduceMotion ? false : "hidden"}
           animate={reduceMotion ? undefined : inView ? "visible" : "hidden"}
         >
           {STROKES.map((r, i) => (
-            <motion.rect
+            <motion.line
               key={i}
-              x={r.x}
-              width={r.w}
+              x1={centerOf(r.x)}
+              x2={centerOf(r.x)}
+              y2={r.y + r.h}
+              vectorEffect="non-scaling-stroke"
               custom={r}
               variants={reduceMotion ? undefined : strokeVariants}
-              {...(reduceMotion ? { y: r.y, height: r.h } : {})}
+              {...(reduceMotion ? { y1: r.y } : {})}
             />
           ))}
         </motion.g>
