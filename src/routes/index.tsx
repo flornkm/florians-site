@@ -163,7 +163,7 @@ function IndexPage() {
     <div className="md:grid md:grid-cols-9 md:gap-x-6">
       <aside className="mb-16 md:col-span-2 md:mb-0 md:sticky md:top-4 md:z-20 md:flex md:h-[calc(100dvh-2rem)] md:flex-col">
         <h1 className="mb-12 max-w-[15rem] text-base fw-medium leading-snug text-primary md:shrink-0">
-          Designer by conviction, engineer by necessity.
+          Designer by conviction, engineer by choice.
         </h1>
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
           <h2 className="mb-4 text-sm fw-medium text-primary">Selected work</h2>
