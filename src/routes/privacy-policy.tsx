@@ -21,7 +21,7 @@ export const Route = createFileRoute("/privacy-policy")({
 function PrivacyPolicyPage() {
   return (
     <div className="grid grid-cols-9 gap-x-6">
-      <section className="col-start-1 col-span-9 md:col-start-3 md:col-span-5">
+      <section className="col-start-1 col-span-9 md:col-start-3 md:col-span-3 lg:col-span-2">
         <H2 className="mb-4">Privacy Policy</H2>
         <Body1>
           This is a personal site and contains links to other websites (just as any other website).
