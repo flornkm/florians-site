@@ -53,8 +53,8 @@ function WideImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         objectFit="contain"
-        sizes="(min-width: 2560px) 1260px, (min-width: 768px) 55vw, 92vw"
-        className="h-auto w-full rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+        sizes="(min-width: 1600px) 768px, (min-width: 768px) 55vw, 92vw"
+        className="mx-auto h-auto w-full max-w-3xl rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
       />
     </div>
   );
@@ -97,7 +97,7 @@ function WorkVideo({ src, alt }: { src: string; alt: string }) {
   return (
     <div ref={containerRef} className="bg-image-card p-4 md:p-12">
       <div
-        className="relative w-full overflow-hidden rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+        className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
         style={entry ? { aspectRatio: `${entry.width} / ${entry.height}` } : undefined}
       >
         {placeholder && (
@@ -134,18 +134,20 @@ function WorkVideo({ src, alt }: { src: string; alt: string }) {
 
 function MobileRow({ images, alt }: { images: string[]; alt: string }) {
   return (
-    <div className="flex gap-3 bg-image-card p-2 py-4 md:p-10 md:py-12">
-      {images.map((src) => (
-        <div key={src} className="min-w-0 flex-1 px-2 @container">
-          <Image
-            src={src}
-            alt={alt}
-            objectFit="contain"
-            sizes="(min-width: 768px) 320px, 30vw"
-            className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
-          />
-        </div>
-      ))}
+    <div className="bg-image-card p-2 py-4 md:p-10 md:py-12">
+      <div className="mx-auto flex max-w-3xl gap-3">
+        {images.map((src) => (
+          <div key={src} className="min-w-0 flex-1 px-2 @container">
+            <Image
+              src={src}
+              alt={alt}
+              objectFit="contain"
+              sizes="(min-width: 768px) 320px, 30vw"
+              className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
