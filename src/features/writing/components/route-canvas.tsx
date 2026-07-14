@@ -10,10 +10,20 @@ import {
   type Metric,
   type RoutePath,
 } from "@/features/writing/lib/runs";
+import { Body3 } from "@/components/design-system/body";
 import { cn } from "@/lib/utils";
+import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
 import { arc } from "motion";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type Ref,
+  type SVGProps,
+} from "react";
 
 const DRAW_DURATION = 2.8;
 
@@ -57,6 +67,62 @@ function StartMarker({ fill }: { fill: string }) {
       {/* Play triangle, nudged right so it sits optically centered. */}
       <path d="M-1.9 -3.4 L3.5 0 L-1.9 3.4 Z" fill={glyphColor(fill)} stroke="none" />
     </>
+  );
+}
+
+// Wraps an endpoint glyph in the site's Base UI tooltip, anchored to the SVG marker group. Going
+// through Base UI (rather than a hand-drawn SVG label) gives us the shared hover delay, a popup
+// portaled to the body so it's never clipped by the route box and always on top, and collision-
+// aware placement that flips/shifts near the edges. `offset` places the marker beside the route
+// point (negative = left of start, positive = right of finish). The transparent hit rect enlarges
+// the target; stroke="none" keeps it from inheriting the svg's currentColor stroke as a border.
+function EndpointMarker({
+  label,
+  offset,
+  children,
+}: {
+  label: string;
+  offset: number;
+  children: ReactNode;
+}) {
+  const hit = PLATE / 2 + 3;
+  return (
+    <BaseTooltip.Root>
+      <BaseTooltip.Trigger
+        render={(triggerProps) => {
+          const props = triggerProps as SVGProps<SVGGElement> & { ref?: Ref<SVGGElement> };
+          return (
+            <g {...props} transform={`translate(${offset} 0)`} className={cn("cursor-default", props.className)}>
+              <rect
+                x={-hit}
+                y={-hit}
+                width={hit * 2}
+                height={hit * 2}
+                fill="transparent"
+                stroke="none"
+                style={{ pointerEvents: "all" }}
+              />
+              {children}
+            </g>
+          );
+        }}
+      />
+      <BaseTooltip.Portal>
+        <BaseTooltip.Positioner sideOffset={8}>
+          <BaseTooltip.Popup
+            className={cn(
+              "z-50 font-medium bg-surface-inverted text-inverted px-2 py-1 rounded-lg",
+              "origin-[var(--transform-origin)]",
+              "transition-all duration-50 ease-out",
+              "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1",
+              "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:translate-y-1",
+            )}
+          >
+            <Body3 className="text-inverted whitespace-nowrap">{label}</Body3>
+          </BaseTooltip.Popup>
+        </BaseTooltip.Positioner>
+      </BaseTooltip.Portal>
+    </BaseTooltip.Root>
   );
 }
 
@@ -293,16 +359,16 @@ export function RouteCanvas({
         </g>
         {startPoint && (
           <g transform={`translate(${startPoint[0]} ${startPoint[1]}) scale(${1 / scale})`}>
-            <g transform={`translate(${-MARKER_OFFSET} 0)`}>
+            <EndpointMarker label="Start" offset={-MARKER_OFFSET}>
               <StartMarker fill={startColor} />
-            </g>
+            </EndpointMarker>
           </g>
         )}
         {endPoint && done && (
           <g transform={`translate(${endPoint[0]} ${endPoint[1]}) scale(${1 / scale})`}>
-            <g transform={`translate(${MARKER_OFFSET} 0)`}>
+            <EndpointMarker label="Finish" offset={MARKER_OFFSET}>
               <FinishMarker fill={endColor} />
-            </g>
+            </EndpointMarker>
             {!reduceMotion && (
               // Burst origin: the top edge of the finish plate.
               <g transform={`translate(${MARKER_OFFSET} ${-PLATE / 2})`}>

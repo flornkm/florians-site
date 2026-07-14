@@ -60,7 +60,7 @@ export const Route = createRootRoute({
       {
         // crossOrigin is required for the font preload to be reused.
         rel: "preload",
-        href: "/fonts/haas-recast/HaasRecastVF-Trial.woff2",
+        href: "/fonts/haas-recast/HaasRecastVF.woff2",
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",

@@ -1,149 +1,140 @@
-import { useChat } from "@ai-sdk/react";
-import type { UIMessage } from "ai";
-import { DefaultChatTransport } from "ai";
 import { useCallback, useEffect, useState } from "react";
 import { useTypingAnimation } from "../../../hooks/use-typing-animation";
 import { CRTDisplay } from "../../contact/components/crt/crt-display";
 import type { CRTMessage } from "../../contact/components/crt/crt-text-renderer";
 
-type ChatMessage = UIMessage<never, { suggestions: string[] }>;
-
 const BOOT_MESSAGE = "Terminal ready. Ask me anything.";
 
-const FALLBACK_SUGGESTIONS = [
-  "How do black holes work?",
-  "Explain quantum computing",
-  "What's the tallest building?",
+const INITIAL_SUGGESTIONS = ["What does Florian do?", "Where has he worked?", "How can I reach him?"];
+
+interface Reply {
+  answer: string;
+  followups: string[];
+}
+
+// Canned, terminal-style answers. Kept plain so the demo works with the chat
+// endpoint gone — no network, no model, just a scripted conversation.
+const SCRIPT: { match: RegExp; reply: Reply }[] = [
+  {
+    match: /reach|contact|email|touch|hire|get in|message/i,
+    reply: {
+      answer:
+        "Email him at [hello@floriankiem.com](mailto:hello@floriankiem.com), or find him as [@flornkm](https://twitter.com/flornkm) on X and [GitHub](https://github.com/flornkm).",
+      followups: ["What does Florian do?", "What's his tech stack?", "Where has he worked?"],
+    },
+  },
+  {
+    match: /stack|tech|tool|framework|language|build.*with/i,
+    reply: {
+      answer:
+        "React, TypeScript, Vite, TanStack, Tailwind, Three.js / R3F, Rive, and Firebase. This site runs on TanStack Start.",
+      followups: ["What has he built?", "Where has he worked?", "How can I reach him?"],
+    },
+  },
+  {
+    match: /travel|countr|visit|been to|world/i,
+    reply: {
+      answer: "16 countries so far, from Germany across Europe to the UAE, Thailand, and Indonesia.",
+      followups: ["What does Florian do?", "What's his tech stack?", "How can I reach him?"],
+    },
+  },
+  {
+    match: /work|compan|client|employ|job|team/i,
+    reply: {
+      answer:
+        "As a design engineer for Superpower, Kalshi, Snaptrude, Morphic, Dash0, and Opral.",
+      followups: ["What has he built?", "What's his tech stack?", "How can I reach him?"],
+    },
+  },
+  {
+    match: /built|project|made|ship|portfolio|experiment/i,
+    reply: {
+      answer:
+        "Interfaces and internal tools for the companies he's worked with, plus experiments like this CRT terminal.",
+      followups: ["What's his tech stack?", "Where has he worked?", "How can I reach him?"],
+    },
+  },
+  {
+    match: /do|role|who|about|design engineer|background/i,
+    reply: {
+      answer:
+        "He's a design engineer. He translates design into production-grade code to shorten iteration cycles and ship better products.",
+      followups: ["Where has he worked?", "What's his tech stack?", "How can I reach him?"],
+    },
+  },
 ];
 
-function parseLastJson(buffer: string): string[] | null {
-  const lastBrace = buffer.lastIndexOf("}");
-  if (lastBrace === -1) return null;
-  let depth = 0;
-  let start = -1;
-  for (let i = lastBrace; i >= 0; i--) {
-    if (buffer[i] === "}") depth++;
-    if (buffer[i] === "{") depth--;
-    if (depth === 0) {
-      start = i;
-      break;
-    }
-  }
-  if (start === -1) return null;
-  try {
-    const parsed = JSON.parse(buffer.slice(start, lastBrace + 1));
-    return parsed.suggestions?.filter(Boolean) ?? null;
-  } catch {
-    return null;
-  }
+const FALLBACK: Reply = {
+  answer: "This is a scripted demo, so it only knows a few things about Florian. Try a suggestion below.",
+  followups: INITIAL_SUGGESTIONS,
+};
+
+function replyFor(text: string): Reply {
+  return SCRIPT.find((entry) => entry.match.test(text))?.reply ?? FALLBACK;
 }
 
-function streamSuggestions(onUpdate: (suggestions: string[]) => void) {
-  fetch("/api/experiment/chat/suggestions", { method: "POST" })
-    .then((res) => {
-      if (!res.ok || !res.body) throw new Error("no body");
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      function read(): Promise<void> {
-        return reader.read().then(({ done, value }) => {
-          if (done) return;
-          buffer += decoder.decode(value, { stream: true });
-          const suggestions = parseLastJson(buffer);
-          if (suggestions?.length) onUpdate(suggestions);
-          return read();
-        });
-      }
-      return read();
-    })
-    .catch(() => onUpdate(FALLBACK_SUGGESTIONS));
-}
+type Phase = "boot" | "idle" | "typing";
 
 export const CrtChat = () => {
   const [input, setInput] = useState("");
-  const [initialSuggestions, setInitialSuggestions] = useState<string[]>([]);
-  const bootText = useTypingAnimation(BOOT_MESSAGE);
-  const bootComplete = bootText === BOOT_MESSAGE;
+  const [messages, setMessages] = useState<CRTMessage[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [followups, setFollowups] = useState<string[]>([]);
+  const [phase, setPhase] = useState<Phase>("boot");
+  // The text currently being typed out (boot banner or a canned answer).
+  const [target, setTarget] = useState(BOOT_MESSAGE);
+
+  // Feed the hook an empty target while idle so the next answer always animates
+  // from scratch, even if it repeats the previous answer verbatim.
+  const typed = useTypingAnimation(phase === "idle" ? "" : target);
 
   useEffect(() => {
-    if (!bootComplete) return;
-    if (initialSuggestions.length > 0) return;
-    streamSuggestions(setInitialSuggestions);
-  }, [bootComplete, initialSuggestions.length]);
-
-  const { messages, sendMessage, status } = useChat<ChatMessage>({
-    transport: new DefaultChatTransport({
-      api: "/api/experiment/chat",
-    }),
-  });
-
-  const isStreaming = status !== "ready";
-  const completedMessages: CRTMessage[] = [];
-  let rawStreamText = "";
-
-  for (const msg of messages) {
-    const text = msg.parts
-      .filter((p) => p.type === "text")
-      .map((p) => p.text)
-      .join("");
-    if (!text) continue;
-
-    if (msg === messages.at(-1) && msg.role === "assistant" && isStreaming) {
-      rawStreamText = text;
+    if (phase === "idle" || typed !== target) return;
+    if (phase === "boot") {
+      setSuggestions(INITIAL_SUGGESTIONS);
     } else {
-      completedMessages.push({
-        role: msg.role === "user" ? "user" : "assistant",
-        text,
-      });
+      setMessages((prev) => [...prev, { role: "assistant", text: target }]);
+      setSuggestions(followups);
     }
-  }
+    setPhase("idle");
+  }, [phase, typed, target, followups]);
 
-  const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant");
-  const streamedSuggestions =
-    lastAssistant?.parts.find((p) => p.type === "data-suggestions")?.data ?? [];
-
-  const suggestions =
-    messages.length === 0
-      ? bootComplete
-        ? initialSuggestions
-        : []
-      : isStreaming
-        ? []
-        : streamedSuggestions;
-
-  const handleSubmit = useCallback(
+  const send = useCallback(
     (text: string) => {
-      sendMessage({ text });
+      const trimmed = text.trim();
+      if (!trimmed) return;
+      const reply = replyFor(trimmed);
+      setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
+      setSuggestions([]);
+      setFollowups(reply.followups);
+      setTarget(reply.answer);
+      setPhase("typing");
       setInput("");
     },
-    [sendMessage],
+    [],
   );
 
   const handleSuggestionClick = useCallback(
     (suggestion: string) => {
-      if (status !== "ready") return;
-      sendMessage({ text: suggestion });
+      if (phase !== "idle") return;
+      send(suggestion);
     },
-    [sendMessage, status],
+    [phase, send],
   );
 
-  const displayMessages: CRTMessage[] = bootComplete
-    ? [{ role: "assistant", text: BOOT_MESSAGE }, ...completedMessages]
-    : [];
-
-  const displayStreamText = !bootComplete ? bootText : rawStreamText;
-  const displayIsStreaming = !bootComplete || isStreaming;
+  const displayMessages: CRTMessage[] =
+    phase === "boot" ? [] : [{ role: "assistant", text: BOOT_MESSAGE }, ...messages];
 
   return (
     <CRTDisplay
       messages={displayMessages}
-      streamedText={displayStreamText}
-      isStreaming={displayIsStreaming}
+      streamedText={phase === "idle" ? "" : typed}
+      isStreaming={phase !== "idle"}
       inputText={input}
       onInputChange={setInput}
-      onSubmit={handleSubmit}
-      disabled={status !== "ready" || !bootComplete}
-      suggestions={suggestions as string[]}
+      onSubmit={send}
+      disabled={phase !== "idle"}
+      suggestions={suggestions}
       onSuggestionClick={handleSuggestionClick}
       fullscreen={false}
       scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.63 : 0.7}
