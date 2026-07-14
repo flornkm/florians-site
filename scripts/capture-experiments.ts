@@ -45,14 +45,12 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
-  "absolute-position": 1500, // land on the 12,847-hold, badge overlapping Archive
   "login-error": 800, // static login form, no boot animation
   "variable-weight": 800, // static text sample at rest
   "drawer-drag": 1500, // two floating drawers slide in + the photo decodes
   "scrollbar-gutter": 1000, // land on the fully-typed / scrollbar-visible frame
   "shadow-ring": 1200, // spring settles
   copy: 1200,
-  "figma-select": 1200,
   "video-player": 1500,
   "slop-detector": 3500, // WebGL boot + first render
   "frosted-camera": 2500, // fake camera stream
@@ -63,24 +61,45 @@ const SLUGS: Record<string, number> = {
   "crt-terminal": 2500, // typing animation
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
-  "blur-fade": 800,
+  "paste-editor": 800,
 };
 
-// Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,figma-select
+// Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor
 const ONLY = process.env.CAPTURE_ONLY?.split(",")
   .map((s) => s.trim())
   .filter(Boolean);
 
 // Optional click (selector inside the open dialog) to put a slug into a more telling
-// state before the shot — e.g. Figma Select no longer auto-selects, so we select the
-// avatar here to show the selection chrome in the poster.
-const CLICKS: Record<string, string> = {
-  "figma-select": 'img[alt="Florian Kiem"]',
-};
+// state before the shot.
+const CLICKS: Record<string, string> = {};
 
 // Optional interaction to stage a slug right before the shot (after the settle
 // wait) — the live demo is untouched.
-const PREPARE: Record<string, (dialog: Locator, page: Page) => Promise<void>> = {};
+const PREPARE: Record<string, (dialog: Locator, page: Page) => Promise<void>> = {
+  // Stage a pasted attachment so the poster shows the chip and the active send button.
+  "paste-editor": async (dialog, page) => {
+    const sample = [
+      "# Drawer component spec",
+      "",
+      "The drawer should feel like a natural extension of the page.",
+      "",
+      "- Opens from the bottom on mobile",
+      "- Swipe down to dismiss",
+      "- Background scales to 0.97 while open",
+    ].join("\n");
+    await dialog
+      .locator("textarea")
+      .first()
+      .evaluate((el, text) => {
+        const dt = new DataTransfer();
+        dt.setData("text/plain", text);
+        el.dispatchEvent(
+          new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true }),
+        );
+      }, sample);
+    await page.waitForTimeout(700);
+  },
+};
 
 // Capture every slug in one color scheme. `suffix` is appended to the output name
 // ("" for light, "-dark" for dark) so the grid can pick the file by media query. The

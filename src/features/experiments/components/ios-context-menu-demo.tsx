@@ -323,8 +323,6 @@ export function IosContextMenu() {
           </motion.div>
         </div>
       </div>
-
-      <p className="text-xs text-quaternary pb-4 opacity-60">Press and hold to open menu</p>
     </div>
   );
 }

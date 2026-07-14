@@ -1,15 +1,13 @@
-import { AbsolutePosition } from "@/features/experiments/components/absolute-position-demo";
-import { BlurFade } from "@/features/experiments/components/blur-fade-demo";
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
 import { DragImageDrawer } from "@/features/experiments/components/drag-image-drawer-demo";
-import { FigmaSelect } from "@/features/experiments/components/figma-select-demo";
 import { FontSmoothing } from "@/features/experiments/components/font-smoothing-demo";
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
 import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
 import { LoginError } from "@/features/experiments/components/login-error-demo";
+import { PasteEditor } from "@/features/experiments/components/paste-editor-demo";
 import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
 import { ScrollbarGutter } from "@/features/experiments/components/scrollbar-gutter-demo";
 import { ShadowRing } from "@/features/experiments/components/shadow-ring-demo";
@@ -56,15 +54,13 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
-  experiment("blur-fade", "Blur Fade", "Motion", BlurFade),
-  experiment("absolute-position", "Absolute Position", "Layout", AbsolutePosition),
+  experiment("paste-editor", "Paste Editor", "Input", PasteEditor),
   experiment("login-error", "Login", "UX", LoginError),
   experiment("variable-weight", "Variable Weight", "Type", VariableWeight),
   experiment("drawer-drag", "Drawer", "Base UI", DragImageDrawer),
   experiment("shadow-ring", "Shadow Ring", "Shadow", ShadowRing),
   experiment("scrollbar-gutter", "Scrollbar Gutter", "Layout", ScrollbarGutter),
   experiment("copy", "Copy", "Motion", CopyExperiment),
-  experiment("figma-select", "Figma Select", "UI", FigmaSelect),
   experiment("video-player", "Video Player", "Video", VideoPlayerExperiment),
   experiment("slop-detector", "Slop Detector", "3D", SlopDetector),
   experiment("frosted-camera", "Frosted Camera", "Camera", FrostedCamera),
@@ -258,7 +254,6 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
               />
             </picture>
           )}
-
         </div>
 
         {/* Live component mounts only when expanded, laid out at the final dialog size so it
