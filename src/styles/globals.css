@@ -18,23 +18,17 @@
   src: url(/fonts/commit-mono/commit-mono-var.woff2) format("woff2");
 }
 
-/* Wagram (Non-Commercial demo) — the serif. Ships italic styles only (Light/Regular/Medium), which is
+/* Wagram (licensed, D0UBLE ZER0) — the serif. Ships italic styles only (Regular/Medium), which is
    all the site needs since the serif is used exclusively in italic contexts (em/i, captions, colophon).
    Upright serif falls back to Georgia via --font-serif in text.css. */
-@font-face {
-  font-family: "Wagram";
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-  src: url(/fonts/wagram/WagramNonCommercial-LightItalic.otf) format("opentype");
-}
-
 @font-face {
   font-family: "Wagram";
   font-weight: 400;
   font-style: italic;
   font-display: swap;
-  src: url(/fonts/wagram/WagramNonCommercial-Italic.otf) format("opentype");
+  src:
+    url(/fonts/wagram/Wagram-Italic.woff2) format("woff2"),
+    url(/fonts/wagram/Wagram-Italic.woff) format("woff");
 }
 
 @font-face {
@@ -42,7 +36,9 @@
   font-weight: 500;
   font-style: italic;
   font-display: swap;
-  src: url(/fonts/wagram/WagramNonCommercial-MediumItalic.otf) format("opentype");
+  src:
+    url(/fonts/wagram/Wagram-MediumItalic.woff2) format("woff2"),
+    url(/fonts/wagram/Wagram-MediumItalic.woff) format("woff");
 }
 
 /* TEMPORARY tryout: Ciron Text as sans (trial font, unlicensed). Remove to restore Pretendard.
