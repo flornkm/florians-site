@@ -39,7 +39,7 @@ export const VariableWeight = () => {
   };
 
   return (
-    <div className="font-pretendard flex h-full w-full flex-col items-center justify-center gap-8 px-8 py-8">
+    <div className="font-pretendard relative flex h-full w-full flex-col items-center justify-center px-8 py-8">
       <motion.ul
         style={{ fontVariationSettings }}
         className="flex w-52 flex-col rounded-xl bg-surface p-1 shadow-ring-sm"
@@ -60,7 +60,7 @@ export const VariableWeight = () => {
       <div
         role="group"
         aria-label="Font weight"
-        className="relative flex rounded-full bg-surface-tertiary p-1"
+        className="absolute bottom-4 left-1/2 flex -translate-x-1/2 rounded-full bg-surface-tertiary p-1"
       >
         {/* Plain CSS transform, not a Framer `layout` animation — the pill sits outside
             Framer's layout tree, so the tile's open/close morph can't sweep it along.
