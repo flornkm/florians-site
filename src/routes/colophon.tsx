@@ -155,12 +155,6 @@ function ColophonPage() {
                 Artboards Studio
               </Link>
             </Body1>
-            <Body1>
-              Videos:{" "}
-              <Link href="https://screen.studio/" target="_blank">
-                Screen Studio
-              </Link>
-            </Body1>
           </div>
         </div>
         <div className="grid grid-cols-9 gap-x-6 items-start">
@@ -192,14 +186,10 @@ function ColophonPage() {
               Animations: Pure{" "}
               <Link href="https://tailwindcss.com/" target="_blank">
                 Tailwind
-              </Link>
-              ,{" "}
-              <Link href="https://rive.app/" target="_blank">
-                Rive
-              </Link>
-              , or{" "}
+              </Link>{" "}
+              or{" "}
               <Link href="https://motion.dev/" target="_blank">
-                Framer Motion
+                Motion
               </Link>
             </Body1>
           </div>
