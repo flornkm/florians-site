@@ -1,9 +1,18 @@
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
+
+const CAPTION_CLASS =
+  "mx-auto mt-4 max-w-[460px] text-center font-serif text-[11px] font-normal italic text-primary";
 
 // The figure caption fades in one word at a time, each blurring into focus.
 export function AnimatedCaption({ text, className }: { text: string; className?: string }) {
+  const reduceMotion = useReducedMotion();
   const words = text.split(" ");
+
+  if (reduceMotion) {
+    return <figcaption className={cn(CAPTION_CLASS, className)}>{text}</figcaption>;
+  }
+
   return (
     <motion.figcaption
       initial="hidden"
@@ -12,10 +21,7 @@ export function AnimatedCaption({ text, className }: { text: string; className?:
         hidden: {},
         visible: { transition: { delayChildren: 0.15, staggerChildren: 0.045 } },
       }}
-      className={cn(
-        "mx-auto mt-4 max-w-[460px] text-center font-serif text-[11px] font-normal italic text-primary",
-        className,
-      )}
+      className={cn(CAPTION_CLASS, className)}
     >
       {words.map((word, i) => (
         <motion.span

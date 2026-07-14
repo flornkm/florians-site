@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { videoManifest } from "@/videoMap.gen";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
-import { motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const isVideo = (src: string) => /\.(webm|mp4)$/i.test(src);
@@ -170,20 +169,11 @@ function IndexPage() {
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
           <h2 className="mb-4 text-sm fw-medium text-primary">Selected work</h2>
           <ul className="flex flex-col items-start gap-1.5">
-            {PROJECTS.map((project, index) => {
+            {PROJECTS.map((project) => {
               const isActive =
                 !isDesktop || (!!project.media?.length && active === projectId(project));
               return (
-                <motion.li
-                  key={project.name}
-                  initial={{ opacity: 0, x: -16, filter: "blur(2px)" }}
-                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                >
+                <li key={project.name}>
                   <a
                     href={project.url}
                     target="_blank"
@@ -196,7 +186,7 @@ function IndexPage() {
                     {project.name}
                     <IconArrowUpRight className="size-3.5 -translate-x-0.5 translate-y-0.5 opacity-0 blur-[2px] transition duration-150 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none" />
                   </a>
-                </motion.li>
+                </li>
               );
             })}
           </ul>

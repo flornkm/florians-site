@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HeadContent, Outlet, Scripts, createRootRoute, useLocation } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
+import { MotionConfig } from "motion/react";
 
 import Footer from "@/components/shared/footer";
 import Navigation from "@/components/shared/navigation";
@@ -129,15 +130,20 @@ function RootLayout() {
           }}
         />
         <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Navigation />
-            <main
-              className={`mx-auto w-full max-w-[2560px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`}
-            >
-              <Outlet />
-            </main>
-            <Footer variant={footerVariant} />
-          </TooltipProvider>
+          {/* reducedMotion="user" kills transform/layout animations site-wide (nav pill,
+              experiment tile morph) for prefers-reduced-motion; opacity/blur reveals are
+              gated per component via useReducedMotion. */}
+          <MotionConfig reducedMotion="user">
+            <TooltipProvider>
+              <Navigation />
+              <main
+                className={`mx-auto w-full max-w-[2560px] min-h-screen px-6 pt-4 ${isHome ? "pb-0" : "pb-16"}`}
+              >
+                <Outlet />
+              </main>
+              <Footer variant={footerVariant} />
+            </TooltipProvider>
+          </MotionConfig>
         </QueryClientProvider>
         <Analytics />
         <Scripts />

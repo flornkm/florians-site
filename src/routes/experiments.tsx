@@ -75,6 +75,9 @@ const EXPERIMENTS: Experiment[] = [
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
 
+// Placeholder while no experiment has been opened yet (the drawer stays mounted).
+const NoExperiment = () => null;
+
 interface ExperimentsSearch {
   demo?: string;
 }
@@ -164,16 +167,16 @@ function ExperimentsPage() {
         )}
       </AnimatePresence>
 
-      {drawerExperiment && (
-        <ExperimentDrawer
-          open={isMobile && activeExperiment?.slug === drawerExperiment.slug}
-          title={drawerExperiment.title}
-          Component={drawerExperiment.Component}
-          onOpenChange={(next) => {
-            if (!next) close();
-          }}
-        />
-      )}
+      {/* Always mounted: if the Root first mounted already-open, Base UI would treat it
+          as initially open and skip the enter animation on the first tap. */}
+      <ExperimentDrawer
+        open={isMobile && activeExperiment !== null}
+        title={drawerExperiment?.title ?? ""}
+        Component={drawerExperiment?.Component ?? NoExperiment}
+        onOpenChange={(next) => {
+          if (!next) close();
+        }}
+      />
     </MotionConfig>
   );
 }
