@@ -1,9 +1,10 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && vite dev",
+    "dev": "vite dev",
     "preview": "vercel dev",
-    "build": "bun scripts/extract-content.ts && bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && vite build",
+    "build": "bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && vite build",
+    "manifests": "bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts",
     "start": "vite preview",
     "typecheck": "tsc --noEmit",
     "capture:experiments": "bun scripts/capture-experiments.ts",

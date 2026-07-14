@@ -56,18 +56,16 @@
     url(/fonts/ciron-text/CironText-VF.ttf) format("truetype");
 }
 
-/* TEMPORARY tryout: Haas Recast as sans (variable trial font, unlicensed). Currently the active
-   sans (see --font-sans in text.css). Default instance is upright, full width (wdth 100), neutral
-   tracking (TRAK 0) — so standard CSS weights map normally (400=Regular, 500=Medium, 700=Bold).
-   Axes available for play: wght 100–900, wdth 50–100, ital 0–1, TRAK -35–0. */
+/* Haas Recast (licensed, Dalton Maag — Host & Link web) as sans. The active sans (see --font-sans
+   in text.css). This is the 2-axis web variable font: weight (wght 100–900) + tracking (TRAK -35–0).
+   Default instance is neutral tracking (TRAK 0), so standard CSS weights map normally (400=Regular,
+   500=Medium, 700=Bold). woff2-only — the licensed package ships no ttf, and woff2 is universal. */
 @font-face {
   font-family: "Haas Recast";
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src:
-    url(/fonts/haas-recast/HaasRecastVF-Trial.woff2) format("woff2"),
-    url(/fonts/haas-recast/HaasRecastVF_Trial_TrakWdthWghtItal.ttf) format("truetype");
+  src: url(/fonts/haas-recast/HaasRecastVF.woff2) format("woff2");
 }
 
 /* Pretendard (variable) — used only inside the experiment demos via the font-pretendard
