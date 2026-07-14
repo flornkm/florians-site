@@ -2,7 +2,7 @@ import { Image } from "@/components/shared/image";
 import { Link } from "@/components/ui/link";
 import { PHOTOS } from "@/features/about/const/photos";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 const CONTACT_LINKS = [
   { name: "Twitter", href: "https://x.com/flornkm" },
@@ -54,6 +54,8 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div>
       <div className="grid grid-cols-9 gap-x-6">
@@ -109,8 +111,8 @@ function AboutPage() {
           <motion.figure
             key={photo.src}
             className={PHOTO_LAYOUT[index]}
-            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(4px)" }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: "some", margin: "0px 0px 15% 0px" }}
             transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
           >

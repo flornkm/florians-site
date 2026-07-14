@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useLocation } from "@tanstack/react-router";
-import { animate, motion, useMotionValue } from "motion/react";
+import { animate, motion, useMotionValue, useReducedMotion } from "motion/react";
 import ContactDialog from "./contact-dialog";
 import { Logo } from "./logo";
 import { Link } from "../ui/link";
@@ -25,6 +25,14 @@ export default function Navigation() {
 
   // Lives here so the whole Home link (spanning the overflow area) opens the logo and keeps it open without flicker.
   const logoProgress = useMotionValue(0);
+  const reduceMotion = useReducedMotion();
+  const setLogoHover = (target: number) => {
+    if (reduceMotion) {
+      logoProgress.set(target);
+    } else {
+      animate(logoProgress, target, logoTransition);
+    }
+  };
 
   const isActive = (href: string) =>
     href === "/"
@@ -43,8 +51,8 @@ export default function Navigation() {
           <span
             className="relative flex shrink-0 items-center"
             style={{ width: LOGO_HOVER_WIDTH }}
-            onMouseEnter={() => animate(logoProgress, 1, logoTransition)}
-            onMouseLeave={() => animate(logoProgress, 0, logoTransition)}
+            onMouseEnter={() => setLogoHover(1)}
+            onMouseLeave={() => setLogoHover(0)}
           >
             <Logo className="h-3 w-auto text-primary" progress={logoProgress} />
           </span>
