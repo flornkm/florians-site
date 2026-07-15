@@ -29,7 +29,7 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      { title: "Florian Kiem, Design, Code" },
+      { title: "Florian Kiem" },
       // Keep the site out of search engines entirely (paired with the
       // X-Robots-Tag header in vercel.json for non-HTML responses).
       { name: "robots", content: "noindex, nofollow" },
@@ -38,7 +38,7 @@ export const Route = createRootRoute({
         content:
           "The personal site of Florian Kiem - design and code, bridging the gap between creativity and logic in this portfolio.",
       },
-      { property: "og:title", content: "Florian Kiem, Design, Code" },
+      { property: "og:title", content: "Florian Kiem" },
       {
         property: "og:description",
         content:
@@ -47,7 +47,7 @@ export const Route = createRootRoute({
       { property: "og:image", content: "/api/og?title=Design%2C%20Code" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Florian Kiem, Design, Code" },
+      { name: "twitter:title", content: "Florian Kiem" },
       {
         name: "twitter:description",
         content:

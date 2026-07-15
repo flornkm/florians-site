@@ -79,7 +79,7 @@ export const Route = createFileRoute("/writing/$id")({
       `&icon=${encodeURIComponent(loaderData.icon)}`;
     return {
       meta: [
-        { title: `${loaderData.title} ‹ Florian Kiem, Design, Code` },
+        { title: `${loaderData.title} ‹ Florian Kiem` },
         { name: "description", content: loaderData.description },
         { property: "og:title", content: loaderData.title },
         { property: "og:description", content: loaderData.description },

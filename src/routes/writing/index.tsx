@@ -38,7 +38,7 @@ export const Route = createFileRoute("/writing/")({
   }),
   head: () => ({
     meta: [
-      { title: "Writing ‹ Florian Kiem, Design, Code" },
+      { title: "Writing ‹ Florian Kiem" },
       {
         name: "description",
         content: "Writing contains thoughts, ideas, and experiences from Florian.",
