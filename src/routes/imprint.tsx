@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
-      { title: "Imprint ‹ Florian Design Engineer" },
+      { title: "Imprint ‹ Florian Kiem, Design, Code" },
       { name: "description", content: "The usual imprint page." },
       { property: "og:title", content: "Imprint" },
       { property: "og:description", content: "The usual imprint page." },

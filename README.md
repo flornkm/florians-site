@@ -1,6 +1,6 @@
 # Florian - Personal Site (Open Source Portfolio)
 
-A personal site differs from a portfolio. While a portfolio is mainly used to demonstrate work to a potential employer, I use my personal site to express myself as a design engineer. I have purposefully open-sourced this page so that others can get inspired, copy pieces of it, or use it as a starting point for their own personal site.
+A personal site differs from a portfolio. While a portfolio is mainly used to demonstrate work to a potential employer, I use my personal site to express myself through design and code. I have purposefully open-sourced this page so that others can get inspired, copy pieces of it, or use it as a starting point for their own personal site.
 
 ## Usage
 

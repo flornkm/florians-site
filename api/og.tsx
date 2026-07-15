@@ -46,7 +46,7 @@ function firstParam(value: string | string[] | undefined): string | undefined {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const rawTitle = firstParam(req.query.title);
-    const title = (rawTitle || "Design Engineer").slice(0, 120);
+    const title = (rawTitle || "Design, Code").slice(0, 120);
     const isWriting = firstParam(req.query.writing) === "1";
     const icon = firstParam(req.query.icon); // base64-encoded standalone SVG
 

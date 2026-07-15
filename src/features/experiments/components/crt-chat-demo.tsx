@@ -42,7 +42,7 @@ const SCRIPT: { match: RegExp; reply: Reply }[] = [
     match: /work|compan|client|employ|job|team/i,
     reply: {
       answer:
-        "As a design engineer for Superpower, Kalshi, Snaptrude, Morphic, Dash0, and Opral.",
+        "Doing design and code for Superpower, Kalshi, Snaptrude, Morphic, Dash0, and Opral.",
       followups: ["What has he built?", "What's his tech stack?", "How can I reach him?"],
     },
   },
@@ -58,7 +58,7 @@ const SCRIPT: { match: RegExp; reply: Reply }[] = [
     match: /do|role|who|about|design engineer|background/i,
     reply: {
       answer:
-        "He's a design engineer. He translates design into production-grade code to shorten iteration cycles and ship better products.",
+        "Design, code. He translates design into production-grade code to shorten iteration cycles and ship better products.",
       followups: ["Where has he worked?", "What's his tech stack?", "How can I reach him?"],
     },
   },
