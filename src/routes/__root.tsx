@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 
 if (typeof window !== "undefined") {
   console.info(
-    `%cFlorian Kiem %cDesign engineer. Curious how this is built? floriankiem.com/colophon`,
+    `%cFlorian Kiem %cCurious how this is built? floriankiem.com/colophon`,
     "color: #fff; font-size: 20px; font-weight: medium; margin-top: 10px; margin-bottom: 10px;",
     "color: #a3a3a3; font-size: 12px; margin-top: 10px; margin-bottom: 10px;",
   );
@@ -29,31 +29,31 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      { title: "Florian Design Engineer" },
+      { title: "Florian Kiem, Design, Code" },
       // Keep the site out of search engines entirely (paired with the
       // X-Robots-Tag header in vercel.json for non-HTML responses).
       { name: "robots", content: "noindex, nofollow" },
       {
         name: "description",
         content:
-          "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
+          "The personal site of Florian Kiem - design and code, bridging the gap between creativity and logic in this portfolio.",
       },
-      { property: "og:title", content: "Florian Design Engineer" },
+      { property: "og:title", content: "Florian Kiem, Design, Code" },
       {
         property: "og:description",
         content:
-          "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
+          "The personal site of Florian Kiem - design and code, bridging the gap between creativity and logic in this portfolio.",
       },
-      { property: "og:image", content: "/api/og?title=Design%20Engineer" },
+      { property: "og:image", content: "/api/og?title=Design%2C%20Code" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Florian Design Engineer" },
+      { name: "twitter:title", content: "Florian Kiem, Design, Code" },
       {
         name: "twitter:description",
         content:
-          "The personal site of Florian Kiem - a design engineer, bridging the gap between creativity and logic in this portfolio.",
+          "The personal site of Florian Kiem - design and code, bridging the gap between creativity and logic in this portfolio.",
       },
-      { name: "twitter:image", content: "/api/og?title=Design%20Engineer" },
+      { name: "twitter:image", content: "/api/og?title=Design%2C%20Code" },
     ],
     links: [
       { rel: "preconnect", href: "https://cdn.floriankiem.com", crossOrigin: "anonymous" },

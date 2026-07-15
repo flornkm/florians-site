@@ -28,7 +28,7 @@ const PHOTO_LAYOUT = [
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About ‹ Florian Design Engineer" },
+      { title: "About ‹ Florian Kiem, Design, Code" },
       {
         name: "description",
         content:

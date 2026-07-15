@@ -89,21 +89,21 @@ export const Route = createFileRoute("/experiments")({
   },
   head: () => ({
     meta: [
-      { title: "Experiments ‹ Florian Design Engineer" },
+      { title: "Experiments ‹ Florian Kiem, Design, Code" },
       {
         name: "description",
-        content: "A page collecting different design engineering experiments.",
+        content: "A page collecting different design and code experiments.",
       },
       { property: "og:title", content: "Experiments" },
       {
         property: "og:description",
-        content: "A page collecting different design engineering experiments.",
+        content: "A page collecting different design and code experiments.",
       },
       { property: "og:image", content: "/api/og?title=Experiments" },
       { name: "twitter:title", content: "Experiments" },
       {
         name: "twitter:description",
-        content: "A page collecting different design engineering experiments.",
+        content: "A page collecting different design and code experiments.",
       },
       { name: "twitter:image", content: "/api/og?title=Experiments" },
     ],

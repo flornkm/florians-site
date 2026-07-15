@@ -1,6 +1,6 @@
 # Florian Kiem
 
-> Florian Kiem is a design engineer building products in the intersection of design and engineering.
+> Florian Kiem builds products in the intersection of design and code.
 
 Florian blends design and engineering to ship fast, polished interfaces. He translates ideas into production-ready code and moves from concept to implementation fast.
 
