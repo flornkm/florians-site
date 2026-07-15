@@ -15,6 +15,7 @@ A comment is allowed only if it explains a **WHY that is not visible from the co
 - A workaround for a specific bug, with a link or ticket
 - Non-obvious external behavior (`// API returns 200 with an error body; do not trust status alone`)
 - A deliberate tradeoff a reader would otherwise want to "fix"
+- Required annotations: license headers, `eslint-disable` / `@ts-expect-error` with a reason, public API docs of a published library
 
 Keep it to one short line. No multi-paragraph prose, no ASCII art, no banners.
 

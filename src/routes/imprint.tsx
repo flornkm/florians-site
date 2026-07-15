@@ -31,10 +31,9 @@ function ImprintPage() {
         </Body1>
         <H2 className="mt-12 mb-4">Rights</H2>
         <Body1>
-          All writing, images, code, and the design of this site are copyright
-          Florian Kiem. Reproduction, text and data mining, and the use of any
-          part of this site for training AI models are not permitted without
-          written permission. Reach out via hello@floriankiem.com.
+          All writing, images, code, and the design of this site are copyright Florian Kiem.
+          Reproduction, text and data mining, and the use of any part of this site for training AI
+          models are not permitted without written permission. Reach out via hello@floriankiem.com.
         </Body1>
       </section>
     </div>

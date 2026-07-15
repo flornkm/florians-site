@@ -62,6 +62,7 @@ const SLUGS: Record<string, number> = {
   "ios-context-menu": 1000,
   "text-shimmer": 1500,
   "paste-editor": 800,
+  "container-query": 800, // static card at rest
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor

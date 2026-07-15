@@ -48,6 +48,27 @@ Need to react to something?
 - Analytics fired because a view was shown.
 - Data fetching when no framework loader exists — and always with cleanup.
 
+## Never patch a broken Effect with a ref
+
+If you need a `useRef` to stop an Effect from double-firing, looping, or reading stale state, the Effect itself is the problem — eliminate it, don't bandage it.
+
+- `hasRun.current` / `isMounted.current` guards → the logic belongs in an event handler, a derived value, or genuinely runs once per mount (then it must survive Strict Mode remounting anyway).
+- A ref that only exists to hold the "latest callback" so it can be omitted from the dependency array → use `useEffectEvent` (experimental) once stable; until then move the logic to an event handler, or isolate the ref workaround in a named custom hook — never inline in a component.
+
+React's own docs: the right question isn't "how do I run an Effect once", but "how do I fix my Effect so it works after remounting".
+
+## More patterns
+
+- **DOM measurement/setup on mount** — prefer a callback ref over `useRef` + Effect; it fires exactly when the node attaches (and in React 19 the callback can return a cleanup):
+
+  ```tsx
+  const measuredRef = useCallback((node: HTMLDivElement | null) => {
+    if (node !== null) setHeight(node.getBoundingClientRect().height);
+  }, []);
+  ```
+
+- **App initialization** (auth token check, localStorage load) — run once at module level behind a `typeof window !== "undefined"` guard, not in an Effect.
+
 ## Review checklist
 
 When reviewing or writing an Effect, answer out loud:
