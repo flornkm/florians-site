@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 
 if (typeof window !== "undefined") {
   console.info(
-    `%cFlorian Kiem — Design Engineer %cCurious how this is built? floriankiem.com/colophon`,
+    `%cFlorian Kiem %cDesign engineer. Curious how this is built? floriankiem.com/colophon`,
     "color: #fff; font-size: 20px; font-weight: medium; margin-top: 10px; margin-bottom: 10px;",
     "color: #a3a3a3; font-size: 12px; margin-top: 10px; margin-bottom: 10px;",
   );
@@ -123,7 +123,7 @@ function RootLayout() {
     / __/ / / /_/ / /     / / /_/ / / / /
    /_/   /_/\\____/_/     /_/\\__,_/_/ /_/
 
-   floriankiem.com — designed & built by Florian Kiem
+   Designed & built by Florian Kiem. floriankiem.com
 `,
             )}));`,
           }}
