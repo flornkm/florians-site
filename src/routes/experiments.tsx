@@ -1,3 +1,4 @@
+import { ContainerQuery } from "@/features/experiments/components/container-query-demo";
 import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
@@ -54,6 +55,7 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("container-query", "Container Query", "Layout", ContainerQuery),
   experiment("paste-editor", "Paste Editor", "Input", PasteEditor),
   experiment("login-error", "Login", "UX", LoginError),
   experiment("variable-weight", "Variable Weight", "Type", VariableWeight),

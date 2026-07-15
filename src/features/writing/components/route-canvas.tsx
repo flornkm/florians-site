@@ -92,7 +92,11 @@ function EndpointMarker({
         render={(triggerProps) => {
           const props = triggerProps as SVGProps<SVGGElement> & { ref?: Ref<SVGGElement> };
           return (
-            <g {...props} transform={`translate(${offset} 0)`} className={cn("cursor-default", props.className)}>
+            <g
+              {...props}
+              transform={`translate(${offset} 0)`}
+              className={cn("cursor-default", props.className)}
+            >
               <rect
                 x={-hit}
                 y={-hit}

@@ -22,14 +22,17 @@ export function TooltipProvider({ children }: { children: React.ReactNode }) {
 
 interface TooltipProps {
   children: React.ReactNode;
-  content: string;
+  content: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  // Controlled visibility for non-hover triggers (e.g. shown while dragging). Omit for
+  // the default hover behavior.
+  open?: boolean;
 }
 
-export default function Tooltip({ children, content, className, style }: TooltipProps) {
+export default function Tooltip({ children, content, className, style, open }: TooltipProps) {
   return (
-    <BaseTooltip.Root>
+    <BaseTooltip.Root open={open}>
       <BaseTooltip.Trigger
         render={(triggerProps) => (
           <div
@@ -44,12 +47,15 @@ export default function Tooltip({ children, content, className, style }: Tooltip
         )}
       />
       <BaseTooltip.Portal>
-        <BaseTooltip.Positioner sideOffset={8}>
+        {/* z on the Positioner, not the Popup: the Positioner places itself with a
+            transform, which traps any child z-index in its own stacking context —
+            a z'd Popup would still paint behind a z-[110] dialog. */}
+        <BaseTooltip.Positioner sideOffset={8} className="z-[150]">
           <BaseTooltip.Popup
             className={cn(
               "z-50 font-medium bg-surface-inverted text-inverted px-2 py-1 rounded-lg",
               "origin-[var(--transform-origin)]",
-              "transition-all duration-50 ease-out",
+              "transition-all duration-150 ease-out",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1",
               "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:translate-y-1",
             )}

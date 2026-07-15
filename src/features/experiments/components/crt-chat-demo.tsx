@@ -5,7 +5,11 @@ import type { CRTMessage } from "../../contact/components/crt/crt-text-renderer"
 
 const BOOT_MESSAGE = "Terminal ready. Ask me anything.";
 
-const INITIAL_SUGGESTIONS = ["What does Florian do?", "Where has he worked?", "How can I reach him?"];
+const INITIAL_SUGGESTIONS = [
+  "What does Florian do?",
+  "Where has he worked?",
+  "How can I reach him?",
+];
 
 interface Reply {
   answer: string;
@@ -34,15 +38,15 @@ const SCRIPT: { match: RegExp; reply: Reply }[] = [
   {
     match: /travel|countr|visit|been to|world/i,
     reply: {
-      answer: "16 countries so far, from Germany across Europe to the UAE, Thailand, and Indonesia.",
+      answer:
+        "16 countries so far, from Germany across Europe to the UAE, Thailand, and Indonesia.",
       followups: ["What does Florian do?", "What's his tech stack?", "How can I reach him?"],
     },
   },
   {
     match: /work|compan|client|employ|job|team/i,
     reply: {
-      answer:
-        "Doing design and code for Superpower, Kalshi, Snaptrude, Morphic, Dash0, and Opral.",
+      answer: "Doing design and code for Superpower, Kalshi, Snaptrude, Morphic, Dash0, and Opral.",
       followups: ["What has he built?", "What's his tech stack?", "How can I reach him?"],
     },
   },
@@ -65,7 +69,8 @@ const SCRIPT: { match: RegExp; reply: Reply }[] = [
 ];
 
 const FALLBACK: Reply = {
-  answer: "This is a scripted demo, so it only knows a few things about Florian. Try a suggestion below.",
+  answer:
+    "This is a scripted demo, so it only knows a few things about Florian. Try a suggestion below.",
   followups: INITIAL_SUGGESTIONS,
 };
 
@@ -99,20 +104,17 @@ export const CrtChat = () => {
     setPhase("idle");
   }, [phase, typed, target, followups]);
 
-  const send = useCallback(
-    (text: string) => {
-      const trimmed = text.trim();
-      if (!trimmed) return;
-      const reply = replyFor(trimmed);
-      setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
-      setSuggestions([]);
-      setFollowups(reply.followups);
-      setTarget(reply.answer);
-      setPhase("typing");
-      setInput("");
-    },
-    [],
-  );
+  const send = useCallback((text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    const reply = replyFor(trimmed);
+    setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
+    setSuggestions([]);
+    setFollowups(reply.followups);
+    setTarget(reply.answer);
+    setPhase("typing");
+    setInput("");
+  }, []);
 
   const handleSuggestionClick = useCallback(
     (suggestion: string) => {

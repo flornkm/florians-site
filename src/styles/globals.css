@@ -18,8 +18,7 @@
   font-weight: 400 600;
   font-style: normal;
   font-display: swap;
-  src: url(https://cdn.floriankiem.com/fonts/commit-mono/v1/commit-mono-var.woff2)
-    format("woff2");
+  src: url(https://cdn.floriankiem.com/fonts/commit-mono/v1/commit-mono-var.woff2) format("woff2");
 }
 
 /* Wagram (licensed, D0UBLE ZER0) — the serif. Ships italic styles only (Regular/Medium), which is
@@ -41,8 +40,7 @@
   font-style: italic;
   font-display: swap;
   src:
-    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff2)
-      format("woff2"),
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff2) format("woff2"),
     url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff) format("woff");
 }
 
@@ -70,8 +68,7 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url(https://cdn.floriankiem.com/fonts/haas-recast/v1/HaasRecastVF.woff2)
-    format("woff2");
+  src: url(https://cdn.floriankiem.com/fonts/haas-recast/v1/HaasRecastVF.woff2) format("woff2");
 }
 
 /* Pretendard (variable) — used only inside the experiment demos via the font-pretendard
