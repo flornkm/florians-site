@@ -15,8 +15,7 @@ const queryClient = new QueryClient();
 
 if (typeof window !== "undefined") {
   console.info(
-    `%cPersonal Site of Florian %cThanks for visiting my place of the internet. If you're seeing this you're probably a programmer (or a bot).
-Feel free to send me a screenshot of your console so I know someone found this easter egg.`,
+    `%cFlorian Kiem — Design Engineer %cCurious how this is built? floriankiem.com/colophon`,
     "color: #fff; font-size: 20px; font-weight: medium; margin-top: 10px; margin-bottom: 10px;",
     "color: #a3a3a3; font-size: 12px; margin-top: 10px; margin-bottom: 10px;",
   );
@@ -124,8 +123,7 @@ function RootLayout() {
     / __/ / / /_/ / /     / / /_/ / / / /
    /_/   /_/\\____/_/     /_/\\__,_/_/ /_/
 
-   Personal site of Florian. You just found another
-   easter egg. Let me know you found it!
+   floriankiem.com — designed & built by Florian Kiem
 `,
             )}));`,
           }}
@@ -161,8 +159,8 @@ const errorLinks = [
 function NotFoundPage() {
   return (
     <div className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-10rem)] flex flex-col items-start justify-center max-w-sm mx-auto px-8">
-      <h1 className="text-base font-semibold mb-0.5">Oops, someone cut this page loose.</h1>
-      <p className="text-sm text-tertiary mb-5">But no worries, these here are still there:</p>
+      <h1 className="text-base font-semibold mb-0.5">Looks like this page came loose.</h1>
+      <p className="text-sm text-tertiary mb-5">These are still attached:</p>
       <ul className="space-x-2 flex flex-wrap">
         {errorLinks.map((link, index) => (
           <li className="text-sm" key={link.href}>
