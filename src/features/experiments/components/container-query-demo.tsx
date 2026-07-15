@@ -42,7 +42,7 @@ export const ContainerQuery = () => {
   };
 
   return (
-    <div className="flex w-full max-w-full flex-col items-center justify-center gap-8 px-8 py-6">
+    <div className="relative flex h-full w-full max-w-full flex-col items-center justify-center px-8 py-6">
       <div
         ref={frameRef}
         style={{ width }}
@@ -79,7 +79,9 @@ export const ContainerQuery = () => {
         </button>
       </div>
 
-      <label className="inline-flex select-none items-center gap-3 text-xs text-tertiary">
+      {/* Pinned to the demo's bottom edge, out of the flex flow: the frame grows and
+          shrinks while dragging, and the control must never shift with it. */}
+      <label className="absolute bottom-6 left-1/2 inline-flex -translate-x-1/2 select-none items-center gap-3 text-xs text-tertiary">
         <Toggle checked={contained} onCheckedChange={setContained} />
         <span>Container query</span>
       </label>
