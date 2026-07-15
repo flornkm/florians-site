@@ -13,6 +13,7 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   { name: "Rogo", date: "2025 – 2026", url: "https://rogo.ai" },
+  { name: "Legora", date: "2026", url: "https://legora.com" },
   {
     name: "Flow",
     date: "2026",
