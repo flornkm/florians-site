@@ -24,7 +24,7 @@ const projectId = (project: Project) => `project-${project.name.toLowerCase()}`;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Work ‹ Florian Kiem, Design, Code" },
+      { title: "Work ‹ Florian Kiem" },
       {
         name: "description",
         content: "Selected design and engineering work by Florian Kiem.",

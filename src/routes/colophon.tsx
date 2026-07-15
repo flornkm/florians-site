@@ -25,7 +25,7 @@ function renderLinkedList(items: { name: string; href: string }[]) {
 export const Route = createFileRoute("/colophon")({
   head: () => ({
     meta: [
-      { title: "Colophon ‹ Florian Kiem, Design, Code" },
+      { title: "Colophon ‹ Florian Kiem" },
       {
         name: "description",
         content:
