@@ -1,19 +1,30 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { ImageResponse } from "@vercel/og";
-import fs from "node:fs";
-import path from "node:path";
 import React from "react";
 
-// Static weight-550 instance of the variable Haas Recast (the site sans). @vercel/og's Satori
-// can't parse the variable TTF, and it must be a git-tracked file or Vercel won't deploy it.
-const ogFont = fs.readFileSync(
-  path.join(process.cwd(), "public/fonts/haas-recast/HaasRecast-OG.ttf"),
-);
+// The licensed font binaries live on the private CDN (flornkm/cdn), not in this repo.
+// Satori can't parse the variable TTF or WOFF2, so these are the static weight-550
+// Haas Recast instance and the Wagram .woff. Fetched once per cold start; server-side
+// requests carry no Origin header, which the CDN middleware lets through.
+const CDN_FONTS = "https://cdn.floriankiem.com/fonts";
 
-// Wagram Medium Italic (the site serif). Satori parses WOFF but not WOFF2, so read the .woff.
-const serifFont = fs.readFileSync(
-  path.join(process.cwd(), "public/fonts/wagram/Wagram-MediumItalic.woff"),
-);
+async function fetchFont(url: string): Promise<Buffer> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Font fetch failed: ${res.status} ${url}`);
+  return Buffer.from(await res.arrayBuffer());
+}
+
+let fontsPromise: Promise<[Buffer, Buffer]> | null = null;
+function loadFonts(): Promise<[Buffer, Buffer]> {
+  fontsPromise ??= Promise.all([
+    fetchFont(`${CDN_FONTS}/haas-recast/v1/HaasRecast-OG.ttf`),
+    fetchFont(`${CDN_FONTS}/wagram/v1/Wagram-MediumItalic.woff`),
+  ]).catch((e) => {
+    fontsPromise = null; // retry on the next invocation
+    throw e;
+  });
+  return fontsPromise;
+}
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -40,12 +51,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const icon = firstParam(req.query.icon); // base64-encoded standalone SVG
 
     const element = isWriting ? writingCard(title, icon) : defaultCard(title);
+    const [ogFont, serifFont] = await loadFonts();
 
     const image = new ImageResponse(element, {
       width: WIDTH,
       height: HEIGHT,
       fonts: [
-        { name: "Haas Recast", data: ogFont, weight: 550, style: "normal" },
+        // Satori's Weight type only admits the standard hundreds, but it accepts
+        // arbitrary numeric weights at runtime — this file is a static 550 instance.
+        { name: "Haas Recast", data: ogFont, weight: 550 as unknown as 500, style: "normal" },
         { name: "Wagram", data: serifFont, weight: 500, style: "italic" },
       ],
     });

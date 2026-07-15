@@ -57,10 +57,11 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: "/api/og?title=Design%20Engineer" },
     ],
     links: [
+      { rel: "preconnect", href: "https://cdn.floriankiem.com", crossOrigin: "anonymous" },
       {
         // crossOrigin is required for the font preload to be reused.
         rel: "preload",
-        href: "/fonts/haas-recast/HaasRecastVF.woff2",
+        href: "https://cdn.floriankiem.com/fonts/haas-recast/v1/HaasRecastVF.woff2",
         as: "font",
         type: "font/woff2",
         crossOrigin: "anonymous",

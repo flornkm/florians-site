@@ -10,12 +10,16 @@
 
 @source "../../node_modules/streamdown/dist/index.js";
 
+/* Brand fonts are served from cdn.floriankiem.com (private repo flornkm/cdn) so the
+   licensed binaries stay out of this public repo. The CDN only grants CORS to
+   *.floriankiem.com origins and localhost. */
 @font-face {
   font-family: "Commit Mono";
   font-weight: 400 600;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/commit-mono/commit-mono-var.woff2) format("woff2");
+  src: url(https://cdn.floriankiem.com/fonts/commit-mono/v1/commit-mono-var.woff2)
+    format("woff2");
 }
 
 /* Wagram (licensed, D0UBLE ZER0) — the serif. Ships italic styles only (Regular/Medium), which is
@@ -27,8 +31,8 @@
   font-style: italic;
   font-display: swap;
   src:
-    url(/fonts/wagram/Wagram-Italic.woff2) format("woff2"),
-    url(/fonts/wagram/Wagram-Italic.woff) format("woff");
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-Italic.woff2) format("woff2"),
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-Italic.woff) format("woff");
 }
 
 @font-face {
@@ -37,8 +41,9 @@
   font-style: italic;
   font-display: swap;
   src:
-    url(/fonts/wagram/Wagram-MediumItalic.woff2) format("woff2"),
-    url(/fonts/wagram/Wagram-MediumItalic.woff) format("woff");
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff2)
+      format("woff2"),
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff) format("woff");
 }
 
 /* TEMPORARY tryout: Ciron Text as sans (trial font, unlicensed). Remove to restore Pretendard.
@@ -65,7 +70,8 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-  src: url(/fonts/haas-recast/HaasRecastVF.woff2) format("woff2");
+  src: url(https://cdn.floriankiem.com/fonts/haas-recast/v1/HaasRecastVF.woff2)
+    format("woff2");
 }
 
 /* Pretendard (variable) — used only inside the experiment demos via the font-pretendard
