@@ -312,9 +312,12 @@ function FitScale({ children }: { children: ReactNode }) {
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Layout size, not visual bounds: the dialog's opening morph is a pure
+    // transform, so offsetWidth is already the final size on frame one —
+    // one measurement, no per-frame chasing.
     const update = () => {
-      const rect = el.getBoundingClientRect();
-      setScale(Math.min(rect.width / WINDOW_W, rect.height / WINDOW_H));
+      if (el.offsetWidth === 0) return;
+      setScale(Math.min(el.offsetWidth / WINDOW_W, el.offsetHeight / WINDOW_H));
     };
     update();
     const observer = new ResizeObserver(update);
@@ -363,7 +366,7 @@ export function Finder() {
     <div
       className={cn(
         "h-full w-full select-none rounded-[inherit] p-4 antialiased",
-        "bg-[#eceef0] dark:bg-[#131316]",
+        "bg-white dark:bg-[#131316]",
       )}
       style={{ fontFamily: SYSTEM_FONT }}
       // Capture phase: sticker drags stopPropagation on the way up, but the

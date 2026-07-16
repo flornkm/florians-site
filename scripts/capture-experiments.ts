@@ -23,7 +23,7 @@ const OUT = "public/experiments";
 
 // Posters render at ~200px in the grid (and briefly mid-morph), so downscale the
 // retina screenshot and encode to webp (alpha-aware) with cwebp.
-const MAX_WIDTH = 1000;
+const MAX_WIDTH = Number(process.env.CAPTURE_WIDTH ?? 1000);
 const WEBP_QUALITY = 80;
 
 function toWebp(png: string, webp: string) {
@@ -63,6 +63,7 @@ const SLUGS: Record<string, number> = {
   "text-shimmer": 1500,
   "paste-editor": 800,
   "container-query": 800, // static card at rest
+  finder: 1800, // sticker textures load async
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor
