@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { FinderCanvas } from "./finder-canvas";
 import { IconAirdrop } from "central-icons/IconAirdrop";
 import { IconAppstore } from "central-icons/IconAppstore";
 import { IconArrowDownCircle } from "central-icons/IconArrowDownCircle";
@@ -147,11 +148,14 @@ function SidebarRow({
       type="button"
       onClick={onSelect}
       className={cn(
-        "flex h-[25px] w-full cursor-default items-center gap-1.5 rounded-[6px] px-1.5",
-        "text-[13px] text-black/85 transition-colors dark:text-white/85",
+        "flex h-[28px] w-full cursor-default items-center gap-1.5 rounded-[6px] px-1.5",
+        "text-[13px] transition-colors",
         selected
-          ? "bg-black/[0.07] dark:bg-white/[0.1]"
-          : "hover:bg-black/[0.04] active:bg-black/[0.08] dark:hover:bg-white/[0.05] dark:active:bg-white/[0.09]",
+          ? "bg-black/[0.06] text-[#0a82ff] dark:bg-white/[0.09]"
+          : cn(
+              "text-black/85 hover:bg-black/[0.04] active:bg-black/[0.08]",
+              "dark:text-white/85 dark:hover:bg-white/[0.05] dark:active:bg-white/[0.09]",
+            ),
       )}
     >
       {children}
@@ -169,13 +173,24 @@ function Sidebar({
   windowFocused: boolean;
 }) {
   return (
-    <aside className="flex w-[152px] shrink-0 flex-col overflow-hidden border-r border-black/[0.08] bg-[#ececee] dark:border-white/[0.08] dark:bg-[#232326]">
-      <div className="flex h-[46px] shrink-0 items-center px-4">
+    /* Tahoe sidebar: a floating glass panel inset from the window edge. */
+    <aside
+      className={cn(
+        "gradient-border m-2.5 mr-0 flex w-[158px] shrink-0 flex-col overflow-hidden rounded-[16px]",
+        "bg-[#f4f4f6]/85 backdrop-blur-xl",
+        "[--gradient-border:linear-gradient(to_bottom,rgba(255,255,255,0.7),rgba(0,0,0,0.06))]",
+        "shadow-[0_2px_6px_rgba(0,0,0,0.04),0_10px_30px_rgba(0,0,0,0.06)]",
+        "dark:bg-[#28282c]/85",
+        "dark:[--gradient-border:linear-gradient(to_bottom,rgba(255,255,255,0.16),rgba(255,255,255,0.04))]",
+        "dark:shadow-[0_2px_6px_rgba(0,0,0,0.3),0_10px_30px_rgba(0,0,0,0.25)]",
+      )}
+    >
+      <div className="flex h-[44px] shrink-0 items-center px-3.5">
         <TrafficLights windowFocused={windowFocused} />
       </div>
       <div
         className={cn(
-          "flex-1 overflow-hidden px-2.5 pb-2 transition-opacity duration-150",
+          "flex-1 overflow-hidden px-2 pb-2 transition-opacity duration-150",
           !windowFocused && "opacity-60",
         )}
       >
@@ -266,7 +281,7 @@ function NavButton({
       disabled={!enabled}
       onClick={onClick}
       className={cn(
-        "flex h-full w-9 cursor-default items-center justify-center rounded-full transition-colors",
+        "flex h-full w-[33px] cursor-default items-center justify-center rounded-full transition-colors",
         enabled
           ? cn(
               "text-black/80 hover:bg-black/[0.05] active:bg-black/[0.09]",
@@ -277,68 +292,6 @@ function NavButton({
     >
       <Icon className="size-4" />
     </button>
-  );
-}
-
-/* Click-drag in the empty folder area draws Finder's selection marquee. */
-function MarqueeArea() {
-  const ref = useRef<HTMLDivElement>(null);
-  const origin = useRef<{ x: number; y: number } | null>(null);
-  const [rect, setRect] = useState<{
-    left: number;
-    top: number;
-    width: number;
-    height: number;
-  } | null>(null);
-
-  // Pointer coords arrive in screen space; the window renders inside a scale
-  // transform, so map through the current scale and clamp to the folder area.
-  const toLocal = (e: React.PointerEvent) => {
-    const el = ref.current;
-    if (!el) return { x: 0, y: 0 };
-    const bounds = el.getBoundingClientRect();
-    const scale = bounds.width / el.offsetWidth;
-    return {
-      x: Math.min(Math.max((e.clientX - bounds.left) / scale, 0), el.offsetWidth),
-      y: Math.min(Math.max((e.clientY - bounds.top) / scale, 0), el.offsetHeight),
-    };
-  };
-
-  const stop = () => {
-    origin.current = null;
-    setRect(null);
-  };
-
-  return (
-    <div
-      ref={ref}
-      className="relative flex-1 overflow-hidden"
-      onPointerDown={(e) => {
-        if (e.button !== 0) return;
-        e.currentTarget.setPointerCapture(e.pointerId);
-        origin.current = toLocal(e);
-      }}
-      onPointerMove={(e) => {
-        if (!origin.current) return;
-        const point = toLocal(e);
-        const from = origin.current;
-        setRect({
-          left: Math.min(from.x, point.x),
-          top: Math.min(from.y, point.y),
-          width: Math.abs(point.x - from.x),
-          height: Math.abs(point.y - from.y),
-        });
-      }}
-      onPointerUp={stop}
-      onPointerCancel={stop}
-    >
-      {rect && rect.width + rect.height > 3 && (
-        <div
-          className="pointer-events-none absolute rounded-[2px] border border-[#0a82ff]/40 bg-[#0a82ff]/10"
-          style={rect}
-        />
-      )}
-    </div>
   );
 }
 
@@ -436,7 +389,7 @@ export function Finder() {
                 !windowFocused && "opacity-55",
               )}
             >
-              <div className={cn(CAPSULE, "h-[32px]")}>
+              <div className={cn(CAPSULE, "h-[32px] gap-[2px] p-[3px]")}>
                 <NavButton
                   icon={IconChevronLeft}
                   enabled={canGoBack}
@@ -464,8 +417,9 @@ export function Finder() {
                     type="button"
                     onClick={() => setView(i)}
                     className={cn(
-                      "relative flex h-full w-[33px] cursor-default items-center justify-center rounded-full",
-                      view !== i && "active:bg-black/[0.06] dark:active:bg-white/[0.09]",
+                      "relative flex h-full w-[33px] cursor-default items-center justify-center rounded-full transition-colors",
+                      view !== i &&
+                        "hover:bg-black/[0.04] active:bg-black/[0.07] dark:hover:bg-white/[0.06] dark:active:bg-white/[0.1]",
                     )}
                   >
                     {view === i && (
@@ -493,7 +447,8 @@ export function Finder() {
                 className={cn(
                   CAPSULE,
                   "h-[32px] cursor-default gap-1 px-3 text-black/75 dark:text-white/85",
-                  "active:bg-black/[0.05] dark:active:bg-white/[0.12]",
+                  "transition-colors hover:bg-[#f1f1f3]/90 active:bg-[#e9e9eb]/90",
+                  "dark:hover:bg-white/[0.12] dark:active:bg-white/[0.16]",
                 )}
               >
                 <IconDotGrid3x3 className="size-4" />
@@ -538,8 +493,10 @@ export function Finder() {
               </label>
             </div>
 
-            {/* Folder contents — empty, but drag-selectable like Finder */}
-            <MarqueeArea />
+            {/* Folder contents — a WebGL surface rendering the sticky files */}
+            <div className="relative flex-1 overflow-hidden">
+              <FinderCanvas />
+            </div>
           </div>
         </div>
       </FitScale>
