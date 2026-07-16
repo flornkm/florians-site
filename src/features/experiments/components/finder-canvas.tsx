@@ -862,23 +862,29 @@ export function FinderCanvas() {
       gl.uniform1f(loc(program, "u_lift"), state.lift * k);
     };
 
-    const render = () => {
+    const render = (resize = false) => {
       if (disposed) return;
       if (!stickers.some((sticker) => sticker.texture)) return;
 
-      const bounds = canvas.getBoundingClientRect();
-      if (bounds.width === 0) return;
-      // Supersample beyond devicePixelRatio: the browser downscales the
-      // backing store, smoothing alpha-to-coverage edges and mip transitions
-      // that otherwise read as slight pixelation.
-      const dpr = (window.devicePixelRatio || 1) * 2;
-      const backingW = Math.round(bounds.width * dpr);
-      const backingH = Math.round(bounds.height * dpr);
-      if (canvas.width !== backingW || canvas.height !== backingH) {
-        canvas.width = backingW;
-        canvas.height = backingH;
-        fboA = fboB = fboC = null;
+      // Resizing the backing reallocates canvas + FBOs — only do it on
+      // explicit occasions (settle, window resize), never per frame.
+      if (resize || canvas.width <= 1) {
+        const bounds = canvas.getBoundingClientRect();
+        if (bounds.width === 0) return;
+        // Supersample beyond devicePixelRatio: the browser downscales the
+        // backing store, smoothing alpha-to-coverage edges and mip
+        // transitions that otherwise read as slight pixelation.
+        const dpr = (window.devicePixelRatio || 1) * 2;
+        const backingW = Math.round(bounds.width * dpr);
+        const backingH = Math.round(bounds.height * dpr);
+        if (canvas.width !== backingW || canvas.height !== backingH) {
+          canvas.width = backingW;
+          canvas.height = backingH;
+          fboA = fboB = fboC = null;
+        }
       }
+      const backingW = canvas.width;
+      const backingH = canvas.height;
       const k = canvas.width / canvas.offsetWidth;
 
       const fboW = Math.max(2, Math.round(backingW / 2));
@@ -1116,7 +1122,27 @@ export function FinderCanvas() {
       img.onload = () => applySource(sticker, i, img, img.width, img.height);
     });
 
-    const onResize = () => render();
+    const onResize = () => render(true);
+    // The dialog's opening morph changes the canvas's visual size without a
+    // resize event. Wait (cheaply — no rendering) until the bounds settle,
+    // then do a single full-resolution render.
+    let settleRaf = 0;
+    let settleLast = 0;
+    let settleStable = 0;
+    let settleFrames = 0;
+    const settleWatch = () => {
+      const width = canvas.getBoundingClientRect().width;
+      if (Math.abs(width - settleLast) < 0.5) settleStable++;
+      else settleStable = 0;
+      settleLast = width;
+      settleFrames++;
+      if (settleStable >= 3 || settleFrames > 120) {
+        render(true);
+        return;
+      }
+      settleRaf = requestAnimationFrame(settleWatch);
+    };
+    settleRaf = requestAnimationFrame(settleWatch);
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerup", onPointerUp);
@@ -1127,6 +1153,7 @@ export function FinderCanvas() {
     return () => {
       disposed = true;
       if (raf) cancelAnimationFrame(raf);
+      if (settleRaf) cancelAnimationFrame(settleRaf);
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", onPointerUp);

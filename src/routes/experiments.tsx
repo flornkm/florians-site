@@ -24,7 +24,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import type { ComponentType } from "react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Experiment {
   slug: string;
@@ -39,7 +39,7 @@ interface Experiment {
 }
 
 // The centered modal the tile morphs into when opened.
-const DIALOG_SIZE = "h-[min(88vh,33rem)] w-[min(92vw,44rem)]";
+const DIALOG_SIZE = "h-[min(88vh,37.5rem)] w-[min(92vw,50rem)]";
 
 const experiment = (
   slug: string,
@@ -56,6 +56,7 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
+  experiment("finder", "Finder", "macOS", Finder),
   experiment("container-query", "Container Query", "Layout", ContainerQuery),
   experiment("paste-editor", "Paste Editor", "Input", PasteEditor),
   experiment("login-error", "Login", "UX", LoginError),
@@ -74,7 +75,6 @@ const EXPERIMENTS: Experiment[] = [
   experiment("crt-terminal", "CRT Terminal", "Terminal", CrtChat),
   experiment("ios-context-menu", "iOS Context Menu", "Menu", IosContextMenu),
   experiment("text-shimmer", "Text Shimmer", "Type", TextShimmerExperiment),
-  experiment("finder", "Finder", "macOS", Finder),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
@@ -206,6 +206,18 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
   const [morphing, setMorphing] = useState(false);
   const elevated = expanded || morphing;
 
+  // Heavy demos (WebGL init, texture uploads) jank the open morph if they
+  // mount during it — mount the live component only once the morph settles,
+  // with the poster carrying the animation until then.
+  const [liveReady, setLiveReady] = useState(false);
+  if (!expanded && liveReady) setLiveReady(false);
+  useEffect(() => {
+    if (!expanded) return;
+    // Safety net for opens without a layout animation (deep links, reloads).
+    const timer = setTimeout(() => setLiveReady(true), 550);
+    return () => clearTimeout(timer);
+  }, [expanded]);
+
   return (
     // 4:3 cell — matches the poster ratio (so object-cover never crops) and the dialog ratio
     // (so the open morph is a clean uniform scale).
@@ -213,9 +225,13 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
     <li className="relative aspect-[4/3]">
       <motion.div
         layout
+        layoutDependency={expanded}
         data-experiment-tile={expanded ? "open" : "closed"}
         onLayoutAnimationStart={() => setMorphing(true)}
-        onLayoutAnimationComplete={() => setMorphing(false)}
+        onLayoutAnimationComplete={() => {
+          setMorphing(false);
+          if (expanded) setLiveReady(true);
+        }}
         style={{ zIndex: elevated ? 110 : undefined }}
         onKeyDown={(e) => {
           if (expanded && e.key === "Escape") onClose();
@@ -238,9 +254,10 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         <div
           className={cn(
             "absolute inset-0",
-            // Fade out on open only; on close it snaps back instantly (no transition class)
-            // so the poster — not the live component — is what scales down with the box.
-            expanded
+            // Fade out only once the live component is mounted (post-morph); on close it
+            // snaps back instantly (no transition class) so the poster — not the live
+            // component — is what scales down with the box.
+            expanded && liveReady
               ? "pointer-events-none opacity-0 transition-opacity duration-200"
               : "opacity-100",
           )}
@@ -266,7 +283,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         {/* Live component mounts only when expanded, laid out at the final dialog size so it
             never resizes during the morph; it fades in over the box scale. No exit animation:
             on close it unmounts instantly and the poster underneath scales down instead. */}
-        {expanded && (
+        {expanded && liveReady && (
           <motion.div
             key="live"
             initial={{ opacity: 0 }}
