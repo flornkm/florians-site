@@ -31,7 +31,7 @@ export const ScrollMaskFade = () => {
   const [masked, setMasked] = useState(true);
 
   return (
-    <div className="flex flex-col items-center gap-5 w-full max-w-full px-4 py-4">
+    <div className="relative flex h-full w-full max-w-full flex-col items-center justify-center px-4 py-4">
       <div
         className={`smf-scrollbar ${masked ? "scroll-mask [--scroll-mask-size:56px]" : ""} h-56 w-full max-w-96 px-4 sm:px-10 overflow-y-auto`}
       >
@@ -55,7 +55,7 @@ export const ScrollMaskFade = () => {
           )}
         </div>
       </div>
-      <label className="inline-flex items-center gap-3 text-xs text-tertiary select-none">
+      <label className="absolute bottom-6 left-1/2 inline-flex -translate-x-1/2 select-none items-center gap-3 text-xs text-tertiary">
         <Toggle checked={masked} onCheckedChange={setMasked} />
         <span>Mask</span>
       </label>

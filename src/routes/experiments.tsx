@@ -3,6 +3,7 @@ import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
 import { DepthInput } from "@/features/experiments/components/depth-input";
 import { DragImageDrawer } from "@/features/experiments/components/drag-image-drawer-demo";
+import { Finder } from "@/features/experiments/components/finder-demo";
 import { FontSmoothing } from "@/features/experiments/components/font-smoothing-demo";
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
 import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
@@ -73,6 +74,7 @@ const EXPERIMENTS: Experiment[] = [
   experiment("crt-terminal", "CRT Terminal", "Terminal", CrtChat),
   experiment("ios-context-menu", "iOS Context Menu", "Menu", IosContextMenu),
   experiment("text-shimmer", "Text Shimmer", "Type", TextShimmerExperiment),
+  experiment("finder", "Finder", "macOS", Finder),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;

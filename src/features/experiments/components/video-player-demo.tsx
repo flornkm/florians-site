@@ -8,7 +8,7 @@ export const VideoPlayerExperiment = () => {
   const [custom, setCustom] = useState(true);
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full max-w-md px-6 py-6">
+    <div className="relative flex h-full w-full max-w-md flex-col items-center justify-center px-6 py-6">
       <div className="w-full overflow-hidden rounded-md">
         {custom ? (
           <VideoPlayer src={SRC} />
@@ -17,11 +17,12 @@ export const VideoPlayerExperiment = () => {
         )}
       </div>
 
-      <Toggle checked={custom} onCheckedChange={setCustom} className="select-none">
-        <span className="text-xs text-secondary">
+      <label className="absolute bottom-6 left-1/2 inline-flex -translate-x-1/2 select-none items-center gap-3 text-xs text-tertiary">
+        <Toggle checked={custom} onCheckedChange={setCustom} />
+        <span className="whitespace-nowrap">
           {custom ? "Custom media player" : "Native HTML player"}
         </span>
-      </Toggle>
+      </label>
     </div>
   );
 };

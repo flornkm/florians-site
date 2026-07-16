@@ -8,69 +8,17 @@ export interface VideoManifestEntry {
 export const videoManifest: Record<string, VideoManifestEntry> = {
   "/videos/flow/404.mp4": { width: 1920, height: 1144, thumbhash: "/QcCBIDxSWjPa3SIu0UwzUhQiQ==" },
   "/videos/flow/404.webm": { width: 1920, height: 1144, thumbhash: "/QcCBIDxSWjPa3SIu0UwzUhQig==" },
-  "/videos/flow/company.mp4": {
-    width: 1920,
-    height: 1144,
-    thumbhash: "r/cRFICWiYaMdpeKd4B3cAILxw==",
-  },
-  "/videos/flow/company.webm": {
-    width: 1920,
-    height: 1144,
-    thumbhash: "r/cRFICWiYaMdpeKd4B3cAIL1w==",
-  },
-  "/videos/sona/hero-video.mp4": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "PggCBID3GOiEi3WMdH0Hh3BwCA==",
-  },
-  "/videos/sona/hero-video.webm": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "PggCBID3GOiEi3WMdH0Hh3BwCA==",
-  },
-  "/videos/sona/sona-use.mp4": {
-    width: 1280,
-    height: 720,
-    thumbhash: "nygGFITFZ1X+onSFWJS/ifeFVw==",
-  },
-  "/videos/sona/sona-use.webm": {
-    width: 1280,
-    height: 720,
-    thumbhash: "nygGFITFZ1X+onSFWZS/ifeFVw==",
-  },
-  "/videos/stock-footage.mp4": {
-    width: 1920,
-    height: 1080,
-    thumbhash: "m/gJFIQeQ0Z/tWmJd3cpZWALhg==",
-  },
-  "/videos/superpower/health-categories.mp4": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "PfgBBICllq92iJiMlYnfiAEztA==",
-  },
-  "/videos/superpower/health-categories.webm": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "PfgBBICllq92iJiMlYnfiAFDtA==",
-  },
-  "/videos/superpower/protocol-reveal.mp4": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "AAgCBIDw8PDh4eFLS4cAAAAAAA==",
-  },
-  "/videos/superpower/protocol-reveal.webm": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "AAgCBIDw8PDh4eFLS4cAAAAAAA==",
-  },
-  "/videos/superpower/scroll-effect.mp4": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "PPgFBIDWWIhwfYWCfILi4JjvtQ==",
-  },
-  "/videos/superpower/scroll-effect.webm": {
-    width: 2520,
-    height: 1500,
-    thumbhash: "PPgFBIDWWIhwfYWCfILj4JjvtQ==",
-  },
+  "/videos/flow/company.mp4": { width: 1920, height: 1144, thumbhash: "r/cRFICWiYaMdpeKd4B3cAILxw==" },
+  "/videos/flow/company.webm": { width: 1920, height: 1144, thumbhash: "r/cRFICWiYaMdpeKd4B3cAIL1w==" },
+  "/videos/sona/hero-video.mp4": { width: 2520, height: 1500, thumbhash: "PggCBID3GOiEi3WMdH0Hh3BwCA==" },
+  "/videos/sona/hero-video.webm": { width: 2520, height: 1500, thumbhash: "PggCBID3GOiEi3WMdH0Hh3BwCA==" },
+  "/videos/sona/sona-use.mp4": { width: 1280, height: 720, thumbhash: "nygGFITFZ1X+onSFWJS/ifeFVw==" },
+  "/videos/sona/sona-use.webm": { width: 1280, height: 720, thumbhash: "nygGFITFZ1X+onSFWZS/ifeFVw==" },
+  "/videos/stock-footage.mp4": { width: 1920, height: 1080, thumbhash: "m/gJFIQeQ0Z/tWmJd3cpZWALhg==" },
+  "/videos/superpower/health-categories.mp4": { width: 2520, height: 1500, thumbhash: "PfgBBICllq92iJiMlYnfiAEztA==" },
+  "/videos/superpower/health-categories.webm": { width: 2520, height: 1500, thumbhash: "PfgBBICllq92iJiMlYnfiAFDtA==" },
+  "/videos/superpower/protocol-reveal.mp4": { width: 2520, height: 1500, thumbhash: "AAgCBIDw8PDh4eFLS4cAAAAAAA==" },
+  "/videos/superpower/protocol-reveal.webm": { width: 2520, height: 1500, thumbhash: "AAgCBIDw8PDh4eFLS4cAAAAAAA==" },
+  "/videos/superpower/scroll-effect.mp4": { width: 2520, height: 1500, thumbhash: "PPgFBIDWWIhwfYWCfILi4JjvtQ==" },
+  "/videos/superpower/scroll-effect.webm": { width: 2520, height: 1500, thumbhash: "PPgFBIDWWIhwfYWCfILj4JjvtQ==" },
 };
