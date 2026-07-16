@@ -45,10 +45,12 @@ const SPRING = { type: "spring", stiffness: 550, damping: 40 } as const;
 /* Liquid-glass capsule shared by every toolbar control. One hairline via the
    gradient border, one soft shadow — never a second ring. */
 const CAPSULE = cn(
-  "gradient-border relative flex items-center rounded-full bg-white/85 backdrop-blur-xl",
-  "[--gradient-border:linear-gradient(to_bottom,rgba(0,0,0,0.03),rgba(0,0,0,0.08))]",
-  "shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_14px_rgba(0,0,0,0.05)]",
-  "dark:bg-white/[0.08]",
+  "gradient-border relative flex items-center rounded-full",
+  // Light: off-white fill, a fully white 1px border (via the gradient border),
+  // and the soft edge from shadow-ring's baked hairline.
+  "bg-[#fcfcfc] [--gradient-border:linear-gradient(#ffffff,#ffffff)]",
+  "shadow-ring-sm hairline-black/2",
+  "dark:bg-white/[0.08] dark:backdrop-blur-xl",
   "dark:[--gradient-border:linear-gradient(to_bottom,rgba(255,255,255,0.18),rgba(255,255,255,0.05))]",
   "dark:shadow-[0_1px_2px_rgba(0,0,0,0.25),0_4px_14px_rgba(0,0,0,0.18)]",
 );
@@ -364,7 +366,9 @@ export function Finder() {
         "bg-[#eceef0] dark:bg-[#131316]",
       )}
       style={{ fontFamily: SYSTEM_FONT }}
-      onPointerDown={(e) =>
+      // Capture phase: sticker drags stopPropagation on the way up, but the
+      // window should still refocus the moment one is grabbed.
+      onPointerDownCapture={(e) =>
         setWindowFocused((e.target as HTMLElement).closest("[data-finder-window]") !== null)
       }
     >
@@ -372,7 +376,7 @@ export function Finder() {
         <div
           data-finder-window
           className={cn(
-            "flex h-full w-full overflow-hidden rounded-[12px] bg-white dark:bg-[#202023]",
+            "flex h-full w-full overflow-hidden rounded-[26px] bg-white dark:bg-[#202023]",
             "transition-shadow duration-200",
             windowFocused
               ? "shadow-[0_0_0_0.5px_rgba(0,0,0,0.12),0_10px_30px_rgba(0,0,0,0.08),0_40px_110px_rgba(0,0,0,0.16)] dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.12),0_10px_30px_rgba(0,0,0,0.3),0_40px_110px_rgba(0,0,0,0.45)]"
