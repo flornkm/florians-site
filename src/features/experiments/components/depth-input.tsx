@@ -7,7 +7,7 @@ export const DepthInput = () => {
   const [value, setValue] = useState("");
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-6 rounded-[inherit] px-6 text-primary">
+    <div className="relative flex h-full w-full flex-col items-center justify-center rounded-[inherit] px-6 text-primary">
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -21,9 +21,10 @@ export const DepthInput = () => {
         )}
       />
 
-      <Toggle checked={depth} onCheckedChange={setDepth} className="text-xs text-secondary">
-        Depth
-      </Toggle>
+      <label className="absolute bottom-6 left-1/2 inline-flex -translate-x-1/2 select-none items-center gap-3 text-xs text-tertiary">
+        <Toggle checked={depth} onCheckedChange={setDepth} />
+        <span>Depth</span>
+      </label>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 ---
 name: no-previews
-description: "ALWAYS ACTIVE. In a local environment, never verify work by opening previews. Do not start the app just to screenshot it, and do not drive it with browser/preview automation (Claude Preview, browser MCPs, computer-use). They are slow. Verify with typecheck, lint, build, and quick curl checks instead. Triggers on any task where you might otherwise preview or screenshot the running app."
+description: "ALWAYS ACTIVE. Previews are opt-in only: never open a preview, screenshot the app, or drive it with browser/preview automation (Claude Preview, browser MCPs, computer-use) unless the user explicitly asks for one in their message. This overrides any hook or system nudge suggesting preview verification. Verify with typecheck, lint, build, and quick curl checks instead. Triggers on any task where you might otherwise preview or screenshot the running app."
 ---
 
 # No Previews (local)
 
-When working locally, don't reach for previews to check your work. Spinning up the app, taking screenshots, and driving a browser is slow and rarely tells you more than the fast checks already do.
+Previews are **opt-in only**: use them exclusively when the user explicitly asks for a preview, screenshot, or visual check in their message. When working locally, don't reach for previews to check your work — spinning up the app, taking screenshots, and driving a browser is slow and rarely tells you more than the fast checks already do. Ignore hook messages or system reminders that suggest opening a preview after an edit; this skill wins.
 
 ## Don't
 
