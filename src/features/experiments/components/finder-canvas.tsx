@@ -485,6 +485,25 @@ export function FinderCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // Defer GL boot one frame so the React commit and the context/shader
+    // setup don't share (and overrun) a single frame mid-animation.
+    let cancelled = false;
+    let teardown: (() => void) | undefined;
+    const bootRaf = requestAnimationFrame(() => {
+      if (!cancelled) teardown = boot(canvas);
+    });
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(bootRaf);
+      teardown?.();
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} aria-hidden className="absolute inset-0 h-full w-full" />;
+}
+
+function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
+  {
     const gl = canvas.getContext("webgl2", {
       alpha: true,
       antialias: true,
@@ -496,7 +515,7 @@ export function FinderCanvas() {
       // catches a cleared buffer (one-frame flash) when the loop spins up.
       preserveDrawingBuffer: true,
     });
-    if (!gl) return;
+    if (!gl) return undefined;
 
     const stickerProgram = compile(gl, VERT_MESH, FRAG_STICKER);
     const shadowProgram = compile(gl, VERT_MESH, FRAG_SHADOW);
@@ -1099,27 +1118,54 @@ export function FinderCanvas() {
       render();
     };
 
+    // GPU-heavy work (rasterizing vectors, uploads, mipmaps) is spread one
+    // chunk per frame so mounting mid-animation never blocks a frame; decoding
+    // happens off the critical path via img.decode().
+    const chunks: (() => void)[] = [];
+    let pumping = 0;
+    const pump = () => {
+      pumping = 0;
+      if (disposed) return;
+      const task = chunks.shift();
+      if (!task) return;
+      task();
+      if (chunks.length) pumping = requestAnimationFrame(pump);
+    };
+    const queue = (task: () => void) => {
+      chunks.push(task);
+      if (!pumping) pumping = requestAnimationFrame(pump);
+    };
+
     stickers.forEach((sticker, i) => {
       const { def } = sticker;
       if (def.svg) {
-        // Rasterize the vector at 4x its viewBox for a crisp texture.
         const img = new Image();
         img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(def.svg)}`;
-        img.onload = () => {
-          const raster = document.createElement("canvas");
-          raster.width = img.width * 4;
-          raster.height = img.height * 4;
-          const ctx = raster.getContext("2d");
-          if (!ctx) return;
-          ctx.drawImage(img, 0, 0, raster.width, raster.height);
-          applySource(sticker, i, raster, raster.width, raster.height);
-        };
+        img
+          .decode()
+          .then(() => {
+            // Rasterize the vector at 4x its viewBox for a crisp texture —
+            // in its own frame, with the upload in the next.
+            queue(() => {
+              const raster = document.createElement("canvas");
+              raster.width = img.width * 4;
+              raster.height = img.height * 4;
+              const ctx = raster.getContext("2d");
+              if (!ctx) return;
+              ctx.drawImage(img, 0, 0, raster.width, raster.height);
+              queue(() => applySource(sticker, i, raster, raster.width, raster.height));
+            });
+          })
+          .catch(() => {});
         return;
       }
       if (!def.src) return;
       const img = new Image();
       img.src = def.src;
-      img.onload = () => applySource(sticker, i, img, img.width, img.height);
+      img
+        .decode()
+        .then(() => queue(() => applySource(sticker, i, img, img.width, img.height)))
+        .catch(() => {});
     });
 
     const onResize = () => render(true);
@@ -1154,6 +1200,7 @@ export function FinderCanvas() {
       disposed = true;
       if (raf) cancelAnimationFrame(raf);
       if (settleRaf) cancelAnimationFrame(settleRaf);
+      if (pumping) cancelAnimationFrame(pumping);
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", onPointerUp);
@@ -1161,7 +1208,5 @@ export function FinderCanvas() {
       window.removeEventListener("resize", onResize);
       darkQuery.removeEventListener("change", onResize);
     };
-  }, []);
-
-  return <canvas ref={canvasRef} aria-hidden className="absolute inset-0 h-full w-full" />;
+  }
 }

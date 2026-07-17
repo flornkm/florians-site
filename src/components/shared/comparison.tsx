@@ -160,12 +160,12 @@ export function Comparison({
         <Dialog.Trigger
           aria-label={alt ? `Compare: ${alt}` : "Compare images"}
           className={cn(
-            "block w-full cursor-zoom-in appearance-none rounded-lg text-left outline-none",
+            "block w-full cursor-zoom-in appearance-none text-left outline-none",
             "focus-visible:ring-2 focus-visible:ring-default",
             "max-md:ml-[50%] max-md:w-[calc(100vw-48px)] max-md:-translate-x-1/2",
           )}
         >
-          <div className="rounded-lg bg-secondary p-4 md:p-12">
+          <div className="bg-secondary p-4 md:p-12">
             {/* The cutouts carry wide transparent margins, so the frames overlap via negative
                 inner margins to pull the products visually together. */}
             <div className="flex items-center">

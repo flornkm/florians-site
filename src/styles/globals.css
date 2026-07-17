@@ -153,19 +153,6 @@ body:has([data-block-scroll]) {
   mask-image: linear-gradient(to bottom, transparent, black);
 }
 
-/* Fine 1px dot grid for figure/illustration backgrounds. Shared across all
-   figures so they align to the same grid; dots stay 1px at any scale. */
-.figure-dots {
-  --figure-dot: #d9d9d9;
-  background-image: radial-gradient(circle, var(--figure-dot) 0.5px, transparent 0.6px);
-  background-size: 10px 10px;
-}
-@media (prefers-color-scheme: dark) {
-  .figure-dots {
-    --figure-dot: #2a2a2a;
-  }
-}
-
 /*
  * scroll-mask: fades the top/bottom edges of a scroll container.
  * The top fade grows in once you've scrolled, the bottom fade shrinks as you
@@ -232,4 +219,11 @@ body:has([data-block-scroll]) {
 em,
 i {
   @apply font-serif font-medium tracking-[-0.04em];
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-blue-300) 12%, transparent);
+  text-decoration: underline dotted var(--color-blue-500);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
 }

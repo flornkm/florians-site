@@ -24,7 +24,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import type { ComponentType } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 interface Experiment {
   slug: string;
@@ -206,18 +206,6 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
   const [morphing, setMorphing] = useState(false);
   const elevated = expanded || morphing;
 
-  // Heavy demos (WebGL init, texture uploads) jank the open morph if they
-  // mount during it — mount the live component only once the morph settles,
-  // with the poster carrying the animation until then.
-  const [liveReady, setLiveReady] = useState(false);
-  if (!expanded && liveReady) setLiveReady(false);
-  useEffect(() => {
-    if (!expanded) return;
-    // Safety net for opens without a layout animation (deep links, reloads).
-    const timer = setTimeout(() => setLiveReady(true), 550);
-    return () => clearTimeout(timer);
-  }, [expanded]);
-
   return (
     // 4:3 cell — matches the poster ratio (so object-cover never crops) and the dialog ratio
     // (so the open morph is a clean uniform scale).
@@ -228,10 +216,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         layoutDependency={expanded}
         data-experiment-tile={expanded ? "open" : "closed"}
         onLayoutAnimationStart={() => setMorphing(true)}
-        onLayoutAnimationComplete={() => {
-          setMorphing(false);
-          if (expanded) setLiveReady(true);
-        }}
+        onLayoutAnimationComplete={() => setMorphing(false)}
         style={{ zIndex: elevated ? 110 : undefined }}
         onKeyDown={(e) => {
           if (expanded && e.key === "Escape") onClose();
@@ -254,10 +239,9 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         <div
           className={cn(
             "absolute inset-0",
-            // Fade out only once the live component is mounted (post-morph); on close it
-            // snaps back instantly (no transition class) so the poster — not the live
-            // component — is what scales down with the box.
-            expanded && liveReady
+            // Fade out on open only; on close it snaps back instantly (no transition class)
+            // so the poster — not the live component — is what scales down with the box.
+            expanded
               ? "pointer-events-none opacity-0 transition-opacity duration-200"
               : "opacity-100",
           )}
@@ -283,7 +267,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         {/* Live component mounts only when expanded, laid out at the final dialog size so it
             never resizes during the morph; it fades in over the box scale. No exit animation:
             on close it unmounts instantly and the poster underneath scales down instead. */}
-        {expanded && liveReady && (
+        {expanded && (
           <motion.div
             key="live"
             initial={{ opacity: 0 }}
