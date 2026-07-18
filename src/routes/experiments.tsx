@@ -1,17 +1,10 @@
-import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
-import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
-import { MetalBlob } from "@/features/experiments/components/metal-blob-demo";
-import { StickerFile } from "@/features/experiments/components/sticker-file-demo";
-import { SlopDetector } from "@/features/experiments/components/slop-detector";
-import { XpMascot } from "@/features/experiments/components/xp-mascot-demo";
 import { ExperimentDrawer } from "@/features/experiments/components/experiment-drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
-import type { ComponentType } from "react";
-import { useCallback, useRef, useState } from "react";
+import { type ComponentType, lazy, Suspense, useCallback, useRef, useState } from "react";
 
 interface Experiment {
   slug: string;
@@ -42,13 +35,24 @@ const experiment = (
   Component,
 });
 
+// Each demo is lazy-loaded. validateSearch and the tile grid read this array in the route's
+// eager (non-code-split) module, so a static `import { SlopDetector }` here would drag every
+// demo's bundle — including the three/drei/hls 3D graph (~950 KB) — into every route's initial
+// load, the homepage included. Loading each Component behind import() keeps that code in its own
+// chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
-  experiment("windows-xp", "Windows XP", "Nostalgia", XpMascot),
-  experiment("metal-blob", "Metal Blob", "3D", MetalBlob),
-  experiment("sticker-file", "Sticker File", "Paper", StickerFile),
-  experiment("slop-detector", "Slop Detector", "3D", SlopDetector),
-  experiment("frosted-camera", "Frosted Camera", "Camera", FrostedCamera),
-  experiment("crt-terminal", "CRT Terminal", "Terminal", CrtChat),
+  experiment("windows-xp", "Windows XP", "Nostalgia",
+    lazy(() => import("@/features/experiments/components/xp-mascot-demo").then((m) => ({ default: m.XpMascot })))),
+  experiment("metal-blob", "Metal Blob", "3D",
+    lazy(() => import("@/features/experiments/components/metal-blob-demo").then((m) => ({ default: m.MetalBlob })))),
+  experiment("sticker-file", "Sticker File", "Paper",
+    lazy(() => import("@/features/experiments/components/sticker-file-demo").then((m) => ({ default: m.StickerFile })))),
+  experiment("slop-detector", "Slop Detector", "3D",
+    lazy(() => import("@/features/experiments/components/slop-detector").then((m) => ({ default: m.SlopDetector })))),
+  experiment("frosted-camera", "Frosted Camera", "Camera",
+    lazy(() => import("@/features/experiments/components/frosted-camera-demo").then((m) => ({ default: m.FrostedCamera })))),
+  experiment("crt-terminal", "CRT Terminal", "Terminal",
+    lazy(() => import("@/features/experiments/components/crt-chat-demo").then((m) => ({ default: m.CrtChat })))),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
@@ -284,7 +288,11 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
             }}
             className="absolute inset-0 flex items-center justify-center font-pretendard"
           >
-            <Component />
+            {/* Suspense boundary for the lazy demo chunk; the blurred poster underneath
+                covers the (near-instant) fetch during the open morph. */}
+            <Suspense fallback={null}>
+              <Component />
+            </Suspense>
           </motion.div>
         )}
 

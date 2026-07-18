@@ -1,6 +1,6 @@
 import { DrawerPreview as Drawer } from "@base-ui/react/drawer";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
-import type { ComponentType } from "react";
+import { type ComponentType, Suspense } from "react";
 import "./experiment-drawer.css";
 
 interface ExperimentDrawerProps {
@@ -29,7 +29,9 @@ export function ExperimentDrawer({ open, title, Component, onOpenChange }: Exper
               data-base-ui-swipe-ignore
             >
               <Drawer.Title className="sr-only">{title}</Drawer.Title>
-              <Component />
+              <Suspense fallback={null}>
+                <Component />
+              </Suspense>
             </Drawer.Content>
           </Drawer.Popup>
         </Drawer.Viewport>

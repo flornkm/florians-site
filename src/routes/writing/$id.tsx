@@ -1,9 +1,7 @@
 import { H1 } from "@/components/design-system/heading";
 import { useMdxContent } from "@/components/shared/mdx-content";
 import { Link } from "@/components/ui/link";
-import { resolvePostIcon } from "@/features/writing/lib/post-icon";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
-import { toStandaloneSvg } from "@/features/writing/lib/icon-svg";
 import { getContent, isWritingEntry, type WritingEntry } from "@/lib/mdx";
 import { Await, createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
@@ -44,10 +42,6 @@ function getWritingItem(slug: string) {
       ? item.collaborators.split(",").map((c: string) => c.trim())
       : item.collaborators || [];
 
-  // Pre-render the mark so the OG card shows the same icon as the grid.
-  const iconSvg = toStandaloneSvg(resolvePostIcon(item.slug), 200);
-  const icon = encodeBase64(iconSvg);
-
   return {
     slug: item.slug,
     title: item.title,
@@ -56,8 +50,20 @@ function getWritingItem(slug: string) {
     // Live posts (e.g. runs) carry no frontmatter date — their date streams in via newestRunDate.
     date: typeof item.date === "string" ? item.date : "",
     collaborators,
-    icon,
   };
+}
+
+// Pre-render the mark so the OG card shows the same icon as the grid. The icon renderer
+// (post-icon + icon-svg, ~100 KB with its path data) is imported dynamically inside the
+// loader instead of at module top level: the loader lives in this route's eager,
+// non-code-split module, so a static import would drag that graph into every route's
+// initial bundle — including the homepage. This way it loads only when a post is opened.
+async function buildPostIcon(slug: string): Promise<string> {
+  const [{ resolvePostIcon }, { toStandaloneSvg }] = await Promise.all([
+    import("@/features/writing/lib/post-icon"),
+    import("@/features/writing/lib/icon-svg"),
+  ]);
+  return encodeBase64(toStandaloneSvg(resolvePostIcon(slug), 200));
 }
 
 // Server-only Firebase read. Kept separate and deferred so navigation never blocks on it —
@@ -65,10 +71,11 @@ function getWritingItem(slug: string) {
 const getNewestRunDate = createServerFn().handler(() => fetchNewestRunDate());
 
 export const Route = createFileRoute("/writing/$id")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const item = getWritingItem(params.id);
     return {
       ...item,
+      icon: await buildPostIcon(item.slug),
       newestRunDate: item.type === "live" ? getNewestRunDate() : null,
     };
   },
