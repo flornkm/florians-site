@@ -46,13 +46,14 @@ export const Route = createFileRoute("/")({
   component: IndexPage,
 });
 
-function WideImage({ src, alt }: { src: string; alt: string }) {
+function WideImage({ src, alt, priority }: { src: string; alt: string; priority?: boolean }) {
   return (
     <div className="bg-image-card p-4 md:p-12">
       <Image
         src={src}
         alt={alt}
         objectFit="contain"
+        priority={priority}
         sizes="(min-width: 1600px) 768px, (min-width: 768px) 55vw, 92vw"
         className="mx-auto h-auto w-full max-w-3xl rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
       />
@@ -132,7 +133,15 @@ function WorkVideo({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-function MobileRow({ images, alt }: { images: string[]; alt: string }) {
+function MobileRow({
+  images,
+  alt,
+  priority,
+}: {
+  images: string[];
+  alt: string;
+  priority?: boolean;
+}) {
   return (
     <div className="bg-image-card p-2 py-4 md:p-10 md:py-12">
       <div className="mx-auto flex max-w-3xl gap-3">
@@ -142,6 +151,7 @@ function MobileRow({ images, alt }: { images: string[]; alt: string }) {
               src={src}
               alt={alt}
               objectFit="contain"
+              priority={priority}
               sizes="(min-width: 768px) 320px, 30vw"
               className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
             />
@@ -217,21 +227,25 @@ function IndexPage() {
       </aside>
 
       <div className="flex flex-col gap-1 md:col-start-3 md:col-span-5">
-        {withMedia.map((project) => (
+        {withMedia.map((project, sectionIndex) => (
           <section
             key={project.name}
             id={projectId(project)}
             className="flex scroll-mt-24 flex-col gap-1"
           >
-            {project.media?.map((block, index) =>
-              Array.isArray(block) ? (
-                <MobileRow key={index} images={block} alt={project.name} />
+            {project.media?.map((block, index) => {
+              // The first media block of the first project is the LCP element: load it
+              // eagerly at high priority instead of lazily, so it isn't queued behind
+              // hydration and the below-the-fold clips.
+              const priority = sectionIndex === 0 && index === 0;
+              return Array.isArray(block) ? (
+                <MobileRow key={index} images={block} alt={project.name} priority={priority} />
               ) : isVideo(block) ? (
                 <WorkVideo key={block} src={block} alt={project.name} />
               ) : (
-                <WideImage key={block} src={block} alt={project.name} />
-              ),
-            )}
+                <WideImage key={block} src={block} alt={project.name} priority={priority} />
+              );
+            })}
           </section>
         ))}
         {/* Extends the column so the sticky sidebar settles into the footer's Pages row. */}
