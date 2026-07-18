@@ -156,6 +156,7 @@ function RunItem({ run }: { run: Run }) {
           metric={metric}
           temperature={run.temperature}
           temperatures={run.temperatures}
+          averageHeartRate={run.averageHeartRate}
           heartRates={run.heartRates}
           replayToken={replayToken}
           className="mt-5 h-[26rem] w-full bg-secondary p-3 md:h-[34rem] md:p-5"

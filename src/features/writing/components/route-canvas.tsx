@@ -1,4 +1,5 @@
 import {
+  HR_STOPS,
   LINE_RAMP,
   NEUTRAL,
   ROUTE_PADDING,
@@ -208,6 +209,7 @@ export function RouteCanvas({
   metric,
   temperature,
   temperatures,
+  averageHeartRate,
   heartRates,
   replayToken = 0,
   className,
@@ -217,6 +219,7 @@ export function RouteCanvas({
   metric: Metric;
   temperature: number | null;
   temperatures: number[] | null;
+  averageHeartRate: number | null;
   heartRates: number[] | null;
   /** Increment to restart the draw animation from zero. */
   replayToken?: number;
@@ -232,20 +235,19 @@ export function RouteCanvas({
   // Flips when the draw finishes; reveals the end marker in the same instant the tip dot hides.
   const [done, setDone] = useState(false);
 
-  // One color per segment, normalized to the run's own range so even small swings read as a
-  // gradient. Temperature falls back to a uniform absolute color for runs without a series.
+  // One color per segment from the metric's absolute scale; runs without a per-point series
+  // fall back to a uniform color from the average.
   const segmentColors = useMemo(() => {
     const segmentCount = geom.points.length - 1;
     const series = metric === "temperature" ? temperatures : heartRates;
     if (series && series.length) {
       return seriesColors(metric, series.slice(0, segmentCount));
     }
-    const uniform =
-      metric === "temperature" && temperature != null
-        ? rampColor(TEMP_STOPS, temperature)
-        : NEUTRAL;
+    const average = metric === "temperature" ? temperature : averageHeartRate;
+    const stops = metric === "temperature" ? TEMP_STOPS : HR_STOPS;
+    const uniform = average != null ? rampColor(stops, average) : NEUTRAL;
     return Array.from({ length: segmentCount }, () => uniform);
-  }, [geom, metric, temperature, temperatures, heartRates]);
+  }, [geom, metric, temperature, temperatures, averageHeartRate, heartRates]);
 
   // The line scales with the route as it fills the box. Measure the user→screen scale (it shifts
   // with the column width) and size the stroke inversely so it renders at a constant px width.
@@ -404,11 +406,9 @@ export function RouteCanvas({
   );
 }
 
-// Legend for the line colors, cool to warm. The line is normalized per run, so the honest
-// labels are the range endpoints, not absolute values.
+// Legend for the line colors, cool to warm.
 export function ColorLegend({ metric, className }: { metric: Metric; className?: string }) {
   const [low, high] = metric === "temperature" ? ["Cooler", "Warmer"] : ["Easy", "Hard"];
-  // The bar is the real ramp, not an approximation — built from the same stops the line samples.
   const gradient = `linear-gradient(to right, ${LINE_RAMP.map(
     (stop) => `${toRgb(stop.rgb)} ${stop.at * 100}%`,
   ).join(", ")})`;

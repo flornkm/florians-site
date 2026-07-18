@@ -26,18 +26,26 @@ export const NEUTRAL = "currentColor";
 
 export type Ramp = { at: number; rgb: [number, number, number] }[];
 
-// Absolute temperature scale on the site's accent palette (blue → sage → gold → orange),
-// used for the uniform-line fallback when a run has no per-point series.
+// Absolute temperature scale in °C on the accent palette (blue → sage → gold → orange).
 export const TEMP_STOPS: Ramp = [
-  { at: 0, rgb: [126, 156, 196] }, // cold
-  { at: 12, rgb: [111, 174, 159] }, // mild
-  { at: 22, rgb: [202, 168, 74] }, // warm
-  { at: 32, rgb: [232, 100, 60] }, // hot
+  { at: 0, rgb: [126, 156, 196] },
+  { at: 12, rgb: [111, 174, 159] },
+  { at: 22, rgb: [202, 168, 74] },
+  { at: 32, rgb: [232, 100, 60] },
 ];
 
-// The same palette over 0→1, for the line itself. Each run's series is normalized to its
-// own min→max before sampling, so even a 1–2°C or few-bpm swing spreads across the full
-// palette and reads as a visible gradient — relative within a run, absolute in the readout.
+// Absolute heart-rate scale in bpm, anchored to the athlete's Strava HR zones
+// (Z1 ≤127, Z2 128–158, Z3 159–174, Z4 175–189, Z5 190+).
+export const HR_STOPS: Ramp = [
+  { at: 115, rgb: [126, 156, 196] },
+  { at: 145, rgb: [111, 174, 159] },
+  { at: 172, rgb: [202, 168, 74] },
+  { at: 190, rgb: [232, 100, 60] },
+];
+
+const SERIES_STOPS: Record<Metric, Ramp> = { temperature: TEMP_STOPS, heartrate: HR_STOPS };
+
+// Palette over 0→1, used only for the legend's gradient bar.
 export const LINE_RAMP: Ramp = [
   { at: 0, rgb: [126, 156, 196] },
   { at: 0.38, rgb: [111, 174, 159] },
@@ -45,21 +53,8 @@ export const LINE_RAMP: Ramp = [
   { at: 1, rgb: [232, 100, 60] },
 ];
 
-// A run with a nearly flat series shouldn't stretch sensor noise into a full rainbow —
-// below this span the gradient stays intentionally mild.
-const MIN_SPAN: Record<Metric, number> = { temperature: 2, heartrate: 12 };
-
-// Per-point colors for a series, normalized to its own range (centered when the floor kicks in).
 export function seriesColors(metric: Metric, series: number[]): string[] {
-  let min = Infinity;
-  let max = -Infinity;
-  for (const v of series) {
-    if (v < min) min = v;
-    if (v > max) max = v;
-  }
-  const span = Math.max(max - min, MIN_SPAN[metric]);
-  const lo = (min + max) / 2 - span / 2;
-  return series.map((v) => rampColor(LINE_RAMP, (v - lo) / span));
+  return series.map((v) => rampColor(SERIES_STOPS[metric], v));
 }
 
 export function toRgb([r, g, b]: [number, number, number]): string {
