@@ -1,22 +1,9 @@
-import { ContainerQuery } from "@/features/experiments/components/container-query-demo";
-import { CopyExperiment } from "@/features/experiments/components/copy-demo";
 import { CrtChat } from "@/features/experiments/components/crt-chat-demo";
-import { DepthInput } from "@/features/experiments/components/depth-input";
-import { DragImageDrawer } from "@/features/experiments/components/drag-image-drawer-demo";
-import { Finder } from "@/features/experiments/components/finder-demo";
-import { FontSmoothing } from "@/features/experiments/components/font-smoothing-demo";
 import { FrostedCamera } from "@/features/experiments/components/frosted-camera-demo";
-import { IosContextMenu } from "@/features/experiments/components/ios-context-menu-demo";
-import { LazyImage } from "@/features/experiments/components/lazy-image-demo";
-import { LoginError } from "@/features/experiments/components/login-error-demo";
-import { PasteEditor } from "@/features/experiments/components/paste-editor-demo";
-import { ScrollMaskFade } from "@/features/experiments/components/scroll-mask-fade-demo";
-import { ScrollbarGutter } from "@/features/experiments/components/scrollbar-gutter-demo";
-import { ShadowRing } from "@/features/experiments/components/shadow-ring-demo";
+import { MetalBlob } from "@/features/experiments/components/metal-blob-demo";
+import { StickerFile } from "@/features/experiments/components/sticker-file-demo";
 import { SlopDetector } from "@/features/experiments/components/slop-detector";
-import { TextShimmerExperiment } from "@/features/experiments/components/text-shimmer-demo";
-import { VariableWeight } from "@/features/experiments/components/variable-weight-demo";
-import { VideoPlayerExperiment } from "@/features/experiments/components/video-player-demo";
+import { XpMascot } from "@/features/experiments/components/xp-mascot-demo";
 import { ExperimentDrawer } from "@/features/experiments/components/experiment-drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
@@ -56,25 +43,12 @@ const experiment = (
 });
 
 const EXPERIMENTS: Experiment[] = [
-  experiment("finder", "Finder", "macOS", Finder),
-  experiment("container-query", "Container Query", "Layout", ContainerQuery),
-  experiment("paste-editor", "Paste Editor", "Input", PasteEditor),
-  experiment("login-error", "Login", "UX", LoginError),
-  experiment("variable-weight", "Variable Weight", "Type", VariableWeight),
-  experiment("drawer-drag", "Drawer", "Base UI", DragImageDrawer),
-  experiment("shadow-ring", "Shadow Ring", "Shadow", ShadowRing),
-  experiment("scrollbar-gutter", "Scrollbar Gutter", "Layout", ScrollbarGutter),
-  experiment("copy", "Copy", "Motion", CopyExperiment),
-  experiment("video-player", "Video Player", "Video", VideoPlayerExperiment),
+  experiment("windows-xp", "Windows XP", "Nostalgia", XpMascot),
+  experiment("metal-blob", "Metal Blob", "3D", MetalBlob),
+  experiment("sticker-file", "Sticker File", "Paper", StickerFile),
   experiment("slop-detector", "Slop Detector", "3D", SlopDetector),
   experiment("frosted-camera", "Frosted Camera", "Camera", FrostedCamera),
-  experiment("scroll-mask-fade", "Scroll Mask Fade", "Scroll", ScrollMaskFade),
-  experiment("font-smoothing", "Font Smoothing", "Type", FontSmoothing),
-  experiment("lazy-image", "Lazy Image", "Image", LazyImage),
-  experiment("depth-input", "Depth Input", "Input", DepthInput),
   experiment("crt-terminal", "CRT Terminal", "Terminal", CrtChat),
-  experiment("ios-context-menu", "iOS Context Menu", "Menu", IosContextMenu),
-  experiment("text-shimmer", "Text Shimmer", "Type", TextShimmerExperiment),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
@@ -206,6 +180,20 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
   const [morphing, setMorphing] = useState(false);
   const elevated = expanded || morphing;
 
+  // The box grows as one solid surface (the sharp poster scaling up); only once the layout
+  // has settled do we blur-dissolve the poster into the live component. Swapping mid-morph is
+  // what read as a "shift" — two different images crossfading while the box was still moving.
+  // Initialise from the mount-time state: a deep-link/reload lands already expanded with no
+  // morph to wait on, so reveal the live component straight away instead of stalling on the poster.
+  const [revealed, setRevealed] = useState(expanded);
+  // Reset the reveal during render (not an effect) whenever the tile closes, so a re-open
+  // always starts from the sharp poster instead of a stale reveal from the previous open.
+  const [wasExpanded, setWasExpanded] = useState(expanded);
+  if (expanded !== wasExpanded) {
+    setWasExpanded(expanded);
+    if (!expanded) setRevealed(false);
+  }
+
   return (
     // 4:3 cell — matches the poster ratio (so object-cover never crops) and the dialog ratio
     // (so the open morph is a clean uniform scale).
@@ -216,7 +204,11 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         layoutDependency={expanded}
         data-experiment-tile={expanded ? "open" : "closed"}
         onLayoutAnimationStart={() => setMorphing(true)}
-        onLayoutAnimationComplete={() => setMorphing(false)}
+        onLayoutAnimationComplete={() => {
+          setMorphing(false);
+          // Hand off to the live component only after the box has fully settled.
+          if (expanded) setRevealed(true);
+        }}
         style={{ zIndex: elevated ? 110 : undefined }}
         onKeyDown={(e) => {
           if (expanded && e.key === "Escape") onClose();
@@ -239,11 +231,17 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         <div
           className={cn(
             "absolute inset-0",
-            // Fade out on open only; on close it snaps back instantly (no transition class)
-            // so the poster — not the live component — is what scales down with the box.
-            expanded
-              ? "pointer-events-none opacity-0 transition-opacity duration-200"
-              : "opacity-100",
+            expanded && "pointer-events-none",
+            // The blur is applied instantly the moment the tile expands (no transition class on
+            // the grow state) so the surface is already out of focus as it lifts and resizes into
+            // the center — like a game booting up. Once settled (`revealed`) the focus pulls in:
+            // it dissolves into the live component while the blur resolves to sharp. On close it
+            // snaps back to a sharp poster (no transition) so that's what scales down with the box.
+            !expanded
+              ? "opacity-100"
+              : revealed
+                ? "opacity-0 blur-0 transition-[opacity,filter] duration-[800ms] ease-out"
+                : "opacity-100 blur-[12px]",
           )}
         >
           {!posterError && (
@@ -270,9 +268,20 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
         {expanded && (
           <motion.div
             key="live"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, filter: "blur(12px)" }}
+            // Mounts as the box grows (so it's ready) but stays blurred-out until the layout
+            // settles. On reveal the opacity comes up fast so the (still very blurry) content is
+            // present immediately, then the blur pulls into focus slowly — a "booting up" feel
+            // rather than a brief flicker of softness.
+            animate={
+              revealed
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 0, filter: "blur(12px)" }
+            }
+            transition={{
+              opacity: { duration: 0.3, ease: "easeOut" },
+              filter: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+            }}
             className="absolute inset-0 flex items-center justify-center font-pretendard"
           >
             <Component />

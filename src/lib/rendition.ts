@@ -6,6 +6,10 @@
 // source are skipped per-image so nothing is ever upscaled.
 export const RENDITION_WIDTHS = [640, 1280, 2048] as const;
 
+// Above this, a top-tier rendition already covers retina, so serving the (often huge) original adds bytes without
+// visible gain. At or below it, the original is the sharpest candidate a small source can offer.
+export const MAX_SRCSET_WIDTH = RENDITION_WIDTHS[RENDITION_WIDTHS.length - 1];
+
 // "/images/superpower/modal.webp" + 1280 -> "_gen/images/superpower/modal-1280.webp"
 export function renditionRelPath(publicPath: string, width: number): string {
   const noExt = publicPath.replace(/\.[^/.]+$/, "");

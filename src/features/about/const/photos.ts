@@ -15,4 +15,7 @@ export const PHOTOS: Photo[] = [
   { src: "/images/about/phuket-ocean.webp", caption: "Phuket, Thailand" },
   { src: "/images/about/living-room.webp", caption: "Dubai, UAE" },
   { src: "/images/about/amsterdam-toilet.webp", caption: "Amsterdam, The Netherlands" },
+  { src: "/images/about/vienna-facade.webp", caption: "Vienna, Austria" },
+  { src: "/images/about/budapest-interior.webp", caption: "Budapest, Hungary" },
+  { src: "/images/about/constanta-casino.webp", caption: "Constanța, Romania" },
 ];

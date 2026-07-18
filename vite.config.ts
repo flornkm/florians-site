@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
@@ -14,7 +15,7 @@ export default defineConfig({
     {
       enforce: "pre",
       ...mdx({
-        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
         // Standalone images render as block components (a <div> card), so they
         // must not be wrapped in a <p> — that's invalid HTML and breaks SSR.
         rehypePlugins: [rehypeUnwrapImages],
