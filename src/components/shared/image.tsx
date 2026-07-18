@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { imageManifest } from "@/imageMap.gen";
-import { buildSrcSet, renditionUrl } from "@/lib/rendition";
+import { buildSrcSet, MAX_SRCSET_WIDTH, renditionUrl } from "@/lib/rendition";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
 
@@ -82,10 +82,19 @@ export function Image({
   const h = height ?? entry?.height;
   const hasDims = typeof w === "number" && typeof h === "number";
 
-  // Serve the pre-rendered display-sized renditions when they exist; the original is the largest fallback.
+  // Serve the pre-rendered display-sized renditions when they exist. When the source is smaller than the next
+  // rendition tier, only a downscaled rendition (often 640) gets generated — so append the original at its true
+  // width as the top candidate, letting retina/large slots pick full resolution instead of upscaling a 640.
   const renditions = entry?.widths;
-  const srcSet = renditions?.length ? buildSrcSet(src, renditions) : undefined;
-  const imgSrc = renditions?.length ? renditionUrl(src, renditions[renditions.length - 1]) : src;
+  const topRendition = renditions?.length ? renditions[renditions.length - 1] : 0;
+  const useOriginal =
+    !!renditions?.length && !!entry && entry.width > topRendition && entry.width <= MAX_SRCSET_WIDTH;
+  const srcSet = renditions?.length
+    ? useOriginal
+      ? `${buildSrcSet(src, renditions)}, ${src} ${entry?.width}w`
+      : buildSrcSet(src, renditions)
+    : undefined;
+  const imgSrc = !renditions?.length || useOriginal ? src : renditionUrl(src, topRendition);
   const imgSizes = srcSet ? (sizes ?? "100vw") : undefined;
 
   const effectiveLoading = loading ?? (priority ? "eager" : "lazy");

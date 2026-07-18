@@ -1,0 +1,204 @@
+/* Windows XP "Office Assistant" style Claude helper — a pixelated Claude mark with a blinking
+   face and a period-accurate yellow speech bubble. Everything is scoped under .xp-mascot so the
+   hardcoded XP hex values never leak into the site's design tokens; this is a deliberately
+   off-brand pixel recreation. */
+
+/* Pixel bitmap face for the XP UI. font-display:block so it never falls back to a smooth font
+   mid-render and breaks the illusion. */
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  src: url(/fonts/ms-sans-serif/ms-sans-serif.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+  src: url(/fonts/ms-sans-serif/ms-sans-serif-bold.woff2) format("woff2");
+}
+
+.xp-mascot {
+  --xp-font: "Pixelated MS Sans Serif", Tahoma, Verdana, Geneva, sans-serif;
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fff;
+  font-family: var(--xp-font);
+}
+/* Match the dialog's dark surface (Tailwind neutral-950) so the panel reads black in dark mode
+   like the other experiments. */
+@media (prefers-color-scheme: dark) {
+  .xp-mascot {
+    background: oklch(0.145 0 0);
+  }
+  font-size: 11px;
+  color: #000;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  user-select: none;
+  cursor: default;
+}
+
+.xp-mascot-inner {
+  position: relative;
+  z-index: 1;
+  width: 300px;
+  max-width: 82%;
+  display: flex;
+  flex-direction: column;
+  animation: xp-mascot-pop 0.42s cubic-bezier(0.22, 1.35, 0.4, 1) both;
+}
+@keyframes xp-mascot-pop {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.xp-mascot-bubble {
+  position: relative;
+  background: #ffffe1;
+  border: 1px solid #6a6a4a;
+  border-radius: 7px;
+  padding: 9px 10px;
+  box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.3);
+  color: #000;
+}
+.xp-mascot-bubble::after {
+  content: "";
+  position: absolute;
+  right: 32px;
+  bottom: -9px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-top: 10px solid #ffffe1;
+  filter: drop-shadow(1px 1px 0 #6a6a4a);
+}
+.xp-mascot-you {
+  font-size: 10px;
+  color: #6a6a4a;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.xp-mascot-text {
+  font-size: 11px;
+  line-height: 1.5;
+  min-height: 34px;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+}
+.xp-mascot-caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  margin-left: 2px;
+  background: #555;
+  vertical-align: text-bottom;
+  animation: xp-mascot-blink-caret 1s steps(1) infinite;
+}
+@keyframes xp-mascot-blink-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.xp-mascot-form {
+  display: flex;
+  gap: 4px;
+}
+.xp-field {
+  flex: 1;
+  height: 21px;
+  min-width: 0;
+  padding: 0 5px;
+  font-family: var(--xp-font);
+  font-size: 11px;
+  background: #fff;
+  border: 1px solid #7f9db9;
+  border-top-color: #4a6a8a;
+  border-left-color: #4a6a8a;
+  color: #000;
+}
+.xp-field:focus {
+  outline: none;
+  border-color: #2a6fd6;
+  border-top-color: #2a6fd6;
+  border-left-color: #2a6fd6;
+}
+.xp-btn {
+  box-sizing: border-box;
+  min-width: 0;
+  height: 21px;
+  padding: 0 10px;
+  font-family: var(--xp-font);
+  font-size: 11px;
+  color: #000;
+  background: linear-gradient(180deg, #fff, #ecebe5 86%, #d8d0c4);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.xp-btn:hover:not([disabled]) {
+  background: linear-gradient(180deg, #fff, #fdf6da 86%, #ffd98e);
+}
+.xp-btn:active:not([disabled]) {
+  background: linear-gradient(180deg, #cdc9bd, #e0ddd1 8%, #ebe9e2);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.xp-btn[disabled] {
+  color: #a0a0a0;
+  text-shadow: 1px 1px 0 #fff;
+  background: #ece9d8;
+  border-color: #91a7c4;
+  cursor: default;
+}
+.xp-btn[data-default]:not([disabled]) {
+  box-shadow: 0 0 0 1px #5a8fdc;
+}
+
+.xp-mascot-char {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 26px;
+  margin-top: 2px;
+}
+.xp-mascot-face {
+  display: block;
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.35));
+}
+.xp-mascot-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: xp-mascot-blink 3.6s infinite;
+}
+@keyframes xp-mascot-blink {
+  0%,
+  93%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xp-mascot-inner,
+  .xp-mascot-eyes {
+    animation: none;
+  }
+}

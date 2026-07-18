@@ -45,25 +45,12 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
-  "login-error": 800, // static login form, no boot animation
-  "variable-weight": 800, // static text sample at rest
-  "drawer-drag": 1500, // two floating drawers slide in + the photo decodes
-  "scrollbar-gutter": 1000, // land on the fully-typed / scrollbar-visible frame
-  "shadow-ring": 1200, // spring settles
-  copy: 1200,
-  "video-player": 1500,
+  "metal-blob": 3500, // WebGL boot + first render
+  "sticker-file": 1800, // sticker texture rasterizes + uploads async
   "slop-detector": 3500, // WebGL boot + first render
   "frosted-camera": 2500, // fake camera stream
-  "scroll-mask-fade": 1200,
-  "font-smoothing": 800,
-  "lazy-image": 2500, // progressive load
-  "depth-input": 1000,
   "crt-terminal": 2500, // typing animation
-  "ios-context-menu": 1000,
-  "text-shimmer": 1500,
-  "paste-editor": 800,
-  "container-query": 800, // static card at rest
-  finder: 1800, // sticker textures load async
+  "windows-xp": 1500, // pop-in + logo rasterizes on mount
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor

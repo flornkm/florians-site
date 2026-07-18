@@ -16,7 +16,7 @@ function ResponsiveCamera() {
     // centering pan in GeigerCounter. (A static `position` prop would re-zero x/z on
     // every re-render the open morph triggers, knocking the device off-center.)
     cam.position.y = 0.5;
-    const target = size.width < 768 ? 1700 : 3400;
+    const target = size.width < 768 ? 1200 : 2400;
     if (cam.zoom !== target) {
       cam.zoom = target;
       cam.updateProjectionMatrix();

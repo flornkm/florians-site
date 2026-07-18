@@ -23,6 +23,9 @@ const PHOTO_LAYOUT = [
   "col-start-3 col-span-4 mt-8 md:col-start-4 md:col-span-1 md:mt-24",
   "col-start-1 col-span-5 mt-2 md:col-start-7 md:col-span-2 md:mt-20",
   "col-start-2 col-span-4 mt-8 md:col-start-2 md:col-span-2 md:mt-28",
+  "col-start-3 col-span-4 mt-2 md:col-start-4 md:col-span-2 md:mt-8",
+  "col-start-1 col-span-5 mt-8 md:col-start-7 md:col-span-2 md:mt-40",
+  "col-start-2 col-span-4 mt-2 md:col-start-1 md:col-span-2 md:mt-16",
 ];
 
 export const Route = createFileRoute("/about")({

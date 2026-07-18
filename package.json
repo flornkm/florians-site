@@ -71,6 +71,7 @@
     "oxlint": "1.55.0",
     "playwright-core": "^1.60.0",
     "rehype-unwrap-images": "^1.0.0",
+    "remark-gfm": "^4.0.1",
     "sharp": "^0.34.5",
     "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^4.1.13",

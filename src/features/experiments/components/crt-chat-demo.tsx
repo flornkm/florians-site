@@ -128,19 +128,23 @@ export const CrtChat = () => {
     phase === "boot" ? [] : [{ role: "assistant", text: BOOT_MESSAGE }, ...messages];
 
   return (
-    <CRTDisplay
-      messages={displayMessages}
-      streamedText={phase === "idle" ? "" : typed}
-      isStreaming={phase !== "idle"}
-      inputText={input}
-      onInputChange={setInput}
-      onSubmit={send}
-      disabled={phase !== "idle"}
-      suggestions={suggestions}
-      onSuggestionClick={handleSuggestionClick}
-      fullscreen={false}
-      scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.63 : 0.7}
-      autoFocus={false}
-    />
+    // Query container so the TV can size its 4:3 tube against this box (not the viewport)
+    // and stay contained in either dialog orientation. See CRTDisplay's non-fullscreen root.
+    <div className="relative flex h-full w-full items-center justify-center [container-type:size]">
+      <CRTDisplay
+        messages={displayMessages}
+        streamedText={phase === "idle" ? "" : typed}
+        isStreaming={phase !== "idle"}
+        inputText={input}
+        onInputChange={setInput}
+        onSubmit={send}
+        disabled={phase !== "idle"}
+        suggestions={suggestions}
+        onSuggestionClick={handleSuggestionClick}
+        fullscreen={false}
+        scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.74 : 0.85}
+        autoFocus={false}
+      />
+    </div>
   );
 };

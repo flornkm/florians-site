@@ -165,7 +165,7 @@ export function Comparison({
             "max-md:ml-[50%] max-md:w-[calc(100vw-48px)] max-md:-translate-x-1/2",
           )}
         >
-          <div className="bg-secondary p-4 md:p-12">
+          <div className="bg-tertiary p-4 transition-opacity duration-200 hover:opacity-90 md:p-12">
             {/* The cutouts carry wide transparent margins, so the frames overlap via negative
                 inner margins to pull the products visually together. */}
             <div className="flex items-center">
@@ -199,7 +199,7 @@ export function Comparison({
         <Dialog.Popup variant="headless">
           <Dialog.Title className="sr-only">{alt || "Image comparison"}</Dialog.Title>
           <div
-            className="w-full rounded-lg bg-surface p-6 shadow-emphasis md:p-10 dark:bg-neutral-950"
+            className="w-full rounded-lg bg-surface p-6 shadow-ring-lg md:p-10 dark:bg-neutral-950"
             style={{ width: zoomWidth }}
           >
             <DiffSurface
