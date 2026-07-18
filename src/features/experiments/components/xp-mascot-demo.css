@@ -31,6 +31,12 @@
   overflow: hidden;
   background: #fff;
   font-family: var(--xp-font);
+  font-size: 11px;
+  color: #000;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  user-select: none;
+  cursor: default;
 }
 /* Match the dialog's dark surface (Tailwind neutral-950) so the panel reads black in dark mode
    like the other experiments. */
@@ -38,12 +44,6 @@
   .xp-mascot {
     background: oklch(0.145 0 0);
   }
-  font-size: 11px;
-  color: #000;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: unset;
-  user-select: none;
-  cursor: default;
 }
 
 .xp-mascot-inner {
