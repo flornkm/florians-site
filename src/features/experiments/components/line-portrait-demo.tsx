@@ -13,10 +13,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const SRC = "/images/experiments/starry-mountains.webp";
 
 // A 3:4 buffer the source is cover-cropped into, kept high-res so the column sort reads as smooth
-// vertical smear rather than blocky pixels. SCALE upscales it once for the render target.
+// vertical smear rather than blocky pixels. The canvas itself is sized to its real device pixels
+// (see the draw loop), so these layers upscale straight to native resolution — no retina downscale
+// blur that would smear the fine columns away on a phone.
 const COLS = 240;
 const ROWS = 320;
-const SCALE = 3;
 
 const POSTER = "#ff4326"; // the red-orange field the streaks bleed into, like the reference card
 
@@ -116,17 +117,19 @@ export const LinePortrait = () => {
 
   const [seed, setSeed] = useState(0);
   const [caption, setCaption] = useState(0);
+  // Hue rotation lives in React state so it drives a CSS filter on the <canvas> — Canvas2D's own
+  // ctx.filter is unsupported on iOS Safari before 17, but the CSS filter works everywhere.
+  const [hue, setHue] = useState(0);
 
   // Source luminance + colour, read once from the decoded image.
   const srcRef = useRef<{ data: Uint8ClampedArray; bri: Float32Array } | null>(null);
   const [ready, setReady] = useState(false);
 
-  // The untouched cropped photo, the sorted layers, a morph clock, and the current hue rotation —
-  // all read by the rAF loop without re-rendering React.
+  // The untouched cropped photo, the sorted layers, and a morph clock — all read by the rAF loop
+  // without re-rendering React.
   const origRef = useRef<HTMLCanvasElement | null>(null);
   const layersRef = useRef<Layers | null>(null);
   const morphStartRef = useRef(0);
-  const hueRef = useRef(0);
 
   useEffect(() => {
     const img = new Image();
@@ -170,7 +173,7 @@ export const LinePortrait = () => {
     sortColumns(src.data, src.bri, out, EDGE, seed);
     layersRef.current = buildLayers(out);
     // Each click (seed bump) also spins the streaks to a new hue; seed 0 keeps the true colours.
-    hueRef.current = (seed * 67) % 360;
+    setHue((seed * 67) % 360);
     // First open dissolves from the photo (-1 = start next frame); every click after that switches
     // instantly (-Infinity makes the morph read as already-complete on the very next frame).
     morphStartRef.current = seed === 0 ? -1 : Number.NEGATIVE_INFINITY;

@@ -86,7 +86,6 @@ export const CrtChat = () => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [followups, setFollowups] = useState<string[]>([]);
   const [phase, setPhase] = useState<Phase>("boot");
-  // The text currently being typed out (boot banner or a canned answer).
   const [target, setTarget] = useState(BOOT_MESSAGE);
 
   // Feed the hook an empty target while idle so the next answer always animates
