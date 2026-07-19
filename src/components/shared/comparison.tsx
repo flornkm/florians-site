@@ -84,6 +84,9 @@ function DiffSurface({ before, after, beforeLabel, afterLabel, aspectRatio }: Di
       onKeyDown={handleKeyDown}
       className={cn(
         "relative w-full cursor-ew-resize touch-none select-none rounded-sm outline-none",
+        // iOS Safari ignores draggable/user-select on images; the callout has to be killed
+        // explicitly or a drag long-presses into the native "open image" preview.
+        "[-webkit-touch-callout:none]",
         "focus-visible:ring-2 focus-visible:ring-default",
       )}
       style={{ aspectRatio }}
@@ -96,7 +99,7 @@ function DiffSurface({ before, after, beforeLabel, afterLabel, aspectRatio }: Di
           alt=""
           decoding="async"
           draggable={false}
-          className="absolute inset-0 h-full w-full object-contain"
+          className="absolute inset-0 h-full w-full select-none object-contain [-webkit-user-drag:none]"
         />
       </motion.div>
       <motion.div className="absolute inset-0" style={{ clipPath: beforeClip }}>
@@ -105,7 +108,7 @@ function DiffSurface({ before, after, beforeLabel, afterLabel, aspectRatio }: Di
           alt=""
           decoding="async"
           draggable={false}
-          className="absolute inset-0 h-full w-full object-contain"
+          className="absolute inset-0 h-full w-full select-none object-contain [-webkit-user-drag:none]"
         />
       </motion.div>
       <motion.div

@@ -142,7 +142,7 @@ export const CrtChat = () => {
         suggestions={suggestions}
         onSuggestionClick={handleSuggestionClick}
         fullscreen={false}
-        scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.74 : 0.85}
+        scale={typeof window !== "undefined" && window.innerWidth < 768 ? 0.62 : 0.72}
         autoFocus={false}
       />
     </div>
