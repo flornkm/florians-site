@@ -166,7 +166,11 @@ void main() {
   // Static fine grain, like film/sensor noise, so flat areas aren't dead-clean.
   col += (hash(uv * vec2(1950.0, 1470.0)) - 0.5) * 0.035;
 
-  outColor = vec4(pow(clamp(col, 0.0, 1.0), vec3(0.92)), mask);
+  // Premultiplied output: fold the plate mask into RGB so pixels off the plate are
+  // fully transparent black. Straight alpha (rgb, mask) reads as opaque grain on
+  // iOS WebKit — this keeps the sign's edge clean on every browser.
+  vec3 rgb = pow(clamp(col, 0.0, 1.0), vec3(0.92));
+  outColor = vec4(rgb * mask, mask);
 }`;
 
 function compile(gl: WebGL2RenderingContext, type: number, src: string): WebGLShader {
@@ -495,7 +499,7 @@ function drawPlateText(
 }
 
 function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
-  const gl = canvas.getContext("webgl2", { antialias: true, alpha: true, premultipliedAlpha: false });
+  const gl = canvas.getContext("webgl2", { antialias: true, alpha: true, premultipliedAlpha: true });
   if (!gl) return undefined;
 
   const program = linkProgram(gl);
