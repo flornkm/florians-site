@@ -7,11 +7,13 @@ import { VITRINES } from "@/features/experiments/components/arch-vitrines-art";
    texture without fattening them. Static — the plates render instantly, no entrance animation. */
 
 export const ArchVitrines = () => (
-  <div className="absolute inset-0 flex items-center justify-center gap-6 p-6 text-[#463996] sm:gap-10 dark:text-[#a6a1ea]">
+  <div className="absolute inset-0 flex items-center justify-center gap-4 p-4 text-[#463996] md:gap-10 md:p-6 dark:text-[#a6a1ea]">
     {VITRINES.map((v) => (
       <div
         key={v.key}
-        className="flex h-[54%] shrink-0 items-center justify-center overflow-hidden rounded-t-full border-[1.5px] border-current p-3 [&_svg]:size-full [&_svg]:object-contain"
+        // Width-driven on the narrow mobile sheet so two arches always fit across; height-driven
+        // on the wide desktop dialog. Only ever one dimension is fixed, so the 5/6 shape holds.
+        className="flex w-[42%] max-w-[9rem] items-center justify-center overflow-hidden rounded-t-full border-[1.5px] border-current p-2.5 md:h-[42%] md:w-auto md:max-w-none [&_svg]:size-full [&_svg]:object-contain"
         style={{ aspectRatio: "5 / 6" }}
         // Inlined so each stroke resolves currentColor against the arch's ink.
         dangerouslySetInnerHTML={{ __html: v.svg }}
