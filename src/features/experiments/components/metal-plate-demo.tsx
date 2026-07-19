@@ -28,10 +28,12 @@ const TEXT: PlateText = {
   corner: "319/2",
 };
 
-// Internal raster resolution of the material texture. 4:3 to match the dialog.
-// Oversized so the cast lettering and fine scratches stay crisp, not soft.
+// Internal raster resolution of the material texture. The plate is 1.6:1 and sits
+// centred with only a thin margin (PLATE_MARGIN) for its worn edge, so the canvas
+// box hugs the sign instead of framing it with empty surface.
+const PLATE_MARGIN = 120;
 const TEX_W = 1800;
-const TEX_H = 1350;
+const TEX_H = Math.round((TEX_W - PLATE_MARGIN * 2) / 1.6) + PLATE_MARGIN * 2;
 const TEX_ASPECT = TEX_W / TEX_H;
 
 const VERT = `#version 300 es
@@ -242,7 +244,7 @@ const gray = (v: number) => `rgb(${(v * 255) | 0},${(v * 255) | 0},${(v * 255) |
 
 // Rasterize the plate into one RGBA texture: R = height, G = mask, B = wear.
 function buildMaterial(text: PlateText): ImageData {
-  const px = 400; // margin around the sign so it sits smaller on the surface
+  const px = PLATE_MARGIN; // thin margin for the plate's worn edge, not framing
 
   const pw = TEX_W - px * 2;
   const ph = pw / 1.6;
