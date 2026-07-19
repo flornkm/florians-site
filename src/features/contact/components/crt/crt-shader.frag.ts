@@ -59,32 +59,25 @@ void main() {
     return;
   }
 
-  // Chromatic aberration
   float r = texture2D(uTexture, uv + vec2( CHROMA_SHIFT, 0.0)).r;
   float g = texture2D(uTexture, uv).g;
   float b = texture2D(uTexture, uv + vec2(-CHROMA_SHIFT, 0.0)).b;
   vec3 color = vec3(r, g, b);
 
-  // Bloom
   color += sampleBloom(uv) * BLOOM_STRENGTH;
 
-  // Phosphor mask
   vec2 fragCoord = uv * uResolution;
   color *= phosphorMask(fragCoord);
 
-  // Scanlines
   float scanline = sin(fragCoord.y * 3.14159265 * 2.0 / (uResolution.y / SCANLINE_COUNT)) * 0.5 + 0.5;
   color *= 1.0 - SCANLINE_WEIGHT * (1.0 - scanline);
 
-  // Vignette
   vec2 vig = uv * (1.0 - uv);
   color *= pow(vig.x * vig.y * 15.0, VIGNETTE_AMOUNT);
 
-  // Flicker + noise
   color *= 1.0 + FLICKER_AMP * sin(uTime * 8.0);
   color += (rand(uv + fract(uTime)) - 0.5) * NOISE_AMP;
 
-  // Brightness
   color *= BRIGHTNESS;
 
   // Turn-on: fade from black, revealing vertically from the center outward.
