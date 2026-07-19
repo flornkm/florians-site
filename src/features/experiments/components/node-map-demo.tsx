@@ -274,6 +274,7 @@ const snapshot = (layout: Map<string, Placed>): PosMap => {
 
 export const NodeMap = () => {
   const coarse = useMediaQuery("(pointer: coarse)");
+  const narrow = useMediaQuery("(max-width: 640px)");
   const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   const [center, setCenter] = useState(DEFAULT_CENTER);
@@ -347,10 +348,15 @@ export const NodeMap = () => {
 
   const visibleEdges = EDGES.filter(([a, b]) => visible.has(a) && visible.has(b));
 
+  // On touch/mobile the container is narrow, so the padded desktop box scales down and leaves the
+  // graph small. Crop tight to the content (centred on CENTER, RING plus glyph+label margin) so
+  // it fills the width instead.
+  const viewBox = narrow ? "165 77 490 490" : "0 0 820 660";
+
   return (
     <div className="absolute inset-0 flex items-center justify-center p-4 select-none">
       <svg
-        viewBox="0 0 820 660"
+        viewBox={viewBox}
         className="h-full w-full"
         preserveAspectRatio="xMidYMid meet"
         onPointerLeave={() => !coarse && setHovered(null)}

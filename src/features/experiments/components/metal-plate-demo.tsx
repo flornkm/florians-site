@@ -32,6 +32,7 @@ const TEXT: PlateText = {
 // Oversized so the cast lettering and fine scratches stay crisp, not soft.
 const TEX_W = 1800;
 const TEX_H = 1350;
+const TEX_ASPECT = TEX_W / TEX_H;
 
 const VERT = `#version 300 es
 in vec2 a_pos;
@@ -530,13 +531,25 @@ function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
   let time = 0;
   let last = performance.now();
 
+  // Fit the largest 4:3 box (the texture's ratio) inside the available space and
+  // let the parent centre it. The dialog is already 4:3 so nothing changes there;
+  // on the portrait mobile sheet this keeps the sign from stretching to fill.
   const resize = () => {
-    const b = canvas.getBoundingClientRect();
-    if (b.width === 0 || b.height === 0) return;
-    aspect = b.width / b.height;
+    const host = canvas.parentElement ?? canvas;
+    const rect = host.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    let cw = rect.width;
+    let ch = cw / TEX_ASPECT;
+    if (ch > rect.height) {
+      ch = rect.height;
+      cw = ch * TEX_ASPECT;
+    }
+    canvas.style.width = `${cw}px`;
+    canvas.style.height = `${ch}px`;
+    aspect = TEX_ASPECT;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
-    const w = Math.round(b.width * dpr);
-    const h = Math.round(b.height * dpr);
+    const w = Math.round(cw * dpr);
+    const h = Math.round(ch * dpr);
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w;
       canvas.height = h;
@@ -589,7 +602,7 @@ function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
   let stable = 0;
   const watch = () => {
     if (disposed) return;
-    const w = canvas.getBoundingClientRect().width;
+    const w = (canvas.parentElement ?? canvas).getBoundingClientRect().width;
     if (Math.abs(w - settleLast) < 0.5) stable++;
     else stable = 0;
     settleLast = w;
@@ -637,5 +650,5 @@ export const MetalPlate = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 size-full touch-none" aria-hidden />;
+  return <canvas ref={canvasRef} className="block touch-none" aria-hidden />;
 };
