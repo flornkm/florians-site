@@ -3,25 +3,22 @@
    hardcoded XP hex values never leak into the site's design tokens; this is a deliberately
    off-brand pixel recreation. */
 
-/* Pixel bitmap face for the XP UI. font-display:block so it never falls back to a smooth font
+/* W95FA — a scalable, OFL-licensed recreation of the Windows 95 MS Sans Serif face (Alina Sava),
+   used here instead of Microsoft's proprietary bitmap so the font can ship freely. Single weight;
+   bold is left to browser synthesis. font-display:block so it never falls back to a smooth font
    mid-render and breaks the illusion. */
 @font-face {
-  font-family: "Pixelated MS Sans Serif";
+  font-family: "W95FA";
   font-weight: 400;
   font-style: normal;
   font-display: block;
-  src: url(/fonts/ms-sans-serif/ms-sans-serif.woff2) format("woff2");
-}
-@font-face {
-  font-family: "Pixelated MS Sans Serif";
-  font-weight: 700;
-  font-style: normal;
-  font-display: block;
-  src: url(/fonts/ms-sans-serif/ms-sans-serif-bold.woff2) format("woff2");
+  src:
+    url(/fonts/w95fa/w95fa.woff2) format("woff2"),
+    url(/fonts/w95fa/w95fa.woff) format("woff");
 }
 
 .xp-mascot {
-  --xp-font: "Pixelated MS Sans Serif", Tahoma, Verdana, Geneva, sans-serif;
+  --xp-font: "W95FA", Tahoma, Verdana, Geneva, sans-serif;
 
   position: absolute;
   inset: 0;
@@ -29,21 +26,16 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #fff;
+  background: transparent;
   font-family: var(--xp-font);
   font-size: 11px;
+  font-weight: 400;
+  font-synthesis: none;
   color: #000;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
   user-select: none;
   cursor: default;
-}
-/* Match the dialog's dark surface (Tailwind neutral-950) so the panel reads black in dark mode
-   like the other experiments. */
-@media (prefers-color-scheme: dark) {
-  .xp-mascot {
-    background: oklch(0.145 0 0);
-  }
 }
 
 .xp-mascot-inner {
@@ -53,6 +45,8 @@
   max-width: 82%;
   display: flex;
   flex-direction: column;
+  transform: scale(1.15);
+  transform-origin: center center;
   animation: xp-mascot-pop 0.42s cubic-bezier(0.22, 1.35, 0.4, 1) both;
 }
 @keyframes xp-mascot-pop {
@@ -62,7 +56,7 @@
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: scale(1.15);
   }
 }
 

@@ -49,6 +49,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",
     "remark-rehype": "^11.1.2",
+    "roughjs": "^4.6.6",
     "shadow-plugin": "1.1.1",
     "super-hover": "^0.2.1",
     "tailwind-merge": "^3.3.1",

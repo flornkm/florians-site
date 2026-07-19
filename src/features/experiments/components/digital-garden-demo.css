@@ -1,0 +1,173 @@
+/* A small centred garden of procedural pixel-art flowers. Everything is scoped under
+   .digital-garden; each flower is a canvas upscaled nearest-neighbour (see digital-garden-art.ts)
+   so the shading crisps into pixel clusters. The background stays transparent — the arrangement
+   sits on the dialog surface — and gentle looping motions keep it alive. No retro-web chrome. */
+
+.digital-garden {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: none;
+  cursor: default;
+  background: transparent;
+}
+
+.digital-garden canvas {
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* each plant is anchored by its root (left + bottom) and rises upward */
+.dg-plant {
+  position: absolute;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+/* hard (blur-0) offset shadow keeps the sticker edge crisp — a blurred shadow would read as soft */
+.dg-plant canvas {
+  filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.22));
+}
+
+/* grass tufts, rooted along the base in front of the stem bases */
+.dg-grass {
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 45;
+}
+
+/* a snipped plant's falling pieces — above everything, never intercepts clicks */
+.dg-cut {
+  position: absolute;
+  z-index: 800;
+  pointer-events: none;
+}
+.dg-cut canvas {
+  position: absolute;
+  left: 0;
+  image-rendering: pixelated;
+  filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.2));
+}
+.dg-cut-top {
+  top: 0;
+  will-change: transform, opacity;
+}
+/* brief bright glint along the cut line */
+.dg-cut-flash {
+  position: absolute;
+  left: 0;
+  height: 2px;
+  background: #fffdf0;
+  box-shadow: 0 0 3px #fff;
+  transition: opacity 0.28s ease;
+}
+
+/* Each flower gets one of a few gentle looping motions (varied duration/delay set inline) so the
+   arrangement breathes instead of moving as one block. */
+.dg-bloom-anim {
+  transform-origin: bottom center;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+.dg-anim-sway {
+  animation-name: dg-sway;
+}
+.dg-anim-bob {
+  animation-name: dg-bob;
+}
+.dg-anim-pulse {
+  animation-name: dg-pulse;
+  transform-origin: center;
+}
+.dg-anim-wiggle {
+  animation-name: dg-wiggle;
+}
+@keyframes dg-sway {
+  from {
+    transform: rotate(-4deg);
+  }
+  to {
+    transform: rotate(4deg);
+  }
+}
+@keyframes dg-bob {
+  from {
+    transform: translateY(2px);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+@keyframes dg-pulse {
+  from {
+    transform: scale(0.94);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+@keyframes dg-wiggle {
+  from {
+    transform: rotate(-3deg) scale(0.97);
+  }
+  to {
+    transform: rotate(3deg) scale(1.03);
+  }
+}
+
+/* butterfly wings flap in place */
+.dg-flutter {
+  animation: dg-flutter 0.24s ease-in-out infinite alternate;
+}
+@keyframes dg-flutter {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0.82);
+  }
+}
+
+/* one-shot grow-in: each flower sprouts from its base with a slight overshoot; the per-flower
+   delay (set inline) is larger the higher it sits, so the bouquet grows up from the ground. */
+.dg-grow {
+  transform-origin: bottom center;
+  animation: dg-grow 0.55s cubic-bezier(0.34, 1.56, 0.5, 1) both;
+}
+@keyframes dg-grow {
+  0% {
+    transform: translateY(26%) scale(0.04);
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+/* grass patches just rise (scaleY) from their base rather than scaling from a point */
+.dg-grow-grass {
+  animation-name: dg-grow-grass;
+  animation-duration: 0.45s;
+  animation-timing-function: ease-out;
+}
+@keyframes dg-grow-grass {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-bloom-anim,
+  .dg-flutter,
+  .dg-grow {
+    animation: none !important;
+  }
+}

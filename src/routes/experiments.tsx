@@ -49,18 +49,126 @@ const experiment = (
 // load, the homepage included. Loading each Component behind import() keeps that code in its own
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
-  experiment("windows-xp", "Windows XP", "Nostalgia",
-    lazyDemo(() => import("@/features/experiments/components/xp-mascot-demo").then((m) => ({ default: m.XpMascot })))),
-  experiment("metal-blob", "Metal Blob", "3D",
-    lazyDemo(() => import("@/features/experiments/components/metal-blob-demo").then((m) => ({ default: m.MetalBlob })))),
-  experiment("sticker-file", "Sticker File", "Paper",
-    lazyDemo(() => import("@/features/experiments/components/sticker-file-demo").then((m) => ({ default: m.StickerFile })))),
-  experiment("slop-detector", "Slop Detector", "3D",
-    lazyDemo(() => import("@/features/experiments/components/slop-detector").then((m) => ({ default: m.SlopDetector })))),
-  experiment("frosted-camera", "Frosted Camera", "Camera",
-    lazyDemo(() => import("@/features/experiments/components/frosted-camera-demo").then((m) => ({ default: m.FrostedCamera })))),
-  experiment("crt-terminal", "CRT Terminal", "Terminal",
-    lazyDemo(() => import("@/features/experiments/components/crt-chat-demo").then((m) => ({ default: m.CrtChat })))),
+  experiment(
+    "flo",
+    "Flo",
+    "Rough",
+    lazyDemo(() =>
+      import("@/features/experiments/components/flo-demo").then((m) => ({
+        default: m.Flo,
+      })),
+    ),
+  ),
+  experiment(
+    "transit-ticket",
+    "Transit Ticket",
+    "Print",
+    lazyDemo(() =>
+      import("@/features/experiments/components/transit-ticket-demo").then((m) => ({
+        default: m.TransitTicket,
+      })),
+    ),
+  ),
+  experiment(
+    "dot-clock",
+    "Dot Clock",
+    "Physics",
+    lazyDemo(() =>
+      import("@/features/experiments/components/dot-clock-demo").then((m) => ({
+        default: m.DotClock,
+      })),
+    ),
+  ),
+  experiment(
+    "chrome-horse",
+    "Chrome Horse",
+    "Chrome",
+    lazyDemo(() =>
+      import("@/features/experiments/components/chrome-horse-demo").then((m) => ({
+        default: m.ChromeHorse,
+      })),
+    ),
+  ),
+  experiment(
+    "node-map",
+    "Node Map",
+    "SVG",
+    lazyDemo(() =>
+      import("@/features/experiments/components/node-map-demo").then((m) => ({
+        default: m.NodeMap,
+      })),
+    ),
+  ),
+  experiment(
+    "digital-garden",
+    "Digital Garden",
+    "GeoCities",
+    lazyDemo(() =>
+      import("@/features/experiments/components/digital-garden-demo").then((m) => ({
+        default: m.DigitalGarden,
+      })),
+    ),
+  ),
+  experiment(
+    "machine-plate",
+    "Machine Plate",
+    "WebGL",
+    lazyDemo(() =>
+      import("@/features/experiments/components/metal-plate-demo").then((m) => ({
+        default: m.MetalPlate,
+      })),
+    ),
+  ),
+  experiment(
+    "sticker-file",
+    "Sticker File",
+    "Paper",
+    lazyDemo(() =>
+      import("@/features/experiments/components/sticker-file-demo").then((m) => ({
+        default: m.StickerFile,
+      })),
+    ),
+  ),
+  experiment(
+    "windows-xp",
+    "Windows XP",
+    "Nostalgia",
+    lazyDemo(() =>
+      import("@/features/experiments/components/xp-mascot-demo").then((m) => ({
+        default: m.XpMascot,
+      })),
+    ),
+  ),
+  experiment(
+    "slop-detector",
+    "Slop Detector",
+    "3D",
+    lazyDemo(() =>
+      import("@/features/experiments/components/slop-detector").then((m) => ({
+        default: m.SlopDetector,
+      })),
+    ),
+  ),
+  experiment(
+    "frosted-camera",
+    "Frosted Camera",
+    "Camera",
+    lazyDemo(() =>
+      import("@/features/experiments/components/frosted-camera-demo").then((m) => ({
+        default: m.FrostedCamera,
+      })),
+    ),
+  ),
+  experiment(
+    "crt-terminal",
+    "CRT Terminal",
+    "Terminal",
+    lazyDemo(() =>
+      import("@/features/experiments/components/crt-chat-demo").then((m) => ({
+        default: m.CrtChat,
+      })),
+    ),
+  ),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
@@ -268,7 +376,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
                 loading="lazy"
                 decoding="async"
                 onError={() => setPosterError(true)}
-                className="absolute inset-0 size-full object-cover"
+                className="absolute inset-0 size-full object-cover transition-opacity duration-200 group-hover:opacity-90"
               />
             </picture>
           )}
@@ -286,9 +394,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
             // present immediately, then the blur pulls into focus slowly — a "booting up" feel
             // rather than a brief flicker of softness.
             animate={
-              revealed
-                ? { opacity: 1, filter: "blur(0px)" }
-                : { opacity: 0, filter: "blur(12px)" }
+              revealed ? { opacity: 1, filter: "blur(0px)" } : { opacity: 0, filter: "blur(12px)" }
             }
             transition={{
               opacity: { duration: 0.3, ease: "easeOut" },
