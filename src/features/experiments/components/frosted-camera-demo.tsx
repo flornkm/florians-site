@@ -56,7 +56,7 @@ export const FrostedCamera = () => {
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, scale: 0.92, filter: "blur(4px)" }}
             transition={IMAGE_TWEEN}
-            className="absolute inset-0 m-auto max-h-full w-auto max-w-[60%] object-contain pointer-events-none select-none will-change-[transform,opacity,filter]"
+            className="absolute inset-0 m-auto max-h-full w-auto max-w-[72%] object-contain pointer-events-none select-none will-change-[transform,opacity,filter]"
           />
         </AnimatePresence>
       </motion.button>

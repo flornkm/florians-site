@@ -79,7 +79,7 @@ export default function Navigation() {
 
       {/* Mobile-only floating bar; on desktop the tabs and Contact live in the top nav above. */}
       <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
-        <div className="flex items-center gap-1 rounded-[14px] bg-primary p-1.5 shadow-ring-lg hairline-black/8 dark:hairline-white/10">
+        <div className="flex items-center gap-1 rounded-full bg-primary p-1.5 shadow-ring-lg hairline-black/8 dark:hairline-white/10">
           {TABS.map((tab) => {
             const active = isActive(tab.href);
             return (
@@ -96,7 +96,7 @@ export default function Navigation() {
                   <motion.span
                     layoutId="nav-active-pill"
                     transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
-                    className="absolute inset-0 rounded-lg bg-surface-tertiary"
+                    className="absolute inset-0 rounded-full bg-surface-tertiary"
                   />
                 )}
                 <span className="relative">{tab.name}</span>

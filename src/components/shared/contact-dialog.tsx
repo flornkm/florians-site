@@ -79,9 +79,9 @@ export default function ContactDialog({
     return () => window.removeEventListener("mousedown", handleClick);
   }, [isOpen, close]);
 
-  // In the mobile bottom bar the pill matches the morphing nav pill's 8px radius so every
-  // element shares one roundness; standalone (desktop) it keeps its tighter 4px corners.
-  const closedRadius = roundedRightWhenClosed ? { borderRadius: 8 } : { borderRadius: 4 };
+  // In the mobile bottom bar the pill is fully rounded so it nests into the bar's pill shape
+  // and matches the morphing nav pill; standalone (desktop) it keeps its tighter 4px corners.
+  const closedRadius = roundedRightWhenClosed ? { borderRadius: 9999 } : { borderRadius: 4 };
 
   return (
     <MotionConfig transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}>
