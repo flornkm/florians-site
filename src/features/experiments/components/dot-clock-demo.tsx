@@ -132,7 +132,7 @@ export const DotClock = () => {
     let W = 0;
     let H = 0;
     let pitch = 0; // px between neighbouring cells
-    let radius = 0; // dot radius
+    let radius = 0;
     let originX = 0;
     let originY = 0;
 

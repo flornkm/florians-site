@@ -45,7 +45,6 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
-  "line-portrait": 1600, // scan sweep reveals the sorted portrait; a beat so it's fully drawn
   "overlap-type": 1000, // letters drop-stagger into their rotated pile, then settle
   "world-cup": 1200, // continuous zoom loop; a beat so the bands populate + fonts settle
   "dot-clock": 3000, // dots pack into the time and settle under collision
@@ -60,6 +59,8 @@ const SLUGS: Record<string, number> = {
   "windows-xp": 1500, // pop-in + logo rasterizes on mount
   "transit-ticket": 1200, // static vector art; just needs a paint
   flo: 1000, // rough.js frames build on mount; a beat to draw + settle the boil
+  "color-plates": 800, // swatches fade-up stagger settles quickly
+  "arch-vitrines": 200, // static plates; just needs a paint
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor

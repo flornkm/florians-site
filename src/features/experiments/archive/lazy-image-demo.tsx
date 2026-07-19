@@ -50,10 +50,13 @@ export const LazyImage = () => {
   });
 
   useEffect(() => {
+    let ignore = false;
+    const controller = new AbortController();
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = IMAGE_SRC;
     img.onload = () => {
+      if (ignore) return;
       imgRef.current = img;
       setAspect(img.width / img.height);
       redraw(progress.get());
@@ -74,9 +77,10 @@ export const LazyImage = () => {
         }));
       }
     };
-    fetch(IMAGE_SRC)
+    fetch(IMAGE_SRC, { signal: controller.signal })
       .then((r) => r.blob())
       .then((b) => {
+        if (ignore) return;
         setSizes((prev) => ({
           low: prev?.low ?? "…",
           full: formatBytes(b.size),
@@ -84,6 +88,8 @@ export const LazyImage = () => {
       })
       .catch(() => {});
     return () => {
+      ignore = true;
+      controller.abort();
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
   }, []);

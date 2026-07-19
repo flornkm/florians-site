@@ -65,7 +65,6 @@ function Card({ ring }: { ring: boolean }) {
           : "border border-primary shadow-lg",
       )}
     >
-      {/* full skeleton */}
       <div className="flex items-center gap-2.5">
         <div className="size-8 shrink-0 rounded-full bg-surface-tertiary" />
         <div className="flex flex-1 flex-col gap-1.5">

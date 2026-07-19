@@ -14,6 +14,15 @@ const WORDS = ["STACK", "OVERLAP", "LAYERS", "SHAPES", "BOLD", "PAIR UP"];
 const MAX_ROT = 15; // deg of random tilt per letter
 const OVERLAP = 0.22; // how far each letter bites into the previous, in em
 
+// A right-pointing "next" arrow shown while hovering — clicking advances to the next word. White
+// fill + black outline so it stays legible over either theme (like an OS cursor). encodeURIComponent
+// keeps it SSR-safe (no btoa). Hotspot centred on the arrow.
+const ARROW =
+  "<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'>" +
+  "<path d='M4 12 H17 V6 L27 15 L17 24 V18 H4 Z' fill='white' stroke='black' stroke-width='1.6' stroke-linejoin='round'/>" +
+  "</svg>";
+const NEXT_CURSOR = `url("data:image/svg+xml,${encodeURIComponent(ARROW)}") 15 15, pointer`;
+
 // Deterministic 0..1 hash so the layout is stable per (seed, letter) and reproducible in SSR /
 // poster capture without touching Math.random (which the lint forbids and which would reshuffle
 // every render).
@@ -64,8 +73,8 @@ export const OverlapType = () => {
         type="button"
         onClick={reshuffle}
         aria-label={`Overlapping bold letters spelling ${word}. Click to reshuffle.`}
-        className="group absolute inset-0 flex cursor-pointer items-center justify-center overflow-hidden px-8 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neutral-400"
-        style={{ containerType: "size" }}
+        className="group absolute inset-0 flex items-center justify-center overflow-hidden px-8 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neutral-400"
+        style={{ containerType: "size", cursor: NEXT_CURSOR }}
       >
         {/* key on word+seed replays the drop-in stagger on every reshuffle. */}
         <motion.div
