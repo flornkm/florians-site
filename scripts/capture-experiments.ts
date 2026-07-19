@@ -45,12 +45,18 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
-  "metal-blob": 3500, // WebGL boot + first render
+  "dot-clock": 3000, // dots pack into the time and settle under collision
+  "node-map": 1200, // path draw-in settles
+  "digital-garden": 2000, // grow + sway animations settle
+  "machine-plate": 3500, // WebGL boot + material texture rasterizes
+  "chrome-horse": 2500, // silhouette rasterizes + chrome settles
   "sticker-file": 1800, // sticker texture rasterizes + uploads async
   "slop-detector": 3500, // WebGL boot + first render
   "frosted-camera": 2500, // fake camera stream
   "crt-terminal": 2500, // typing animation
   "windows-xp": 1500, // pop-in + logo rasterizes on mount
+  "transit-ticket": 1200, // static vector art; just needs a paint
+  flo: 1000, // rough.js frames build on mount; a beat to draw + settle the boil
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor
@@ -159,6 +165,9 @@ async function captureScheme(scheme: "light" | "dark", suffix: string) {
         }
         const close = document.querySelector('[aria-label="Close"]') as HTMLElement | null;
         if (close) close.style.display = "none";
+        // Credit footnotes belong in the live demo, not the poster thumbnail.
+        for (const c of document.querySelectorAll<HTMLElement>("[data-node-credit]"))
+          c.style.display = "none";
       }, STRIP_ROOT_BG.has(slug));
 
       await page.waitForTimeout(BASE_SETTLE + settle);
