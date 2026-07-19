@@ -50,6 +50,36 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
+    "world-cup",
+    "World Cup 26",
+    "Motion",
+    lazyDemo(() =>
+      import("@/features/experiments/components/world-cup-tunnel-demo").then((m) => ({
+        default: m.WorldCupTunnel,
+      })),
+    ),
+  ),
+  experiment(
+    "line-portrait",
+    "Line Art",
+    "Sort",
+    lazyDemo(() =>
+      import("@/features/experiments/components/line-portrait-demo").then((m) => ({
+        default: m.LinePortrait,
+      })),
+    ),
+  ),
+  experiment(
+    "overlap-type",
+    "Overlap Type",
+    "Type",
+    lazyDemo(() =>
+      import("@/features/experiments/components/overlap-type-demo").then((m) => ({
+        default: m.OverlapType,
+      })),
+    ),
+  ),
+  experiment(
     "flo",
     "Flo",
     "Rough",

@@ -241,10 +241,25 @@ vec3 env(vec3 r, float time) {
 }
 
 void main() {
+  // Aspect-fit the 4:3 material inside the canvas (contain): scale v_uv about its
+  // centre so the horse keeps its proportions on any viewport — a tall portrait
+  // (mobile) letterboxes top/bottom instead of stretching the horse vertically.
+  const float texAspect = 4.0 / 3.0;
+  vec2 fit = v_uv;
+  vec2 lp = u_light;
+  if (u_aspect > texAspect) {
+    fit.x = (v_uv.x - 0.5) * (u_aspect / texAspect) + 0.5;
+    lp.x = (u_light.x - 0.5) * (u_aspect / texAspect) + 0.5;
+  } else {
+    fit.y = (v_uv.y - 0.5) * (texAspect / u_aspect) + 0.5;
+    lp.y = (u_light.y - 0.5) * (texAspect / u_aspect) + 0.5;
+  }
+  if (fit.x < 0.0 || fit.x > 1.0 || fit.y < 0.0 || fit.y > 1.0) discard;
+
   // Snap every fragment to a coarse cell grid: the chrome is still shaded by the
   // real reflections, but each cell paints one flat facet, so it reads as chunky
   // pixel art rather than a smooth render.
-  vec2 cell = (floor(v_uv * u_grid) + 0.5) / u_grid;
+  vec2 cell = (floor(fit * u_grid) + 0.5) / u_grid;
   vec2 uv = vec2(cell.x, 1.0 - cell.y);
 
   float mask = texture(u_tex, uv).g;
@@ -284,7 +299,7 @@ void main() {
   col += vec3(0.85, 0.92, 1.0) * s2 * 0.6;
 
   // Point light riding the cursor — moving it re-lights the whole horse.
-  vec3 toC = vec3((u_light - uv) * vec2(u_aspect, 1.0), 0.42);
+  vec3 toC = vec3((lp - uv) * vec2(texAspect, 1.0), 0.42);
   float cd = length(toC);
   vec3 Lc = toC / max(cd, 1e-4);
   float sc = pow(max(dot(n, normalize(Lc + V)), 0.0), 70.0);

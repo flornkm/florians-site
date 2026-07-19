@@ -26,11 +26,17 @@ const FONT: Record<string, string[]> = {
 
 type RGB = [number, number, number];
 
-function hexToRgb(hex: string): RGB | null {
-  const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
-  if (!m) return null;
-  const n = parseInt(m[1], 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+// Accepts both a computed `rgb(r g b)` / `rgb(r, g, b)` string and a raw #rrggbb hex.
+function parseColor(value: string): RGB | null {
+  const s = value.trim();
+  const rgb = /rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/i.exec(s);
+  if (rgb) return [Math.round(+rgb[1]), Math.round(+rgb[2]), Math.round(+rgb[3])];
+  const hex = /^#?([0-9a-f]{6})$/i.exec(s);
+  if (hex) {
+    const n = parseInt(hex[1], 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  return null;
 }
 
 const ROWS = 7;
@@ -131,13 +137,22 @@ export const DotClock = () => {
     let originY = 0;
 
     // Dot colours, read from the theme: idle grey and active "black" (which is white in dark
-    // mode), so both read correctly on light and dark.
+    // mode), so both read correctly on light and dark. We resolve each token through a probe
+    // element's computed `color` rather than reading the raw custom property: iOS Safari often
+    // returns an empty string for getPropertyValue("--x"), but computed `color` is always a
+    // concrete rgb() on every engine.
     let grey: RGB = [163, 163, 163];
     let ink: RGB = [23, 23, 23];
+    const probe = document.createElement("span");
+    probe.style.cssText = "position:absolute;width:0;height:0;visibility:hidden";
+    canvas.parentElement?.appendChild(probe);
+    const resolveVar = (name: string): RGB | null => {
+      probe.style.color = `var(${name})`;
+      return parseColor(getComputedStyle(probe).color);
+    };
     const readColors = () => {
-      const cs = getComputedStyle(canvas);
-      const q = hexToRgb(cs.getPropertyValue("--text-quaternary"));
-      const p = hexToRgb(cs.getPropertyValue("--text-primary"));
+      const q = resolveVar("--text-quaternary");
+      const p = resolveVar("--text-primary");
       if (q) grey = q;
       if (p) ink = p;
     };
@@ -441,6 +456,7 @@ export const DotClock = () => {
         window.clearInterval(id);
         darkQuery.removeEventListener("change", onTheme);
         ro.disconnect();
+        probe.remove();
       };
     }
 
@@ -474,6 +490,7 @@ export const DotClock = () => {
       canvas.removeEventListener("pointerleave", onLeave);
       darkQuery.removeEventListener("change", onTheme);
       ro.disconnect();
+      probe.remove();
     };
   }, []);
 
