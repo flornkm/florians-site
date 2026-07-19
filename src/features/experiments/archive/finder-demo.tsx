@@ -81,8 +81,6 @@ function ZoomGlyph() {
   );
 }
 
-/* ---------- Sidebar ---------- */
-
 interface SideItem {
   icon: IconComponent;
   label: string;
@@ -238,8 +236,6 @@ function Sidebar({
   );
 }
 
-/* ---------- Window chrome ---------- */
-
 const TRAFFIC_LIGHTS = [
   { color: "#ff5f57", Glyph: CloseGlyph },
   { color: "#febc2e", Glyph: MinGlyph },
@@ -389,7 +385,6 @@ export function Finder() {
           <Sidebar current={current} onNavigate={navigate} windowFocused={windowFocused} />
 
           <div className="flex min-w-0 flex-1 flex-col">
-            {/* Toolbar */}
             <div
               className={cn(
                 "flex h-[50px] shrink-0 items-center gap-2 px-3 transition-opacity duration-150",
@@ -416,7 +411,6 @@ export function Finder() {
 
               <div className="flex-1" />
 
-              {/* View switcher */}
               <div className={cn(CAPSULE, "h-[32px] p-[3px]")}>
                 {VIEW_MODES.map((mode, i) => (
                   <button
@@ -448,7 +442,6 @@ export function Finder() {
                 ))}
               </div>
 
-              {/* Group by */}
               <button
                 type="button"
                 className={cn(
@@ -462,7 +455,6 @@ export function Finder() {
                 <IconChevronDownSmall className="size-3 text-black/55 dark:text-white/55" />
               </button>
 
-              {/* Share / tag / more */}
               <div className={cn(CAPSULE, "h-[32px] p-[3px]")}>
                 {[IconShareOs, IconTag, IconCircleDotsCenter1].map((Icon, i) => (
                   <button
@@ -479,7 +471,6 @@ export function Finder() {
                 ))}
               </div>
 
-              {/* Search */}
               <label
                 className={cn(
                   CAPSULE,

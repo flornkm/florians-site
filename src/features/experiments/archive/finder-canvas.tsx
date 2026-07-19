@@ -759,8 +759,6 @@ function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
     const onPointerUp = () => endInteraction();
     const onPointerCancel = () => endInteraction();
 
-    /* ---------- Simulation ---------- */
-
     const step = (sticker: Sticker, dt: number): boolean => {
       const { state } = sticker;
       let active = false;
@@ -843,8 +841,6 @@ function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
 
       return active;
     };
-
-    /* ---------- Rendering ---------- */
 
     const bindMesh = (program: WebGLProgram) => {
       gl.bindBuffer(gl.ARRAY_BUFFER, mesh.vbo);

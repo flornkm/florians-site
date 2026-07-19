@@ -50,22 +50,32 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
+    "arch-vitrines",
+    "Arch Vitrines",
+    "Etch",
+    lazyDemo(() =>
+      import("@/features/experiments/components/arch-vitrines-demo").then((m) => ({
+        default: m.ArchVitrines,
+      })),
+    ),
+  ),
+  experiment(
+    "color-plates",
+    "Colour Plates",
+    "Colour",
+    lazyDemo(() =>
+      import("@/features/experiments/components/color-plates-demo").then((m) => ({
+        default: m.ColorPlates,
+      })),
+    ),
+  ),
+  experiment(
     "world-cup",
     "World Cup 26",
     "Motion",
     lazyDemo(() =>
       import("@/features/experiments/components/world-cup-tunnel-demo").then((m) => ({
         default: m.WorldCupTunnel,
-      })),
-    ),
-  ),
-  experiment(
-    "line-portrait",
-    "Line Art",
-    "Sort",
-    lazyDemo(() =>
-      import("@/features/experiments/components/line-portrait-demo").then((m) => ({
-        default: m.LinePortrait,
       })),
     ),
   ),
@@ -430,7 +440,7 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
               opacity: { duration: 0.3, ease: "easeOut" },
               filter: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
             }}
-            className="absolute inset-0 flex items-center justify-center font-pretendard"
+            className="absolute inset-0 flex items-center justify-center"
           >
             {/* Suspense boundary for the lazy demo chunk; the blurred poster underneath
                 covers the (near-instant) fetch during the open morph. */}

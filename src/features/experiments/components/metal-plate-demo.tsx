@@ -36,6 +36,10 @@ const TEX_W = 1800;
 const TEX_H = Math.round((TEX_W - PLATE_MARGIN * 2) / 1.6) + PLATE_MARGIN * 2;
 const TEX_ASPECT = TEX_W / TEX_H;
 
+// Cap the on-screen size so the sign sits on the surface on the wide desktop dialog
+// instead of filling it; the mobile sheet is narrower than this, so it fills there.
+const MAX_WIDTH = 480;
+
 const VERT = `#version 300 es
 in vec2 a_pos;
 out vec2 v_uv;
@@ -537,14 +541,14 @@ function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
   let time = 0;
   let last = performance.now();
 
-  // Fit the largest 4:3 box (the texture's ratio) inside the available space and
-  // let the parent centre it. The dialog is already 4:3 so nothing changes there;
-  // on the portrait mobile sheet this keeps the sign from stretching to fill.
+  // Fit the sign inside the available space, capped at MAX_WIDTH, and let the parent
+  // centre it. On the portrait mobile sheet this keeps it from stretching to fill;
+  // on the wide desktop dialog the cap stops it from ballooning to the full width.
   const resize = () => {
     const host = canvas.parentElement ?? canvas;
     const rect = host.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
-    let cw = rect.width;
+    let cw = Math.min(rect.width, MAX_WIDTH);
     let ch = cw / TEX_ASPECT;
     if (ch > rect.height) {
       ch = rect.height;

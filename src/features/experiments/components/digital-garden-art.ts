@@ -5,7 +5,6 @@
 
 type Ctx = CanvasRenderingContext2D;
 
-// ---- tiny colour helpers -------------------------------------------------
 // Accepts "#rrggbb" or "rgb()/rgba()", so an already-shaded colour can be shaded again without
 // being mis-read as hex (that produced NaN channels → css()'s `|0` floored them to a pure green).
 function parse(color: string): [number, number, number] {
@@ -138,7 +137,7 @@ function seedDisc(ctx: Ctx, cx: number, cy: number, r0: number, color: string, s
   }
 }
 
-// ---- stems & grass (drawn in grid coordinates; the component adds the black outline) ----------
+// drawn in grid coordinates; the component adds the black outline
 const STEM_G = "#3f9e34";
 const STEM_LITE = "#69c94b";
 const GREENS = ["#3f9e34", "#4fb340", "#2f7d2e", "#5bbf46"];
@@ -218,8 +217,6 @@ export function drawGrassTuft(ctx: Ctx, gw: number, gh: number, seed: number) {
     ctx.fill();
   }
 }
-
-// ---- flower heads --------------------------------------------------------
 
 function drawGerbera(ctx: Ctx, s: number, color: string, center: string, seed: number, thin = false, phase = 0) {
   const c = s / 2;
@@ -556,8 +553,6 @@ function drawLadybug(ctx: Ctx, s: number) {
     ctx.fill();
   }
 }
-
-// ---- registry ------------------------------------------------------------
 
 // `draw` takes a phase 0..1; `anim` marks assets whose pixels genuinely change with phase (so the
 // renderer bakes a multi-frame loop for them; the rest render as a single frame).
