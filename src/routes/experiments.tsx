@@ -6,6 +6,14 @@ import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import { type ComponentType, lazy, Suspense, useCallback, useRef, useState } from "react";
 
+// A lazy component that also exposes `preload()` — calling it fires the underlying dynamic
+// import so the chunk is fetched ahead of render (on hover/focus/pointer-down), not only once
+// the tile mounts it. import() is cached, so the eventual lazy render reuses the same chunk.
+type PreloadableComponent = ComponentType & { preload: () => Promise<unknown> };
+
+const lazyDemo = (factory: () => Promise<{ default: ComponentType }>): PreloadableComponent =>
+  Object.assign(lazy(factory), { preload: factory });
+
 interface Experiment {
   slug: string;
   title: string;
@@ -15,7 +23,7 @@ interface Experiment {
   // the files exist the tile falls back to a plain panel.
   poster: string;
   posterDark: string;
-  Component: ComponentType;
+  Component: PreloadableComponent;
 }
 
 // The centered modal the tile morphs into when opened.
@@ -25,7 +33,7 @@ const experiment = (
   slug: string,
   title: string,
   tag: string,
-  Component: ComponentType,
+  Component: PreloadableComponent,
 ): Experiment => ({
   slug,
   title,
@@ -42,17 +50,17 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment("windows-xp", "Windows XP", "Nostalgia",
-    lazy(() => import("@/features/experiments/components/xp-mascot-demo").then((m) => ({ default: m.XpMascot })))),
+    lazyDemo(() => import("@/features/experiments/components/xp-mascot-demo").then((m) => ({ default: m.XpMascot })))),
   experiment("metal-blob", "Metal Blob", "3D",
-    lazy(() => import("@/features/experiments/components/metal-blob-demo").then((m) => ({ default: m.MetalBlob })))),
+    lazyDemo(() => import("@/features/experiments/components/metal-blob-demo").then((m) => ({ default: m.MetalBlob })))),
   experiment("sticker-file", "Sticker File", "Paper",
-    lazy(() => import("@/features/experiments/components/sticker-file-demo").then((m) => ({ default: m.StickerFile })))),
+    lazyDemo(() => import("@/features/experiments/components/sticker-file-demo").then((m) => ({ default: m.StickerFile })))),
   experiment("slop-detector", "Slop Detector", "3D",
-    lazy(() => import("@/features/experiments/components/slop-detector").then((m) => ({ default: m.SlopDetector })))),
+    lazyDemo(() => import("@/features/experiments/components/slop-detector").then((m) => ({ default: m.SlopDetector })))),
   experiment("frosted-camera", "Frosted Camera", "Camera",
-    lazy(() => import("@/features/experiments/components/frosted-camera-demo").then((m) => ({ default: m.FrostedCamera })))),
+    lazyDemo(() => import("@/features/experiments/components/frosted-camera-demo").then((m) => ({ default: m.FrostedCamera })))),
   experiment("crt-terminal", "CRT Terminal", "Terminal",
-    lazy(() => import("@/features/experiments/components/crt-chat-demo").then((m) => ({ default: m.CrtChat })))),
+    lazyDemo(() => import("@/features/experiments/components/crt-chat-demo").then((m) => ({ default: m.CrtChat })))),
 ];
 
 const TRANSITION = { duration: 0.45, ease: [0.22, 1, 0.36, 1] } as const;
@@ -300,6 +308,11 @@ function ExperimentTile({ experiment, isActive, morph, onOpen, onClose }: Experi
           <button
             type="button"
             onClick={onOpen}
+            // Warm the demo's chunk on intent (hover / keyboard focus / press start) so it's
+            // fetched before the open morph finishes, not once the dialog has fully mounted.
+            onPointerEnter={() => Component.preload()}
+            onFocus={() => Component.preload()}
+            onPointerDown={() => Component.preload()}
             aria-label={`Open ${title}`}
             className="absolute inset-0 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-default"
           />

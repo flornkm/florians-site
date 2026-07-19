@@ -36,15 +36,6 @@ interface ThemeColors {
   backHover: string;
 }
 
-const DARK_THEME: ThemeColors = {
-  bg: "#000000",
-  text: "#ffffff",
-  dim: "#999999",
-  prompt: "#dddddd",
-  back: "#888888",
-  backHover: "#ffffff",
-};
-
 const LIGHT_THEME: ThemeColors = {
   bg: "#ffffff",
   text: "#171717",
@@ -54,9 +45,10 @@ const LIGHT_THEME: ThemeColors = {
   backHover: "#171717",
 };
 
+// The tube glass stays a white screen in both schemes (only the surrounding bezel goes dark),
+// so the phosphor colours are always the light theme regardless of prefers-color-scheme.
 function getTheme(): ThemeColors {
-  if (typeof window === "undefined") return DARK_THEME;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? DARK_THEME : LIGHT_THEME;
+  return LIGHT_THEME;
 }
 
 export interface HitArea {
