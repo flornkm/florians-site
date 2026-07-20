@@ -107,7 +107,7 @@ function StatSkeleton({ valueWidth }: { valueWidth: string }) {
 // full-width route cards), same spacing, same widths.
 function RunsSkeleton() {
   return (
-    <div className="not-prose mt-12 w-full">
+    <div className="not-prose mx-auto mt-12 w-full md:max-w-[720px]">
       <ul className="flex flex-col gap-20">
         {Array.from({ length: 2 }).map((_, index) => (
           <li key={index}>
@@ -212,7 +212,10 @@ export function RunsFeed() {
   }
 
   return (
-    <div className="not-prose mt-12 w-full">
+    // Capped to the same "proud" width as the wider figure images (720px) so the route maps
+    // don't balloon to the full article width on large screens; centred by the article's
+    // md:mx-auto. The inner stats/summary keep their own 460px text-column cap.
+    <div className="not-prose mx-auto mt-12 w-full md:max-w-[720px]">
       <ul className="flex flex-col gap-20">
         {runs.map((run) => (
           <RunItem key={run.id} run={run} />
