@@ -73,8 +73,8 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/writing/products-that-look-better-used/apple-fitness.webp": { width: 1074, height: 2213, thumbhash: "CgiCAgAOqqNqBzRNlZ80/AgIiHdxhSg=", widths: [640] },
   "/images/writing/products-that-look-better-used/baseball-glove-unused.webp": { width: 2800, height: 2000, thumbhash: "lHqCBIAztQ5mrJziGUgGYnVwgIp4J8h3Bw==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/baseball-glove-used.webp": { width: 2800, height: 2000, thumbhash: "F1qCBIAzm1B5h0hWpwd4Z4B3gIp4J8h2Bw==", widths: [640, 1280, 2048] },
-  "/images/writing/products-that-look-better-used/github-graph-used-dark.webp": { width: 2937, height: 1197, thumbhash: "C7iBAoARcq95ltlAh/aLl1dniHeAetc=", widths: [640, 1280, 2048] },
-  "/images/writing/products-that-look-better-used/github-graph-used.webp": { width: 2937, height: 1197, thumbhash: "ZKiBAoARnjCIeBcwh/WMl1dniHeAetc=", widths: [640, 1280, 2048] },
+  "/images/writing/products-that-look-better-used/github-graph-used-dark.webp": { width: 2937, height: 1197, thumbhash: "C7iBAoARcq95lthQiPaLl1dniHeAetc=", widths: [640, 1280, 2048] },
+  "/images/writing/products-that-look-better-used/github-graph-used.webp": { width: 2937, height: 1197, thumbhash: "ZaiBAoARnjCIeBcwiPWLl1dniHeAetc=", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/keyboard-unused.webp": { width: 2800, height: 2000, thumbhash: "9PeBBIA0aId0inT6eJz493eKdIV3CLiHCg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/keyboard-used.webp": { width: 2800, height: 2000, thumbhash: "ZgiCBIA0OPqHeIWcJv+m8W96dIV3CLiHCg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/leica-unused.webp": { width: 2800, height: 2000, thumbhash: "DgiCBIAjtQxpl5dVSv2101+LgXiHCMeICg==", widths: [640, 1280, 2048] },
@@ -84,5 +84,5 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/writing/products-that-look-better-used/rimowa-used.webp": { width: 2800, height: 2000, thumbhash: "KviFBIBGa6COdFVKB0mHf4qHcIl3Z5iIBg==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/shoes-unused.webp": { width: 2800, height: 2000, thumbhash: "9veBBIAjJvd4iKZ9WPFX6IaPcViYB8d8CQ==", widths: [640, 1280, 2048] },
   "/images/writing/products-that-look-better-used/shoes-used.webp": { width: 2800, height: 2000, thumbhash: "nxiCBIAjJvd4iZacCFdosIGKcViYB8d8CQ==", widths: [640, 1280, 2048] },
-  "/images/writing/wabi-sabi.svg": { width: 3954, height: 2312, thumbhash: null },
+  "/images/writing/wabi-sabi.svg": { width: 2105, height: 1087, thumbhash: null },
 };

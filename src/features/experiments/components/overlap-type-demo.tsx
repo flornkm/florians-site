@@ -99,10 +99,16 @@ export const OverlapType = () => {
               <motion.span
                 key={i}
                 variants={{
-                  hidden: { opacity: 0, y: "-0.35em", scale: 0.8 },
-                  shown: { opacity: 1, y: 0, scale: 1 },
+                  hidden: { opacity: 0, y: "-0.35em", scale: 0.8, filter: "blur(2px)" },
+                  shown: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
                 }}
-                transition={{ type: "spring", stiffness: 480, damping: 26 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 480,
+                  damping: 26,
+                  // Tween the blur — a spring would undershoot into an invalid negative radius.
+                  filter: { type: "tween", duration: 0.24, ease: "easeOut" },
+                }}
                 style={{
                   // Individual `rotate`/`translate` CSS props (not `transform`) so they compose with
                   // motion's y/scale animation instead of overwriting it.

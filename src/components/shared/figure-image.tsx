@@ -1,6 +1,6 @@
 import { Dialog } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import { AnimatedCaption } from "./animated-caption";
 import { Image } from "./image";
 
@@ -49,13 +49,16 @@ export function FigureImage({
         style={width ? { maxWidth: width } : undefined}
       >
         {/* On mobile the panel breaks out of ancestor padding to line up with the body
-            text's 24px side padding (the root layout's px-6); from md up it's a normal block. */}
+            text's 24px side padding (the root layout's px-6); from md up it's a normal block.
+            The breakout is clamped to `width` so a capped figure stays capped instead of
+            being blown up to the full viewport and centred off-screen. */}
         <Dialog.Trigger
           aria-label={alt ? `Open image: ${alt}` : "Open image"}
+          style={{ "--figure-w": width ? `${width}px` : "100vw" } as CSSProperties}
           className={cn(
             "block w-full cursor-zoom-in appearance-none text-left outline-none",
             "focus-visible:ring-2 focus-visible:ring-default",
-            "max-md:ml-[50%] max-md:w-[calc(100vw-48px)] max-md:-translate-x-1/2",
+            "max-md:ml-[50%] max-md:w-[min(calc(100vw-48px),var(--figure-w))] max-md:-translate-x-1/2",
           )}
         >
           <div
