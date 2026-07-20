@@ -157,7 +157,10 @@ export function Comparison({
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <figure className="not-prose my-8 first:mt-0 last:mb-0">
+      {/* Cap the panel to the same "proud" width the wider FigureImages use (720px), so on
+          large screens the comparison sits a bit wider than the text column without ballooning
+          to the full article width. It's centred by the article's md:mx-auto on figures. */}
+      <figure className="not-prose my-8 first:mt-0 last:mb-0 md:max-w-[720px]">
         {/* On mobile the panel breaks out of ancestor padding to line up with the body
             text's 24px side padding (the root layout's px-6); from md up it's a normal block. */}
         <Dialog.Trigger
