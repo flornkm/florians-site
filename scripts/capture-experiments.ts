@@ -167,8 +167,11 @@ async function captureScheme(scheme: "light" | "dark", suffix: string) {
           const root = el?.querySelector(".bg-primary") as HTMLElement | null;
           if (root) root.style.background = "transparent";
         }
-        const close = document.querySelector('[aria-label="Close"]') as HTMLElement | null;
-        if (close) close.style.display = "none";
+        // Every Close, not the first one on the page: the contact dialog and the mobile
+        // drawer carry the same label, so a querySelector could match one of those and
+        // leave the tile's own close button sitting in the poster.
+        for (const c of document.querySelectorAll<HTMLElement>('[aria-label="Close"]'))
+          c.style.display = "none";
         // Credit footnotes belong in the live demo, not the poster thumbnail.
         for (const c of document.querySelectorAll<HTMLElement>("[data-node-credit]"))
           c.style.display = "none";
