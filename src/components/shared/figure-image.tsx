@@ -45,7 +45,7 @@ export function FigureImage({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <figure
-        className={cn("not-prose my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}
+        className={cn("not-prose mx-auto my-8 first:mt-0 last:mb-0", isDiagram && "max-w-[640px]")}
         style={width ? { maxWidth: width } : undefined}
       >
         {/* On mobile the panel breaks out of ancestor padding to line up with the body
