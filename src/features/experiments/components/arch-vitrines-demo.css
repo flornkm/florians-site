@@ -1,33 +1,8 @@
-/* The vitrines animate on their own — no hover or tap. Each plate is three stacked copies of
-   the etching with differently-seeded (static, so rasterised-once) ink filters; this loop shows
-   exactly one copy at a time on the boiling-line cadence (3 frames, 330ms cycle, delays set
-   inline). The sparks twinkle continuously in the same ink. */
+/* The vitrines animate on their own — no hover or tap. The boil itself is a canvas blit loop
+   (see the demo file); only the sparks are DOM, twinkling continuously in the same ink. */
 
 .av-vitrine {
   position: relative;
-}
-
-.av-frame {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  /* Own compositor layer per frame: the filter raster stays cached on the GPU, so each swap
-     is compositing only — no re-paint of the filtered strokes. */
-  will-change: opacity;
-  /* step-end keeps opacity discrete (only ever 0 or 1). Interpolating it even briefly blends
-     two frames and reads as flicker. */
-  animation: av-boil 330ms step-end infinite;
-}
-@keyframes av-boil {
-  0% {
-    opacity: 1;
-  }
-  33.33% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 
 /* Sparks in the same ink as the etching; position/size/delay set inline. */
@@ -50,13 +25,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .av-frame {
-    animation: none;
-    will-change: auto;
-  }
-  .av-frame:first-child {
-    opacity: 1;
-  }
   .av-spark {
     animation: none;
   }
