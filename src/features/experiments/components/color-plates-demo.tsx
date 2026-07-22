@@ -1,11 +1,13 @@
-import type { FC } from "react";
+import { cn } from "@/lib/utils";
+import { type FC, useState } from "react";
 
 /* A small specimen sheet of hand-picked colours, each labelled with an invented, half-a-word
    name sitting inside its field — the way paint chips get christened. At rest you see the name;
-   hovering a swatch swaps the label out for one hand-drawn form that reads the name back to you.
+   hovering a swatch — or touching it, on hands-on devices — swaps the label out for one
+   hand-drawn form that reads the name back to you, plus the chip's printed colour code. A finger
+   can slide across the sheet and each plate under it takes its turn, piano-style.
    Every plate stays bright enough for black ink, so the sheet needs no light-on-dark variant.
-   Static, transparent-backed, no assets — every mark is a tiny inline SVG in currentColor, and
-   the reveal is pure Tailwind group-hover, scoped per swatch so only the hovered one flips. */
+   Static, transparent-backed, no assets — every mark is a tiny inline SVG in currentColor. */
 
 type Mark = FC<{ className?: string }>;
 
@@ -97,55 +99,107 @@ interface Plate {
   Icon: Mark;
 }
 
-// Every plate is bright by construction (YIQ well above the ~135 point where black ink starts to
-// sink), so the label, border and marks are always black — no light-on-dark exceptions.
+// Every plate is bright by construction (oklch L 0.73–0.88, well clear of where black ink starts
+// to sink), so the label, border and marks are always black — no light-on-dark exceptions.
 const INK = "#000000";
 
+// The original palette pulled back to 75% of its oklch chroma (lightness untouched) — takes the
+// neon edge off without going washed-out. Kept as hex because the value doubles as the code
+// printed on the chip.
 const PLATES: Plate[] = [
-  { color: "#ff7a5c", name: "sunburnt", Icon: Moon },
-  { color: "#4fd8c4", name: "poolside", Icon: Water },
-  { color: "#ffd23f", name: "high-noon", Icon: Sun },
-  { color: "#7cc4ff", name: "wide-sky", Icon: Horizon },
-  { color: "#d9a6ff", name: "soft-plum", Icon: Peak },
-  { color: "#9bd977", name: "spring-ish", Icon: Pine },
-  { color: "#ffa8c5", name: "bubblegum", Icon: Ring },
-  { color: "#ffb347", name: "apricot-ish", Icon: Diamond },
-  { color: "#7ff0d0", name: "minty", Icon: Quarter },
+  { color: "#ec8871", name: "sunburnt", Icon: Moon },
+  { color: "#77d2c3", name: "poolside", Icon: Water },
+  { color: "#f5d474", name: "high-noon", Icon: Sun },
+  { color: "#8ec3ef", name: "wide-sky", Icon: Horizon },
+  { color: "#d3adef", name: "soft-plum", Icon: Peak },
+  { color: "#a6d48d", name: "spring-ish", Icon: Pine },
+  { color: "#f2b0c5", name: "bubblegum", Icon: Ring },
+  { color: "#f1b970", name: "apricot-ish", Icon: Diamond },
+  { color: "#9bead2", name: "minty", Icon: Quarter },
 ];
 
-export const ColorPlates = () => (
-  <div className="absolute inset-0 flex items-center justify-center overflow-hidden p-6">
-    <div className="grid grid-cols-3 gap-2">
-      {PLATES.map(({ color, name, Icon }) => (
-        <div
-          key={name}
-          className="group/plate relative flex size-16 select-none items-end border p-1.5"
-          style={
-            {
-              backgroundColor: color,
-              borderColor: INK,
-              // Let a mark punch a hole in itself (e.g. the crescent) by drawing in the plate colour.
-              "--plate-bg": color,
-            } as React.CSSProperties
-          }
-        >
-          {/* At rest: the name. Fades out on hover as the mark takes its place. */}
-          <span
-            className="text-[9px] leading-none tracking-tight opacity-100 group-hover/plate:opacity-0"
-            style={{ color: INK }}
-          >
-            {name}
-          </span>
-          {/* On hover: the custom form that spells the name out. */}
+// The plate under the pointer, resolved by position rather than event target: on touch the
+// pointer stays captured by the plate first pressed, so sliding needs a hit-test to let the
+// finger play across neighbouring plates.
+const plateAtPoint = (e: React.PointerEvent) =>
+  document
+    .elementFromPoint(e.clientX, e.clientY)
+    ?.closest("[data-plate]")
+    ?.getAttribute("data-plate") ?? null;
+
+export const ColorPlates = () => {
+  // Touch (and held-mouse) reveal; plain mouse hover stays pure CSS.
+  const [pressed, setPressed] = useState<string | null>(null);
+  const release = () => setPressed(null);
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden p-6">
+      <div
+        className="grid touch-none grid-cols-3 gap-2"
+        onPointerDown={(e) => setPressed(plateAtPoint(e))}
+        onPointerMove={(e) => {
+          if (e.buttons > 0) setPressed(plateAtPoint(e));
+        }}
+        onPointerUp={release}
+        onPointerCancel={release}
+        onPointerLeave={release}
+      >
+        {PLATES.map(({ color, name, Icon }) => (
           <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover/plate:opacity-100"
-            style={{ color: INK }}
+            key={name}
+            data-plate={name}
+            data-pressed={pressed === name || undefined}
+            className={cn(
+              "group/plate relative flex size-16 select-none items-end border p-1.5",
+              "transition-transform duration-150 data-[pressed]:scale-[0.94]",
+            )}
+            style={
+              {
+                backgroundColor: color,
+                borderColor: INK,
+                // Let a mark punch a hole in itself (e.g. the crescent) by drawing in the plate colour.
+                "--plate-bg": color,
+              } as React.CSSProperties
+            }
           >
-            <Icon className="size-6" />
+            {/* Name and code stacked in one grid cell so the code sits exactly where the
+                name does; the reveal crossfades between them in place. */}
+            <span className="grid" style={{ color: INK }}>
+              <span
+                className={cn(
+                  "self-end text-[9px] leading-none tracking-tight [grid-area:1/1]",
+                  "transition-opacity duration-150",
+                  "group-hover/plate:opacity-0 group-data-[pressed]/plate:opacity-0",
+                )}
+              >
+                {name}
+              </span>
+              <span
+                aria-hidden
+                className={cn(
+                  "self-end font-mono text-[9px] leading-none opacity-0 [grid-area:1/1]",
+                  "transition-opacity duration-150",
+                  "group-hover/plate:opacity-100 group-data-[pressed]/plate:opacity-100",
+                )}
+              >
+                {color}
+              </span>
+            </span>
+            {/* On reveal: the custom form that spells the name out. */}
+            <div
+              aria-hidden
+              className={cn(
+                "pointer-events-none absolute inset-0 flex items-center justify-center",
+                "opacity-0 transition-opacity duration-150",
+                "group-hover/plate:opacity-100 group-data-[pressed]/plate:opacity-100",
+              )}
+              style={{ color: INK }}
+            >
+              <Icon className="size-6" />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
