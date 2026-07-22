@@ -114,23 +114,23 @@ interface Plate {
   Icon: Mark;
 }
 
-// Every plate is bright by construction (oklch L 0.75–0.88, black ink lands 9:1–14.7:1 on all
+// Every plate is bright by construction (oklch L 0.75–0.83, black ink lands 8.8:1–12.4:1 on all
 // of them), so the label, border and marks are always black — no light-on-dark exceptions.
 const INK = "#000000";
 
-// Each colour is hand-tuned in oklch to the archetype its name evokes (chlorine-cyan for
-// poolside, reddened-skin coral for sunburnt, …) at a muted chroma (~0.09–0.13) that stays shy
-// of neon. Kept as hex because the value doubles as the code printed on the chip.
+// Crayon treatment: every hue is the archetype its name evokes, set at a uniform oklch L 0.75 /
+// C 0.145 (chroma clamped per-hue to sRGB gamut; high-noon lifted to L 0.83 — dark yellow reads
+// mustard, not noon sun). Kept as hex because the value doubles as the code printed on the chip.
 const PLATES: Plate[] = [
-  { color: "#f09080", name: "sunburnt", Icon: Parasol },
-  { color: "#78d5e0", name: "poolside", Icon: Water },
-  { color: "#f9d46b", name: "high-noon", Icon: Sun },
-  { color: "#87c6f2", name: "wide-sky", Icon: Horizon },
-  { color: "#dba9e6", name: "soft-plum", Icon: Plum },
-  { color: "#add78b", name: "spring-ish", Icon: Pine },
-  { color: "#f7afc9", name: "bubblegum", Icon: Ring },
-  { color: "#f2b772", name: "apricot-ish", Icon: Apricot },
-  { color: "#98e8c9", name: "minty", Icon: Leaf },
+  { color: "#fc8876", name: "sunburnt", Icon: Parasol },
+  { color: "#1cc4d3", name: "poolside", Icon: Water },
+  { color: "#ecc246", name: "high-noon", Icon: Sun },
+  { color: "#4bb8fd", name: "wide-sky", Icon: Horizon },
+  { color: "#d68ee7", name: "soft-plum", Icon: Plum },
+  { color: "#8bc15b", name: "spring-ish", Icon: Pine },
+  { color: "#f584b1", name: "bubblegum", Icon: Ring },
+  { color: "#e89c33", name: "apricot-ish", Icon: Apricot },
+  { color: "#25cb9c", name: "minty", Icon: Leaf },
 ];
 
 // The plate under the pointer, resolved by position rather than event target: on touch the
