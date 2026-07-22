@@ -32,79 +32,80 @@ const svg = (children: React.ReactNode): Mark =>
     );
   };
 
-// sunburnt — a beach parasol: half a disc on a stem.
-const Parasol = svg(
+// watermelon — a slice: half a disc, the seeds knocked out in the plate colour.
+const Watermelon = svg(
   <>
-    <path d="M4 12A8 8 0 0 1 20 12Z" fill="currentColor" stroke="none" />
-    <rect x="10.9" y="12" width="2.2" height="7.5" fill="currentColor" stroke="none" />
+    <path d="M3 15A9 9 0 0 1 21 15Z" fill="currentColor" stroke="none" />
+    <circle cx="8.6" cy="12.4" r="1.3" fill="var(--plate-bg)" stroke="none" />
+    <circle cx="15.4" cy="12.4" r="1.3" fill="var(--plate-bg)" stroke="none" />
+    <circle cx="12" cy="9" r="1.3" fill="var(--plate-bg)" stroke="none" />
   </>,
 );
 
-// poolside — three still bands of water.
-const Water = svg(
+// caramel — a wrapped candy: square centre, a twist triangle each side.
+const Caramel = svg(
   <>
-    <rect x="3" y="7" width="18" height="2.4" fill="currentColor" stroke="none" />
-    <rect x="3" y="12" width="18" height="2.4" fill="currentColor" stroke="none" />
-    <rect x="3" y="17" width="18" height="2.4" fill="currentColor" stroke="none" />
+    <rect x="8" y="8" width="8" height="8" fill="currentColor" stroke="none" />
+    <path d="M8 12 3 8.5 3 15.5Z" fill="currentColor" stroke="none" />
+    <path d="M16 12 21 8.5 21 15.5Z" fill="currentColor" stroke="none" />
   </>,
 );
 
-// high-noon — a disc with four cardinal rays.
-const Sun = svg(
+// pear-ish — the fruit as two stacked discs.
+const Pear = svg(
   <>
-    <circle cx="12" cy="12" r="5.5" fill="currentColor" stroke="none" />
-    <rect x="10.8" y="1.5" width="2.4" height="3.5" fill="currentColor" stroke="none" />
-    <rect x="10.8" y="19" width="2.4" height="3.5" fill="currentColor" stroke="none" />
-    <rect x="1.5" y="10.8" width="3.5" height="2.4" fill="currentColor" stroke="none" />
-    <rect x="19" y="10.8" width="3.5" height="2.4" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="7.5" r="4" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="15" r="6.5" fill="currentColor" stroke="none" />
   </>,
 );
 
-// wide-sky — a half disc resting on a long horizon.
-const Horizon = svg(
-  <>
-    <path d="M5 14A7 7 0 0 1 19 14Z" fill="currentColor" stroke="none" />
-    <rect x="2" y="16" width="20" height="2.4" fill="currentColor" stroke="none" />
-  </>,
-);
-
-// soft-plum — the fruit: one disc under a short stem.
-const Plum = svg(
-  <>
-    <circle cx="12" cy="14" r="7" fill="currentColor" stroke="none" />
-    <rect x="10.9" y="3.5" width="2.2" height="4.5" fill="currentColor" stroke="none" />
-  </>,
-);
-
-// spring-ish — a geometric pine: one tier on a trunk.
-const Pine = svg(
-  <>
-    <path d="M12 4 19 16 5 16Z" fill="currentColor" stroke="none" />
-    <rect x="10.7" y="16" width="2.6" height="4" fill="currentColor" stroke="none" />
-  </>,
-);
-
-// bubblegum — a ring: one disc knocked out by another in the plate colour.
-const Ring = svg(
+// billiard — a ball: one disc, the number spot knocked out in the plate colour.
+const Billiard = svg(
   <>
     <circle cx="12" cy="12" r="8.5" fill="currentColor" stroke="none" />
-    <circle cx="12" cy="12" r="3.5" fill="var(--plate-bg)" stroke="none" />
+    <circle cx="12" cy="8.5" r="2.6" fill="var(--plate-bg)" stroke="none" />
   </>,
 );
 
-// apricot-ish — the fruit again, told apart from the plum by a triangle leaf.
-const Apricot = svg(
+// sea-glass — a bottle: neck bar over body bar.
+const Bottle = svg(
   <>
-    <circle cx="12" cy="14" r="7" fill="currentColor" stroke="none" />
-    <path d="M12 8.5 18 3 19 9Z" fill="currentColor" stroke="none" />
+    <rect x="10.4" y="3" width="3.2" height="6" fill="currentColor" stroke="none" />
+    <rect x="7.5" y="9" width="9" height="12" fill="currentColor" stroke="none" />
   </>,
 );
 
-// minty — a leaf: two arcs, the vein knocked out in the plate colour.
-const Leaf = svg(
+// denim — a jeans pocket: a bar squared off by a triangle point.
+const Pocket = svg(
   <>
-    <path d="M12 3A11.5 11.5 0 0 1 12 21A11.5 11.5 0 0 1 12 3Z" fill="currentColor" stroke="none" />
-    <rect x="11.2" y="6.5" width="1.6" height="11" fill="var(--plate-bg)" stroke="none" />
+    <rect x="5" y="5" width="14" height="8" fill="currentColor" stroke="none" />
+    <path d="M5 13 19 13 12 20.5Z" fill="currentColor" stroke="none" />
+  </>,
+);
+
+// grape-soda — three discs clustered like the bunch.
+const Grapes = svg(
+  <>
+    <circle cx="8.3" cy="8.5" r="3.6" fill="currentColor" stroke="none" />
+    <circle cx="15.7" cy="8.5" r="3.6" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="15" r="3.6" fill="currentColor" stroke="none" />
+  </>,
+);
+
+// lolly — a disc on a stick.
+const Lolly = svg(
+  <>
+    <circle cx="12" cy="9" r="6" fill="currentColor" stroke="none" />
+    <rect x="10.9" y="15" width="2.2" height="6" fill="currentColor" stroke="none" />
+  </>,
+);
+
+// rhubarb — three stalks, cut to different lengths.
+const Stalks = svg(
+  <>
+    <rect x="5.5" y="7" width="2.6" height="13" fill="currentColor" stroke="none" />
+    <rect x="10.7" y="4" width="2.6" height="16" fill="currentColor" stroke="none" />
+    <rect x="15.9" y="9" width="2.6" height="11" fill="currentColor" stroke="none" />
   </>,
 );
 
@@ -114,23 +115,23 @@ interface Plate {
   Icon: Mark;
 }
 
-// Every plate is bright by construction (oklch L 0.75–0.83, black ink lands 8.8:1–12.4:1 on all
+// Every plate is bright by construction (oklch L 0.75–0.81, black ink lands 8.8:1–11.9:1 on all
 // of them), so the label, border and marks are always black — no light-on-dark exceptions.
 const INK = "#000000";
 
 // Crayon treatment: every hue is the archetype its name evokes, set at a uniform oklch L 0.75 /
-// C 0.145 (chroma clamped per-hue to sRGB gamut; high-noon lifted to L 0.83 — dark yellow reads
-// mustard, not noon sun). Kept as hex because the value doubles as the code printed on the chip.
+// C 0.145 (chroma clamped per-hue to sRGB gamut; pear-ish lifted to L 0.81 — dark chartreuse
+// reads olive, not pear). Kept as hex because the value doubles as the code printed on the chip.
 const PLATES: Plate[] = [
-  { color: "#fc8876", name: "sunburnt", Icon: Parasol },
-  { color: "#1cc4d3", name: "poolside", Icon: Water },
-  { color: "#ecc246", name: "high-noon", Icon: Sun },
-  { color: "#4bb8fd", name: "wide-sky", Icon: Horizon },
-  { color: "#d68ee7", name: "soft-plum", Icon: Plum },
-  { color: "#8bc15b", name: "spring-ish", Icon: Pine },
-  { color: "#f584b1", name: "bubblegum", Icon: Ring },
-  { color: "#e89c33", name: "apricot-ish", Icon: Apricot },
-  { color: "#25cb9c", name: "minty", Icon: Leaf },
+  { color: "#fc8490", name: "watermelon", Icon: Watermelon },
+  { color: "#f69053", name: "caramel", Icon: Caramel },
+  { color: "#c7c94c", name: "pear-ish", Icon: Pear },
+  { color: "#61c77b", name: "billiard", Icon: Billiard },
+  { color: "#1cc8b8", name: "sea-glass", Icon: Bottle },
+  { color: "#5db6fd", name: "denim", Icon: Pocket },
+  { color: "#ad9efd", name: "grape-soda", Icon: Grapes },
+  { color: "#d090ed", name: "lolly", Icon: Lolly },
+  { color: "#ea87cb", name: "rhubarb", Icon: Stalks },
 ];
 
 // The plate under the pointer, resolved by position rather than event target: on touch the
