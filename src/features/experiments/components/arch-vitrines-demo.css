@@ -1,23 +1,27 @@
-/* Hover behaviour for the arched vitrines. Everything stays in the plate's own ink (currentColor):
-   the pointed-at vitrine lifts, three sparks twinkle in the niche, its serif plate label writes
-   itself in word by word out of a blur, and the sibling dims so the hovered one reads as the
-   subject. The ink itself "boils" (feTurbulence seeds cycled in JS) — that part lives in the
-   demo file. */
+/* The vitrines animate on their own — no hover or tap. Each plate is three stacked copies of
+   the etching with differently-seeded (static, so rasterised-once) ink filters; this loop shows
+   exactly one copy at a time on the boiling-line cadence (3 frames, 330ms cycle, delays set
+   inline). The sparks twinkle continuously in the same ink. */
 
 .av-vitrine {
   position: relative;
-  transition:
-    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 0.4s ease;
 }
 
-.av-vitrine:hover {
-  transform: translateY(-4px);
+.av-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: av-boil 330ms infinite;
 }
-
-/* Only the pointed-at vitrine stays lit. */
-.arch-vitrines:has(.av-vitrine:hover) .av-vitrine:not(:hover) {
-  opacity: 0.42;
+@keyframes av-boil {
+  0%,
+  33.2% {
+    opacity: 1;
+  }
+  33.4%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Sparks in the same ink as the etching; position/size/delay set inline. */
@@ -25,9 +29,6 @@
   position: absolute;
   opacity: 0;
   pointer-events: none;
-  will-change: transform, opacity;
-}
-.av-vitrine:hover .av-spark {
   animation: av-twinkle 1.9s ease-in-out infinite;
 }
 @keyframes av-twinkle {
@@ -42,60 +43,14 @@
   }
 }
 
-/* Sits below the arch and out of flow, so adding it never changes the vitrine's 5/6 geometry. */
-.av-title {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 0.9rem;
-  /* inline-block words in a balanced text flow, so the label breaks into even lines instead
-     of a long first line and one orphan; flex would defeat text-wrap entirely. */
-  text-align: center;
-  text-wrap: balance;
-  line-height: 1.35;
-  /* Wider than the arch so the label reads as its own line of type, but capped so the two
-     labels never collide on the narrow mobile sheet. */
-  width: min(11rem, 42vw);
-  font-size: 11px;
-  font-style: italic;
-  letter-spacing: 0.01em;
-  pointer-events: none;
-}
-
-/* inline-block so the blur/translate apply per word; the spaces between them stay real text
-   nodes, which is what gives each gap a line-break opportunity for balancing. */
-.av-word {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(4px);
-}
-.av-vitrine:hover .av-word {
-  animation: av-word 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-@keyframes av-word {
-  from {
-    opacity: 0;
-    filter: blur(4px);
-    transform: translateY(3px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .av-vitrine:hover {
-    transform: none;
-  }
-  .av-vitrine:hover .av-spark {
+  .av-frame {
     animation: none;
   }
-  .av-vitrine:hover .av-word {
-    animation: none;
+  .av-frame:first-child {
     opacity: 1;
-    filter: none;
+  }
+  .av-spark {
+    animation: none;
   }
 }
