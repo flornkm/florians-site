@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { videoManifest } from "@/videoMap.gen";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
-import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const isVideo = (src: string) => /\.(webm|mp4)$/i.test(src);
@@ -170,7 +169,6 @@ function IndexPage() {
   // The sidebar is only sticky from md up, so scroll-based highlighting only makes
   // sense there. On mobile every item stays highlighted.
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const reduceMotion = useReducedMotion();
 
   return (
     <div className="md:grid md:grid-cols-9 md:gap-x-6">
@@ -185,15 +183,14 @@ function IndexPage() {
               const isActive =
                 !isDesktop || (!!project.media?.length && active === projectId(project));
               return (
-                <motion.li
+                // CSS entrance instead of Motion: Motion SSRs its `initial` state as
+                // inline opacity-0 styles, so if the JS bundle fails to load (stale
+                // deploy, flaky network) the list stays invisible forever. The CSS
+                // animation ships visible markup and plays with or without JS.
+                <li
                   key={project.name}
-                  initial={reduceMotion ? false : { opacity: 0, x: -16, filter: "blur(2px)" }}
-                  animate={reduceMotion ? undefined : { opacity: 1, x: 0, filter: "blur(0px)" }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
+                  className="animate-work-reveal"
+                  style={{ animationDelay: `${index * 0.06}s` }}
                 >
                   <a
                     href={project.url}
@@ -207,7 +204,7 @@ function IndexPage() {
                     {project.name}
                     <IconArrowUpRight className="size-3.5 -translate-x-0.5 translate-y-0.5 opacity-0 blur-[2px] transition duration-150 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none" />
                   </a>
-                </motion.li>
+                </li>
               );
             })}
           </ul>
