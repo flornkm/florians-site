@@ -37,7 +37,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* dvh, not vh: with Safari's bottom chrome expanded, 86vh outgrows the visible
+     viewport and the sheet reads as fullscreen. Sizing against the dynamic viewport
+     keeps the same smaller sheet (page peeking behind) in every chrome state. */
   height: 86vh;
+  height: 86dvh;
   overflow: hidden;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
