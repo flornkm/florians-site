@@ -32,11 +32,11 @@ const svg = (children: React.ReactNode): Mark =>
     );
   };
 
-// sunburnt — a crescent, carved from one disc by another in the plate colour.
-const Moon = svg(
+// sunburnt — a beach parasol: half a disc on a stem.
+const Parasol = svg(
   <>
-    <circle cx="12" cy="12" r="8" fill="currentColor" stroke="none" />
-    <circle cx="15.2" cy="9.6" r="6.8" fill="var(--plate-bg)" stroke="none" />
+    <path d="M4 12A8 8 0 0 1 20 12Z" fill="currentColor" stroke="none" />
+    <rect x="10.9" y="12" width="2.2" height="7.5" fill="currentColor" stroke="none" />
   </>,
 );
 
@@ -68,8 +68,13 @@ const Horizon = svg(
   </>,
 );
 
-// soft-plum — a single solid triangle.
-const Peak = svg(<path d="M12 4 21 19 3 19Z" fill="currentColor" stroke="none" />);
+// soft-plum — the fruit: one disc under a short stem.
+const Plum = svg(
+  <>
+    <circle cx="12" cy="14" r="7" fill="currentColor" stroke="none" />
+    <rect x="10.9" y="3.5" width="2.2" height="4.5" fill="currentColor" stroke="none" />
+  </>,
+);
 
 // spring-ish — a geometric pine: one tier on a trunk.
 const Pine = svg(
@@ -87,11 +92,21 @@ const Ring = svg(
   </>,
 );
 
-// apricot-ish — a diamond, the square stood on its corner.
-const Diamond = svg(<path d="M12 3 21 12 12 21 3 12Z" fill="currentColor" stroke="none" />);
+// apricot-ish — the fruit again, told apart from the plum by a triangle leaf.
+const Apricot = svg(
+  <>
+    <circle cx="12" cy="14" r="7" fill="currentColor" stroke="none" />
+    <path d="M12 8.5 18 3 19 9Z" fill="currentColor" stroke="none" />
+  </>,
+);
 
-// minty — a quarter disc, one corner of a square swept round.
-const Quarter = svg(<path d="M4 4 20 4A16 16 0 0 1 4 20Z" fill="currentColor" stroke="none" />);
+// minty — a leaf: two arcs, the vein knocked out in the plate colour.
+const Leaf = svg(
+  <>
+    <path d="M12 3A11.5 11.5 0 0 1 12 21A11.5 11.5 0 0 1 12 3Z" fill="currentColor" stroke="none" />
+    <rect x="11.2" y="6.5" width="1.6" height="11" fill="var(--plate-bg)" stroke="none" />
+  </>,
+);
 
 interface Plate {
   color: string;
@@ -99,23 +114,23 @@ interface Plate {
   Icon: Mark;
 }
 
-// Every plate is bright by construction (oklch L 0.73–0.88, well clear of where black ink starts
-// to sink), so the label, border and marks are always black — no light-on-dark exceptions.
+// Every plate is bright by construction (oklch L 0.75–0.88, black ink lands 9:1–14.7:1 on all
+// of them), so the label, border and marks are always black — no light-on-dark exceptions.
 const INK = "#000000";
 
-// The original palette pulled back to 75% of its oklch chroma (lightness untouched) — takes the
-// neon edge off without going washed-out. Kept as hex because the value doubles as the code
-// printed on the chip.
+// Each colour is hand-tuned in oklch to the archetype its name evokes (chlorine-cyan for
+// poolside, reddened-skin coral for sunburnt, …) at a muted chroma (~0.09–0.13) that stays shy
+// of neon. Kept as hex because the value doubles as the code printed on the chip.
 const PLATES: Plate[] = [
-  { color: "#ec8871", name: "sunburnt", Icon: Moon },
-  { color: "#77d2c3", name: "poolside", Icon: Water },
-  { color: "#f5d474", name: "high-noon", Icon: Sun },
-  { color: "#8ec3ef", name: "wide-sky", Icon: Horizon },
-  { color: "#d3adef", name: "soft-plum", Icon: Peak },
-  { color: "#a6d48d", name: "spring-ish", Icon: Pine },
-  { color: "#f2b0c5", name: "bubblegum", Icon: Ring },
-  { color: "#f1b970", name: "apricot-ish", Icon: Diamond },
-  { color: "#9bead2", name: "minty", Icon: Quarter },
+  { color: "#f09080", name: "sunburnt", Icon: Parasol },
+  { color: "#78d5e0", name: "poolside", Icon: Water },
+  { color: "#f9d46b", name: "high-noon", Icon: Sun },
+  { color: "#87c6f2", name: "wide-sky", Icon: Horizon },
+  { color: "#dba9e6", name: "soft-plum", Icon: Plum },
+  { color: "#add78b", name: "spring-ish", Icon: Pine },
+  { color: "#f7afc9", name: "bubblegum", Icon: Ring },
+  { color: "#f2b772", name: "apricot-ish", Icon: Apricot },
+  { color: "#98e8c9", name: "minty", Icon: Leaf },
 ];
 
 // The plate under the pointer, resolved by position rather than event target: on touch the
