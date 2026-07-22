@@ -88,6 +88,7 @@
   --spacing-col: 248px;
   --aspect-a4: 1.4142857143/1;
   --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-work-reveal: work-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 
   --shadow-xs: var(--smooth-shadow-xs);
   --shadow-sm: var(--smooth-shadow-sm);
@@ -105,6 +106,27 @@
       filter: none;
       opacity: 1;
     }
+  }
+
+  /* Entrance for the home Selected-work list. Must stay a CSS animation, not a
+     Motion `initial`/`animate` pair: reveals that start from opacity 0 would be
+     SSR'd as inline hidden styles and depend on hydration to ever become
+     visible. `backwards` holds the hidden state through each item's stagger
+     delay. The implicit `to` is the element's normal style. */
+  @keyframes work-reveal {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+      filter: blur(2px);
+    }
+  }
+}
+
+/* Skip the reveal for reduced motion, matching the useReducedMotion gate the
+   Motion version had. Unlayered on purpose so it beats the utilities layer. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-work-reveal {
+    animation: none;
   }
 }
 
