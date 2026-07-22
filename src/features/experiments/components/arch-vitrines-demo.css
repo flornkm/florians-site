@@ -11,14 +11,20 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: av-boil 330ms infinite;
+  /* Own compositor layer per frame: the filter raster stays cached on the GPU, so each swap
+     is compositing only — no re-paint of the filtered strokes. */
+  will-change: opacity;
+  /* step-end keeps opacity discrete (only ever 0 or 1). Interpolating it even briefly blends
+     two frames and reads as flicker. */
+  animation: av-boil 330ms step-end infinite;
 }
 @keyframes av-boil {
-  0%,
-  33.2% {
+  0% {
     opacity: 1;
   }
-  33.4%,
+  33.33% {
+    opacity: 0;
+  }
   100% {
     opacity: 0;
   }
@@ -46,6 +52,7 @@
 @media (prefers-reduced-motion: reduce) {
   .av-frame {
     animation: none;
+    will-change: auto;
   }
   .av-frame:first-child {
     opacity: 1;
