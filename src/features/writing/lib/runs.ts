@@ -17,7 +17,9 @@ export type Run = {
 
 export type Metric = "temperature" | "heartrate";
 
-// Keeps the stroke from clipping at the edges of the normalized viewBox.
+// Fallback breathing room around the normalized viewBox, in viewBox units. Only used before the
+// route box has been measured — once it has, RouteCanvas reserves the edges in screen px instead,
+// which is the only way the fixed-size endpoint marks are guaranteed to fit.
 export const ROUTE_PADDING = 6;
 
 // Neutral fallback when the selected metric has no data for a run — resolves to the SVG's
@@ -95,6 +97,76 @@ export function parsePolyline(d: string): RouteGeometry {
     cum.push(cum[i - 1] + Math.hypot(dx, dy));
   }
   return { points, cum, total: cum[cum.length - 1] || 1 };
+}
+
+// Room a mark drawn at a route point claims around itself, in screen px.
+export type Insets = { left: number; right: number; top: number; bottom: number };
+
+// A fixed-size mark (an endpoint plate, a burst) pinned to a point of the normalized route.
+export type MarkClaim = { at: [number, number]; insets: Insets };
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), Math.max(min, max));
+}
+
+// Fit a route into a measured `boxW × boxH` px viewport: returns the user→px scale and the viewBox
+// that applies it, sized so every claim keeps its pixels inside the viewport and the line itself
+// keeps `slack` px all round. Marks are counter-scaled to a constant pixel size, so reserving their
+// room in viewBox units instead can only hold at one column width — which is how endpoint marks
+// ended up sliced in half on narrow screens.
+//
+// A claim needs reserved space only where its point sits closer to the route's bounding box than
+// its reach, so the insets shrink as the scale grows — circular, since the scale is derived from
+// the insets. Two passes settle it: fit once against the worst case (every claim at the edge), then
+// re-fit against what the claims actually need at that scale. The second scale is never smaller
+// than the first, so the insets it implies are never larger than the ones it was fitted with, and
+// the result always fits.
+//
+// The viewBox is given the viewport's exact aspect ratio, so `meet` neither letterboxes nor
+// rescales it: the returned scale is precisely what the browser applies.
+export function fitRoute(
+  path: RoutePath,
+  boxW: number,
+  boxH: number,
+  claims: MarkClaim[],
+  slack: number,
+): { scale: number; viewBox: string } {
+  const w = Math.max(path.w, 0.001);
+  const h = Math.max(path.h, 0.001);
+
+  const insetsAt = (scale: number): Insets =>
+    claims.reduce<Insets>(
+      (need, { at, insets }) => ({
+        left: Math.max(need.left, insets.left - at[0] * scale),
+        right: Math.max(need.right, insets.right - (w - at[0]) * scale),
+        top: Math.max(need.top, insets.top - at[1] * scale),
+        bottom: Math.max(need.bottom, insets.bottom - (h - at[1]) * scale),
+      }),
+      { left: slack, right: slack, top: slack, bottom: slack },
+    );
+
+  // Uniform, and never zero or negative: a box too small to hold the insets still draws a (tiny)
+  // route rather than an inverted viewBox.
+  const scaleFor = (insets: Insets) =>
+    Math.max(
+      0.01,
+      Math.min((boxW - insets.left - insets.right) / w, (boxH - insets.top - insets.bottom) / h),
+    );
+
+  const insets = insetsAt(scaleFor(insetsAt(0)));
+  const scale = scaleFor(insets);
+
+  // Center the route in whatever room is left over, pushing it off center only as far as an inset
+  // demands — so routes whose endpoints sit clear of the edges look exactly as they always have.
+  const freeX = boxW - w * scale;
+  const freeY = boxH - h * scale;
+  const padLeft = clamp(freeX / 2, insets.left, freeX - insets.right);
+  const padTop = clamp(freeY / 2, insets.top, freeY - insets.bottom);
+
+  return {
+    scale,
+    viewBox: `${-padLeft / scale} ${-padTop / scale} ${boxW / scale} ${boxH / scale}`,
+  };
 }
 
 export function formatKm(meters: number): string {
