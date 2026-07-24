@@ -4,10 +4,12 @@ import {
   NEUTRAL,
   ROUTE_PADDING,
   TEMP_STOPS,
+  fitRoute,
   parsePolyline,
   rampColor,
   seriesColors,
   toRgb,
+  type Insets,
   type Metric,
   type RoutePath,
 } from "@/features/writing/lib/runs";
@@ -18,6 +20,7 @@ import { arc } from "motion";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -201,6 +204,49 @@ function FinishConfetti({ color }: { color: string }) {
   );
 }
 
+// Room each mark claims around its own route point, in screen px. Everything drawn on top of the
+// line — plates, glyphs, confetti, tip dot — is counter-scaled to a constant pixel size, so the
+// space it needs has to be reserved in pixels too. Reserving it in viewBox units instead (the
+// original ROUTE_PADDING) silently under-reserves as the column narrows: at a 350px-wide box the
+// scale is ~3px per unit, so 6 units is only ~19px against a plate that reaches 23px, and every
+// endpoint sitting on the bounding box edge — which is most of them — got clipped in half.
+const PLATE_HALF = PLATE / 2 + 1; // half the plate plus the outer half of its 1.4 stroke
+const MARKER_REACH = MARKER_OFFSET + PLATE_HALF;
+// Slack for the marks that ride the line itself: the tip dot (8px square, centered) and the stroke.
+const LINE_SLACK = 5;
+
+// How far the burst travels from its origin at the finish plate's top edge, taken from the table
+// so retuning a particle can't quietly reintroduce clipping. The arc bow and the fade-out mean the
+// last pixel or two never really reads, hence no extra allowance for the curve.
+const CONFETTI_SPREAD = CONFETTI.reduce(
+  (spread, particle) => {
+    const rad = (particle.angle * Math.PI) / 180;
+    const x = Math.cos(rad) * particle.dist;
+    const y = Math.sin(rad) * particle.dist;
+    return {
+      left: Math.max(spread.left, particle.r - x),
+      right: Math.max(spread.right, x + particle.r),
+      up: Math.max(spread.up, particle.r - y),
+    };
+  },
+  { left: 0, right: 0, up: 0 },
+);
+
+// Start plate hangs left of its point, finish plate right — and the burst fans up and out from
+// the finish plate's top edge, which is what makes the finish's claim the larger one.
+const START_INSETS: Insets = {
+  left: MARKER_REACH,
+  right: 0,
+  top: PLATE_HALF,
+  bottom: PLATE_HALF,
+};
+const FINISH_INSETS: Insets = {
+  left: Math.max(0, CONFETTI_SPREAD.left - MARKER_OFFSET),
+  right: Math.max(MARKER_REACH, MARKER_OFFSET + CONFETTI_SPREAD.right),
+  top: Math.max(PLATE_HALF, PLATE / 2 + CONFETTI_SPREAD.up),
+  bottom: PLATE_HALF,
+};
+
 // The box + animated route line, shared by the /writing/runs feed and the /runs-post view.
 // Overlays (metric switch, legend) come in as absolutely-positioned children so each caller
 // composes its own chrome around the identical drawing.
@@ -228,6 +274,7 @@ export function RouteCanvas({
 }) {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const groupRef = useRef<SVGGElement>(null);
   const dotRef = useRef<SVGRectElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.35 });
@@ -249,22 +296,56 @@ export function RouteCanvas({
     return Array.from({ length: segmentCount }, () => uniform);
   }, [geom, metric, temperature, temperatures, averageHeartRate, heartRates]);
 
-  // The line scales with the route as it fills the box. Measure the user→screen scale (it shifts
-  // with the column width) and size the stroke inversely so it renders at a constant px width.
-  const [scale, setScale] = useState(5);
+  // The drawing is laid out from the viewport's pixel size: it decides both the viewBox (which has
+  // to reserve px-sized room for the endpoint marks) and the user→screen scale that the stroke and
+  // the marks counter-scale by so they render at a constant px size. Measured off the <svg> itself,
+  // whose size comes from the container — never from the viewBox — so this can't feed back on
+  // itself. getBoundingClientRect is post-transform, so an ancestor scale is folded in for free.
+  const [box, setBox] = useState<{ w: number; h: number } | null>(null);
 
-  useEffect(() => {
-    const group = groupRef.current;
-    if (!group) return;
+  useLayoutEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
     const measure = () => {
-      const ctm = group.getScreenCTM();
-      if (ctm) setScale(Math.hypot(ctm.a, ctm.b) || 5);
+      const rect = svg.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        setBox((prev) =>
+          prev && prev.w === rect.width && prev.h === rect.height
+            ? prev
+            : { w: rect.width, h: rect.height },
+        );
+      }
     };
     measure();
     const observer = new ResizeObserver(measure);
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(svg);
     return () => observer.disconnect();
-  }, [path]);
+  }, []);
+
+  // Before the first measurement (and if ResizeObserver is missing entirely) fall back to the
+  // uniform viewBox-unit padding — same drawing as before, just without the guarantee.
+  const fit = useMemo(() => {
+    const start = geom.points[0];
+    const end = geom.points[geom.points.length - 1];
+    if (box && start && end) {
+      return fitRoute(
+        path,
+        box.w,
+        box.h,
+        [
+          { at: start, insets: START_INSETS },
+          { at: end, insets: FINISH_INSETS },
+        ],
+        LINE_SLACK,
+      );
+    }
+    const origin = -ROUTE_PADDING;
+    return {
+      scale: 5,
+      viewBox: `${origin} ${origin} ${path.w + ROUTE_PADDING * 2} ${path.h + ROUTE_PADDING * 2}`,
+    };
+  }, [box, path, geom]);
+  const { scale, viewBox } = fit;
 
   // Draw by growing each segment's own `d` on a plain requestAnimationFrame loop. Only geometry
   // (`d`) changes per frame, which renders identically everywhere — unlike stroke-dash / pathLength
@@ -335,10 +416,6 @@ export function RouteCanvas({
     return () => cancelAnimationFrame(frame);
   }, [inView, reduceMotion, geom, replayToken]);
 
-  const origin = -ROUTE_PADDING;
-  const width = path.w + ROUTE_PADDING * 2;
-  const height = path.h + ROUTE_PADDING * 2;
-  const viewBox = `${origin} ${origin} ${width} ${height}`;
   const startPoint = geom.points[0];
   const endPoint = geom.points[geom.points.length - 1];
   // Plates sample the line's own gradient at its ends, so they track the metric switch.
@@ -347,6 +424,7 @@ export function RouteCanvas({
   return (
     <div ref={ref} className={cn("relative", className)}>
       <svg
+        ref={svgRef}
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
         fill="none"
