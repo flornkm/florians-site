@@ -21,6 +21,22 @@ interface Entry {
   height: number;
   thumbhash: string | null;
   widths?: number[];
+  transparent?: true;
+}
+
+// A cutout's thumbhash is a solid blob — ThumbHash carries too little alpha detail to keep the
+// hole — so blurring it up behind the image paints a pale glow over whatever the page shows
+// through. Past this much clear area the blur-up is all bleed and no preview, so <Image> skips it.
+const TRANSPARENT_AREA_THRESHOLD = 0.1;
+
+function clearAreaFraction(data: Buffer | Uint8Array, channels: number): number {
+  let clear = 0;
+  let total = 0;
+  for (let i = channels - 1; i < data.length; i += channels) {
+    total++;
+    if (data[i] < 8) clear++;
+  }
+  return total === 0 ? 0 : clear / total;
 }
 
 function parseSvgDimensions(source: string): { width: number; height: number } | null {
@@ -86,12 +102,19 @@ async function processImage(absPath: string): Promise<[string, Entry] | null> {
     .toBuffer({ resolveWithObject: true });
   const hash = rgbaToThumbHash(info.width, info.height, data);
   const thumbhash = Buffer.from(hash).toString("base64");
+  const transparent = clearAreaFraction(data, info.channels) >= TRANSPARENT_AREA_THRESHOLD;
 
   const widths = await renderRenditions(absPath, publicPath, meta.width);
 
   return [
     publicPath,
-    { width: meta.width, height: meta.height, thumbhash, ...(widths.length ? { widths } : {}) },
+    {
+      width: meta.width,
+      height: meta.height,
+      thumbhash,
+      ...(widths.length ? { widths } : {}),
+      ...(transparent ? { transparent: true as const } : {}),
+    },
   ];
 }
 
@@ -151,10 +174,11 @@ async function main() {
   const sorted = Object.keys(manifest).sort();
   const body = sorted
     .map((k) => {
-      const { width, height, thumbhash, widths } = manifest[k];
+      const { width, height, thumbhash, widths, transparent } = manifest[k];
       const hash = thumbhash === null ? "null" : JSON.stringify(thumbhash);
       const widthsField = widths?.length ? `, widths: [${widths.join(", ")}]` : "";
-      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, thumbhash: ${hash}${widthsField} },`;
+      const transparentField = transparent ? ", transparent: true" : "";
+      return `  ${JSON.stringify(k)}: { width: ${width}, height: ${height}, thumbhash: ${hash}${widthsField}${transparentField} },`;
     })
     .join("\n");
 
@@ -164,6 +188,8 @@ export interface ImageManifestEntry {
   height: number;
   thumbhash: string | null;
   widths?: number[];
+  /** Mostly-transparent cutout: <Image> skips the blur-up, which would bleed through the holes. */
+  transparent?: true;
 }
 
 export const imageManifest: Record<string, ImageManifestEntry> = {
