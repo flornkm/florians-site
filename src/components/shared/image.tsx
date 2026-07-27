@@ -60,7 +60,12 @@ export function Image({
   const wasPreloaded = loadedSrcs.has(src);
   const [loaded, setLoaded] = useState(wasPreloaded);
   const skipFadeRef = useRef(wasPreloaded);
-  const placeholder = useMemo(() => thumbhashToDataURL(entry?.thumbhash), [entry?.thumbhash]);
+  // Cutouts get no blur-up: their thumbhash is a solid blob, so it shows through the transparent
+  // areas as a stray glow over the page behind — worse than the plain fade-in it replaces.
+  const placeholder = useMemo(
+    () => (entry?.transparent ? null : thumbhashToDataURL(entry?.thumbhash)),
+    [entry?.thumbhash, entry?.transparent],
+  );
 
   useIsomorphicLayoutEffect(() => {
     const img = imgRef.current;
