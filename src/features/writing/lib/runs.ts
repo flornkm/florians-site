@@ -111,9 +111,10 @@ function clamp(value: number, min: number, max: number): number {
 
 // Fit a route into a measured `boxW × boxH` px viewport: returns the user→px scale and the viewBox
 // that applies it, sized so every claim keeps its pixels inside the viewport and the line itself
-// keeps `slack` px all round. Marks are counter-scaled to a constant pixel size, so reserving their
-// room in viewBox units instead can only hold at one column width — which is how endpoint marks
-// ended up sliced in half on narrow screens.
+// keeps at least `slack` px on each side. Marks are counter-scaled to a constant pixel size, so
+// reserving their room in viewBox units instead can only hold at one column width — which is how
+// endpoint marks ended up sliced in half on narrow screens. `slack` is per side rather than a
+// single number so a caller can keep the line clear of overlay chrome parked in the box.
 //
 // A claim needs reserved space only where its point sits closer to the route's bounding box than
 // its reach, so the insets shrink as the scale grows — circular, since the scale is derived from
@@ -129,7 +130,7 @@ export function fitRoute(
   boxW: number,
   boxH: number,
   claims: MarkClaim[],
-  slack: number,
+  slack: Insets,
 ): { scale: number; viewBox: string } {
   const w = Math.max(path.w, 0.001);
   const h = Math.max(path.h, 0.001);
@@ -142,7 +143,7 @@ export function fitRoute(
         top: Math.max(need.top, insets.top - at[1] * scale),
         bottom: Math.max(need.bottom, insets.bottom - (h - at[1]) * scale),
       }),
-      { left: slack, right: slack, top: slack, bottom: slack },
+      { ...slack },
     );
 
   // Uniform, and never zero or negative: a box too small to hold the insets still draws a (tiny)

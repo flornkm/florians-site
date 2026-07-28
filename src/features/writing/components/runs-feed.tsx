@@ -132,6 +132,12 @@ function RunsSkeleton() {
   );
 }
 
+// The bottom row of map controls sits flush with the box's padding edge, i.e. flush with the
+// bottom of the drawing area, so the route has to stay this many px clear of it: the sm button
+// height (h-7) the switch and replay share, plus a gap so the line doesn't graze them. The legend
+// on the other side is shorter, so one band covers both.
+const CHROME_HEIGHT = 28 + 8;
+
 // Each entry carries its own metric toggle, so one run can show temperature while the
 // next shows heart rate.
 function RunItem({ run }: { run: Run }) {
@@ -159,6 +165,7 @@ function RunItem({ run }: { run: Run }) {
           averageHeartRate={run.averageHeartRate}
           heartRates={run.heartRates}
           replayToken={replayToken}
+          bottomChrome={CHROME_HEIGHT}
           className="mt-5 h-[26rem] w-full bg-secondary p-3 md:h-[34rem] md:p-5"
         >
           {/* Map-style controls in the box corners: toggle + replay left, color key right. */}

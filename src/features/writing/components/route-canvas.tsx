@@ -215,6 +215,14 @@ const MARKER_REACH = MARKER_OFFSET + PLATE_HALF;
 // Slack for the marks that ride the line itself: the tip dot (8px square, centered) and the stroke.
 const LINE_SLACK = 5;
 
+// Extra bottom slack when a caller parks chrome (the metric switch, the replay button, the legend)
+// along the bottom of the box: the chrome's own height plus the plate reach, so a route point that
+// lands on the bottom edge of the fit — and the endpoint mark hanging off it — still clears the
+// controls instead of running underneath them.
+function bottomSlack(chrome: number): number {
+  return chrome > 0 ? LINE_SLACK + chrome + PLATE_HALF : LINE_SLACK;
+}
+
 // How far the burst travels from its origin at the finish plate's top edge, taken from the table
 // so retuning a particle can't quietly reintroduce clipping. The arc bow and the fade-out mean the
 // last pixel or two never really reads, hence no extra allowance for the curve.
@@ -258,6 +266,7 @@ export function RouteCanvas({
   averageHeartRate,
   heartRates,
   replayToken = 0,
+  bottomChrome = 0,
   className,
   children,
 }: {
@@ -269,6 +278,9 @@ export function RouteCanvas({
   heartRates: number[] | null;
   /** Increment to restart the draw animation from zero. */
   replayToken?: number;
+  /** Height in px of the overlay chrome the caller pins along the bottom of the box; the fit keeps
+   * the route above it. */
+  bottomChrome?: number;
   className?: string;
   children?: ReactNode;
 }) {
@@ -336,7 +348,12 @@ export function RouteCanvas({
           { at: start, insets: START_INSETS },
           { at: end, insets: FINISH_INSETS },
         ],
-        LINE_SLACK,
+        {
+          left: LINE_SLACK,
+          right: LINE_SLACK,
+          top: LINE_SLACK,
+          bottom: bottomSlack(bottomChrome),
+        },
       );
     }
     const origin = -ROUTE_PADDING;
@@ -344,7 +361,7 @@ export function RouteCanvas({
       scale: 5,
       viewBox: `${origin} ${origin} ${path.w + ROUTE_PADDING * 2} ${path.h + ROUTE_PADDING * 2}`,
     };
-  }, [box, path, geom]);
+  }, [box, path, geom, bottomChrome]);
   const { scale, viewBox } = fit;
 
   // Draw by growing each segment's own `d` on a plain requestAnimationFrame loop. Only geometry
