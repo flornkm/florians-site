@@ -150,9 +150,11 @@ function RunItem({ run }: { run: Run }) {
       {run.description && (
         <p className="relative mx-auto mt-3 w-full max-w-[460px] text-balance text-sm leading-[1.5] text-primary">
           {/* Hangs in the left margin on desktop (baseline-aligned via matching text size and
-              leading) so the note text keeps the column's left edge; inline on mobile where
-              there's no margin to hang into. */}
-          <span className={cn("font-serif font-medium italic", GUTTER)}>AI Summary: </span>
+              leading) so the note text keeps the column's left edge; hidden on mobile where
+              there's no margin to hang into — the summary stands on its own there. */}
+          <span className={cn("hidden font-serif font-medium italic md:inline", GUTTER)}>
+            AI Summary:{" "}
+          </span>
           {run.description}
         </p>
       )}
