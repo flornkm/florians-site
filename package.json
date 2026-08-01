@@ -3,8 +3,8 @@
   "scripts": {
     "dev": "vite dev",
     "preview": "vercel dev",
-    "build": "bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && vite build",
-    "manifests": "bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts",
+    "build": "bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && bun scripts/build-experiment-og.ts && vite build",
+    "manifests": "bun scripts/build-image-manifest.ts && bun scripts/build-video-manifest.ts && bun scripts/build-experiment-og.ts",
     "start": "vite preview",
     "typecheck": "tsc --noEmit",
     "capture:experiments": "bun scripts/capture-experiments.ts",

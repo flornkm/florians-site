@@ -220,32 +220,43 @@ interface ExperimentsSearch {
   demo?: string;
 }
 
+const pageMeta = (title: string, ogTitle: string, description: string, image: string) => [
+  { title },
+  { name: "description", content: description },
+  { property: "og:title", content: ogTitle },
+  { property: "og:description", content: description },
+  { property: "og:image", content: image },
+  { name: "twitter:title", content: ogTitle },
+  { name: "twitter:description", content: description },
+  { name: "twitter:image", content: image },
+];
+
 export const Route = createFileRoute("/experiments")({
   validateSearch: (search: Record<string, unknown>): ExperimentsSearch => {
     const demo = search.demo;
     return typeof demo === "string" && EXPERIMENTS.some((e) => e.slug === demo) ? { demo } : {};
   },
-  head: () => ({
-    meta: [
-      { title: "Experiments ‹ Florian Kiem" },
-      {
-        name: "description",
-        content: "A page collecting different design and code experiments.",
-      },
-      { property: "og:title", content: "Experiments" },
-      {
-        property: "og:description",
-        content: "A page collecting different design and code experiments.",
-      },
-      { property: "og:image", content: "/api/og?title=Experiments" },
-      { name: "twitter:title", content: "Experiments" },
-      {
-        name: "twitter:description",
-        content: "A page collecting different design and code experiments.",
-      },
-      { name: "twitter:image", content: "/api/og?title=Experiments" },
-    ],
-  }),
+  // A shared deep-link (?demo=<slug>) previews the experiment itself: its title plus a
+  // pre-rendered card of the light-mode poster (scripts/build-experiment-og.ts). Only
+  // validated slugs get this — every other visit keeps the page's default card.
+  head: ({ match }) => {
+    const shared = EXPERIMENTS.find((e) => e.slug === match.search.demo);
+    return {
+      meta: shared
+        ? pageMeta(
+            `${shared.title} ‹ Florian Kiem`,
+            shared.title,
+            `${shared.title} — a design and code experiment by Florian Kiem.`,
+            `/_og/experiments/${shared.slug}.png`,
+          )
+        : pageMeta(
+            "Experiments ‹ Florian Kiem",
+            "Experiments",
+            "A page collecting different design and code experiments.",
+            "/api/og?title=Experiments",
+          ),
+    };
+  },
   component: ExperimentsPage,
 });
 
