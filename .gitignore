@@ -12,3 +12,6 @@ vite.config.ts.timestamp*
 
 # Generated, display-sized image renditions (rebuilt by scripts/build-image-manifest.ts)
 /public/_gen
+
+# Generated experiment OG cards (rebuilt by scripts/build-experiment-og.ts)
+/public/_og
