@@ -19,7 +19,7 @@ LEVELS = [k * 32 / 255 for k in range(8)]
 CENTER = (0.35, 0.30)
 STOPS = [(0, 1.0), (0.20, 0.62), (0.52, 0.22), (0.75, 0.0), (1.0, 0.0)]
 
-N = 24  # sub-dots per axis; rendered at 96px this gives the md-cell 4px dot size
+N = 32  # sub-dots per axis; rendered at 64px this gives the xs-cell 2px dot size
 
 
 def gradient(d: float) -> float:
@@ -50,7 +50,7 @@ for y in range(N):
             x += 1
 
 svg = (
-    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {N} {N}" width="96" height="96" '
+    f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {N} {N}" width="64" height="64" '
     'shape-rendering="crispEdges">'
     f'<clipPath id="dither-ball-clip"><circle cx="{N / 2}" cy="{N / 2}" r="{N / 2}"/></clipPath>'
     f'<g clip-path="url(#dither-ball-clip)"><rect width="{N}" height="{N}" fill="#fff"/>'

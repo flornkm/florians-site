@@ -7,7 +7,7 @@ function DitherDemo() {
      ball). The live filter + mix-blend-mode pipeline renders inconsistently in Safari at
      this thumbnail scale, so the thumbnail ships as static SVG; regenerate with
      scripts/build-dither-ball.py. */
-  return <img src="/images/dither-ball.svg" alt="" className="size-24" />;
+  return <img src="/images/dither-ball.svg" alt="" className="size-16" />;
 }
 
 function GradientBorderDemo() {

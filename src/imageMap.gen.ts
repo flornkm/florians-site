@@ -24,7 +24,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/about/vienna-facade.webp": { width: 1200, height: 1600, thumbhash: "1QcKJQSwd4yGd2mnh6d4dl+X9IVJ", widths: [640] },
   "/images/avatars/florian_kiem.jpg": { width: 1250, height: 1250, thumbhash: "bRgOFwT4d1h/iHZyhuh3Z1iKeHBIB4cD", widths: [640] },
   "/images/avatars/florian_kiem.webp": { width: 1250, height: 1250, thumbhash: "1yiKDQI3OMZ7iXC6ZzeMcLMICJeDd3lKhw==", widths: [640], transparent: true },
-  "/images/dither-ball.svg": { width: 96, height: 96, thumbhash: null },
+  "/images/dither-ball.svg": { width: 64, height: 64, thumbhash: null },
   "/images/experiments/drawer-photo.webp": { width: 800, height: 982, thumbhash: "nBgONgxnhgeFh1d6h3mXd4eGWFCSByQ=", widths: [640] },
   "/images/experiments/frosted-camera-dark.webp": { width: 2048, height: 1575, thumbhash: "0PeBBIAjtwiHeIqD9xqVb1N2gYd3CMiHCQ==", widths: [640, 1280], transparent: true },
   "/images/experiments/frosted-camera-grey.webp": { width: 2048, height: 1575, thumbhash: "4veFBIAktwiId4l0h2/H+nV9gXeHCMiHCQ==", widths: [640, 1280], transparent: true },
