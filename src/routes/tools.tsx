@@ -3,18 +3,11 @@ import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import type { ComponentType } from "react";
 
 function DitherDemo() {
-  return (
-    {/* Cell sizes below md downscale the plugin's 16px Bayer tile, and Safari ignores
-        image-rendering: pixelated when shrinking background images — the pattern averages
-        to flat gray and the effect disappears. Stay at md (native 1:1) or larger. */}
-    <div className="dither dither-md size-24 rounded-full dark:dither-lg">
-      {/* The dither overlay screen-blends a Bayer pattern before contrast(120) crushes to the
-          0.5-gray midpoint, so anything brighter than ~50% gray dithers to pure white. The ramp
-          must sit mostly below mid-gray and hit black inside the visible radius (gradients
-          default to farthest-corner extent) or the ball renders as a blank white disc. */}
-      <div className="size-full bg-[radial-gradient(circle_at_35%_30%,#ffffff,#a3a3a3_30%,#3d3d3d_60%,#000000_82%)] dark:bg-[radial-gradient(circle_at_32%_28%,#ffffff,#b0b0b0_28%,#4a4a4a_62%,#000000_90%)]" />
-    </div>
-  );
+  /* Pre-rendered output of the plugin's algorithm (Bayer threshold over a radial-gradient
+     ball). The live filter + mix-blend-mode pipeline renders inconsistently in Safari at
+     this thumbnail scale, so the thumbnail ships as static SVG; regenerate with
+     scripts/build-dither-ball.py. */
+  return <img src="/images/dither-ball.svg" alt="" className="size-24" />;
 }
 
 function GradientBorderDemo() {
