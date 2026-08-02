@@ -212,7 +212,7 @@ function IndexPage() {
                   href={person.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1 text-sm font-medium text-tertiary transition-colors hover:text-secondary"
+                  className="group inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors md:text-tertiary md:hover:text-secondary"
                 >
                   {person.name}
                   <IconArrowUpRight className="size-3.5 -translate-x-0.5 translate-y-0.5 opacity-0 blur-[2px] transition duration-150 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none" />
