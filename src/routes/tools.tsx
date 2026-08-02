@@ -4,7 +4,10 @@ import type { ComponentType } from "react";
 
 function DitherDemo() {
   return (
-    <div className="dither dither-xs size-16 rounded-full dark:dither-sm">
+    {/* Cell sizes below md downscale the plugin's 16px Bayer tile, and Safari ignores
+        image-rendering: pixelated when shrinking background images — the pattern averages
+        to flat gray and the effect disappears. Stay at md (native 1:1) or larger. */}
+    <div className="dither dither-md size-24 rounded-full dark:dither-lg">
       {/* The dither overlay screen-blends a Bayer pattern before contrast(120) crushes to the
           0.5-gray midpoint, so anything brighter than ~50% gray dithers to pure white. The ramp
           must sit mostly below mid-gray and hit black inside the visible radius (gradients
