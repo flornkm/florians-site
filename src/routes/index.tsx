@@ -211,13 +211,18 @@ function IndexPage() {
               );
             })}
           </ul>
-          <h2 className="mt-12 mb-4 text-sm fw-medium text-primary">Collaborating with</h2>
+          <h2
+            className="mt-12 mb-4 text-sm fw-medium text-primary animate-work-reveal"
+            style={{ animationDelay: `${PROJECTS.length * 0.06}s` }}
+          >
+            Collaborating with
+          </h2>
           <ul className="flex flex-col items-start gap-1.5">
             {COLLABORATORS.map((person, index) => (
               <li
                 key={person.name}
                 className="animate-work-reveal"
-                style={{ animationDelay: `${(PROJECTS.length + index) * 0.06}s` }}
+                style={{ animationDelay: `${(PROJECTS.length + 1 + index) * 0.06}s` }}
               >
                 <a
                   href={person.url}
