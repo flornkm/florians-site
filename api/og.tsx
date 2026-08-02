@@ -106,6 +106,7 @@ function defaultCard(title: string) {
             fontWeight: 500,
             fontStyle: "italic",
             fontSize: 120,
+            letterSpacing: "-0.02em",
             color: "#111111",
             lineHeight: 1,
             textAlign: "center",

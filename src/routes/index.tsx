@@ -1,6 +1,7 @@
 import { Image } from "@/components/shared/image";
 import { SmartVideo } from "@/components/shared/smart-video";
 import { Link } from "@/components/ui/link";
+import { COLLABORATORS } from "@/features/work/collaborators";
 import { PROJECTS, type Project } from "@/features/work/projects";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -53,8 +54,9 @@ function WideImage({ src, alt, priority }: { src: string; alt: string; priority?
         alt={alt}
         objectFit="contain"
         priority={priority}
+        draggable={false}
         sizes="(min-width: 1600px) 768px, (min-width: 768px) 55vw, 92vw"
-        className="mx-auto h-auto w-full max-w-3xl rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+        className="mx-auto h-auto w-full max-w-3xl rounded-sm outline -outline-offset-1 outline-black/5 select-none dark:outline-white/15"
       />
     </div>
   );
@@ -151,8 +153,9 @@ function MobileRow({
               alt={alt}
               objectFit="contain"
               priority={priority}
+              draggable={false}
               sizes="(min-width: 768px) 320px, 30vw"
-              className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+              className="h-auto w-full rounded-[16cqi] outline -outline-offset-1 outline-black/5 select-none dark:outline-white/15"
             />
           </div>
         ))}
@@ -174,7 +177,7 @@ function IndexPage() {
     <div className="md:grid md:grid-cols-9 md:gap-x-6">
       <aside className="mb-16 md:col-span-2 md:mb-0 md:sticky md:top-4 md:z-20 md:flex md:h-[calc(100dvh-2rem)] md:flex-col">
         <h1 className="mb-12 max-w-[15rem] text-base fw-medium leading-snug text-primary md:shrink-0">
-          Software should feel as good as it looks.
+          Building design systems to make software feel as good as it looks.
         </h1>
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
           <h2 className="mb-4 text-sm fw-medium text-primary">Selected work</h2>
@@ -207,6 +210,26 @@ function IndexPage() {
                 </li>
               );
             })}
+          </ul>
+          <h2 className="mt-12 mb-4 text-sm fw-medium text-primary">Collaborating with</h2>
+          <ul className="flex flex-col items-start gap-1.5">
+            {COLLABORATORS.map((person, index) => (
+              <li
+                key={person.name}
+                className="animate-work-reveal"
+                style={{ animationDelay: `${(PROJECTS.length + index) * 0.06}s` }}
+              >
+                <a
+                  href={person.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1 text-sm font-medium text-tertiary transition-colors hover:text-secondary"
+                >
+                  {person.name}
+                  <IconArrowUpRight className="size-3.5 -translate-x-0.5 translate-y-0.5 opacity-0 blur-[2px] transition duration-150 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none" />
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         {/* Desktop shows these in the sidebar; on mobile they move into the footer's "More" column instead. */}

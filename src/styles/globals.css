@@ -89,6 +89,7 @@
   --aspect-a4: 1.4142857143/1;
   --animate-fade-in: fade-in 0.5s ease-out;
   --animate-work-reveal: work-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  --animate-mail-sweep: mail-sweep 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 
   --shadow-xs: var(--smooth-shadow-xs);
   --shadow-sm: var(--smooth-shadow-sm);
@@ -120,6 +121,18 @@
       filter: blur(2px);
     }
   }
+
+  /* Left-to-right reveal for the contact dialog's mail graphic. Both steps are
+     explicit because the resting style is clip-path: none, which can't be
+     interpolated from inset() — an implicit `to` would snap instead of sweep. */
+  @keyframes mail-sweep {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
 }
 
 /* Skip the reveal for reduced motion, matching the useReducedMotion gate the
@@ -133,6 +146,22 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Minimal scrollbars via the standard properties (Chrome, Firefox, Safari 18.2+).
+   The scrollbar stays fully native — same hit area, keyboard and hover behavior,
+   horizontal and vertical alike — just thinner and tinted with a transparent
+   track. scrollbar-width doesn't inherit, hence the * selector. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-secondary) transparent;
+}
+
+/* High-contrast / forced-colors users get the browser's own scrollbar colors back. */
+@media (forced-colors: active) {
+  * {
+    scrollbar-color: auto;
+  }
 }
 
 body {

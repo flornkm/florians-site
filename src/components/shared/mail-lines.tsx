@@ -108,7 +108,14 @@ export function MailLines({
         ))}
       </g>
 
-      <g className="fill-[#4d4d4d] dark:fill-[#c8c8c8]" aria-hidden>
+      {/* The entrance build is a single CSS clip-path sweep over the group, not per-rect
+          Motion animations: the dialog's layout morph runs at the same moment, and ~35
+          concurrent attribute tweens (y/height relayout the SVG every frame) made opening
+          jank. Motion only drives the mail<->check morph, which happens in isolation. */}
+      <g
+        className="fill-[#4d4d4d] dark:fill-[#c8c8c8] animate-mail-sweep motion-reduce:animate-none"
+        aria-hidden
+      >
         {STROKES.map((s, i) => {
           const target = shape === "check" ? s.check : s.mail;
           return (
@@ -116,7 +123,7 @@ export function MailLines({
               key={i}
               x={s.x}
               width={W}
-              initial={reduceMotion ? false : { y: s.mail.y + s.mail.h, height: 0 }}
+              initial={false}
               animate={{ y: target.y, height: target.h }}
               transition={
                 reduceMotion ? { duration: 0 } : { delay: delayFor(s.x), duration: 0.3, ease: EASE }
