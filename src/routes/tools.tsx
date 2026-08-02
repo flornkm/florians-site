@@ -5,7 +5,11 @@ import type { ComponentType } from "react";
 function DitherDemo() {
   return (
     <div className="dither dither-xs size-16 rounded-full dark:dither-sm">
-      <div className="size-full bg-[radial-gradient(circle_at_35%_30%,#ffffff,#777777_55%,#1a1a1a)] dark:bg-[radial-gradient(circle_at_32%_28%,#ffffff,#b0b0b0_28%,#4a4a4a_62%,#000000_90%)]" />
+      {/* The dither overlay screen-blends a Bayer pattern before contrast(120) crushes to the
+          0.5-gray midpoint, so anything brighter than ~50% gray dithers to pure white. The ramp
+          must sit mostly below mid-gray and hit black inside the visible radius (gradients
+          default to farthest-corner extent) or the ball renders as a blank white disc. */}
+      <div className="size-full bg-[radial-gradient(circle_at_35%_30%,#ffffff,#a3a3a3_30%,#3d3d3d_60%,#000000_82%)] dark:bg-[radial-gradient(circle_at_32%_28%,#ffffff,#b0b0b0_28%,#4a4a4a_62%,#000000_90%)]" />
     </div>
   );
 }
