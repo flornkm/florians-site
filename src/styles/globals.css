@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadow-plugin";
 @import "gradient-border-plugin";
+@import "dither-plugin";
 @import "./colors.css";
 @import "./text.css";
 @import "./shadow-ring.css";

@@ -10,6 +10,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 import Button, { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import ScissorsCursor, { CutText } from "@/components/shared/scissors-cursor";
 
 const queryClient = new QueryClient();
 
@@ -151,13 +152,21 @@ function RootLayout() {
   );
 }
 
-const errorLinks = [{ label: "Home", href: "/" }];
+const errorLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+];
 
 function NotFoundPage() {
   return (
     <div className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-10rem)] flex flex-col items-start justify-center max-w-sm mx-auto px-8">
-      <h1 className="text-base font-medium mb-0.5">Looks like this page came loose.</h1>
-      <p className="text-sm text-tertiary mb-5">These are still attached:</p>
+      <ScissorsCursor />
+      <h1 className="text-base font-medium mb-0.5">
+        <CutText text="Looks like this page came loose." />
+      </h1>
+      <p className="text-sm text-tertiary mb-5">
+        <CutText text="These are still attached:" />
+      </p>
       <ul className="space-x-2 flex flex-wrap">
         {errorLinks.map((link, index) => (
           <li className="text-sm" key={link.href}>
@@ -180,6 +189,7 @@ function NotFoundPage() {
 function ErrorPage() {
   return (
     <div className="w-full h-screen flex flex-col items-start justify-center max-w-sm mx-auto px-4">
+      <ScissorsCursor />
       <h1 className="text-lg font-semibold mb-1">500 Error</h1>
       <p className="text-sm text-tertiary mb-5">Internal server error. Please try again later.</p>
       <Button variant="primary" onClick={() => window.location.reload()}>
