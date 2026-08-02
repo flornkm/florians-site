@@ -17,6 +17,7 @@ const isVideo = (src: string) => /\.(webm|mp4)$/i.test(src);
 const MORE_LINKS = [
   { name: "Colophon", href: "/colophon" },
   { name: "Experiments", href: "/experiments" },
+  { name: "Tools", href: "/tools" },
 ];
 
 const projectId = (project: Project) => `project-${project.name.toLowerCase()}`;
@@ -182,19 +183,11 @@ function IndexPage() {
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
           <h2 className="mb-4 text-sm fw-medium text-primary">Selected work</h2>
           <ul className="flex flex-col items-start gap-1.5">
-            {PROJECTS.map((project, index) => {
+            {PROJECTS.map((project) => {
               const isActive =
                 !isDesktop || (!!project.media?.length && active === projectId(project));
               return (
-                // CSS entrance instead of Motion: Motion SSRs its `initial` state as
-                // inline opacity-0 styles, so if the JS bundle fails to load (stale
-                // deploy, flaky network) the list stays invisible forever. The CSS
-                // animation ships visible markup and plays with or without JS.
-                <li
-                  key={project.name}
-                  className="animate-work-reveal"
-                  style={{ animationDelay: `${index * 0.06}s` }}
-                >
+                <li key={project.name}>
                   <a
                     href={project.url}
                     target="_blank"
@@ -211,19 +204,10 @@ function IndexPage() {
               );
             })}
           </ul>
-          <h2
-            className="mt-12 mb-4 text-sm fw-medium text-primary animate-work-reveal"
-            style={{ animationDelay: `${PROJECTS.length * 0.06}s` }}
-          >
-            Collaborating with
-          </h2>
+          <h2 className="mt-12 mb-4 text-sm fw-medium text-primary">Collaborating with</h2>
           <ul className="flex flex-col items-start gap-1.5">
-            {COLLABORATORS.map((person, index) => (
-              <li
-                key={person.name}
-                className="animate-work-reveal"
-                style={{ animationDelay: `${(PROJECTS.length + 1 + index) * 0.06}s` }}
-              >
+            {COLLABORATORS.map((person) => (
+              <li key={person.name}>
                 <a
                   href={person.url}
                   target="_blank"
