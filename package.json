@@ -36,7 +36,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.21",
-    "dither-plugin": "^1.1.1",
     "firebase-admin": "^13.5.0",
     "flubber": "^0.4.2",
     "gradient-border-plugin": "^1.1.3",
