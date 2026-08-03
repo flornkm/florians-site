@@ -84,13 +84,13 @@ function AboutPage() {
               bunch of different disciplines ranging from graphic design to video editing.
             </p>
             <p>
-              Today my work spans multiple disciplines. I like working in high quality but still
-              move fast. AI is enabling unprecedented possibilities that give design opportunities
-              to participate in actual product development, which is where I see my chance to bring
-              worlds together.
+              Today my work spans multiple disciplines. While design stays my core focus, I moved from
+              being a product designer in the classical sense, to being responsible for setting up design-systems
+              and foundations of modern software companies.
             </p>
             <p>
-              In the past I've worked with companies like Rogo, Superpower, Delphi, and many more.
+              In the past I've worked with companies like Rogo, Legora, Superpower, and many more. I also angel-invest
+              into companies I'm working with.
             </p>
             <div className="mt-8 flex items-center gap-4">
               {CONTACT_LINKS.map((link) => (
