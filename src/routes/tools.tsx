@@ -26,7 +26,13 @@ function GradientBorderDemo() {
 }
 
 function ShadowDemo() {
-  return <div className="size-16 rounded-2xl bg-primary dark:bg-[#232323] smooth-shadow-ring-md" />;
+  /* The plugin's ring flips to white via light-dark(), which reads the page's declared
+     color-scheme — this site never declares one, so it would stay black (invisible on the
+     dark tile). Set the dark ring explicitly instead of opting the whole site into
+     color-scheme, which would also restyle native scrollbars and form controls. */
+  return (
+    <div className="size-16 rounded-2xl bg-primary dark:bg-[#232323] smooth-shadow-ring-md dark:smooth-ring-white/18" />
+  );
 }
 
 const TOOLS: { name: string; href: string; demo: ComponentType }[] = [
