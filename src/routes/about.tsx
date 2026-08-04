@@ -79,18 +79,13 @@ function AboutPage() {
         <div className="col-start-3 col-span-7 md:col-start-6 md:col-span-4 lg:col-span-2">
           <div className="hyphens-auto space-y-6 text-justify text-sm leading-relaxed text-primary md:max-w-72">
             <p>
-              Born in the South of Germany, I began playing with digital design early on. While I
-              eventually found my obsession in making software feel and look great, I tried out a
-              bunch of different disciplines ranging from graphic design to video editing.
+              Born in the south of Germany, I grew up with the Internet. In my childhood, I tried a bunch of different disciplines, ranging from 3D art to graphic design.
             </p>
             <p>
-              Today my work spans multiple disciplines. While design stays my core focus, I moved from
-              being a product designer in the classical sense, to being responsible for setting up design-systems
-              and foundations of modern software companies.
+              After studying product design, my day-to-day work evolved into something different. Pure Figma designs aren't enough, so I see my value in developing foundational design systems hands-on.
             </p>
             <p>
-              In the past I've worked with companies like Rogo, Legora, Superpower, and many more. I also angel-invest
-              into companies I'm working with.
+              In the past, I've worked with companies like Rogo, Legora, Superpower, and many more. I also invest in select software companies personally.
             </p>
             <div className="mt-8 flex items-center gap-4">
               {CONTACT_LINKS.map((link) => (
