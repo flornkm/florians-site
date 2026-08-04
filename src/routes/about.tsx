@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 
 const CONTACT_LINKS = [
-  { name: "Twitter", href: "https://x.com/flornkm" },
+  { name: "@flornkm", href: "https://x.com/flornkm" },
   { name: "Email", href: "mailto:hello@floriankiem.com" },
 ];
 
