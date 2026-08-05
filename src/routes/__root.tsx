@@ -160,28 +160,29 @@ const errorLinks = [
 function NotFoundPage() {
   return (
     <div className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-10rem)] flex flex-col items-start justify-center max-w-sm mx-auto px-8">
-      <ScissorsCursor />
-      <h1 className="text-base font-medium mb-0.5">
-        <CutText text="Looks like this page came loose." />
-      </h1>
-      <p className="text-sm text-tertiary mb-5">
-        <CutText text="These are still attached:" />
-      </p>
-      <ul className="space-x-2 flex flex-wrap">
-        {errorLinks.map((link, index) => (
-          <li className="text-sm" key={link.href}>
-            <Link
-              href={link.href}
-              className={buttonVariants({
-                variant: index === 0 ? "primary" : "secondary",
-                size: "md",
-              })}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <ScissorsCursor>
+        <h1 className="text-base font-medium mb-0.5">
+          <CutText text="Looks like this page came loose." />
+        </h1>
+        <p className="text-sm text-tertiary mb-5">
+          <CutText text="These are still attached:" />
+        </p>
+        <ul className="space-x-2 flex flex-wrap">
+          {errorLinks.map((link, index) => (
+            <li className="text-sm" key={link.href}>
+              <Link
+                href={link.href}
+                className={buttonVariants({
+                  variant: index === 0 ? "primary" : "secondary",
+                  size: "md",
+                })}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </ScissorsCursor>
     </div>
   );
 }
@@ -189,16 +190,17 @@ function NotFoundPage() {
 function ErrorPage() {
   return (
     <div className="w-full h-[calc(100vh-4rem)] md:h-[calc(100vh-10rem)] flex flex-col items-start justify-center max-w-sm mx-auto px-8">
-      <ScissorsCursor />
-      <h1 className="text-base font-medium mb-0.5">
-        <CutText text="500 Error" />
-      </h1>
-      <p className="text-sm text-tertiary mb-5">
-        <CutText text="Internal server error. Please try again later." />
-      </p>
-      <Button variant="primary" onClick={() => window.location.reload()}>
-        Reload
-      </Button>
+      <ScissorsCursor>
+        <h1 className="text-base font-medium mb-0.5">
+          <CutText text="500 Error" />
+        </h1>
+        <p className="text-sm text-tertiary mb-5">
+          <CutText text="Internal server error. Please try again later." />
+        </p>
+        <Button variant="primary" onClick={() => window.location.reload()}>
+          Reload
+        </Button>
+      </ScissorsCursor>
     </div>
   );
 }
