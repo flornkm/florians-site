@@ -45,6 +45,7 @@ const BASE_SETTLE = 2500;
 
 // slug → extra settle time (ms) for things that animate or boot slowly.
 const SLUGS: Record<string, number> = {
+  "avatar-stack": 800, // static stack; a beat for fonts + the backdrop to paint
   "overlap-type": 1000, // letters drop-stagger into their rotated pile, then settle
   "world-cup": 1200, // continuous zoom loop; a beat so the bands populate + fonts settle
   "dot-clock": 3000, // dots pack into the time and settle under collision
