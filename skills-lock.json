@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "prefer-container-queries": {
+      "source": "flornkm/skills",
+      "sourceType": "github",
+      "skillPath": "skills/prefer-container-queries/SKILL.md",
+      "computedHash": "3fa6dd9ef0abaa079079b2784ae02a355d595cf5e3936bbbf1fd7cd34119e34f"
+    }
+  }
+}
