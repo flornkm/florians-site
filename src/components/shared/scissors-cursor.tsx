@@ -3,6 +3,8 @@ import { useReducedMotion } from "motion/react";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 const SNIP_EVENT = "scissors-snip";
+/** Matches the one-shot blade animation in cursorStyles. */
+const SNIP_ONCE_MS = 220;
 
 // Deterministic pseudo-random per character so SSR and client render the same scatter.
 function seeded(index: number, salt: number) {
@@ -53,6 +55,9 @@ html.scissors-cursor, html.scissors-cursor * { cursor: none !important; }
 }
 .scissors-blade-a { animation: scissors-idle-a 1.8s ease-in-out infinite; }
 .scissors-blade-b { animation: scissors-idle-b 1.8s ease-in-out infinite; }
+.scissors-follower[data-snip-once="true"] .scissors-blade-a { animation: scissors-snip-a 0.22s ease-in-out 1; }
+.scissors-follower[data-snip-once="true"] .scissors-blade-b { animation: scissors-snip-b 0.22s ease-in-out 1; }
+/* After the one-shot rules so a running cut keeps the blades snipping through a click. */
 .scissors-follower[data-snipping="true"] .scissors-blade-a { animation: scissors-snip-a 0.22s ease-in-out infinite; }
 .scissors-follower[data-snipping="true"] .scissors-blade-b { animation: scissors-snip-b 0.22s ease-in-out infinite; }
 @keyframes scissors-idle-a { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-5deg); } }
@@ -115,6 +120,26 @@ export default function ScissorsCursor() {
     window.addEventListener(SNIP_EVENT, snip);
     return () => {
       window.removeEventListener(SNIP_EVENT, snip);
+      window.clearTimeout(timeout);
+    };
+  }, [finePointer]);
+
+  useEffect(() => {
+    if (!finePointer) return;
+    let timeout: number;
+    const snipOnce = () => {
+      const follower = followerRef.current;
+      if (!follower) return;
+      // Drop the attribute and force a reflow so a rapid second click restarts the animation.
+      follower.removeAttribute("data-snip-once");
+      void follower.offsetWidth;
+      follower.setAttribute("data-snip-once", "true");
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => follower.removeAttribute("data-snip-once"), SNIP_ONCE_MS);
+    };
+    window.addEventListener("pointerdown", snipOnce);
+    return () => {
+      window.removeEventListener("pointerdown", snipOnce);
       window.clearTimeout(timeout);
     };
   }, [finePointer]);
