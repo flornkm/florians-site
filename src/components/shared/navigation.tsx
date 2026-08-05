@@ -83,7 +83,7 @@ export default function Navigation() {
           {onExperiments && (
             <span
               aria-hidden
-              className="absolute right-0 top-[calc(50%+3px)] hidden aspect-[1137/96] h-5 -translate-y-1/2 select-none dark:invert [&_svg]:size-full lg:block"
+              className="absolute right-0 top-[calc(50%+3px)] hidden aspect-[1209/72] h-5 -translate-y-1/2 select-none dark:invert [&_svg]:size-full lg:block"
               dangerouslySetInnerHTML={{ __html: scribbleRaw }}
             />
           )}
@@ -99,7 +99,7 @@ export default function Navigation() {
       {onExperiments && (
         <span
           aria-hidden
-          className="absolute right-6 top-7 aspect-[1137/96] w-[52vw] max-w-72 select-none dark:invert [&_svg]:size-full md:hidden"
+          className="absolute right-6 top-7 aspect-[1209/72] w-[58vw] max-w-80 select-none dark:invert [&_svg]:size-full md:hidden"
           dangerouslySetInnerHTML={{ __html: scribbleRaw }}
         />
       )}
