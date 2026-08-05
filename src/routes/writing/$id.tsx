@@ -143,7 +143,7 @@ function WritingDetailPage() {
     // width on every breakpoint; text is capped/centered — via max-w from md up, via symmetric margins
     // on mobile. Margins (not a narrower article) keep the media breakout math in figure-image /
     // comparison intact, since it centers on the article column's midpoint.
-    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(h1)]:mx-4",
+    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(h1)]:mx-8",
   );
 
   if (!content) {
@@ -178,7 +178,7 @@ function WritingDetailPage() {
           </div>
           {/* On mobile the title/date sit on the same rail as the inset body text (see the
               prose margins passed to useMdxContent below); media keeps the full width. */}
-          <header className="mb-8 max-md:px-4 md:-mt-7 md:mb-10">
+          <header className="mb-8 max-md:px-8 md:-mt-7 md:mb-10">
             <H1 className="text-sm">{item.title}</H1>
             <HeaderDate type={item.type} date={item.date} newestRunDate={item.newestRunDate} />
           </header>
