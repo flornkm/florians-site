@@ -50,26 +50,6 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
-    "arch-vitrines",
-    "Arch Vitrines",
-    "Etch",
-    lazyDemo(() =>
-      import("@/features/experiments/components/arch-vitrines-demo").then((m) => ({
-        default: m.ArchVitrines,
-      })),
-    ),
-  ),
-  experiment(
-    "color-plates",
-    "Colour Plates",
-    "Colour",
-    lazyDemo(() =>
-      import("@/features/experiments/components/color-plates-demo").then((m) => ({
-        default: m.ColorPlates,
-      })),
-    ),
-  ),
-  experiment(
     "world-cup",
     "World Cup 26",
     "Motion",

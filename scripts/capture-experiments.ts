@@ -59,8 +59,6 @@ const SLUGS: Record<string, number> = {
   "windows-xp": 1500, // pop-in + logo rasterizes on mount
   "transit-ticket": 1200, // static vector art; just needs a paint
   flo: 1000, // rough.js frames build on mount; a beat to draw + settle the boil
-  "color-plates": 800, // swatches fade-up stagger settles quickly
-  "arch-vitrines": 200, // static plates; just needs a paint
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor
