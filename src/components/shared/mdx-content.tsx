@@ -235,16 +235,22 @@ export function MobileImages({ images }: { images: { src: string; alt: string }[
 
 export function Footnotes({ children }: { children?: ReactNode }) {
   return (
-    <footer
-      className={cn(
-        "not-prose mt-16 space-y-1.5 border-t border-primary pt-5",
-        "text-[11px] leading-relaxed text-tertiary",
-        "[&_sup]:mr-1 [&_sup]:text-[9px]",
-        // Mirrors prose-a (see prose-variants.ts) minus the text color, which stays footnote-tertiary.
-        "[&_a]:fw-link [&_a]:transition-all [&_a]:duration-200 [&_a]:underline [&_a]:decoration-tertiary/40 [&_a]:hover:decoration-tertiary/70 [&_a]:underline-offset-[3px] [&_a]:active:no-underline",
-      )}
-    >
-      {children}
+    // Figure captions look their line up in here by matching the <sup> number.
+    <footer data-footnotes className="not-prose mt-16">
+      {/* The rule spans a figure's grey stage, so it matches the media rather than the text:
+          the 720px figure cap the articles use, full width below that. */}
+      <div className="mx-auto w-full max-w-[720px] border-t border-primary" />
+      <div
+        className={cn(
+          "mt-5 space-y-1.5 max-md:mx-8 md:mx-auto md:max-w-[460px]",
+          "text-[11px] leading-relaxed text-tertiary",
+          "[&_sup]:mr-1 [&_sup]:text-[9px]",
+          // Mirrors prose-a (see prose-variants.ts) minus the text color, which stays footnote-tertiary.
+          "[&_a]:fw-link [&_a]:transition-all [&_a]:duration-200 [&_a]:underline [&_a]:decoration-tertiary/40 [&_a]:hover:decoration-tertiary/70 [&_a]:underline-offset-[3px] [&_a]:active:no-underline",
+        )}
+      >
+        {children}
+      </div>
     </footer>
   );
 }

@@ -143,7 +143,9 @@ function WritingDetailPage() {
     // width on every breakpoint; text is capped/centered — via max-w from md up, via symmetric margins
     // on mobile. Margins (not a narrower article) keep the media breakout math in figure-image /
     // comparison intact, since it centers on the article column's midpoint.
-    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(h1)]:mx-8",
+    // <footer> (the footnotes) is excluded too: its rule spans the media width and it insets
+    // its own notes to the text rail.
+    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(footer):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(footer):not(h1)]:mx-8",
   );
 
   if (!content) {
