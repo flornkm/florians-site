@@ -97,9 +97,10 @@ export function FigureImage({
             )}
           </div>
         </Dialog.Trigger>
-        {/* Mirrors the body text column: full width on mobile, centred 460px from md up. */}
+        {/* Mirrors the body text column: inset via the same margins on mobile (see the prose
+            rules in routes/writing/$id.tsx), centred 460px from md up. */}
         {alt && (
-          <figcaption className="mt-4 font-serif text-[11px] font-normal italic text-primary md:mx-auto md:max-w-[460px]">
+          <figcaption className="mt-4 font-serif text-[11px] font-normal italic text-primary max-md:mx-8 md:mx-auto md:max-w-[460px]">
             {alt}
             {sources && <sup className="ml-0.5 text-[9px] text-tertiary">{sources}</sup>}
           </figcaption>
