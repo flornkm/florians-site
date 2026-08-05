@@ -74,6 +74,18 @@ const CLICKS: Record<string, string> = {};
 // Optional interaction to stage a slug right before the shot (after the settle
 // wait) — the live demo is untouched.
 const PREPARE: Record<string, (dialog: Locator, page: Page) => Promise<void>> = {
+  // Freeze the drifting gradient centered behind the stack so the poster always
+  // shows the layering, not a random frame of the loop. Framer rewrites the
+  // inline transform every rAF, so only an !important stylesheet rule sticks.
+  "avatar-stack": async (_dialog, page) => {
+    await page.evaluate(() => {
+      const style = document.createElement("style");
+      style.textContent =
+        '[data-experiment-tile="open"] [style*="linear-gradient"] { transform: none !important; }';
+      document.head.appendChild(style);
+    });
+    await page.waitForTimeout(200);
+  },
   // Stage a pasted attachment so the poster shows the chip and the active send button.
   "paste-editor": async (dialog, page) => {
     const sample = [

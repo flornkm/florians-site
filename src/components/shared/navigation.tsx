@@ -1,10 +1,14 @@
 import { cn } from "@/lib/utils";
 import { useLocation } from "@tanstack/react-router";
 import { animate, motion, useMotionValue, useReducedMotion } from "motion/react";
+import scribbleRaw from "./experiments-scribble.svg?raw";
 import ContactDialog from "./contact-dialog";
 import { Logo } from "./logo";
 import { Link } from "../ui/link";
 
+// Hand-drawn strip shown only on /experiments. Inlined (not an <img>) so each
+// path can animate in sequence — the filled scribble paths pop in one after
+// another, like the strip being written out.
 const logoTransition = { type: "spring", duration: 0.3, bounce: 0 } as const;
 // Width of the expanded "FLORIAN KIEM" so the hover zone covers the whole word, not just the tiny collapsed logo.
 const LOGO_HOVER_WIDTH = 108;
@@ -39,6 +43,8 @@ export default function Navigation() {
       ? pathname === "/" || pathname.startsWith("/work")
       : pathname === href || pathname.startsWith(href + "/");
 
+  const onExperiments = pathname === "/experiments" || pathname.startsWith("/experiments/");
+
   return (
     <nav className="relative z-50 bg-primary">
       <div className="mx-auto grid w-full max-w-[2560px] grid-cols-9 items-center gap-x-6 px-6 pt-6 pb-4">
@@ -57,7 +63,7 @@ export default function Navigation() {
             <Logo className="h-3 w-auto text-primary" progress={logoProgress} />
           </span>
         </Link>
-        <div className="hidden items-center gap-4 col-span-5 md:flex md:gap-6">
+        <div className="relative hidden items-center gap-4 col-span-5 md:flex md:gap-6">
           {TABS.map((tab) => (
             <Link
               key={tab.name}
@@ -70,12 +76,33 @@ export default function Navigation() {
               {tab.name}
             </Link>
           ))}
+          {/* Right-aligned to the tabs' grid track — the same column edge the
+              nav items align left to — and out of flow so it never stretches
+              the nav row. This strip is short enough to clear the tabs from lg
+              up; below that only the mobile top-right instance shows. */}
+          {onExperiments && (
+            <span
+              aria-hidden
+              className="absolute right-0 top-[calc(50%+3px)] hidden aspect-[1137/96] h-5 -translate-y-1/2 select-none dark:invert [&_svg]:size-full lg:block"
+              dangerouslySetInnerHTML={{ __html: scribbleRaw }}
+            />
+          )}
         </div>
         {/* Desktop only: fixed and anchored to the content's right edge (not the viewport) so it stays aligned past the 2560px max-width. On mobile the Contact button lives in the bottom bar instead. */}
         <div className="hidden justify-end col-span-2 md:flex md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2560px)/2+1.5rem))]">
           <ContactDialog />
         </div>
       </div>
+
+      {/* Mobile keeps the scribble at the top right; Contact lives in the bottom
+          bar there, so the corner is free. Width-capped so it clears the logo. */}
+      {onExperiments && (
+        <span
+          aria-hidden
+          className="absolute right-6 top-7 aspect-[1137/96] w-[52vw] max-w-72 select-none dark:invert [&_svg]:size-full md:hidden"
+          dangerouslySetInnerHTML={{ __html: scribbleRaw }}
+        />
+      )}
 
       {/* Mobile-only floating bar; on desktop the tabs and Contact live in the top nav above. */}
       <div className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
