@@ -222,7 +222,10 @@ function IndexPage() {
           </ul>
         </div>
         {/* Desktop shows these in the sidebar; on mobile they move into the footer's "More" column instead. */}
-        <div className="mt-12 hidden items-center gap-4 md:mt-0 md:flex md:shrink-0 md:pt-12">
+        {/* flex-wrap: on narrow desktops this row is wider than its 2-column
+            track, and the indent footer sits pulled up right beside it — an
+            overflowing "Tools" would land on the footer's links. */}
+        <div className="mt-12 hidden items-center gap-x-4 gap-y-2 md:mt-0 md:flex md:shrink-0 md:flex-wrap md:pt-12">
           {MORE_LINKS.map((link) => (
             <Link
               key={link.name}
