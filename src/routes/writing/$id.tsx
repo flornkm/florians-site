@@ -139,9 +139,11 @@ function WritingDetailPage() {
   const content = useMdxContent(
     "writing",
     item.slug,
-    // Prose <h1> is hidden (the header above is the title). On mobile everything spans the full content
-    // width; from md up, text is capped/centered while media stays full width.
-    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px]",
+    // Prose <h1> is hidden (the header above is the title). Media (div/figure) spans the full content
+    // width on every breakpoint; text is capped/centered — via max-w from md up, via symmetric margins
+    // on mobile. Margins (not a narrower article) keep the media breakout math in figure-image /
+    // comparison intact, since it centers on the article column's midpoint.
+    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(h1)]:mx-4",
   );
 
   if (!content) {
@@ -174,7 +176,9 @@ function WritingDetailPage() {
               <IconArrowUndoUp className="size-4" />
             </Link>
           </div>
-          <header className="mb-8 md:-mt-7 md:mb-10">
+          {/* On mobile the title/date sit on the same rail as the inset body text (see the
+              prose margins passed to useMdxContent below); media keeps the full width. */}
+          <header className="mb-8 max-md:px-4 md:-mt-7 md:mb-10">
             <H1 className="text-sm">{item.title}</H1>
             <HeaderDate type={item.type} date={item.date} newestRunDate={item.newestRunDate} />
           </header>
