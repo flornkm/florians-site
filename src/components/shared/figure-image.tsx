@@ -2,6 +2,7 @@ import { Dialog } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { type CSSProperties, useState } from "react";
 import { AnimatedCaption } from "./animated-caption";
+import { FootnoteRefs } from "./footnote-ref";
 import { Image } from "./image";
 
 interface FigureImageProps {
@@ -102,7 +103,7 @@ export function FigureImage({
         {alt && (
           <figcaption className="mt-4 font-serif text-[11px] font-normal italic text-primary max-md:mx-8 md:mx-auto md:max-w-[460px]">
             {alt}
-            {sources && <sup className="ml-0.5 text-[9px] text-tertiary">{sources}</sup>}
+            {sources && <FootnoteRefs sources={sources} />}
           </figcaption>
         )}
       </figure>

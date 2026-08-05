@@ -272,6 +272,51 @@ i {
   @apply font-serif font-medium tracking-[-0.04em];
 }
 
+/* The footnote line a figure's source superscript last jumped to: a highlighter sweep
+   that fades out to the right, and away entirely after a few seconds. Painted by a
+   pseudo-element so it can fade without taking the text with it, and inset outwards so
+   the mark bleeds past the text without shifting the line. */
+[data-footnote-active] {
+  position: relative;
+}
+
+[data-footnote-active]::before {
+  content: "";
+  position: absolute;
+  inset: -0.1rem -0.4rem;
+  z-index: -1;
+  border-radius: 2px;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--accent-yellow) 26%, transparent),
+    color-mix(in srgb, var(--accent-yellow) 10%, transparent) 70%,
+    transparent
+  );
+  animation: footnote-mark 3.5s ease-out forwards;
+}
+
+@keyframes footnote-mark {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-footnote-active]::before {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--accent-yellow) 20%, transparent),
+      color-mix(in srgb, var(--accent-yellow) 8%, transparent) 70%,
+      transparent
+    );
+  }
+}
+
 ::selection {
   background-color: color-mix(in srgb, var(--color-blue-300) 12%, transparent);
   text-decoration: underline dotted var(--color-blue-500);
