@@ -1,10 +1,13 @@
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { useReducedMotion } from "motion/react";
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { type Variants, motion, useAnimate, useMotionValue, useReducedMotion } from "motion/react";
+import { type ReactNode, createContext, useCallback, useContext, useEffect, useState } from "react";
 
-const SNIP_EVENT = "scissors-snip";
-/** Matches the one-shot blade animation in cursorStyles. */
-const SNIP_ONCE_MS = 220;
+const SNIP_MS = 220;
+const IDLE_SWING = { duration: 1.8, ease: "easeInOut", repeat: Infinity } as const;
+const SNIP_SWING = { duration: SNIP_MS / 1000, ease: "easeInOut" } as const;
+
+/** Lets CutText keep the cursor snipping for as long as it is cutting letters away. */
+const SnipContext = createContext<(durationMs?: number) => void>(() => {});
 
 // Deterministic pseudo-random per character so SSR and client render the same scatter.
 function seeded(index: number, salt: number) {
@@ -12,13 +15,14 @@ function seeded(index: number, salt: number) {
   return x - Math.floor(x);
 }
 
-function BladeShapes({ side, stroke, strokeWidth }: {
-  side: "a" | "b";
-  stroke: string;
-  strokeWidth: number;
-}) {
+function Blade({ side, stroke, strokeWidth }: { side: "a" | "b"; stroke: string; strokeWidth: number }) {
+  const open = side === "a" ? -5 : 5;
   return (
-    <>
+    <motion.g
+      className={`scissors-blade scissors-blade-${side}`}
+      animate={{ rotate: [0, open, 0] }}
+      transition={IDLE_SWING}
+    >
       <path
         d={side === "a" ? "M7.6 2.8 L12 13 L13.9 15.7" : "M16.4 2.8 L12 13 L10.1 15.7"}
         stroke={stroke}
@@ -27,177 +31,134 @@ function BladeShapes({ side, stroke, strokeWidth }: {
         strokeLinejoin="round"
       />
       <circle cx={side === "a" ? 15.4 : 8.6} cy={17.8} r={2.6} stroke={stroke} strokeWidth={strokeWidth} />
-    </>
+    </motion.g>
   );
 }
 
 const cursorStyles = `
-html.scissors-cursor, html.scissors-cursor * { cursor: none !important; }
-.scissors-follower {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
-  will-change: transform;
-}
+html, html * { cursor: none !important; }
+.scissors-follower { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; will-change: transform; }
 /* Shift the svg so the pointer sits at the blade tips (the hotspot), then tilt
    the whole scissors to point top-left like a native cursor. */
-.scissors-follower svg {
-  display: block;
-  transform: translate(-10px, -3px) rotate(-40deg);
-  transform-origin: 10px 3px;
-}
-.scissors-blade-a, .scissors-blade-b {
-  transform-box: view-box;
-  transform-origin: 12px 13px;
-}
-.scissors-blade-a { animation: scissors-idle-a 1.8s ease-in-out infinite; }
-.scissors-blade-b { animation: scissors-idle-b 1.8s ease-in-out infinite; }
-.scissors-follower[data-snip-once="true"] .scissors-blade-a { animation: scissors-snip-a 0.22s ease-in-out 1; }
-.scissors-follower[data-snip-once="true"] .scissors-blade-b { animation: scissors-snip-b 0.22s ease-in-out 1; }
-/* After the one-shot rules so a running cut keeps the blades snipping through a click. */
-.scissors-follower[data-snipping="true"] .scissors-blade-a { animation: scissors-snip-a 0.22s ease-in-out infinite; }
-.scissors-follower[data-snipping="true"] .scissors-blade-b { animation: scissors-snip-b 0.22s ease-in-out infinite; }
-@keyframes scissors-idle-a { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-5deg); } }
-@keyframes scissors-idle-b { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(5deg); } }
-@keyframes scissors-snip-a { 0%, 100% { transform: rotate(0deg); } 40% { transform: rotate(-16deg); } }
-@keyframes scissors-snip-b { 0%, 100% { transform: rotate(0deg); } 40% { transform: rotate(16deg); } }
-@keyframes scissors-cut-away {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; animation-timing-function: ease-out; }
-  25% { transform: translate(calc(var(--dx) * 0.12), -4px) rotate(calc(var(--rot) * 0.2)); opacity: 1; animation-timing-function: ease-in; }
-  100% { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
-}
-@keyframes scissors-return {
-  0% { transform: translate(0, 5px); opacity: 0; }
-  100% { transform: translate(0, 0); opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .scissors-blade-a, .scissors-blade-b { animation: none !important; }
-}
+.scissors-follower svg { display: block; transform: translate(-10px, -3px) rotate(-40deg); transform-origin: 10px 3px; }
+.scissors-blade { transform-box: view-box; transform-origin: 12px 13px; }
 `;
 
-/** Replaces the native cursor with a gently snipping macOS-style scissors while mounted. */
-export default function ScissorsCursor() {
+/**
+ * Replaces the native cursor with a gently snipping macOS-style scissors while mounted, and
+ * provides the snip trigger to any CutText inside it.
+ */
+export default function ScissorsCursor({ children }: { children?: ReactNode }) {
   const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
-  const followerRef = useRef<HTMLDivElement>(null);
-  const [snipping, setSnipping] = useState(false);
+  const [scope, animate] = useAnimate<SVGSVGElement>();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const opacity = useMotionValue(0);
 
+  const snip = useCallback(
+    (durationMs = SNIP_MS) => {
+      if (!scope.current) return;
+      const repeat = Math.max(0, Math.round(durationMs / SNIP_MS) - 1);
+      animate(".scissors-blade-a", { rotate: [0, -16, 0] }, { ...SNIP_SWING, repeat });
+      animate(".scissors-blade-b", { rotate: [0, 16, 0] }, { ...SNIP_SWING, repeat }).then(() => {
+        // Hand the blades back to the idle loop; the declarative animate prop only runs on mount.
+        animate(".scissors-blade-a", { rotate: [0, -5, 0] }, IDLE_SWING);
+        animate(".scissors-blade-b", { rotate: [0, 5, 0] }, IDLE_SWING);
+      });
+    },
+    [animate, scope],
+  );
+
+  // The cursor follows the whole window, so this one subscription stays outside React.
   useEffect(() => {
     if (!finePointer) return;
-    document.documentElement.classList.add("scissors-cursor");
-
     const move = (event: PointerEvent) => {
-      const follower = followerRef.current;
-      if (!follower) return;
-      follower.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
-      follower.style.opacity = "1";
+      x.set(event.clientX);
+      y.set(event.clientY);
+      opacity.set(1);
     };
-    const hide = () => {
-      if (followerRef.current) followerRef.current.style.opacity = "0";
-    };
+    const hide = () => opacity.set(0);
+    const click = () => snip();
     window.addEventListener("pointermove", move, { passive: true });
-    document.documentElement.addEventListener("mouseleave", hide);
+    window.addEventListener("pointerdown", click);
     window.addEventListener("blur", hide);
+    document.documentElement.addEventListener("mouseleave", hide);
     return () => {
-      document.documentElement.classList.remove("scissors-cursor");
       window.removeEventListener("pointermove", move);
-      document.documentElement.removeEventListener("mouseleave", hide);
+      window.removeEventListener("pointerdown", click);
       window.removeEventListener("blur", hide);
+      document.documentElement.removeEventListener("mouseleave", hide);
     };
-  }, [finePointer]);
-
-  useEffect(() => {
-    if (!finePointer) return;
-    let timeout: number;
-    const snip = (event: Event) => {
-      const duration = (event as CustomEvent<number>).detail ?? 350;
-      setSnipping(true);
-      window.clearTimeout(timeout);
-      timeout = window.setTimeout(() => setSnipping(false), duration);
-    };
-    window.addEventListener(SNIP_EVENT, snip);
-    return () => {
-      window.removeEventListener(SNIP_EVENT, snip);
-      window.clearTimeout(timeout);
-    };
-  }, [finePointer]);
-
-  useEffect(() => {
-    if (!finePointer) return;
-    let timeout: number;
-    const snipOnce = () => {
-      const follower = followerRef.current;
-      if (!follower) return;
-      // Drop the attribute and force a reflow so a rapid second click restarts the animation.
-      follower.removeAttribute("data-snip-once");
-      void follower.offsetWidth;
-      follower.setAttribute("data-snip-once", "true");
-      window.clearTimeout(timeout);
-      timeout = window.setTimeout(() => follower.removeAttribute("data-snip-once"), SNIP_ONCE_MS);
-    };
-    window.addEventListener("pointerdown", snipOnce);
-    return () => {
-      window.removeEventListener("pointerdown", snipOnce);
-      window.clearTimeout(timeout);
-    };
-  }, [finePointer]);
-
-  if (!finePointer) return null;
+  }, [finePointer, snip, x, y, opacity]);
 
   return (
-    <>
-      <style>{cursorStyles}</style>
-      <div ref={followerRef} className="scissors-follower" data-snipping={snipping} aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          {/* White halo first, black strokes on top, so the cursor reads on any background. */}
-          <g className="scissors-blade-a">
-            <BladeShapes side="a" stroke="white" strokeWidth={4.6} />
-          </g>
-          <g className="scissors-blade-b">
-            <BladeShapes side="b" stroke="white" strokeWidth={4.6} />
-          </g>
-          <g className="scissors-blade-a">
-            <BladeShapes side="a" stroke="black" strokeWidth={2} />
-          </g>
-          <g className="scissors-blade-b">
-            <BladeShapes side="b" stroke="black" strokeWidth={2} />
-          </g>
-        </svg>
-      </div>
-    </>
+    <SnipContext.Provider value={snip}>
+      {children}
+      {finePointer && (
+        <>
+          <style>{cursorStyles}</style>
+          <motion.div className="scissors-follower" style={{ x, y, opacity }} aria-hidden="true">
+            <svg ref={scope} width="20" height="20" viewBox="0 0 24 24" fill="none">
+              {/* White halo first, black strokes on top, so the cursor reads on any background. */}
+              <Blade side="a" stroke="white" strokeWidth={4.6} />
+              <Blade side="b" stroke="white" strokeWidth={4.6} />
+              <Blade side="a" stroke="black" strokeWidth={2} />
+              <Blade side="b" stroke="black" strokeWidth={2} />
+            </svg>
+          </motion.div>
+        </>
+      )}
+    </SnipContext.Provider>
   );
 }
 
-const CHAR_STAGGER_MS = 30;
-const CUT_DURATION_MS = 650;
-const RETURN_STAGGER_MS = 12;
-const RETURN_DURATION_MS = 350;
+const CHAR_STAGGER = 0.03;
+const CUT_DURATION = 0.65;
+const HOLD = 0.4;
+const RETURN_STAGGER = 0.012;
+const RETURN_DURATION = 0.35;
+
+type CharMotion = { index: number; dx: number; dy: number; rot: number };
+
+const charVariants: Variants = {
+  idle: { x: 0, y: 0, rotate: 0, opacity: 1, transition: { duration: 0 } },
+  cut: ({ index, dx, dy, rot }: CharMotion) => ({
+    x: [0, dx * 0.12, dx],
+    y: [0, -4, dy],
+    rotate: [0, rot * 0.2, rot],
+    opacity: [1, 1, 0],
+    transition: {
+      duration: CUT_DURATION,
+      delay: index * CHAR_STAGGER,
+      times: [0, 0.25, 1],
+      ease: ["easeOut", "easeIn"],
+    },
+  }),
+  // Leading keyframes snap each character back to its slot (still invisible) before it rises.
+  return: ({ index }: CharMotion) => ({
+    x: [0, 0],
+    y: [5, 0],
+    rotate: [0, 0],
+    opacity: [0, 1],
+    transition: { duration: RETURN_DURATION, delay: HOLD + index * RETURN_STAGGER, ease: "easeOut" },
+  }),
+};
 
 /** Text that gets cut away character by character on hover, like paper snippets falling off. */
 export function CutText({ text }: { text: string }) {
   const reducedMotion = useReducedMotion();
+  const snip = useContext(SnipContext);
   const [phase, setPhase] = useState<"idle" | "cut" | "return">("idle");
-  const timeoutRef = useRef<number>(undefined);
 
-  useEffect(() => () => window.clearTimeout(timeoutRef.current), []);
-
-  const totalChars = text.replace(/ /g, "").length;
+  const lastIndex = text.replace(/ /g, "").length - 1;
 
   const handleEnter = () => {
     if (reducedMotion || phase !== "idle") return;
     setPhase("cut");
-    // Keep the scissors snipping for as long as the letters are being cut.
-    window.dispatchEvent(new CustomEvent(SNIP_EVENT, { detail: totalChars * CHAR_STAGGER_MS }));
-    timeoutRef.current = window.setTimeout(() => {
-      setPhase("return");
-      timeoutRef.current = window.setTimeout(
-        () => setPhase("idle"),
-        totalChars * RETURN_STAGGER_MS + RETURN_DURATION_MS,
-      );
-    }, totalChars * CHAR_STAGGER_MS + CUT_DURATION_MS + 400);
+    snip((lastIndex + 1) * CHAR_STAGGER * 1000);
   };
+  // The last character is the last to finish, so it drives the whole run forward.
+  const advance = () => setPhase((current) => (current === "cut" ? "return" : "idle"));
 
   let charIndex = 0;
   return (
@@ -207,29 +168,26 @@ export function CutText({ text }: { text: string }) {
           {wordIndex > 0 && " "}
           <span className="inline-block whitespace-nowrap">
             {word.split("").map((char) => {
-              const i = charIndex++;
-              const dx = (seeded(i, 1) - 0.5) * 110;
-              const dy = 36 + seeded(i, 2) * 70;
-              const rotation = (seeded(i, 3) - 0.5) * 280;
+              const index = charIndex++;
               return (
-                <span
-                  key={i}
+                <motion.span
+                  key={index}
                   className="inline-block"
-                  style={{
-                    "--dx": `${dx}px`,
-                    "--dy": `${dy}px`,
-                    "--rot": `${rotation}deg`,
-                    animation:
-                      phase === "cut"
-                        ? `scissors-cut-away ${CUT_DURATION_MS}ms ${i * CHAR_STAGGER_MS}ms forwards`
-                        : phase === "return"
-                          // "both" keeps not-yet-returned characters hidden during their delay.
-                          ? `scissors-return ${RETURN_DURATION_MS}ms ease-out ${i * RETURN_STAGGER_MS}ms both`
-                          : "none",
-                  } as CSSProperties}
+                  variants={charVariants}
+                  custom={
+                    {
+                      index,
+                      dx: (seeded(index, 1) - 0.5) * 110,
+                      dy: 36 + seeded(index, 2) * 70,
+                      rot: (seeded(index, 3) - 0.5) * 280,
+                    } satisfies CharMotion
+                  }
+                  initial={false}
+                  animate={phase}
+                  onAnimationComplete={index === lastIndex ? advance : undefined}
                 >
                   {char}
-                </span>
+                </motion.span>
               );
             })}
           </span>
