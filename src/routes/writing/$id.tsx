@@ -145,7 +145,10 @@ function WritingDetailPage() {
     // comparison intact, since it centers on the article column's midpoint.
     // <footer> (the footnotes) is excluded too: its rule spans the media width and it insets
     // its own notes to the text rail.
-    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(footer):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(footer):not(h1)]:mx-8",
+    // Tables are the one element carrying an explicit width (prose-table:w-full): a percentage
+    // width is resolved against the container and ignores the rail's margins, so on mobile it
+    // has to be narrowed by them by hand or the table overflows by 4rem.
+    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(footer):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(footer):not(h1)]:mx-8 max-md:[&>table]:w-[calc(100%-4rem)]",
   );
 
   if (!content) {
@@ -155,8 +158,10 @@ function WritingDetailPage() {
   return (
     <div className="w-full">
       {/* Mirror the /writing index grid so the article column lines up with it. The root layout
-          already supplies the mobile side padding (px-6), so no extra px here. */}
-      <div className="-mt-[7px] pt-2.5 md:-mt-2 md:grid md:grid-cols-9 md:gap-x-6 lg:pt-9">
+          already supplies the mobile side padding (px-6), so no extra px here. pt-9 from md up
+          cancels the -mt-2/-mt-7 pull-up below; without it the title and the back button slide
+          up underneath the nav row. */}
+      <div className="-mt-[7px] pt-2.5 md:-mt-2 md:grid md:grid-cols-9 md:gap-x-6 md:pt-9">
         <aside className="hidden md:col-span-2 md:col-start-1 md:-mt-7 md:block">
           <div className="md:sticky md:top-9">
             <Link
@@ -178,9 +183,10 @@ function WritingDetailPage() {
               <IconArrowUndoUp className="size-4" />
             </Link>
           </div>
-          {/* On mobile the title/date sit on the same rail as the inset body text (see the
-              prose margins passed to useMdxContent below); media keeps the full width. */}
-          <header className="mb-8 max-md:px-8 md:-mt-7 md:mb-10">
+          {/* On mobile the title/date start flush with the back button, and are capped at the
+              body text's measure (its mx-8 rail, see the prose margins passed to useMdxContent
+              below) so a long title wraps on the same line length. */}
+          <header className="mb-8 max-md:max-w-[calc(100%-4rem)] md:-mt-7 md:mb-10">
             <H1 className="text-sm">{item.title}</H1>
             <HeaderDate type={item.type} date={item.date} newestRunDate={item.newestRunDate} />
           </header>
