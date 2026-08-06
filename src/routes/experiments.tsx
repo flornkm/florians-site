@@ -50,6 +50,16 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
+    "video-tapes",
+    "Video Tapes",
+    "Aero",
+    lazyDemo(() =>
+      import("@/features/experiments/components/video-tapes-demo").then((m) => ({
+        default: m.VideoTapes,
+      })),
+    ),
+  ),
+  experiment(
     "avatar-stack",
     "Avatar Stack",
     "Mask",

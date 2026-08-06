@@ -84,6 +84,16 @@
     url(/fonts/pretendard/PretendardVariable.ttf) format("truetype");
 }
 
+/* Cedarville Cursive (OFL, Google Fonts) — handwritten labels on the tape-chat
+   experiment's canvas textures only; loaded on demand via document.fonts.load. */
+@font-face {
+  font-family: "Cedarville Cursive";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/cedarville-cursive/CedarvilleCursive.woff2) format("woff2");
+}
+
 @theme {
   --spacing-col: 248px;
   --aspect-a4: 1.4142857143/1;
