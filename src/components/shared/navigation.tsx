@@ -88,8 +88,11 @@ export default function Navigation() {
             />
           )}
         </div>
-        {/* Desktop only: fixed and anchored to the content's right edge (not the viewport) so it stays aligned past the 2560px max-width. On mobile the Contact button lives in the bottom bar instead. */}
-        <div className="hidden justify-end col-span-2 md:flex md:fixed md:top-6 md:z-50 md:right-[max(1.5rem,calc((100vw-2560px)/2+1.5rem))]">
+        {/* Desktop only: in flow in the last grid track, so it lines up with the content's right
+            edge without taking the nav out of the document. The dialog itself expands absolutely
+            inside this cell, so opening it never stretches the nav row. On mobile the Contact
+            button lives in the bottom bar instead. */}
+        <div className="hidden justify-end col-span-2 md:flex">
           <ContactDialog />
         </div>
       </div>
