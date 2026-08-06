@@ -60,6 +60,7 @@ const SLUGS: Record<string, number> = {
   "windows-xp": 1500, // pop-in + logo rasterizes on mount
   "transit-ticket": 1200, // static vector art; just needs a paint
   flo: 1000, // rough.js frames build on mount; a beat to draw + settle the boil
+  "video-tapes": 2500, // WebGL boot + label textures rasterize
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor
