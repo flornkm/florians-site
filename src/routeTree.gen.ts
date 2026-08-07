@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as KruemelRouteImport } from './routes/kruemel'
 import { Route as ImprintRouteImport } from './routes/imprint'
 import { Route as ExperimentsRouteImport } from './routes/experiments'
 import { Route as ColophonRouteImport } from './routes/colophon'
@@ -24,9 +26,19 @@ const ToolsRoute = ToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KruemelRoute = KruemelRouteImport.update({
+  id: '/kruemel',
+  path: '/kruemel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImprintRoute = ImprintRouteImport.update({
@@ -71,7 +83,9 @@ export interface FileRoutesByFullPath {
   '/colophon': typeof ColophonRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
+  '/kruemel': typeof KruemelRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sitemap': typeof SitemapRoute
   '/tools': typeof ToolsRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
@@ -82,7 +96,9 @@ export interface FileRoutesByTo {
   '/colophon': typeof ColophonRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
+  '/kruemel': typeof KruemelRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sitemap': typeof SitemapRoute
   '/tools': typeof ToolsRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing': typeof WritingIndexRoute
@@ -94,7 +110,9 @@ export interface FileRoutesById {
   '/colophon': typeof ColophonRoute
   '/experiments': typeof ExperimentsRoute
   '/imprint': typeof ImprintRoute
+  '/kruemel': typeof KruemelRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sitemap': typeof SitemapRoute
   '/tools': typeof ToolsRoute
   '/writing/$id': typeof WritingIdRoute
   '/writing/': typeof WritingIndexRoute
@@ -107,7 +125,9 @@ export interface FileRouteTypes {
     | '/colophon'
     | '/experiments'
     | '/imprint'
+    | '/kruemel'
     | '/privacy-policy'
+    | '/sitemap'
     | '/tools'
     | '/writing/$id'
     | '/writing/'
@@ -118,7 +138,9 @@ export interface FileRouteTypes {
     | '/colophon'
     | '/experiments'
     | '/imprint'
+    | '/kruemel'
     | '/privacy-policy'
+    | '/sitemap'
     | '/tools'
     | '/writing/$id'
     | '/writing'
@@ -129,7 +151,9 @@ export interface FileRouteTypes {
     | '/colophon'
     | '/experiments'
     | '/imprint'
+    | '/kruemel'
     | '/privacy-policy'
+    | '/sitemap'
     | '/tools'
     | '/writing/$id'
     | '/writing/'
@@ -141,7 +165,9 @@ export interface RootRouteChildren {
   ColophonRoute: typeof ColophonRoute
   ExperimentsRoute: typeof ExperimentsRoute
   ImprintRoute: typeof ImprintRoute
+  KruemelRoute: typeof KruemelRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SitemapRoute: typeof SitemapRoute
   ToolsRoute: typeof ToolsRoute
   WritingIdRoute: typeof WritingIdRoute
   WritingIndexRoute: typeof WritingIndexRoute
@@ -156,11 +182,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kruemel': {
+      id: '/kruemel'
+      path: '/kruemel'
+      fullPath: '/kruemel'
+      preLoaderRoute: typeof KruemelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/imprint': {
@@ -221,7 +261,9 @@ const rootRouteChildren: RootRouteChildren = {
   ColophonRoute: ColophonRoute,
   ExperimentsRoute: ExperimentsRoute,
   ImprintRoute: ImprintRoute,
+  KruemelRoute: KruemelRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SitemapRoute: SitemapRoute,
   ToolsRoute: ToolsRoute,
   WritingIdRoute: WritingIdRoute,
   WritingIndexRoute: WritingIndexRoute,
