@@ -63,11 +63,13 @@ const centerOf = (x: number) => x + WORDMARK_STROKE / 2;
 const SWEEP = 0.7; // seconds for the build to cross the full width
 const delayFor = (x: number) => (x / VIEW_W) * SWEEP;
 
+// The delay comes from the source column, not the drawn x, so the sub-columns of one
+// glyph stroke grow together instead of micro-staggering across the bundle.
 const strokeVariants: Variants = {
   hidden: ({ y, h }: { y: number; h: number }) => ({ y1: y + h }),
-  visible: ({ x, y }: { x: number; y: number }) => ({
+  visible: ({ y, delay }: { y: number; delay: number }) => ({
     y1: y,
-    transition: { delay: delayFor(x), duration: 0.45, ease: "easeOut" },
+    transition: { delay, duration: 0.45, ease: "easeOut" },
   }),
 };
 
@@ -87,7 +89,12 @@ export function FlorianLines({ className }: FlorianLinesProps) {
     return {
       gridXs: Array.from({ length: Math.floor(VIEW_W / pitch) + 1 }, (_, i) => i * pitch),
       strokes: STROKES.flatMap((r) =>
-        offsets.map((offset) => ({ x: r.x + offset, y: r.y, w: r.w, h: r.h })),
+        offsets.map((offset) => ({
+          x: r.x + offset,
+          y: r.y,
+          h: r.h,
+          delay: delayFor(r.x),
+        })),
       ),
     };
   }, [subdivision]);
