@@ -27,7 +27,17 @@ const SHAPE_PATHS: Record<string, string> = {
   hexagon: `<path d="M16 4 L26.4 10 V22 L16 28 L5.6 22 V10 Z" />`,
 };
 
-const SHAPE_KEYS = ["triangle", "square", "hexagon", "flower"];
+// `<shape>:<mark>`, plus the markless flower. Both marks share one bounding box (x 12.5–19.5,
+// ~7px tall around the centre) so a check and a cross carry the same optical weight in the shape.
+const SHAPE_KEYS = [
+  "triangle:cross",
+  "square:cross",
+  "hexagon:cross",
+  "triangle:check",
+  "square:check",
+  "hexagon:check",
+  "flower",
+];
 
 function hash(s: string): number {
   let h = 2166136261;
@@ -38,11 +48,21 @@ function hash(s: string): number {
   return h >>> 0;
 }
 
+/** Reads as "no / removed / not done". */
 function cross(cy: number): string {
   const t = (cy - 3.5).toFixed(1);
   const b = (cy + 3.5).toFixed(1);
   return `<path d="M12.5 ${t} L19.5 ${b} M19.5 ${t} L12.5 ${b}" fill="none" stroke="${INK}" stroke-width="1.55" />`;
 }
+
+/** Reads as "do this / the recommended way" — the counterpart to the cross, for posts that advise
+    rather than warn. Miter join at the vertex, so the corner stays as sharp as the cross's ends. */
+function check(cy: number): string {
+  const d = `M12.5 ${cy} L15 ${(cy + 2.8).toFixed(1)} L19.5 ${(cy - 3.2).toFixed(1)}`;
+  return `<path d="${d}" fill="none" stroke="${INK}" stroke-width="1.55" />`;
+}
+
+const MARKS: Record<string, (cy: number) => string> = { cross, check };
 
 function flowerInner(color: string): string {
   const N = 8;
@@ -62,15 +82,18 @@ function flowerInner(color: string): string {
 export function fallbackIcon(slug: string): PostIcon {
   const h = hash(slug);
   const color = PALETTE[h % PALETTE.length];
-  const key = SHAPE_KEYS[(h >> 4) % SHAPE_KEYS.length];
+  // `>>>`, not `>>`: hash() returns a full uint32, so a signed shift goes negative for anything
+  // above 2^31 and the modulo then indexes off the front of the array.
+  const key = SHAPE_KEYS[(h >>> 4) % SHAPE_KEYS.length];
 
   if (key === "flower") {
     return { inner: flowerInner(color), viewBox: "0 0 32 32" };
   }
 
+  const [shape, mark] = key.split(":");
   // The triangle's visual center sits a little lower than its geometric one.
-  const cy = key === "triangle" ? 18 : 16;
-  const inner = `<g fill="${color}" stroke="${OUTLINE}" stroke-width="1.4" stroke-linejoin="miter">${SHAPE_PATHS[key]}${cross(cy)}</g>`;
+  const cy = shape === "triangle" ? 18 : 16;
+  const inner = `<g fill="${color}" stroke="${OUTLINE}" stroke-width="1.4" stroke-linejoin="miter">${SHAPE_PATHS[shape]}${MARKS[mark](cy)}</g>`;
   return { inner, viewBox: "0 0 32 32" };
 }
 

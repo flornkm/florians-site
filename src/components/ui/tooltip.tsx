@@ -51,9 +51,11 @@ export default function Tooltip({ children, content, className, style, open }: T
             transform, which traps any child z-index in its own stacking context —
             a z'd Popup would still paint behind a z-[110] dialog. */}
         <BaseTooltip.Positioner sideOffset={8} className="z-[150]">
+          {/* No z-index here on purpose: the Positioner's own z-index makes it a stacking
+              context, so a number on its only child has nothing left to be ranked against. */}
           <BaseTooltip.Popup
             className={cn(
-              "z-50 font-medium bg-surface-inverted text-inverted px-2 py-1 rounded-lg",
+              "font-medium bg-surface-inverted text-inverted px-2 py-1 rounded-lg",
               "origin-[var(--transform-origin)]",
               "transition-all duration-150 ease-out",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:translate-y-1",

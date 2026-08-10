@@ -1,5 +1,5 @@
 import { motion, useInView, useReducedMotion, type Variants } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   parseWordmarkRects,
   WORDMARK_SPACING,
@@ -16,13 +16,46 @@ const STROKES = parseWordmarkRects().filter((r) => r.x < 960);
 
 const VIEW_W = Math.max(...STROKES.map((r) => r.x + r.w));
 
-const GRID_XS = Array.from(
-  { length: Math.floor(VIEW_W / WORDMARK_SPACING) + 1 },
-  (_, i) => i * WORDMARK_SPACING,
-);
-
 // Screen-pixel stroke width; non-scaling-stroke keeps it constant while the SVG scales with the page.
 const STROKE_PX = 1.5;
+
+// The wordmark has a fixed number of grid columns, so stretching it to the container
+// would spread the lines further apart the wider the screen gets. Instead we split each
+// column into as many sub-columns as it takes to stay near this pitch, so the field keeps
+// a constant density everywhere and glyph strokes become bundles of hairlines.
+const TARGET_PITCH_PX = 5;
+const MAX_SUBDIVISION = 4;
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+function useSubdivision(ref: React.RefObject<HTMLElement | null>, frozen: boolean) {
+  // 1 on the server and until measured, which is what narrow viewports resolve to anyway.
+  const [subdivision, setSubdivision] = useState(1);
+  // Changing the count remounts the strokes, which would replay the reveal — so stop
+  // reacting to resizes once the wordmark has been seen.
+  const frozenRef = useRef(frozen);
+  frozenRef.current = frozen;
+
+  useIsomorphicLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const measure = () => {
+      const width = el.clientWidth;
+      if (!width || frozenRef.current) return;
+      const pitchPx = (WORDMARK_SPACING / VIEW_W) * width;
+      const steps = Math.round(pitchPx / TARGET_PITCH_PX);
+      setSubdivision(Math.min(Math.max(steps, 1), MAX_SUBDIVISION));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return subdivision;
+}
 
 // Center each line in the 1-unit-wide column its rect used to occupy.
 const centerOf = (x: number) => x + WORDMARK_STROKE / 2;
@@ -45,6 +78,19 @@ export function FlorianLines({ className }: FlorianLinesProps) {
   // leave the wordmark stuck in its collapsed "hidden" state on mobile.
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
+  const subdivision = useSubdivision(ref, inView);
+
+  const { gridXs, strokes } = useMemo(() => {
+    const pitch = WORDMARK_SPACING / subdivision;
+    const offsets = Array.from({ length: subdivision }, (_, k) => k * pitch);
+
+    return {
+      gridXs: Array.from({ length: Math.floor(VIEW_W / pitch) + 1 }, (_, i) => i * pitch),
+      strokes: STROKES.flatMap((r) =>
+        offsets.map((offset) => ({ x: r.x + offset, y: r.y, w: r.w, h: r.h })),
+      ),
+    };
+  }, [subdivision]);
 
   return (
     <div ref={ref} className={className}>
@@ -57,7 +103,7 @@ export function FlorianLines({ className }: FlorianLinesProps) {
         aria-label="Florian"
       >
         <g className="stroke-[#e5e5e5] dark:stroke-[#262626]" strokeWidth={STROKE_PX} aria-hidden>
-          {GRID_XS.map((x) => (
+          {gridXs.map((x) => (
             <line
               key={x}
               x1={centerOf(x)}
@@ -76,7 +122,7 @@ export function FlorianLines({ className }: FlorianLinesProps) {
           initial={reduceMotion ? false : "hidden"}
           animate={reduceMotion ? undefined : inView ? "visible" : "hidden"}
         >
-          {STROKES.map((r, i) => (
+          {strokes.map((r, i) => (
             <motion.line
               key={i}
               x1={centerOf(r.x)}
