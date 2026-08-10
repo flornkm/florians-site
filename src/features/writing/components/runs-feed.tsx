@@ -212,7 +212,7 @@ export function RunsFeed() {
   if (isError) {
     return (
       <Body2 className="not-prose text-tertiary">
-        Runs are taking a breather — check back soon.
+        Runs are taking a breather. Check back soon.
       </Body2>
     );
   }

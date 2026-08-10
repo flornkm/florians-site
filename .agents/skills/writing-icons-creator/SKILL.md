@@ -32,10 +32,12 @@ The same icon is reused automatically in the article's **social/OG image** (`api
 ## The rules (do not deviate)
 
 - **Canvas:** always `viewBox="0 0 32 32"`. Center is `(16, 16)`.
-- **Allowed shapes ONLY:** `triangle`, `square`, `hexagon` (each with a center **×**), or `flower` (no ×). Nothing else — no icons-as-pictograms, no letters, no line art, no gradients, no extra detail.
+- **Allowed shapes ONLY:** `triangle`, `square`, `hexagon` (each carrying a center **mark**, either a **×** or a **✓**), or `flower` (no mark). Nothing else — no icons-as-pictograms, no letters, no line art, no gradients, no extra detail.
 - **Fill:** one solid color from the palette.
 - **Outline:** clear black `#171717`, `stroke-width="1.4"`. **Sharp corners** — use `stroke-linejoin="miter"`; never `round`.
-- **The × mark:** black `#171717`, `stroke-width="1.55"`, `fill="none"`. **Sharp ends** — no `stroke-linecap="round"` (leave it at the default butt cap). Present on triangle/square/hexagon, **absent** on the flower.
+- **The center mark:** black `#171717`, `stroke-width="1.55"`, `fill="none"`. **Sharp ends** — no `stroke-linecap="round"` (leave it at the default butt cap). Present on triangle/square/hexagon, **absent** on the flower. Two marks exist and they share one bounding box (x 12.5–19.5, 7px tall around the center) so they carry the same optical weight:
+  - **×** — "no / removed / not done". The default.
+  - **✓** — "do this / the recommended way". Use for posts that advise rather than warn, and whenever a neighboring post already owns the × in a similar color.
 - Put all styling on an **inner `<g>`** (keep the root `<svg>` to just `viewBox` + size). The loader inlines the SVG, so a clean inner group is the most predictable.
 - Keep it flat. The whole point is a simple, recognizable silhouette at ~56px.
 
@@ -106,6 +108,25 @@ The × sits a touch lower because the triangle's visual center is below its midp
 </svg>
 ```
 
+### Swapping the × for a ✓ (advice / do this)
+
+Any of the three polygons takes the check instead of the cross. Replace only the mark path; the shape path and every other attribute stay identical. The check is written around the shape's `cy` — `16` for square and hexagon, `18` for the triangle (so the triangle's is `M12.5 18 L15 20.8 L19.5 14.8`).
+
+```svg
+<path d="M12.5 16 L15 18.8 L19.5 12.8" fill="none" stroke="#171717" stroke-width="1.55" />
+```
+
+Full example, hexagon + ✓:
+
+```svg
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <g fill="FILL" stroke="#171717" stroke-width="1.4" stroke-linejoin="miter">
+    <path d="M16 4 L26.4 10 V22 L16 28 L5.6 22 V10 Z" />
+    <path d="M12.5 16 L15 18.8 L19.5 12.8" fill="none" stroke="#171717" stroke-width="1.55" />
+  </g>
+</svg>
+```
+
 ### Flower (organic / generative — no ×)
 
 A single scalloped path of 8 petals. Use the path exactly as-is.
@@ -135,7 +156,8 @@ A single scalloped path of 8 petals. Use the path exactly as-is.
 - ❌ Putting `fill`/`stroke` only on the root `<svg>` and leaving shapes unstyled — inheritance can be lost when inlined. Style the inner `<g>` (or each path) explicitly, as the templates do.
 - ❌ Using `currentColor` — always hardcode the palette hex so the color is intentional.
 - ❌ Inventing new shapes, adding text, drawing literal objects, or using more than one color. Keep to the four marks.
-- ❌ Forgetting the × on triangle/square/hexagon, or adding one to the flower.
+- ❌ Forgetting the center mark on triangle/square/hexagon, or adding one to the flower.
+- ❌ Reaching for the × out of habit when a neighboring post already uses it — read the other `icon.svg` files first and take the ✓ if the × is spoken for.
 - ❌ Rounding the corners or × ends — joins are `miter` and caps are the default butt; never `round`.
 - ❌ Using pure `#000` / pure white. The outline is `#171717`; fills come from the palette only.
 
