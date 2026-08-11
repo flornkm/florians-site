@@ -1,6 +1,6 @@
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { motion, useReducedMotion } from "motion/react";
-import { type MouseEvent, useId, useState } from "react";
+import { useId } from "react";
 
 // The screen-printed magenta fleet from a vintage German "Rundfahrt" (sightseeing) tram ticket —
 // four locomotives Florian recreated at high detail, imported as vector paths and recoloured to a
@@ -9,21 +9,13 @@ import { type MouseEvent, useId, useState } from "react";
 // window / porthole / wheel-gap is a genuine hole (built into the paths, plus a mask for the front
 // loco's keyhole). Themed magenta by prefers-color-scheme. No assets.
 //
-// It is a ticket, so it can be punched: each click cuts a real hole through the print (a mask on
-// the artwork, so the surface behind shows through) and drops the chad. A faint ring marks the
-// crimp where the punch pressed the paper.
-//
 // The steam engines smoke: gooey puffs (blur + alpha-contrast filter, the classic SVG goo) rise
 // from the chimneys and merge like liquid before dissolving. The smoke lives outside the
 // screen-print group — animating inside it would re-rasterize the costly turbulence filter every
 // frame — so each chimney is its own small goo region instead.
 
 const LABEL =
-  "Four magenta screen-printed locomotives from a vintage tram ticket: a streamlined railcar, a front-view steam engine, an electric loco with pantographs, and an early steam loco with tender. Click to punch holes in the ticket.";
-
-const PUNCH_RADIUS = 13;
-/** Bounds the mask's circle list; the oldest punches "heal" past this. */
-const MAX_PUNCHES = 40;
+  "Four magenta screen-printed locomotives from a vintage tram ticket: a streamlined railcar, a front-view steam engine, an electric loco with pantographs, and an early steam loco with tender.";
 
 // Chimney mouths in viewBox coordinates: the front-view loco's twin stacks and
 // the early loco's tall funnel. The railcar and the electric loco don't smoke.
@@ -36,12 +28,6 @@ const PUFFS_PER_CHIMNEY = 3;
 const PUFF_SECONDS = 2.8;
 const PUFF_RISE = 42;
 
-interface Punch {
-  x: number;
-  y: number;
-  id: number;
-}
-
 export const TransitTicket = () => {
   // Mouse-driven browsers only. WebKit rasterizes SVG filters into a buffer that ignores the
   // device pixel ratio, so on a 3x phone the printed art comes back soft and pixelated while
@@ -50,25 +36,7 @@ export const TransitTicket = () => {
   // returns false until hydration, so nothing paints the filter before we know.
   const printed = useMediaQuery("(pointer: fine)");
   const reduceMotion = useReducedMotion();
-  const maskId = useId();
-  const [punches, setPunches] = useState<Punch[]>([]);
-  const lastPunch = punches.at(-1);
-
-  const handlePunch = (event: MouseEvent<SVGSVGElement>) => {
-    const box = event.currentTarget.getBoundingClientRect();
-    // The svg keeps the viewBox ratio (h-full w-auto), so a linear map suffices.
-    const x = ((event.clientX - box.left) / box.width) * 800;
-    const y = ((event.clientY - box.top) / box.height) * 600;
-    setPunches((previous) => {
-      // No overlapping holes: where the paper is already gone, there is
-      // nothing left to punch.
-      const overlaps = previous.some(
-        (punch) => Math.hypot(punch.x - x, punch.y - y) < PUNCH_RADIUS * 2,
-      );
-      if (overlaps) return previous;
-      return [...previous.slice(-(MAX_PUNCHES - 1)), { x, y, id: (previous.at(-1)?.id ?? 0) + 1 }];
-    });
-  };
+  const gooId = useId();
 
   return (
     <div className="absolute inset-0 flex items-center justify-center p-5 select-none">
@@ -76,8 +44,7 @@ export const TransitTicket = () => {
         viewBox="0 0 800 600"
         role="img"
         aria-label={LABEL}
-        onClick={handlePunch}
-        className="h-full w-auto max-w-full cursor-pointer [--mag:#c21c7e] dark:[--mag:#dc2a8e]"
+        className="h-full w-auto max-w-full [--mag:#c21c7e] dark:[--mag:#dc2a8e]"
       >
         <defs>
           {/* Static and deliberately cheap: one turbulence + displacement for the hand-pulled
@@ -131,7 +98,7 @@ export const TransitTicket = () => {
               contrast (19x - 8) snaps the smear back to a hard edge — overlapping
               puffs read as one merging blob. Wide region so blur never clips. */}
           <filter
-            id={`${maskId}-goo`}
+            id={`${gooId}-goo`}
             x="-60%"
             y="-60%"
             width="220%"
@@ -145,34 +112,6 @@ export const TransitTicket = () => {
               values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -8"
             />
           </filter>
-          {/* Softens the hole's inner-shadow ring into a shaded lip. */}
-          <filter id={`${maskId}-soft`} x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.2" />
-          </filter>
-          {/* One clip per hole so its interior shading never bleeds past the cut. */}
-          {punches.map((punch) => (
-            <clipPath key={punch.id} id={`${maskId}-hole-${punch.id}`}>
-              <circle cx={punch.x} cy={punch.y} r={PUNCH_RADIUS} />
-            </clipPath>
-          ))}
-          {lastPunch && (
-            <clipPath id={`${maskId}-chad`}>
-              <circle cx={lastPunch.x} cy={lastPunch.y} r={PUNCH_RADIUS - 0.4} />
-            </clipPath>
-          )}
-          <mask
-            id={`${maskId}-punches`}
-            maskUnits="userSpaceOnUse"
-            x="0"
-            y="0"
-            width="800"
-            height="600"
-          >
-            <rect width="800" height="600" fill="white" />
-            {punches.map((punch) => (
-              <circle key={punch.id} cx={punch.x} cy={punch.y} r={PUNCH_RADIUS} fill="black" />
-            ))}
-          </mask>
           <mask id="hole-270e" maskUnits="userSpaceOnUse" x="15" y="79" width="87" height="41">
             <rect x="15" y="79" width="87" height="41" fill="white" />
             <path
@@ -182,11 +121,7 @@ export const TransitTicket = () => {
           </mask>
         </defs>
 
-        {/* The inner id-ed group is the raw, unfiltered artwork; the chad
-            re-renders a circle of it via <use> without paying for the print
-            filter a second time. */}
-        <g filter={printed ? "url(#print)" : undefined} mask={`url(#${maskId}-punches)`}>
-          <g id={`${maskId}-art`}>
+        <g filter={printed ? "url(#print)" : undefined}>
           <g fill="var(--mag)" transform="translate(300 224) scale(1.95) translate(-85.6 -71.2)">
             <path d="m48.7 80.9 1.3-2.9-0.4-0.5h-0.7l-0.4-0.5h-1.8v0.3c0 0.6-0.7 0.6-0.7 0.1v-2.1c0-0.6 0.7-0.5 0.7 0v0.3h1.5l0.4-0.3c-0.2-1.2-0.6-2 0.6-4 1.7-2.9 2.6-3.3 4.1-4.2 1.8-2.2 2.8-4.1 4.2-4.9 2-1.1 3.6-1 6.1-1 0.6 0 0.8-1.3 1.5-0.9h1l-0.5 0.5v0.5h10.1c0.5-0.4 0.8-1 1.6-1h5.2c0.6 0 1.5 0.9 1.7 1h12.4c0.4-0.5 0.8-0.6 1.3-0.6h0.5c0.5 0 0.9 0.2 1.2 0.6h18.6c2.1 0 3.9 1.2 4 3.4h-54.2s-0.1-0.1-0.1 0.5l0.1 0.2h54v6.1h0.3c0.2 0 0.4 0 0.4 0.3v1.4c0 0.3-0.2 0.3-0.8 0.3v1.5h0.8c0.4 0 0.4 0.4 0.5 0.8h1v-0.4c0-0.5 0.8-0.6 0.8 0v1.9c0 0.5-0.7 0.6-0.8 0l-0.1-0.3h-0.9l-0.5 0.5h-0.8v0.5h1.1c0.4-0.1 0.6 0.1 0.6 0.4v0.8h-0.5v-0.8l-1.3 0.1c0 0.4-0.4 0.3-0.7 0.3h-4.6c-0.9-0.9-1.7-1.5-2.7-2.1h-2c0 0.8 2.6 0.8 2.8 1.2 0.1 0.5 0.1 1.4 0 1.6-0.2 0.2-0.7 0-0.7 0.2-0.2 0.7-0.9 1.2-1.6 1.4h9.2c0.6 0 0.6 1.1 0.1 1h-73.2c-0.4 0-0.3-1.1 0.1-1h9.2c-0.8-0.2-1.2-0.8-1.5-1.5h-0.4c-0.3 0-0.3-0.1-0.3-0.5 0-1.7 0.1-1.4 1.1-1.6 0.6-0.1 1.6-0.4 1.7-0.7l-0.2-0.1h-1.8c-1 0.9-1.6 2.1-2.2 3.2m11.9-15.3-0.1-0.1h-0.4l-0.2 0.1v9l0.2 0.1h0.3l0.2-0.1v-9zm-3.9 0-0.1-0.1h-0.6l-0.1 0.1v9l0.2 0.1h0.3l0.2-0.1 0.1-9zm2.5 2.5v-2.3c0-0.2-0.1-0.3-0.3-0.3h-1.5c-0.2 0-0.2 0.1-0.2 0.3v2.4c0 0.4 0.2 0.3 1.7 0.3 0.2-0.1 0.3-0.1 0.3-0.4zm0.3 8-0.1-0.2h-2.5l-0.1 0.2v0.3l0.1 0.1h2.5l0.1-0.1v-0.3zm0 2.3-0.1-0.2h-2.5l-0.1 0.2v0.3l0.1 0.1h2.5l0.1-0.1v-0.3zm-5.4-13.1c0-0.2-0.1-0.3-0.3-0.3h-0.5c-0.7 0-0.6 0.2-2.5 2.7l0.3 0.1h2.7c0.5 0 0.7 0 0.7-0.4l-0.4-2.1zm-2.4-0.2-0.1-0.1h-1.2l-0.2 0.1c-0.8 1.1-1.9 2.6-1.7 2.7h1.4l1.8-2.5v-0.2zm-6.8 8h-0.9c-0.1 0-0.7 1.3-0.4 1.3h1.2l0.1-0.2v-0.9-0.2zm2 0.2c0-0.2-0.1-0.2-0.3-0.2h-0.8l-0.2 0.2v0.9l0.1 0.2h0.9l0.3-0.1v-1zm47.9 8.7c-0.8-0.3-1.3-0.9-1.5-1.5h-0.3l-0.3-0.1c-0.2-0.1-0.1-1.7 0-1.8 0.7-0.3 2.4-0.4 2.4-0.9l-0.1-0.1h-1.9c-0.8 0.5-1.8 1.4-2.6 2.2h-6.9l-0.3-0.1v-0.8h-0.6v1.4c0 0.3-0.5 0.2-0.9 0.2h-10.7c-0.7 0-0.8 0-0.8-0.4v-1.2h-0.5l-0.1 0.8c-0.2 0.2-0.8 0.1-1.3 0.1-0.7-1-1.5-1.7-2.1-2.1h-2l-0.2 0.1c0.4 0.7 2.6 0.7 2.8 1.1 0.1 0.4 0.2 1.5 0 1.6-0.1 0.2-0.7 0-0.7 0.2-0.2 0.6-0.7 1.1-1.4 1.4h29.6l0.4-0.1zm-37.4 0c-0.7-0.3-0.8-0.7-1.2-1.4h-1.2c-0.2 0.6-0.7 1.1-1.3 1.4h3.7zm5.8 0c-0.7-0.3-1.1-0.7-1.3-1.4h-1.2c-0.2 0.6-0.6 1.1-1.3 1.4h3.8zm36.8 0c-0.8-0.2-1.1-0.7-1.4-1.4h-1.2c-0.1 0.5-0.7 1.1-1.4 1.4h4zm5.2 0c-0.7-0.3-1.1-0.7-1.3-1.4h-1.2c-0.2 0.6-0.7 1.1-1.4 1.4h3.9zm5.4-13.9c0-0.2-0.2-0.4-0.5-0.4h-1.2c-0.3 0-0.5 0.2-0.5 0.5v3c0 0.2 0.1 0.4 0.4 0.4h1.3c0.3 0 0.5-0.1 0.5-0.4v-3.1zm4.3 0c0-0.2-0.2-0.4-0.5-0.4h-1.3c-0.2 0-0.5 0.2-0.5 0.5v3c0 0.2 0.3 0.4 0.5 0.4h1.3c0.3 0 0.5-0.1 0.5-0.4v-3.1zm-43.1-0.1c0-0.2-0.2-0.4-0.4-0.4h-4.7c-0.2 0-0.4 0.2-0.4 0.4v3.5c0 0.3 0.2 0.4 0.4 0.4h4.6c0.2 0 0.5-0.1 0.5-0.4v-3.5zm7.7 0.1c0-0.2-0.2-0.4-0.4-0.4h-4.5c-0.4 0-0.6 0.1-0.6 0.4v3.4c0 0.3 0.2 0.5 0.6 0.4h4.4c0.2 0 0.5-0.1 0.5-0.4v-3.4zm8.1 0c0-0.2-0.2-0.4-0.4-0.4h-4.8c-0.2-0.1-0.5 0.2-0.5 0.4v3.4c0 0.2 0.2 0.4 0.5 0.4h4.6c0.4 0 0.6-0.1 0.6-0.4v-3.4zm7.9 0c0-0.2-0.2-0.5-0.4-0.4h-4.6c-0.3 0-0.5 0.2-0.5 0.4v3.4c0 0.2 0.2 0.5 0.6 0.4h4.4c0.3 0 0.5-0.1 0.5-0.4v-3.4zm8-0.1c0-0.2-0.2-0.4-0.5-0.4h-4.4c-0.2 0-0.5 0.2-0.5 0.5v3.4c0 0.3 0.2 0.4 0.5 0.4h4.5c0.1 0 0.4-0.1 0.4-0.4v-3.5z" />
           </g>
@@ -227,22 +162,13 @@ export const TransitTicket = () => {
             <path d="m33.5 144.6c-0.1 0.4 0.1 0.4 0.5 0.6l4.8 0.2 8.7-0.2 5.6 0.1 4 0.2 0.7-0.5 9.1-9.6-0.3 0.1 0.3-0.1 0.1-0.3-0.1 0.3 0.2-0.4 0.4-0.4-12.1-0.2-2.5-0.2h-5.5l-4.5-0.2-5.9 0.1-3-0.1c-1.4-0.1-1.5 1.1-1 2.4l0.2 1.6v4l-0.2 2.4 0.5 0.2z" />
             <polygon points="64 145.6 66.6 145.7 71.1 145.8 73.1 145.6 73.5 145.4 73.6 145 73.6 140.9 73.5 138.2 73.4 136.6 73.2 136.6 65.9 144.2" />
           </g>
-          </g>
         </g>
 
         {/* One goo group per chimney keeps each animated filter region small. A
             fixed vent blob sits on the mouth; puffs rise out of it, drift, and
             dissolve — the goo merges them while they're still touching. */}
-        {/* The smoke is ink on the ticket like everything else, so the punch
-            mask cuts it too — the goo resolves first, then the holes are cut
-            from the result, and the hole interiors paint on top. */}
         {CHIMNEYS.map((chimney, chimneyIndex) => (
-          <g
-            key={chimneyIndex}
-            filter={`url(#${maskId}-goo)`}
-            mask={`url(#${maskId}-punches)`}
-            fill="var(--mag)"
-          >
+          <g key={chimneyIndex} filter={`url(#${gooId}-goo)`} fill="var(--mag)">
             <circle cx={chimney.x} cy={chimney.y} r={4.5} />
             {reduceMotion ? (
               <circle cx={chimney.x + 2} cy={chimney.y - 14} r={7} opacity={0.85} />
@@ -277,70 +203,6 @@ export const TransitTicket = () => {
             )}
           </g>
         ))}
-
-        {/* Hole interiors: a grey disc a shade darker than the surface, an
-            inner shadow hugging the top edge (a blurred ring shifted down and
-            clipped to the hole, so only its upper arc shows inside), and the
-            faint crimp ring where the punch pressed the paper. */}
-        {punches.map((punch) => (
-          <g key={punch.id}>
-            <circle
-              cx={punch.x}
-              cy={punch.y}
-              r={PUNCH_RADIUS}
-              className="fill-black/10 dark:fill-black/35"
-            />
-            <circle
-              cx={punch.x}
-              cy={punch.y + 1.6}
-              r={PUNCH_RADIUS}
-              fill="none"
-              strokeWidth={3}
-              filter={`url(#${maskId}-soft)`}
-              clipPath={`url(#${maskId}-hole-${punch.id})`}
-              className="stroke-black/25 dark:stroke-black/60"
-            />
-            <circle
-              cx={punch.x}
-              cy={punch.y}
-              r={PUNCH_RADIUS}
-              fill="none"
-              strokeWidth={1}
-              className="stroke-black/10 dark:stroke-white/15"
-            />
-          </g>
-        ))}
-
-        {/* The chad is exactly what the punch removed: a paper disc carrying
-            the artwork clipped at the punch spot (via <use>, unfiltered), so a
-            punch through a locomotive drops a fragment of it. The clip lives on
-            the falling group itself, so it travels and rotates with the disc.
-            Keyed by punch id so a fresh click restarts the fall. */}
-        {lastPunch && (
-          <motion.g
-            key={lastPunch.id}
-            clipPath={`url(#${maskId}-chad)`}
-            style={{
-              transformBox: "view-box",
-              transformOrigin: `${lastPunch.x}px ${lastPunch.y}px`,
-            }}
-            initial={{ y: 0, rotate: 0, opacity: 1 }}
-            animate={
-              reduceMotion
-                ? { opacity: 0 }
-                : { y: 85, rotate: lastPunch.id % 2 === 0 ? 26 : -22, opacity: [1, 1, 0] }
-            }
-            transition={{ duration: 0.75, ease: "easeIn" }}
-          >
-            <circle
-              cx={lastPunch.x}
-              cy={lastPunch.y}
-              r={PUNCH_RADIUS}
-              className="fill-neutral-200 dark:fill-neutral-800"
-            />
-            <use href={`#${maskId}-art`} />
-          </motion.g>
-        )}
       </svg>
     </div>
   );
