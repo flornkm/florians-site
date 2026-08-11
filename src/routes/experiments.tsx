@@ -50,22 +50,22 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
+    "claude-2010",
+    "Claude 2010",
+    "Isometric",
+    lazyDemo(() =>
+      import("@/features/experiments/components/claude-2010-demo").then((m) => ({
+        default: m.Claude2010,
+      })),
+    ),
+  ),
+  experiment(
     "video-tapes",
     "Video Tapes",
     "Aero",
     lazyDemo(() =>
       import("@/features/experiments/components/video-tapes-demo").then((m) => ({
         default: m.VideoTapes,
-      })),
-    ),
-  ),
-  experiment(
-    "avatar-stack",
-    "Avatar Stack",
-    "Mask",
-    lazyDemo(() =>
-      import("@/features/experiments/components/avatar-stack-demo").then((m) => ({
-        default: m.AvatarStack,
       })),
     ),
   ),
