@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 270" width="600" height="270" role="img" aria-label="The GitHub mark in the center with arrows pointing inward from x-marked sources on every side.">
+  <style>
+    :root { --fb: #7e9cc4; --ink: #171717; }
+    @media (prefers-color-scheme: dark) { :root { --fb: #9bb4da; --ink: #ededed; } }
+    .fline  { fill: none; stroke: var(--fb); stroke-width: 1.6; stroke-linecap: butt; stroke-linejoin: miter; }
+    .farea  { fill: var(--fb); opacity: 0.14; }
+    .stems  { opacity: 0.5; }
+    .stems line { stroke: var(--fb); stroke-width: 1; }
+    .farrows line { stroke: var(--fb); stroke-width: 1.6; }
+    .fhead  { fill: var(--fb); }
+    /* The mark sits in a scale(2.5) group: 0.64 × 2.5 = 1.6, matching the arrows. */
+    .fmark  { fill: var(--fb); fill-opacity: 0.14; stroke: var(--fb); stroke-width: 0.64; stroke-linejoin: round; stroke-linecap: round; }
+    .imark  { fill: var(--fb); stroke: var(--ink); stroke-width: 1.4; stroke-linejoin: miter; }
+    .ix     { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+    .axis   { fill: none; stroke: var(--ink); stroke-width: 1.3; }
+  </style>
+
+  <g class="farrows">
+      <line x1="405" y1="135" x2="346" y2="135" />
+      <line x1="374.25" y1="209.25" x2="332.53" y2="167.53" />
+      <line x1="300" y1="240" x2="300" y2="181" />
+      <line x1="225.75" y1="209.25" x2="267.47" y2="167.53" />
+      <line x1="195" y1="135" x2="254" y2="135" />
+      <line x1="225.75" y1="60.75" x2="267.47" y2="102.47" />
+      <line x1="300" y1="30" x2="300" y2="89" />
+      <line x1="374.25" y1="60.75" x2="332.53" y2="102.47" />
+  </g>
+  <g>
+      <path class="fhead" d="M336 135 L346 139.5 L346 130.5 Z" />
+      <path class="fhead" d="M325.46 160.46 L329.34 170.71 L335.71 164.34 Z" />
+      <path class="fhead" d="M300 171 L295.5 181 L304.5 181 Z" />
+      <path class="fhead" d="M274.54 160.46 L264.29 164.34 L270.66 170.71 Z" />
+      <path class="fhead" d="M264 135 L254 130.5 L254 139.5 Z" />
+      <path class="fhead" d="M274.54 109.54 L270.66 99.29 L264.29 105.66 Z" />
+      <path class="fhead" d="M300 99 L304.5 89 L295.5 89 Z" />
+      <path class="fhead" d="M325.46 109.54 L335.71 105.66 L329.34 99.29 Z" />
+  </g>
+  <g>
+      <path class="ix" d="M408.5 131.5 L415.5 138.5 M415.5 131.5 L408.5 138.5" />
+      <path class="ix" d="M375.7 210.7 L382.7 217.7 M382.7 210.7 L375.7 217.7" />
+      <path class="ix" d="M296.5 243.5 L303.5 250.5 M303.5 243.5 L296.5 250.5" />
+      <path class="ix" d="M217.3 210.7 L224.3 217.7 M224.3 210.7 L217.3 217.7" />
+      <path class="ix" d="M184.5 131.5 L191.5 138.5 M191.5 131.5 L184.5 138.5" />
+      <path class="ix" d="M217.3 52.3 L224.3 59.3 M224.3 52.3 L217.3 59.3" />
+      <path class="ix" d="M296.5 19.5 L303.5 26.5 M303.5 19.5 L296.5 26.5" />
+      <path class="ix" d="M375.7 52.3 L382.7 59.3 M382.7 52.3 L375.7 59.3" />
+  </g>
+  <g transform="translate(280 115) scale(2.5)">
+    <path class="fmark" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+  </g>
+</svg>

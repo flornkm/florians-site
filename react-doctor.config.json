@@ -1,0 +1,9 @@
+{
+  "$schema": "https://www.react.doctor/schema/config.json",
+  "rules": {
+    "react-doctor/no-unknown-property": "off"
+  },
+  "ignore": {
+    "files": ["api/**"]
+  }
+}

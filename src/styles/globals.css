@@ -1,0 +1,340 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadow-plugin";
+@import "gradient-border-plugin";
+@import "./colors.css";
+@import "./text.css";
+@import "./shadow-ring.css";
+
+@plugin "@tailwindcss/typography";
+@plugin 'tailwind-scrollbar';
+
+@source "../../node_modules/streamdown/dist/index.js";
+
+/* Brand fonts are served from cdn.floriankiem.com (private repo flornkm/cdn) so the
+   licensed binaries stay out of this public repo. The CDN only grants CORS to
+   *.floriankiem.com origins and localhost. */
+@font-face {
+  font-family: "Commit Mono";
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  src: url(https://cdn.floriankiem.com/fonts/commit-mono/v1/commit-mono-var.woff2) format("woff2");
+}
+
+/* Wagram (licensed, D0UBLE ZER0) — the serif. Ships italic styles only (Regular/Medium), which is
+   all the site needs since the serif is used exclusively in italic contexts (em/i, captions, colophon).
+   Upright serif falls back to Georgia via --font-serif in text.css. */
+@font-face {
+  font-family: "Wagram";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src:
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-Italic.woff2) format("woff2"),
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-Italic.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Wagram";
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src:
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff2) format("woff2"),
+    url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff) format("woff");
+}
+
+/* Haas Recast (licensed, Dalton Maag — Host & Link web) as sans. The active sans (see --font-sans
+   in text.css). This is the 2-axis web variable font: weight (wght 100–900) + tracking (TRAK -35–0).
+   Default instance is neutral tracking (TRAK 0), so standard CSS weights map normally (400=Regular,
+   500=Medium, 700=Bold). woff2-only — the licensed package ships no ttf, and woff2 is universal. */
+@font-face {
+  font-family: "Haas Recast";
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  src: url(https://cdn.floriankiem.com/fonts/haas-recast/v1/HaasRecastVF.woff2) format("woff2");
+}
+
+/* Pretendard (variable) — first fallback in --font-sans (behind Haas Recast) and used
+   directly inside the experiment demos via the font-pretendard utility. */
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src:
+    url(/fonts/pretendard/PretendardVariable.woff2) format("woff2"),
+    url(/fonts/pretendard/PretendardVariable.ttf) format("truetype");
+}
+
+/* Cedarville Cursive (OFL, Google Fonts) — handwritten labels on the tape-chat
+   experiment's canvas textures only; loaded on demand via document.fonts.load. */
+@font-face {
+  font-family: "Cedarville Cursive";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/cedarville-cursive/CedarvilleCursive.woff2) format("woff2");
+}
+
+@theme {
+  --spacing-col: 248px;
+  --aspect-a4: 1.4142857143/1;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-work-reveal: work-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  --animate-mail-sweep: mail-sweep 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-xs: var(--smooth-shadow-xs);
+  --shadow-sm: var(--smooth-shadow-sm);
+  --shadow-md: var(--smooth-shadow-md);
+  --shadow-lg: var(--smooth-shadow-lg);
+  --shadow-xl: var(--smooth-shadow-xl);
+  --shadow-2xl: var(--smooth-shadow-2xl);
+
+  @keyframes fade-in {
+    0% {
+      filter: blur(1px);
+      opacity: 0;
+    }
+    100% {
+      filter: none;
+      opacity: 1;
+    }
+  }
+
+  /* Entrance for the home Selected-work list. Must stay a CSS animation, not a
+     Motion `initial`/`animate` pair: reveals that start from opacity 0 would be
+     SSR'd as inline hidden styles and depend on hydration to ever become
+     visible. `backwards` holds the hidden state through each item's stagger
+     delay. The implicit `to` is the element's normal style. */
+  @keyframes work-reveal {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+      filter: blur(2px);
+    }
+  }
+
+  /* Left-to-right reveal for the contact dialog's mail graphic. Both steps are
+     explicit because the resting style is clip-path: none, which can't be
+     interpolated from inset() — an implicit `to` would snap instead of sweep. */
+  @keyframes mail-sweep {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
+
+/* Skip the reveal for reduced motion, matching the useReducedMotion gate the
+   Motion version had. Unlayered on purpose so it beats the utilities layer. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-work-reveal {
+    animation: none;
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Minimal scrollbars via the standard properties (Chrome, Firefox, Safari 18.2+).
+   The scrollbar stays fully native — same hit area, keyboard and hover behavior,
+   horizontal and vertical alike — just thinner and tinted with a transparent
+   track. scrollbar-width doesn't inherit, hence the * selector. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-secondary) transparent;
+}
+
+/* High-contrast / forced-colors users get the browser's own scrollbar colors back. */
+@media (forced-colors: active) {
+  * {
+    scrollbar-color: auto;
+  }
+}
+
+body {
+  width: 100dvw;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 460;
+  /* Haas Recast defaults to tabular figures (every digit shares one advance), which pads
+     narrow digits and makes dates/numbers in prose read loosely tracked. Proportional is the
+     right default for running text; the few spots needing aligned digits opt into tabular-nums. */
+  font-variant-numeric: proportional-nums;
+}
+
+p {
+  letter-spacing: -0.005em;
+}
+
+html:has([data-block-scroll]),
+body:has([data-block-scroll]) {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+*:not([class*="outline-"]):not(input):not(textarea) {
+  @apply outline-0 outline-transparent;
+}
+
+/* [data-focus-via="pointer"] opts out elements (e.g. <select>) that browsers consider
+   :focus-visible even when focused with the mouse. */
+:focus-visible:not(input):not(textarea):not([data-focus-via="pointer"]) {
+  @apply outline-2 outline-offset-2 outline-blue-300 transition-all duration-150;
+}
+
+.progressive-blur {
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+  mask-image: linear-gradient(to bottom, transparent, black);
+}
+
+/*
+ * scroll-mask: fades the top/bottom edges of a scroll container.
+ * The top fade grows in once you've scrolled, the bottom fade shrinks as you
+ * reach the end — so an edge only fades while there's content hidden past it.
+ * Apply to an `overflow-y-auto` element. Override the fade height with
+ * `[--scroll-mask-size:4rem]`. Falls back to no mask when not scrollable.
+ */
+@property --scroll-mask-top {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --scroll-mask-bottom {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@utility scroll-mask {
+  --scroll-mask-size: 3rem;
+  --scroll-mask-top: 0px;
+  --scroll-mask-bottom: 0px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black var(--scroll-mask-top),
+    black calc(100% - var(--scroll-mask-bottom)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    black var(--scroll-mask-top),
+    black calc(100% - var(--scroll-mask-bottom)),
+    transparent 100%
+  );
+  animation:
+    scroll-mask-top linear both,
+    scroll-mask-bottom linear both;
+  animation-timeline: scroll(self), scroll(self);
+  animation-range:
+    0 var(--scroll-mask-size),
+    calc(100% - var(--scroll-mask-size)) 100%;
+}
+
+/* hit-area-<n>: invisibly extends a link's click/hover target by n px per
+   side without affecting layout. When neighboring targets overlap (stacks
+   with gaps under 2n px), the later sibling wins the shared zone. */
+@utility hit-area-* {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: calc(--value(integer) * -1px);
+  }
+}
+
+@keyframes scroll-mask-top {
+  from {
+    --scroll-mask-top: 0px;
+  }
+  to {
+    --scroll-mask-top: var(--scroll-mask-size);
+  }
+}
+@keyframes scroll-mask-bottom {
+  from {
+    --scroll-mask-bottom: var(--scroll-mask-size);
+  }
+  to {
+    --scroll-mask-bottom: 0px;
+  }
+}
+
+/* Italic font should in all normal cases be serif */
+em,
+i {
+  @apply font-serif font-medium tracking-[-0.04em];
+}
+
+/* The footnote line a figure's source superscript last jumped to: a highlighter sweep
+   that fades out to the right, and away entirely after a few seconds. Painted by a
+   pseudo-element so it can fade without taking the text with it, and inset outwards so
+   the mark bleeds past the text without shifting the line. */
+[data-footnote-active] {
+  position: relative;
+}
+
+[data-footnote-active]::before {
+  content: "";
+  position: absolute;
+  inset: -0.1rem -0.4rem;
+  z-index: -1;
+  border-radius: 2px;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--accent-yellow) 26%, transparent),
+    color-mix(in srgb, var(--accent-yellow) 10%, transparent) 70%,
+    transparent
+  );
+  animation: footnote-mark 3.5s ease-out forwards;
+}
+
+@keyframes footnote-mark {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-footnote-active]::before {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--accent-yellow) 20%, transparent),
+      color-mix(in srgb, var(--accent-yellow) 8%, transparent) 70%,
+      transparent
+    );
+  }
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-blue-300) 12%, transparent);
+  text-decoration: underline dotted var(--color-blue-500);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* WebKit drops text-decoration inside ::selection but honors it in ::highlight(),
+   so SelectionDots mirrors the live selection into this highlight on Safari. */
+::highlight(selection-dots) {
+  text-decoration: underline dotted var(--color-blue-500);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
