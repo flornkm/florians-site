@@ -77,7 +77,20 @@ function petalRing(
     phase?: number; // animation phase 0..1 — wobbles petals + travels a glint around the ring
   },
 ) {
-  const { count, rot, rInner, rOuter, w, color, pointed = false, tip = 0.3, line = 0.34, lineW = 1, sheen = true, phase = 0 } = opts;
+  const {
+    count,
+    rot,
+    rInner,
+    rOuter,
+    w,
+    color,
+    pointed = false,
+    tip = 0.3,
+    line = 0.34,
+    lineW = 1,
+    sheen = true,
+    phase = 0,
+  } = opts;
   const TAU = Math.PI * 2;
   const wobble = Math.sin(phase * TAU) * 0.03; // whole-ring shiver
   for (let i = 0; i < count; i++) {
@@ -115,7 +128,15 @@ function petalRing(
 }
 
 // textured seed disc (sunflower / gerbera centre); breathes a hair with the animation phase
-function seedDisc(ctx: Ctx, cx: number, cy: number, r0: number, color: string, seed: number, phase = 0) {
+function seedDisc(
+  ctx: Ctx,
+  cx: number,
+  cy: number,
+  r0: number,
+  color: string,
+  seed: number,
+  phase = 0,
+) {
   const r = r0 * (1 + Math.sin(phase * Math.PI * 2) * 0.04);
   const g = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.3, r * 0.1, cx, cy, r);
   g.addColorStop(0, lighten(color, 0.35));
@@ -218,7 +239,15 @@ export function drawGrassTuft(ctx: Ctx, gw: number, gh: number, seed: number) {
   }
 }
 
-function drawGerbera(ctx: Ctx, s: number, color: string, center: string, seed: number, thin = false, phase = 0) {
+function drawGerbera(
+  ctx: Ctx,
+  s: number,
+  color: string,
+  center: string,
+  seed: number,
+  thin = false,
+  phase = 0,
+) {
   const c = s / 2;
   const R = s * 0.46;
   petalRing(ctx, c, c, {
@@ -303,8 +332,28 @@ function drawRose(ctx: Ctx, s: number, color: string, phase = 0) {
   ctx.fill();
   // Broad, overlapping, rounded petals in offset rings kept inside the mound — outer edges catch
   // light, bases sit in shadow, so it furls like a cabbage rose rather than a spiky rosette.
-  const ring = (count: number, rot: number, rIn: number, rOut: number, w: number, col: string, tip: number) =>
-    petalRing(ctx, c, c, { count, rot, rInner: rIn, rOuter: rOut, w, color: col, tip, line: 0.2, lineW: 1, sheen: false, phase });
+  const ring = (
+    count: number,
+    rot: number,
+    rIn: number,
+    rOut: number,
+    w: number,
+    col: string,
+    tip: number,
+  ) =>
+    petalRing(ctx, c, c, {
+      count,
+      rot,
+      rInner: rIn,
+      rOuter: rOut,
+      w,
+      color: col,
+      tip,
+      line: 0.2,
+      lineW: 1,
+      sheen: false,
+      phase,
+    });
   ring(7, 0.0, R * 0.4, R * 0.98, s * 0.4, darken(color, 0.06), 0.22);
   ring(6, 0.45, R * 0.28, R * 0.76, s * 0.4, color, 0.2);
   ring(5, 1.05, R * 0.16, R * 0.54, s * 0.34, lighten(color, 0.08), 0.18);
@@ -381,7 +430,17 @@ function drawTulip(ctx: Ctx, s: number, color: string) {
 function drawFivePetal(ctx: Ctx, s: number, color: string, center: string, phase = 0) {
   const c = s / 2;
   const R = s * 0.46;
-  petalRing(ctx, c, c, { count: 5, rot: 0, rInner: R * 0.12, rOuter: R, w: s * 0.4, color, tip: 0.3, line: 0.28, phase });
+  petalRing(ctx, c, c, {
+    count: 5,
+    rot: 0,
+    rInner: R * 0.12,
+    rOuter: R,
+    w: s * 0.4,
+    color,
+    tip: 0.3,
+    line: 0.28,
+    phase,
+  });
   ctx.beginPath();
   ctx.arc(c, c, R * 0.24, 0, Math.PI * 2);
   const g = ctx.createRadialGradient(c, c, 0, c, c, R * 0.24);
@@ -543,7 +602,11 @@ function drawLadybug(ctx: Ctx, s: number) {
   ctx.stroke();
   // spots
   const spots: [number, number, number][] = [
-    [-0.18, -0.02, 0.09], [0.18, -0.02, 0.09], [-0.2, 0.22, 0.08], [0.2, 0.22, 0.08], [0, 0.32, 0.07],
+    [-0.18, -0.02, 0.09],
+    [0.18, -0.02, 0.09],
+    [-0.2, 0.22, 0.08],
+    [0.2, 0.22, 0.08],
+    [0, 0.32, 0.07],
   ];
   ctx.fillStyle = "#111";
   for (const [dx, dy, r] of spots) {
@@ -555,24 +618,64 @@ function drawLadybug(ctx: Ctx, s: number) {
 
 // `draw` takes a phase 0..1; `anim` marks assets whose pixels genuinely change with phase (so the
 // renderer bakes a multi-frame loop for them; the rest render as a single frame).
-export type AssetSpec = { w: number; h: number; anim?: boolean; draw: (ctx: Ctx, phase: number) => void };
+export type AssetSpec = {
+  w: number;
+  h: number;
+  anim?: boolean;
+  draw: (ctx: Ctx, phase: number) => void;
+};
 
 export const ASSETS: Record<string, AssetSpec> = {
   rose_red: { w: 60, h: 60, anim: true, draw: (ctx, p) => drawRose(ctx, 60, "#e11d3a", p) },
   rose_yellow: { w: 60, h: 60, anim: true, draw: (ctx, p) => drawRose(ctx, 60, "#ffcf1e", p) },
   rose_pink: { w: 60, h: 60, anim: true, draw: (ctx, p) => drawRose(ctx, 60, "#ff5ca0", p) },
   rose_blue: { w: 60, h: 60, anim: true, draw: (ctx, p) => drawRose(ctx, 60, "#3f63d6", p) },
-  gerbera_pink: { w: 58, h: 58, anim: true, draw: (ctx, p) => drawGerbera(ctx, 58, "#ff62b0", "#ffd21e", 11, false, p) },
-  gerbera_red: { w: 58, h: 58, anim: true, draw: (ctx, p) => drawGerbera(ctx, 58, "#ef2740", "#3a1206", 22, true, p) },
-  gerbera_orange: { w: 58, h: 58, anim: true, draw: (ctx, p) => drawGerbera(ctx, 58, "#ff8a1e", "#6b3d16", 7, false, p) },
-  gerbera_purple: { w: 58, h: 58, anim: true, draw: (ctx, p) => drawGerbera(ctx, 58, "#9a4be0", "#ffd21e", 33, true, p) },
-  daisy_white: { w: 58, h: 58, anim: true, draw: (ctx, p) => drawDaisy(ctx, 58, "#ffffff", "#ffcf1e", 4, p) },
+  gerbera_pink: {
+    w: 58,
+    h: 58,
+    anim: true,
+    draw: (ctx, p) => drawGerbera(ctx, 58, "#ff62b0", "#ffd21e", 11, false, p),
+  },
+  gerbera_red: {
+    w: 58,
+    h: 58,
+    anim: true,
+    draw: (ctx, p) => drawGerbera(ctx, 58, "#ef2740", "#3a1206", 22, true, p),
+  },
+  gerbera_orange: {
+    w: 58,
+    h: 58,
+    anim: true,
+    draw: (ctx, p) => drawGerbera(ctx, 58, "#ff8a1e", "#6b3d16", 7, false, p),
+  },
+  gerbera_purple: {
+    w: 58,
+    h: 58,
+    anim: true,
+    draw: (ctx, p) => drawGerbera(ctx, 58, "#9a4be0", "#ffd21e", 33, true, p),
+  },
+  daisy_white: {
+    w: 58,
+    h: 58,
+    anim: true,
+    draw: (ctx, p) => drawDaisy(ctx, 58, "#ffffff", "#ffcf1e", 4, p),
+  },
   sunflower: { w: 62, h: 62, anim: true, draw: (ctx, p) => drawSunflower(ctx, 62, 9, p) },
   tulip_red: { w: 46, h: 60, draw: (ctx) => drawTulip(ctx, 46, "#e11d3a") },
   tulip_yellow: { w: 46, h: 60, draw: (ctx) => drawTulip(ctx, 46, "#ffcf1e") },
   tulip_purple: { w: 46, h: 60, draw: (ctx) => drawTulip(ctx, 46, "#9a4be0") },
-  five_blue: { w: 40, h: 40, anim: true, draw: (ctx, p) => drawFivePetal(ctx, 40, "#3f7be0", "#ffd21e", p) },
-  five_orange: { w: 40, h: 40, anim: true, draw: (ctx, p) => drawFivePetal(ctx, 40, "#ff8a1e", "#ffe6a0", p) },
+  five_blue: {
+    w: 40,
+    h: 40,
+    anim: true,
+    draw: (ctx, p) => drawFivePetal(ctx, 40, "#3f7be0", "#ffd21e", p),
+  },
+  five_orange: {
+    w: 40,
+    h: 40,
+    anim: true,
+    draw: (ctx, p) => drawFivePetal(ctx, 40, "#ff8a1e", "#ffe6a0", p),
+  },
   calla_pink: { w: 54, h: 60, draw: (ctx) => drawCalla(ctx, 54, "#ff8fc4") },
   leafspray: { w: 54, h: 54, draw: (ctx) => drawLeafSpray(ctx, 54) },
   butterfly: { w: 48, h: 44, draw: (ctx) => drawButterfly(ctx, 44, "#ff5aa0", "#ffb020") },

@@ -93,7 +93,10 @@ export function Image({
   const renditions = entry?.widths;
   const topRendition = renditions?.length ? renditions[renditions.length - 1] : 0;
   const useOriginal =
-    !!renditions?.length && !!entry && entry.width > topRendition && entry.width <= MAX_SRCSET_WIDTH;
+    !!renditions?.length &&
+    !!entry &&
+    entry.width > topRendition &&
+    entry.width <= MAX_SRCSET_WIDTH;
   const srcSet = renditions?.length
     ? useOriginal
       ? `${buildSrcSet(src, renditions)}, ${src} ${entry?.width}w`

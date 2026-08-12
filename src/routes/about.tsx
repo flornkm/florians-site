@@ -79,13 +79,17 @@ function AboutPage() {
         <div className="col-start-3 col-span-7 md:col-start-6 md:col-span-4 lg:col-span-2">
           <div className="hyphens-auto space-y-6 text-justify text-sm leading-relaxed text-primary md:max-w-72">
             <p>
-              Born in the south of Germany, I grew up with the Internet. In my childhood, I tried a bunch of different disciplines, ranging from 3D art to graphic design.
+              Born in the south of Germany, I grew up with the Internet. In my childhood, I tried a
+              bunch of different disciplines, ranging from 3D art to graphic design.
             </p>
             <p>
-              After studying product design, my day-to-day work evolved into something different. Pure Figma designs aren't enough, so I see my value in developing foundational design systems hands-on.
+              After studying product design, my day-to-day work evolved into something different.
+              Pure Figma designs aren't enough, so I see my value in developing foundational design
+              systems hands-on.
             </p>
             <p>
-              In the past, I've worked with companies like Rogo, Superpower, and Dash0. I also invest in some of the companies I work with.
+              In the past, I've worked with companies like Rogo, Superpower, and Dash0. I also
+              invest in some of the companies I work with.
             </p>
             <div className="mt-8 flex items-center gap-4">
               {CONTACT_LINKS.map((link) => (

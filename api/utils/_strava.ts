@@ -1,5 +1,6 @@
 import { db } from "./_firebase.js";
 import { generateRunDescription } from "./_describe.js";
+import { countryDisplayName, fetchRunCountry } from "./_geocode.js";
 import { decodePolyline, toNormalizedPath, type RoutePath } from "./_polyline.js";
 import { fetchRunTemperatures } from "./_weather.js";
 
@@ -53,6 +54,10 @@ export type StoredRun = {
   // Per-point heart rate resampled to the polyline's point count, so the line can gradient
   // along its length. null when the run has no HR data (e.g. no chest strap / watch).
   heartRates: number[] | null;
+  // Country of the start point (English name + ISO alpha-2), reverse-geocoded at sync time.
+  // Country-level only, so the feed stays location-safe. The feed filters on the code.
+  country: string | null;
+  countryCode: string | null;
   // Short diary-style note generated once at sync time (claude-sonnet-5 via the Vercel AI
   // Gateway); null until AI_GATEWAY_API_KEY is available, then filled on the next sync.
   description: string | null;
@@ -143,15 +148,27 @@ async function toStoredRun(
     Array.isArray(prior?.temperatures) && prior.temperatures.length > 0 ? prior.temperatures : null;
   const priorHr =
     Array.isArray(prior?.heartRates) && prior.heartRates.length > 0 ? prior.heartRates : null;
+  // Re-derive the display name from the stored code, so runs geocoded before a naming
+  // change (e.g. formal ISO names) heal on the next sync without re-geocoding.
+  const priorCountry = prior?.countryCode
+    ? {
+        country: countryDisplayName(prior.countryCode) ?? prior.country ?? null,
+        countryCode: prior.countryCode,
+      }
+    : null;
   // The per-point series arrived after the scalar, so an old run can have temperature but
   // not temperatures — refetch unless both are present (a route-less run can never gain one).
   const hasFullTemps = priorTemp != null && (priorTemps != null || points.length === 0);
+  const hasStart = start != null && start.length === 2;
 
-  const [temps, hrStream] = await Promise.all([
-    hasFullTemps || !(start && start.length === 2)
+  const [temps, hrStream, geo] = await Promise.all([
+    hasFullTemps || !hasStart
       ? Promise.resolve({ start: priorTemp, perPoint: priorTemps })
       : fetchRunTemperatures(start[0], start[1], startDate, activity.elapsed_time, points.length),
     priorHr ? Promise.resolve(null) : fetchHeartrateStream(accessToken, activity.id),
+    priorCountry || !hasStart
+      ? Promise.resolve(priorCountry ?? { country: null, countryCode: null })
+      : fetchRunCountry(start[0], start[1]),
   ]);
 
   // Descriptions are reused here and generated (for runs still missing one) in a
@@ -171,6 +188,8 @@ async function toStoredRun(
     temperatures: temps.perPoint,
     averageHeartRate: activity.average_heartrate ?? null,
     heartRates: priorHr ?? (hrStream && points.length ? resample(hrStream, points.length) : null),
+    country: geo.country,
+    countryCode: geo.countryCode,
     description,
     syncedAt,
   };

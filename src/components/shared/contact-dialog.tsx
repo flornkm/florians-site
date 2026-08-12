@@ -12,7 +12,7 @@ import type { ComponentType } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
-  "X (Twitter)": IconX,
+  X: IconX,
   GitHub: IconGithub,
   LinkedIn: IconLinkedin,
   Email: IconEmail2,

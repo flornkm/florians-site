@@ -400,10 +400,7 @@ function TapeScene() {
     mounted.forEach((spring, index) => {
       const material = shadowMats.current[index];
       if (!material) return;
-      const away = Math.hypot(
-        spring.pos.x - spring.home.pos.x,
-        spring.pos.y - spring.home.pos.y,
-      );
+      const away = Math.hypot(spring.pos.x - spring.home.pos.x, spring.pos.y - spring.home.pos.y);
       material.opacity = 0.3 * THREE.MathUtils.clamp(1 - away * 1.4, 0, 1);
     });
 

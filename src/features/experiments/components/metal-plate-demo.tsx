@@ -218,7 +218,14 @@ function fitFont(
   return px;
 }
 
-function roundRectPath(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+function roundRectPath(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number,
+) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
   ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -311,7 +318,13 @@ function buildMaterial(text: PlateText): ImageData {
     for (let i = 0; i < 320; i++) {
       ctx.fillStyle = gray(0.32 + Math.random() * 0.08);
       ctx.beginPath();
-      ctx.arc(px + Math.random() * pw, py + Math.random() * ph, 1 + Math.random() * 2.4, 0, Math.PI * 2);
+      ctx.arc(
+        px + Math.random() * pw,
+        py + Math.random() * ph,
+        1 + Math.random() * 2.4,
+        0,
+        Math.PI * 2,
+      );
       ctx.fill();
     }
 
@@ -364,7 +377,13 @@ function buildMaterial(text: PlateText): ImageData {
         const a = Math.random() * Math.PI * 2;
         const d = Math.random() * 15 * scale;
         ctx.beginPath();
-        ctx.arc(fx + Math.cos(a) * d, fy + Math.sin(a) * d, (4 + Math.random() * 11) * scale, 0, Math.PI * 2);
+        ctx.arc(
+          fx + Math.cos(a) * d,
+          fy + Math.sin(a) * d,
+          (4 + Math.random() * 11) * scale,
+          0,
+          Math.PI * 2,
+        );
         ctx.fill();
       }
     };
@@ -372,8 +391,18 @@ function buildMaterial(text: PlateText): ImageData {
       if (Math.random() < 0.4) continue;
       const t = Math.random();
       const jit = () => (Math.random() - 0.5) * 22;
-      if (Math.random() < 0.5) flake(px + t * pw + jit(), (Math.random() < 0.5 ? py : py + ph) + jit(), 0.7 + Math.random());
-      else flake((Math.random() < 0.5 ? px : px + pw) + jit(), py + t * ph + jit(), 0.7 + Math.random());
+      if (Math.random() < 0.5)
+        flake(
+          px + t * pw + jit(),
+          (Math.random() < 0.5 ? py : py + ph) + jit(),
+          0.7 + Math.random(),
+        );
+      else
+        flake(
+          (Math.random() < 0.5 ? px : px + pw) + jit(),
+          py + t * ph + jit(),
+          0.7 + Math.random(),
+        );
     }
     for (const [cx, cy] of [
       [px, py],
@@ -498,12 +527,34 @@ function drawPlateText(
   drawBox(text.left, contentL, boxW);
   drawBox(text.right, contentL + contentW - boxW, boxW);
 
-  line(text.city, contentL + contentW / 2, bandY + boxH * 0.2, ph * 0.24, 2, 0.9, "center", contentW - boxW * 2 - 60);
-  line(text.corner, contentL + contentW, py + ph * 0.95, ph * 0.05, 1, 0.72, "right", contentW * 0.3);
+  line(
+    text.city,
+    contentL + contentW / 2,
+    bandY + boxH * 0.2,
+    ph * 0.24,
+    2,
+    0.9,
+    "center",
+    contentW - boxW * 2 - 60,
+  );
+  line(
+    text.corner,
+    contentL + contentW,
+    py + ph * 0.95,
+    ph * 0.05,
+    1,
+    0.72,
+    "right",
+    contentW * 0.3,
+  );
 }
 
 function boot(canvas: HTMLCanvasElement): (() => void) | undefined {
-  const gl = canvas.getContext("webgl2", { antialias: true, alpha: true, premultipliedAlpha: true });
+  const gl = canvas.getContext("webgl2", {
+    antialias: true,
+    alpha: true,
+    premultipliedAlpha: true,
+  });
   if (!gl) return undefined;
 
   const program = linkProgram(gl);

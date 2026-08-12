@@ -45,7 +45,12 @@ function outline(ctx: CanvasRenderingContext2D, w: number, h: number) {
     for (let x = 0; x < w; x++) {
       const p = y * w + x;
       if (op[p]) continue;
-      if ((y > 0 && op[p - w]) || (y < h - 1 && op[p + w]) || (x > 0 && op[p - 1]) || (x < w - 1 && op[p + 1])) {
+      if (
+        (y > 0 && op[p - w]) ||
+        (y < h - 1 && op[p + w]) ||
+        (x > 0 && op[p - 1]) ||
+        (x < w - 1 && op[p + 1])
+      ) {
         const i = p * 4;
         d[i] = OUTLINE[0];
         d[i + 1] = OUTLINE[1];
@@ -77,7 +82,8 @@ function bakePlant(name: string, headGh: number, stemGh: number, seed: number, p
   if (!ctx) return null;
   const cx = gw / 2;
   const headBaseY = PAD + headGh - overlap;
-  if (stemGh > 1) drawStem(ctx, cx, gh - PAD, cx, headBaseY, Math.max(2, Math.round(headGh * 0.1)), seed);
+  if (stemGh > 1)
+    drawStem(ctx, cx, gh - PAD, cx, headBaseY, Math.max(2, Math.round(headGh * 0.1)), seed);
   ctx.save();
   ctx.translate(cx - headGw / 2, PAD);
   const k = headGh / spec.h;
@@ -174,14 +180,34 @@ function GrassTuft({ w, h, seed }: { w: number; h: number; seed: number }) {
     crispen(ctx, gw, gh);
     outline(ctx, gw, gh);
   }, [gw, gh, seed]);
-  return <canvas ref={ref} width={gw} height={gh} style={{ width: gw * PX, height: gh * PX }} aria-hidden />;
+  return (
+    <canvas
+      ref={ref}
+      width={gw}
+      height={gh}
+      style={{ width: gw * PX, height: gh * PX }}
+      aria-hidden
+    />
+  );
 }
 
 const FLOWERS = [
-  "rose_red", "rose_yellow", "rose_pink", "rose_blue",
-  "gerbera_pink", "gerbera_red", "gerbera_orange", "gerbera_purple",
-  "daisy_white", "sunflower", "tulip_red", "tulip_yellow", "tulip_purple",
-  "five_blue", "five_orange", "calla_pink",
+  "rose_red",
+  "rose_yellow",
+  "rose_pink",
+  "rose_blue",
+  "gerbera_pink",
+  "gerbera_red",
+  "gerbera_orange",
+  "gerbera_purple",
+  "daisy_white",
+  "sunflower",
+  "tulip_red",
+  "tulip_yellow",
+  "tulip_purple",
+  "five_blue",
+  "five_orange",
+  "calla_pink",
 ];
 const ANIMS = ["sway", "bob", "pulse", "wiggle"];
 const N_PLANTS = 44;
@@ -202,7 +228,12 @@ const grassTufts = (() => {
   return out;
 })();
 
-function makePlant(id: number, rand: () => number, cap?: (n: string) => number, counts?: Record<string, number>): Plant {
+function makePlant(
+  id: number,
+  rand: () => number,
+  cap?: (n: string) => number,
+  counts?: Record<string, number>,
+): Plant {
   let name = FLOWERS[(rand() * FLOWERS.length) | 0];
   if (cap && counts) {
     for (let t = 0; t < 24; t++) {
@@ -292,7 +323,9 @@ function CutPiece({ cut }: { cut: Cut }) {
           width: cut.w,
           height: cut.cutY,
           transformOrigin: "50% 100%",
-          transform: go ? `translate(${cut.driftX}px, ${cut.fallY}px) rotate(${cut.rot}deg)` : "none",
+          transform: go
+            ? `translate(${cut.driftX}px, ${cut.fallY}px) rotate(${cut.rot}deg)`
+            : "none",
           opacity: go ? 0 : 1,
           transition: "transform 0.62s cubic-bezier(0.45, 0, 0.9, 0.5), opacity 0.5s ease-in 0.18s",
         }}
@@ -310,7 +343,10 @@ function CutPiece({ cut }: { cut: Cut }) {
           transition: "opacity 0.35s ease 0.3s",
         }}
       />
-      <div className="dg-cut-flash" style={{ top: cut.cutY - 1, width: cut.w, opacity: go ? 0 : 1 }} />
+      <div
+        className="dg-cut-flash"
+        style={{ top: cut.cutY - 1, width: cut.w, opacity: go ? 0 : 1 }}
+      />
     </div>
   );
 }
@@ -344,7 +380,10 @@ export const DigitalGarden = () => {
     const h = gh * PX;
     // cut somewhere on the stem, below the head
     const headBottomRow = headGh - Math.round(headGh * 0.16) + PAD;
-    const cutRow = Math.max(headBottomRow + 1, Math.min(gh - 2, headBottomRow + 1 + Math.round((0.15 + Math.random() * 0.45) * stemGh)));
+    const cutRow = Math.max(
+      headBottomRow + 1,
+      Math.min(gh - 2, headBottomRow + 1 + Math.round((0.15 + Math.random() * 0.45) * stemGh)),
+    );
     const topCv = document.createElement("canvas");
     topCv.width = gw;
     topCv.height = cutRow;
@@ -379,7 +418,8 @@ export const DigitalGarden = () => {
 
   const onPlantClick = useCallback(
     (plant: Plant) => (e: React.MouseEvent<HTMLDivElement>) => {
-      const reduce = typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reduce =
+        typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
       const cut = reduce ? null : makeCut(plant, e.currentTarget.querySelector("canvas"));
       setPlants((ps) => ps.filter((p) => p.id !== plant.id));
       if (cut) {
@@ -407,9 +447,18 @@ export const DigitalGarden = () => {
   );
 
   return (
-    <div ref={containerRef} className="digital-garden" role="img" aria-label="A small pixel-art flower garden">
+    <div
+      ref={containerRef}
+      className="digital-garden"
+      role="img"
+      aria-label="A small pixel-art flower garden"
+    >
       {grassTufts.map((g, i) => (
-        <div key={`g${i}`} className="dg-grass" style={{ left: `${g.left}%`, bottom: `${g.bottom}%` }}>
+        <div
+          key={`g${i}`}
+          className="dg-grass"
+          style={{ left: `${g.left}%`, bottom: `${g.bottom}%` }}
+        >
           <div className="dg-grow dg-grow-grass">
             <GrassTuft w={g.w} h={g.h} seed={g.seed} />
           </div>
