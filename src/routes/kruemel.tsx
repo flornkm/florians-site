@@ -1,5 +1,6 @@
 import { Image } from "@/components/shared/image";
 import { PHOTOS } from "@/features/kruemel/const/photos";
+import { absoluteUrl } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -23,13 +24,13 @@ export const Route = createFileRoute("/kruemel")({
         property: "og:description",
         content: "Krümel, 2013-2026. The best dog one could wish for.",
       },
-      { property: "og:image", content: "/api/og?title=Kr%C3%BCmel" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Kr%C3%BCmel") },
       { name: "twitter:title", content: "Krümel" },
       {
         name: "twitter:description",
         content: "Krümel, 2013-2026. The best dog one could wish for.",
       },
-      { name: "twitter:image", content: "/api/og?title=Kr%C3%BCmel" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Kr%C3%BCmel") },
     ],
   }),
   component: KruemelPage,

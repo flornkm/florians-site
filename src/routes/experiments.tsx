@@ -1,5 +1,6 @@
 import { ExperimentDrawer } from "@/features/experiments/components/experiment-drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { absoluteUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
@@ -225,10 +226,10 @@ const pageMeta = (title: string, ogTitle: string, description: string, image: st
   { name: "description", content: description },
   { property: "og:title", content: ogTitle },
   { property: "og:description", content: description },
-  { property: "og:image", content: image },
+  { property: "og:image", content: absoluteUrl(image) },
   { name: "twitter:title", content: ogTitle },
   { name: "twitter:description", content: description },
-  { name: "twitter:image", content: image },
+  { name: "twitter:image", content: absoluteUrl(image) },
 ];
 
 export const Route = createFileRoute("/experiments")({

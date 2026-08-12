@@ -5,6 +5,7 @@ import { Link } from "@/components/ui/link";
 import { INSPIRATION } from "@/features/colophon/const/inspiration";
 import { PEOPLE } from "@/features/colophon/const/people";
 import { proseVariants } from "@/lib/prose-variants";
+import { absoluteUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
@@ -37,14 +38,14 @@ export const Route = createFileRoute("/colophon")({
         content:
           "The colophon page of Florian provides information about the website, tech stack, inspiration as well as credits.",
       },
-      { property: "og:image", content: "/api/og?title=Colophon" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Colophon") },
       { name: "twitter:title", content: "Colophon" },
       {
         name: "twitter:description",
         content:
           "The colophon page of Florian provides information about the website, tech stack, inspiration as well as credits.",
       },
-      { name: "twitter:image", content: "/api/og?title=Colophon" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Colophon") },
     ],
   }),
   component: ColophonPage,

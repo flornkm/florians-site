@@ -3,6 +3,7 @@ import { useMdxContent } from "@/components/shared/mdx-content";
 import { Link } from "@/components/ui/link";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent, isWritingEntry, type WritingEntry } from "@/lib/mdx";
+import { absoluteUrl } from "@/lib/site";
 import { Await, createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { IconArrowUndoUp } from "central-icons/IconArrowUndoUp";
@@ -81,9 +82,10 @@ export const Route = createFileRoute("/writing/$id")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const ogImage =
+    const ogImage = absoluteUrl(
       `/api/og?writing=1&title=${encodeURIComponent(loaderData.title)}` +
-      `&icon=${encodeURIComponent(loaderData.icon)}`;
+        `&icon=${encodeURIComponent(loaderData.icon)}`,
+    );
     return {
       meta: [
         { title: `${loaderData.title} ‹ Florian Kiem` },

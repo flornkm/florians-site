@@ -4,6 +4,7 @@ import { Link } from "@/components/ui/link";
 import { PROJECTS, type Project } from "@/features/work/projects";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { absoluteUrl } from "@/lib/site";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
 import { videoManifest } from "@/videoMap.gen";
@@ -34,13 +35,13 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Selected design and engineering work by Florian Kiem.",
       },
-      { property: "og:image", content: "/api/og?title=Work" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Work") },
       { name: "twitter:title", content: "Work" },
       {
         name: "twitter:description",
         content: "Selected design and engineering work by Florian Kiem.",
       },
-      { name: "twitter:image", content: "/api/og?title=Work" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Work") },
     ],
   }),
   component: IndexPage,

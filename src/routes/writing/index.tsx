@@ -4,6 +4,7 @@ import { Link } from "@/components/ui/link";
 import { PostIcon } from "@/features/writing/components/post-icon";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent } from "@/lib/mdx";
+import { absoluteUrl } from "@/lib/site";
 import { Await, createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { Suspense } from "react";
@@ -48,13 +49,13 @@ export const Route = createFileRoute("/writing/")({
         property: "og:description",
         content: "Writing contains thoughts, ideas, and experiences from Florian.",
       },
-      { property: "og:image", content: "/api/og?title=Writing" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Writing") },
       { name: "twitter:title", content: "Writing" },
       {
         name: "twitter:description",
         content: "Writing contains thoughts, ideas, and experiences from Florian.",
       },
-      { name: "twitter:image", content: "/api/og?title=Writing" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Writing") },
     ],
   }),
   component: WritingPage,
