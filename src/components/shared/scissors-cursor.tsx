@@ -15,7 +15,15 @@ function seeded(index: number, salt: number) {
   return x - Math.floor(x);
 }
 
-function Blade({ side, stroke, strokeWidth }: { side: "a" | "b"; stroke: string; strokeWidth: number }) {
+function Blade({
+  side,
+  stroke,
+  strokeWidth,
+}: {
+  side: "a" | "b";
+  stroke: string;
+  strokeWidth: number;
+}) {
   const open = side === "a" ? -5 : 5;
   return (
     <motion.g
@@ -30,7 +38,13 @@ function Blade({ side, stroke, strokeWidth }: { side: "a" | "b"; stroke: string;
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx={side === "a" ? 15.4 : 8.6} cy={17.8} r={2.6} stroke={stroke} strokeWidth={strokeWidth} />
+      <circle
+        cx={side === "a" ? 15.4 : 8.6}
+        cy={17.8}
+        r={2.6}
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+      />
     </motion.g>
   );
 }
@@ -140,7 +154,11 @@ const charVariants: Variants = {
     y: [5, 0],
     rotate: [0, 0],
     opacity: [0, 1],
-    transition: { duration: RETURN_DURATION, delay: HOLD + index * RETURN_STAGGER, ease: "easeOut" },
+    transition: {
+      duration: RETURN_DURATION,
+      delay: HOLD + index * RETURN_STAGGER,
+      ease: "easeOut",
+    },
   }),
 };
 

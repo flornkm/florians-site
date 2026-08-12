@@ -10,8 +10,8 @@
     "capture:experiments": "bun scripts/capture-experiments.ts",
     "lint": "oxlint -D correctness -D perf --import-plugin --jsx-a11y-plugin src/",
     "lint:fix": "oxlint --fix -D correctness -D perf --import-plugin --jsx-a11y-plugin src/",
-    "format": "oxfmt --write 'src/**' '*.json' '*.ts'",
-    "format:check": "oxfmt --check 'src/**' '*.json' '*.ts'",
+    "format": "oxfmt --check 'src/**' '!src/**/*.gen.ts' '*.json' '*.ts'",
+    "format:fix": "oxfmt --write 'src/**' '!src/**/*.gen.ts' '*.json' '*.ts'",
     "install-icons": "dotenv -- bun add central-icons@npm:@central-icons-react/round-outlined-radius-1-stroke-2 central-icons-filled@npm:@central-icons-react/round-filled-radius-1-stroke-2"
   },
   "dependencies": {

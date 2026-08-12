@@ -12,6 +12,10 @@ export type Run = {
   temperatures: number[] | null;
   averageHeartRate: number | null;
   heartRates: number[] | null;
+  // English country name of the start point (country-level only), e.g. "Spain". The API
+  // already withholds hidden countries server-side; this is display data, not a filter.
+  country: string | null;
+  countryCode: string | null;
   description: string | null;
 };
 
