@@ -395,7 +395,6 @@ function drawFivePetal(ctx: Ctx, s: number, color: string, center: string, phase
 }
 
 function drawCalla(ctx: Ctx, s: number, color: string) {
-  const c = s / 2;
   // trumpet / funnel opening up-left
   ctx.beginPath();
   ctx.moveTo(s * 0.5, s * 0.92);
