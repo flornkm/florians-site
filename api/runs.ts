@@ -8,7 +8,7 @@ const runsRef = db.ref("runs");
 // Countries hidden for now from the public feed, by ISO alpha-2 code (AE covers Dubai). Runs stay
 // stored with their country in Firebase. Only the feed withholds them, so unhiding a
 // country later is a one-line change with no refetch.
-const HIDDEN_COUNTRY_CODES = new Set(["DE", "AE"]);
+const HIDDEN_COUNTRY_CODES = new Set(["DE", "AE", "NL"]);
 
 // Public, read-only feed for the live writing post. Only location-safe, pre-normalized
 // data lives in Firebase, so nothing here can leak a location.
