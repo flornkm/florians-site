@@ -12,13 +12,22 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  { name: "Rogo", date: "2025 – 2026", url: "https://rogo.ai" },
-  { name: "Legora", date: "2026", url: "https://legora.com" },
+  {
+    name: "Rogo",
+    date: "2025 – 2026",
+    url: "https://rogo.ai",
+    mediaOrder: 0,
+    media: [
+      "/videos/rogo/design-system.webm",
+      "/images/rogo/notifications.webp",
+      "/videos/rogo/agent.webm",
+    ],
+  },
   {
     name: "Flow",
     date: "2026",
     url: "https://flowengineering.com",
-    mediaOrder: 0,
+    mediaOrder: 1,
     media: ["/images/flow/hero.webp", "/videos/flow/company.webm", "/videos/flow/404.webm"],
   },
   {

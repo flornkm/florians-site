@@ -85,7 +85,7 @@ function AboutPage() {
               After studying product design, my day-to-day work evolved into something different. Pure Figma designs aren't enough, so I see my value in developing foundational design systems hands-on.
             </p>
             <p>
-              In the past, I've worked with companies like Rogo, Legora, and Superpower. I also invest in some of the companies I work with.
+              In the past, I've worked with companies like Rogo, Superpower, and Dash0. I also invest in some of the companies I work with.
             </p>
             <div className="mt-8 flex items-center gap-4">
               {CONTACT_LINKS.map((link) => (

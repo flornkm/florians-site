@@ -1,7 +1,6 @@
 import { Image } from "@/components/shared/image";
 import { SmartVideo } from "@/components/shared/smart-video";
 import { Link } from "@/components/ui/link";
-import { COLLABORATORS } from "@/features/work/collaborators";
 import { PROJECTS, type Project } from "@/features/work/projects";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -99,37 +98,48 @@ function WorkVideo({ src, alt }: { src: string; alt: string }) {
 
   return (
     <div ref={containerRef} className="bg-image-card p-4 md:p-12">
+      {/* The ring lives on an ::after overlay so it paints above the video, and the
+          overflow clip lives on an inner layer so the ring itself is never clipped —
+          clipping it shaves the corner arc's outer anti-aliasing, which reads as a
+          cut-off ring. Unclipped, it renders identically to the images' outline. */}
       <div
-        className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-sm outline -outline-offset-1 outline-black/5 dark:outline-white/15"
+        className="relative mx-auto w-full max-w-3xl rounded-sm after:pointer-events-none after:absolute after:inset-0 after:rounded-sm after:outline after:-outline-offset-1 after:outline-black/5 dark:after:outline-white/15"
         style={entry ? { aspectRatio: `${entry.width} / ${entry.height}` } : undefined}
       >
-        {placeholder && (
-          <img
-            src={placeholder}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover"
-            style={{
-              filter: "blur(20px)",
-              opacity: ready ? 0 : 1,
-              transition: "opacity 400ms ease-out",
-            }}
-          />
-        )}
-        {active && (
-          <SmartVideo
-            webm={webm}
-            mp4={mp4}
-            preload="auto"
-            aria-label={alt}
-            className={cn(
-              "absolute inset-0 h-full w-full transition-opacity duration-300 ease-out",
-              ready ? "opacity-100" : "opacity-0",
-            )}
-            onCanPlay={() => setReady(true)}
-            onLoadedData={() => setReady(true)}
-          />
-        )}
+        <div className="absolute inset-0 overflow-hidden rounded-sm">
+          {placeholder && (
+            <img
+              src={placeholder}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover"
+              style={{
+                filter: "blur(20px)",
+                opacity: ready ? 0 : 1,
+                transition: "opacity 400ms ease-out",
+              }}
+            />
+          )}
+          {active && (
+            <SmartVideo
+              webm={webm}
+              mp4={mp4}
+              preload="auto"
+              aria-label={alt}
+              controlsList="nodownload"
+              disablePictureInPicture
+              onContextMenu={(e) => e.preventDefault()}
+              className={cn(
+                // rounded-sm on the video itself: Safari doesn't reliably clip video
+                // frames to an ancestor's overflow-hidden radius.
+                "absolute inset-0 h-full w-full rounded-sm transition-opacity duration-300 ease-out",
+                ready ? "opacity-100" : "opacity-0",
+              )}
+              onCanPlay={() => setReady(true)}
+              onLoadedData={() => setReady(true)}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -178,7 +188,7 @@ function IndexPage() {
     <div className="md:grid md:grid-cols-9 md:gap-x-6">
       <aside className="mb-16 md:col-span-2 md:mb-0 md:sticky md:top-4 md:z-20 md:flex md:h-[calc(100dvh-2rem)] md:flex-col">
         <h1 className="mb-12 max-w-[15rem] text-base fw-medium leading-snug text-primary md:shrink-0">
-          Putting design, code, and capital into software that should feel as good as it looks.
+          Designs and codes software products. Invests in a few.
         </h1>
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
           <h2 className="mb-4 text-sm fw-medium text-primary">Selected work</h2>
@@ -204,22 +214,6 @@ function IndexPage() {
               );
             })}
           </ul>
-          <h2 className="mt-12 mb-4 text-sm fw-medium text-primary">Collaborating with</h2>
-          <ul className="flex flex-col items-start gap-1.5">
-            {COLLABORATORS.map((person) => (
-              <li key={person.name}>
-                <a
-                  href={person.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors md:text-tertiary md:hover:text-secondary"
-                >
-                  {person.name}
-                  <IconArrowUpRight className="size-3.5 -translate-x-0.5 translate-y-0.5 opacity-0 blur-[2px] transition duration-150 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none" />
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
         {/* Desktop shows these in the sidebar; on mobile they move into the footer's "More" column instead. */}
         {/* flex-wrap: on narrow desktops this row is wider than its 2-column
@@ -230,7 +224,7 @@ function IndexPage() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-tertiary transition-colors hover:text-secondary"
+              className="text-sm font-medium text-tertiary transition-colors duration-50 hover:text-secondary hit-area-6"
             >
               {link.name}
             </Link>
@@ -238,7 +232,12 @@ function IndexPage() {
         </div>
       </aside>
 
-      <div className="flex flex-col gap-1 md:col-start-3 md:col-span-5">
+      {/* Casual save protection: no context menu on any work image or video. Assets stay
+          publicly served — this only blocks the easy right-click path, like aliciagilca.com. */}
+      <div
+        className="flex flex-col gap-1 md:col-start-3 md:col-span-5"
+        onContextMenu={(e) => e.preventDefault()}
+      >
         {withMedia.map((project, sectionIndex) => (
           <section
             key={project.name}

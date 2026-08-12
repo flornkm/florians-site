@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { IconEmail2 } from "central-icons/IconEmail2";
 import { IconGithub } from "central-icons/IconGithub";
-import { IconInstagram } from "central-icons/IconInstagram";
 import { IconLinkedin } from "central-icons/IconLinkedin";
 import { IconPhone } from "central-icons/IconPhone";
 import { IconX } from "central-icons/IconX";
@@ -16,7 +15,6 @@ const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
   "X (Twitter)": IconX,
   GitHub: IconGithub,
   LinkedIn: IconLinkedin,
-  Instagram: IconInstagram,
   Email: IconEmail2,
   iMessage: IconPhone,
 };
@@ -95,7 +93,8 @@ export default function ContactDialog({
             "bg-interactive-secondary text-primary overflow-hidden outline outline-transparent outline-offset-0 transition-[outline-color,outline-offset,outline-width,background-color] duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-blue-300",
             isOpen
               ? // Mobile: pin to the viewport, capped at 380px and centered (mx-auto, not a transform, so it doesn't fight the layout animation) so it never grows too wide or overflows. Desktop: anchored top-right like before.
-                "fixed inset-x-0 bottom-20 mx-auto w-[380px] max-w-[calc(100vw-1rem)] md:absolute md:inset-x-auto md:mx-0 md:bottom-auto md:right-0 md:top-0 md:w-[380px] md:max-w-none"
+                // 286px makes the featured tile square: its width matches the 4-row link column's height.
+                "fixed inset-x-0 bottom-20 mx-auto w-[286px] max-w-[calc(100vw-1rem)] md:absolute md:inset-x-auto md:mx-0 md:bottom-auto md:right-0 md:top-0 md:w-[286px] md:max-w-none"
               : "absolute right-0 bottom-0 md:bottom-auto md:top-0 hover:bg-interactive-secondary-hover",
           )}
           style={isOpen ? { borderRadius: 8 } : closedRadius}
@@ -130,7 +129,7 @@ export default function ContactDialog({
                         href={link.href}
                         target={isExternal(link.href) ? "_blank" : undefined}
                         rel={isExternal(link.href) ? "noopener noreferrer" : undefined}
-                        className="flex items-center gap-2.5 px-1.5 py-1.5 rounded-sm hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-sm"
+                        className="flex items-center gap-2.5 px-1.5 py-1.5 rounded-sm hover:bg-black/5 dark:hover:bg-white/5 text-sm"
                       >
                         <link.icon className="size-4 shrink-0" />
                         <span className="font-medium">{link.name}</span>
