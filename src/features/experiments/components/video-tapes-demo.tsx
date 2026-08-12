@@ -566,6 +566,24 @@ function Tape({
   );
 }
 
+// The 18° fov is vertical, so on a tall mobile canvas the visible width
+// collapses and the tape row overflows the frame. Zoom out with the aspect
+// ratio until the row (homes ±0.85 plus half a tape) fits the width;
+// landscape/desktop stays at zoom 1.
+function FitTapeRow() {
+  const camera = useThree((state) => state.camera);
+  const size = useThree((state) => state.size);
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    camera.zoom = Math.min(1, size.width / size.height);
+    camera.updateProjectionMatrix();
+    invalidate();
+  }, [camera, size, invalidate]);
+
+  return null;
+}
+
 export const VideoTapes = () => (
   <div className="absolute inset-0">
     <Canvas
@@ -578,6 +596,7 @@ export const VideoTapes = () => (
       onCreated={(state) => state.camera.lookAt(0, 0, 0)}
       style={{ touchAction: "none" }}
     >
+      <FitTapeRow />
       <TapeScene />
     </Canvas>
   </div>
