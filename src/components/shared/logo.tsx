@@ -54,9 +54,18 @@ export function Logo({ className, progress }: LogoProps) {
       {/* Spacer reserving the small-k width so the collapsed box hugs "Fk" */}
       <span aria-hidden style={{ width: px(7) }} />
 
+      {/* translateZ + will-change put the fading spans on their own compositing
+          layers; without them Safari re-rasterizes the text per frame and steps
+          the blur radius instead of ramping it smoothly. */}
       <motion.span
         className="absolute top-0 inline-flex"
-        style={{ left: px(8.078), opacity: progress, filter }}
+        style={{
+          left: px(8.078),
+          opacity: progress,
+          filter,
+          transform: "translateZ(0)",
+          willChange: "filter",
+        }}
         aria-hidden
       >
         <svg height={HEIGHT} width={px(MIDDLE_WIDTH)} viewBox="8.078 0 56.842 11" fill="none">
@@ -100,7 +109,13 @@ export function Logo({ className, progress }: LogoProps) {
 
       <motion.span
         className="absolute top-0 inline-flex"
-        style={{ left: px(73.742), opacity: progress, filter }}
+        style={{
+          left: px(73.742),
+          opacity: progress,
+          filter,
+          transform: "translateZ(0)",
+          willChange: "filter",
+        }}
         aria-hidden
       >
         <svg height={HEIGHT} width={px(23.258)} viewBox="73.742 0 23.258 11" fill="none">
