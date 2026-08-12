@@ -12,12 +12,11 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  { name: "Legora", date: "2026", url: "https://legora.com" },
   {
     name: "Flow",
     date: "2026",
     url: "https://flowengineering.com",
-    mediaOrder: 0,
+    mediaOrder: 1,
     media: ["/images/flow/hero.webp", "/videos/flow/company.webm", "/videos/flow/404.webm"],
   },
   {

@@ -69,7 +69,7 @@ export default function Navigation() {
               key={tab.name}
               href={tab.href}
               className={cn(
-                "text-sm font-medium transition-colors",
+                "text-sm font-medium transition-colors duration-50 hit-area-10",
                 isActive(tab.href) ? "text-primary" : "text-tertiary hover:text-secondary",
               )}
             >
@@ -117,7 +117,7 @@ export default function Navigation() {
                 key={tab.name}
                 href={tab.href}
                 className={cn(
-                  "relative px-4 py-1.5 text-sm font-medium transition-colors",
+                  "relative px-4 py-1.5 text-sm font-medium transition-colors duration-50 hit-area-6",
                   active ? "text-primary" : "text-tertiary hover:text-secondary",
                 )}
               >

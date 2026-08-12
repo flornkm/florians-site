@@ -259,6 +259,18 @@ body:has([data-block-scroll]) {
     calc(100% - var(--scroll-mask-size)) 100%;
 }
 
+/* hit-area-<n>: invisibly extends a link's click/hover target by n px per
+   side without affecting layout. When neighboring targets overlap (stacks
+   with gaps under 2n px), the later sibling wins the shared zone. */
+@utility hit-area-* {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: calc(--value(integer) * -1px);
+  }
+}
+
 @keyframes scroll-mask-top {
   from {
     --scroll-mask-top: 0px;

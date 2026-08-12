@@ -6,7 +6,7 @@ import { FlorianLines } from "./florian-lines";
 import { Tab, TABS } from "./navigation";
 
 const footerLinkVariants = cva(
-  "font-medium flex items-center gap-2 text-tertiary hover:text-secondary transition-all",
+  "font-medium flex items-center gap-2 text-tertiary hover:text-secondary transition-colors duration-50 hit-area-6",
   {
     variants: {
       size: {
