@@ -140,15 +140,11 @@ function WritingDetailPage() {
     "writing",
     item.slug,
     // Prose <h1> is hidden (the header above is the title). Media (div/figure) spans the full content
-    // width on every breakpoint; text is capped/centered — via max-w from md up, via symmetric margins
-    // on mobile. Margins (not a narrower article) keep the media breakout math in figure-image /
-    // comparison intact, since it centers on the article column's midpoint.
+    // width on every breakpoint; text is capped/centered via max-w from md up. On mobile everything
+    // is full-width so text aligns flush with the header (the root layout's px-6 is the only inset).
     // <footer> (the footnotes) is excluded too: its rule spans the media width and it insets
     // its own notes to the text rail.
-    // Tables are the one element carrying an explicit width (prose-table:w-full): a percentage
-    // width is resolved against the container and ignores the rail's margins, so on mobile it
-    // has to be narrowed by them by hand or the table overflows by 4rem.
-    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(footer):not(h1)]:max-w-[460px] max-md:[&>:not(div):not(figure):not(footer):not(h1)]:mx-8 max-md:[&>table]:w-[calc(100%-4rem)]",
+    "w-full [&>h1]:hidden [&>h1+*]:mt-0 md:[&>*:not(h1)]:mx-auto md:[&>:not(div):not(figure):not(footer):not(h1)]:max-w-[460px]",
   );
 
   if (!content) {
@@ -183,10 +179,7 @@ function WritingDetailPage() {
               <IconArrowUndoUp className="size-4" />
             </Link>
           </div>
-          {/* On mobile the title/date start flush with the back button, and are capped at the
-              body text's measure (its mx-8 rail, see the prose margins passed to useMdxContent
-              below) so a long title wraps on the same line length. */}
-          <header className="mb-8 max-md:max-w-[calc(100%-4rem)] md:-mt-7 md:mb-10">
+          <header className="mb-8 md:-mt-7 md:mb-10">
             <H1 className="text-sm">{item.title}</H1>
             <HeaderDate type={item.type} date={item.date} newestRunDate={item.newestRunDate} />
           </header>
