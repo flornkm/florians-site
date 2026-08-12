@@ -242,7 +242,7 @@ export function Footnotes({ children }: { children?: ReactNode }) {
       <div className="mx-auto w-full max-w-[720px] border-t border-primary" />
       <div
         className={cn(
-          "mt-5 space-y-1.5 max-md:mx-8 md:mx-auto md:max-w-[460px]",
+          "mt-5 space-y-1.5 md:mx-auto md:max-w-[460px]",
           "text-[11px] leading-relaxed text-tertiary",
           "[&_sup]:mr-1 [&_sup]:text-[9px]",
           // Mirrors prose-a (see prose-variants.ts) minus the text color, which stays footnote-tertiary.
