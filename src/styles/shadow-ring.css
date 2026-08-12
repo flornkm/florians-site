@@ -8,8 +8,7 @@
  * cards, menus. NEVER also add a `border`/`ring` to the same element; the ring is
  * already in here and a second edge doubles up.
  *
- * Ported from the rogo UI package (packages/ui/src/styles/{shadows,shadow-ring}.css),
- * adapted to this site's prefers-color-scheme dark mode (rogo toggles a `.dark` class).
+ * Dark mode follows the site-wide prefers-color-scheme convention (no `.dark` class).
  * The base `--shadow-*` tokens live in globals.css and deliberately stay ringless.
  */
 
@@ -29,7 +28,7 @@
 
 /*
  * NB: these reference --smooth-shadow-* (the raw shadow values from shadow-plugin),
- * NOT --shadow-* like rogo does. This site's colors.css overloads --shadow / --shadow-lg
+ * NOT --shadow-*. This site's colors.css overloads --shadow / --shadow-lg
  * as flat *color* tokens (for the shadow-muted / shadow-emphasis color utilities) in the
  * same :root, and source order makes the color win — so `var(--shadow-lg)` resolves to a
  * bare color, an invalid shadow layer that silently drops the soft shadow. The
