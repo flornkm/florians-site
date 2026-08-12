@@ -8,7 +8,7 @@
  * cards, menus. NEVER also add a `border`/`ring` to the same element; the ring is
  * already in here and a second edge doubles up.
  *
- * Adapted to this site's prefers-color-scheme dark mode.
+ * Dark mode follows the site-wide prefers-color-scheme convention (no `.dark` class).
  * The base `--shadow-*` tokens live in globals.css and deliberately stay ringless.
  */
 
