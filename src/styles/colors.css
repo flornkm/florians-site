@@ -1,0 +1,183 @@
+:root {
+  --bg-primary: #fdfdfd;
+  --bg-secondary: #fafafa;
+  --bg-image-card: #f7f7f7;
+  --bg-tertiary: #f5f5f5;
+  --bg-quaternary: #e5e5e5;
+  --bg-inverted: #000000;
+
+  --surface: #ffffff;
+  --surface-secondary: #fafafa;
+  --surface-tertiary: #f5f5f5;
+  --surface-inverted: #171717;
+
+  --text-primary: #171717;
+  --text-secondary: #525252;
+  --text-tertiary: #737373;
+  --text-quaternary: #a3a3a3;
+  --text-inverted: #ffffff;
+  --text-inverted-secondary: #a3a3a3;
+
+  --border-primary: #e5e5e5;
+  --border-secondary: #d4d4d4;
+  --border-tertiary: #f5f5f5;
+
+  --interactive-hover: #f5f5f5;
+  --interactive-active: #e5e5e5;
+
+  /* Filled secondary controls (secondary button, contact pill, article back button). */
+  --interactive-secondary: #d4d4d4;
+  --interactive-secondary-hover: #c7c7c7;
+
+  --accent-primary: #171717;
+  --accent-primary-hover: #262626;
+  --accent-foreground: #ffffff;
+
+  /* Illustration / blog-icon accent palette. Theme-independent (inherited into
+     dark). Mirrored literally in src/features/writing/lib/icon-svg.ts — SVGs
+     rendered as <img> or by the OG function can't read CSS variables, so the
+     hex values must be kept in sync there. */
+  --accent-yellow: #f2c94c;
+  --accent-orange: #e8643c;
+  --accent-olive: #8d9150;
+  --accent-sage: #6fae9f;
+  --accent-clay: #d98e5a;
+  --accent-rose: #b8607a;
+  --accent-blue: #7e9cc4;
+  --accent-gold: #caa84a;
+
+  --destructive: #dc2626;
+  --warning: #f59e0b;
+  --success: #22c55e;
+
+  --ring: rgba(59, 130, 246, 0.5);
+  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow-lg: rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-image-card: #0f0f0f;
+    --bg-tertiary: #171717;
+    --bg-quaternary: #262626;
+    --bg-inverted: #ffffff;
+
+    --surface: #171717;
+    --surface-secondary: #0a0a0a;
+    --surface-tertiary: #262626;
+    --surface-inverted: #ffffff;
+
+    --text-primary: #ffffff;
+    --text-secondary: #bdbdbd;
+    --text-tertiary: #969696;
+    --text-quaternary: #6b6b6b;
+    --text-inverted: #000000;
+    --text-inverted-secondary: #525252;
+
+    --border-primary: #262626;
+    --border-secondary: #404040;
+    --border-tertiary: #171717;
+
+    --interactive-hover: #262626;
+    --interactive-active: #404040;
+
+    --interactive-secondary: #404040;
+    --interactive-secondary-hover: #4a4a4a;
+
+    --accent-primary: #ffffff;
+    --accent-primary-hover: #e5e5e5;
+    --accent-foreground: #000000;
+
+    --destructive: #ef4444;
+    --warning: #f59e0b;
+    --success: #22c55e;
+
+    --ring: rgba(59, 130, 246, 0.5);
+    --shadow: rgba(255, 255, 255, 0.05);
+    --shadow-lg: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@theme inline {
+  --text-color-primary: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+  --text-color-tertiary: var(--text-tertiary);
+  --text-color-quaternary: var(--text-quaternary);
+  --text-color-inverted: var(--text-inverted);
+  --text-color-inverted-secondary: var(--text-inverted-secondary);
+  --text-color-accent-foreground: var(--accent-foreground);
+  --text-color-destructive: var(--destructive);
+  --text-color-warning: var(--warning);
+  --text-color-success: var(--success);
+
+  --background-color-primary: var(--bg-primary);
+  --background-color-secondary: var(--bg-secondary);
+  --background-color-image-card: var(--bg-image-card);
+  --background-color-tertiary: var(--bg-tertiary);
+  --background-color-quaternary: var(--bg-quaternary);
+  --background-color-inverted: var(--bg-inverted);
+  --background-color-surface: var(--surface);
+  --background-color-surface-secondary: var(--surface-secondary);
+  --background-color-surface-tertiary: var(--surface-tertiary);
+  --background-color-surface-inverted: var(--surface-inverted);
+  --background-color-accent-primary: var(--accent-primary);
+  --background-color-accent-primary-hover: var(--accent-primary-hover);
+  --background-color-interactive-hover: var(--interactive-hover);
+  --background-color-interactive-active: var(--interactive-active);
+  --background-color-interactive-secondary: var(--interactive-secondary);
+  --background-color-interactive-secondary-hover: var(--interactive-secondary-hover);
+  --background-color-destructive: var(--destructive);
+  --background-color-warning: var(--warning);
+  --background-color-success: var(--success);
+
+  --border-color-primary: var(--border-primary);
+  --border-color-secondary: var(--border-secondary);
+  --border-color-tertiary: var(--border-tertiary);
+  --border-color-accent-primary: var(--accent-primary);
+
+  --outline-color-primary: var(--border-primary);
+  --outline-color-secondary: var(--border-secondary);
+  --outline-color-tertiary: var(--border-tertiary);
+
+  --ring-color-default: var(--ring);
+  --ring-color-primary: var(--accent-primary);
+
+  --fill-primary: var(--text-primary);
+  --fill-secondary: var(--text-secondary);
+  --fill-tertiary: var(--text-tertiary);
+  --fill-quaternary: var(--text-quaternary);
+  --fill-inverted: var(--text-inverted);
+
+  --stroke-primary: var(--text-primary);
+  --stroke-secondary: var(--text-secondary);
+  --stroke-tertiary: var(--text-tertiary);
+
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-olive: var(--accent-olive);
+  --color-accent-sage: var(--accent-sage);
+  --color-accent-clay: var(--accent-clay);
+  --color-accent-rose: var(--accent-rose);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-gold: var(--accent-gold);
+
+  --box-shadow-color-muted: var(--shadow);
+  --box-shadow-color-emphasis: var(--shadow-lg);
+
+  --divide-color-primary: var(--border-primary);
+  --divide-color-secondary: var(--border-secondary);
+  --divide-color-tertiary: var(--border-tertiary);
+
+  --caret-color-primary: var(--text-primary);
+  --caret-color-accent: var(--accent-primary);
+
+  --accent-color-primary: var(--accent-primary);
+
+  --text-decoration-color-primary: var(--text-primary);
+  --text-decoration-color-secondary: var(--text-secondary);
+  --text-decoration-color-tertiary: var(--text-tertiary);
+  --text-decoration-color-muted: var(--border-primary);
+  --text-decoration-color-emphasis: var(--text-primary);
+}

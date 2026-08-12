@@ -1,4 +1,25 @@
 {
-  "buildCommand": "pnpm run vercel-build",
-  "outputDirectory": "dist/client"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "bun run build",
+  "outputDirectory": ".output",
+  "functions": {
+    "api/runs/sync.ts": { "maxDuration": 60 }
+  },
+  "crons": [{ "path": "/api/runs/sync", "schedule": "0 4 * * *" }],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "tdm-reservation", "value": "1" }]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Vary", "value": "Origin" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://floriankiem.com" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+      ]
+    }
+  ]
 }
