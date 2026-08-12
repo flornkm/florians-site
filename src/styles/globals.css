@@ -345,3 +345,11 @@ i {
   text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
 }
+
+/* WebKit drops text-decoration inside ::selection but honors it in ::highlight(),
+   so SelectionDots mirrors the live selection into this highlight on Safari. */
+::highlight(selection-dots) {
+  text-decoration: underline dotted var(--color-blue-500);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}

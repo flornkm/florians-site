@@ -11,6 +11,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Button, { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import ScissorsCursor, { CutText } from "@/components/shared/scissors-cursor";
+import { initSelectionDots } from "@/lib/selection-dots";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ if (typeof window !== "undefined") {
     "color: #fff; font-size: 20px; font-weight: medium; margin-top: 10px; margin-bottom: 10px;",
     "color: #a3a3a3; font-size: 12px; margin-top: 10px; margin-bottom: 10px;",
   );
+  initSelectionDots();
 }
 
 export const Route = createRootRoute({

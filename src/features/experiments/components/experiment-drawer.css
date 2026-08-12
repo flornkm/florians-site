@@ -72,6 +72,35 @@
   }
 }
 
+/* The drag strip along the sheet's top edge. Transparent apart from the grabber;
+   sits above the content so touches here reach the viewport's swipe handlers
+   instead of the experiment. */
+.experiment-drawer__handle {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  /* The swipe is JS-driven; without this the browser competes with a page scroll. */
+  touch-action: none;
+}
+
+/* iOS-style grabber: 36×5 rounded pill. */
+.experiment-drawer__grabber {
+  margin-top: 8px;
+  width: 36px;
+  height: 5px;
+  border-radius: 999px;
+  background-color: var(--color-neutral-300);
+}
+
+@media (prefers-color-scheme: dark) {
+  .experiment-drawer__grabber {
+    background-color: var(--color-neutral-700);
+  }
+}
+
 .experiment-drawer__content {
   position: relative;
   flex: 1 1 0%;
