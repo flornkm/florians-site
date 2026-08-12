@@ -1,6 +1,7 @@
 import { Image } from "@/components/shared/image";
 import { Link } from "@/components/ui/link";
 import { PHOTOS } from "@/features/about/const/photos";
+import { absoluteUrl } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -43,14 +44,14 @@ export const Route = createFileRoute("/about")({
         content:
           "How I got to design and coding, what I learned and accomplished so far, and why I love doing what I do.",
       },
-      { property: "og:image", content: "/api/og?title=About" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=About") },
       { name: "twitter:title", content: "About" },
       {
         name: "twitter:description",
         content:
           "How I got to design and coding, what I learned and accomplished so far, and why I love doing what I do.",
       },
-      { name: "twitter:image", content: "/api/og?title=About" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=About") },
     ],
   }),
   component: AboutPage,

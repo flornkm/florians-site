@@ -1,3 +1,4 @@
+import { absoluteUrl } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import type { ComponentType } from "react";
@@ -58,13 +59,13 @@ export const Route = createFileRoute("/tools")({
         property: "og:description",
         content: "Small web tools built by Florian Kiem.",
       },
-      { property: "og:image", content: "/api/og?title=Tools" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Tools") },
       { name: "twitter:title", content: "Tools" },
       {
         name: "twitter:description",
         content: "Small web tools built by Florian Kiem.",
       },
-      { name: "twitter:image", content: "/api/og?title=Tools" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Tools") },
     ],
   }),
   component: ToolsPage,

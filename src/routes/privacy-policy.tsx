@@ -1,5 +1,6 @@
 import { Body1 } from "@/components/design-system/body";
 import { H2 } from "@/components/design-system/heading";
+import { absoluteUrl } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/privacy-policy")({
@@ -9,10 +10,10 @@ export const Route = createFileRoute("/privacy-policy")({
       { name: "description", content: "The usual privacy policy page." },
       { property: "og:title", content: "Privacy Policy" },
       { property: "og:description", content: "The usual privacy policy page." },
-      { property: "og:image", content: "/api/og?title=Privacy Policy" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Privacy%20Policy") },
       { name: "twitter:title", content: "Privacy Policy" },
       { name: "twitter:description", content: "The usual privacy policy page." },
-      { name: "twitter:image", content: "/api/og?title=Privacy Policy" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Privacy%20Policy") },
     ],
   }),
   component: PrivacyPolicyPage,

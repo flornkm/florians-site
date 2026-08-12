@@ -12,6 +12,7 @@ import Button, { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import ScissorsCursor, { CutText } from "@/components/shared/scissors-cursor";
 import { initSelectionDots } from "@/lib/selection-dots";
+import { absoluteUrl } from "@/lib/site";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +45,7 @@ export const Route = createRootRoute({
         content:
           "The personal site of Florian Kiem - design and code, bridging the gap between creativity and logic in this portfolio.",
       },
-      { property: "og:image", content: "/api/og?title=Design%2C%20Code" },
+      { property: "og:image", content: absoluteUrl("/api/og?title=Design%2C%20Code") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Florian Kiem" },
@@ -53,7 +54,7 @@ export const Route = createRootRoute({
         content:
           "The personal site of Florian Kiem - design and code, bridging the gap between creativity and logic in this portfolio.",
       },
-      { name: "twitter:image", content: "/api/og?title=Design%2C%20Code" },
+      { name: "twitter:image", content: absoluteUrl("/api/og?title=Design%2C%20Code") },
     ],
     links: [
       { rel: "preconnect", href: "https://cdn.floriankiem.com", crossOrigin: "anonymous" },
