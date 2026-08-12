@@ -29,3 +29,5 @@ Disallow: /
 
 User-agent: *
 Disallow:
+
+Sitemap: https://floriankiem.com/sitemap.xml

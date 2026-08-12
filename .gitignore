@@ -16,3 +16,6 @@ vite.config.ts.timestamp*
 
 # Generated experiment OG cards (rebuilt by scripts/build-experiment-og.ts)
 /public/_og
+
+# Generated sitemap (rebuilt by scripts/build-sitemap.ts)
+/public/sitemap.xml
