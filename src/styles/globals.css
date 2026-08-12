@@ -45,21 +45,6 @@
     url(https://cdn.floriankiem.com/fonts/wagram/v1/Wagram-MediumItalic.woff) format("woff");
 }
 
-/* TEMPORARY tryout: Ciron Text as sans (trial font, unlicensed). Remove to restore Pretendard.
-   Subset variable woff2 (upright "Text" flavor only) with the weight axis remapped to a normal
-   100–900 scale, so standard CSS weights work as usual (400=Regular, 500=Medium, 700=Bold).
-   Built from the trial TTF via build_ciron.py in this folder. */
-@font-face {
-  font-family: "Ciron Text";
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  src:
-    url(/fonts/ciron-text/CironText-VF.woff2) format("woff2"),
-    url(/fonts/ciron-text/CironText-VF.woff) format("woff"),
-    url(/fonts/ciron-text/CironText-VF.ttf) format("truetype");
-}
-
 /* Haas Recast (licensed, Dalton Maag — Host & Link web) as sans. The active sans (see --font-sans
    in text.css). This is the 2-axis web variable font: weight (wght 100–900) + tracking (TRAK -35–0).
    Default instance is neutral tracking (TRAK 0), so standard CSS weights map normally (400=Regular,
@@ -72,8 +57,8 @@
   src: url(https://cdn.floriankiem.com/fonts/haas-recast/v1/HaasRecastVF.woff2) format("woff2");
 }
 
-/* Pretendard (variable) — used only inside the experiment demos via the font-pretendard
-   utility; the rest of the site stays on the sans tryout above. */
+/* Pretendard (variable) — first fallback in --font-sans (behind Haas Recast) and used
+   directly inside the experiment demos via the font-pretendard utility. */
 @font-face {
   font-family: "Pretendard Variable";
   font-weight: 45 920;
