@@ -6,8 +6,8 @@ import { Fragment } from "react";
 const MARK_DURATION = 3500;
 let clearMark: ReturnType<typeof setTimeout> | undefined;
 
-// The footnote list is authored as plain markup inside <Footnotes>, so a reference finds its
-// line by matching the <sup> number instead of relying on generated ids.
+// The footnote list is rendered by <Footnotes>, so a reference finds its line by matching
+// the <sup> number instead of relying on generated ids.
 function jumpToFootnote(number: string) {
   const list = document.querySelector("[data-footnotes]");
   const target = list
