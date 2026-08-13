@@ -233,7 +233,24 @@ export function MobileImages({ images }: { images: { src: string; alt: string }[
   );
 }
 
-export function Footnotes({ children }: { children?: ReactNode }) {
+/** One footnote line: `text` names the source, the optional link is appended to the same line. */
+export type Footnote = { text: string; href?: string; label?: string };
+
+function FootnoteSource({ href, label }: { href?: string; label?: string }) {
+  if (!href) return null;
+  return (
+    <>
+      {" "}
+      <a href={href} target="_blank" rel="noreferrer">
+        {label ?? href}
+      </a>
+    </>
+  );
+}
+
+// Footnotes are passed as data rather than markup: MDX parses multi-line children as flow
+// content, which wraps a wrapped <a> in its own paragraph and drops it onto a new line.
+export function Footnotes({ items }: { items: Footnote[] }) {
   return (
     // Figure captions look their line up in here by matching the <sup> number.
     <footer data-footnotes className="not-prose mt-16">
@@ -249,7 +266,13 @@ export function Footnotes({ children }: { children?: ReactNode }) {
           "[&_a]:fw-link [&_a]:transition-all [&_a]:duration-200 [&_a]:underline [&_a]:decoration-tertiary/40 [&_a]:hover:decoration-tertiary/70 [&_a]:underline-offset-[3px] [&_a]:active:no-underline",
         )}
       >
-        {children}
+        {items.map((item, index) => (
+          <p key={item.text}>
+            <sup>{index + 1}</sup>
+            {item.text}
+            <FootnoteSource href={item.href} label={item.label} />
+          </p>
+        ))}
       </div>
     </footer>
   );
