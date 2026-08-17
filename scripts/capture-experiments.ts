@@ -61,6 +61,7 @@ const SLUGS: Record<string, number> = {
   flo: 1000, // rough.js frames build on mount; a beat to draw + settle the boil
   "video-tapes": 2500, // WebGL boot + label textures rasterize
   "prism-orb": 2000, // WebGL boot; no texture to wait on
+  "claude-2010": 2500, // room webp assets load + first pixelated render
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor

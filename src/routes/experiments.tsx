@@ -51,6 +51,16 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
+    "claude-2010",
+    "Claude 2010",
+    "Isometric",
+    lazyDemo(() =>
+      import("@/features/experiments/components/claude-2010-demo").then((m) => ({
+        default: m.Claude2010,
+      })),
+    ),
+  ),
+  experiment(
     "prism-orb",
     "Prism Orb",
     "Glass",
