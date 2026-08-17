@@ -1,0 +1,406 @@
+/* Claude 2010 — isometric room + an in-game media-player skin. Everything is scoped under
+   .c2010 so the deliberately off-brand palette never leaks into the site's tokens.
+
+   The chat isn't a window with a mascot in it: the mascot IS the chassis, the way a 2003
+   Winamp/K-Jöfol/WMP skin moulded the whole player into a head — screen where the eyes go,
+   transport across the brow, speaker wings bolted to the sides, the face left showing below
+   the deck. The silhouette is cut with a stepped clip-path so its edge is aliased like the
+   room render, and the plastic is shaded in hard bands with a 1px dither on top rather than
+   smooth gradients. It is also deliberately small: the room composites at roughly one texel
+   per css half-pixel, so a full-width panel with 20px type reads as a modern app pasted over
+   pixel art. */
+
+/* W95FA — an OFL recreation of the Windows 95 MS Sans Serif face (Alina Sava). font-display:block
+   so it never falls back to a smooth face mid-render and breaks the illusion. */
+@font-face {
+  font-family: "W95FA";
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  src:
+    url(/fonts/w95fa/w95fa.woff2) format("woff2"),
+    url(/fonts/w95fa/w95fa.woff) format("woff");
+}
+
+.c2010 {
+  /* One pair of cursors for the whole experiment: the OS arrow never appears, not over the
+     room, not over the deck's buttons, not over the chat log. */
+  --cur: url("/experiments/room-2010/cursor.png") 0 0, auto;
+  --cur-hand: url("/experiments/room-2010/cursor-hand.png") 5 0, pointer;
+
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  font-size: 11px;
+  font-synthesis: none;
+  user-select: none;
+  cursor: var(--cur);
+}
+
+.c2010-zoom {
+  position: absolute;
+  inset: 0;
+}
+
+.c2010-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.c2010-hotspot {
+  position: absolute;
+  cursor: var(--cur-hand);
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.c2010-hotspot:focus-visible {
+  outline: 1px dashed rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+
+/* ---- The skin layer: everything below is in-game hardware, not OS chrome ---- */
+
+.c2010-chat-layer {
+  /* Bright moulded orange, the way the skins were bright green or bright blue: a saturated body
+     with a glossy top third, chrome hardware, and a green phosphor screen. */
+  --ink: #1a0902;
+  --shell: #f4721e;
+  --shell-gloss: #ff9440;
+  --shell-hi: #ffe2c6;
+  --shell-mid: #ffb376;
+  --shell-lo: #c1500e;
+  --skirt: #8f3708;
+  --metal: #c2c2b6;
+  --metal-hi: #f6f6f0;
+  --metal-lo: #6e6e64;
+  --glass: #05100a;
+  --glass-hi: #14301c;
+  --lcd: #9fe07e;
+  --lcd-dim: #4c7a45;
+  --gold: #ffc23a;
+
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-family: "W95FA", Tahoma, Verdana, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+  animation: c2010-fade-in 0.18s steps(2, jump-none) both;
+}
+
+@keyframes c2010-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Waking up: the shell inflates from a squashed puddle and settles through two overshoots.
+   Stepped, so it flips frame to frame like everything else in the room. */
+@keyframes c2010-wake {
+  0% {
+    transform: scale(0.3, 0.06) translateY(46px);
+  }
+  16% {
+    transform: scale(0.62, 0.3) translateY(28px);
+  }
+  32% {
+    transform: scale(0.86, 0.72) translateY(10px);
+  }
+  48% {
+    transform: scale(1.06, 1.1) translateY(-4px);
+  }
+  64% {
+    transform: scale(1.02, 0.94) translateY(2px);
+  }
+  80% {
+    transform: scale(0.99, 1.03) translateY(-1px);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---- Shared material language ---- */
+
+/* Moulded plastic: a 1px specular line, a glossy shoulder, then the body rolling into a darker
+   skirt. Injection-moulded and lacquered, like the skins it comes from. */
+.c2010-plastic {
+  background: linear-gradient(
+    180deg,
+    var(--shell-hi) 0 1px,
+    var(--shell-mid) 1px 3px,
+    var(--shell-gloss) 8%,
+    var(--shell) 34%,
+    var(--shell) 78%,
+    var(--shell-lo) 93%,
+    var(--skirt) 100%
+  );
+}
+
+/* Send is carved out of the shell rather than sitting on it: no fill of its own, just the same
+   recessed well as the field next to it, so the pair reads as one moulded piece. */
+.c2010-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  padding: 0 12px;
+  height: 22px;
+  border: 1px solid #4a1c05;
+  border-radius: 11px;
+  background: transparent;
+  box-shadow:
+    inset 0 2px 4px rgba(46, 15, 2, 0.5),
+    inset 0 -1px 0 rgba(255, 198, 152, 0.28),
+    0 1px 0 rgba(255, 198, 152, 0.4);
+  color: #1d0900;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  cursor: var(--cur-hand);
+}
+
+.c2010-cta:hover {
+  box-shadow:
+    inset 0 2px 4px rgba(46, 15, 2, 0.32),
+    inset 0 -1px 0 rgba(255, 198, 152, 0.34),
+    0 1px 0 rgba(255, 198, 152, 0.4);
+  color: #150600;
+}
+
+.c2010-cta:active {
+  box-shadow:
+    inset 0 3px 6px rgba(46, 15, 2, 0.78),
+    inset 0 -1px 0 rgba(255, 198, 152, 0.18);
+}
+
+.c2010-cta:disabled {
+  cursor: var(--cur);
+  color: #4e1f06;
+}
+
+/* The close is only ever a cross. */
+.c2010-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #3d1503;
+  font-family: inherit;
+  line-height: 1;
+  cursor: var(--cur-hand);
+}
+
+.c2010-btn:hover {
+  color: #331104;
+}
+
+.c2010-btn:active {
+  transform: translateY(1px);
+}
+
+/* ---- The shell: the mascot, with the chat set into its face ---- */
+
+/* Size comes from the component (DISPLAY_W/DISPLAY_H); everything below is a percentage of it. */
+.c2010p {
+  position: relative;
+  transform-origin: 50% 88%;
+  animation: c2010-wake 0.44s steps(1, end) both;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* Rasterised at the room's texel scale and blown back up nearest-neighbour: the shell aliases by
+   exactly as much as the render behind it, and by no more. */
+.c2010p-chassis {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+/* Everything below is pinned to coordinates on the drawing. */
+.c2010p-ui {
+  position: absolute;
+  inset: 0;
+}
+
+.c2010p-ui.is-talking {
+  animation: c2010-nod 0.34s steps(2, jump-none) infinite;
+}
+
+@keyframes c2010-nod {
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+.c2010p-tiny {
+  position: absolute;
+  top: 6.76%;
+  right: 15.88%;
+  display: flex;
+}
+
+/* The pane is part of the drawing; this only carries the text sitting in it. */
+/* CRT strike: a bright slit that opens to full height and burns off, then the log is there. */
+.c2010p-flash {
+  position: absolute;
+  top: 29.73%;
+  left: 19.41%;
+  width: 61.18%;
+  height: 39.86%;
+  border-radius: 8px;
+  pointer-events: none;
+  background: #d3f7c2;
+  animation: c2010-strike 0.4s steps(4, jump-none) 0.34s both;
+}
+
+@keyframes c2010-strike {
+  0% {
+    transform: scaleY(0.02);
+    opacity: 0.9;
+  }
+  45% {
+    transform: scaleY(0.03);
+    opacity: 1;
+  }
+  72% {
+    transform: scaleY(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+.c2010p-screen {
+  position: absolute;
+  top: 29.73%;
+  left: 19.41%;
+  width: 61.18%;
+  height: 39.86%;
+  padding: 5px 7px;
+  overflow-y: auto;
+  border-radius: 8px;
+  color: #d6f0c4;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: var(--cur);
+  user-select: text;
+  scrollbar-width: thin;
+  scrollbar-color: #3c5a36 transparent;
+  animation: c2010-fade-in 0.2s steps(2, jump-none) 0.6s both;
+}
+
+.c2010p-screen p {
+  margin: 0 0 4px;
+  overflow-wrap: break-word;
+}
+
+.c2010p-screen b {
+  margin-right: 4px;
+  font-weight: 400;
+}
+
+.c2010p-screen p[data-from="claude"] b {
+  color: var(--gold);
+}
+
+.c2010p-screen p[data-from="you"] b {
+  color: #7fc9e8;
+}
+
+.c2010p-screen p[data-from="system"] {
+  color: var(--lcd-dim);
+}
+
+.c2010p-typing {
+  animation: c2010-blink-soft 0.8s steps(2, jump-none) infinite;
+}
+
+@keyframes c2010-blink-soft {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.c2010p-compose,
+.c2010p-tiny {
+  animation: c2010-fade-in 0.2s steps(2, jump-none) 0.62s both;
+}
+
+.c2010p-compose {
+  position: absolute;
+  top: 71.62%;
+  left: 21.18%;
+  width: 57.65%;
+  display: flex;
+  gap: 3px;
+}
+
+/* The field is a well pressed into the shell: dark at the lip where the plastic overhangs it,
+   warming toward the bottom, with a lit bottom edge and an emboss under the whole thing. */
+.c2010p-compose input {
+  flex: 1;
+  min-width: 0;
+  height: 22px;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 0 9px;
+  border: 1px solid #4a1c05;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #7e330f 0, #a34c17 58%, #c2632a 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(46, 15, 2, 0.7),
+    inset 0 -1px 0 rgba(255, 198, 152, 0.3),
+    0 1px 0 rgba(255, 198, 152, 0.4);
+  color: #ffe9d8;
+  outline: none;
+}
+
+.c2010p-compose input:focus {
+  box-shadow:
+    inset 0 2px 3px rgba(46, 15, 2, 0.7),
+    inset 0 0 0 1px rgba(255, 214, 176, 0.45),
+    0 1px 0 rgba(255, 198, 152, 0.4);
+}
+
+.c2010p-compose input::placeholder {
+  color: rgba(255, 214, 182, 0.5);
+}
+
+/* iOS zooms the page when focusing an input below 16px; touch devices trade a bit of period
+   accuracy for a stable viewport. */
+@media (pointer: coarse) {
+  .c2010p-compose input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .c2010p {
+    transform: scale(0.85);
+  }
+}
