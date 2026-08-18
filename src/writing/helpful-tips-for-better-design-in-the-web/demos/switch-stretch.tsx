@@ -27,7 +27,7 @@ const MODES: { value: Mode; label: string }[] = [
 ];
 
 export function SwitchStretch() {
-  const [mode, setMode] = useState<Mode>("stretch");
+  const [mode, setMode] = useState<Mode>("plain");
   const [on, setOn] = useState(true);
   const stretch = mode === "stretch";
 

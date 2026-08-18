@@ -1,0 +1,43 @@
+---
+title: Tips to improve your product
+description: Unpopular tips that help to make the web a better, more fun place to be in.
+date: 2026-08-30
+type: note
+---
+
+import { AvatarClipping } from "./demos/avatar-clipping";
+import { StackingOrder } from "./demos/stacking-order";
+import { SwitchStretch } from "./demos/switch-stretch";
+
+# Helpful tips for webdesign
+
+This article is based on many experiences I had in the last couple of weeks on a variety of websites. The purpose of this article is not argueing this is the only correct way, good design can come from many different directions, but it should help to give you an idea of how things we take for granted today can be built a little differently to improve experiences.
+
+## Avatar Groups, done right
+
+<AvatarClipping />
+
+- Makes the "empty" space between them work with gradients or background images
+- Easy to maintain, and scalable
+- Helps to keep initials readable
+
+Try to avoid using `borders` or `outlines`, they need to have the exact color of the background which makes it impossible to scale beyond solid colors.
+
+<br />
+
+## Avoid z-index as much as possible
+
+<StackingOrder />
+
+- A good element order makes you be able to avoid most z-index classes
+- If using z-index, try to make agents able to know why
+- Don't overcomplicate or nest absolute classes if not necessary
+
+<br />
+
+## Stretch your switches while they are held
+
+<SwitchStretch />
+
+- Elements that move fast in reallife appear longer, therefore stretches feel more natural
+- Combined with different methods of animating the thumb, the switch will feel playful, heavy, soft, etc. - Try to use this to align with how your brand looks and feels
