@@ -5,8 +5,10 @@ date: 2026-08-30
 type: note
 ---
 
+import { ActiveState } from "./demos/active-state";
 import { AvatarClipping } from "./demos/avatar-clipping";
 import { StackingOrder } from "./demos/stacking-order";
+import { GradientEasing } from "./demos/gradient-easing";
 import { SwitchStretch } from "./demos/switch-stretch";
 
 # Helpful tips for webdesign
@@ -35,9 +37,21 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 
 <br />
 
+## Don't skip the active state
+
+<ActiveState />
+
+<br />
+
 ## Stretch your switches while they are held
 
 <SwitchStretch />
 
 - Elements that move fast in reallife appear longer, therefore stretches feel more natural
 - Combined with different methods of animating the thumb, the switch will feel playful, heavy, soft, etc. - Try to use this to align with how your brand looks and feels
+
+<br />
+
+## Ease your gradients
+
+<GradientEasing />

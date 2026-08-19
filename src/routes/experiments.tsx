@@ -51,12 +51,52 @@ const experiment = (
 // chunk, fetched only when its tile is opened, and lets this stay the single source of truth.
 const EXPERIMENTS: Experiment[] = [
   experiment(
+    "icon-lens",
+    "Icon Lens",
+    "Refraction",
+    lazyDemo(() =>
+      import("@/features/experiments/components/icon-lens-demo").then((m) => ({
+        default: m.IconLens,
+      })),
+    ),
+  ),
+  experiment(
+    "liquid-glass",
+    "Liquid Glass",
+    "Liquid",
+    lazyDemo(() =>
+      import("@/features/experiments/components/liquid-glass-demo").then((m) => ({
+        default: m.LiquidGlass,
+      })),
+    ),
+  ),
+  experiment(
+    "magnet-mark",
+    "Magnet Mark",
+    "Magnet",
+    lazyDemo(() =>
+      import("@/features/experiments/components/magnet-mark-demo").then((m) => ({
+        default: m.MagnetMark,
+      })),
+    ),
+  ),
+  experiment(
     "claude-2010",
     "Claude 2010",
     "Isometric",
     lazyDemo(() =>
       import("@/features/experiments/components/claude-2010-demo").then((m) => ({
         default: m.Claude2010,
+      })),
+    ),
+  ),
+  experiment(
+    "claude-mark",
+    "Claude Mark",
+    "Optics",
+    lazyDemo(() =>
+      import("@/features/experiments/components/claude-mark-demo").then((m) => ({
+        default: m.ClaudeMark,
       })),
     ),
   ),
