@@ -99,15 +99,21 @@ const vec2 BODY = vec2(${BODY_X.toFixed(4)}, ${BODY_Y.toFixed(4)});
 // the refracted rays have crossed the axis and the word comes back upside down. That
 // inverted image is real and it is wanted — but at the rim, as the FAR sample below,
 // not smeared across the clear middle where the upright one belongs.
-const float TEXT_DEPTH_MID = 0.55;
-const float TEXT_DEPTH_RIM = 1.70;
+const float TEXT_DEPTH_MID = 0.42;
+const float TEXT_DEPTH_RIM = 1.05;
 // The upside-down copy that wraps the lower rim is the same page followed all the way to
 // the far surface. A real lens shows both, and the inverted one is what reads as glass.
-const float TEXT_FAR_GAIN = 1.20;
-// Wavelengths the page is sampled at. Far fewer than the ribbons take: a fringe on a
-// legible edge reads at a fraction of the sampling a smeared emitter needs before it
-// stops looking like separate stripes.
-const int TEXT_TAPS = 9;
+const float TEXT_FAR_GAIN = 0.20;
+// Wavelengths the page is sampled at, and how far apart they are taken.
+//
+// The dispersion the CORD gets is deliberately far past what real glass does — that is
+// stated at the top of this file. Handing the page the same exaggeration is what made the
+// text look smeared rather than refracted: every letter arrived as nine coloured copies of
+// itself a visible distance apart. Real glass fringes an edge by a hair, and a hair is
+// what reads as clean. The page gets its own, much tighter spread.
+const int TEXT_TAPS = 7;
+const float TEXT_IOR_LO = 1.50;
+const float TEXT_IOR_HI = 1.55;
 // The band runs on its own multiple of the clock. Sharing one rate with the light drift
 // read as a single slow system; split, the ribbon can move at the speed it wants while
 // the reflections stay calm enough not to strobe.
@@ -302,7 +308,7 @@ vec3 centres(float x, float t, float lightY) {
   float drift = sin(x * 0.62 + t * 0.23) * 0.058 + sin(x * 1.40 - t * 0.17) * 0.022;
   // Small enough that the three read as one cord rather than three threads sharing a
   // frame. It only has to exceed the strand width for the crossings to be legible.
-  return b + drift + sin(vec3(ph, ph + TWIST, ph + 2.0 * TWIST)) * 0.125;
+  return b + drift + sin(vec3(ph, ph + TWIST, ph + 2.0 * TWIST)) * 0.072;
 }
 
 // Where each strand is in the twist, -1 at the back and +1 at the front. This is the
@@ -336,29 +342,22 @@ float ribbons(float y, vec3 cy, float w, vec3 facing) {
 // Everything about a ribbon set that depends only on x, so it too leaves the loop.
 // x: half-width after taper, y: falloff along the length.
 vec2 profile(float x) {
-  // The cord is a compact bundle in the middle of the glass, not a band drawn across it.
-  // Both lengths are keyed to a span well inside the body: the thickness taper closes the
-  // strands to a point at about two thirds of the half-width, and the falloff has them
-  // gone before that. That is what keeps colour off the sides, and what makes the bundle
-  // read as a rounded lens rather than a streak with tails running out to the rim.
-  return vec2(0.084 * pow(clamp(1.0 - pow(x / 0.62, 2.0), 0.0, 1.0), 0.55),
-              exp(-pow(abs(x) / 0.34, 2.4)));
+  // A wave: at its fullest through the middle of the glass and drawing thin toward both
+  // sides, rather than a bundle of constant thickness cut off at the ends. x here is the
+  // first component: how wide the winding is allowed to open, which is what sets the
+  // cord's depth at that point. The second is how much light is left along its length.
+  return vec2(1.0 * pow(clamp(1.0 - pow(x / 0.86, 2.0), 0.0, 1.0), 0.45),
+              exp(-pow(abs(x) / 0.52, 2.6)));
 }
 
-// Each strand's own place in the spectrum: a warm one, a cool one, and a pale one. This
-// is the part that stopped being derived. Dispersing a single white emitter gives a full
-// rainbow stacked top to bottom, and stacked is exactly what it looks like — every column
-// showing the whole spectrum in order, which reads as a gradient however finely it is
-// sampled. Distinct ribbons that cross one another cannot come out of that, so the colour
-// now lives on the strands and the glass only bends and fringes it.
-const vec3 STRAND_HUE = vec3(0.82, 0.22, 0.08);
-// How far each strand's hue travels across its own width. The warm one is given a long
-// sweep because it has to carry three of the reference's colours on its own — red along
-// its top edge through orange into yellow. The cool one is kept short deliberately: let
-// it run as far as the warm one does and its upper edge reaches green, and green is the
-// one colour the reference does not have. That green was two strands meeting in the
-// middle of the spectrum, not a strand of its own.
-const vec3 STRAND_SWEEP = vec3(0.20, 0.10, 0.09);
+// How many strings the cord is wound from, and how far apart the winding holds them.
+const int STRINGS = 11;
+const float SPLAY = 0.145;
+// How far past full brightness each strand's core runs. Below 1 there is no core at all,
+// just a coloured shape; this is what buys the white centre and the coloured falloff.
+// Well past 1, because the clipping is the point. Below about 2 the middle of the cord
+// never saturates and there is no white core at all — just a thin rainbow stripe.
+const float STRAND_PEAK = 3.30;
 
 // Levels a spectral colour to a common brightness. The wavelengths are nowhere near equal
 // in luminance — a saturated red carries about a third the light of a cyan at the same
@@ -371,41 +370,57 @@ vec3 leveled(vec3 c) {
   return c / max(dot(c, vec3(0.2126, 0.7152, 0.0722)), 0.10);
 }
 
-// The cord at a point, resolved front to back. Premultiplied colour in rgb, coverage in a.
+// Clips each channel on its own, which is what a sensor or an eye does to light that is
+// too bright for it. This is the whole reason the cord has a white middle: an overexposed
+// green really does go white, because its green channel saturates first and the other two
+// catch up. shoulder() below deliberately does the opposite — it scales the whole colour
+// by its own peak so the hue survives — and that is right for a reflection and wrong for
+// an emitter. Used here, it kept the bright centre a bright GREEN and no amount of gain
+// would turn it white.
+vec3 expose(vec3 c) {
+  return vec3(1.0) - exp(-max(c, 0.0));
+}
+
+// The cord: ONE bundle with the spectrum laid across its width and a single brightness
+// envelope over the whole thing, driven well past full. The middle clips to white — every
+// channel saturating at once — and the wings, which never get there, keep their colour:
+// cool along one edge, warm along the other.
+//
+// Three constructions were tried before this one and all failed on the white middle.
+// Strings each carrying a colour of their own cannot make it: a string that IS red is red
+// in the middle too. Strings each carrying the whole spectrum give every one of them its
+// own white core, so the cord came back as three cords. And summing per-colour strings
+// normalised against the spectrum makes white wherever they overlap — but overlap enough
+// for the centre and the edges go white too, and the colour disappears entirely.
 vec4 cord(float x, float y, float t, float lightY) {
-  vec3 cy = centres(x, t, lightY);
-  vec3 dep = twistDepth(x, t);
+  vec3 wave = centres(x, t, lightY);
+  float b = dot(wave, vec3(1.0 / 3.0));
   vec2 prof = profile(x);
-  // Not one width for the three. The warm strand has to carry red through orange into
-  // yellow across its own face, and a strand as narrow as the other two has no room to
-  // show that — it arrives as a single colour with a fringe.
-  vec3 w = max(prof.x, 1e-4) * vec3(1.35, 0.86, 0.62);
-  vec3 d = (vec3(y) - cy) / w;
+  float ph = twistPhase(x, t);
+  // The winding opens and closes along the length, so the spectrum is wide in some places
+  // and drawn nearly shut in others.
+  float splay = max(SPLAY * prof.x * (0.70 + 0.30 * sin(ph)), 1e-4);
+  float dy = y - b;
 
-  // A hard shoulder, not a gaussian. An edge you can follow along its length is the whole
-  // difference between a ribbon and a smear, and it is what the crossings need to read.
-  vec3 a = exp(-pow(abs(d), vec3(4.5))) * prof.y;
+  // Which string is at this height. The wobble is the winding: the order stays the same
+  // but the whole stack rolls along the cord rather than lying in fixed lanes.
+  float u = clamp(0.5 + (dy / splay) + 0.11 * sin(ph * 1.7 + x * 0.9), 0.0, 1.0);
+  // One envelope over the bundle, past 1 through the middle.
+  // A flatter falloff than a gaussian. Squared, the wings drop away so fast that the
+  // colour out there is always dim, and dim colour reads as a tinted shape rather than as
+  // light — the cord has to be bright all the way across and only white in the middle.
+  float e = exp(-pow(abs(dy) / (splay * 0.82), 1.7)) * prof.y * STRAND_PEAK;
 
-  // Hue sweeping across each strand's own width, so the warm one runs red along its upper
-  // edge into yellow at the lower — the fringe a real ribbon of light has, rather than a
-  // flat fill.
-  vec3 h = STRAND_HUE + d * STRAND_SWEEP;
-  vec3 c0 = leveled(wavelength(clamp(h.x, 0.0, 1.0))) * 0.46;
-  vec3 c1 = leveled(wavelength(clamp(h.y, 0.0, 1.0))) * 0.46;
-  // The third is the pale one the reference shows below the other two, not a colour in
-  // its own right.
-  vec3 c2 = mix(vec3(1.0), leveled(wavelength(clamp(h.z, 0.0, 1.0))) * 0.46, 0.34) * 0.17;
-
-  // Whatever is nearer covers what is behind it. step() on the depths rather than a sort:
-  // with three strands the occlusion is just the product of the ones in front.
-  vec3 occ = vec3(
-    (1.0 - a.y * step(dep.x, dep.y)) * (1.0 - a.z * step(dep.x, dep.z)),
-    (1.0 - a.x * step(dep.y, dep.x)) * (1.0 - a.z * step(dep.y, dep.z)),
-    (1.0 - a.x * step(dep.z, dep.x)) * (1.0 - a.y * step(dep.z, dep.y))
-  );
-  vec3 lit = 0.52 + 0.48 * dep;
-  vec3 k = a * occ * lit;
-  return vec4(c0 * k.x + c1 * k.y + c2 * k.z, dot(a * occ, vec3(1.0)));
+  // How much of the spectrum is still stacked here. Through the middle of the bundle the
+  // wavelengths have not separated yet, so what arrives is all of them at once, and all
+  // of them at once is white. Only out in the wings has one pulled far enough clear to
+  // arrive on its own. Leaving this to the clipping alone gives a YELLOW core rather than
+  // a white one: the middle of the spectrum is green, its green channel saturates first
+  // and the blue never catches up.
+  // Held back so the white stays a core rather than swallowing the colour: with the
+  // exposure raised, everything the mix reaches goes white, not just the middle.
+  vec3 col = mix(leveled(wavelength(u)), vec3(1.25), smoothstep(1.30, 2.80, e));
+  return vec4(col * e, e);
 }
 
 // Light does not stop at the outline. The band is an emitter inside a body that is clear
@@ -506,7 +521,11 @@ void main() {
   // deep image of the page wraps the rim for exactly the reason the deep cord does, and
   // it keeps that second image a band round the rim instead of flooding the middle where
   // the near one belongs.
-  float rim = smoothstep(0.34, 0.90, 1.0 - zu);
+  // A band that dies before the outline, not a ramp that runs into it. Carried all the
+  // way out, the cord's deep image lands on the red end of the spectrum exactly where the
+  // edge is and leaves a red line traced round the whole silhouette — which reads as a
+  // chromatic artifact, not as a second image seen through glass.
+  float rim = smoothstep(0.30, 0.58, 1.0 - zu) * (1.0 - smoothstep(0.74, 0.92, 1.0 - zu));
   float farWeight = FAR_GAIN * rim;
 
   vec4 nearCord = cord(base.x, base.y, t, u_light.y);
@@ -543,14 +562,14 @@ void main() {
   // dark page — turns the body into a flat grey pebble on a light one.
   // Thinner glass takes less out of what passes through it. On a light page this is the
   // whole difference between a sheet and a milky pebble, so it is cut hardest there.
-  float absorb = (0.07 + 0.20 * (1.0 - zu)) * mix(1.0, 0.95, u_ambient);
+  float absorb = (0.045 + 0.13 * (1.0 - zu)) * mix(1.0, 0.80, u_ambient);
   // The spectrum is light being added, so it needs something dark to land on. That is
   // what the crown below provides on a light page — with it there, the gain can stay
   // high in both themes. Lowering it for light mode (which is what a bare white page
   // needs, to stop every hue clipping) leaves the colours flat once the crown exists.
   // Brighter on a light page. Emission on black needs no help; on white it is competing
   // with the page for the same range and starts out looking washed.
-  vec3 spectrum = shoulder(saturated(inside, mix(1.46, 1.48, u_ambient)) * mix(1.75, 2.35, u_ambient));
+  vec3 spectrum = expose(saturated(inside, mix(1.10, 1.14, u_ambient)) * mix(2.40, 2.80, u_ambient));
 
   // What the light blocks, which is much less than what it emits. Two things follow from
   // that. It is taken from the CORD's own coverage rather than from the summed colour, so
@@ -628,7 +647,7 @@ void main() {
   // where the glass has already gone opaque and 1 - alpha has nothing left to let it
   // through; it has to land just inside the rim, in the last of the clear glass.
   float thick = 1.0 - zu;
-  float textRim = smoothstep(0.38, 0.64, thick) * (1.0 - smoothstep(0.78, 0.95, thick));
+  float textRim = smoothstep(0.46, 0.70, thick) * (1.0 - smoothstep(0.80, 0.94, thick));
   float textDepth = mix(TEXT_DEPTH_MID, TEXT_DEPTH_RIM, smoothstep(0.25, 1.0, r));
 
   // The page, taken one wavelength at a time like everything else in here. Sampled at a
@@ -641,7 +660,7 @@ void main() {
   for (int i = 0; i < TEXT_TAPS; i++) {
     float v = (float(i) + 0.5) / float(TEXT_TAPS);
     vec3 w = wavelength(hueAt(v));
-    vec3 dir = refract(-V, N, 1.0 / mix(IOR_VIOLET, IOR_RED, v));
+    vec3 dir = refract(-V, N, 1.0 / mix(TEXT_IOR_HI, TEXT_IOR_LO, v));
     float near = texture(u_text, (P + dir * textDepth).xy * BODY * 0.5 + 0.5).a;
     float deep = texture(u_text, (P + dir * DEPTH).xy * BODY * 0.5 + 0.5).a;
     pageSum += w * (near + deep * textRim * TEXT_FAR_GAIN);
