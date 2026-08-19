@@ -75,6 +75,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/superpower/superpower-ai.webp": { width: 5040, height: 3000, thumbhash: "PAgGBIDWSGZwe3WCa4N2hoBASA==", widths: [640, 1280, 2048] },
   "/images/writing/code-from-all-sides.svg": { width: 600, height: 270, thumbhash: null },
   "/images/writing/cost-of-software.svg": { width: 600, height: 250, thumbhash: null },
+  "/images/writing/helpful-tips-for-better-design-in-the-web/loch-ness.webp": { width: 1900, height: 1267, thumbhash: "EvgBHYKFiqhjlIlycDxGcZZ/g/c4", widths: [640, 1280] },
   "/images/writing/knowing-what-to-ship.svg": { width: 600, height: 240, thumbhash: null },
   "/images/writing/products-that-look-better-used/aesop-unused.webp": { width: 2800, height: 2000, thumbhash: "JfiBBIARiHZ/gHhHh/gnh4+DcI53SKeHBg==", widths: [640, 1280, 2048], transparent: true },
   "/images/writing/products-that-look-better-used/aesop-used.webp": { width: 2800, height: 2000, thumbhash: "IviBBIARiHePcIhXh/hIh36AcI54R7d3Bg==", widths: [640, 1280, 2048], transparent: true },
