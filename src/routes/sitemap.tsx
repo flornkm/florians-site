@@ -1,6 +1,7 @@
 import { H1 } from "@/components/design-system/heading";
 import { Link } from "@/components/ui/link";
 import { getContent } from "@/lib/mdx";
+import { canonicalLink } from "@/lib/site";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 
 // Derived, never maintained: every static path the file-based router knows about, plus the MDX
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/sitemap")({
       { title: "Sitemap ‹ Florian Kiem" },
       { name: "description", content: "Every page on this site." },
     ],
+    links: [canonicalLink("/sitemap")],
   }),
   component: SitemapPage,
 });

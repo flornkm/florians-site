@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 import { PostIcon } from "@/features/writing/components/post-icon";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent } from "@/lib/mdx";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { Await, createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { Suspense } from "react";
@@ -57,6 +57,7 @@ export const Route = createFileRoute("/writing/")({
       },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Writing") },
     ],
+    links: [canonicalLink("/writing")],
   }),
   component: WritingPage,
 });

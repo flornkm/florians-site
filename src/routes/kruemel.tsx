@@ -1,6 +1,6 @@
 import { Image } from "@/components/shared/image";
 import { PHOTOS } from "@/features/kruemel/const/photos";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -32,6 +32,7 @@ export const Route = createFileRoute("/kruemel")({
       },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Kr%C3%BCmel") },
     ],
+    links: [canonicalLink("/kruemel")],
   }),
   component: KruemelPage,
 });

@@ -23,7 +23,9 @@ export default defineConfig({
       }),
     },
     tanstackStart(),
-    nitro(),
+    // serverDir opts into nitro's server/ conventions — server/middleware
+    // handles agent content negotiation (Accept: text/markdown).
+    nitro({ serverDir: "server" }),
     react(),
     tailwindcss(),
   ],

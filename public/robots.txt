@@ -1,32 +1,30 @@
 # floriankiem.com
-# AI training crawlers are not welcome. Content and design are copyrighted.
-# Retrieval to answer a user's question, with attribution and a link, is fine.
-# See /llms.txt for the full policy.
+# AI agents and crawlers are welcome to read this site.
+# Every page is also served as markdown via `Accept: text/markdown`.
+# Content and design are copyrighted — see /llms.txt for the usage policy.
 
+# Explicit allowance for AI assistants, agents, and their crawlers.
 User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
 User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
 User-agent: anthropic-ai
 User-agent: Claude-Web
-User-agent: CCBot
 User-agent: Google-Extended
 User-agent: Applebot-Extended
 User-agent: PerplexityBot
-User-agent: Bytespider
-User-agent: TikTokSpider
-User-agent: meta-externalagent
-User-agent: FacebookBot
-User-agent: Amazonbot
+User-agent: Perplexity-User
+User-agent: DeepSeekBot
+User-agent: CCBot
 User-agent: cohere-ai
-User-agent: cohere-training-data-crawler
+User-agent: meta-externalagent
+User-agent: Amazonbot
 User-agent: AI2Bot
-User-agent: Diffbot
-User-agent: ImagesiftBot
-User-agent: omgili
-User-agent: omgilibot
-User-agent: Timpibot
-User-agent: PanguBot
-Disallow: /
+Allow: /
 
+# Everyone else is welcome too.
 User-agent: *
 Disallow:
 

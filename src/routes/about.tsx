@@ -1,7 +1,7 @@
 import { Image } from "@/components/shared/image";
 import { Link } from "@/components/ui/link";
 import { PHOTOS } from "@/features/about/const/photos";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -53,6 +53,7 @@ export const Route = createFileRoute("/about")({
       },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=About") },
     ],
+    links: [canonicalLink("/about")],
   }),
   component: AboutPage,
 });
