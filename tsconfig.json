@@ -11,7 +11,7 @@
     "noEmit": true,
     "target": "ES2022",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "bun"],
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],

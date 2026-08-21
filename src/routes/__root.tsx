@@ -13,6 +13,7 @@ import { Link } from "@/components/ui/link";
 import ScissorsCursor, { CutText } from "@/components/shared/scissors-cursor";
 import { initSelectionDots } from "@/lib/selection-dots";
 import { absoluteUrl } from "@/lib/site";
+import { structuredDataJson } from "@/lib/structured-data";
 
 const queryClient = new QueryClient();
 
@@ -95,7 +96,10 @@ export const Route = createRootRoute({
         media: "(prefers-color-scheme: dark)",
       },
     ],
-    scripts: [],
+    scripts: [
+      // schema.org Person + WebSite identity for AI agents and search engines.
+      { type: "application/ld+json", children: structuredDataJson() },
+    ],
   }),
   component: RootLayout,
   notFoundComponent: NotFoundPage,
@@ -152,9 +156,12 @@ function RootLayout() {
   );
 }
 
+// Sitemap and llms.txt are recovery routes for agents that land on a dead URL.
 const errorLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Sitemap", href: "/sitemap" },
+  { label: "llms.txt", href: "/llms.txt" },
 ];
 
 function NotFoundPage() {

@@ -3,7 +3,7 @@ import { useMdxContent } from "@/components/shared/mdx-content";
 import { Link } from "@/components/ui/link";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent, isWritingEntry, type WritingEntry } from "@/lib/mdx";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { Await, createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { IconArrowUndoUp } from "central-icons/IconArrowUndoUp";
@@ -97,6 +97,7 @@ export const Route = createFileRoute("/writing/$id")({
         { name: "twitter:description", content: loaderData.description },
         { name: "twitter:image", content: ogImage },
       ],
+      links: [canonicalLink(`/writing/${loaderData.slug}`)],
     };
   },
   component: WritingDetailPage,

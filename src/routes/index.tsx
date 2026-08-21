@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 import { PROJECTS, type Project } from "@/features/work/projects";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { thumbhashToDataURL } from "@/lib/thumbhash";
 import { cn } from "@/lib/utils";
 import { videoManifest } from "@/videoMap.gen";
@@ -43,6 +43,7 @@ export const Route = createFileRoute("/")({
       },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Work") },
     ],
+    links: [canonicalLink("/")],
   }),
   component: IndexPage,
 });
@@ -191,6 +192,16 @@ function IndexPage() {
         <h1 className="mb-12 max-w-[15rem] text-base fw-medium leading-snug text-primary md:shrink-0">
           Designs and codes software products. Invests in a few.
         </h1>
+        {/* The visual page is deliberately media-only; this gives screen readers and
+            non-JS crawlers the same story in text. */}
+        <p className="sr-only">
+          I am Florian Kiem, a design engineer building software products in the intersection of
+          design and code. This page shows selected work: interface design, design systems, motion,
+          and front-end engineering for companies like Rogo, Flow Engineering, Sona, Superpower,
+          Delphi, Kalshi, Snaptrude, Morphic, Dash0, and Opral. Each project below is presented
+          through screenshots and short clips. Read more about me on the about page, browse notes
+          and essays on the writing page, or get in touch via the contact page.
+        </p>
         <div className="md:-ml-6 md:min-h-0 md:flex-1 md:overflow-y-auto md:pl-6 md:scroll-mask">
           <h2 className="mb-4 text-sm fw-medium text-primary">Selected work</h2>
           <ul className="flex flex-col items-start gap-1.5">
@@ -245,6 +256,8 @@ function IndexPage() {
             id={projectId(project)}
             className="flex scroll-mt-24 flex-col gap-1"
           >
+            <h2 className="sr-only">{project.name}</h2>
+            {project.description && <p className="sr-only">{project.description}</p>}
             {project.media?.map((block, index) => {
               // The first media block of the first project is the LCP element: load it
               // eagerly at high priority instead of lazily, so it isn't queued behind
