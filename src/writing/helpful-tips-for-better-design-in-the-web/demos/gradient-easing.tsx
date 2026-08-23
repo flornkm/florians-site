@@ -36,18 +36,19 @@ import { useState } from "react";
 
    The photo is load-bearing as well, and it is cropped at source rather than framed at render
    time: the file is already the exact 3:2 window the card shows, kept at the crop's native pixels
-   so nothing is resampled twice on the way to the screen. The cottage centres it and the cattle
-   straddle the middle, which is the composition; what the figure needs from it is the water under
-   them. The ramp — and the edge at the top of it — plays out over that one continuous mid-tone
-   field. Over the forest that fills the original the two ramps would be near enough
-   indistinguishable, which is the trap this figure has to avoid: a texture busy enough hides the
-   very thing being shown. */
+   so nothing is resampled twice on the way to the screen. The alp hut centres it and the cattle
+   straddle the middle, which is the
+   composition; what the figure needs from it is the meadow under them. The ramp — and the edge at
+   the top of it — plays out over that one continuous mid-tone field. Over the forest that frames
+   the original the two ramps would be near enough indistinguishable, which is the trap this
+   figure has to avoid: a texture busy enough hides the very thing being shown. */
 
-// Well short of full black. At 0.85 over water this dark the bottom of the ramp was arriving at
-// something indistinguishable from solid, so the scrim read as a slab with a fade stuck on top of
-// it rather than as one gradient. The caption still clears its background comfortably: the loch
-// under it is already deep navy, so the scrim is insurance rather than the whole contrast budget.
-const SCRIM_ALPHA = 0.72;
+// Well short of full black. Anywhere near solid the bottom of the ramp reads as a slab with a
+// fade stuck on top of it rather than as one gradient — and with the hold below extending the
+// darkest value, the slab threshold sits lower than it did without one. 0.62 over the meadow
+// still lands the caption on a comfortably dark ground: the grass is a mid-tone, so the scrim
+// carries the contrast budget, but it does not need to win by this much more.
+const SCRIM_ALPHA = 0.62;
 // Enough stops that each straight segment is shorter than the curvature it stands in for. Fewer
 // and the sampling itself starts showing as faint bands, which is the bug being fixed here.
 const STOP_COUNT = 16;
@@ -74,17 +75,30 @@ const STOP_ALPHAS = Array.from(
 // alpha(p) = A * (1 - p)^n, and the exponent is the whole ease. A cosine arrives flat at *both*
 // ends, and the flat end at the bottom is what was building the slab: the ramp sat on its darkest
 // value instead of leaving it. Flatness is only worth anything at the top, where the scrim has to
-// vanish into the photograph without drawing a line. At the bottom it terminates against the card
-// edge, where there is nothing to blend into and nothing for a change in slope to show against, so
-// this curve starts moving there immediately — 1.6x the linear ramp's rate off the bottom.
+// vanish into the photograph without drawing a line. At the bottom the ramp terminates against
+// the hold below it, where a change of slope lands in tones too dark to show, so this curve
+// starts moving there immediately — 1.6x the linear ramp's rate off the bottom.
 // Above 1 is what keeps the top flat; 1.6 lands the kink there at 35% of the linear ramp's.
 const EASE_EXPONENT = 1.6;
 
-// Inverting that for each evenly spaced alpha: the position at which the curve has already fallen
-// that far. Both ends are fixed points, so the ramp is pinned while everything between it slides.
-const EASED_POSITIONS = STOP_ALPHAS.map(
-  (_, index) => 1 - (1 - index / STOP_COUNT) ** (1 / EASE_EXPONENT),
-);
+// Eased, the ramp compresses upward and this fraction of the scrim's bottom holds near full
+// strength. Without a hold, easing drains the exact band the caption stands on — the linear ramp
+// is still near its darkest there, the eased one has already left — so toggling the figure made
+// its own caption harder to read. A third was tried and read as a slab: a fifth is enough to keep
+// the caption's ground steady between the two states while the hold still ends before the eye
+// starts reading it as a solid block. The edge being demonstrated lives at the *top* of the ramp
+// either way.
+const EASE_HOLD = 0.2;
+
+// Inverting the curve for each evenly spaced alpha — the position at which it has already fallen
+// that far — then compressing the result into the span above the hold. The bottom stop stays
+// pinned to the card edge, so the stretch below the first moved stop reads as the hold: one
+// near-flat segment at the scrim's darkest value.
+const EASED_POSITIONS = STOP_ALPHAS.map((_, index) => {
+  if (index === 0) return 0;
+  const inverted = 1 - (1 - index / STOP_COUNT) ** (1 / EASE_EXPONENT);
+  return EASE_HOLD + (1 - EASE_HOLD) * inverted;
+});
 
 function stopPosition(index: number, progress: number) {
   const linear = index / STOP_COUNT;
@@ -193,29 +207,31 @@ export function GradientEasing() {
             )}
           >
             {/* The file is already cropped to exactly this 3:2 window, so nothing is being framed
-                here at render time. The crop pulls in on the cattle and keeps the shore up in the
-                top fifth; everything under it is open loch, which is the one continuous field in
-                the original and the only surface the scrim can be honestly read against. */}
+                here at render time. The crop holds the hut just above centre and stops short of
+                the fir tops at the original's bottom edge; everything under the cattle is open
+                meadow, which is the one continuous field in the original and the only surface the
+                scrim can be honestly read against. */}
             <Image
-              src="/images/writing/helpful-tips-for-better-design-in-the-web/loch-ness.webp"
-              alt="A white cottage above the shore of Loch Ness, with highland cattle at the water's edge"
+              src="/images/writing/helpful-tips-for-better-design-in-the-web/alpine-pasture.webp"
+              alt="A timber alp hut on a mountain pasture seen from above, cattle gathered on the track looping around it"
               objectFit="cover"
               sizes="(min-width: 768px) 384px, 90vw"
               style={{ aspectRatio: "3 / 2" }}
             />
-            {/* Stops short of the shore. The waterline sits around 62% down at its lowest, so a
-                scrim any taller would put its own top edge — the one thing here worth looking at —
-                across the cattle and the shingle. */}
+            {/* Reaches just under the hut's forecourt. Its top edge crosses the lower cattle, but
+                the top of the ramp is where both curves are at their most transparent, so what
+                lands on them is a whisper — while the extra travel is what keeps the fade above
+                the caption unhurried. */}
             <motion.div
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-[34%]"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-[48%]"
               style={{ backgroundImage: gradient }}
             />
             {/* The caption is why a scrim is here at all. Without something to make legible the
                 gradient reads as decoration, and decoration nobody misses when it is wrong. */}
-            <div className="absolute inset-x-0 bottom-0 p-4">
-              <p className="text-[13px] font-medium leading-tight text-white">Loch Ness</p>
-              <p className="mt-1 text-[13px] leading-tight text-white/70">Afternoon</p>
+            <div className="absolute inset-x-0 bottom-0 flex items-baseline justify-between p-4">
+              <p className="text-[13px] font-medium leading-tight text-white">Alpine pasture</p>
+              <p className="text-[13px] leading-tight text-white/70">Midday</p>
             </div>
           </div>
 

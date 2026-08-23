@@ -1,7 +1,5 @@
+import { Select } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { Select } from "@base-ui/react/select";
-import { IconCheckmark1Small } from "central-icons/IconCheckmark1Small";
-import { IconChevronGrabberVertical } from "central-icons/IconChevronGrabberVertical";
 import { useState } from "react";
 
 /* Figure for "Don't skip the active state" in the Unpopular tips article.
@@ -118,121 +116,71 @@ export function ActiveState() {
     <figure className="not-prose mx-auto my-8 max-w-[520px] font-pretendard">
       <div className="flex justify-center rounded-sm p-4 outline -outline-offset-1 outline-black/5 md:p-12 dark:outline-white/8">
         {/* Same floor and the same control-below-the-subject stack as the switch figure, so the two
-            sit at the same weight in the column. */}
-        <div className="flex min-h-[12rem] w-full flex-col items-center justify-center">
-          {/* The pair takes its width from whichever of the two is wider, which is the button —
-              nothing here is a magic number, and the labels can be reworded without a width
-              needing to be re-measured. `w-fit` sizes the column to the widest child's content
-              and the default stretch alignment pulls the other one out to match, so the trigger
-              lands exactly under the button rather than near it. */}
-          <div className="flex w-fit flex-col gap-10">
-            <button
-              type="button"
-              // Safari only honours `:active` on touch when the element or an ancestor carries a
-              // touchstart listener. This empty handler is what registers one — without it the whole
-              // figure is a desktop-only flourish on the exact devices that have no hover to fall
-              // back on.
-              onTouchStart={() => {}}
-              className={cn(
-                "h-11 shrink-0 cursor-pointer touch-manipulation select-none rounded-full px-6",
-                "text-[15px] font-medium [-webkit-tap-highlight-color:transparent]",
-                BUTTON_FILL,
-                BUTTON_DEPTH,
-                "outline-none focus-visible:ring-2 focus-visible:ring-default",
-                SPRING_VAR,
-                // Promoted up front so the spring never waits on a layer being created mid-press.
-                "will-change-transform",
-                // `scale`, not `transform`: Tailwind v4's scale utility sets the standalone `scale`
-                // property, and a transition naming only `transform` would let it snap.
-                PRESS_CLASS[press],
-                // The colour keeps fading; it is the movement that reduced motion asks to be spared.
-                "motion-reduce:[transition:background-color_180ms_ease-out] motion-reduce:active:scale-100",
-              )}
-            >
-              Continue
-            </button>
+            sit at the same weight in the column. Equal 1fr rows above and below the button hold it
+            at the exact vertical center of the stage while the trigger sits on the floor. One
+            content-sized column, so nothing here is a magic number: the button decides the width
+            and the default stretch alignment pulls the trigger out to match, landing it exactly
+            under the button rather than near it. */}
+        <div className="grid min-h-[12rem] w-full grid-rows-[1fr_auto_1fr] justify-center">
+          <button
+            type="button"
+            // Safari only honours `:active` on touch when the element or an ancestor carries a
+            // touchstart listener. This empty handler is what registers one — without it the whole
+            // figure is a desktop-only flourish on the exact devices that have no hover to fall
+            // back on.
+            onTouchStart={() => {}}
+            className={cn(
+              "row-start-2 h-11 shrink-0 cursor-pointer touch-manipulation select-none rounded-full px-6",
+              "text-[15px] font-medium [-webkit-tap-highlight-color:transparent]",
+              BUTTON_FILL,
+              BUTTON_DEPTH,
+              "outline-none focus-visible:ring-2 focus-visible:ring-default",
+              SPRING_VAR,
+              // Promoted up front so the spring never waits on a layer being created mid-press.
+              "will-change-transform",
+              // `scale`, not `transform`: Tailwind v4's scale utility sets the standalone `scale`
+              // property, and a transition naming only `transform` would let it snap.
+              PRESS_CLASS[press],
+              // The colour keeps fading; it is the movement that reduced motion asks to be spared.
+              "motion-reduce:[transition:background-color_180ms_ease-out] motion-reduce:active:scale-100",
+            )}
+          >
+            Continue
+          </button>
 
-            <Select.Root
-              value={press}
-              // Null is Base UI's "cleared" value, which nothing in here can produce: there is no
-              // clear affordance and one of the three is always selected.
-              onValueChange={(value) => value && setPress(value)}
-              items={PRESS_OPTIONS}
-              // The page keeps scrolling while this is open. Locking an article's scroll for a
-              // three-item control in a figure is heavier than the control deserves.
-              modal={false}
-            >
-              <Select.Trigger
-                aria-label="Press behaviour"
-                className={cn(
-                  "flex h-9 shrink-0 cursor-pointer items-center justify-between gap-2",
-                  "rounded-full bg-surface py-1 pl-4 pr-2.5 text-[13px] font-medium text-primary",
-                  "shadow-ring-xs hairline-black/8 dark:hairline-white/10",
-                  "outline-none transition-colors hover:bg-surface-secondary",
-                  "focus-visible:ring-2 focus-visible:ring-default",
-                )}
-              >
-                <Select.Value />
-                <Select.Icon>
-                  <IconChevronGrabberVertical className="size-4 text-quaternary" />
-                </Select.Icon>
-              </Select.Trigger>
+          <Select.Root
+            value={press}
+            // Null is Base UI's "cleared" value, which nothing in here can produce: there is no
+            // clear affordance and one of the three is always selected.
+            onValueChange={(value) => value && setPress(value)}
+            items={PRESS_OPTIONS}
+            // The page keeps scrolling while this is open. Locking an article's scroll for a
+            // three-item control in a figure is heavier than the control deserves.
+            modal={false}
+          >
+            {/* 16px off the card's visible edge, not the stage floor: the stage sits inside the
+                card padding, so at md the control has to reach 32px into it to land there. At the
+                small size the padding is 16px, and the stage floor already is that line. */}
+            <Select.Trigger aria-label="Press behaviour" className="row-start-3 self-end md:-mb-8">
+              <Select.Value />
+            </Select.Trigger>
 
-              <Select.Portal>
-                {/* z on the Positioner, not the Popup: the Positioner places itself with a transform,
-                  which would trap any z-index on its child in a stacking context of its own. */}
-                <Select.Positioner
-                  // Upwards, into the empty half of the stage the button is standing in. The trigger
-                  // sits on the floor of the figure, so a menu below it would open over the article.
-                  side="top"
-                  sideOffset={8}
-                  // Base UI's default drops the popup over the trigger with the selected row on top
-                  // of it. In a figure that reads as the control jumping; beside it, it reads as a
-                  // menu.
-                  alignItemWithTrigger={false}
-                  className="z-[150]"
-                >
-                  <Select.Popup
-                    // Portalled out of the figure, so the article's font has to come along with it.
-                    className={cn(
-                      // Base UI measures the trigger onto the positioner, so the menu inherits the
-                      // width the button decided without either of them naming a number, plus a
-                      // margin of its own: a menu cut to the exact width of its trigger reads as the
-                      // trigger having grown rather than as a surface that opened over it.
-                      "w-[calc(var(--anchor-width)_+_2rem)] rounded-2xl bg-surface p-1.5 font-pretendard",
-                      // A step brighter than the page it floats over in dark mode: on a near-black
-                      // surface a shadow has nothing left to darken, so the surface carries the lift.
-                      "shadow-ring-lg hairline-black/8 dark:bg-surface-tertiary dark:hairline-white/10",
-                      "origin-[var(--transform-origin)] transition-all duration-150 ease-out",
-                      "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
-                      "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
-                    )}
-                  >
-                    <Select.List>
-                      {PRESS_OPTIONS.map((option) => (
-                        <Select.Item
-                          key={option.value}
-                          value={option.value}
-                          className={cn(
-                            "flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3 py-2",
-                            "text-[13px] text-primary outline-none transition-colors",
-                            // Dark highlight goes lighter, not darker: surface-secondary sits below
-                            // the popup's own surface there and would read as a hole.
-                            "data-[highlighted]:bg-surface-secondary dark:data-[highlighted]:bg-white/8",
-                          )}
-                        >
-                          <Select.ItemText>{option.label}</Select.ItemText>
-                          <Select.ItemIndicator>
-                            <IconCheckmark1Small className="size-4 text-tertiary" />
-                          </Select.ItemIndicator>
-                        </Select.Item>
-                      ))}
-                    </Select.List>
-                  </Select.Popup>
-                </Select.Positioner>
-              </Select.Portal>
-            </Select.Root>
-          </div>
+            <Select.Content
+              // No overlay in the figure — the popup opening over the trigger reads as the
+              // control jumping. Open upwards instead, into the empty half of the stage the
+              // button is standing in, rather than over the article.
+              alignItemWithTrigger={false}
+              side="top"
+              // Portalled out of the figure, so the article's font has to come along with it.
+              className="font-pretendard"
+            >
+              {PRESS_OPTIONS.map((option) => (
+                <Select.Item key={option.value} value={option.value}>
+                  {option.label}
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
         </div>
       </div>
     </figure>
