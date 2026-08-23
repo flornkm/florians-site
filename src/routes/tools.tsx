@@ -1,4 +1,4 @@
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
 import type { ComponentType } from "react";
@@ -67,6 +67,7 @@ export const Route = createFileRoute("/tools")({
       },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Tools") },
     ],
+    links: [canonicalLink("/tools")],
   }),
   component: ToolsPage,
 });

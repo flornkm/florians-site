@@ -1,6 +1,6 @@
 import { Body1 } from "@/components/design-system/body";
 import { H2 } from "@/components/design-system/heading";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/imprint")({
@@ -15,6 +15,7 @@ export const Route = createFileRoute("/imprint")({
       { name: "twitter:description", content: "The usual imprint page." },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Imprint") },
     ],
+    links: [canonicalLink("/imprint")],
   }),
   component: ImprintPage,
 });
