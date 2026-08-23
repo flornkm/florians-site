@@ -1,6 +1,6 @@
 import { ExperimentDrawer } from "@/features/experiments/components/experiment-drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
@@ -306,6 +306,8 @@ export const Route = createFileRoute("/experiments")({
             "A page collecting different design and code experiments.",
             "/api/og?title=Experiments",
           ),
+      // ?demo= deep links share the same document; the bare page is canonical.
+      links: [canonicalLink("/experiments")],
     };
   },
   component: ExperimentsPage,

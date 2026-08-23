@@ -1,6 +1,6 @@
 import { Body1 } from "@/components/design-system/body";
 import { H2 } from "@/components/design-system/heading";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/privacy-policy")({
@@ -15,6 +15,7 @@ export const Route = createFileRoute("/privacy-policy")({
       { name: "twitter:description", content: "The usual privacy policy page." },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Privacy%20Policy") },
     ],
+    links: [canonicalLink("/privacy-policy")],
   }),
   component: PrivacyPolicyPage,
 });

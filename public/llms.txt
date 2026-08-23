@@ -6,21 +6,27 @@ Florian blends design and engineering to ship fast, polished interfaces. He tran
 
 ## Why Work With Florian
 - Design + Engineering: Bridges product design and code for tighter feedback loops and higher-quality outcomes.
-- Proven Work: Case studies across consumer and developer tools with attention to UX, motion, and craft.
-- Modern Stack: TypeScript, React, Vike, Tailwind, Three.js/WebGL, Rive; SSR/prerendering and solid Lighthouse scores.
-- Performance & Accessibility: Semantic HTML, responsive patterns, and fast-by-default builds.
+- Proven Work: Selected work across consumer and developer tools with attention to UX, motion, and craft.
+- Modern Stack: TypeScript, React, TanStack Start, Tailwind, Three.js/WebGL; SSR and fast-by-default builds.
+- Performance & Accessibility: Semantic HTML, responsive patterns, and solid Lighthouse scores.
 - Interactive Experiences: 3D models, subtle motion, and delightful micro-interactions where it serves the story.
-- AI-Powered Touchpoints: On-site chat/contact experience using modern AI SDKs.
 - Collaboration: Open for advisory and sometimes embedded work.
 
-## Portfolio Overview
-- Work: Feature projects and case studies - [Boost](/work/boost), [Inlang](/work/inlang), [Sona](/work/sona).
-- About: Background, values, tools, and accolades - [/about](/about).
-- Writing: A blog-like stream of photos, experiments, and updates - [/writing](/writing).
-- Contact: Chat-based contact and quick questions - [/contact](/contact).
-- Send a Postcard: A playful way to say hi - [/send-postcard](/send-postcard).
-- Colophon: Tech stack, inspirations, and credits - [/colophon](/colophon).
-- Legal: [/imprint](/imprint), [/privacy-policy](/privacy-policy).
+## Site Map
+- Work: Selected projects with imagery and clips - [/](/)
+- About: Background, values, tools, and accolades - [/about](/about)
+- Writing: Notes, essays, and live experiments - [/writing](/writing)
+- Contact: Email and social profiles - [/contact](/contact)
+- Experiments: Interactive playground pieces - [/experiments](/experiments)
+- Tools: Hardware and software Florian uses - [/tools](/tools)
+- Colophon: Tech stack, inspirations, and credits - [/colophon](/colophon)
+- Sitemap: Every page on this site - [/sitemap](/sitemap), machine-readable at [/sitemap.xml](/sitemap.xml)
+- Legal: [/imprint](/imprint), [/privacy-policy](/privacy-policy)
+
+## Machine-Readable Access
+- Every HTML page is also served as markdown: request it with the `Accept: text/markdown` header.
+- Nonexistent paths return HTTP 404 with recovery links (this file, /sitemap.xml).
+- The homepage embeds JSON-LD (schema.org Person + WebSite) for entity resolution.
 
 ## Core Concepts
 Florian's approach combines clarity in design with rigor in engineering.

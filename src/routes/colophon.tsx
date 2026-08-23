@@ -5,7 +5,7 @@ import { Link } from "@/components/ui/link";
 import { INSPIRATION } from "@/features/colophon/const/inspiration";
 import { PEOPLE } from "@/features/colophon/const/people";
 import { proseVariants } from "@/lib/prose-variants";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, canonicalLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import { IconArrowUpRight } from "central-icons/IconArrowUpRight";
@@ -47,6 +47,7 @@ export const Route = createFileRoute("/colophon")({
       },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Colophon") },
     ],
+    links: [canonicalLink("/colophon")],
   }),
   component: ColophonPage,
 });
