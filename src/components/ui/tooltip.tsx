@@ -98,7 +98,7 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
             <BaseTooltip.Positioner
               sideOffset={8}
               className={cn(
-                "h-[var(--positioner-height)] w-[var(--positioner-width)]",
+                "z-[150] h-[var(--positioner-height)] w-[var(--positioner-width)]",
                 "max-w-[var(--available-width)]",
                 "transition-[top,left,right,bottom,transform]",
                 `duration-[0.1s] ease-[${easing}]`,
@@ -107,7 +107,7 @@ export function TooltipGroup({ children }: TooltipGroupProps) {
             >
               <BaseTooltip.Popup
                 className={cn(
-                  "relative z-50 font-medium bg-surface-inverted text-inverted rounded-lg",
+                  "relative font-medium bg-surface-inverted text-inverted rounded-lg",
                   "h-[var(--popup-height,auto)] w-[var(--popup-width,auto)]",
                   `origin-[var(--transform-origin)]`,
                   `transition-[width,height,opacity,scale] duration-[0.1s] ease-[${easing}]`,
@@ -258,11 +258,11 @@ export function RichTooltip({ children, content, className, maxWidth = 360 }: Ri
         )}
       />
       <BaseTooltip.Portal>
-        <BaseTooltip.Positioner sideOffset={12}>
+        <BaseTooltip.Positioner sideOffset={12} className="z-[150]">
           <BaseTooltip.Popup
             data-rich-tooltip
             className={cn(
-              "z-50 bg-primary border border-primary rounded-lg shadow-lg p-3 overflow-hidden",
+              "bg-primary border border-primary rounded-lg shadow-lg p-3 overflow-hidden",
               "origin-[var(--transform-origin)]",
               "transition-all duration-100 ease-out",
               "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",

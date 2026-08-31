@@ -27,7 +27,7 @@ const MODES: { value: Mode; label: string }[] = [
 ];
 
 export function SwitchStretch() {
-  const [mode, setMode] = useState<Mode>("stretch");
+  const [mode, setMode] = useState<Mode>("plain");
   const [on, setOn] = useState(true);
   const stretch = mode === "stretch";
 
@@ -36,8 +36,10 @@ export function SwitchStretch() {
       <div className="flex justify-center rounded-sm p-4 outline -outline-offset-1 outline-black/5 md:p-12 dark:outline-white/8">
         {/* A floor on the stage rather than more padding: the switch is small enough that the
             frame would otherwise shrinkwrap to a strip, and the min-height keeps the figure the
-            same weight in the column as the other three. */}
-        <div className="flex min-h-[12rem] w-full flex-col items-center justify-center gap-10">
+            same weight in the column as the other three. Equal 1fr rows above and below the switch
+            hold it at the exact vertical center of the stage while the control sits on the floor,
+            matching the button figure. */}
+        <div className="grid min-h-[12rem] w-full grid-rows-[1fr_auto_1fr] justify-items-center">
           <button
             type="button"
             role="switch"
@@ -49,7 +51,7 @@ export function SwitchStretch() {
             // stretch is a desktop-only flourish.
             onTouchStart={() => {}}
             className={cn(
-              "group relative h-[32px] w-[72px] shrink-0 cursor-pointer touch-manipulation select-none rounded-full",
+              "group relative row-start-2 h-[32px] w-[72px] shrink-0 cursor-pointer touch-manipulation select-none rounded-full",
               "[-webkit-tap-highlight-color:transparent]",
               "transition-colors duration-200 ease-out motion-reduce:transition-none",
               // No ring-offset: Tailwind's offset colour is a hard white, and with no card behind
@@ -80,7 +82,10 @@ export function SwitchStretch() {
           <div
             role="group"
             aria-label="Press behaviour"
-            className="relative flex rounded-full bg-surface-tertiary p-1 dark:bg-surface"
+            // 16px off the card's visible edge, not the stage floor: the stage sits inside the
+            // card padding, so at md the control has to reach 32px into it to land there. At the
+            // small size the padding is 16px, and the stage floor already is that line.
+            className="relative row-start-3 flex self-end rounded-full bg-surface-tertiary p-1 md:-mb-8 dark:bg-surface"
           >
             {/* Plain CSS transform rather than a layout animation, and two equal cells, so the
                 pill is exactly half the track and slides by its own width. */}

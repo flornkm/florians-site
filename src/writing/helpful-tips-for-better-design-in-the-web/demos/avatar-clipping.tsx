@@ -85,7 +85,9 @@ const OPTIONS: Option[] = [
 
 export function AvatarClipping() {
   const reduceMotion = useReducedMotion() ?? false;
-  const [on, setOn] = useState({ clip: true, ring: true, optical: true, backdrop: true });
+  // All four off to start: the figure opens on the naive stack the tip is arguing against, so the
+  // fix is something the reader switches on rather than something they have to undo.
+  const [on, setOn] = useState({ clip: false, ring: false, optical: false, backdrop: false });
   const toggle = (key: Option["key"]) => setOn((prev) => ({ ...prev, [key]: !prev[key] }));
 
   return (

@@ -60,8 +60,12 @@ const SLUGS: Record<string, number> = {
   "transit-ticket": 1200, // static vector art; just needs a paint
   flo: 1000, // rough.js frames build on mount; a beat to draw + settle the boil
   "video-tapes": 2500, // WebGL boot + label textures rasterize
-  "prism-orb": 2000, // WebGL boot; no texture to wait on
+  "prism-orb": 2500, // WebGL boot + the page-behind raster waits on document.fonts.ready
+  "claude-mark": 2500, // WebGL boot + the spokes settle out of their mount burst
+  "magnet-mark": 2000, // WebGL boot + the tiles assemble into the wordmark
   "claude-2010": 2500, // room webp assets load + first pixelated render
+  "icon-lens": 2500, // WebGL boot + the engraving texture rasterizes
+  "liquid-glass": 2500, // WebGL boot + the type raster waits on document.fonts.ready
 };
 
 // Optionally restrict to a subset, e.g. CAPTURE_ONLY=copy,paste-editor
@@ -76,6 +80,17 @@ const CLICKS: Record<string, string> = {};
 // Optional interaction to stage a slug right before the shot (after the settle
 // wait) — the live demo is untouched.
 const PREPARE: Record<string, (dialog: Locator, page: Page) => Promise<void>> = {
+  // Opens as a plain wordmark. Click inside it and shoot a fifth of a second later, so
+  // the poster catches the shockwave's ring while it is still crossing the mark.
+  "magnet-mark": async (dialog, page) => {
+    const box = await dialog.boundingBox();
+    if (!box) return;
+    await page.mouse.move(box.x + box.width * 0.45, box.y + box.height * 0.5);
+    await page.waitForTimeout(400);
+    await page.mouse.down();
+    await page.mouse.up();
+    await page.waitForTimeout(220);
+  },
   // Stage a pasted attachment so the poster shows the chip and the active send button.
   "paste-editor": async (dialog, page) => {
     const sample = [
