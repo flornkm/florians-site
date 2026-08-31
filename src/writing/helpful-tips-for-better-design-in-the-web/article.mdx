@@ -13,7 +13,9 @@ import { SwitchStretch } from "./demos/switch-stretch";
 
 # Helpful tips for webdesign
 
-This article is based on many experiences I had in the last couple of weeks on a variety of websites. The purpose of this article is not argueing this is the only correct way, good design can come from many different directions, but it should help to give you an idea of how things we take for granted today can be built a little differently to improve experiences.
+This article bullet-point-lists a bunch of tips I personally found helpful when learning them. Most of these come from practical work where we encountered edge cases. I believe continues refactoring of the elements used in your app, even when using an existing design system, leads to a better user experience in the long run.
+
+_Obviously, feel free to copy this article and give it your agent._
 
 ## Avatar Groups, done right
 
@@ -41,6 +43,11 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 
 <ActiveState />
 
+- Active states make it immidately clear if an element is pressed
+- The more playful the brand, the more elements would move
+- I tend to use more subtle versions for this if an UI is used professionally
+- Always keep in mind: Users will click your buttons hundreds, sometimes thausands of times a day
+
 <br />
 
 ## Stretch your switches while they are held
@@ -48,10 +55,15 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 <SwitchStretch />
 
 - Elements that move fast in reallife appear longer, therefore stretches feel more natural
-- Combined with different methods of animating the thumb, the switch will feel playful, heavy, soft, etc. - Try to use this to align with how your brand looks and feels
+- Combined with different methods of animating the thumb, the switch will feel playful, heavy, soft, etc.
+- Try to use this to align with how your brand looks and feels
 
 <br />
 
 ## Ease your gradients
 
 <GradientEasing />
+
+- Helps to create better readability while taking up less space
+- Generally leads to a more polished look and feel, i.e. when used in cards
+- Mostly to be used with background imagery, leading to more of the natural light of the image being visible
