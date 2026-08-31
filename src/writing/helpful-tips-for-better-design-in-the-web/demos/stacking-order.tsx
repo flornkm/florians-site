@@ -118,14 +118,17 @@ export function StackingOrder() {
           one images carry — with no fill behind it there is nothing to hold it back, and at
           white/15 it read as a drawn box rather than an edge. */}
       <div className="flex justify-center rounded-sm p-4 outline -outline-offset-1 outline-black/5 md:p-12 dark:outline-white/8">
-        <div className="flex w-full flex-col items-center gap-8">
+        {/* Same stage as the button and switch figures: equal 1fr rows hold the subject at the
+            vertical center while the control sits on the floor. Taller floor than theirs — the
+            tray alone is most of 12rem, and the rows need slack left over to do the centering. */}
+        <div className="grid min-h-[20rem] w-full grid-rows-[1fr_auto_1fr] justify-items-center">
           {/* A 4px frame, so its radius is the panels' 20px plus that inset. It must read as
             *recessed* in both themes: surface-tertiary is a step down in light but a step up in
             dark, so the darker secondary takes over there.
             Fluid up to 21rem rather than fixed at it: below ~370px of viewport the figure's own
             padding leaves less than that, and a fixed width would push the panels out of the
             outline instead of narrowing. The cap is 21rem plus the 4px frame on either side. */}
-          <div className="w-full max-w-[21.5rem] rounded-3xl bg-surface-tertiary p-1 dark:bg-surface-secondary">
+          <div className="row-start-2 w-full max-w-[21.5rem] rounded-3xl bg-surface-tertiary p-1 dark:bg-surface-secondary">
             <div className="relative w-full" style={{ height: CONTENT_TOP + CONTENT_HEIGHT }}>
               {toolbarLast ? [content, toolbar] : [toolbar, content]}
             </div>
@@ -134,7 +137,10 @@ export function StackingOrder() {
           <div
             role="group"
             aria-label="Stacking mechanism"
-            className="relative flex rounded-full bg-surface-tertiary p-1 dark:bg-surface"
+            // 16px off the card's visible edge, not the stage floor: the stage sits inside the
+            // card padding, so at md the control has to reach 32px into it to land there. At the
+            // small size the padding is 16px, and the stage floor already is that line.
+            className="relative row-start-3 flex self-end rounded-full bg-surface-tertiary p-1 md:-mb-8 dark:bg-surface"
           >
             {/* Plain CSS transform, not a Framer `layout` animation — the pill sits outside
               Framer's layout tree, so the tile's open/close morph can't sweep it along.

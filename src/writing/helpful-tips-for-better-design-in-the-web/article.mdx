@@ -1,0 +1,69 @@
+---
+title: Tips to improve your product
+description: Unpopular tips that help to make the web a better, more fun place to be in.
+date: 2026-08-30
+type: note
+---
+
+import { ActiveState } from "./demos/active-state";
+import { AvatarClipping } from "./demos/avatar-clipping";
+import { StackingOrder } from "./demos/stacking-order";
+import { GradientEasing } from "./demos/gradient-easing";
+import { SwitchStretch } from "./demos/switch-stretch";
+
+# Helpful tips for webdesign
+
+This article bullet-point-lists a bunch of tips I personally found helpful when I learned them. Most of these come from practical work, where we encountered edge cases. I believe continuous refactoring of the elements used in your app, even when you use an existing design system, leads to a better user experience in the long run.
+
+_Obviously, feel free to copy this article and give it your agent._
+
+## Avatar Groups, done right
+
+<AvatarClipping />
+
+- Makes the "empty" space between them work with gradients or background images
+- Easy to maintain, and scalable
+- Helps to keep initials readable
+
+Try to avoid using `borders` or `outlines`, they need to have the exact color of the background which makes it impossible to scale beyond solid colors.
+
+<br />
+
+## Avoid z-index as much as possible
+
+<StackingOrder />
+
+- A good element order makes you be able to avoid most z-index classes
+- If using z-index, try to make agents able to know why
+- Don't overcomplicate or nest absolute classes if not necessary
+
+<br />
+
+## Don't skip the active state
+
+<ActiveState />
+
+- Active states make it immidately clear if an element is pressed
+- The more playful the brand, the more elements would move
+- I tend to use more subtle versions for this if an UI is used professionally
+- Always keep in mind: Users will click your buttons hundreds, sometimes thausands of times a day
+
+<br />
+
+## Stretch your switches while they are held
+
+<SwitchStretch />
+
+- Elements that move fast in reallife appear longer, therefore stretches feel more natural
+- Combined with different methods of animating the thumb, the switch will feel playful, heavy, soft, etc.
+- Try to use this to align with how your brand looks and feels
+
+<br />
+
+## Ease your gradients
+
+<GradientEasing />
+
+- Helps to create better readability while taking up less space
+- Generally leads to a more polished look and feel, i.e. when used in cards
+- Mostly to be used with background imagery, leading to more of the natural light of the image being visible
