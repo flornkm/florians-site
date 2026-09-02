@@ -110,31 +110,51 @@ describe("MDX to markdown", () => {
     .filter((e) => e.isDirectory() && fs.existsSync(path.join(writingDir, e.name, "article.mdx")))
     .map((e) => e.name);
 
-  // Code is the part an agent cannot reconstruct from the prose, and the conversion has two
-  // rules — drop `import`/`export` lines, replace JSX component lines — that would happily eat
-  // lines inside a fence. Comparing each block verbatim rather than counting fences is what
-  // catches a line going missing from the middle of one.
-  it.each(posts)("keeps every code block in %s verbatim", (slug: string) => {
-    const source = fs.readFileSync(path.join(writingDir, slug, "article.mdx"), "utf8");
-    const blocks = [...source.matchAll(/^```[^\n]*\n[\s\S]*?^```/gm)].map((m) => m[0]);
+  /** Every `<Component />` in a post's article, paired with its sidecar path if one exists. */
+  function componentsIn(slug: string) {
+    const dir = path.join(writingDir, slug);
+    const source = fs.readFileSync(path.join(dir, "article.mdx"), "utf8");
+    const sources = new Map<string, string>();
+    for (const [, names, from] of source.matchAll(/^import\s+\{([^}]+)\}\s+from\s+"([^"]+)"/gm)) {
+      for (const entry of names!.split(",")) sources.set(entry.trim(), from!);
+    }
+    return [...source.matchAll(/<([A-Z]\w*)/g)].map((m) => {
+      const name = m[1]!;
+      const from = sources.get(name);
+      const sidecar = from?.startsWith(".") ? `${path.resolve(dir, from)}.md` : undefined;
+      return { name, sidecar: sidecar && fs.existsSync(sidecar) ? sidecar : undefined };
+    });
+  }
+
+  // The whole point of the conversion: a demo the page lets you play with becomes, in the twin,
+  // the code that makes it work. An agent handed only the interactive-content note is left to
+  // invent the CSS, which is what this post promising "give it your agent" was doing before.
+  // Compared block by block, so a line lost from the middle of one still fails.
+  it.each(posts)("inlines each demo's code into the twin of %s", (slug: string) => {
     const twin = markdownPages[`/writing/${slug}`]!.markdown;
 
-    expect((twin.match(/^```/gm) ?? []).length).toBe((source.match(/^```/gm) ?? []).length);
-    for (const block of blocks) expect(twin).toContain(block);
+    for (const { sidecar } of componentsIn(slug)) {
+      if (!sidecar) continue;
+      const code = fs.readFileSync(sidecar, "utf8");
+      const blocks = [...code.matchAll(/^```[^\n]*\n[\s\S]*?^```/gm)].map((m) => m[0]);
+      expect(blocks.length, `${path.basename(sidecar)} has no code to inline`).toBeGreaterThan(0);
+      for (const block of blocks) expect(twin).toContain(block);
+    }
   });
 
-  // A demo becomes a note saying the web page has more; page furniture (the copy button)
-  // becomes nothing at all. Either way no JSX survives — a component left in the twin, whether
-  // it stood on its own line or sat inline in a sentence, is markup an agent has to step over.
-  it.each(posts)("marks the demos in %s and leaves no JSX behind", (slug: string) => {
-    const source = fs.readFileSync(path.join(writingDir, slug, "article.mdx"), "utf8");
-    const demos = [...source.matchAll(/^\s*<([A-Z]\w*)/gm)].map((m) => m[1]!);
+  // A demo with no sidecar still gets the note; page furniture becomes nothing at all. Either
+  // way no JSX survives — a component left in the twin, whether it stood on its own line or sat
+  // inline in a sentence, is markup an agent has to step over.
+  it.each(posts)("leaves no JSX in the twin of %s", (slug: string) => {
     const twin = markdownPages[`/writing/${slug}`]!.markdown;
     const outsideFences = twin.replace(/^```[\s\S]*?^```/gm, "");
+    const uncovered = componentsIn(slug).filter(
+      ({ name, sidecar }) => !sidecar && name !== "CopyAsMarkdown",
+    );
 
     expect((twin.match(/\*\(Interactive content on the web page\.\)\*/g) ?? []).length).toBe(
-      demos.length,
+      uncovered.length,
     );
-    expect(outsideFences).not.toMatch(/<[A-Z]\w*/);
+    expect(outsideFences).not.toMatch(/<[A-Za-z]\w*/);
   });
 });
