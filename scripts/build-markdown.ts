@@ -193,6 +193,36 @@ const CHROME_PATTERN = new RegExp(`\\s*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>
 
 const INTERACTIVE_NOTE = "*(Interactive content on the web page.)*";
 
+/**
+ * Component name -> the module the article imports it from, so a demo can be traced back to
+ * its own source directory without a naming convention to keep in sync.
+ */
+function importedFrom(body: string): Map<string, string> {
+  const sources = new Map<string, string>();
+  for (const [, names, source] of body.matchAll(/^import\s+\{([^}]+)\}\s+from\s+"([^"]+)"/gm)) {
+    for (const entry of names!.split(",")) {
+      const name = entry
+        .trim()
+        .split(/\s+as\s+/)
+        .pop()
+        ?.trim();
+      if (name) sources.set(name, source!);
+    }
+  }
+  return sources;
+}
+
+/**
+ * A demo's agent-facing twin: `demos/switch-stretch.md` beside `demos/switch-stretch.tsx`.
+ * What the page shows as something to play with, the markdown shows as the code that does it.
+ */
+function demoMarkdown(component: string, sources: Map<string, string>, postDir: string): string {
+  const source = sources.get(component);
+  if (!source?.startsWith(".")) return "";
+  const sidecar = `${path.resolve(postDir, source)}.md`;
+  return fs.existsSync(sidecar) ? fs.readFileSync(sidecar, "utf8").trim() : "";
+}
+
 /** Index of the last line of the JSX block opening at `start`, self-closing or not. */
 function componentBlockEnd(lines: string[], start: number, name: string): number {
   if (/\/>\s*$/.test(lines[start]!)) return start;
@@ -204,19 +234,24 @@ function componentBlockEnd(lines: string[], start: number, name: string): number
   return start;
 }
 
-// MDX -> markdown: drop imports/exports and JSX component blocks; note where an interactive
-// demo lives so agents know the web page shows more.
+// MDX -> markdown. The page and the twin carry the same prose; where they differ is the
+// components, which are the whole point of the conversion:
 //
-// A component's props usually run over several lines (`<Comparison\n  before=…\n/>`), so the
-// whole block has to go, not just its opening line — otherwise the props land in the twin as
-// raw JSX, which is noise to a reader and to an agent alike. Where a block carries an `alt`,
-// that sentence is the only description of the figure anywhere in the markdown, so it stays as
-// a caption under the note.
+// - A demo becomes the code it runs, read from the sidecar beside its source. The page can
+//   show you a switch that stretches under your finger; markdown cannot, and an agent handed
+//   "*(Interactive content on the web page.)*" is left to invent the CSS. It falls back to
+//   that note only where no sidecar exists.
+// - A figure becomes the note plus its `alt`, which is the only description of it anywhere in
+//   the markdown.
+// - Page furniture (the copy button) becomes nothing. It sits inline in a sentence, so it is
+//   cut out of the line rather than taking the line with it.
 //
-// Fenced code blocks pass through untouched: they are the part an agent cannot reconstruct
-// from the prose, and every rule above would otherwise eat lines inside them.
-function cleanMdxBody(body: string): string {
+// Props usually run over several lines (`<Comparison\n  before=…\n/>`), so the whole block is
+// consumed, not just its opening line — otherwise they land in the twin as raw JSX. Fenced
+// code blocks pass through untouched: every rule above would otherwise eat lines inside them.
+function cleanMdxBody(body: string, postDir: string): string {
   const lines = body.split("\n");
+  const sources = importedFrom(body);
   const out: string[] = [];
   let inFence = false;
 
@@ -233,6 +268,8 @@ function cleanMdxBody(body: string): string {
       continue;
     }
     if (/^\s*(import|export)\s/.test(line)) continue;
+    // Spacing between sections on the page; in markdown the blank lines already say it.
+    if (/^\s*<br\s*\/?>\s*$/.test(line)) continue;
 
     const stripped = line.replace(CHROME_PATTERN, "");
     const component = stripped.match(/^\s*<([A-Z]\w*)/)?.[1];
@@ -246,6 +283,12 @@ function cleanMdxBody(body: string): string {
     const end = componentBlockEnd(lines, i, component);
     const block = lines.slice(i, end + 1).join("\n");
     i = end;
+
+    const demo = demoMarkdown(component, sources, postDir);
+    if (demo) {
+      out.push(demo);
+      continue;
+    }
 
     out.push(INTERACTIVE_NOTE);
     const alt = block.match(/\balt="([^"]+)"/)?.[1];
@@ -270,7 +313,7 @@ const posts: WritingPost[] = fs
       title: String(data.title ?? e.name),
       description: String(data.description ?? ""),
       date: String(data.date ?? ""),
-      body: cleanMdxBody(content),
+      body: cleanMdxBody(content, path.join(writingDir, e.name)),
     };
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
