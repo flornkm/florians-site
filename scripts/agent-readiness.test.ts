@@ -102,3 +102,39 @@ describe("llms.txt", () => {
     }
   });
 });
+
+describe("MDX to markdown", () => {
+  const writingDir = path.join(ROOT, "src/writing");
+  const posts = fs
+    .readdirSync(writingDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && fs.existsSync(path.join(writingDir, e.name, "article.mdx")))
+    .map((e) => e.name);
+
+  // Code is the part an agent cannot reconstruct from the prose, and the conversion has two
+  // rules — drop `import`/`export` lines, replace JSX component lines — that would happily eat
+  // lines inside a fence. Comparing each block verbatim rather than counting fences is what
+  // catches a line going missing from the middle of one.
+  it.each(posts)("keeps every code block in %s verbatim", (slug: string) => {
+    const source = fs.readFileSync(path.join(writingDir, slug, "article.mdx"), "utf8");
+    const blocks = [...source.matchAll(/^```[^\n]*\n[\s\S]*?^```/gm)].map((m) => m[0]);
+    const twin = markdownPages[`/writing/${slug}`]!.markdown;
+
+    expect((twin.match(/^```/gm) ?? []).length).toBe((source.match(/^```/gm) ?? []).length);
+    for (const block of blocks) expect(twin).toContain(block);
+  });
+
+  // A demo becomes a note saying the web page has more; page furniture (the copy button)
+  // becomes nothing at all. Getting that backwards leaves an agent chasing an interactive
+  // widget that was never content in the first place.
+  it.each(posts)("marks the demos in %s and only the demos", (slug: string) => {
+    const source = fs.readFileSync(path.join(writingDir, slug, "article.mdx"), "utf8");
+    const components = [...source.matchAll(/^\s*<([A-Z]\w*)[^>]*\/?>\s*$/gm)].map((m) => m[1]!);
+    const demos = components.filter((name) => name !== "CopyAsMarkdown");
+    const twin = markdownPages[`/writing/${slug}`]!.markdown;
+
+    expect((twin.match(/\*\(Interactive content on the web page\.\)\*/g) ?? []).length).toBe(
+      demos.length,
+    );
+    for (const name of components) expect(twin).not.toContain(`<${name}`);
+  });
+});

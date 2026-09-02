@@ -5,6 +5,7 @@ date: 2026-08-30
 type: note
 ---
 
+import { CopyAsMarkdown } from "@/features/writing/components/copy-as-markdown";
 import { ActiveState } from "./demos/active-state";
 import { AvatarClipping } from "./demos/avatar-clipping";
 import { StackingOrder } from "./demos/stacking-order";
@@ -15,7 +16,9 @@ import { SwitchStretch } from "./demos/switch-stretch";
 
 This article bullet-point-lists a bunch of tips I personally found helpful when I learned them. Most of these come from practical work, where we encountered edge cases. I believe continuous refactoring of the elements used in your app, even when you use an existing design system, leads to a better user experience in the long run.
 
-_Obviously, feel free to copy this article and give it your agent._
+_Obviously, feel free to copy this article and give it your agent._ Every section ships the code the demo above it actually runs, so there is nothing left to guess at. The button takes the whole post — code blocks included — or your agent can fetch [the markdown itself](/writing/tips-to-improve-your-product.md).
+
+<CopyAsMarkdown />
 
 ## Avatar Groups, done right
 
@@ -27,6 +30,39 @@ _Obviously, feel free to copy this article and give it your agent._
 
 Try to avoid using `borders` or `outlines`, they need to have the exact color of the background which makes it impossible to scale beyond solid colors.
 
+The gap is a hole, not a ring painted in the surface colour: each avatar subtracts its neighbour's circle, grown by the gap, out of its own body. 64px avatars, overlapping by 25%, with a 3px gap — so the neighbour's centre sits at `32 - 64 × 0.75 = -16` and its cut radius at `32 + 3`.
+
+```html
+<svg width="64" height="64" viewBox="0 0 64 64">
+  <mask id="body">
+    <rect width="100%" height="100%" fill="black" />
+    <circle cx="32" cy="32" r="32" fill="white" />
+    <circle cx="-16" cy="32" r="35" fill="black" />
+  </mask>
+  <g mask="url(#body)">
+    <circle cx="32" cy="32" r="32" fill="#4a5ec8" />
+    <text x="32" y="32" text-anchor="middle" dominant-baseline="central">FK</text>
+  </g>
+</svg>
+```
+
+```css
+.avatar + .avatar {
+  margin-left: -16px;
+} /* 25% of 64 */
+```
+
+If you do want a ring, build it out of the same two circles so it hugs the cut instead of crossing it: the avatar circle inset by half the stroke, masked by the grown neighbour, plus the neighbour's arc clipped back to the body.
+
+```html
+<g fill="none" stroke-width="1" stroke="rgb(0 0 0 / 0.2)">
+  <circle cx="32" cy="32" r="31.5" mask="url(#ring)" />
+  <circle cx="-16" cy="32" r="35.5" clip-path="url(#clip)" />
+</g>
+```
+
+The initials need a nudge too. The crescent eats the left of a clipped avatar, so its optical centre sits right of `cx` — halfway toward the visible band's midpoint, `(-16 + 35) / 4`, reads centred. The full midpoint overshoots.
+
 <br />
 
 ## Avoid z-index as much as possible
@@ -36,6 +72,24 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 - A good element order makes you be able to avoid most z-index classes
 - If using z-index, try to make agents able to know why
 - Don't overcomplicate or nest absolute classes if not necessary
+
+The trap is that a positioned element with a `z-index` starts its own stacking context, so a menu's desperate 9999 is only ever measured against its siblings inside the toolbar — and the toolbar as a whole still loses to the panel below it. No number typed into the menu can fix that.
+
+```jsx
+<div style={{ position: "absolute", zIndex: 1 }}>
+  {/* toolbar — this z-index is what traps everything below it */}
+  <div style={{ position: "absolute", zIndex: 9999 }}>…menu…</div>
+</div>
+<div style={{ position: "absolute", zIndex: 2 }}>…content…</div>
+```
+
+The fix ships no `z-index` at all. Both panels are absolutely positioned off their own fixed offsets rather than their index, so reordering the DOM changes which one paints on top and moves nothing on screen.
+
+```jsx
+<div className="relative">{menuOpen ? [content, toolbar] : [toolbar, content]}</div>
+```
+
+Keep the toolbar last for as long as the menu is on screen, not just while it is open — swapping back the instant the state flips drops the menu behind the panel mid-fade.
 
 <br />
 
@@ -48,6 +102,72 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 - I tend to use more subtle versions for this if an UI is used professionally
 - Always keep in mind: Users will click your buttons hundreds, sometimes thausands of times a day
 
+Playful is a real spring sampled into `linear()` rather than approximated by a bezier — a bezier cannot cross its own target, which is the entire character of a spring. This one is underdamped at ζ=0.5: it overshoots 16% of the distance a third of the way through and is settled by the end.
+
+```css
+:root {
+  --press-spring: linear(
+    0,
+    0.09,
+    0.298,
+    0.547,
+    0.779,
+    0.963,
+    1.085,
+    1.148,
+    1.163,
+    1.145,
+    1.11,
+    1.069,
+    1.032,
+    1.003,
+    0.985,
+    0.975,
+    0.974,
+    0.977,
+    0.983,
+    0.989,
+    1
+  );
+}
+
+/* Down fast, back slowly. The press is a reaction and has to land inside the same
+   moment as the finger; the release is the button recovering. */
+.button {
+  transition:
+    background-color 180ms ease-out,
+    scale 420ms var(--press-spring);
+}
+.button:active {
+  transition:
+    background-color 180ms ease-out,
+    scale 240ms var(--press-spring);
+  scale: 0.94;
+}
+```
+
+Subtle stays exactly where it is and drops tone instead. On a fill already near-black a few points is nothing, so the press takes eleven and stops just short of black — far enough that it cannot be mistaken for hover, short enough that the button is still a surface rather than a hole.
+
+```css
+.button {
+  background-color: oklch(0.27 0 0);
+  transition: background-color 240ms ease-out;
+}
+.button:hover {
+  background-color: oklch(0.31 0 0);
+}
+.button:active {
+  background-color: oklch(0.16 0 0);
+  transition: background-color 90ms ease-out;
+}
+```
+
+Two things that will bite you. Use `scale`, not `transform` — a transition naming only `transform` lets Tailwind's standalone `scale` property snap. And Safari only honours `:active` on touch when the element or an ancestor carries a touchstart listener, so a button without one is a desktop-only flourish on exactly the devices that have no hover to fall back on:
+
+```js
+button.addEventListener("touchstart", () => {});
+```
+
 <br />
 
 ## Stretch your switches while they are held
@@ -58,6 +178,40 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 - Combined with different methods of animating the thumb, the switch will feel playful, heavy, soft, etc.
 - Try to use this to align with how your brand looks and feels
 
+The knob is pinned to both ends of the track rather than translated, so its width is simply whatever the two offsets leave over. Pulling the far one in both elongates it and points it in the direction it is about to travel, in one property — a translated knob would need a second, competing scale to do the same, and would smear its rounded caps doing it. The track never changes size, so nothing beside it gets pushed around.
+
+```css
+/* 72×32 track, 3px of padding, so the knob rests at 40 across and goes to 49 held. */
+.knob {
+  position: absolute;
+  inset-block: 3px;
+  left: 3px;
+  right: 29px;
+  border-radius: 9999px;
+  transition:
+    left 280ms cubic-bezier(0.32, 0.72, 0, 1),
+    right 280ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+[aria-checked="true"] .knob {
+  left: 29px;
+  right: 3px;
+}
+
+/* Held: pull in the offset on the side it is about to cross. */
+.switch:active .knob {
+  right: 20px;
+}
+.switch[aria-checked="true"]:active .knob {
+  left: 20px;
+}
+.switch:active .knob {
+  transition-duration: 160ms;
+  transition-timing-function: ease-out;
+}
+```
+
+Quick on the way out, unhurried on the way back, which is what makes the release read as elastic rather than as a second animation. Make it a pill at rest, not a circle: a circle that only becomes a pill on press reads as a glitch.
+
 <br />
 
 ## Ease your gradients
@@ -67,3 +221,25 @@ Try to avoid using `borders` or `outlines`, they need to have the exact color of
 - Helps to create better readability while taking up less space
 - Generally leads to a more polished look and feel, i.e. when used in cards
 - Mostly to be used with background imagery, leading to more of the natural light of the image being visible
+
+A two-stop `linear-gradient` fades at a constant rate, which puts a visible edge where it meets the image. The ease is one line of maths — `alpha(p) = A × (1 - p)ⁿ` — sampled into enough stops that each straight segment is shorter than the curvature it stands in for.
+
+```js
+const A = 0.62; // scrim alpha at the bottom
+const N = 1.6; // the exponent is the whole ease; above 1 keeps the top flat
+const HOLD = 0.2; // fraction of the bottom held near full strength
+const STOPS = 16;
+
+const ramp = Array.from({ length: STOPS + 1 }, (_, i) => {
+  const alpha = A * (1 - i / STOPS);
+  const p = i / STOPS;
+  const eased = i === 0 ? 0 : HOLD + (1 - HOLD) * (1 - (1 - p) ** (1 / N));
+  return `rgb(0 0 0 / ${alpha.toFixed(4)}) ${(eased * 100).toFixed(3)}%`;
+});
+
+element.style.backgroundImage = `linear-gradient(to top, ${ramp.join(", ")})`;
+```
+
+A cosine arrives flat at _both_ ends, and the flat end at the bottom is what builds a slab: the ramp sits on its darkest value instead of leaving it. Flatness is only worth anything at the top, where the scrim has to vanish into the photograph without drawing a line. The hold is there because easing otherwise drains the exact band a caption stands on — a fifth keeps that ground steady; a third reads as a slab again.
+
+Sixteen stops is not arbitrary either. Dropping to eight nearly halves the improvement, taking the kink where the eased ramp lands from 35% of the linear one's back up past 50%.
