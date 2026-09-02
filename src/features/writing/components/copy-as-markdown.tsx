@@ -33,6 +33,8 @@ const RESET_DELAY = 2000;
 export function CopyAsMarkdown() {
   const [state, setState] = useState<State>("idle");
   const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const markdown = useRef<string | null>(null);
+  const pending = useRef<Promise<void> | null>(null);
 
   const settle = (next: State) => {
     setState(next);
@@ -40,15 +42,45 @@ export function CopyAsMarkdown() {
     resetTimer.current = setTimeout(() => setState("idle"), RESET_DELAY);
   };
 
-  const copy = async () => {
-    try {
-      // The twin of whatever page this is rendered on, so the button never needs to be told
-      // which post it belongs to.
-      const response = await fetch(`${window.location.pathname.replace(/\/$/, "")}.md`, {
-        headers: { accept: "text/markdown" },
+  /* Fetched on approach rather than on click, so the round trip happens while the pointer is
+     still travelling and the press itself has nothing to wait for. Started from hover, focus
+     and pointerdown alike: a mouse announces itself well ahead, a finger only at pointerdown,
+     and the keyboard not at all until focus lands. A reader who never goes near the button
+     never pays for the request. */
+  const prefetch = () => {
+    if (markdown.current !== null) return pending.current ?? Promise.resolve();
+    pending.current ??= fetch(`${window.location.pathname.replace(/\/$/, "")}.md`, {
+      headers: { accept: "text/markdown" },
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`${response.status}`);
+        return response.text();
+      })
+      .then((text) => {
+        markdown.current = text;
+      })
+      // Swallowed here because there is nothing to report yet — nobody has asked for anything.
+      // The click retries and is the one that gets to say it failed.
+      .catch(() => {})
+      .finally(() => {
+        pending.current = null;
       });
-      if (!response.ok) throw new Error(`${response.status}`);
-      await navigator.clipboard.writeText(await response.text());
+    return pending.current;
+  };
+
+  const copy = async () => {
+    // Awaiting the fetch first spends the click's transient activation, and Safari then refuses
+    // the clipboard outright — so the write has to be the first thing the handler does with
+    // text already in hand. The await below only runs when the prefetch has not landed, which
+    // is the first tap on a touch device and nothing else.
+    if (markdown.current === null) await prefetch();
+    if (markdown.current === null) {
+      settle("failed");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(markdown.current);
       settle("copied");
     } catch {
       // Clipboard access is refused outright in some contexts, and there is nothing to retry.
@@ -61,6 +93,9 @@ export function CopyAsMarkdown() {
     <button
       type="button"
       onClick={copy}
+      onPointerEnter={prefetch}
+      onPointerDown={prefetch}
+      onFocus={prefetch}
       aria-label={LABEL[state]}
       title={LABEL[state]}
       className={cn(
