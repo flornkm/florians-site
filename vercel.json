@@ -6,6 +6,13 @@
     "api/runs/sync.ts": { "maxDuration": 60 }
   },
   "crons": [{ "path": "/api/runs/sync", "schedule": "0 4 * * *" }],
+  "redirects": [
+    {
+      "source": "/writing/helpful-tips-for-better-design-in-the-web",
+      "destination": "/writing/tips-to-improve-your-product",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
