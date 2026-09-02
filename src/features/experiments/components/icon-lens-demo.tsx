@@ -315,7 +315,10 @@ vec3 plate() {
 // real ring of shadow; the glass in the middle passes light and concentrates it, so the
 // darkest part of a magnifier's shadow is its rim and the brightest point on the table
 // is directly beneath its centre.
-vec3 loupeShadow(vec2 p, vec3 col) {
+// Returned as the factor rather than the shaded colour, because the direct view needs it
+// twice: once to darken whatever it lands on, and once as the alpha of the tint it leaves
+// on the bare surface, which is the page rather than a pixel this shader owns.
+vec3 shadowFactor(vec2 p) {
   vec2 sp = (p - u_lens - vec2(0.10, -0.13) * u_lensR * (0.3 + u_lift))
           / (u_lensR * (1.0 + 0.18 * u_lift));
   float sr = length(sp);
@@ -331,14 +334,24 @@ vec3 loupeShadow(vec2 p, vec3 col) {
   // shadow ending on an invisible edge, which is worse than it landing on white.
   // Faint on purpose. It only has to say the glass is off the surface when it is picked
   // up; anything heavier is a grey cloud sitting on a white page.
-  return col * (1.0 - body * (1.0 - 0.74 * middle) * mix(0.055, 0.125, u_lift))
-             * (1.0 + exp(-f * f) * mix(0.05, 0.04, u_lift) * vec3(1.0, 0.95, 0.86));
+  return vec3(1.0 - body * (1.0 - 0.74 * middle) * mix(0.055, 0.125, u_lift))
+       * (1.0 + exp(-f * f) * mix(0.05, 0.04, u_lift) * vec3(1.0, 0.95, 0.86));
+}
+
+vec3 loupeShadow(vec2 p, vec3 col) {
+  return col * shadowFactor(p);
+}
+
+// The squircle the wash is painted inside. Its own outline is smaller — the pigment is
+// inset — and that outline, not this one, is the icon's silhouette.
+float tileMask(vec2 p, float w) {
+  return coverage(sq5(p / TILE), w / TILE);
 }
 
 // The whole icon as a function of position. The glass calls this again along its
 // refracted rays, which is why the tile's outline bends when the loupe crosses it —
 // there is no flat image of the icon anywhere for it to sample instead.
-vec3 scene(vec2 p, float w) {
+vec4 scene(vec2 p, float w) {
   vec3 col = plate();
 
   // No drop shadow under the tile. On a surface this exact colour any shadow reads as an
@@ -350,13 +363,19 @@ vec3 scene(vec2 p, float w) {
   // here is a white ring around the artwork on a dark page, and reads as a border rather
   // than as part of the icon. Flat either way — any falloff across it shows up as a
   // gradient in the margin, which is the part that should read as nothing at all.
-  float tile = coverage(sq5(p / TILE), w / TILE);
+  float tile = tileMask(p, w);
   col = mix(col, mix(plate(), vec3(1.0), u_ambient), tile);
 
   vec4 ink = pigment(p / GRAD, w / GRAD);
-  col = mix(col, ink.rgb, ink.a * tile);
+  float paint = ink.a * tile;
+  col = mix(col, ink.rgb, paint);
 
-  return loupeShadow(p, col);
+  // rgb is the icon as it looks on the panel, which is what the glass has to sample: what
+  // is behind the loupe is that panel, plate and all. a is what the icon itself covers —
+  // the wash and nothing under it — so the direct view can leave the panel to the page.
+  // The two never disagree, because the backing behind the wash is the plate's own colour
+  // in both themes; dropping it changes what the poster carries, not what it looks like.
+  return vec4(loupeShadow(p, col), paint);
 }
 
 // Direction-to-colour, standing in for a cubemap: one key lobe, a vertical gradient and
@@ -444,7 +463,7 @@ vec3 through(vec2 base, vec3 N, float depth, float w) {
     // almost horizontal and the intersection runs away to infinity; past that angle a
     // real loupe has a wall, not a view.
     vec3 s = sensitivity(t);
-    sum += scene(base + rd.xy * (depth / max(-rd.z, 0.34)), w) * s;
+    sum += scene(base + rd.xy * (depth / max(-rd.z, 0.34)), w).rgb * s;
     wsum += s;
   }
   return sum / max(wsum, vec3(1e-4));
@@ -464,7 +483,7 @@ vec3 element(vec2 base, vec3 N, float depth, float w, float cell, float legible)
   vec3 rd = refract(vec3(0.0, 0.0, -1.0), N, 2.0 / (IOR_RED + IOR_VIOLET));
   vec2 hit = base + rd.xy * (depth / max(-rd.z, 0.34));
   vec2 index = floor(hit / cell);
-  return display(scene((index + 0.5) * cell, w), hit / cell - index, legible);
+  return display(scene((index + 0.5) * cell, w).rgb, hit / cell - index, legible);
 }
 
 void main() {
@@ -479,7 +498,8 @@ void main() {
   vec2 light = vec2(cos(u_time * 0.19), sin(u_time * 0.23)) * 0.4;
   placeStops();
 
-  vec3 col = scene(p, w);
+  vec4 sc = scene(p, w);
+  vec3 col = sc.rgb;
 
   vec2 q = (p - u_lens) / u_lensR;
   float r = length(q);
@@ -561,7 +581,24 @@ void main() {
     }
   }
 
-  outColor = vec4(col, 1.0);
+  // The plate is not a pixel this canvas owns. It is the panel the icon is shown on, so
+  // scene() keeps painting it — the glass refracts what is behind the loupe, and behind
+  // the loupe is that panel — but the direct view hands it back to the page. What leaves
+  // here is the wash, the loupe and the shadow it throws, over nothing: no slab of panel
+  // colour cut out around them, which is what let the poster read as a white card in a
+  // grid of transparent ones.
+  vec3 sf = shadowFactor(p);
+  float body = max(sc.a, coverage(r, aa));
+  // Everything above was composited onto the plate, so take it back out — col is the
+  // artwork over its own coverage and the shaded plate over the rest, and subtracting the
+  // second term leaves exactly the first, already premultiplied. Exact because the
+  // backing behind the wash is the plate's own colour in both themes.
+  vec3 premul = max(col - (1.0 - body) * plate() * sf, vec3(0.0));
+  // The shadow lands on a surface this shader no longer draws, so it leaves as the tint it
+  // would have made there — black at the strength it took the plate down by, which
+  // multiplies out the same way over whatever the page puts behind it.
+  float shade = clamp(1.0 - dot(sf, vec3(0.2126, 0.7152, 0.0722)), 0.0, 1.0);
+  outColor = vec4(premul, body + (1.0 - body) * shade);
 }`;
 
 // The ring text, painted straight into loupe-local space so the shader reads it with a
@@ -633,7 +670,8 @@ function linkProgram(gl: WebGL2RenderingContext): WebGLProgram {
 function boot(canvas: HTMLCanvasElement, onLost: () => void): (() => void) | undefined {
   const gl = canvas.getContext("webgl2", {
     antialias: false,
-    alpha: false,
+    alpha: true,
+    premultipliedAlpha: true,
     failIfMajorPerformanceCaveat: true,
   });
   if (!gl) return undefined;
@@ -904,7 +942,7 @@ function boot(canvas: HTMLCanvasElement, onLost: () => void): (() => void) | und
 // every machine with hardware acceleration switched off — a browser setting, not an
 // exotic state. Proportions are the shader's own constants carried over by hand.
 const FallbackIcon = () => (
-  <div className="absolute inset-0 grid place-items-center bg-white dark:bg-[#0a0a0a]">
+  <div className="absolute inset-0 grid place-items-center">
     <div className="relative aspect-square h-[55%] rounded-[28%] bg-white dark:bg-transparent">
       <div
         className="absolute inset-[14.1%] rounded-[26%]"
