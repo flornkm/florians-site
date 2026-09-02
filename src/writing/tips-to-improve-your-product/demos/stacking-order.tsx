@@ -22,9 +22,9 @@ import { type CSSProperties, useState } from "react";
    so re-ordering the DOM changes which one paints on top and moves nothing on screen. */
 
 const TOOLBAR_TOP = 0;
-// The 36px trigger plus 10px above and below, so the toolbar's vertical padding matches the 10px
+// The 33px trigger plus 10px above and below, so the toolbar's vertical padding matches the 10px
 // it keeps to the right of the trigger.
-const TOOLBAR_HEIGHT = 56;
+const TOOLBAR_HEIGHT = 53;
 // A 12px gap — as tight as the cut allows. The content card's top edge lands exactly where the
 // open menu's first label starts, so the menu is sliced through its padding instead of through a
 // word. Any looser and the cut runs across the glyphs, which reads as a rendering glitch rather
@@ -230,10 +230,12 @@ function Toolbar({
           whileTap={{ scale: 0.92 }}
           transition={reduceMotion ? { duration: 0 } : SETTLE}
           className={cn(
-            // Same strings as the article's other dropdown, which is a real Base UI select — this
-            // one has to be hand-rolled because a portalled popup would sit outside the stacking
-            // contexts the figure exists to demonstrate.
-            selectStyles.trigger,
+            // Sized for the toolbar it sits in rather than borrowed from the shared select: this
+            // is a control inside a panel, where the other figure's trigger stands alone on a
+            // stage. Only the menu below is shared.
+            "flex cursor-pointer items-center gap-1.5 rounded-[0.625rem] bg-surface py-1.5 pl-3 pr-2",
+            "text-[14px] font-medium text-primary shadow-ring-xs hairline-black/8 dark:hairline-white/10",
+            "outline-none transition-colors hover:bg-surface-secondary focus-visible:ring-2 focus-visible:ring-default",
             // Promoted up front so the scale spring never waits on a layer being created mid-press.
             // Note this makes the button its own stacking context — harmless here only because the
             // menu is its *sibling*, not its child. Nested inside, it would be trapped exactly like
@@ -242,7 +244,7 @@ function Toolbar({
           )}
         >
           {selected}
-          <IconChevronGrabberVertical className={selectStyles.triggerIcon} />
+          <IconChevronGrabberVertical className="size-4 text-quaternary" />
         </motion.button>
 
         {/* Cleared on the way out rather than on each close path, so a menu dismissed with a
