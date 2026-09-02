@@ -212,7 +212,7 @@ export function GradientEasing() {
                 meadow, which is the one continuous field in the original and the only surface the
                 scrim can be honestly read against. */}
             <Image
-              src="/images/writing/helpful-tips-for-better-design-in-the-web/alpine-pasture.webp"
+              src="/images/writing/tips-to-improve-your-product/alpine-pasture.webp"
               alt="A timber alp hut on a mountain pasture seen from above, cattle gathered on the track looping around it"
               objectFit="cover"
               sizes="(min-width: 768px) 384px, 90vw"
