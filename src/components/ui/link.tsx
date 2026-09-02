@@ -12,10 +12,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, AnchorProps>(function Li
     href.startsWith("http") ||
     href.startsWith("mailto:") ||
     href.startsWith("tel:") ||
-    href.startsWith("#") ||
-    // A page's markdown twin is served by the nitro middleware, not by the router — handing
-    // it to RouterLink would client-side navigate to a route that does not exist.
-    /\.md$/i.test(href);
+    href.startsWith("#");
 
   if (isExternal) {
     return <a ref={ref} href={href} target={target} {...rest} />;

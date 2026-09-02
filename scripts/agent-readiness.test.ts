@@ -124,17 +124,17 @@ describe("MDX to markdown", () => {
   });
 
   // A demo becomes a note saying the web page has more; page furniture (the copy button)
-  // becomes nothing at all. Getting that backwards leaves an agent chasing an interactive
-  // widget that was never content in the first place.
-  it.each(posts)("marks the demos in %s and only the demos", (slug: string) => {
+  // becomes nothing at all. Either way no JSX survives — a component left in the twin, whether
+  // it stood on its own line or sat inline in a sentence, is markup an agent has to step over.
+  it.each(posts)("marks the demos in %s and leaves no JSX behind", (slug: string) => {
     const source = fs.readFileSync(path.join(writingDir, slug, "article.mdx"), "utf8");
-    const components = [...source.matchAll(/^\s*<([A-Z]\w*)[^>]*\/?>\s*$/gm)].map((m) => m[1]!);
-    const demos = components.filter((name) => name !== "CopyAsMarkdown");
+    const demos = [...source.matchAll(/^\s*<([A-Z]\w*)/gm)].map((m) => m[1]!);
     const twin = markdownPages[`/writing/${slug}`]!.markdown;
+    const outsideFences = twin.replace(/^```[\s\S]*?^```/gm, "");
 
     expect((twin.match(/\*\(Interactive content on the web page\.\)\*/g) ?? []).length).toBe(
       demos.length,
     );
-    for (const name of components) expect(twin).not.toContain(`<${name}`);
+    expect(outsideFences).not.toMatch(/<[A-Z]\w*/);
   });
 });

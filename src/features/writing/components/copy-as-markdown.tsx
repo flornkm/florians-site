@@ -1,19 +1,29 @@
 import { cn } from "@/lib/utils";
 import { IconCheckmark1Small } from "central-icons/IconCheckmark1Small";
+import { IconCrossSmall } from "central-icons/IconCrossSmall";
 import { IconSquareBehindSquare1 } from "central-icons/IconSquareBehindSquare1";
 import { useRef, useState } from "react";
+import type { ComponentType } from "react";
 
 /* Puts the whole post on the clipboard as markdown — the same body an agent gets from the
    page's `.md` twin (server/middleware/markdown.ts), code blocks and all, rather than the
    rendered DOM a manual selection would pick up. An article that invites you to hand it to
-   an agent should not make you assemble it first. */
+   an agent should not make you assemble it first.
+
+   Inline and wordless: it sits at the end of the invitation, which already says what it does. */
 
 type State = "idle" | "copied" | "failed";
 
+const ICONS: Record<State, ComponentType<{ className?: string }>> = {
+  idle: IconSquareBehindSquare1,
+  copied: IconCheckmark1Small,
+  failed: IconCrossSmall,
+};
+
 const LABEL: Record<State, string> = {
-  idle: "Copy as Markdown",
-  copied: "Copied",
-  failed: "Copy failed",
+  idle: "Copy this post as Markdown",
+  copied: "Copied as Markdown",
+  failed: "Could not copy",
 };
 
 // Long enough to read the confirmation, short enough that the button is ready again by the
@@ -48,28 +58,36 @@ export function CopyAsMarkdown() {
   };
 
   return (
-    <div className="not-prose my-6">
-      <button
-        type="button"
-        onClick={copy}
-        // The confirmation replaces the label in place, so a screen reader hears the outcome
-        // rather than the reader having to go looking for it.
-        aria-live="polite"
-        className={cn(
-          "flex h-9 cursor-pointer items-center gap-2 rounded-full bg-surface py-1 pl-3.5 pr-4",
-          "text-[13px] font-medium text-primary shadow-ring-xs hairline-black/8 dark:hairline-white/10",
-          "outline-none transition-colors hover:bg-surface-tertiary dark:hover:bg-surface-secondary",
-          "focus-visible:ring-2 focus-visible:ring-default",
-          "touch-manipulation select-none",
-        )}
-      >
-        {state === "copied" ? (
-          <IconCheckmark1Small className="size-4 text-tertiary" />
-        ) : (
-          <IconSquareBehindSquare1 className="size-4 text-quaternary" />
-        )}
-        {LABEL[state]}
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={copy}
+      aria-label={LABEL[state]}
+      title={LABEL[state]}
+      className={cn(
+        "not-prose ml-1 inline-grid size-6 shrink-0 cursor-pointer place-items-center align-[-0.3em]",
+        "rounded-md text-quaternary transition-colors hover:bg-surface-tertiary hover:text-tertiary",
+        "outline-none focus-visible:ring-2 focus-visible:ring-default",
+        "touch-manipulation select-none",
+      )}
+    >
+      {/* All three stacked in one cell so they cross-fade through each other rather than
+          swapping: the outgoing icon shrinks away under the incoming one, which is what makes
+          a state change read as the same control changing its mind rather than two buttons. */}
+      {(Object.keys(ICONS) as State[]).map((key) => {
+        const Icon = ICONS[key];
+        const active = key === state;
+        return (
+          <Icon
+            key={key}
+            aria-hidden
+            className={cn(
+              "col-start-1 row-start-1 size-4 transition-all duration-200 ease-out",
+              "motion-reduce:transition-none",
+              active ? "scale-100 opacity-100" : "scale-50 opacity-0",
+            )}
+          />
+        );
+      })}
+    </button>
   );
 }
