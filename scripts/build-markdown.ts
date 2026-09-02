@@ -187,7 +187,9 @@ type WritingPost = {
 
 // Components that are page furniture rather than content — a copy button is meaningless
 // to a reader who already has the markdown in hand, so it leaves no trace in the twin.
-const CHROME_COMPONENTS = new Set(["CopyAsMarkdown"]);
+// These sit inline in a sentence, so they are cut out of the line rather than dropping it.
+const CHROME_COMPONENTS = ["CopyAsMarkdown"];
+const CHROME_PATTERN = new RegExp(`\\s*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>]*/>`, "g");
 
 const INTERACTIVE_NOTE = "*(Interactive content on the web page.)*";
 
@@ -232,9 +234,12 @@ function cleanMdxBody(body: string): string {
     }
     if (/^\s*(import|export)\s/.test(line)) continue;
 
-    const component = line.match(/^\s*<([A-Z]\w*)/)?.[1];
+    const stripped = line.replace(CHROME_PATTERN, "");
+    const component = stripped.match(/^\s*<([A-Z]\w*)/)?.[1];
     if (!component) {
-      out.push(line);
+      // A line that was nothing but furniture disappears; one that merely ended with some
+      // keeps its sentence.
+      if (stripped.trim() || !line.trim()) out.push(stripped);
       continue;
     }
 
@@ -242,7 +247,6 @@ function cleanMdxBody(body: string): string {
     const block = lines.slice(i, end + 1).join("\n");
     i = end;
 
-    if (CHROME_COMPONENTS.has(component)) continue;
     out.push(INTERACTIVE_NOTE);
     const alt = block.match(/\balt="([^"]+)"/)?.[1];
     if (alt) out.push("", `_${alt}_`);
