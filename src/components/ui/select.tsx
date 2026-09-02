@@ -7,13 +7,16 @@ import type { ComponentProps } from "react";
 const Root = BaseSelect.Root;
 const Value = BaseSelect.Value;
 
-/* The look of a select, kept as plain strings so a menu that cannot be a Base UI select still
-   wears it exactly. The stacking-order figure has to hand-roll its menu — Base UI portals the
-   popup to the body, which would defeat a demo whose entire subject is which sibling paints on
-   top — and the two dropdowns sit a few paragraphs apart in the same article, close enough that
+/* The look of an open menu, kept as plain strings so a dropdown that cannot be a Base UI select
+   still wears it exactly. The stacking-order figure has to hand-roll its own — Base UI portals
+   the popup to the body, which would defeat a demo whose entire subject is which sibling paints
+   on top — and the two menus sit a few paragraphs apart in the same article, close enough that
    any drift between them in either theme reads as a mistake. Sharing the strings is what makes
-   them identical rather than merely similar. Surface only: the open/close animation stays with
-   each implementation, since one is driven by Base UI's data attributes and the other by Framer. */
+   them identical rather than merely similar.
+
+   The menu only. A trigger belongs to whatever it sits in, and the figure's is a control inside
+   a panel rather than one standing alone on a stage. So is the open/close animation, since one
+   menu is driven by Base UI's data attributes and the other by Framer. */
 
 const TRIGGER = cn(
   "flex h-9 shrink-0 cursor-pointer items-center justify-between gap-2",
@@ -52,10 +55,8 @@ const TRIGGER_ICON = "size-4 text-quaternary";
 const ITEM_INDICATOR = "size-4 text-tertiary";
 
 export const selectStyles = {
-  trigger: TRIGGER,
   popup: POPUP,
   item: ITEM,
-  triggerIcon: TRIGGER_ICON,
   itemIndicator: ITEM_INDICATOR,
 };
 
