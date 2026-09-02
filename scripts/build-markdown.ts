@@ -185,15 +185,70 @@ type WritingPost = {
   body: string;
 };
 
-// MDX -> markdown: drop imports/exports and JSX component blocks; note where an
-// interactive demo lives so agents know the web page shows more.
+// Components that are page furniture rather than content — a copy button is meaningless
+// to a reader who already has the markdown in hand, so it leaves no trace in the twin.
+const CHROME_COMPONENTS = new Set(["CopyAsMarkdown"]);
+
+const INTERACTIVE_NOTE = "*(Interactive content on the web page.)*";
+
+/** Index of the last line of the JSX block opening at `start`, self-closing or not. */
+function componentBlockEnd(lines: string[], start: number, name: string): number {
+  if (/\/>\s*$/.test(lines[start]!)) return start;
+  const closingTag = new RegExp(`^\\s*</${name}>\\s*$`);
+  for (let i = start + 1; i < lines.length; i++) {
+    if (/\/>\s*$/.test(lines[i]!) || /^\s*\/?>\s*$/.test(lines[i]!)) return i;
+    if (closingTag.test(lines[i]!)) return i;
+  }
+  return start;
+}
+
+// MDX -> markdown: drop imports/exports and JSX component blocks; note where an interactive
+// demo lives so agents know the web page shows more.
+//
+// A component's props usually run over several lines (`<Comparison\n  before=…\n/>`), so the
+// whole block has to go, not just its opening line — otherwise the props land in the twin as
+// raw JSX, which is noise to a reader and to an agent alike. Where a block carries an `alt`,
+// that sentence is the only description of the figure anywhere in the markdown, so it stays as
+// a caption under the note.
+//
+// Fenced code blocks pass through untouched: they are the part an agent cannot reconstruct
+// from the prose, and every rule above would otherwise eat lines inside them.
 function cleanMdxBody(body: string): string {
-  return body
-    .split("\n")
-    .filter((line) => !/^\s*(import|export)\s/.test(line))
-    .map((line) =>
-      /^\s*<[A-Z][^>]*\/?>\s*$/.test(line) ? "*(Interactive content on the web page.)*" : line,
-    )
+  const lines = body.split("\n");
+  const out: string[] = [];
+  let inFence = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]!;
+
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      out.push(line);
+      continue;
+    }
+    if (inFence) {
+      out.push(line);
+      continue;
+    }
+    if (/^\s*(import|export)\s/.test(line)) continue;
+
+    const component = line.match(/^\s*<([A-Z]\w*)/)?.[1];
+    if (!component) {
+      out.push(line);
+      continue;
+    }
+
+    const end = componentBlockEnd(lines, i, component);
+    const block = lines.slice(i, end + 1).join("\n");
+    i = end;
+
+    if (CHROME_COMPONENTS.has(component)) continue;
+    out.push(INTERACTIVE_NOTE);
+    const alt = block.match(/\balt="([^"]+)"/)?.[1];
+    if (alt) out.push("", `_${alt}_`);
+  }
+
+  return out
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();

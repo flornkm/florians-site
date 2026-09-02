@@ -24,9 +24,19 @@ export const proseVariants = cva("text-tertiary", {
         "prose-td:text-primary prose-td:align-top prose-td:py-3",
         "[&_th]:border-b [&_th]:border-primary [&_td]:border-b [&_td]:border-primary",
         "[&_th]:pr-6 [&_td]:pr-6 [&_th:first-child]:pl-0 [&_td:first-child]:pl-0 [&_th:last-child]:pr-0 [&_td:last-child]:pr-0",
-        "prose-pre:bg-surface-secondary prose-code:text-secondary prose-code:text-xs prose-code:font-mono",
+        "prose-code:text-secondary prose-code:text-xs prose-code:font-mono",
         "prose-code:before:content-none prose-code:after:content-none",
         "[&_:not(pre)>code]:bg-surface-tertiary [&_:not(pre)>code]:rounded-[4px] [&_:not(pre)>code]:px-1 [&_:not(pre)>code]:py-0.5",
+        // Written as [&_pre] rather than prose-pre: so it outranks the typography plugin's own
+        // `pre` rule, whose :where() wrapper leaves it at the same specificity — the plugin ships
+        // light-on-dark defaults, which on this surface would be near-invisible.
+        // Outline, not a border: it lands on the block's own pixels, so a long line scrolling
+        // underneath it doesn't shift the box by a pixel. An elevated card would lift a code
+        // block off the column it belongs to.
+        "[&_pre]:bg-surface-secondary [&_pre]:text-secondary [&_pre]:rounded-sm [&_pre]:my-6",
+        "[&_pre]:outline [&_pre]:-outline-offset-1 [&_pre]:outline-black/5 dark:[&_pre]:outline-white/8",
+        "[&_pre]:overflow-x-auto [&_pre]:p-4 [&_pre]:text-xs [&_pre]:leading-relaxed",
+        "[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit",
         "md:prose-img:max-w-xl",
       ],
     },
