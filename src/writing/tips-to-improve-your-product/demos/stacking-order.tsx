@@ -1,3 +1,4 @@
+import { selectStyles } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { IconCheckmark1Small } from "central-icons/IconCheckmark1Small";
 import { IconChevronGrabberVertical } from "central-icons/IconChevronGrabberVertical";
@@ -5,7 +6,7 @@ import { IconColorSwatch } from "central-icons/IconColorSwatch";
 import { IconAnimationElastic } from "central-icons/IconAnimationElastic";
 import { IconSearchMenu } from "central-icons/IconSearchMenu";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 
 /* Figure for "Avoid z-index as much as possible" in the Unpopular tips article.
    The oldest bug in the book: a dropdown that opens *behind* the thing below it.
@@ -21,9 +22,9 @@ import { useState } from "react";
    so re-ordering the DOM changes which one paints on top and moves nothing on screen. */
 
 const TOOLBAR_TOP = 0;
-// The 33px trigger plus 10px above and below, so the toolbar's vertical padding matches the 10px
+// The 36px trigger plus 10px above and below, so the toolbar's vertical padding matches the 10px
 // it keeps to the right of the trigger.
-const TOOLBAR_HEIGHT = 53;
+const TOOLBAR_HEIGHT = 56;
 // A 12px gap — as tight as the cut allows. The content card's top edge lands exactly where the
 // open menu's first label starts, so the menu is sliced through its padding instead of through a
 // word. Any looser and the cut runs across the glyphs, which reads as a rendering glitch rather
@@ -198,6 +199,11 @@ function Toolbar({
   onMenuGone,
   onSelect,
 }: ToolbarProps) {
+  // Which row is lit. Held here rather than read off :hover so a resting cursor and the keyboard
+  // cannot light two rows at once — the same single-highlight rule Base UI enforces on the
+  // article's other dropdown, which is what lets both share one highlight selector.
+  const [highlighted, setHighlighted] = useState<Option | null>(null);
+
   return (
     <div
       // z-index 1 is what traps the menu: it makes the toolbar its own stacking context, so the
@@ -224,9 +230,10 @@ function Toolbar({
           whileTap={{ scale: 0.92 }}
           transition={reduceMotion ? { duration: 0 } : SETTLE}
           className={cn(
-            "flex cursor-pointer items-center gap-1.5 rounded-[0.625rem] bg-surface py-1.5 pl-3 pr-2",
-            "text-[14px] font-medium text-primary shadow-ring-xs hairline-black/8 dark:hairline-white/10",
-            "outline-none transition-colors hover:bg-surface-secondary focus-visible:ring-2 focus-visible:ring-default",
+            // Same strings as the article's other dropdown, which is a real Base UI select — this
+            // one has to be hand-rolled because a portalled popup would sit outside the stacking
+            // contexts the figure exists to demonstrate.
+            selectStyles.trigger,
             // Promoted up front so the scale spring never waits on a layer being created mid-press.
             // Note this makes the button its own stacking context — harmless here only because the
             // menu is its *sibling*, not its child. Nested inside, it would be trapped exactly like
@@ -235,16 +242,32 @@ function Toolbar({
           )}
         >
           {selected}
-          <IconChevronGrabberVertical className="size-4 text-quaternary" />
+          <IconChevronGrabberVertical className={selectStyles.triggerIcon} />
         </motion.button>
 
-        <AnimatePresence onExitComplete={onMenuGone}>
+        {/* Cleared on the way out rather than on each close path, so a menu dismissed with a
+            finger still resting over a row does not reopen with that row already lit. */}
+        <AnimatePresence
+          onExitComplete={() => {
+            setHighlighted(null);
+            onMenuGone();
+          }}
+        >
           {open && (
             <motion.div
               role="listbox"
               // The number everyone reaches for, kept honest: it is a real 9999 and it really
               // does not help.
-              style={{ zIndex: mode === "z" ? 9999 : undefined, transformOrigin: "top right" }}
+              // --anchor-width is what Base UI would set from the measured trigger; here the menu
+              // is absolutely positioned inside a wrapper that *is* the trigger, so 100% resolves
+              // to the same number and the shared width rule applies unchanged.
+              style={
+                {
+                  zIndex: mode === "z" ? 9999 : undefined,
+                  transformOrigin: "top right",
+                  "--anchor-width": "100%",
+                } as CSSProperties
+              }
               // Barely any travel: at 50ms a slide or a real pop would only register as a flinch,
               // so it just resolves into place — opacity with a whisper of scale behind it.
               initial={{ opacity: 0, scale: 0.98 }}
@@ -255,10 +278,7 @@ function Toolbar({
                 transition: reduceMotion ? { duration: 0 } : MENU_OUT,
               }}
               transition={reduceMotion ? { duration: 0 } : MENU_IN}
-              // A step brighter than the panels it floats over in dark mode. On light, elevation
-              // reads from the shadow alone; on a near-black surface a shadow has nothing to darken,
-              // so the surface itself has to carry the lift.
-              className="absolute right-0 top-[calc(100%+0.5rem)] w-[11rem] rounded-2xl bg-surface p-1.5 shadow-ring-lg hairline-black/8 dark:bg-surface-tertiary dark:hairline-white/10"
+              className={cn(selectStyles.popup, "absolute right-0 top-[calc(100%+0.5rem)]")}
             >
               {OPTIONS.map((option) => (
                 <button
@@ -267,17 +287,20 @@ function Toolbar({
                   role="option"
                   aria-selected={option === selected}
                   onClick={() => onSelect(option)}
-                  className={cn(
-                    "flex w-full cursor-pointer items-center justify-between rounded-xl px-3 py-2 text-left",
-                    "text-[14px] text-primary outline-none transition-colors",
-                    // Dark hover has to go lighter, not darker: surface-secondary is below the
-                    // menu's own surface now, so it would read as a hole rather than a highlight.
-                    "hover:bg-surface-secondary focus-visible:bg-surface-secondary",
-                    "dark:hover:bg-white/8 dark:focus-visible:bg-white/8",
-                  )}
+                  // The attribute Base UI would set on its own items, driven by hand here so the
+                  // shared highlight rule is the same selector in both menus — and so only one
+                  // row can be lit, whichever input moved it there.
+                  data-highlighted={option === highlighted ? "" : undefined}
+                  onPointerEnter={() => setHighlighted(option)}
+                  onPointerLeave={() => setHighlighted(null)}
+                  onFocus={() => setHighlighted(option)}
+                  onBlur={() => setHighlighted(null)}
+                  className={cn(selectStyles.item, "transition-colors")}
                 >
                   {option}
-                  {option === selected && <IconCheckmark1Small className="size-4 text-tertiary" />}
+                  {option === selected && (
+                    <IconCheckmark1Small className={selectStyles.itemIndicator} />
+                  )}
                 </button>
               ))}
             </motion.div>

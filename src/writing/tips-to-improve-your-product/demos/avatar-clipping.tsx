@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { IconCheckmark1Small } from "central-icons/IconCheckmark1Small";
 import { motion, useReducedMotion } from "motion/react";
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 /* Figure for "Clip your avatars" in the Unpopular tips article. Dressed as a real members
    panel, so the technique is shown where it actually gets used rather than on a blank stage.
@@ -68,6 +68,10 @@ const PEOPLE = [
   // The overflow chip: same treatment, so the trick has to survive a neutral fill too.
   { id: "more", initials: "+2", fill: "fill-[oklch(0.62_0_0)]", ink: "fill-[oklch(0.97_0_0)]" },
 ];
+
+// Finger drift, in px, still counted as a tap rather than an aborted scroll. Roughly the wobble
+// of a deliberate tap; past it the reader was going somewhere else.
+const TAP_SLOP = 12;
 
 interface Option {
   key: "clip" | "ring" | "optical" | "backdrop";
@@ -205,14 +209,62 @@ function CheckRow({
   checked: boolean;
   onChange: () => void;
 }) {
+  /* A touch click is dispatched at the point the finger *lifted*, not the point it landed. So a
+     press that starts on one row and slides a few pixels before releasing toggles whichever row
+     it ended over — the wrong one, and on a list this tight usually the row right above or below
+     the one the reader was aiming at.
+
+     The gesture is vetted before the click is allowed to count: the press has to have started on
+     this row and to have stayed within a finger's wobble of where it landed. A drift is then
+     ignored twice over — the row it started on never sees the release, and the row it ended over
+     never saw the press — so a sloppy tap costs a second tap rather than undoing an earlier one.
+     Both refs live for the length of one gesture and are consumed by the click that ends it. */
+  const press = useRef<{ x: number; y: number } | null>(null);
+  const wasTap = useRef(false);
+
   return (
     <button
       type="button"
       role="checkbox"
       aria-checked={checked}
-      onClick={onChange}
+      onPointerDown={(event) => {
+        press.current = event.isPrimary ? { x: event.clientX, y: event.clientY } : null;
+        wasTap.current = false;
+      }}
+      // Safari only honours `:active` on touch when the element or an ancestor carries a
+      // touchstart listener, the same empty handler the button figure needs.
+      onTouchStart={() => {}}
+      onPointerUp={(event) => {
+        const start = press.current;
+        press.current = null;
+        wasTap.current =
+          !!start && Math.hypot(event.clientX - start.x, event.clientY - start.y) <= TAP_SLOP;
+      }}
+      // Fired the moment the browser decides the gesture is a scroll, which is exactly when the
+      // row has to stop treating it as a tap.
+      onPointerCancel={() => {
+        press.current = null;
+        wasTap.current = false;
+      }}
+      onClick={(event) => {
+        const fromTap = wasTap.current;
+        wasTap.current = false;
+        // detail 0 means the click was synthesised — keyboard, or a screen reader's activation.
+        // There is no gesture to vet there, and no other way for those users to reach the row.
+        if (event.detail !== 0 && !fromTap) return;
+        onChange();
+      }}
       className={cn(
         "flex w-full cursor-pointer items-center gap-3 rounded-xl px-2.5 py-2 text-left",
+        // 44px on a finger, the row's own height under a cursor. The rows sit flush against each
+        // other with no gutter to absorb a near miss, so the only thing standing between a tap
+        // aimed at one label and the next is how tall the target is.
+        "pointer-coarse:min-h-11",
+        // No double-tap zoom to wait on: without this the browser holds the click back ~300ms to
+        // see whether a second tap is coming, and two quick taps down the list get read as one
+        // gesture instead of two. select-none keeps a slightly long press from starting a
+        // selection over the label instead of registering as a tap.
+        "touch-manipulation select-none",
         // Translucent rather than a surface token: these rows sit on the grey tray, and every
         // named surface lighter than it reads as a highlight rather than a press. Black in light
         // steps the row *down* from the tray; dark inverts to white because the tray is already
@@ -221,6 +273,10 @@ function CheckRow({
         // the list, so two rows read as lit at once. Snapping keeps it pinned to the pointer.
         "outline-none hover:bg-black/8 dark:hover:bg-white/8",
         "focus-visible:bg-black/8 dark:focus-visible:bg-white/8",
+        // Tailwind's `hover` only applies where a device can hover, so touch would otherwise get
+        // no acknowledgement at all between the tap and the box filling in — and this article has
+        // a section arguing precisely that.
+        "active:bg-black/8 dark:active:bg-white/8",
       )}
     >
       <span
