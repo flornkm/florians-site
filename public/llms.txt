@@ -13,18 +13,20 @@ Florian blends design and engineering to ship fast, polished interfaces. He tran
 - Collaboration: Open for advisory and sometimes embedded work.
 
 ## Site Map
-- Work: Selected projects with imagery and clips - [/](/)
-- About: Background, values, tools, and accolades - [/about](/about)
-- Writing: Notes, essays, and live experiments - [/writing](/writing)
-- Contact: Email and social profiles - [/contact](/contact)
-- Experiments: Interactive playground pieces - [/experiments](/experiments)
-- Tools: Hardware and software Florian uses - [/tools](/tools)
-- Colophon: Tech stack, inspirations, and credits - [/colophon](/colophon)
+- Work: Selected projects with imagery and clips - [/](/), markdown at [/index.md](/index.md)
+- About: Background, values, tools, and accolades - [/about](/about), markdown at [/about.md](/about.md)
+- Writing: Notes, essays, and live experiments - [/writing](/writing), markdown at [/writing.md](/writing.md)
+- Contact: Email and social profiles - [/contact](/contact), markdown at [/contact.md](/contact.md)
+- Experiments: Interactive playground pieces - [/experiments](/experiments), markdown at [/experiments.md](/experiments.md)
+- Tools: Hardware and software Florian uses - [/tools](/tools), markdown at [/tools.md](/tools.md)
+- Colophon: Tech stack, inspirations, and credits - [/colophon](/colophon), markdown at [/colophon.md](/colophon.md)
 - Sitemap: Every page on this site - [/sitemap](/sitemap), machine-readable at [/sitemap.xml](/sitemap.xml)
 - Legal: [/imprint](/imprint), [/privacy-policy](/privacy-policy)
 
 ## Machine-Readable Access
-- Every HTML page is also served as markdown: request it with the `Accept: text/markdown` header.
+- Every HTML page is also served as markdown, two ways: append `.md` to any path, or request the page with the `Accept: text/markdown` header. Both return the same body.
+- Individual articles work the same way — [/writing.md](/writing.md) lists every post, and each one's markdown is its URL plus `.md` (for example [/writing/tips-to-improve-your-product.md](/writing/tips-to-improve-your-product.md)).
+- Where an article's figure is an interactive demo, the markdown carries the code that demo runs rather than a placeholder, so the technique is usable without the web page.
 - Nonexistent paths return HTTP 404 with recovery links (this file, /sitemap.xml).
 - The homepage embeds JSON-LD (schema.org Person + WebSite) for entity resolution.
 

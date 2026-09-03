@@ -185,15 +185,117 @@ type WritingPost = {
   body: string;
 };
 
-// MDX -> markdown: drop imports/exports and JSX component blocks; note where an
-// interactive demo lives so agents know the web page shows more.
-function cleanMdxBody(body: string): string {
-  return body
-    .split("\n")
-    .filter((line) => !/^\s*(import|export)\s/.test(line))
-    .map((line) =>
-      /^\s*<[A-Z][^>]*\/?>\s*$/.test(line) ? "*(Interactive content on the web page.)*" : line,
-    )
+// Components that are page furniture rather than content — a copy button is meaningless
+// to a reader who already has the markdown in hand, so it leaves no trace in the twin.
+// These sit inline in a sentence, so they are cut out of the line rather than dropping it.
+const CHROME_COMPONENTS = ["CopyAsMarkdown"];
+const CHROME_PATTERN = new RegExp(`\\s*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>]*/>`, "g");
+
+const INTERACTIVE_NOTE = "*(Interactive content on the web page.)*";
+
+/**
+ * Component name -> the module the article imports it from, so a demo can be traced back to
+ * its own source directory without a naming convention to keep in sync.
+ */
+function importedFrom(body: string): Map<string, string> {
+  const sources = new Map<string, string>();
+  for (const [, names, source] of body.matchAll(/^import\s+\{([^}]+)\}\s+from\s+"([^"]+)"/gm)) {
+    for (const entry of names!.split(",")) {
+      const name = entry
+        .trim()
+        .split(/\s+as\s+/)
+        .pop()
+        ?.trim();
+      if (name) sources.set(name, source!);
+    }
+  }
+  return sources;
+}
+
+/**
+ * A demo's agent-facing twin: `demos/switch-stretch.md` beside `demos/switch-stretch.tsx`.
+ * What the page shows as something to play with, the markdown shows as the code that does it.
+ */
+function demoMarkdown(component: string, sources: Map<string, string>, postDir: string): string {
+  const source = sources.get(component);
+  if (!source?.startsWith(".")) return "";
+  const sidecar = `${path.resolve(postDir, source)}.md`;
+  return fs.existsSync(sidecar) ? fs.readFileSync(sidecar, "utf8").trim() : "";
+}
+
+/** Index of the last line of the JSX block opening at `start`, self-closing or not. */
+function componentBlockEnd(lines: string[], start: number, name: string): number {
+  if (/\/>\s*$/.test(lines[start]!)) return start;
+  const closingTag = new RegExp(`^\\s*</${name}>\\s*$`);
+  for (let i = start + 1; i < lines.length; i++) {
+    if (/\/>\s*$/.test(lines[i]!) || /^\s*\/?>\s*$/.test(lines[i]!)) return i;
+    if (closingTag.test(lines[i]!)) return i;
+  }
+  return start;
+}
+
+// MDX -> markdown. The page and the twin carry the same prose; where they differ is the
+// components, which are the whole point of the conversion:
+//
+// - A demo becomes the code it runs, read from the sidecar beside its source. The page can
+//   show you a switch that stretches under your finger; markdown cannot, and an agent handed
+//   "*(Interactive content on the web page.)*" is left to invent the CSS. It falls back to
+//   that note only where no sidecar exists.
+// - A figure becomes the note plus its `alt`, which is the only description of it anywhere in
+//   the markdown.
+// - Page furniture (the copy button) becomes nothing. It sits inline in a sentence, so it is
+//   cut out of the line rather than taking the line with it.
+//
+// Props usually run over several lines (`<Comparison\n  before=…\n/>`), so the whole block is
+// consumed, not just its opening line — otherwise they land in the twin as raw JSX. Fenced
+// code blocks pass through untouched: every rule above would otherwise eat lines inside them.
+function cleanMdxBody(body: string, postDir: string): string {
+  const lines = body.split("\n");
+  const sources = importedFrom(body);
+  const out: string[] = [];
+  let inFence = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]!;
+
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      out.push(line);
+      continue;
+    }
+    if (inFence) {
+      out.push(line);
+      continue;
+    }
+    if (/^\s*(import|export)\s/.test(line)) continue;
+    // Spacing between sections on the page; in markdown the blank lines already say it.
+    if (/^\s*<br\s*\/?>\s*$/.test(line)) continue;
+
+    const stripped = line.replace(CHROME_PATTERN, "");
+    const component = stripped.match(/^\s*<([A-Z]\w*)/)?.[1];
+    if (!component) {
+      // A line that was nothing but furniture disappears; one that merely ended with some
+      // keeps its sentence.
+      if (stripped.trim() || !line.trim()) out.push(stripped);
+      continue;
+    }
+
+    const end = componentBlockEnd(lines, i, component);
+    const block = lines.slice(i, end + 1).join("\n");
+    i = end;
+
+    const demo = demoMarkdown(component, sources, postDir);
+    if (demo) {
+      out.push(demo);
+      continue;
+    }
+
+    out.push(INTERACTIVE_NOTE);
+    const alt = block.match(/\balt="([^"]+)"/)?.[1];
+    if (alt) out.push("", `_${alt}_`);
+  }
+
+  return out
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
@@ -211,7 +313,7 @@ const posts: WritingPost[] = fs
       title: String(data.title ?? e.name),
       description: String(data.description ?? ""),
       date: String(data.date ?? ""),
-      body: cleanMdxBody(content),
+      body: cleanMdxBody(content, path.join(writingDir, e.name)),
     };
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -226,7 +328,9 @@ Notes, essays, and live experiments by Florian Kiem.
 ${posts
   .map(
     (p) =>
-      `- [${p.title}](${SITE_URL}/writing/${p.slug})${p.date ? ` (${p.date})` : ""}${p.description ? ` — ${p.description}` : ""}`,
+      // The markdown link is spelled out rather than left as a rule to apply, so an agent that
+      // lands here can follow a post straight to its twin without being told the convention.
+      `- [${p.title}](${SITE_URL}/writing/${p.slug})${p.date ? ` (${p.date})` : ""}${p.description ? ` — ${p.description}` : ""}\n  Markdown: ${SITE_URL}/writing/${p.slug}.md`,
   )
   .join("\n")}`,
 );

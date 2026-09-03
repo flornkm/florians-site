@@ -3,6 +3,7 @@
 import { describe, expect, it } from "bun:test";
 import fs from "node:fs";
 import path from "node:path";
+import { normalizePathname } from "../src/lib/agent-content";
 import { markdownPages } from "../src/markdownMap.gen";
 
 const ROOT = path.resolve(import.meta.dirname!, "..");
@@ -95,10 +96,75 @@ describe("llms.txt", () => {
     expect(internal.length).toBeGreaterThan(0);
     for (const link of internal) {
       const exists =
-        link in markdownPages ||
+        // Resolved the way the middleware resolves a request, so a `.md` link is checked
+        // against the page it actually names rather than being read as a missing file.
+        normalizePathname(link) in markdownPages ||
         fs.existsSync(path.join(ROOT, "public", link)) ||
         link === "/sitemap.xml"; // generated into public/ at build time
       expect(exists, `llms.txt links to nonexistent page ${link}`).toBe(true);
     }
+  });
+
+  // The `.md` suffix is the only form an agent can reach without setting a header, so it is
+  // the one that has to be written down somewhere findable.
+  it("documents both ways to ask for markdown", () => {
+    expect(llms).toContain("Accept: text/markdown");
+    expect(llms).toMatch(/append `\.md`/i);
+  });
+});
+
+describe("MDX to markdown", () => {
+  const writingDir = path.join(ROOT, "src/writing");
+  const posts = fs
+    .readdirSync(writingDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && fs.existsSync(path.join(writingDir, e.name, "article.mdx")))
+    .map((e) => e.name);
+
+  /** Every `<Component />` in a post's article, paired with its sidecar path if one exists. */
+  function componentsIn(slug: string) {
+    const dir = path.join(writingDir, slug);
+    const source = fs.readFileSync(path.join(dir, "article.mdx"), "utf8");
+    const sources = new Map<string, string>();
+    for (const [, names, from] of source.matchAll(/^import\s+\{([^}]+)\}\s+from\s+"([^"]+)"/gm)) {
+      for (const entry of names!.split(",")) sources.set(entry.trim(), from!);
+    }
+    return [...source.matchAll(/<([A-Z]\w*)/g)].map((m) => {
+      const name = m[1]!;
+      const from = sources.get(name);
+      const sidecar = from?.startsWith(".") ? `${path.resolve(dir, from)}.md` : undefined;
+      return { name, sidecar: sidecar && fs.existsSync(sidecar) ? sidecar : undefined };
+    });
+  }
+
+  // The whole point of the conversion: a demo the page lets you play with becomes, in the twin,
+  // the code that makes it work. An agent handed only the interactive-content note is left to
+  // invent the CSS, which is what this post promising "give it your agent" was doing before.
+  // Compared block by block, so a line lost from the middle of one still fails.
+  it.each(posts)("inlines each demo's code into the twin of %s", (slug: string) => {
+    const twin = markdownPages[`/writing/${slug}`]!.markdown;
+
+    for (const { sidecar } of componentsIn(slug)) {
+      if (!sidecar) continue;
+      const code = fs.readFileSync(sidecar, "utf8");
+      const blocks = [...code.matchAll(/^```[^\n]*\n[\s\S]*?^```/gm)].map((m) => m[0]);
+      expect(blocks.length, `${path.basename(sidecar)} has no code to inline`).toBeGreaterThan(0);
+      for (const block of blocks) expect(twin).toContain(block);
+    }
+  });
+
+  // A demo with no sidecar still gets the note; page furniture becomes nothing at all. Either
+  // way no JSX survives — a component left in the twin, whether it stood on its own line or sat
+  // inline in a sentence, is markup an agent has to step over.
+  it.each(posts)("leaves no JSX in the twin of %s", (slug: string) => {
+    const twin = markdownPages[`/writing/${slug}`]!.markdown;
+    const outsideFences = twin.replace(/^```[\s\S]*?^```/gm, "");
+    const uncovered = componentsIn(slug).filter(
+      ({ name, sidecar }) => !sidecar && name !== "CopyAsMarkdown",
+    );
+
+    expect((twin.match(/\*\(Interactive content on the web page\.\)\*/g) ?? []).length).toBe(
+      uncovered.length,
+    );
+    expect(outsideFences).not.toMatch(/<[A-Za-z]\w*/);
   });
 });
