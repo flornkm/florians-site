@@ -28,23 +28,59 @@ interface TooltipProps {
   // Controlled visibility for non-hover triggers (e.g. shown while dragging). Omit for
   // the default hover behavior.
   open?: boolean;
+  // Wraps the trigger in a span instead of a div, for something sitting inside a paragraph:
+  // a div there ends the <p> early and splits the sentence into two in the DOM.
+  inline?: boolean;
 }
 
-export default function Tooltip({ children, content, className, style, open }: TooltipProps) {
+export default function Tooltip({
+  children,
+  content,
+  className,
+  style,
+  open,
+  inline,
+}: TooltipProps) {
   return (
     <BaseTooltip.Root open={open}>
       <BaseTooltip.Trigger
-        render={(triggerProps) => (
-          <div
-            {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & {
-              ref?: React.Ref<HTMLDivElement>;
-            })}
-            className={cn("relative", className, triggerProps.className)}
-            style={style}
-          >
-            {children}
-          </div>
-        )}
+        // Two branches rather than one dynamic tag: a "span" | "div" union intersects the two
+        // prop types, and their refs have no common assignment, so every prop types as `never`.
+        render={(triggerProps) => {
+          const wrapperClass = cn(
+            "relative",
+            // A span is inline by default, which would collapse around a grid child.
+            inline && "inline-flex",
+            className,
+            triggerProps.className,
+          );
+
+          if (inline) {
+            return (
+              <span
+                {...(triggerProps as React.HTMLAttributes<HTMLSpanElement> & {
+                  ref?: React.Ref<HTMLSpanElement>;
+                })}
+                className={wrapperClass}
+                style={style}
+              >
+                {children}
+              </span>
+            );
+          }
+
+          return (
+            <div
+              {...(triggerProps as React.HTMLAttributes<HTMLDivElement> & {
+                ref?: React.Ref<HTMLDivElement>;
+              })}
+              className={wrapperClass}
+              style={style}
+            >
+              {children}
+            </div>
+          );
+        }}
       />
       <BaseTooltip.Portal>
         {/* z on the Positioner, not the Popup: the Positioner places itself with a
