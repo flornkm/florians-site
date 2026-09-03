@@ -189,7 +189,15 @@ type WritingPost = {
 // to a reader who already has the markdown in hand, so it leaves no trace in the twin.
 // These sit inline in a sentence, so they are cut out of the line rather than dropping it.
 const CHROME_COMPONENTS = ["CopyAsMarkdown"];
-const CHROME_PATTERN = new RegExp(`\\s*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>]*/>`, "g");
+// The separator in front is taken with it, so the sentence does not end on a dangling space.
+const CHROME_PATTERN = new RegExp(
+  `(?:&nbsp;|&#160;|\\s)*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>]*/>`,
+  "g",
+);
+
+// A span is layout, never content — the article uses one to hold a word and the copy button on
+// the same line. Only its tags go; whatever it wraps is prose that belongs in the twin.
+const LAYOUT_SPAN_PATTERN = /<\/?span\b[^>]*>/g;
 
 const INTERACTIVE_NOTE = "*(Interactive content on the web page.)*";
 
@@ -271,7 +279,12 @@ function cleanMdxBody(body: string, postDir: string): string {
     // Spacing between sections on the page; in markdown the blank lines already say it.
     if (/^\s*<br\s*\/?>\s*$/.test(line)) continue;
 
-    const stripped = line.replace(CHROME_PATTERN, "");
+    let stripped = line.replace(CHROME_PATTERN, "");
+    if (stripped.includes("<span")) {
+      // Unwrapping the span leaves the emphasis it splits showing as two runs (`_a_ _b_`).
+      // Rejoining them keeps the sentence one italic phrase, the way the page renders it.
+      stripped = stripped.replace(LAYOUT_SPAN_PATTERN, "").replace(/_ _/g, " ");
+    }
     const component = stripped.match(/^\s*<([A-Z]\w*)/)?.[1];
     if (!component) {
       // A line that was nothing but furniture disappears; one that merely ended with some

@@ -36,7 +36,7 @@ export function CopyAsMarkdown() {
   const [state, setState] = useState<State>("idle");
   const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const markdown = useRef<string | null>(null);
-  const pending = useRef<Promise<void> | null>(null);
+  const request = useRef<Promise<string> | null>(null);
 
   const settle = (next: State) => {
     setState(next);
@@ -44,14 +44,8 @@ export function CopyAsMarkdown() {
     resetTimer.current = setTimeout(() => setState("idle"), RESET_DELAY);
   };
 
-  /* Fetched on approach rather than on click, so the round trip happens while the pointer is
-     still travelling and the press itself has nothing to wait for. Started from hover, focus
-     and pointerdown alike: a mouse announces itself well ahead, a finger only at pointerdown,
-     and the keyboard not at all until focus lands. A reader who never goes near the button
-     never pays for the request. */
-  const prefetch = () => {
-    if (markdown.current !== null) return pending.current ?? Promise.resolve();
-    pending.current ??= fetch(`${window.location.pathname.replace(/\/$/, "")}.md`, {
+  const load = () => {
+    request.current ??= fetch(`${window.location.pathname.replace(/\/$/, "")}.md`, {
       headers: { accept: "text/markdown" },
     })
       .then((response) => {
@@ -60,41 +54,67 @@ export function CopyAsMarkdown() {
       })
       .then((text) => {
         markdown.current = text;
+        return text;
       })
-      // Swallowed here because there is nothing to report yet — nobody has asked for anything.
-      // The click retries and is the one that gets to say it failed.
-      .catch(() => {})
-      .finally(() => {
-        pending.current = null;
+      .catch((error: unknown) => {
+        // Never cache a failure: the next press has to be a fresh attempt, not a replay of
+        // this rejection.
+        request.current = null;
+        throw error;
       });
-    return pending.current;
+    return request.current;
   };
 
-  const copy = async () => {
-    // Awaiting the fetch first spends the click's transient activation, and Safari then refuses
-    // the clipboard outright — so the write has to be the first thing the handler does with
-    // text already in hand. The await below only runs when the prefetch has not landed, which
-    // is the first tap on a touch device and nothing else.
-    if (markdown.current === null) await prefetch();
-    if (markdown.current === null) {
-      settle("failed");
+  /* Fetched on approach rather than on click, so the round trip happens while the pointer is
+     still travelling and the press itself has nothing to wait for. Started from hover, focus
+     and pointerdown alike: a mouse announces itself well ahead, a finger only at pointerdown,
+     and the keyboard not at all until focus lands. A reader who never goes near the button
+     never pays for the request. Rejections are swallowed because nobody has asked for
+     anything yet — the press is what gets to report a failure. */
+  const prefetch = () => {
+    void load().catch(() => {});
+  };
+
+  const report = (work: Promise<unknown>) => {
+    work.then(() => settle("copied")).catch(() => settle("failed"));
+  };
+
+  const copy = () => {
+    const ready = markdown.current;
+    if (ready !== null) {
+      report(navigator.clipboard.writeText(ready));
       return;
     }
 
-    try {
-      await navigator.clipboard.writeText(markdown.current);
-      settle("copied");
-    } catch {
-      // Clipboard access is refused outright in some contexts, and there is nothing to retry.
-      // Saying so beats a button that silently does nothing.
-      settle("failed");
+    /* Nothing prefetched yet, which on a touch device is every first tap: pointerdown lands
+       only a moment before the click. Awaiting the fetch here and then writing is what made
+       the button report a failure it had not earned — an await spends the gesture's transient
+       activation, and Safari refuses the clipboard from that point on.
+
+       So the write is handed a *promise* instead. `ClipboardItem` accepts one, which is
+       exactly this case: the write is authorised by the gesture that started it and resolves
+       whenever the text lands. Where that is unsupported there is nothing left but to await
+       and try, which is what the browsers missing it accept anyway. */
+    const pending = load();
+    if (typeof ClipboardItem === "function") {
+      const item = new ClipboardItem({
+        "text/plain": pending.then((text) => new Blob([text], { type: "text/plain" })),
+      });
+      report(
+        navigator.clipboard
+          .write([item])
+          .catch(() => pending.then((text) => navigator.clipboard.writeText(text))),
+      );
+      return;
     }
+
+    report(pending.then((text) => navigator.clipboard.writeText(text)));
   };
 
   return (
     // The label lives in the tooltip rather than beside the icon, on the app's default delay.
     // No `title` alongside it: the browser's own tooltip would arrive late and say it twice.
-    <Tooltip content={LABEL[state]} inline className="not-prose ml-1 align-[-0.3em]">
+    <Tooltip content={LABEL[state]} inline className="not-prose align-[-0.3em]">
       <button
         type="button"
         onClick={copy}
