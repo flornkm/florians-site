@@ -328,7 +328,9 @@ Notes, essays, and live experiments by Florian Kiem.
 ${posts
   .map(
     (p) =>
-      `- [${p.title}](${SITE_URL}/writing/${p.slug})${p.date ? ` (${p.date})` : ""}${p.description ? ` — ${p.description}` : ""}`,
+      // The markdown link is spelled out rather than left as a rule to apply, so an agent that
+      // lands here can follow a post straight to its twin without being told the convention.
+      `- [${p.title}](${SITE_URL}/writing/${p.slug})${p.date ? ` (${p.date})` : ""}${p.description ? ` — ${p.description}` : ""}\n  Markdown: ${SITE_URL}/writing/${p.slug}.md`,
   )
   .join("\n")}`,
 );

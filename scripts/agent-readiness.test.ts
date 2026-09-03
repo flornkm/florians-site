@@ -3,6 +3,7 @@
 import { describe, expect, it } from "bun:test";
 import fs from "node:fs";
 import path from "node:path";
+import { normalizePathname } from "../src/lib/agent-content";
 import { markdownPages } from "../src/markdownMap.gen";
 
 const ROOT = path.resolve(import.meta.dirname!, "..");
@@ -95,11 +96,20 @@ describe("llms.txt", () => {
     expect(internal.length).toBeGreaterThan(0);
     for (const link of internal) {
       const exists =
-        link in markdownPages ||
+        // Resolved the way the middleware resolves a request, so a `.md` link is checked
+        // against the page it actually names rather than being read as a missing file.
+        normalizePathname(link) in markdownPages ||
         fs.existsSync(path.join(ROOT, "public", link)) ||
         link === "/sitemap.xml"; // generated into public/ at build time
       expect(exists, `llms.txt links to nonexistent page ${link}`).toBe(true);
     }
+  });
+
+  // The `.md` suffix is the only form an agent can reach without setting a header, so it is
+  // the one that has to be written down somewhere findable.
+  it("documents both ways to ask for markdown", () => {
+    expect(llms).toContain("Accept: text/markdown");
+    expect(llms).toMatch(/append `\.md`/i);
   });
 });
 
