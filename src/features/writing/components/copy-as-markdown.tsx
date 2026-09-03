@@ -1,3 +1,4 @@
+import Tooltip from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { IconCheckmark1Small } from "central-icons/IconCheckmark1Small";
 import { IconCrossSmall } from "central-icons/IconCrossSmall";
@@ -10,7 +11,8 @@ import type { ComponentType } from "react";
    rendered DOM a manual selection would pick up. An article that invites you to hand it to
    an agent should not make you assemble it first.
 
-   Inline and wordless: it sits at the end of the invitation, which already says what it does. */
+   Inline and wordless: it sits at the end of the invitation, which already says what it does,
+   with the label kept in a tooltip. */
 
 type State = "idle" | "copied" | "failed";
 
@@ -90,39 +92,42 @@ export function CopyAsMarkdown() {
   };
 
   return (
-    <button
-      type="button"
-      onClick={copy}
-      onPointerEnter={prefetch}
-      onPointerDown={prefetch}
-      onFocus={prefetch}
-      aria-label={LABEL[state]}
-      title={LABEL[state]}
-      className={cn(
-        "not-prose ml-1 inline-grid size-6 shrink-0 cursor-pointer place-items-center align-[-0.3em]",
-        "rounded-md text-quaternary transition-colors hover:bg-surface-tertiary hover:text-tertiary",
-        "outline-none focus-visible:ring-2 focus-visible:ring-default",
-        "touch-manipulation select-none",
-      )}
-    >
-      {/* All three stacked in one cell so they cross-fade through each other rather than
+    // The label lives in the tooltip rather than beside the icon, on the app's default delay.
+    // No `title` alongside it: the browser's own tooltip would arrive late and say it twice.
+    <Tooltip content={LABEL[state]} inline className="not-prose ml-1 align-[-0.3em]">
+      <button
+        type="button"
+        onClick={copy}
+        onPointerEnter={prefetch}
+        onPointerDown={prefetch}
+        onFocus={prefetch}
+        aria-label={LABEL[state]}
+        className={cn(
+          "grid size-6 shrink-0 cursor-pointer place-items-center",
+          "rounded-md text-quaternary transition-colors hover:bg-surface-tertiary hover:text-tertiary",
+          "outline-none focus-visible:ring-2 focus-visible:ring-default",
+          "touch-manipulation select-none",
+        )}
+      >
+        {/* All three stacked in one cell so they cross-fade through each other rather than
           swapping: the outgoing icon shrinks away under the incoming one, which is what makes
           a state change read as the same control changing its mind rather than two buttons. */}
-      {(Object.keys(ICONS) as State[]).map((key) => {
-        const Icon = ICONS[key];
-        const active = key === state;
-        return (
-          <Icon
-            key={key}
-            aria-hidden
-            className={cn(
-              "col-start-1 row-start-1 size-4 transition-all duration-200 ease-out",
-              "motion-reduce:transition-none",
-              active ? "scale-100 opacity-100" : "scale-50 opacity-0",
-            )}
-          />
-        );
-      })}
-    </button>
+        {(Object.keys(ICONS) as State[]).map((key) => {
+          const Icon = ICONS[key];
+          const active = key === state;
+          return (
+            <Icon
+              key={key}
+              aria-hidden
+              className={cn(
+                "col-start-1 row-start-1 size-4 transition-all duration-200 ease-out",
+                "motion-reduce:transition-none",
+                active ? "scale-100 opacity-100" : "scale-50 opacity-0",
+              )}
+            />
+          );
+        })}
+      </button>
+    </Tooltip>
   );
 }
