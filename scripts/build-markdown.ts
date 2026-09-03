@@ -189,7 +189,13 @@ type WritingPost = {
 // to a reader who already has the markdown in hand, so it leaves no trace in the twin.
 // These sit inline in a sentence, so they are cut out of the line rather than dropping it.
 const CHROME_COMPONENTS = ["CopyAsMarkdown"];
-const CHROME_PATTERN = new RegExp(`\\s*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>]*/>`, "g");
+// The separator in front is taken with it. It is a non-breaking space in the source — that is
+// what keeps the button on the same line as the sentence it belongs to — and left behind it
+// would surface in the twin as a literal `&nbsp;`.
+const CHROME_PATTERN = new RegExp(
+  `(?:&nbsp;|&#160;|\\s)*<(?:${CHROME_COMPONENTS.join("|")})\\b[^>]*/>`,
+  "g",
+);
 
 const INTERACTIVE_NOTE = "*(Interactive content on the web page.)*";
 
