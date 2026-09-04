@@ -5,11 +5,14 @@ import { PostIcon } from "@/features/writing/components/post-icon";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent } from "@/lib/mdx";
 import { absoluteUrl, canonicalLink } from "@/lib/site";
+import { writingIndexStructuredData } from "@/lib/structured-data";
 import { Await, createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { Suspense } from "react";
 
 type WritingListItem = { slug: string; title: string; date: string; type: string };
+
+const DESCRIPTION = "Writing contains thoughts, ideas, and experiences from Florian.";
 
 // Plain (non-server) function: getContent reads from a bundled eager glob, so it runs on
 // the client too. Wrapping it in createServerFn would force an RPC round-trip on every
@@ -37,27 +40,26 @@ export const Route = createFileRoute("/writing/")({
     items: getWritingItems(),
     newestRunDate: getNewestRunDate(),
   }),
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Writing ‹ Florian Kiem" },
-      {
-        name: "description",
-        content: "Writing contains thoughts, ideas, and experiences from Florian.",
-      },
+      { name: "description", content: DESCRIPTION },
       { property: "og:title", content: "Writing" },
-      {
-        property: "og:description",
-        content: "Writing contains thoughts, ideas, and experiences from Florian.",
-      },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:image", content: absoluteUrl("/api/og?title=Writing") },
       { name: "twitter:title", content: "Writing" },
-      {
-        name: "twitter:description",
-        content: "Writing contains thoughts, ideas, and experiences from Florian.",
-      },
+      { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: absoluteUrl("/api/og?title=Writing") },
     ],
     links: [canonicalLink("/writing")],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify(writingIndexStructuredData(loaderData.items, DESCRIPTION)),
+          },
+        ]
+      : [],
   }),
   component: WritingPage,
 });
