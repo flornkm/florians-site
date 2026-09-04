@@ -4,6 +4,7 @@ import { Link } from "@/components/ui/link";
 import { fetchNewestRunDate } from "@/features/writing/lib/newest-run-date";
 import { getContent, isWritingEntry, type WritingEntry } from "@/lib/mdx";
 import { absoluteUrl, canonicalLink } from "@/lib/site";
+import { writingPostStructuredData } from "@/lib/structured-data";
 import { Await, createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { IconArrowUndoUp } from "central-icons/IconArrowUndoUp";
@@ -93,11 +94,26 @@ export const Route = createFileRoute("/writing/$id")({
         { property: "og:title", content: loaderData.title },
         { property: "og:description", content: loaderData.description },
         { property: "og:image", content: ogImage },
+        // Overrides the root's og:type=website (deepest match wins). Only dated posts
+        // claim to be articles; the live post has no publish time to declare.
+        ...(loaderData.date
+          ? [
+              { property: "og:type", content: "article" },
+              { property: "article:published_time", content: loaderData.date },
+              { property: "article:author", content: "Florian Kiem" },
+            ]
+          : []),
         { name: "twitter:title", content: loaderData.title },
         { name: "twitter:description", content: loaderData.description },
         { name: "twitter:image", content: ogImage },
       ],
       links: [canonicalLink(`/writing/${loaderData.slug}`)],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(writingPostStructuredData(loaderData, ogImage)),
+        },
+      ],
     };
   },
   component: WritingDetailPage,
