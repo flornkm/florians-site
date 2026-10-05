@@ -16,6 +16,12 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    name: "Legora",
+    description: "Design work for Legora, an AI platform for legal work.",
+    date: "2026",
+    url: "https://legora.com",
+  },
+  {
     name: "Flow",
     description:
       "Design and engineering for Flow Engineering’s web presence, from the company pages to an animated 404.",
@@ -23,6 +29,10 @@ export const PROJECTS: Project[] = [
     url: "https://flowengineering.com",
     mediaOrder: 1,
     media: ["/images/flow/hero.webp", "/videos/flow/company.webm", "/videos/flow/404.webm"],
+  },
+  {
+    name: "Prodex",
+    date: "2026",
   },
   {
     name: "Sona",
