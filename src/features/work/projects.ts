@@ -25,12 +25,21 @@ export const PROJECTS: Project[] = [
     media: ["/images/flow/hero.webp", "/videos/flow/company.webm", "/videos/flow/404.webm"],
   },
   {
+    name: "Prodex",
+    description:
+      "Design and engineering for Prodex’s website, which introduces Dexter, an AI industrial engineer for factories.",
+    date: "2026",
+    url: "https://prodexlabs.com",
+    mediaOrder: 2,
+    media: ["/videos/prodex/website-hero.webm", "/videos/prodex/website-tour.webm"],
+  },
+  {
     name: "Sona",
     description:
       "Product design for Sona, an app that records conversations and turns them into transcripts, summaries, and key insights.",
     date: "2024 – 2025",
     url: "https://sona.wtf",
-    mediaOrder: 2,
+    mediaOrder: 3,
     media: [
       [
         "/images/sona/recording.webp",

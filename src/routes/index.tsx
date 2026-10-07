@@ -197,7 +197,7 @@ function IndexPage() {
         <p className="sr-only">
           I am Florian Kiem, a design engineer building software products in the intersection of
           design and code. This page shows selected work: interface design, design systems, motion,
-          and front-end engineering for companies like Flow Engineering, Sona, Superpower,
+          and front-end engineering for companies like Flow Engineering, Prodex, Sona, Superpower,
           Delphi, Kalshi, Snaptrude, Morphic, Dash0, and Opral. Each project below is presented
           through screenshots and short clips. Read more about me on the about page, browse notes
           and essays on the writing page, or get in touch via the contact page.
